@@ -1,0 +1,709 @@
+#include "MainMenu.h"
+
+#include <algorithm>
+
+#include "ShopScene.h"
+#include "Beatup.h"
+#include "ui/CocosGUI.h"
+#include "SoundEngine.h"
+#include "Weapons.h"
+#include "DataManager.h"
+#include "Combo.h"
+#include "Quest.h"
+#include "Util.h"
+#include "Level.h"
+
+USING_NS_CC;
+
+
+Scene* MainMenu::beatup_scene = NULL;
+
+bool MainMenu::init()
+{
+#ifdef _WIN32
+    FUNC_INIT_WIN32(MainMenu);
+#else
+    FUNC_INIT(MainMenu);
+#endif
+
+    SoundEngine::play_music("music\\menu.mp3");
+
+    MainMenu::menu_font = DEFAULT_FONT;
+    MainMenu::menu_fontsize = 40;
+
+    this->shop_items = new std::vector<ShopItem*>();
+
+    MainMenu::menu_heightdiff = -1;
+    this->last_pos = Vec2(-1, -1);
+
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    //auto label = Label::createWithTTF("Welcome to the MainMenu", TITLE_FONT, sx(24));
+
+    auto label = Sprite::createWithSpriteFrameName("logo_topfixed.png");
+    label->setScale(sx(4.0f));
+    label->getTexture()->setAliasTexParameters();
+
+    label->setPosition(Vec2(
+        origin.x + visibleSize.width/2,
+        origin.y + visibleSize.height - (label->getContentSize().height*sy(3))
+    ));
+    this->addChild(label, 1);
+
+    this->coins_lbl = Label::createWithTTF("Beat some people up!", TITLE_FONT, sx(this->menu_fontsize));
+    this->coins_lbl->setVisible(false);
+    this->coins_lbl->setPosition(Vec2(
+        origin.x + visibleSize.width/2,
+        origin.y + visibleSize.height - label->getContentSize().height*3
+    ));
+    this->addChild(this->coins_lbl, 1);
+
+    this->combo_menu = Menu::create();
+    this->addChild(this->combo_menu);
+
+    auto scroll = this->create_center_scrollview();
+
+    BoolFuncNoArgs quit_cb = [this](){
+        this->quit(NULL);
+        return false;
+    };
+
+    std::vector<ItemData> item_data = {
+        {"default", "Fight!", MainMenu::quick_start_game, false},
+        {"resume_fight", "Resume", MainMenu::resume_game, true},
+        {"default", "Level Select", MainMenu::open_levelselect, false},
+        {"default", "Options", MainMenu::open_options, false},
+        {"default", "Quit", quit_cb, false},
+    };
+
+    this->init_menu_from_data(scroll, item_data);
+
+    this->resize_scroll_inner(scroll);
+
+    return true;
+};
+
+void MainMenu::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
+{
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    {
+        Director::getInstance()->end();
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
+    {
+        MainMenu::quick_start_game();
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_L ) 
+    {
+        MainMenu::open_levelselect();
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_O ) 
+    {
+        MainMenu::open_options();
+    }
+};
+
+bool MainMenu::quick_start_game()
+{
+    int level = Level::get_generic_complete() + 1;
+    level = std::min(level, 20); //TODO make it so it knows its limit dynamically
+    MainMenu::cleanup_beatup_scene();
+    MainMenu::beatup_scene = Beatup::createScene(level);
+    MainMenu::beatup_scene->retain();
+
+    SoundEngine::stop_all_sound_and_music();
+    if (SoundEngine::is_music_enabled())
+    {
+        SoundEngine::bg_music_id = SoundEngine::play_sound("music\\start_fight.mp3");
+    };
+
+    //use level 1
+    MainMenu::resume_game();
+    // MainMenu::open_objective();
+
+    return true;
+};
+
+bool MainMenu::resume_game()
+{
+    if (MainMenu::beatup_scene != NULL)
+    {
+        CCLOG("Resuming fight\n");
+
+        MainMenu::beatup_scene->retain();
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+    }
+    else
+    {
+        CCLOG("No fight\n");
+    };
+
+    return true;
+};
+
+bool MainMenu::open_options()
+{
+    auto scene = Scene::create();
+    OptionsMenu* options_menu = OptionsMenu::create();
+    scene->addChild(options_menu);
+
+    auto director = Director::getInstance();
+    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+
+    return true;
+};
+
+bool MainMenu::open_levelselect()
+{
+    auto scene = Scene::create();
+    LevelSelectMenu* level_select = LevelSelectMenu::create();
+    scene->addChild(level_select);
+
+    auto director = Director::getInstance();
+    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    return true;
+};
+
+//TODO figure if this needs to exist or not
+bool MainMenu::open_objective()
+{
+    //create a level one if it doesn't already exist
+    if (MainMenu::beatup_scene == NULL)
+    {
+        MainMenu::beatup_scene = Beatup::createScene(1);
+        MainMenu::beatup_scene->retain();
+    };
+
+    auto scene = Scene::create();
+    ObjectiveMenu* objective_menu = ObjectiveMenu::create();
+    scene->addChild(objective_menu);
+
+    auto director = Director::getInstance();
+    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    return true;
+};
+
+void MainMenu::cleanup_beatup_scene()
+{
+    if (MainMenu::beatup_scene != NULL)
+    {
+        MainMenu::beatup_scene->release();
+        MainMenu::beatup_scene = NULL;
+    };
+};
+
+bool OptionsMenu::init()
+{
+#ifdef _WIN32
+    FUNC_INIT_WIN32(OptionsMenu);
+#else
+    FUNC_INIT(OptionsMenu);
+#endif
+
+    menu_font = DEFAULT_FONT;
+    menu_fontsize = 40;
+
+    this->shop_items = new std::vector<ShopItem*>();
+
+    menu_heightdiff = -1;
+    this->last_pos = Vec2(-1, -1);
+
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    auto label = Label::createWithTTF("Welcome to the OptionsMenu", TITLE_FONT, sx(24));
+
+    label->setPosition(Vec2(origin.x + visibleSize.width/2,
+                origin.y + visibleSize.height - label->getContentSize().height));
+
+    this->addChild(label, 1);
+
+    this->coins_lbl = Label::createWithTTF("OPTIONS!", this->menu_font, this->menu_fontsize);
+    this->coins_lbl->setPosition(Vec2(origin.x + visibleSize.width/2,
+                origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)));
+    this->addChild(this->coins_lbl, 1);
+
+    this->combo_menu = Menu::create();
+    this->addChild(this->combo_menu);
+
+    auto scroll = this->create_center_scrollview();
+
+    auto go_back_cb = []() {
+        auto director = Director::getInstance();
+        director->popScene();
+        return false;
+    };
+
+
+    auto create_state = [](std::string id_key, std::string noun)
+    {
+
+        auto vibration_state = new OptionsMenu::ButtonState;
+        vibration_state->current = DataManager::get_bool_from_data(id_key, true);
+        auto options_cb = [noun](ui::Button* btn, bool& current)
+        {
+            if (current)
+            {
+                std::stringstream ss;
+                ss << "[ ] " << noun << " enabled"; //checkmark
+                std::string text = ss.str();
+                btn->setTitleText(text);
+            }
+            else
+            {
+                std::stringstream ss;
+                ss << "[X] " << noun << " disabled";
+                std::string text = ss.str();
+                btn->setTitleText(text);
+            };
+        };
+        vibration_state->swap_state = options_cb;
+
+        return vibration_state;
+    };
+
+    auto vibration_state = create_state("vibration_enabled", "Vibration");
+    auto tutorial_state = create_state(Beatup::tutorial_id_key, "Tutorials");
+    auto sound_state = create_state(SoundEngine::id_string, "Sounds");
+    auto music_state = create_state(SoundEngine::music_id_string, "Music");
+
+    std::vector<ItemData> item_data = {
+        {"default", "Toggle Sound", OptionsMenu::toggle_sound, false, sound_state},
+        {"default", "Toggle Music", OptionsMenu::toggle_music, false, music_state},
+        {"default", "Toggle Tutorials", OptionsMenu::toggle_tutorials, false, tutorial_state},
+        {"default", "Toggle Vibration", OptionsMenu::toggle_vibration, false, vibration_state},
+
+        {"default", "Reset...", OptionsMenu::open_reset, false},
+
+        {"default", "Back", go_back_cb, false},
+    };
+
+    this->init_menu_from_data(scroll, item_data);
+
+    this->resize_scroll_inner(scroll);
+
+    return true;
+};
+
+bool OptionsMenu::toggle_sound()
+{
+    SoundEngine::set_sound_enabled(!SoundEngine::is_sound_enabled());
+    return true;
+};
+
+bool OptionsMenu::toggle_music()
+{
+    SoundEngine::set_music_enabled(!SoundEngine::is_music_enabled());
+    if (SoundEngine::is_music_enabled())
+    {
+        SoundEngine::play_music("music\\menu.mp3");
+    };
+    return true;
+};
+
+bool OptionsMenu::toggle_vibration()
+{
+    std::string vibrate_key = "vibration_enabled";
+    bool current_vibration = DataManager::get_bool_from_data(vibrate_key, true);
+    DataManager::set_bool_from_data(vibrate_key, !current_vibration);
+    return true;
+};
+
+bool OptionsMenu::toggle_tutorials()
+{
+    std::string vibrate_key = Beatup::tutorial_id_key;
+    bool current_vibration = DataManager::get_bool_from_data(vibrate_key, true);
+    DataManager::set_bool_from_data(vibrate_key, !current_vibration);
+    return true;
+};
+
+bool OptionsMenu::open_reset()
+{
+    auto scene = Scene::create();
+    ResetMenu* reset_layer = ResetMenu::create();
+    scene->addChild(reset_layer);
+
+    auto director = Director::getInstance();
+    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    return true;
+};
+
+void OptionsMenu::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
+{
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    {
+        pop_scene(NULL);
+    }
+};
+
+bool LevelSelectMenu::init()
+{
+#ifdef _WIN32
+    FUNC_INIT_WIN32(LevelSelectMenu);
+#else
+    FUNC_INIT(LevelSelectMenu);
+#endif
+
+    menu_font = DEFAULT_FONT;
+    menu_fontsize = 40;
+
+    this->shop_items = new std::vector<ShopItem*>();
+
+    menu_heightdiff = -1;
+    this->last_pos = Vec2(-1, -1);
+
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    // add a label shows "Hello World" create and initialize a label
+    auto label = Label::createWithTTF("Opponent Select", menu_font, sx(24));
+
+    // position the label on the center of the screen
+    label->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - label->getContentSize().height
+        )
+    );
+
+    // add the label as a child to this layer
+    this->addChild(label, 1);
+
+    this->coins_lbl = Label::createWithTTF(
+        "Complete missions to unlock more levels",
+        this->menu_font,
+        this->menu_fontsize
+    );
+    this->coins_lbl->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - label->getContentSize().height-sx(30)
+        )
+    );
+    this->coins_lbl->setTextColor(Color4B::WHITE);
+    this->addChild(this->coins_lbl, 1);
+
+    auto scroll = this->create_center_scrollview();
+
+    this->combo_menu = Menu::create();
+    this->addChild(this->combo_menu);
+
+    int last_level = DataManager::get_int_from_data(Level::generic_id_key);
+    CCLOG("current level %d", last_level);
+
+    for (int i = 1; i <= last_level + 1; i++)
+    {
+        Level* level = Level::create_level(i);
+        if (level != NULL)
+        {
+            std::string lvl_lbl = level->scene_detail.name;
+            std::stringstream ss;
+            ss << i << ") " << lvl_lbl;
+            auto btn = create_button(ss.str(), start_new_game(level->order));
+            scroll->addChild(btn);
+        }
+        else
+        {
+            CCLOG("stopping level creation at %i", i);
+            break;
+        };
+    }
+
+    //back button
+    auto btn = create_button("Back", []() 
+    {
+        auto director = Director::getInstance();
+        director->popScene();
+        return false;
+    });
+    scroll->addChild(btn);
+
+    this->resize_scroll_inner(scroll);
+    return true;
+};
+
+BoolFuncNoArgs LevelSelectMenu::start_new_game(int level)
+{
+
+    BoolFuncNoArgs cb = [level]()
+    {
+        MainMenu::cleanup_beatup_scene();
+
+        SoundEngine::stop_all_sound_and_music();
+        if (SoundEngine::is_music_enabled())
+        {
+            SoundEngine::bg_music_id = SoundEngine::play_sound("music\\start_fight.mp3");
+        };
+
+        MainMenu::beatup_scene = Beatup::createScene(level);
+        MainMenu::beatup_scene->retain();
+
+        MainMenu::resume_game();
+
+        return false;
+    };
+    return cb;
+};
+
+
+void LevelSelectMenu::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
+{
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    {
+        pop_scene(NULL);
+    }
+};
+
+bool ObjectiveMenu::init()
+{
+#ifdef _WIN32
+    FUNC_INIT_WIN32(ObjectiveMenu);
+#else
+    FUNC_INIT(ObjectiveMenu);
+#endif
+
+    menu_font = DEFAULT_FONT;
+    menu_fontsize = 40;
+
+    this->shop_items = new std::vector<ShopItem*>();
+
+    menu_heightdiff = -1;
+    this->last_pos = Vec2(-1, -1);
+
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    // add a label shows "Hello World" create and initialize a label
+    auto label = Label::createWithTTF("Mission Screen", menu_font, sx(24));
+
+    // position the label on the center of the screen
+    label->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - label->getContentSize().height
+        )
+    );
+
+    // add the label as a child to this layer
+    this->addChild(label, 1);
+
+    this->coins_lbl = Label::createWithTTF(
+        "Rewards for completion!",
+        this->menu_font,
+        this->menu_fontsize
+    );
+    this->coins_lbl->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+        )
+    );
+    this->coins_lbl->setTextColor(Color4B::BLUE);
+    this->addChild(this->coins_lbl, 1);
+
+    auto scroll = this->create_center_scrollview();
+
+    this->combo_menu = Menu::create();
+    this->addChild(this->combo_menu);
+
+    auto raw = MainMenu::beatup_scene->getChildByName("beatup");
+    Beatup* beatup = dynamic_cast<Beatup*>(raw);
+    Quest* quest = beatup->quest;
+
+    auto quest_name = create_button(quest->name, [](){ return true;}, true);
+    scroll->addChild(quest_name);
+
+    for (Objective* obj : *quest->objectives)
+    {
+        auto obj_btn = create_button(obj->name, [](){ return true;});
+        scroll->addChild(obj_btn);
+    };
+
+    //back button
+    auto btn = create_button("Start", []() 
+    {
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+        return false;
+    });
+    scroll->addChild(btn);
+
+    this->resize_scroll_inner(scroll);
+    return true;
+};
+
+void ObjectiveMenu::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
+{
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    {
+        pop_scene(NULL);
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
+            || keyCode == EventKeyboard::KeyCode::KEY_Q 
+            || keyCode == EventKeyboard::KeyCode::KEY_E 
+            || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
+    {
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+    };
+};
+
+bool ResetMenu::init()
+{
+#ifdef _WIN32
+    FUNC_INIT_WIN32(ResetMenu);
+#else
+    FUNC_INIT(ResetMenu);
+#endif
+
+    menu_font = DEFAULT_FONT;
+    menu_fontsize = 40;
+
+    this->shop_items = new std::vector<ShopItem*>();
+
+    menu_heightdiff = -1;
+    this->last_pos = Vec2(-1, -1);
+
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    // add a label shows "Hello World" create and initialize a label
+    auto label = Label::createWithTTF("Reset your save data", menu_font, sx(24));
+
+    // position the label on the center of the screen
+    label->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - label->getContentSize().height
+        )
+    );
+
+    // add the label as a child to this layer
+    this->addChild(label, 1);
+
+    this->coins_lbl = Label::createWithTTF(
+        "CAUTION: No way to undo this",
+        this->menu_font,
+        this->menu_fontsize
+    );
+    this->coins_lbl->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+        )
+    );
+    this->coins_lbl->setTextColor(Color4B::WHITE);
+    this->addChild(this->coins_lbl, 1);
+
+    auto scroll = this->create_center_scrollview();
+
+    this->combo_menu = Menu::create();
+    this->addChild(this->combo_menu);
+    auto go_back_cb = []() {
+       auto director = Director::getInstance();
+       director->popScene();
+       return false;
+    };
+
+
+
+    std::vector<ItemData> item_data = {
+        {"default", "Reset All", ResetMenu::reset_all, false},
+        {"default", "Reset Coins", ResetMenu::reset_total_coin_stat, false},
+        {"default", "Reset Levels", ResetMenu::reset_levels, false},
+        {"default", "Reset Combos", ResetMenu::reset_all_combos, false},
+        {"default", "Reset Total Hits", ResetMenu::reset_total_hit_stat, false},
+        {"default", "Reset Fists", ResetMenu::reset_all_fist_weapons, false},
+        {"default", "Back", go_back_cb, false},
+    };
+
+    this->init_menu_from_data(scroll, item_data);
+
+
+
+    this->resize_scroll_inner(scroll);
+    return true;
+};
+
+void ResetMenu::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
+{
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    {
+        pop_scene(NULL);
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
+            || keyCode == EventKeyboard::KeyCode::KEY_Q 
+            || keyCode == EventKeyboard::KeyCode::KEY_E 
+            || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
+    {
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+    };
+};
+
+bool ResetMenu::reset_all()
+{
+    ResetMenu::reset_total_hit_stat();
+    ResetMenu::reset_total_coin_stat();
+    ResetMenu::reset_all_combos();
+    ResetMenu::reset_all_fist_weapons();
+    ResetMenu::reset_levels();
+
+    return true;
+};
+
+bool ResetMenu::reset_total_hit_stat()
+{
+    int default_stat = 0;
+    UserDefault* ud = UserDefault::getInstance();
+    ud->setIntegerForKey(Beatup::total_hit_key.c_str(), default_stat);
+    log("reset hit stats");
+    return true;
+};
+
+bool ResetMenu::reset_all_combos()
+{
+    Beatup* bad_beatup = (Beatup*)Beatup::create();
+    for (Combo* combo : *bad_beatup->combos)
+    {
+        combo->set_been_bought(false);
+    };
+    log("reset all combos");
+    return true;
+};
+
+bool ResetMenu::reset_all_fist_weapons()
+{
+    Beatup* bad_beatup = (Beatup*)Beatup::create();
+    bad_beatup->fist_flame->set_been_bought(false);
+    bad_beatup->fist_psionic->set_been_bought(false);
+    bad_beatup->fist_frost->set_been_bought(false);
+
+    DataManager::set_bool_from_data("left_fist_charge_boost", false);
+    DataManager::set_bool_from_data("right_fist_charge_boost", false);
+    DataManager::set_bool_from_data("charging_enabled", false);
+
+    log("reset all fist weapons");
+    return true;
+};
+
+bool ResetMenu::reset_total_coin_stat()
+{
+    int default_stat = 0;
+    UserDefault* ud = UserDefault::getInstance();
+    ud->setIntegerForKey(Beatup::total_coin_key.c_str(), default_stat);
+    log("reset coin stats");
+    return true;
+};
+
+bool ResetMenu::reset_levels()
+{
+    int default_stat = 0;
+    UserDefault* ud = UserDefault::getInstance();
+    ud->setIntegerForKey(Level::generic_id_key.c_str(), default_stat);
+    log("reset level");
+    return true;
+};
+

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\ShopScene.cpp" />
+    <ClCompile Include="..\Classes\GameLayer.cpp" />
+    <ClCompile Include="..\Classes\Fist.cpp" />
+    <ClCompile Include="..\Classes\Beatup.cpp" />
+    <ClCompile Include="..\Classes\Weapons.cpp" />
+    <ClCompile Include="..\Classes\MainMenu.cpp" />
+    <ClCompile Include="..\Classes\SoundEngine.cpp" />
+    <ClCompile Include="..\Classes\Face.cpp" />
+    <ClCompile Include="..\Classes\Clock.cpp" />
+    <ClCompile Include="..\Classes\Buyable.cpp" />
+    <ClCompile Include="..\Classes\DataManager.cpp" />
+    <ClCompile Include="..\Classes\ProgressBar.cpp" />
+    <ClCompile Include="..\Classes\Combo.cpp" />
+    <ClCompile Include="..\Classes\ShatterNode.cpp" />
+    <ClCompile Include="..\Classes\Quest.cpp" />
+    <ClCompile Include="..\Classes\Alert.cpp" />
+    <ClCompile Include="..\Classes\Util.cpp" />
+    <ClCompile Include="..\Classes\Level.cpp" />
+    <ClCompile Include="..\Classes\FShake.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\ShopScene.h" />
+    <ClInclude Include="..\Classes\GameLayer.h" />
+    <ClInclude Include="..\Classes\Fist.h" />
+    <ClInclude Include="..\Classes\constants.h" />
+    <ClInclude Include="..\Classes\Beatup.h" />
+    <ClInclude Include="..\Classes\Weapons.h" />
+    <ClInclude Include="..\Classes\MainMenu.h" />
+    <ClInclude Include="..\Classes\SoundEngine.h" />
+    <ClInclude Include="..\Classes\Face.h" />
+    <ClInclude Include="..\Classes\Clock.h" />
+    <ClInclude Include="..\Classes\Buyable.h" />
+    <ClInclude Include="..\Classes\DataManager.h" />
+    <ClInclude Include="..\Classes\ProgressBar.h" />
+    <ClInclude Include="..\Classes\Combo.h" />
+    <ClInclude Include="..\Classes\RandomWeightMap.h" />
+    <ClInclude Include="..\Classes\ShatterNode.h" />
+    <ClInclude Include="..\Classes\Quest.h" />
+    <ClInclude Include="..\Classes\Alert.h" />
+    <ClInclude Include="..\Classes\Util.h" />
+    <ClInclude Include="..\Classes\Level.h" />
+    <ClInclude Include="..\Classes\FShake.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

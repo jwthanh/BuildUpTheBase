@@ -1,0 +1,7 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=76A39BB2_002D9B84_002D4C65_002D98A5_002D654D86B86F2A_002Ff_003AHelloWorldScene_002Eh_002Fl_003A_002E_002E_003FClasses_003FHelloWorldScene_002Eh/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:Int64 x:Key="/Default/Environment/UserInterface/TodoGrouping/GroupingIndex/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark5/Coords/@EntryValue">(Doc Ln 1117 Col 66)</s:String>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark5/FileId/@EntryValue">76A39BB2-9B84-4C65-98A5-654D86B86F2A/f:Face.cpp/l:..?Classes?Face.cpp</s:String>
+	<s:String x:Key="/Default/Housekeeping/Bookmarks/NumberedBookmarks/=Bookmark5/Owner/@EntryValue">NumberedBookmarkManager</s:String></wpf:ResourceDictionary>
