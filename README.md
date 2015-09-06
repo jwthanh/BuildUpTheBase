@@ -1,14 +1,12 @@
-# Beat up the face!
-Beatup the face! An upcoming Android game where you defend America from evil. 
+# BaseBuilder
+An upcoming game about building a base
 
 ## Features
-Beat up a bunch of faces across a bunch of different levels, completing missions to unlock crazy rewards, like setting your fists on fire, or mind controlling the face. When you're done unlocking things, you'll be able to freeze your fists, blow up a baby human shield, or detonate a rocket on a wall.
+None yet
 
 ## Release Schedule
 
-* Getting final audio
-* waiting on UI
-* On track to release by the end of August 2015
+* Way too early to tell
 
 # Installation (roughly)
 http://www.cocos2d-x.org/filedown/cocos2d-x-3.4.zip should be the same one I use now, although I got it right off of github.
