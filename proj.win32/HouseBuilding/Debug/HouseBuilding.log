@@ -1,3 +1,4 @@
-﻿cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-  HouseBuilding.cpp
+﻿  HouseBuilding.cpp
+  Clock.cpp
+  Generating Code...
   HouseBuilding.vcxproj -> C:\Users\Primary\workspace\basebuilder\proj.win32\Debug\HouseBuilding.exe

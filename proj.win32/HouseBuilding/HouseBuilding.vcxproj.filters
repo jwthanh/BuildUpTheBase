@@ -27,12 +27,18 @@
     <ClInclude Include="HouseBuilding.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Classes\Clock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HouseBuilding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\Clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

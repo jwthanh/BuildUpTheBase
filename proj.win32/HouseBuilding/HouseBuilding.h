@@ -2,11 +2,22 @@
 #ifndef HOUSEBUILDING_H
 #define HOUSEBUILDING_H
 
+#include "../../Classes/Clock.h"
+
 
 class Building;
 
 typedef void(*VoidFuncBuilding)(const Building*);
 typedef bool(*BoolFuncBuilding)(const Building*);
+
+class Updateable
+{
+public:
+    Clock* update_clock;
+
+    Updateable();
+    void update(float dt);
+};
 
 class Nameable
 {
@@ -16,11 +27,11 @@ class Nameable
         Nameable(std::string name) :name(name) {};
 };
 
-class Building : public Nameable
+class Building : public Nameable, public Updateable
 {
     public:
         unsigned int num_workers; //people who work here, help make things faster
-        Building(std::string name, VoidFuncBuilding task) : task(task), Nameable(name)
+        Building(std::string name, VoidFuncBuilding task) : task(task), Nameable(name), Updateable()
     {
 
         num_workers = 1;

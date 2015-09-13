@@ -10,6 +10,15 @@
 #include "HouseBuilding.h"
 
 
+Updateable::Updateable()
+{
+    this->update_clock = new Clock(15.0f);
+};
+
+void Updateable::update(float dt)
+{
+    this->update_clock->update(dt);
+};
 
 void farm_task(const Building* building)
 {
