@@ -8,9 +8,21 @@
 class Building;
 class Buildup;
 class Village;
+class Product;
+class Ingredient;
+class Waste;
 
-typedef void(*VoidFuncBuilding)(const Building*);
-typedef bool(*BoolFuncBuilding)(const Building*);
+typedef void(*VoidFuncBuilding)(Building*);
+typedef bool(*BoolFuncBuilding)(Building*);
+
+typedef std::shared_ptr<Product> spProduct;
+typedef std::vector<spProduct> vsProduct;
+
+typedef std::shared_ptr<Ingredient> spIngredient;
+typedef std::vector<spIngredient> vsIngredient;
+
+typedef std::shared_ptr<Waste> spWaste;
+typedef std::vector<spWaste> vsWaste;
 
 class Updateable
 {
@@ -27,13 +39,46 @@ class Nameable
         std::string name;
 
         Nameable(std::string name) :name(name) {};
+        Nameable(const Nameable& other)
+        {
+            this->name = other.name;
+        }
 };
 
+
+class Ingredient : public Nameable
+{
+    Ingredient(std::string name) : Nameable(name) {};
+};
+
+class Product : public Nameable
+{
+    public:
+        enum ProductTypes {
+            Veggies,
+            Meat,
+            Dairy,
+            Cereals
+        };
+    Product(std::string name) : Nameable(name) {};
+
+    Product(const Product& other) : Nameable(other) { 
+    };
+};
+
+class Waste : public Nameable
+{
+    Waste() : Nameable("Waste") {};
+};
 class Building : public Nameable, public Updateable
 {
     public:
 
         Village* city;
+
+        vsProduct products;
+        vsWaste wastes;
+        vsIngredient ingredients;
 
         unsigned int num_workers; //people who work here, help make things faster
         VoidFuncBuilding task = NULL; //shop might sell product, farm creates ingredients, etc
@@ -41,9 +86,14 @@ class Building : public Nameable, public Updateable
             : task(task), Nameable(name), Updateable(), city(city)
         {
             num_workers = 1;
+
+            products = vsProduct();
+            wastes = vsWaste();
+            ingredients = vsIngredient();
         };
 
         void update(float dt);
+        void print_inventory();
 
         void do_task();
 
@@ -86,21 +136,6 @@ class Player : public Person
         Player(std::string name) : Person(name) {};
 
         void update(float dt);
-};
-
-class Ingredient : public Nameable
-{
-    Ingredient(std::string name) : Nameable(name) {};
-};
-
-class Product : public Nameable
-{
-    Product(std::string name) : Nameable(name) {};
-};
-
-class Waste : public Nameable
-{
-    Waste() : Nameable("Waste") {};
 };
 
 class Buildup

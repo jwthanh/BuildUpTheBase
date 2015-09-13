@@ -9,6 +9,7 @@
 #include <ctime>
 
 #include "HouseBuilding.h"
+#include <sstream>
 
 Buildup::Buildup()
 {
@@ -25,24 +26,36 @@ void Updateable::update(float dt)
     this->update_clock->update(dt);
 };
 
-void farm_task(const Building* building)
+void farm_task(Building* building)
 {
-    int new_coins = 10;
-    building->city->buildup->player->coins += new_coins;
+    int new_products = 10;
+    std::vector<std::shared_ptr<Product>> products = std::vector<std::shared_ptr<Product>>();
+    for (int i = 0; i < new_products; i++)
+    {
+        spProduct p = std::make_shared<Product>("grain");
+        building->products.push_back(p);
+    };
+
+    building->products.insert(
+        building->products.end(),
+        products.begin(),
+        products.end()
+    );
+
     std::cout << "\tDoing farm stuff" << std::endl;
 };
 
-void workshop_task(const Building* building)
+void workshop_task(Building* building)
 {
     std::cout << "\tDoing workshop stuff" << std::endl;
 };
 
-void dump_task(const Building* building)
+void dump_task(Building* building)
 {
     std::cout << "\tDoing dump stuff" << std::endl;
 };
 
-void marketplace_task(const Building* building)
+void marketplace_task(Building* building)
 {
     std::cout << "\tDoing marketplace stuff" << std::endl;
 };
@@ -68,12 +81,31 @@ void Village::update_buildings(float dt)
 void Building::update(float dt)
 {
     Updateable::update(dt);
+    printf("   %s - time at %.f\n", this->name.c_str(), this->update_clock->start_time);
+    this->print_inventory();
     if (update_clock->passed_threshold())
     {
-        printf("   %s - time at %.f\n", this->name.c_str(), this->update_clock->start_time);
         this->do_task();
         update_clock->reset();
     }
+    else
+    {
+        std::cout << "   \twaiting" << std::endl;
+    }
+    std::cout << std::endl;
+};
+
+void Building::print_inventory()
+{
+    std::stringstream ss;
+    ss << "   ";
+    ss << "I: " << this->ingredients.size();
+    ss << " P: " << this->products.size();
+    ss << " W: " << this->wastes.size();
+    ss << std::endl;
+
+    std::cout << ss.str();
+
 };
 
 void Building::do_task()
