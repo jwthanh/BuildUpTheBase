@@ -43,7 +43,7 @@ ProgressBar::ProgressBar(
     this->lbl = Label::createWithTTF("", DEFAULT_FONT, 40);
     this->lbl->setScale(0.25f);
     this->lbl->setAnchorPoint(Vec2(0.5f, 0.5f));
-    this->lbl->getTexture()->setAliasTexParameters();
+    //this->lbl->getTexture()->setAliasTexParameters();
     auto front_size = this->front_timer->getContentSize();
     this->lbl->setPosition(Vec2(
         front_size.width/2.0f,

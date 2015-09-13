@@ -51,7 +51,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setDisplayStats(false);
 
     // set FPS. the default value is 1.0/60 if you don't call this
-    director->setAnimationInterval(1.0 / 60);
+    director->setAnimationInterval((float)(1.0 / 60));
 
 #ifdef __ANDROID__
 #else
