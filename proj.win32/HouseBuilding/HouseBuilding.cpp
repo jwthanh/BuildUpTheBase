@@ -107,15 +107,15 @@ void Buildup::main_loop()
 
 }
 
-Village* init_city()
+Village* init_city(Buildup* buildup)
 {
-    auto city = new Village("Burlington");
+    auto city = new Village(buildup, "Burlington");
 
-    auto farm = std::make_shared<Building>("The Farm", farm_task);
+    auto farm = std::make_shared<Building>(city, "The Farm", farm_task);
     farm->update_clock->set_threshold(2*CLOCKS_PER_SEC);
-    auto dump= std::make_shared<Building>("The Dump", dump_task);
-    auto workshop = std::make_shared<Building>("The Workshop", workshop_task);
-    auto marketplace = std::make_shared<Building>("The Marketplace", marketplace_task);
+    auto dump= std::make_shared<Building>(city, "The Dump", dump_task);
+    auto workshop = std::make_shared<Building>(city, "The Workshop", workshop_task);
+    auto marketplace = std::make_shared<Building>(city, "The Marketplace", marketplace_task);
 
     city->buildings.push_back(farm);
     city->buildings.push_back(dump);
@@ -130,7 +130,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
     Buildup* buildup = new Buildup();
 
-    buildup->city = init_city();
+    buildup->city = init_city(buildup);
     buildup->city->update_buildings(0);
 
     auto player = std::make_shared<Player>("Jimothy");

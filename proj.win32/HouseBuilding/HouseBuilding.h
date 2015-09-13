@@ -6,6 +6,8 @@
 
 
 class Building;
+class Buildup;
+class Village;
 
 typedef void(*VoidFuncBuilding)(const Building*);
 typedef bool(*BoolFuncBuilding)(const Building*);
@@ -30,12 +32,14 @@ class Nameable
 class Building : public Nameable, public Updateable
 {
     public:
+
+        Village* city;
+
         unsigned int num_workers; //people who work here, help make things faster
         VoidFuncBuilding task = NULL; //shop might sell product, farm creates ingredients, etc
-        Building(std::string name, VoidFuncBuilding task)
-            : task(task), Nameable(name), Updateable()
+        Building(Village* city, std::string name, VoidFuncBuilding task)
+            : task(task), Nameable(name), Updateable(), city(city)
         {
-
             num_workers = 1;
         };
 
@@ -49,10 +53,12 @@ class Village : public Nameable, public Updateable
 {
     public:
 
+        Buildup* buildup;
+
         std::vector<std::shared_ptr<Building>> buildings;
 
-        Village(std::string name) 
-            : Nameable(name), Updateable()
+        Village(Buildup* buildup, std::string name) 
+            : Nameable(name), Updateable(), buildup(buildup)
         {
             buildings = {};
         };
