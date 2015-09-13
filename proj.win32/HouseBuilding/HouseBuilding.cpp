@@ -55,12 +55,12 @@ void Village::update(float dt)
 
 void Village::update_buildings(float dt)
 {
+    printf("\n\nupdating buildings\n");
     for (std::shared_ptr<Building> building : this->buildings)
     {
         building->update(dt);
     };
 
-    printf("updated buildings\n");
 };
 
 void Building::update(float dt)
@@ -68,6 +68,7 @@ void Building::update(float dt)
     Updateable::update(dt);
     if (update_clock->passed_threshold())
     {
+        printf("\t%s - time at %.f\n", this->name.c_str(), this->update_clock->start_time);
         this->do_task();
         update_clock->reset();
     }
@@ -111,7 +112,7 @@ Village* init_city()
     auto city = new Village("Burlington");
 
     auto farm = std::make_shared<Building>("The Farm", farm_task);
-    farm->update_clock->set_threshold(2);
+    farm->update_clock->set_threshold(2*CLOCKS_PER_SEC);
     auto dump= std::make_shared<Building>("The Dump", dump_task);
     auto workshop = std::make_shared<Building>("The Workshop", workshop_task);
     auto marketplace = std::make_shared<Building>("The Marketplace", marketplace_task);
