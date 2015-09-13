@@ -31,31 +31,18 @@ class Building : public Nameable, public Updateable
 {
     public:
         unsigned int num_workers; //people who work here, help make things faster
-        Building(std::string name, VoidFuncBuilding task) : task(task), Nameable(name), Updateable()
-    {
-
-        num_workers = 1;
-    };
-
-        void update(float dt)
+        VoidFuncBuilding task = NULL; //shop might sell product, farm creates ingredients, etc
+        Building(std::string name, VoidFuncBuilding task)
+            : task(task), Nameable(name), Updateable()
         {
-            Updateable::update(dt);
-            if (update_clock->passed_threshold())
-            {
-                this->do_task();
-                update_clock->reset();
-            }
-        }
 
-        void do_task()
-        {
-            if (this->task)
-            {
-                this->task(this);
-            };
+            num_workers = 1;
         };
 
-        VoidFuncBuilding task = NULL; //shop might sell product, farm creates ingredients, etc
+        void update(float dt);
+
+        void do_task();
+
 };
 
 class Village : public Nameable, public Updateable
@@ -64,22 +51,13 @@ class Village : public Nameable, public Updateable
 
         std::vector<std::shared_ptr<Building>> buildings;
 
-        Village(std::string name) : Nameable(name), Updateable()
-    {
-        buildings = {};
-    };
-
-
-        void update(float dt);
-
-
-        void update_tasks()
+        Village(std::string name) 
+            : Nameable(name), Updateable()
         {
-            for (std::shared_ptr<Building> building : this->buildings)
-            {
-                building->do_task();
-            };
+            buildings = {};
         };
+        void update(float dt);
+        void update_buildings(float dt);
 };
 
 

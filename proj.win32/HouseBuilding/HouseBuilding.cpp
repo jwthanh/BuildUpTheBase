@@ -49,7 +49,36 @@ void Village::update(float dt)
 {
     Updateable::update(dt);
 
-    this->update_tasks();
+    this->update_buildings(dt);
+};
+
+
+void Village::update_buildings(float dt)
+{
+    for (std::shared_ptr<Building> building : this->buildings)
+    {
+        building->update(dt);
+    };
+
+    printf("updated buildings\n");
+};
+
+void Building::update(float dt)
+{
+    Updateable::update(dt);
+    if (update_clock->passed_threshold())
+    {
+        this->do_task();
+        update_clock->reset();
+    }
+};
+
+void Building::do_task()
+{
+    if (this->task)
+    {
+        this->task(this);
+    };
 };
 
 void Buildup::main_loop()
@@ -82,6 +111,7 @@ Village* init_city()
     auto city = new Village("Burlington");
 
     auto farm = std::make_shared<Building>("The Farm", farm_task);
+    farm->update_clock->set_threshold(2);
     auto dump= std::make_shared<Building>("The Dump", dump_task);
     auto workshop = std::make_shared<Building>("The Workshop", workshop_task);
     auto marketplace = std::make_shared<Building>("The Marketplace", marketplace_task);
@@ -100,7 +130,7 @@ int _tmain(int argc, _TCHAR* argv[])
     Buildup* buildup = new Buildup();
 
     buildup->city = init_city();
-    buildup->city->update_tasks();
+    buildup->city->update_buildings(0);
 
     auto player = std::make_shared<Player>("Jimothy");
     player->coins = 100;
