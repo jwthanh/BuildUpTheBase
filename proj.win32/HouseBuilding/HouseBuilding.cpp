@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <ctime>
 
 #include "HouseBuilding.h"
 
@@ -40,6 +41,13 @@ void marketplace_task(const Building* building)
     std::cout << "Doing marketplace stuff" << std::endl;
 };
 
+void Village::update(float dt)
+{
+    Updateable::update(dt);
+
+    this->run_tasks_once();
+};
+
 void main_update(float dt)
 {
     
@@ -62,6 +70,26 @@ int _tmain(int argc, _TCHAR* argv[])
     city->buildings.push_back(marketplace);
 
     city->run_tasks_once();
+
+    Clock game_clock = Clock(CLOCKS_PER_SEC);
+    clock_t start_time = clock() / CLOCKS_PER_SEC;
+
+    int current_ticks = 0;
+    while (true)
+    {
+        game_clock.update((float)current_ticks);
+
+        current_ticks = clock() / CLOCKS_PER_SEC - start_time;
+        if (game_clock.passed_threshold())
+        {
+            city->update(game_clock.start_time);
+
+            game_clock.reset();
+
+            current_ticks = 0;
+            start_time = clock() / CLOCKS_PER_SEC;
+        }
+    }
 
 
     auto player = std::make_shared<Player>("Jimothy");

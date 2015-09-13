@@ -51,10 +51,17 @@ public:
 class Village : public Nameable, public Updateable
 {
 public:
+
+    std::vector<std::shared_ptr<Building>> buildings;
+
     Village(std::string name) : Nameable(name), Updateable()
     {
         buildings = {};
     };
+
+
+    void update(float dt);
+
 
     void run_tasks_once()
     {
@@ -63,9 +70,6 @@ public:
             building->do_task();
         };
     };
-
-    std::vector<std::shared_ptr<Building>> buildings;
-
 };
 
 
