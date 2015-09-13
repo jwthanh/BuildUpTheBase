@@ -29,22 +29,22 @@ void farm_task(const Building* building)
 {
     int new_coins = 10;
     building->city->buildup->player->coins += new_coins;
-    std::cout << "Doing farm stuff" << std::endl;
+    std::cout << "\tDoing farm stuff" << std::endl;
 };
 
 void workshop_task(const Building* building)
 {
-    std::cout << "Doing workshop stuff" << std::endl;
+    std::cout << "\tDoing workshop stuff" << std::endl;
 };
 
 void dump_task(const Building* building)
 {
-    std::cout << "Doing dump stuff" << std::endl;
+    std::cout << "\tDoing dump stuff" << std::endl;
 };
 
 void marketplace_task(const Building* building)
 {
-    std::cout << "Doing marketplace stuff" << std::endl;
+    std::cout << "\tDoing marketplace stuff" << std::endl;
 };
 
 void Village::update(float dt)
@@ -70,7 +70,7 @@ void Building::update(float dt)
     Updateable::update(dt);
     if (update_clock->passed_threshold())
     {
-        printf("\t%s - time at %.f\n", this->name.c_str(), this->update_clock->start_time);
+        printf("   %s - time at %.f\n", this->name.c_str(), this->update_clock->start_time);
         this->do_task();
         update_clock->reset();
     }
@@ -130,7 +130,7 @@ Village* init_city(Buildup* buildup)
 
 void Player::update(float dt)
 {
-    printf("The Player has %i coins\n", this->coins);
+    printf("   The Player has %i coins\n", this->coins);
 };
 
 int _tmain(int argc, _TCHAR* argv[])
