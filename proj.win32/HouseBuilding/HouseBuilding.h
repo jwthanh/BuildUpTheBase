@@ -45,13 +45,19 @@ class Nameable
         }
 };
 
-
-class Ingredient : public Nameable
+class Resource : public Nameable
 {
-    Ingredient(std::string name) : Nameable(name) {};
+public:
+    Resource(std::string name) :Nameable(name){};
 };
 
-class Product : public Nameable
+
+class Ingredient : public Resource
+{
+    Ingredient(std::string name) : Resource(name) {};
+};
+
+class Product : public Resource
 {
     public:
         enum ProductTypes {
@@ -60,15 +66,15 @@ class Product : public Nameable
             Dairy,
             Cereals
         };
-    Product(std::string name) : Nameable(name) {};
+    Product(std::string name) : Resource(name) {};
 
-    Product(const Product& other) : Nameable(other) { 
+    Product(const Product& other) : Resource(other) { 
     };
 };
 
-class Waste : public Nameable
+class Waste : public Resource
 {
-    Waste() : Nameable("Waste") {};
+    Waste() : Resource("Waste") {};
 };
 class Building : public Nameable, public Updateable
 {
