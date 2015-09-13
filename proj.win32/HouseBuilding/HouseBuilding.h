@@ -106,4 +106,13 @@ class Waste : public Nameable
 {
     Waste() : Nameable("Waste") {};
 };
+
+class Buildup
+{
+    public:
+        Village* city;
+
+        Buildup();
+        void main_loop();
+};
 #endif

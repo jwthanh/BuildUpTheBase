@@ -10,6 +10,10 @@
 
 #include "HouseBuilding.h"
 
+Buildup::Buildup()
+{
+    this->city = NULL;
+};
 
 Updateable::Updateable()
 {
@@ -48,29 +52,8 @@ void Village::update(float dt)
     this->run_tasks_once();
 };
 
-void main_update(float dt)
+void Buildup::main_loop()
 {
-    
-
-}
-
-
-int _tmain(int argc, _TCHAR* argv[])
-{
-    auto city = std::make_shared<Village>("Burlington");
-
-    auto farm = std::make_shared<Building>("The Farm", farm_task);
-    auto dump= std::make_shared<Building>("The Dump", dump_task);
-    auto workshop = std::make_shared<Building>("The Workshop", workshop_task);
-    auto marketplace = std::make_shared<Building>("The Marketplace", marketplace_task);
-
-    city->buildings.push_back(farm);
-    city->buildings.push_back(dump);
-    city->buildings.push_back(workshop);
-    city->buildings.push_back(marketplace);
-
-    city->run_tasks_once();
-
     Clock game_clock = Clock(CLOCKS_PER_SEC);
     clock_t start_time = clock() / CLOCKS_PER_SEC;
 
@@ -82,7 +65,7 @@ int _tmain(int argc, _TCHAR* argv[])
         current_ticks = clock() / CLOCKS_PER_SEC - start_time;
         if (game_clock.passed_threshold())
         {
-            city->update(game_clock.start_time);
+            this->city->update(game_clock.start_time);
 
             game_clock.reset();
 
@@ -92,15 +75,45 @@ int _tmain(int argc, _TCHAR* argv[])
     }
 
 
+}
+
+Village* init_city()
+{
+    auto city = new Village("Burlington");
+
+    auto farm = std::make_shared<Building>("The Farm", farm_task);
+    auto dump= std::make_shared<Building>("The Dump", dump_task);
+    auto workshop = std::make_shared<Building>("The Workshop", workshop_task);
+    auto marketplace = std::make_shared<Building>("The Marketplace", marketplace_task);
+
+    city->buildings.push_back(farm);
+    city->buildings.push_back(dump);
+    city->buildings.push_back(workshop);
+    city->buildings.push_back(marketplace);
+
+    return city;
+};
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+    Buildup* buildup = new Buildup();
+
+    buildup->city = init_city();
+    buildup->city->run_tasks_once();
+
     auto player = std::make_shared<Player>("Jimothy");
     player->coins = 100;
 
     auto animal = std::make_shared<Animal>("Tank");
 
+    buildup->main_loop();
+
     std::cout << std::endl << "Done?";
     std::string val;
     std::cin.ignore();
     std::cout << "Peace" << std::endl;
+
 
 
     return 0;
