@@ -28,7 +28,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::create("Beat up the face!");
+        glview = GLViewImpl::create("Build up a base!");
         director->setOpenGLView(glview);
 
         auto set_resolution = [glview](float x, float y) {
