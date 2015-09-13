@@ -73,10 +73,10 @@ class Animal : public Nameable
         Animal(std::string name) : Nameable(name) {};
 };
 
-class Person : public Nameable
+class Person : public Nameable, public Updateable
 {
     public:
-        Person(std::string name) : Nameable(name) {};
+        Person(std::string name) : Nameable(name), Updateable() {};
 };
 
 class Player : public Person
@@ -84,6 +84,8 @@ class Player : public Person
     public:
         unsigned int coins;
         Player(std::string name) : Person(name) {};
+
+        void update(float dt);
 };
 
 class Ingredient : public Nameable
@@ -104,6 +106,8 @@ class Waste : public Nameable
 class Buildup
 {
     public:
+        Player* player;
+
         Village* city;
 
         Buildup();

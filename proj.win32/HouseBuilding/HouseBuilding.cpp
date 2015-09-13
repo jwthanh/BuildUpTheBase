@@ -27,6 +27,8 @@ void Updateable::update(float dt)
 
 void farm_task(const Building* building)
 {
+    int new_coins = 10;
+    building->city->buildup->player->coins += new_coins;
     std::cout << "Doing farm stuff" << std::endl;
 };
 
@@ -96,6 +98,7 @@ void Buildup::main_loop()
         if (game_clock.passed_threshold())
         {
             this->city->update(game_clock.start_time);
+            this->player->update(game_clock.start_time);
 
             game_clock.reset();
 
@@ -125,18 +128,23 @@ Village* init_city(Buildup* buildup)
     return city;
 };
 
+void Player::update(float dt)
+{
+    printf("The Player has %i coins\n", this->coins);
+};
 
 int _tmain(int argc, _TCHAR* argv[])
 {
     Buildup* buildup = new Buildup();
 
-    buildup->city = init_city(buildup);
-    buildup->city->update_buildings(0);
-
-    auto player = std::make_shared<Player>("Jimothy");
+    auto player = new Player("Jimothy");
     player->coins = 100;
+    buildup->player = player;
 
     auto animal = std::make_shared<Animal>("Tank");
+
+    buildup->city = init_city(buildup);
+    buildup->city->update_buildings(0);
 
     buildup->main_loop();
 
