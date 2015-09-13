@@ -189,6 +189,7 @@ Scrollable* GameLayer::create_center_scrollview()
     scroll->setLayoutType(ui::Layout::Type::VERTICAL);
 
     // scroll->setBounceEnabled(true); //this sucks, needs to be smoother
+    scroll->setScrollBarAutoHideEnabled(false);
 
     return scroll;
 }

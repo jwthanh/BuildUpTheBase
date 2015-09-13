@@ -1787,12 +1787,15 @@ void Beatup::create_quest_alert()
     auto resize_btn = [](ui::Button* button) {
         auto lbl_size = button->getTitleRenderer()->getContentSize();
 
+        button->ignoreContentAdaptWithSize(true);
+        auto lbl = button->getTitleRenderer();
         button->setContentSize(
             Size(
                 lbl_size.width * 1.5f,
                 lbl_size.height * 1.5f
             )
         );
+        lbl->setDimensions(lbl_size.width*1.5f, lbl_size.height*1.5f);
 
     };
 
