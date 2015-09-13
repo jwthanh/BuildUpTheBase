@@ -49,7 +49,7 @@ void Village::update(float dt)
 {
     Updateable::update(dt);
 
-    this->run_tasks_once();
+    this->update_tasks();
 };
 
 void Buildup::main_loop()
@@ -100,7 +100,7 @@ int _tmain(int argc, _TCHAR* argv[])
     Buildup* buildup = new Buildup();
 
     buildup->city = init_city();
-    buildup->city->run_tasks_once();
+    buildup->city->update_tasks();
 
     auto player = std::make_shared<Player>("Jimothy");
     player->coins = 100;

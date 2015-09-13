@@ -37,6 +37,16 @@ class Building : public Nameable, public Updateable
         num_workers = 1;
     };
 
+        void update(float dt)
+        {
+            Updateable::update(dt);
+            if (update_clock->passed_threshold())
+            {
+                this->do_task();
+                update_clock->reset();
+            }
+        }
+
         void do_task()
         {
             if (this->task)
@@ -63,7 +73,7 @@ class Village : public Nameable, public Updateable
         void update(float dt);
 
 
-        void run_tasks_once()
+        void update_tasks()
         {
             for (std::shared_ptr<Building> building : this->buildings)
             {
