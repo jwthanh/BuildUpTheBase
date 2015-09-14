@@ -78,8 +78,8 @@ void Village::update_buildings(float dt)
 
 };
 
-template<typename from_T, typename to_T>
-void transfer(from_T from_vs, to_T to_vs, int quantity)
+template<typename from_V, typename to_V>
+void transfer(from_V from_vs, to_V to_vs, int quantity)
 {
     if (from_vs.size() < quantity)
     {
