@@ -42,7 +42,7 @@ void farm_task(Building* building)
         products.end()
     );
 
-    std::cout << "\tDoing farm stuff" << std::endl;
+    std::cout << "\tDoing farm stuff, aka generating grain products" << std::endl;
 };
 
 void workshop_task(Building* building)
@@ -75,6 +75,42 @@ void Village::update_buildings(float dt)
     {
         building->update(dt);
     };
+
+};
+
+template<typename from_T, typename to_T>
+void transfer(from_T from_vs, to_T to_vs, int quantity)
+{
+    if (from_vs.size() < quantity)
+    {
+        std::cout << quantity << " is too many" << std::endl;
+        quantity = from_vs.size();
+    }
+
+    if (quantity > 0)
+    {
+        std::move(from_vs.begin(), std::next(from_vs.begin(), quantity), std::back_inserter(to_vs));
+    }
+};
+
+void Animal::b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::ResourceType res_type, int quantity)
+{
+    if (res_type == Resource::Ingredient)
+    {
+        transfer(from_bldg->ingredients, to_bldg->ingredients, quantity);
+    }
+    else if (res_type == Resource::Product)
+    {
+        transfer(from_bldg->products, to_bldg->products, quantity);
+    }
+    else if (res_type == Resource::Waste)
+    {
+        transfer(from_bldg->wastes, to_bldg->wastes, quantity);
+    }
+    else
+    {
+        std::cout << "type not recognized" << std::endl;
+    }
 
 };
 

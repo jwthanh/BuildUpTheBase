@@ -11,9 +11,13 @@ class Village;
 class Product;
 class Ingredient;
 class Waste;
+class Resource;
 
 typedef void(*VoidFuncBuilding)(Building*);
 typedef bool(*BoolFuncBuilding)(Building*);
+
+typedef std::shared_ptr<Resource> spResource;
+typedef std::vector<spResource> vsResource;
 
 typedef std::shared_ptr<Product> spProduct;
 typedef std::vector<spProduct> vsProduct;
@@ -47,13 +51,22 @@ class Nameable
 
 class Resource : public Nameable
 {
-public:
-    Resource(std::string name) :Nameable(name){};
+    public:
+        enum ResourceType {
+            Ingredient = 0,
+            Product = 1,
+            Waste = 2
+        };
+
+        static const ResourceType resource_type;
+
+        Resource(std::string name) :Nameable(name){};
 };
 
 
 class Ingredient : public Resource
 {
+    static const ResourceType resource_type = Resource::ResourceType::Ingredient;
     Ingredient(std::string name) : Resource(name) {};
 };
 
@@ -82,9 +95,9 @@ class Building : public Nameable, public Updateable
 
         Village* city;
 
-        vsProduct products;
-        vsWaste wastes;
-        vsIngredient ingredients;
+        std::vector<std::shared_ptr<Product>> products;
+        std::vector<std::shared_ptr<Waste>> wastes;
+        std::vector<std::shared_ptr<Ingredient>> ingredients;
 
         unsigned int num_workers; //people who work here, help make things faster
         VoidFuncBuilding task = NULL; //shop might sell product, farm creates ingredients, etc
@@ -127,6 +140,8 @@ class Animal : public Nameable
 {
     public:
         Animal(std::string name) : Nameable(name) {};
+
+        void b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::ResourceType res_type, int quantity);
 };
 
 class Person : public Nameable, public Updateable
