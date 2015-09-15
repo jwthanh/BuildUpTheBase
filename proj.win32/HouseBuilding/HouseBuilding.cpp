@@ -83,8 +83,9 @@ void transfer(from_V from_vs, to_V to_vs, int quantity)
 {
     if (from_vs.size() < quantity)
     {
-        std::cout << quantity << " is too many" << std::endl;
+        std::cout << quantity << " is too many.";
         quantity = from_vs.size();
+        std::cout << " new size is" << quantity << std::endl;
     }
 
     if (quantity > 0)
