@@ -203,7 +203,7 @@ bool Beatup::init()
 
     this->coins_lbl = Label::createWithTTF("0 coins", DEFAULT_FONT, 24);
     this->coins_lbl->setAnchorPoint(Vec2(0.5f, 0.5f));
-    //this->coins_lbl->getTexture()->setAliasTexParameters();
+    this->coins_lbl->getFontAtlas()->setAliasTexParameters();
     this->coins_lbl->setPosition(Vec2(
         28,
         6.5f

@@ -211,7 +211,7 @@ cocos2d::ui::Button* GameLayer::create_button(std::string text, BoolFuncNoArgs c
     btn->setTitleFontName(menu_font);
     btn->setTitleFontSize(menu_fontsize);
     btn->setTitleColor(Color3B::BLACK);
-    //btn->getTitleRenderer()->getTexture()->setAliasTexParameters();
+    btn->getTitleRenderer()->getFontAtlas()->setAliasTexParameters();
 
     btn->setColor(Color3B(114, 160, 72));
 
