@@ -28,6 +28,7 @@ void Updateable::update(float dt)
 
 void farm_task(Building* building)
 {
+    std::cout << "\tDoing farm stuff";
     int new_products = 10;
     std::vector<std::shared_ptr<Product>> products = std::vector<std::shared_ptr<Product>>();
     for (int i = 0; i < new_products; i++)
@@ -42,7 +43,15 @@ void farm_task(Building* building)
         products.end()
     );
 
-    std::cout << "\tDoing farm stuff, aka generating grain products" << std::endl;
+    std::cout << ", aka generating grain products" << std::endl;
+
+    Animal animal = Animal("Horse");
+    animal.b2b_transfer(
+        building,
+        building->city->buildings.at(1).get(),
+        Resource::ResourceType::Product,
+        5
+    );
 };
 
 void workshop_task(Building* building)
@@ -79,7 +88,7 @@ void Village::update_buildings(float dt)
 };
 
 template<typename from_V, typename to_V>
-void transfer(from_V from_vs, to_V to_vs, int quantity)
+void transfer(from_V& from_vs, to_V& to_vs, int quantity)
 {
     if (from_vs.size() < quantity)
     {

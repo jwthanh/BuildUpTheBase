@@ -1,6 +1,6 @@
 ﻿  HouseBuilding.cpp
-c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(84): warning C4018: '<' : signed/unsigned mismatch
-          c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(101) : see reference to function template instantiation 'void transfer<std::vector<spIngredient,std::allocator<_Ty>>,std::vector<_Ty,std::allocator<_Ty>>>(from_V,to_V,int)' being compiled
+c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(88): warning C4018: '<' : signed/unsigned mismatch
+          c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(105) : see reference to function template instantiation 'void transfer<std::vector<spIngredient,std::allocator<_Ty>>,std::vector<_Ty,std::allocator<_Ty>>>(from_V &,to_V &,int)' being compiled
           with
           [
               _Ty=spIngredient

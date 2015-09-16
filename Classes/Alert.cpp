@@ -31,6 +31,8 @@ Alert* Alert::create()
 
     auto create_txt = [&](std::string msg, ui::RelativeLayoutParameter* param) {
         auto txt = ui::Text::create(msg, DEFAULT_FONT, sx(25.0f));
+        Label* lbl = (Label*)txt->getVirtualRenderer();
+        lbl->getFontAtlas()->setAliasTexParameters();
         txt->setTextColor(Color4B::BLACK);
         //txt->enableOutline(Color4B::BLACK, 2);
 
