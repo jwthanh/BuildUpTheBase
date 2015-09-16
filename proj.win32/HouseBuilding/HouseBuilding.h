@@ -16,6 +16,9 @@ class Resource;
 typedef void(*VoidFuncBuilding)(Building*);
 typedef bool(*BoolFuncBuilding)(Building*);
 
+typedef std::shared_ptr<Building> spBuilding;
+typedef std::vector<spBuilding> vsBuilding;
+
 typedef std::shared_ptr<Resource> spResource;
 typedef std::vector<spResource> vsResource;
 
@@ -131,8 +134,11 @@ class Village : public Nameable, public Updateable
         {
             buildings = {};
         };
+
         void update(float dt);
         void update_buildings(float dt);
+
+        Building* building_by_name(std::string name);
 };
 
 

@@ -26,7 +26,7 @@ void Updateable::update(float dt)
     this->update_clock->update(dt);
 };
 
-void farm_task(Building* building)
+void farm_task(Building* farm)
 {
     std::cout << "\tDoing farm stuff";
     int new_products = 10;
@@ -34,11 +34,11 @@ void farm_task(Building* building)
     for (int i = 0; i < new_products; i++)
     {
         spProduct p = std::make_shared<Product>("grain");
-        building->products.push_back(p);
+        farm->products.push_back(p);
     };
 
-    building->products.insert(
-        building->products.end(),
+    farm->products.insert(
+        farm->products.end(),
         products.begin(),
         products.end()
     );
@@ -47,8 +47,8 @@ void farm_task(Building* building)
 
     Animal animal = Animal("Horse");
     animal.b2b_transfer(
-        building,
-        building->city->buildings.at(1).get(),
+        farm,
+        farm->city->building_by_name("The Workshop"),
         Resource::ResourceType::Product,
         5
     );
@@ -85,6 +85,17 @@ void Village::update_buildings(float dt)
         building->update(dt);
     };
 
+};
+
+Building* Village::building_by_name(std::string name)
+{
+    for (auto bldg : this->buildings)
+    {
+        if (bldg->name == name)
+            return bldg.get();
+    };
+
+    return NULL;
 };
 
 template<typename from_V, typename to_V>
