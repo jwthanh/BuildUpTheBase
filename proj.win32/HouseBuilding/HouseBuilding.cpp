@@ -29,8 +29,10 @@ void Updateable::update(float dt)
 void farm_task(Building* farm)
 {
     std::cout << "\tDoing farm stuff";
+
     int new_products = 10;
-    std::vector<std::shared_ptr<Product>> products = std::vector<std::shared_ptr<Product>>();
+    vsProduct products = vsProduct();
+
     for (int i = 0; i < new_products; i++)
     {
         spProduct p = std::make_shared<Product>("grain");
@@ -134,6 +136,45 @@ void Animal::b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::Reso
     }
 
 };
+
+template<typename T>
+void create(std::vector<T> vec, int quantity, std::string name)
+{
+    std::vector<T> created_resources = std::vector<T>();
+
+    for (int i = 0; i < quantity; i++)
+    {
+        std::shared_ptr<T> p = std::make_shared<T>("grain");
+        created_resources.push_back(p);
+    };
+
+    vec.insert(
+        vec.end(),
+        created_resources.begin(),
+        created_resources.end()
+    );
+
+};
+
+void Building::create_resources(Resource::ResourceType type, int quantity, std::string name)
+{
+    if (type == Resource::Ingredient)
+    {
+        create(this->ingredients, quantity, name);
+    }
+    else if (type == Resource::Product)
+    {
+        create(this->products, quantity, name);
+    }
+    else if (type == Resource::Waste)
+    {
+        create(this->wastes, quantity, name);
+    }
+    else
+    {
+        std::cout << "type not recognized" << std::endl;
+    }
+}
 
 void Building::update(float dt)
 {

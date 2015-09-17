@@ -114,6 +114,8 @@ class Building : public Nameable, public Updateable
             ingredients = vsIngredient();
         };
 
+        void create_resources(Resource::ResourceType type, int quantity, std::string name);
+
         void update(float dt);
         void print_inventory();
 
