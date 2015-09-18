@@ -7,27 +7,4 @@ c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cp
   ,            from_V=std::vector<spIngredient,std::allocator<spIngredient>>
   ,            to_V=std::vector<spIngredient,std::allocator<spIngredient>>
           ]
-c:\program files (x86)\microsoft visual studio 12.0\vc\include\memory(932): error C2664: 'Waste::Waste(const Waste &)' : cannot convert argument 1 from 'const char [6]' to 'const Waste &'
-          Reason: cannot convert from 'const char [6]' to 'const Waste'
-          No constructor could take the source type, or constructor overload resolution was ambiguous
-          c:\program files (x86)\microsoft visual studio 12.0\vc\include\memory(1003) : see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<const char(&)[6]>(const char (&)[6])' being compiled
-          with
-          [
-              _Ty=Waste
-          ]
-          c:\program files (x86)\microsoft visual studio 12.0\vc\include\memory(1003) : see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<const char(&)[6]>(const char (&)[6])' being compiled
-          with
-          [
-              _Ty=Waste
-          ]
-          c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(147) : see reference to function template instantiation 'std::shared_ptr<Waste> std::make_shared<T,const char(&)[6]>(const char (&)[6])' being compiled
-          with
-          [
-              T=Waste
-          ]
-          c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(171) : see reference to function template instantiation 'void create<Waste,std::vector<spWaste,std::allocator<_Ty>>>(vectorT,int,std::string)' being compiled
-          with
-          [
-              _Ty=spWaste
-  ,            vectorT=std::vector<spWaste,std::allocator<spWaste>>
-          ]
+  HouseBuilding.vcxproj -> C:\Users\Primary\workspace\basebuilder\proj.win32\Debug\HouseBuilding.exe

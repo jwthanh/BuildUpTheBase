@@ -72,7 +72,7 @@ class Ingredient : public Resource
     public:
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
         Ingredient(std::string name) : Resource(name) {};
-    };
+};
 
 class Product : public Resource
 {
@@ -83,16 +83,16 @@ class Product : public Resource
             Dairy,
             Cereals
         };
-    Product(std::string name) : Resource(name) {};
+        Product(std::string name) : Resource(name) {};
 
-    Product(const Product& other) : Resource(other) { 
-    };
+        Product(const Product& other) : Resource(other) {
+        };
 };
 
 class Waste : public Resource
 {
-public:
-    Waste() : Resource("Waste") {};
+    public:
+        Waste(std::string name) : Resource(name) {};
 };
 class Building : public Nameable, public Updateable
 {
@@ -133,7 +133,7 @@ class Village : public Nameable, public Updateable
 
         std::vector<std::shared_ptr<Building>> buildings;
 
-        Village(Buildup* buildup, std::string name) 
+        Village(Buildup* buildup, std::string name)
             : Nameable(name), Updateable(), buildup(buildup)
         {
             buildings = {};
