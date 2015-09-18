@@ -31,21 +31,26 @@ void farm_task(Building* farm)
     std::cout << "\tDoing farm stuff";
 
     int new_products = 10;
-    farm->create_resources(Resource::Product, new_products, "grain");
+    farm->create_resources(Resource::Ingredient, new_products, "grain");
 
-    std::cout << ", aka generating grain products" << std::endl;
+    std::cout << ", aka generating grain ingredients" << std::endl;
 
     Animal animal = Animal("Horse");
     animal.b2b_transfer(
         farm,
         farm->city->building_by_name("The Workshop"),
-        Resource::ResourceType::Product,
+        Resource::ResourceType::Ingredient,
         new_products/2
     );
 };
 
 void workshop_task(Building* workshop)
 {
+    if (workshop->ingredients.size() > 0)
+    {
+        workshop->ingredients.pop_back();
+        workshop->create_resources(Resource::Product, 2, "Pie");
+    }
     if (workshop->products.size() > 0)
     {
         workshop->products.pop_back();
