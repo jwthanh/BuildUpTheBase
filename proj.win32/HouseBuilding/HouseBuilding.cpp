@@ -44,9 +44,25 @@ void farm_task(Building* farm)
     );
 };
 
-void workshop_task(Building* building)
+void workshop_task(Building* workshop)
 {
+    if (workshop->products.size() > 0)
+    {
+        workshop->products.pop_back();
+        workshop->create_resources(Resource::Waste, 1, "dead product");
+    }
     std::cout << "\tDoing workshop stuff" << std::endl;
+
+    if (workshop->wastes.size() > 2)
+    {
+        Animal animal = Animal("Horse");
+        animal.b2b_transfer(
+            workshop,
+            workshop->city->building_by_name("The Dump"),
+            Resource::ResourceType::Waste,
+            1
+            );
+    };
 };
 
 void dump_task(Building* building)
