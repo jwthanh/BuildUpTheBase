@@ -31,19 +31,7 @@ void farm_task(Building* farm)
     std::cout << "\tDoing farm stuff";
 
     int new_products = 10;
-    vsProduct products = vsProduct();
-
-    for (int i = 0; i < new_products; i++)
-    {
-        spProduct p = std::make_shared<Product>("grain");
-        farm->products.push_back(p);
-    };
-
-    farm->products.insert(
-        farm->products.end(),
-        products.begin(),
-        products.end()
-    );
+    farm->create_resources(Resource::Product, new_products, "grain");
 
     std::cout << ", aka generating grain products" << std::endl;
 
@@ -52,7 +40,7 @@ void farm_task(Building* farm)
         farm,
         farm->city->building_by_name("The Workshop"),
         Resource::ResourceType::Product,
-        5
+        new_products/2
     );
 };
 
@@ -138,7 +126,7 @@ void Animal::b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::Reso
 };
 
 template<typename T, typename vectorT>
-void create(vectorT vec, int quantity, std::string name)
+void create(vectorT& vec, int quantity, std::string name)
 {
     vectorT created_resources = vectorT();
 
