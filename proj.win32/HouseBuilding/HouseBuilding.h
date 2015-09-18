@@ -69,9 +69,10 @@ class Resource : public Nameable
 
 class Ingredient : public Resource
 {
-    static const ResourceType resource_type = Resource::ResourceType::Ingredient;
-    Ingredient(std::string name) : Resource(name) {};
-};
+    public:
+        static const ResourceType resource_type = Resource::ResourceType::Ingredient;
+        Ingredient(std::string name) : Resource(name) {};
+    };
 
 class Product : public Resource
 {
@@ -90,6 +91,7 @@ class Product : public Resource
 
 class Waste : public Resource
 {
+public:
     Waste() : Resource("Waste") {};
 };
 class Building : public Nameable, public Updateable

@@ -7,63 +7,27 @@ c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cp
   ,            from_V=std::vector<spIngredient,std::allocator<spIngredient>>
   ,            to_V=std::vector<spIngredient,std::allocator<spIngredient>>
           ]
-c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(148): error C2664: 'void std::vector<spIngredient,std::allocator<_Ty>>::push_back(const std::shared_ptr<Ingredient> &)' : cannot convert argument 1 from 'std::shared_ptr<T>' to 'std::shared_ptr<Ingredient> &&'
+c:\program files (x86)\microsoft visual studio 12.0\vc\include\memory(932): error C2664: 'Waste::Waste(const Waste &)' : cannot convert argument 1 from 'const char [6]' to 'const Waste &'
+          Reason: cannot convert from 'const char [6]' to 'const Waste'
+          No constructor could take the source type, or constructor overload resolution was ambiguous
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\memory(1003) : see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<const char(&)[6]>(const char (&)[6])' being compiled
           with
           [
-              _Ty=spIngredient
+              _Ty=Waste
           ]
-          and
-          [
-              T=spIngredient
-          ]
-          Reason: cannot convert from 'std::shared_ptr<T>' to 'std::shared_ptr<Ingredient>'
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\memory(1003) : see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<const char(&)[6]>(const char (&)[6])' being compiled
           with
           [
-              T=spIngredient
+              _Ty=Waste
           ]
-          No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-          c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(163) : see reference to function template instantiation 'void create<spIngredient>(std::vector<spIngredient,std::allocator<_Ty>>,int,std::string)' being compiled
+          c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(147) : see reference to function template instantiation 'std::shared_ptr<Waste> std::make_shared<T,const char(&)[6]>(const char (&)[6])' being compiled
           with
           [
-              _Ty=spIngredient
+              T=Waste
           ]
-c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(148): error C2664: 'void std::vector<spProduct,std::allocator<_Ty>>::push_back(const std::shared_ptr<Product> &)' : cannot convert argument 1 from 'std::shared_ptr<T>' to 'std::shared_ptr<Product> &&'
-          with
-          [
-              _Ty=spProduct
-          ]
-          and
-          [
-              T=spProduct
-          ]
-          Reason: cannot convert from 'std::shared_ptr<T>' to 'std::shared_ptr<Product>'
-          with
-          [
-              T=spProduct
-          ]
-          No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-          c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(167) : see reference to function template instantiation 'void create<spProduct>(std::vector<spProduct,std::allocator<_Ty>>,int,std::string)' being compiled
-          with
-          [
-              _Ty=spProduct
-          ]
-c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(148): error C2664: 'void std::vector<spWaste,std::allocator<_Ty>>::push_back(const std::shared_ptr<Waste> &)' : cannot convert argument 1 from 'std::shared_ptr<T>' to 'std::shared_ptr<Waste> &&'
+          c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(171) : see reference to function template instantiation 'void create<Waste,std::vector<spWaste,std::allocator<_Ty>>>(vectorT,int,std::string)' being compiled
           with
           [
               _Ty=spWaste
-          ]
-          and
-          [
-              T=spWaste
-          ]
-          Reason: cannot convert from 'std::shared_ptr<T>' to 'std::shared_ptr<Waste>'
-          with
-          [
-              T=spWaste
-          ]
-          No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-          c:\users\primary\workspace\basebuilder\proj.win32\housebuilding\housebuilding.cpp(171) : see reference to function template instantiation 'void create<spWaste>(std::vector<spWaste,std::allocator<_Ty>>,int,std::string)' being compiled
-          with
-          [
-              _Ty=spWaste
+  ,            vectorT=std::vector<spWaste,std::allocator<spWaste>>
           ]

@@ -137,10 +137,10 @@ void Animal::b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::Reso
 
 };
 
-template<typename T>
-void create(std::vector<T> vec, int quantity, std::string name)
+template<typename T, typename vectorT>
+void create(vectorT vec, int quantity, std::string name)
 {
-    std::vector<T> created_resources = std::vector<T>();
+    vectorT created_resources = vectorT();
 
     for (int i = 0; i < quantity; i++)
     {
@@ -160,15 +160,15 @@ void Building::create_resources(Resource::ResourceType type, int quantity, std::
 {
     if (type == Resource::Ingredient)
     {
-        create(this->ingredients, quantity, name);
+        create<Ingredient>(this->ingredients, quantity, name);
     }
     else if (type == Resource::Product)
     {
-        create(this->products, quantity, name);
+        create<Product>(this->products, quantity, name);
     }
     else if (type == Resource::Waste)
     {
-        create(this->wastes, quantity, name);
+        create<Waste>(this->wastes, quantity, name);
     }
     else
     {
