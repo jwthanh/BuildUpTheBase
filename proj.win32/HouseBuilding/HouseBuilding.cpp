@@ -56,6 +56,11 @@ void workshop_task(Building* workshop)
         workshop->products.pop_back();
         workshop->create_resources(Resource::Waste, 1, "dead product");
     }
+    if (workshop->products.size() > 5)
+    {
+        workshop->products.erase(workshop->products.begin(), workshop->products.begin()+5);
+        workshop->city->buildup->player->coins += 3;
+    }
     std::cout << "\tDoing workshop stuff" << std::endl;
 
     if (workshop->wastes.size() > 2)
