@@ -100,6 +100,8 @@ bool Shop::buy(ShopItem* shop_item, int cost, BoolFuncNoArgs on_bought)
     return true;
 };
 
+
+
 void Shop::menu_init()
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
