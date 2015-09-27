@@ -12,6 +12,8 @@ class Product;
 class Ingredient;
 class Waste;
 class Resource;
+class Fighter;
+class Battle;
 
 typedef void(*VoidFuncBuilding)(Building*);
 typedef bool(*BoolFuncBuilding)(Building*);
@@ -30,6 +32,12 @@ typedef std::vector<spIngredient> vsIngredient;
 
 typedef std::shared_ptr<Waste> spWaste;
 typedef std::vector<spWaste> vsWaste;
+
+typedef std::shared_ptr<Battle> spBattle;
+typedef std::vector<spBattle> vsBattle;
+
+typedef std::shared_ptr<Fighter> spFighter;
+typedef std::vector<spFighter> vsFighter;
 
 class Updateable
 {
@@ -94,6 +102,53 @@ class Waste : public Resource
     public:
         Waste(std::string name) : Resource(name) {};
 };
+
+class Fighter : public Nameable, public Updateable
+{
+    public:
+        Village* city;
+        Fighter(Village* city, std::string name) : Nameable(name), Updateable(), city(city)
+        {
+            
+        }
+        void update(float dt);
+};
+
+class Battle : public Updateable
+{
+public:
+    vsFighter combatants;
+
+    Battle() : Updateable()
+    {
+        this->combatants = vsFighter();
+    };
+
+    void update(float dt)
+    {
+        Updateable::update(dt);
+        this->do_battle();
+    }
+
+    void do_battle()
+    {
+        if (this->combatants.size() != 0)
+        {
+            std::cout << "A fight between";
+            for (auto fighter : this->combatants)
+            {
+                std::cout << " " << fighter->name;
+            }
+            std::cout << "... and that's it!" << std::endl;
+        }
+        else
+        {
+            std::cout << "no one to fight" << std::endl;
+        }
+        return;
+    }
+};
+
 class Building : public Nameable, public Updateable
 {
     public:

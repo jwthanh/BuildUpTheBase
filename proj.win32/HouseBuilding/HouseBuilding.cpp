@@ -26,6 +26,11 @@ void Updateable::update(float dt)
     this->update_clock->update(dt);
 };
 
+void Fighter::update(float dt)
+{
+    Updateable::update(dt);
+}
+
 void farm_task(Building* farm)
 {
     std::cout << "\tDoing farm stuff";
@@ -83,6 +88,20 @@ void dump_task(Building* building)
 void marketplace_task(Building* building)
 {
     std::cout << "\tDoing marketplace stuff" << std::endl;
+};
+
+void arena_task(Building* arena)
+{
+    std::cout << "\tDoing arena stuff" << std::endl;
+
+    auto fighter_dude = std::make_shared<Fighter>(arena->city, "Mitchell");
+    auto fighter_bear = std::make_shared<Fighter>(arena->city, "Barry");
+
+    auto battle = std::make_shared<Battle>();
+    battle->combatants.push_back(fighter_dude);
+    battle->combatants.push_back(fighter_bear);
+
+    battle->do_battle();
 };
 
 void Village::update(float dt)
@@ -263,11 +282,13 @@ Village* init_city(Buildup* buildup)
     auto dump= std::make_shared<Building>(city, "The Dump", dump_task);
     auto workshop = std::make_shared<Building>(city, "The Workshop", workshop_task);
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", marketplace_task);
+    auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
 
     city->buildings.push_back(farm);
     city->buildings.push_back(dump);
     city->buildings.push_back(workshop);
     city->buildings.push_back(marketplace);
+    city->buildings.push_back(arena);
 
     return city;
 };
