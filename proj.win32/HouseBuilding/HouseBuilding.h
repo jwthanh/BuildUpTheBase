@@ -155,9 +155,9 @@ class Building : public Nameable, public Updateable
 
         Village* city;
 
-        std::vector<std::shared_ptr<Product>> products;
-        std::vector<std::shared_ptr<Waste>> wastes;
-        std::vector<std::shared_ptr<Ingredient>> ingredients;
+        vsProduct products;
+        vsWaste wastes;
+        vsIngredient ingredients;
 
         unsigned int num_workers; //people who work here, help make things faster
         VoidFuncBuilding task = NULL; //shop might sell product, farm creates ingredients, etc
@@ -186,7 +186,7 @@ class Village : public Nameable, public Updateable
 
         Buildup* buildup;
 
-        std::vector<std::shared_ptr<Building>> buildings;
+        vsBuilding buildings;
 
         Village(Buildup* buildup, std::string name)
             : Nameable(name), Updateable(), buildup(buildup)
