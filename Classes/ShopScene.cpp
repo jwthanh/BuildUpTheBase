@@ -133,6 +133,7 @@ void Shop::menu_init()
         origin.x + visibleSize.width - this->back_button->getContentSize().width/2 ,
         origin.y + this->back_button->getContentSize().height/2
     );
+
     this->back_button->setPosition(this->convertToNodeSpaceAR(corner_pos));
     this->back_button->setCallback(CC_CALLBACK_1(Shop::pop_scene, this));
 

@@ -31,10 +31,12 @@ bool Shield::first_time_brick = true;
 float Hittable::get_hits_percent()
 {
     return float(this->hits_taken) / float(this->hits_to_kill);
+
 };
 
 cocos2d::Rect Face::get_swipable_rect()
 {
+
     Sprite* target_sprite;
     if (this->has_shield_active())
     {
