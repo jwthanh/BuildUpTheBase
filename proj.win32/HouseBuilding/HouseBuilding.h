@@ -106,6 +106,10 @@ class Waste : public Resource
 class Fighter : public Nameable, public Updateable
 {
     public:
+        float current_hp;
+        float max_hp;
+        float damage;
+
         Village* city;
         Fighter(Village* city, std::string name) : Nameable(name), Updateable(), city(city)
         {
