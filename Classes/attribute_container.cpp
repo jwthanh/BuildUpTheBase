@@ -41,7 +41,7 @@ void AttributeContainer::Update()
 Damage* AttributeContainer::get_effective_damage()
 {
     int initial_damage = this->damage->current_val;
-    Damage* result = new Damage;
+    //Damage* result = new Damage;
  //   if (this->owner->equipment != NULL && this->owner->equipment->main_weapon->equipped_item != NULL)
  //   {
 	//	Item* item = this->owner->equipment->main_weapon->equipped_item;
@@ -63,7 +63,7 @@ Damage* AttributeContainer::get_effective_damage()
  //   }
 
  //   result->normal += initial_damage;
-	return result;
+	return NULL;
 };
 
 void AttributeContainer::RegenerateAll()

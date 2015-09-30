@@ -27,11 +27,11 @@ AttrEffect::AttrEffect()
     this->armor_max_val = 0;
     this->armor_regen_rate = 0;
     this->armor_regen_interval = 0; 
-    this->armor = new Armor();
+    this->armor = NULL;
 
     this->damage_regen_rate = 0;
     this->damage_regen_interval = 0; 
-    this->damage = new Damage();
+    this->damage = NULL;
 
     this->hunger_current_val = 0;
     this->hunger_max_val = 0;
@@ -391,8 +391,8 @@ std::string AttrEffect::full_str()
     string_vec.push_back("ARR: "+std::to_string((long double)this->armor_regen_rate));
     string_vec.push_back("ARI: "+std::to_string((long double)this->armor_regen_interval));
 
-    string_vec.push_back("DCV: "+std::to_string((long double)this->damage->get_raw_total()));
-    string_vec.push_back("DMV: "+std::to_string((long double)this->damage->get_raw_total()));
+    //string_vec.push_back("DCV: "+std::to_string((long double)this->damage->get_raw_total()));
+    //string_vec.push_back("DMV: "+std::to_string((long double)this->damage->get_raw_total()));
     string_vec.push_back("DRR: "+std::to_string((long double)this->damage_regen_rate));
     string_vec.push_back("DRI: "+std::to_string((long double)this->damage_regen_interval));
 
@@ -455,7 +455,7 @@ std::string AttrEffect::oneline_str_colorless()
     string_vec.push_back(this->small_convert("ARR: ", (int)this->armor_regen_rate));
     string_vec.push_back(this->small_convert("ARI: ", (int)this->armor_regen_interval));
 
-    string_vec.push_back(this->small_convert("DCV: ", (int)this->damage->get_raw_total()));
+    //string_vec.push_back(this->small_convert("DCV: ", (int)this->damage->get_raw_total()));
     string_vec.push_back(this->small_convert("DRR: ", (int)this->damage_regen_rate));
     string_vec.push_back(this->small_convert("DRI: ", (int)this->damage_regen_interval));
 
