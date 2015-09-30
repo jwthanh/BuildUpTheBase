@@ -1,13 +1,4 @@
-#include "stdafx.h"
 #include "attribute.h"
-
-const TCODColor HealthAttribute::attribute_color = TCODColor::desaturatedGreen;
-const TCODColor ManaAttribute::attribute_color = TCODColor::desaturatedBlue;
-const TCODColor ArmorAttribute::attribute_color = TCODColor::lightGrey;
-const TCODColor DamageAttribute::attribute_color = TCODColor::desaturatedRed;
-const TCODColor HungerAttribute::attribute_color = TCODColor::desaturatedMagenta;
-const TCODColor SpeedAttribute::attribute_color = TCODColor::desaturatedViolet;
-
 Attribute::Attribute()
 {
     this->tick = 0;

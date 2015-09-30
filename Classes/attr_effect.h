@@ -4,7 +4,7 @@
 
 #include <vector>
 #include <iostream>
-#include <enums/attributes_t.h>
+#include "attributes_t.h"
 
 const int NO_DURATION = -1;
 
@@ -51,7 +51,6 @@ class TimedEffect
         bool is_expired(long double turn_count);
 };
 
-std::string buffer_color(std::string input, int val, TCODColor color);
 
 class AttrEffect
 {
@@ -127,12 +126,6 @@ class AttrEffect
         void mark_applied_hunger(Actor* actor);
         void mark_applied_speed(Actor* actor);
 
-        void set_rng_health(TCODRandom* rng, int min, int max, int med);
-        void set_rng_mana(TCODRandom* rng, int min, int max, int med);
-        int set_rng_armor(TCODRandom* rng, int min, int max, int med);
-        int set_rng_damage(TCODRandom* rng, int min, int max, int med);
-        int set_rng_hunger(TCODRandom* rng, int min, int max, int med);
-        int set_rng_speed(TCODRandom* rng, int min, int max, int med);
 
         void unmark_applied_all(Actor* actor);
 
@@ -140,8 +133,6 @@ class AttrEffect
         std::string full_str();
         std::string oneline_str();
         std::string oneline_str_colorless();
-        // std::vector<TCODColor> oneline_str_colours();
-        std::vector<TCOD_colctrl_t> oneline_str_colours();
 
         void set_all_vals_to(int new_val);
         void set_health_vals_to(int new_val);

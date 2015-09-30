@@ -25,7 +25,6 @@ class Attribute
         Attribute();
         Attribute(Attribute& other);
 
-        static const TCODColor attribute_color;
 
 
         virtual void update();
@@ -57,7 +56,6 @@ class Attribute
 class HealthAttribute : public Attribute
 {
     public:
-        static const TCODColor attribute_color;
         HealthAttribute();
 	//void regenerate();
 };
@@ -65,35 +63,30 @@ class HealthAttribute : public Attribute
 class ManaAttribute : public Attribute
 {
     public:
-        static const TCODColor attribute_color;
         ManaAttribute();
 };
 
 class ArmorAttribute : public Attribute
 {
     public:
-        static const TCODColor attribute_color;
         ArmorAttribute();
 };
 
 class DamageAttribute : public Attribute
 {
     public:
-        static const TCODColor attribute_color;
         DamageAttribute();
 };
 
 class HungerAttribute : public Attribute
 {
     public:
-        static const TCODColor attribute_color;
         HungerAttribute();
 };
 
 class SpeedAttribute : public Attribute
 {
     public:
-        static const TCODColor attribute_color;
         SpeedAttribute();
 };
 

@@ -1,10 +1,7 @@
-#include "stdafx.h"
 
 #include "attribute_container.h"
 #include "attribute.h"
 #include "combat.h"
-#include "equipment.h"
-#include "item.h"
 
 
 AttributeContainer::AttributeContainer()
@@ -44,28 +41,28 @@ void AttributeContainer::Update()
 Damage* AttributeContainer::get_effective_damage()
 {
     int initial_damage = this->damage->current_val;
-    Damage* result;
-    if (this->owner->equipment != NULL && this->owner->equipment->main_weapon->equipped_item != NULL)
-    {
-		Item* item = this->owner->equipment->main_weapon->equipped_item;
-		result = new Damage(*item->attr_effect->damage);
-    }
-	else
-	{
-		result = new Damage();
-	}
+    Damage* result = new Damage;
+ //   if (this->owner->equipment != NULL && this->owner->equipment->main_weapon->equipped_item != NULL)
+ //   {
+	//	Item* item = this->owner->equipment->main_weapon->equipped_item;
+	//	result = new Damage(*item->attr_effect->damage);
+ //   }
+	//else
+	//{
+	//	result = new Damage();
+	//}
 
-    if (this->owner->equipment != NULL && this->owner->equipment->off_weapon->equipped_item != NULL)
-    {
-		Item* item = this->owner->equipment->off_weapon->equipped_item;
-		Damage* tmp = new Damage(*item->attr_effect->damage);
-        Damage* out = new Damage((*tmp)+(*result)); //TODO figure out wtf I'm doing
-        delete result;
-        delete tmp;
-        result = out;
-    }
+ //   if (this->owner->equipment != NULL && this->owner->equipment->off_weapon->equipped_item != NULL)
+ //   {
+	//	Item* item = this->owner->equipment->off_weapon->equipped_item;
+	//	Damage* tmp = new Damage(*item->attr_effect->damage);
+ //       Damage* out = new Damage((*tmp)+(*result)); //TODO figure out wtf I'm doing
+ //       delete result;
+ //       delete tmp;
+ //       result = out;
+ //   }
 
-    result->normal += initial_damage;
+ //   result->normal += initial_damage;
 	return result;
 };
 
@@ -154,34 +151,6 @@ std::string format_verbose(AttrClass* attr)
     return ss.str();
 };
 
-std::vector<std::string> AttributeContainer::VerboseVector()
-{
-    std::string result = "";
-    std::vector<std::string> string_vec;
-
-    TCODColor health_color = HealthAttribute::attribute_color;
-    TCODColor mana_color = ManaAttribute::attribute_color;
-    TCODColor armor_color = ArmorAttribute::attribute_color;
-    TCODColor damage_color = DamageAttribute::attribute_color;
-    TCODColor speed_color = SpeedAttribute::attribute_color;
-
-    string_vec.push_back(colfg(health_color, "HEALTH"));
-    string_vec.push_back(" "+format_verbose<HealthAttribute>(this->health));
-
-    string_vec.push_back(colfg(mana_color, "MANA"));
-    string_vec.push_back(" "+format_verbose<ManaAttribute>(this->mana));
-
-    string_vec.push_back(colfg(armor_color, "ARMOR"));
-    string_vec.push_back(" "+format_verbose<ArmorAttribute>(this->armor));
-
-    string_vec.push_back(colfg(damage_color, "DAMAGE"));
-    string_vec.push_back(" "+format_verbose<DamageAttribute>(this->damage));
-
-    string_vec.push_back(colfg(speed_color, "SPEED"));
-    string_vec.push_back(" "+format_verbose<SpeedAttribute>(this->speed));
-
-    return string_vec;
-};
 
 std::vector<std::string> AttributeContainer::PrettyVector()
 {
@@ -218,5 +187,5 @@ std::vector<std::string> AttributeContainer::PrettyVector()
 
 std::string AttributeContainer::PrettyPrint()
 {
-    return StringJoin(this->PrettyVector(), '\n', false);
+    return "UNIMPLEMENTED 3";
 };

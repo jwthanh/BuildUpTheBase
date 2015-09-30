@@ -1,7 +1,6 @@
 // ConsoleApplication1.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include <memory>
 #include <string>
 #include <vector>
@@ -10,6 +9,7 @@
 
 #include "HouseBuilding.h"
 #include <sstream>
+#include "../main.h"
 
 Buildup::Buildup()
 {
