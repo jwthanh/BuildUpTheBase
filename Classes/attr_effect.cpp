@@ -253,7 +253,7 @@ bool AttrEffect::already_applied_all(Actor* actor)
 
     // // The thing is that I need to sort out how to apply the item's effects to
     // // the actor once, because if it gets reapplied they might be invincible or
-    // // gaining way too much health for ever.
+    // // gaining way too much attrs for ever.
     // //TODO TODO TODO
 
     return false;

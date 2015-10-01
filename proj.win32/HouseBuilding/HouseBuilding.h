@@ -3,6 +3,8 @@
 #define HOUSEBUILDING_H
 
 #include "../../Classes/Clock.h"
+#include "../../Classes/attribute.h"
+#include "../../Classes/attribute_container.h"
 
 
 class Building;
@@ -106,14 +108,13 @@ class Waste : public Resource
 class Fighter : public Nameable, public Updateable
 {
     public:
-        float current_hp;
-        float max_hp;
+        AttributeContainer* attrs;
         float damage;
 
         Village* city;
         Fighter(Village* city, std::string name) : Nameable(name), Updateable(), city(city)
         {
-            
+            this->attrs = new AttributeContainer();
         }
         void update(float dt);
 };
@@ -141,7 +142,8 @@ public:
             std::cout << "A fight between";
             for (auto fighter : this->combatants)
             {
-                std::cout << " " << fighter->name;
+                std::cout << " ..." << fighter->name;
+                fighter->attrs->health->current_val -= 10;
             }
             std::cout << "... and that's it!" << std::endl;
         }

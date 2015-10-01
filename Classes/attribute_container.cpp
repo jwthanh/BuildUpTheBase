@@ -111,10 +111,10 @@ void AttributeContainer::RegenerateSpeed()
 //    TCODColor damage_color = DamageAttribute::attribute_color;
 //    TCODColor speed_color = SpeedAttribute::attribute_color;
 //
-//    string_vec.push_back(buffer_color("HCV", this->health->current_val, health_color));
-//    string_vec.push_back(buffer_color("HMV", this->health->max_val, health_color));
-//    string_vec.push_back(buffer_color("HRR", this->health->regen_rate, health_color));
-//    string_vec.push_back(buffer_color("HRI", this->health->regen_interval, health_color));
+//    string_vec.push_back(buffer_color("HCV", this->attrs->current_val, health_color));
+//    string_vec.push_back(buffer_color("HMV", this->attrs->max_val, health_color));
+//    string_vec.push_back(buffer_color("HRR", this->attrs->regen_rate, health_color));
+//    string_vec.push_back(buffer_color("HRI", this->attrs->regen_interval, health_color));
 //
 //    string_vec.push_back(buffer_color("MCV", this->mana->current_val, mana_color));
 //    string_vec.push_back(buffer_color("MMV", this->mana->max_val, mana_color));
