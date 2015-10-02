@@ -142,6 +142,7 @@ public:
             std::cout << "A fight between";
             for (auto fighter : this->combatants)
             {
+
                 std::cout << " ..." << fighter->name;
                 fighter->attrs->health->current_val -= 10;
             }
