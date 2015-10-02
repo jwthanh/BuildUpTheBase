@@ -145,6 +145,7 @@ public:
 
                 std::cout << " ..." << fighter->name;
                 fighter->attrs->health->current_val -= 10;
+                std::cout << " at " << fighter->attrs->health->current_val << " hp;";
             }
             std::cout << "... and that's it!" << std::endl;
         }
