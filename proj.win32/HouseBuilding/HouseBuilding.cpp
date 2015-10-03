@@ -61,11 +61,15 @@ void workshop_task(Building* workshop)
         workshop->products.pop_back();
         workshop->create_resources(Resource::Waste, 1, "dead product");
     }
-    if (workshop->products.size() > 5)
-    {
-        workshop->products.erase(workshop->products.begin(), workshop->products.begin()+5);
+    // if (workshop->products.size() > 5)
+    // {
+    //     workshop->products.erase(workshop->products.begin(), workshop->products.begin()+5);
+    VoidFunc pay = [workshop](){
         workshop->city->buildup->player->coins += 3;
-    }
+        return;
+    };
+    remove_if_sized(workshop->products, 5, 5, pay);
+    // }
     std::cout << "\tDoing workshop stuff" << std::endl;
 
     if (workshop->wastes.size() > 2)
@@ -130,6 +134,17 @@ Building* Village::building_by_name(std::string name)
     };
 
     return NULL;
+};
+
+template<typename from_V>
+void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int remove_count, VoidFunc callback )
+{
+    if (from_vs.size() > condition_size)
+    {
+        if (remove_count == 0) { remove_count = condition_size; };
+        from_vs.erase(from_vs.begin(), from_vs.begin()+remove_count);
+        callback();
+    };
 };
 
 template<typename from_V, typename to_V>

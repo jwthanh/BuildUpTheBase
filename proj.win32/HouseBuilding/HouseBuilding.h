@@ -5,6 +5,7 @@
 #include "../../Classes/Clock.h"
 #include "../../Classes/attribute.h"
 #include "../../Classes/attribute_container.h"
+#include <functional>
 
 
 class Building;
@@ -19,6 +20,8 @@ class Battle;
 
 typedef void(*VoidFuncBuilding)(Building*);
 typedef bool(*BoolFuncBuilding)(Building*);
+
+typedef std::function<void()> VoidFunc;
 
 typedef std::shared_ptr<Building> spBuilding;
 typedef std::vector<spBuilding> vsBuilding;
@@ -246,4 +249,7 @@ class Buildup
         Buildup();
         void main_loop();
 };
+
+template<typename from_V>
+void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int remove_count, VoidFunc callback );
 #endif
