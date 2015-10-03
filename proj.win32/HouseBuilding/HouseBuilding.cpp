@@ -94,12 +94,11 @@ void arena_task(Building* arena)
 {
     std::cout << "\tDoing arena stuff" << std::endl;
 
-    auto fighter_dude = std::make_shared<Fighter>(arena->city, "Mitchell");
-    auto fighter_bear = std::make_shared<Fighter>(arena->city, "Barry");
-
     auto battle = std::make_shared<Battle>();
-    battle->combatants.push_back(fighter_dude);
-    battle->combatants.push_back(fighter_bear);
+    for (spFighter fighter : arena->fighters)
+    {
+        battle->combatants.push_back(fighter);
+    };
 
     battle->do_battle();
 };
@@ -283,6 +282,10 @@ Village* init_city(Buildup* buildup)
     auto workshop = std::make_shared<Building>(city, "The Workshop", workshop_task);
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", marketplace_task);
     auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
+
+    arena->fighters.push_back(std::make_shared<Fighter>(arena->city, "Mitchell"));
+    arena->fighters.push_back(std::make_shared<Fighter>(arena->city, "Barry"));
+
 
     city->buildings.push_back(farm);
     city->buildings.push_back(dump);

@@ -167,6 +167,8 @@ class Building : public Nameable, public Updateable
         vsWaste wastes;
         vsIngredient ingredients;
 
+        vsFighter fighters;
+
         unsigned int num_workers; //people who work here, help make things faster
         VoidFuncBuilding task = NULL; //shop might sell product, farm creates ingredients, etc
         Building(Village* city, std::string name, VoidFuncBuilding task)
@@ -177,6 +179,8 @@ class Building : public Nameable, public Updateable
             products = vsProduct();
             wastes = vsWaste();
             ingredients = vsIngredient();
+
+            fighters = vsFighter();
         };
 
         void create_resources(Resource::ResourceType type, int quantity, std::string name);
