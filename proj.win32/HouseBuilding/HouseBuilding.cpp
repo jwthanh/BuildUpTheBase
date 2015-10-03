@@ -134,7 +134,7 @@ Building* Village::building_by_name(std::string name)
 };
 
 template<typename from_V, typename to_V>
-void transfer(from_V& from_vs, to_V& to_vs, int quantity)
+void transfer(from_V& from_vs, to_V& to_vs, unsigned int quantity)
 {
     if (from_vs.size() < quantity)
     {
