@@ -61,15 +61,12 @@ void workshop_task(Building* workshop)
         workshop->products.pop_back();
         workshop->create_resources(Resource::Waste, 1, "dead product");
     }
-    // if (workshop->products.size() > 5)
-    // {
-    //     workshop->products.erase(workshop->products.begin(), workshop->products.begin()+5);
+
     VoidFunc pay = [workshop](){
         workshop->city->buildup->player->coins += 3;
-        return;
     };
     remove_if_sized(workshop->products, 5, 5, pay);
-    // }
+
     std::cout << "\tDoing workshop stuff" << std::endl;
 
     if (workshop->wastes.size() > 2)
@@ -105,6 +102,12 @@ void arena_task(Building* arena)
     };
 
     battle->do_battle();
+};
+
+void mine_task(Building* mine)
+{
+    std::cout << "\tDoing mine stuff" << std::endl;
+    mine->create_resources(Resource::Ingredient, 9, "iron");
 };
 
 void Village::update(float dt)
@@ -297,6 +300,8 @@ Village* init_city(Buildup* buildup)
     auto workshop = std::make_shared<Building>(city, "The Workshop", workshop_task);
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", marketplace_task);
     auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
+    auto mine = std::make_shared<Building>(city, "The Mine", mine_task);
+    mine->update_clock->set_threshold(3*CLOCKS_PER_SEC);
 
     arena->fighters.push_back(std::make_shared<Fighter>(arena->city, "Mitchell"));
     arena->fighters.push_back(std::make_shared<Fighter>(arena->city, "Barry"));
@@ -307,6 +312,7 @@ Village* init_city(Buildup* buildup)
     city->buildings.push_back(workshop);
     city->buildings.push_back(marketplace);
     city->buildings.push_back(arena);
+    city->buildings.push_back(mine);
 
     return city;
 };
