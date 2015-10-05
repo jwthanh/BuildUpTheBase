@@ -10,6 +10,7 @@
 #include "HouseBuilding.h"
 #include <sstream>
 #include "../main.h"
+#include "Recipe.h"
 
 Buildup::Buildup()
 {
@@ -283,10 +284,28 @@ void Building::do_task()
     };
 };
 
+void test_recipe()
+{
+    
+    vsIngredient inputs = {
+        std::make_shared<Ingredient>("grain"),
+        std::make_shared<Ingredient>("grain"),
+        std::make_shared<Ingredient>("iron")
+    } ;
+
+    Recipe recipe = Recipe();
+    bool result = recipe.is_satisfied(inputs);
+
+    std::cout << "is the recipe satisfied? " << std::boolalpha << result << std::endl << std::endl;
+
+}
+
 void Buildup::main_loop()
 {
     Clock game_clock = Clock(CLOCKS_PER_SEC);
     clock_t start_time = clock() / CLOCKS_PER_SEC;
+
+    //test_recipe();
 
     int current_ticks = 0;
     while (true)
