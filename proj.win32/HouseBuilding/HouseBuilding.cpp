@@ -31,7 +31,7 @@ void Fighter::update(float dt)
     Updateable::update(dt);
 }
 
-std::string type_to_string(Ingredient::Type type)
+std::string Ingredient::type_to_string(Ingredient::Type type)
 {
     std::string result = "none";
     if (type == Ingredient::Grain) return "grain";
@@ -40,7 +40,7 @@ std::string type_to_string(Ingredient::Type type)
     return result;
 };
 
-Ingredient::Type string_to_type(std::string string_type)
+Ingredient::Type Ingredient::string_to_type(std::string string_type)
 {
     Ingredient::Type result = Ingredient::Type::None;
     if (string_type == "grain") return Ingredient::Grain;

@@ -95,9 +95,13 @@ class Ingredient : public Resource
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
 
         static std::string type_to_string(Ingredient::Type type);
-        static Ingredient::Type type_to_string(std::string string_type);
+        static Ingredient::Type string_to_type(std::string string_type);
 
-        Ingredient(std::string name) : Resource(name) {};
+        Ingredient::Type ingredient_type;
+        Ingredient(std::string name) : Resource(name) 
+    {
+        this->ingredient_type = Ingredient::string_to_type(name);
+    };
 };
 
 class Product : public Resource

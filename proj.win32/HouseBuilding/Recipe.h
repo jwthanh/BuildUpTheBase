@@ -4,7 +4,7 @@
 
 #include "HouseBuilding.h"
 #include <map>
-
+typedef std::map<Ingredient::Type, int> ComponentMap;
 class Recipe
 {
     public:
@@ -14,7 +14,7 @@ class Recipe
         //     Iron
         // };
 
-        std::map<Ingredient::Type, int> components;
+        ComponentMap components;
 
         //if there's enough ingredients in the input vector to make recipe
         bool is_satisfied(vsIngredient input);
