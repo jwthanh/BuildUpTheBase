@@ -3,5 +3,11 @@
 
 Recipe::Recipe()
 {
-        this->ingredients = vsIngredient();
+    this->components = std::map<Ingredient::Type, int>();
+};
+
+bool Recipe::is_satisfied(vsIngredient input)
+{
+
+    return false;
 };

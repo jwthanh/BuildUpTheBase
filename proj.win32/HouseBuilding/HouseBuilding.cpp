@@ -31,6 +31,25 @@ void Fighter::update(float dt)
     Updateable::update(dt);
 }
 
+std::string type_to_string(Ingredient::Type type)
+{
+    std::string result = "none";
+    if (type == Ingredient::Grain) return "grain";
+    else if (type == Ingredient::Iron) return "iron";
+
+    return result;
+};
+
+Ingredient::Type string_to_type(std::string string_type)
+{
+    Ingredient::Type result = Ingredient::Type::None;
+    if (string_type == "grain") return Ingredient::Grain;
+    else if (string_type == "iron") return Ingredient::Iron;
+
+    return result;
+
+};
+
 void farm_task(Building* farm)
 {
     std::cout << "\tDoing farm stuff";

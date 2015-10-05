@@ -86,7 +86,17 @@ class Resource : public Nameable
 class Ingredient : public Resource
 {
     public:
+        enum Type {
+            None,
+            Grain,
+            Iron
+        };
+
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
+
+        static std::string type_to_string(Ingredient::Type type);
+        static Ingredient::Type type_to_string(std::string string_type);
+
         Ingredient(std::string name) : Resource(name) {};
 };
 
