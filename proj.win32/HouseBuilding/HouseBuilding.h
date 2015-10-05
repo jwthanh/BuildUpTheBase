@@ -2,10 +2,13 @@
 #ifndef HOUSEBUILDING_H
 #define HOUSEBUILDING_H
 
+#include <functional>
+#include <memory>
+#include <iostream>
+
 #include "../../Classes/Clock.h"
 #include "../../Classes/attribute.h"
 #include "../../Classes/attribute_container.h"
-#include <functional>
 
 
 class Building;
