@@ -89,16 +89,12 @@ void workshop_task(Building* workshop)
 
     std::cout << "\tDoing workshop stuff" << std::endl;
 
-    if (workshop->wastes.size() > 2)
-    {
-        Animal animal = Animal("Horse");
-        animal.b2b_transfer(
-            workshop,
-            workshop->city->building_by_name("The Dump"),
-            Resource::ResourceType::Waste,
-            1
-            );
-    };
+    move_if_sized<vsWaste>(workshop->wastes,
+        Resource::Waste,
+        2, 2,
+        workshop, workshop->city->building_by_name("The Dump"),
+        [](){}
+    );
 };
 
 void dump_task(Building* building)
@@ -166,6 +162,23 @@ void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int 
     {
         if (remove_count == 0) { remove_count = condition_size; };
         from_vs.erase(from_vs.begin(), from_vs.begin()+remove_count);
+        callback();
+    };
+};
+
+template<typename from_V>
+void move_if_sized(from_V& from_vs, Resource::ResourceType res_type, unsigned int condition_size, unsigned int move_count, Building* from_bldg, Building* to_bldg, VoidFunc callback )
+{
+    if (from_vs.size() > condition_size)
+    {
+        if (move_count == 0) { move_count = condition_size; };
+        Animal animal = Animal("Horse");
+        animal.b2b_transfer(
+            from_bldg,
+            to_bldg,
+            res_type,
+            move_count
+            );
         callback();
     };
 };
