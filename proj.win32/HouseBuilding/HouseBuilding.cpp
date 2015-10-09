@@ -124,6 +124,11 @@ void mine_task(Building* mine)
 {
     std::cout << "\tDoing mine stuff" << std::endl;
     mine->create_resources(Resource::Ingredient, 9, "iron");
+
+    move_if_sized(mine->ingredients, Resource::Ingredient,
+        2, 2,
+        mine, mine->city->building_by_name("The Workshop"),
+        [](){});
 };
 
 void Village::update(float dt)

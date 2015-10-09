@@ -5,6 +5,7 @@
 #include <functional>
 #include <memory>
 #include <iostream>
+#include <random>
 
 #include "../../Classes/Clock.h"
 #include "../../Classes/attribute.h"
@@ -164,7 +165,7 @@ public:
             {
 
                 std::cout << " ..." << fighter->name;
-                fighter->attrs->health->current_val -= 10;
+                fighter->attrs->health->current_val -= std::rand() % 4 + 6;
                 std::cout << " at " << fighter->attrs->health->current_val << " hp;";
             }
             std::cout << "... and that's it!" << std::endl;
