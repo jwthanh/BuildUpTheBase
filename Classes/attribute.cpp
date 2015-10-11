@@ -160,6 +160,16 @@ void Attribute::remove_from_regen_interval(int difference)
         this->regen_interval -= difference;
     };
 
+}
+
+bool Attribute::is_empty()
+{
+    return this->current_val <= 0.0f;
+}
+
+bool Attribute::is_full()
+{
+    return this->current_val >= this->max_val;
 };
 
 // bool Attribute::CanRegenerate()

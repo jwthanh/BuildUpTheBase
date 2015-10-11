@@ -51,6 +51,9 @@ class Attribute
         virtual void remove_from_regen_rate(int difference);
         virtual void remove_from_regen_interval(int difference);
 
+        bool is_empty();
+        bool is_full();
+
 };
 
 class HealthAttribute : public Attribute

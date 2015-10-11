@@ -11,6 +11,7 @@
 #include <sstream>
 #include "../main.h"
 #include "Recipe.h"
+#include <algorithm>
 
 Buildup::Buildup()
 {
@@ -60,7 +61,8 @@ void Battle::do_battle()
         {
 
             std::cout << " ..." << fighter->name;
-            fighter->attrs->health->current_val -= std::rand() % 4 + 6;
+            double& health = fighter->attrs->health->current_val;
+            health -= std::rand() % 4 + 6;
             std::cout << " at " << fighter->attrs->health->current_val << " hp;";
         }
         std::cout << "... and that's it!" << std::endl;
@@ -118,6 +120,16 @@ void workshop_task(Building* workshop)
     );
 };
 
+void necro_task(Building* grave)
+{
+    //looks for waste bodies, converts to skeletons
+};
+
+void grave_task(Building* grave)
+{
+    //takes waste bodies from arena and buries them
+};
+
 void dump_task(Building* building)
 {
     std::cout << "\tDoing dump stuff" << std::endl;
@@ -135,10 +147,38 @@ void arena_task(Building* arena)
     auto battle = std::make_shared<Battle>();
     for (spFighter fighter : arena->fighters)
     {
-        battle->combatants.push_back(fighter);
+        if (!fighter->attrs->health->is_empty())
+        {
+            battle->combatants.push_back(fighter);
+        };
     };
 
     battle->do_battle();
+
+    int bodies_to_create = 0;
+    battle->combatants.erase(
+        std::remove_if(
+        battle->combatants.begin(),
+        battle->combatants.end(),
+        [&](spFighter fighter) -> bool {
+        // Do "some stuff", then return true if element should be removed.
+        HealthAttribute* health = fighter->attrs->health;
+        if (health->is_empty())
+        {
+            bodies_to_create++;
+            return true;
+        }
+    }
+        ),
+        battle->combatants.end()
+        );
+
+    for (int i = 0; i < bodies_to_create; i++)
+    {
+        std::cout << "creating a corpse" << std::endl;
+        auto grave = arena->city->building_by_name("The Graveyard");
+        grave->create_resources(Resource::Waste, 1, "Corpse");
+    }
 };
 
 void mine_task(Building* mine)
@@ -378,6 +418,8 @@ Village* init_city(Buildup* buildup)
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", marketplace_task);
     auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
     auto mine = std::make_shared<Building>(city, "The Mine", mine_task);
+    auto grave = std::make_shared<Building>(city, "The Graveyard", grave_task);
+    auto necro = std::make_shared<Building>(city, "The Mine", necro_task);
     mine->update_clock->set_threshold(3*CLOCKS_PER_SEC);
 
     arena->fighters.push_back(std::make_shared<Fighter>(arena->city, "Mitchell"));
@@ -390,6 +432,8 @@ Village* init_city(Buildup* buildup)
     city->buildings.push_back(marketplace);
     city->buildings.push_back(arena);
     city->buildings.push_back(mine);
+    city->buildings.push_back(grave);
+    city->buildings.push_back(necro);
 
     return city;
 };
