@@ -120,9 +120,17 @@ void workshop_task(Building* workshop)
     );
 };
 
-void necro_task(Building* grave)
+void necro_task(Building* necro)
 {
     //looks for waste bodies, converts to skeletons
+    Building* grave = necro->city->building_by_name("The Graveyard");
+
+    move_if_sized<vsWaste>(grave->wastes, Resource::Waste,
+            2, 2,
+            grave, necro,
+            [](){}
+        );
+
 };
 
 void grave_task(Building* grave)
@@ -233,7 +241,9 @@ void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int 
 };
 
 template<typename from_V>
-void move_if_sized(from_V& from_vs, Resource::ResourceType res_type, unsigned int condition_size, unsigned int move_count, Building* from_bldg, Building* to_bldg, VoidFunc callback )
+void move_if_sized(from_V& from_vs, Resource::ResourceType res_type,
+        unsigned int condition_size, unsigned int move_count,
+        Building* from_bldg, Building* to_bldg, VoidFunc callback )
 {
     if (from_vs.size() > condition_size)
     {
@@ -391,7 +401,8 @@ void Buildup::main_loop()
     {
         game_clock.update((float)current_ticks);
 
-        current_ticks = clock() / CLOCKS_PER_SEC - start_time;
+        //current_ticks = clock() / CLOCKS_PER_SEC - start_time;
+        current_ticks = 1000;
         if (game_clock.passed_threshold())
         {
             this->city->update(game_clock.start_time);
@@ -402,6 +413,8 @@ void Buildup::main_loop()
             current_ticks = 0;
             start_time = clock() / CLOCKS_PER_SEC;
         }
+        std::string temp;
+        std::getline(std::cin, temp);
     }
 
 
@@ -419,11 +432,15 @@ Village* init_city(Buildup* buildup)
     auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
     auto mine = std::make_shared<Building>(city, "The Mine", mine_task);
     auto grave = std::make_shared<Building>(city, "The Graveyard", grave_task);
-    auto necro = std::make_shared<Building>(city, "The Mine", necro_task);
+    auto necro = std::make_shared<Building>(city, "The Underscape", necro_task);
     mine->update_clock->set_threshold(3*CLOCKS_PER_SEC);
 
-    arena->fighters.push_back(std::make_shared<Fighter>(arena->city, "Mitchell"));
-    arena->fighters.push_back(std::make_shared<Fighter>(arena->city, "Barry"));
+    auto mitchell = std::make_shared<Fighter>(arena->city, "Mitchell");
+    auto barry = std::make_shared<Fighter>(arena->city, "Barry");
+    barry->attrs->health->set_vals(20);
+    mitchell->attrs->health->set_vals(20);
+    arena->fighters.push_back(mitchell);
+    arena->fighters.push_back(barry);
 
 
     city->buildings.push_back(farm);
