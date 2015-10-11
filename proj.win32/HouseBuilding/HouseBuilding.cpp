@@ -51,6 +51,27 @@ Ingredient::Type Ingredient::string_to_type(std::string string_type)
 
 };
 
+void Battle::do_battle()
+{
+    if (this->combatants.size() != 0)
+    {
+        std::cout << "A fight between";
+        for (auto fighter : this->combatants)
+        {
+
+            std::cout << " ..." << fighter->name;
+            fighter->attrs->health->current_val -= std::rand() % 4 + 6;
+            std::cout << " at " << fighter->attrs->health->current_val << " hp;";
+        }
+        std::cout << "... and that's it!" << std::endl;
+    }
+    else
+    {
+        std::cout << "no one to fight" << std::endl;
+    }
+    return;
+}
+
 void farm_task(Building* farm)
 {
     std::cout << "\tDoing farm stuff";

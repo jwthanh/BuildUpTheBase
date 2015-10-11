@@ -8,6 +8,7 @@
 
 USING_NS_CC;
 
+
 Combo::Combo(Beatup* beatup, std::string id_key, std::string name) : Buyable(beatup, id_key)
 {
     this->beatup = beatup;

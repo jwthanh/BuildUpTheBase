@@ -156,26 +156,7 @@ public:
         this->do_battle();
     }
 
-    void do_battle()
-    {
-        if (this->combatants.size() != 0)
-        {
-            std::cout << "A fight between";
-            for (auto fighter : this->combatants)
-            {
-
-                std::cout << " ..." << fighter->name;
-                fighter->attrs->health->current_val -= std::rand() % 4 + 6;
-                std::cout << " at " << fighter->attrs->health->current_val << " hp;";
-            }
-            std::cout << "... and that's it!" << std::endl;
-        }
-        else
-        {
-            std::cout << "no one to fight" << std::endl;
-        }
-        return;
-    }
+    void do_battle();
 };
 
 class Building : public Nameable, public Updateable
