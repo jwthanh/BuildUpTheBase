@@ -397,7 +397,7 @@ void test_recipe()
         std::make_shared<Ingredient>("iron")
     } ;
 
-    Recipe recipe = Recipe();
+    Recipe recipe = Recipe("test recipe");
     bool result = recipe.is_satisfied(inputs);
 
     std::cout << "is the recipe satisfied? " << std::boolalpha << result << std::endl << std::endl;
@@ -431,7 +431,7 @@ void Buildup::main_loop()
             start_time = clock() / CLOCKS_PER_SEC;
 
             std::string temp;
-            std::cout << "enter to continue: " << std::endl;
+            std::cout << "enter to continue " << std::endl;
             std::getline(std::cin, temp);
         }
     }

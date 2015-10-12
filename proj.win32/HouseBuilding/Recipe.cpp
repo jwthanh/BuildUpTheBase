@@ -1,9 +1,11 @@
 #include "Recipe.h"
 
 
-Recipe::Recipe()
+Recipe::Recipe(std::string name) : Nameable(name)
 {
     this->components = ComponentMap();
+
+    //example recipe
     this->components[Ingredient::Type::Grain] = 2;
     this->components[Ingredient::Type::Iron] = 1;
 };
