@@ -76,12 +76,8 @@ void Battle::do_battle()
 
 void farm_task(Building* farm)
 {
-    std::cout << "\tDoing farm stuff";
-
     int new_products = 10;
     farm->create_resources(Resource::Ingredient, new_products, "grain");
-
-    std::cout << ", aka generating grain ingredients" << std::endl;
 
     Animal animal = Animal("Horse");
     animal.b2b_transfer(
@@ -151,7 +147,6 @@ void marketplace_task(Building* building)
 void arena_task(Building* arena)
 {
     std::cout << "\tDoing arena stuff" << std::endl;
-
     auto battle = std::make_shared<Battle>();
     for (spFighter fighter : arena->fighters)
     {
@@ -237,7 +232,7 @@ void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int 
     {
 
         if (remove_count == 0) { remove_count = condition_size; };
-        print("REEEEmoving " << remove_count);
+        print("removing " << remove_count);
         from_vs.erase(from_vs.begin(), from_vs.begin()+remove_count);
         callback();
     };
@@ -250,7 +245,7 @@ void move_if_sized(from_V& from_vs, Resource::ResourceType res_type,
 {
     if (from_vs.size() >= condition_size)
     {
-        print("moving " << move_count << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
+        print("moving x" << move_count << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
         if (move_count == 0) { move_count = condition_size; };
         Animal animal = Animal("Horse");
         animal.b2b_transfer(
@@ -324,7 +319,7 @@ void create(vectorT& vec, int quantity, std::string name)
 void Building::create_resources(Resource::ResourceType type, int quantity, std::string name)
 {
 
-    std::cout << "creating " << name << "("<<Resource::type_str(type) << ") " << quantity << std::endl;
+    std::cout << "creating " << name << "("<<Resource::type_str(type) << ") x" << quantity << std::endl;
     if (type == Resource::Ingredient)
     {
         create<Ingredient>(this->ingredients, quantity, name);
@@ -346,7 +341,7 @@ void Building::create_resources(Resource::ResourceType type, int quantity, std::
 void Building::update(float dt)
 {
     Updateable::update(dt);
-    printf("   %s - time at %.f\n", this->name.c_str(), this->update_clock->start_time);
+    printf("   %s - %.f\n", this->name.c_str(), this->update_clock->start_time);
     this->print_inventory();
     if (update_clock->passed_threshold())
     {
@@ -364,9 +359,9 @@ void Building::print_inventory()
 {
     std::stringstream ss;
     ss << "   ";
-    ss << "I: " << this->ingredients.size();
-    ss << " P: " << this->products.size();
-    ss << " W: " << this->wastes.size();
+    ss << "ING: " << this->ingredients.size();
+    ss << " PDT: " << this->products.size();
+    ss << " WST: " << this->wastes.size();
     ss << std::endl;
 
     std::cout << ss.str();
