@@ -136,9 +136,15 @@ void grave_task(Building* grave)
     //takes waste bodies from arena and buries them
 };
 
-void dump_task(Building* building)
+void dump_task(Building* dump)
 {
     std::cout << "\tDoing dump stuff" << std::endl;
+
+    if (dump->wastes.size() > 5)
+    {
+        print("more than 5 dump wastes, flies are gathering");
+        dump->create_resources(Resource::Ingredient, 2, "fly");
+    };
 };
 
 void marketplace_task(Building* building)
@@ -251,7 +257,6 @@ void move_if_sized(Resource::ResourceType res_type,
 
     if (from_size >= condition_size)
     {
-        print("moving x" << move_count << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
         if (move_count == 0) { move_count = condition_size; };
         Animal animal = Animal("Horse");
         animal.b2b_transfer(
@@ -284,6 +289,7 @@ void transfer(from_V& from_vs, to_V& to_vs, unsigned int quantity)
 
 void Animal::b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::ResourceType res_type, int quantity)
 {
+    print("moving x" << quantity << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
     if (res_type == Resource::Ingredient)
     {
         transfer(from_bldg->ingredients, to_bldg->ingredients, quantity);
