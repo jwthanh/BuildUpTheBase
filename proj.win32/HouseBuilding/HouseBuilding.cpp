@@ -97,9 +97,16 @@ void workshop_task(Building* workshop)
 {
     if (workshop->ingredients.size() > 0)
     {
-        print("convert one ingredient to 2 Pies");
-        workshop->ingredients.pop_back();
-        workshop->create_resources(Resource::Product, 2, "Pie");
+        Recipe recipe = Recipe("sword");
+        recipe.components[Ingredient::IngredientType::Iron] = 2;
+
+        bool can_make_sword = recipe.is_satisfied(workshop->ingredients);
+        if (can_make_sword)
+        {
+            print("convert one ingredient to 1 Sword");
+            workshop->ingredients.pop_back();
+            workshop->create_resources(Resource::Product, 1, "Sword");
+        };
     }
     if (workshop->products.size() > 0)
     {
@@ -390,6 +397,7 @@ void Building::update(float dt)
     {
         std::cout << "   \twaiting" << std::endl;
     }
+    this->print_inventory();
     std::cout << std::endl;
 };
 
@@ -435,7 +443,7 @@ void Buildup::main_loop()
     Clock game_clock = Clock(CLOCKS_PER_SEC);
     clock_t start_time = clock() / CLOCKS_PER_SEC;
 
-    //test_recipe();
+    // test_recipe();
     int total_loops = 0;
 
     int current_ticks = 0;
