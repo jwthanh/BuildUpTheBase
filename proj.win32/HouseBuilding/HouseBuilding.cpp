@@ -410,14 +410,16 @@ void Buildup::main_loop()
     clock_t start_time = clock() / CLOCKS_PER_SEC;
 
     //test_recipe();
+    int total_loops = 0;
 
     int current_ticks = 0;
     while (true)
     {
+        total_loops++;
         game_clock.update((float)current_ticks);
 
         //current_ticks = clock() / CLOCKS_PER_SEC - start_time;
-        current_ticks = 1000;
+        current_ticks += 1000;
         if (game_clock.passed_threshold())
         {
             this->city->update(game_clock.start_time);
@@ -427,9 +429,11 @@ void Buildup::main_loop()
 
             current_ticks = 0;
             start_time = clock() / CLOCKS_PER_SEC;
+
+            std::string temp;
+            std::cout << "enter to continue: " << std::endl;
+            std::getline(std::cin, temp);
         }
-        std::string temp;
-        std::getline(std::cin, temp);
     }
 
 
