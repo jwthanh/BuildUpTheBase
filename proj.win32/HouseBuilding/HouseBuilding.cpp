@@ -42,6 +42,7 @@ std::string Ingredient::type_to_string(Ingredient::IngredientType type)
     else if (type == Ingredient::Iron) return "iron";
     else if (type == Ingredient::Wood) return "wood";
     else if (type == Ingredient::Fly) return "fly";
+    else if (type == Ingredient::Flesh) return "flesh";
 
     return result;
 };
@@ -49,10 +50,13 @@ std::string Ingredient::type_to_string(Ingredient::IngredientType type)
 Ingredient::IngredientType Ingredient::string_to_type(std::string string_type)
 {
     Ingredient::IngredientType result = Ingredient::IngredientType::None;
+    std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower);
     if (string_type == "grain") return Ingredient::Grain;
     else if (string_type == "iron") return Ingredient::Iron;
     else if (string_type == "wood") return Ingredient::Wood;
     else if (string_type == "fly") return Ingredient::Fly;
+    else if (string_type == "flesh") return Ingredient::Flesh;
+    else assert(false && "unknown type");
 
     return result;
 
@@ -134,8 +138,27 @@ void workshop_task(Building* workshop)
 
 void necro_task(Building* necro)
 {
+    Village* city = necro->city;
     //looks for waste bodies, converts to skeletons
     Building* grave = necro->city->building_by_name("The Graveyard");
+
+    Recipe skeleton_recipe = Recipe("Skeletons");
+    skeleton_recipe.components[Ingredient::IngredientType::Flesh] = 7;
+
+    if (skeleton_recipe.is_satisfied(necro->ingredients))
+    {
+        print("creating skeleton!");
+        auto skelly = std::make_shared<Fighter>(city, "Skeleton");
+        skelly->attrs->health->set_vals(15);
+        city->building_by_name("The Arena")->fighters.push_back(skelly);
+        skeleton_recipe.consume(necro->ingredients);
+    };
+
+    if (necro->wastes.size() > 0)
+    {
+        necro->create_resources(Resource::Ingredient, 5, "Flesh");
+        necro->wastes.pop_back();
+    };
 
     // print("thinking about necro");
     move_if_sized(Resource::Waste,
@@ -339,7 +362,6 @@ template<>
 std::shared_ptr<Ingredient> create_one(std::string name)
 { //TODO do this for all types of IPW
     auto ing =  std::make_shared<Ingredient>(name);
-    std::transform(name.begin(), name.end(), name.begin(), ::tolower);
     ing->ingredient_type = Ingredient::string_to_type(name);
     return ing;
 };

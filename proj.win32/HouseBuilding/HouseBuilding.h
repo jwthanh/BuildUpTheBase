@@ -97,7 +97,8 @@ class Ingredient : public Resource
             Grain,
             Iron,
             Wood,
-            Fly
+            Fly,
+            Flesh
         };
 
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;

@@ -17,7 +17,7 @@ class Recipe : public Nameable
         //if there's enough ingredients in the input vector to make recipe
         bool is_satisfied(vsIngredient input);
         //remove ING from input
-        void consume(vsIngredient input);
+        void consume(vsIngredient& input);
 
 };
 

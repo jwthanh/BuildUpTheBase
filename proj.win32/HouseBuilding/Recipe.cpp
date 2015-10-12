@@ -57,22 +57,24 @@ bool Recipe::is_satisfied(vsIngredient input)
     return true;
 };
 
-void Recipe::consume(vsIngredient input)
+void Recipe::consume(vsIngredient& input)
 {
     ComponentMap temp_map = ComponentMap(this->components);
     if (this->is_satisfied(input))
     {
-        auto removal_fun = [temp_map](spIngredient element) -> bool {
-            auto map_el = temp_map.at(element->ingredient_type);
-            if (map_el > 0)
+        auto removal_fun = [&temp_map](spIngredient element) -> bool {
+
+            int& val = temp_map.at(element->ingredient_type);
+            if (val > 0)
             {
-                map_el -= 1;
+                val -= 1;
                 return true;
             }
             else
             {
                 return false;
             }
+
         };
         input.erase(
             std::remove_if(input.begin(), input.end(), removal_fun),
