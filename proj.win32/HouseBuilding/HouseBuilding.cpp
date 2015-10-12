@@ -92,16 +92,19 @@ void workshop_task(Building* workshop)
 {
     if (workshop->ingredients.size() > 0)
     {
+        print("convert one ingredient to 2 Pies");
         workshop->ingredients.pop_back();
         workshop->create_resources(Resource::Product, 2, "Pie");
     }
     if (workshop->products.size() > 0)
     {
         workshop->products.pop_back();
-        //workshop->create_resources(Resource::Waste, 1, "dead product");
+        print("One product wasted away");
+        workshop->create_resources(Resource::Waste, 1, "Wasted product");
     }
 
     VoidFunc pay = [workshop](){
+        print("paying 3 coins for 5 products");
         workshop->city->buildup->player->coins += 3;
     };
     remove_if_sized(workshop->products, 5, 5, pay);
