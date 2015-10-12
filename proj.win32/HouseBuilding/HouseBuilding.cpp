@@ -12,6 +12,7 @@
 #include "../main.h"
 #include "Recipe.h"
 #include <algorithm>
+#include <locale>
 
 Buildup::Buildup()
 {
@@ -319,6 +320,21 @@ void Animal::b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::Reso
 
 };
 
+template<typename T>
+std::shared_ptr<T> create_one(std::string name)
+{
+    return std::make_shared<T>(name);
+};
+
+template<>
+std::shared_ptr<Ingredient> create_one(std::string name)
+{ //TODO do this for all types of IPW
+    auto ing =  std::make_shared<Ingredient>(name);
+    std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+    ing->ingredient_type = Ingredient::string_to_type(name);
+    return ing;
+};
+
 template<typename T, typename vectorT>
 void create(vectorT& vec, int quantity, std::string name)
 {
@@ -326,7 +342,7 @@ void create(vectorT& vec, int quantity, std::string name)
 
     for (int i = 0; i < quantity; i++)
     {
-        std::shared_ptr<T> p = std::make_shared<T>(name);
+        std::shared_ptr<T> p = create_one<T>(name);
         created_resources.push_back(p);
     };
 
