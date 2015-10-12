@@ -44,6 +44,16 @@ bool Recipe::is_satisfied(vsIngredient input)
         };
 
     };
+
+    for (auto pair : this->components)
+    {
+        auto it = input_components.find(pair.first);
+        //if the type isnt in the inputs map, fail
+        if (it == input_components.end())
+        {
+            return false;
+        };
+    }
     return true;
 };
 

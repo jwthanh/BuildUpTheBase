@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <ctime>
+#include <assert.h>
 
 #include "HouseBuilding.h"
 #include <sstream>
@@ -432,9 +433,27 @@ void test_recipe()
     } ;
 
     Recipe recipe = Recipe("test recipe");
+    recipe.components = ComponentMap();
+    recipe.components[Ingredient::IngredientType::Grain] = 2;
+    recipe.components[Ingredient::IngredientType::Iron] = 1;
     bool result = recipe.is_satisfied(inputs);
-
+    assert(result && "everythings there");
     std::cout << "is the recipe satisfied? " << std::boolalpha << result << std::endl << std::endl;
+
+    recipe.components = ComponentMap();
+    recipe.components[Ingredient::IngredientType::Grain] = 3;
+    result = recipe.is_satisfied(inputs);
+    assert(!result && " missing one type but has the other");
+
+    recipe.components = ComponentMap();
+    recipe.components[Ingredient::IngredientType::Grain] = 1;
+    result = recipe.is_satisfied(inputs);
+    assert(result && "over shoots reqs");
+
+    recipe.components = ComponentMap();
+    recipe.components[Ingredient::IngredientType::Fly] = 5;
+    result = recipe.is_satisfied(inputs);
+    assert(!result && "looks for ingredient not in input");
 
 }
 
@@ -443,7 +462,7 @@ void Buildup::main_loop()
     Clock game_clock = Clock(CLOCKS_PER_SEC);
     clock_t start_time = clock() / CLOCKS_PER_SEC;
 
-    // test_recipe();
+    test_recipe();
     int total_loops = 0;
 
     int current_ticks = 0;
