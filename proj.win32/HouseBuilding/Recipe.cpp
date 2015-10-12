@@ -6,8 +6,8 @@ Recipe::Recipe(std::string name) : Nameable(name)
     this->components = ComponentMap();
 
     //example recipe
-    this->components[Ingredient::Type::Grain] = 2;
-    this->components[Ingredient::Type::Iron] = 1;
+    this->components[Ingredient::IngredientType::Grain] = 2;
+    this->components[Ingredient::IngredientType::Iron] = 1;
 };
 
 bool Recipe::is_satisfied(vsIngredient input)
@@ -18,7 +18,7 @@ bool Recipe::is_satisfied(vsIngredient input)
     {
         //if ingredient type's not in matches map, add it regardless of whether
         //its relevant or not
-        Ingredient::Type i_type = ingredient->ingredient_type; 
+        Ingredient::IngredientType i_type = ingredient->ingredient_type; 
         auto it = input_components.find(i_type);
         if (it == input_components.end())
         {
@@ -36,7 +36,7 @@ bool Recipe::is_satisfied(vsIngredient input)
         if (it == this->components.end()) continue;
 
         //if there's not enough input, fail early
-        Ingredient::Type i_type = it->first;
+        Ingredient::IngredientType i_type = it->first;
         if (input_components[i_type] < this->components[i_type])
         {
             return false;

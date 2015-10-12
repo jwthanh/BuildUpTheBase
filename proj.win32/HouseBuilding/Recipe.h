@@ -5,7 +5,7 @@
 #include <map>
 
 #include "HouseBuilding.h"
-typedef std::map<Ingredient::Type, int> ComponentMap;
+typedef std::map<Ingredient::IngredientType, int> ComponentMap;
 
 class Recipe : public Nameable
 {

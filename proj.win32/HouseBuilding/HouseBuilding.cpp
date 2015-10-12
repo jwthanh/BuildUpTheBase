@@ -33,7 +33,7 @@ void Fighter::update(float dt)
     Updateable::update(dt);
 }
 
-std::string Ingredient::type_to_string(Ingredient::Type type)
+std::string Ingredient::type_to_string(Ingredient::IngredientType type)
 {
     std::string result = "none";
     if (type == Ingredient::Grain) return "grain";
@@ -42,9 +42,9 @@ std::string Ingredient::type_to_string(Ingredient::Type type)
     return result;
 };
 
-Ingredient::Type Ingredient::string_to_type(std::string string_type)
+Ingredient::IngredientType Ingredient::string_to_type(std::string string_type)
 {
-    Ingredient::Type result = Ingredient::Type::None;
+    Ingredient::IngredientType result = Ingredient::IngredientType::None;
     if (string_type == "grain") return Ingredient::Grain;
     else if (string_type == "iron") return Ingredient::Iron;
 
@@ -202,6 +202,12 @@ void mine_task(Building* mine)
         2, 2,
         mine, mine->city->building_by_name("The Workshop"),
         NO_CB);
+};
+
+void forest_task(Building* mine)
+{
+    std::cout << "\tDoing forest stuff" << std::endl;
+    mine->create_resources(Resource::Ingredient, 2, "wood");
 };
 
 void Village::update(float dt)
