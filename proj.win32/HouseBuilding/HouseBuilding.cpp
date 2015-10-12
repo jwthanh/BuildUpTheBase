@@ -111,7 +111,7 @@ void workshop_task(Building* workshop)
     move_if_sized(Resource::Waste,
         2, 2,
         workshop, workshop->city->building_by_name("The Dump"),
-        [](){}
+        NO_CB
     );
 };
 
@@ -124,7 +124,7 @@ void necro_task(Building* necro)
     move_if_sized(Resource::Waste,
             2, 2,
             grave, necro,
-            [](){}
+            NO_CB
         );
 };
 
@@ -192,7 +192,7 @@ void mine_task(Building* mine)
     move_if_sized(Resource::Ingredient,
         2, 2,
         mine, mine->city->building_by_name("The Workshop"),
-        [](){});
+        NO_CB);
 };
 
 void Village::update(float dt)

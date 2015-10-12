@@ -12,6 +12,7 @@
 #include "../../Classes/attribute_container.h"
 
 #define print(msg) std::cout << msg << std::endl
+#define NO_CB [](){}
 
 
 class Building;
