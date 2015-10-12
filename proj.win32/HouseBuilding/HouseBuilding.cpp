@@ -38,6 +38,8 @@ std::string Ingredient::type_to_string(Ingredient::IngredientType type)
     std::string result = "none";
     if (type == Ingredient::Grain) return "grain";
     else if (type == Ingredient::Iron) return "iron";
+    else if (type == Ingredient::Wood) return "wood";
+    else if (type == Ingredient::Fly) return "fly";
 
     return result;
 };
@@ -47,6 +49,8 @@ Ingredient::IngredientType Ingredient::string_to_type(std::string string_type)
     Ingredient::IngredientType result = Ingredient::IngredientType::None;
     if (string_type == "grain") return Ingredient::Grain;
     else if (string_type == "iron") return Ingredient::Iron;
+    else if (string_type == "wood") return Ingredient::Wood;
+    else if (string_type == "fly") return Ingredient::Fly;
 
     return result;
 

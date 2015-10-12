@@ -95,7 +95,9 @@ class Ingredient : public Resource
         enum IngredientType {
             None,
             Grain,
-            Iron
+            Iron,
+            Wood,
+            Fly
         };
 
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
