@@ -109,12 +109,13 @@ void workshop_task(Building* workshop)
             workshop->create_resources(Resource::Product, 1, "Sword");
         };
     }
-    if (workshop->products.size() > 0)
-    {
-        workshop->products.pop_back();
-        print("One product wasted away");
-        workshop->create_resources(Resource::Waste, 1, "Wasted product");
-    }
+
+    // if (workshop->products.size() > 0)
+    // {
+    //     workshop->products.pop_back();
+    //     print("One product wasted away");
+    //     workshop->create_resources(Resource::Waste, 1, "Wasted product");
+    // }
 
     VoidFunc pay = [workshop](){
         print("paying 3 coins for 5 products");
