@@ -11,6 +11,8 @@
 #include "../../Classes/attribute.h"
 #include "../../Classes/attribute_container.h"
 
+#define print(msg) std::cout << msg << std::endl
+
 
 class Building;
 class Buildup;
@@ -77,6 +79,8 @@ class Resource : public Nameable
             Product = 1,
             Waste = 2
         };
+
+        static std::string type_str(ResourceType type);
 
         static const ResourceType resource_type;
 

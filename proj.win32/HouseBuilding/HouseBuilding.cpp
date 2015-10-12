@@ -234,7 +234,9 @@ void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int 
 {
     if (from_vs.size() > condition_size)
     {
+
         if (remove_count == 0) { remove_count = condition_size; };
+        print("REEEEmoving " << remove_count);
         from_vs.erase(from_vs.begin(), from_vs.begin()+remove_count);
         callback();
     };
@@ -247,6 +249,7 @@ void move_if_sized(from_V& from_vs, Resource::ResourceType res_type,
 {
     if (from_vs.size() > condition_size)
     {
+        print("moving " << move_count << " of type " << Resource::type_str(res_type));
         if (move_count == 0) { move_count = condition_size; };
         Animal animal = Animal("Horse");
         animal.b2b_transfer(
@@ -301,9 +304,11 @@ void create(vectorT& vec, int quantity, std::string name)
 {
     vectorT created_resources = vectorT();
 
+    print("creating " << quantity << " of " << name);
+
     for (int i = 0; i < quantity; i++)
     {
-        std::shared_ptr<T> p = std::make_shared<T>("grain");
+        std::shared_ptr<T> p = std::make_shared<T>(name);
         created_resources.push_back(p);
     };
 
@@ -317,6 +322,8 @@ void create(vectorT& vec, int quantity, std::string name)
 
 void Building::create_resources(Resource::ResourceType type, int quantity, std::string name)
 {
+
+    std::cout << Resource::type_str(type) <<" creating " << name << " " << quantity << std::endl;
     if (type == Resource::Ingredient)
     {
         create<Ingredient>(this->ingredients, quantity, name);
@@ -485,3 +492,13 @@ int _tmain(int argc, _TCHAR* argv[])
     return 0;
 }
 
+std::string Resource::type_str(ResourceType type)
+{
+    auto mapping = std::map<ResourceType, std::string>();
+    mapping[Ingredient] = "Ingredient";
+    mapping[ResourceType::Product] = "Product";
+    mapping[ResourceType::Waste] = "Waste";
+
+    return mapping[type];
+
+}
