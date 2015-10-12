@@ -256,6 +256,5 @@ class Buildup
 template<typename from_V>
 void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int remove_count, VoidFunc callback );
 
-template<typename from_V>
-void move_if_sized(from_V& from_vs, Resource::ResourceType res_type, unsigned int condition_size, unsigned int move_count, Building* from_bldg, Building* to_bldng, VoidFunc callback);
+void move_if_sized(Resource::ResourceType res_type, unsigned int condition_size, unsigned int move_count, Building* from_bldg, Building* to_bldng, VoidFunc callback);
 #endif

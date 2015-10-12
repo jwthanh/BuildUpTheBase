@@ -108,8 +108,7 @@ void workshop_task(Building* workshop)
 
     std::cout << "\tDoing workshop stuff" << std::endl;
 
-    move_if_sized<vsWaste>(workshop->wastes,
-        Resource::Waste,
+    move_if_sized(Resource::Waste,
         2, 2,
         workshop, workshop->city->building_by_name("The Dump"),
         [](){}
@@ -122,7 +121,7 @@ void necro_task(Building* necro)
     Building* grave = necro->city->building_by_name("The Graveyard");
 
     // print("thinking about necro");
-    move_if_sized<vsWaste>(grave->wastes, Resource::Waste,
+    move_if_sized(Resource::Waste,
             2, 2,
             grave, necro,
             [](){}
@@ -190,7 +189,7 @@ void mine_task(Building* mine)
     std::cout << "\tDoing mine stuff" << std::endl;
     mine->create_resources(Resource::Ingredient, 9, "iron");
 
-    move_if_sized(mine->ingredients, Resource::Ingredient,
+    move_if_sized(Resource::Ingredient,
         2, 2,
         mine, mine->city->building_by_name("The Workshop"),
         [](){});
@@ -238,12 +237,16 @@ void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int 
     };
 };
 
-template<typename from_V>
-void move_if_sized(from_V& from_vs, Resource::ResourceType res_type,
+void move_if_sized(Resource::ResourceType res_type,
         unsigned int condition_size, unsigned int move_count,
         Building* from_bldg, Building* to_bldg, VoidFunc callback )
 {
-    if (from_vs.size() >= condition_size)
+    int from_size;
+    if (res_type == Resource::Ingredient) from_size = from_bldg->ingredients.size();
+    else if (res_type == Resource::Product) from_size = from_bldg->products.size();
+    else if (res_type == Resource::Waste) from_size = from_bldg->wastes.size();
+
+    if (from_size >= condition_size)
     {
         print("moving x" << move_count << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
         if (move_count == 0) { move_count = condition_size; };
