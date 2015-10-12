@@ -182,7 +182,7 @@ void arena_task(Building* arena)
             battle->combatants.end()
             );
 
-    print(bodies_to_create << " bodies to create");
+    //print(bodies_to_create << " bodies to create");
     for (int i = 0; i < bodies_to_create; i++)
     {
         auto grave = arena->city->building_by_name("The Graveyard");
@@ -250,7 +250,7 @@ void move_if_sized(from_V& from_vs, Resource::ResourceType res_type,
 {
     if (from_vs.size() >= condition_size)
     {
-        print("moving " << move_count << " of type " << Resource::type_str(res_type));
+        print("moving " << move_count << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
         if (move_count == 0) { move_count = condition_size; };
         Animal animal = Animal("Horse");
         animal.b2b_transfer(
