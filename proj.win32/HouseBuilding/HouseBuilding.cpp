@@ -102,7 +102,7 @@ void workshop_task(Building* workshop)
     if (workshop->products.size() > 0)
     {
         workshop->products.pop_back();
-        workshop->create_resources(Resource::Waste, 1, "dead product");
+        //workshop->create_resources(Resource::Waste, 1, "dead product");
     }
 
     VoidFunc pay = [workshop](){
@@ -125,12 +125,12 @@ void necro_task(Building* necro)
     //looks for waste bodies, converts to skeletons
     Building* grave = necro->city->building_by_name("The Graveyard");
 
+    // print("thinking about necro");
     move_if_sized<vsWaste>(grave->wastes, Resource::Waste,
             2, 2,
             grave, necro,
             [](){}
         );
-
 };
 
 void grave_task(Building* grave)
@@ -164,8 +164,7 @@ void arena_task(Building* arena)
     battle->do_battle();
 
     int bodies_to_create = 0;
-    battle->combatants.erase(
-        std::remove_if(
+    auto removed_it = std::remove_if(
         battle->combatants.begin(),
         battle->combatants.end(),
         [&](spFighter fighter) -> bool {
@@ -177,13 +176,15 @@ void arena_task(Building* arena)
             return true;
         }
     }
-        ),
-        battle->combatants.end()
-        );
+    );
+    battle->combatants.erase(
+            removed_it,
+            battle->combatants.end()
+            );
 
+    print(bodies_to_create << " bodies to create");
     for (int i = 0; i < bodies_to_create; i++)
     {
-        std::cout << "creating a corpse" << std::endl;
         auto grave = arena->city->building_by_name("The Graveyard");
         grave->create_resources(Resource::Waste, 1, "Corpse");
     }
@@ -247,7 +248,7 @@ void move_if_sized(from_V& from_vs, Resource::ResourceType res_type,
         unsigned int condition_size, unsigned int move_count,
         Building* from_bldg, Building* to_bldg, VoidFunc callback )
 {
-    if (from_vs.size() > condition_size)
+    if (from_vs.size() >= condition_size)
     {
         print("moving " << move_count << " of type " << Resource::type_str(res_type));
         if (move_count == 0) { move_count = condition_size; };
@@ -274,7 +275,9 @@ void transfer(from_V& from_vs, to_V& to_vs, unsigned int quantity)
 
     if (quantity > 0)
     {
-        std::move(from_vs.begin(), std::next(from_vs.begin(), quantity), std::back_inserter(to_vs));
+        auto it = std::next(from_vs.begin(), quantity);
+        std::move(from_vs.begin(), it, std::back_inserter(to_vs));
+        from_vs.erase(from_vs.begin(), it);
     }
 };
 
@@ -304,8 +307,6 @@ void create(vectorT& vec, int quantity, std::string name)
 {
     vectorT created_resources = vectorT();
 
-    print("creating " << quantity << " of " << name);
-
     for (int i = 0; i < quantity; i++)
     {
         std::shared_ptr<T> p = std::make_shared<T>(name);
@@ -323,7 +324,7 @@ void create(vectorT& vec, int quantity, std::string name)
 void Building::create_resources(Resource::ResourceType type, int quantity, std::string name)
 {
 
-    std::cout << Resource::type_str(type) <<" creating " << name << " " << quantity << std::endl;
+    std::cout << "creating " << name << "("<<Resource::type_str(type) << ") " << quantity << std::endl;
     if (type == Resource::Ingredient)
     {
         create<Ingredient>(this->ingredients, quantity, name);
