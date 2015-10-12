@@ -170,8 +170,8 @@ void arena_task(Building* arena)
             bodies_to_create++;
             return true;
         }
-    }
-    );
+        return false;
+    });
     battle->combatants.erase(
             removed_it,
             battle->combatants.end()
