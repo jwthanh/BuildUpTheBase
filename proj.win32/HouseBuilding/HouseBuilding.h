@@ -27,7 +27,8 @@ class Resource;
 class Fighter;
 class Battle;
 
-typedef void(*VoidFuncBuilding)(Building*);
+//typedef void(*VoidFuncBuilding)(Building*);
+typedef void(*TaskFunc)(Building*, float);
 typedef bool(*BoolFuncBuilding)(Building*);
 
 typedef std::function<void()> VoidFunc;
@@ -183,8 +184,8 @@ class Building : public Nameable, public Updateable
         vsFighter fighters;
 
         unsigned int num_workers; //people who work here, help make things faster
-        VoidFuncBuilding task = NULL; //shop might sell product, farm creates ingredients, etc
-        Building(Village* city, std::string name, VoidFuncBuilding task)
+        TaskFunc task = NULL; //shop might sell product, farm creates ingredients, etc
+        Building(Village* city, std::string name, TaskFunc task)
             : task(task), Nameable(name), Updateable(), city(city)
         {
             num_workers = 1;
@@ -201,7 +202,7 @@ class Building : public Nameable, public Updateable
         void update(float dt);
         void print_inventory();
 
-        void do_task();
+        void do_task(float dt);
 
 };
 

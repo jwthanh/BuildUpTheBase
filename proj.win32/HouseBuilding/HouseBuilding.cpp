@@ -86,7 +86,7 @@ void Battle::do_battle()
     return;
 }
 
-void farm_task(Building* farm)
+void farm_task(Building* farm, float dt)
 {
     int new_products = 10;
     farm->create_resources(Resource::Ingredient, new_products, "grain");
@@ -100,7 +100,7 @@ void farm_task(Building* farm)
     );
 };
 
-void workshop_task(Building* workshop)
+void workshop_task(Building* workshop, float dt)
 {
     if (workshop->ingredients.size() > 0)
     {
@@ -138,7 +138,7 @@ void workshop_task(Building* workshop)
     );
 };
 
-void necro_task(Building* necro)
+void necro_task(Building* necro, float dt)
 {
     Village* city = necro->city;
     //looks for waste bodies, converts to skeletons
@@ -170,12 +170,12 @@ void necro_task(Building* necro)
         );
 };
 
-void grave_task(Building* grave)
+void grave_task(Building* grave, float dt)
 {
     //takes waste bodies from arena and buries them
 };
 
-void dump_task(Building* dump)
+void dump_task(Building* dump, float dt)
 {
     std::cout << "\tDoing dump stuff" << std::endl;
 
@@ -186,12 +186,12 @@ void dump_task(Building* dump)
     };
 };
 
-void marketplace_task(Building* building)
+void marketplace_task(Building* building, float dt)
 {
     std::cout << "\tDoing marketplace stuff" << std::endl;
 };
 
-void arena_task(Building* arena)
+void arena_task(Building* arena, float dt)
 {
     std::cout << "\tDoing arena stuff" << std::endl;
     auto battle = std::make_shared<Battle>();
@@ -232,7 +232,7 @@ void arena_task(Building* arena)
     }
 };
 
-void mine_task(Building* mine)
+void mine_task(Building* mine, float dt)
 {
     std::cout << "\tDoing mine stuff" << std::endl;
 
@@ -248,7 +248,7 @@ void mine_task(Building* mine)
         NO_CB);
 };
 
-void forest_task(Building* mine)
+void forest_task(Building* mine, float dt)
 {
     std::cout << "\tDoing forest stuff" << std::endl;
     mine->create_resources(Resource::Ingredient, 2, "wood");
@@ -421,7 +421,7 @@ void Building::update(float dt)
     this->print_inventory();
     if (update_clock->passed_threshold())
     {
-        this->do_task();
+        this->do_task(dt);
         update_clock->reset();
     }
     else
@@ -445,11 +445,11 @@ void Building::print_inventory()
 
 };
 
-void Building::do_task()
+void Building::do_task(float dt)
 {
     if (this->task)
     {
-        this->task(this);
+        this->task(this, dt);
     };
 };
 
