@@ -40,6 +40,7 @@ std::string Ingredient::type_to_string(Ingredient::IngredientType type)
     std::string result = "none";
     if (type == Ingredient::Grain) return "grain";
     else if (type == Ingredient::Iron) return "iron";
+    else if (type == Ingredient::Copper) return "copper";
     else if (type == Ingredient::Wood) return "wood";
     else if (type == Ingredient::Fly) return "fly";
     else if (type == Ingredient::Flesh) return "flesh";
@@ -53,6 +54,7 @@ Ingredient::IngredientType Ingredient::string_to_type(std::string string_type)
     std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower);
     if (string_type == "grain") return Ingredient::Grain;
     else if (string_type == "iron") return Ingredient::Iron;
+    else if (string_type == "copper") return Ingredient::Copper;
     else if (string_type == "wood") return Ingredient::Wood;
     else if (string_type == "fly") return Ingredient::Fly;
     else if (string_type == "flesh") return Ingredient::Flesh;
@@ -233,7 +235,12 @@ void arena_task(Building* arena)
 void mine_task(Building* mine)
 {
     std::cout << "\tDoing mine stuff" << std::endl;
-    mine->create_resources(Resource::Ingredient, 9, "iron");
+
+    RandomWeightMap<std::string> mine_spawn_map = RandomWeightMap<std::string>();
+    mine_spawn_map.add_item("iron", 1);
+    mine_spawn_map.add_item("copper", 9);
+    std::string ing_type = mine_spawn_map.get_item();
+    mine->create_resources(Resource::Ingredient, 9, ing_type);
 
     move_if_sized(Resource::Ingredient,
         2, 2,

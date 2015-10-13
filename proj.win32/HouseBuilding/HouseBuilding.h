@@ -10,6 +10,8 @@
 #include "../../Classes/Clock.h"
 #include "../../Classes/attribute.h"
 #include "../../Classes/attribute_container.h"
+#include "../../Classes/RandomWeightMap.h"
+
 
 #define print(msg) std::cout << msg << std::endl
 #define NO_CB [](){}
@@ -96,6 +98,7 @@ class Ingredient : public Resource
             None,
             Grain,
             Iron,
+            Copper,
             Wood,
             Fly,
             Flesh

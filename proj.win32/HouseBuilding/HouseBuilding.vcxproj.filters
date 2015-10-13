@@ -48,6 +48,9 @@
     <ClInclude Include="Recipe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Classes\RandomWeightMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HouseBuilding.cpp">

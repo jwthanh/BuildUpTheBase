@@ -88,6 +88,7 @@
     <ClInclude Include="..\..\Classes\Clock.h" />
     <ClInclude Include="..\..\Classes\combat.h" />
     <ClInclude Include="..\..\Classes\elements_t.h" />
+    <ClInclude Include="..\..\Classes\RandomWeightMap.h" />
     <ClInclude Include="HouseBuilding.h" />
     <ClInclude Include="Recipe.h" />
     <ClInclude Include="targetver.h" />
