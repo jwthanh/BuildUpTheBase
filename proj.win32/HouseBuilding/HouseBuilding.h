@@ -105,6 +105,8 @@ class Ingredient : public Resource
             Flesh
         };
 
+        static const std::map<IngredientType, std::string> type_map;
+
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
 
         static std::string type_to_string(Ingredient::IngredientType type);

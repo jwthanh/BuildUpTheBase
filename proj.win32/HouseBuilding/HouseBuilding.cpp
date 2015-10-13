@@ -15,6 +15,15 @@
 #include <algorithm>
 #include <locale>
 
+const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
+    {Ingredient::Grain, "grain"},
+    {Ingredient::Iron, "iron"},
+    {Ingredient::Copper, "copper"},
+    {Ingredient::Wood, "wood"},
+    {Ingredient::Fly, "fly"},
+    {Ingredient::Flesh, "flesh"}
+};
+
 Buildup::Buildup()
 {
     this->city = NULL;
