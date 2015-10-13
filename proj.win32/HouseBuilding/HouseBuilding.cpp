@@ -47,12 +47,13 @@ void Fighter::update(float dt)
 std::string Ingredient::type_to_string(Ingredient::IngredientType type)
 {
     std::string result = "none";
-    if (type == Ingredient::Grain) return "grain";
-    else if (type == Ingredient::Iron) return "iron";
-    else if (type == Ingredient::Copper) return "copper";
-    else if (type == Ingredient::Wood) return "wood";
-    else if (type == Ingredient::Fly) return "fly";
-    else if (type == Ingredient::Flesh) return "flesh";
+    for (auto pair : Ingredient::type_map)
+    {
+        if (type == pair.first == type)
+        {
+            return pair.second;
+        }
+    }
 
     return result;
 };
@@ -61,13 +62,14 @@ Ingredient::IngredientType Ingredient::string_to_type(std::string string_type)
 {
     Ingredient::IngredientType result = Ingredient::IngredientType::None;
     std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower);
-    if (string_type == "grain") return Ingredient::Grain;
-    else if (string_type == "iron") return Ingredient::Iron;
-    else if (string_type == "copper") return Ingredient::Copper;
-    else if (string_type == "wood") return Ingredient::Wood;
-    else if (string_type == "fly") return Ingredient::Fly;
-    else if (string_type == "flesh") return Ingredient::Flesh;
-    else assert(false && "unknown type");
+    for (auto pair : Ingredient::type_map)
+    {
+        if (pair.second == string_type)
+        {
+            return pair.first;
+        }
+    }
+    assert(false && "unknown type");
 
     return result;
 
