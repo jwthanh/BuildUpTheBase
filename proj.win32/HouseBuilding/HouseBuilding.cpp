@@ -17,6 +17,8 @@
 
 const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
     {Ingredient::Grain, "grain"},
+    {Ingredient::Seed, "seed"},
+    {Ingredient::Wood, "wood"},
     {Ingredient::Iron, "iron"},
     {Ingredient::Copper, "copper"},
     {Ingredient::Wood, "wood"},
@@ -72,7 +74,6 @@ Ingredient::IngredientType Ingredient::string_to_type(std::string string_type)
     assert(false && "unknown type");
 
     return result;
-
 };
 
 void Battle::do_battle()
@@ -82,7 +83,6 @@ void Battle::do_battle()
         std::cout << "A fight between";
         for (auto fighter : this->combatants)
         {
-
             std::cout << " ..." << fighter->name;
             double& health = fighter->attrs->health->current_val;
             health -= std::rand() % 4 + 6;
@@ -99,7 +99,19 @@ void Battle::do_battle()
 
 void farm_task(Building* farm, float dt)
 {
-    int new_products = 10;
+    RandomWeightMap<std::string> farm_spawn_map = RandomWeightMap<std::string>();
+    farm_spawn_map.add_item("grain", 10);
+    farm_spawn_map.add_item("seed", 5);
+    std::string ing_type = farm_spawn_map.get_item();
+
+
+    RandomWeightMap<int> farm_count_map = RandomWeightMap<int>();
+    farm_count_map.add_item(10, 15);
+    farm_count_map.add_item(5, 5);
+    farm_count_map.add_item(6, 5);
+    farm_count_map.add_item(7, 5);
+    int new_products = farm_count_map.get_item();
+
     farm->create_resources(Resource::Ingredient, new_products, "grain");
 
     Animal animal = Animal("Horse");
@@ -109,6 +121,7 @@ void farm_task(Building* farm, float dt)
         Resource::ResourceType::Ingredient,
         new_products/2
     );
+    
 };
 
 void workshop_task(Building* workshop, float dt)

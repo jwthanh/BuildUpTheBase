@@ -98,6 +98,7 @@ class Ingredient : public Resource
         enum IngredientType {
             None,
             Grain,
+            Seed,
             Iron,
             Copper,
             Wood,
