@@ -137,6 +137,10 @@ void workshop_task(Building* workshop, float dt)
             print("convert one ingredient to 1 Sword");
             workshop->ingredients.pop_back();
             workshop->create_resources(Resource::Product, 1, "Sword");
+        }
+        else 
+        {
+            print("can't make sword");
         };
     }
 
