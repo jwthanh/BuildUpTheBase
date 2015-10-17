@@ -564,6 +564,7 @@ Village* init_city(Buildup* buildup)
     auto grave = std::make_shared<Building>(city, "The Graveyard", grave_task);
     auto necro = std::make_shared<Building>(city, "The Underscape", necro_task);
     mine->update_clock->set_threshold(3*CLOCKS_PER_SEC);
+    auto forest = std::make_shared<Building>(city, "The Forest", forest_task);
 
     auto mitchell = std::make_shared<Fighter>(arena->city, "Mitchell");
     auto barry = std::make_shared<Fighter>(arena->city, "Barry");
@@ -581,6 +582,7 @@ Village* init_city(Buildup* buildup)
     city->buildings.push_back(mine);
     city->buildings.push_back(grave);
     city->buildings.push_back(necro);
+    city->buildings.push_back(forest);
 
     return city;
 };

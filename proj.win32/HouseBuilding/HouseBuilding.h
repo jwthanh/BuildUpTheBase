@@ -186,12 +186,16 @@ class Building : public Nameable, public Updateable
 
         vsFighter fighters;
 
+        Clock* spawn_clock;
+
         unsigned int num_workers; //people who work here, help make things faster
         TaskFunc task = NULL; //shop might sell product, farm creates ingredients, etc
         Building(Village* city, std::string name, TaskFunc task)
             : task(task), Nameable(name), Updateable(), city(city)
         {
             num_workers = 1;
+
+            spawn_clock = new Clock(1);
 
             products = vsProduct();
             wastes = vsWaste();
