@@ -276,10 +276,16 @@ void mine_task(Building* mine, float dt)
         NO_CB);
 };
 
-void forest_task(Building* mine, float dt)
+void forest_task(Building* forest, float dt)
 {
     std::cout << "\tDoing forest stuff" << std::endl;
-    mine->create_resources(Resource::Ingredient, 2, "wood");
+    forest->create_resources(Resource::Ingredient, 2, "wood");
+
+    if (forest->spawn_clock->passed_threshold())
+    {
+        forest->fighters.push_back(std::make_shared<Fighter>(forest->city, "bunny"));
+        forest->spawn_clock->reset();
+    };
 };
 
 void Village::update(float dt)
@@ -449,6 +455,7 @@ void Building::update(float dt)
     this->print_inventory();
     if (update_clock->passed_threshold())
     {
+        this->spawn_clock->update(dt);
         this->do_task(dt);
         update_clock->reset();
     }

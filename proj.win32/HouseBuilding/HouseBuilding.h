@@ -195,13 +195,14 @@ class Building : public Nameable, public Updateable
         {
             num_workers = 1;
 
-            spawn_clock = new Clock(1);
+            spawn_clock = new Clock(3000);
 
             products = vsProduct();
             wastes = vsWaste();
             ingredients = vsIngredient();
 
             fighters = vsFighter();
+
         };
 
         void create_resources(Resource::ResourceType type, int quantity, std::string name);
