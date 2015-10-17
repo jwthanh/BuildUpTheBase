@@ -234,19 +234,23 @@ void arena_task(Building* arena, float dt)
     battle->do_battle();
 
     int bodies_to_create = 0;
-    auto removed_it = std::remove_if(
-        battle->combatants.begin(),
-        battle->combatants.end(),
-        [&](spFighter fighter) -> bool {
-        // Do "some stuff", then return true if element should be removed.
-        HealthAttribute* health = fighter->attrs->health;
-        if (health->is_empty())
-        {
-            bodies_to_create++;
-            return true;
-        }
-        return false;
-    });
+    auto remove_dead = [&bodies_to_create](vsFighter& fighters)
+    {
+        return std::remove_if(
+            fighters.begin(),
+            fighters.end(),
+            [&](spFighter fighter) -> bool {
+            // Do "some stuff", then return true if element should be removed.
+            HealthAttribute* health = fighter->attrs->health;
+            if (health->is_empty())
+            {
+                bodies_to_create++;
+                return true;
+            }
+            return false;
+        });
+    };
+    auto removed_it = remove_dead(battle->combatants);
     battle->combatants.erase(
             removed_it,
             battle->combatants.end()
@@ -491,7 +495,6 @@ void Building::do_task(float dt)
 
 void test_recipe()
 {
-    
     vsIngredient inputs = {
         std::make_shared<Ingredient>("grain"),
         std::make_shared<Ingredient>("grain"),
