@@ -262,6 +262,14 @@ void arena_task(Building* arena, float dt)
         auto grave = arena->city->building_by_name("The Graveyard");
         grave->create_resources(Resource::Waste, 1, "Corpse");
     }
+
+    //needs to be after because bodies_to_create gets incremented in this too
+    auto remove_fighter_it = remove_dead(arena->fighters);
+    arena->fighters.erase(
+            remove_fighter_it,
+            arena->fighters.end()
+            );
+
 };
 
 void mine_task(Building* mine, float dt)
