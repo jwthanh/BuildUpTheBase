@@ -474,6 +474,7 @@ void Building::print_inventory()
     ss << "ING: " << this->ingredients.size();
     ss << " PDT: " << this->products.size();
     ss << " WST: " << this->wastes.size();
+    ss << " FIT: " << this->fighters.size();
     ss << std::endl;
 
     std::cout << ss.str();
