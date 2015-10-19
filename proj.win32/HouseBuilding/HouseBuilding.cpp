@@ -128,19 +128,38 @@ void workshop_task(Building* workshop, float dt)
 {
     if (workshop->ingredients.size() > 0)
     {
-        Recipe recipe = Recipe("sword");
-        recipe.components[Ingredient::IngredientType::Iron] = 2;
+        {
+            Recipe recipe = Recipe("sword");
+            recipe.components[Ingredient::IngredientType::Iron] = 2;
 
-        bool can_make_sword = recipe.is_satisfied(workshop->ingredients);
-        if (can_make_sword)
+            bool can_make_sword = recipe.is_satisfied(workshop->ingredients);
+            if (can_make_sword)
+            {
+                print("convert recipe's ingredient to 1 Sword");
+                workshop->create_resources(Resource::Product, 1, "Sword");
+                recipe.consume(workshop->ingredients);
+            }
+            else 
+            {
+                print("can't make sword");
+            };
+        };
         {
-            print("convert recipe's ingredient to 1 Sword");
-            workshop->create_resources(Resource::Product, 1, "Sword");
-            recipe.consume(workshop->ingredients);
-        }
-        else 
-        {
-            print("can't make sword");
+
+            Recipe shield_rcp = Recipe("shield");
+            shield_rcp.components[Ingredient::IngredientType::Wood] = 3;
+
+            bool can_make_sword = shield_rcp.is_satisfied(workshop->ingredients);
+            if (can_make_sword)
+            {
+                print("convert shield_rcp's ingredient to 1 shield");
+                workshop->create_resources(Resource::Product, 1, "Shield");
+                shield_rcp.consume(workshop->ingredients);
+            }
+            else 
+            {
+                print("can't make shield");
+            };
         };
     }
 
