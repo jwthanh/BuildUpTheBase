@@ -103,7 +103,8 @@ class Ingredient : public Resource
             Copper,
             Wood,
             Fly,
-            Flesh
+            Flesh,
+            Berry
         };
 
         static const std::map<IngredientType, std::string> type_map;

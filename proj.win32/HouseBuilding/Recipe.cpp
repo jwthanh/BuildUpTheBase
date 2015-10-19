@@ -78,7 +78,7 @@ void Recipe::consume(vsIngredient& input)
                 }
 
             }
-            catch (const std::out_of_range& e) {
+            catch (const std::out_of_range&) {
                 return false;
             }
         };

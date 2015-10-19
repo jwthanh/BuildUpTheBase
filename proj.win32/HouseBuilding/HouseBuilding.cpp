@@ -310,7 +310,8 @@ void mine_task(Building* mine, float dt)
 void forest_task(Building* forest, float dt)
 {
     std::cout << "\tDoing forest stuff" << std::endl;
-    forest->create_resources(Resource::Ingredient, 2, "wood");
+    forest->create_resources(Resource::Ingredient, 3, "berry");
+    forest->create_resources(Resource::Ingredient, 1, "wood");
 
     if (forest->spawn_clock->passed_threshold())
     {
