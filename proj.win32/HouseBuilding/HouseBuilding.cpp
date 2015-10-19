@@ -298,6 +298,11 @@ void forest_task(Building* forest, float dt)
         forest->fighters.push_back(std::make_shared<Fighter>(forest->city, "bunny"));
         forest->spawn_clock->reset();
     };
+
+    move_if_sized(Resource::Ingredient,
+        5, 5,
+        forest, forest->city->building_by_name("The Workshop"),
+        NO_CB);
 };
 
 void Village::update(float dt)
