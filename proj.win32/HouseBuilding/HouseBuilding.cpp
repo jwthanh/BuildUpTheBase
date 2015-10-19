@@ -23,7 +23,8 @@ const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
     {Ingredient::Copper, "copper"},
     {Ingredient::Wood, "wood"},
     {Ingredient::Fly, "fly"},
-    {Ingredient::Flesh, "flesh"}
+    {Ingredient::Flesh, "flesh"},
+    {Ingredient::Berry, "berry"}
 };
 
 Buildup::Buildup()
