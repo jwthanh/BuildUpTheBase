@@ -64,17 +64,23 @@ void Recipe::consume(vsIngredient& input)
     {
         auto removal_fun = [&temp_map](spIngredient element) -> bool {
 
-            int& val = temp_map.at(element->ingredient_type);
-            if (val > 0)
-            {
-                val -= 1;
-                return true;
+            try {
+                int& val = temp_map.at(element->ingredient_type);
+
+                if (val > 0)
+                {
+                    val -= 1;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
-            else
-            {
+            catch (const std::out_of_range& e) {
                 return false;
             }
-
         };
         input.erase(
             std::remove_if(input.begin(), input.end(), removal_fun),
