@@ -601,7 +601,7 @@ Village* init_city(Buildup* buildup)
 
     auto farm = std::make_shared<Building>(city, "The Farm", farm_task);
     farm->update_clock->set_threshold(2*CLOCKS_PER_SEC);
-    auto dump= std::make_shared<Building>(city, "The Dump", dump_task);
+    auto dump = std::make_shared<Building>(city, "The Dump", dump_task);
     auto workshop = std::make_shared<Building>(city, "The Workshop", workshop_task);
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", marketplace_task);
     auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
@@ -611,12 +611,12 @@ Village* init_city(Buildup* buildup)
     mine->update_clock->set_threshold(3*CLOCKS_PER_SEC);
     auto forest = std::make_shared<Building>(city, "The Forest", forest_task);
 
-    auto mitchell = std::make_shared<Fighter>(arena->city, "Mitchell");
-    auto barry = std::make_shared<Fighter>(arena->city, "Barry");
-    barry->attrs->health->set_vals(20);
-    mitchell->attrs->health->set_vals(20);
-    arena->fighters.push_back(mitchell);
-    arena->fighters.push_back(barry);
+    auto fighter = std::make_shared<Fighter>(arena->city, "Fighter");
+    auto brawler = std::make_shared<Fighter>(arena->city, "Brawler");
+    brawler->attrs->health->set_vals(20);
+    fighter->attrs->health->set_vals(20);
+    arena->fighters.push_back(fighter);
+    arena->fighters.push_back(brawler);
 
 
     city->buildings.push_back(farm);
