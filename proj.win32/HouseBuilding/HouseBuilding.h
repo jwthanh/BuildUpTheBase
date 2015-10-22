@@ -34,29 +34,19 @@ typedef bool(*BoolFuncBuilding)(Building*);
 
 typedef std::function<void()> VoidFunc;
 
-typedef std::shared_ptr<Building> spBuilding;
-typedef std::vector<spBuilding> vsBuilding;
+#define _MAKE_SP(Cls) typedef std::shared_ptr<##Cls> sp##Cls
+#define _MAKE_VS(Cls) typedef std::vector<sp##Cls> vs##Cls
 
-typedef std::shared_ptr<Resource> spResource;
-typedef std::vector<spResource> vsResource;
+#define MAKE_SP_VS(Cls) _MAKE_SP(##Cls);_MAKE_VS(##Cls)
 
-typedef std::shared_ptr<Product> spProduct;
-typedef std::vector<spProduct> vsProduct;
-
-typedef std::shared_ptr<Ingredient> spIngredient;
-typedef std::vector<spIngredient> vsIngredient;
-
-typedef std::shared_ptr<Waste> spWaste;
-typedef std::vector<spWaste> vsWaste;
-
-typedef std::shared_ptr<Battle> spBattle;
-typedef std::vector<spBattle> vsBattle;
-
-typedef std::shared_ptr<Fighter> spFighter;
-typedef std::vector<spFighter> vsFighter;
-
-typedef std::shared_ptr<Worker> spWorker;
-typedef std::vector<spWorker> vsWorker;
+MAKE_SP_VS(Building);
+MAKE_SP_VS(Resource);
+MAKE_SP_VS(Product);
+MAKE_SP_VS(Ingredient);
+MAKE_SP_VS(Waste);
+MAKE_SP_VS(Battle);
+MAKE_SP_VS(Fighter);
+MAKE_SP_VS(Worker);
 
 class Updateable
 {
