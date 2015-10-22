@@ -26,6 +26,7 @@ class Waste;
 class Resource;
 class Fighter;
 class Battle;
+class Worker;
 
 //typedef void(*VoidFuncBuilding)(Building*);
 typedef void(*TaskFunc)(Building*, float);
@@ -53,6 +54,9 @@ typedef std::vector<spBattle> vsBattle;
 
 typedef std::shared_ptr<Fighter> spFighter;
 typedef std::vector<spFighter> vsFighter;
+
+typedef std::shared_ptr<Worker> spWorker;
+typedef std::vector<spWorker> vsWorker;
 
 class Updateable
 {
@@ -186,6 +190,7 @@ class Building : public Nameable, public Updateable
         vsIngredient ingredients;
 
         vsFighter fighters;
+        vsWorker workers;
 
         Clock* spawn_clock;
 
