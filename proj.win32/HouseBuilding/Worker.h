@@ -11,7 +11,8 @@ class Worker : public Nameable
     public:
         spBuilding building;
 
-        Worker(std::string name) : Nameable(name) {
+        Worker(spBuilding building, std::string name) : Nameable(name) {
+            this->building = building;
 
         };
 };

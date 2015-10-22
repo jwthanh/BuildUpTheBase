@@ -198,6 +198,7 @@ class Building : public Nameable, public Updateable
             ingredients = vsIngredient();
 
             fighters = vsFighter();
+            workers = vsWorker();
 
         };
 

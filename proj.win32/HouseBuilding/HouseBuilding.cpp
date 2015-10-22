@@ -7,13 +7,14 @@
 #include <iostream>
 #include <ctime>
 #include <assert.h>
-
-#include "HouseBuilding.h"
 #include <sstream>
-#include "../main.h"
-#include "Recipe.h"
 #include <algorithm>
 #include <locale>
+
+#include "HouseBuilding.h"
+#include "../main.h"
+#include "Recipe.h"
+#include "Worker.h"
 
 const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
     {Ingredient::Grain, "grain"},
@@ -601,6 +602,7 @@ Village* init_city(Buildup* buildup)
 
     auto farm = std::make_shared<Building>(city, "The Farm", farm_task);
     farm->update_clock->set_threshold(2*CLOCKS_PER_SEC);
+    farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
     auto dump = std::make_shared<Building>(city, "The Dump", dump_task);
     auto workshop = std::make_shared<Building>(city, "The Workshop", workshop_task);
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", marketplace_task);
