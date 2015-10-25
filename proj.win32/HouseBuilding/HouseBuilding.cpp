@@ -317,7 +317,10 @@ void forest_task(Building* forest, float dt)
 
     if (forest->spawn_clock->passed_threshold())
     {
-        forest->fighters.push_back(std::make_shared<Fighter>(forest->city, "bunny"));
+        print("creating bunny");
+        auto bunny = std::make_shared<Fighter>(forest->city, "bunny");
+        bunny->attrs->health->set_vals(5);
+        forest->fighters.push_back(bunny);
         forest->spawn_clock->reset();
     };
 

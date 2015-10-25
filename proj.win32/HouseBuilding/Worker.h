@@ -13,7 +13,6 @@ class Worker : public Nameable
 
         Worker(spBuilding building, std::string name) : Nameable(name) {
             this->building = building;
-
         };
 };
 
