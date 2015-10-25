@@ -82,7 +82,7 @@ void Battle::do_battle()
 {
     if (this->combatants.size() != 0)
     {
-        std::cout << "A fight between";
+        std::cout << "\tA fight between";
         for (auto fighter : this->combatants)
         {
             std::cout << " ..." << fighter->name;
@@ -94,7 +94,7 @@ void Battle::do_battle()
     }
     else
     {
-        std::cout << "no one to fight" << std::endl;
+        print1("no one to fight");
     }
     return;
 }
@@ -137,13 +137,13 @@ void workshop_task(Building* workshop, float dt)
             bool can_make_sword = recipe.is_satisfied(workshop->ingredients);
             if (can_make_sword)
             {
-                print("convert recipe's ingredient to 1 Sword");
+                print1("convert recipe's ingredient to 1 Sword");
                 workshop->create_resources(Resource::Product, 1, "Sword");
                 recipe.consume(workshop->ingredients);
             }
             else 
             {
-                print("can't make sword");
+                print1("can't make sword");
             };
         };
         {
@@ -154,13 +154,13 @@ void workshop_task(Building* workshop, float dt)
             bool can_make_sword = shield_rcp.is_satisfied(workshop->ingredients);
             if (can_make_sword)
             {
-                print("convert shield_rcp's ingredient to 1 shield");
+                print1("convert shield_rcp's ingredient to 1 shield");
                 workshop->create_resources(Resource::Product, 1, "Shield");
                 shield_rcp.consume(workshop->ingredients);
             }
             else 
             {
-                print("can't make shield");
+                print1("can't make shield");
             };
         };
     }
@@ -168,12 +168,12 @@ void workshop_task(Building* workshop, float dt)
     // if (workshop->products.size() > 0)
     // {
     //     workshop->products.pop_back();
-    //     print("One product wasted away");
+    //     print1("One product wasted away");
     //     workshop->create_resources(Resource::Waste, 1, "Wasted product");
     // }
 
     VoidFunc pay = [workshop](){
-        print("paying 3 coins for 5 products");
+        print1("paying 3 coins for 5 products");
         workshop->city->buildup->player->coins += 3;
     };
     remove_if_sized(workshop->products, 5, 5, pay);
@@ -198,7 +198,7 @@ void necro_task(Building* necro, float dt)
 
     if (skeleton_recipe.is_satisfied(necro->ingredients))
     {
-        print("creating skeleton!");
+        print1("creating skeleton!");
         auto skelly = std::make_shared<Fighter>(city, "Skeleton");
         skelly->attrs->health->set_vals(15);
         city->building_by_name("The Arena")->fighters.push_back(skelly);
@@ -211,7 +211,7 @@ void necro_task(Building* necro, float dt)
         necro->wastes.pop_back();
     };
 
-    // print("thinking about necro");
+    // print1("thinking about necro");
     move_if_sized(Resource::Waste,
             2, 2,
             grave, necro,
@@ -230,7 +230,7 @@ void dump_task(Building* dump, float dt)
 
     if (dump->wastes.size() > 5)
     {
-        print("more than 5 dump wastes, flies are gathering");
+        print1("more than 5 dump wastes, flies are gathering");
         dump->create_resources(Resource::Ingredient, 2, "fly");
     };
 };
@@ -277,7 +277,7 @@ void arena_task(Building* arena, float dt)
             battle->combatants.end()
             );
 
-    //print(bodies_to_create << " bodies to create");
+    //print1(bodies_to_create << " bodies to create");
     for (int i = 0; i < bodies_to_create; i++)
     {
         auto grave = arena->city->building_by_name("The Graveyard");
@@ -317,7 +317,7 @@ void forest_task(Building* forest, float dt)
 
     if (forest->spawn_clock->passed_threshold())
     {
-        print("creating bunny");
+        print1("creating bunny");
         auto bunny = std::make_shared<Fighter>(forest->city, "bunny");
         bunny->attrs->health->set_vals(5);
         forest->fighters.push_back(bunny);
@@ -366,7 +366,7 @@ void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int 
     {
 
         if (remove_count == 0) { remove_count = condition_size; };
-        print("removing " << remove_count);
+        print1("removing " << remove_count);
         from_vs.erase(from_vs.begin(), from_vs.begin()+remove_count);
         callback();
     };
@@ -415,7 +415,7 @@ void transfer(from_V& from_vs, to_V& to_vs, unsigned int quantity)
 
 void Animal::b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::ResourceType res_type, int quantity)
 {
-    print("moving x" << quantity << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
+    print1("moving x" << quantity << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
     if (res_type == Resource::Ingredient)
     {
         transfer(from_bldg->ingredients, to_bldg->ingredients, quantity);

@@ -14,6 +14,8 @@
 
 
 #define print(msg) std::cout << msg << std::endl
+#define print1(msg) std::cout << "\t" << msg << std::endl
+#define print2(msg) std::cout << "\t\t" << msg << std::endl
 #define NO_CB [](){}
 
 
