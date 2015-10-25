@@ -46,7 +46,7 @@ T RandomWeightMap<T>::get_item(int score)
 {
     int total_weight = this->get_total_weight();
     int cumulative_weight = 0;
-    std::cout << " " << score << " score" << std::endl;
+    // std::cout << " " << score << " score" << std::endl;
     for (auto it = this->_map.begin(); it != this->_map.end(); it++)
     {
         cumulative_weight+=it->second;
