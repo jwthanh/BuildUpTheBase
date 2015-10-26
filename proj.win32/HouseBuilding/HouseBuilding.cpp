@@ -159,6 +159,9 @@ void workshop_task(Building* workshop, float dt)
                 print1("convert shield_rcp's ingredient to 1 shield");
                 workshop->create_resources(Resource::Product, 1, "Shield");
                 shield_rcp.consume(workshop->ingredients);
+                print1("creating one ruined iron");
+                workshop->create_resources(Resource::Waste, 1, "wasted_iron");
+                shield_rcp.consume(workshop->ingredients);
             }
             else 
             {
