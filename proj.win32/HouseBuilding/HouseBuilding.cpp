@@ -41,7 +41,14 @@ Updateable::Updateable()
 void Updateable::update(float dt)
 {
     this->update_clock->update(dt);
+}; 
+
+Fighter::Fighter(spBuilding building, std::string name) : Nameable(name), Updateable(), city(building->city)
+{
+    this->attrs = new AttributeContainer();
+    building->fighters.push_back(spFighter(this));
 };
+
 
 void Fighter::update(float dt)
 {
@@ -99,7 +106,7 @@ void Battle::do_battle()
     return;
 }
 
-void farm_task(Building* farm, float dt)
+void farm_task(spBuilding farm, float dt)
 {
     RandomWeightMap<std::string> farm_spawn_map = RandomWeightMap<std::string>();
     farm_spawn_map.add_item("grain", 10);
@@ -126,7 +133,7 @@ void farm_task(Building* farm, float dt)
     
 };
 
-void workshop_task(Building* workshop, float dt)
+void workshop_task(spBuilding workshop, float dt)
 {
     if (workshop->ingredients.size() > 0)
     {
@@ -192,21 +199,21 @@ void workshop_task(Building* workshop, float dt)
     );
 };
 
-void necro_task(Building* necro, float dt)
+void necro_task(spBuilding necro, float dt)
 {
     Village* city = necro->city;
     //looks for waste bodies, converts to skeletons
-    Building* grave = necro->city->building_by_name("The Graveyard");
+    spBuilding grave = necro->city->building_by_name("The Graveyard");
 
     Recipe skeleton_recipe = Recipe("Skeletons");
     skeleton_recipe.components[Ingredient::IngredientType::Flesh] = 7;
 
     if (skeleton_recipe.is_satisfied(necro->ingredients))
     {
+        auto arena = city->building_by_name("The Arena");
         print1("creating skeleton!");
-        auto skelly = std::make_shared<Fighter>(city, "Skeleton");
+        auto skelly = std::make_shared<Fighter>(spBuilding(arena), "Skeleton");
         skelly->attrs->health->set_vals(15);
-        city->building_by_name("The Arena")->fighters.push_back(skelly);
         skeleton_recipe.consume(necro->ingredients);
     };
 
@@ -224,12 +231,12 @@ void necro_task(Building* necro, float dt)
         );
 };
 
-void grave_task(Building* grave, float dt)
+void grave_task(spBuilding grave, float dt)
 {
     //takes waste bodies from arena and buries them
 };
 
-void dump_task(Building* dump, float dt)
+void dump_task(spBuilding dump, float dt)
 {
     std::cout << "\tDoing dump stuff" << std::endl;
 
@@ -240,17 +247,18 @@ void dump_task(Building* dump, float dt)
     };
 };
 
-void marketplace_task(Building* building, float dt)
+void marketplace_task(spBuilding building, float dt)
 {
     std::cout << "\tDoing marketplace stuff" << std::endl;
 };
 
-void arena_task(Building* arena, float dt)
+void arena_task(spBuilding arena, float dt)
 {
     std::cout << "\tDoing arena stuff" << std::endl;
     auto battle = std::make_shared<Battle>();
     for (spFighter fighter : arena->fighters)
     {
+        if (fighter == NULL) { continue;  }
         if (!fighter->attrs->health->is_empty())
         {
             battle->combatants.push_back(fighter);
@@ -298,7 +306,7 @@ void arena_task(Building* arena, float dt)
 
 };
 
-void mine_task(Building* mine, float dt)
+void mine_task(spBuilding mine, float dt)
 {
     std::cout << "\tDoing mine stuff" << std::endl;
 
@@ -314,7 +322,7 @@ void mine_task(Building* mine, float dt)
         NO_CB);
 };
 
-void forest_task(Building* forest, float dt)
+void forest_task(spBuilding forest, float dt)
 {
     std::cout << "\tDoing forest stuff" << std::endl;
     forest->create_resources(Resource::Ingredient, 3, "berry");
@@ -323,9 +331,8 @@ void forest_task(Building* forest, float dt)
     if (forest->spawn_clock->passed_threshold())
     {
         print1("creating bunny");
-        auto bunny = std::make_shared<Fighter>(forest->city, "bunny");
+        auto bunny = std::make_shared<Fighter>(spBuilding(forest), "bunny");
         bunny->attrs->health->set_vals(5);
-        forest->fighters.push_back(bunny);
         forest->spawn_clock->reset();
     };
 
@@ -353,12 +360,12 @@ void Village::update_buildings(float dt)
 
 };
 
-Building* Village::building_by_name(std::string name)
+spBuilding Village::building_by_name(std::string name)
 {
-    for (auto bldg : this->buildings)
+    for (spBuilding bldg : this->buildings)
     {
         if (bldg->name == name)
-            return bldg.get();
+            return bldg;
     };
 
     return NULL;
@@ -379,7 +386,7 @@ void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int 
 
 void move_if_sized(Resource::ResourceType res_type,
         unsigned int condition_size, unsigned int move_count,
-        Building* from_bldg, Building* to_bldg, VoidFunc callback )
+        spBuilding from_bldg, spBuilding to_bldg, VoidFunc callback )
 {
     int from_size;
     if (res_type == Resource::Ingredient) from_size = from_bldg->ingredients.size();
@@ -418,7 +425,7 @@ void transfer(from_V& from_vs, to_V& to_vs, unsigned int quantity)
     }
 };
 
-void Animal::b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::ResourceType res_type, int quantity)
+void Animal::b2b_transfer(spBuilding from_bldg, spBuilding to_bldg, Resource::ResourceType res_type, int quantity)
 {
     print1("moving x" << quantity << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
     if (res_type == Resource::Ingredient)
@@ -532,7 +539,7 @@ void Building::do_task(float dt)
 {
     if (this->task)
     {
-        this->task(this, dt);
+        this->task(spBuilding(this), dt);
     };
 };
 
@@ -621,12 +628,10 @@ Village* init_city(Buildup* buildup)
     mine->update_clock->set_threshold(3*CLOCKS_PER_SEC);
     auto forest = std::make_shared<Building>(city, "The Forest", forest_task);
 
-    auto fighter = std::make_shared<Fighter>(arena->city, "Fighter");
-    auto brawler = std::make_shared<Fighter>(arena->city, "Brawler");
+    auto fighter = std::make_shared<Fighter>(arena, "Fighter");
+    auto brawler = std::make_shared<Fighter>(arena, "Brawler");
     brawler->attrs->health->set_vals(20);
     fighter->attrs->health->set_vals(20);
-    arena->fighters.push_back(fighter);
-    arena->fighters.push_back(brawler);
 
 
     city->buildings.push_back(farm);

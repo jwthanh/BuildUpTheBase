@@ -30,12 +30,6 @@ class Fighter;
 class Battle;
 class Worker;
 
-//typedef void(*VoidFuncBuilding)(Building*);
-typedef void(*TaskFunc)(Building*, float);
-typedef bool(*BoolFuncBuilding)(Building*);
-
-typedef std::function<void()> VoidFunc;
-
 #define _MAKE_SP(Cls) typedef std::shared_ptr<##Cls> sp##Cls
 #define _MAKE_VS(Cls) typedef std::vector<sp##Cls> vs##Cls
 
@@ -50,6 +44,13 @@ MAKE_SP_VS(Battle);
 MAKE_SP_VS(Fighter);
 MAKE_SP_VS(Worker);
 
+//typedef void(*VoidFuncBuilding)(spBuilding);
+typedef void(*TaskFunc)(spBuilding, float);
+typedef bool(*BoolFuncBuilding)(spBuilding);
+
+typedef std::function<void()> VoidFunc;
+
+
 class Updateable
 {
     public:
@@ -59,7 +60,7 @@ class Updateable
         void update(float dt);
 };
 
-class Nameable
+class Nameable : public std::enable_shared_from_this<Nameable>
 {
     public:
         std::string name;
@@ -145,10 +146,7 @@ class Fighter : public Nameable, public Updateable
         float damage;
 
         Village* city;
-        Fighter(Village* city, std::string name) : Nameable(name), Updateable(), city(city)
-        {
-            this->attrs = new AttributeContainer();
-        }
+        Fighter(spBuilding building, std::string name);
         void update(float dt);
 };
 
@@ -187,7 +185,7 @@ class Building : public Nameable, public Updateable
         Clock* spawn_clock;
 
         unsigned int num_workers; //people who work here, help make things faster
-        TaskFunc task = NULL; //shop might sell product, farm creates ingredients, etc
+        TaskFunc task = nullptr; //shop might sell product, farm creates ingredients, etc
         Building(Village* city, std::string name, TaskFunc task)
             : task(task), Nameable(name), Updateable(), city(city)
         {
@@ -230,7 +228,7 @@ class Village : public Nameable, public Updateable
         void update(float dt);
         void update_buildings(float dt);
 
-        Building* building_by_name(std::string name);
+        spBuilding building_by_name(std::string name);
 };
 
 
@@ -239,7 +237,7 @@ class Animal : public Nameable
     public:
         Animal(std::string name) : Nameable(name) {};
 
-        void b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::ResourceType res_type, int quantity);
+        void b2b_transfer(spBuilding from_bldg, spBuilding to_bldg, Resource::ResourceType res_type, int quantity);
 };
 
 class Person : public Nameable, public Updateable
@@ -271,5 +269,5 @@ class Buildup
 template<typename from_V>
 void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int remove_count, VoidFunc callback );
 
-void move_if_sized(Resource::ResourceType res_type, unsigned int condition_size, unsigned int move_count, Building* from_bldg, Building* to_bldng, VoidFunc callback);
+void move_if_sized(Resource::ResourceType res_type, unsigned int condition_size, unsigned int move_count, spBuilding from_bldg, spBuilding to_bldng, VoidFunc callback);
 #endif
