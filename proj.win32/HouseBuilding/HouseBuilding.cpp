@@ -139,6 +139,8 @@ void workshop_task(Building* workshop, float dt)
             {
                 print1("convert recipe's ingredient to 1 Sword");
                 workshop->create_resources(Resource::Product, 1, "Sword");
+                print1("creating one ruined iron");
+                workshop->create_resources(Resource::Waste, 1, "wasted_iron");
                 recipe.consume(workshop->ingredients);
             }
             else 
@@ -298,8 +300,8 @@ void mine_task(Building* mine, float dt)
     std::cout << "\tDoing mine stuff" << std::endl;
 
     RandomWeightMap<std::string> mine_spawn_map = RandomWeightMap<std::string>();
-    mine_spawn_map.add_item("iron", 10);
-    mine_spawn_map.add_item("copper", 90);
+    mine_spawn_map.add_item("iron", 30);
+    mine_spawn_map.add_item("copper", 70);
     std::string ing_type = mine_spawn_map.get_item();
     mine->create_resources(Resource::Ingredient, 9, ing_type);
 
@@ -494,7 +496,7 @@ void Building::update(float dt)
 {
     Updateable::update(dt);
     printf("   %s - %.f\n", this->name.c_str(), this->update_clock->start_time);
-    this->print_inventory();
+    // this->print_inventory();
     if (update_clock->passed_threshold())
     {
         this->spawn_clock->update(dt);
