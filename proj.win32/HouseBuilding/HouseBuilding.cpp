@@ -533,38 +533,45 @@ void Building::update(float dt)
     std::cout << std::endl;
 };
 
-void Building::print_ingredients()
-{
-    std::stringstream ss;
-    ss << "\t";
-
-    for (auto type_str : Ingredient::type_map)
-    {
-        Ingredient::IngredientType type = type_str.first;
-        std::string str = type_str.second;
-
-        auto type_matches = [type](spIngredient ing){ return ing->ingredient_type == type; };
-        int count = std::count_if(this->ingredients.begin(), this->ingredients.end(), type_matches);
-
-        if (count != 0)
-        {
-            ss << str << ": " << count << " ";
-        }
-    };
-
-    std::cout << ss.str() << std::endl;
+#define PRINT_RESOURCE(Rtype, Rlowertype) \
+void Building::print_##Rlowertype##s() \
+{ \
+    std::stringstream ss; \
+ \
+    for (auto type_str : Rtype::type_map) \
+    { \
+        Rtype::Rtype##Type type = type_str.first; \
+        std::string str = type_str.second; \
+ \
+        auto type_matches = [type](sp##Rtype ing){ return ing->Rlowertype##_type == type; }; \
+        int count = std::count_if(this->Rlowertype##s.begin(), this->Rlowertype##s.end(), type_matches); \
+ \
+        if (count != 0) \
+        { \
+            ss << str << ": " << count << " "; \
+        } \
+    }; \
+ \
+    if (!ss.str().empty()) \
+                {\
+        std::cout << "   " << #Rtype << ": " << ss.str() << std::endl; \
+        }\
 };
 
-void Building::print_products()
-{
+PRINT_RESOURCE(Ingredient, ingredient);
+PRINT_RESOURCE(Product, product);
+PRINT_RESOURCE(Waste, waste);
 
-};
-
-void Building::print_wastes()
-{
-
-};
-
+// void Building::print_products()
+// {
+// 
+// };
+// 
+// void Building::print_wastes()
+// {
+// 
+// };
+// 
 void Building::print_fighters()
 {
 
