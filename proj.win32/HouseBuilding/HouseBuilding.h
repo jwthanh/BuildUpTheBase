@@ -107,26 +107,32 @@ class Ingredient : public Resource
 
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
 
+        IngredientType ingredient_type;
         static std::string type_to_string(Ingredient::IngredientType type);
         static Ingredient::IngredientType string_to_type(std::string string_type);
 
-        Ingredient::IngredientType ingredient_type;
-        Ingredient(std::string name) : Resource(name) 
-    {
-        this->ingredient_type = Ingredient::string_to_type(name);
-    };
+
+        Ingredient(std::string name) : Resource(name) {
+            this->ingredient_type = Ingredient::string_to_type(name);
+        };
 };
 
 class Product : public Resource
 {
     public:
-        enum ProductTypes {
+        enum ProductType {
             Veggies,
             Meat,
             Dairy,
             Cereals
         };
-        Product(std::string name) : Resource(name) {};
+        static const std::map<ProductType, std::string> type_map;
+
+        ProductType product_type;
+
+        Product(std::string name) : Resource(name) {
+            ProductType ingredient_type;
+        };
 
         Product(const Product& other) : Resource(other) {
         };
@@ -135,6 +141,11 @@ class Product : public Resource
 class Waste : public Resource
 {
     public:
+        enum WasteType {
+
+        };
+        static const std::map<WasteType, std::string> type_map;
+
         Waste(std::string name) : Resource(name) {};
 };
 
@@ -145,8 +156,7 @@ class Fighter : public Nameable, public Updateable
         float damage;
 
         Village* city;
-        Fighter(Village* city, std::string name) : Nameable(name), Updateable(), city(city)
-        {
+        Fighter(Village* city, std::string name) : Nameable(name), Updateable(), city(city) {
             this->attrs = new AttributeContainer();
         }
         void update(float dt);
@@ -154,21 +164,21 @@ class Fighter : public Nameable, public Updateable
 
 class Battle : public Updateable
 {
-public:
-    vsFighter combatants;
+    public:
+        vsFighter combatants;
 
-    Battle() : Updateable()
+        Battle() : Updateable()
     {
         this->combatants = vsFighter();
     };
 
-    void update(float dt)
-    {
-        Updateable::update(dt);
-        this->do_battle();
-    }
+        void update(float dt)
+        {
+            Updateable::update(dt);
+            this->do_battle();
+        }
 
-    void do_battle();
+        void do_battle();
 };
 
 class Building : public Nameable, public Updateable

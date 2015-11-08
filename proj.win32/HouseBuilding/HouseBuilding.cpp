@@ -28,6 +28,16 @@ const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
     {Ingredient::Berry, "berry"}
 };
 
+const std::map<Product::ProductType, std::string> Product::type_map = {
+    {Product::Veggies, "veggies"},
+    {Product::Meat, "meat"},
+    {Product::Dairy, "dairy"},
+    {Product::Cereals, "cereals"},
+};
+
+const std::map<Waste::WasteType, std::string> Waste::type_map = {
+};
+
 Buildup::Buildup()
 {
     this->city = NULL;
