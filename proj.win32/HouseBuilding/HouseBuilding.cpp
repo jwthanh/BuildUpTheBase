@@ -33,9 +33,13 @@ const std::map<Product::ProductType, std::string> Product::type_map = {
     {Product::Meat, "meat"},
     {Product::Dairy, "dairy"},
     {Product::Cereals, "cereals"},
+    {Product::Shield, "shield"},
+    {Product::Meat, "meat"},
 };
 
 const std::map<Waste::WasteType, std::string> Waste::type_map = {
+    {Waste::Corpse, "corpse"},
+    {Waste::Wasted_Iron, "wasted_iron"},
 };
 
 Buildup::Buildup()
@@ -62,12 +66,12 @@ void Fighter::update(float dt)
 { \
     std::string result = "none"; \
     for (auto pair : ResType::type_map) \
-    { \
-        if (type == pair.first == type) \
         { \
+        if (type == pair.first == type) \
+                { \
             return pair.second; \
+                } \
         } \
-    } \
  \
     return result; \
 }; \
@@ -77,12 +81,13 @@ ResType::##ResType##Type ResType::string_to_type(std::string string_type) \
     ResType::##ResType##Type result = ResType::##ResType##Type::None; \
     std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower); \
     for (auto pair : ResType::type_map) \
-    { \
-        if (pair.second == string_type) \
         { \
+        if (pair.second == string_type) \
+                { \
             return pair.first; \
+                } \
         } \
-    } \
+    print("type id" << string_type); \
     assert(false && "unknown type"); \
  \
     return result; \

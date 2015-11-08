@@ -80,6 +80,7 @@ class Resource : public Nameable
             Waste = 2
         };
 
+        // convert type to string
         static std::string type_str(ResourceType type);
 
         static const ResourceType resource_type;
@@ -87,16 +88,18 @@ class Resource : public Nameable
         Resource(std::string name) :Nameable(name){};
 };
 
-#define type_conversion(Rtype) \
+#define type_conversion(Rtype, Rlowertype) \
         static const std::map<##Rtype##Type, std::string> type_map; \
- \
-        ##Rtype##Type ingredient_type; \
+        \
+        ##Rtype##Type Rlowertype##_type; \
         static std::string type_to_string(Rtype::##Rtype##Type type); \
         static Rtype::##Rtype##Type string_to_type(std::string string_type); 
 
 class Ingredient : public Resource
 {
     public:
+        static const ResourceType resource_type = Resource::ResourceType::Ingredient;
+
         enum IngredientType {
             None,
             Grain,
@@ -109,13 +112,7 @@ class Ingredient : public Resource
             Berry
         };
 
-        static const ResourceType resource_type = Resource::ResourceType::Ingredient;
-
-        type_conversion(Ingredient);
-        // IngredientType ingredient_type;
-        // static std::string type_to_string(Ingredient::IngredientType type);
-        // static Ingredient::IngredientType string_to_type(std::string string_type);
-
+        type_conversion(Ingredient, ingredient);
 
         Ingredient(std::string name) : Resource(name) {
             this->ingredient_type = Ingredient::string_to_type(name);
@@ -125,19 +122,20 @@ class Ingredient : public Resource
 class Product : public Resource
 {
     public:
+        static const ResourceType resource_type = Resource::ResourceType::Product;
+
         enum ProductType {
             None,
             Veggies,
             Meat,
             Dairy,
-            Cereals
+            Cereals,
+            Shield
         };
-        type_conversion(Product);
-
-        ProductType product_type;
+        type_conversion(Product, product);
 
         Product(std::string name) : Resource(name) {
-            ProductType ingredient_type;
+            this->product_type = Product::string_to_type(name);
         };
 
         Product(const Product& other) : Resource(other) {
@@ -147,12 +145,19 @@ class Product : public Resource
 class Waste : public Resource
 {
     public:
-        enum WasteType {
-            None
-        };
-        type_conversion(Waste);
+        static const ResourceType resource_type = Resource::ResourceType::Waste;
 
-        Waste(std::string name) : Resource(name) {};
+        enum WasteType {
+            None,
+            Corpse,
+            Wasted_Iron
+        };
+        type_conversion(Waste, waste);
+
+
+        Waste(std::string name) : Resource(name) {
+            this->waste_type = Waste::string_to_type(name);
+        };
 };
 
 class Fighter : public Nameable, public Updateable
