@@ -87,6 +87,12 @@ class Resource : public Nameable
         Resource(std::string name) :Nameable(name){};
 };
 
+#define type_conversion(Rtype) \
+        static const std::map<##Rtype##Type, std::string> type_map; \
+ \
+        ##Rtype##Type ingredient_type; \
+        static std::string type_to_string(Rtype::##Rtype##Type type); \
+        static Rtype::##Rtype##Type string_to_type(std::string string_type); 
 
 class Ingredient : public Resource
 {
@@ -103,13 +109,12 @@ class Ingredient : public Resource
             Berry
         };
 
-        static const std::map<IngredientType, std::string> type_map;
-
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
 
-        IngredientType ingredient_type;
-        static std::string type_to_string(Ingredient::IngredientType type);
-        static Ingredient::IngredientType string_to_type(std::string string_type);
+        type_conversion(Ingredient);
+        // IngredientType ingredient_type;
+        // static std::string type_to_string(Ingredient::IngredientType type);
+        // static Ingredient::IngredientType string_to_type(std::string string_type);
 
 
         Ingredient(std::string name) : Resource(name) {
@@ -121,12 +126,13 @@ class Product : public Resource
 {
     public:
         enum ProductType {
+            None,
             Veggies,
             Meat,
             Dairy,
             Cereals
         };
-        static const std::map<ProductType, std::string> type_map;
+        type_conversion(Product);
 
         ProductType product_type;
 
@@ -142,9 +148,9 @@ class Waste : public Resource
 {
     public:
         enum WasteType {
-
+            None
         };
-        static const std::map<WasteType, std::string> type_map;
+        type_conversion(Waste);
 
         Waste(std::string name) : Resource(name) {};
 };
