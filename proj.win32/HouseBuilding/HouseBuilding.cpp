@@ -548,7 +548,7 @@ void Building::print_##Rlowertype##s() \
  \
         if (count != 0) \
         { \
-            ss << str << ": " << count << " "; \
+            ss << str << "(x" << count << ") "; \
         } \
     }; \
  \
