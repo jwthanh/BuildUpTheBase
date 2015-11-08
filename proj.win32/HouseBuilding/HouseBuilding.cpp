@@ -562,16 +562,6 @@ PRINT_RESOURCE(Ingredient, ingredient);
 PRINT_RESOURCE(Product, product);
 PRINT_RESOURCE(Waste, waste);
 
-// void Building::print_products()
-// {
-// 
-// };
-// 
-// void Building::print_wastes()
-// {
-// 
-// };
-// 
 void Building::print_fighters()
 {
 
