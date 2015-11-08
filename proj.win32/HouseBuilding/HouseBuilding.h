@@ -207,7 +207,14 @@ class Building : public Nameable, public Updateable
         void create_resources(Resource::ResourceType type, int quantity, std::string name);
 
         void update(float dt);
+
         void print_inventory();
+
+        void print_specifics();
+        void print_ingredients();
+        void print_products();
+        void print_wastes();
+        void print_fighters();
 
         void do_task(float dt);
 
