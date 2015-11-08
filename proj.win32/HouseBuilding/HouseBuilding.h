@@ -88,12 +88,11 @@ class Resource : public Nameable
         Resource(std::string name) :Nameable(name){};
 };
 
-#define type_conversion(Rtype, Rlowertype) \
-        static const std::map<##Rtype##Type, std::string> type_map; \
-        \
-        ##Rtype##Type Rlowertype##_type; \
-        static std::string type_to_string(Rtype::##Rtype##Type type); \
-        static Rtype::##Rtype##Type string_to_type(std::string string_type); 
+#define TYPE_MAP_CONVERSION(Rtype, Rlowertype) \
+    static const std::map<##Rtype##Type, std::string> type_map; \
+##Rtype##Type Rlowertype##_type; \
+static std::string type_to_string(Rtype::##Rtype##Type type); \
+static Rtype::##Rtype##Type string_to_type(std::string string_type); 
 
 class Ingredient : public Resource
 {
@@ -112,7 +111,7 @@ class Ingredient : public Resource
             Berry
         };
 
-        type_conversion(Ingredient, ingredient);
+        TYPE_MAP_CONVERSION(Ingredient, ingredient);
 
         Ingredient(std::string name) : Resource(name) {
             this->ingredient_type = Ingredient::string_to_type(name);
@@ -132,7 +131,7 @@ class Product : public Resource
             Cereals,
             Shield
         };
-        type_conversion(Product, product);
+        TYPE_MAP_CONVERSION(Product, product);
 
         Product(std::string name) : Resource(name) {
             this->product_type = Product::string_to_type(name);
@@ -152,7 +151,7 @@ class Waste : public Resource
             Corpse,
             Wasted_Iron
         };
-        type_conversion(Waste, waste);
+        TYPE_MAP_CONVERSION(Waste, waste);
 
 
         Waste(std::string name) : Resource(name) {
