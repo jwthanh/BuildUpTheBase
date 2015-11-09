@@ -173,8 +173,8 @@ class Fighter : public Nameable, public Updateable
 
         std::string get_stats() {
             std::stringstream ss;
-
-            ss << this->attrs->health->current_val << "/" << this->attrs->health->max_val << " " << this->attrs->get_effective_damage() << " dmg";
+            int effective_dmg = this->attrs->damage->current_val;
+            ss << this->attrs->health->current_val << "/" << this->attrs->health->max_val << "/" << effective_dmg;
             // for (std::string attr : this->attrs->PrettyVector())
             // {
             //     ss << attr;
