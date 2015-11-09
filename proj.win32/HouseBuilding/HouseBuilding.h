@@ -50,6 +50,10 @@ MAKE_SP_VS(Battle);
 MAKE_SP_VS(Fighter);
 MAKE_SP_VS(Worker);
 
+#undef MAKE_SP_VS
+#undef _MAKE_VS
+#undef _MAKE_SP
+
 class Updateable
 {
     public:
