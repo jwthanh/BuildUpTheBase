@@ -170,6 +170,18 @@ class Fighter : public Nameable, public Updateable
             this->attrs = new AttributeContainer();
         }
         void update(float dt);
+
+        std::string get_stats() {
+            std::stringstream ss;
+
+            ss << this->attrs->health->current_val << "/" << this->attrs->health->max_val << " " << this->attrs->get_effective_damage() << " dmg";
+            // for (std::string attr : this->attrs->PrettyVector())
+            // {
+            //     ss << attr;
+            // }
+
+            return ss.str();
+        };
 };
 
 class Battle : public Updateable

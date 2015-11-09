@@ -564,7 +564,16 @@ PRINT_RESOURCE(Waste, waste);
 
 void Building::print_fighters()
 {
+    std::stringstream ss;
+    for (spFighter fighter : this->fighters) 
+    {
+        ss << fighter->get_stats() << " ";
+    };
 
+    if (!ss.str().empty()) 
+    {
+        std::cout << "   " << ss.str() << std::endl;
+    };
 };
 
 void Building::print_specifics()
