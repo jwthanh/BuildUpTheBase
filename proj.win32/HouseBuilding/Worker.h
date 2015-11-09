@@ -8,30 +8,43 @@ template<typename Rtype>
 class ResourceCondition : public Nameable
 {
     public:
+        enum TypeChoices {
+            Any = 0,
+            Ingredient,
+            Product, 
+            Waste
+        };
+        TypeChoices type_choice;
         Rtype choice;
-
-        //Ingredient::IngredientType ingredient_choice;
-        //Product::ProductType product_choice;
-        //Waste::WasteType waste_choice;
 
         int quantity;
 
-        ResourceCondition(/*TypeChoices type_choice,*/ Rtype choice, int quantity, std::string name) : Nameable(name) {
-            //this->type_choice = type_choice;
+        ResourceCondition(TypeChoices type_choice, Rtype choice, int quantity, std::string name) : Nameable(name) {
+            this->type_choice;
             this->quantity = quantity;
-
-            //this->ingredient_choice = NULL;
-            //this->product_choice = NULL;
-            //this->waste_choice = NULL;
-
             this->choice = choice;
-            //if (type_choice == Ingredient) {
-            //    this->ingredient_choice = reinterpret_cast<Ingredient::IngredientType>(choice);
-            //} else if (type_choice == Product) {
-            //    this->product_choice = choice; 
-            //} else if (type_choice == Waste) {
-            //    this->waste_choice = choice;
-            //};
+        };
+
+        bool is_satisfied(spBuilding building) {
+            if (this->type_choice == Ingredient)
+            {
+                return building->ingredients.size() >= this->quantity;
+            }
+            else if (this->type_choice == Product)
+            {
+                return building->products.size() >= this->quantity;
+            }
+            else if (this->type_choice == Ingredient)
+            {
+                return building->wastes.size() >= this->quantity;
+            }
+            else
+            {
+                unsigned int size = building->ingredients.size() +
+                    building->products.size() +
+                    building->wastes.size();
+                return size >= this->quantity;
+            };
         };
 };
 
