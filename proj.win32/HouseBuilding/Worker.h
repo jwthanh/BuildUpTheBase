@@ -21,8 +21,8 @@ class ResourceCondition : public Nameable
 
         ResourceCondition(TypeChoices type_choice, Rtype choice, int quantity, std::string name) : Nameable(name) {
             this->type_choice;
-            this->quantity = quantity;
             this->choice = choice;
+            this->quantity = quantity;
         };
 
         bool is_satisfied(spBuilding building) {

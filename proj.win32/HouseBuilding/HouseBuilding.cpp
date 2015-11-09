@@ -624,6 +624,38 @@ void Building::do_task(float dt)
     };
 };
 
+void test_conditions()
+{
+    vsIngredient inputs = {
+        std::make_shared<Ingredient>("grain"),
+        std::make_shared<Ingredient>("grain"),
+        std::make_shared<Ingredient>("iron")
+    };
+
+    auto city = new Village(NULL, "The Test City");
+    auto farm = std::make_shared<Building>(city, "The Test Farm", TaskFunc());
+    farm->ingredients = inputs;
+    
+    ResourceCondition<Ingredient::IngredientType> rc = ResourceCondition<Ingredient::IngredientType>(
+            ResourceCondition<Ingredient::IngredientType>::TypeChoices::Ingredient,
+            Ingredient::IngredientType::Grain,
+            2,
+            "test condition");
+
+    assert(rc.is_satisfied(farm) == true);
+
+    farm->ingredients = {
+        std::make_shared<Ingredient>("iron")
+    };
+    assert(rc.is_satisfied(farm) == false);
+
+    rc.choice = Ingredient::Iron;
+    assert(rc.is_satisfied(farm) == false);
+    rc.quantity = 1;
+    assert(rc.is_satisfied(farm) == true);
+
+};
+
 void test_recipe()
 {
     vsIngredient inputs = {
@@ -662,7 +694,10 @@ void Buildup::main_loop()
     Clock game_clock = Clock(CLOCKS_PER_SEC);
     clock_t start_time = clock() / CLOCKS_PER_SEC;
 
+    print("starting tests...");
     test_recipe();
+    test_conditions();
+    print("...done tests");
     int total_loops = 0;
 
     int current_ticks = 0;
