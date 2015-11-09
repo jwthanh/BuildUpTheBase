@@ -60,6 +60,20 @@ void Updateable::update(float dt)
 void Fighter::update(float dt)
 {
     Updateable::update(dt);
+};
+
+std::string Fighter::get_stats()
+{
+    std::stringstream ss;
+    ss << this->name << " ";
+    double effective_dmg = this->attrs->damage->current_val;
+    ss << this->attrs->health->current_val << "/" << this->attrs->health->max_val << "/" << effective_dmg;
+    // for (std::string attr : this->attrs->PrettyVector())
+    // {
+    //     ss << attr;
+    // }
+
+    return ss.str();
 }
 
 #define type_stuff(ResType) std::string ResType::type_to_string(ResType::##ResType##Type type) \

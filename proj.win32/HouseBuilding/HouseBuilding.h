@@ -140,6 +140,7 @@ class Product : public Resource
             Cereals,
             Shield
         };
+
         TYPE_MAP_CONVERSION(Product, product);
 
         Product(std::string name) : Resource(name) {
@@ -161,6 +162,7 @@ class Waste : public Resource
             Corpse,
             Wasted_Iron
         };
+
         TYPE_MAP_CONVERSION(Waste, waste);
 
 
@@ -177,26 +179,15 @@ class Fighter : public Nameable, public Updateable
 {
     public:
         AttributeContainer* attrs;
-        float damage;
-
         Village* city;
+
         Fighter(Village* city, std::string name) : Nameable(name), Updateable(), city(city) {
             this->attrs = new AttributeContainer();
         }
+
         void update(float dt);
 
-        std::string get_stats() {
-            std::stringstream ss;
-            ss << this->name << " ";
-            double effective_dmg = this->attrs->damage->current_val;
-            ss << this->attrs->health->current_val << "/" << this->attrs->health->max_val << "/" << effective_dmg;
-            // for (std::string attr : this->attrs->PrettyVector())
-            // {
-            //     ss << attr;
-            // }
-
-            return ss.str();
-        };
+        std::string get_stats();
 };
 
 class Battle : public Updateable
