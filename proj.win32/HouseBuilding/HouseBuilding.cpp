@@ -400,7 +400,7 @@ void move_if_sized(Resource::ResourceType res_type,
         unsigned int condition_size, unsigned int move_count,
         Building* from_bldg, Building* to_bldg, VoidFunc callback )
 {
-    int from_size;
+    unsigned int from_size;
     if (res_type == Resource::Ingredient) from_size = from_bldg->ingredients.size();
     else if (res_type == Resource::Product) from_size = from_bldg->products.size();
     else if (res_type == Resource::Waste) from_size = from_bldg->wastes.size();

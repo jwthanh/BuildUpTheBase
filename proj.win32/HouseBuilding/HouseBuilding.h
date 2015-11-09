@@ -120,6 +120,11 @@ class Ingredient : public Resource
         Ingredient(std::string name) : Resource(name) {
             this->ingredient_type = Ingredient::string_to_type(name);
         };
+
+        Ingredient(const Ingredient& other) : Resource(other) {
+            this->ingredient_type = other.ingredient_type;
+        };
+
 };
 
 class Product : public Resource
@@ -142,6 +147,7 @@ class Product : public Resource
         };
 
         Product(const Product& other) : Resource(other) {
+            this->product_type = other.product_type;
         };
 };
 
@@ -161,6 +167,10 @@ class Waste : public Resource
         Waste(std::string name) : Resource(name) {
             this->waste_type = Waste::string_to_type(name);
         };
+
+        Waste(const Waste& other) : Resource(other) {
+            this->waste_type = other.waste_type;
+        };
 };
 
 class Fighter : public Nameable, public Updateable
@@ -178,7 +188,7 @@ class Fighter : public Nameable, public Updateable
         std::string get_stats() {
             std::stringstream ss;
             ss << this->name << " ";
-            int effective_dmg = this->attrs->damage->current_val;
+            double effective_dmg = this->attrs->damage->current_val;
             ss << this->attrs->health->current_val << "/" << this->attrs->health->max_val << "/" << effective_dmg;
             // for (std::string attr : this->attrs->PrettyVector())
             // {
