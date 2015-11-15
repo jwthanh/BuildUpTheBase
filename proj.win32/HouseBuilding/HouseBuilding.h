@@ -12,12 +12,14 @@
 #include "../../Classes/attribute_container.h"
 //#include "../../Classes/RandomWeightMap.h"
 
+#include "../../cocos2d/cocos/cocos2d.h"
+
 #include <map>
 
 
-#define print(msg) std::cout << msg << std::endl
-#define print1(msg) std::cout << "\t" << msg << std::endl
-#define print2(msg) std::cout << "\t\t" << msg << std::endl
+#define print(msg) {std::stringstream ss; ss<< msg; CCLOG(ss.str().c_str());}
+#define print1(msg) {std::stringstream ss; ss<< "\t" << msg; CCLOG(ss.str().c_str());}
+#define print2(msg) {std::stringstream ss; ss<< "\t\t" << msg; CCLOG(ss.str().c_str());}
 #define NO_CB [](){}
 
 
@@ -233,7 +235,7 @@ class Building : public Nameable, public Updateable
         {
             num_workers = 1;
 
-            spawn_clock = new Clock(3000);
+            spawn_clock = new Clock(3);
 
             products = vsProduct();
             wastes = vsWaste();
@@ -315,6 +317,7 @@ class Buildup
 
         Buildup();
         void main_loop();
+        void update(float dt);
 };
 
 template<typename from_V>

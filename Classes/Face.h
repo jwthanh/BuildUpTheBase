@@ -222,5 +222,5 @@ class Gore : public Coin
 
 };
 
-
 #endif
+

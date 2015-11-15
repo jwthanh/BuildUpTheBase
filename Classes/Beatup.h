@@ -67,6 +67,7 @@ class Beatup : public GameLayer
 
         virtual bool init();
         void update(float dt);
+        void update_buildup(float dt);
         void update_coins(float dt);
         void reset();
 

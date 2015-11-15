@@ -285,7 +285,16 @@ bool Beatup::init()
     this->buildup->city = Buildup::init_city(this->buildup);
     this->buildup->city->update_buildings(0);
 
+    //Director::getInstance()->getScheduler()->scheduleUpdate(schedule_selector(Beatup::update_buildup), 0, false);
+    //Scheduler::scheduleUpdate(schedule_selector(Buildup::update), 0, false);
+    this->schedule(schedule_selector(Beatup::update_buildup));
+
     return true;
+}
+
+void Beatup::update_buildup(float dt)
+{
+    this->buildup->update(dt);
 }
 
 void Beatup::setup_commands()

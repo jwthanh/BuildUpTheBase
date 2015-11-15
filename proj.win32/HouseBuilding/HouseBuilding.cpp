@@ -379,7 +379,7 @@ void Village::update(float dt)
 
 void Village::update_buildings(float dt)
 {
-    printf("\n\nupdating buildings\n");
+    print("\n\nupdating buildings");
     for (std::shared_ptr<Building> building : this->buildings)
     {
         building->update(dt);
@@ -532,7 +532,7 @@ void Building::create_resources(Resource::ResourceType type, int quantity, std::
 void Building::update(float dt)
 {
     Updateable::update(dt);
-    printf("   %s - %.f\n", this->name.c_str(), this->update_clock->start_time);
+    CCLOG("   %s - %.f", this->name.c_str(), this->update_clock->start_time);
     // this->print_inventory();
     if (update_clock->passed_threshold())
     {
@@ -690,6 +690,12 @@ void test_recipe()
 
 }
 
+void Buildup::update(float dt)
+{
+        this->city->update(dt);
+        this->player->update(dt);
+};
+
 void Buildup::main_loop()
 {
     Clock game_clock = Clock(CLOCKS_PER_SEC);
@@ -733,7 +739,7 @@ Village* Buildup::init_city(Buildup* buildup)
     auto city = new Village(buildup, "Burlington");
 
     auto farm = std::make_shared<Building>(city, "The Farm", farm_task);
-    farm->update_clock->set_threshold(2*CLOCKS_PER_SEC);
+    farm->update_clock->set_threshold(2);
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
     auto dump = std::make_shared<Building>(city, "The Dump", dump_task);
     auto workshop = std::make_shared<Building>(city, "The Workshop", workshop_task);
@@ -742,7 +748,7 @@ Village* Buildup::init_city(Buildup* buildup)
     auto mine = std::make_shared<Building>(city, "The Mine", mine_task);
     auto grave = std::make_shared<Building>(city, "The Graveyard", grave_task);
     auto necro = std::make_shared<Building>(city, "The Underscape", necro_task);
-    mine->update_clock->set_threshold(3*CLOCKS_PER_SEC);
+    mine->update_clock->set_threshold(3);
     auto forest = std::make_shared<Building>(city, "The Forest", forest_task);
 
     auto fighter = std::make_shared<Fighter>(arena->city, "Fighter");
@@ -768,7 +774,7 @@ Village* Buildup::init_city(Buildup* buildup)
 
 void Player::update(float dt)
 {
-    printf("   The Player has %i coins\n", this->coins);
+    print("   The Player has "<< this->coins << "coins");
 };
 
 int _tmain(int argc, _TCHAR* argv[])
