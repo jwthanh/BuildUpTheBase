@@ -569,7 +569,7 @@ void Building::print_##Rlowertype##s() \
  \
     if (!ss.str().empty()) \
                 {\
-        std::cout << "   " << #Rtype << ": " << ss.str() << std::endl; \
+        print("   " << #Rtype << ": " << ss.str()); \
         }\
 };
 
@@ -610,9 +610,10 @@ void Building::print_inventory()
     ss << " PDT: " << this->products.size();
     ss << " WST: " << this->wastes.size();
     ss << " FIT: " << this->fighters.size();
-    ss << std::endl;
+    // ss << std::endl;
 
-    std::cout << ss.str();
+    // std::cout << ss.str();
+    print(ss.str());
     this->print_specifics();
 
 };

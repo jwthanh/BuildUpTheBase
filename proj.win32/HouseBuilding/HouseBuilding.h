@@ -17,9 +17,9 @@
 #include <map>
 
 
-#define print(msg) {std::stringstream ss; ss<< msg; CCLOG(ss.str().c_str());}
-#define print1(msg) {std::stringstream ss; ss<< "\t" << msg; CCLOG(ss.str().c_str());}
-#define print2(msg) {std::stringstream ss; ss<< "\t\t" << msg; CCLOG(ss.str().c_str());}
+#define print(msg) {std::stringstream ss123; ss123<< msg; CCLOG(ss123.str().c_str());}
+#define print1(msg) {std::stringstream ss123; ss123<< "\t" << msg; CCLOG(ss123.str().c_str());}
+#define print2(msg) {std::stringstream ss123; ss123<< "\t\t" << msg; CCLOG(ss123.str().c_str());}
 #define NO_CB [](){}
 
 
