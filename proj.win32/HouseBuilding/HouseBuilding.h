@@ -10,7 +10,9 @@
 #include "../../Classes/Clock.h"
 #include "../../Classes/attribute.h"
 #include "../../Classes/attribute_container.h"
-#include "../../Classes/RandomWeightMap.h"
+//#include "../../Classes/RandomWeightMap.h"
+
+#include <map>
 
 
 #define print(msg) std::cout << msg << std::endl
@@ -308,6 +310,8 @@ class Buildup
         Player* player;
 
         Village* city;
+
+        static Village* init_city(Buildup*);
 
         Buildup();
         void main_loop();

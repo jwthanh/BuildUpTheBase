@@ -5,6 +5,8 @@
 #include "GameLayer.h"
 #include "constants.h"
 
+#include "proj.win32/HouseBuilding/HouseBuilding.h"
+
 class Shop;
 
 class Face;
@@ -46,6 +48,8 @@ class Beatup : public GameLayer
         cocos2d::Sprite* background;
 
         static cocos2d::Scene* main_menu_scene;
+
+        Buildup* buildup;
 
         bool level_been_won;
         bool level_been_lost;

@@ -28,24 +28,29 @@ class ResourceCondition : public Nameable
         bool is_satisfied(spBuilding building) {
             if (this->type_choice == Ingredient)
             {
-                return building->ingredients.size() >= this->quantity;
+                return (int)building->ingredients.size() >= this->quantity;
             }
             else if (this->type_choice == Product)
             {
-                return building->products.size() >= this->quantity;
+                return (int)building->products.size() >= this->quantity;
             }
             else if (this->type_choice == Ingredient)
             {
-                return building->wastes.size() >= this->quantity;
+                return (int)building->wastes.size() >= this->quantity;
             }
             else
             {
                 unsigned int size = building->ingredients.size() +
                     building->products.size() +
                     building->wastes.size();
-                return size >= this->quantity;
+                return (int)size >= this->quantity;
             };
         };
+};
+
+class Action : public Nameable
+{
+
 };
 
 //

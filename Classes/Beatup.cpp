@@ -120,18 +120,18 @@ bool Beatup::init()
     int side_height = (int)sy(100);
 
     Vec2* new_pos = new Vec2(
-        visibleSize.width / 2 + origin.x+sx(350),
-        visibleSize.height / 2 + origin.y+sy(300)
-    );
+        visibleSize.width / 2 + origin.x + sx(350),
+        visibleSize.height / 2 + origin.y + sy(300)
+        );
     new_pos->x = new_pos->x + sx(20);
     new_pos->y = new_pos->y - side_height + sy(30);
 
 
 
     auto create_combo = [this, new_pos, side_height](
-            std::string id_key, std::string name, unsigned int cost,
-            std::initializer_list<FistHands> order, float shake_time,
-            float stamina_regen)
+        std::string id_key, std::string name, unsigned int cost,
+        std::initializer_list<FistHands> order, float shake_time,
+        float stamina_regen)
     {
         Combo* combo = new Combo(this, id_key, name);
         combo->shop_cost = cost;
@@ -154,31 +154,31 @@ bool Beatup::init()
     };
 
     // LRLLLR
-    auto order = { FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right};
+    auto order = { FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right };
     create_combo("left_field", "Left Field", 25, order, 0.5f, 10.0f);
 
     // LRRRLL
-    order = { FistHands::Left, FistHands::Right, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left};
+    order = { FistHands::Left, FistHands::Right, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left };
     create_combo("grand_tour", "Grand Tour", 35, order, 0.75f, 15.0f);
 
     // RRLLRL
-    order = {FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right, FistHands::Left};
+    order = { FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right, FistHands::Left };
     create_combo("fist_salad", "Fist Salad", 65, order, 1.15f, 20.0f);
 
     // RRRLRLLR
-    order = {FistHands::Right, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right};
+    order = { FistHands::Right, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right };
     create_combo("knuckle_avalanche", "Knuckle Avalanche", 155, order, 1.50f, 25.0f);
 
     // LRLLRLLLR
-    order = {FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right};
+    order = { FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right };
     create_combo("love_tap", "Love Tap", 200, order, 1.75f, 30.0f);
 
     // LRLLRRLLLR
-    order = {FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right};
+    order = { FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right };
     create_combo("impressive_hook", "Impressive Hook", 300, order, 2.25f, 35.0f);
 
     // RRLRRLLLLR
-    order = {FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right};
+    order = { FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right };
     create_combo("brawlhalla", "Brawlhalla", 400, order, 2.75f, 55.0f);
 
     //shop_lbl
@@ -187,8 +187,8 @@ bool Beatup::init()
     this->shop_banner->setAnchorPoint(Vec2(0.0f, 0.0f));
     Vec2 banner_pos = Vec2(
         0,
-       visibleSize.height / 2 + origin.y+sy(100)
-    );
+        visibleSize.height / 2 + origin.y + sy(100)
+        );
     this->shop_banner->setScale(sx(4));
     this->shop_banner->setPosition(banner_pos);
     this->addChild(this->shop_banner);
@@ -197,7 +197,7 @@ bool Beatup::init()
     this->shop_lbl->setPosition(Vec2(
         28,
         17
-    ));
+        ));
 
     this->shop_banner->addChild(this->shop_lbl);
 
@@ -207,7 +207,7 @@ bool Beatup::init()
     this->coins_lbl->setPosition(Vec2(
         28,
         6.5f
-    ));
+        ));
     this->coins_lbl->setScale(0.2f);
 
     this->shop_banner->addChild(this->coins_lbl);
@@ -231,7 +231,7 @@ bool Beatup::init()
     quest_button->setPosition(Vec2(
         origin.x + visibleSize.width - quest_button->getContentSize().width*quest_button->getScaleX(),
         origin.y + quest_button->getContentSize().height*quest_button->getScaleY())
-    );
+        );
 
     // create menu, it's an autorelease object
     auto menu = Menu::create(quest_button, NULL);
@@ -245,7 +245,7 @@ bool Beatup::init()
     title_lbl->setPosition(this->get_center_pos(
         0,
         sy(265)
-    ));
+        ));
 
     // add the label as a child to this layer
     this->addChild(title_lbl, 1);
@@ -275,6 +275,15 @@ bool Beatup::init()
     auto _plistFile = FileUtils::getInstance()->fullPathForFilename("blood.plist");
     Gore::particle_map = FileUtils::getInstance()->getValueMapFromFile(_plistFile.c_str());
 
+    this->buildup = new Buildup();
+    auto player = new Player("Jimothy");
+    player->coins = 100;
+    this->buildup->player = player;
+
+    auto animal = std::make_shared<Animal>("Tank");
+
+    this->buildup->city = Buildup::init_city(this->buildup);
+    this->buildup->city->update_buildings(0);
 
     return true;
 }

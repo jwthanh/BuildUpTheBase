@@ -154,11 +154,15 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ItemGroup>
     <ClCompile Include="..\Classes\Alert.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\attribute.cpp" />
+    <ClCompile Include="..\Classes\attribute_container.cpp" />
+    <ClCompile Include="..\Classes\attr_effect.cpp" />
     <ClCompile Include="..\Classes\Buyable.cpp" />
     <ClCompile Include="..\Classes\Clock.cpp" />
     <ClCompile Include="..\Classes\Combo.cpp" />
     <ClCompile Include="..\Classes\DataManager.cpp" />
     <ClCompile Include="..\Classes\Face.cpp" />
+    <ClCompile Include="..\Classes\FileOperation.cpp" />
     <ClCompile Include="..\Classes\Fist.cpp" />
     <ClCompile Include="..\Classes\FShake.cpp" />
     <ClCompile Include="..\Classes\GameLayer.cpp" />
@@ -172,17 +176,26 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\SoundEngine.cpp" />
     <ClCompile Include="..\Classes\Util.cpp" />
     <ClCompile Include="..\Classes\Weapons.cpp" />
+    <ClCompile Include="HouseBuilding\HouseBuilding.cpp" />
+    <ClCompile Include="HouseBuilding\Recipe.cpp" />
+    <ClCompile Include="HouseBuilding\Worker.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Alert.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\attribute.h" />
+    <ClInclude Include="..\Classes\attributes_t.h" />
+    <ClInclude Include="..\Classes\attribute_container.h" />
+    <ClInclude Include="..\Classes\attr_effect.h" />
     <ClInclude Include="..\Classes\Buyable.h" />
     <ClInclude Include="..\Classes\Clock.h" />
     <ClInclude Include="..\Classes\Combo.h" />
     <ClInclude Include="..\Classes\constants.h" />
     <ClInclude Include="..\Classes\DataManager.h" />
+    <ClInclude Include="..\Classes\elements_t.h" />
     <ClInclude Include="..\Classes\Face.h" />
+    <ClInclude Include="..\Classes\FileOperation.h" />
     <ClInclude Include="..\Classes\Fist.h" />
     <ClInclude Include="..\Classes\FShake.h" />
     <ClInclude Include="..\Classes\GameLayer.h" />
@@ -197,6 +210,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\SoundEngine.h" />
     <ClInclude Include="..\Classes\Util.h" />
     <ClInclude Include="..\Classes\Weapons.h" />
+    <ClInclude Include="HouseBuilding\HouseBuilding.h" />
+    <ClInclude Include="HouseBuilding\Recipe.h" />
+    <ClInclude Include="HouseBuilding\targetver.h" />
+    <ClInclude Include="HouseBuilding\Worker.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

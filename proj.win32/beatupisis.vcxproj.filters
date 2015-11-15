@@ -35,6 +35,13 @@
     <ClCompile Include="..\Classes\Util.cpp" />
     <ClCompile Include="..\Classes\Level.cpp" />
     <ClCompile Include="..\Classes\FShake.cpp" />
+    <ClCompile Include="HouseBuilding\HouseBuilding.cpp" />
+    <ClCompile Include="HouseBuilding\Recipe.cpp" />
+    <ClCompile Include="HouseBuilding\Worker.cpp" />
+    <ClCompile Include="..\Classes\attr_effect.cpp" />
+    <ClCompile Include="..\Classes\attribute.cpp" />
+    <ClCompile Include="..\Classes\attribute_container.cpp" />
+    <ClCompile Include="..\Classes\FileOperation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -62,6 +69,16 @@
     <ClInclude Include="..\Classes\Util.h" />
     <ClInclude Include="..\Classes\Level.h" />
     <ClInclude Include="..\Classes\FShake.h" />
+    <ClInclude Include="HouseBuilding\HouseBuilding.h" />
+    <ClInclude Include="HouseBuilding\Recipe.h" />
+    <ClInclude Include="HouseBuilding\targetver.h" />
+    <ClInclude Include="HouseBuilding\Worker.h" />
+    <ClInclude Include="..\Classes\attr_effect.h" />
+    <ClInclude Include="..\Classes\attribute.h" />
+    <ClInclude Include="..\Classes\attribute_container.h" />
+    <ClInclude Include="..\Classes\attributes_t.h" />
+    <ClInclude Include="..\Classes\elements_t.h" />
+    <ClInclude Include="..\Classes\FileOperation.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

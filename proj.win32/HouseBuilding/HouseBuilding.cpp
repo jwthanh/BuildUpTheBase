@@ -15,6 +15,7 @@
 #include "../main.h"
 #include "Recipe.h"
 #include "Worker.h"
+#include "../../Classes/RandomWeightMap.h"
 
 const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
     {Ingredient::Grain, "grain"},
@@ -727,7 +728,7 @@ void Buildup::main_loop()
 
 }
 
-Village* init_city(Buildup* buildup)
+Village* Buildup::init_city(Buildup* buildup)
 {
     auto city = new Village(buildup, "Burlington");
 
@@ -780,7 +781,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
     auto animal = std::make_shared<Animal>("Tank");
 
-    buildup->city = init_city(buildup);
+    buildup->city = Buildup::init_city(buildup);
     buildup->city->update_buildings(0);
 
     buildup->main_loop();
