@@ -379,7 +379,7 @@ void Village::update(float dt)
 
 void Village::update_buildings(float dt)
 {
-    print("\n\nupdating buildings");
+    // print("\n\nupdating buildings");
     for (std::shared_ptr<Building> building : this->buildings)
     {
         building->update(dt);
@@ -532,20 +532,22 @@ void Building::create_resources(Resource::ResourceType type, int quantity, std::
 void Building::update(float dt)
 {
     Updateable::update(dt);
-    CCLOG("   %s - %.f", this->name.c_str(), this->update_clock->start_time);
     // this->print_inventory();
     if (update_clock->passed_threshold())
     {
+        CCLOG("   %s - %.f", this->name.c_str(), this->update_clock->start_time);
         this->spawn_clock->update(dt);
         this->do_task(dt);
         update_clock->reset();
+        this->print_inventory();
     }
     else
     {
-        std::cout << "   \twaiting" << std::endl;
+        // CCLOG("   %s - %.f", this->name.c_str(), this->update_clock->start_time);
+        // std::cout << "   \twaiting" << std::endl;
+        // print("   \twaiting");
     }
-    this->print_inventory();
-    std::cout << std::endl;
+    // std::cout << std::endl;
 };
 
 #define PRINT_RESOURCE(Rtype, Rlowertype) \
@@ -693,8 +695,8 @@ void test_recipe()
 
 void Buildup::update(float dt)
 {
-        this->city->update(dt);
-        this->player->update(dt);
+    this->city->update(dt);
+    this->player->update(dt);
 };
 
 void Buildup::main_loop()
@@ -775,7 +777,7 @@ Village* Buildup::init_city(Buildup* buildup)
 
 void Player::update(float dt)
 {
-    print("   The Player has "<< this->coins << "coins");
+    // print("   The Player has "<< this->coins << "coins");
 };
 
 int _tmain(int argc, _TCHAR* argv[])
