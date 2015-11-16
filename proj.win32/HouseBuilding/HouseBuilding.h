@@ -251,10 +251,14 @@ class Building : public Nameable, public Updateable
         std::string get_inventory();
         void print_inventory();
 
+        std::string get_ingredients();
+        std::string get_products();
+        std::string get_wastes();
         void print_specifics();
         void print_ingredients();
         void print_products();
         void print_wastes();
+
         void print_fighters();
 
         void do_task(float dt);

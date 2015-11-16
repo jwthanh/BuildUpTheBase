@@ -563,7 +563,7 @@ void Building::print_specifics()
 };
 
 #define PRINT_RESOURCE(Rtype, Rlowertype) \
-void Building::print_##Rlowertype##s() \
+std::string Building::get_##Rlowertype##s() \
 { \
     std::stringstream ss; \
  \
@@ -580,11 +580,17 @@ void Building::print_##Rlowertype##s() \
             ss << str << "(x" << count << ") "; \
         } \
     }; \
+    return ss.str();\
  \
-    if (!ss.str().empty()) \
-                {\
-        print("   " << #Rtype << ": " << ss.str()); \
-        }\
+};\
+\
+void Building::print_##Rlowertype##s() \
+{ \
+    std::string ss = this->get_##Rlowertype##s(); \
+    if (!ss.empty()) \
+    { \
+        print("   " << #Rtype << ": " << ss); \
+    }\
 };
 
 PRINT_RESOURCE(Ingredient, ingredient);
