@@ -34,6 +34,7 @@ const std::map<Product::ProductType, std::string> Product::type_map = {
     {Product::Meat, "meat"},
     {Product::Dairy, "dairy"},
     {Product::Cereals, "cereals"},
+    {Product::Sword, "sword"},
     {Product::Shield, "shield"},
     {Product::Meat, "meat"},
 };
@@ -102,7 +103,7 @@ ResType::##ResType##Type ResType::string_to_type(std::string string_type) \
             return pair.first; \
                 } \
         } \
-    print("type id" << string_type); \
+    print("type id " << string_type); \
     assert(false && "unknown type"); \
  \
     return result; \

@@ -142,6 +142,7 @@ class Product : public Resource
             Meat,
             Dairy,
             Cereals,
+            Sword,
             Shield
         };
 
