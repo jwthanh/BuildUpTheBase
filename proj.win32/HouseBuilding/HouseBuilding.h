@@ -254,6 +254,8 @@ class Building : public Nameable, public Updateable
         std::string get_ingredients();
         std::string get_products();
         std::string get_wastes();
+        std::string get_specifics();
+
         void print_specifics();
         void print_ingredients();
         void print_products();

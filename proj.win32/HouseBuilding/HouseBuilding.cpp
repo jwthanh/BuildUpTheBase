@@ -551,15 +551,21 @@ void Building::update(float dt)
     }
     // std::cout << std::endl;
 };
+std::string Building::get_specifics()
+{
+    return this->get_ingredients() + " " +
+    this->get_products() + " " +
+    this->get_wastes();
+    // this->get_fighters();
+
+};
+
 void Building::print_specifics()
 {
-    /* go through the vector, count the instances of the type of the element,
-      ignoring the ones that have already been counted */
     this->print_ingredients();
     this->print_products();
     this->print_wastes();
     this->print_fighters();
-
 };
 
 #define PRINT_RESOURCE(Rtype, Rlowertype) \
