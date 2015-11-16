@@ -248,6 +248,7 @@ class Building : public Nameable, public Updateable
 
         void update(float dt);
 
+        std::string get_inventory();
         void print_inventory();
 
         void print_specifics();

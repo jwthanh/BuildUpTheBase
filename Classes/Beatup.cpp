@@ -1117,9 +1117,16 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
         // this->create_quest_alert();
 
         //this->quest->do_unlock();
-        this->fist_flame->set_been_bought(true);
-        this->fist_frost->set_been_bought(true);
-        this->fist_psionic->set_been_bought(true);
+        // this->fist_flame->set_been_bought(true);
+        // this->fist_frost->set_been_bought(true);
+        // this->fist_psionic->set_been_bought(true);
+
+        auto farm = this->buildup->city->building_by_name("The Farm");
+        auto farm_inv_lbl = Label::createWithTTF(farm->get_inventory(), DEFAULT_FONT, 24);
+        farm_inv_lbl->setAnchorPoint(Vec2(0,0));
+
+        this->addChild(farm_inv_lbl);
+        // farm_inv_lbl->setPosition(100, 100);
 
         //this->check_quest();
     }

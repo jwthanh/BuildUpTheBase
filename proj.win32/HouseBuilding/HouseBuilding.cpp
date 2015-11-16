@@ -551,6 +551,16 @@ void Building::update(float dt)
     }
     // std::cout << std::endl;
 };
+void Building::print_specifics()
+{
+    /* go through the vector, count the instances of the type of the element,
+      ignoring the ones that have already been counted */
+    this->print_ingredients();
+    this->print_products();
+    this->print_wastes();
+    this->print_fighters();
+
+};
 
 #define PRINT_RESOURCE(Rtype, Rlowertype) \
 void Building::print_##Rlowertype##s() \
@@ -595,29 +605,23 @@ void Building::print_fighters()
     };
 };
 
-void Building::print_specifics()
-{
-    /* go through the vector, count the instances of the type of the element,
-      ignoring the ones that have already been counted */
-    this->print_ingredients();
-    this->print_products();
-    this->print_wastes();
-    this->print_fighters();
 
-};
-
-void Building::print_inventory()
+std::string Building::get_inventory()
 {
     std::stringstream ss;
-    ss << "   ";
     ss << "ING: " << this->ingredients.size();
     ss << " PDT: " << this->products.size();
     ss << " WST: " << this->wastes.size();
     ss << " FIT: " << this->fighters.size();
     // ss << std::endl;
 
-    // std::cout << ss.str();
-    print(ss.str());
+    return ss.str();
+};
+
+void Building::print_inventory()
+{
+    std::string inventory = this->get_inventory();
+    print("   " << inventory);
     this->print_specifics();
 
 };
