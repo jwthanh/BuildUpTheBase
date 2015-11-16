@@ -89,6 +89,7 @@ void Recipe::consume(vsIngredient& input)
     }
     else
     {
+
         print("can't make recipe " << this->name);
     };
 };

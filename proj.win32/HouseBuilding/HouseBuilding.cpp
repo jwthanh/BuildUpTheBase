@@ -16,6 +16,7 @@
 #include "Recipe.h"
 #include "Worker.h"
 #include "../../Classes/RandomWeightMap.h"
+#include "../../Classes/attribute.h"
 
 const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
     {Ingredient::Grain, "grain"},

@@ -401,6 +401,10 @@ void Beatup::add_total_coin(int x)
 {
     this->temp_coins += x;
     DataManager::incr_key("total_coin_key", x);
+
+    auto farm = this->buildup->city->building_by_name("The Farm");
+
+    farm->create_resources(Resource::Ingredient, x, "grain");
 };
 
 void Beatup::back_to_menu()

@@ -4,11 +4,8 @@
 
 #include <functional>
 #include <memory>
-#include <iostream>
-#include <random>
 
 #include "../../Classes/Clock.h"
-#include "../../Classes/attribute.h"
 #include "../../Classes/attribute_container.h"
 //#include "../../Classes/RandomWeightMap.h"
 
