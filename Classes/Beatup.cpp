@@ -1121,11 +1121,40 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
         // this->fist_frost->set_been_bought(true);
         // this->fist_psionic->set_been_bought(true);
 
-        auto farm = this->buildup->city->building_by_name("The Farm");
-        auto farm_inv_lbl = Label::createWithTTF(farm->get_inventory(), DEFAULT_FONT, 24);
-        farm_inv_lbl->setAnchorPoint(Vec2(0,0));
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    float y = visibleSize.height-sy(50);
 
-        this->addChild(farm_inv_lbl);
+        auto make_label = [&](std::string name)
+        {
+            auto farm = this->buildup->city->building_by_name("The " + name);
+            std::string lbl_string = name + " " + farm->get_inventory();
+            if (this->getChildByName(name))
+            {
+                ((Label*)this->getChildByName(name))->setString(lbl_string);
+            }
+            else
+            {
+                auto farm_inv_lbl = Label::createWithTTF(lbl_string, DEFAULT_FONT, 24);
+                farm_inv_lbl->setName(name);
+                farm_inv_lbl->setAnchorPoint(Vec2(0, 0));
+                farm_inv_lbl->setPosition(0, y);
+                this->addChild(farm_inv_lbl);
+            };
+
+            y -= sy(25);
+        };
+
+        make_label("Farm");
+        make_label("Dump");
+        make_label("Workshop");
+        make_label("Marketplace");
+        make_label("Arena");
+        make_label("Mine");
+        make_label("Graveyard");
+        make_label("Underscape");
+        make_label("Forest");
+
+
         // farm_inv_lbl->setPosition(100, 100);
 
         //this->check_quest();
