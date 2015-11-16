@@ -125,6 +125,9 @@ class Beatup : public GameLayer
         unsigned int punch_count;
 
         void flash_color_on_face(float total_duration, cocos2d::Color3B flash_color, cocos2d::Color3B reset_color = cocos2d::Color3B::WHITE);
+
+        void print_inventory();
+
         void set_target_face(Face* target);
         Face* get_target_face();
 

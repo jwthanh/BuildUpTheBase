@@ -522,6 +522,8 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
                 combo->cd_bar->bump(0.125f, 1.05f);
 
                 combo->toggle_order();
+
+                this->print_inventory();
                 return false;
             };
         };
@@ -1047,6 +1049,58 @@ void Beatup::flash_color_on_face(float total_duration, Color3B flash_color, Colo
     };
 };
 
+void Beatup::print_inventory()
+{
+    this->hide_ui();
+
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    float y = visibleSize.height - sy(50);
+
+    auto make_label = [&](std::string name)
+    {
+        auto farm = this->buildup->city->building_by_name("The " + name);
+        std::string lbl_string = name + " " + farm->get_inventory();
+        std::string spc_string = " " + farm->get_specifics();
+        if (this->getChildByName(name))
+        {
+            ((Label*)this->getChildByName(name))->setString(lbl_string);
+            ((Label*)this->getChildByName(name + "_specific"))->setString(spc_string);
+        }
+        else
+        {
+            auto farm_inv_lbl = Label::createWithTTF(lbl_string, DEFAULT_FONT, 24);
+            farm_inv_lbl->setName(name);
+            farm_inv_lbl->setAnchorPoint(Vec2(0, 0));
+            farm_inv_lbl->setPosition(0, y);
+            this->addChild(farm_inv_lbl);
+
+            y -= sy(25);
+            auto farm_inv_spc_lbl = Label::createWithTTF(spc_string, DEFAULT_FONT, 24);
+            farm_inv_spc_lbl->setName(name + "_specific");
+            farm_inv_spc_lbl->setAnchorPoint(Vec2(0, 0));
+            farm_inv_spc_lbl->setPosition(0, y);
+            this->addChild(farm_inv_spc_lbl);
+        };
+
+        y -= sy(25);
+    };
+
+    make_label("Farm");
+    make_label("Dump");
+    make_label("Workshop");
+    make_label("Marketplace");
+    make_label("Arena");
+    make_label("Mine");
+    make_label("Graveyard");
+    make_label("Underscape");
+    make_label("Forest");
+
+
+    // farm_inv_lbl->setPosition(100, 100);
+
+
+}
+
 void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
 {
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
@@ -1120,53 +1174,9 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
         // this->fist_flame->set_been_bought(true);
         // this->fist_frost->set_been_bought(true);
         // this->fist_psionic->set_been_bought(true);
-
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    float y = visibleSize.height-sy(50);
-
-        auto make_label = [&](std::string name)
-        {
-            auto farm = this->buildup->city->building_by_name("The " + name);
-            std::string lbl_string = name + " " + farm->get_inventory();
-            std::string spc_string = " " + farm->get_specifics();
-            if (this->getChildByName(name))
-            {
-                ((Label*)this->getChildByName(name))->setString(lbl_string);
-                ((Label*)this->getChildByName(name+"_specific"))->setString(spc_string);
-            }
-            else
-            {
-                auto farm_inv_lbl = Label::createWithTTF(lbl_string, DEFAULT_FONT, 24);
-                farm_inv_lbl->setName(name);
-                farm_inv_lbl->setAnchorPoint(Vec2(0, 0));
-                farm_inv_lbl->setPosition(0, y);
-                this->addChild(farm_inv_lbl);
-
-                y -= sy(25);
-                auto farm_inv_spc_lbl = Label::createWithTTF(spc_string, DEFAULT_FONT, 24);
-                farm_inv_spc_lbl->setName(name+"_specific");
-                farm_inv_spc_lbl->setAnchorPoint(Vec2(0, 0));
-                farm_inv_spc_lbl->setPosition(0, y);
-                this->addChild(farm_inv_spc_lbl);
-            };
-
-            y -= sy(25);
-        };
-
-        make_label("Farm");
-        make_label("Dump");
-        make_label("Workshop");
-        make_label("Marketplace");
-        make_label("Arena");
-        make_label("Mine");
-        make_label("Graveyard");
-        make_label("Underscape");
-        make_label("Forest");
-
-
-        // farm_inv_lbl->setPosition(100, 100);
-
         //this->check_quest();
+
+        this->print_inventory();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_X) 
     {
