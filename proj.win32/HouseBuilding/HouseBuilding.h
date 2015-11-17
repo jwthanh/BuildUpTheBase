@@ -108,6 +108,7 @@ class Ingredient : public Resource
             None,
             Grain,
             Seed,
+            Tree,
             Iron,
             Copper,
             Wood,

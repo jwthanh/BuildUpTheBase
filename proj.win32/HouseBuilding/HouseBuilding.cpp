@@ -152,6 +152,15 @@ void farm_task(Building* farm, float dt)
 
     farm->create_resources(Resource::Ingredient, new_products, "grain");
 
+    Recipe recipe = Recipe("tree");
+    recipe.components[Ingredient::IngredientType::Seed] = 20;
+    if (recipe.is_satisfied(farm->ingredients))
+    {
+        farm->create_resources(Resource::Ingredient, 1, "Tree");
+        print1("Created a tree");
+        recipe.consume(farm->ingredients);
+    };
+
     Animal animal = Animal("Horse");
     animal.b2b_transfer(
         farm,
