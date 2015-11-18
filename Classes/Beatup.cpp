@@ -1467,6 +1467,10 @@ void Beatup::hide_ui()
     this->title_lbl->setVisible(false);
 
     this->shop_banner->setVisible(false);
+
+    this->flames_button->setVisible(false);
+    this->frost_button->setVisible(false);
+    this->psionic_button->setVisible(false);
 };
 
 void Beatup::win_level()
