@@ -48,6 +48,8 @@ class ResourceCondition : public Nameable
         };
 };
 
+typedef ResourceCondition<Ingredient::IngredientType> IngredientCondition;
+
 class Action : public Nameable
 {
 

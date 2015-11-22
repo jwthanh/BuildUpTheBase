@@ -670,9 +670,9 @@ void test_conditions()
     auto farm = std::make_shared<Building>(city, "The Test Farm", TaskFunc());
     farm->ingredients = inputs;
     
-    ResourceCondition<Ingredient::IngredientType> rc = ResourceCondition<Ingredient::IngredientType>(
-            ResourceCondition<Ingredient::IngredientType>::TypeChoices::Ingredient,
-            Ingredient::IngredientType::Grain,
+    IngredientCondition rc = IngredientCondition(
+            IngredientCondition::TypeChoices::Ingredient,
+            Ingredient::Grain,
             2,
             "test condition");
 

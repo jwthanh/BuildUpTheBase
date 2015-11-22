@@ -313,6 +313,12 @@ class Player : public Person
         void update(float dt);
 };
 
+class Enemy : public Person
+{
+    public:
+        Enemy(std::string name) : Person(name) {};
+};
+
 class Buildup
 {
     public:

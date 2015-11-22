@@ -263,7 +263,7 @@ bool Beatup::init()
     this->prep_fists();
     this->prep_other();
 
-    this->update(0.001f);
+    //this->update(0.001f); //dont remember what this was for
     this->update_coins_lbl(false);
 
     this->setup_commands();
@@ -1401,6 +1401,8 @@ void Beatup::update(float dt)
             this->quest_completed = true;
         };
     };
+
+    this->print_inventory();
 
 };
 
