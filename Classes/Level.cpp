@@ -37,7 +37,7 @@ Level* Level::create_level(int level_num)
             { "Chester", BackgroundTypes::Forest }
         },
         { //3
-            { 140, 15.0f, {  } },
+            { 14000, 15.0f, {  } },
             { 10 },
             { "Chuck", BackgroundTypes::Forest }
         },
