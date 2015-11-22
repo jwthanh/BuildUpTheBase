@@ -42,6 +42,7 @@
     <ClCompile Include="..\Classes\attribute.cpp" />
     <ClCompile Include="..\Classes\attribute_container.cpp" />
     <ClCompile Include="..\Classes\FileOperation.cpp" />
+    <ClCompile Include="..\Classes\combat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -79,6 +80,7 @@
     <ClInclude Include="..\Classes\attributes_t.h" />
     <ClInclude Include="..\Classes\elements_t.h" />
     <ClInclude Include="..\Classes\FileOperation.h" />
+    <ClInclude Include="..\Classes\combat.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

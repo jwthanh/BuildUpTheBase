@@ -1,22 +1,10 @@
 #include <sstream>
-#include <typeinfo>
-#include <cstdlib>
-
-#include <libtcod.hpp>
 
 #include "combat.h"
 #include "attribute_container.h"
-#include <actors\Person.h>
-#include <actors\actor.h>
 #include "attribute.h"
-#include "tile.h"
-#include <Representation.h>
-#include "ui.h"
-#include "messages.h"
-#include "spells.h"
 #include "attr_effect.h"
-#include "class.h"
-#include "thinker.h"
+#include <proj.win32/HouseBuilding/HouseBuilding.h>
 
 
 void Combat::printout(){
@@ -28,14 +16,14 @@ void Combat::printout(){
 };
 
 
-void Combat::assign_to_master(Person* master)
+void Combat::assign_to_master(Fighter* master)
 {
     this->master = master;
 };
 
-Combat::Combat(std::string name, int max_hp, Person* master)
+Combat::Combat(std::string name, Fighter* master)
 {
-    this->master = NULL;
+    this->master = master;
     this->is_dead = false;
 
     this->attackers = new std::vector<Combat*>;
@@ -50,26 +38,20 @@ void Combat::level_up(int levels)
     int i = 0;
     while (i < levels)
     {
-        this->master->level+=1;
-        std::cout << "NEW LEVEL IS: " << this->master->level << std::endl;
-        if (this->master == Game::player)
-        {
-            std::stringstream msg;
-            msg <<  "You are now level " << this->master->level << ".";
-            new Message(Ui::msg_handler_main, NOTYPE_MSG, colfg(TCODColor::lightBlue, msg.str()));
-        };
+        this->master->xp->lvl+=1;
+        print("NEW LEVEL IS: " << this->master->xp->lvl << std::endl);
         //log(lvl * 10) * 100
-        // this->master->xp_required_to_lvlup = std::floor(std::log(this->master->level *10.0f) * 100.0f);
+        // this->master->xp_required_to_lvlup = std::floor(std::log(this->master->xp->lvl *10.0f) * 100.0f);
 
-        double level = this->master->level;
+        double level = this->master->xp->lvl;
         double lvl10 = level*10;
         // //((x*10)^(x*10)/200))*100
         // double result = std::pow((lvl10),(lvl10)/200)*100;
 
         // log(x^x)*(x*100)+200
         double result = std::log(std::pow(level, level)) * (level*100) + 200;
-        this->master->xp_required_to_lvlup = std::floor(result);
-        this->master->xp_this_level = std::max((double)this->master->xp_this_level - this->master->xp_required_to_lvlup, 0.0); 
+        this->master->xp->required_to_lvlup = std::floor(result);
+        this->master->xp->this_level = std::max((double)this->master->xp->this_level - this->master->xp->required_to_lvlup, 0.0); 
 
         this->level_up_stats(1);
         this->level_up_skills(1);
@@ -113,7 +95,7 @@ void Combat::level_up_stats(int levels)
 
 void Combat::give_exp(int exp_to_gain)
 {
-    this->master->xp->current += exp_to_gain;
+    this->master->xp->total += exp_to_gain;
     this->master->xp->this_level += exp_to_gain;
     // calc if level up
     if (this->master->xp->this_level >= this->master->xp->required_to_lvlup)
@@ -132,13 +114,13 @@ void Combat::attack(Combat* combat_target, Damage* dmg)
         return;
     }
 
-    std::stringstream ss;
-    std::string sneak_msg  = this->master->is_sneaking ? " sneak" : "";
-    ss << this->master->name.c_str();
-    ss << sneak_msg << " attacks " << combat_target->master->name.c_str();
-    ss << " for " << dmg->get_raw_total() << ".";
+    //std::stringstream ss;
+    //std::string sneak_msg  = this->master->is_sneaking ? " sneak" : "";
+    //ss << this->master->name.c_str();
+    //ss << sneak_msg << " attacks " << combat_target->master->name.c_str();
+    //ss << " for " << dmg->get_raw_total() << ".";
 
-    new Message(Ui::msg_handler_main, message_types_t::DAMAGE_GIVEN_MSG, ss.str().c_str());
+    //new Message(Ui::msg_handler_main, message_types_t::DAMAGE_GIVEN_MSG, ss.str().c_str());
     combat_target->take_damage(this, dmg);
     this->last_victim = combat_target->master;
 
@@ -146,7 +128,7 @@ void Combat::attack(Combat* combat_target, Damage* dmg)
     if (is_target_dead)
     {
         //get opponents exp value
-        int exp_to_gain = combat_target->master->xp_value;
+        int exp_to_gain = combat_target->master->xp->value;
         //add it to the master's exp
         this->give_exp(exp_to_gain);
     };
@@ -157,10 +139,10 @@ void Combat::remember_attacker(Combat* combat_attacker, bool mark_the_attk=true)
     if (mark_the_attk == true) 
     {
         was_attacked = true;
-        if (this->master != Game::player)
-        {
-            this->master->thinker->target = combat_attacker->master;
-        }
+        //if (this->master != Game::player)
+        //{
+        //    this->master->thinker->target = combat_attacker->master;
+        //}
     };
 
     if(std::find(attackers->begin(), attackers->end(), combat_attacker) != attackers->end()) 
@@ -177,15 +159,16 @@ void Combat::remember_attacker(Combat* combat_attacker, bool mark_the_attk=true)
 
 void Combat::die()
 {
-    printf("I've died!\n");
+    print("I've died!\n");
     //make position unblocked
     if (master != NULL)
     {
-        master->die();
+        //master->die();
+        print("so has my master");
     }
     else if (master == NULL)
     {
-        printf("I've no master so he's not going to die, is he?\n");
+        print("I've no master so he's not going to die, is he?\n");
     };
 
 };
@@ -230,53 +213,52 @@ void Combat::take_damage(Combat* combat_attacker, Damage* dmg)
     {
         // if (this->master->thinker != NULL && this->master->thinker->is_ally) { return; }; //ally invincible
 
-        TCODRandom* rng = Game::stat_rolls_rng;
-        int dodge_chance = 15;
-        int dodge_result = rng->get(0, 100);
+        //TCODRandom* rng = Game::stat_rolls_rng;
+        //int dodge_chance = 15;
+        //int dodge_result = rng->get(0, 100);
 
 
-        if (dodge_result < dodge_chance) 
-        {
-            new Message(Ui::msg_handler_main, DAMAGE_TAKEN_MSG, colfg(TCODColor::lightAmber, this->master->name+" dodged the attack!."));
-            return;
-        };
+        //if (dodge_result < dodge_chance) 
+        //{
+        //    new Message(Ui::msg_handler_main, DAMAGE_TAKEN_MSG, colfg(TCODColor::lightAmber, this->master->name+" dodged the attack!."));
+        //    return;
+        //};
 
         int adjusted_dmg = this->adjust_damage_to_armor(dmg);
-        if (combat_attacker->master == Game::player) { Game::stats->damage_dealt += adjusted_dmg; };
-        if (this->master == Game::player) { Game::stats->damage_taken += adjusted_dmg; };
+        //if (combat_attacker->master == Game::player) { Game::stats->damage_dealt += adjusted_dmg; };
+        //if (this->master == Game::player) { Game::stats->damage_taken += adjusted_dmg; };
 
-        if (this->master->is_sneaking)
-        {
-            adjusted_dmg *= 1.6;
-        };
+        //if (this->master->is_sneaking)
+        //{
+        //    adjusted_dmg *= 1.6;
+        //};
 
-        if (this->master->is_defending)
-        {
-            adjusted_dmg = adjusted_dmg - this->master->attrs->armor->current_val; // effectively double armor
-            new Message(Ui::msg_handler_main, DAMAGE_TAKEN_MSG, colfg(TCODColor::lightAmber, this->master->name+" deflected some damage!."));
-        };
+        //if (this->master->is_defending)
+        //{
+        //    adjusted_dmg = adjusted_dmg - this->master->attrs->armor->current_val; // effectively double armor
+        //    new Message(Ui::msg_handler_main, DAMAGE_TAKEN_MSG, colfg(TCODColor::lightAmber, this->master->name+" deflected some damage!."));
+        //};
 
-        int original_adjusted_dmg = adjusted_dmg;
         adjusted_dmg = std::max(adjusted_dmg, 1);
-        if (this->master->soullinked_to != NULL)
-        {
-            Actor* poor_soul = this->master->soullinked_to;
-            //poor_soul->combat->take_damage(combat_attacker, adjusted_dmg/2); //TODO: figure out how to multiply/divide Damage
-            this->master->attrs->health->current_val -= adjusted_dmg/2;
-            poor_soul->attrs->health->current_val -= adjusted_dmg/2;
-            std::cout << poor_soul->name << " burned from soullink to " << this->master->name << std::endl;
-        }
-        else
-        {
+        //if (this->master->soullinked_to != NULL)
+        //{
+        //    Actor* poor_soul = this->master->soullinked_to;
+        //    //poor_soul->combat->take_damage(combat_attacker, adjusted_dmg/2); //TODO: figure out how to multiply/divide Damage
+        //    this->master->attrs->health->current_val -= adjusted_dmg/2;
+        //    poor_soul->attrs->health->current_val -= adjusted_dmg/2;
+        //    std::cout << poor_soul->name << " burned from soullink to " << this->master->name << std::endl;
+        //}
+        //else
+        //{
             this->master->attrs->health->current_val -= adjusted_dmg;
-        }
-        if (this->master == Game::player)
-        {
-            if (adjusted_dmg > 15)
-            {
-                printf("what the f?\n");
-            };
-        };
+        //}
+        //if (this->master == Game::player)
+        //{
+        //    if (adjusted_dmg > 15)
+        //    {
+        //        printf("what the f?\n");
+        //    };
+        //};
 
         std::cout << this->master->name;
         std::cout << " took " << adjusted_dmg << " damage! ";

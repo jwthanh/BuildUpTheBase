@@ -183,11 +183,15 @@ class Waste : public Resource
 class Fighter : public Nameable, public Updateable
 {
     public:
+        Experience* xp;
         AttributeContainer* attrs;
         Village* city;
+        Combat* combat;
 
         Fighter(Village* city, std::string name) : Nameable(name), Updateable(), city(city) {
             this->attrs = new AttributeContainer();
+            this->xp = new Experience();
+            this->combat = new Combat("unnamed combat", this);
         }
 
         void update(float dt);
@@ -303,9 +307,7 @@ class Animal : public Nameable
 class Person : public Nameable, public Updateable
 {
     public:
-        Experience* xp;
         Person(std::string name) : Nameable(name), Updateable() {
-            this->xp = new Experience();
         };
 };
 

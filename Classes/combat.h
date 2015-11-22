@@ -7,7 +7,7 @@
 // #include <actors\Person.h>
 
 class Person; 
-class Person; 
+class Fighter; 
 class Game;
 class Damage;
 
@@ -17,14 +17,14 @@ class Combat
         std::string default_name;
     public:
         // std::string name;
-        Person* master;
+        Fighter* master;
 
         bool is_dead;
         bool was_attacked;
-        Person* last_victim;
+        Fighter* last_victim;
         std::vector<Combat*> * attackers;
 
-        Combat(std::string name, int max_hp, Person* master);
+        Combat(std::string name, Fighter* master);
 
         void attack(Combat* Combat_target, Damage* dmg);
         void take_damage(Combat* Combat_attacker, Damage* dmg);
@@ -36,7 +36,7 @@ class Combat
         bool check_death();
         void die();
 
-        void assign_to_master(Person* master);
+        void assign_to_master(Fighter* master);
 
         void give_exp(int exp_to_gain);
 
@@ -93,11 +93,14 @@ class Experience
         unsigned int this_level;
         unsigned int required_to_lvlup;
 
+        unsigned int value;
+
         Experience(): 
             total(0),
             this_level(0),
             required_to_lvlup(100),
-            lvl(1)
+            lvl(1),
+            value(10)
         {}
 };
 #endif

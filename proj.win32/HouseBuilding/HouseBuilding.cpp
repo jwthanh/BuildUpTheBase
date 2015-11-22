@@ -127,6 +127,10 @@ void Battle::do_battle()
             double& health = fighter->attrs->health->current_val;
             health -= std::rand() % 4 + 6;
             ss << " at " << fighter->attrs->health->current_val << " hp;";
+            if (fighter->combat->check_death())
+            {
+                ss << " and it died!";
+            }
         }
         ss << "... and that's it!" << std::endl;
         print(ss.str());
