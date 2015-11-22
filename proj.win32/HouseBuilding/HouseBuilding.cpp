@@ -768,18 +768,18 @@ Village* Buildup::init_city(Buildup* buildup)
 {
     auto city = new Village(buildup, "Burlington");
 
-    auto farm = std::make_shared<Building>(city, "The Farm", farm_task);
+    auto farm = std::make_shared<Building>(city, "The Farm", nullptr);
     farm->update_clock->set_threshold(2);
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
-    auto dump = std::make_shared<Building>(city, "The Dump", dump_task);
-    auto workshop = std::make_shared<Building>(city, "The Workshop", workshop_task);
-    auto marketplace = std::make_shared<Building>(city, "The Marketplace", marketplace_task);
-    auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
-    auto mine = std::make_shared<Building>(city, "The Mine", mine_task);
-    auto grave = std::make_shared<Building>(city, "The Graveyard", grave_task);
-    auto necro = std::make_shared<Building>(city, "The Underscape", necro_task);
+    auto dump = std::make_shared<Building>(city, "The Dump", nullptr);
+    auto workshop = std::make_shared<Building>(city, "The Workshop", nullptr);
+    auto marketplace = std::make_shared<Building>(city, "The Marketplace", nullptr);
+    auto arena = std::make_shared<Building>(city, "The Arena", nullptr);
+    auto mine = std::make_shared<Building>(city, "The Mine", nullptr);
+    auto grave = std::make_shared<Building>(city, "The Graveyard", nullptr);
+    auto necro = std::make_shared<Building>(city, "The Underscape", nullptr);
     mine->update_clock->set_threshold(3);
-    auto forest = std::make_shared<Building>(city, "The Forest", forest_task);
+    auto forest = std::make_shared<Building>(city, "The Forest", nullptr);
 
     auto fighter = std::make_shared<Fighter>(arena->city, "Fighter");
     auto brawler = std::make_shared<Fighter>(arena->city, "Brawler");
