@@ -7,7 +7,7 @@
 // #include <actors\Person.h>
 
 class Person; 
-class Actor; 
+class Person; 
 class Game;
 class Damage;
 
@@ -17,14 +17,14 @@ class Combat
         std::string default_name;
     public:
         // std::string name;
-        Actor* master;
+        Person* master;
 
         bool is_dead;
         bool was_attacked;
-        Actor* last_victim;
+        Person* last_victim;
         std::vector<Combat*> * attackers;
 
-        Combat (std::string name, int max_hp, Person* master, char representation = 'p' );
+        Combat(std::string name, int max_hp, Person* master);
 
         void attack(Combat* Combat_target, Damage* dmg);
         void take_damage(Combat* Combat_attacker, Damage* dmg);
@@ -80,5 +80,24 @@ class Armor
         Armor();
         int get_raw_total();
 
+};
+
+class Experience
+{
+    public:
+        /* if you're level 9 with 960 total experience and it'd take 1000 for level 
+         * 10, total would be 960, this_level would be 60, required_to_lvlup would be
+         * 100 */
+        unsigned int lvl;
+        unsigned int total; 
+        unsigned int this_level;
+        unsigned int required_to_lvlup;
+
+        Experience(): 
+            total(0),
+            this_level(0),
+            required_to_lvlup(100),
+            lvl(1)
+        {}
 };
 #endif

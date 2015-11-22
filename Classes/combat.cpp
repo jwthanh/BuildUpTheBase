@@ -33,10 +33,8 @@ void Combat::assign_to_master(Person* master)
     this->master = master;
 };
 
-Combat::Combat(std::string name, int max_hp, Person* master, char representation)
+Combat::Combat(std::string name, int max_hp, Person* master)
 {
-    representation = representation;
-
     this->master = NULL;
     this->is_dead = false;
 
@@ -44,7 +42,6 @@ Combat::Combat(std::string name, int max_hp, Person* master, char representation
     this->was_attacked = false;
 
     this->last_victim = NULL;
-
 };
 
 void Combat::level_up(int levels)
@@ -53,8 +50,6 @@ void Combat::level_up(int levels)
     int i = 0;
     while (i < levels)
     {
-
-
         this->master->level+=1;
         std::cout << "NEW LEVEL IS: " << this->master->level << std::endl;
         if (this->master == Game::player)
@@ -93,35 +88,35 @@ void Combat::level_up(int levels)
 
 void Combat::level_up_skills(int levels)
 {
-    if (this->master->actor_class == NULL)
-    {
-    }
-    else
-    {
-        this->master->actor_class->LevelUpSkills(levels);
-    }
+    // if (this->master->actor_class == NULL)
+    // {
+    // }
+    // else
+    // {
+    //     this->master->actor_class->LevelUpSkills(levels);
+    // }
 };
 
 void Combat::level_up_stats(int levels)
 {
-    if (this->master->actor_class == NULL)
-    {
-        FighterClass fighter_class = FighterClass();
-        fighter_class.master = this->master;
-        fighter_class.LevelUpStats(levels);
-    }
-    else
-    {
-        this->master->actor_class->LevelUpStats(levels);
-    }
+    // if (this->master->actor_class == NULL)
+    // {
+    //     FighterClass fighter_class = FighterClass();
+    //     fighter_class.master = this->master;
+    //     fighter_class.LevelUpStats(levels);
+    // }
+    // else
+    // {
+    //     this->master->actor_class->LevelUpStats(levels);
+    // }
 };
 
 void Combat::give_exp(int exp_to_gain)
 {
-    this->master->xp += exp_to_gain;
-    this->master->xp_this_level += exp_to_gain;
+    this->master->xp->current += exp_to_gain;
+    this->master->xp->this_level += exp_to_gain;
     // calc if level up
-    if (this->master->xp_this_level >= this->master->xp_required_to_lvlup)
+    if (this->master->xp->this_level >= this->master->xp->required_to_lvlup)
     {
         this->level_up();
     };

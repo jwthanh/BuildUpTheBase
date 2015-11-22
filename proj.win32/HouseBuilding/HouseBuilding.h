@@ -18,6 +18,7 @@
 #define print1(msg) {std::stringstream ss123; ss123<< "\t" << msg; CCLOG(ss123.str().c_str());}
 #define print2(msg) {std::stringstream ss123; ss123<< "\t\t" << msg; CCLOG(ss123.str().c_str());}
 #define NO_CB [](){}
+#include "../../Classes/combat.h"
 
 
 class Building;
@@ -302,7 +303,10 @@ class Animal : public Nameable
 class Person : public Nameable, public Updateable
 {
     public:
-        Person(std::string name) : Nameable(name), Updateable() {};
+        Experience* xp;
+        Person(std::string name) : Nameable(name), Updateable() {
+            this->xp = new Experience();
+        };
 };
 
 class Player : public Person
