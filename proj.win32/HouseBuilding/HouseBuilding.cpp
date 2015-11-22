@@ -119,15 +119,17 @@ void Battle::do_battle()
 {
     if (this->combatants.size() != 0)
     {
-        std::cout << "\tA fight between";
+        std::stringstream ss;
+        ss << "\tA fight between";
         for (auto fighter : this->combatants)
         {
-            std::cout << " ..." << fighter->name;
+            ss << " ..." << fighter->name;
             double& health = fighter->attrs->health->current_val;
             health -= std::rand() % 4 + 6;
-            std::cout << " at " << fighter->attrs->health->current_val << " hp;";
+            ss << " at " << fighter->attrs->health->current_val << " hp;";
         }
-        std::cout << "... and that's it!" << std::endl;
+        ss << "... and that's it!" << std::endl;
+        print(ss.str());
     }
     else
     {
@@ -775,7 +777,7 @@ Village* Buildup::init_city(Buildup* buildup)
     auto dump = std::make_shared<Building>(city, "The Dump", nullptr);
     auto workshop = std::make_shared<Building>(city, "The Workshop", nullptr);
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", nullptr);
-    auto arena = std::make_shared<Building>(city, "The Arena", nullptr);
+    auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
     auto mine = std::make_shared<Building>(city, "The Mine", nullptr);
     auto grave = std::make_shared<Building>(city, "The Graveyard", nullptr);
     auto necro = std::make_shared<Building>(city, "The Underscape", nullptr);
