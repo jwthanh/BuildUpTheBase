@@ -117,7 +117,7 @@ type_stuff(Waste);
 
 void Battle::do_battle()
 {
-    if (this->combatants.size() != 0)
+    if (this->combatants.size() > 1)
     {
         std::stringstream ss;
         ss << "\tA fight between";
@@ -295,6 +295,15 @@ void marketplace_task(Building* building, float dt)
 
 void arena_task(Building* arena, float dt)
 {
+    auto city = arena->city;
+    if (arena->fighters.size() <= 1)
+    {
+        print1("creating squirrel!");
+        auto skelly = std::make_shared<Fighter>(city, "Squirrel");
+        skelly->attrs->health->set_vals(3);
+        city->building_by_name("The Arena")->fighters.push_back(skelly);
+    };
+
     std::cout << "\tDoing arena stuff" << std::endl;
     auto battle = std::make_shared<Battle>();
     for (spFighter fighter : arena->fighters)
@@ -787,8 +796,8 @@ Village* Buildup::init_city(Buildup* buildup)
 
     auto fighter = std::make_shared<Fighter>(arena->city, "Fighter");
     auto brawler = std::make_shared<Fighter>(arena->city, "Brawler");
-    brawler->attrs->health->set_vals(20);
-    fighter->attrs->health->set_vals(20);
+    brawler->attrs->health->set_vals(200);
+    fighter->attrs->health->set_vals(50);
     arena->fighters.push_back(fighter);
     arena->fighters.push_back(brawler);
 

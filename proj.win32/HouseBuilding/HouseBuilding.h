@@ -235,6 +235,7 @@ class Building : public Nameable, public Updateable
         {
             num_workers = 1;
 
+            update_clock->set_threshold(1.0f);
             spawn_clock = new Clock(3);
 
             products = vsProduct();
