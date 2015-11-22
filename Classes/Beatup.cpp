@@ -803,7 +803,7 @@ void Beatup::prep_other()
     this->update_player_hp_bar();
 
     this->stamina_clock = new Clock(0.25f);
-    this->stamina_max = 80;
+    this->stamina_max = 80000;
     this->stamina_count = this->stamina_max;
 
     this->stamina_prog = new ProgressBar(this, "", "", "combo_bar.png", "");
