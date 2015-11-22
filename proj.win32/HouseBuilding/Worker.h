@@ -49,6 +49,8 @@ class ResourceCondition : public Nameable
 };
 
 typedef ResourceCondition<Ingredient::IngredientType> IngredientCondition;
+typedef ResourceCondition<Product::ProductType> ProductCondition;
+typedef ResourceCondition<Waste::WasteType> WasteCondition;
 
 class Action : public Nameable
 {
