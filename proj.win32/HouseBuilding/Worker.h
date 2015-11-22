@@ -49,8 +49,11 @@ class ResourceCondition : public Nameable
 };
 
 typedef ResourceCondition<Ingredient::IngredientType> IngredientCondition;
+#define IngredientConditionEx(ingredient_enum, quantity, name) IngredientCondition(IngredientCondition::TypeChoices::Ingredient, Ingredient::ingredient_enum, quantity, name)
 typedef ResourceCondition<Product::ProductType> ProductCondition;
+#define ProductConditionEx(product_enum, quantity, name) ProductCondition(ProductCondition::TypeChoices::Product, Product::product_enum, quantity, name)
 typedef ResourceCondition<Waste::WasteType> WasteCondition;
+#define WasteConditionEx(waste_enum, quantity, name) WasteCondition(WasteCondition::TypeChoices::Waste, Waste::waste_enum, quantity, name)
 
 class Action : public Nameable
 {

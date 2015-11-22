@@ -670,11 +670,12 @@ void test_conditions()
     auto farm = std::make_shared<Building>(city, "The Test Farm", TaskFunc());
     farm->ingredients = inputs;
     
-    IngredientCondition rc = IngredientCondition(
-            IngredientCondition::TypeChoices::Ingredient,
-            Ingredient::Grain,
-            2,
-            "test condition");
+    IngredientCondition rc = IngredientConditionEx(Grain, 2, "test condition");
+    // IngredientCondition rc = IngredientCondition(
+    //         IngredientCondition::TypeChoices::Ingredient,
+    //         Ingredient::Grain,
+    //         2,
+    //         "test condition");
 
     assert(rc.is_satisfied(farm) == true);
 
