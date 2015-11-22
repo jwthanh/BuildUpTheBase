@@ -103,7 +103,7 @@ bool Beatup::init()
     this->addChild(this->color_layer);
 
     this->punch_log = new PunchLog();
-    this->punches_to_coin = 3;
+    this->punches_to_coin = 1;
     this->punch_count = 0;
 
     this->shake_clock = new Clock(0.0f);

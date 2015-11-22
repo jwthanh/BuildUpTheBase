@@ -557,11 +557,11 @@ void Building::update(float dt)
     // this->print_inventory();
     if (update_clock->passed_threshold())
     {
-        CCLOG("   %s - %.f", this->name.c_str(), this->update_clock->start_time);
+        // CCLOG("   %s - %.f", this->name.c_str(), this->update_clock->start_time);
         this->spawn_clock->update(dt);
         this->do_task(dt);
         update_clock->reset();
-        this->print_inventory();
+        // this->print_inventory();
     }
     else
     {
