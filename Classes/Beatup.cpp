@@ -25,6 +25,7 @@
 #pragma warning(default:4244)
 #include "Util.h"
 #include "MainMenu.h"
+#include <proj.win32/HouseBuilding/Recipe.h>
 
 USING_NS_CC;
 
@@ -1119,6 +1120,16 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
     {
         if (this->get_target_face())
             this->get_target_face()->disable_shield();
+
+        auto farm = this->buildup->city->building_by_name("The Farm");
+        Recipe recipe = Recipe("pileofgrain");
+        recipe.components[Ingredient::IngredientType::Grain] = 10;
+        if (recipe.is_satisfied(farm->ingredients))
+        {
+            farm->create_resources(Resource::Ingredient, 1, "PileOfGrain");
+            print1("Created a pile of grain)");
+            recipe.consume(farm->ingredients);
+        };
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F) 
     {

@@ -107,6 +107,7 @@ class Ingredient : public Resource
         enum IngredientType {
             None,
             Grain,
+            PileOfGrain,
             Seed,
             Tree,
             Iron,

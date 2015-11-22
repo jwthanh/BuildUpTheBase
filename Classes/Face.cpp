@@ -77,10 +77,10 @@ bool Face::take_damage(int damage)
     this->beatup->add_total_hit(1);
 
     // if (this->hits_taken % 2 == 0)
-    if (this->hits_taken % 75 == 0)
-    {
-        this->add_shield();
-    };
+    // if (this->hits_taken % 75 == 0) //disable shield
+    // {
+    //     this->add_shield();
+    // };
 
     if (this->get_hits_percent() >= 1)
     {

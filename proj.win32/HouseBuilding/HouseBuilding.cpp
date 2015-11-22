@@ -20,6 +20,7 @@
 
 const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
     {Ingredient::Grain, "grain"},
+    {Ingredient::PileOfGrain, "pileofgrain"},
     {Ingredient::Seed, "seed"},
     {Ingredient::Wood, "wood"},
     {Ingredient::Iron, "iron"},
@@ -152,12 +153,12 @@ void farm_task(Building* farm, float dt)
 
     farm->create_resources(Resource::Ingredient, new_products, "grain");
 
-    Recipe recipe = Recipe("tree");
-    recipe.components[Ingredient::IngredientType::Seed] = 20;
+    Recipe recipe = Recipe("pileofgrain");
+    recipe.components[Ingredient::IngredientType::Grain] = 10;
     if (recipe.is_satisfied(farm->ingredients))
     {
-        farm->create_resources(Resource::Ingredient, 1, "Tree");
-        print1("Created a tree");
+        farm->create_resources(Resource::Ingredient, 1, "PileOfGrain");
+        print1("Created a pile of grain (no todo)");
         recipe.consume(farm->ingredients);
     };
 
