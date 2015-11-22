@@ -102,7 +102,7 @@ bool Beatup::init()
     this->addChild(this->color_layer);
 
     this->punch_log = new PunchLog();
-    this->punches_to_coin = 10;
+    this->punches_to_coin = 3;
     this->punch_count = 0;
 
     this->shake_clock = new Clock(0.0f);
@@ -404,7 +404,6 @@ void Beatup::add_total_coin(int x)
     DataManager::incr_key("total_coin_key", x);
 
     auto farm = this->buildup->city->building_by_name("The Farm");
-
     farm->create_resources(Resource::Ingredient, x, "grain");
 };
 
