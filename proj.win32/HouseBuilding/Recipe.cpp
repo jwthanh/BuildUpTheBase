@@ -63,17 +63,13 @@ void Recipe::consume(vsIngredient& input)
     if (this->is_satisfied(input))
     {
         auto removal_fun = [&temp_map](spIngredient element) -> bool {
-
             try {
                 int& val = temp_map.at(element->ingredient_type);
 
-                if (val > 0)
-                {
+                if (val > 0) {
                     val -= 1;
                     return true;
-                }
-                else
-                {
+                } else {
                     return false;
                 }
 
@@ -82,10 +78,12 @@ void Recipe::consume(vsIngredient& input)
                 return false;
             }
         };
+
         input.erase(
             std::remove_if(input.begin(), input.end(), removal_fun),
             input.end()
-            );
+        );
+        print("consumed " << this->name);
     }
     else
     {

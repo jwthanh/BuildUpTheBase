@@ -26,6 +26,7 @@
 #include "Util.h"
 #include "MainMenu.h"
 #include <proj.win32/HouseBuilding/Recipe.h>
+#include "attribute.h"
 
 USING_NS_CC;
 
@@ -1171,6 +1172,19 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
     {
         // this->get_target_face()->recovering_sprite->getGLProgramState()->setUniformFloat("u_amount", 4.0f);
         this->toggle_is_blocking();
+    }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_H)
+    {
+        auto farm = this->buildup->city->building_by_name("The Farm");
+        Recipe heal_recipe = Recipe("HealingGrain");
+        heal_recipe.components[Ingredient::IngredientType::Grain] = 5;
+        if (heal_recipe.is_satisfied(farm->ingredients))
+        {
+            auto arena = this->buildup->city->building_by_name("The Arena");
+            auto fighter = arena->fighters.front();
+            fighter->attrs->health->current_val += 10;
+            heal_recipe.consume(farm->ingredients);
+        }
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
     {

@@ -248,7 +248,6 @@ void necro_task(Building* necro, float dt)
 
     Recipe skeleton_recipe = Recipe("Skeletons");
     skeleton_recipe.components[Ingredient::IngredientType::Flesh] = 7;
-
     if (skeleton_recipe.is_satisfied(necro->ingredients))
     {
         print1("creating skeleton!");
