@@ -19,7 +19,7 @@ class Combat
         // std::string name;
         Fighter* master;
 
-        bool is_dead;
+        bool _is_dead;
         bool was_attacked;
         Fighter* last_victim;
         std::vector<Combat*> * attackers;
@@ -33,7 +33,7 @@ class Combat
         void remember_attacker(Combat* Combat_attacker, bool mark_the_attk);
 
         void try_to_die();
-        bool check_death();
+        bool is_dead();
         void die();
 
         void assign_to_master(Fighter* master);

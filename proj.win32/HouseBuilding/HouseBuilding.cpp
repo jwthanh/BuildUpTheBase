@@ -127,7 +127,7 @@ void Battle::do_battle()
             double& health = fighter->attrs->health->current_val;
             health -= std::rand() % 4 + 6;
             ss << " at " << fighter->attrs->health->current_val << " hp;";
-            if (fighter->combat->check_death())
+            if (fighter->combat->is_dead())
             {
                 ss << " and it died!";
                 this->distribute_exp(fighter);
@@ -148,13 +148,13 @@ void Battle::distribute_exp(spFighter dead_fighter)
 {
     float live_combatants = 0;
     for (auto fighter : this->combatants) {
-        if (!fighter->combat->check_death()) {
+        if (!fighter->combat->is_dead()) {
             live_combatants++;
         };
     };
 
     for (auto fighter : this->combatants) {
-        if (!fighter->combat->check_death()) {
+        if (!fighter->combat->is_dead()) {
             fighter->combat->give_exp(dead_fighter->xp->value / live_combatants);
 
         };

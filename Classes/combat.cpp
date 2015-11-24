@@ -23,7 +23,7 @@ void Combat::assign_to_master(Fighter* master)
 Combat::Combat(std::string name, Fighter* master)
 {
     this->master = master;
-    this->is_dead = false;
+    this->_is_dead = false;
 
     this->attackers = new std::vector<Combat*>;
     this->was_attacked = false;
@@ -123,7 +123,7 @@ void Combat::attack(Combat* combat_target, Damage* dmg)
     combat_target->take_damage(this, dmg);
     this->last_victim = combat_target->master;
 
-    bool is_target_dead = combat_target->check_death();
+    bool is_target_dead = combat_target->is_dead();
     if (is_target_dead)
     {
         //get opponents exp value
@@ -185,7 +185,7 @@ Combat* Combat::get_last_attacker()
 
 void Combat::try_to_die()
 {
-    if (this->check_death())
+    if (this->is_dead())
     {
         this->die();
     };
@@ -283,13 +283,13 @@ void Combat::take_damage(Combat* combat_attacker, Damage* dmg)
     };
 };
 
-bool Combat::check_death()
+bool Combat::is_dead()
 {
-    if (this->master->attrs->health->current_val <= 0  && !is_dead)
+    if (this->master->attrs->health->current_val <= 0  && !_is_dead)
     {
-        is_dead = true;
+        _is_dead = true;
     }
-    return is_dead;
+    return _is_dead;
 };
 
 Damage::Damage()
