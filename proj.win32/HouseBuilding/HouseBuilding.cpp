@@ -130,6 +130,7 @@ void Battle::do_battle()
             if (fighter->combat->check_death())
             {
                 ss << " and it died!";
+                this->distribute_exp(fighter);
             }
         }
         ss << "... and that's it!" << std::endl;
@@ -141,6 +142,24 @@ void Battle::do_battle()
     }
     return;
 }
+
+///Give every other combatant exp
+void Battle::distribute_exp(spFighter dead_fighter)
+{
+    float live_combatants = 0;
+    for (auto fighter : this->combatants) {
+        if (!fighter->combat->check_death()) {
+            live_combatants++;
+        };
+    };
+
+    for (auto fighter : this->combatants) {
+        if (!fighter->combat->check_death()) {
+            fighter->combat->give_exp(dead_fighter->xp->value / live_combatants);
+
+        };
+    };
+};
 
 void farm_task(Building* farm, float dt)
 {

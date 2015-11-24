@@ -6,15 +6,14 @@
 #include "attr_effect.h"
 #include <proj.win32/HouseBuilding/HouseBuilding.h>
 
-
-void Combat::printout(){
+void Combat::printout()
+{
 
     std::cout << "\nCombat PRINTOUT" << std::endl;
     //cout << "NAME: " << name << endl;
     std::cout << "MAX HP: " << this->master->attrs->health->max_val << std::endl;
 
 };
-
 
 void Combat::assign_to_master(Fighter* master)
 {

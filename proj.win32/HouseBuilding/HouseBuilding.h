@@ -216,6 +216,7 @@ class Battle : public Updateable
         }
 
         void do_battle();
+        void distribute_exp(spFighter dead_fighter);
 };
 
 class Building : public Nameable, public Updateable
