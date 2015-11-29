@@ -125,7 +125,9 @@ void Battle::do_battle()
         {
             ss << " ..." << fighter->name;
             double& health = fighter->attrs->health->current_val;
-            health -= std::rand() % 4 + 6;
+            auto dmg = fighter->attrs->damage->current_val;
+            health -= dmg;
+            //health -= std::rand() % 4 + 6;
             ss << " at " << fighter->attrs->health->current_val << " hp;";
             if (fighter->combat->is_dead())
             {
@@ -322,7 +324,8 @@ void arena_task(Building* arena, float dt)
     {
         print1("creating squirrel!");
         auto skelly = std::make_shared<Fighter>(city, "Squirrel");
-        skelly->attrs->health->set_vals(3);
+        skelly->attrs->health->set_vals(4);
+        skelly->attrs->damage->set_vals(2);
         city->building_by_name("The Arena")->fighters.push_back(skelly);
     };
 
