@@ -1203,6 +1203,8 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
         bm_prog->setScale(2);
         bm_prog->base_node->removeFromParent();
 
+        bm_prog->set_percentage(this->buildup->fighter->attrs->health->get_val_percentage());
+
         bm_node->addChild(bad_mother);
         bm_node->addChild(bm_prog->base_node);
 
