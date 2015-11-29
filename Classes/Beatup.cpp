@@ -1190,30 +1190,24 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
     {
 
-        // Face* face = this->get_target_face();
-        // face->break_all_features();
-
-        // this->create_quest_alert();
-
-        //this->quest->do_unlock();
-        // this->fist_flame->set_been_bought(true);
-        // this->fist_frost->set_been_bought(true);
-        // this->fist_psionic->set_been_bought(true);
-        //this->check_quest();
+        auto bm_node = Node::create();
+        this->addChild(bm_node);
 
         Sprite* bad_mother = Sprite::createWithSpriteFrameName("badmother20x20.png");
         bad_mother->setScale(4);
-        bad_mother->setPosition(200, 200);
+        bad_mother->setPosition(0, 100);
 
         auto bm_prog = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
-        bm_prog->setPosition(Vec2(200, 100));
+        bm_prog->setPosition(Vec2(0, 0));
         bm_prog->setAnchorPoint(Vec2(0.5, 0.5));
         bm_prog->setScale(2);
-        print("front" << bm_prog->front_timer->getPosition().x << " " << bm_prog->front_timer->getPosition().y);
-        print("back" << bm_prog->back_timer->getPosition().x << " " << bm_prog->back_timer->getPosition().y);
-        print("clor" << bm_prog->color_layer->getPosition().x << " " << bm_prog->color_layer->getPosition().y);
-        //bm_prog->lbl->setString("ASDASD");
-        this->addChild(bad_mother);
+        bm_prog->base_node->removeFromParent();
+
+        bm_node->addChild(bad_mother);
+        bm_node->addChild(bm_prog->base_node);
+
+        bm_node->setPosition(this->get_center_pos());
+        bm_node->setAnchorPoint(Vec2(0.5, 0.5));
 
         this->print_inventory();
     }
