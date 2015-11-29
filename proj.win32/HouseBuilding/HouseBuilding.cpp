@@ -153,7 +153,6 @@ void Battle::distribute_exp(spFighter dead_fighter)
         };
     };
 
-
     for (auto fighter : this->combatants) {
         if (!fighter->combat->is_dead()) {
             fighter->combat->give_exp(dead_fighter->xp->value / live_combatants);

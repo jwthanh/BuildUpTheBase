@@ -47,6 +47,9 @@ void Combat::level_up(int levels)
         // //((x*10)^(x*10)/200))*100
         // double result = std::pow((lvl10),(lvl10)/200)*100;
 
+        //regen to max health
+        this->master->attrs->health->current_val = this->master->attrs->health->current_val;
+
         // log(x^x)*(x*100)+200
         double result = std::log(std::pow(level, level)) * (level*100) + 200;
         this->master->xp->required_to_lvlup = std::floor(result);
