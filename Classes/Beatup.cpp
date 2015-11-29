@@ -50,7 +50,7 @@ Scene* Beatup::createScene(int level = 0)
         beatup->prep_level(level);
     };
 
-    beatup->create_quest_alert();
+    // beatup->create_quest_alert();
 
 	return scene;
 };
@@ -1204,7 +1204,7 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
         {
             auto arena = this->buildup->city->building_by_name("The Arena");
             auto fighter = arena->fighters.front();
-            fighter->attrs->health->current_val += 10;
+            fighter->attrs->health->current_val += 50;
             heal_recipe.consume(farm->ingredients);
         }
     }
