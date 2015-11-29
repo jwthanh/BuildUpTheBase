@@ -88,6 +88,16 @@ bool Beatup::init()
 
     CCLOG("beatup init");
 
+    this->buildup = new Buildup();
+    auto player = new Player("Jimothy");
+    player->coins = 100;
+    this->buildup->player = player;
+
+    auto animal = std::make_shared<Animal>("Tank");
+
+    this->buildup->city = Buildup::init_city(this->buildup);
+    this->buildup->city->update_buildings(0);
+
     this->level = NULL;
     this->quest = NULL;
     this->quest_completed = false;
@@ -276,16 +286,6 @@ bool Beatup::init()
 
     auto _plistFile = FileUtils::getInstance()->fullPathForFilename("blood.plist");
     Gore::particle_map = FileUtils::getInstance()->getValueMapFromFile(_plistFile.c_str());
-
-    this->buildup = new Buildup();
-    auto player = new Player("Jimothy");
-    player->coins = 100;
-    this->buildup->player = player;
-
-    auto animal = std::make_shared<Animal>("Tank");
-
-    this->buildup->city = Buildup::init_city(this->buildup);
-    this->buildup->city->update_buildings(0);
 
     //Director::getInstance()->getScheduler()->scheduleUpdate(schedule_selector(Beatup::update_buildup), 0, false);
     //Scheduler::scheduleUpdate(schedule_selector(Buildup::update), 0, false);
@@ -875,6 +875,27 @@ void Beatup::prep_other()
     this->addChild(this->psionic_button);
     this->addChild(this->flames_button);
 
+    this->fighter_node = Node::create();
+    this->addChild(this->fighter_node);
+
+    Sprite* bad_mother = Sprite::createWithSpriteFrameName("badmother20x20.png");
+    bad_mother->setScale(4);
+    bad_mother->setPosition(0, 100);
+
+    this->fighter_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
+    this->fighter_bar->setPosition(Vec2(0, 0));
+    this->fighter_bar->setAnchorPoint(Vec2(0.5, 0.5));
+    this->fighter_bar->setScale(2);
+    this->fighter_bar->base_node->removeFromParent();
+
+    this->fighter_bar->set_percentage(this->buildup->fighter->attrs->health->get_val_percentage());
+
+    this->fighter_node->addChild(bad_mother);
+    this->fighter_node->addChild(this->fighter_bar->base_node);
+
+    this->fighter_node->setPosition(this->get_center_pos(sx(300)));
+    this->fighter_node->setAnchorPoint(Vec2(0.5, 0.5));
+
 };
 
 void Beatup::deal_player_dmg(int dmg)
@@ -1190,26 +1211,6 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
     {
 
-        auto bm_node = Node::create();
-        this->addChild(bm_node);
-
-        Sprite* bad_mother = Sprite::createWithSpriteFrameName("badmother20x20.png");
-        bad_mother->setScale(4);
-        bad_mother->setPosition(0, 100);
-
-        auto bm_prog = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
-        bm_prog->setPosition(Vec2(0, 0));
-        bm_prog->setAnchorPoint(Vec2(0.5, 0.5));
-        bm_prog->setScale(2);
-        bm_prog->base_node->removeFromParent();
-
-        bm_prog->set_percentage(this->buildup->fighter->attrs->health->get_val_percentage());
-
-        bm_node->addChild(bad_mother);
-        bm_node->addChild(bm_prog->base_node);
-
-        bm_node->setPosition(this->get_center_pos(sx(300)));
-        bm_node->setAnchorPoint(Vec2(0.5, 0.5));
 
         this->print_inventory();
     }
@@ -1428,6 +1429,8 @@ void Beatup::update(float dt)
     };
 
     this->print_inventory();
+
+    this->fighter_bar->set_percentage(this->buildup->fighter->attrs->health->get_val_percentage());
 
 };
 
