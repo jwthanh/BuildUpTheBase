@@ -1206,7 +1206,7 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
         bm_node->addChild(bad_mother);
         bm_node->addChild(bm_prog->base_node);
 
-        bm_node->setPosition(this->get_center_pos());
+        bm_node->setPosition(this->get_center_pos(sx(300)));
         bm_node->setAnchorPoint(Vec2(0.5, 0.5));
 
         this->print_inventory();

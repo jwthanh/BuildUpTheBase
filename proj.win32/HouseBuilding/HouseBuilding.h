@@ -331,6 +331,7 @@ class Buildup
 {
     public:
         Player* player;
+        spFighter fighter;
 
         Village* city;
 

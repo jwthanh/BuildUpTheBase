@@ -819,11 +819,11 @@ Village* Buildup::init_city(Buildup* buildup)
     mine->update_clock->set_threshold(3);
     auto forest = std::make_shared<Building>(city, "The Forest", nullptr);
 
-    auto fighter = std::make_shared<Fighter>(arena->city, "Fighter");
+    buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");
     auto brawler = std::make_shared<Fighter>(arena->city, "Brawler");
-    brawler->attrs->health->set_vals(200);
-    fighter->attrs->health->set_vals(50);
-    arena->fighters.push_back(fighter);
+    brawler->attrs->health->set_vals(50);
+    buildup->fighter->attrs->health->set_vals(200);
+    arena->fighters.push_back(buildup->fighter);
     arena->fighters.push_back(brawler);
 
 
