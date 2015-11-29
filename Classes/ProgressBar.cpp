@@ -13,6 +13,7 @@ ProgressBar::ProgressBar(
     this->target_percentage = 100.0f;
 
     this->beatup = beatup;
+    this->base_node = Node::create();
 
     auto get_sprite = [](std::string sprite_path, std::string frame_path)
     {
@@ -37,7 +38,7 @@ ProgressBar::ProgressBar(
 
     Sprite* back_sprite = get_sprite("", back_sprite_frame_path);
     this->background = back_sprite;
-    beatup->addChild(this->background);
+    this->base_node->addChild(this->background);
 
     this->lbl = Label::createWithTTF("", DEFAULT_FONT, 40);
     this->lbl->setScale(0.25f);
@@ -56,8 +57,8 @@ ProgressBar::ProgressBar(
     this->front_timer->setLocalZOrder(101);
     this->lbl->setLocalZOrder(102);
 
-    this->beatup->addChild(this->back_timer);
-    this->beatup->addChild(this->front_timer);
+    this->base_node->addChild(this->back_timer);
+    this->base_node->addChild(this->front_timer);
 
     this->color_layer = LayerColor::create(Color4B(255, 255, 255, 25));
     this->front_timer->addChild(this->color_layer);
@@ -70,7 +71,7 @@ ProgressBar::ProgressBar(
     {
         timer->setType(ProgressTimerType::BAR);
         timer->setBarChangeRate(Vec2(1, 0));
-        timer->setAnchorPoint(Vec2(0, 0));
+        timer->setAnchorPoint(Vec2(0.5, 0.5));
         timer->setPosition(0, 0);
         timer->setVisible(true);
         timer->setPercentage(100);
@@ -84,10 +85,13 @@ ProgressBar::ProgressBar(
 
         timer->setMidpoint(Vec2(0, 0));
     };
+    this->background->setAnchorPoint(Vec2(0.5,0.5));
 
     this->do_finish_bump = false;
 
-     this->setScale(sx(4));
+    this->setScale(sx(4));
+
+    this->beatup->addChild(this->base_node);
 };
 
 ProgressBar::~ProgressBar()
@@ -131,24 +135,27 @@ void ProgressBar::update_string(std::string msg)
 
 void ProgressBar::setAnchorPoint(cocos2d::Vec2 vec2)
 {
-    this->front_timer->setAnchorPoint(vec2);
-    this->back_timer->setAnchorPoint(vec2);
+    this->base_node->setAnchorPoint(vec2);
+    // this->front_timer->setAnchorPoint(vec2);
+    // this->back_timer->setAnchorPoint(vec2);
 };
 
 void ProgressBar::setPosition(cocos2d::Vec2 vec2)
 {
-    this->front_timer->setPosition(vec2);
-    this->back_timer->setPosition(vec2);
-    this->background->setPosition(vec2);
+    this->base_node->setPosition(vec2);
+    // this->front_timer->setPosition(vec2);
+    // this->back_timer->setPosition(vec2);
+    // this->background->setPosition(vec2);
 };
 
 void ProgressBar::setScale(float scale)
 {
     this->scale = scale;
+    this->base_node->setScale(scale);
 
-    this->front_timer->setScale(scale);
-    this->back_timer->setScale(scale);
-    this->background->setScale(scale);
+    // this->front_timer->setScale(scale);
+    // this->back_timer->setScale(scale);
+    // this->background->setScale(scale);
     this->fit_back_to_front();
 };
 

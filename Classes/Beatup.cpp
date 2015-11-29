@@ -619,6 +619,7 @@ void Beatup::prep_face(Face* face)
         this->get_center_pos().x,
         visibleSize.height - sy(hby)*2
     );
+
     face->health_bar->setPosition(health_pos);
 
     auto create_animated_sprite = [face](std::string sprite_path, std::string neutral_path, std::string left_path, std::string right_path) {

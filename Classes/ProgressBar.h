@@ -17,6 +17,7 @@ class ProgressBar
             Both
         };
 
+        cocos2d::Node* base_node;
         cocos2d::LayerColor* color_layer;
 
         cocos2d::ProgressTimer* front_timer;
