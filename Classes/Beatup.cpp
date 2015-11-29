@@ -1200,6 +1200,20 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
         // this->fist_psionic->set_been_bought(true);
         //this->check_quest();
 
+        Sprite* bad_mother = Sprite::createWithSpriteFrameName("badmother20x20.png");
+        bad_mother->setScale(4);
+        bad_mother->setPosition(200, 200);
+
+        auto bm_prog = new ProgressBar(this, "", "", "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
+        bm_prog->setPosition(Vec2(200, 100));
+        bm_prog->setAnchorPoint(Vec2(0.5, 0.5));
+        bm_prog->setScale(2);
+        print("front" << bm_prog->front_timer->getPosition().x << " " << bm_prog->front_timer->getPosition().y);
+        print("back" << bm_prog->back_timer->getPosition().x << " " << bm_prog->back_timer->getPosition().y);
+        print("clor" << bm_prog->color_layer->getPosition().x << " " << bm_prog->color_layer->getPosition().y);
+        //bm_prog->lbl->setString("ASDASD");
+        this->addChild(bad_mother);
+
         this->print_inventory();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_X) 
