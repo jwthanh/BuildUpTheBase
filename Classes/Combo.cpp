@@ -36,7 +36,7 @@ Combo::Combo(Beatup* beatup, std::string id_key, std::string name) : Buyable(bea
     this->cooldown = this->defaults.cooldown;
     this->cooldown_clock = new Clock(this->cooldown);
 
-    this->cd_bar = new ProgressBar(beatup, "", "", "combo_bar.png", "combo_mid.png");
+    this->cd_bar = new ProgressBar(beatup, "combo_bar.png", "combo_mid.png");
     this->cd_bar->update_string(name); //TODO renable once bars work
     this->cd_bar->setScale(sx(5));
 

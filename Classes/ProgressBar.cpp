@@ -7,8 +7,7 @@ USING_NS_CC;
 
 
 ProgressBar::ProgressBar(
-        Beatup* beatup, std::string front_sprite_path, std::string back_sprite_path,
-        std::string front_sprite_frame_path, std::string back_sprite_frame_path
+        Beatup* beatup, std::string front_sprite_frame_path, std::string back_sprite_frame_path
         )
 {
     this->target_percentage = 100.0f;
@@ -31,12 +30,12 @@ ProgressBar::ProgressBar(
         return result;
     };
 
-    Sprite* front_sprite = get_sprite(front_sprite_path, front_sprite_frame_path);
+    Sprite* front_sprite = get_sprite("", front_sprite_frame_path);
     this->front_timer = cocos2d::ProgressTimer::create(front_sprite);
     Sprite* slider_sprite = get_sprite("whitebar.png", "");
     this->back_timer = cocos2d::ProgressTimer::create(slider_sprite);
 
-    Sprite* back_sprite = get_sprite(back_sprite_path, back_sprite_frame_path);
+    Sprite* back_sprite = get_sprite("", back_sprite_frame_path);
     this->background = back_sprite;
     beatup->addChild(this->background);
 

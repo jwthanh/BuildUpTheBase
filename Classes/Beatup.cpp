@@ -605,7 +605,7 @@ void Beatup::prep_face(Face* face)
 
     this->addChild(node_grid);
 
-    face->health_bar = new ProgressBar(this, "", "", "enemy_healthbar_bar.png", "enemy_healthbar.png");
+    face->health_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar.png");
     face->health_bar->back_timer->setSprite(Sprite::createWithSpriteFrameName("enemy_healthbar_bar_white.png"));
     //face->health_bar->front_timer->setBarChangeRate(Vec2(1.0f, 0.8f));
     //face->health_bar->back_timer->setBarChangeRate(Vec2(1.0f, 0.8f));
@@ -792,7 +792,7 @@ void Beatup::prep_other()
     this->player_hp = 10; //these number gets replaced in setup_level
     this->player_total_hp = 10;
 
-    this->player_hp_bar = new ProgressBar(this, "", "", "healthbar_bar.png", "healthbar.png");
+    this->player_hp_bar = new ProgressBar(this, "healthbar_bar.png", "healthbar.png");
     this->player_hp_bar->back_timer->setSprite(Sprite::createWithSpriteFrameName("healthbar_bar_white.png"));
     this->player_hp_bar->setAnchorPoint(Vec2(0.5f, 0.5f));
     this->player_hp_bar->setPosition(Vec2(
@@ -807,7 +807,7 @@ void Beatup::prep_other()
     this->stamina_max = 80000;
     this->stamina_count = this->stamina_max;
 
-    this->stamina_prog = new ProgressBar(this, "", "", "combo_bar.png", "");
+    this->stamina_prog = new ProgressBar(this, "combo_bar.png", "");
     this->stamina_prog->back_timer->setSprite(Sprite::createWithSpriteFrameName("combo_bar_white.png"));
     this->stamina_prog->fit_back_to_front();
     this->stamina_prog->setPosition( this->get_center_pos(0, -sy(230)));
@@ -1204,7 +1204,7 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
         bad_mother->setScale(4);
         bad_mother->setPosition(200, 200);
 
-        auto bm_prog = new ProgressBar(this, "", "", "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
+        auto bm_prog = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
         bm_prog->setPosition(Vec2(200, 100));
         bm_prog->setAnchorPoint(Vec2(0.5, 0.5));
         bm_prog->setScale(2);
