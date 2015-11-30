@@ -821,8 +821,6 @@ Village* Buildup::init_city(Buildup* buildup)
     auto forest = std::make_shared<Building>(city, "The Forest", nullptr);
 
     buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");
-    buildup->fighter->xp->total = 99;
-    buildup->fighter->xp->this_level = 99;
     auto brawler = std::make_shared<Fighter>(arena->city, "Brawler");
     brawler->attrs->health->set_vals(15);
     buildup->fighter->attrs->health->set_vals(200);
