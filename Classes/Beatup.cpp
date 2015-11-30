@@ -880,7 +880,7 @@ void Beatup::prep_other()
 
     Sprite* bad_mother = Sprite::createWithSpriteFrameName("townsmen8x8.png");
     bad_mother->setName("bad_mother");
-    bad_mother->setScale(4);
+    bad_mother->setScale(8);
     bad_mother->setPosition(0, 100);
 
     this->fighter_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
@@ -1445,17 +1445,20 @@ void Beatup::update(float dt)
     if (this->buildup->fighter->xp->lvl == 2) {
         auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
         auto old_pos = bm->getPosition();
+        bm->setScale(8);
         Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("thief8x8.png");
         bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
     }
     else if (this->buildup->fighter->xp->lvl == 3) {
         auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
         auto old_pos = bm->getPosition();
+        bm->setScale(8);
         Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("hero8x8.png");
         bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
     }
     else if (this->buildup->fighter->xp->lvl == 4) {
         auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
+        bm->setScale(4);
         auto old_pos = bm->getPosition();
         Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("badmother20x20.png");
         bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
