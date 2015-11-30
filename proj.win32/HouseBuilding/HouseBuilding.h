@@ -19,8 +19,10 @@
 #define print2(msg) {std::stringstream ss123; ss123<< "\t\t" << msg; CCLOG(ss123.str().c_str());}
 #define NO_CB [](){}
 #include "../../Classes/combat.h"
+#include <ProgressBar.h>
 
 
+class Beatup;
 class Building;
 class Buildup;
 class Village;
@@ -197,6 +199,21 @@ class Fighter : public Nameable, public Updateable
         void update(float dt);
 
         std::string get_stats();
+};
+
+class FighterNode : public cocos2d::Node
+{
+    public:
+        CREATE_FUNC(FighterNode);
+        static FighterNode* create(Beatup* beatup, spFighter fighter);
+
+        void update(float dt);
+
+        Beatup* beatup;
+        spFighter fighter;
+
+        ProgressBar* hp_bar;
+        ProgressBar* xp_bar;
 };
 
 class Battle : public Updateable

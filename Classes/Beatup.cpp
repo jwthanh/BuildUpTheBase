@@ -875,35 +875,7 @@ void Beatup::prep_other()
     this->addChild(this->psionic_button);
     this->addChild(this->flames_button);
 
-    this->fighter_node = Node::create();
-    this->addChild(this->fighter_node);
-
-    Sprite* bad_mother = Sprite::createWithSpriteFrameName("townsmen8x8.png");
-    bad_mother->setName("bad_mother");
-    bad_mother->setScale(8);
-    bad_mother->setPosition(0, 100);
-
-    this->fighter_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
-    this->fighter_bar->back_timer->setVisible(false);
-    this->fighter_bar->setPosition(Vec2(0, 0));
-    this->fighter_bar->setAnchorPoint(Vec2(0.5, 0.5));
-    this->fighter_bar->setScale(2);
-    this->fighter_bar->base_node->removeFromParent();
-    this->fighter_bar->set_percentage(this->buildup->fighter->attrs->health->get_val_percentage());
-
-    this->fighter_xp_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
-    this->fighter_xp_bar->back_timer->setVisible(false);
-    this->fighter_xp_bar->setPosition(Vec2(0, -25));
-    this->fighter_xp_bar->setAnchorPoint(Vec2(0.5, 0.5));
-    this->fighter_xp_bar->setScale(2);
-    this->fighter_xp_bar->base_node->removeFromParent();
-
-    this->fighter_node->addChild(bad_mother);
-    this->fighter_node->addChild(this->fighter_bar->base_node);
-    this->fighter_node->addChild(this->fighter_xp_bar->base_node);
-
-    this->fighter_node->setPosition(this->get_center_pos(sx(300)));
-    this->fighter_node->setAnchorPoint(Vec2(0.5, 0.5));
+    this->fighter_node = FighterNode::create(this, this->buildup->fighter);
 
 };
 
@@ -1457,9 +1429,7 @@ void Beatup::update(float dt)
 
     this->print_inventory();
 
-    this->fighter_bar->set_percentage(this->buildup->fighter->attrs->health->get_val_percentage());
-    this->fighter_xp_bar->set_percentage(this->buildup->fighter->xp->get_progress_percentage()*100);
-    this->fighter_xp_bar->front_timer->setColor(Color3B::BLUE);
+    this->fighter_node->update(dt);
 
     if (this->buildup->fighter->xp->lvl == 2) {
         auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
