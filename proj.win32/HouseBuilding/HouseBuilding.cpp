@@ -49,6 +49,7 @@ const std::map<Waste::WasteType, std::string> Waste::type_map = {
 Buildup::Buildup()
 {
     this->city = NULL;
+    this->target_building = NULL;
 };
 
 Updateable::Updateable()

@@ -1220,6 +1220,19 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
     {
 
+        Scene* army_scene = Scene::create();
+
+        for (unsigned int i = 0; i < this->buildup->city->building_by_name("The Farm")->ingredients.size(); i++) {
+            Sprite* bad_mother = Sprite::createWithSpriteFrameName("townsmen8x8.png");
+            bad_mother->setName("bad_mother");
+            bad_mother->setScale(8);
+            bad_mother->setPosition(300+CCRANDOM_0_1() * 400, 100+CCRANDOM_0_1() * 400);
+            JumpBy* jump_by = JumpBy::create(CCRANDOM_0_1()* 1.5f+1.0f, Vec2(0, 0), CCRANDOM_0_1()*10, 3);
+            bad_mother->runAction(RepeatForever::create(Sequence::createWithTwoActions(DelayTime::create(CCRANDOM_0_1()*1.0f), jump_by)));
+            army_scene->addChild(bad_mother);
+        };
+
+        Director::getInstance()->pushScene(army_scene);
         this->print_inventory();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_X) 

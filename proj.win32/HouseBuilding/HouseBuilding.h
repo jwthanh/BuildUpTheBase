@@ -333,6 +333,8 @@ class Buildup
         Player* player;
         spFighter fighter;
 
+        spBuilding target_building;
+
         Village* city;
 
         static Village* init_city(Buildup*);
