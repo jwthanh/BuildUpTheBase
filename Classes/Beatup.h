@@ -52,6 +52,7 @@ class Beatup : public GameLayer
         Buildup* buildup;
         cocos2d::Node* fighter_node;
         ProgressBar* fighter_bar;
+        ProgressBar* fighter_xp_bar;
 
         bool level_been_won;
         bool level_been_lost;

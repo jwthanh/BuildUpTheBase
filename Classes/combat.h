@@ -102,5 +102,10 @@ class Experience
             lvl(1),
             value(10)
         {}
+
+        float get_progress_percentage()
+        {
+            return static_cast<float>(this->this_level) / static_cast<float>(this->required_to_lvlup);
+        }
 };
 #endif

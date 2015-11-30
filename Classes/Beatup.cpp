@@ -888,11 +888,18 @@ void Beatup::prep_other()
     this->fighter_bar->setAnchorPoint(Vec2(0.5, 0.5));
     this->fighter_bar->setScale(2);
     this->fighter_bar->base_node->removeFromParent();
-
     this->fighter_bar->set_percentage(this->buildup->fighter->attrs->health->get_val_percentage());
+
+    this->fighter_xp_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
+    this->fighter_xp_bar->back_timer->setVisible(false);
+    this->fighter_xp_bar->setPosition(Vec2(0, -50));
+    this->fighter_xp_bar->setAnchorPoint(Vec2(0.5, 0.5));
+    this->fighter_xp_bar->setScale(2);
+    this->fighter_xp_bar->base_node->removeFromParent();
 
     this->fighter_node->addChild(bad_mother);
     this->fighter_node->addChild(this->fighter_bar->base_node);
+    this->fighter_node->addChild(this->fighter_xp_bar->base_node);
 
     this->fighter_node->setPosition(this->get_center_pos(sx(300)));
     this->fighter_node->setAnchorPoint(Vec2(0.5, 0.5));
@@ -1431,6 +1438,7 @@ void Beatup::update(float dt)
     this->print_inventory();
 
     this->fighter_bar->set_percentage(this->buildup->fighter->attrs->health->get_val_percentage());
+    this->fighter_xp_bar->set_percentage(this->buildup->fighter->xp->get_progress_percentage()*100);
 
 };
 
