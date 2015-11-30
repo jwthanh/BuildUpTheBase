@@ -57,6 +57,7 @@ bool GameLayer::vec2_in_rect(Rect* rect, cocos2d::Vec2 pos)
 
 bool GameLayer::init()
 {
+
     isTouchDown = false;
 
     initialTouchPos[0] = 0;
@@ -280,6 +281,14 @@ void GameLayer::onEnter()
     if (!SoundEngine::is_sound_enabled())
     {
         SoundEngine::stop_all_sound_and_music();
+    }
+};
+
+void GameLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
+{
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    {
+        Director::getInstance()->popScene();
     }
 };
 

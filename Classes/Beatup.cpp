@@ -1221,16 +1221,22 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
     {
 
         Scene* army_scene = Scene::create();
+        GameLayer* layer = GameLayer::create();
+
+        auto pKeybackListener = EventListenerKeyboard::create();
+        pKeybackListener->onKeyPressed = CC_CALLBACK_2(GameLayer::onKeyReleased, layer);
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(pKeybackListener, layer);
 
         for (unsigned int i = 0; i < this->buildup->city->building_by_name("The Farm")->ingredients.size(); i++) {
             Sprite* bad_mother = Sprite::createWithSpriteFrameName("townsmen8x8.png");
             bad_mother->setName("bad_mother");
             bad_mother->setScale(8);
-            bad_mother->setPosition(300+CCRANDOM_0_1() * 400, 100+CCRANDOM_0_1() * 400);
-            JumpBy* jump_by = JumpBy::create(CCRANDOM_0_1()* 1.5f+1.0f, Vec2(0, 0), CCRANDOM_0_1()*10, 3);
+            bad_mother->setPosition(300 + CCRANDOM_0_1() * 400, 100 + CCRANDOM_0_1() * 400);
+            JumpBy* jump_by = JumpBy::create(CCRANDOM_0_1()* 1.5f + 1.0f, Vec2(0, 0), CCRANDOM_0_1() * 10, 3);
             bad_mother->runAction(RepeatForever::create(Sequence::createWithTwoActions(DelayTime::create(CCRANDOM_0_1()*1.0f), jump_by)));
-            army_scene->addChild(bad_mother);
+            layer->addChild(bad_mother);
         };
+        army_scene->addChild(layer);
 
         Director::getInstance()->pushScene(army_scene);
         this->print_inventory();

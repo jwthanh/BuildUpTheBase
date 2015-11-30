@@ -22,11 +22,12 @@ class GameLayer : public cocos2d::Layer
         static int menu_fontsize;
         static int menu_heightdiff;
 
+        CREATE_FUNC(GameLayer);
         static cocos2d::Scene* createScene();
 
         cocos2d::Vec2 get_center_pos(float offset_x = 0, float offset_y = 0);
 
-        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) = 0;
+        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent);
         virtual void pop_scene(cocos2d::Ref* pSender);
         virtual void quit(cocos2d::Ref* pSender);
 
