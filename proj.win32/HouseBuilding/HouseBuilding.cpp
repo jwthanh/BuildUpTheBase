@@ -132,6 +132,7 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     bad_mother->setScale(8);
     bad_mother->setPosition(0, 100);
 
+    //hp bar
     node->hp_bar = new ProgressBar(node->beatup, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
     node->hp_bar->back_timer->setVisible(false);
     node->hp_bar->setPosition(Vec2(0, 0));
@@ -140,6 +141,7 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     node->hp_bar->base_node->removeFromParent();
     node->hp_bar->set_percentage(node->beatup->buildup->fighter->attrs->health->get_val_percentage());
 
+    //xp bar
     node->xp_bar = new ProgressBar(node->beatup, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
     node->xp_bar->back_timer->setVisible(false);
     node->xp_bar->setPosition(Vec2(0, -25));
