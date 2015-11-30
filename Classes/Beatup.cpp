@@ -883,6 +883,7 @@ void Beatup::prep_other()
     bad_mother->setPosition(0, 100);
 
     this->fighter_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
+    this->fighter_bar->back_timer->setVisible(false);
     this->fighter_bar->setPosition(Vec2(0, 0));
     this->fighter_bar->setAnchorPoint(Vec2(0.5, 0.5));
     this->fighter_bar->setScale(2);
@@ -1210,7 +1211,6 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
     {
-
 
         this->print_inventory();
     }
