@@ -212,6 +212,8 @@ class FighterNode : public cocos2d::Node
         Beatup* beatup;
         spFighter fighter;
 
+        cocos2d::Sprite* sprite;
+
         ProgressBar* hp_bar;
         ProgressBar* xp_bar;
 };

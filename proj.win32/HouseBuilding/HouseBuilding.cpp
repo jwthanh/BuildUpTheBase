@@ -127,10 +127,11 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     node->beatup = beatup;
     node->fighter = fighter;
 
-    cocos2d::Sprite* bad_mother = Sprite::createWithSpriteFrameName("townsmen8x8.png");
-    bad_mother->setName("bad_mother");
-    bad_mother->setScale(8);
-    bad_mother->setPosition(0, 100);
+    node->sprite = Sprite::createWithSpriteFrameName("townsmen8x8.png");
+    node->sprite->setName("bad_mother");
+    node->sprite->setScale(8);
+    node->sprite->setPosition(0, 100);
+    node->addChild(node->sprite);
 
     //hp bar
     node->hp_bar = new ProgressBar(node->beatup, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
@@ -140,6 +141,7 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     node->hp_bar->setScale(2);
     node->hp_bar->base_node->removeFromParent();
     node->hp_bar->set_percentage(node->beatup->buildup->fighter->attrs->health->get_val_percentage());
+    node->addChild(node->hp_bar->base_node);
 
     //xp bar
     node->xp_bar = new ProgressBar(node->beatup, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
@@ -149,9 +151,6 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     node->xp_bar->setScale(2);
     node->xp_bar->base_node->removeFromParent();
     node->xp_bar->front_timer->setColor(Color3B::BLUE);
-
-    node->addChild(bad_mother);
-    node->addChild(node->hp_bar->base_node);
     node->addChild(node->xp_bar->base_node);
 
     node->setPosition(node->beatup->get_center_pos(sx(300)));

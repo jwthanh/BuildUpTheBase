@@ -39,7 +39,8 @@ bool GameLayer::touch_in_node(Node* target, cocos2d::Touch* touch, float scale)
 
 bool GameLayer::vec2_in_node(Node* target, cocos2d::Vec2 pos)
 {
-    if (target->getBoundingBox().containsPoint(pos)) 
+    auto bbox = target->getBoundingBox();
+    if (bbox.containsPoint(pos)) 
     {
         return true;
     }

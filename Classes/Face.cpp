@@ -1105,7 +1105,7 @@ bool Coin::update(float dt)
         }
         else
         {
-            this->sprite->setOpacity(10);
+            // this->sprite->setOpacity(10);
             this->sprite->removeFromParentAndCleanup(true);
             this->sprite = NULL;
             this->should_remove = true;

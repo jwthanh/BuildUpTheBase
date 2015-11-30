@@ -492,6 +492,25 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         return false;
     }
 
+    auto fighter_pos = this->fighter_node->convertToWorldSpace(this->fighter_node->sprite->getPosition());
+    auto fighter_size = this->fighter_node->sprite->getContentSize();
+    Rect fighter_rect = Rect(
+        fighter_pos.x - fighter_size.width/2*this->fighter_node->sprite->getScaleX(),
+        fighter_pos.y - fighter_size.height/2*this->fighter_node->sprite->getScaleY(),
+        fighter_size.width*this->fighter_node->sprite->getScaleX(),
+        fighter_size.height*this->fighter_node->sprite->getScaleY()
+        );
+
+    //LayerColor* color_layer = LayerColor::create(Color4B::RED);
+    //color_layer->setContentSize(fighter_rect.size);
+    //color_layer->setPosition(fighter_rect.origin);
+    //this->addChild(color_layer);
+
+    if (vec2_in_rect(&fighter_rect, touch->getLocation()))
+    {
+        print("touched sprite");
+    }
+
     if (touch_in_node(this->shop_banner, touch))
     {
         this->switch_to_shop();
