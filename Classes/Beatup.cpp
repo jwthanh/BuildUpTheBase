@@ -892,7 +892,7 @@ void Beatup::prep_other()
 
     this->fighter_xp_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
     this->fighter_xp_bar->back_timer->setVisible(false);
-    this->fighter_xp_bar->setPosition(Vec2(0, -50));
+    this->fighter_xp_bar->setPosition(Vec2(0, -25));
     this->fighter_xp_bar->setAnchorPoint(Vec2(0.5, 0.5));
     this->fighter_xp_bar->setScale(2);
     this->fighter_xp_bar->base_node->removeFromParent();
@@ -1439,6 +1439,7 @@ void Beatup::update(float dt)
 
     this->fighter_bar->set_percentage(this->buildup->fighter->attrs->health->get_val_percentage());
     this->fighter_xp_bar->set_percentage(this->buildup->fighter->xp->get_progress_percentage()*100);
+    this->fighter_xp_bar->front_timer->setColor(Color3B::BLUE);
 
 };
 
