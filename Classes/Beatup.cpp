@@ -878,7 +878,8 @@ void Beatup::prep_other()
     this->fighter_node = Node::create();
     this->addChild(this->fighter_node);
 
-    Sprite* bad_mother = Sprite::createWithSpriteFrameName("badmother20x20.png");
+    Sprite* bad_mother = Sprite::createWithSpriteFrameName("townsmen8x8.png");
+    bad_mother->setName("bad_mother");
     bad_mother->setScale(4);
     bad_mother->setPosition(0, 100);
 
@@ -1440,6 +1441,25 @@ void Beatup::update(float dt)
     this->fighter_bar->set_percentage(this->buildup->fighter->attrs->health->get_val_percentage());
     this->fighter_xp_bar->set_percentage(this->buildup->fighter->xp->get_progress_percentage()*100);
     this->fighter_xp_bar->front_timer->setColor(Color3B::BLUE);
+
+    if (this->buildup->fighter->xp->lvl == 2) {
+        auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
+        auto old_pos = bm->getPosition();
+        Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("thief8x8.png");
+        bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
+    }
+    else if (this->buildup->fighter->xp->lvl == 3) {
+        auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
+        auto old_pos = bm->getPosition();
+        Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("hero8x8.png");
+        bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
+    }
+    else if (this->buildup->fighter->xp->lvl == 4) {
+        auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
+        auto old_pos = bm->getPosition();
+        Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("badmother20x20.png");
+        bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
+    };
 
 };
 

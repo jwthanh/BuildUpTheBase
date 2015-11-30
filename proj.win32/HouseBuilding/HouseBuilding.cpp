@@ -324,6 +324,7 @@ void arena_task(Building* arena, float dt)
     {
         print1("creating squirrel!");
         auto skelly = std::make_shared<Fighter>(city, "Squirrel");
+        skelly->xp->value = 25;
         skelly->attrs->health->set_vals(4);
         skelly->attrs->damage->set_vals(2);
         city->building_by_name("The Arena")->fighters.push_back(skelly);
@@ -820,8 +821,10 @@ Village* Buildup::init_city(Buildup* buildup)
     auto forest = std::make_shared<Building>(city, "The Forest", nullptr);
 
     buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");
+    buildup->fighter->xp->total = 99;
+    buildup->fighter->xp->this_level = 99;
     auto brawler = std::make_shared<Fighter>(arena->city, "Brawler");
-    brawler->attrs->health->set_vals(50);
+    brawler->attrs->health->set_vals(15);
     buildup->fighter->attrs->health->set_vals(200);
     arena->fighters.push_back(buildup->fighter);
     arena->fighters.push_back(brawler);
