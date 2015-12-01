@@ -1206,6 +1206,7 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
             auto fighter = arena->fighters.front();
             fighter->attrs->health->current_val += 50;
             heal_recipe.consume(farm->ingredients);
+            print("healed first fighter");
         }
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
