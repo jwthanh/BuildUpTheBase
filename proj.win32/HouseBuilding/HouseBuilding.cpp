@@ -627,7 +627,16 @@ void Building::create_resources(Resource::ResourceType type, int quantity, std::
     {
         std::cout << "type not recognized" << std::endl;
     }
-}
+};
+
+void Building::consume_recipe(Recipe* recipe)
+{
+    if (recipe->is_satisfied(this->ingredients))
+    {
+        recipe->consume(this->ingredients);
+        recipe->callback(NULL); //TODO add beatup
+    }
+};
 
 void Building::update(float dt)
 {

@@ -5,12 +5,16 @@
 #include <map>
 
 #include "HouseBuilding.h"
+#include "constants.h"
+
 typedef std::map<Ingredient::IngredientType, int> ComponentMap;
 
 class Recipe : public Nameable
 {
     public:
         ComponentMap components;
+
+        VoidFuncBeatupNoArgs callback;
 
         Recipe(std::string name="Unnamed");
 

@@ -37,8 +37,11 @@ enum BackgroundTypes
     Western
 };
 
+class Beatup;
+
 typedef std::function<bool()> BoolFuncNoArgs;
 typedef std::function<void()> VoidFuncNoArgs;
+typedef std::function<void(Beatup*)> VoidFuncBeatupNoArgs;
 
 const char PATH_SEPARATOR =
 #ifdef _WIN32

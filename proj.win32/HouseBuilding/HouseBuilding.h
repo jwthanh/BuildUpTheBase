@@ -22,6 +22,7 @@
 #include <ProgressBar.h>
 
 
+class Recipe;
 class Beatup;
 class Building;
 class Buildup;
@@ -273,6 +274,7 @@ class Building : public Nameable, public Updateable
         };
 
         void create_resources(Resource::ResourceType type, int quantity, std::string name);
+        void consume_recipe(Recipe* recipe);
 
         void update(float dt);
 
