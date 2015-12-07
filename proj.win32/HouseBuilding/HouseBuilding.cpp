@@ -176,6 +176,12 @@ void FighterNode::update(float dt)
     this->xp_bar->set_percentage(this->fighter->xp->get_progress_percentage()*100);
 };
 
+void FighterNode::load_new_sprite(std::string name)
+{
+    Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName(name);
+    this->sprite->setSpriteFrame(townsmen_sprite->getSpriteFrame());
+};
+
 void Battle::do_battle()
 {
     if (this->combatants.size() > 1)

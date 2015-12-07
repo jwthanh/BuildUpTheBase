@@ -214,6 +214,7 @@ class FighterNode : public cocos2d::Node
         spFighter fighter;
 
         cocos2d::Sprite* sprite;
+        void load_new_sprite(std::string name);
 
         ProgressBar* hp_bar;
         ProgressBar* xp_bar;

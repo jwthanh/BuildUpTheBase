@@ -895,11 +895,7 @@ void Beatup::prep_other()
 
     this->brawler_node = FighterNode::create(this, this->buildup->brawler);
     this->brawler_node->setPosition(this->get_center_pos(sx(300), sy(-150)));
-    auto bm = this->brawler_node->sprite;
-    auto old_pos = bm->getPosition();
-    bm->setScale(8);
-    Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("ogre10x10.png");
-    bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
+    this->brawler_node->load_new_sprite("ogre10x10.png");
 
 };
 
@@ -1438,26 +1434,13 @@ void Beatup::update(float dt)
     this->brawler_node->update(dt);
 
     if (this->buildup->fighter->xp->lvl == 2) {
-        auto bm = this->fighter_node->sprite;
-        auto old_pos = bm->getPosition();
-        bm->setScale(8);
-        Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("thief8x8.png");
-        bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
-
+        this->fighter_node->load_new_sprite("thief8x8.png");
     }
     else if (this->buildup->fighter->xp->lvl == 3) {
-        auto bm = this->fighter_node->sprite;
-        auto old_pos = bm->getPosition();
-        bm->setScale(8);
-        Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("hero8x8.png");
-        bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
+        this->fighter_node->load_new_sprite("hero8x8.png");
     }
     else if (this->buildup->fighter->xp->lvl == 4) {
-        auto bm = this->fighter_node->sprite;
-        bm->setScale(4);
-        auto old_pos = bm->getPosition();
-        Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("badmother20x20.png");
-        bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
+        this->fighter_node->load_new_sprite("badmother20x20.png");
     };
 
 };
