@@ -129,7 +129,6 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     node->fighter = fighter;
 
     node->sprite = Sprite::createWithSpriteFrameName("townsmen8x8.png");
-    node->sprite->setName("bad_mother");
     node->sprite->setScale(8);
     node->sprite->setPosition(0, 100);
     node->addChild(node->sprite);
@@ -163,7 +162,7 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
 
 void FighterNode::update(float dt)
 {
-    auto hp_percentage = this->beatup->buildup->fighter->attrs->health->get_val_percentage();
+    auto hp_percentage = this->fighter->attrs->health->get_val_percentage();
 
     if (this->hp_bar->target_percentage != hp_percentage)
     {
@@ -174,7 +173,7 @@ void FighterNode::update(float dt)
     }
 
     this->hp_bar->set_percentage(hp_percentage);
-    this->xp_bar->set_percentage(this->beatup->buildup->fighter->xp->get_progress_percentage()*100);
+    this->xp_bar->set_percentage(this->fighter->xp->get_progress_percentage()*100);
 };
 
 void Battle::do_battle()
@@ -892,11 +891,11 @@ Village* Buildup::init_city(Buildup* buildup)
     auto forest = std::make_shared<Building>(city, "The Forest", nullptr);
 
     buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");
-    auto brawler = std::make_shared<Fighter>(arena->city, "Brawler");
-    brawler->attrs->health->set_vals(15);
+    buildup->brawler = std::make_shared<Fighter>(arena->city, "Brawler");
+    buildup->brawler->attrs->health->set_vals(100);
     buildup->fighter->attrs->health->set_vals(200);
     arena->fighters.push_back(buildup->fighter);
-    arena->fighters.push_back(brawler);
+    arena->fighters.push_back(buildup->brawler);
 
 
     city->buildings.push_back(farm);

@@ -51,6 +51,7 @@ class Beatup : public GameLayer
 
         Buildup* buildup;
         FighterNode* fighter_node;
+        FighterNode* brawler_node;
 
         bool level_been_won;
         bool level_been_lost;

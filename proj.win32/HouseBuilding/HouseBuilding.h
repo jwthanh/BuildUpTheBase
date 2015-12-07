@@ -353,6 +353,7 @@ class Buildup
     public:
         Player* player;
         spFighter fighter;
+        spFighter brawler;
 
         spBuilding target_building;
 

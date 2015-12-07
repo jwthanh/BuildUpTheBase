@@ -502,11 +502,6 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         fighter_size.height*this->fighter_node->sprite->getScaleY()
         );
 
-    //LayerColor* color_layer = LayerColor::create(Color4B::RED);
-    //color_layer->setContentSize(fighter_rect.size);
-    //color_layer->setPosition(fighter_rect.origin);
-    //this->addChild(color_layer);
-
     if (vec2_in_rect(&fighter_rect, touch->getLocation()))
     {
         print("touched sprite");
@@ -896,6 +891,15 @@ void Beatup::prep_other()
     this->addChild(this->flames_button);
 
     this->fighter_node = FighterNode::create(this, this->buildup->fighter);
+    this->fighter_node->setPosition(this->get_center_pos(sx(300), sy(50)));
+
+    this->brawler_node = FighterNode::create(this, this->buildup->brawler);
+    this->brawler_node->setPosition(this->get_center_pos(sx(300), sy(-150)));
+    auto bm = this->brawler_node->sprite;
+    auto old_pos = bm->getPosition();
+    bm->setScale(8);
+    Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("ogre10x10.png");
+    bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
 
 };
 
@@ -1431,9 +1435,10 @@ void Beatup::update(float dt)
     this->print_inventory();
 
     this->fighter_node->update(dt);
+    this->brawler_node->update(dt);
 
     if (this->buildup->fighter->xp->lvl == 2) {
-        auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
+        auto bm = this->fighter_node->sprite;
         auto old_pos = bm->getPosition();
         bm->setScale(8);
         Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("thief8x8.png");
@@ -1441,14 +1446,14 @@ void Beatup::update(float dt)
 
     }
     else if (this->buildup->fighter->xp->lvl == 3) {
-        auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
+        auto bm = this->fighter_node->sprite;
         auto old_pos = bm->getPosition();
         bm->setScale(8);
         Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("hero8x8.png");
         bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
     }
     else if (this->buildup->fighter->xp->lvl == 4) {
-        auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
+        auto bm = this->fighter_node->sprite;
         bm->setScale(4);
         auto old_pos = bm->getPosition();
         Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("badmother20x20.png");
@@ -2043,7 +2048,6 @@ void Beatup::view_army()
 
     for (unsigned int i = 0; i < this->buildup->city->building_by_name("The Farm")->ingredients.size(); i++) {
         Sprite* bad_mother = Sprite::createWithSpriteFrameName("townsmen8x8.png");
-        bad_mother->setName("bad_mother");
         bad_mother->setScale(8);
         bad_mother->setPosition(300 + CCRANDOM_0_1() * 400, 100 + CCRANDOM_0_1() * 400);
         JumpBy* jump_by = JumpBy::create(CCRANDOM_0_1()* 1.5f + 1.0f, Vec2(0, 0), CCRANDOM_0_1() * 10, 3);
