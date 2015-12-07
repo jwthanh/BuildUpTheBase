@@ -69,4 +69,13 @@ void FShake::stop(void)
 	this->getTarget()->setPosition( Vec2( _initial_x, _initial_y ) );
 
 	ActionInterval::stop();
+} 
+
+FShake* FShake::clone()
+{
+    // no copy constructor
+    auto a = new (std::nothrow) FShake();
+    a->initWithDuration(_duration, _strength_x, _strength_y);
+    a->autorelease();
+    return a;
 }

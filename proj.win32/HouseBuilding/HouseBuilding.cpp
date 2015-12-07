@@ -20,6 +20,7 @@
 
 #include "../../Classes/Beatup.h"
 #include <Util.h>
+#include <FShake.h>
 
 USING_NS_CC;
 
@@ -162,7 +163,17 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
 
 void FighterNode::update(float dt)
 {
-    this->hp_bar->set_percentage(this->beatup->buildup->fighter->attrs->health->get_val_percentage());
+    auto hp_percentage = this->beatup->buildup->fighter->attrs->health->get_val_percentage();
+
+    if (this->hp_bar->target_percentage != hp_percentage)
+    {
+        FShake* shake = FShake::actionWithDuration(0.1f, 2.0f);
+        this->hp_bar->front_timer->runAction(shake);
+        this->hp_bar->back_timer->runAction(shake->clone());
+        this->hp_bar->background->runAction(shake->clone());
+    }
+
+    this->hp_bar->set_percentage(hp_percentage);
     this->xp_bar->set_percentage(this->beatup->buildup->fighter->xp->get_progress_percentage()*100);
 };
 

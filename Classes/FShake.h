@@ -20,6 +20,7 @@ public:
 	virtual void startWithTarget(cocos2d::Node* pTarget);
 	virtual void update(float time);
 	virtual void stop(void);
+    virtual FShake* clone();
 
 protected:
 	// Initial position of the shaked node

@@ -27,6 +27,7 @@
 #include "MainMenu.h"
 #include <proj.win32/HouseBuilding/Recipe.h>
 #include "attribute.h"
+#include "FShake.h"
 
 USING_NS_CC;
 
@@ -1437,6 +1438,7 @@ void Beatup::update(float dt)
         bm->setScale(8);
         Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName("thief8x8.png");
         bm->setSpriteFrame(townsmen_sprite->getSpriteFrame());
+
     }
     else if (this->buildup->fighter->xp->lvl == 3) {
         auto bm = static_cast<Sprite*>(this->fighter_node->getChildByName("bad_mother"));
