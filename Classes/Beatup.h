@@ -220,6 +220,8 @@ class Beatup : public GameLayer
 
         bool tutorials_enabled();
         static std::string tutorial_id_key;
+
+        void view_army();
 };
 
 void test_shader_stuff(Beatup* beatup);
