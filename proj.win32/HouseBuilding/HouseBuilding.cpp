@@ -22,6 +22,8 @@
 #include <Util.h>
 #include <FShake.h>
 
+#include "cocos2d.h"
+
 USING_NS_CC;
 
 const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
@@ -198,19 +200,27 @@ vsFighter Battle::combatants_by_team(Fighter::TeamsType team)
 
 void Battle::fight(spFighter left, spFighter right)
 {
+    if (left->attrs->health->current_val < 1 || right->attrs->health->current_val < 1) {
+        print("someone is dead, skipping");
+        return;
+    };
+
     std::stringstream ss;
     ss << "\tA fight! ";
     ss << left->name << " vs " << right->name;
 
     double& health = right->attrs->health->current_val;
     auto dmg = left->attrs->damage->current_val;
-    health -= dmg;
+    health -= ceil(cocos2d::rand_0_1() * dmg);
     ss << " " << right->name << " at " << right->attrs->health->current_val << " hp;";
 
     if (right->combat->is_dead())
     {
         ss << " and it died!";
-        this->distribute_exp(right);
+
+        //only give exp to killer
+        left->combat->give_exp(right->xp->value);
+        // this->distribute_exp(right);
     }
     print(ss.str());
 };
@@ -424,11 +434,11 @@ void arena_task(Building* arena, float dt)
     if (arena->fighters.size() <= 2)
     {
         print1("creating squirrel!");
-        auto skelly = std::make_shared<Fighter>(city, "Squirrel");
-        skelly->xp->value = 25;
-        skelly->attrs->health->set_vals(4);
-        skelly->attrs->damage->set_vals(2);
-        city->building_by_name("The Arena")->fighters.push_back(skelly);
+        auto squirrel = std::make_shared<Fighter>(city, "Squirrel");
+        squirrel->xp->value = 25;
+        squirrel->attrs->health->set_vals(20);
+        squirrel->attrs->damage->set_vals(10);
+        city->building_by_name("The Arena")->fighters.push_back(squirrel);
     };
 
     std::cout << "\tDoing arena stuff" << std::endl;
@@ -932,11 +942,13 @@ Village* Buildup::init_city(Buildup* buildup)
 
     buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");
     buildup->fighter->team = Fighter::TeamOne;
+    buildup->fighter->attrs->health->set_vals(100);
 
     buildup->brawler = std::make_shared<Fighter>(arena->city, "Brawler");
     buildup->brawler->team = Fighter::TeamOne;
-    buildup->brawler->attrs->health->set_vals(100);
-    buildup->fighter->attrs->health->set_vals(200);
+    buildup->brawler->attrs->health->set_vals(200);
+
+
     arena->fighters.push_back(buildup->fighter);
     arena->fighters.push_back(buildup->brawler);
 
