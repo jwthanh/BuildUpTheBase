@@ -167,7 +167,7 @@ void FighterNode::update(float dt)
 
     if (this->hp_bar->target_percentage != hp_percentage)
     {
-        FShake* shake = FShake::actionWithDuration(0.1f, 2.0f);
+        FShake* shake = FShake::actionWithDuration(0.1f, 1.0f);
         this->hp_bar->front_timer->runAction(shake);
         this->hp_bar->back_timer->runAction(shake->clone());
         this->hp_bar->background->runAction(shake->clone());
