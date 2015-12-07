@@ -182,28 +182,61 @@ void FighterNode::load_new_sprite(std::string name)
     this->sprite->setSpriteFrame(townsmen_sprite->getSpriteFrame());
 };
 
+vsFighter Battle::combatants_by_team(Fighter::TeamsType team)
+{
+    vsFighter team_combatants = vsFighter();
+
+    for (auto fighter : this->combatants)
+    {
+        if (fighter->team == team)
+        {
+            team_combatants.push_back(fighter);
+        }
+    }
+    return team_combatants;
+};
+
+void Battle::fight(spFighter left, spFighter right)
+{
+    std::stringstream ss;
+    ss << "\tA fight! ";
+    ss << left->name << " vs " << right->name;
+
+    double& health = right->attrs->health->current_val;
+    auto dmg = left->attrs->damage->current_val;
+    health -= dmg;
+    ss << " " << right->name << " at " << right->attrs->health->current_val << " hp;";
+
+    if (right->combat->is_dead())
+    {
+        ss << " and it died!";
+        this->distribute_exp(right);
+    }
+    print(ss.str());
+};
+
 void Battle::do_battle()
 {
     if (this->combatants.size() > 1)
     {
-        std::stringstream ss;
-        ss << "\tA fight between";
-        for (auto fighter : this->combatants)
+        vsFighter team_1 = this->combatants_by_team(Fighter::TeamOne);
+        vsFighter team_2 = this->combatants_by_team(Fighter::TeamTwo);
+
+        //team1 attacks team2
+        for (auto fighter : team_1)
         {
-            ss << " ..." << fighter->name;
-            double& health = fighter->attrs->health->current_val;
-            auto dmg = fighter->attrs->damage->current_val;
-            health -= dmg;
-            //health -= std::rand() % 4 + 6;
-            ss << " at " << fighter->attrs->health->current_val << " hp;";
-            if (fighter->combat->is_dead())
-            {
-                ss << " and it died!";
-                this->distribute_exp(fighter);
+            for (auto enemy : team_2) {
+                this->fight(fighter, enemy);
             }
         }
-        ss << "... and that's it!" << std::endl;
-        print(ss.str());
+
+        //team2 attacks team1 after
+        for (auto fighter : team_2)
+        {
+            for (auto enemy : team_1) {
+                this->fight(fighter, enemy);
+            }
+        }
     }
     else
     {
@@ -387,7 +420,8 @@ void marketplace_task(Building* building, float dt)
 void arena_task(Building* arena, float dt)
 {
     auto city = arena->city;
-    if (arena->fighters.size() <= 1)
+    //expect two allies or dont spawn more
+    if (arena->fighters.size() <= 2)
     {
         print1("creating squirrel!");
         auto skelly = std::make_shared<Fighter>(city, "Squirrel");
@@ -897,7 +931,10 @@ Village* Buildup::init_city(Buildup* buildup)
     auto forest = std::make_shared<Building>(city, "The Forest", nullptr);
 
     buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");
+    buildup->fighter->team = Fighter::TeamOne;
+
     buildup->brawler = std::make_shared<Fighter>(arena->city, "Brawler");
+    buildup->brawler->team = Fighter::TeamOne;
     buildup->brawler->attrs->health->set_vals(100);
     buildup->fighter->attrs->health->set_vals(200);
     arena->fighters.push_back(buildup->fighter);

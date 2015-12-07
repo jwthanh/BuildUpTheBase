@@ -186,6 +186,14 @@ class Waste : public Resource
 class Fighter : public Nameable, public Updateable
 {
     public:
+        enum TeamsType {
+            TeamOne = 0, TeamTwo, TeamThree, TeamFour,
+            TeamFive, TeamSix, TeamSeven, TeamEight,
+            TeamNine, TeamTen
+        } team;
+
+        // TeamsType
+
         Experience* xp;
         AttributeContainer* attrs;
         Village* city;
@@ -195,6 +203,7 @@ class Fighter : public Nameable, public Updateable
             this->attrs = new AttributeContainer();
             this->xp = new Experience();
             this->combat = new Combat("unnamed combat", this);
+            this->team = TeamTwo; //default 2 for enemy
         }
 
         void update(float dt);
@@ -224,18 +233,18 @@ class Battle : public Updateable
 {
     public:
         vsFighter combatants;
+        vsFighter combatants_by_team(Fighter::TeamsType team);
 
-        Battle() : Updateable()
-    {
+        Battle() : Updateable() {
         this->combatants = vsFighter();
     };
 
-        void update(float dt)
-        {
+        void update(float dt) {
             Updateable::update(dt);
             this->do_battle();
         }
 
+        void fight(spFighter left, spFighter right);
         void do_battle();
         void distribute_exp(spFighter dead_fighter);
 };
