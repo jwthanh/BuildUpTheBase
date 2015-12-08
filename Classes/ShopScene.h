@@ -95,6 +95,7 @@ class ShopItem
 
     public:
         bool is_enabled = true;
+        bool is_infinite_buy = true;
 
         ShopItem(Shop* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button);
 

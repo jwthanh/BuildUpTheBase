@@ -438,7 +438,7 @@ void arena_task(Building* arena, float dt)
         squirrel->xp->value = 25;
         squirrel->attrs->health->set_vals(20);
         squirrel->attrs->damage->set_vals(10);
-        city->building_by_name("The Arena")->fighters.push_back(squirrel);
+        arena->fighters.push_back(squirrel);
     };
 
     std::cout << "\tDoing arena stuff" << std::endl;

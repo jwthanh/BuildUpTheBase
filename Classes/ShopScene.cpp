@@ -90,12 +90,14 @@ bool Shop::buy(ShopItem* shop_item, int cost, BoolFuncNoArgs on_bought)
     {
         on_bought();
 
-        if (shop_item)
-        {
+        if (shop_item && !shop_item->is_infinite_buy) {
             shop_item->is_enabled = false;
-        };
-        this->buy_stuff(cost);
-        return false;
+            this->buy_stuff(cost);
+        }
+        else {
+            this->buy_stuff(cost);
+        }
+        return shop_item->is_infinite_buy;
     };
     return true;
 };
@@ -239,70 +241,35 @@ void Shop::prep_combos(cocos2d::ui::ScrollView* scroll)
 
 void Shop::prep_punch_items(cocos2d::ui::ScrollView* scroll)
 {
-    LeftPunchDamageShopItem* lpdsi = new LeftPunchDamageShopItem(this, this->combo_menu);
-    auto c_btn = create_button(lpdsi->get_menu_text(), lpdsi->get_callback(this));
-    lpdsi->button = c_btn;
-    scroll->addChild(c_btn);
 
-    RightPunchDamageShopItem* rpdsi = new RightPunchDamageShopItem(this, this->combo_menu);
-    c_btn = create_button(rpdsi->get_menu_text(), rpdsi->get_callback(this));
-    rpdsi->button = c_btn;
-    scroll->addChild(c_btn);
-
-    std::function<BoolFuncNoArgs(Fist*, int)> get_fist_cb = [this](Fist* fist, int cost)
+    std::function<BoolFuncNoArgs(int)> get_fist_cb = [this](int cost)
     {
         //runs when the button is clicked
-        BoolFuncNoArgs on_click = [this, fist, cost]()
+        BoolFuncNoArgs on_click = [this, cost]()
         {
             //build id_string
             std::stringstream id_string;
-            if (fist->hand == FistHands::Left) { id_string << "left_fist"; }
-            else { id_string << "right_fist"; }
-            id_string << "_charge_boost";
+            id_string << "sell_grain";
+
+            print1("clicked!");
 
             //runs after the button is clicked, and the item has been bought
-            BoolFuncNoArgs on_bought_cb = [&id_string, this, fist, cost]()
+            BoolFuncNoArgs on_bought_cb = [&id_string, this, cost]()
             {
-                fist->charging_clock->set_threshold(
-                    fist->defaults.charge_threshold/2
-                );
+                print1("bought!");
+                //fist->charging_clock->set_threshold(
+                //    fist->defaults.charge_threshold/2
+                //);
 
                 //set the charged boost as sold
-                DataManager::set_bool_from_data(id_string.str(), true);
-                return true;
+                //DataManager::set_bool_from_data(id_string.str(), true);
+                return false;
             };
 
             //use id_string to find the shop item
             PlainShopItem* psi = this->get_psi_by_id(id_string.str());
-            return this->buy(psi, cost, on_bought_cb);
-        };
-
-        return on_click;
-    };
-
-    std::function<BoolFuncNoArgs(float, int)> get_stamina_boost = [this](float stamina_boost, int cost)
-    {
-        //runs when the button is clicked
-        BoolFuncNoArgs on_click = [this, stamina_boost, cost]()
-        {
-            //build id_string
-            std::stringstream id_string;
-            id_string << "stamina_recharge_boost";
-            if (cost == 45) { id_string << "_1"; }
-            else { id_string << "_2"; }
-
-            //runs after the button is clicked, and the item has been bought
-            BoolFuncNoArgs on_bought_cb = [&id_string, this, stamina_boost, cost]()
-            {
-                this->beatup->stamina_regen_rate += stamina_boost;
-
-                //set the charged boost as sold
-                DataManager::set_bool_from_data(id_string.str(), true);
-                return true;
-            };
-
-            //use id_string to find the shop item
-            PlainShopItem* psi = this->get_psi_by_id(id_string.str());
+            print1("MADE INFINITE");
+            psi->is_infinite_buy = true;
             return this->buy(psi, cost, on_bought_cb);
         };
 
@@ -310,10 +277,7 @@ void Shop::prep_punch_items(cocos2d::ui::ScrollView* scroll)
     };
 
     std::vector<PricedItemData> item_data = {
-        { "left_fist_charge_boost", "Left Charge Boost", get_fist_cb(this->beatup->left_fist, 100), false, 50},
-        { "right_fist_charge_boost", "Right Charge Boost", get_fist_cb(this->beatup->right_fist, 100), false, 50},
-        { "stamina_recharge_boost_1", "Small Stamina Boost", get_stamina_boost(0.5f, 45), false, 45},
-        { "stamina_recharge_boost_2", "Large Stamina Boost", get_stamina_boost(1.0f, 100), false, 100}
+        { "sell_grain", "Sell some grain", get_fist_cb(1), false, 1},
     };
 
     this->init_menu_from_priced_data(scroll, item_data);
@@ -647,7 +611,8 @@ PlainShopItem::PlainShopItem(Shop* shop, cocos2d::Menu* menu, std::string id_key
     if (this->get_been_bought() &&
             //boosts are special cases where they are always enabled on first load
             (id_key != "left_fist_charge_boost" && id_key != "right_fist_charge_boost"
-             && id_key != "stamina_recharge_boost_1" && id_key != "stamina_recharge_boost_2")) 
+             && id_key != "stamina_recharge_boost_1" && id_key != "stamina_recharge_boost_2") &&
+             !this->is_infinite_buy) 
     {
         this->is_enabled = false;
     }
@@ -663,7 +628,7 @@ PlainShopItem::PlainShopItem(Shop* shop, cocos2d::Menu* menu, std::string id_key
 void PlainShopItem::set_been_bought(bool val)
 {
     DataManager::set_bool_from_data(this->id_key, val);
-    if (val)
+    if (val && !this->is_infinite_buy)
     {
         this->is_enabled = false;
     };
