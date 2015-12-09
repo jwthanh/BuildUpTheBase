@@ -620,22 +620,20 @@ void Beatup::prep_face(Face* face)
 
     this->addChild(node_grid);
 
-    face->health_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar.png");
-    face->health_bar->back_timer->setSprite(Sprite::createWithSpriteFrameName("enemy_healthbar_bar_white.png"));
-    //face->health_bar->front_timer->setBarChangeRate(Vec2(1.0f, 0.8f));
-    //face->health_bar->back_timer->setBarChangeRate(Vec2(1.0f, 0.8f));
-    face->health_bar->fit_back_to_front();
-    face->health_bar->setAnchorPoint(Vec2(0.5f, 0.5f));
+    //face->health_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar.png");
+    //face->health_bar->back_timer->setSprite(Sprite::createWithSpriteFrameName("enemy_healthbar_bar_white.png"));
+    //face->health_bar->fit_back_to_front();
+    //face->health_bar->setAnchorPoint(Vec2(0.5f, 0.5f));
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    float hby = face->health_bar->front_timer->getContentSize().height;
-    Vec2 health_pos = Vec2(
-        this->get_center_pos().x,
-        visibleSize.height - sy(hby)*2
-    );
+    //float hby = face->health_bar->front_timer->getContentSize().height;
+    //Vec2 health_pos = Vec2(
+    //    this->get_center_pos().x,
+    //    visibleSize.height - sy(hby)*2
+    //);
 
-    face->health_bar->setPosition(health_pos);
+    //face->health_bar->setPosition(health_pos);
 
     auto create_animated_sprite = [face](std::string sprite_path, std::string neutral_path, std::string left_path, std::string right_path) {
         auto sprite = Sprite::createWithSpriteFrameName(sprite_path);

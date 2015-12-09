@@ -494,7 +494,7 @@ void Face::remove()
     this->remove_all_features();
     delete this->features;
 
-    delete this->health_bar;
+    //delete this->health_bar;
     this->removeFromParentAndCleanup(true);
     this->removed = true;
 };
@@ -627,6 +627,7 @@ void Face::set_center(int x, int y)
 
 void Face::update_health_bar(float dt)
 {
+    return;
     if (this->beatup->get_target_face() == this)
     {
         float percentage = 1.0f-this->get_hits_percent();
