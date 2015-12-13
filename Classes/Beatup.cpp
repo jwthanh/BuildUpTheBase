@@ -142,7 +142,7 @@ bool Beatup::init()
 
 
     auto create_combo = [this, new_pos, side_height](
-        std::string id_key, std::string name, unsigned int cost,
+        std::string id_key, std::string name, int cost,
         std::initializer_list<FistHands> order, float shake_time,
         float stamina_regen)
     {
@@ -395,7 +395,7 @@ int Beatup::get_total_hits()
     return DataManager::get_int_from_data(Beatup::total_hit_key);
 };
 
-unsigned Beatup::get_total_coins()
+int Beatup::get_total_coins()
 {
     return DataManager::get_int_from_data(Beatup::total_coin_key);
 };
@@ -1443,7 +1443,7 @@ void Beatup::update(float dt)
 
 };
 
-void Beatup::update_coins_lbl(bool do_bump, unsigned int total_coins)
+void Beatup::update_coins_lbl(bool do_bump, int total_coins)
 {
     std::stringstream ss;
     if (total_coins == -321)
@@ -1850,9 +1850,9 @@ void Beatup::reload_resources()
 #endif
 };
 
-unsigned int Beatup::get_activation_count()
+int Beatup::get_activation_count()
 {
-    unsigned int activates = 0;
+    int activates = 0;
     for (Combo* combo : *this->combos)
     {
         activates += combo->activate_count;

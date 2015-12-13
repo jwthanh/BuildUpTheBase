@@ -86,25 +86,25 @@ bool unlock_grenade(Beatup* beatup)
 
 bool obj_block_once(Beatup* beatup)
 {
-    unsigned int minimum_blocks = 1;
+    int minimum_blocks = 1;
     return beatup->block_count >= minimum_blocks;
 };
 
 bool obj_activate_combos(Beatup* beatup)
 {
-    unsigned int minimum_activations = 2;
+    int minimum_activations = 2;
     return beatup->get_activation_count() >= minimum_activations;
 };
 
 bool obj_earn_coins(Beatup* beatup)
 {
-    unsigned int minimum_coins = 5;
+    int minimum_coins = 5;
     return beatup->temp_coins >= minimum_coins;
 };
 
 bool obj_charged_punches(Beatup* beatup)
 {
-    unsigned int charges = 3;
+    int charges = 3;
     return beatup->temp_charges >= charges;
 };
 
@@ -162,7 +162,7 @@ Quest::Quest()
     this->objectives = NULL;
 };
 
-Quest* Quest::create_quest(Beatup* beatup, unsigned int level)
+Quest* Quest::create_quest(Beatup* beatup, int level)
 {
     std::vector<Objective*>* objectives = new std::vector<Objective*>();
 

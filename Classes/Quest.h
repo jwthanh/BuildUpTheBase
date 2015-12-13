@@ -58,7 +58,7 @@ class Quest
         void do_unlock();
 
         Quest();
-        static Quest* create_quest(Beatup* beatup, unsigned int level);
+        static Quest* create_quest(Beatup* beatup, int level);
 };
 
 #endif

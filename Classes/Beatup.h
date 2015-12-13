@@ -103,14 +103,14 @@ class Beatup : public GameLayer
 
         std::vector<Combo*>* combos;
         void detect_combo(FistHands hand);
-        unsigned int get_activation_count();
+        int get_activation_count();
 
         void reset_hits();
 
         bool should_shake();
         Clock* shake_clock;
 
-        unsigned int block_count;
+        int block_count;
 
         bool is_blocking = false;
         Clock* block_clock;
@@ -124,7 +124,7 @@ class Beatup : public GameLayer
         cocos2d::NodeGrid* node_grid;
 
         float punches_to_coin; //1 punch to 1 coin 
-        unsigned int punch_count;
+        int punch_count;
 
         void flash_color_on_face(float total_duration, cocos2d::Color3B flash_color, cocos2d::Color3B reset_color = cocos2d::Color3B::WHITE);
 
@@ -135,7 +135,7 @@ class Beatup : public GameLayer
 
         std::vector<Coin*>* coins;
         std::vector<Gore*>* gores;
-        unsigned int coins_banked;
+        int coins_banked;
 
         std::vector<Face*>* faces;
         void cycle_next_face();
@@ -163,14 +163,14 @@ class Beatup : public GameLayer
         int get_total_hits();
         static std::string total_hit_key;
 
-        unsigned int temp_coins;
+        int temp_coins;
         void add_total_coin(int x);
-        unsigned get_total_coins();
+        int get_total_coins();
         static std::string total_coin_key;
 
         cocos2d::Label* title_lbl;
         cocos2d::Label* coins_lbl;
-        void update_coins_lbl(bool do_bump = true, unsigned int total_coins = -321);
+        void update_coins_lbl(bool do_bump = true, int total_coins = -321);
 
         void reload_resources();
         void apply_flash_shader();
@@ -181,7 +181,7 @@ class Beatup : public GameLayer
         Quest* quest;
         bool quest_completed;
 
-        unsigned int temp_charges;
+        int temp_charges;
         void create_quest_alert();
 
         void setup_commands();

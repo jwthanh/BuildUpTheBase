@@ -48,7 +48,7 @@ class Shop : public GameLayer
 
         bool buy(ShopItem* shop_item, int cost, BoolFuncNoArgs on_bought);
         void buy_stuff(int cost);
-        bool can_afford(unsigned cost);
+        bool can_afford(int cost);
 
         static cocos2d::Scene* createScene();
 
@@ -120,7 +120,7 @@ class ShopItem
 
         virtual void update(float dt);
         virtual bool can_afford();
-        virtual unsigned int get_cost() = 0;
+        virtual int get_cost() = 0;
 
         virtual std::string get_cost_string();
 
@@ -152,7 +152,7 @@ class PlainShopItem : public ShopItem
         bool get_been_bought();
 
 
-        virtual unsigned int get_cost();
+        virtual int get_cost();
         // virtual bool can_afford() { return true; };
 };
 
@@ -166,7 +166,7 @@ class ComboShopItem : public ShopItem
         std::string get_menu_text();
         BoolFuncNoArgs get_callback(Shop* shop) override;
 
-        unsigned int get_cost();
+        int get_cost();
 };
 
 class PunchDamageShopItem : public ShopItem
@@ -174,7 +174,7 @@ class PunchDamageShopItem : public ShopItem
     public:
 
         PunchDamageShopItem(Shop* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button = NULL) : ShopItem(shop, menu, button){};
-        unsigned int get_cost() override;
+        int get_cost() override;
         BoolFuncNoArgs get_callback(Shop* shop) override;
 
         virtual Fist* get_fist() = 0;

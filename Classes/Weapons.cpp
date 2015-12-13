@@ -207,7 +207,7 @@ void ThrowableWeapon::fire()
     };
 };
 
-void ThrowableWeapon::change_cost(unsigned int new_cost)
+void ThrowableWeapon::change_cost( int new_cost)
 {
     this->coin_cost = new_cost;
     std::stringstream ss;
@@ -291,12 +291,12 @@ std::string GrenadeWeapon::get_fire_mp3_path()
     return "sounds\\new\\extra\\C_explosion_1.mp3";
 };
 
-unsigned int RocketWeapon::get_damage()
+ int RocketWeapon::get_damage()
 {
     return 50;
 };
 
-unsigned int GrenadeWeapon::get_damage()
+ int GrenadeWeapon::get_damage()
 {
     return 10;
 };

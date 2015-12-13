@@ -75,7 +75,7 @@ void Shop::buy_stuff(int cost)
     SoundEngine::play_sound("sounds\\new\\coin\\C_coin_1.mp3");
 };
 
-bool Shop::can_afford(unsigned cost)
+bool Shop::can_afford(int cost)
 {
     if (this->beatup->get_total_coins() >= cost)
     {
@@ -277,7 +277,7 @@ void Shop::prep_punch_items(cocos2d::ui::ScrollView* scroll)
     };
 
     std::vector<PricedItemData> item_data = {
-        { "sell_grain", "Sell some grain", get_fist_cb(1), false, 1},
+        { "sell_grain", "Sell some grain", get_fist_cb(-1), false, -1},
     };
 
     this->init_menu_from_priced_data(scroll, item_data);
@@ -558,12 +558,12 @@ BoolFuncNoArgs ComboShopItem::get_callback(Shop* shop)
     return callback;
 };
 
-unsigned int ComboShopItem::get_cost()
+int ComboShopItem::get_cost()
 {
     return this->combo->shop_cost;
 };
 
-unsigned int PunchDamageShopItem::get_cost()
+int PunchDamageShopItem::get_cost()
 {
     return 70;
 };
@@ -639,7 +639,7 @@ bool PlainShopItem::get_been_bought()
     return DataManager::get_bool_from_data(this->id_key, false);
 };
 
-unsigned int PlainShopItem::get_cost()
+int PlainShopItem::get_cost()
 {
     return this->cost;
 };

@@ -24,11 +24,11 @@ class Weapon : public Buyable
 
         std::string name = "Unnamed Weapon";
 
-        unsigned int damage;
+        int damage;
 
         void update(float dt);
 
-        virtual unsigned int get_damage() = 0;
+        virtual int get_damage() = 0;
 
 };
 
@@ -37,8 +37,8 @@ class ThrowableWeapon : public Weapon
     public:
         ThrowableWeapon(Beatup* beatup, std::string id_key, std::string name);
 
-        unsigned int coin_cost;
-        void change_cost(unsigned int new_cost);
+        int coin_cost;
+        void change_cost(int new_cost);
 
         void init(std::string sprite_path);
 
@@ -67,7 +67,7 @@ class RocketWeapon : public ThrowableWeapon
         RocketWeapon(Beatup* beatup, std::string id_key, std::string name) : ThrowableWeapon(beatup, id_key, name) {};
         virtual void init_position() override;
 
-        virtual unsigned int get_damage();
+        virtual int get_damage();
         virtual std::string get_fire_mp3_path();
         virtual void do_animate();
 };
@@ -78,7 +78,7 @@ class GrenadeWeapon : public RocketWeapon
         GrenadeWeapon(Beatup* beatup, std::string id_key, std::string name) : RocketWeapon(beatup, id_key, name) {};
         void init_position() override;
 
-        virtual unsigned int get_damage();
+        virtual int get_damage();
         virtual std::string get_fire_mp3_path();
 
         virtual void do_animate();
@@ -109,7 +109,7 @@ class FistWeapon : public Weapon
         void init_psionic(FistSprite* fs);
         void init_frost(FistSprite* fs);
 
-        unsigned int get_damage() { return 10;  };
+        int get_damage() { return 10;  };
 
 };
 
