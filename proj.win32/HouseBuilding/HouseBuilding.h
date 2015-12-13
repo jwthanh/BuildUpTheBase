@@ -365,7 +365,7 @@ class Buildup
         spFighter fighter;
         spFighter brawler;
 
-        spBuilding target_building;
+        Building* target_building;
 
         Village* city;
 

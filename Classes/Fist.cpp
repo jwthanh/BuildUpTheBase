@@ -222,6 +222,9 @@ void Fist::block()
 
 void Fist::punch(bool is_charged_punch)
 {
+
+    this->beatup->buildup->target_building = this->beatup->buildup->city->building_by_name("The Farm");
+
     Face* face = this->beatup->get_target_face();
 	if (face == NULL)
 	{

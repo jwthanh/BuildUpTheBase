@@ -139,8 +139,6 @@ bool Beatup::init()
     new_pos->x = new_pos->x + sx(20);
     new_pos->y = new_pos->y - side_height + sy(30);
 
-
-
     auto create_combo = [this, new_pos, side_height](
         std::string id_key, std::string name, int cost,
         std::initializer_list<FistHands> order, float shake_time,
@@ -405,8 +403,8 @@ void Beatup::add_total_coin(int x)
     this->temp_coins += x;
     DataManager::incr_key("total_coin_key", x);
 
-    auto farm = this->buildup->city->building_by_name("The Farm");
-    farm->create_resources(Resource::Ingredient, x, "grain");
+    auto target_building = this->buildup->target_building;
+    target_building->create_resources(Resource::Ingredient, x, "grain");
 };
 
 void Beatup::back_to_menu()
