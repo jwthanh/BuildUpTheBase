@@ -930,6 +930,8 @@ Village* Buildup::init_city(Buildup* buildup)
     auto farm = std::make_shared<Building>(city, "The Farm", nullptr);
     farm->update_clock->set_threshold(2);
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
+    buildup->target_building = farm;
+
     auto dump = std::make_shared<Building>(city, "The Dump", nullptr);
     auto workshop = std::make_shared<Building>(city, "The Workshop", nullptr);
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", nullptr);
