@@ -130,6 +130,9 @@ class Beatup : public GameLayer
 
         void print_inventory();
 
+        void set_target_building(spBuilding target);
+        spBuilding get_target_building();
+
         void set_target_face(Face* target);
         Face* get_target_face();
 
@@ -140,6 +143,8 @@ class Beatup : public GameLayer
         std::vector<Face*>* faces;
         void cycle_next_face();
         void remove_all_faces();
+
+        void cycle_next_building();
 
         cocos2d::NodeGrid* left_fist_node_grid;
         cocos2d::NodeGrid* right_fist_node_grid;

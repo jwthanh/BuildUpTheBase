@@ -1012,6 +1012,24 @@ bool Beatup::should_shake()
     return result;
 };
 
+void Beatup::set_target_building(spBuilding target)
+{
+    spBuilding old_target = this->get_target_building();
+    if (old_target != NULL)
+    {
+        // old_target->swap_center(target);
+    }
+    this->buildup->target_building = target;
+    SoundEngine::play_sound("sounds\\old\\Swoosh.mp3");
+};
+
+spBuilding Beatup::get_target_building()
+{
+    if (this->buildup->target_building == NULL ) { return NULL; };
+    return this->buildup->target_building;
+};
+
+
 void Beatup::set_target_face(Face* target)
 {
     Face* old_target = this->get_target_face();
@@ -1172,6 +1190,7 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
     {
         // this->get_target_face()->recovering_sprite->getGLProgramState()->setUniformFloat("u_amount", 1.0f);
         this->cycle_next_face();
+        this->cycle_next_building();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F1) 
     {
@@ -1697,6 +1716,28 @@ void Beatup::cycle_next_face()
     else
     {
         log("0 or 1 faces to swap between, need two or more.");
+    };
+};
+
+void Beatup::cycle_next_building()
+{
+    vsBuilding buildings = this->buildup->city->buildings;
+    if (buildings.size() > 1)
+    {
+        vsBuilding::iterator face_iter = std::find(buildings.begin(), buildings.end(), this->get_target_building());
+
+        if (face_iter+1 != buildings.end())
+        {
+            this->set_target_building(*(face_iter + 1));
+        }
+        else
+        {
+            this->set_target_building(*buildings.begin());
+        }
+    }
+    else
+    {
+        log("0 or 1 buildings to swap between, need two or more.");
     };
 };
 

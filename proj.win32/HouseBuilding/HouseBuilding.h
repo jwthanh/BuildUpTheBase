@@ -35,9 +35,6 @@ class Fighter;
 class Battle;
 class Worker;
 
-//typedef void(*VoidFuncBuilding)(Building*);
-typedef void(*TaskFunc)(Building*, float);
-typedef bool(*BoolFuncBuilding)(Building*);
 
 typedef std::function<void()> VoidFunc;
 
@@ -58,6 +55,10 @@ MAKE_SP_VS(Worker);
 #undef MAKE_SP_VS
 #undef _MAKE_VS
 #undef _MAKE_SP
+
+//typedef void(*VoidFuncBuilding)(spBuilding);
+typedef void(*TaskFunc)(spBuilding, float);
+typedef bool(*BoolFuncBuilding)(spBuilding);
 
 class Updateable
 {
@@ -249,7 +250,7 @@ class Battle : public Updateable
         void distribute_exp(spFighter dead_fighter);
 };
 
-class Building : public Nameable, public Updateable
+class Building : public Nameable, public Updateable, public std::enable_shared_from_this<Building>
 {
     public:
 
@@ -324,7 +325,7 @@ class Village : public Nameable, public Updateable
         void update(float dt);
         void update_buildings(float dt);
 
-        Building* building_by_name(std::string name);
+        spBuilding building_by_name(std::string name);
 };
 
 
@@ -333,7 +334,7 @@ class Animal : public Nameable
     public:
         Animal(std::string name) : Nameable(name) {};
 
-        void b2b_transfer(Building* from_bldg, Building* to_bldg, Resource::ResourceType res_type, int quantity);
+        void b2b_transfer(spBuilding from_bldg, spBuilding to_bldg, Resource::ResourceType res_type, int quantity);
 };
 
 class Person : public Nameable, public Updateable
@@ -365,7 +366,7 @@ class Buildup
         spFighter fighter;
         spFighter brawler;
 
-        Building* target_building;
+        spBuilding target_building;
 
         Village* city;
 
@@ -379,5 +380,5 @@ class Buildup
 template<typename from_V>
 void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int remove_count, VoidFunc callback );
 
-void move_if_sized(Resource::ResourceType res_type, unsigned int condition_size, unsigned int move_count, Building* from_bldg, Building* to_bldng, VoidFunc callback);
+void move_if_sized(Resource::ResourceType res_type, unsigned int condition_size, unsigned int move_count, spBuilding from_bldg, spBuilding to_bldng, VoidFunc callback);
 #endif
