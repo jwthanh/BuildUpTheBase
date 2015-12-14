@@ -1140,12 +1140,12 @@ void Beatup::print_inventory()
 }
 
 
-void Beatup::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent)
+void Beatup::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent)
 {
     this->key_state[keyCode] = false;
 };
 
-void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* evt)
+void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
 {
     this->key_state[keyCode] = true;
 
