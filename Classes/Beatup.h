@@ -45,6 +45,7 @@ class Beatup : public GameLayer
         Face* target_face;
 
     public:
+        std::map<cocos2d::EventKeyboard::KeyCode, bool> key_state;
         cocos2d::Sprite* background;
 
         static cocos2d::Scene* main_menu_scene;
@@ -129,8 +130,8 @@ class Beatup : public GameLayer
         void flash_color_on_face(float total_duration, cocos2d::Color3B flash_color, cocos2d::Color3B reset_color = cocos2d::Color3B::WHITE);
 
         void print_inventory();
-
-        void set_target_building(spBuilding target);
+    void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent);
+    void set_target_building(spBuilding target);
         spBuilding get_target_building();
 
         void set_target_face(Face* target);
@@ -144,7 +145,7 @@ class Beatup : public GameLayer
         void cycle_next_face();
         void remove_all_faces();
 
-        void cycle_next_building();
+        void cycle_next_building(bool reverse = false);
 
         cocos2d::NodeGrid* left_fist_node_grid;
         cocos2d::NodeGrid* right_fist_node_grid;

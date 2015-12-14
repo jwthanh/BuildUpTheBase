@@ -1139,8 +1139,16 @@ void Beatup::print_inventory()
 
 }
 
-void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
+
+void Beatup::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent)
 {
+    this->key_state[keyCode] = false;
+};
+
+void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* evt)
+{
+    this->key_state[keyCode] = true;
+
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
     {
         Beatup::back_to_menu();
@@ -1190,7 +1198,14 @@ void Beatup::onKeyReleased(EventKeyboard::KeyCode keyCode, Event*)
     {
         // this->get_target_face()->recovering_sprite->getGLProgramState()->setUniformFloat("u_amount", 1.0f);
         this->cycle_next_face();
-        this->cycle_next_building();
+        bool shift_pressed;
+        try {
+            shift_pressed = this->key_state.at(cocos2d::EventKeyboard::KeyCode::KEY_SHIFT);
+        } catch (std::out_of_range)
+        {
+            shift_pressed = false;
+        }
+        this->cycle_next_building(shift_pressed);
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F1) 
     {
@@ -1719,16 +1734,30 @@ void Beatup::cycle_next_face()
     };
 };
 
-void Beatup::cycle_next_building()
+void Beatup::cycle_next_building(bool reverse)
 {
     vsBuilding buildings = this->buildup->city->buildings;
     if (buildings.size() > 1)
     {
-        vsBuilding::iterator face_iter = std::find(buildings.begin(), buildings.end(), this->get_target_building());
-
-        if (face_iter+1 != buildings.end())
+        if (reverse == false)
         {
-            this->set_target_building(*(face_iter + 1));
+            vsBuilding::iterator face_iter = std::find(buildings.begin(), buildings.end(), this->get_target_building());
+
+            if (face_iter + 1 != buildings.end())
+            {
+                this->set_target_building(*(face_iter + 1));
+            }
+
+        }
+        else if (reverse == true)
+        {
+            vsBuilding::reverse_iterator face_iter = std::find(buildings.rbegin(), buildings.rend(), this->get_target_building());
+
+            if (face_iter + 1 != buildings.rend())
+            {
+                this->set_target_building(*(face_iter + 1));
+            }
+
         }
         else
         {

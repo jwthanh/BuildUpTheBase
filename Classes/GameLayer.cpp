@@ -274,6 +274,10 @@ cocos2d::Vec2 GameLayer::get_center_pos(float offset_x, float offset_y)
     center_pos.y += offset_y;
 
     return center_pos;
+}
+
+void GameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent)
+{
 };
 
 void GameLayer::onEnter()
