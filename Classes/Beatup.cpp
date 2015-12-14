@@ -1096,9 +1096,9 @@ void Beatup::print_inventory()
 
     auto make_label = [&](std::string name)
     {
-        auto farm = this->buildup->city->building_by_name("The " + name);
-        std::string lbl_string = name + " " + farm->get_inventory();
-        std::string spc_string = " " + farm->get_specifics();
+        auto building = this->buildup->city->building_by_name("The " + name);
+        std::string lbl_string = (this->get_target_building() == building ? ">>" : "") + name + " " + building->get_inventory();
+        std::string spc_string = " " + building->get_specifics();
         if (this->getChildByName(name))
         {
             ((Label*)this->getChildByName(name))->setString(lbl_string);
@@ -1106,18 +1106,18 @@ void Beatup::print_inventory()
         }
         else
         {
-            auto farm_inv_lbl = Label::createWithTTF(lbl_string, DEFAULT_FONT, 24);
-            farm_inv_lbl->setName(name);
-            farm_inv_lbl->setAnchorPoint(Vec2(0, 0));
-            farm_inv_lbl->setPosition(0, y);
-            this->addChild(farm_inv_lbl);
+            auto building_inv_lbl = Label::createWithTTF(lbl_string, DEFAULT_FONT, 24);
+            building_inv_lbl->setName(name);
+            building_inv_lbl->setAnchorPoint(Vec2(0, 0));
+            building_inv_lbl->setPosition(0, y);
+            this->addChild(building_inv_lbl);
 
             y -= sy(25);
-            auto farm_inv_spc_lbl = Label::createWithTTF(spc_string, DEFAULT_FONT, 24);
-            farm_inv_spc_lbl->setName(name + "_specific");
-            farm_inv_spc_lbl->setAnchorPoint(Vec2(0, 0));
-            farm_inv_spc_lbl->setPosition(0, y);
-            this->addChild(farm_inv_spc_lbl);
+            auto building_inv_spc_lbl = Label::createWithTTF(spc_string, DEFAULT_FONT, 24);
+            building_inv_spc_lbl->setName(name + "_specific");
+            building_inv_spc_lbl->setAnchorPoint(Vec2(0, 0));
+            building_inv_spc_lbl->setPosition(0, y);
+            this->addChild(building_inv_spc_lbl);
         };
 
         y -= sy(25);
