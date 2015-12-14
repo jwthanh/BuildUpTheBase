@@ -403,8 +403,12 @@ void Beatup::add_total_coin(int x)
     this->temp_coins += x;
     DataManager::incr_key("total_coin_key", x);
 
-    auto target_building = this->buildup->target_building;
-    target_building->create_resources(Resource::Ingredient, x, "grain");
+    spBuilding target_building = this->buildup->target_building;
+    if (target_building->name == "The Farm") {
+        target_building->create_resources(Resource::Ingredient, x, "grain");
+    } else {
+        target_building->create_resources(Resource::Ingredient, x, "wood");
+    };
 };
 
 void Beatup::back_to_menu()
@@ -530,14 +534,15 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         {
             if (!combo->get_been_bought()) { continue; };
 
-            if (touch_in_node(combo->cd_bar->front_timer, touch) ||
-                touch_in_node(combo->cd_bar->back_timer, touch))
+            if (touch_in_node(combo->cd_bar->base_node, touch)) //TODO  fix this because node has no size, and prog bars are added to the node, not to beatup anymore
             {
                 combo->cd_bar->bump(0.125f, 1.05f);
 
                 combo->toggle_order();
 
-                this->print_inventory();
+                // this->print_inventory();
+                this->view_army();
+                print("touched combo");
                 return false;
             };
         };
