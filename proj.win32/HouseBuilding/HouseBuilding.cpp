@@ -930,17 +930,23 @@ Village* Buildup::init_city(Buildup* buildup)
     auto farm = std::make_shared<Building>(city, "The Farm", nullptr);
     farm->update_clock->set_threshold(2);
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
+    farm->punched_ingredient_type = "grain";
     buildup->target_building = farm;
 
     auto dump = std::make_shared<Building>(city, "The Dump", nullptr);
+    dump->punched_ingredient_type = "fly";
     auto workshop = std::make_shared<Building>(city, "The Workshop", nullptr);
+    workshop->punched_ingredient_type = "wood";
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", nullptr);
     auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
     auto mine = std::make_shared<Building>(city, "The Mine", nullptr);
+    mine->punched_ingredient_type = "copper";
     auto grave = std::make_shared<Building>(city, "The Graveyard", nullptr);
+    grave->punched_ingredient_type = "flesh";
     auto necro = std::make_shared<Building>(city, "The Underscape", nullptr);
     mine->update_clock->set_threshold(3);
     auto forest = std::make_shared<Building>(city, "The Forest", nullptr);
+    forest->punched_ingredient_type = "berry";
 
     buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");
     buildup->fighter->team = Fighter::TeamOne;

@@ -256,6 +256,8 @@ class Building : public Nameable, public Updateable, public std::enable_shared_f
 
         Village* city;
 
+        std::string punched_ingredient_type = "wood";
+
         vsProduct products;
         vsWaste wastes;
         vsIngredient ingredients;

@@ -404,11 +404,7 @@ void Beatup::add_total_coin(int x)
     DataManager::incr_key("total_coin_key", x);
 
     spBuilding target_building = this->buildup->target_building;
-    if (target_building->name == "The Farm") {
-        target_building->create_resources(Resource::Ingredient, x, "grain");
-    } else {
-        target_building->create_resources(Resource::Ingredient, x, "wood");
-    };
+    target_building->create_resources(Resource::Ingredient, x, target_building->punched_ingredient_type);
 };
 
 void Beatup::back_to_menu()
