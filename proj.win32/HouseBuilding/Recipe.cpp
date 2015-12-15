@@ -2,6 +2,14 @@
 #include <algorithm>
 
 
+void Recipe::callback(Beatup* beatup)
+{
+    if (_callback != NULL)
+    {
+        this->_callback(beatup);
+    }
+}
+
 Recipe::Recipe(std::string name) : Nameable(name)
 {
     this->components = ComponentMap();

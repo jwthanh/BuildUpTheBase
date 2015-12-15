@@ -14,7 +14,8 @@ class Recipe : public Nameable
     public:
         ComponentMap components;
 
-        VoidFuncBeatupNoArgs callback;
+        VoidFuncBeatupNoArgs _callback;
+        void callback(Beatup* beatup);
 
         Recipe(std::string name="Unnamed");
 

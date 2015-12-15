@@ -1244,7 +1244,17 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
     {
-        this->print_inventory();
+        auto mine = this->buildup->city->building_by_name("The Mine");
+
+        Recipe* recipe = new Recipe("sword");
+        recipe->components[Ingredient::IngredientType::Copper] = 2;
+        auto callback = [mine](Beatup* beatup) {
+            mine->create_resources(Resource::Product, 1, "Sword");
+            mine->create_resources(Resource::Waste, 1, "wasted_iron");
+        };
+        recipe->_callback = callback;
+
+        mine->consume_recipe(recipe);
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_X) 
     {
