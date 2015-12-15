@@ -1153,6 +1153,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
     {
         Beatup::back_to_menu();
+        print("LEAVE!!!");
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_Q || keyCode == EventKeyboard::KeyCode::KEY_1) 
     {

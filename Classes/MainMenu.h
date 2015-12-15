@@ -19,7 +19,7 @@ class MainMenu : public Shop
 
         virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
 
-        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
+        virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
         bool init() override;
         static bool quick_start_game();
@@ -38,7 +38,7 @@ class OptionsMenu : public Shop
 
         virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
 
-        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
+        virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
         bool init() override;
 
@@ -59,7 +59,7 @@ class LevelSelectMenu : public Shop
 
         virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
 
-        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
+        virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
         bool init() override;
 
@@ -75,7 +75,7 @@ class ObjectiveMenu : public Shop
 
         virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
 
-        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
+        virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
         bool init() override;
 
@@ -89,7 +89,7 @@ class ResetMenu : public Shop
 
         virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
 
-        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
+        virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
         bool init() override;
 

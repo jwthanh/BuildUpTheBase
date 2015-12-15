@@ -159,6 +159,7 @@ void GameLayer::quit(Ref* pSender)
     return;
 #endif
 
+    CCLOG("QUITTING");
     Director::getInstance()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
