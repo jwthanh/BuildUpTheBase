@@ -43,14 +43,15 @@ class Beatup : public GameLayer
         void prep_other();
 
         Face* target_face;
-
-    public:
+public:
         std::map<cocos2d::EventKeyboard::KeyCode, bool> key_state;
         cocos2d::Sprite* background;
 
         static cocos2d::Scene* main_menu_scene;
 
         Buildup* buildup;
+
+        vsFighter enemy_nodes;
         FighterNode* fighter_node;
         FighterNode* brawler_node;
 

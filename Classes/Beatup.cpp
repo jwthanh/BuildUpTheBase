@@ -890,6 +890,10 @@ void Beatup::prep_other()
     this->fighter_node = FighterNode::create(this, this->buildup->fighter);
     this->fighter_node->setPosition(this->get_center_pos(sx(300), sy(50)));
 
+    this->enemy_nodes = vsFighter();
+    this->fighter_node = FighterNode::create(this, this->buildup->fighter);
+    this->fighter_node->setPosition(this->get_center_pos(sx(300), sy(50)));
+
     this->brawler_node = FighterNode::create(this, this->buildup->brawler);
     this->brawler_node->setPosition(this->get_center_pos(sx(300), sy(-150)));
     this->brawler_node->load_new_sprite("ogre10x10.png");
@@ -1474,6 +1478,9 @@ void Beatup::update(float dt)
 
     this->fighter_node->update(dt);
     this->brawler_node->update(dt);
+    for (auto node : this->enemy_nodes) {
+        node->update(dt);
+    };
 
     if (this->buildup->fighter->xp->lvl == 2) {
         this->fighter_node->load_new_sprite("thief8x8.png");

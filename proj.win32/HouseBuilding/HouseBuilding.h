@@ -193,7 +193,10 @@ class Fighter : public Nameable, public Updateable
             TeamNine, TeamTen
         } team;
 
-        // TeamsType
+        //TODO use these bools someway
+        bool has_sword = false;
+        bool has_armor = false;
+        bool has_shield = false;
 
         Experience* xp;
         AttributeContainer* attrs;
