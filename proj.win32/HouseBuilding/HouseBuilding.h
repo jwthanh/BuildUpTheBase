@@ -225,6 +225,7 @@ class FighterNode : public cocos2d::Node
 
         void update(float dt);
 
+        void set_fighter(spFighter fighter);
         void clear_fighter();
 
         Beatup* beatup;

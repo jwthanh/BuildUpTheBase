@@ -188,11 +188,24 @@ void FighterNode::load_new_sprite(std::string name)
     this->sprite->setSpriteFrame(townsmen_sprite->getSpriteFrame());
 };
 
+void FighterNode::set_fighter(spFighter fighter)
+{
+    this->fighter = fighter;
+
+    this->load_new_sprite(fighter->sprite_name);
+
+    if (fighter != NULL) {
+        this->hp_bar->set_percentage(fighter->attrs->health->get_val_percentage());
+        this->xp_bar->set_percentage(fighter->xp->get_progress_percentage());
+    };
+
+};
+
 void FighterNode::clear_fighter()
 {
     this->fighter = NULL;
 
-    this->load_new_sprite("back_button.png");
+    this->load_new_sprite("back_button.png"); //placeholder
 
     this->hp_bar->set_percentage(0);
     this->xp_bar->set_percentage(0);
@@ -455,7 +468,7 @@ void arena_task(spBuilding arena, float dt)
         print1("creating squirrel!");
         auto squirrel = std::make_shared<Fighter>(city, "Squirrel");
         squirrel->xp->value = 25;
-        squirrel->attrs->health->set_vals(20);
+        squirrel->attrs->health->set_vals(80);
         squirrel->attrs->damage->set_vals(10);
         arena->fighters.push_back(squirrel);
 
