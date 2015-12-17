@@ -35,6 +35,7 @@ const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
     {Ingredient::Copper, "copper"},
     {Ingredient::Wood, "wood"},
     {Ingredient::Fly, "fly"},
+    {Ingredient::Sand, "sand"},
     {Ingredient::Flesh, "flesh"},
     {Ingredient::Berry, "berry"}
 };
@@ -976,6 +977,7 @@ Village* Buildup::init_city(Buildup* buildup)
     workshop->punched_ingredient_type = "wood";
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", nullptr);
     auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
+    arena->punched_ingredient_type = "sand";
     auto mine = std::make_shared<Building>(city, "The Mine", nullptr);
     mine->punched_ingredient_type = "copper";
     auto grave = std::make_shared<Building>(city, "The Graveyard", nullptr);

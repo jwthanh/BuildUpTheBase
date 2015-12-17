@@ -119,6 +119,7 @@ class Ingredient : public Resource
             Copper,
             Wood,
             Fly,
+            Sand,
             Flesh,
             Berry
         };
