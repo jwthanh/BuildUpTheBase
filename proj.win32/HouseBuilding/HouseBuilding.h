@@ -203,6 +203,8 @@ class Fighter : public Nameable, public Updateable
         Village* city;
         Combat* combat;
 
+        std::string sprite_name = "weapon_gauntlet.png";
+
         Fighter(Village* city, std::string name) : Nameable(name), Updateable(), city(city) {
             this->attrs = new AttributeContainer();
             this->xp = new Experience();

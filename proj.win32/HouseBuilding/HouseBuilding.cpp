@@ -191,7 +191,11 @@ void FighterNode::load_new_sprite(std::string name)
 void FighterNode::clear_fighter()
 {
     this->fighter = NULL;
+
     this->load_new_sprite("back_button.png");
+
+    this->hp_bar->set_percentage(0);
+    this->xp_bar->set_percentage(0);
 };
 
 vsFighter Battle::combatants_by_team(Fighter::TeamsType team)
@@ -457,6 +461,7 @@ void arena_task(spBuilding arena, float dt)
 
         if (arena->city->buildup->beatup->enemy_node->fighter == NULL) {
             arena->city->buildup->beatup->enemy_node->fighter = squirrel;
+            arena->city->buildup->beatup->enemy_node->load_new_sprite(squirrel->sprite_name);
         }
     };
 
