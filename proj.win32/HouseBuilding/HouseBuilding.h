@@ -223,6 +223,8 @@ class FighterNode : public cocos2d::Node
 
         void update(float dt);
 
+        void clear_fighter();
+
         Beatup* beatup;
         spFighter fighter;
 
@@ -236,12 +238,14 @@ class FighterNode : public cocos2d::Node
 class Battle : public Updateable
 {
     public:
+        Buildup* buildup;
+
         vsFighter combatants;
         vsFighter combatants_by_team(Fighter::TeamsType team);
 
-        Battle() : Updateable() {
-        this->combatants = vsFighter();
-    };
+        Battle(Buildup* buildup) : buildup(buildup), Updateable() {
+            this->combatants = vsFighter();
+        };
 
         void update(float dt) {
             Updateable::update(dt);
@@ -367,6 +371,7 @@ class Enemy : public Person
 class Buildup
 {
     public:
+        Beatup* beatup;
         Player* player;
         spFighter fighter;
         spFighter brawler;

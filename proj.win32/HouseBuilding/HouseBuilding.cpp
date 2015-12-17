@@ -142,7 +142,9 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     node->hp_bar->setAnchorPoint(Vec2(0.5, 0.5));
     node->hp_bar->setScale(2);
     node->hp_bar->base_node->removeFromParent();
-    node->hp_bar->set_percentage(node->beatup->buildup->fighter->attrs->health->get_val_percentage());
+    if (fighter != NULL) {
+        node->hp_bar->set_percentage(fighter->attrs->health->get_val_percentage());
+    };
     node->addChild(node->hp_bar->base_node);
 
     //xp bar
@@ -164,6 +166,8 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
 
 void FighterNode::update(float dt)
 {
+    if (this->fighter == NULL) return;
+
     auto hp_percentage = this->fighter->attrs->health->get_val_percentage();
 
     if (this->hp_bar->target_percentage != hp_percentage)
@@ -182,6 +186,12 @@ void FighterNode::load_new_sprite(std::string name)
 {
     Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName(name);
     this->sprite->setSpriteFrame(townsmen_sprite->getSpriteFrame());
+};
+
+void FighterNode::clear_fighter()
+{
+    this->fighter = NULL;
+    this->load_new_sprite("back_button.png");
 };
 
 vsFighter Battle::combatants_by_team(Fighter::TeamsType team)
@@ -217,6 +227,11 @@ void Battle::fight(spFighter left, spFighter right)
     if (right->combat->is_dead())
     {
         ss << " and it died!";
+
+        if (this->buildup->beatup->enemy_node->fighter == right) {
+            print("matched fighternode, removing");
+            this->buildup->beatup->enemy_node->clear_fighter();
+        };
 
         //only give exp to killer
         left->combat->give_exp(right->xp->value);
@@ -439,10 +454,14 @@ void arena_task(spBuilding arena, float dt)
         squirrel->attrs->health->set_vals(20);
         squirrel->attrs->damage->set_vals(10);
         arena->fighters.push_back(squirrel);
+
+        if (arena->city->buildup->beatup->enemy_node->fighter == NULL) {
+            arena->city->buildup->beatup->enemy_node->fighter = squirrel;
+        }
     };
 
     std::cout << "\tDoing arena stuff" << std::endl;
-    auto battle = std::make_shared<Battle>();
+    auto battle = std::make_shared<Battle>(arena->city->buildup);
     for (spFighter fighter : arena->fighters)
     {
         if (!fighter->attrs->health->is_empty())

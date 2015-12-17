@@ -51,7 +51,9 @@ public:
 
         Buildup* buildup;
 
-        vsFighter enemy_nodes;
+        // vsFighter enemy_nodes;
+        FighterNode* enemy_node;
+
         FighterNode* fighter_node;
         FighterNode* brawler_node;
 

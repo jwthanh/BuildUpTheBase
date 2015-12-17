@@ -90,6 +90,8 @@ bool Beatup::init()
     CCLOG("beatup init");
 
     this->buildup = new Buildup();
+    this->buildup->beatup = this;
+
     auto player = new Player("Jimothy");
     player->coins = 100;
     this->buildup->player = player;
@@ -296,6 +298,14 @@ bool Beatup::init()
 void Beatup::update_buildup(float dt)
 {
     this->buildup->update(dt);
+
+    //for fighter and not my dudes, update the fighter nodes
+    auto arena = this->buildup->city->building_by_name("The Arena");
+    for (auto fighter : arena->fighters) {
+        if (fighter != this->buildup->fighter) {
+
+        };
+    };
 }
 
 void Beatup::setup_commands()
@@ -887,15 +897,15 @@ void Beatup::prep_other()
     this->addChild(this->psionic_button);
     this->addChild(this->flames_button);
 
-    this->fighter_node = FighterNode::create(this, this->buildup->fighter);
-    this->fighter_node->setPosition(this->get_center_pos(sx(300), sy(50)));
+    // this->enemy_nodes = vsFighter();
+    this->enemy_node = FighterNode::create(this, NULL);
+    this->enemy_node->setPosition(this->get_center_pos(sx(350), sy(0)));
 
-    this->enemy_nodes = vsFighter();
     this->fighter_node = FighterNode::create(this, this->buildup->fighter);
-    this->fighter_node->setPosition(this->get_center_pos(sx(300), sy(50)));
+    this->fighter_node->setPosition(this->get_center_pos(sx(200), sy(50)));
 
     this->brawler_node = FighterNode::create(this, this->buildup->brawler);
-    this->brawler_node->setPosition(this->get_center_pos(sx(300), sy(-150)));
+    this->brawler_node->setPosition(this->get_center_pos(sx(200), sy(-150)));
     this->brawler_node->load_new_sprite("ogre10x10.png");
 
 };
@@ -1478,9 +1488,10 @@ void Beatup::update(float dt)
 
     this->fighter_node->update(dt);
     this->brawler_node->update(dt);
-    for (auto node : this->enemy_nodes) {
-        node->update(dt);
-    };
+    this->enemy_node->update(dt);
+    // for (auto node : this->enemy_nodes) {
+    //     node->update(dt);
+    // };
 
     if (this->buildup->fighter->xp->lvl == 2) {
         this->fighter_node->load_new_sprite("thief8x8.png");
