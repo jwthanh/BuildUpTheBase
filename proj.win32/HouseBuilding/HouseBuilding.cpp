@@ -358,6 +358,7 @@ void workshop_task(spBuilding workshop, float dt)
                 print1("creating one ruined iron");
                 workshop->create_resources(Resource::Waste, 1, "wasted_iron");
                 recipe.consume(workshop->ingredients);
+                workshop->city->buildup->beatup->fighter_node->setColor(Color3B::RED);
             }
             else 
             {

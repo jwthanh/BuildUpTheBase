@@ -124,6 +124,7 @@ class Ingredient : public Resource
             Berry
         };
 
+
         TYPE_MAP_CONVERSION(Ingredient, ingredient);
 
         Ingredient(std::string name) : Resource(name) {
