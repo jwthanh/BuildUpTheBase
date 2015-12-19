@@ -1265,6 +1265,8 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
         auto callback = [mine](Beatup* beatup) {
             mine->create_resources(Resource::Product, 1, "Sword");
             mine->create_resources(Resource::Waste, 1, "wasted_iron");
+            mine->city->buildup->beatup->fighter_node->setColor(Color3B::RED);
+            mine->city->buildup->fighter->has_sword = true;
         };
         recipe->_callback = callback;
 

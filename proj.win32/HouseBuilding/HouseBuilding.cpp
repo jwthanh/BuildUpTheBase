@@ -239,7 +239,13 @@ void Battle::fight(spFighter left, spFighter right)
 
     double& health = right->attrs->health->current_val;
     auto dmg = left->attrs->damage->current_val;
+
+    if (left->has_sword)
+    {
+        dmg *= 2;
+    };
     health -= ceil(cocos2d::rand_0_1() * dmg);
+
     ss << " " << right->name << " at " << right->attrs->health->current_val << " hp;";
 
     if (right->combat->is_dead())
@@ -359,6 +365,7 @@ void workshop_task(spBuilding workshop, float dt)
                 workshop->create_resources(Resource::Waste, 1, "wasted_iron");
                 recipe.consume(workshop->ingredients);
                 workshop->city->buildup->beatup->fighter_node->setColor(Color3B::RED);
+                workshop->city->buildup->fighter->has_sword = true;
             }
             else 
             {
