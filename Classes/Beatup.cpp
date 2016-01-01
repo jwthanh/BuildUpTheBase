@@ -1169,29 +1169,6 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
         Beatup::back_to_menu();
         print("LEAVE!!!");
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_Q || keyCode == EventKeyboard::KeyCode::KEY_1) 
-    {
-        this->left_fist->punch();
-    }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_E || keyCode == EventKeyboard::KeyCode::KEY_3) 
-    {
-        this->right_fist->punch();
-    }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_R || keyCode == EventKeyboard::KeyCode::KEY_4) 
-    {
-        if (this->get_target_face())
-            this->get_target_face()->disable_shield();
-
-        auto farm = this->buildup->city->building_by_name("The Farm");
-        Recipe recipe = Recipe("pileofgrain");
-        recipe.components[Ingredient::IngredientType::Grain] = 10;
-        if (recipe.is_satisfied(farm->ingredients))
-        {
-            farm->create_resources(Resource::Ingredient, 1, "PileOfGrain");
-            print1("Created a pile of grain)");
-            recipe.consume(farm->ingredients);
-        };
-    }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F) 
     {
         if (this->get_target_face())
@@ -1311,6 +1288,52 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
         float scale = 4.0;
         this->left_fist->speed_flames(scale);
         this->right_fist->speed_flames(scale);
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_1) 
+    {
+        auto scene = Scene::create();
+        BuildingMenu* building_menu = BuildingMenu::create();
+        scene->addChild(building_menu);
+
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_2) 
+    {
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_3) 
+    {
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_4) 
+    {
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_5) 
+    {
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_6) 
+    {
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_7) 
+    {
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_8) 
+    {
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_9) 
+    {
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_0) 
+    {
     }
 }
 

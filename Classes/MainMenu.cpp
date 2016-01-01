@@ -708,3 +708,90 @@ bool ResetMenu::reset_levels()
     return true;
 };
 
+
+bool BuildingMenu::init()
+{
+#ifdef _WIN32
+    FUNC_INIT_WIN32(BuildingMenu);
+#else
+    FUNC_INIT(BuildingMenu);
+#endif
+
+    menu_font = DEFAULT_FONT;
+    menu_fontsize = 40;
+
+    this->shop_items = new std::vector<ShopItem*>();
+
+    menu_heightdiff = -1;
+    this->last_pos = Vec2(-1, -1);
+
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    // add a label shows "Hello World" create and initialize a label
+    auto label = Label::createWithTTF("Building: BUILDING NAME", menu_font, sx(24));
+
+    // position the label on the center of the screen
+    label->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - label->getContentSize().height
+        )
+    );
+
+    // add the label as a child to this layer
+    this->addChild(label, 1);
+
+    this->coins_lbl = Label::createWithTTF(
+        "Building Menu",
+        this->menu_font,
+        this->menu_fontsize
+    );
+    this->coins_lbl->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+        )
+    );
+    this->coins_lbl->setTextColor(Color4B::WHITE);
+    this->addChild(this->coins_lbl, 1);
+
+    auto scroll = this->create_center_scrollview();
+
+    this->combo_menu = Menu::create();
+    this->addChild(this->combo_menu);
+    auto go_back_cb = []() {
+       auto director = Director::getInstance();
+       director->popScene();
+       return false;
+    };
+
+
+
+    std::vector<ItemData> item_data = {
+        {"default", "Back", go_back_cb, false},
+    };
+
+    this->init_menu_from_data(scroll, item_data);
+
+
+
+    this->resize_scroll_inner(scroll);
+    return true;
+};
+
+void BuildingMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
+{
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    {
+        pop_scene(NULL);
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
+            || keyCode == EventKeyboard::KeyCode::KEY_Q 
+            || keyCode == EventKeyboard::KeyCode::KEY_E 
+            || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
+    {
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+    };
+};
