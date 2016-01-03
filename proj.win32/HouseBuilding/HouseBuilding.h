@@ -281,6 +281,7 @@ class Building : public Nameable, public Updateable, public std::enable_shared_f
 
         unsigned int num_workers; //people who work here, help make things faster
         TaskFunc task = NULL; //shop might sell product, farm creates ingredients, etc
+
         Building(Village* city, std::string name, TaskFunc task)
             : task(task), Nameable(name), Updateable(), city(city)
         {

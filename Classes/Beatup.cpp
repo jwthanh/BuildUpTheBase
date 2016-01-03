@@ -1293,7 +1293,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     else if(keyCode == EventKeyboard::KeyCode::KEY_1) 
     {
         auto scene = Scene::create();
-        BuildingMenu* building_menu = BuildingMenu::create();
+        BuildingMenu* building_menu = BuildingMenu::create(this->buildup->target_building);
         scene->addChild(building_menu);
 
         auto director = Director::getInstance();

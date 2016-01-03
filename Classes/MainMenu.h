@@ -6,6 +6,7 @@
 #include "ShopScene.h"
 
 #include "constants.h"
+#include <proj.win32/HouseBuilding/HouseBuilding.h>
 
 class MainMenu : public Shop
 {
@@ -105,7 +106,9 @@ class ResetMenu : public Shop
 class BuildingMenu : public Shop
 {
     public:
-        CREATE_FUNC(BuildingMenu);
+        spBuilding building;
+
+        static BuildingMenu* create(spBuilding building);
         static cocos2d::Scene* createScene();
 
         virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene

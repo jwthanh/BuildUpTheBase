@@ -708,6 +708,22 @@ bool ResetMenu::reset_levels()
     return true;
 };
 
+BuildingMenu* BuildingMenu::create(spBuilding building)
+{
+    BuildingMenu *pRet = new(std::nothrow) BuildingMenu();
+    pRet->building = building; //this should be after init, cause i guess init should fail, but its fine for now.
+
+    if (pRet && pRet->init()) {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr; 
+        return pRet;
+    }
+};
 
 bool BuildingMenu::init()
 {
@@ -729,7 +745,9 @@ bool BuildingMenu::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     // add a label shows "Hello World" create and initialize a label
-    auto label = Label::createWithTTF("Building: BUILDING NAME", menu_font, sx(24));
+    std::stringstream ss;
+    ss << "Buidling: " << this->building->name;
+    auto label = Label::createWithTTF(ss.str(), menu_font, sx(24));
 
     // position the label on the center of the screen
     label->setPosition(
