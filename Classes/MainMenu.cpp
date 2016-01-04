@@ -784,11 +784,14 @@ bool BuildingMenu::init()
        return false;
     };
 
-
-
     std::vector<ItemData> item_data = {
         {"default", "Back", go_back_cb, false},
     };
+    item_data.insert(
+        item_data.begin(),
+        this->building->menu_items.begin(),
+        this->building->menu_items.end()
+    );
 
     this->init_menu_from_data(scroll, item_data);
 

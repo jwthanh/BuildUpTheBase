@@ -20,6 +20,7 @@
 #define NO_CB [](){}
 #include "../../Classes/combat.h"
 #include <ProgressBar.h>
+#include <ShopScene.h>
 
 
 class Recipe;
@@ -280,7 +281,9 @@ class Building : public Nameable, public Updateable, public std::enable_shared_f
         Clock* spawn_clock;
 
         unsigned int num_workers; //people who work here, help make things faster
+
         TaskFunc task = NULL; //shop might sell product, farm creates ingredients, etc
+        std::vector<ItemData> menu_items;
 
         Building(Village* city, std::string name, TaskFunc task)
             : task(task), Nameable(name), Updateable(), city(city)
