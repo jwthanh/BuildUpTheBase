@@ -1169,6 +1169,29 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
         Beatup::back_to_menu();
         print("LEAVE!!!");
     }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_Q)
+    {
+        this->left_fist->punch();
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_E)
+    {
+        this->right_fist->punch();
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_R)
+    {
+        if (this->get_target_face())
+            this->get_target_face()->disable_shield();
+
+        auto farm = this->buildup->city->building_by_name("The Farm");
+        Recipe recipe = Recipe("pileofgrain");
+        recipe.components[Ingredient::IngredientType::Grain] = 10;
+        if (recipe.is_satisfied(farm->ingredients))
+        {
+            farm->create_resources(Resource::Ingredient, 1, "PileOfGrain");
+            print1("Created a pile of grain)");
+            recipe.consume(farm->ingredients);
+        };
+    }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F) 
     {
         if (this->get_target_face())
