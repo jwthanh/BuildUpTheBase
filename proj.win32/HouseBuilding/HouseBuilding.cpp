@@ -980,9 +980,8 @@ Village* Buildup::init_city(Buildup* buildup)
     buildup->target_building = farm;
 
     farm->menu_items = {
-        {"default", "FARRRMMM!", [](){ print("clicked!"); return true;}, false},
+        {"default", "Farm task!", [farm](){ farm_task(farm, 0); return true;}, false},
     };
-
 
     auto dump = std::make_shared<Building>(city, "The Dump", nullptr);
     dump->punched_ingredient_type = "fly";
