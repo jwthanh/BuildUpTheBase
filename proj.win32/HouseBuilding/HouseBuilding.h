@@ -300,6 +300,12 @@ class Building : public Nameable, public Updateable, public std::enable_shared_f
             fighters = vsFighter();
             workers = vsWorker();
 
+            menu_items = {
+                {"default", "Building task!", [this,task](){
+                    task(shared_from_this(), 0); return true;
+                }, false},
+            };
+
         };
 
         void create_resources(Resource::ResourceType type, int quantity, std::string name);

@@ -973,37 +973,33 @@ Village* Buildup::init_city(Buildup* buildup)
 {
     auto city = new Village(buildup, "Burlington");
 
-    auto farm = std::make_shared<Building>(city, "The Farm", nullptr);
+    auto farm = std::make_shared<Building>(city, "The Farm", farm_task);
     farm->update_clock->set_threshold(2);
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
     farm->punched_ingredient_type = "grain";
     buildup->target_building = farm;
 
-    farm->menu_items = {
-        {"default", "Farm task!", [farm](){ farm_task(farm, 0); return true;}, false},
-    };
-
-    auto dump = std::make_shared<Building>(city, "The Dump", nullptr);
+    auto dump = std::make_shared<Building>(city, "The Dump", dump_task);
     dump->punched_ingredient_type = "fly";
 
-    auto workshop = std::make_shared<Building>(city, "The Workshop", nullptr);
+    auto workshop = std::make_shared<Building>(city, "The Workshop", workshop_task);
     workshop->punched_ingredient_type = "wood";
 
-    auto marketplace = std::make_shared<Building>(city, "The Marketplace", nullptr);
+    auto marketplace = std::make_shared<Building>(city, "The Marketplace", marketplace_task);
 
     auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
     arena->punched_ingredient_type = "sand";
 
-    auto mine = std::make_shared<Building>(city, "The Mine", nullptr);
+    auto mine = std::make_shared<Building>(city, "The Mine", mine_task);
     mine->punched_ingredient_type = "copper";
 
-    auto grave = std::make_shared<Building>(city, "The Graveyard", nullptr);
+    auto grave = std::make_shared<Building>(city, "The Graveyard", grave_task);
     grave->punched_ingredient_type = "flesh";
 
-    auto necro = std::make_shared<Building>(city, "The Underscape", nullptr);
+    auto necro = std::make_shared<Building>(city, "The Underscape", necro_task);
     mine->update_clock->set_threshold(3);
 
-    auto forest = std::make_shared<Building>(city, "The Forest", nullptr);
+    auto forest = std::make_shared<Building>(city, "The Forest", forest_task);
     forest->punched_ingredient_type = "berry";
 
     buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");
