@@ -300,8 +300,10 @@ class Building : public Nameable, public Updateable, public std::enable_shared_f
             fighters = vsFighter();
             workers = vsWorker();
 
+            std::stringstream ss;
+            ss << "Default " << name << " task";
             menu_items = {
-                {"default", "Building task!", [this,task](){
+                {"default", ss.str(), [this,task](){
                     task(shared_from_this(), 0); return true;
                 }, false},
             };
