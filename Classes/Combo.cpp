@@ -66,7 +66,8 @@ void Combo::update(float dt)
         this->cd_bar->setVisible(false);
     };
  
-    if (this->get_been_bought() && !this->beatup->get_level_over())
+    //FIXME actuall remove this
+    if (false && this->get_been_bought() && !this->beatup->get_level_over())
     {
         this->cd_bar->front_timer->setVisible(true);
         this->cd_bar->back_timer->setVisible(false); //FIXME hack to make the back timer always invisible
