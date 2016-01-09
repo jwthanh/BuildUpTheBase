@@ -39,18 +39,6 @@ bool MainMenu::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    //auto label = Label::createWithTTF("Welcome to the MainMenu", TITLE_FONT, sx(24));
-
-    // auto label = Sprite::createWithSpriteFrameName("logo_topfixed.png");
-    // label->setScale(sx(4.0f));
-    // label->getTexture()->setAliasTexParameters();
-
-    // label->setPosition(Vec2(
-    //     origin.x + visibleSize.width/2,
-    //     origin.y + visibleSize.height - (label->getContentSize().height*sy(3))
-    // ));
-    // this->addChild(label, 1);
-
     this->coins_lbl = Label::createWithTTF("Beat some people up!", TITLE_FONT, sx(this->menu_fontsize));
     this->coins_lbl->setVisible(false);
     this->coins_lbl->setPosition(Vec2(
