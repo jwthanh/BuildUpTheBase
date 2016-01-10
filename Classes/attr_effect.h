@@ -129,7 +129,7 @@ class AttrEffect
 
         void unmark_applied_all(Actor* actor);
 
-        std::string AttrEffect::small_convert(std::string prefix, int val);
+        std::string small_convert(std::string prefix, int val);
         std::string full_str();
         std::string oneline_str();
         std::string oneline_str_colorless();
