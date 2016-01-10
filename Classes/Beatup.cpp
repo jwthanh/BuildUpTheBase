@@ -1367,7 +1367,7 @@ void Beatup::update(float dt)
 
     if (!SoundEngine::get_playing_music())
     {
-        SoundEngine::play_music("music\\in_fight.mp3");
+        SoundEngine::play_music("music\\medieval.mp3");
     }
 
     if (this->level_been_lost)
