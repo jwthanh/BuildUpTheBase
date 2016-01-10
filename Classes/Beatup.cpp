@@ -25,7 +25,7 @@
 #pragma warning(default:4244)
 #include "Util.h"
 #include "MainMenu.h"
-#include <proj.win32/HouseBuilding/Recipe.h>
+#include "Recipe.h"
 #include "attribute.h"
 #include "FShake.h"
 

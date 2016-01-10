@@ -177,9 +177,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\SoundEngine.cpp" />
     <ClCompile Include="..\Classes\Util.cpp" />
     <ClCompile Include="..\Classes\Weapons.cpp" />
-    <ClCompile Include="HouseBuilding\HouseBuilding.cpp" />
-    <ClCompile Include="HouseBuilding\Recipe.cpp" />
-    <ClCompile Include="HouseBuilding\Worker.cpp" />
+    <ClCompile Include="..\Classes\HouseBuilding.cpp" />
+    <ClCompile Include="..\Classes\Recipe.cpp" />
+    <ClCompile Include="..\Classes\Worker.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -212,10 +212,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\SoundEngine.h" />
     <ClInclude Include="..\Classes\Util.h" />
     <ClInclude Include="..\Classes\Weapons.h" />
-    <ClInclude Include="HouseBuilding\HouseBuilding.h" />
-    <ClInclude Include="HouseBuilding\Recipe.h" />
-    <ClInclude Include="HouseBuilding\targetver.h" />
-    <ClInclude Include="HouseBuilding\Worker.h" />
+    <ClInclude Include="..\Classes\HouseBuilding.h" />
+    <ClInclude Include="..\Classes\Recipe.h" />
+    <ClInclude Include="..\Classes\targetver.h" />
+    <ClInclude Include="..\Classes\Worker.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

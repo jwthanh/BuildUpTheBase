@@ -5,7 +5,7 @@
 #include "GameLayer.h"
 #include "constants.h"
 
-#include "proj.win32/HouseBuilding/HouseBuilding.h"
+#include "HouseBuilding.h"
 
 class Shop;
 

@@ -4,7 +4,7 @@
 #include "attribute_container.h"
 #include "attribute.h"
 #include "attr_effect.h"
-#include <proj.win32/HouseBuilding/HouseBuilding.h>
+#include "HouseBuilding.h"
 
 void Combat::printout()
 {
