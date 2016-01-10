@@ -33,6 +33,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/MainMenu.cpp \
                    ../../Classes/HouseBuilding.cpp \
                    ../../Classes/Recipe.cpp \
+                   ../../Classes/Combat.cpp \
                    ../../Classes/Worker.cpp \
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

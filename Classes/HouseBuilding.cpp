@@ -89,7 +89,7 @@ std::string Fighter::get_stats()
     return ss.str();
 }
 
-#define type_stuff(ResType)std::string ResType::type_to_string(ResType::##ResType##Type type) \
+#define type_stuff(ResType)std::string ResType::type_to_string(ResType::ResType##Type type) \
 { \
     std::string result = "none"; \
     for (auto pair : ResType::type_map) \
@@ -103,9 +103,9 @@ std::string Fighter::get_stats()
     return result; \
 }; \
  \
-ResType::##ResType##Type ResType::string_to_type(std::string string_type) \
+ResType::ResType##Type ResType::string_to_type(std::string string_type) \
 { \
-    ResType::##ResType##Type result = ResType::##ResType##Type::None; \
+    ResType::ResType##Type result = ResType::ResType##Type::None; \
     std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower); \
     for (auto pair : ResType::type_map) \
         { \

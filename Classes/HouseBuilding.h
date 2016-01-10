@@ -14,9 +14,9 @@
 #include <map>
 
 
-#define printj(msg){std::stringstream ss123; ss123<< msg; CCLOG(ss123.str().c_str());}
-#define printj1(msg){std::stringstream ss123; ss123<< "\t" << msg; CCLOG(ss123.str().c_str());}
-#define printj2(msg){std::stringstream ss123; ss123<< "\t\t" << msg; CCLOG(ss123.str().c_str());}
+#define printj(msg){std::stringstream ss123; ss123<< msg; CCLOG(ss123.str().c_str(), "");}
+#define printj1(msg){std::stringstream ss123; ss123<< "\t" << msg; CCLOG(ss123.str().c_str(), "");}
+#define printj2(msg){std::stringstream ss123; ss123<< "\t\t" << msg; CCLOG(ss123.str().c_str(), "");}
 #define NO_CB [](){}
 #include "../../Classes/combat.h"
 #include <ProgressBar.h>
