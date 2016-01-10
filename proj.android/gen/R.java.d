@@ -1,4 +1,4 @@
-C:\Users\Primary\workspace\basebuilder\proj.android\gen\com\tankorsmash\beatupface\R.java \
+C:\Users\Primary\workspace\basebuilder\proj.android\gen\com\tankorsmash\buildupthebase\R.java \
  : C:\Users\Primary\workspace\basebuilder\proj.android\res\drawable-hdpi\icon.png \
 C:\Users\Primary\workspace\basebuilder\proj.android\res\drawable-hdpi\icon_copy.png \
 C:\Users\Primary\workspace\basebuilder\proj.android\res\drawable-ldpi\icon.png \
