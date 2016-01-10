@@ -89,7 +89,7 @@ std::string Fighter::get_stats()
     return ss.str();
 }
 
-#define type_stuff(ResType) std::string ResType::type_to_string(ResType::##ResType##Type type) \
+#define type_stuff(ResType)std::string ResType::type_to_string(ResType::##ResType##Type type) \
 { \
     std::string result = "none"; \
     for (auto pair : ResType::type_map) \

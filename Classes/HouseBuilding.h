@@ -42,7 +42,7 @@ typedef std::function<void()> VoidFunc;
 #define _MAKE_SP(Cls)typedef std::shared_ptr<##Cls> sp##Cls
 #define _MAKE_VS(Cls)typedef std::vector<sp##Cls> vs##Cls
 
-#define MAKE_SP_VS(Cls)_MAKE_SP(##Cls);_MAKE_VS(##Cls)
+#define MAKE_SP_VS(Cls)_MAKE_SP(Cls);_MAKE_VS(Cls)
 
 MAKE_SP_VS(Building);
 MAKE_SP_VS(Resource);
@@ -103,7 +103,7 @@ class Resource : public Nameable
     static const std::map<##Rtype##Type, std::string> type_map; \
 ##Rtype##Type Rlowertype##_type; \
 static std::string type_to_string(Rtype::##Rtype##Type type); \
-static Rtype::##Rtype##Type string_to_type(std::string string_type); 
+static Rtype::Rtype##Type string_to_type(std::string string_type); 
 
 class Ingredient : public Resource
 {
