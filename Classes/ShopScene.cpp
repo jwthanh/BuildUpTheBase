@@ -251,12 +251,12 @@ void Shop::prep_punch_items(cocos2d::ui::ScrollView* scroll)
             std::stringstream id_string;
             id_string << "sell_grain";
 
-            print1("clicked!");
+            printj1("clicked!");
 
             //runs after the button is clicked, and the item has been bought
             BoolFuncNoArgs on_bought_cb = [&id_string, this, cost]()
             {
-                print1("bought!");
+                printj1("bought!");
                 //fist->charging_clock->set_threshold(
                 //    fist->defaults.charge_threshold/2
                 //);
@@ -268,7 +268,7 @@ void Shop::prep_punch_items(cocos2d::ui::ScrollView* scroll)
 
             //use id_string to find the shop item
             PlainShopItem* psi = this->get_psi_by_id(id_string.str());
-            print1("MADE INFINITE");
+            printj1("MADE INFINITE");
             psi->is_infinite_buy = true;
             return this->buy(psi, cost, on_bought_cb);
         };

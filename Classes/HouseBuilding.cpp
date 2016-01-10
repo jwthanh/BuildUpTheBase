@@ -114,7 +114,7 @@ ResType::##ResType##Type ResType::string_to_type(std::string string_type) \
             return pair.first; \
                 } \
         } \
-    print("type id " << string_type); \
+    printj("type id " << string_type); \
     assert(false && "unknown type"); \
  \
     return result; \
@@ -228,7 +228,7 @@ vsFighter Battle::combatants_by_team(Fighter::TeamsType team)
 void Battle::fight(spFighter left, spFighter right)
 {
     if (left->attrs->health->current_val < 1 || right->attrs->health->current_val < 1) {
-        print("someone is dead, skipping");
+        printj("someone is dead, skipping");
         return;
     };
 
@@ -252,7 +252,7 @@ void Battle::fight(spFighter left, spFighter right)
         ss << " and it died!";
 
         if (this->buildup->beatup->enemy_node->fighter == right) {
-            print("matched fighternode, removing");
+            printj("matched fighternode, removing");
             this->buildup->beatup->enemy_node->clear_fighter();
         };
 
@@ -260,7 +260,7 @@ void Battle::fight(spFighter left, spFighter right)
         left->combat->give_exp(right->xp->value);
         // this->distribute_exp(right);
     }
-    print(ss.str());
+    printj(ss.str());
 };
 
 void Battle::do_battle()
@@ -288,7 +288,7 @@ void Battle::do_battle()
     }
     else
     {
-        print1("no one to fight");
+        printj1("no one to fight");
     }
     return;
 }
@@ -333,7 +333,7 @@ void farm_task(spBuilding farm, float dt)
     if (recipe.is_satisfied(farm->ingredients))
     {
         farm->create_resources(Resource::Ingredient, 1, "PileOfGrain");
-        print1("Created a pile of grain (no todo)");
+        printj1("Created a pile of grain (no todo)");
         recipe.consume(farm->ingredients);
     };
 
@@ -358,9 +358,9 @@ void workshop_task(spBuilding workshop, float dt)
             bool can_make_sword = recipe.is_satisfied(workshop->ingredients);
             if (can_make_sword)
             {
-                print1("convert recipe's ingredient to 1 Sword");
+                printj1("convert recipe's ingredient to 1 Sword");
                 workshop->create_resources(Resource::Product, 1, "Sword");
-                print1("creating one ruined iron");
+                printj1("creating one ruined iron");
                 workshop->create_resources(Resource::Waste, 1, "wasted_iron");
                 recipe.consume(workshop->ingredients);
                 workshop->city->buildup->beatup->fighter_node->setColor(Color3B::RED);
@@ -368,7 +368,7 @@ void workshop_task(spBuilding workshop, float dt)
             }
             else 
             {
-                print1("can't make sword");
+                printj1("can't make sword");
             };
         };
         {
@@ -379,16 +379,16 @@ void workshop_task(spBuilding workshop, float dt)
             bool can_make_sword = shield_rcp.is_satisfied(workshop->ingredients);
             if (can_make_sword)
             {
-                print1("convert shield_rcp's ingredient to 1 shield");
+                printj1("convert shield_rcp's ingredient to 1 shield");
                 workshop->create_resources(Resource::Product, 1, "Shield");
                 shield_rcp.consume(workshop->ingredients);
-                print1("creating one ruined iron");
+                printj1("creating one ruined iron");
                 workshop->create_resources(Resource::Waste, 1, "wasted_iron");
                 shield_rcp.consume(workshop->ingredients);
             }
             else 
             {
-                print1("can't make shield");
+                printj1("can't make shield");
             };
         };
     }
@@ -396,12 +396,12 @@ void workshop_task(spBuilding workshop, float dt)
     // if (workshop->products.size() > 0)
     // {
     //     workshop->products.pop_back();
-    //     print1("One product wasted away");
+    //     printj1("One product wasted away");
     //     workshop->create_resources(Resource::Waste, 1, "Wasted product");
     // }
 
     VoidFunc pay = [workshop](){
-        print1("paying 3 coins for 5 products");
+        printj1("paying 3 coins for 5 products");
         workshop->city->buildup->player->coins += 3;
     };
     remove_if_sized(workshop->products, 5, 5, pay);
@@ -425,7 +425,7 @@ void necro_task(spBuilding necro, float dt)
     skeleton_recipe.components[Ingredient::IngredientType::Flesh] = 7;
     if (skeleton_recipe.is_satisfied(necro->ingredients))
     {
-        print1("creating skeleton!");
+        printj1("creating skeleton!");
         auto skelly = std::make_shared<Fighter>(city, "Skeleton");
         skelly->attrs->health->set_vals(15);
         city->building_by_name("The Arena")->fighters.push_back(skelly);
@@ -438,7 +438,7 @@ void necro_task(spBuilding necro, float dt)
         necro->wastes.pop_back();
     };
 
-    // print1("thinking about necro");
+    // printj1("thinking about necro");
     move_if_sized(Resource::Waste,
             2, 2,
             grave, necro,
@@ -457,7 +457,7 @@ void dump_task(spBuilding dump, float dt)
 
     if (dump->wastes.size() > 5)
     {
-        print1("more than 5 dump wastes, flies are gathering");
+        printj1("more than 5 dump wastes, flies are gathering");
         dump->create_resources(Resource::Ingredient, 2, "fly");
     };
 };
@@ -473,7 +473,7 @@ void arena_task(spBuilding arena, float dt)
     //expect two allies or dont spawn more
     if (arena->fighters.size() <= 2)
     {
-        print1("creating squirrel!");
+        printj1("creating squirrel!");
         auto squirrel = std::make_shared<Fighter>(city, "Squirrel");
         squirrel->xp->value = 25;
         squirrel->attrs->health->set_vals(80);
@@ -521,7 +521,7 @@ void arena_task(spBuilding arena, float dt)
             battle->combatants.end()
             );
 
-    //print1(bodies_to_create << " bodies to create");
+    //printj1(bodies_to_create << " bodies to create");
     for (int i = 0; i < bodies_to_create; i++)
     {
         auto grave = arena->city->building_by_name("The Graveyard");
@@ -561,7 +561,7 @@ void forest_task(spBuilding forest, float dt)
 
     if (forest->spawn_clock->passed_threshold())
     {
-        print1("creating bunny");
+        printj1("creating bunny");
         auto bunny = std::make_shared<Fighter>(forest->city, "bunny");
         bunny->attrs->health->set_vals(5);
         forest->fighters.push_back(bunny);
@@ -584,7 +584,7 @@ void Village::update(float dt)
 
 void Village::update_buildings(float dt)
 {
-    // print("\n\nupdating buildings");
+    // printj("\n\nupdating buildings");
     for (std::shared_ptr<Building> building : this->buildings)
     {
         building->update(dt);
@@ -610,7 +610,7 @@ void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int 
     {
 
         if (remove_count == 0) { remove_count = condition_size; };
-        print1("removing " << remove_count);
+        printj1("removing " << remove_count);
         from_vs.erase(from_vs.begin(), from_vs.begin()+remove_count);
         callback();
     };
@@ -659,7 +659,7 @@ void transfer(from_V& from_vs, to_V& to_vs, unsigned int quantity)
 
 void Animal::b2b_transfer(spBuilding from_bldg, spBuilding to_bldg, Resource::ResourceType res_type, int quantity)
 {
-    print1("moving x" << quantity << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
+    printj1("moving x" << quantity << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
     if (res_type == Resource::Ingredient)
     {
         transfer(from_bldg->ingredients, to_bldg->ingredients, quantity);
@@ -759,7 +759,7 @@ void Building::update(float dt)
     {
         // CCLOG("   %s - %.f", this->name.c_str(), this->update_clock->start_time);
         // std::cout << "   \twaiting" << std::endl;
-        // print("   \twaiting");
+        // printj("   \twaiting");
     }
     // std::cout << std::endl;
 };
@@ -807,7 +807,7 @@ void Building::print_##Rlowertype##s() \
     std::string ss = this->get_##Rlowertype##s(); \
     if (!ss.empty()) \
     { \
-        print("   " << #Rtype << ": " << ss); \
+        printj("   " << #Rtype << ": " << ss); \
     }\
 };
 
@@ -845,7 +845,7 @@ std::string Building::get_inventory()
 void Building::print_inventory()
 {
     std::string inventory = this->get_inventory();
-    print("   " << inventory);
+    printj("   " << inventory);
     this->print_specifics();
 
 };
@@ -935,10 +935,10 @@ void Buildup::main_loop()
     Clock game_clock = Clock(CLOCKS_PER_SEC);
     clock_t start_time = clock() / CLOCKS_PER_SEC;
 
-    print("starting tests...");
+    printj("starting tests...");
     test_recipe();
     test_conditions();
-    print("...done tests");
+    printj("...done tests");
     int total_loops = 0;
 
     int current_ticks = 0;
@@ -1029,7 +1029,7 @@ Village* Buildup::init_city(Buildup* buildup)
 
 void Player::update(float dt)
 {
-    // print("   The Player has "<< this->coins << "coins");
+    // printj("   The Player has "<< this->coins << "coins");
 };
 
 //int _tmain(int argc, _TCHAR* argv[])

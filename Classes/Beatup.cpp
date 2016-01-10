@@ -512,7 +512,7 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 
     if (vec2_in_rect(&fighter_rect, touch->getLocation()))
     {
-        print("touched sprite");
+        printj("touched sprite");
     }
 
     if (touch_in_node(this->shop_banner, touch))
@@ -548,7 +548,7 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 
                 // this->print_inventory();
                 this->view_army();
-                print("touched combo");
+                printj("touched combo");
                 return false;
             };
         };
@@ -1167,7 +1167,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
     {
         Beatup::back_to_menu();
-        print("LEAVE!!!");
+        printj("LEAVE!!!");
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
@@ -1188,7 +1188,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
         if (recipe.is_satisfied(farm->ingredients))
         {
             farm->create_resources(Resource::Ingredient, 1, "PileOfGrain");
-            print1("Created a pile of grain)");
+            printj1("Created a pile of grain)");
             recipe.consume(farm->ingredients);
         };
     }
@@ -1253,7 +1253,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
             auto fighter = arena->fighters.front();
             fighter->attrs->health->current_val += 50;
             heal_recipe.consume(farm->ingredients);
-            print("healed first fighter");
+            printj("healed first fighter");
         }
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)

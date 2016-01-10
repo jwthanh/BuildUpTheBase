@@ -38,7 +38,7 @@ void Combat::level_up(int levels)
     while (i < levels)
     {
         this->master->xp->lvl+=1;
-        print("NEW LEVEL IS: " << this->master->xp->lvl << std::endl);
+        printj("NEW LEVEL IS: " << this->master->xp->lvl << std::endl);
         //log(lvl * 10) * 100
         // this->master->xp_required_to_lvlup = std::floor(std::log(this->master->xp->lvl *10.0f) * 100.0f);
 
@@ -161,16 +161,16 @@ void Combat::remember_attacker(Combat* combat_attacker, bool mark_the_attk=true)
 
 void Combat::die()
 {
-    print("I've died!\n");
+    printj("I've died!\n");
     //make position unblocked
     if (master != NULL)
     {
         //master->die();
-        print("so has my master");
+        printj("so has my master");
     }
     else if (master == NULL)
     {
-        print("I've no master so he's not going to die, is he?\n");
+        printj("I've no master so he's not going to die, is he?\n");
     };
 
 };

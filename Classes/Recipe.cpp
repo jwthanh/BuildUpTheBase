@@ -91,11 +91,11 @@ void Recipe::consume(vsIngredient& input)
             std::remove_if(input.begin(), input.end(), removal_fun),
             input.end()
         );
-        print("consumed " << this->name);
+        printj("consumed " << this->name);
     }
     else
     {
 
-        print("can't make recipe " << this->name);
+        printj("can't make recipe " << this->name);
     };
 };
