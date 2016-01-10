@@ -14,9 +14,9 @@
 #include <map>
 
 
-#define print(msg) {std::stringstream ss123; ss123<< msg; CCLOG(ss123.str().c_str());}
-#define print1(msg) {std::stringstream ss123; ss123<< "\t" << msg; CCLOG(ss123.str().c_str());}
-#define print2(msg) {std::stringstream ss123; ss123<< "\t\t" << msg; CCLOG(ss123.str().c_str());}
+#define print(msg){std::stringstream ss123; ss123<< msg; CCLOG(ss123.str().c_str());}
+#define print1(msg){std::stringstream ss123; ss123<< "\t" << msg; CCLOG(ss123.str().c_str());}
+#define print2(msg){std::stringstream ss123; ss123<< "\t\t" << msg; CCLOG(ss123.str().c_str());}
 #define NO_CB [](){}
 #include "../../Classes/combat.h"
 #include <ProgressBar.h>
@@ -39,10 +39,10 @@ class Worker;
 
 typedef std::function<void()> VoidFunc;
 
-#define _MAKE_SP(Cls) typedef std::shared_ptr<##Cls> sp##Cls
-#define _MAKE_VS(Cls) typedef std::vector<sp##Cls> vs##Cls
+#define _MAKE_SP(Cls)typedef std::shared_ptr<##Cls> sp##Cls
+#define _MAKE_VS(Cls)typedef std::vector<sp##Cls> vs##Cls
 
-#define MAKE_SP_VS(Cls) _MAKE_SP(##Cls);_MAKE_VS(##Cls)
+#define MAKE_SP_VS(Cls)_MAKE_SP(##Cls);_MAKE_VS(##Cls)
 
 MAKE_SP_VS(Building);
 MAKE_SP_VS(Resource);

@@ -12,7 +12,6 @@
 #include <locale>
 
 #include "HouseBuilding.h"
-#include "../main.h"
 #include "Recipe.h"
 #include "Worker.h"
 #include "../../Classes/RandomWeightMap.h"
@@ -1033,30 +1032,30 @@ void Player::update(float dt)
     // print("   The Player has "<< this->coins << "coins");
 };
 
-int _tmain(int argc, _TCHAR* argv[])
-{
-    Buildup* buildup = new Buildup();
-
-    auto player = new Player("Jimothy");
-    player->coins = 100;
-    buildup->player = player;
-
-    auto animal = std::make_shared<Animal>("Tank");
-
-    buildup->city = Buildup::init_city(buildup);
-    buildup->city->update_buildings(0);
-
-    buildup->main_loop();
-
-    std::cout << std::endl << "Done?";
-    std::string val;
-    std::cin.ignore();
-    std::cout << "Peace" << std::endl;
-
-
-
-    return 0;
-}
+//int _tmain(int argc, _TCHAR* argv[])
+//{
+//    Buildup* buildup = new Buildup();
+//
+//    auto player = new Player("Jimothy");
+//    player->coins = 100;
+//    buildup->player = player;
+//
+//    auto animal = std::make_shared<Animal>("Tank");
+//
+//    buildup->city = Buildup::init_city(buildup);
+//    buildup->city->update_buildings(0);
+//
+//    buildup->main_loop();
+//
+//    std::cout << std::endl << "Done?";
+//    std::string val;
+//    std::cin.ignore();
+//    std::cout << "Peace" << std::endl;
+//
+//
+//
+//    return 0;
+//}
 
 std::string Resource::type_str(ResourceType type)
 {
