@@ -28,6 +28,7 @@
 #include "Recipe.h"
 #include "attribute.h"
 #include "FShake.h"
+#include <cocos2d/cocos/editor-support/cocostudio/CSParseBinary_generated.h>
 
 USING_NS_CC;
 
@@ -473,11 +474,7 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         {
             if (touch_in_node(fist->sprite, touch) && !fist->is_punching)
             {
-                if (this->is_blocking)
-                {
-
-                }
-                else
+                if (!this->is_blocking)
                 {
                     fist->punch();
 
@@ -489,8 +486,39 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
                     return true;
                 }
             }
-
         };
+    };
+
+    auto get_sprite_rect = [&](Node* parent_node, Sprite* sprite)
+    {
+        auto pos = parent_node->convertToWorldSpace(sprite->getPosition());
+        auto size = sprite->getContentSize();
+
+        //NOTE: scale by parent as well
+        auto width = size.width * sprite->getScaleX()* parent_node->getScaleX();
+        auto height = size.height * sprite->getScaleY() * parent_node->getScaleY();
+
+        auto rect = Rect(
+                pos.x - width/2,
+                pos.y - height/2,
+                width,
+                height
+                );
+
+        return rect;
+    };
+
+    Rect face_rect = get_sprite_rect(this->get_target_face(), this->get_target_face()->get_sprite());
+
+    auto layer_color = LayerColor::create(Color4B::RED);
+    layer_color->setContentSize(face_rect.size);
+    layer_color->setPosition(face_rect.origin);
+
+    this->addChild(layer_color);
+
+    auto touch_loc = touch->getLocation();
+    if (vec2_in_rect(&face_rect, touch_loc)) {
+        printj("TOUCH");
     };
 
     if ((touch_in_node(this->player_hp_bar->front_timer, touch, 1.5) || touch_in_node(this->player_hp_bar->back_timer, touch, 1.5) ||
@@ -501,13 +529,15 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         return false;
     }
 
-    auto fighter_pos = this->fighter_node->convertToWorldSpace(this->fighter_node->sprite->getPosition());
-    auto fighter_size = this->fighter_node->sprite->getContentSize();
+    auto fighter_sprite = this->fighter_node->sprite;
+    auto fighter_pos = this->fighter_node->convertToWorldSpace(fighter_sprite->getPosition());
+    auto fighter_size = fighter_sprite->getContentSize();
+
     Rect fighter_rect = Rect(
-        fighter_pos.x - fighter_size.width/2*this->fighter_node->sprite->getScaleX(),
-        fighter_pos.y - fighter_size.height/2*this->fighter_node->sprite->getScaleY(),
-        fighter_size.width*this->fighter_node->sprite->getScaleX(),
-        fighter_size.height*this->fighter_node->sprite->getScaleY()
+        fighter_pos.x - fighter_size.width/2*fighter_sprite->getScaleX(),
+        fighter_pos.y - fighter_size.height/2*fighter_sprite->getScaleY(),
+        fighter_size.width*fighter_sprite->getScaleX(),
+        fighter_size.height*fighter_sprite->getScaleY()
         );
 
     if (vec2_in_rect(&fighter_rect, touch->getLocation()))
