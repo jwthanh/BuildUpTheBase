@@ -1158,6 +1158,12 @@ void Beatup::print_inventory()
 void Beatup::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent)
 {
     this->key_state[keyCode] = false;
+
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    {
+        Beatup::back_to_menu();
+        printj("esc/back key released");
+    }
 };
 
 void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
@@ -1167,7 +1173,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
     {
         Beatup::back_to_menu();
-        printj("LEAVE!!!");
+        printj("esc/back key pressed");
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
