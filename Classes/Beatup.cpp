@@ -1831,6 +1831,10 @@ void Beatup::cycle_next_building(bool reverse)
             {
                 this->set_target_building(*(face_iter + 1));
             }
+            else
+            {
+                this->set_target_building(*buildings.begin());
+            }
 
         }
         else if (reverse == true)
@@ -1841,11 +1845,11 @@ void Beatup::cycle_next_building(bool reverse)
             {
                 this->set_target_building(*(face_iter + 1));
             }
+            else
+            {
+                this->set_target_building(*buildings.rbegin());
+            }
 
-        }
-        else
-        {
-            this->set_target_building(*buildings.begin());
         }
     }
     else
