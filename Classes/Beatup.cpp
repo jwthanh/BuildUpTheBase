@@ -237,7 +237,7 @@ bool Beatup::init()
     auto quest_button = MenuItemSprite::create(
         Sprite::createWithSpriteFrameName("back_banner.png"),
         Sprite::createWithSpriteFrameName("back_banner.png"),
-        std::bind(&Beatup::create_quest_alert, this));
+        std::bind(&Beatup::cycle_next_building, this, false));
 
     quest_button->setScale(sx(4.5f));
 
