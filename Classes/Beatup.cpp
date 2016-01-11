@@ -28,7 +28,6 @@
 #include "Recipe.h"
 #include "attribute.h"
 #include "FShake.h"
-#include <cocos2d/cocos/editor-support/cocostudio/CSParseBinary_generated.h>
 
 USING_NS_CC;
 
