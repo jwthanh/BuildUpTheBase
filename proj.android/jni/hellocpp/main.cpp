@@ -23,7 +23,7 @@ void cocos_android_app_init(JNIEnv* env)
 void vibrate(int milliseconds)
 {
     JniMethodInfo minfo;
-    if (JniHelper::getStaticMethodInfo(minfo, "com/tankorsmash/beatupface/AppActivity", "vibrate", "(I)V"), "Function doesn't exist")
+    if (JniHelper::getStaticMethodInfo(minfo, "com/tankorsmash/buildupthebase/AppActivity", "vibrate", "(I)V"), "Function doesn't exist")
     {
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, (jint)milliseconds);
     }
