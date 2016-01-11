@@ -440,6 +440,16 @@ void Beatup::onEnter()
     this->schedule(schedule_selector(Beatup::update));
 };
 
+void Beatup::switch_to_building_menu()
+{
+    auto scene = Scene::create();
+    BuildingMenu* building_menu = BuildingMenu::create(this->buildup->target_building);
+    scene->addChild(building_menu);
+
+    auto director = Director::getInstance();
+    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+};
+
 void Beatup::switch_to_shop()
 {
     auto director = Director::getInstance();
@@ -513,12 +523,7 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 
     auto touch_loc = touch->getLocation();
     if (vec2_in_rect(&face_rect, touch_loc)) {
-        auto scene = Scene::create();
-        BuildingMenu* building_menu = BuildingMenu::create(this->buildup->target_building);
-        scene->addChild(building_menu);
-
-        auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+        this->switch_to_building_menu();
         return false;
     };
 
