@@ -498,27 +498,28 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         auto width = size.width * sprite->getScaleX()* parent_node->getScaleX();
         auto height = size.height * sprite->getScaleY() * parent_node->getScaleY();
 
-        auto rect = Rect(
-                pos.x - width/2,
-                pos.y - height/2,
-                width,
-                height
-                );
+        auto rect = Rect(pos.x-width/2, pos.y-height/2, width, height);
 
         return rect;
     };
 
     Rect face_rect = get_sprite_rect(this->get_target_face(), this->get_target_face()->get_sprite());
 
-    auto layer_color = LayerColor::create(Color4B::RED);
-    layer_color->setContentSize(face_rect.size);
-    layer_color->setPosition(face_rect.origin);
-
-    this->addChild(layer_color);
+    //debug
+    // auto layer_color = LayerColor::create(Color4B::RED);
+    // layer_color->setContentSize(face_rect.size);
+    // layer_color->setPosition(face_rect.origin);
+    // this->addChild(layer_color);
 
     auto touch_loc = touch->getLocation();
     if (vec2_in_rect(&face_rect, touch_loc)) {
-        printj("TOUCH");
+        auto scene = Scene::create();
+        BuildingMenu* building_menu = BuildingMenu::create(this->buildup->target_building);
+        scene->addChild(building_menu);
+
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+        return false;
     };
 
     if ((touch_in_node(this->player_hp_bar->front_timer, touch, 1.5) || touch_in_node(this->player_hp_bar->back_timer, touch, 1.5) ||
