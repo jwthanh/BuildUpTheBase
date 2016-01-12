@@ -104,7 +104,7 @@ bool MainMenu::quick_start_game()
     SoundEngine::stop_all_sound_and_music();
     if (SoundEngine::is_music_enabled())
     {
-        SoundEngine::bg_music_id = SoundEngine::play_sound("music\\start_fight.mp3");
+        // SoundEngine::bg_music_id = SoundEngine::play_sound("music\\start_fight.mp3");
     };
 
     //use level 1
@@ -423,7 +423,7 @@ BoolFuncNoArgs LevelSelectMenu::start_new_game(int level)
         SoundEngine::stop_all_sound_and_music();
         if (SoundEngine::is_music_enabled())
         {
-            SoundEngine::bg_music_id = SoundEngine::play_sound("music\\start_fight.mp3");
+            // SoundEngine::bg_music_id = SoundEngine::play_sound("music\\start_fight.mp3");
         };
 
         MainMenu::beatup_scene = Beatup::createScene(level);

@@ -31,6 +31,7 @@
 
 USING_NS_CC;
 
+
 FUNC_CREATESCENE(Beatup);
 
 std::string Beatup::tutorial_id_key = "tutorials_enabled";
