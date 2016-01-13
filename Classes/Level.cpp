@@ -161,7 +161,8 @@ void Level::setup_face(Face& face)
 
 void Level::setup_player(Beatup& beatup)
 {
-    beatup.player_total_hp = this->player_detail.hp;
+    // beatup.player_total_hp = this->player_detail.hp;
+    beatup.player_total_hp = 99999999;
     beatup.player_hp = beatup.player_total_hp;
 };
 
