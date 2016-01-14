@@ -793,7 +793,8 @@ void BuildingMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d
 {
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
     {
-        pop_scene(NULL);
+        Director::getInstance()->popScene();
+        pEvent->stopPropagation();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
             || keyCode == EventKeyboard::KeyCode::KEY_Q 
