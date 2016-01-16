@@ -1195,7 +1195,7 @@ void Beatup::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Eve
 {
     this->key_state[keyCode] = false;
 
-    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK ) 
     {
         Beatup::back_to_menu();
         printj("esc/back key released");
@@ -1367,6 +1367,12 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_2) 
     {
+        auto scene = Scene::create();
+        CityMenu* building_menu = CityMenu::create(this->buildup->target_building);
+        scene->addChild(building_menu);
+
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_3) 

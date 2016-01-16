@@ -118,4 +118,20 @@ class BuildingMenu : public Shop
         bool init() override;
 
 };
+
+class CityMenu : public Shop
+{
+    public:
+        spBuilding building;
+
+        static CityMenu* create(spBuilding building);
+        static cocos2d::Scene* createScene();
+
+        virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
+
+        virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
+
+        bool init() override;
+
+};
 #endif
