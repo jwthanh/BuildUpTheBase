@@ -1,19 +1,16 @@
 # BaseBuilder
-An upcoming game about building a base
+An upcoming game about building a base. Checkout the latest update video https://www.youtube.com/watch?v=oNZ5dbS90yQ
 
 ## Features
-None yet
+* A bunch of buildings exist
+* Punch each one, something different comes out
+* Click on a building, something happens
+* Dudes fight, level up
+* You can build a sword that'll help one fight
 
 ## Release Schedule
 
-* Way too early to tell
-
-# Installation (roughly)
-http://www.cocos2d-x.org/filedown/cocos2d-x-3.4.zip should be the same one I use now, although I got it right off of github.
-
-# iOS and Mac
-
-1. clone this repo
-2. install cocos2d-x
-3. create new game (cocos new Temp -p com.Temp -l cpp -d .)
-4. copy the cocos2d folder into the root of the 'artistry' folder
+* End of Dec: move back to phone (done)
+* End of Jan: flesh out building tasks
+* End of Feb: different screens for fighting and building
+* End of year: Release?
