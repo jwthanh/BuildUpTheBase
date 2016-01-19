@@ -829,14 +829,6 @@ bool CityMenu::init()
     FUNC_INIT(CityMenu);
 #endif
 
-    menu_font = DEFAULT_FONT;
-    menu_fontsize = 40;
-
-    this->shop_items = new std::vector<ShopItem*>();
-
-    menu_heightdiff = -1;
-    this->last_pos = Vec2(-1, -1);
-
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -869,31 +861,6 @@ bool CityMenu::init()
     );
     this->coins_lbl->setTextColor(Color4B::WHITE);
     this->addChild(this->coins_lbl, 1);
-
-    auto scroll = this->create_center_scrollview();
-
-    this->combo_menu = Menu::create();
-    this->addChild(this->combo_menu);
-    auto go_back_cb = []() {
-       auto director = Director::getInstance();
-       director->popScene();
-       return false;
-    };
-
-    std::vector<ItemData> item_data = {
-        {"default", "Back", go_back_cb, false},
-    };
-    // item_data.insert(
-    //     item_data.begin(),
-    //     this->building->menu_items.begin(),
-    //     this->building->menu_items.end()
-    // );
-
-    this->init_menu_from_data(scroll, item_data);
-
-
-
-    this->resize_scroll_inner(scroll);
     return true;
 };
 

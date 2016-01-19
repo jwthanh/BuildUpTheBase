@@ -119,10 +119,12 @@ class BuildingMenu : public Shop
 
 };
 
-class CityMenu : public Shop
+class CityMenu : public GameLayer
 {
     public:
         spBuilding building;
+
+        cocos2d::Label* coins_lbl;
 
         static CityMenu* create(spBuilding building);
         static cocos2d::Scene* createScene();
