@@ -136,4 +136,13 @@ class CityMenu : public GameLayer
         bool init() override;
 
 };
+
+class BuildingNode : public cocos2d::Node 
+{
+    public:
+
+        CREATE_FUNC(BuildingNode);
+        cocos2d::LayerColor* bg_layer;
+        BuildingNode();
+};
 #endif

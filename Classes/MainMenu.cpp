@@ -845,6 +845,11 @@ bool CityMenu::init()
         )
     );
 
+    auto bldg_node = BuildingNode::create();
+    bldg_node->setPosition(this->get_center_pos());
+
+    this->addChild(bldg_node);
+
     // add the label as a child to this layer
     this->addChild(label, 1);
 
@@ -877,4 +882,15 @@ void CityMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Ev
         auto director = Director::getInstance();
         director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
     };
+};
+
+BuildingNode::BuildingNode()
+{
+    float width = 200;
+    float height = 200;
+
+    this->bg_layer = LayerColor::create(Color4B::GREEN, width, height);
+    this->addChild(this->bg_layer);
+
+    this->setContentSize(Size(width, height));
 };
