@@ -226,6 +226,7 @@ public:
         cocos2d::Scene* shop_scene;
         void switch_to_shop();
         void switch_to_building_menu();
+        void switch_to_city_menu();
 
 
         cocos2d::MotionStreak* motion;
