@@ -880,6 +880,16 @@ bool CityMenu::init()
         button->setTitleText(building->name);
         button->setTitleFontSize(24);
 
+        auto cb = [this, building](Ref*, ui::Widget::TouchEventType) {
+            auto scene = Scene::create();
+            BuildingMenu* building_menu = BuildingMenu::create(building);
+            scene->addChild(building_menu);
+
+            auto director = Director::getInstance();
+            director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+        };
+        button->addTouchEventListener(cb);
+
         resize_btn(button);
         scroll->addChild(button);
     }
