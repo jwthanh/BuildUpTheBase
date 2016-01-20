@@ -140,9 +140,14 @@ class CityMenu : public GameLayer
 class BuildingNode : public cocos2d::Node 
 {
     public:
-
-        CREATE_FUNC(BuildingNode);
-        cocos2d::LayerColor* bg_layer;
         BuildingNode();
+        CREATE_FUNC(BuildingNode);
+
+        spBuilding building;
+        void set_building(spBuilding bldg);
+
+        cocos2d::LayerColor* bg_layer;
+        cocos2d::Label* building_label;
+
 };
 #endif

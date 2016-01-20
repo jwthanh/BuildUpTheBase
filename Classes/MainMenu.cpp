@@ -892,5 +892,14 @@ BuildingNode::BuildingNode()
     this->bg_layer = LayerColor::create(Color4B::GREEN, width, height);
     this->addChild(this->bg_layer);
 
+    this->building_label = Label::createWithTTF("unset bldg", TITLE_FONT, 12);
+    this->addChild(this->building_label);
+
+
     this->setContentSize(Size(width, height));
+};
+
+void BuildingNode::set_building(spBuilding bldg)
+{
+    this->building = bldg;
 };
