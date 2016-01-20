@@ -845,10 +845,40 @@ bool CityMenu::init()
         )
     );
 
-    auto bldg_node = BuildingNode::create();
-    bldg_node->setPosition(this->get_center_pos());
+    // auto bldg_node = BuildingNode::create();
+    // bldg_node->setPosition(this->get_center_pos());
+    // this->addChild(bldg_node);
+    auto resize_btn = [](ui::Button* button) {
+        auto lbl_size = button->getTitleRenderer()->getContentSize();
 
-    this->addChild(bldg_node);
+        button->setContentSize(
+                Size(
+                    lbl_size.width * 1.1f,
+                    lbl_size.height * 1.1f
+                    )
+                );
+    };
+
+    auto scroll = ui::ScrollView::create();
+    scroll->setLayoutType(ui::Layout::Type::VERTICAL);
+    scroll->setContentSize(Size(200, 400));
+    scroll->setInnerContainerSize(Size(200, 800));
+    scroll->setAnchorPoint(Vec2(0.5f, 0.5f));
+
+    scroll->setPosition(this->get_center_pos());
+
+    for (auto building : this->building->city->buildings)
+    {
+        auto button = ui::Button::create("shop_title.png", "", "", ui::TextureResType::PLIST);
+        button->ignoreContentAdaptWithSize(false);
+        button->setTitleText(building->name);
+        button->setTitleFontSize(24);
+
+        resize_btn(button);
+
+        scroll->addChild(button);
+    }
+    this->addChild(scroll);
 
     // add the label as a child to this layer
     this->addChild(label, 1);
@@ -886,8 +916,8 @@ void CityMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Ev
 
 BuildingNode::BuildingNode()
 {
-    float width = 200;
-    float height = 200;
+    float width = 50;
+    float height = 50;
 
     this->bg_layer = LayerColor::create(Color4B::GREEN, width, height);
     this->addChild(this->bg_layer);
