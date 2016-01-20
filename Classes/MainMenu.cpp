@@ -859,8 +859,12 @@ bool CityMenu::init()
                 );
     };
 
+    auto layout_param = ui::RelativeLayoutParameter::create();
+    layout_param->setMargin(ui::Margin(0, 50.0f, 0, 0)); //supposed to be 50 units between each button, FIXME
+
     auto scroll = ui::ScrollView::create();
     scroll->setLayoutType(ui::Layout::Type::VERTICAL);
+
     scroll->setContentSize(Size(200, 400));
     scroll->setInnerContainerSize(Size(200, 800));
     scroll->setAnchorPoint(Vec2(0.5f, 0.5f));
@@ -870,12 +874,13 @@ bool CityMenu::init()
     for (auto building : this->building->city->buildings)
     {
         auto button = ui::Button::create("shop_title.png", "", "", ui::TextureResType::PLIST);
+        button->setLayoutParameter(layout_param->createCloneInstance());
+
         button->ignoreContentAdaptWithSize(false);
         button->setTitleText(building->name);
         button->setTitleFontSize(24);
 
         resize_btn(button);
-
         scroll->addChild(button);
     }
     this->addChild(scroll);
