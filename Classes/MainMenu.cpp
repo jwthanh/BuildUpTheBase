@@ -772,7 +772,19 @@ bool BuildingMenu::init()
        return false;
     };
 
+    auto open_bldg_inventory = [this]() {
+
+        auto scene = Scene::create();
+        InventoryMenu* building_menu = InventoryMenu::create(this->building);
+        scene->addChild(building_menu);
+
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+        return false;
+    };
+
     std::vector<ItemData> item_data = {
+        {"default", "Inventory", open_bldg_inventory, false},
         {"default", "Back", go_back_cb, false},
     };
     item_data.insert(
@@ -948,3 +960,94 @@ void BuildingNode::set_building(spBuilding bldg)
 {
     this->building = bldg;
 };
+
+bool InventoryMenu::init()
+{
+#ifdef _WIN32
+    FUNC_INIT_WIN32(InventoryMenu);
+#else
+    FUNC_INIT(InventoryMenu);
+#endif
+
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    // add a label shows "Hello World" create and initialize a label
+    std::stringstream ss;
+    ss << "Buidling: " << this->building->name;
+    auto label = Label::createWithTTF(ss.str(), menu_font, sx(24));
+
+    // position the label on the center of the screen
+    label->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - label->getContentSize().height
+        )
+    );
+
+    // auto bldg_node = BuildingNode::create();
+    // bldg_node->setPosition(this->get_center_pos());
+    // this->addChild(bldg_node);
+    auto resize_btn = [](ui::Button* button) {
+        auto lbl_size = button->getTitleRenderer()->getContentSize();
+
+        button->setContentSize(
+                Size(
+                    lbl_size.width * 1.1f,
+                    lbl_size.height * 1.1f
+                    )
+                );
+    };
+
+    // add the label as a child to this layer
+    this->addChild(label, 1);
+
+    this->coins_lbl = Label::createWithTTF(
+        "Inventory Menu",
+        this->menu_font,
+        this->menu_fontsize
+    );
+    this->coins_lbl->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+        )
+    );
+    this->coins_lbl->setTextColor(Color4B::WHITE);
+    this->addChild(this->coins_lbl, 1);
+
+    return true;
+};
+
+void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
+{
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    {
+        Director::getInstance()->popScene();
+        pEvent->stopPropagation();
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
+            || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
+    {
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+    };
+};
+
+InventoryMenu* InventoryMenu::create(spBuilding building)
+{
+    InventoryMenu *pRet = new(std::nothrow) InventoryMenu();
+    pRet->building = building; //this should be after init, cause i guess init should fail, but its fine for now.
+
+    if (pRet && pRet->init()) {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr; 
+        return pRet;
+    }
+};
+
