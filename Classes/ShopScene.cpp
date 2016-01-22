@@ -109,6 +109,7 @@ void Shop::menu_init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+
     this->combo_menu = Menu::create();
     this->addChild(this->combo_menu);
 

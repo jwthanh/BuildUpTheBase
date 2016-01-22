@@ -803,12 +803,7 @@ bool BuildingMenu::init()
 
 void BuildingMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
 {
-    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
-    {
-        Director::getInstance()->popScene();
-        pEvent->stopPropagation();
-    }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
+    if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
@@ -928,12 +923,7 @@ bool CityMenu::init()
 
 void CityMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
 {
-    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
-    {
-        Director::getInstance()->popScene();
-        pEvent->stopPropagation();
-    }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
+    if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
@@ -1021,12 +1011,7 @@ bool InventoryMenu::init()
 
 void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
 {
-    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
-    {
-        Director::getInstance()->popScene();
-        pEvent->stopPropagation();
-    }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
+    if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
