@@ -1046,6 +1046,12 @@ bool InventoryMenu::init()
                 auto raw_butn = panel->getChildByName("resource_btn");
                 auto btn = dynamic_cast<ui::Button*>(raw_butn);
 
+                auto cb = [ing_type, this](Ref*, ui::Widget::TouchEventType) {
+                    auto alert = InventoryMenu::create_detail_alert(building, ing_type);
+                    this->addChild(alert);
+                };
+                btn->addTouchEventListener(cb);
+
                 auto type_str = Ingredient::type_to_string(ing_type);
 
                 std::stringstream ss;
@@ -1100,7 +1106,6 @@ void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
-        
         auto original_panel = InventoryMenu::create_detail_alert(NULL, Ingredient::IngredientType::Grain);
         this->addChild(original_panel);
     }
@@ -1131,12 +1136,16 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     original_panel->removeFromParent();
 
     auto resource_name = dynamic_cast<ui::Text*>(original_panel->getChildByName("resource_name"));
-    resource_name->setString("Grain");
+    std::string res_name = Ingredient::type_to_string(type);
+    resource_name->setString(res_name);
+
     auto resource_description = dynamic_cast<ui::Text*>(original_panel->getChildByName("resource_description"));
     resource_description->setString("Grain is good to eat\nits a lot of fun to touch\ni could go for some right now");
+
     auto count_desc = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_desc"));
     auto count_lbl = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_lbl"));
-    count_lbl->setString("123");
+    int count = building->get_ingredient_count()[type];
+    count_lbl->setString(std::to_string(count));
 
     original_panel->setPosition(this->get_center_pos());
 
