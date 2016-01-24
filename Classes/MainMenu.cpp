@@ -1007,25 +1007,20 @@ bool InventoryMenu::init()
 
         for (int j = 0; j < 3; j++) {
             index++;
-            // auto scene = ui::Button::create("f_face_neutral.png", "", "", ui::TextureResType::PLIST);
+
             auto parent_scene = inst->createNode("editor/Node.csb");
             auto scene = parent_scene->getChildByName("Panel_1");
             scene->removeFromParent();
-            CCLOG("scene width %f", scene->getContentSize().width);
 
             auto btn = scene->getChildByName("resource_btn");
             if (btn) {
-                CCLOG("found button");
-
                 auto casted = dynamic_cast<ui::Button*>(btn);
                 if (casted) {
-                    CCLOG("cast properly %i", index);
                     try {
                         casted->setTitleText(building->ingredients.at(index)->name);
-                        CCLOG("set text properly ASDASDASD");
                     }
                     catch (std::out_of_range&) {
-                        CCLOG("set text out of range error");
+                        break;
                     }
                 }
             }
