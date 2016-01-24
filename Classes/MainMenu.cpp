@@ -991,26 +991,28 @@ bool InventoryMenu::init()
                 );
     };
 
-    //create 9 sprites, three per row to go into a layout
+    auto inst = CSLoader::getInstance();
 
     int ingredient_count = building->ingredients.size();
     int num_cols = 5;
 
-    auto inst = CSLoader::getInstance();
     //load dummy node to get size
     auto raw_node = inst->createNode("editor/Node.csb");
     auto panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
     float panel_width = panel->getContentSize().width;
-    CCLOG("%f", panel_width);
+    // CCLOG("%f", panel_width);
 
+    //prep param to apply to rows and cols
     auto param = ui::LinearLayoutParameter::create();
     auto margin = ui::Margin(0, 10, 10, 0);
+    param->setMargin(margin);
 
     float width = (panel_width+margin.left+margin.right)*num_cols;
 
+    //set base layout TODO variable height
     auto layout = ui::Layout::create();
     layout->setLayoutType(ui::Layout::Type::VERTICAL);
-    layout->setContentSize(Size(width, 500));
+    layout->setContentSize(Size(width, 500)); 
     layout->setAnchorPoint(Vec2(0.5, 0.5));
 
     int index = 0;
@@ -1023,19 +1025,21 @@ bool InventoryMenu::init()
 
         for (int j = 0; j < num_cols; j++) {
 
+            //pull the panel out of node because node's not a widget and has no size
             auto raw_node = inst->createNode("editor/Node.csb");
             auto panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
+            panel->removeFromParent();
             // CCLOG("%f", panel->getContentSize().width);
 
-            panel->removeFromParent();
             panel->setLayoutParameter(param);
 
-            auto btn = panel->getChildByName("resource_btn");
-            if (btn) {
-                auto casted = dynamic_cast<ui::Button*>(btn);
-                if (casted) {
+            auto raw_butn = panel->getChildByName("resource_btn");
+            if (raw_butn) {
+                auto btn = dynamic_cast<ui::Button*>(raw_butn);
+                if (btn) {
                     try {
-                        casted->setTitleText(building->ingredients.at(index)->name);
+                        btn->setTitleText(building->ingredients.at(index)->name);
+
                         index++;
                     }
                     catch (std::out_of_range&) {
