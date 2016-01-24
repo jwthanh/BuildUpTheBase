@@ -781,6 +781,7 @@ void Building::print_specifics()
 };
 
 #define PRINT_RESOURCE(Rtype, Rlowertype) \
+\
 std::string Building::get_##Rlowertype##s() \
 { \
     std::stringstream ss; \
@@ -790,8 +791,14 @@ std::string Building::get_##Rlowertype##s() \
         Rtype::Rtype##Type type = type_str.first; \
         std::string str = type_str.second; \
  \
-        auto type_matches = [type](sp##Rtype ing){ return ing->Rlowertype##_type == type; }; \
-        int count = std::count_if(this->Rlowertype##s.begin(), this->Rlowertype##s.end(), type_matches); \
+        auto type_matches = [type](sp##Rtype ing){ \
+            return ing->Rlowertype##_type == type;\
+        }; \
+        int count = std::count_if(\
+            this->Rlowertype##s.begin(),\
+            this->Rlowertype##s.end(),\
+            type_matches\
+        ); \
  \
         if (count != 0) \
         { \
