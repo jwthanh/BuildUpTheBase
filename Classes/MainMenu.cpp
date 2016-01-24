@@ -1016,6 +1016,8 @@ bool InventoryMenu::init()
     layout->setContentSize(Size(width, 500)); 
     layout->setAnchorPoint(Vec2(0.5, 0.5));
 
+    auto map_type = building->get_ingredient_count();
+
     int index = 0;
     for (int i = 0; i < 99; i++) {
         auto inner_layout = ui::HBox::create();

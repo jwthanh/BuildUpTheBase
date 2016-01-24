@@ -318,9 +318,9 @@ class Building : public Nameable, public Updateable, public std::enable_shared_f
         std::string get_inventory();
         void print_inventory();
 
-        std::map<Ingredient, int> get_ingredient_count();
-        std::map<Product, int> get_product_count();
-        std::map<Waste, int> get_waste_count();
+        std::map<Ingredient::IngredientType, int> get_ingredient_count();
+        std::map<Product::ProductType, int> get_product_count();
+        std::map<Waste::WasteType, int> get_waste_count();
         std::string get_ingredients();
         std::string get_products();
         std::string get_wastes();
