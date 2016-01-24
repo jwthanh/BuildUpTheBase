@@ -989,6 +989,36 @@ bool InventoryMenu::init()
                 );
     };
 
+    //create 9 sprites, three per row to go into a layout
+    auto layout = ui::Layout::create();
+    layout->setLayoutType(ui::Layout::Type::VERTICAL);
+    layout->setContentSize(Size(300, 300));
+    layout->setAnchorPoint(Vec2(0.5, 0.5));
+    for (int i = 0; i < 3; i++) {
+        auto inner_layout = ui::Layout::create();
+        auto param = ui::LinearLayoutParameter::create();
+        inner_layout->setLayoutType(ui::Layout::Type::HORIZONTAL);
+        inner_layout->setContentSize(Size(300, 100));
+
+
+        param->setGravity(ui::LinearLayoutParameter::LinearGravity::CENTER_HORIZONTAL);
+        param->setMargin(ui::Margin(0, 0, 5.0, 0));
+        inner_layout->setLayoutParameter(param);
+        //inner_layout->setLayoutType(ui::Layout::Type::RELATIVE);
+
+        for (int j = 0; j < 3; j++) {
+            //auto sprite = Sprite::createWithSpriteFrameName("f_face_neutral.png");
+            auto sprite = ui::Button::create("f_face_neutral.png", "", "", ui::TextureResType::PLIST);
+            CCLOG("%f", sprite->getContentSize().width);
+            inner_layout->addChild(sprite);
+        };
+
+        layout->addChild(inner_layout);
+    };
+    layout->setPosition(this->get_center_pos());
+
+    this->addChild(layout);
+
     // add the label as a child to this layer
     this->addChild(label, 1);
 
@@ -1021,18 +1051,18 @@ void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
 
 InventoryMenu* InventoryMenu::create(spBuilding building)
 {
-    InventoryMenu *pRet = new(std::nothrow) InventoryMenu();
-    pRet->building = building; //this should be after init, cause i guess init should fail, but its fine for now.
+    InventoryMenu *menu = new(std::nothrow) InventoryMenu();
+    menu->building = building; //this should be after init, cause i guess init should fail, but its fine for now.
 
-    if (pRet && pRet->init()) {
-        pRet->autorelease();
-        return pRet;
+    if (menu && menu->init()) {
+        menu->autorelease();
+        return menu;
     }
     else
     {
-        delete pRet;
-        pRet = nullptr; 
-        return pRet;
+        delete menu;
+        menu = nullptr; 
+        return menu;
     }
 };
 
