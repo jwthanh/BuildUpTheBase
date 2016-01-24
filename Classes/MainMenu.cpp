@@ -997,10 +997,11 @@ bool InventoryMenu::init()
     int num_cols = 5;
 
     //load dummy node to get size
+    //and pull the panel out of node because node's not a widget and has no size
     auto raw_node = inst->createNode("editor/Node.csb");
-    auto panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
-    float panel_width = panel->getContentSize().width;
-    // CCLOG("%f", panel_width);
+    auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
+    original_panel->removeFromParent();
+    float panel_width = original_panel->getContentSize().width;
 
     //prep param to apply to rows and cols
     auto param = ui::LinearLayoutParameter::create();
@@ -1025,11 +1026,7 @@ bool InventoryMenu::init()
 
         for (int j = 0; j < num_cols; j++) {
 
-            //pull the panel out of node because node's not a widget and has no size
-            auto raw_node = inst->createNode("editor/Node.csb");
-            auto panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
-            panel->removeFromParent();
-            // CCLOG("%f", panel->getContentSize().width);
+            auto panel = original_panel->clone();
 
             panel->setLayoutParameter(param);
 
