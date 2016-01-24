@@ -151,6 +151,8 @@ class InventoryMenu : public GameLayer
 
         virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
+        cocos2d::ui::Widget* create_detail_alert(spBuilding building, Ingredient::IngredientType type);
+
         bool init() override;
 
 };
