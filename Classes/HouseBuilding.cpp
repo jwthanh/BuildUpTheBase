@@ -94,7 +94,7 @@ std::string Fighter::get_stats()
     std::string result = "none"; \
     for (auto pair : ResType::type_map) \
         { \
-        if (type == pair.first == type) \
+        if (type == pair.first) \
                 { \
             return pair.second; \
                 } \

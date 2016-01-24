@@ -736,7 +736,7 @@ bool BuildingMenu::init()
 
     // add a label shows "Hello World" create and initialize a label
     std::stringstream ss;
-    ss << "Buidling: " << this->building->name;
+    ss << "Building: " << this->building->name;
     auto label = Label::createWithTTF(ss.str(), menu_font, sx(24));
 
     // position the label on the center of the screen
@@ -843,7 +843,7 @@ bool CityMenu::init()
 
     // add a label shows "Hello World" create and initialize a label
     std::stringstream ss;
-    ss << "Buidling: " << this->building->name;
+    ss << "Building: " << this->building->name;
     auto label = Label::createWithTTF(ss.str(), menu_font, sx(24));
 
     // position the label on the center of the screen
@@ -966,7 +966,7 @@ bool InventoryMenu::init()
 
     // add a label shows "Hello World" create and initialize a label
     std::stringstream ss;
-    ss << "Buidling: " << this->building->name;
+    ss << "Building: " << this->building->name;
     auto label = Label::createWithTTF(ss.str(), menu_font, sx(24));
 
     // position the label on the center of the screen
@@ -1017,8 +1017,9 @@ bool InventoryMenu::init()
     layout->setAnchorPoint(Vec2(0.5, 0.5));
 
     auto map_type = building->get_ingredient_count();
+    auto it = map_type.begin();
+    auto end_it = map_type.end();
 
-    int index = 0;
     for (int i = 0; i < 99; i++) {
         auto inner_layout = ui::HBox::create();
         inner_layout->setContentSize(Size(width, 100));
@@ -1037,9 +1038,20 @@ bool InventoryMenu::init()
                 auto btn = dynamic_cast<ui::Button*>(raw_butn);
                 if (btn) {
                     try {
-                        btn->setTitleText(building->ingredients.at(index)->name);
+                        std::advance(it, 1);
 
-                        index++;
+                        if (it != end_it) {
+                            Ingredient::IngredientType ing_type = it->first;
+                            auto type_str = Ingredient::type_to_string(ing_type);
+
+                            int count = it->second;
+
+                            std::stringstream ss;
+                            ss << count << std::endl << type_str;
+
+                            btn->setTitleText(ss.str());
+                        }
+
                     }
                     catch (std::out_of_range&) {
                         break;
@@ -1052,7 +1064,7 @@ bool InventoryMenu::init()
 
         layout->addChild(inner_layout);
 
-        if (index >= ingredient_count){
+        if (it == end_it){
             break;
         };
     };
