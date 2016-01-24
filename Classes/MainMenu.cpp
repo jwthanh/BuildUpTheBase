@@ -1031,28 +1031,31 @@ bool InventoryMenu::init()
             std::advance(it, 1);
 
             if (it != end_it) {
+                Ingredient::IngredientType ing_type = it->first;
+                int count = it->second;
+
+                if (count == 0) { j--; continue; };
 
                 auto panel = original_panel->clone();
                 panel->setLayoutParameter(param);
+
                 auto raw_butn = panel->getChildByName("resource_btn");
+                auto btn = dynamic_cast<ui::Button*>(raw_butn);
 
-                if (raw_butn) {
-                    auto btn = dynamic_cast<ui::Button*>(raw_butn);
-                    if (btn) {
-                        Ingredient::IngredientType ing_type = it->first;
-                        auto type_str = Ingredient::type_to_string(ing_type);
+                auto type_str = Ingredient::type_to_string(ing_type);
 
-                        int count = it->second;
 
-                        std::stringstream ss;
-                        ss << count << std::endl << type_str;
+                std::stringstream ss;
+                ss << count << std::endl << type_str;
 
-                        btn->setTitleText(ss.str());
+                btn->setTitleText(ss.str());
 
-                    }
-                }
                 inner_layout->addChild(panel);
             }
+
+            if (it == end_it){
+                break;
+            };
 
         };
 
