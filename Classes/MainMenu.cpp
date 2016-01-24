@@ -996,21 +996,41 @@ bool InventoryMenu::init()
     layout->setLayoutType(ui::Layout::Type::VERTICAL);
     layout->setContentSize(Size(300, 300));
     layout->setAnchorPoint(Vec2(0.5, 0.5));
+
+    int index = 0;
     for (int i = 0; i < 3; i++) {
-        auto inner_layout = ui::VBox::create();
+        auto inner_layout = ui::HBox::create();
         inner_layout->setContentSize(Size(300, 100));
 
-        //auto inst = cocostudio::GUIReader::getInstance();
         auto inst = CSLoader::getInstance();
-
-        //auto widget = inst->widgetFromJsonFile("res/Scene.json");
 
 
         for (int j = 0; j < 3; j++) {
-            //auto sprite = Sprite::createWithSpriteFrameName("f_face_neutral.png");
-            //auto sprite = ui::Button::create("f_face_neutral.png", "", "", ui::TextureResType::PLIST);
-            auto sprite = inst->createNode("editor/Scene.csb");
-            inner_layout->addChild(sprite);
+            index++;
+            // auto scene = ui::Button::create("f_face_neutral.png", "", "", ui::TextureResType::PLIST);
+            auto parent_scene = inst->createNode("editor/Node.csb");
+            auto scene = parent_scene->getChildByName("Panel_1");
+            scene->removeFromParent();
+            CCLOG("scene width %f", scene->getContentSize().width);
+
+            auto btn = scene->getChildByName("resource_btn");
+            if (btn) {
+                CCLOG("found button");
+
+                auto casted = dynamic_cast<ui::Button*>(btn);
+                if (casted) {
+                    CCLOG("cast properly %i", index);
+                    try {
+                        casted->setTitleText(building->ingredients.at(index)->name);
+                        CCLOG("set text properly ASDASDASD");
+                    }
+                    catch (std::out_of_range&) {
+                        CCLOG("set text out of range error");
+                    }
+                }
+            }
+
+            inner_layout->addChild(scene);
         };
 
         layout->addChild(inner_layout);
