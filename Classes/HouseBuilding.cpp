@@ -781,6 +781,11 @@ void Building::print_specifics()
 };
 
 #define PRINT_RESOURCE(Rtype, Rlowertype) \
+std::map<Rtype,int> Building::get_##Rlowertype##_count()\
+{\
+    std::map<Rtype, int> Rlowertype_map = std::map<Rtype, int>();\
+    return Rlowertype_map;\
+};\
 \
 std::string Building::get_##Rlowertype##s() \
 { \
