@@ -1008,11 +1008,11 @@ bool InventoryMenu::init()
         for (int j = 0; j < 3; j++) {
             index++;
 
-            auto parent_scene = inst->createNode("editor/Node.csb");
-            auto scene = parent_scene->getChildByName("Panel_1");
-            scene->removeFromParent();
+            auto raw_node = inst->createNode("editor/Node.csb");
+            auto panel = raw_node->getChildByName("Panel_1");
+            panel->removeFromParent();
 
-            auto btn = scene->getChildByName("resource_btn");
+            auto btn = panel->getChildByName("resource_btn");
             if (btn) {
                 auto casted = dynamic_cast<ui::Button*>(btn);
                 if (casted) {
@@ -1025,7 +1025,7 @@ bool InventoryMenu::init()
                 }
             }
 
-            inner_layout->addChild(scene);
+            inner_layout->addChild(panel);
         };
 
         layout->addChild(inner_layout);
