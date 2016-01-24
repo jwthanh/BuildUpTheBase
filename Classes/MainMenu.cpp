@@ -12,8 +12,8 @@
 #include "Quest.h"
 #include "Util.h"
 #include "Level.h"
-#include <cocos2d/cocos/editor-support/cocostudio/CCSGUIReader.h>
-#include <cocos2d/cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h>
+#include <editor-support/cocostudio/CCSGUIReader.h>
+#include <editor-support/cocostudio/ActionTimeline/CSLoader.h>
 
 USING_NS_CC;
 
