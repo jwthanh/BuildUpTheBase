@@ -1022,11 +1022,10 @@ bool InventoryMenu::init()
 
 
         for (int j = 0; j < num_cols; j++) {
-            index++;
 
             auto raw_node = inst->createNode("editor/Node.csb");
             auto panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
-            CCLOG("%f", panel->getContentSize().width);
+            // CCLOG("%f", panel->getContentSize().width);
 
             panel->removeFromParent();
             panel->setLayoutParameter(param);
@@ -1037,6 +1036,7 @@ bool InventoryMenu::init()
                 if (casted) {
                     try {
                         casted->setTitleText(building->ingredients.at(index)->name);
+                        index++;
                     }
                     catch (std::out_of_range&) {
                         break;
