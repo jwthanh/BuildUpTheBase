@@ -1135,6 +1135,14 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
     original_panel->removeFromParent();
 
+    auto cb = [original_panel](Ref*, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            original_panel->removeFromParent();
+        };
+    };
+    original_panel->addTouchEventListener(cb);
+
     auto resource_name = dynamic_cast<ui::Text*>(original_panel->getChildByName("resource_name"));
     std::string res_name = Ingredient::type_to_string(type);
     resource_name->setString(res_name);
