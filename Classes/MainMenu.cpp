@@ -992,27 +992,42 @@ bool InventoryMenu::init()
     };
 
     //create 9 sprites, three per row to go into a layout
+
+    int ingredient_count = building->ingredients.size();
+    int num_cols = 5;
+
+    auto inst = CSLoader::getInstance();
+    //load dummy node to get size
+    auto raw_node = inst->createNode("editor/Node.csb");
+    auto panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
+    float panel_width = panel->getContentSize().width;
+    CCLOG("%f", panel_width);
+
+    auto param = ui::LinearLayoutParameter::create();
+    auto margin = ui::Margin(0, 10, 10, 0);
+
+    float width = (panel_width+margin.left+margin.right)*num_cols;
+
     auto layout = ui::Layout::create();
     layout->setLayoutType(ui::Layout::Type::VERTICAL);
-    layout->setContentSize(Size(600, 300));
+    layout->setContentSize(Size(width, 500));
     layout->setAnchorPoint(Vec2(0.5, 0.5));
 
     int index = 0;
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 99; i++) {
         auto inner_layout = ui::HBox::create();
-        inner_layout->setContentSize(Size(300, 100));
+        inner_layout->setContentSize(Size(width, 100));
 
-        auto param = ui::LinearLayoutParameter::create();
-        param->setMargin(ui::Margin(0, 10, 10, 0));
         inner_layout->setLayoutParameter(param);
 
-        auto inst = CSLoader::getInstance();
 
-        for (int j = 0; j < 3; j++) {
+        for (int j = 0; j < num_cols; j++) {
             index++;
 
             auto raw_node = inst->createNode("editor/Node.csb");
             auto panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
+            CCLOG("%f", panel->getContentSize().width);
+
             panel->removeFromParent();
             panel->setLayoutParameter(param);
 
@@ -1033,6 +1048,10 @@ bool InventoryMenu::init()
         };
 
         layout->addChild(inner_layout);
+
+        if (index >= ingredient_count){
+            break;
+        };
     };
     layout->setPosition(this->get_center_pos());
 
