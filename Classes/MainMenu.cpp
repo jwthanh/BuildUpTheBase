@@ -12,6 +12,8 @@
 #include "Quest.h"
 #include "Util.h"
 #include "Level.h"
+#include <cocos2d/cocos/editor-support/cocostudio/CCSGUIReader.h>
+#include <cocos2d/cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h>
 
 USING_NS_CC;
 
@@ -995,21 +997,19 @@ bool InventoryMenu::init()
     layout->setContentSize(Size(300, 300));
     layout->setAnchorPoint(Vec2(0.5, 0.5));
     for (int i = 0; i < 3; i++) {
-        auto inner_layout = ui::Layout::create();
-        auto param = ui::LinearLayoutParameter::create();
-        inner_layout->setLayoutType(ui::Layout::Type::HORIZONTAL);
+        auto inner_layout = ui::VBox::create();
         inner_layout->setContentSize(Size(300, 100));
 
+        //auto inst = cocostudio::GUIReader::getInstance();
+        auto inst = CSLoader::getInstance();
 
-        param->setGravity(ui::LinearLayoutParameter::LinearGravity::CENTER_HORIZONTAL);
-        param->setMargin(ui::Margin(0, 0, 5.0, 0));
-        inner_layout->setLayoutParameter(param);
-        //inner_layout->setLayoutType(ui::Layout::Type::RELATIVE);
+        //auto widget = inst->widgetFromJsonFile("res/Scene.json");
+
 
         for (int j = 0; j < 3; j++) {
             //auto sprite = Sprite::createWithSpriteFrameName("f_face_neutral.png");
-            auto sprite = ui::Button::create("f_face_neutral.png", "", "", ui::TextureResType::PLIST);
-            CCLOG("%f", sprite->getContentSize().width);
+            //auto sprite = ui::Button::create("f_face_neutral.png", "", "", ui::TextureResType::PLIST);
+            auto sprite = inst->createNode("editor/Scene.csb");
             inner_layout->addChild(sprite);
         };
 
