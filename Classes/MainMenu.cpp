@@ -1106,6 +1106,14 @@ void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
         auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
         original_panel->removeFromParent();
 
+        auto resource_name = dynamic_cast<ui::Text*>(original_panel->getChildByName("resource_name"));
+        resource_name->setString("Grain");
+        auto resource_description = dynamic_cast<ui::Text*>(original_panel->getChildByName("resource_description"));
+        resource_description->setString("Grain is good to eat\nits a lot of fun to touch\ni could go for some right now");
+        auto count_desc = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_desc"));
+        auto count_lbl = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_lbl"));
+        count_lbl->setString("123");
+
         original_panel->setPosition(this->get_center_pos());
         this->addChild(original_panel);
     }
