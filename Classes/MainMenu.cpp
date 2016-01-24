@@ -1046,9 +1046,11 @@ bool InventoryMenu::init()
                 auto raw_butn = panel->getChildByName("resource_btn");
                 auto btn = dynamic_cast<ui::Button*>(raw_butn);
 
-                auto cb = [ing_type, this](Ref*, ui::Widget::TouchEventType) {
-                    auto alert = InventoryMenu::create_detail_alert(building, ing_type);
-                    this->addChild(alert);
+                auto cb = [ing_type, this](Ref*, ui::Widget::TouchEventType type) {
+                    if (type == ui::Widget::TouchEventType::ENDED) {
+                        auto alert = InventoryMenu::create_detail_alert(building, ing_type);
+                        this->addChild(alert);
+                    };
                 };
                 btn->addTouchEventListener(cb);
 
@@ -1106,7 +1108,7 @@ void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
-        auto original_panel = InventoryMenu::create_detail_alert(NULL, Ingredient::IngredientType::Grain);
+        auto original_panel = InventoryMenu::create_detail_alert(this->building, Ingredient::IngredientType::Grain);
         this->addChild(original_panel);
     }
 };
