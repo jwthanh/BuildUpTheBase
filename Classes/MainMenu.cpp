@@ -1023,18 +1023,23 @@ bool InventoryMenu::init()
     for (int i = 0; i < 99; i++) {
         auto inner_layout = ui::HBox::create();
         inner_layout->setContentSize(Size(width, 100));
-
         inner_layout->setLayoutParameter(param);
 
-
         for (int j = 0; j < num_cols; j++) {
-            std::advance(it, 1);
+            if (it == end_it){
+                break;
+            };
 
             if (it != end_it) {
                 Ingredient::IngredientType ing_type = it->first;
                 int count = it->second;
 
-                if (count == 0) { j--; continue; };
+            
+                if (count == 0) {
+                    std::advance(it, 1);
+                    j--;
+                    continue;
+                };
 
                 auto panel = original_panel->clone();
                 panel->setLayoutParameter(param);
@@ -1047,15 +1052,13 @@ bool InventoryMenu::init()
 
                 std::stringstream ss;
                 ss << count << std::endl << type_str;
-
                 btn->setTitleText(ss.str());
 
                 inner_layout->addChild(panel);
+
             }
 
-            if (it == end_it){
-                break;
-            };
+            std::advance(it, 1);
 
         };
 
