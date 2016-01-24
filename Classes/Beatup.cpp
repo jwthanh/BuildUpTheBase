@@ -460,6 +460,16 @@ void Beatup::switch_to_city_menu()
     director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
 };
 
+void Beatup::switch_to_inventory_menu()
+{
+    auto scene = Scene::create();
+    InventoryMenu* building_menu = InventoryMenu::create(this->buildup->target_building);
+    scene->addChild(building_menu);
+
+    auto director = Director::getInstance();
+    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+};
+
 void Beatup::switch_to_shop()
 {
     auto director = Director::getInstance();
@@ -1367,26 +1377,17 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_1) 
     {
-        auto scene = Scene::create();
-        BuildingMenu* building_menu = BuildingMenu::create(this->buildup->target_building);
-        scene->addChild(building_menu);
-
-        auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+        this->switch_to_city_menu();
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_2) 
     {
-        auto scene = Scene::create();
-        CityMenu* building_menu = CityMenu::create(this->buildup->target_building);
-        scene->addChild(building_menu);
-
-        auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+        this->switch_to_building_menu();
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_3) 
     {
+        this->switch_to_inventory_menu();
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_4) 
