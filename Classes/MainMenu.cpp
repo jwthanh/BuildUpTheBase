@@ -1034,7 +1034,6 @@ bool InventoryMenu::init()
                 Ingredient::IngredientType ing_type = it->first;
                 int count = it->second;
 
-            
                 if (count == 0) {
                     std::advance(it, 1);
                     j--;
