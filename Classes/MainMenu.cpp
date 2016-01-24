@@ -994,7 +994,7 @@ bool InventoryMenu::init()
     //create 9 sprites, three per row to go into a layout
     auto layout = ui::Layout::create();
     layout->setLayoutType(ui::Layout::Type::VERTICAL);
-    layout->setContentSize(Size(300, 300));
+    layout->setContentSize(Size(600, 300));
     layout->setAnchorPoint(Vec2(0.5, 0.5));
 
     int index = 0;
@@ -1002,15 +1002,19 @@ bool InventoryMenu::init()
         auto inner_layout = ui::HBox::create();
         inner_layout->setContentSize(Size(300, 100));
 
-        auto inst = CSLoader::getInstance();
+        auto param = ui::LinearLayoutParameter::create();
+        param->setMargin(ui::Margin(0, 10, 10, 0));
+        inner_layout->setLayoutParameter(param);
 
+        auto inst = CSLoader::getInstance();
 
         for (int j = 0; j < 3; j++) {
             index++;
 
             auto raw_node = inst->createNode("editor/Node.csb");
-            auto panel = raw_node->getChildByName("Panel_1");
+            auto panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
             panel->removeFromParent();
+            panel->setLayoutParameter(param);
 
             auto btn = panel->getChildByName("resource_btn");
             if (btn) {
