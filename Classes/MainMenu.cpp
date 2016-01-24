@@ -1028,38 +1028,32 @@ bool InventoryMenu::init()
 
 
         for (int j = 0; j < num_cols; j++) {
+            std::advance(it, 1);
 
-            auto panel = original_panel->clone();
+            if (it != end_it) {
 
-            panel->setLayoutParameter(param);
+                auto panel = original_panel->clone();
+                panel->setLayoutParameter(param);
+                auto raw_butn = panel->getChildByName("resource_btn");
 
-            auto raw_butn = panel->getChildByName("resource_btn");
-            if (raw_butn) {
-                auto btn = dynamic_cast<ui::Button*>(raw_butn);
-                if (btn) {
-                    try {
-                        std::advance(it, 1);
+                if (raw_butn) {
+                    auto btn = dynamic_cast<ui::Button*>(raw_butn);
+                    if (btn) {
+                        Ingredient::IngredientType ing_type = it->first;
+                        auto type_str = Ingredient::type_to_string(ing_type);
 
-                        if (it != end_it) {
-                            Ingredient::IngredientType ing_type = it->first;
-                            auto type_str = Ingredient::type_to_string(ing_type);
+                        int count = it->second;
 
-                            int count = it->second;
+                        std::stringstream ss;
+                        ss << count << std::endl << type_str;
 
-                            std::stringstream ss;
-                            ss << count << std::endl << type_str;
+                        btn->setTitleText(ss.str());
 
-                            btn->setTitleText(ss.str());
-                        }
-
-                    }
-                    catch (std::out_of_range&) {
-                        break;
                     }
                 }
+                inner_layout->addChild(panel);
             }
 
-            inner_layout->addChild(panel);
         };
 
         layout->addChild(inner_layout);
