@@ -1048,7 +1048,6 @@ bool InventoryMenu::init()
 
                 auto type_str = Ingredient::type_to_string(ing_type);
 
-
                 std::stringstream ss;
                 ss << count << std::endl << type_str;
                 btn->setTitleText(ss.str());
@@ -1098,7 +1097,18 @@ void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
     {
         auto director = Director::getInstance();
         director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
-    };
+    }
+    else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
+    {
+        
+        auto inst = CSLoader::getInstance();
+        auto raw_node = inst->createNode("editor/inventory_detail.csb");
+        auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
+        original_panel->removeFromParent();
+
+        original_panel->setPosition(this->get_center_pos());
+        this->addChild(original_panel);
+    }
 };
 
 InventoryMenu* InventoryMenu::create(spBuilding building)
