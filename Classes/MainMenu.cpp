@@ -1220,7 +1220,12 @@ bool CharacterMenu::init()
     param->setMargin(margin);
     float width = (panel_width+margin.left+margin.right);
 
-    //set base layout TODO variable height
+    auto character_name = dynamic_cast<ui::Text*>(original_panel->getChildByName("character_name"));
+    character_name->setString(fighter->name);
+
+    auto character_art = dynamic_cast<ui::ImageView*>(original_panel->getChildByName("character_art"));
+    character_art->loadTexture(fighter->sprite_name, ui::TextureResType::PLIST);
+
     auto layout = ui::Layout::create();
     layout->setLayoutType(ui::Layout::Type::VERTICAL);
     layout->setContentSize(Size(width, 500)); 

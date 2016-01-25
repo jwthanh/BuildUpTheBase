@@ -974,7 +974,6 @@ void Beatup::prep_other()
 
     this->brawler_node = FighterNode::create(this, this->buildup->brawler);
     this->brawler_node->setPosition(this->get_center_pos(sx(200), sy(-150)));
-    this->brawler_node->load_new_sprite("ogre10x10.png");
 
 };
 

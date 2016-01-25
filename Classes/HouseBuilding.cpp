@@ -130,7 +130,7 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     node->beatup = beatup;
     node->fighter = fighter;
 
-    node->sprite = Sprite::createWithSpriteFrameName("townsmen8x8.png");
+    node->sprite = Sprite::createWithSpriteFrameName(fighter ? fighter->sprite_name : "townsmen8x8.png");
     node->sprite->setScale(8);
     node->sprite->setPosition(0, 100);
     node->addChild(node->sprite);
@@ -1029,11 +1029,13 @@ Village* Buildup::init_city(Buildup* buildup)
     forest->punched_ingredient_type = "berry";
 
     buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");
+    buildup->fighter->sprite_name = "townsmen8x8.png";
     buildup->fighter->team = Fighter::TeamOne;
     buildup->fighter->attrs->health->set_vals(100);
 
     buildup->brawler = std::make_shared<Fighter>(arena->city, "Brawler");
     buildup->brawler->team = Fighter::TeamOne;
+    buildup->brawler->sprite_name = "ogre10x10.png";
     buildup->brawler->attrs->health->set_vals(200);
 
 
