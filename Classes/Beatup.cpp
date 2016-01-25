@@ -471,6 +471,16 @@ void Beatup::switch_to_inventory_menu()
     director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
 };
 
+void Beatup::switch_to_character_menu(spFighter fighter)
+{
+    auto scene = Scene::create();
+    CharacterMenu* building_menu = CharacterMenu::create(fighter);
+    scene->addChild(building_menu);
+
+    auto director = Director::getInstance();
+    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+};
+
 void Beatup::switch_to_shop()
 {
     auto director = Director::getInstance();
@@ -570,6 +580,7 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
     if (vec2_in_rect(&fighter_rect, touch->getLocation()))
     {
         printj("touched sprite");
+        this->switch_to_character_menu(this->fighter_node->fighter);
     }
 
     if (touch_in_node(this->shop_banner, touch))

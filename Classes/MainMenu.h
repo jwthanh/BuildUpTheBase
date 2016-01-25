@@ -147,8 +147,6 @@ class InventoryMenu : public GameLayer
         static InventoryMenu* create(spBuilding building);
         static cocos2d::Scene* createScene();
 
-        virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
-
         virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
         cocos2d::ui::Widget* create_detail_alert(spBuilding building, Ingredient::IngredientType type);
@@ -170,4 +168,24 @@ class BuildingNode : public cocos2d::Node
         cocos2d::Label* building_label;
 
 };
+
+
+class CharacterMenu : public GameLayer
+{
+    public:
+        spFighter fighter;
+
+        cocos2d::Label* coins_lbl;
+
+        static CharacterMenu* create(spFighter fighter);
+        static cocos2d::Scene* createScene();
+
+        virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
+
+        cocos2d::ui::Widget* create_detail_alert(spFighter fighter);
+
+        bool init() override;
+
+};
+
 #endif

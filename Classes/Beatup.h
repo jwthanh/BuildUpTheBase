@@ -228,6 +228,7 @@ public:
         void switch_to_building_menu();
         void switch_to_city_menu();
         void switch_to_inventory_menu();
+        void switch_to_character_menu(spFighter fighter);
 
 
         cocos2d::MotionStreak* motion;

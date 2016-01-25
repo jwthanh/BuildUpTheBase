@@ -868,8 +868,8 @@ bool CityMenu::init()
                 );
     };
 
-    auto layout_param = ui::RelativeLayoutParameter::create();
-    layout_param->setMargin(ui::Margin(0, 50.0f, 0, 0)); //supposed to be 50 units between each button, FIXME
+    auto layout_param = ui::LinearLayoutParameter::create();
+    layout_param->setMargin(ui::Margin(0, 25.0f, 0, 0)); //supposed to be 50 units between each button, FIXME
 
     auto scroll = ui::ScrollView::create();
     scroll->setLayoutType(ui::Layout::Type::VERTICAL);
@@ -883,7 +883,11 @@ bool CityMenu::init()
     for (auto building : this->building->city->buildings)
     {
         auto button = ui::Button::create("shop_title.png", "", "", ui::TextureResType::PLIST);
-        button->setLayoutParameter(layout_param->createCloneInstance());
+        auto button_param = layout_param->createCloneInstance();
+        auto button_margin = layout_param->getMargin();
+        button_param->setMargin(button_margin);
+        button->setLayoutParameter(button_param);
+        
 
         button->ignoreContentAdaptWithSize(false);
         button->setTitleText(building->name);
@@ -1161,3 +1165,144 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
 
     return original_panel;
 };
+
+bool CharacterMenu::init()
+{
+#ifdef _WIN32
+    FUNC_INIT_WIN32(CharacterMenu);
+#else
+    FUNC_INIT(CharacterMenu);
+#endif
+
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    // add a label shows "Hello World" create and initialize a label
+    std::stringstream ss;
+    ss << "Fighter detail: " << this->fighter->name;
+    auto label = Label::createWithTTF(ss.str(), menu_font, sx(24));
+
+    // position the label on the center of the screen
+    label->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - label->getContentSize().height
+        )
+    );
+
+    // auto bldg_node = FighterNode::create();
+    // bldg_node->setPosition(this->get_center_pos());
+    // this->addChild(bldg_node);
+    auto resize_btn = [](ui::Button* button) {
+        auto lbl_size = button->getTitleRenderer()->getContentSize();
+
+        button->setContentSize(
+                Size(
+                    lbl_size.width * 1.1f,
+                    lbl_size.height * 1.1f
+                    )
+                );
+    };
+
+    auto inst = CSLoader::getInstance();
+
+    int num_cols = 5;
+
+    //load dummy node to get size
+    //and pull the panel out of node because node's not a widget and has no size
+    auto raw_node = inst->createNode("editor/character_detail.csb");
+    auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
+    original_panel->removeFromParent();
+
+    float panel_width = original_panel->getContentSize().width;
+    auto param = ui::LinearLayoutParameter::create();
+    auto margin = ui::Margin(0, 10, 10, 0);
+    param->setMargin(margin);
+    float width = (panel_width+margin.left+margin.right);
+
+    //set base layout TODO variable height
+    auto layout = ui::Layout::create();
+    layout->setLayoutType(ui::Layout::Type::VERTICAL);
+    layout->setContentSize(Size(width, 500)); 
+    layout->setAnchorPoint(Vec2(0.5, 0.5));
+
+    layout->setPosition(this->get_center_pos());
+
+    layout->addChild(original_panel);
+
+    this->addChild(layout);
+
+    // add the label as a child to this layer
+    this->addChild(label, 1);
+
+    this->coins_lbl = Label::createWithTTF(
+        "Character menu",
+        this->menu_font,
+        this->menu_fontsize
+    );
+    this->coins_lbl->setPosition(
+        Vec2(
+            origin.x + visibleSize.width/2,
+            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+        )
+    );
+    this->coins_lbl->setTextColor(Color4B::WHITE);
+    this->addChild(this->coins_lbl, 1);
+
+    return true;
+};
+
+void CharacterMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
+{
+    if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
+            || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
+    {
+        auto director = Director::getInstance();
+        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+    }
+    else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
+    {
+        auto original_panel = CharacterMenu::create_detail_alert(this->fighter);
+        this->addChild(original_panel);
+    }
+};
+
+CharacterMenu* CharacterMenu::create(spFighter fighter)
+{
+    CharacterMenu *menu = new(std::nothrow) CharacterMenu();
+    menu->fighter = fighter; //this should be after init, cause i guess init should fail, but its fine for now.
+
+    if (menu && menu->init()) {
+        menu->autorelease();
+        return menu;
+    }
+    else
+    {
+        delete menu;
+        menu = nullptr; 
+        return menu;
+    }
+};
+
+ui::Widget* CharacterMenu::create_detail_alert(spFighter fighter)
+{
+    auto inst = CSLoader::getInstance();
+    auto raw_node = inst->createNode("editor/inventory_detail.csb");
+    auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
+    original_panel->removeFromParent();
+
+    auto cb = [original_panel](Ref*, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            original_panel->removeFromParent();
+        };
+    };
+    original_panel->addTouchEventListener(cb);
+
+    auto character_name = dynamic_cast<ui::Text*>(original_panel->getChildByName("character_name"));
+    character_name->setString(fighter->name);
+    original_panel->setPosition(this->get_center_pos());
+
+    return original_panel;
+};
+
