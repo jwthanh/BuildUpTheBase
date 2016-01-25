@@ -59,6 +59,12 @@ bool GameLayer::vec2_in_rect(Rect* rect, cocos2d::Vec2 pos)
 bool GameLayer::init()
 {
 
+    //TODO this might actually solve all of my scaling problems at once.
+    // if I take the time to remove all my scaling stuff, and fallback on this,
+    // I might be in business
+    //this->setScaleX(sx(1));
+    //this->setScaleY(sy(1));
+
     isTouchDown = false;
 
     initialTouchPos[0] = 0;
