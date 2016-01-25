@@ -6,8 +6,8 @@
 
 #include "cocos2d.h"
 
-float sx(float x);
-float sy(float y);
+float sx(float x, bool do_scale=false);
+float sy(float y, bool do_scale=false);
 
 template<typename T>
 T pick_one(std::vector<T> vec)

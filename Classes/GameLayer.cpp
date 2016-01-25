@@ -62,8 +62,8 @@ bool GameLayer::init()
     //TODO this might actually solve all of my scaling problems at once.
     // if I take the time to remove all my scaling stuff, and fallback on this,
     // I might be in business
-    //this->setScaleX(sx(1));
-    //this->setScaleY(sy(1));
+    this->setScaleX(sx(1, true));
+    this->setScaleY(sy(1, true));
 
     isTouchDown = false;
 

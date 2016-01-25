@@ -40,7 +40,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         // set_resolution(1280, 720);
 
         //1080p
-        // set_resolution(1920, 1080);
+        set_resolution(1920, 1080);
 
         //1024 x 600
         // set_resolution(1024, 600);
