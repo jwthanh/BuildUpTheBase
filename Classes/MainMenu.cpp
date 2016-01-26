@@ -124,7 +124,7 @@ bool MainMenu::resume_game()
 
         MainMenu::beatup_scene->retain();
         auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+        director->pushScene(MainMenu::beatup_scene);
     }
     else
     {
@@ -141,7 +141,7 @@ bool MainMenu::open_options()
     scene->addChild(options_menu);
 
     auto director = Director::getInstance();
-    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    director->pushScene(scene);
 
     return true;
 };
@@ -153,7 +153,7 @@ bool MainMenu::open_levelselect()
     scene->addChild(level_select);
 
     auto director = Director::getInstance();
-    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    director->pushScene(scene);
     return true;
 };
 
@@ -172,7 +172,7 @@ bool MainMenu::open_objective()
     scene->addChild(objective_menu);
 
     auto director = Director::getInstance();
-    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    director->pushScene(scene);
     return true;
 };
 
@@ -317,7 +317,7 @@ bool OptionsMenu::open_reset()
     scene->addChild(reset_layer);
 
     auto director = Director::getInstance();
-    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    director->pushScene(scene);
     return true;
 };
 
@@ -516,7 +516,7 @@ bool ObjectiveMenu::init()
     auto btn = create_button("Start", []() 
     {
         auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+        director->pushScene(MainMenu::beatup_scene);
         return false;
     });
     scroll->addChild(btn);
@@ -537,7 +537,7 @@ void ObjectiveMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+        director->pushScene(MainMenu::beatup_scene);
     };
 };
 
@@ -630,7 +630,7 @@ void ResetMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::E
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+        director->pushScene(MainMenu::beatup_scene);
     };
 };
 
@@ -781,7 +781,7 @@ bool BuildingMenu::init()
         scene->addChild(building_menu);
 
         auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+        director->pushScene(scene);
         return false;
     };
 
@@ -809,7 +809,7 @@ void BuildingMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+        director->pushScene(MainMenu::beatup_scene);
     };
 };
 
@@ -899,7 +899,7 @@ bool CityMenu::init()
             scene->addChild(building_menu);
 
             auto director = Director::getInstance();
-            director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+            director->pushScene(scene);
         };
         button->addTouchEventListener(cb);
 
@@ -933,7 +933,7 @@ void CityMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Ev
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+        director->pushScene(MainMenu::beatup_scene);
     };
 };
 
@@ -1108,7 +1108,7 @@ void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+        director->pushScene(MainMenu::beatup_scene);
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
@@ -1263,7 +1263,7 @@ void CharacterMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
-        director->pushScene(TransitionZoomFlipAngular::create(0.25, MainMenu::beatup_scene));
+        director->pushScene(MainMenu::beatup_scene);
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {

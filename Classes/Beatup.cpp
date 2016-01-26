@@ -448,7 +448,7 @@ void Beatup::switch_to_building_menu()
     scene->addChild(building_menu);
 
     auto director = Director::getInstance();
-    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    director->pushScene(scene);
 };
 
 void Beatup::switch_to_city_menu()
@@ -458,7 +458,7 @@ void Beatup::switch_to_city_menu()
     scene->addChild(building_menu);
 
     auto director = Director::getInstance();
-    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    director->pushScene(scene);
 };
 
 void Beatup::switch_to_inventory_menu()
@@ -468,7 +468,7 @@ void Beatup::switch_to_inventory_menu()
     scene->addChild(building_menu);
 
     auto director = Director::getInstance();
-    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    director->pushScene(scene);
 };
 
 void Beatup::switch_to_character_menu(spFighter fighter)
@@ -478,7 +478,7 @@ void Beatup::switch_to_character_menu(spFighter fighter)
     scene->addChild(building_menu);
 
     auto director = Director::getInstance();
-    director->pushScene(TransitionZoomFlipAngular::create(0.25, scene));
+    director->pushScene(scene);
 };
 
 void Beatup::switch_to_shop()
