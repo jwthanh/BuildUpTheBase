@@ -809,7 +809,7 @@ void BuildingMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
-        director->pushScene(MainMenu::beatup_scene);
+        director->popScene();
     };
 };
 
@@ -934,7 +934,7 @@ void CityMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Ev
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
-        director->pushScene(MainMenu::beatup_scene);
+        director->popScene();
     };
 };
 
@@ -1109,7 +1109,7 @@ void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
-        director->pushScene(MainMenu::beatup_scene);
+        director->popScene();
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
@@ -1264,7 +1264,7 @@ void CharacterMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
     {
         auto director = Director::getInstance();
-        director->pushScene(MainMenu::beatup_scene);
+        director->popScene();
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
