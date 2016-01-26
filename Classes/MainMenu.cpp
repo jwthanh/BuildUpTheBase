@@ -843,7 +843,7 @@ bool CityMenu::init()
 
     // add a label shows "Hello World" create and initialize a label
     std::stringstream ss;
-    ss << "Building: " << this->building->name;
+    ss << "City Menu";
     auto label = Label::createWithTTF(ss.str(), menu_font, sx(24));
 
     // position the label on the center of the screen
@@ -911,19 +911,20 @@ bool CityMenu::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    this->coins_lbl = Label::createWithTTF(
-        "Building Menu",
-        this->menu_font,
-        this->menu_fontsize
-    );
-    this->coins_lbl->setPosition(
-        Vec2(
-            origin.x + visibleSize.width/2,
-            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
-        )
-    );
-    this->coins_lbl->setTextColor(Color4B::WHITE);
-    this->addChild(this->coins_lbl, 1);
+    // this->coins_lbl = Label::createWithTTF(
+    //     "",
+    //     this->menu_font,
+    //     this->menu_fontsize
+    // );
+    // this->coins_lbl->setPosition(
+    //     Vec2(
+    //         origin.x + visibleSize.width/2,
+    //         origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+    //     )
+    // );
+    // this->coins_lbl->setTextColor(Color4B::WHITE);
+    // this->addChild(this->coins_lbl, 1);
+
     return true;
 };
 
