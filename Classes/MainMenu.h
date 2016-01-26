@@ -124,7 +124,7 @@ class CityMenu : public GameLayer
     public:
         spBuilding building;
 
-        cocos2d::Label* coins_lbl;
+        cocos2d::Label* main_lbl;
 
         static CityMenu* create(spBuilding building);
         static cocos2d::Scene* createScene();
@@ -142,7 +142,7 @@ class InventoryMenu : public GameLayer
     public:
         spBuilding building;
 
-        cocos2d::Label* coins_lbl;
+        cocos2d::Label* main_lbl;
 
         static InventoryMenu* create(spBuilding building);
         static cocos2d::Scene* createScene();
@@ -175,7 +175,7 @@ class CharacterMenu : public GameLayer
     public:
         spFighter fighter;
 
-        cocos2d::Label* coins_lbl;
+        cocos2d::Label* main_lbl;
 
         static CharacterMenu* create(spFighter fighter);
         static cocos2d::Scene* createScene();

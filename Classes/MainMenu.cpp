@@ -41,13 +41,13 @@ bool MainMenu::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    this->coins_lbl = Label::createWithTTF("Beat some people up!", TITLE_FONT, sx(this->menu_fontsize));
-    this->coins_lbl->setVisible(false);
-    this->coins_lbl->setPosition(Vec2(
+    this->main_lbl = Label::createWithTTF("Beat some people up!", TITLE_FONT, sx(this->menu_fontsize));
+    this->main_lbl->setVisible(false);
+    this->main_lbl->setPosition(Vec2(
         origin.x + visibleSize.width/2,
         origin.y + visibleSize.height 
     ));
-    this->addChild(this->coins_lbl, 1);
+    this->addChild(this->main_lbl, 1);
 
     this->combo_menu = Menu::create();
     this->addChild(this->combo_menu);
@@ -211,10 +211,10 @@ bool OptionsMenu::init()
 
     this->addChild(label, 1);
 
-    this->coins_lbl = Label::createWithTTF("OPTIONS!", this->menu_font, this->menu_fontsize);
-    this->coins_lbl->setPosition(Vec2(origin.x + visibleSize.width/2,
-                origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)));
-    this->addChild(this->coins_lbl, 1);
+    this->main_lbl = Label::createWithTTF("OPTIONS!", this->menu_font, this->menu_fontsize);
+    this->main_lbl->setPosition(Vec2(origin.x + visibleSize.width/2,
+                origin.y + visibleSize.height - this->main_lbl->getContentSize().height-sx(30)));
+    this->addChild(this->main_lbl, 1);
 
     this->combo_menu = Menu::create();
     this->addChild(this->combo_menu);
@@ -362,19 +362,19 @@ bool LevelSelectMenu::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    this->coins_lbl = Label::createWithTTF(
+    this->main_lbl = Label::createWithTTF(
         "Complete missions to unlock more levels",
         this->menu_font,
         this->menu_fontsize
     );
-    this->coins_lbl->setPosition(
+    this->main_lbl->setPosition(
         Vec2(
             origin.x + visibleSize.width/2,
             origin.y + visibleSize.height - label->getContentSize().height-sx(30)
         )
     );
-    this->coins_lbl->setTextColor(Color4B::WHITE);
-    this->addChild(this->coins_lbl, 1);
+    this->main_lbl->setTextColor(Color4B::WHITE);
+    this->addChild(this->main_lbl, 1);
 
     auto scroll = this->create_center_scrollview();
 
@@ -480,19 +480,19 @@ bool ObjectiveMenu::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    this->coins_lbl = Label::createWithTTF(
+    this->main_lbl = Label::createWithTTF(
         "Rewards for completion!",
         this->menu_font,
         this->menu_fontsize
     );
-    this->coins_lbl->setPosition(
+    this->main_lbl->setPosition(
         Vec2(
             origin.x + visibleSize.width/2,
-            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+            origin.y + visibleSize.height - this->main_lbl->getContentSize().height-sx(30)
         )
     );
-    this->coins_lbl->setTextColor(Color4B::BLUE);
-    this->addChild(this->coins_lbl, 1);
+    this->main_lbl->setTextColor(Color4B::BLUE);
+    this->addChild(this->main_lbl, 1);
 
     auto scroll = this->create_center_scrollview();
 
@@ -574,19 +574,19 @@ bool ResetMenu::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    this->coins_lbl = Label::createWithTTF(
+    this->main_lbl = Label::createWithTTF(
         "CAUTION: No way to undo this",
         this->menu_font,
         this->menu_fontsize
     );
-    this->coins_lbl->setPosition(
+    this->main_lbl->setPosition(
         Vec2(
             origin.x + visibleSize.width/2,
-            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+            origin.y + visibleSize.height - this->main_lbl->getContentSize().height-sx(30)
         )
     );
-    this->coins_lbl->setTextColor(Color4B::WHITE);
-    this->addChild(this->coins_lbl, 1);
+    this->main_lbl->setTextColor(Color4B::WHITE);
+    this->addChild(this->main_lbl, 1);
 
     auto scroll = this->create_center_scrollview();
 
@@ -750,19 +750,19 @@ bool BuildingMenu::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    this->coins_lbl = Label::createWithTTF(
+    this->main_lbl = Label::createWithTTF(
         "Building Menu",
         this->menu_font,
         this->menu_fontsize
     );
-    this->coins_lbl->setPosition(
+    this->main_lbl->setPosition(
         Vec2(
             origin.x + visibleSize.width/2,
-            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+            origin.y + visibleSize.height - this->main_lbl->getContentSize().height-sx(30)
         )
     );
-    this->coins_lbl->setTextColor(Color4B::WHITE);
-    this->addChild(this->coins_lbl, 1);
+    this->main_lbl->setTextColor(Color4B::WHITE);
+    this->addChild(this->main_lbl, 1);
 
     auto scroll = this->create_center_scrollview();
 
@@ -911,19 +911,19 @@ bool CityMenu::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    // this->coins_lbl = Label::createWithTTF(
+    // this->main_lbl = Label::createWithTTF(
     //     "",
     //     this->menu_font,
     //     this->menu_fontsize
     // );
-    // this->coins_lbl->setPosition(
+    // this->main_lbl->setPosition(
     //     Vec2(
     //         origin.x + visibleSize.width/2,
-    //         origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+    //         origin.y + visibleSize.height - this->main_lbl->getContentSize().height-sx(30)
     //     )
     // );
-    // this->coins_lbl->setTextColor(Color4B::WHITE);
-    // this->addChild(this->coins_lbl, 1);
+    // this->main_lbl->setTextColor(Color4B::WHITE);
+    // this->addChild(this->main_lbl, 1);
 
     return true;
 };
@@ -1086,19 +1086,19 @@ bool InventoryMenu::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    this->coins_lbl = Label::createWithTTF(
+    this->main_lbl = Label::createWithTTF(
         "Inventory Menu",
         this->menu_font,
         this->menu_fontsize
     );
-    this->coins_lbl->setPosition(
+    this->main_lbl->setPosition(
         Vec2(
             origin.x + visibleSize.width/2,
-            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+            origin.y + visibleSize.height - this->main_lbl->getContentSize().height-sx(30)
         )
     );
-    this->coins_lbl->setTextColor(Color4B::WHITE);
-    this->addChild(this->coins_lbl, 1);
+    this->main_lbl->setTextColor(Color4B::WHITE);
+    this->addChild(this->main_lbl, 1);
 
     return true;
 };
@@ -1241,19 +1241,19 @@ bool CharacterMenu::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    this->coins_lbl = Label::createWithTTF(
+    this->main_lbl = Label::createWithTTF(
         "Character menu",
         this->menu_font,
         this->menu_fontsize
     );
-    this->coins_lbl->setPosition(
+    this->main_lbl->setPosition(
         Vec2(
             origin.x + visibleSize.width/2,
-            origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-sx(30)
+            origin.y + visibleSize.height - this->main_lbl->getContentSize().height-sx(30)
         )
     );
-    this->coins_lbl->setTextColor(Color4B::WHITE);
-    this->addChild(this->coins_lbl, 1);
+    this->main_lbl->setTextColor(Color4B::WHITE);
+    this->addChild(this->main_lbl, 1);
 
     return true;
 };

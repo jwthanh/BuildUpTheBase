@@ -73,7 +73,7 @@ class Shop : public GameLayer
 
         CREATE_FUNC(Shop);
 
-        cocos2d::Label* coins_lbl;
+        cocos2d::Label* main_lbl;
         void update_coins_lbl();
 
         Beatup* beatup;

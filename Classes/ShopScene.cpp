@@ -44,12 +44,12 @@ bool Shop::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    this->coins_lbl = Label::createWithTTF("0 coins", this->menu_font, this->menu_fontsize);
-    this->coins_lbl->setPosition(Vec2(
+    this->main_lbl = Label::createWithTTF("0 coins", this->menu_font, this->menu_fontsize);
+    this->main_lbl->setPosition(Vec2(
         origin.x + visibleSize.width/2,
-        origin.y + visibleSize.height - this->coins_lbl->getContentSize().height-30
+        origin.y + visibleSize.height - this->main_lbl->getContentSize().height-30
     ));
-    this->addChild(this->coins_lbl, 1);
+    this->addChild(this->main_lbl, 1);
 
     return true;
 } ;
@@ -58,7 +58,7 @@ void Shop::update_coins_lbl()
 {
     std::stringstream ss;
     ss << this->beatup->get_total_coins() << " coins";
-    this->coins_lbl->setString(ss.str());
+    this->main_lbl->setString(ss.str());
 
 	// ss.str("");
 	// ss << "All hits ever: "
