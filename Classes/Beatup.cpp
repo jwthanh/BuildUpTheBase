@@ -491,7 +491,7 @@ void Beatup::switch_to_shop()
     }
     if (this->shop == NULL)
     {
-        this->shop = Shop::create();
+        this->shop = ShopMenu::create();
         this->shop->beatup = this;
         this->shop->menu_init();
         this->shop->update(0);

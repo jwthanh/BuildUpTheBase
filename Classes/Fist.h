@@ -8,7 +8,7 @@
 class FistSprite;
 class Beatup;
 class Clock;
-class Shop;
+class ShopMenu;
 
 class Shield;
 class Fist;

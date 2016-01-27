@@ -11,31 +11,31 @@
 
 USING_NS_CC;
 
-bool Shop::init()
+bool ShopMenu::init()
 {
 #ifdef _WIN32
-    FUNC_INIT_WIN32(Shop);
+    FUNC_INIT_WIN32(ShopMenu);
 #else
-    FUNC_INIT(Shop);
+    FUNC_INIT(ShopMenu);
 #endif
 
 	this->beatup = NULL;
 
-    Shop::menu_font = DEFAULT_FONT;
-    Shop::menu_fontsize = 35;
+    ShopMenu::menu_font = DEFAULT_FONT;
+    ShopMenu::menu_fontsize = 35;
 
     SoundEngine::play_music("music\\shop.mp3");
 
     this->shop_items = new std::vector<ShopItem*>();
 
-    Shop::menu_heightdiff = -1;
+    ShopMenu::menu_heightdiff = -1;
     this->last_pos = Vec2(-1, -1);
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     // add a label shows "Hello World" create and initialize a label
-    auto label = Label::createWithTTF("Welcome to the Shop", Shop::menu_font, sx(24));
+    auto label = Label::createWithTTF("Welcome to the ShopMenu", ShopMenu::menu_font, sx(24));
 
     // position the label on the center of the screen
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
@@ -54,7 +54,7 @@ bool Shop::init()
     return true;
 } ;
 
-void Shop::update_coins_lbl()
+void ShopMenu::update_coins_lbl()
 {
     std::stringstream ss;
     ss << this->beatup->get_total_coins() << " coins";
@@ -66,7 +66,7 @@ void Shop::update_coins_lbl()
     // this->stat_lbl->setString(ss.str().c_str());
 };
 
-void Shop::buy_stuff(int cost)
+void ShopMenu::buy_stuff(int cost)
 {
     DataManager::decr_key(Beatup::total_coin_key, cost);
     cocos2d::log("spent %d", cost);
@@ -75,7 +75,7 @@ void Shop::buy_stuff(int cost)
     SoundEngine::play_sound("sounds\\new\\coin\\C_coin_1.mp3");
 };
 
-bool Shop::can_afford(int cost)
+bool ShopMenu::can_afford(int cost)
 {
     if (this->beatup->get_total_coins() >= cost)
     {
@@ -84,7 +84,7 @@ bool Shop::can_afford(int cost)
     return false;
 };
 
-bool Shop::buy(ShopItem* shop_item, int cost, BoolFuncNoArgs on_bought)
+bool ShopMenu::buy(ShopItem* shop_item, int cost, BoolFuncNoArgs on_bought)
 {
     if (this->can_afford(cost))
     {
@@ -104,7 +104,7 @@ bool Shop::buy(ShopItem* shop_item, int cost, BoolFuncNoArgs on_bought)
 
 
 
-void Shop::menu_init()
+void ShopMenu::menu_init()
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -130,7 +130,7 @@ void Shop::menu_init()
     this->prep_tabs(NULL, buff_scroll, NULL);
 
     //back button
-    this->back_button = MenuItemLabel::create(Label::createWithTTF("Back", Shop::menu_font, Shop::menu_fontsize));
+    this->back_button = MenuItemLabel::create(Label::createWithTTF("Back", ShopMenu::menu_font, ShopMenu::menu_fontsize));
     this->combo_menu->addChild(this->back_button);
     Vec2 corner_pos = Vec2(
         origin.x + visibleSize.width - this->back_button->getContentSize().width/2 ,
@@ -138,10 +138,10 @@ void Shop::menu_init()
     );
 
     this->back_button->setPosition(this->convertToNodeSpaceAR(corner_pos));
-    this->back_button->setCallback(CC_CALLBACK_1(Shop::pop_scene, this));
+    this->back_button->setCallback(CC_CALLBACK_1(ShopMenu::pop_scene, this));
 
     //stat label
-    // this->stat_lbl = Label::createWithTTF("total hits: ?", Shop::menu_font, Shop::menu_fontsize);
+    // this->stat_lbl = Label::createWithTTF("total hits: ?", ShopMenu::menu_font, ShopMenu::menu_fontsize);
     // this->stat_lbl->setPosition(Vec2(corner_pos.x-sx(150), corner_pos.y+sy(500)));
     // this->addChild(this->stat_lbl);
 
@@ -156,7 +156,7 @@ void Shop::menu_init()
     // this->resize_scroll_inner(fist_scroll);
 };
 
-void Shop::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scrollable* fist_scroll)
+void ShopMenu::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scrollable* fist_scroll)
 {
 
     //float xdiff = sx(300);
@@ -194,7 +194,7 @@ void Shop::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scrollab
 
     //show only the combo scrollable
     // combo_scroll->setVisible(true);
-    // combo_mil = MenuItemLabel::create(Label::createWithTTF("COMBOS", Shop::menu_font, Shop::menu_fontsize));
+    // combo_mil = MenuItemLabel::create(Label::createWithTTF("COMBOS", ShopMenu::menu_font, ShopMenu::menu_fontsize));
     // this->combo_menu->addChild(combo_mil);
     // combo_mil->setPosition(this->convertToNodeSpaceAR(Vec2(
     //     this->get_center_pos().x - xdiff,
@@ -204,7 +204,7 @@ void Shop::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scrollab
     // update_with_count(combo_mil, combo_scroll);
 
     buff_scroll->setVisible(true);
-    buff_mil = MenuItemLabel::create(Label::createWithTTF("BOOSTS", Shop::menu_font, Shop::menu_fontsize));
+    buff_mil = MenuItemLabel::create(Label::createWithTTF("BOOSTS", ShopMenu::menu_font, ShopMenu::menu_fontsize));
     this->combo_menu->addChild(buff_mil);
     buff_mil->setPosition(this->convertToNodeSpaceAR(Vec2(
        this->get_center_pos().x,
@@ -214,7 +214,7 @@ void Shop::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scrollab
     //update_with_count(buff_mil, buff_scroll);
 
     // fist_scroll->setVisible(false);
-    // fist_mil = MenuItemLabel::create(Label::createWithTTF("UNLOCKS", Shop::menu_font, Shop::menu_fontsize));
+    // fist_mil = MenuItemLabel::create(Label::createWithTTF("UNLOCKS", ShopMenu::menu_font, ShopMenu::menu_fontsize));
     // this->combo_menu->addChild(fist_mil);
     // fist_mil->setPosition(this->convertToNodeSpaceAR(Vec2(
     //     this->get_center_pos().x + xdiff,
@@ -225,7 +225,7 @@ void Shop::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scrollab
 
 };
 
-void Shop::prep_combos(cocos2d::ui::ScrollView* scroll)
+void ShopMenu::prep_combos(cocos2d::ui::ScrollView* scroll)
 {
     for (Combo* combo : *this->beatup->combos)
     {
@@ -240,7 +240,7 @@ void Shop::prep_combos(cocos2d::ui::ScrollView* scroll)
     };
 };
 
-void Shop::prep_punch_items(cocos2d::ui::ScrollView* scroll)
+void ShopMenu::prep_punch_items(cocos2d::ui::ScrollView* scroll)
 {
 
     std::function<BoolFuncNoArgs(int)> get_fist_cb = [this](int cost)
@@ -284,7 +284,7 @@ void Shop::prep_punch_items(cocos2d::ui::ScrollView* scroll)
     this->init_menu_from_priced_data(scroll, item_data);
 };
 
-PlainShopItem* Shop::get_psi_by_id(std::string id_key)
+PlainShopItem* ShopMenu::get_psi_by_id(std::string id_key)
 {
     PlainShopItem* psi = NULL;
     for (ShopItem* si : *this->shop_items)
@@ -298,7 +298,7 @@ PlainShopItem* Shop::get_psi_by_id(std::string id_key)
     return psi;
 };
 
-void Shop::prep_fist_weapons(cocos2d::ui::ScrollView* scroll)
+void ShopMenu::prep_fist_weapons(cocos2d::ui::ScrollView* scroll)
 {
     std::function<BoolFuncNoArgs(FistWeapon*)> get_fistweapon_cb = [this](FistWeapon* fist_weapon)
     {
@@ -336,7 +336,7 @@ void Shop::prep_fist_weapons(cocos2d::ui::ScrollView* scroll)
     this->init_menu_from_priced_data(scroll, item_data);
 };
 
-void Shop::prep_charged_fist(cocos2d::ui::ScrollView* scroll)
+void ShopMenu::prep_charged_fist(cocos2d::ui::ScrollView* scroll)
 {
     std::function<BoolFuncNoArgs(std::string)> get_charge_cb = [this](std::string id_key)
     {
@@ -364,7 +364,7 @@ void Shop::prep_charged_fist(cocos2d::ui::ScrollView* scroll)
     this->init_menu_from_priced_data(scroll, item_data);
 };
 
-void Shop::shop_menu_update(float dt)
+void ShopMenu::shop_menu_update(float dt)
 {
     for (ShopItem* shop_item : *this->shop_items)
     {
@@ -372,12 +372,12 @@ void Shop::shop_menu_update(float dt)
     };
 };
 
-void Shop::update(float dt)
+void ShopMenu::update(float dt)
 {
     this->shop_menu_update(dt);
 };
 
-void Shop::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *pEvent)
+void ShopMenu::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *pEvent)
 {
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
     {
@@ -385,7 +385,7 @@ void Shop::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *pEvent)
     }
 }
 
-void Shop::pop_scene(Ref* pSender)
+void ShopMenu::pop_scene(Ref* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
     MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.", "Alert");
@@ -397,7 +397,7 @@ void Shop::pop_scene(Ref* pSender)
 
 }
 
-ShopItem::ShopItem(Shop* shop, Menu* menu, ui::Button* button) : button(button)
+ShopItem::ShopItem(ShopMenu* shop, Menu* menu, ui::Button* button) : button(button)
 {
     this->beatup = shop->beatup;
 
@@ -469,7 +469,7 @@ void ShopItem::update(float dt)
 
 };
 
-void Shop::init_menu_from_data(cocos2d::ui::ScrollView* scroll, std::vector<ItemData> item_data)
+void ShopMenu::init_menu_from_data(cocos2d::ui::ScrollView* scroll, std::vector<ItemData> item_data)
 {
     for (ItemData id : item_data)
     {
@@ -488,7 +488,7 @@ void Shop::init_menu_from_data(cocos2d::ui::ScrollView* scroll, std::vector<Item
     };
 };
 
-void Shop::init_menu_from_priced_data(cocos2d::ui::ScrollView* scroll, std::vector<PricedItemData> item_data)
+void ShopMenu::init_menu_from_priced_data(cocos2d::ui::ScrollView* scroll, std::vector<PricedItemData> item_data)
 {
 
     for (PricedItemData pid : item_data)
@@ -509,7 +509,7 @@ void Shop::init_menu_from_priced_data(cocos2d::ui::ScrollView* scroll, std::vect
     };
 };
 
-void Shop::resize_scroll_inner(Scrollable* scroll)
+void ShopMenu::resize_scroll_inner(Scrollable* scroll)
 {
     float extra_margins = scroll->getChildrenCount()*(sy(15.0f)*sy(1.0f));
     int scroll_w = sx(800);
@@ -520,7 +520,7 @@ void Shop::resize_scroll_inner(Scrollable* scroll)
 }
 
 
-ComboShopItem::ComboShopItem(Shop* shop, Menu* menu, Combo* combo, ui::Button* button) : ShopItem(shop, menu, button)
+ComboShopItem::ComboShopItem(ShopMenu* shop, Menu* menu, Combo* combo, ui::Button* button) : ShopItem(shop, menu, button)
 {
     this->combo = combo;
 
@@ -544,7 +544,7 @@ std::string ComboShopItem::get_menu_text()
     };
 };
 
-BoolFuncNoArgs ComboShopItem::get_callback(Shop* shop)
+BoolFuncNoArgs ComboShopItem::get_callback(ShopMenu* shop)
 {
     BoolFuncNoArgs callback = [shop, this]()
     {
@@ -589,7 +589,7 @@ Fist* RightPunchDamageShopItem::get_fist()
     return this->beatup->right_fist;
 };
 
-BoolFuncNoArgs PunchDamageShopItem::get_callback(Shop* shop)
+BoolFuncNoArgs PunchDamageShopItem::get_callback(ShopMenu* shop)
 {
     BoolFuncNoArgs cb = [this, shop]()
     {
@@ -606,7 +606,7 @@ BoolFuncNoArgs PunchDamageShopItem::get_callback(Shop* shop)
 };
 
 
-PlainShopItem::PlainShopItem(Shop* shop, cocos2d::Menu* menu, std::string id_key, ui::Button* button) : ShopItem(shop, menu, button)
+PlainShopItem::PlainShopItem(ShopMenu* shop, cocos2d::Menu* menu, std::string id_key, ui::Button* button) : ShopItem(shop, menu, button)
 {
     this->id_key = id_key;
     if (this->get_been_bought() &&

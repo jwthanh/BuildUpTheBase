@@ -7,7 +7,7 @@
 
 #include "HouseBuilding.h"
 
-class Shop;
+class ShopMenu;
 
 class Face;
 class FacialFeature;
@@ -222,7 +222,7 @@ public:
         void onSwipeRight(float dt);
         void onSwipeDown(float dt);
 
-        Shop* shop;
+        ShopMenu* shop;
         cocos2d::Scene* shop_scene;
         void switch_to_shop();
         void switch_to_building_menu();

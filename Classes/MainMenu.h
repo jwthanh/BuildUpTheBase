@@ -8,7 +8,7 @@
 #include "constants.h"
 #include "HouseBuilding.h"
 
-class MainMenu : public Shop
+class MainMenu : public ShopMenu
 {
     public:
         CREATE_FUNC(MainMenu);
@@ -31,7 +31,7 @@ class MainMenu : public Shop
 
 };
 
-class OptionsMenu : public Shop
+class OptionsMenu : public ShopMenu
 {
     public:
         CREATE_FUNC(OptionsMenu);
@@ -52,7 +52,7 @@ class OptionsMenu : public Shop
 
 };
 
-class LevelSelectMenu : public Shop
+class LevelSelectMenu : public ShopMenu
 {
     public:
         CREATE_FUNC(LevelSelectMenu);
@@ -68,7 +68,7 @@ class LevelSelectMenu : public Shop
 
 };
 
-class ObjectiveMenu : public Shop
+class ObjectiveMenu : public ShopMenu
 {
     public:
         CREATE_FUNC(ObjectiveMenu);
@@ -82,7 +82,7 @@ class ObjectiveMenu : public Shop
 
 };
 
-class ResetMenu : public Shop
+class ResetMenu : public ShopMenu
 {
     public:
         CREATE_FUNC(ResetMenu);
@@ -103,7 +103,7 @@ class ResetMenu : public Shop
 
 };
 
-class BuildingMenu : public Shop
+class BuildingMenu : public ShopMenu
 {
     public:
         spBuilding building;
