@@ -278,7 +278,7 @@ void ShopMenu::prep_punch_items(cocos2d::ui::ScrollView* scroll)
     };
 
     std::vector<PricedItemData> item_data = {
-        { "sell_grain", "Sell some grain", get_fist_cb(-1), false, -1},
+        { "sell_grain", "Sell one piece of grain", get_fist_cb(-1), false, -1},
     };
 
     this->init_menu_from_priced_data(scroll, item_data);
