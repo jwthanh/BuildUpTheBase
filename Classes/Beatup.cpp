@@ -1215,12 +1215,7 @@ void Beatup::print_inventory()
     make_label("Underscape");
     make_label("Forest");
 
-
-    // farm_inv_lbl->setPosition(100, 100);
-
-
 }
-
 
 void Beatup::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent)
 {
