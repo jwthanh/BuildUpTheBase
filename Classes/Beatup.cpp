@@ -583,45 +583,6 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         this->switch_to_character_menu(this->fighter_node->fighter);
     }
 
-    if (touch_in_node(this->shop_banner, touch))
-    {
-        this->switch_to_shop();
-        return false;
-    }
-
-    if (touch_in_node(this->rocket->sprite, touch))
-    {
-        this->rocket->fire();
-        return false;
-    }
-
-    if (touch_in_node(this->grenade->sprite, touch))
-    {
-        this->grenade->fire();
-        return false;
-    }
-
-    else 
-    {
-
-        for (auto combo : *this->combos)
-        {
-            if (!combo->get_been_bought()) { continue; };
-
-            if (touch_in_node(combo->cd_bar->base_node, touch)) //TODO  fix this because node has no size, and prog bars are added to the node, not to beatup anymore
-            {
-                combo->cd_bar->bump(0.125f, 1.05f);
-
-                combo->toggle_order();
-
-                // this->print_inventory();
-                this->view_army();
-                printj("touched combo");
-                return false;
-            };
-        };
-    }
-
     return true; //determines whether the touch keeps going or something
 };
 
