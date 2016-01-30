@@ -59,11 +59,6 @@ void ShopMenu::update_coins_lbl()
     std::stringstream ss;
     ss << this->beatup->get_total_coins() << " coins";
     this->main_lbl->setString(ss.str());
-
-	// ss.str("");
-	// ss << "All hits ever: "
-	// 	<< this->beatup->get_total_hits();
-    // this->stat_lbl->setString(ss.str().c_str());
 };
 
 void ShopMenu::buy_stuff(int cost)
