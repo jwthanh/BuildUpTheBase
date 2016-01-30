@@ -546,11 +546,6 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 
     Rect face_rect = get_sprite_rect(this->get_target_face(), this->get_target_face()->get_sprite());
 
-    //debug
-    // auto layer_color = LayerColor::create(Color4B::RED);
-    // layer_color->setContentSize(face_rect.size);
-    // layer_color->setPosition(face_rect.origin);
-    // this->addChild(layer_color);
 
     auto touch_loc = touch->getLocation();
     if (vec2_in_rect(&face_rect, touch_loc)) {
@@ -566,22 +561,18 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         return false;
     }
 
-    auto fighter_sprite = this->fighter_node->sprite;
-    auto fighter_pos = this->fighter_node->convertToWorldSpace(fighter_sprite->getPosition());
-    auto fighter_size = fighter_sprite->getContentSize();
-
-    Rect fighter_rect = Rect(
-        fighter_pos.x - fighter_size.width/2*fighter_sprite->getScaleX(),
-        fighter_pos.y - fighter_size.height/2*fighter_sprite->getScaleY(),
-        fighter_size.width*fighter_sprite->getScaleX(),
-        fighter_size.height*fighter_sprite->getScaleY()
-        );
-
+    Rect fighter_rect = get_sprite_rect(this->fighter_node, this->fighter_node->sprite);
     if (vec2_in_rect(&fighter_rect, touch->getLocation()))
     {
-        printj("touched sprite");
         this->switch_to_character_menu(this->fighter_node->fighter);
     }
+
+    //debug
+    // auto layer_color = LayerColor::create(Color4B::RED);
+    // layer_color->setContentSize(fighter_rect.size);
+    // layer_color->setPosition(fighter_rect.origin);
+    // this->addChild(layer_color);
+
 
     return true; //determines whether the touch keeps going or something
 };
