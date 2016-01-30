@@ -473,6 +473,12 @@ void Beatup::switch_to_inventory_menu()
 
 void Beatup::switch_to_character_menu(spFighter fighter)
 {
+    if (fighter == NULL)
+    {
+        printj("fighter is null, no character menu");
+        return;
+    }
+
     auto scene = Scene::create();
     CharacterMenu* building_menu = CharacterMenu::create(fighter);
     scene->addChild(building_menu);
@@ -561,10 +567,13 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         return false;
     }
 
-    Rect fighter_rect = get_sprite_rect(this->fighter_node, this->fighter_node->sprite);
-    if (vec2_in_rect(&fighter_rect, touch->getLocation()))
-    {
-        this->switch_to_character_menu(this->fighter_node->fighter);
+    for (auto node : {this->fighter_node, this->brawler_node, this->enemy_node}){
+        Rect fighter_rect = get_sprite_rect(node, node->sprite);
+        if (vec2_in_rect(&fighter_rect, touch->getLocation()))
+        {
+            this->switch_to_character_menu(node->fighter);
+        }
+
     }
 
     //debug
