@@ -14,6 +14,7 @@
 #include "Level.h"
 #include <editor-support/cocostudio/CCSGUIReader.h>
 #include <editor-support/cocostudio/ActionTimeline/CSLoader.h>
+#include "attribute.h"
 
 USING_NS_CC;
 
@@ -1236,6 +1237,12 @@ bool CharacterMenu::init()
     auto character_art = dynamic_cast<ui::ImageView*>(original_panel->getChildByName("character_art"));
     character_art->loadTexture(fighter->sprite_name, ui::TextureResType::PLIST);
 
+    auto hp_val = dynamic_cast<ui::Text*>(original_panel->getChildByName("hp_val"));
+    hp_val->setString(std::to_string((int)fighter->attrs->health->current_val));
+
+    auto xp_val = dynamic_cast<ui::Text*>(original_panel->getChildByName("xp_val"));
+    xp_val->setString(std::to_string((int)fighter->xp->total));
+
     auto layout = ui::Layout::create();
     layout->setLayoutType(ui::Layout::Type::VERTICAL);
     layout->setContentSize(Size(width, 500)); 
@@ -1301,6 +1308,7 @@ CharacterMenu* CharacterMenu::create(spFighter fighter)
 
 ui::Widget* CharacterMenu::create_detail_alert(spFighter fighter)
 {
+    //TODO remove, this whole method is unused
     auto inst = CSLoader::getInstance();
     auto raw_node = inst->createNode("editor/inventory_detail.csb");
     auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
@@ -1316,6 +1324,15 @@ ui::Widget* CharacterMenu::create_detail_alert(spFighter fighter)
 
     auto character_name = dynamic_cast<ui::Text*>(original_panel->getChildByName("character_name"));
     character_name->setString(fighter->name);
+
+    auto hp_val = dynamic_cast<ui::Text*>(original_panel->getChildByName("hp_val"));
+    hp_val->setString(std::to_string(fighter->attrs->health->current_val));
+
+    auto xp_val = dynamic_cast<ui::Text*>(original_panel->getChildByName("xp_val"));
+    xp_val->setString(std::to_string(fighter->xp->total));
+
+
+
     original_panel->setPosition(this->get_center_pos());
 
     return original_panel;
