@@ -1013,7 +1013,7 @@ bool InventoryMenu::init()
 
     //load dummy node to get size
     //and pull the panel out of node because node's not a widget and has no size
-    auto raw_node = inst->createNode("editor/Node.csb");
+    auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
     auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
     original_panel->removeFromParent();
     float panel_width = original_panel->getContentSize().width;
@@ -1148,7 +1148,7 @@ InventoryMenu* InventoryMenu::create(spBuilding building)
 ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::IngredientType type)
 {
     auto inst = CSLoader::getInstance();
-    auto raw_node = inst->createNode("editor/inventory_detail.csb");
+    auto raw_node = inst->createNode("editor/details/inventory_detail.csb");
     auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
     original_panel->removeFromParent();
 
@@ -1219,7 +1219,7 @@ bool CharacterMenu::init()
 
     int num_cols = 5;
 
-    auto raw_node = inst->createNode("editor/character_detail.csb");
+    auto raw_node = inst->createNode("editor/details/character_detail.csb");
     auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
     original_panel->removeFromParent();
 
