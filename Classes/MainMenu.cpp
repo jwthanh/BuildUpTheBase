@@ -1219,8 +1219,6 @@ bool CharacterMenu::init()
 
     int num_cols = 5;
 
-    //load dummy node to get size
-    //and pull the panel out of node because node's not a widget and has no size
     auto raw_node = inst->createNode("editor/character_detail.csb");
     auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
     original_panel->removeFromParent();
@@ -1242,6 +1240,14 @@ bool CharacterMenu::init()
 
     auto xp_val = dynamic_cast<ui::Text*>(original_panel->getChildByName("xp_val"));
     xp_val->setString(std::to_string((int)fighter->xp->total));
+
+    auto dmg_val = dynamic_cast<ui::Text*>(original_panel->getChildByName("dmg_val"));
+    dmg_val->setString(std::to_string((int)fighter->attrs->damage->current_val));
+
+    auto bns_val = dynamic_cast<ui::Text*>(original_panel->getChildByName("bns_val"));
+    std::string bns_msg = "x1";
+    if (this->fighter->has_sword) { bns_msg = "x2"; };
+    bns_val->setString(bns_msg);
 
     auto layout = ui::Layout::create();
     layout->setLayoutType(ui::Layout::Type::VERTICAL);
