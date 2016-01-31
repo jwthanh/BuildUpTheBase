@@ -1284,8 +1284,6 @@ void CharacterMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
-        auto original_panel = CharacterMenu::create_detail_alert(this->fighter);
-        this->addChild(original_panel);
     }
 };
 
@@ -1306,35 +1304,4 @@ CharacterMenu* CharacterMenu::create(spFighter fighter)
     }
 };
 
-ui::Widget* CharacterMenu::create_detail_alert(spFighter fighter)
-{
-    //TODO remove, this whole method is unused
-    auto inst = CSLoader::getInstance();
-    auto raw_node = inst->createNode("editor/inventory_detail.csb");
-    auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
-    original_panel->removeFromParent();
-
-    auto cb = [original_panel](Ref*, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            original_panel->removeFromParent();
-        };
-    };
-    original_panel->addTouchEventListener(cb);
-
-    auto character_name = dynamic_cast<ui::Text*>(original_panel->getChildByName("character_name"));
-    character_name->setString(fighter->name);
-
-    auto hp_val = dynamic_cast<ui::Text*>(original_panel->getChildByName("hp_val"));
-    hp_val->setString(std::to_string(fighter->attrs->health->current_val));
-
-    auto xp_val = dynamic_cast<ui::Text*>(original_panel->getChildByName("xp_val"));
-    xp_val->setString(std::to_string(fighter->xp->total));
-
-
-
-    original_panel->setPosition(this->get_center_pos());
-
-    return original_panel;
-};
 
