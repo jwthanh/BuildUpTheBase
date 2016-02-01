@@ -870,14 +870,29 @@ bool CityMenu::init()
     city_scene->setPosition(this->get_center_pos());
     city_scene->setAnchorPoint(Vec2(0.5,0.5));
 
+    auto create_count = [](std::string prefix, int count) {
+        std::stringstream ss;
+        ss << prefix << ": " << count;
+        return ss.str();
+    };
+
     for (auto building : this->building->city->buildings)
     {
 
        auto node = city_scene->getChildByName(building->name);
        auto building_panel = dynamic_cast<ui::Layout*>(node->getChildByName("building_panel"));
 
-       auto building_name_lbl =dynamic_cast<ui::Text*>(building_panel->getChildByName("building_name")); 
+       auto building_name_lbl = dynamic_cast<ui::Text*>(building_panel->getChildByName("building_name")); 
        building_name_lbl->setString(building->name);
+
+       auto ing_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("ingredient_count"));
+       ing_count->setString(create_count("ING", building->ingredients.size()));
+
+       auto pro_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("product_count"));
+       pro_count->setString(create_count("PRO", building->products.size()));
+
+       auto wst_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("waste_count"));
+       wst_count->setString(create_count("WST", building->wastes.size()));
 
        auto cb = [this, building](Ref*, ui::Widget::TouchEventType) {
            auto scene = Scene::create();
