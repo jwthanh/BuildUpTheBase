@@ -855,6 +855,7 @@ bool CityMenu::init()
     std::stringstream ss;
     ss << "City Menu";
     auto label = Label::createWithTTF(ss.str(), menu_font, sx(24));
+    this->addChild(label, 1);
 
     // position the label on the center of the screen
     label->setPosition(
@@ -869,8 +870,6 @@ bool CityMenu::init()
     city_scene->setPosition(this->get_center_pos());
     city_scene->setAnchorPoint(Vec2(0.5,0.5));
 
-
-
     for (auto building : this->building->city->buildings)
     {
 
@@ -878,7 +877,6 @@ bool CityMenu::init()
        auto building_panel = dynamic_cast<ui::Layout*>(node->getChildByName("building_panel"));
 
        auto building_name_lbl =dynamic_cast<ui::Text*>(building_panel->getChildByName("building_name")); 
-       //button->ignoreContentAdaptWithSize(false);
        building_name_lbl->setString(building->name);
 
        auto cb = [this, building](Ref*, ui::Widget::TouchEventType) {
@@ -894,8 +892,6 @@ bool CityMenu::init()
     }
     this->addChild(city_scene);
 
-    // add the label as a child to this layer
-    this->addChild(label, 1);
 
     // this->main_lbl = Label::createWithTTF(
     //     "",
