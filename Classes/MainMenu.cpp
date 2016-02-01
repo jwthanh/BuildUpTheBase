@@ -1016,12 +1016,15 @@ bool InventoryMenu::init()
     auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
     auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
     original_panel->removeFromParent();
+    auto cat = dynamic_cast<Sprite*>(original_panel->getChildByName("cat_1"));
+
     float panel_width = original_panel->getContentSize().width;
 
     //prep param to apply to rows and cols
     auto param = ui::LinearLayoutParameter::create();
     auto margin = ui::Margin(0, 10, 10, 0);
     param->setMargin(margin);
+
 
     float width = (panel_width+margin.left+margin.right)*num_cols;
 
