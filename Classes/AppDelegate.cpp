@@ -58,6 +58,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     system("xcopy \"C:\\Users\\Primary\\workspace\\beatupisis\\proj.win32\\..\\Resources\" \"C:\\Users\\Primary\\workspace\\beatupisis\\proj.win32\\Debug.win32\\\" /E /I /F /Y  /D /K ");
 #endif
 
+    //add the cocos studio paths. it ignores its own export path so you need to tell it where else to look
+    FileUtils::getInstance()->addSearchPath("editor");
+
     this->preload_all();
 
     Scene* scene = Scene::create();

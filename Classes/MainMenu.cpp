@@ -864,59 +864,35 @@ bool CityMenu::init()
         )
     );
 
-    // auto bldg_node = BuildingNode::create();
-    // bldg_node->setPosition(this->get_center_pos());
-    // this->addChild(bldg_node);
-    auto resize_btn = [](ui::Button* button) {
-        auto lbl_size = button->getTitleRenderer()->getContentSize();
+    auto inst = CSLoader::getInstance();
+    auto city_scene = inst->createNode("editor/scenes/city_scene.csb");
+    city_scene->setPosition(this->get_center_pos());
+    city_scene->setAnchorPoint(Vec2(0.5,0.5));
 
-        button->setContentSize(
-                Size(
-                    lbl_size.width * 1.1f,
-                    lbl_size.height * 1.1f
-                    )
-                );
-    };
 
-    auto layout_param = ui::LinearLayoutParameter::create();
-    layout_param->setMargin(ui::Margin(0, 25.0f, 0, 0)); //supposed to be 50 units between each button, FIXME
-
-    auto scroll = ui::ScrollView::create();
-    scroll->setLayoutType(ui::Layout::Type::VERTICAL);
-
-    scroll->setContentSize(Size(200, 400));
-    scroll->setInnerContainerSize(Size(200, 800));
-    scroll->setAnchorPoint(Vec2(0.5f, 0.5f));
-
-    scroll->setPosition(this->get_center_pos());
 
     for (auto building : this->building->city->buildings)
     {
-        auto button = ui::Button::create("shop_title.png", "", "", ui::TextureResType::PLIST);
-        auto button_param = layout_param->createCloneInstance();
-        auto button_margin = layout_param->getMargin();
-        button_param->setMargin(button_margin);
-        button->setLayoutParameter(button_param);
-        
 
-        button->ignoreContentAdaptWithSize(false);
-        button->setTitleText(building->name);
-        button->setTitleFontSize(24);
+       auto node = city_scene->getChildByName(building->name);
+       auto building_panel = dynamic_cast<ui::Layout*>(node->getChildByName("building_panel"));
 
-        auto cb = [this, building](Ref*, ui::Widget::TouchEventType) {
-            auto scene = Scene::create();
-            BuildingMenu* building_menu = BuildingMenu::create(building);
-            scene->addChild(building_menu);
+       auto building_name_lbl =dynamic_cast<ui::Text*>(building_panel->getChildByName("building_name")); 
+       //button->ignoreContentAdaptWithSize(false);
+       building_name_lbl->setString(building->name);
 
-            auto director = Director::getInstance();
-            director->pushScene(scene);
-        };
-        button->addTouchEventListener(cb);
+       auto cb = [this, building](Ref*, ui::Widget::TouchEventType) {
+           auto scene = Scene::create();
+           BuildingMenu* building_menu = BuildingMenu::create(building);
+           scene->addChild(building_menu);
 
-        resize_btn(button);
-        scroll->addChild(button);
+           auto director = Director::getInstance();
+           director->pushScene(scene);
+       };
+       building_panel->addTouchEventListener(cb);
+
     }
-    this->addChild(scroll);
+    this->addChild(city_scene);
 
     // add the label as a child to this layer
     this->addChild(label, 1);

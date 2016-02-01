@@ -1223,8 +1223,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F) 
     {
-        if (this->get_target_face())
-            this->get_target_face()->remove_all_features();
+        this->switch_to_city_menu();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_W) 
     {
