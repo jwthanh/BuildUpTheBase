@@ -885,6 +885,9 @@ bool CityMenu::init()
        auto building_name_lbl = dynamic_cast<ui::Text*>(building_panel->getChildByName("building_name")); 
        building_name_lbl->setString(building->name);
 
+       auto building_image = dynamic_cast<ui::ImageView*>(building_panel->getChildByName("building_image")); 
+       building_image->loadTexture("buildingTiles_041.png", ui::TextureResType::PLIST);
+
        auto ing_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("ingredient_count"));
        ing_count->setString(create_count("ING", building->ingredients.size()));
 
