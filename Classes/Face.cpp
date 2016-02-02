@@ -787,15 +787,8 @@ FacialFeature::FacialFeature(Face* face, std::string sprite_name, int hit_limit)
 
 FacialFeature::~FacialFeature()
 {
-
     this->face->removeChild(this->sprite);
-
-    //FIXME this messes with the features list since its being iterated over
-    //std::vector<FacialFeature*>* vec = this->face->features;
-    //vec->erase(std::remove(vec->begin(), vec->end(), this), vec->end());
-
     this->face = NULL;
-
 };
 
 bool FacialFeature::should_break(int hits_taken)
@@ -1187,20 +1180,6 @@ Gore::Gore(int full_width, Beatup* beatup) : Coin(full_width, beatup)
 
     this->angle = cocos2d::rand_minus1_1()*1.5;
 };
-//
-//ParticleSystemQuad* Gore::get_blood_parts()
-//{
-//    if (!Gore::_has_blood_parts)
-//    {
-//        Gore::__blood_parts = ParticleSystemQuad::create("blood.plist");
-//        Gore::__blood_parts->setTotalParticles(5);
-//        Size sprite_size = Size(35, 28);
-//        Gore::__blood_parts->setPosition(sprite_size.width/2, sprite_size.height/2);
-//        Gore::__blood_parts->setAutoRemoveOnFinish(true);
-//    };
-//
-//    //return Gore::__blood_parts->du
-//};
 
 ParticleSystemQuad* Coin::get_particles()
 {
