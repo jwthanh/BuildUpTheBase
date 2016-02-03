@@ -600,7 +600,6 @@ bool ResetMenu::init()
     };
 
 
-
     std::vector<ItemData> item_data = {
         {"default", "Reset All", ResetMenu::reset_all, false},
         {"default", "Reset Coins", ResetMenu::reset_total_coin_stat, false},
@@ -798,8 +797,6 @@ bool BuildingMenu::init()
 
     this->init_menu_from_data(scroll, item_data);
 
-
-
     this->resize_scroll_inner(scroll);
     return true;
 };
@@ -910,21 +907,6 @@ bool CityMenu::init()
     }
     this->addChild(city_scene);
 
-
-    // this->main_lbl = Label::createWithTTF(
-    //     "",
-    //     this->menu_font,
-    //     this->menu_fontsize
-    // );
-    // this->main_lbl->setPosition(
-    //     Vec2(
-    //         origin.x + visibleSize.width/2,
-    //         origin.y + visibleSize.height - this->main_lbl->getContentSize().height-sx(30)
-    //     )
-    // );
-    // this->main_lbl->setTextColor(Color4B::WHITE);
-    // this->addChild(this->main_lbl, 1);
-
     return true;
 };
 
@@ -982,9 +964,6 @@ bool InventoryMenu::init()
         )
     );
 
-    // auto bldg_node = BuildingNode::create();
-    // bldg_node->setPosition(this->get_center_pos());
-    // this->addChild(bldg_node);
     auto resize_btn = [](ui::Button* button) {
         auto lbl_size = button->getTitleRenderer()->getContentSize();
 
