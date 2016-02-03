@@ -41,28 +41,6 @@ void AttributeContainer::Update()
 Damage* AttributeContainer::get_effective_damage()
 {
     int initial_damage = this->damage->current_val;
-    //Damage* result = new Damage;
- //   if (this->owner->equipment != NULL && this->owner->equipment->main_weapon->equipped_item != NULL)
- //   {
-	//	Item* item = this->owner->equipment->main_weapon->equipped_item;
-	//	result = new Damage(*item->attr_effect->damage);
- //   }
-	//else
-	//{
-	//	result = new Damage();
-	//}
-
- //   if (this->owner->equipment != NULL && this->owner->equipment->off_weapon->equipped_item != NULL)
- //   {
-	//	Item* item = this->owner->equipment->off_weapon->equipped_item;
-	//	Damage* tmp = new Damage(*item->attr_effect->damage);
- //       Damage* out = new Damage((*tmp)+(*result)); //TODO figure out wtf I'm doing
- //       delete result;
- //       delete tmp;
- //       result = out;
- //   }
-
- //   result->normal += initial_damage;
 	return NULL;
 };
 
