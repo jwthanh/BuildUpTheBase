@@ -55,6 +55,13 @@ typedef ResourceCondition<Product::ProductType> ProductCondition;
 typedef ResourceCondition<Waste::WasteType> WasteCondition;
 #define WasteConditionEx(waste_enum, quantity, name) WasteCondition(WasteCondition::TypeChoices::Waste, Waste::waste_enum, quantity, name)
 
+//if this is satisfied, the action can happen
+class Condition : public Nameable
+{
+
+};
+
+//
 class Action : public Nameable
 {
 
