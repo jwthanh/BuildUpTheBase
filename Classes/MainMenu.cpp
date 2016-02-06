@@ -874,16 +874,16 @@ bool CityMenu::init()
     };
 
     std::vector<std::string> sprite_names = {
-        "buildingTiles_033.png",
         "buildingTiles_001.png",
-        "buildingTiles_099.png",
-        "buildingTiles_030.png",
         "buildingTiles_002.png",
-        "buildingTiles_100.png",
-        "buildingTiles_017.png",
         "buildingTiles_003.png",
-        "buildingTiles_034.png",
+        "buildingTiles_017.png",
         "buildingTiles_018.png",
+        "buildingTiles_030.png",
+        "buildingTiles_033.png",
+        "buildingTiles_034.png",
+        "buildingTiles_099.png",
+        "buildingTiles_100.png",
         "buildingTiles_116.png",
         "buildingTiles_117.png"
     };
