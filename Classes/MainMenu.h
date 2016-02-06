@@ -182,7 +182,8 @@ class CharacterMenu : public GameLayer
         static cocos2d::Scene* createScene();
 
         virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
-
+        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent);
+        virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event);
         bool init() override;
 
 };

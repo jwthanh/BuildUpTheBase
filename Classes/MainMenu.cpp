@@ -1298,4 +1298,13 @@ CharacterMenu* CharacterMenu::create(spFighter fighter)
     }
 };
 
+void CharacterMenu::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
+{
+    Director::getInstance()->popScene();
+};
 
+void CharacterMenu::onTouchEnded(Touch *touch, Event *event)
+{
+    GameLayer::onTouchEnded(touch, event);
+    Director::getInstance()->popScene();
+};
