@@ -300,13 +300,15 @@ class Building : public Nameable, public Updateable, public std::enable_shared_f
             fighters = vsFighter();
             workers = vsWorker();
 
-            std::stringstream ss;
-            ss << name << " task";
-            menu_items = {
-                {"default", ss.str(), [this,task](){
-                    task(shared_from_this(), 0); return true;
-                }, false},
-            };
+            menu_items = {};
+            // std::stringstream ss;
+            // ss << name << " task";
+            // menu_items = {
+            //     {"default", ss.str(), [this,task](){
+            //         task(shared_from_this(), 0);
+            //         return true;
+            //     }, false},
+            // };
 
         };
 
