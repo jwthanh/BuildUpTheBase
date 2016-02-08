@@ -10,7 +10,8 @@ An upcoming game about building a base. Checkout the latest update video https:/
 
 ## Release Schedule
 
-* End of Dec: move back to phone (done)
-* End of Jan: flesh out building tasks
-* End of Feb: different screens for fighting and building
+* End of Feb: flesh out building tasks, remove fists and face, replace with
+  other things
+* End of Mar: figure out what you actually do
+* End of Mar: different screens for fighting and building
 * End of year: Release?
