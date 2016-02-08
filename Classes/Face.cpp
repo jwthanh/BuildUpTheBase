@@ -1216,31 +1216,7 @@ Sequence* Coin::get_movement_action()
 
     Sequence* seq;
 
-    if (this->move_to_coins_lbl)
-    {
-        
-        std::function<void()> func = std::bind(&Beatup::update_coins_lbl, this->beatup, true, this->beatup->get_total_coins()+1);
-        Sequence* targeted_seq = Sequence::create(
-            CallFunc::create(func),
-            NULL
-        );
-
-        MoveTo* move_to = MoveTo::create(
-            0.1f,
-            this->beatup->coins_lbl->convertToWorldSpace(this->beatup->coins_lbl->getPosition())
-        );
-
-        seq = Sequence::create(
-            jump_by, 
-            move_to,
-            TargetedAction::create(this->beatup->coins_lbl, targeted_seq),
-            NULL
-        );
-    }
-    else
-    {
-        seq = Sequence::create(jump_by, NULL);
-    };
+    seq = Sequence::create(jump_by, NULL);
     return seq;
 };
 

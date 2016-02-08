@@ -220,21 +220,6 @@ void ShopMenu::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scro
 
 };
 
-void ShopMenu::prep_combos(cocos2d::ui::ScrollView* scroll)
-{
-    for (Combo* combo : *this->beatup->combos)
-    {
-        ComboShopItem* csi = new ComboShopItem(this, this->combo_menu, combo, NULL);
-        auto c_btn = create_button(
-                csi->get_menu_text(),
-                csi->get_callback(this),
-                combo->get_been_bought()
-            );
-        scroll->addChild(c_btn);
-        csi->button = c_btn;
-    };
-};
-
 void ShopMenu::prep_punch_items(cocos2d::ui::ScrollView* scroll)
 {
 
@@ -514,50 +499,6 @@ void ShopMenu::resize_scroll_inner(Scrollable* scroll)
     ));
 }
 
-
-ComboShopItem::ComboShopItem(ShopMenu* shop, Menu* menu, Combo* combo, ui::Button* button) : ShopItem(shop, menu, button)
-{
-    this->combo = combo;
-
-    if (this->combo->get_been_bought())
-    {
-        this->is_enabled = false;
-    }
-};
-
-std::string ComboShopItem::get_menu_text()
-{
-    if (this->combo != NULL)
-    {
-        std::stringstream ss;
-        ss << combo->name << " " << this->get_cost_string();
-        return ss.str();
-    }
-    else
-    {
-        return "No combo matched";
-    };
-};
-
-BoolFuncNoArgs ComboShopItem::get_callback(ShopMenu* shop)
-{
-    BoolFuncNoArgs callback = [shop, this]()
-    {
-        auto on_buy_cb = [this](){
-            this->combo->set_been_bought(true);
-            return true;
-        };
-        shop->buy(this, combo->shop_cost, on_buy_cb);
-        return false;
-    };
-
-    return callback;
-};
-
-int ComboShopItem::get_cost()
-{
-    return this->combo->shop_cost;
-};
 
 int PunchDamageShopItem::get_cost()
 {

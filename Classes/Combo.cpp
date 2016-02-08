@@ -114,42 +114,6 @@ void Combo::hide_order()
     this->order_is_shown = false;
 };
 
-void Combo::toggle_order()
-{
-
-    if (this->order_is_shown)
-    {
-        this->hide_order();
-    }
-    else
-    {
-        for (auto combo : *this->beatup->combos)
-        {
-            combo->hide_order();
-        };
-
-        Size visibleSize = Director::getInstance()->getVisibleSize();
-        Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-        auto pos = Vec2(
-            visibleSize.width / 2 + origin.x,
-            visibleSize.height / 2 + origin.y+ sy(200)
-        );
-        this->order_lbl = Label::createWithTTF(
-            Combo::order_to_string( this->hand_order),
-            DEFAULT_FONT,
-            sx(60)
-        );
-        this->order_lbl->setLocalZOrder(2);
-
-        this->order_lbl->setPosition(pos);
-        this->beatup->addChild(this->order_lbl);
-
-        this->color_combo_chars();
-        this->order_is_shown = true;
-    };
-};
-
 std::string Combo::order_to_string(std::vector<FistHands>* hand_order)
 {
     auto string_map = std::map<FistHands, std::string>();

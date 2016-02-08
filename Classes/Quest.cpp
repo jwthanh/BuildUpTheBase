@@ -34,23 +34,6 @@ bool unl_charged_fist(Beatup* beatup)
     return false;
 };
 
-bool unl_combos(Beatup* beatup)
-{
-    for (Combo* combo : *beatup->combos)
-    {
-        combo->set_been_bought(true);
-    };
-
-    return false;
-};
-
-bool unlock_combo_by_index(Beatup* beatup, int index)
-{
-    beatup->combos->at(index)->set_been_bought(true);
-
-    return false;
-};
-
 bool unlock_flame_fist(Beatup* beatup)
 {
     beatup->fist_flame->set_been_bought(true);
@@ -88,12 +71,6 @@ bool obj_block_once(Beatup* beatup)
 {
     int minimum_blocks = 1;
     return beatup->block_count >= minimum_blocks;
-};
-
-bool obj_activate_combos(Beatup* beatup)
-{
-    int minimum_activations = 2;
-    return beatup->get_activation_count() >= minimum_activations;
 };
 
 bool obj_earn_coins(Beatup* beatup)
@@ -198,7 +175,7 @@ Quest* Quest::create_quest(Beatup* beatup, int level)
             },
             { "Unlocks your first combo",
                 [=](Beatup* bu) {
-                    return unlock_combo_by_index(bu, 0);
+                    return false;
                 }
             }
 
@@ -213,7 +190,8 @@ Quest* Quest::create_quest(Beatup* beatup, int level)
         { //3
             "Chain 'em together",
             {
-                { "Do two combos\n\nTap the combo cooldown bar on the right\n to see the order you need to\n punch to activate a combo", obj_activate_combos },
+                { "Do two combos\n\nTap the combo cooldown bar on the right\n to see the order you need to\n punch to activate a combo", 
+                [](Beatup* bu){return false; } },
             },
             { "Unlocks the grenade\n (costs coins to use)", [](Beatup* bu){return unlock_grenade(bu); } }
         },
@@ -222,7 +200,7 @@ Quest* Quest::create_quest(Beatup* beatup, int level)
             {
                 { "Earn 5 coins", obj_earn_coins },
             },
-            { "Unlocks your second combo", [](Beatup* bu){return unlock_combo_by_index(bu, 1); } }
+            { "Unlocks your second combo", [](Beatup* bu){return false; } }
         },
         { //5
             "It's heating up!",
@@ -236,7 +214,7 @@ Quest* Quest::create_quest(Beatup* beatup, int level)
             {
                 { "Enjoy this!", obj_free },
             },
-            { "Unlocks the third combo", [](Beatup* bu){return unlock_combo_by_index(bu, 2); } }
+            { "Unlocks the third combo", [](Beatup* bu){return false; } }
         },
         { //7
             "Salad Bar",
@@ -250,7 +228,7 @@ Quest* Quest::create_quest(Beatup* beatup, int level)
             {
                 { "Earn 5 coins", obj_earn_coins },
             },
-            { "Unlock the fourth combo", [](Beatup* bu){return unlock_combo_by_index(bu, 3); } }
+            { "Unlock the fourth combo", [](Beatup* bu){return false; } }
         },
         { //9
             "Do you feel that?",
@@ -264,7 +242,7 @@ Quest* Quest::create_quest(Beatup* beatup, int level)
             {
                 { "Earn 5 coins", obj_earn_coins },
             },
-            { "Unlocks the fifth combo", [](Beatup* bu){return unlock_combo_by_index(bu, 4); } }
+            { "Unlocks the fifth combo", [](Beatup* bu){return false; } }
         },
         { //11
             "Feelin' weird",
@@ -278,14 +256,14 @@ Quest* Quest::create_quest(Beatup* beatup, int level)
             {
                 { "Earn 5 coins", obj_earn_coins },
             },
-            { "Unlocks the sixth combo", [](Beatup* bu){return unlock_combo_by_index(bu, 5); } }
+            { "Unlocks the sixth combo", [](Beatup* bu){return false; } }
         },
         { //13
             "Fully loaded",
             {
                 { "Earn 5 coins", obj_earn_coins },
             },
-            { "Unlocks the seventh combo", [](Beatup* bu){return unlock_combo_by_index(bu, 6); } }
+            { "Unlocks the seventh combo", [](Beatup* bu){return false; } }
         },
         { //14
             "Just you and me, bub",

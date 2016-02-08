@@ -21,8 +21,6 @@ class Gore;
 class PunchLog;
 struct PunchLogItem;
 
-class Combo;
-
 class ProgressBar;
 class RocketWeapon;
 class GrenadeWeapon;
@@ -101,12 +99,6 @@ public:
 
         ProgressBar* progress_bar;
 
-        bool is_comboing;
-        Clock* flurry_switch_clock;
-        bool flurry_with_left_hand;
-
-        std::vector<Combo*>* combos;
-        void detect_combo(FistHands hand);
         int get_activation_count();
 
         void reset_hits();
@@ -178,8 +170,6 @@ public:
         static std::string total_coin_key;
 
         cocos2d::Label* title_lbl;
-        cocos2d::Label* coins_lbl;
-        void update_coins_lbl(bool do_bump = true, int total_coins = -321);
 
         void reload_resources();
         void apply_flash_shader();

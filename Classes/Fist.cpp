@@ -270,18 +270,6 @@ void Fist::punch(bool is_charged_punch)
         if (face != NULL && face->shield == NULL)
         {
             //scale the color of the face based on the current weapon
-            auto scale_color = [face, this](FistWeapon* fist_weapon) {
-                auto parts = this->sprite->get_weapon_particlesys(fist_weapon->type);
-                if (parts->isActive())
-                {
-                    fist_weapon->scale_face_color(face);
-                }
-            };
-
-            scale_color(this->beatup->fist_flame);
-            scale_color(this->beatup->fist_psionic);
-            scale_color(this->beatup->fist_frost);
-
             //this may change the face's sprite.
 
             float total_punch_dmg = this->get_punch_dmg();
@@ -378,7 +366,6 @@ void Fist::punch(bool is_charged_punch)
                     assert(false && "weird hand");
                 };
             };
-            face->beatup->detect_combo(hand);
         }
 	}
 };

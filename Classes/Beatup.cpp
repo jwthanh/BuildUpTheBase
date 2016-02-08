@@ -124,116 +124,12 @@ bool Beatup::init()
 
     this->spawn_coin_clock = new Clock(0.15f);
 
-    this->is_comboing = false;
-    this->flurry_switch_clock = new Clock(0.032f);
-    this->flurry_with_left_hand = false;
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    this->combos = new std::vector<Combo*>();
 
     int side_height = (int)sy(100);
-
-    Vec2* new_pos = new Vec2(
-        visibleSize.width / 2 + origin.x + sx(350),
-        visibleSize.height / 2 + origin.y + sy(300)
-        );
-    new_pos->x = new_pos->x + sx(20);
-    new_pos->y = new_pos->y - side_height + sy(30);
-
-    auto create_combo = [this, new_pos, side_height](
-        std::string id_key, std::string name, int cost,
-        std::initializer_list<FistHands> order, float shake_time,
-        float stamina_regen)
-    {
-        Combo* combo = new Combo(this, id_key, name);
-        combo->shop_cost = cost;
-        combo->hand_order = new std::vector<FistHands>(order);
-        combo->shake_time = shake_time;
-        combo->stamina_regen = stamina_regen;
-
-        combo->defaults.cooldown = stamina_regen * 0.7f;
-        combo->cooldown = combo->defaults.cooldown;
-        combo->cooldown_clock->set_threshold(combo->cooldown);
-
-        this->combos->push_back(combo);
-
-        int combo_height = (int)combo->cd_bar->front_timer->getBoundingBox().size.height;
-
-        new_pos->y = new_pos->y - combo_height - sy(5);
-        combo->cd_bar->do_finish_bump = true;
-        combo->cd_bar->setPosition(*new_pos);
-
-    };
-
-    // LRLLLR
-    auto order = { FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right };
-    create_combo("left_field", "Left Field", 25, order, 0.5f, 10.0f);
-
-    // LRRRLL
-    order = { FistHands::Left, FistHands::Right, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left };
-    create_combo("grand_tour", "Grand Tour", 35, order, 0.75f, 15.0f);
-
-    // RRLLRL
-    order = { FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right, FistHands::Left };
-    create_combo("fist_salad", "Fist Salad", 65, order, 1.15f, 20.0f);
-
-    // RRRLRLLR
-    order = { FistHands::Right, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right };
-    create_combo("knuckle_avalanche", "Knuckle Avalanche", 155, order, 1.50f, 25.0f);
-
-    // LRLLRLLLR
-    order = { FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right };
-    create_combo("love_tap", "Love Tap", 200, order, 1.75f, 30.0f);
-
-    // LRLLRRLLLR
-    order = { FistHands::Left, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right };
-    create_combo("impressive_hook", "Impressive Hook", 300, order, 2.25f, 35.0f);
-
-    // RRLRRLLLLR
-    order = { FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Right, FistHands::Right, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Left, FistHands::Right };
-    create_combo("brawlhalla", "Brawlhalla", 400, order, 2.75f, 55.0f);
-
-    //shop_lbl
-    this->shop_banner = Sprite::createWithSpriteFrameName("shop_banner.png");
-
-    this->shop_banner->setAnchorPoint(Vec2(0.0f, 0.0f));
-    Vec2 banner_pos = Vec2(
-        0,
-        visibleSize.height / 2 + origin.y + sy(100)
-        );
-    this->shop_banner->setScale(sx(4));
-    this->shop_banner->setPosition(banner_pos);
-    this->addChild(this->shop_banner);
-
-    this->shop_lbl = Sprite::createWithSpriteFrameName("text_shop.png");
-    this->shop_lbl->setPosition(Vec2(
-        28,
-        17
-        ));
-
-    this->shop_banner->addChild(this->shop_lbl);
-
-    this->coins_lbl = Label::createWithTTF("0 coins", DEFAULT_FONT, 24);
-    this->coins_lbl->setAnchorPoint(Vec2(0.5f, 0.5f));
-    this->coins_lbl->getFontAtlas()->setAliasTexParameters();
-    this->coins_lbl->setPosition(Vec2(
-        28,
-        6.5f
-        ));
-    this->coins_lbl->setScale(0.2f);
-
-    this->shop_banner->addChild(this->coins_lbl);
-
-    //rocket
-    this->rocket = new RocketWeapon(this, "throwable_rocket", "Rocket");
-    this->rocket->init("weapon_rocket.png");
-
-    //grenade
-    this->grenade = new GrenadeWeapon(this, "throwable_grenade", "Grenade");
-    this->grenade->init("weapon_grenade.png");
-    this->grenade->change_cost(15);
 
     auto quest_button = MenuItemSprite::create(
         Sprite::createWithSpriteFrameName("back_banner.png"),
@@ -278,7 +174,6 @@ bool Beatup::init()
     this->prep_other();
 
     //this->update(0.001f); //dont remember what this was for
-    this->update_coins_lbl(false);
 
     this->setup_commands();
 
@@ -319,13 +214,6 @@ void Beatup::setup_commands()
         } };
     auto console = Director::getInstance()->getConsole();
     console->addCommand(face_charge);
-
-    Console::Command reset_combo = {"rc", "restores a combo's cooldown",
-        [this](int, std::string args)
-        {
-            this->combos->at(stoi(args))->update(99999999.0f);
-        } };
-    console->addCommand(reset_combo);
 
     auto gl = Director::getInstance()->getOpenGLView();
     auto frame_size = gl->getFrameSize();
@@ -1004,50 +892,6 @@ void Beatup::lose_level()
     log("You've lost the level!");
 };
 
-void Beatup::detect_combo(FistHands hand)
-{
-    this->punch_log->add_punch(hand);
-
-    for (auto combo : *this->combos)
-    {
-        if (!combo->get_been_bought() || !combo->can_punch()) 
-        {
-            continue;
-        }
-
-        else if (combo->handle_hand(hand))
-        {
-            //This is where combo action happens
-            Face* face = this->get_target_face(); 
-            if (!face) { return; }
-
-            face->is_crit_hit = true;
-            float shake_time = combo->shake_time;
-            this->shake_clock->set_threshold(shake_time); //TODO should this start the clock?
-            face->shake_clock->set_threshold(shake_time);
-
-            this->left_fist->punch_clock->start_for_thres(shake_time);
-            this->left_fist->hit_sprite->setPosition(this->left_fist->sprite->getPosition());
-            this->left_fist->hit_sprite->setVisible(true);
-            this->left_fist->moving_sprite->setVisible(false);
-
-            this->right_fist->punch_clock->start_for_thres(shake_time);
-            this->right_fist->hit_sprite->setPosition(this->right_fist->sprite->getPosition());
-            this->right_fist->hit_sprite->setVisible(true);
-            this->right_fist->moving_sprite->setVisible(false);
-
-            combo->cooldown_clock->start_for_thres(combo->cooldown);
-            combo->can_activate = false;
-
-            this->is_comboing = true;
-
-            face->end_charge_attack();
-
-            // Coin::spawn(face, this);
-        };
-    };
-};
-
 bool Beatup::should_shake()
 {
     bool result =  this->shake_clock->is_active();
@@ -1408,11 +1252,6 @@ void Beatup::update(float dt)
 
     this->spawn_coin_clock->update(dt);
 
-    for (auto combo : *this->combos)
-    {
-        combo->update(dt);
-    };
-
     if (this->block_clock->is_active())
     {
         this->block_clock->update(dt);
@@ -1433,7 +1272,7 @@ void Beatup::update(float dt)
             shake_intensity *= 4;
             opacity *= 4;
 
-            if (this->is_comboing && this->flurry_switch_clock->passed_threshold())
+            if (false)
             {
                 //every time the fists move, deal some damage
                 if (!targetted_face->has_shield_active())
@@ -1452,21 +1291,17 @@ void Beatup::update(float dt)
                     fist->other->reset_pos();
                 };
 
-                if (this->flurry_with_left_hand)
+                if (false)
                 {
                     move_to_crit_punch(this->left_fist);
-                    this->flurry_with_left_hand = false;
                 }
                 else
                 {
                     move_to_crit_punch(this->right_fist);
-                    this->flurry_with_left_hand = true;
                 }
-                this->flurry_switch_clock->reset();
             }
             else
             {
-                this->flurry_switch_clock->update(dt);
 
                 auto hide_and_move_hit_show_moving = [](Fist* fist){
                     fist->hit_sprite->setPosition(fist->sprite->getPosition());
@@ -1539,11 +1374,7 @@ void Beatup::update(float dt)
 
     this->update_coins(dt);
 
-    // this->update_coins_lbl(); //cant run this because we have the fancy coin label thing
     this->update_player_hp_bar();
-
-    this->rocket->update(dt);
-    this->grenade->update(dt);
 
     this->fist_flame->update(dt);
     this->fist_frost->update(dt);
@@ -1577,35 +1408,6 @@ void Beatup::update(float dt)
     };
 
 };
-
-void Beatup::update_coins_lbl(bool do_bump, int total_coins)
-{
-    std::stringstream ss;
-    if (total_coins == -321)
-    {
-        total_coins = this->get_total_coins();
-    };
-    ss << "$ " << total_coins;
-
-    std::string old_string = this->coins_lbl->getString();
-    if (old_string != ss.str())
-    {
-        this->coins_lbl->setString(ss.str());
-
-        if (do_bump)
-        {
-            float duration = 0.125f;
-            TintTo* tint_to = TintTo::create(duration, 254, 233, 34);
-            TintTo* tint_back = TintTo::create(duration, Color3B::WHITE);
-            ScaleTo* sb = ScaleTo::create(duration, 0.6f);
-            ScaleTo* bs = ScaleTo::create(duration, 0.2f);
-            Sequence* seq = Sequence::create(tint_to, sb, tint_back, bs, NULL);
-
-            this->coins_lbl->runAction(seq);
-        };
-    };
-};
-
 
 void Beatup::update_coins(float dt)
 {
@@ -1645,12 +1447,8 @@ void Beatup::hide_ui()
     this->player_hp_bar->setVisible(false);
     this->stamina_prog->setVisible(false);
 
-    this->shop_lbl->setVisible(false);
-    this->coins_lbl->setVisible(false);
-
     this->title_lbl->setVisible(false);
 
-    this->shop_banner->setVisible(false);
 
     this->flames_button->setVisible(false);
     this->frost_button->setVisible(false);
@@ -2023,17 +1821,6 @@ void Beatup::reload_resources()
 #else
     system("xcopy \"C:\\Users\\Primary\\workspace\\beatupisis\\proj.win32\\..\\Resources\" \"C:\\Users\\Primary\\workspace\\beatupisis\\proj.win32\\Debug.win32\\\" /E /I /F /Y  /D /K ");
 #endif
-};
-
-int Beatup::get_activation_count()
-{
-    int activates = 0;
-    for (Combo* combo : *this->combos)
-    {
-        activates += combo->activate_count;
-    };
-
-    return activates;
 };
 
 void Beatup::create_quest_alert()

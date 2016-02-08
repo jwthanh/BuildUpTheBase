@@ -7,7 +7,6 @@ class PlainShopItem;
 class Fist;
 class ShopItem;
 class Beatup;
-class Combo;
 class Scrollable;
 
 struct ItemData {
@@ -61,7 +60,6 @@ class ShopMenu : public GameLayer
 
         virtual bool init() override;
         void prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scrollable* fist_scroll);
-        void prep_combos(cocos2d::ui::ScrollView* scroll);
         void prep_punch_items(cocos2d::ui::ScrollView* scroll);
         void prep_fist_weapons(cocos2d::ui::ScrollView* scroll);
         void prep_charged_fist(cocos2d::ui::ScrollView* scroll);
@@ -154,19 +152,6 @@ class PlainShopItem : public ShopItem
 
         virtual int get_cost();
         // virtual bool can_afford() { return true; };
-};
-
-class ComboShopItem : public ShopItem
-{
-    public:
-        Combo* combo;
-
-        ComboShopItem(ShopMenu* shop, cocos2d::Menu* menu, Combo* combo, cocos2d::ui::Button* button);
-
-        std::string get_menu_text();
-        BoolFuncNoArgs get_callback(ShopMenu* shop) override;
-
-        int get_cost();
 };
 
 class PunchDamageShopItem : public ShopItem

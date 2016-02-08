@@ -604,7 +604,6 @@ bool ResetMenu::init()
         {"default", "Reset All", ResetMenu::reset_all, false},
         {"default", "Reset Coins", ResetMenu::reset_total_coin_stat, false},
         {"default", "Reset Levels", ResetMenu::reset_levels, false},
-        {"default", "Reset Combos", ResetMenu::reset_all_combos, false},
         {"default", "Reset Total Hits", ResetMenu::reset_total_hit_stat, false},
         {"default", "Reset Fists", ResetMenu::reset_all_fist_weapons, false},
         {"default", "Back", go_back_cb, false},
@@ -638,7 +637,6 @@ bool ResetMenu::reset_all()
 {
     ResetMenu::reset_total_hit_stat();
     ResetMenu::reset_total_coin_stat();
-    ResetMenu::reset_all_combos();
     ResetMenu::reset_all_fist_weapons();
     ResetMenu::reset_levels();
 
@@ -651,17 +649,6 @@ bool ResetMenu::reset_total_hit_stat()
     UserDefault* ud = UserDefault::getInstance();
     ud->setIntegerForKey(Beatup::total_hit_key.c_str(), default_stat);
     log("reset hit stats");
-    return true;
-};
-
-bool ResetMenu::reset_all_combos()
-{
-    Beatup* bad_beatup = (Beatup*)Beatup::create();
-    for (Combo* combo : *bad_beatup->combos)
-    {
-        combo->set_been_bought(false);
-    };
-    log("reset all combos");
     return true;
 };
 
