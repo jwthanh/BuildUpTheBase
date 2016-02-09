@@ -77,7 +77,7 @@ public:
 
         PunchLog* punch_log;
 
-        void shake_screen(int intensity);
+        void shake_screen(int intensity, bool left_angle);
         void shake_color(GLuint opacity);
 
 

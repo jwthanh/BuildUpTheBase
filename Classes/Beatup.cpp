@@ -1336,7 +1336,8 @@ void Beatup::update(float dt)
             };
         };
 
-        this->shake_screen(shake_intensity);
+        float face_rotation = this->get_target_face()->getRotation();
+        this->shake_screen(shake_intensity, face_rotation <= 0);
 
         this->shake_clock->update(dt);
 
@@ -1693,9 +1694,16 @@ void Beatup::set_is_blocking(bool val)
     this->is_blocking = val;
 };
 
-void Beatup::shake_screen(int intensity)
+void Beatup::shake_screen(int intensity, bool left_angle)
 {
     float x = (rand() % intensity) - 0.5f; //Generate a random x coordinate
+    if (!left_angle)
+    {
+        x += 10;
+    }
+    else {
+        x -= 10;
+    }
     float y = (rand() % intensity) - 0.5f; //Do the same for the y coordinate
     this->setPosition(x, y);
 };
