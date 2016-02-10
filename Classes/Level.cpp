@@ -27,7 +27,7 @@ Level* Level::create_level(int level_num)
 
     std::vector<LevelDetail> level_details = {
         { //1
-            { 100, 15.0f, {  } },
+            { 14000, 15.0f, {  } },
             { 10 },
             { "Chad", BackgroundTypes::Forest }
         },
