@@ -1,14 +1,13 @@
-#ifndef __HELLOWORLD_FILE_OPERATION__
-#define __HELLOWORLD_FILE_OPERATION__
+#ifndef __fileoperation__
+#define __fileoperation__
 
 #include <string>
+#include <json/document.h>
 
-class FileOperation 
+class FileIO 
 {
-public:
-	static void saveFile(void);
-	static void readFile(void);
-	static std::string getFilePath();
+    public:
+        static rapidjson::Document open_json(std::string json_path);
 };
 
 #endif

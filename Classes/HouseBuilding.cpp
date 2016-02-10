@@ -24,6 +24,7 @@
 #include "cocos2d.h"
 #include <tinyxml2/tinyxml2.h>
 #include <json/document.h>
+#include "FileOperation.h"
 
 USING_NS_CC;
 
@@ -739,9 +740,7 @@ Building::Building(Village* city, std::string name, TaskFunc task) :
     //xmlDoc->Parse(xmlBuffer.c_str(), xmlBuffer.size());
     //auto root = xmlDoc->RootElement();
 
-    std::string jsonBuffer = file_utils->getStringFromFile("buildings_data.json");
-    auto jsonDoc = rapidjson::Document();
-    jsonDoc.Parse(jsonBuffer.c_str());
+    auto jsonDoc = FileIO::open_json("buildings_data.json");
     assert(jsonDoc.HasMember("buildings"));
     if (jsonDoc["buildings"].HasMember(name.c_str()))
     {
@@ -765,7 +764,6 @@ Building::Building(Village* city, std::string name, TaskFunc task) :
              return true;
          }, false},
      };
-
 };
 
 
