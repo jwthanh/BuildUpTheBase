@@ -22,6 +22,8 @@
 #include <FShake.h>
 
 #include "cocos2d.h"
+#include <tinyxml2/tinyxml2.h>
+#include <json/document.h>
 
 USING_NS_CC;
 
@@ -711,6 +713,61 @@ void create(vectorT& vec, int quantity, std::string name)
     );
 
 };
+
+Building::Building(Village* city, std::string name, TaskFunc task) :
+             task(task), Nameable(name), Updateable(), city(city)
+{
+    num_workers = 1;
+
+    update_clock->set_threshold(1.0f);
+    spawn_clock = new Clock(3);
+
+    products = vsProduct();
+    wastes = vsWaste();
+    ingredients = vsIngredient();
+
+    fighters = vsFighter();
+    workers = vsWorker();
+
+    menu_items = {};
+
+    std::stringstream ss;
+    auto file_utils = FileUtils::getInstance();
+
+    // std::string xmlBuffer = file_utils->getStringFromFile("joshtest.dat");
+    //tinyxml2::XMLDocument* xmlDoc = new tinyxml2::XMLDocument();
+    //xmlDoc->Parse(xmlBuffer.c_str(), xmlBuffer.size());
+    //auto root = xmlDoc->RootElement();
+
+    std::string jsonBuffer = file_utils->getStringFromFile("buildings_data.json");
+    auto jsonDoc = rapidjson::Document();
+    jsonDoc.Parse(jsonBuffer.c_str());
+    assert(jsonDoc.HasMember("buildings"));
+    if (jsonDoc["buildings"].HasMember(name.c_str()))
+    {
+        auto all_buildings = &jsonDoc["buildings"];
+        auto this_building = &(*all_buildings)[name.c_str()];
+
+        if (this_building->HasMember("task_name")) {
+            auto task_name = &(*this_building)["task_name"];
+            ss << task_name->GetString() << " task";
+        } else {
+            ss << name << " task";
+        };
+    }
+    else {
+        ss << name << " task";
+    };
+
+     menu_items = {
+         {"default", ss.str(), [this,task](){
+             task(shared_from_this(), 0);
+             return true;
+         }, false},
+     };
+
+};
+
 
 void Building::create_resources(Resource::ResourceType type, int quantity, std::string name)
 {

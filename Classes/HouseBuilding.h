@@ -285,33 +285,7 @@ class Building : public Nameable, public Updateable, public std::enable_shared_f
         TaskFunc task = NULL; //shop might sell product, farm creates ingredients, etc
         std::vector<ItemData> menu_items;
 
-        Building(Village* city, std::string name, TaskFunc task)
-            : task(task), Nameable(name), Updateable(), city(city)
-        {
-            num_workers = 1;
-
-            update_clock->set_threshold(1.0f);
-            spawn_clock = new Clock(3);
-
-            products = vsProduct();
-            wastes = vsWaste();
-            ingredients = vsIngredient();
-
-            fighters = vsFighter();
-            workers = vsWorker();
-
-            menu_items = {};
-            // std::stringstream ss;
-            // ss << name << " task";
-            // menu_items = {
-            //     {"default", ss.str(), [this,task](){
-            //         task(shared_from_this(), 0);
-            //         return true;
-            //     }, false},
-            // };
-
-        };
-
+        Building(Village* city, std::string name, TaskFunc task);
         void create_resources(Resource::ResourceType type, int quantity, std::string name);
         void consume_recipe(Recipe* recipe);
 

@@ -1,0 +1,31 @@
+{
+    "buildings": {
+        "The Farm" : {
+            "task_name":"10grain -> 1 pile, move 1/2 ING"
+        },
+        "The Workshop" : {
+            "task_name":"Sword (2 iron), Shield (3 wood)"
+        },
+        "The Dump" : {
+            "task_name":"5 waste > create flies"
+        },
+        "The Marketplace" : {
+            "task_name":"Bustle (nothing)"
+        },
+        "The Arena" : {
+            "task_name":"Squirrel, fighter, move corpse"
+        },
+        "The Graveyard" : {
+            "task_name":"Dead silence (nothing)"
+        },
+        "The Underscape" : {
+            "task_name":"Skeleton (7 flesh)"
+        },
+        "The Forest" : {
+            "task_name":"Bunny, mine berry, wood"
+        },
+        "The Mine" : {
+            "task_name":"Mine copper, iron"
+        }
+    }
+}
