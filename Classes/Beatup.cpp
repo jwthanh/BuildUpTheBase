@@ -1776,10 +1776,8 @@ void Beatup::apply_flash_shader()
 
     for (Sprite* sprite : sprite_lists)
     {
-
         sprite->setBlendFunc(BlendFunc::ALPHA_NON_PREMULTIPLIED);
         sprite->setGLProgram(prog);
-
     };
 
     for (FacialFeature* facial : *face->features)
@@ -1790,14 +1788,11 @@ void Beatup::apply_flash_shader()
 
     CHECK_GL_ERROR_DEBUG();
 
-
     GLProgramState* state = GLProgramState::getOrCreateWithGLProgram(prog);
     state->setUniformFloat("u_amount", 1.0f);
     state->setUniformVec2("u_resolution", Director::getInstance()->getOpenGLView()->getDesignResolutionSize());
     prog->release();
-
-
-}
+};
 
 bool Beatup::tutorials_enabled()
 {
