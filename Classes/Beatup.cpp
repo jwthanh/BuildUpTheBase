@@ -1152,6 +1152,10 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
             face->kill();
         };
     }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_GRAVE) 
+    {
+        this->reload_resources();
+    }
     else if(keyCode == EventKeyboard::KeyCode::KEY_V) 
     {
         Face* face = this->get_target_face(); 
