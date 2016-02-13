@@ -22,10 +22,11 @@ class Hittable
         float get_hits_percent();
 };
 
-class Face : public cocos2d::Layer, public Hittable
+class Face : public cocos2d::Node, public Hittable
 {
     private:
         const std::string default_sound_path = "sounds\\old\\dsnoway.mp3";
+
     public:
 
         struct Defaults {
