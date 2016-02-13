@@ -542,26 +542,17 @@ RepeatForever* animate_idle(std::string neutral_str, std::string left_str, std::
 
 void Beatup::prep_face(Face* face)
 {
+    face->beatup = this; //unnecessary?
 
     this->node_grid = NodeGrid::create();
-    this->node_grid->setPosition(0,0 );
+    this->node_grid->setPosition(0, 0);
+    this->node_grid->addChild(face);
+
 
     this->addChild(node_grid);
 
-    //face->health_bar = new ProgressBar(this, "enemy_healthbar_bar.png", "enemy_healthbar.png");
-    //face->health_bar->back_timer->setSprite(Sprite::createWithSpriteFrameName("enemy_healthbar_bar_white.png"));
-    //face->health_bar->fit_back_to_front();
-    //face->health_bar->setAnchorPoint(Vec2(0.5f, 0.5f));
-
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    //float hby = face->health_bar->front_timer->getContentSize().height;
-    //Vec2 health_pos = Vec2(
-    //    this->get_center_pos().x,
-    //    visibleSize.height - sy(hby)*2
-    //);
-
-    //face->health_bar->setPosition(health_pos);
 
     auto create_animated_sprite = [face](std::string sprite_path, std::string neutral_path, std::string left_path, std::string right_path) {
         auto sprite = Sprite::createWithSpriteFrameName(sprite_path);
@@ -620,9 +611,6 @@ void Beatup::prep_face(Face* face)
             hit_face_sprt_dead
     };
 
-    this->node_grid->addChild(face);
-
-    face->beatup = this;
 
     Vec2 face_pos = Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y);
     face->set_center(face_pos);
