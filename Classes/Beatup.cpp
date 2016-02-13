@@ -438,14 +438,16 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         return rect;
     };
 
-    Rect face_rect = get_sprite_rect(this->get_target_face(), this->get_target_face()->get_sprite());
+    if (this->get_target_face())
+    {
+        Rect face_rect = get_sprite_rect(this->get_target_face(), this->get_target_face()->get_sprite());
 
-
-    auto touch_loc = touch->getLocation();
-    if (vec2_in_rect(&face_rect, touch_loc)) {
-        this->switch_to_city_menu();
-        return false;
-    };
+        auto touch_loc = touch->getLocation();
+        if (vec2_in_rect(&face_rect, touch_loc)) {
+            this->switch_to_city_menu();
+            return false;
+        };
+    }
 
     if ((touch_in_node(this->player_hp_bar->front_timer, touch, 1.5) || touch_in_node(this->player_hp_bar->back_timer, touch, 1.5) ||
                 touch_in_node(this->stamina_prog->front_timer, touch, 1.5) || touch_in_node(this->stamina_prog->back_timer, touch, 1.5)) 
