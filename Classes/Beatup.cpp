@@ -1100,18 +1100,15 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
             auto glView = Director::getInstance()->getOpenGLView();
             glView->setFrameSize(1920, 1080);
             glView->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);
-            // Director::getInstance()->popToRootScene();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F2) 
     {
             auto glView = Director::getInstance()->getOpenGLView();
             glView->setFrameSize(960, 640);
             glView->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
-            // Director::getInstance()->popToRootScene();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE) 
     {
-        // this->get_target_face()->recovering_sprite->getGLProgramState()->setUniformFloat("u_amount", 4.0f);
         this->toggle_is_blocking();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_H)
@@ -1172,21 +1169,12 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_B) 
     {
-        float scale = 1.0;
-        this->left_fist->speed_flames(scale);
-        this->right_fist->speed_flames(scale);
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_N) 
     {
-        float scale = 2.0;
-        this->left_fist->speed_flames(scale);
-        this->right_fist->speed_flames(scale);
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_M) 
     {
-        float scale = 4.0;
-        this->left_fist->speed_flames(scale);
-        this->right_fist->speed_flames(scale);
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_1) 
