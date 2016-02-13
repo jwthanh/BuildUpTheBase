@@ -132,6 +132,8 @@ public:
         void set_target_face(Face* target);
         Face* get_target_face();
 
+        cocos2d::Node* face_fight_node;
+
         std::vector<Coin*>* coins;
         std::vector<Gore*>* gores;
         int coins_banked;

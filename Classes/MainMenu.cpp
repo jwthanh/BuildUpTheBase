@@ -102,7 +102,7 @@ bool MainMenu::quick_start_game()
     level = std::min(level, 20); //TODO make it so it knows its limit dynamically
     MainMenu::cleanup_beatup_scene();
     MainMenu::beatup_scene = Beatup::createScene(level);
-    MainMenu::beatup_scene->retain();
+    MainMenu::beatup_scene->retain(); //TODO make sure this gets released at some point
 
     SoundEngine::stop_all_sound_and_music();
     if (SoundEngine::is_music_enabled())

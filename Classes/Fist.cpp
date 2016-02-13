@@ -53,8 +53,6 @@ Fist::Fist(FistSprite* sprite, bool is_left)
     );
     this->spark_part->setScale(0.65f);
     this->sprite->addChild(spark_part);
-
-
 };
 
 void Fist::update(float dt)

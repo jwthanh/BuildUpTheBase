@@ -93,6 +93,9 @@ bool Beatup::init()
     this->buildup = new Buildup();
     this->buildup->beatup = this;
 
+    this->face_fight_node = Node::create();
+    this->addChild(face_fight_node);
+
     auto player = new Player("Jimothy");
     player->coins = 100;
     this->buildup->player = player;
@@ -549,7 +552,7 @@ void Beatup::prep_face(Face* face)
     this->node_grid->addChild(face);
 
 
-    this->addChild(node_grid);
+    this->face_fight_node->addChild(node_grid);
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -667,9 +670,10 @@ void Beatup::prep_fists()
     this->right_fist->hit_sprite->prep(this->right_fist, flames_pos);
 
     this->left_fist_node_grid = NodeGrid::create();
-    this->addChild(this->left_fist_node_grid, 10);
+    this->face_fight_node->addChild(this->left_fist_node_grid, 10);
+
     this->right_fist_node_grid = NodeGrid::create();
-    this->addChild(this->right_fist_node_grid, 10);
+    this->face_fight_node->addChild(this->right_fist_node_grid, 10);
 
     this->left_fist->other = this->right_fist;
     this->left_fist_node_grid->addChild(this->left_fist->sprite);
