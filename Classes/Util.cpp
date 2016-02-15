@@ -19,3 +19,10 @@ float sy (float y, bool do_scale)
     auto frs = cocos2d::Director::getInstance()->getOpenGLView()->getFrameSize();
     return y * (frs.height / 640.0);
 };
+
+void log_vector(cocos2d::Vec2 vector, std::string message="")
+{
+    std::stringstream ss;
+    ss << message << ": " << vector.x << " " << vector.y;
+    CCLOG(ss.str().c_str());
+};
