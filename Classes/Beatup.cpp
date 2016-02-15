@@ -94,6 +94,7 @@ bool Beatup::init()
     this->buildup->beatup = this;
 
     this->face_fight_node = Node::create();
+    this->face_fight_node->setPositionY(this->get_center_pos().y/2);
     this->addChild(face_fight_node);
 
     auto player = new Player("Jimothy");
@@ -188,8 +189,8 @@ bool Beatup::init()
     auto _plistFile = FileUtils::getInstance()->fullPathForFilename("blood.plist");
     Gore::particle_map = FileUtils::getInstance()->getValueMapFromFile(_plistFile.c_str());
 
-    //Director::getInstance()->getScheduler()->scheduleUpdate(schedule_selector(Beatup::update_buildup), 0, false);
-    //Scheduler::scheduleUpdate(schedule_selector(Buildup::update), 0, false);
+    this->hide_ui();
+
     this->schedule(schedule_selector(Beatup::update_buildup));
 
     return true;
