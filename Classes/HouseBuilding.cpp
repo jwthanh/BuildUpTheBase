@@ -263,7 +263,8 @@ void Battle::fight(spFighter left, spFighter right)
         left->combat->give_exp(right->xp->value);
         // this->distribute_exp(right);
     }
-    printj(ss.str());
+
+    //printj(ss.str());
 };
 
 void Battle::do_battle()
@@ -371,7 +372,7 @@ void workshop_task(spBuilding workshop, float dt)
             }
             else 
             {
-                printj1("can't make sword");
+                // printj1("can't make sword");
             };
         };
         {
@@ -391,7 +392,7 @@ void workshop_task(spBuilding workshop, float dt)
             }
             else 
             {
-                printj1("can't make shield");
+                // printj1("can't make shield");
             };
         };
     }
@@ -476,7 +477,7 @@ void arena_task(spBuilding arena, float dt)
     //expect two allies or dont spawn more
     if (arena->fighters.size() <= 2)
     {
-        printj1("creating squirrel!");
+        // printj1("creating squirrel!");
         auto squirrel = std::make_shared<Fighter>(city, "Squirrel");
         squirrel->xp->value = 25;
         squirrel->attrs->health->set_vals(80);
@@ -662,7 +663,7 @@ void transfer(from_V& from_vs, to_V& to_vs, unsigned int quantity)
 
 void Animal::b2b_transfer(spBuilding from_bldg, spBuilding to_bldg, Resource::ResourceType res_type, int quantity)
 {
-    printj1("moving x" << quantity << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
+    //printj1("moving x" << quantity << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
     if (res_type == Resource::Ingredient)
     {
         transfer(from_bldg->ingredients, to_bldg->ingredients, quantity);

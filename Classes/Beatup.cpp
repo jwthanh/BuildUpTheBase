@@ -485,6 +485,8 @@ void Beatup::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     GameLayer::onTouchEnded(touch, event);
 
+    log_vector(touch->getLocation(), "touch");
+
     if (!this->getChildByName("quest_alert"))
     {
         //quest alert active, don't update
