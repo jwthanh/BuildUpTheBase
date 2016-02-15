@@ -672,7 +672,8 @@ void Face::update(float dt)
         }
     };
 
-    this->last_attack_clock->update(dt);
+    // this->last_attack_clock->update(dt);
+
     //if you haven't attacked in a while
     if (this->long_enough_since_last_attack())
     {
