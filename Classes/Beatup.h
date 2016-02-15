@@ -41,7 +41,10 @@ class Beatup : public GameLayer
         void prep_other();
 
         Face* target_face;
-public:
+
+        bool _visible_inventory = false;
+
+    public:
         std::map<cocos2d::EventKeyboard::KeyCode, bool> key_state;
         cocos2d::Sprite* background;
 
@@ -67,6 +70,7 @@ public:
 
         bool has_been_initialized = false;
         static cocos2d::Scene* createScene();
+        void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent);
         void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent);
 
         virtual bool init();
@@ -115,8 +119,9 @@ public:
         void flash_color_on_face(float total_duration, cocos2d::Color3B flash_color, cocos2d::Color3B reset_color = cocos2d::Color3B::WHITE);
 
         void print_inventory();
-    void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent);
-    void set_target_building(spBuilding target);
+        void hide_inventory();
+
+        void set_target_building(spBuilding target);
         spBuilding get_target_building();
 
         void set_target_face(Face* target);

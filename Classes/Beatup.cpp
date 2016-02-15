@@ -909,10 +909,15 @@ void Beatup::print_inventory()
         auto building = this->buildup->city->building_by_name("The " + name);
         std::string lbl_string = (this->get_target_building() == building ? ">>" : "") + name + " " + building->get_inventory();
         std::string spc_string = " " + building->get_specifics();
-        if (this->getChildByName(name))
+
+        auto lbl = this->getChildByName(name);
+        auto specific = this->getChildByName(name + "_specific");
+        if (lbl)
         {
-            ((Label*)this->getChildByName(name))->setString(lbl_string);
-            ((Label*)this->getChildByName(name + "_specific"))->setString(spc_string);
+            ((Label*)lbl)->setString(lbl_string);
+            ((Label*)specific)->setString(spc_string);
+            lbl->setVisible(true);
+            specific->setVisible(true);
         }
         else
         {
@@ -944,6 +949,33 @@ void Beatup::print_inventory()
     make_label("Forest");
 
 }
+
+void Beatup::hide_inventory() 
+{
+    std::vector<std::string> building_names = {
+        "Farm",
+        "Dump",
+        "Workshop",
+        "Marketplace",
+        "Arena",
+        "Mine",
+        "Graveyard",
+        "Underscape",
+        "Forest"
+    };
+
+    for (auto name : building_names) {
+        auto lbl = this->getChildByName(name);
+        if (lbl) {
+            lbl->setVisible(false);
+        };
+
+        auto specific_lbl = this->getChildByName(name+"_specific");
+        if (specific_lbl) {
+            specific_lbl->setVisible(false);
+        };
+    };
+};
 
 void Beatup::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent)
 {
@@ -1029,6 +1061,16 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
             auto glView = Director::getInstance()->getOpenGLView();
             glView->setFrameSize(960, 640);
             glView->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F3) 
+    {
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F4) 
+    {
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F5) 
+    {
+        this->_visible_inventory = !this->_visible_inventory;
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE) 
     {
@@ -1300,7 +1342,11 @@ void Beatup::update(float dt)
         };
     };
 
-    this->print_inventory();
+    if (_visible_inventory) {
+        this->print_inventory();
+    } else {
+        this->hide_inventory();
+    };
 
     this->fighter_node->update(dt);
     this->brawler_node->update(dt);
