@@ -36,34 +36,26 @@ bool unl_charged_fist(Beatup* beatup)
 
 bool unlock_flame_fist(Beatup* beatup)
 {
-    beatup->fist_flame->set_been_bought(true);
-    beatup->set_visible_weapon_button(beatup->fist_flame->type, true);
     return false;
 };
 
 bool unlock_frost_fist(Beatup* beatup)
 {
-    beatup->fist_frost->set_been_bought(true);
-    beatup->set_visible_weapon_button(beatup->fist_frost->type, true);
     return false;
 };
 
 bool unlock_psionic_fist(Beatup* beatup)
 {
-    beatup->fist_psionic->set_been_bought(true);
-    beatup->set_visible_weapon_button(beatup->fist_psionic->type, true);
     return false;
 };
 
 bool unlock_rocket(Beatup* beatup)
 {
-    beatup->rocket->set_been_bought(true);
     return false;
 };
 
 bool unlock_grenade(Beatup* beatup)
 {
-    beatup->grenade->set_been_bought(true);
     return false;
 };
 

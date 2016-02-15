@@ -688,29 +688,6 @@ void Beatup::prep_fists()
 
 };
 
-void Beatup::set_visible_weapon_button(FistWeaponTypes weapon_type, bool val)
-{
-    WeaponButton* button = NULL;
-    if (weapon_type == FistWeaponTypes::Flames)
-    {
-        button = this->flames_button;
-    }
-    else if (weapon_type == FistWeaponTypes::Psionic)
-    {
-        button = this->psionic_button;
-    }
-    else if (weapon_type == FistWeaponTypes::Frost)
-    {
-        button = this->frost_button;
-    }
-    else
-    {
-        assert(false && "Can't make this unrecognized FistWeaponTypes visible");
-    };
-
-    button->setVisible(val);
-};
-
 void Beatup::update_player_hp_bar()
 {
     float percentage = (float)this->player_hp/(float)this->player_total_hp;
@@ -761,55 +738,6 @@ void Beatup::prep_other()
     this->shop_scene = NULL;
 
 
-    float button_y = 200.0f;
-    float button_margin = 50.0f;
-
-    this->fist_flame = new FistWeapon(this, "flaming_fists", "Flaming fists", FistWeaponTypes::Flames);
-    this->fist_flame->init({
-        this->left_fist->sprite,
-        this->left_fist->moving_sprite,
-        this->left_fist->hit_sprite,
-
-        this->right_fist->sprite,
-        this->right_fist->moving_sprite,
-        this->right_fist->hit_sprite,
-    });
-    this->flames_button = WeaponButton::create("weapon_select_button.png", "weapon_select_selected.png", "weapon_select_button.png");
-    this->flames_button->prep(this, this->fist_flame, Vec2(0, sy(button_y)), "sounds\\new\\lighter\\C_lighter_1.mp3", "weapon_flame.png");
-    
-
-    this->fist_psionic = new FistWeapon(this, "psionic_fists", "Psionic fists", FistWeaponTypes::Psionic);
-    this->fist_psionic->init({
-        this->left_fist->sprite,
-        this->left_fist->moving_sprite,
-        this->left_fist->hit_sprite,
-
-        this->right_fist->sprite,
-        this->right_fist->moving_sprite,
-        this->right_fist->hit_sprite,
-    });
-    this->psionic_button = WeaponButton::create("weapon_select_button.png", "weapon_select_selected.png", "weapon_select_button.png");
-    this->psionic_button->prep(this, this->fist_psionic, Vec2(0, sy(button_y-=button_margin)), "sounds\\old\\radio_wave.mp3", "weapon_psionic.png");
-
-
-    this->fist_frost = new FistWeapon(this, "frost_fists", "Frosty fists", FistWeaponTypes::Frost);
-    this->fist_frost->init({
-        this->left_fist->sprite,
-        this->left_fist->moving_sprite,
-        this->left_fist->hit_sprite,
-
-        this->right_fist->sprite,
-        this->right_fist->moving_sprite,
-        this->right_fist->hit_sprite,
-    });
-    this->frost_button = WeaponButton::create("weapon_select_button.png", "weapon_select_selected.png", "weapon_select_button.png");
-    this->frost_button->prep(this, this->fist_frost, Vec2(0, sy(button_y-=button_margin)), "sounds\\old\\ice_freeze.mp3", "weapon_ice.png");
-
-    this->addChild(this->frost_button);
-    this->addChild(this->psionic_button);
-    this->addChild(this->flames_button);
-
-    // this->enemy_nodes = vsFighter();
     this->enemy_node = FighterNode::create(this, NULL);
     this->enemy_node->setPosition(this->get_center_pos(sx(350), sy(0)));
 
@@ -1364,10 +1292,6 @@ void Beatup::update(float dt)
 
     this->update_player_hp_bar();
 
-    this->fist_flame->update(dt);
-    this->fist_frost->update(dt);
-    this->fist_psionic->update(dt);
-
     if (this->quest != NULL)
     {
         if (!this->quest_completed && this->quest->get_is_satisfied())
@@ -1434,13 +1358,6 @@ void Beatup::hide_ui()
 {
     this->player_hp_bar->setVisible(false);
     this->stamina_prog->setVisible(false);
-
-    this->title_lbl->setVisible(false);
-
-
-    this->flames_button->setVisible(false);
-    this->frost_button->setVisible(false);
-    this->psionic_button->setVisible(false);
 };
 
 void Beatup::win_level()

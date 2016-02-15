@@ -605,7 +605,6 @@ bool ResetMenu::init()
         {"default", "Reset Coins", ResetMenu::reset_total_coin_stat, false},
         {"default", "Reset Levels", ResetMenu::reset_levels, false},
         {"default", "Reset Total Hits", ResetMenu::reset_total_hit_stat, false},
-        {"default", "Reset Fists", ResetMenu::reset_all_fist_weapons, false},
         {"default", "Back", go_back_cb, false},
     };
 
@@ -637,7 +636,6 @@ bool ResetMenu::reset_all()
 {
     ResetMenu::reset_total_hit_stat();
     ResetMenu::reset_total_coin_stat();
-    ResetMenu::reset_all_fist_weapons();
     ResetMenu::reset_levels();
 
     return true;
@@ -649,21 +647,6 @@ bool ResetMenu::reset_total_hit_stat()
     UserDefault* ud = UserDefault::getInstance();
     ud->setIntegerForKey(Beatup::total_hit_key.c_str(), default_stat);
     log("reset hit stats");
-    return true;
-};
-
-bool ResetMenu::reset_all_fist_weapons()
-{
-    Beatup* bad_beatup = (Beatup*)Beatup::create();
-    bad_beatup->fist_flame->set_been_bought(false);
-    bad_beatup->fist_psionic->set_been_bought(false);
-    bad_beatup->fist_frost->set_been_bought(false);
-
-    DataManager::set_bool_from_data("left_fist_charge_boost", false);
-    DataManager::set_bool_from_data("right_fist_charge_boost", false);
-    DataManager::set_bool_from_data("charging_enabled", false);
-
-    log("reset all fist weapons");
     return true;
 };
 

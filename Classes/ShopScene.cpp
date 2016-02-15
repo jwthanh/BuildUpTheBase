@@ -278,44 +278,6 @@ PlainShopItem* ShopMenu::get_psi_by_id(std::string id_key)
     return psi;
 };
 
-void ShopMenu::prep_fist_weapons(cocos2d::ui::ScrollView* scroll)
-{
-    std::function<BoolFuncNoArgs(FistWeapon*)> get_fistweapon_cb = [this](FistWeapon* fist_weapon)
-    {
-        //runs when the button is clicked
-        BoolFuncNoArgs on_click = [this, fist_weapon]()
-        {
-            //runs after the button is clicked, and the item has been bough
-            BoolFuncNoArgs on_bought_cb = [this, fist_weapon]()
-            {
-                FistWeaponTypes type = fist_weapon->type;
-                fist_weapon->set_been_bought(true);
-
-                this->beatup->set_visible_weapon_button(type, true);
-
-                return true;
-            };
-
-            PlainShopItem* psi = this->get_psi_by_id(fist_weapon->id_key);
-            return this->buy(psi, fist_weapon->shop_cost, on_bought_cb);
-        };
-        return on_click;
-    };
-
-    //fist weapons
-    FistWeapon* flame_fist = this->beatup->fist_flame;
-    FistWeapon* psionic_fist = this->beatup->fist_psionic;
-    FistWeapon* frost_fist = this->beatup->fist_frost;
-
-    std::vector<PricedItemData> item_data = {
-        { flame_fist->id_key, flame_fist->name, get_fistweapon_cb(flame_fist), flame_fist->get_been_bought(), flame_fist->shop_cost},
-        { psionic_fist->id_key, psionic_fist->name, get_fistweapon_cb(psionic_fist), psionic_fist->get_been_bought(), psionic_fist->shop_cost},
-        { frost_fist->id_key, frost_fist->name, get_fistweapon_cb(frost_fist), frost_fist->get_been_bought(), frost_fist->shop_cost}
-    };
-
-    this->init_menu_from_priced_data(scroll, item_data);
-};
-
 void ShopMenu::prep_charged_fist(cocos2d::ui::ScrollView* scroll)
 {
     std::function<BoolFuncNoArgs(std::string)> get_charge_cb = [this](std::string id_key)

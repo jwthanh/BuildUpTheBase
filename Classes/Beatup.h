@@ -86,16 +86,6 @@ public:
         cocos2d::Sprite* shop_lbl;
         cocos2d::Sprite* shop_banner;
 
-        RocketWeapon* rocket;
-        GrenadeWeapon* grenade;
-
-        FistWeapon* fist_flame;
-        WeaponButton* flames_button;
-        FistWeapon* fist_psionic;
-        WeaponButton* psionic_button;
-        FistWeapon* fist_frost;
-        WeaponButton* frost_button;
-        void set_visible_weapon_button(FistWeaponTypes weapon_type, bool val);
 
         ProgressBar* progress_bar;
 

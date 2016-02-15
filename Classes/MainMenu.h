@@ -97,7 +97,6 @@ class ResetMenu : public ShopMenu
         static bool reset_all();
         static bool reset_total_hit_stat();
         static bool reset_total_coin_stat();
-        static bool reset_all_fist_weapons();
         static bool reset_levels();
 
 };

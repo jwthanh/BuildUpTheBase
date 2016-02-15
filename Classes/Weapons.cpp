@@ -357,11 +357,6 @@ void FistWeapon::scale_face_color(Face* face)
 
 void FistWeapon::update(float dt)
 {
-    if (this->beatup->get_level_over())
-    {
-        this->beatup->set_visible_weapon_button(this->type, false);
-    }
-
 };
 
 void FistWeapon::call_on_activated()
@@ -428,32 +423,12 @@ void WeaponButton::prep(Beatup* beatup, FistWeapon* fist_weapon, Vec2 pos, std::
             if (!this->fist_weapon->is_active)
             {
                 this->fist_weapon->call_on_activated();
-                this->beatup->left_fist->one_weapon_active(this->fist_weapon->type);
-                this->beatup->right_fist->one_weapon_active(this->fist_weapon->type);
 
-                auto deactivate_if_not = [this](FistWeapon* fw)
-                {
-                    if (fw->type != this->fist_weapon->type)
-                    {
-                        if (this->beatup->get_target_face())
-                        {
-                            this->beatup->get_target_face()->reset_color();
-                        };
-                        fw->call_on_deactivated();
-                    };
-                };
-
-                deactivate_if_not(this->beatup->fist_flame);
-                deactivate_if_not(this->beatup->fist_psionic);
-                deactivate_if_not(this->beatup->fist_frost);
             }
             //if its active already, we want to disable it
             else
             {
                 this->fist_weapon->call_on_deactivated();
-
-                this->beatup->left_fist->set_weapon_active(this->fist_weapon->type, false);
-                this->beatup->right_fist->set_weapon_active(this->fist_weapon->type, false);
             };
 
         };
