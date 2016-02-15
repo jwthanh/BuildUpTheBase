@@ -486,6 +486,7 @@ void Beatup::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
     GameLayer::onTouchEnded(touch, event);
 
     log_vector(touch->getLocation(), "touch");
+    this->face_fight_node->setPosition(touch->getLocation());
 
     if (!this->getChildByName("quest_alert"))
     {
