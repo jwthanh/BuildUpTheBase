@@ -20,7 +20,7 @@ float sy (float y, bool do_scale)
     return y * (frs.height / 640.0);
 };
 
-void log_vector(cocos2d::Vec2 vector, std::string message="")
+void log_vector(cocos2d::Vec2 vector, std::string message)
 {
     std::stringstream ss;
     ss << message << ": " << vector.x << " " << vector.y;

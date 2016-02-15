@@ -17,6 +17,6 @@ T pick_one(std::vector<T> vec)
     return vec.at(index);
 };
 
-void log_vector(cocos2d::Vec2 vector, std::string message);
+void log_vector(cocos2d::Vec2 vector, std::string message="");
 
 #endif
