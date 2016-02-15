@@ -406,12 +406,28 @@ void Beatup::switch_to_shop()
 bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     GameLayer::onTouchBegan(touch, event);
+    auto touch_loc = touch->getLocation();
+
+    auto get_sprite_rect = [&](Node* parent_node, Sprite* sprite)
+    {
+        auto pos = parent_node->convertToWorldSpace(sprite->getPosition());
+        auto size = sprite->getContentSize();
+
+        //NOTE: scale by parent as well
+        auto width = size.width * sprite->getScaleX()* parent_node->getScaleX();
+        auto height = size.height * sprite->getScaleY() * parent_node->getScaleY();
+
+        auto rect = Rect(pos.x-width/2, pos.y-height/2, width, height);
+
+        return rect;
+    };
 
     if (!this->getChildByName("quest_alert"))
     {
         for (Fist* fist : { this->left_fist, this->right_fist })
         {
-            if (touch_in_node(fist->sprite, touch) && !fist->is_punching)
+            auto fist_rect = get_sprite_rect(this->face_fight_node, fist->sprite);
+            if (vec2_in_rect(&fist_rect, touch_loc) && !fist->is_punching)
             {
                 if (!this->is_blocking)
                 {
@@ -428,25 +444,10 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         };
     };
 
-    auto get_sprite_rect = [&](Node* parent_node, Sprite* sprite)
-    {
-        auto pos = parent_node->convertToWorldSpace(sprite->getPosition());
-        auto size = sprite->getContentSize();
-
-        //NOTE: scale by parent as well
-        auto width = size.width * sprite->getScaleX()* parent_node->getScaleX();
-        auto height = size.height * sprite->getScaleY() * parent_node->getScaleY();
-
-        auto rect = Rect(pos.x-width/2, pos.y-height/2, width, height);
-
-        return rect;
-    };
-
     if (this->get_target_face())
     {
         Rect face_rect = get_sprite_rect(this->get_target_face(), this->get_target_face()->get_sprite());
 
-        auto touch_loc = touch->getLocation();
         if (vec2_in_rect(&face_rect, touch_loc)) {
             this->switch_to_city_menu();
             return false;
@@ -489,7 +490,20 @@ void Beatup::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
         //quest alert active, don't update
         for (Fist* fist : { this->left_fist, this->right_fist })
         {
-            if (touch_in_node(fist->sprite, touch) && !fist->is_punching)
+            auto get_sprite_rect = [&](Node* parent_node, Sprite* sprite)
+            {
+                auto pos = parent_node->convertToWorldSpace(sprite->getPosition());
+                auto size = sprite->getContentSize();
+
+                //NOTE: scale by parent as well
+                auto width = size.width * sprite->getScaleX()* parent_node->getScaleX();
+                auto height = size.height * sprite->getScaleY() * parent_node->getScaleY();
+
+                auto rect = Rect(pos.x-width/2, pos.y-height/2, width, height);
+
+                return rect;
+            };
+            if (vec2_in_rect(&get_sprite_rect(this, fist->sprite), touch->getLocation()) && !fist->is_punching)
             {
 
                 if (DataManager::get_bool_from_data("charging_enabled", false) && fist->charging_clock->is_started())

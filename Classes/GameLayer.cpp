@@ -19,10 +19,13 @@ bool GameLayer::touch_in_node(Node* target, cocos2d::Touch* touch, float scale)
     if (scale != 1)
     {
         Rect new_rect(bbox);
+
         new_rect.size.width = bbox.size.width*scale;
         new_rect.size.height = bbox.size.height*scale;
+
         new_rect.origin.x -= (bbox.size.width / 2.0)*(scale - 1.0);// - bbox.size.width );
         new_rect.origin.y -= (bbox.size.height / 2.0)*(scale - 1.0);// - bbox.size.height);
+
         bbox.setRect(
             new_rect.origin.x,
             new_rect.origin.y,
