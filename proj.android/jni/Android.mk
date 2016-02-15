@@ -18,6 +18,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/GameLayer.cpp \
                    ../../Classes/Weapons.cpp \
                    ../../Classes/Fist.cpp \
+                   ../../Classes/FileOperation.cpp \
                    ../../Classes/Face.cpp \
                    ../../Classes/Clock.cpp \
                    ../../Classes/Buyable.cpp \
