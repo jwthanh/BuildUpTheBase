@@ -553,6 +553,7 @@ void Beatup::prep_face(Face* face)
 
 
     this->face_fight_node->addChild(node_grid);
+    this->face_fight_node->setScale(0.5f);
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();

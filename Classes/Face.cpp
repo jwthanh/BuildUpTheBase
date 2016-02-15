@@ -768,7 +768,7 @@ void Face::spawn_dmg_lbl(int damage)
         )
     );
 
-    this->beatup->addChild(hit_dmg);
+    this->beatup->face_fight_node->addChild(hit_dmg);
 };
 
 FacialFeature::FacialFeature(Face* face, std::string sprite_name, int hit_limit)
@@ -1063,7 +1063,7 @@ void Coin::init(Face* face, Fist* attacker, bool use_particles)
 
     this->angle = -1 * attacker->neg(this->angle);
 
-    face->beatup->addChild(this->sprite, 10);
+    face->beatup->face_fight_node->addChild(this->sprite, 10);
     face->beatup->coins->push_back(this);
 
     this->should_remove = false;
