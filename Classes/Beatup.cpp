@@ -543,19 +543,26 @@ RepeatForever* animate_idle(std::string neutral_str, std::string left_str, std::
     {
         vec.pushBack(neutral);
     };
+
     vec.pushBack(left);
     vec.pushBack(left);
+
     for (int i = 0; i<= 9; i++)
     {
         vec.pushBack(neutral);
     };
+
     vec.pushBack(right); 
     vec.pushBack(right); 
     vec.pushBack(right); 
+
     vec.pushBack(neutral);
+
     vec.pushBack(left);
     vec.pushBack(left);
+
     vec.pushBack(neutral);
+
     Animation* anim = Animation::createWithSpriteFrames(vec, 0.15f);
     return  RepeatForever::create(Animate::create(anim));
 
