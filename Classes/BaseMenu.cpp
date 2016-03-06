@@ -130,7 +130,7 @@ void BaseMenu::menu_init()
 
 	this->set_main_lbl();
 
-    this->resize_scroll_inner(buff_scroll);
+    buff_scroll->resize_to_fit();
 };
 
 void BaseMenu::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scrollable* fist_scroll)
@@ -323,16 +323,6 @@ void BaseMenu::init_menu_from_priced_data(cocos2d::ui::ScrollView* scroll, std::
     };
 };
 
-void BaseMenu::resize_scroll_inner(Scrollable* scroll)
-{
-    float extra_margins = scroll->getChildrenCount()*(sy(15.0f)*sy(1.0f));
-    int scroll_w = sx(800);
-    scroll->setInnerContainerSize(Size(
-        scroll_w,
-        scroll->get_accumulated_size().height + extra_margins
-    ));
-}
-
 PlainShopItem::PlainShopItem(BaseMenu* shop, cocos2d::Menu* menu, std::string id_key, ui::Button* button) : ShopItem(shop, menu, button, id_key)
 {
     this->id_key = id_key;
@@ -370,4 +360,14 @@ Scrollable* Scrollable::create()
     CC_SAFE_DELETE(widget);
     return nullptr;
 
+};
+
+void Scrollable::resize_to_fit()
+{
+    float extra_margins = this->getChildrenCount()*(sy(15.0f)*sy(1.0f));
+    int scroll_w = sx(800);
+    this->setInnerContainerSize(cocos2d::Size(
+        scroll_w,
+        this->get_accumulated_size().height + extra_margins
+    ));
 };

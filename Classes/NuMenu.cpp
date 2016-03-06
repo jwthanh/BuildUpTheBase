@@ -26,11 +26,6 @@ void NuMenu::menu_init()
         if (i == 4) { menu_item->setBright(true); }
     };
 
-    float extra_margins = scrollview->getChildrenCount()*(sy(15.0f)*sy(1.0f));
-    int scroll_w = sx(800);
-    scrollview->setInnerContainerSize(cocos2d::Size(
-        scroll_w,
-        scrollview->get_accumulated_size().height + extra_margins
-    ));
+    scrollview->resize_to_fit();
 
 };

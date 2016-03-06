@@ -70,7 +70,7 @@ bool MainMenu::init()
 
     this->init_menu_from_data(scroll, item_data);
 
-    this->resize_scroll_inner(scroll);
+    scroll->resize_to_fit();
 
     return true;
 };
@@ -274,7 +274,7 @@ bool OptionsMenu::init()
 
     this->init_menu_from_data(scroll, item_data);
 
-    this->resize_scroll_inner(scroll);
+    scroll->resize_to_fit();
 
     return true;
 };
@@ -412,7 +412,7 @@ bool LevelSelectMenu::init()
     });
     scroll->addChild(btn);
 
-    this->resize_scroll_inner(scroll);
+    scroll->resize_to_fit();
     return true;
 };
 
@@ -522,7 +522,7 @@ bool ObjectiveMenu::init()
     });
     scroll->addChild(btn);
 
-    this->resize_scroll_inner(scroll);
+    scroll->resize_to_fit();
     return true;
 };
 
@@ -612,7 +612,7 @@ bool ResetMenu::init()
 
 
 
-    this->resize_scroll_inner(scroll);
+    scroll->resize_to_fit();
     return true;
 };
 
@@ -767,7 +767,7 @@ bool BuildingMenu::init()
 
     this->init_menu_from_data(scroll, item_data);
 
-    this->resize_scroll_inner(scroll);
+    scroll->resize_to_fit();
     return true;
 };
 

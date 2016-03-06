@@ -71,7 +71,6 @@ class BaseMenu : public GameLayer
 
         std::vector<ShopItem*>* shop_items;
         cocos2d::Menu* combo_menu;
-        void resize_scroll_inner(Scrollable* scroll);
 
         cocos2d::MenuItemLabel* back_button;
         cocos2d::Label* stat_lbl;
@@ -140,6 +139,8 @@ class Scrollable : public cocos2d::ui::ScrollView
     public:
     cocos2d::Size get_accumulated_size();
     static Scrollable* create();
+
+    void resize_to_fit();
 };
 
 #endif
