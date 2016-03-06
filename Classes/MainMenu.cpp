@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "ShopScene.h"
+#include "BaseMenu.h"
 #include "Beatup.h"
 #include "ui/CocosGUI.h"
 #include "SoundEngine.h"

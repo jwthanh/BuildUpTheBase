@@ -3,12 +3,12 @@
 #define MAINMENU_H
 
 
-#include "ShopScene.h"
+#include "BaseMenu.h"
 
 #include "constants.h"
 #include "HouseBuilding.h"
 
-class MainMenu : public ShopMenu
+class MainMenu : public BaseMenu
 {
     public:
         CREATE_FUNC(MainMenu);
@@ -31,7 +31,7 @@ class MainMenu : public ShopMenu
 
 };
 
-class OptionsMenu : public ShopMenu
+class OptionsMenu : public BaseMenu
 {
     public:
         CREATE_FUNC(OptionsMenu);
@@ -52,7 +52,7 @@ class OptionsMenu : public ShopMenu
 
 };
 
-class LevelSelectMenu : public ShopMenu
+class LevelSelectMenu : public BaseMenu
 {
     public:
         CREATE_FUNC(LevelSelectMenu);
@@ -68,7 +68,7 @@ class LevelSelectMenu : public ShopMenu
 
 };
 
-class ObjectiveMenu : public ShopMenu
+class ObjectiveMenu : public BaseMenu
 {
     public:
         CREATE_FUNC(ObjectiveMenu);
@@ -82,7 +82,7 @@ class ObjectiveMenu : public ShopMenu
 
 };
 
-class ResetMenu : public ShopMenu
+class ResetMenu : public BaseMenu
 {
     public:
         CREATE_FUNC(ResetMenu);
@@ -101,7 +101,7 @@ class ResetMenu : public ShopMenu
 
 };
 
-class BuildingMenu : public ShopMenu
+class BuildingMenu : public BaseMenu
 {
     public:
         spBuilding building;

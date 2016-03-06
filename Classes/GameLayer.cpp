@@ -2,7 +2,7 @@
 #ifdef __ANDROID__
 #include "DataManager.h"
 #endif
-#include "ShopScene.h"
+#include "BaseMenu.h"
 #include "Util.h"
 #include "SoundEngine.h"
 USING_NS_CC;

@@ -7,7 +7,7 @@
 
 #include "HouseBuilding.h"
 
-class ShopMenu;
+class BaseMenu;
 
 class Face;
 class FacialFeature;
@@ -209,7 +209,7 @@ class Beatup : public GameLayer
         void onSwipeRight(float dt);
         void onSwipeDown(float dt);
 
-        ShopMenu* shop;
+        BaseMenu* shop;
         cocos2d::Scene* shop_scene;
         void switch_to_shop();
         void switch_to_building_menu();

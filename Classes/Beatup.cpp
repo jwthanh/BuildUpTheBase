@@ -7,7 +7,7 @@
 #include "Clock.h"
 #include "Face.h"
 #include "SoundEngine.h"
-#include "ShopScene.h"
+#include "BaseMenu.h"
 #include "constants.h"
 #include "Weapons.h"
 #include "Fist.h"
@@ -389,7 +389,7 @@ void Beatup::switch_to_shop()
     }
     if (this->shop == NULL)
     {
-        this->shop = ShopMenu::create();
+        this->shop = BaseMenu::create();
         this->shop->beatup = this;
         this->shop->menu_init();
         this->shop->update(0);

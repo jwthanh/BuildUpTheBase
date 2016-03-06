@@ -172,7 +172,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\ProgressBar.cpp" />
     <ClCompile Include="..\Classes\Quest.cpp" />
     <ClCompile Include="..\Classes\ShatterNode.cpp" />
-    <ClCompile Include="..\Classes\ShopScene.cpp" />
+    <ClCompile Include="..\Classes\BaseMenu.cpp" />
     <ClCompile Include="..\Classes\SoundEngine.cpp" />
     <ClCompile Include="..\Classes\Util.cpp" />
     <ClCompile Include="..\Classes\Weapons.cpp" />
@@ -206,7 +206,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Quest.h" />
     <ClInclude Include="..\Classes\RandomWeightMap.h" />
     <ClInclude Include="..\Classes\ShatterNode.h" />
-    <ClInclude Include="..\Classes\ShopScene.h" />
+    <ClInclude Include="..\Classes\BaseMenu.h" />
     <ClInclude Include="..\Classes\SoundEngine.h" />
     <ClInclude Include="..\Classes\Util.h" />
     <ClInclude Include="..\Classes\Weapons.h" />

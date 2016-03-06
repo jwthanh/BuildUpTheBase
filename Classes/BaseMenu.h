@@ -38,7 +38,7 @@ struct PricedItemData : public ItemData {
 
 // PricedItemData pid = { "ASD", "ASD", [](){return false;}, false, 123};
 
-class ShopMenu : public GameLayer
+class BaseMenu : public GameLayer
 {
     private:
 
@@ -69,7 +69,7 @@ class ShopMenu : public GameLayer
         virtual void update(float dt) override;
         void shop_menu_update(float dt);
 
-        CREATE_FUNC(ShopMenu);
+        CREATE_FUNC(BaseMenu);
 
         cocos2d::Label* main_lbl;
         void update_coins_lbl();
@@ -95,14 +95,14 @@ class ShopItem
         bool is_enabled = true;
         bool is_infinite_buy = true;
 
-        ShopItem(ShopMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button);
+        ShopItem(BaseMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button);
 
         Beatup* beatup;
 
         cocos2d::ui::Button* button;
         std::string id_key;
 
-        virtual BoolFuncNoArgs  get_callback(ShopMenu* shop)
+        virtual BoolFuncNoArgs  get_callback(BaseMenu* shop)
         {
 	        return this->_callback;
         };
@@ -142,7 +142,7 @@ class ShopItem
 class PlainShopItem : public ShopItem
 {
     public:
-        PlainShopItem(ShopMenu* shop, cocos2d::Menu* menu, std::string id_key, cocos2d::ui::Button* button = NULL);
+        PlainShopItem(BaseMenu* shop, cocos2d::Menu* menu, std::string id_key, cocos2d::ui::Button* button = NULL);
 
         int cost = 0;
 
@@ -158,9 +158,9 @@ class PunchDamageShopItem : public ShopItem
 {
     public:
 
-        PunchDamageShopItem(ShopMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button = NULL) : ShopItem(shop, menu, button){};
+        PunchDamageShopItem(BaseMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button = NULL) : ShopItem(shop, menu, button){};
         int get_cost() override;
-        BoolFuncNoArgs get_callback(ShopMenu* shop) override;
+        BoolFuncNoArgs get_callback(BaseMenu* shop) override;
 
         virtual Fist* get_fist() = 0;
 };
@@ -168,7 +168,7 @@ class PunchDamageShopItem : public ShopItem
 class LeftPunchDamageShopItem : public PunchDamageShopItem
 {
     public:
-        LeftPunchDamageShopItem(ShopMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button = NULL) : PunchDamageShopItem(shop, menu, button){};
+        LeftPunchDamageShopItem(BaseMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button = NULL) : PunchDamageShopItem(shop, menu, button){};
         std::string get_menu_text() override;
 
         Fist* get_fist() override;
@@ -177,7 +177,7 @@ class LeftPunchDamageShopItem : public PunchDamageShopItem
 class RightPunchDamageShopItem : public PunchDamageShopItem
 {
     public:
-        RightPunchDamageShopItem(ShopMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button = NULL) : PunchDamageShopItem(shop, menu, button){};
+        RightPunchDamageShopItem(BaseMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button = NULL) : PunchDamageShopItem(shop, menu, button){};
         std::string get_menu_text() override;
 
         Fist* get_fist() override;

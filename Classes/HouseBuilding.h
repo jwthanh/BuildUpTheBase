@@ -20,7 +20,7 @@
 #define NO_CB [](){}
 #include "../../Classes/combat.h"
 #include <ProgressBar.h>
-#include <ShopScene.h>
+#include <BaseMenu.h>
 #include "Buyable.h"
 
 
