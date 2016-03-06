@@ -716,8 +716,8 @@ void create(vectorT& vec, int quantity, std::string name)
 
 };
 
-Building::Building(Village* city, std::string name, TaskFunc task) :
-             task(task), Nameable(name), Updateable(), city(city)
+Building::Building(Village* city, std::string name, std::string id_key, TaskFunc task) :
+             task(task), Nameable(name), Buyable(id_key), Updateable(), city(city)
 {
     num_workers = 1;
 
@@ -950,7 +950,7 @@ void test_conditions()
     };
 
     auto city = new Village(NULL, "The Test City");
-    auto farm = std::make_shared<Building>(city, "The Test Farm", TaskFunc());
+    auto farm = std::make_shared<Building>(city, "The Test Farm", "test_farm", TaskFunc());
     farm->ingredients = inputs;
     
     IngredientCondition rc = IngredientConditionEx(Grain, 2, "test condition");
@@ -1055,33 +1055,33 @@ Village* Buildup::init_city(Buildup* buildup)
 {
     auto city = new Village(buildup, "Burlington");
 
-    auto farm = std::make_shared<Building>(city, "The Farm", farm_task);
+    auto farm = std::make_shared<Building>(city, "The Farm", "the_farm", farm_task);
     farm->update_clock->set_threshold(2);
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
     farm->punched_ingredient_type = "grain";
     buildup->target_building = farm;
 
-    auto dump = std::make_shared<Building>(city, "The Dump", dump_task);
+    auto dump = std::make_shared<Building>(city, "The Dump", "the_dump", dump_task);
     dump->punched_ingredient_type = "fly";
 
-    auto workshop = std::make_shared<Building>(city, "The Workshop", workshop_task);
+    auto workshop = std::make_shared<Building>(city, "The Workshop", "the_workshop", workshop_task);
     workshop->punched_ingredient_type = "wood";
 
-    auto marketplace = std::make_shared<Building>(city, "The Marketplace", marketplace_task);
+    auto marketplace = std::make_shared<Building>(city, "The Marketplace", "the_marketplace", marketplace_task);
 
-    auto arena = std::make_shared<Building>(city, "The Arena", arena_task);
+    auto arena = std::make_shared<Building>(city, "The Arena", "the_arena", arena_task);
     arena->punched_ingredient_type = "sand";
 
-    auto mine = std::make_shared<Building>(city, "The Mine", mine_task);
+    auto mine = std::make_shared<Building>(city, "The Mine", "the_mine", mine_task);
     mine->punched_ingredient_type = "copper";
 
-    auto grave = std::make_shared<Building>(city, "The Graveyard", grave_task);
+    auto grave = std::make_shared<Building>(city, "The Graveyard", "the_graveyard", grave_task);
     grave->punched_ingredient_type = "flesh";
 
-    auto necro = std::make_shared<Building>(city, "The Underscape", necro_task);
+    auto necro = std::make_shared<Building>(city, "The Underscape", "the_underscape", necro_task);
     mine->update_clock->set_threshold(3);
 
-    auto forest = std::make_shared<Building>(city, "The Forest", forest_task);
+    auto forest = std::make_shared<Building>(city, "The Forest", "the_forest", forest_task);
     forest->punched_ingredient_type = "berry";
 
     buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");

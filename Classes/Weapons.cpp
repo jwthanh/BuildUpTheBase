@@ -13,7 +13,7 @@
 
 USING_NS_CC;
  
-Weapon::Weapon(Beatup* beatup, std::string id_key, std::string name) : Buyable(beatup, id_key), name(name)
+Weapon::Weapon(Beatup* beatup, std::string id_key, std::string name) : Buyable(id_key), name(name), beatup(beatup)
 {
 };
 

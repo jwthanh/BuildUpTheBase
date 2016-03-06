@@ -20,6 +20,7 @@ class FistSprite;
 class Weapon : public Buyable
 {
     public:
+        Beatup* beatup;
         Weapon(Beatup* beatup, std::string id_key, std::string name);
 
         std::string name = "Unnamed Weapon";

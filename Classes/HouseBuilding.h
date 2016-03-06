@@ -21,6 +21,7 @@
 #include "../../Classes/combat.h"
 #include <ProgressBar.h>
 #include <ShopScene.h>
+#include "Buyable.h"
 
 
 class Recipe;
@@ -263,7 +264,7 @@ class Battle : public Updateable
         void distribute_exp(spFighter dead_fighter);
 };
 
-class Building : public Nameable, public Updateable, public std::enable_shared_from_this<Building>
+class Building : public Nameable, public Updateable, public Buyable, public std::enable_shared_from_this<Building>
 {
     public:
 
@@ -285,7 +286,7 @@ class Building : public Nameable, public Updateable, public std::enable_shared_f
         TaskFunc task = NULL; //shop might sell product, farm creates ingredients, etc
         std::vector<ItemData> menu_items;
 
-        Building(Village* city, std::string name, TaskFunc task);
+        Building(Village* city, std::string name, std::string id_key, TaskFunc task);
         void create_resources(Resource::ResourceType type, int quantity, std::string name);
         void consume_recipe(Recipe* recipe);
 

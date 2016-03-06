@@ -1,7 +1,4 @@
 #include "Buyable.h"
-#include  "Beatup.h"
-
-USING_NS_CC;
 
 #include "DataManager.h"
 
