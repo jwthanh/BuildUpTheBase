@@ -28,6 +28,7 @@
 #include "Recipe.h"
 #include "attribute.h"
 #include "FShake.h"
+#include "NuMenu.h"
 
 USING_NS_CC;
 
@@ -357,6 +358,17 @@ void Beatup::switch_to_inventory_menu()
 {
     auto scene = Scene::create();
     InventoryMenu* building_menu = InventoryMenu::create(this->buildup->target_building);
+    scene->addChild(building_menu);
+
+    auto director = Director::getInstance();
+    director->pushScene(scene);
+};
+
+void Beatup::switch_to_test()
+{
+    auto scene = Scene::create();
+    NuMenu* building_menu = NuMenu::create();
+    building_menu->menu_init();
     scene->addChild(building_menu);
 
     auto director = Director::getInstance();
@@ -1051,11 +1063,12 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_W) 
     {
-        Alert* q_alert = dynamic_cast<Alert*>(this->getChildByName("quest_alert"));
-        if (q_alert)
-        {
-            q_alert->shrink_close(Vec2(0, 0));
-        }
+        // Alert* q_alert = dynamic_cast<Alert*>(this->getChildByName("quest_alert"));
+        // if (q_alert)
+        // {
+        //     q_alert->shrink_close(Vec2(0, 0));
+        // }
+        this->switch_to_test();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_C) 
     {
