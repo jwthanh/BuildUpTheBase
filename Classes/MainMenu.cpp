@@ -865,6 +865,11 @@ bool CityMenu::init()
        auto node = city_scene->getChildByName(building->name);
        auto building_panel = dynamic_cast<ui::Layout*>(node->getChildByName("building_panel"));
 
+        if (building->get_been_bought() == false) {
+            node->setVisible(false);
+            continue;
+        };
+
        auto building_name_lbl = dynamic_cast<ui::Text*>(building_panel->getChildByName("building_name")); 
        building_name_lbl->setString(building->name);
 
