@@ -37,20 +37,14 @@ struct PricedItemData : public ItemData {
     ) : ItemData(id_string, default_text, callback, start_disabled) , cost(cost){};
 };
 
-// PricedItemData pid = { "ASD", "ASD", [](){return false;}, false, 123};
-
 class BaseMenu : public GameLayer
 {
-    private:
-
     public:
         cocos2d::Vec2 last_pos;
 
         bool buy(ShopItem* shop_item, int cost, BoolFuncNoArgs on_bought);
         void buy_stuff(int cost);
         bool can_afford(int cost);
-
-        static cocos2d::Scene* createScene();
 
         void menu_init();
         void init_menu_from_data(cocos2d::ui::ScrollView* scroll, std::vector<ItemData> item_data);
