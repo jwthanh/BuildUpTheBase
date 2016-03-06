@@ -54,7 +54,7 @@ bool BaseMenu::init()
     return true;
 } ;
 
-void BaseMenu::update_coins_lbl()
+void BaseMenu::set_main_lbl()
 {
     std::stringstream ss;
     ss << this->beatup->get_total_coins() << " coins";
@@ -65,7 +65,7 @@ void BaseMenu::buy_stuff(int cost)
 {
     DataManager::decr_key(Beatup::total_coin_key, cost);
     cocos2d::log("spent %d", cost);
-    this->update_coins_lbl();
+    this->set_main_lbl();
     // SoundEngine::play_sound("sounds\\old\\coin.mp3");
     SoundEngine::play_sound("sounds\\new\\coin\\C_coin_1.mp3");
 };
@@ -108,18 +108,7 @@ void BaseMenu::menu_init()
     this->combo_menu = Menu::create();
     this->addChild(this->combo_menu);
 
-    // auto combo_scroll = this->create_center_scrollview();
     auto buff_scroll = this->create_center_scrollview();
-    // auto fist_scroll = this->create_center_scrollview();
-
-    //combos
-    // this->prep_combos(combo_scroll);
-    //fist buffs
-    this->prep_punch_items(buff_scroll);
-    //fist weapons
-    // this->prep_fist_weapons(fist_scroll);
-    //charged fist
-    // this->prep_charged_fist(fist_scroll);
     
     //tab switches
     this->prep_tabs(NULL, buff_scroll, NULL);
@@ -135,50 +124,27 @@ void BaseMenu::menu_init()
     this->back_button->setPosition(this->convertToNodeSpaceAR(corner_pos));
     this->back_button->setCallback(CC_CALLBACK_1(BaseMenu::pop_scene, this));
 
-    //stat label
-    // this->stat_lbl = Label::createWithTTF("total hits: ?", BaseMenu::menu_font, BaseMenu::menu_fontsize);
-    // this->stat_lbl->setPosition(Vec2(corner_pos.x-sx(150), corner_pos.y+sy(500)));
-    // this->addChild(this->stat_lbl);
-
     auto pos = this->combo_menu->getPosition();
     pos.y += sy(100);
     this->combo_menu->setPosition(pos);
 
-	this->update_coins_lbl();
+	this->set_main_lbl();
 
-    // this->resize_scroll_inner(combo_scroll);
     this->resize_scroll_inner(buff_scroll);
-    // this->resize_scroll_inner(fist_scroll);
 };
 
 void BaseMenu::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scrollable* fist_scroll)
 {
 
-    //float xdiff = sx(300);
     float ydiff = sy(75);
 
-    //MenuItemLabel* combo_mil;
     MenuItemLabel* buff_mil;
-    //MenuItemLabel* fist_mil;
-
-    // ccMenuCallback combo_cb = [combo_scroll, buff_scroll, fist_scroll](Ref*) {
-    //     combo_scroll->setVisible(true);
-    //     buff_scroll->setVisible(false);
-    //     fist_scroll->setVisible(false);
-    // };
 
      ccMenuCallback buff_cb = [combo_scroll, buff_scroll, fist_scroll](Ref*) {
          combo_scroll->setVisible(false);
          buff_scroll->setVisible(true);
          fist_scroll->setVisible(false);
      };
-
-    //ccMenuCallback fist_cb = [combo_scroll, buff_scroll, fist_scroll](Ref*) {
-    //    combo_scroll->setVisible(false);
-    //    buff_scroll->setVisible(false);
-    //    fist_scroll->setVisible(true);
-    //};
-
 
     auto update_with_count = [](MenuItemLabel* lbl, Scrollable* scrollable) {
         std::string old_str = ((Label*)lbl->getLabel())->getString();
@@ -187,16 +153,6 @@ void BaseMenu::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scro
         ((Label*)lbl->getLabel())->setString(ss.str().c_str());
     };
 
-    //show only the combo scrollable
-    // combo_scroll->setVisible(true);
-    // combo_mil = MenuItemLabel::create(Label::createWithTTF("COMBOS", BaseMenu::menu_font, BaseMenu::menu_fontsize));
-    // this->combo_menu->addChild(combo_mil);
-    // combo_mil->setPosition(this->convertToNodeSpaceAR(Vec2(
-    //     this->get_center_pos().x - xdiff,
-    //     this->get_center_pos().y + ydiff
-    // )));
-    // combo_mil->setCallback(combo_cb);
-    // update_with_count(combo_mil, combo_scroll);
 
     buff_scroll->setVisible(true);
     buff_mil = MenuItemLabel::create(Label::createWithTTF("BOOSTS", BaseMenu::menu_font, BaseMenu::menu_fontsize));
@@ -206,62 +162,7 @@ void BaseMenu::prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scro
        this->get_center_pos().y + ydiff
     )));
     buff_mil->setCallback(buff_cb);
-    //update_with_count(buff_mil, buff_scroll);
 
-    // fist_scroll->setVisible(false);
-    // fist_mil = MenuItemLabel::create(Label::createWithTTF("UNLOCKS", BaseMenu::menu_font, BaseMenu::menu_fontsize));
-    // this->combo_menu->addChild(fist_mil);
-    // fist_mil->setPosition(this->convertToNodeSpaceAR(Vec2(
-    //     this->get_center_pos().x + xdiff,
-    //     this->get_center_pos().y + ydiff
-    // )));
-    // fist_mil->setCallback(fist_cb);
-    //update_with_count(fist_mil, fist_scroll);
-
-};
-
-void BaseMenu::prep_punch_items(cocos2d::ui::ScrollView* scroll)
-{
-
-    std::function<BoolFuncNoArgs(int)> get_fist_cb = [this](int cost)
-    {
-        //runs when the button is clicked
-        BoolFuncNoArgs on_click = [this, cost]()
-        {
-            //build id_string
-            std::stringstream id_string;
-            id_string << "sell_grain";
-
-            printj1("clicked!");
-
-            //runs after the button is clicked, and the item has been bought
-            BoolFuncNoArgs on_bought_cb = [&id_string, this, cost]()
-            {
-                printj1("bought!");
-                //fist->charging_clock->set_threshold(
-                //    fist->defaults.charge_threshold/2
-                //);
-
-                //set the charged boost as sold
-                //DataManager::set_bool_from_data(id_string.str(), true);
-                return false;
-            };
-
-            //use id_string to find the shop item
-            PlainShopItem* psi = this->get_psi_by_id(id_string.str());
-            printj1("MADE INFINITE");
-            psi->is_infinite_buy = true;
-            return this->buy(psi, cost, on_bought_cb);
-        };
-
-        return on_click;
-    };
-
-    std::vector<PricedItemData> item_data = {
-        { "sell_grain", "Sell one piece of grain", get_fist_cb(-1), false, -1},
-    };
-
-    this->init_menu_from_priced_data(scroll, item_data);
 };
 
 PlainShopItem* BaseMenu::get_psi_by_id(std::string id_key)
@@ -276,34 +177,6 @@ PlainShopItem* BaseMenu::get_psi_by_id(std::string id_key)
     }
 
     return psi;
-};
-
-void BaseMenu::prep_charged_fist(cocos2d::ui::ScrollView* scroll)
-{
-    std::function<BoolFuncNoArgs(std::string)> get_charge_cb = [this](std::string id_key)
-    {
-        //runs when the button is clicked
-        BoolFuncNoArgs on_click = [this, id_key]()
-        {
-            //runs after the button is clicked, and the item has been bought
-            BoolFuncNoArgs on_bought_cb = [id_key]()
-            {
-                DataManager::set_bool_from_data(id_key, true);
-                return true;
-            };
-
-            PlainShopItem* psi = this->get_psi_by_id(id_key);
-            return this->buy(psi, 15, on_bought_cb);
-        };
-        return on_click;
-    };
-
-    std::string charge_id_key = "charging_enabled"; 
-    std::vector<PricedItemData> item_data = {
-        { charge_id_key, "Chargeable Punches", get_charge_cb(charge_id_key), DataManager::get_bool_from_data(charge_id_key, false), 15},
-    };
-
-    this->init_menu_from_priced_data(scroll, item_data);
 };
 
 void BaseMenu::shop_menu_update(float dt)

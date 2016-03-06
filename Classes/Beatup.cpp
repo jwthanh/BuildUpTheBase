@@ -398,7 +398,7 @@ void Beatup::switch_to_shop()
         this->shop->beatup_scene = director->getRunningScene();
     };
 
-    this->shop->update_coins_lbl();
+    this->shop->set_main_lbl();
 
     director->pushScene(this->shop_scene);
 };

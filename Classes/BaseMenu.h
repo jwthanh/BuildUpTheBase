@@ -60,9 +60,6 @@ class BaseMenu : public GameLayer
 
         virtual bool init() override;
         void prep_tabs(Scrollable* combo_scroll, Scrollable* buff_scroll, Scrollable* fist_scroll);
-        void prep_punch_items(cocos2d::ui::ScrollView* scroll);
-        void prep_fist_weapons(cocos2d::ui::ScrollView* scroll);
-        void prep_charged_fist(cocos2d::ui::ScrollView* scroll);
 
         PlainShopItem* get_psi_by_id(std::string id_key);
 
@@ -72,7 +69,7 @@ class BaseMenu : public GameLayer
         CREATE_FUNC(BaseMenu);
 
         cocos2d::Label* main_lbl;
-        void update_coins_lbl();
+        void set_main_lbl();
 
         Beatup* beatup;
         cocos2d::Scene* beatup_scene;
