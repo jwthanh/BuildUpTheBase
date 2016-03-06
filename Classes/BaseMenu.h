@@ -2,6 +2,7 @@
 #define SHOPSCENE_H
 #include "cocos2d.h"
 #include "GameLayer.h"
+#include "Buyable.h"
 
 class PlainShopItem;
 class Fist;
@@ -82,7 +83,7 @@ class BaseMenu : public GameLayer
         cocos2d::Label* stat_lbl;
 };
 
-class ShopItem
+class ShopItem :  public Buyable
 {
     private:
         std::string _default_text = "Default Menu Text";
@@ -92,12 +93,11 @@ class ShopItem
         bool is_enabled = true;
         bool is_infinite_buy = true;
 
-        ShopItem(BaseMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button);
+        ShopItem(BaseMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button, std::string id_key);
 
         Beatup* beatup;
 
         cocos2d::ui::Button* button;
-        std::string id_key;
 
         virtual BoolFuncNoArgs  get_callback(BaseMenu* shop)
         {
@@ -115,7 +115,6 @@ class ShopItem
 
         virtual void update(float dt);
         virtual bool can_afford();
-        virtual int get_cost() = 0;
 
         virtual std::string get_cost_string();
 
@@ -140,44 +139,6 @@ class PlainShopItem : public ShopItem
 {
     public:
         PlainShopItem(BaseMenu* shop, cocos2d::Menu* menu, std::string id_key, cocos2d::ui::Button* button = NULL);
-
-        int cost = 0;
-
-        void set_been_bought(bool val);
-        bool get_been_bought();
-
-
-        virtual int get_cost();
-        // virtual bool can_afford() { return true; };
-};
-
-class PunchDamageShopItem : public ShopItem
-{
-    public:
-
-        PunchDamageShopItem(BaseMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button = NULL) : ShopItem(shop, menu, button){};
-        int get_cost() override;
-        BoolFuncNoArgs get_callback(BaseMenu* shop) override;
-
-        virtual Fist* get_fist() = 0;
-};
-
-class LeftPunchDamageShopItem : public PunchDamageShopItem
-{
-    public:
-        LeftPunchDamageShopItem(BaseMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button = NULL) : PunchDamageShopItem(shop, menu, button){};
-        std::string get_menu_text() override;
-
-        Fist* get_fist() override;
-};
-
-class RightPunchDamageShopItem : public PunchDamageShopItem
-{
-    public:
-        RightPunchDamageShopItem(BaseMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button = NULL) : PunchDamageShopItem(shop, menu, button){};
-        std::string get_menu_text() override;
-
-        Fist* get_fist() override;
 };
 
 class Scrollable : public cocos2d::ui::ScrollView

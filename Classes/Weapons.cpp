@@ -300,7 +300,7 @@ std::string GrenadeWeapon::get_fire_mp3_path()
 
 void FistWeapon::init_psionic(FistSprite* fs)
 {
-    this->shop_cost = 25;
+    this->_shop_cost = 25;
     fs->psionic_part = ParticleSystemQuad::create("psionic.plist");
     fs->psionic_part->resetSystem();
     fs->psionic_part->setScale(0.25);

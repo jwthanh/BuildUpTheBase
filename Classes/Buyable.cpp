@@ -11,3 +11,8 @@ bool Buyable::get_been_bought()
 {
     return DataManager::get_bool_from_data(this->id_key, false);
 };
+
+int Buyable::get_cost()
+{
+    return this->_shop_cost;
+};

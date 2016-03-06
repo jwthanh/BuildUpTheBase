@@ -212,11 +212,10 @@ void BaseMenu::pop_scene(Ref* pSender)
 
 }
 
-ShopItem::ShopItem(BaseMenu* shop, Menu* menu, ui::Button* button) : button(button)
+ShopItem::ShopItem(BaseMenu* shop, Menu* menu, ui::Button* button, std::string id_key) : button(button), Buyable(id_key)
 {
     this->beatup = shop->beatup;
 
-    this->id_key = "unset_id_key";
 
     this->afford_color = std::shared_ptr<Color3B>(new Color3B(0, 255, 0));
     this->cant_afford_color = std::shared_ptr<Color3B>(new Color3B(255, 0, 0));
@@ -311,7 +310,7 @@ void BaseMenu::init_menu_from_priced_data(cocos2d::ui::ScrollView* scroll, std::
         PlainShopItem* si = new PlainShopItem(this, this->combo_menu, pid.id_string);
         si->set_default_text(pid.default_text);
         si->set_callback(pid.callback);
-        si->cost = pid.cost;
+        si->_shop_cost = pid.cost;
 
         auto c_btn = create_button(
             si->get_menu_text(),
@@ -334,50 +333,7 @@ void BaseMenu::resize_scroll_inner(Scrollable* scroll)
     ));
 }
 
-
-int PunchDamageShopItem::get_cost()
-{
-    return 70;
-};
-
-std::string LeftPunchDamageShopItem::get_menu_text()
-{
-    return "Left Punch Damage+ "+this->get_cost_string();
-};
-
-std::string RightPunchDamageShopItem::get_menu_text()
-{
-    return "Right Punch Damage+ "+this->get_cost_string();
-};
-
-Fist* LeftPunchDamageShopItem::get_fist()
-{
-    return this->beatup->left_fist;
-};
-
-Fist* RightPunchDamageShopItem::get_fist()
-{
-    return this->beatup->right_fist;
-};
-
-BoolFuncNoArgs PunchDamageShopItem::get_callback(BaseMenu* shop)
-{
-    BoolFuncNoArgs cb = [this, shop]()
-    {
-        std::function<bool()> qwe = [this]()
-        {
-            this->get_fist()->punch_dmg += 1.5;
-            return true;
-        };
-        shop->buy(this, this->get_cost(), qwe);
-
-        return false;
-    };
-    return cb;
-};
-
-
-PlainShopItem::PlainShopItem(BaseMenu* shop, cocos2d::Menu* menu, std::string id_key, ui::Button* button) : ShopItem(shop, menu, button)
+PlainShopItem::PlainShopItem(BaseMenu* shop, cocos2d::Menu* menu, std::string id_key, ui::Button* button) : ShopItem(shop, menu, button, id_key)
 {
     this->id_key = id_key;
     if (this->get_been_bought() &&
@@ -395,25 +351,6 @@ PlainShopItem::PlainShopItem(BaseMenu* shop, cocos2d::Menu* menu, std::string id
         return false;
     };
     this->set_callback(default_cb);
-};
-
-void PlainShopItem::set_been_bought(bool val)
-{
-    DataManager::set_bool_from_data(this->id_key, val);
-    if (val && !this->is_infinite_buy)
-    {
-        this->is_enabled = false;
-    };
-};
-
-bool PlainShopItem::get_been_bought()
-{
-    return DataManager::get_bool_from_data(this->id_key, false);
-};
-
-int PlainShopItem::get_cost()
-{
-    return this->cost;
 };
 
 cocos2d::Size Scrollable::get_accumulated_size()
