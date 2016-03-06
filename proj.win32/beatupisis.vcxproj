@@ -169,6 +169,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Beatup.cpp" />
     <ClCompile Include="..\Classes\Level.cpp" />
     <ClCompile Include="..\Classes\MainMenu.cpp" />
+    <ClCompile Include="..\Classes\NuMenu.cpp" />
     <ClCompile Include="..\Classes\ProgressBar.cpp" />
     <ClCompile Include="..\Classes\Quest.cpp" />
     <ClCompile Include="..\Classes\ShatterNode.cpp" />
@@ -202,6 +203,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Beatup.h" />
     <ClInclude Include="..\Classes\Level.h" />
     <ClInclude Include="..\Classes\MainMenu.h" />
+    <ClInclude Include="..\Classes\NuMenu.h" />
     <ClInclude Include="..\Classes\ProgressBar.h" />
     <ClInclude Include="..\Classes\Quest.h" />
     <ClInclude Include="..\Classes\RandomWeightMap.h" />

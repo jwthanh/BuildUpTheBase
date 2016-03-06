@@ -42,6 +42,7 @@
     <ClCompile Include="..\Classes\Recipe.cpp" />
     <ClCompile Include="..\Classes\Worker.cpp" />
     <ClCompile Include="..\Classes\BaseMenu.cpp" />
+    <ClCompile Include="..\Classes\NuMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -79,6 +80,7 @@
     <ClInclude Include="..\Classes\targetver.h" />
     <ClInclude Include="..\Classes\Worker.h" />
     <ClInclude Include="..\Classes\BaseMenu.h" />
+    <ClInclude Include="..\Classes\NuMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
