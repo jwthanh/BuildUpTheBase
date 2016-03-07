@@ -1,6 +1,7 @@
 #include "NuMenu.h"
 #include <cocos2d/cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h>
 #include "Beatup.h"
+#include "StaticData.h"
 
 USING_NS_CC;
 
@@ -49,7 +50,7 @@ bool NuMenu::init()
         scrollview->addChild(menu_item);
 
         cocos2d::ui::Text* title_lbl = static_cast<cocos2d::ui::Text*>(menu_item->getChildByName("title_panel")->getChildByName("title_lbl"));
-        title_lbl->setString(building->name);
+        title_lbl->setString(BaseStaticData::get_data("buildings", building->name, "task_name"));
     };
 
     scrollview->resize_to_fit();

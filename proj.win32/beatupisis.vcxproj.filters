@@ -43,6 +43,7 @@
     <ClCompile Include="..\Classes\Worker.cpp" />
     <ClCompile Include="..\Classes\BaseMenu.cpp" />
     <ClCompile Include="..\Classes\NuMenu.cpp" />
+    <ClCompile Include="..\Classes\StaticData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -81,6 +82,7 @@
     <ClInclude Include="..\Classes\Worker.h" />
     <ClInclude Include="..\Classes\BaseMenu.h" />
     <ClInclude Include="..\Classes\NuMenu.h" />
+    <ClInclude Include="..\Classes\StaticData.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
