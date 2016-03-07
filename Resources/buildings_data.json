@@ -2,39 +2,48 @@
     "buildings": {
         "The Farm" : {
             "task_name":"10grain -> 1 pile, move 1/2 ING",
-            "description": "Green farmland spreads to all corners of the horizons."
+            "description": "Green farmland spreads to all corners of the horizons.",
+            "gold_cost": "0"
         },
         "The Workshop" : {
             "task_name":"Sword (2 iron), Shield (3 wood)",
-            "description": "Smoke rises steadily, a hammer bangs on."
+            "description": "Smoke rises steadily, a hammer bangs on.",
+            "gold_cost": "10"
         },
         "The Dump" : {
             "task_name":"5 waste > create flies",
-            "description": "You can smell it from here, the waste rotting away."
+            "description": "You can smell it from here, the waste rotting away.",
+            "gold_cost": "25"
         },
         "The Marketplace" : {
             "task_name":"Bustle (nothing)",
-            "description": "Loud vendors sell their wares, trying to get the jump on the next customer walking by."
+            "description": "Loud vendors sell their wares, trying to get the jump on the next customer walking by.",
+            "gold_cost": "10"
         },
         "The Arena" : {
             "task_name":"Squirrel, fighter, move corpse",
-            "description": "Ruthless barbarians and their warriors fight to the death, for the pleasure of the crowd."
+            "description": "Ruthless barbarians and their warriors fight to the death, for the pleasure of the crowd.",
+            "gold_cost": "100"
         },
         "The Graveyard" : {
             "task_name":"Dead silence (nothing)",
-            "description": "A dark shadow on the hill looms silently, as if watching and waiting. The dead lay here."
+            "description": "A dark shadow on the hill looms silently, as if watching and waiting. The dead lay here.",
+            "gold_cost": "100"
         },
         "The Underscape" : {
             "task_name":"Skeleton (7 flesh)",
-            "description": "Ungodly noises are heard at all hours of the day. The townsfolk never get close enough to discover what really happens."
+            "description": "Ungodly noises are heard at all hours of the day. The townsfolk never get close enough to discover what really happens.",
+            "gold_cost": "100"
         },
         "The Forest" : {
             "task_name":"Bunny, mine berry, wood",
-            "description": "Verdant lands surround the town."
+            "description": "Verdant lands surround the town.",
+            "gold_cost": "10"
         },
         "The Mine" : {
             "task_name":"Mine copper, iron",
-            "description": "A small dark shaft belies the size of the caverns underneath."
+            "description": "A small dark shaft belies the size of the caverns underneath.",
+            "gold_cost": "10"
         }
     }
 }
