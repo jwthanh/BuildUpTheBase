@@ -50,7 +50,10 @@ bool NuMenu::init()
         scrollview->addChild(menu_item);
 
         cocos2d::ui::Text* title_lbl = static_cast<cocos2d::ui::Text*>(menu_item->getChildByName("title_panel")->getChildByName("title_lbl"));
-        title_lbl->setString(BaseStaticData::get_data("buildings", building->name, "task_name"));
+        title_lbl->setString(BaseStaticData::get_data("buildings", building->name, "description"));
+
+        cocos2d::ui::Text* desc_lbl = static_cast<cocos2d::ui::Text*>(menu_item->getChildByName("description_panel")->getChildByName("description_lbl"));
+        desc_lbl->setString(BaseStaticData::get_data("buildings", building->name, "description"));
     };
 
     scrollview->resize_to_fit();
