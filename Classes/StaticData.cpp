@@ -6,7 +6,7 @@
 
 std::string BaseStaticData::_filename = "buildings_data.json";
 
-std::string BaseStaticData::get_data(std::string key_top, std::string key_child="", std::string key_grandchild="")
+std::string BaseStaticData::get_data(std::string key_top, std::string key_child, std::string key_grandchild)
 {
     auto jsonDoc = FileIO::open_json(filename());
 

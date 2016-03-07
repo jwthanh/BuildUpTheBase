@@ -20,7 +20,7 @@ class BaseStaticData
         _filename = cs;
     }
 
-    static std::string get_data(std::string key_top, std::string key_child, std::string key_grandchild);
+    static std::string get_data(std::string key_top, std::string key_child="", std::string key_grandchild="");
 };
 
 #endif
