@@ -307,9 +307,6 @@ void Beatup::add_total_coin(int x)
 {
     this->temp_coins += x;
     DataManager::incr_key("total_coin_key", x);
-
-    spBuilding target_building = this->buildup->target_building;
-    target_building->create_resources(Resource::Ingredient, x, target_building->punched_ingredient_type);
 };
 
 void Beatup::back_to_menu()
