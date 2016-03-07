@@ -1,5 +1,6 @@
 #include "NuMenu.h"
 #include <cocos2d/cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h>
+#include "Beatup.h"
 
 USING_NS_CC;
 
@@ -40,16 +41,15 @@ bool NuMenu::init()
 
     //setup menu items
     auto inst = cocos2d::CSLoader::getInstance();
-    for (auto i : {1,2,3,4,5}) {
+
+    for (auto building : this->beatup->buildup->city->buildings) {
         cocos2d::ui::Button* menu_item = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
         menu_item->loadTextures("main_UI_export_10_x4.png", "main_UI_export_10_x4_pressed.png", "main_UI_export_10_x4_disabled.png", cocos2d::ui::TextureResType::PLIST);
         menu_item->removeFromParent();
         scrollview->addChild(menu_item);
 
-        if (i == 1) { menu_item->setEnabled(false); }
-        if (i == 2) { menu_item->setBright(false); }
-        if (i == 3) { menu_item->setEnabled(true); }
-        if (i == 4) { menu_item->setBright(true); }
+        cocos2d::ui::Text* title_lbl = static_cast<cocos2d::ui::Text*>(menu_item->getChildByName("title_panel")->getChildByName("title_lbl"));
+        title_lbl->setString(building->name);
     };
 
     scrollview->resize_to_fit();
