@@ -43,8 +43,6 @@ bool NuMenu::init()
     //setup menu items
     auto inst = cocos2d::CSLoader::getInstance();
 
-    int gold_in_hand = 10;
-
     for (auto building : this->beatup->buildup->city->buildings) {
         cocos2d::ui::Button* menu_item = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
         menu_item->loadTextures("main_UI_export_10_x4.png", "main_UI_export_10_x4_pressed.png", "main_UI_export_10_x4_disabled.png", cocos2d::ui::TextureResType::PLIST);
@@ -61,27 +59,36 @@ bool NuMenu::init()
         auto cost_str = BaseStaticData::get_data("buildings", building->name, "gold_cost");
         cost_lbl->setString(cost_str);
 
-        //should be update func
-        int cost = std::atoi(cost_str.c_str());
-        if (gold_in_hand < cost)
-        {
-            menu_item->setBright(false);
-        }
 
-        if (building->get_been_bought())
-        {
-            menu_item->setColor(Color3B::GREEN);
-            menu_item->setBright(false);
+        std::function<void(float)> update_func = [cost_str, menu_item, this, building ](float dt) {
+            int cost = std::atoi(cost_str.c_str());
+
+            if (this->beatup->get_total_coins() < cost)
+            {
+                menu_item->setBright(false);
+                menu_item->setEnabled(false);
+            }
+
+            if (building->get_been_bought())
+            {
+                menu_item->setColor(Color3B::GREEN);
+                menu_item->setBright(false);
+                menu_item->setEnabled(false);
+            };
         };
 
+        Director::getInstance()->getScheduler()->schedule(update_func, menu_item, 0.01f, true, "doesthismatter");
 
-
-        menu_item->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+        menu_item->addTouchEventListener([building, this](Ref* sender, ui::Widget::TouchEventType type)
         {
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 //can afford
-                //if (building->)
+                if (building->get_cost() <= this->beatup->get_total_coins())
+                {
+                    building->set_been_bought(true);
+                    this->beatup->add_total_coin(-building->get_cost());
+                }
             }
         });
     };
