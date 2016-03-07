@@ -24,7 +24,7 @@ class NuMenu : public GameLayer
     public:
         CREATE_FUNC(NuMenu);
 
-        void menu_init();
+        bool init();
 
         Beatup* beatup;
         cocos2d::Scene* beatup_scene;

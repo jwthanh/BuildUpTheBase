@@ -1,11 +1,19 @@
 #include "NuMenu.h"
 #include <cocos2d/cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h>
 
+USING_NS_CC;
+
 #include "BaseMenu.h"
 #include "Util.h"
 
-void NuMenu::menu_init()
+bool NuMenu::init()
 {
+
+#ifdef _WIN32
+    FUNC_INIT_WIN32(NuMenu);
+#else
+    FUNC_INIT(NuMenu);
+#endif
     //setup title
     //setup backbutton
 
@@ -15,7 +23,7 @@ void NuMenu::menu_init()
     //setup menu items
     auto inst = cocos2d::CSLoader::getInstance();
     for (auto i : {1,2,3,4,5}) {
-        cocos2d::ui::Button* menu_item = (cocos2d::ui::Button*)inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn");
+        cocos2d::ui::Button* menu_item = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
         menu_item->loadTextures("main_UI_export_10_x4.png", "main_UI_export_10_x4_pressed.png", "main_UI_export_10_x4_disabled.png", cocos2d::ui::TextureResType::PLIST);
         menu_item->removeFromParent();
         scrollview->addChild(menu_item);
@@ -28,4 +36,5 @@ void NuMenu::menu_init()
 
     scrollview->resize_to_fit();
 
+    return true;
 };
