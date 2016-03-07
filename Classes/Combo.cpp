@@ -9,7 +9,7 @@
 USING_NS_CC;
 
 
-Combo::Combo(Beatup* beatup, std::string id_key, std::string name) : Buyable(beatup, id_key)
+Combo::Combo(Beatup* beatup, std::string id_key, std::string name) : Buyable(id_key)
 {
     this->beatup = beatup;
 
@@ -18,7 +18,7 @@ Combo::Combo(Beatup* beatup, std::string id_key, std::string name) : Buyable(bea
     this->name = name;
     this->id_key = id_key;
 
-    this->shop_cost = 50;
+    this->_shop_cost = 50;
 
     this->shake_time = 1.5;
 

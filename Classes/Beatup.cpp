@@ -514,7 +514,8 @@ void Beatup::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 
                 return rect;
             };
-            if (vec2_in_rect(&get_sprite_rect(this, fist->sprite), touch->getLocation()) && !fist->is_punching)
+            auto sprite_rect = get_sprite_rect(this, fist->sprite);
+            if (vec2_in_rect(&sprite_rect, touch->getLocation()) && !fist->is_punching)
             {
 
                 if (DataManager::get_bool_from_data("charging_enabled", false) && fist->charging_clock->is_started())

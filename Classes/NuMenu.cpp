@@ -1,5 +1,5 @@
 #include "NuMenu.h"
-#include <cocos2d/cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h>
+#include <editor-support/cocostudio/ActionTimeline/CSLoader.h>
 #include "Beatup.h"
 #include "StaticData.h"
 
