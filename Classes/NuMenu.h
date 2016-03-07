@@ -11,6 +11,7 @@ class Fist;
 class ShopItem;
 class Beatup;
 class Scrollable;
+class Beatup;
 
 class NuItem : public Buyable, public cocos2d::ui::Widget
 {
@@ -22,7 +23,7 @@ class NuItem : public Buyable, public cocos2d::ui::Widget
 class NuMenu : public GameLayer
 {
     public:
-        CREATE_FUNC(NuMenu);
+        static NuMenu* create(Beatup* beatup);
 
         bool init();
 

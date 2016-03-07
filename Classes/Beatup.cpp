@@ -367,8 +367,7 @@ void Beatup::switch_to_inventory_menu()
 void Beatup::switch_to_test()
 {
     auto scene = Scene::create();
-    NuMenu* building_menu = NuMenu::create();
-    building_menu->init();
+    NuMenu* building_menu = NuMenu::create(this);
     scene->addChild(building_menu);
 
     auto director = Director::getInstance();
