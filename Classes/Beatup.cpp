@@ -333,6 +333,8 @@ void Beatup::onEnter()
     if (!this->isScheduled(update_selector))
     {
         this->schedule(update_selector);
+        //assumes Buildup stuff isnt ready either
+        this->schedule(schedule_selector(Beatup::update_buildup));
     }
 };
 
