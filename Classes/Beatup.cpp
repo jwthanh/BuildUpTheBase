@@ -1728,7 +1728,6 @@ void Beatup::reset()
 
 void Beatup::apply_flash_shader()
 {
-
     Texture2D::TexParams p;
     p.minFilter = GL_NEAREST;
     p.magFilter = GL_NEAREST;

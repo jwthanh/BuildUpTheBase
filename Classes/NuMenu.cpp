@@ -60,7 +60,7 @@ bool NuMenu::init()
         cost_lbl->setString(cost_str);
 
 
-        std::function<void(float)> update_func = [cost_str, menu_item, this, building ](float dt) {
+        std::function<void(float)> update_func = [cost_lbl, cost_str, menu_item, this, building ](float dt) {
             int cost = std::atoi(cost_str.c_str());
 
             if (this->beatup->get_total_coins() < cost)
@@ -71,7 +71,7 @@ bool NuMenu::init()
 
             if (building->get_been_bought())
             {
-                menu_item->setColor(Color3B::GREEN);
+                cost_lbl->setString("---");
                 menu_item->setBright(false);
                 menu_item->setEnabled(false);
             };
