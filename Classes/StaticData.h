@@ -4,23 +4,32 @@
 
 #include <string>
 
-class BaseStaticData
+class BaseData
 {
-    static std::string _filename;
-
+    private:
+    protected:
+        std::string _filename;
+        std::string _get_data(std::string key_top, std::string key_child="", std::string key_grandchild="");
     public:
 
-    static std::string filename()
-    {
-        return _filename;
-    }
+        //BaseData(){};
 
-    static void set_filename(const std::string& cs)
-    {
-        _filename = cs;
-    }
+        virtual std::string getter(std::string key) = 0;
+};
 
-    static std::string get_data(std::string key_top, std::string key_child="", std::string key_grandchild="");
+class BuildingData : public BaseData
+{
+    public:
+        std::string building_name;
+
+        BuildingData(std::string building_name);
+
+        std::string getter(std::string key) override;
+
+        std::string get_task_name();
+        std::string get_description();
+        std::string get_gold_cost();
+        std::string get_img_large();
 };
 
 #endif

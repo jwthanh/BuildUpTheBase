@@ -765,6 +765,8 @@ Building::Building(Village* city, std::string name, std::string id_key, TaskFunc
              return true;
          }, false},
      };
+
+     this->data = std::make_shared<BuildingData>(name);
 };
 
 

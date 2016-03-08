@@ -7,6 +7,7 @@
 
 #include "../../Classes/Clock.h"
 #include "../../Classes/attribute_container.h"
+#include "../../Classes/StaticData.h"
 //#include "../../Classes/RandomWeightMap.h"
 
 #include "../../cocos2d/cocos/cocos2d.h"
@@ -267,6 +268,8 @@ class Battle : public Updateable
 class Building : public Nameable, public Updateable, public Buyable, public std::enable_shared_from_this<Building>
 {
     public:
+
+        std::shared_ptr<BuildingData> data;
 
         Village* city;
 

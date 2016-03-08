@@ -50,17 +50,17 @@ bool NuMenu::init()
         scrollview->addChild(menu_item);
 
         cocos2d::ui::ImageView* item_icon = static_cast<cocos2d::ui::ImageView*>(menu_item->getChildByName("item_icon"));
-        std::string img_large = BaseStaticData::get_data("buildings", building->name, "img_large");
+        std::string img_large = building->data->get_img_large();
         item_icon->loadTexture(img_large, ui::TextureResType::PLIST);
 
         cocos2d::ui::Text* title_lbl = static_cast<cocos2d::ui::Text*>(menu_item->getChildByName("title_panel")->getChildByName("title_lbl"));
         title_lbl->setString(building->name);
 
         cocos2d::ui::Text* desc_lbl = static_cast<cocos2d::ui::Text*>(menu_item->getChildByName("description_panel")->getChildByName("description_lbl"));
-        desc_lbl->setString(BaseStaticData::get_data("buildings", building->name, "description"));
+        desc_lbl->setString(building->data->get_description());
 
         cocos2d::ui::Text* cost_lbl = static_cast<cocos2d::ui::Text*>(menu_item->getChildByName("cost_panel")->getChildByName("cost_lbl"));
-        auto cost_str = BaseStaticData::get_data("buildings", building->name, "gold_cost");
+        auto cost_str = building->data->get_gold_cost();
         cost_lbl->setString(cost_str);
 
 
