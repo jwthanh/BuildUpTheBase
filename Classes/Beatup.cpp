@@ -89,7 +89,7 @@ bool Beatup::init()
     FUNC_INIT(Beatup);
 #endif
 
-    CCLOG("beatup init");
+    //CCLOG("beatup init");
 
     this->buildup = new Buildup();
     this->buildup->beatup = this;
@@ -223,8 +223,9 @@ void Beatup::setup_commands()
     auto gl = Director::getInstance()->getOpenGLView();
     auto frame_size = gl->getFrameSize();
     auto design_size = gl->getDesignResolutionSize();
-    CCLOG("frame %f %f", frame_size.width, frame_size.height);
-    CCLOG("design %f %f", design_size.width, design_size.height);
+
+    //CCLOG("frame %f %f", frame_size.width, frame_size.height);
+    //CCLOG("design %f %f", design_size.width, design_size.height);
 
 
     Console::Command hd = {"hd", "1080p",

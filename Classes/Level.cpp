@@ -16,7 +16,7 @@ Level::Level(int order) : order(order)
 
 Level* Level::create_level(int level_num)
 {
-    CCLOG("creating level %d", level_num);
+    // CCLOG("creating level %d", level_num);
     Level* level_obj = new Level(level_num);
 
     struct LevelDetail {

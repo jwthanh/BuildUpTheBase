@@ -316,7 +316,7 @@ Quest* Quest::create_quest(Beatup* beatup, int level)
     };
 
     try {
-        CCLOG("setting up quest %d", level);
+        // CCLOG("setting up quest %d", level);
         qs = quest_setups.at(level-1);
     } 
     catch (const std::out_of_range&) {
