@@ -843,22 +843,6 @@ bool CityMenu::init()
         return ss.str();
     };
 
-    std::vector<std::string> sprite_names = {
-        "buildingTiles_001.png",
-        "buildingTiles_002.png",
-        "buildingTiles_003.png",
-        "buildingTiles_017.png",
-        "buildingTiles_018.png",
-        "buildingTiles_030.png",
-        "buildingTiles_033.png",
-        "buildingTiles_034.png",
-        "buildingTiles_099.png",
-        "buildingTiles_100.png",
-        "buildingTiles_116.png",
-        "buildingTiles_117.png"
-    };
-
-    int sprite_idx = 0;
     for (auto building : this->building->city->buildings)
     {
 
@@ -874,7 +858,7 @@ bool CityMenu::init()
        building_name_lbl->setString(building->name);
 
        auto building_image = dynamic_cast<ui::ImageView*>(building_panel->getChildByName("building_image")); 
-       building_image->loadTexture(sprite_names.at(sprite_idx++), ui::TextureResType::PLIST);
+       building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
 
        auto ing_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("ingredient_count"));
        ing_count->setString(create_count("ING", building->ingredients.size()));

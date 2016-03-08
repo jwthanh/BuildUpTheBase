@@ -24,7 +24,7 @@ std::string BaseData::_get_data(std::string key_top, std::string key_child, std:
 BuildingData::BuildingData(std::string building_name)
 {
     this->building_name = building_name;
-    this->_filename = "buildings.json";
+    this->_filename = "buildings_data.json";
 }
 
 std::string BuildingData::getter(std::string key)
