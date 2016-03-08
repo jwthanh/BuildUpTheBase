@@ -328,7 +328,11 @@ void Beatup::onEnter()
     GameLayer::onEnter();
     //this is so it updates again because if you pop a scene or something, the
     //game stops the scheduler FIXME
-    this->schedule(schedule_selector(Beatup::update));
+    auto update_selector = schedule_selector(Beatup::update);
+    if (!this->isScheduled(update_selector))
+    {
+        this->schedule(update_selector);
+    }
 };
 
 void Beatup::switch_to_building_menu()
