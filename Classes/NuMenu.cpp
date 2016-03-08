@@ -49,6 +49,10 @@ bool NuMenu::init()
         menu_item->removeFromParent();
         scrollview->addChild(menu_item);
 
+        cocos2d::ui::ImageView* item_icon = static_cast<cocos2d::ui::ImageView*>(menu_item->getChildByName("item_icon"));
+        std::string img_large = BaseStaticData::get_data("buildings", building->name, "img_large");
+        item_icon->loadTexture(img_large, ui::TextureResType::PLIST);
+
         cocos2d::ui::Text* title_lbl = static_cast<cocos2d::ui::Text*>(menu_item->getChildByName("title_panel")->getChildByName("title_lbl"));
         title_lbl->setString(building->name);
 
