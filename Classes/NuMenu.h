@@ -11,12 +11,13 @@ class Fist;
 class ShopItem;
 class Beatup;
 class Scrollable;
-class Beatup;
 
 class NuItem : public cocos2d::ui::Widget
 {
     public:
-        NuItem(cocos2d::Node* parent);
+        Beatup* beatup;
+
+        NuItem(Beatup* beatup, cocos2d::Node* parent);
 
         cocos2d::ui::Button* button;
         cocos2d::ui::ImageView* item_icon;

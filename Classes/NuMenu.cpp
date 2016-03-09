@@ -8,8 +8,10 @@ USING_NS_CC;
 #include "BaseMenu.h"
 #include "Util.h"
 
-NuItem::NuItem(cocos2d::Node* parent)
+NuItem::NuItem(Beatup* beatup, cocos2d::Node* parent)
 {
+    this->beatup = beatup;
+
     auto inst = cocos2d::CSLoader::getInstance();
 
     this->button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
@@ -85,15 +87,12 @@ bool NuMenu::init()
     auto inst = cocos2d::CSLoader::getInstance();
 
     for (auto building : this->beatup->buildup->city->buildings) {
-        auto menu_item = std::make_shared<NuItem>(scrollview);
+        auto menu_item = std::make_shared<NuItem>(beatup, scrollview);
 
-        std::string img_large = building->data->get_img_large();
-        menu_item->set_image(img_large);
-
+        menu_item->set_image(building->data->get_img_large());
         menu_item->set_title(building->name);
         menu_item->set_description(building->data->get_description());
         menu_item->set_cost(building->data->get_gold_cost());
-
 
         std::function<void(float)> update_func = [menu_item, this, building ](float dt) {
             if (building->get_been_bought()) 
