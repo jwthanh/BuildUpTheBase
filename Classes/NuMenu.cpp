@@ -22,8 +22,8 @@ void NuItem::my_init(Beatup* beatup, cocos2d::Node* parent)
             cocos2d::ui::TextureResType::PLIST);
     button->removeFromParent();
 
-    this->addChild(button);
-    parent->addChild(this);
+    parent->addChild(this); //FIXME hack to get the selector to run. ideally the button would be a child of this but then button doesnt go on the right spot
+    parent->addChild(button);
 
     this->item_icon = static_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
     this->title_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
@@ -141,14 +141,7 @@ bool NuMenu::init()
         menu_item->my_init(building, scrollview);
 
         auto scheduler = Director::getInstance()->getScheduler();
-        //scheduler->scheduleSelector(CC_SCHEDULE_SELECTOR(BuildingShopNuItem::update_func), &(*menu_item), 0.01f, true);
         scheduler->schedule(CC_SCHEDULE_SELECTOR(BuildingShopNuItem::update_func), menu_item, 0.01f, true);
-        //scheduler->schedule(CC_CALLBACK_1(BuildingShopNuItem::update_func, menu_item), &menu_item, 0.01f, true, "doesitmatterthough");
-        //this->schedule(CC_SCHEDULE_SELECTOR(CC_CALLBACK_1(BuildingShopNuItem::update_func, menu_item)));
-        //scheduler->schedule([menu_item](float dt)
-        //{
-        //    menu_item->update_func(dt);
-        //}, &menu_item->button, 0.01f, true, "doesthismatter");
 
         menu_item->button->addTouchEventListener([building, this](Ref* sender, ui::Widget::TouchEventType type)
         {
