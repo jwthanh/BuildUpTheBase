@@ -721,6 +721,8 @@ Building::Building(Village* city, std::string name, std::string id_key, TaskFunc
 {
     num_workers = 1;
 
+    CCLOG("building ctor idkey %s", id_key);
+
     update_clock->set_threshold(1.0f);
     spawn_clock = new Clock(3);
 
