@@ -64,7 +64,13 @@ bool NuMenu::init()
         cost_lbl->setString(cost_str);
 
 
-        std::function<void(float)> update_func = [cost_lbl, cost_str, menu_item, this, building ](float dt) {
+        std::function<void(float)> update_func = [item_icon, cost_lbl, cost_str, menu_item, this, building ](float dt) {
+            if (building->get_been_bought()) 
+            {
+                //TODO make this not happen all the time, or check that its not the same image
+                item_icon->loadTexture("grey_boxCheckmark.png", ui::TextureResType::PLIST);
+            };
+
             int cost = std::atoi(cost_str.c_str());
 
             if (this->beatup->get_total_coins() < cost)
