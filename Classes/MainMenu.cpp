@@ -15,6 +15,7 @@
 #include <editor-support/cocostudio/CCSGUIReader.h>
 #include <editor-support/cocostudio/ActionTimeline/CSLoader.h>
 #include "attribute.h"
+#include "NuMenu.h"
 
 USING_NS_CC;
 
@@ -871,7 +872,7 @@ bool CityMenu::init()
 
        auto cb = [this, building](Ref*, ui::Widget::TouchEventType) {
            auto scene = Scene::create();
-           BuildingMenu* building_menu = BuildingMenu::create(building);
+           BuildingNuMenu* building_menu = BuildingNuMenu::create(this->building->city->buildup->beatup, building);
            scene->addChild(building_menu);
 
            auto director = Director::getInstance();

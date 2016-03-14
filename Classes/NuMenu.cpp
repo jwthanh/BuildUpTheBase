@@ -3,6 +3,9 @@
 #include "Beatup.h"
 #include "StaticData.h"
 
+#include "HouseBuilding.h"
+#include "MainMenu.h"
+
 USING_NS_CC;
 
 #include "BaseMenu.h"
@@ -115,7 +118,7 @@ bool NuMenu::init()
     return true;
 };
 
-void NuMenu::init_items()
+void BuyBuildingsNuMenu::init_items()
 {
     auto scrollview = this->create_center_scrollview();
 
@@ -123,7 +126,7 @@ void NuMenu::init_items()
     auto inst = cocos2d::CSLoader::getInstance();
 
     for (auto building : this->beatup->buildup->city->buildings) {
-        CCLOG("upper key %s", building->id_key.c_str());
+        // CCLOG("upper key %s", building->id_key.c_str());
         //auto menu_item = std::make_shared<BuildingShopNuItem>(building, scrollview);
         auto menu_item = BuildingShopNuItem::create();
         menu_item->my_init(building, scrollview);
@@ -131,6 +134,7 @@ void NuMenu::init_items()
         auto scheduler = Director::getInstance()->getScheduler();
         scheduler->schedule(CC_SCHEDULE_SELECTOR(BuildingShopNuItem::update_func), menu_item, 0.01f, true);
 
+        //touch handler
         menu_item->button->addTouchEventListener([building, this](Ref* sender, ui::Widget::TouchEventType type)
         {
             if (type == ui::Widget::TouchEventType::ENDED)
@@ -147,4 +151,56 @@ void NuMenu::init_items()
     };
 
     scrollview->resize_to_fit();
+};
+
+BuildingNuMenu* BuildingNuMenu::create(Beatup* beatup, std::shared_ptr<Building> building)
+{
+    BuildingNuMenu *menu = new(std::nothrow) BuildingNuMenu();
+    menu->beatup = beatup; //this should be after init, cause i guess init should fail, but its fine for now.
+    menu->building = building;
+
+    if (menu && menu->init()) {
+        menu->autorelease();
+        return menu;
+    }
+    else
+    {
+        delete menu;
+        menu = nullptr;
+        return menu;
+    }
+};
+
+void BuildingNuMenu::init_items()
+{
+    auto scrollview = this->create_center_scrollview();
+    this->create_inventory_item(scrollview);
+
+    auto menu_item = NuItem::create();
+    menu_item->my_init(this->beatup, scrollview);
+
+    menu_item->set_title(building->name);
+    menu_item->set_description(building->data->get_task_name());
+};
+
+void BuildingNuMenu::create_inventory_item(cocos2d::Node* parent)
+{
+    auto inventory_item = NuItem::create();
+    inventory_item->my_init(this->beatup, parent);
+
+    inventory_item->set_title("Inventory");
+    inventory_item->set_description("Check out what this building contains.");
+
+    inventory_item->button->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type)
+    {
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            auto scene = Scene::create();
+            InventoryMenu* building_menu = InventoryMenu::create(this->building);
+            scene->addChild(building_menu);
+
+            auto director = Director::getInstance();
+            director->pushScene(scene);
+        }
+    });
 };

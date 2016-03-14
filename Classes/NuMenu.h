@@ -64,9 +64,27 @@ class NuMenu : public GameLayer
         BEATUP_CREATE_FUNC(NuMenu);
 
         bool init();
-        void init_items();
+        virtual void init_items(){};
 
         Beatup* beatup;
 
 };
+
+class BuyBuildingsNuMenu : public NuMenu
+{
+    public:
+        BEATUP_CREATE_FUNC(BuyBuildingsNuMenu);
+        void init_items();
+};
+
+class BuildingNuMenu : public NuMenu
+{
+    public:
+        std::shared_ptr<Building> building;
+        static BuildingNuMenu* BuildingNuMenu::create(Beatup* beatup, std::shared_ptr<Building> building);
+        void init_items();
+
+        void create_inventory_item(cocos2d::Node* parent);
+};
+
 #endif
