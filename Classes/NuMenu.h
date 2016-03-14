@@ -34,8 +34,10 @@ class NuItem : public cocos2d::ui::Widget
         void set_description(std::string description);
         void set_cost(std::string cost);
 
+        void set_touch_ended_callback(std::function<void(void)> callback);
+
         //handle stuff like been bought, can be pressed etc
-        void update_func(float dt) {};
+        virtual void update_func(float dt) {};
 };
 
 class ShopNuItem : public Buyable, public NuItem
@@ -45,7 +47,7 @@ class ShopNuItem : public Buyable, public NuItem
         ShopNuItem():Buyable("unset_in_shopnuitem") {};
 
         void my_init(Beatup* beatup, Node* parent, std::string id_key);
-        void update_func(float dt);
+        virtual void update_func(float dt);
 };
 
 class BuildingShopNuItem : public ShopNuItem
@@ -85,6 +87,7 @@ class BuildingNuMenu : public NuMenu
 {
     public:
         std::shared_ptr<Building> building;
+
         static BuildingNuMenu* BuildingNuMenu::create(Beatup* beatup, std::shared_ptr<Building> building);
         void init_items();
 

@@ -35,6 +35,18 @@ void NuItem::my_init(Beatup* beatup, cocos2d::Node* parent)
 
 };
 
+void NuItem::set_touch_ended_callback(std::function<void(void)> callback)
+{
+    this->button->addTouchEventListener([callback](Ref* sender, ui::Widget::TouchEventType type)
+    {
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            callback();
+        }
+    });
+
+};
+
 void NuItem::set_image(std::string path)
 {
     this->item_icon->loadTexture(path, ui::TextureResType::PLIST);
@@ -131,14 +143,12 @@ void NuMenu::create_back_item(cocos2d::Node* parent)
     menu_item->set_title("Back");
     menu_item->set_description("Return to previous screen");
 
-    menu_item->button->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type)
-    {
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            auto director = Director::getInstance();
-            director->popScene();
-        }
-    });
+    auto pop_scene = [](){
+        auto director = Director::getInstance();
+        director->popScene();
+    };
+    menu_item->set_touch_ended_callback(pop_scene);
+
 };
 
 void BuyBuildingsNuMenu::init_items()
@@ -157,20 +167,18 @@ void BuyBuildingsNuMenu::init_items()
         auto scheduler = Director::getInstance()->getScheduler();
         scheduler->schedule(CC_SCHEDULE_SELECTOR(BuildingShopNuItem::update_func), menu_item, 0.01f, true);
 
-        //touch handler
-        menu_item->button->addTouchEventListener([building, this](Ref* sender, ui::Widget::TouchEventType type)
-        {
-            if (type == ui::Widget::TouchEventType::ENDED)
+        auto buy_stuff = [this, building](){
+            //can afford
+            if (building->get_cost() <= this->beatup->get_total_coins())
             {
-                //can afford
-                if (building->get_cost() <= this->beatup->get_total_coins())
-                {
-                    CCLOG("buying stuff");
-                    building->set_been_bought(true);
-                    this->beatup->add_total_coin(-building->get_cost());
-                }
+                CCLOG("buying stuff");
+                building->set_been_bought(true);
+                this->beatup->add_total_coin(-building->get_cost());
             }
-        });
+        };
+
+        menu_item->set_touch_ended_callback(buy_stuff);
+
     };
 
 };
@@ -214,16 +222,15 @@ void BuildingNuMenu::create_inventory_item(cocos2d::Node* parent)
     inventory_item->set_title("Inventory");
     inventory_item->set_description("Check out what this building contains.");
 
-    inventory_item->button->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type)
-    {
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            auto scene = Scene::create();
-            InventoryMenu* building_menu = InventoryMenu::create(this->building);
-            scene->addChild(building_menu);
+    auto open_inventory = [this](){
+        auto scene = Scene::create();
+        InventoryMenu* building_menu = InventoryMenu::create(this->building);
+        scene->addChild(building_menu);
 
-            auto director = Director::getInstance();
-            director->pushScene(scene);
-        }
-    });
+        auto director = Director::getInstance();
+        director->pushScene(scene);
+    };
+
+    inventory_item->set_touch_ended_callback(open_inventory);
+
 };
