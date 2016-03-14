@@ -64,7 +64,6 @@ void ShopNuItem::my_init(Beatup* beatup, Node* parent, std::string id_key)
 
 void ShopNuItem::update_func(float dt)
 {
-    CCLOG("update func %s", this->id_key.c_str());
     if (this->get_been_bought()) 
     {
         //TODO make this not happen all the time, or check that its not the same image
