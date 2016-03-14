@@ -73,8 +73,6 @@ void ShopNuItem::my_init(Beatup* beatup, Node* parent, std::string id_key)
     NuItem::my_init(beatup, parent);
     this->id_key = id_key;
     this->_shop_cost = -1;
-
-    CCLOG("id_key %s", id_key.c_str());
 };
 
 void ShopNuItem::update_func(float dt)
@@ -109,7 +107,6 @@ void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
     this->set_title(building->name);
     this->set_description(building->data->get_description());
     this->set_cost(building->data->get_gold_cost());
-
 };
 
 bool NuMenu::init()
@@ -122,14 +119,17 @@ bool NuMenu::init()
 #endif
 
     //setup title
-    //setup backbutton
 
+    //the scrollable in the center
     this->scrollable = this->create_center_scrollview();
 
     //setup menu items
     this->init_items();
 
+    //setup backbutton
     this->create_back_item(scrollable);
+
+    //resizes scrollable based on size of contents TODO:actually measure sizes
     scrollable->resize_to_fit();
 
     return true;
@@ -142,6 +142,8 @@ void NuMenu::create_back_item(cocos2d::Node* parent)
 
     menu_item->set_title("Back");
     menu_item->set_description("Return to previous screen");
+
+    menu_item->set_image("arrowLeft.png");
 
     auto pop_scene = [](){
         auto director = Director::getInstance();
