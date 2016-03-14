@@ -90,7 +90,6 @@ void ShopNuItem::update_func(float dt)
 void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
 {
     ShopNuItem::my_init(building->city->buildup->beatup, parent, building->id_key);
-    CCLOG("building->id_key %s", building->id_key.c_str());
     this->set_image(building->data->get_img_large());
     this->set_title(building->name);
     this->set_description(building->data->get_description());
@@ -127,7 +126,14 @@ bool NuMenu::init()
     //setup title
     //setup backbutton
 
-    //setup scrollable
+    //setup menu items
+    this->init_items();
+
+    return true;
+};
+
+void NuMenu::init_items()
+{
     auto scrollview = this->create_center_scrollview();
 
     //setup menu items
@@ -158,6 +164,4 @@ bool NuMenu::init()
     };
 
     scrollview->resize_to_fit();
-
-    return true;
 };

@@ -64,9 +64,9 @@ class NuMenu : public GameLayer
         static NuMenu* create(Beatup* beatup);
 
         bool init();
+        void init_items();
 
         Beatup* beatup;
-        cocos2d::Scene* beatup_scene;
 
 };
 #endif
