@@ -79,8 +79,13 @@ void ShopNuItem::update_func(float dt)
 {
     if (this->get_been_bought()) 
     {
-        //TODO make this not happen all the time, or check that its not the same image
-        this->set_image("grey_boxCheckmark.png");
+        //Check if image has been updated
+        ResourceData data = this->item_icon->getRenderFile();
+        std::string checkbox_path = "grey_boxCheckmark.png";
+        if (data.file != checkbox_path)
+        {
+            this->set_image(checkbox_path);
+        }
     };
 
     int cost = this->get_cost();
