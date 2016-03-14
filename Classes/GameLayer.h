@@ -140,6 +140,29 @@ this->schedule(schedule_selector(__TYPE__::update)); \
     scene->addChild(layer); \
     \
     return scene; \
-}; \
+};
+
+/** @def CREATE_FUNC(__TYPE__)
+ * Define a create function for a specific type, such as Layer.
+ *
+ * @param __TYPE__  class type to add create(), such as Layer.
+ */
+#define BEATUP_CREATE_FUNC(__TYPE__) \
+static __TYPE__* create(Beatup* beatup) \
+{ \
+    __TYPE__ *pRet = new(std::nothrow) __TYPE__(); \
+    pRet->beatup = beatup; \
+    if (pRet && pRet->init()) \
+    { \
+        pRet->autorelease(); \
+        return pRet; \
+    } \
+    else \
+    { \
+        delete pRet; \
+        pRet = nullptr; \
+        return nullptr; \
+    } \
+}
 
 #endif

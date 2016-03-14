@@ -61,7 +61,7 @@ class BuildingShopNuItem : public ShopNuItem
 class NuMenu : public GameLayer
 {
     public:
-        static NuMenu* create(Beatup* beatup);
+        BEATUP_CREATE_FUNC(NuMenu);
 
         bool init();
         void init_items();

@@ -97,23 +97,6 @@ void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
 
 };
 
-NuMenu* NuMenu::create(Beatup* beatup)
-{
-    NuMenu *menu = new(std::nothrow) NuMenu();
-    menu->beatup = beatup; //this should be after init, cause i guess init should fail, but its fine for now.
-
-    if (menu && menu->init()) {
-        menu->autorelease();
-        return menu;
-    }
-    else
-    {
-        delete menu;
-        menu = nullptr; 
-        return menu;
-    }
-};
-
 bool NuMenu::init()
 {
 
