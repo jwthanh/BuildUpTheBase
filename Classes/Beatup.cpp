@@ -341,7 +341,7 @@ void Beatup::onEnter()
 void Beatup::switch_to_building_menu()
 {
     auto scene = Scene::create();
-    BuildingMenu* building_menu = BuildingMenu::create(this->buildup->target_building);
+    BuildingNuMenu* building_menu = BuildingNuMenu::create(this, this->buildup->target_building);
     scene->addChild(building_menu);
 
     auto director = Director::getInstance();
