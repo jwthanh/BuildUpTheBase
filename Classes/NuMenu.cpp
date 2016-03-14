@@ -118,6 +118,24 @@ bool NuMenu::init()
     return true;
 };
 
+void NuMenu::create_back_item(cocos2d::Node* parent)
+{
+    auto menu_item = NuItem::create();
+    menu_item->my_init(this->beatup, parent);
+
+    menu_item->set_title("Back");
+    menu_item->set_description("Return to previous screen");
+
+    menu_item->button->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type)
+    {
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            auto director = Director::getInstance();
+            director->popScene();
+        }
+    });
+};
+
 void BuyBuildingsNuMenu::init_items()
 {
     auto scrollview = this->create_center_scrollview();
@@ -150,6 +168,8 @@ void BuyBuildingsNuMenu::init_items()
         });
     };
 
+    this->create_back_item(scrollview);
+
     scrollview->resize_to_fit();
 };
 
@@ -181,6 +201,10 @@ void BuildingNuMenu::init_items()
 
     menu_item->set_title(building->name);
     menu_item->set_description(building->data->get_task_name());
+
+    this->create_back_item(scrollview);
+
+    scrollview->resize_to_fit();
 };
 
 void BuildingNuMenu::create_inventory_item(cocos2d::Node* parent)

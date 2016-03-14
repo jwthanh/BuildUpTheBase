@@ -65,6 +65,7 @@ class NuMenu : public GameLayer
 
         bool init();
         virtual void init_items(){};
+        void create_back_item(cocos2d::Node* parent);
 
         Beatup* beatup;
 
