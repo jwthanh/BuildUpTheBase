@@ -50,6 +50,16 @@ void NuItem::set_touch_ended_callback(std::function<void(void)> callback)
 void NuItem::set_image(std::string path)
 {
     this->item_icon->loadTexture(path, ui::TextureResType::PLIST);
+
+    ui::Scale9Sprite* sprite = dynamic_cast<ui::Scale9Sprite*>(this->item_icon->getVirtualRenderer());
+    if (sprite)
+    {
+        sprite->getSprite()->getTexture()->setAliasTexParameters();
+    } else
+    {
+        CCLOG("cannot convert item_icon pointer to scale9");
+        throw std::exception("the sprite isnt scale9");
+    }
 };
 
 void NuItem::set_title(std::string title)
@@ -228,6 +238,8 @@ void BuildingNuMenu::create_inventory_item(cocos2d::Node* parent)
 
     inventory_item->set_title("Inventory");
     inventory_item->set_description("Check out what this building contains.");
+
+    inventory_item->set_image("zoomIn.png");
 
     auto open_inventory = [this](){
         auto scene = Scene::create();
