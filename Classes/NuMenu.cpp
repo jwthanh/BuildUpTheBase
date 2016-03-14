@@ -112,8 +112,13 @@ bool NuMenu::init()
     //setup title
     //setup backbutton
 
+    this->scrollable = this->create_center_scrollview();
+
     //setup menu items
     this->init_items();
+
+    this->create_back_item(scrollable);
+    scrollable->resize_to_fit();
 
     return true;
 };
@@ -138,14 +143,14 @@ void NuMenu::create_back_item(cocos2d::Node* parent)
 
 void BuyBuildingsNuMenu::init_items()
 {
-    auto scrollview = this->create_center_scrollview();
+    auto scrollview = this->scrollable;
 
     //setup menu items
     auto inst = cocos2d::CSLoader::getInstance();
 
     for (auto building : this->beatup->buildup->city->buildings) {
         // CCLOG("upper key %s", building->id_key.c_str());
-        //auto menu_item = std::make_shared<BuildingShopNuItem>(building, scrollview);
+        //auto menu_item = std::make_shared<BuildingShopNuItem>(building, scrollable);
         auto menu_item = BuildingShopNuItem::create();
         menu_item->my_init(building, scrollview);
 
@@ -168,9 +173,6 @@ void BuyBuildingsNuMenu::init_items()
         });
     };
 
-    this->create_back_item(scrollview);
-
-    scrollview->resize_to_fit();
 };
 
 BuildingNuMenu* BuildingNuMenu::create(Beatup* beatup, std::shared_ptr<Building> building)
@@ -193,7 +195,7 @@ BuildingNuMenu* BuildingNuMenu::create(Beatup* beatup, std::shared_ptr<Building>
 
 void BuildingNuMenu::init_items()
 {
-    auto scrollview = this->create_center_scrollview();
+    auto scrollview = this->scrollable;
     this->create_inventory_item(scrollview);
 
     auto menu_item = NuItem::create();
@@ -202,9 +204,6 @@ void BuildingNuMenu::init_items()
     menu_item->set_title(building->name);
     menu_item->set_description(building->data->get_task_name());
 
-    this->create_back_item(scrollview);
-
-    scrollview->resize_to_fit();
 };
 
 void BuildingNuMenu::create_inventory_item(cocos2d::Node* parent)

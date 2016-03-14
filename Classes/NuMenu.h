@@ -63,9 +63,12 @@ class NuMenu : public GameLayer
     public:
         BEATUP_CREATE_FUNC(NuMenu);
 
+        Scrollable* scrollable;
+
         bool init();
-        virtual void init_items(){};
         void create_back_item(cocos2d::Node* parent);
+
+        virtual void init_items(){};
 
         Beatup* beatup;
 
