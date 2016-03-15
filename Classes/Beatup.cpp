@@ -396,26 +396,12 @@ void Beatup::switch_to_character_menu(spFighter fighter)
 
 void Beatup::switch_to_shop()
 {
+    auto scene = Scene::create();
+    BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(this);
+    scene->addChild(building_menu);
+
     auto director = Director::getInstance();
-
-    if (this->shop_scene == NULL)
-    {
-        this->shop_scene = Scene::create();
-    }
-    if (this->shop == NULL)
-    {
-        this->shop = BaseMenu::create();
-        this->shop->beatup = this;
-        this->shop->menu_init();
-        this->shop->update(0);
-
-        this->shop_scene->addChild(this->shop);
-        this->shop->beatup_scene = director->getRunningScene();
-    };
-
-    this->shop->set_main_lbl();
-
-    director->pushScene(this->shop_scene);
+    director->pushScene(scene);
 };
 
 bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
@@ -777,6 +763,33 @@ void Beatup::prep_other()
 
     this->shop = NULL;
     this->shop_scene = NULL;
+
+    auto shop_button = ui::Button::create(
+            "shop_banner.png",
+            "shop_banner_hili.png",
+            "shop_banner.png",
+            ui::TextureResType::PLIST
+            );
+    auto text_shop = ui::ImageView::create(
+        "text_shop.png",
+        ui::TextureResType::PLIST
+        );
+    text_shop->setPosition(Vec2(28, 17));
+    shop_button->addChild(
+        text_shop
+    );
+    shop_button->setScale(4);
+    auto center_pos = this->get_center_pos();
+    shop_button->setPositionX(100.0f);
+    shop_button->setPositionY(center_pos.y * 2 * 0.85f);
+
+    shop_button->addTouchEventListener([this](Ref*, ui::Widget::TouchEventType evt)
+    {
+        if (evt == ui::Widget::TouchEventType::ENDED)
+        this->switch_to_shop();
+    });
+
+    this->addChild(shop_button);
 
 
     this->enemy_node = FighterNode::create(this, NULL);
