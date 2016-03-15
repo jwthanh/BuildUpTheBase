@@ -97,6 +97,15 @@ void MainMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Ev
     }
 };
 
+void MainMenu::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
+{
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    {
+        this->quit(NULL);
+        event->stopPropagation();
+    }
+};
+
 bool MainMenu::quick_start_game()
 {
     int level = Level::get_generic_complete() + 1;
