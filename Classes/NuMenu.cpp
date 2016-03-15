@@ -58,7 +58,6 @@ void NuItem::set_image(std::string path)
     } else
     {
         CCLOG("cannot convert item_icon pointer to scale9");
-        throw std::exception("the sprite isnt scale9");
     }
 };
 

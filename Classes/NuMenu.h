@@ -88,7 +88,7 @@ class BuildingNuMenu : public NuMenu
     public:
         std::shared_ptr<Building> building;
 
-        static BuildingNuMenu* BuildingNuMenu::create(Beatup* beatup, std::shared_ptr<Building> building);
+        static BuildingNuMenu* create(Beatup* beatup, std::shared_ptr<Building> building);
         void init_items();
 
         void create_inventory_item(cocos2d::Node* parent);

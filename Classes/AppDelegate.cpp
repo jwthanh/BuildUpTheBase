@@ -61,20 +61,35 @@ bool AppDelegate::applicationDidFinishLaunching() {
     //add the cocos studio paths. it ignores its own export path so you need to tell it where else to look
     FileUtils::getInstance()->addSearchPath("editor");
 
-    this->preload_all();
 
-    Scene* scene = Scene::create();
-    MainMenu* main_menu = MainMenu::create();
-    scene->addChild(main_menu);
+    //LoadingScene* loading_scene = LoadingScene::create(this);
+    Scene* loading_scene = Scene::create();
+    loading_scene->setOnEnterCallback(
+        std::function<void()>([this, loading_scene](){
+        auto lbl = Label::createWithTTF("LOADING...", TITLE_FONT, 24);
+        loading_scene->setPosition(300, 300);
+        loading_scene->addChild(lbl);
 
-    Beatup::main_menu_scene = scene;
-    Beatup::main_menu_scene->retain();
+        std::function<void(float)> load_func = [this, loading_scene](float){
+            CCLOG("preloading");
+            this->preload_all();
+            CCLOG("done preloading");
 
+            Scene* scene = Scene::create();
+            MainMenu* main_menu = MainMenu::create();
+            scene->addChild(main_menu);
 
-    auto console = director->getConsole();
-    console->listenOnTCP(1234);
-    // run
-    director->runWithScene(scene);
+            Beatup::main_menu_scene = scene;
+            Beatup::main_menu_scene->retain();
+
+            auto director = Director::getInstance();
+            director->pushScene(scene);
+        };
+        loading_scene->scheduleOnce(load_func, 0.05f, "whateverloading");
+    })
+        );
+    director->runWithScene(loading_scene);
+
 
     return true;
 }
