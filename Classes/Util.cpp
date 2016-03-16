@@ -24,5 +24,5 @@ void log_vector(cocos2d::Vec2 vector, std::string message)
 {
     std::stringstream ss;
     ss << message << ": " << vector.x << " " << vector.y;
-    CCLOG(ss.str().c_str());
+    CCLOG("%s", ss.str().c_str());
 };

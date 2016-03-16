@@ -788,6 +788,7 @@ void BuildingMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d
     {
         auto director = Director::getInstance();
         director->popScene();
+        pEvent->stopPropagation();
     };
 };
 
@@ -797,6 +798,7 @@ void BuildingMenu::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *pEvent)
     {
         auto director = Director::getInstance();
         director->popScene();
+        pEvent->stopPropagation();
     }
 };
 
@@ -902,6 +904,7 @@ void CityMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Ev
     {
         auto director = Director::getInstance();
         director->popScene();
+        pEvent->stopPropagation();
     };
 };
 
@@ -1077,6 +1080,7 @@ void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
     {
         auto director = Director::getInstance();
         director->popScene();
+        pEvent->stopPropagation();
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
@@ -1244,6 +1248,7 @@ void CharacterMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
     {
         auto director = Director::getInstance();
         director->popScene();
+        pEvent->stopPropagation();
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
@@ -1270,10 +1275,12 @@ CharacterMenu* CharacterMenu::create(spFighter fighter)
 void CharacterMenu::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
 {
     Director::getInstance()->popScene();
+    pEvent->stopPropagation();
 };
 
 void CharacterMenu::onTouchEnded(Touch *touch, Event *event)
 {
     GameLayer::onTouchEnded(touch, event);
     Director::getInstance()->popScene();
+    event->stopPropagation();
 };

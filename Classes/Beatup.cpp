@@ -1039,6 +1039,7 @@ void Beatup::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Eve
     {
         Beatup::back_to_menu();
         printj("esc/back key released");
+        pEvent->stopPropagation();
     }
 };
 
@@ -1048,8 +1049,10 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
 
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
     {
-        Beatup::back_to_menu();
-        printj("esc/back key pressed");
+        //dont want this because it'll give a keyReleased event to whatever it would popScene to
+        //Beatup::back_to_menu();
+        //printj("esc/back key pressed");
+        //evt->stopPropagation();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
