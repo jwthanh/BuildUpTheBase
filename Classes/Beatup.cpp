@@ -154,7 +154,7 @@ bool Beatup::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    this->title_lbl = Label::createWithTTF("Beat up the face!", DEFAULT_FONT, 24);
+    this->title_lbl = Label::createWithTTF("Beat up the base!", DEFAULT_FONT, 24);
 
     title_lbl->setScaleX(sx(1));
     title_lbl->setScaleY(sy(1));

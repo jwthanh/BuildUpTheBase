@@ -169,7 +169,7 @@ void Level::setup_player(Beatup& beatup)
 void Level::setup_scene(Beatup& beatup)
 {
     beatup.set_background(this->scene_detail.background);
-    beatup.title_lbl->setString(this->scene_detail.name);
+    //beatup.title_lbl->setString(this->scene_detail.name);
 
     beatup.level = this;
 
