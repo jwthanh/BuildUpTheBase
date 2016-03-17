@@ -1151,38 +1151,6 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
     {
-        //auto mine = this->buildup->city->building_by_name("The Mine");
-
-        //Recipe* recipe = new Recipe("sword");
-        //recipe->components[Ingredient::IngredientType::Copper] = 2;
-        //auto callback = [mine](Beatup* beatup) {
-        //    mine->create_resources(Resource::Product, 1, "Sword");
-        //    mine->create_resources(Resource::Waste, 1, "wasted_iron");
-        //    mine->city->buildup->beatup->fighter_node->setColor(Color3B::RED);
-        //    mine->city->buildup->fighter->has_sword = true;
-        //};
-        //recipe->_callback = callback;
-
-        //mine->consume_recipe(recipe);
-
-        auto sprite = Sprite::createWithSpriteFrameName("main_UI_export_10_scale9_x4.png");
-        //auto clipping_node = ClippingRectangleNode::create(Rect(50, 50, 200, 400));
-        //clipping_node->setClippingEnabled(true);
-        //this->addChild(clipping_node);
-
-        //auto clipper = ClippingNode::create();
-        //clipper->setPosition(this->get_center_pos());
-        //this->addChild(clipper);
-        //clipper->addChild(sprite);
-
-        //DrawNode * stencil = DrawNode::create();
-        //stencil->drawSolidCircle(Vec2(clipper->getBoundingBox().size.width / 2,
-        //    clipper->getBoundingBox().size.height / 2), 50, 0, 200, Color4F::MAGENTA);
-
-        //sprite->setPosition(Vec2::ZERO);
-
-        //clipper->setStencil(stencil);
-        //clipper->setInverted(true);
 
         auto harvestable = Harvestable::create();
         harvestable->setPosition(this->get_center_pos());

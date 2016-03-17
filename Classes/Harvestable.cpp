@@ -7,7 +7,6 @@ bool Harvestable::init()
     this->clip = cocos2d::ClippingNode::create();
 
     this->stencil = cocos2d::DrawNode::create();
-    this->stencil->drawSolidRect(cocos2d::Vec2::ZERO, cocos2d::Vec2(10, 10), Color4F::MAGENTA);
 
     this->clip->setStencil(this->stencil);
     this->clip->setInverted(true);
@@ -18,8 +17,26 @@ bool Harvestable::init()
     this->clip->addChild(this->sprite);
 
     this->addChild(this->clip);
+    this->setGlobalZOrder(1000000.0f);
+
+    auto sprite_size = this->sprite->getContentSize();
+    this->setContentSize(sprite_size*this->sprite->getScale());
+    this->sprite->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+
+    this->setTouchEnabled(true); //true otherwise it cant be clicked
 
     //NOTE need to addChild this to something still
 
     return true;
+};
+
+void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+    auto size = 10.0f;
+    Vec2 origin = Vec2(
+        this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
+        this->sprite->getContentSize().height*this->sprite->getScaleY()*CCRANDOM_0_1()
+        );
+    Vec2 destination = origin +Vec2(size, size);
+    this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
 };
