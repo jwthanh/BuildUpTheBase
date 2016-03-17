@@ -138,7 +138,7 @@ class Scrollable : public cocos2d::ui::ScrollView
 {
     public:
     cocos2d::Size get_accumulated_size();
-    static Scrollable* create();
+    CREATE_FUNC(Scrollable);
 
     void resize_to_fit();
 };

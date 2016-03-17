@@ -348,22 +348,11 @@ cocos2d::Size Scrollable::get_accumulated_size()
     return this->getLayoutAccumulatedSize();
 };
 
-Scrollable* Scrollable::create()
-{
-
-    Scrollable* widget = new (std::nothrow) Scrollable();
-    if (widget && widget->init())
-    {
-        widget->autorelease();
-        return widget;
-    }
-    CC_SAFE_DELETE(widget);
-    return nullptr;
-
-};
-
 void Scrollable::resize_to_fit()
 {
+    //TODO maintain scroll position after this gets called
+
+
     float extra_margins = this->getChildrenCount()*(sy(15.0f)*sy(1.0f));
     int scroll_w = sx(800);
     this->setInnerContainerSize(cocos2d::Size(
