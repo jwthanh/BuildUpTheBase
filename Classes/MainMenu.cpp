@@ -849,6 +849,12 @@ bool CityMenu::init()
     city_scene->setPosition(this->get_center_pos());
     city_scene->setAnchorPoint(Vec2(0.5,0.5));
 
+    auto back_btn = dynamic_cast<ui::Button*>(city_scene->getChildByName("back_btn"));
+    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        auto director = Director::getInstance();
+        director->popScene();
+    });
+
     auto create_count = [](std::string prefix, int count) {
         std::stringstream ss;
         ss << prefix << ": " << count;
@@ -892,6 +898,7 @@ bool CityMenu::init()
        building_panel->addTouchEventListener(cb);
 
     }
+
     this->addChild(city_scene);
 
     return true;
