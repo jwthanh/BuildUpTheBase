@@ -718,7 +718,7 @@ void Beatup::prep_fists()
 
 void Beatup::update_player_hp_bar()
 {
-    float percentage = (float)this->player_hp/(float)this->player_total_hp;
+    float percentage = static_cast<float>(this->player_hp)/static_cast<float>(this->player_total_hp);
     this->player_hp_bar->scroll_to_percentage(percentage);
 };
 
@@ -860,7 +860,6 @@ void Beatup::lose_level()
     resize_btn(main_button);
 
     this->addChild(main_button);
-    Size lose_size = lose_sprite->getContentSize();
     main_button->setPosition(Vec2(
                 this->get_center_pos().x,
                 this->get_center_pos().y-sy(275)
@@ -1956,7 +1955,7 @@ void Beatup::create_quest_alert()
         };
     };
 
-    unlock_btn->addTouchEventListener([this, unlock_btn, alert](Ref* sender, ui::Widget::TouchEventType type)
+    unlock_btn->addTouchEventListener([this, unlock_btn, alert, origin, visibleSize](Ref* sender, ui::Widget::TouchEventType type)
     {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
@@ -1970,8 +1969,6 @@ void Beatup::create_quest_alert()
 
             unlock_btn->setVisible(false);
 
-            Vec2 origin = Director::getInstance()->getVisibleOrigin();
-            Size visibleSize = Director::getInstance()->getVisibleSize();
             Vec2 pos = Vec2(
                 origin.x + visibleSize.width - 20,
                 origin.y + 20

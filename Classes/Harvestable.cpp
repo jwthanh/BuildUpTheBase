@@ -31,6 +31,7 @@ bool Harvestable::init()
 
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
+    //TODO dont dig out points already dug out OR dig consecutively more from the top
     auto size = 20.0f;
     Vec2 origin = Vec2(
         this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
