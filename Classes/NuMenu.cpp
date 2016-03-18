@@ -120,7 +120,7 @@ void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
     this->set_image(building->data->get_img_large());
     this->set_title(building->name);
     this->set_description(building->data->get_description());
-    this->set_cost(building->data->get_gold_cost());
+    this->set_cost(std::to_string(building->get_cost()));
 };
 
 bool NuMenu::init()
@@ -185,7 +185,9 @@ void BuyBuildingsNuMenu::init_items()
 
         auto buy_stuff = [this, building](){
             //can afford
-            if (building->get_cost() <= this->beatup->get_total_coins())
+            auto cost = building->get_cost();
+            auto total_coins = this->beatup->get_total_coins();
+            if (cost <= total_coins)
             {
                 CCLOG("buying stuff");
                 building->set_been_bought(true);
