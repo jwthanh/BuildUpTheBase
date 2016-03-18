@@ -131,8 +131,6 @@ bool MainMenu::resume_game()
 {
     if (MainMenu::beatup_scene != NULL)
     {
-        CCLOG("Resuming fight\n");
-
         MainMenu::beatup_scene->retain();
         auto director = Director::getInstance();
         director->pushScene(MainMenu::beatup_scene);

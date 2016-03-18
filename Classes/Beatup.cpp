@@ -1755,11 +1755,6 @@ void Beatup::apply_flash_shader()
     auto amountLoc = prog->getUniformLocationForName("u_amount");
     prog->setUniformLocationWith1f(amountLoc, 4.0f);
 
-    auto resolutionLoc = prog->getUniformLocationForName("u_resolution");
-    Vec2 resolution(1.0f, 1.0f);
-    float res[2] = { 1.0f, 1.0f };
-    prog->setUniformLocationWith2f(resolutionLoc, res[0], res[1]);
-
     prog->updateUniforms();
     CHECK_GL_ERROR_DEBUG();
 
@@ -1789,7 +1784,6 @@ void Beatup::apply_flash_shader()
 
     GLProgramState* state = GLProgramState::getOrCreateWithGLProgram(prog);
     state->setUniformFloat("u_amount", 1.0f);
-    state->setUniformVec2("u_resolution", Director::getInstance()->getOpenGLView()->getDesignResolutionSize());
     prog->release();
 };
 
