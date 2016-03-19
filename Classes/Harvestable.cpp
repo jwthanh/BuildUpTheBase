@@ -63,26 +63,23 @@ void Harvestable::shatter()
     this->sprite->setVisible(false);
     this->setTouchEnabled(false);
 
-    auto shatterabled = ShatterSprite::createWithSpriteFrame(this->sprite->getSpriteFrame());
-    shatterabled->setScale(this->sprite->getScale());
-    shatterabled->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-    this->addChild(shatterabled);
+    auto shatter_sprite = ShatterSprite::createWithSpriteFrame(this->sprite->getSpriteFrame());
+    shatter_sprite->setScale(this->sprite->getScale());
+    shatter_sprite->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    this->addChild(shatter_sprite);
 
-    shatterabled->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
+    shatter_sprite->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
 
+    //spawn label //TODO fix hardcoded name
     auto floating_label = FloatingLabel::createWithTTF("+1 Grain", DEFAULT_FONT, 12);
     floating_label->setPosition(this->getPosition());
     floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
     this->getParent()->addChild(floating_label);
     floating_label->do_float();
 
-    CallFunc* remove = CallFunc::create([this](){
-
-            this->removeFromParent();
-            CCLOG("removed harvestable from parent");
-            });
+    CallFunc* remove = CallFunc::create([this](){ this->removeFromParent(); });
 
     auto shatter_action = ShatterAction::create(1.0f);
-    shatterabled->runAction(Sequence::createWithTwoActions(shatter_action, remove));
+    shatter_sprite->runAction(Sequence::createWithTwoActions(shatter_action, remove));
 
 };
