@@ -70,7 +70,7 @@ void Harvestable::shatter()
 
     shatterabled->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
 
-    auto floating_label = FloatingLabel::createWithTTF("+1", DEFAULT_FONT, 36);
+    auto floating_label = FloatingLabel::createWithTTF("+1 Grain", DEFAULT_FONT, 12);
     floating_label->setPosition(this->getPosition());
     floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
     this->getParent()->addChild(floating_label);
