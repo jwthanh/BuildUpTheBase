@@ -67,6 +67,6 @@ ResType::ResType##Type ResType::string_to_type(std::string string_type) \
     return result; \
 };
 
-std::string Ingredient::type_to_string(Ingredient::IngredientType type) { std::string result = "none"; for (auto pair : Ingredient::type_map) { if (type == pair.first) { return pair.second; } } return result; }; Ingredient::IngredientType Ingredient::string_to_type(std::string string_type) { Ingredient::IngredientType result = Ingredient::IngredientType::None; std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower); for (auto pair : Ingredient::type_map) { if (pair.second == string_type) { return pair.first; } } {std::stringstream ss123; ss123<< "type id " << string_type; cocos2d::log(ss123.str().c_str(),"");}; assert(false && "unknown type"); return result; };;
+type_stuff(Ingredient);
 type_stuff(Product);
 type_stuff(Waste);
