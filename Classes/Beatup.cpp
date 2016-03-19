@@ -1151,7 +1151,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
     {
 
-        auto harvestable = Harvestable::create();
+        auto harvestable = Harvestable::create(this);
         harvestable->setPosition(this->get_center_pos());
         this->addChild(harvestable);
 

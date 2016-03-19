@@ -6,13 +6,18 @@
 #include <cocos2d/cocos/ui/UIWidget.h>
 #include <cocos2d/cocos/ui/UILayout.h>
 
+#include "GameLayer.h"
+
+class Beatup;
+
 class Harvestable : public cocos2d::ui::Widget
 {
     //needs to do something when harvested, animations
     //
     //it might represent a building or a specific resource
     public:
-        CREATE_FUNC(Harvestable);
+        Beatup* beatup;
+        BEATUP_CREATE_FUNC(Harvestable);
 
         cocos2d::ClippingNode* clip;
         cocos2d::DrawNode* stencil;

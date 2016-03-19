@@ -1,6 +1,9 @@
 #include "Harvestable.h"
 #include "FShake.h"
 
+#include "Beatup.h"
+#include "HouseBuilding.h"
+
 USING_NS_CC;
 
 bool Harvestable::init()
@@ -42,4 +45,7 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
     this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
 
     this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
+
+    auto farm = this->beatup->buildup->city->building_by_name("The Farm");
+    farm->create_resources(Resource::Ingredient, 1, "Berry");
 };
