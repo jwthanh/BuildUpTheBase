@@ -1,6 +1,5 @@
 #include "HarvestScene.h"
 #include "Harvestable.h"
-#include "Beatup.h"
 
 #include "GameLogic.h"
 
@@ -10,11 +9,7 @@ bool HarvestScene::init()
 {
     FUNC_INIT(HarvestScene);
 
-    this->beatup = Beatup::create();
-    beatup->setName("beatup");
-    beatup->retain(); //TODO figure out when beatup gets cleaned up aka why this is needed
-
-    auto harvestable = Harvestable::create(this->beatup);
+    auto harvestable = Harvestable::create(GameLogic::getInstance()->beatup);
     harvestable->setPosition(this->get_center_pos());
     this->addChild(harvestable);
 

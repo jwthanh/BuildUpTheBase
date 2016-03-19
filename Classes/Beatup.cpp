@@ -92,7 +92,7 @@ bool Beatup::init()
     FUNC_INIT(Beatup);
 #endif
 
-    //CCLOG("beatup init");
+    CCLOG("beatup init");
 
     this->buildup = new Buildup();
     this->buildup->beatup = this;

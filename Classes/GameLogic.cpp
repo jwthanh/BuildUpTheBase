@@ -14,6 +14,8 @@ bool GameLogic::init()
 {
     GameLogic* instance = GameLogic::getInstance();
     instance->beatup = Beatup::create();
+    instance->beatup->setName("beatup");
+    instance->beatup->retain();
     instance->buildup = instance->beatup->buildup;
 
     return true;

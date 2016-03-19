@@ -13,8 +13,6 @@ class HarvestScene : public GameLayer
 
         virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
-        Beatup* beatup;
-
 
 };
 
