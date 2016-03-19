@@ -2,6 +2,8 @@
 #include "Harvestable.h"
 #include "Beatup.h"
 
+#include "GameLogic.h"
+
 USING_NS_CC;
 
 bool HarvestScene::init()

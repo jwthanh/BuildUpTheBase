@@ -47,6 +47,7 @@
     <ClCompile Include="..\Classes\Harvestable.cpp" />
     <ClCompile Include="..\Classes\Resources.cpp" />
     <ClCompile Include="..\Classes\HarvestScene.cpp" />
+    <ClCompile Include="..\Classes\GameLogic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -90,6 +91,7 @@
     <ClInclude Include="..\Classes\Nameable.h" />
     <ClInclude Include="..\Classes\Resources.h" />
     <ClInclude Include="..\Classes\HarvestScene.h" />
+    <ClInclude Include="..\Classes\GameLogic.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
