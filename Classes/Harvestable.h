@@ -18,13 +18,16 @@ class Harvestable : public cocos2d::ui::Widget
     public:
         Beatup* beatup;
         BEATUP_CREATE_FUNC(Harvestable);
+        bool init() override;
+        void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         cocos2d::ClippingNode* clip;
         cocos2d::DrawNode* stencil;
         cocos2d::Sprite* sprite;
 
-        bool init() override;
-        void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
+        int click_limit;
+        int current_clicks;
+
 };
 
 #endif

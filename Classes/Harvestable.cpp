@@ -8,6 +8,8 @@ USING_NS_CC;
 
 bool Harvestable::init()
 {
+    this->setTouchEnabled(true); //true otherwise it cant be clicked
+
     this->clip = cocos2d::ClippingNode::create();
     this->stencil = cocos2d::DrawNode::create();
 
@@ -25,9 +27,8 @@ bool Harvestable::init()
     this->setContentSize(sprite_size*this->sprite->getScale());
     this->sprite->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 
-    this->setTouchEnabled(true); //true otherwise it cant be clicked
-
-    //NOTE need to addChild this to something still
+    this->click_limit = 5;
+    this->current_clicks = 0;
 
     return true;
 };
@@ -35,17 +36,22 @@ bool Harvestable::init()
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     //TODO dont dig out points already dug out OR dig consecutively more from the top
-    auto size = 20.0f;
-    Vec2 origin = Vec2(
-        this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
-        this->sprite->getContentSize().height*this->sprite->getScaleY()*CCRANDOM_0_1()
-        );
+    this->current_clicks += 1;
+    if (this->current_clicks < this->click_limit) {
+        auto size = 20.0f;
+        Vec2 origin = Vec2(
+                this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
+                this->sprite->getContentSize().height*this->sprite->getScaleY()*CCRANDOM_0_1()
+                );
 
-    Vec2 destination = origin +Vec2(size, size);
-    this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
+        Vec2 destination = origin +Vec2(size, size);
+        this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
 
-    this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
+        this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
 
-    auto farm = this->beatup->buildup->city->building_by_name("The Farm");
-    farm->create_resources(Resource::Ingredient, 1, "Berry");
+        auto farm = this->beatup->buildup->city->building_by_name("The Farm");
+        farm->create_resources(Resource::Ingredient, 1, "Berry");
+    } else {
+        CCLOG("You've done it!");
+    };
 };

@@ -31,7 +31,6 @@
 #include "attribute.h"
 #include "FShake.h"
 #include "NuMenu.h"
-#include "Harvestable.h"
 
 USING_NS_CC;
 
@@ -1145,10 +1144,6 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
     {
-
-        auto harvestable = Harvestable::create(this);
-        harvestable->setPosition(this->get_center_pos());
-        this->addChild(harvestable);
 
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_X) 
