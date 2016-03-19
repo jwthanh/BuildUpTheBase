@@ -752,22 +752,16 @@ void Building::consume_recipe(Recipe* recipe)
 void Building::update(float dt)
 {
     Updateable::update(dt);
-    // this->print_inventory();
-    if (update_clock->passed_threshold())
-    {
-        // CCLOG("   %s - %.f", this->name.c_str(), this->update_clock->start_time);
-        this->spawn_clock->update(dt);
-        this->do_task(dt);
-        update_clock->reset();
-        // this->print_inventory();
-    }
-    else
-    {
-        // CCLOG("   %s - %.f", this->name.c_str(), this->update_clock->start_time);
-        // std::cout << "   \twaiting" << std::endl;
-        // printj("   \twaiting");
-    }
-    // std::cout << std::endl;
+
+    // if (update_clock->passed_threshold())
+    // {
+    //     this->spawn_clock->update(dt);
+    //     this->do_task(dt);
+    //     update_clock->reset();
+    // }
+    // else
+    // {
+    // }
 };
 std::string Building::get_specifics()
 {
@@ -963,6 +957,7 @@ void Buildup::update(float dt)
     this->player->update(dt);
 };
 
+//this isn't used anymore
 void Buildup::main_loop()
 {
     Clock game_clock = Clock(CLOCKS_PER_SEC);
