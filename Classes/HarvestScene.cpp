@@ -20,6 +20,7 @@ bool HarvestScene::init()
 
 void HarvestScene::update(float dt)
 {
+    GameLogic::getInstance()->update(dt);
 };
 
 void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)

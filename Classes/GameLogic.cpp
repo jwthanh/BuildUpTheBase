@@ -23,7 +23,7 @@ bool GameLogic::init()
 
 void GameLogic::update(float dt)
 {
-
+    this->beatup->update_buildup(dt);
 };
 
 GameLogic* GameLogic::getInstance()
