@@ -53,8 +53,23 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
         auto farm = this->beatup->buildup->city->building_by_name("The Farm");
         farm->create_resources(Resource::Ingredient, 1, "Berry");
     } else {
-        CCLOG("You've done it!");
-        // ShatterSprite::createWithTexture(this->sprite->getTexture());
-        // this->runAction(ShatterAction::create(1.0f));
+        this->sprite->setVisible(false);
+        this->setTouchEnabled(false);
+
+        auto shatterabled = ShatterSprite::createWithSpriteFrame(this->sprite->getSpriteFrame());
+        shatterabled->setScale(this->sprite->getScale());
+        shatterabled->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+        this->addChild(shatterabled);
+
+        shatterabled->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
+
+        CallFunc* remove = CallFunc::create([this]()
+        {
+            this->removeFromParent();
+            CCLOG("removed harvestable from parent");
+        });
+
+        auto shatter_action = ShatterAction::create(1.0f);
+        shatterabled->runAction(Sequence::createWithTwoActions(shatter_action, remove));
     };
 };
