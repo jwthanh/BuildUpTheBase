@@ -1119,10 +1119,11 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F4) 
     {
+        this->_visible_inventory = !this->_visible_inventory;
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F5) 
     {
-        this->_visible_inventory = !this->_visible_inventory;
+        this->reload_resources();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE) 
     {
