@@ -14,6 +14,8 @@
 #include "Util.h"
 #include "Level.h"
 
+#include "HouseBuilding.h"
+
 USING_NS_CC;
 
 bool Coin::_has_spin_anim = false;

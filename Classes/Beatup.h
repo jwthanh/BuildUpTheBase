@@ -5,7 +5,6 @@
 #include "GameLayer.h"
 #include "constants.h"
 
-#include "HouseBuilding.h"
 
 class BaseMenu;
 
@@ -30,6 +29,11 @@ class WeaponButton;
 
 class Quest;
 class Level;
+
+class FighterNode;
+class Buildup;
+class Building;
+class Fighter;
 
 
 class Beatup : public GameLayer
@@ -121,8 +125,8 @@ class Beatup : public GameLayer
         void print_inventory();
         void hide_inventory();
 
-        void set_target_building(spBuilding target);
-        spBuilding get_target_building();
+        void set_target_building(std::shared_ptr<Building> target);
+        std::shared_ptr<Building> get_target_building();
 
         void set_target_face(Face* target);
         Face* get_target_face();
@@ -216,7 +220,7 @@ class Beatup : public GameLayer
         void switch_to_city_menu();
         void switch_to_inventory_menu();
         void switch_to_test();
-        void switch_to_character_menu(spFighter fighter);
+        void switch_to_character_menu(std::shared_ptr<Fighter> fighter);
 
 
         cocos2d::MotionStreak* motion;

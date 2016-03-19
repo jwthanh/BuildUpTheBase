@@ -19,6 +19,8 @@
 #include "Alert.h"
 #include "Level.h"
 
+#include "HouseBuilding.h"
+
 
 #pragma warning(default:4267)
 #pragma warning(default:4251)

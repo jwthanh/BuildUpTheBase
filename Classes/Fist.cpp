@@ -13,6 +13,8 @@
 #include "RandomWeightMap.h"
 #include "Util.h"
 
+#include "HouseBuilding.h"
+
 USING_NS_CC;
 
 
