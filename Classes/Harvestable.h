@@ -28,6 +28,8 @@ class Harvestable : public cocos2d::ui::Widget
         int click_limit;
         int current_clicks;
 
+        void shatter();
+
 };
 
 #endif
