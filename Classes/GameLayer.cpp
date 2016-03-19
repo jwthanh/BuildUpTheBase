@@ -303,6 +303,7 @@ void GameLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
     {
+        CCLOG("GameLayer::onKeyReleased: popScene");
         Director::getInstance()->popScene();
         event->stopPropagation();
     }
