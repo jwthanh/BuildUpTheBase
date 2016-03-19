@@ -466,14 +466,6 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         return false;
     }
 
-    for (auto node : {this->fighter_node, this->brawler_node, this->enemy_node}){
-        Rect fighter_rect = get_sprite_rect(node, node->sprite);
-        if (vec2_in_rect(&fighter_rect, touch->getLocation()))
-        {
-            this->switch_to_character_menu(node->fighter);
-        }
-
-    }
 
     //debug
     // auto layer_color = LayerColor::create(Color4B::RED);

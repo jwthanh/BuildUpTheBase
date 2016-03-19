@@ -179,7 +179,7 @@ class Fighter : public Nameable, public Updateable
         std::string get_stats();
 };
 
-class FighterNode : public cocos2d::Node
+class FighterNode : public cocos2d::ui::Widget
 {
     public:
         CREATE_FUNC(FighterNode);
@@ -193,7 +193,7 @@ class FighterNode : public cocos2d::Node
         Beatup* beatup;
         spFighter fighter;
 
-        cocos2d::Sprite* sprite;
+        cocos2d::ui::ImageView* sprite;
         void load_new_sprite(std::string name);
 
         ProgressBar* hp_bar;
@@ -271,6 +271,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         void print_fighters();
 
         void do_task(float dt);
+
 
 };
 

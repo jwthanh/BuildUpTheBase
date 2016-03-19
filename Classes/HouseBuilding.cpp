@@ -129,14 +129,23 @@ type_stuff(Waste);
 
 FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
 {
+
     FighterNode* node = FighterNode::create();
+    node->setTouchEnabled(true);
+
     node->beatup = beatup;
     node->fighter = fighter;
 
-    node->sprite = Sprite::createWithSpriteFrameName(fighter ? fighter->sprite_name : "townsmen8x8.png");
+    node->sprite = ui::ImageView::create(fighter ? fighter->sprite_name : "townsmen8x8.png", TextureResType::PLIST);
     node->sprite->setScale(8);
-    node->sprite->setPosition(0, 100);
+    node->sprite->setPosition(Vec2(0, 100));
     node->addChild(node->sprite);
+
+    node->sprite->setTouchEnabled(true);
+    node->sprite->addTouchEventListener([node](Ref*, TouchEventType)
+    {
+        node->beatup->switch_to_character_menu(node->fighter);
+    });
 
     //hp bar
     node->hp_bar = new ProgressBar(node->beatup, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
@@ -187,8 +196,7 @@ void FighterNode::update(float dt)
 
 void FighterNode::load_new_sprite(std::string name)
 {
-    Sprite* townsmen_sprite = Sprite::createWithSpriteFrameName(name);
-    this->sprite->setSpriteFrame(townsmen_sprite->getSpriteFrame());
+    this->sprite->loadTexture(name, TextureResType::PLIST);
 };
 
 void FighterNode::set_fighter(spFighter fighter)
