@@ -4,6 +4,7 @@
 #include "Beatup.h"
 #include "HouseBuilding.h"
 #include "ShatterNode.h"
+#include "MiscUI.h"
 
 USING_NS_CC;
 
@@ -69,7 +70,14 @@ void Harvestable::shatter()
 
     shatterabled->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
 
+    auto floating_label = FloatingLabel::createWithTTF("+1", DEFAULT_FONT, 36);
+    floating_label->setPosition(this->getPosition());
+    floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    this->getParent()->addChild(floating_label);
+    floating_label->do_float();
+
     CallFunc* remove = CallFunc::create([this](){
+
             this->removeFromParent();
             CCLOG("removed harvestable from parent");
             });
