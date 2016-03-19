@@ -15,6 +15,7 @@
 #include "Level.h"
 
 #include "HouseBuilding.h"
+#include "MiscUI.h"
 
 USING_NS_CC;
 
@@ -741,37 +742,15 @@ void Face::reset_color()
 
 void Face::spawn_dmg_lbl(int damage)
 {
-    float duration = 2.0f;
-
-    float x_scale = sx(100*CCRANDOM_0_1());
-    float y_scale = sy(100 + (10 * CCRANDOM_0_1()));
-
-    ccBezierConfig config = {
-        Vec2(x_scale, y_scale),
-        Vec2(x_scale, 1),
-        Vec2(1, y_scale)
-    };
-
-    auto hit_dmg = Label::createWithTTF(std::to_string(damage), DEFAULT_FONT, 48);
+    auto hit_dmg = FloatingLabel::createWithTTF(std::to_string(damage), DEFAULT_FONT, 48);
     hit_dmg->setScale(sx(1));
     hit_dmg->setPosition( this->beatup->get_center_pos(
         sx((75*CCRANDOM_MINUS1_1())),
         sy((150 * CCRANDOM_0_1()))
     ));
-    hit_dmg->runAction(TintTo::create(duration, Color3B::RED));
-    hit_dmg->runAction(ScaleBy::create(duration, 0.25f));
-    hit_dmg->runAction(FadeOut::create(duration));
-    hit_dmg->runAction(
-        RepeatForever::create(
-            Sequence::create(
-                BezierBy::create(duration, config),
-                BezierBy::create(duration, config),
-                NULL
-            )
-        )
-    );
 
     this->beatup->face_fight_node->addChild(hit_dmg);
+    hit_dmg->do_float();
 };
 
 FacialFeature::FacialFeature(Face* face, std::string sprite_name, int hit_limit)

@@ -48,6 +48,7 @@
     <ClCompile Include="..\Classes\Resources.cpp" />
     <ClCompile Include="..\Classes\HarvestScene.cpp" />
     <ClCompile Include="..\Classes\GameLogic.cpp" />
+    <ClCompile Include="..\Classes\MiscUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -92,6 +93,7 @@
     <ClInclude Include="..\Classes\Resources.h" />
     <ClInclude Include="..\Classes\HarvestScene.h" />
     <ClInclude Include="..\Classes\GameLogic.h" />
+    <ClInclude Include="..\Classes\MiscUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
