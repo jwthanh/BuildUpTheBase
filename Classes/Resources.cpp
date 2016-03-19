@@ -70,3 +70,14 @@ ResType::ResType##Type ResType::string_to_type(std::string string_type) \
 type_stuff(Ingredient);
 type_stuff(Product);
 type_stuff(Waste);
+
+std::string Resource::type_str(ResourceType type)
+{
+    auto mapping = std::map<ResourceType, std::string>();
+    mapping[Ingredient] = "Ingredient";
+    mapping[ResourceType::Product] = "Product";
+    mapping[ResourceType::Waste] = "Waste";
+
+    return mapping[type];
+
+}
