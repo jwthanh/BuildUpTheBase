@@ -3,6 +3,7 @@
 
 #include "Beatup.h"
 #include "HouseBuilding.h"
+#include "ShatterNode.h"
 
 USING_NS_CC;
 
@@ -53,5 +54,7 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
         farm->create_resources(Resource::Ingredient, 1, "Berry");
     } else {
         CCLOG("You've done it!");
+        // ShatterSprite::createWithTexture(this->sprite->getTexture());
+        // this->runAction(ShatterAction::create(1.0f));
     };
 };

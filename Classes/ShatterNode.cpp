@@ -44,6 +44,30 @@ ShatterSprite* ShatterSprite::createWithSpriteFrameName(const std::string& sprit
     return createWithSpriteFrame(frame);
 }
 
+ShatterSprite* ShatterSprite::createWithTexture(Texture2D *texture)
+{
+    ShatterSprite *sprite = new (std::nothrow) ShatterSprite();
+    if (sprite && sprite->initWithTexture(texture))
+    {
+        sprite->autorelease();
+        return sprite;
+    }
+    CC_SAFE_DELETE(sprite);
+    return nullptr;
+}
+
+ShatterSprite* ShatterSprite::createWithTexture(Texture2D *texture, const Rect& rect, bool rotated)
+{
+    ShatterSprite *sprite = new (std::nothrow) ShatterSprite();
+    if (sprite && sprite->initWithTexture(texture, rect, rotated))
+    {
+        sprite->autorelease();
+        return sprite;
+    }
+    CC_SAFE_DELETE(sprite);
+    return nullptr;
+}
+
 bool ShatterSprite::initWithFile(const std::string& filename)
 {
     CCASSERT(filename.size()>0, "Invalid filename for sprite");

@@ -37,6 +37,8 @@ class ShatterSprite : public Sprite
         static ShatterSprite* createWithSpriteFrame(SpriteFrame *spriteFrame);
         static ShatterSprite* createWithSpriteFrameName(SpriteFrame *spriteFrame);
         static ShatterSprite* createWithSpriteFrameName(const std::string& spriteFrameName);
+        static ShatterSprite* createWithTexture(Texture2D *texture);
+        static ShatterSprite* createWithTexture(Texture2D *texture, const Rect& rect, bool rotated);
 
     protected:
         void createShatter();
