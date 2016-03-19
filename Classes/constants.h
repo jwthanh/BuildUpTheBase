@@ -4,6 +4,12 @@
 
 #include <string>
 #include <algorithm>
+#include <functional>
+#include <vector>
+#include <memory>
+#include <sstream>
+
+#include "CCPlatformMacros.h"
 
 #define TITLE_FONT  "fonts/airstrike.ttf"
 #define DEFAULT_FONT  "fonts/pixelmix.ttf"

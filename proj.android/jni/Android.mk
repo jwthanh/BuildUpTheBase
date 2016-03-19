@@ -16,6 +16,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Beatup.cpp \
                    ../../Classes/BaseMenu.cpp \
                    ../../Classes/NuMenu.cpp \
+                   ../../Classes/Resources.cpp \
                    ../../Classes/GameLayer.cpp \
                    ../../Classes/Weapons.cpp \
                    ../../Classes/Fist.cpp \

@@ -173,6 +173,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\NuMenu.cpp" />
     <ClCompile Include="..\Classes\ProgressBar.cpp" />
     <ClCompile Include="..\Classes\Quest.cpp" />
+    <ClCompile Include="..\Classes\Resources.cpp" />
     <ClCompile Include="..\Classes\ShatterNode.cpp" />
     <ClCompile Include="..\Classes\BaseMenu.cpp" />
     <ClCompile Include="..\Classes\SoundEngine.cpp" />
@@ -206,10 +207,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Harvestable.h" />
     <ClInclude Include="..\Classes\Level.h" />
     <ClInclude Include="..\Classes\MainMenu.h" />
+    <ClInclude Include="..\Classes\Nameable.h" />
     <ClInclude Include="..\Classes\NuMenu.h" />
     <ClInclude Include="..\Classes\ProgressBar.h" />
     <ClInclude Include="..\Classes\Quest.h" />
     <ClInclude Include="..\Classes\RandomWeightMap.h" />
+    <ClInclude Include="..\Classes\Resources.h" />
     <ClInclude Include="..\Classes\ShatterNode.h" />
     <ClInclude Include="..\Classes\BaseMenu.h" />
     <ClInclude Include="..\Classes\SoundEngine.h" />

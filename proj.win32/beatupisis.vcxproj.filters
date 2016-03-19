@@ -45,6 +45,7 @@
     <ClCompile Include="..\Classes\NuMenu.cpp" />
     <ClCompile Include="..\Classes\StaticData.cpp" />
     <ClCompile Include="..\Classes\Harvestable.cpp" />
+    <ClCompile Include="..\Classes\Resources.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -85,6 +86,8 @@
     <ClInclude Include="..\Classes\NuMenu.h" />
     <ClInclude Include="..\Classes\StaticData.h" />
     <ClInclude Include="..\Classes\Harvestable.h" />
+    <ClInclude Include="..\Classes\Nameable.h" />
+    <ClInclude Include="..\Classes\Resources.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
