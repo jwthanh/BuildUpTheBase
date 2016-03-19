@@ -8,60 +8,17 @@
 #include "../../Classes/Clock.h"
 #include "../../Classes/attribute_container.h"
 #include "../../Classes/StaticData.h"
-//#include "../../Classes/RandomWeightMap.h"
 
 #include "../../cocos2d/cocos/cocos2d.h"
 
 #include <map>
 
-
-#define printj(msg){std::stringstream ss123; ss123<< msg; CCLOG(ss123.str().c_str(), "");}
-#define printj1(msg){std::stringstream ss123; ss123<< "\t" << msg; CCLOG(ss123.str().c_str(), "");}
-#define printj2(msg){std::stringstream ss123; ss123<< "\t\t" << msg; CCLOG(ss123.str().c_str(), "");}
-#define NO_CB [](){}
 #include "../../Classes/combat.h"
 #include <ProgressBar.h>
 #include <BaseMenu.h>
 #include "Buyable.h"
 
-
-class Recipe;
-class Beatup;
-class Building;
-class Buildup;
-class Village;
-class Product;
-class Ingredient;
-class Waste;
-class Resource;
-class Fighter;
-class Battle;
-class Worker;
-
-
-typedef std::function<void()> VoidFunc;
-
-#define _MAKE_SP(Cls)typedef std::shared_ptr<Cls> sp##Cls
-#define _MAKE_VS(Cls)typedef std::vector<sp##Cls> vs##Cls
-
-#define MAKE_SP_VS(Cls)_MAKE_SP(Cls);_MAKE_VS(Cls)
-
-MAKE_SP_VS(Building);
-MAKE_SP_VS(Resource);
-MAKE_SP_VS(Product);
-MAKE_SP_VS(Ingredient);
-MAKE_SP_VS(Waste);
-MAKE_SP_VS(Battle);
-MAKE_SP_VS(Fighter);
-MAKE_SP_VS(Worker);
-
-#undef MAKE_SP_VS
-#undef _MAKE_VS
-#undef _MAKE_SP
-
-//typedef void(*VoidFuncBuilding)(spBuilding);
-typedef void(*TaskFunc)(spBuilding, float);
-typedef bool(*BoolFuncBuilding)(spBuilding);
+#include "constants.h"
 
 class Updateable
 {
@@ -269,7 +226,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 {
     public:
 
-        std::shared_ptr<BuildingData> data;
+        spBuildingData data;
 
         Village* city;
 
