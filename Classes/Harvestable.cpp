@@ -5,6 +5,7 @@
 #include "HouseBuilding.h"
 #include "ShatterNode.h"
 #include "MiscUI.h"
+#include "GameLogic.h"
 
 USING_NS_CC;
 
@@ -73,6 +74,8 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 
     } else {
         this->shatter();
+
+        GameLogic::getInstance()->add_total_harvests(1);
     };
 };
 

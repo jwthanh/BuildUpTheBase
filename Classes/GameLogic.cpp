@@ -2,6 +2,7 @@
 
 #include "Beatup.h"
 #include "HouseBuilding.h"
+#include "DataManager.h"
 
 GameLogic* GameLogic::_instance = NULL;
 
@@ -35,4 +36,10 @@ GameLogic* GameLogic::getInstance()
     };
 
     return GameLogic::_instance;
+};
+
+void GameLogic::add_total_harvests(int value)
+{
+    CCLOG("adding %d total harvest", value);
+    DataManager::incr_key("total_harvests", value);
 };
