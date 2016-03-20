@@ -23,7 +23,6 @@ bool Harvestable::init()
     this->clip->addChild(this->sprite);
 
     this->addChild(this->clip);
-    this->setGlobalZOrder(1000000.0f);
 
     auto sprite_size = this->sprite->getContentSize();
     this->setContentSize(sprite_size*this->sprite->getScale());
