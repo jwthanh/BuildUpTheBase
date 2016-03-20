@@ -68,6 +68,7 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
             auto rotate_by = RotateBy::create(0.05f, rotation);
             auto rotate_to = RotateTo::create(0.05f, 0);
             this->sprite->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
+            this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
         };
 
     } else {
