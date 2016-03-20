@@ -40,7 +40,7 @@ FloatingLabel* FloatingLabel::createWithTTF(const TTFConfig& ttfConfig, const st
 
 void FloatingLabel::do_float()
 {
-    float duration = 2.0f;
+    float duration = 1.0f;
 
     float x_scale = sx(100*CCRANDOM_0_1());
     float y_scale = sy(100 + (10 * CCRANDOM_0_1()));
@@ -52,8 +52,8 @@ void FloatingLabel::do_float()
     };
 
 
-    this->runAction(TintTo::create(duration, Color3B::RED));
-    this->runAction(ScaleBy::create(duration, 0.25f));
+    this->runAction(TintTo::create(duration*3, Color3B::RED));
+    this->runAction(ScaleBy::create(duration*3, 0.35f));
     this->runAction(FadeOut::create(duration));
     this->runAction(
         RepeatForever::create(
