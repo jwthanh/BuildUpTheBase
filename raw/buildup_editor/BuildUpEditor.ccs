@@ -1,0 +1,26 @@
+<Solution>
+  <PropertyGroup Name="BuildUpEditor" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="buttons">
+          <Project Name="building_button.csd" Type="Node" />
+          <Project Name="inventory_button.csd" Type="Node" />
+          <Project Name="menu_item.csd" Type="Node" />
+        </Folder>
+        <Folder Name="details">
+          <Project Name="character_detail.csd" Type="Node" />
+          <Project Name="inventory_detail.csd" Type="Node" />
+        </Folder>
+        <Folder Name="images">
+          <Image Name="cat.png" />
+          <Image Name="forest.png" />
+          <Image Name="HelloWorld.png" />
+        </Folder>
+        <Folder Name="scenes">
+          <Project Name="city_scene.csd" Type="Scene" />
+        </Folder>
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>
