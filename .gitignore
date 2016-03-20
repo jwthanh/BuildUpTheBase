@@ -41,6 +41,12 @@ proj.win32/Debug.win32/beatupisis.log
 
 raw/*
 
+!raw/buildup_editor/*
+!raw/buildup_editor
+
+raw/buildup_editor/Resources
+raw/buildup_editor/Resources/*
+
 proj.win32/beatupisis.v12.suo
 proj.win32/Debug.win32/*
 
