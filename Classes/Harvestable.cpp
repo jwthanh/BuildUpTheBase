@@ -102,7 +102,7 @@ void Harvestable::shatter()
 
     CallFunc* remove = CallFunc::create([this](){ this->removeFromParent(); });
 
-    auto shatter_action = ShatterAction::create(1.0f);
+    auto shatter_action = ShatterAction::create(0.75f);
     shatter_sprite->runAction(Sequence::createWithTwoActions(shatter_action, remove));
 
 };
