@@ -29,7 +29,7 @@ bool Harvestable::init()
     this->setContentSize(sprite_size*this->sprite->getScale());
     this->sprite->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 
-    this->click_limit = 5;
+    this->click_limit = 15;
     this->current_clicks = 0;
 
     return true;
