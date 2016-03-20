@@ -56,16 +56,16 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
         float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
         float rotation = 0.0f;
 
-        if (click_ratio > 0.8f) {
-            rotation = 25.0f;
-        } else if (click_ratio > 0.6f) {
+        if (click_ratio >= 0.8f) {
             rotation = 15.0f;
-        } else if (click_ratio > 0.4f) {
-            rotation = 5.0f;
+        } else if (click_ratio >= 0.6f) {
+            rotation = 6.0f;
+        } else if (click_ratio >= 0.4f) {
+            rotation = 2.0f;
         };
 
         if (rotation != 0.0f) {
-            auto rotate_by = RotateBy::create(0.05f, 5);
+            auto rotate_by = RotateBy::create(0.05f, rotation);
             auto rotate_to = RotateTo::create(0.05f, 0);
             this->sprite->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
         };
