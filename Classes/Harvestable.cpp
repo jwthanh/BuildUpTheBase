@@ -63,8 +63,11 @@ void Harvestable::shatter()
     this->sprite->setVisible(false);
     this->setTouchEnabled(false);
 
+    float sprite_scale = this->sprite->getScale();
+    Size sprite_size = this->sprite->getContentSize();
+
     auto shatter_sprite = ShatterSprite::createWithSpriteFrame(this->sprite->getSpriteFrame());
-    shatter_sprite->setScale(this->sprite->getScale());
+    shatter_sprite->setScale(sprite_scale);
     shatter_sprite->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
     this->addChild(shatter_sprite);
 
@@ -72,8 +75,10 @@ void Harvestable::shatter()
 
     //spawn label //TODO fix hardcoded name
     auto floating_label = FloatingLabel::createWithTTF("+1 Grain", DEFAULT_FONT, 12);
-    floating_label->setPosition(this->getPosition());
-    floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    floating_label->setPosition(
+            this->getPosition() + Vec2(sprite_size*sprite_scale)
+        );
+    floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
     this->getParent()->addChild(floating_label);
     floating_label->do_float();
 
