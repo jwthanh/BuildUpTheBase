@@ -87,12 +87,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
             CCLOG("done preloading");
 
             Scene* scene = Scene::create();
-            // MainMenu* main_menu = MainMenu::create();
-            // scene->addChild(main_menu);
-            scene->addChild(HarvestScene::create());
+            MainMenu* main_menu = MainMenu::create();
+            scene->addChild(main_menu);
+            // scene->addChild(HarvestScene::create());
 
-            // Beatup::main_menu_scene = scene;
-            // Beatup::main_menu_scene->retain();
+            Beatup::main_menu_scene = scene;
+            Beatup::main_menu_scene->retain();
 
             auto director = Director::getInstance();
             director->pushScene(scene);
