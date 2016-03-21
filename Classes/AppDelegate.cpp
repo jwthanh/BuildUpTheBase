@@ -31,21 +31,31 @@ bool AppDelegate::applicationDidFinishLaunching() {
     if(!glview) {
         glview = GLViewImpl::create("Build up a base!");
         director->setOpenGLView(glview);
-
-        auto set_resolution = [glview](float x, float y) {
-            glview->setFrameSize(x, y);
-            glview->setDesignResolutionSize(x, y, ResolutionPolicy::SHOW_ALL);
-        };
-
-        //720p
-        // set_resolution(1280, 720);
-
-        //1080p
-        // set_resolution(1920, 1080);
-
-        //1024 x 600
-        // set_resolution(1024, 600);
     }
+
+    auto set_resolution = [glview, director](float x, float y) {
+        CCLOG("set_resolution %f %f", x, y);
+        Size new_size = Size(x, y);
+        Size base_size = Size(960, 640);
+        glview->setFrameSize(x, y);
+        // glview->setDesignResolutionSize(x, y, ResolutionPolicy::EXACT_FIT);
+        glview->setDesignResolutionSize(base_size.width, base_size.height, ResolutionPolicy::EXACT_FIT);
+
+        // director->setContentScaleFactor((new_size.width / base_size.width));
+    };
+
+    //iphone
+    // set_resolution(960, 640);
+
+    //720p
+    // set_resolution(1280, 720);
+
+    //1080p
+    set_resolution(1920, 1080);
+    CCLOG("after TEST TEST");
+
+    //1024 x 600
+    // set_resolution(1024, 600);
 
     // turn on display FPS
     // director->setDisplayStats(true);
@@ -146,7 +156,7 @@ void AppDelegate::preload_sounds()
     // cache->preloadEffect(clean_path("sounds\\old\\block.mp3").c_str());
     cache->preloadEffect(clean_path("sounds\\old\\brick_hit.mp3").c_str());
     cache->preloadEffect(clean_path("sounds\\old\\brick_scrape.mp3").c_str());
-    cache->preloadEffect(clean_path("sounds\\old\\cheering.mp3").c_str());
+    // cache->preloadEffect(clean_path("sounds\\old\\cheering.mp3").c_str());
     cache->preloadEffect(clean_path("sounds\\old\\coin.mp3").c_str());
     //cache->preloadEffect(clean_path("sounds\\old\\ding.mp3").c_str());
     cache->preloadEffect(clean_path("sounds\\old\\doom_rocket.mp3").c_str());

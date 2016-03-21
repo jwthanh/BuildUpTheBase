@@ -3,8 +3,7 @@
 #define HARVESTABLE_H
 
 #include "cocos2d.h"
-#include <cocos2d/cocos/ui/UIWidget.h>
-#include <cocos2d/cocos/ui/UILayout.h>
+#include "ui/CocosGUI.h"
 
 #include "GameLayer.h"
 

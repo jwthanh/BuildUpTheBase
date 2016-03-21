@@ -2,7 +2,7 @@
 #include "Harvestable.h"
 
 #include "GameLogic.h"
-#include <cocos2d/cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h>
+#include "cocostudio/ActionTimeline/CSLoader.h"
 #include "NuMenu.h"
 #include "Beatup.h"
 #include "Util.h"
@@ -32,7 +32,7 @@ bool HarvestScene::init()
     
     Node* shop_pos_node = harvest_scene_editor->getChildByName("shop_pos");
     shop_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-    shop_button->setPosition(sv(shop_pos_node->getPosition()));
+    shop_button->setPosition(shop_pos_node->getPosition());
     log_vector(shop_pos_node->getPosition(), "shop pos");
     
 

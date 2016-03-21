@@ -16,8 +16,12 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Beatup.cpp \
                    ../../Classes/BaseMenu.cpp \
                    ../../Classes/NuMenu.cpp \
+                   ../../Classes/HarvestScene.cpp \
+                   ../../Classes/Harvestable.cpp \
                    ../../Classes/Resources.cpp \
+                   ../../Classes/GameLogic.cpp \
                    ../../Classes/GameLayer.cpp \
+                   ../../Classes/MiscUI.cpp \
                    ../../Classes/Weapons.cpp \
                    ../../Classes/Fist.cpp \
                    ../../Classes/FileOperation.cpp \
