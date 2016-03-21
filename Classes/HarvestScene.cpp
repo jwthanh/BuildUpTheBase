@@ -31,7 +31,6 @@ bool HarvestScene::init()
     shop_button->setScale(4);
     
     Node* shop_pos_node = harvest_scene_editor->getChildByName("shop_pos");
-    // shop_pos_node->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     shop_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
     shop_button->setPosition(shop_pos_node->getPosition());
     
@@ -80,6 +79,18 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     {
         this->quit(NULL);
         event->stopPropagation();
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F1) 
+    {
+        auto glView = Director::getInstance()->getOpenGLView();
+        glView->setFrameSize(1920, 1080);
+        glView->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F2) 
+    {
+        auto glView = Director::getInstance()->getOpenGLView();
+        glView->setFrameSize(960, 640);
+        glView->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_F5)
     {
