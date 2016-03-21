@@ -76,6 +76,7 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
         this->shatter();
 
         GameLogic::getInstance()->add_total_harvests(1);
+        CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
     };
 };
 

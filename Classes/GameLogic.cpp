@@ -43,3 +43,8 @@ void GameLogic::add_total_harvests(int value)
     CCLOG("adding %d total harvest", value);
     DataManager::incr_key("total_harvests", value);
 };
+
+int GameLogic::get_total_harvests()
+{
+    return DataManager::get_int_from_data("total_harvests");
+};
