@@ -8,6 +8,7 @@
 
 float sx(float x, bool do_scale=false);
 float sy(float y, bool do_scale=false);
+cocos2d::Vec2 sv(cocos2d::Vec2 input); //note do_scale is true
 
 template<typename T>
 T pick_one(std::vector<T> vec)

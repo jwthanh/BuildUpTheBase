@@ -32,7 +32,8 @@ bool HarvestScene::init()
     
     Node* shop_pos_node = harvest_scene_editor->getChildByName("shop_pos");
     shop_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-    shop_button->setPosition(shop_pos_node->getPosition());
+    shop_button->setPosition(sv(shop_pos_node->getPosition()));
+    log_vector(shop_pos_node->getPosition(), "shop pos");
     
 
     shop_button->addTouchEventListener([this](Ref*, ui::Widget::TouchEventType evt)

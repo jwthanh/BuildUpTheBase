@@ -4,7 +4,7 @@
     <Content>
       <Animation Duration="0" Speed="1.0000" />
       <ObjectData Name="city" Tag="29" ctype="GameNodeObjectData">
-        <Size X="960.0000" Y="640.0000" />
+        <Size X="1920.0000" Y="1080.0000" />
         <Children>
           <AbstractNodeData Name="The Dump" ActionTag="-1946173435" Tag="48" IconVisible="True" LeftMargin="470.0000" RightMargin="490.0000" TopMargin="119.0000" BottomMargin="521.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
