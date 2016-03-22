@@ -62,6 +62,9 @@ void HarvestScene::add_harvestable()
     auto harvestable = Harvestable::create(GameLogic::getInstance()->beatup);
     harvestable->setPosition(this->get_center_pos());
     harvestable->setName("harvestable");
+
+    harvestable->setScale(harvestable->getScale()*2);
+
     this->addChild(harvestable);
 };
 

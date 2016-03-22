@@ -12,6 +12,7 @@ USING_NS_CC;
 bool Harvestable::init()
 {
     this->setTouchEnabled(true); //true otherwise it cant be clicked
+    this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 
     this->clip = cocos2d::ClippingNode::create();
     this->stencil = cocos2d::DrawNode::create();
@@ -27,7 +28,9 @@ bool Harvestable::init()
 
     auto sprite_size = this->sprite->getContentSize();
     this->setContentSize(sprite_size*this->sprite->getScale());
-    this->sprite->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+
+    this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    this->sprite->setPosition(this->getContentSize().width / 2, this->getContentSize().height / 2);
 
     this->click_limit = 15;
     this->current_clicks = 0;
@@ -90,7 +93,8 @@ void Harvestable::shatter()
 
     auto shatter_sprite = ShatterSprite::createWithSpriteFrame(this->sprite->getSpriteFrame());
     shatter_sprite->setScale(sprite_scale);
-    shatter_sprite->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    shatter_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    shatter_sprite->setPosition(this->getContentSize().width / 2, this->getContentSize().height / 2);
     this->addChild(shatter_sprite);
 
     shatter_sprite->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
