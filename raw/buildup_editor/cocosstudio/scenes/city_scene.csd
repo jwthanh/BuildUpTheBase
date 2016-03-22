@@ -4,7 +4,7 @@
     <Content>
       <Animation Duration="0" Speed="1.0000" />
       <ObjectData Name="city" Tag="29" ctype="GameNodeObjectData">
-        <Size X="1920.0000" Y="1080.0000" />
+        <Size X="960.0000" Y="640.0000" />
         <Children>
           <AbstractNodeData Name="The Dump" ActionTag="-1946173435" Tag="48" IconVisible="True" LeftMargin="470.0000" RightMargin="490.0000" TopMargin="119.0000" BottomMargin="521.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
@@ -96,13 +96,13 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="back_btn" ActionTag="-552791013" CallBackType="Touch" CallBackName="pop_scene" Tag="74" IconVisible="False" LeftMargin="63.0000" RightMargin="851.0000" TopMargin="75.0000" BottomMargin="529.0000" TouchEnable="True" FontSize="14" ButtonText="Go Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="back_btn" ActionTag="-552791013" CallBackType="Touch" CallBackName="pop_scene" Tag="74" IconVisible="False" LeftMargin="67.0000" RightMargin="847.0000" TopMargin="82.0000" BottomMargin="522.0000" TouchEnable="True" FontSize="14" ButtonText="Go Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="46.0000" Y="36.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="86.0000" Y="547.0000" />
+            <Position X="90.0000" Y="540.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0896" Y="0.8547" />
+            <PrePosition X="0.0938" Y="0.8438" />
             <PreSize X="0.0479" Y="0.0562" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />

@@ -131,7 +131,7 @@ ui::Button* HarvestScene::create_city_button()
     );
 
     auto shop_text_img = ui::ImageView::create(
-        "text_shop.png",
+        "text_city.png",
         ui::TextureResType::PLIST
     );
 
