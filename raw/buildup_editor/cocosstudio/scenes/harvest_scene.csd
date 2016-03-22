@@ -16,6 +16,16 @@
             <PreSize X="0.0479" Y="0.0719" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
+          <AbstractNodeData Name="city_pos" ActionTag="-1746362178" Tag="77" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" RightMargin="914.0000" TopMargin="245.8560" BottomMargin="348.1440" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+            <Size X="46.0000" Y="46.0000" />
+            <AnchorPoint />
+            <Position Y="348.1440" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition Y="0.5440" />
+            <PreSize X="0.0479" Y="0.0719" />
+            <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

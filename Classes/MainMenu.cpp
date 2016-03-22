@@ -16,6 +16,7 @@
 #include <editor-support/cocostudio/ActionTimeline/CSLoader.h>
 #include "attribute.h"
 #include "NuMenu.h"
+#include "GameLogic.h"
 
 USING_NS_CC;
 
@@ -800,10 +801,9 @@ void BuildingMenu::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *pEvent)
     }
 };
 
-CityMenu* CityMenu::create(spBuilding building)
+CityMenu* CityMenu::create()
 {
     CityMenu *pRet = new(std::nothrow) CityMenu();
-    pRet->building = building; //this should be after init, cause i guess init should fail, but its fine for now.
 
     if (pRet && pRet->init()) {
         pRet->autorelease();
@@ -859,7 +859,7 @@ bool CityMenu::init()
         return ss.str();
     };
 
-    for (auto building : this->building->city->buildings)
+    for (auto building : GameLogic::getInstance()->buildup->city->buildings)
     {
 
        auto node = city_scene->getChildByName(building->name);
@@ -887,7 +887,7 @@ bool CityMenu::init()
 
        auto cb = [this, building](Ref*, ui::Widget::TouchEventType) {
            auto scene = Scene::create();
-           BuildingNuMenu* building_menu = BuildingNuMenu::create(this->building->city->buildup->beatup, building);
+           BuildingNuMenu* building_menu = BuildingNuMenu::create(GameLogic::getInstance()->beatup, building);
            scene->addChild(building_menu);
 
            auto director = Director::getInstance();

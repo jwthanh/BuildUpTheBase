@@ -353,7 +353,7 @@ void Beatup::switch_to_building_menu()
 void Beatup::switch_to_city_menu()
 {
     auto scene = Scene::create();
-    CityMenu* building_menu = CityMenu::create(this->buildup->target_building);
+    CityMenu* building_menu = CityMenu::create();
     scene->addChild(building_menu);
 
     auto director = Director::getInstance();

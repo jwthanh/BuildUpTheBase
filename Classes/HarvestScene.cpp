@@ -6,6 +6,7 @@
 #include "NuMenu.h"
 #include "Beatup.h"
 #include "Util.h"
+#include "MainMenu.h"
 
 USING_NS_CC;
 
@@ -15,6 +16,9 @@ bool HarvestScene::init()
 
     ui::Button* shop_button = this->create_shop_button();
     this->addChild(shop_button);
+
+    ui::Button* city_button = this->create_city_button();
+    this->addChild(city_button);
 
     this->add_harvestable();
 
@@ -103,6 +107,47 @@ ui::Button* HarvestScene::create_shop_button()
         if (evt == ui::Widget::TouchEventType::ENDED) {
             auto scene = Scene::create();
             BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(GameLogic::getInstance()->beatup);
+            scene->addChild(building_menu);
+
+            auto director = Director::getInstance();
+            director->pushScene(scene);
+        };
+    });
+
+    return shop_button;
+};
+
+ui::Button* HarvestScene::create_city_button()
+{
+
+    auto inst = CSLoader::getInstance();
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+
+    auto shop_button = ui::Button::create(
+        "shop_banner.png",
+        "shop_banner_hili.png",
+        "shop_banner.png",
+        ui::TextureResType::PLIST
+    );
+
+    auto shop_text_img = ui::ImageView::create(
+        "text_shop.png",
+        ui::TextureResType::PLIST
+    );
+
+    shop_text_img->setPosition(Vec2(28, 17));
+    shop_button->addChild(shop_text_img);
+    shop_button->setScale(4);
+
+    Node* shop_pos_node = harvest_scene_editor->getChildByName("city_pos");
+    shop_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    shop_button->setPosition(shop_pos_node->getPosition());
+
+    shop_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
+    {
+        if (evt == ui::Widget::TouchEventType::ENDED) {
+            auto scene = Scene::create();
+            CityMenu* building_menu = CityMenu::create();
             scene->addChild(building_menu);
 
             auto director = Director::getInstance();

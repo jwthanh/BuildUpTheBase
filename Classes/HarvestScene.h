@@ -13,6 +13,7 @@ class HarvestScene : public GameLayer
         virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
         cocos2d::ui::Button* create_shop_button();
+        cocos2d::ui::Button* create_city_button();
 
         void add_harvestable();
 

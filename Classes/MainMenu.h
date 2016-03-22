@@ -122,11 +122,9 @@ class BuildingMenu : public BaseMenu
 class CityMenu : public GameLayer
 {
     public:
-        spBuilding building;
-
         cocos2d::Label* main_lbl;
 
-        static CityMenu* create(spBuilding building);
+        static CityMenu* create();
         static cocos2d::Scene* createScene();
 
         virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
