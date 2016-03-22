@@ -33,16 +33,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-    auto set_resolution = [glview, director](float x, float y) {
-        Size new_size = Size(x, y);
+    Size base_size = Size(960, 640);
+
+    auto set_resolution = [glview, director, base_size](float x, float y) {
         glview->setFrameSize(x, y);
+        glview->setDesignResolutionSize(base_size.width, base_size.height, ResolutionPolicy::EXACT_FIT);
     };
 
-    Size base_size = Size(960, 640);
-    glview->setDesignResolutionSize(base_size.width, base_size.height, ResolutionPolicy::EXACT_FIT);
-
     //iphone
-    // set_resolution(960, 640);
+    set_resolution(960, 640);
 
     //720p
     // set_resolution(1280, 720);
@@ -84,13 +83,18 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
             Scene* scene = Scene::create();
 
-            scene->addChild(HarvestScene::create());
+            bool use_new_scene = true;
 
-            // MainMenu* main_menu = MainMenu::create();
-            // scene->addChild(main_menu);
+            if (use_new_scene) {
+                scene->addChild(HarvestScene::create());
+            } else {
 
-            // Beatup::main_menu_scene = scene;
-            // Beatup::main_menu_scene->retain();
+                MainMenu* main_menu = MainMenu::create();
+                scene->addChild(main_menu);
+
+                Beatup::main_menu_scene = scene;
+                Beatup::main_menu_scene->retain();
+            };
 
             auto director = Director::getInstance();
             director->pushScene(scene);
