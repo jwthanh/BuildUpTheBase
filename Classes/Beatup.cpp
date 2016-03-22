@@ -1805,7 +1805,7 @@ void Beatup::reload_resources()
 {
 #ifdef __ANDROID__
 #else
-    system("xcopy \"C:\\Users\\Primary\\workspace\\beatupisis\\proj.win32\\..\\Resources\" \"C:\\Users\\Primary\\workspace\\beatupisis\\proj.win32\\Debug.win32\\\" /E /I /F /Y  /D /K ");
+    system("xcopy \"C:\\Users\\Primary\\workspace\\basebuilder\\proj.win32\\..\\Resources\" \"C:\\Users\\Primary\\workspace\\basebuilder\\proj.win32\\Debug.win32\\\" /E /I /F /Y  /D /K ");
 #endif
 };
 
