@@ -33,6 +33,11 @@ void NuItem::my_init(Beatup* beatup, cocos2d::Node* parent)
     this->desc_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
     this->cost_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
 
+    this->set_title("");
+    this->set_description("");
+    this->set_cost("");
+    // this->set_image("");
+
 };
 
 void NuItem::set_touch_ended_callback(std::function<void(void)> callback)
@@ -77,9 +82,9 @@ void NuItem::set_cost(std::string cost)
 };
 
 void ShopNuItem::my_init(Beatup* beatup, Node* parent, std::string id_key)
-    
 {
     NuItem::my_init(beatup, parent);
+
     this->id_key = id_key;
     this->_shop_cost = -1;
 };
