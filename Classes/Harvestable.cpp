@@ -6,6 +6,7 @@
 #include "ShatterNode.h"
 #include "MiscUI.h"
 #include "GameLogic.h"
+#include "Util.h"
 
 USING_NS_CC;
 
@@ -30,7 +31,7 @@ bool Harvestable::init()
     this->setContentSize(sprite_size*this->sprite->getScale());
 
     this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    this->sprite->setPosition(this->getContentSize().width / 2, this->getContentSize().height / 2);
+    this->sprite->setPosition(get_relative(this->getContentSize()));
 
     this->click_limit = 15;
     this->current_clicks = 0;
@@ -94,7 +95,7 @@ void Harvestable::shatter()
     auto shatter_sprite = ShatterSprite::createWithSpriteFrame(this->sprite->getSpriteFrame());
     shatter_sprite->setScale(sprite_scale);
     shatter_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    shatter_sprite->setPosition(this->getContentSize().width / 2, this->getContentSize().height / 2);
+    shatter_sprite->setPosition(get_relative(this->getContentSize()));
     this->addChild(shatter_sprite);
 
     shatter_sprite->setOpacity(0); //hide this so it shatters it doesnt leave anything behind

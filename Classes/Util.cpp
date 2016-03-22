@@ -25,6 +25,14 @@ cocos2d::Vec2 sv(cocos2d::Vec2 input)
     return cocos2d::Vec2(sx(input.x, true), sy(input.y, true));
 }
 
+cocos2d::Vec2 get_relative(cocos2d::Size input, cocos2d::Vec2 relative_pos)
+{
+    return cocos2d::Vec2(
+        input.width * relative_pos.x,
+        input.height * relative_pos.y
+    );
+};
+
 void log_vector(cocos2d::Vec2 vector, std::string message)
 {
     std::stringstream ss;
