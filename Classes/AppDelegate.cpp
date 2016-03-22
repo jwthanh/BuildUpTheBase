@@ -41,7 +41,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     };
 
     //iphone
-    set_resolution(960, 640);
+    // set_resolution(960, 640);
 
     //720p
     // set_resolution(1280, 720);
@@ -58,6 +58,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval((float)(1.0 / 60));
+
+    // no matter the screen size, have it act like a base size screen, 960x640
+    glview->setDesignResolutionSize(base_size.width, base_size.height, ResolutionPolicy::EXACT_FIT);
 
 #ifdef __ANDROID__
 #else
