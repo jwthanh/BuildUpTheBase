@@ -41,13 +41,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
     };
 
     //iphone
-    set_resolution(960, 640);
+    // set_resolution(960, 640);
 
     //720p
     // set_resolution(1280, 720);
 
     //1080p
-    // set_resolution(1920, 1080);
+    set_resolution(1920, 1080);
 
     //1024 x 600
     // set_resolution(1024, 600);
@@ -83,7 +83,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
             Scene* scene = Scene::create();
 
-            bool use_new_scene = true;
+            bool use_new_scene = false;
 
             if (use_new_scene) {
                 scene->addChild(HarvestScene::create());

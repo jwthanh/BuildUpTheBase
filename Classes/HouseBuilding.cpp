@@ -753,15 +753,15 @@ void Building::update(float dt)
 {
     Updateable::update(dt);
 
-    // if (update_clock->passed_threshold())
-    // {
-    //     this->spawn_clock->update(dt);
-    //     this->do_task(dt);
-    //     update_clock->reset();
-    // }
-    // else
-    // {
-    // }
+    if (update_clock->passed_threshold())
+    {
+        this->spawn_clock->update(dt);
+        this->do_task(dt);
+        update_clock->reset();
+    }
+    else
+    {
+    }
 };
 std::string Building::get_specifics()
 {
