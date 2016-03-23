@@ -351,11 +351,9 @@ cocos2d::Size Scrollable::get_accumulated_size()
 void Scrollable::resize_to_fit()
 {
     //TODO maintain scroll position after this gets called
-
-    float extra_margins = this->getChildrenCount()*(sy(15.0f)*sy(1.0f));
     int scroll_w = sx(800);
     this->setInnerContainerSize(cocos2d::Size(
         scroll_w,
-        this->get_accumulated_size().height + extra_margins
+        this->get_accumulated_size().height
     ));
 };
