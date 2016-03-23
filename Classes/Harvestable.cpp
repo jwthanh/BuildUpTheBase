@@ -101,7 +101,7 @@ void Harvestable::shatter()
     shatter_sprite->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
 
     //spawn label //TODO fix hardcoded name
-    auto floating_label = FloatingLabel::createWithTTF("+1 Harvest", DEFAULT_FONT, 12);
+    auto floating_label = FloatingLabel::createWithTTF("+1 Harvest", DEFAULT_FONT, 24);
     floating_label->setPosition(
             this->getPosition() + Vec2(sprite_size*sprite_scale)
         );
