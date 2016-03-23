@@ -9,11 +9,6 @@ class ShatterFrag : public Sprite
     public:
         int m_randomNumber;
         ShatterFrag() { m_randomNumber = -1; }
-        bool initWithTexture(Texture2D* texture)
-        {
-            this->CCSprite::initWithTexture(texture);
-            return true;
-        }
 };
 
 class ShatterAction;
@@ -25,8 +20,8 @@ class ShatterSprite : public Sprite
 
         ShatterSprite(){
             m_gridSideLen = 2.7f;
-            m_initalFragScale = 4.5f;
-            m_fragBatchNode = NULL;
+            initial_frag_scale = 4.5f;
+            frag_batch_node = NULL;
         }
         virtual ~ShatterSprite(){}
         bool init(const std::string&texFileName);
@@ -46,9 +41,9 @@ class ShatterSprite : public Sprite
         void updateShatterAction(float time, float dt, float growSpeedOfTargetR);
 
         float m_gridSideLen;//grid side length, also frag size
-        float m_initalFragScale;//we want to make frags a litte bigger at start time.
-        std::vector<std::vector<ShatterFrag*> > m_grid;//hold all the frags
-        SpriteBatchNode* m_fragBatchNode;//all frags add to this batchNode
+        float initial_frag_scale;//we want to make frags a litte bigger at start time.
+        std::vector<std::vector<ShatterFrag*> > frag_grid;//hold all the frags
+        SpriteBatchNode* frag_batch_node;//all frags add to this batchNode
 };
 
 class ShatterAction : public ActionInterval

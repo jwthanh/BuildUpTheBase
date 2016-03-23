@@ -117,14 +117,15 @@ void ShatterSprite::createShatter(){
     const int nCol = (int)floorf(contentSize.width/m_gridSideLen);//grid col count
     const int fragCount = nRow*nCol;
     //----create fragBatchNode
-    m_fragBatchNode = SpriteBatchNode::createWithTexture(this->getTexture(),fragCount);
-    this->addChild(m_fragBatchNode);
-    m_fragBatchNode->setVisible(false);
+    frag_batch_node = SpriteBatchNode::createWithTexture(this->getTexture(),fragCount);
+    //frag_batch_node->
+    this->addChild(frag_batch_node);
+    frag_batch_node->setVisible(false);
     //----create frags and add them to fragBatchNode and grid
-    //make m_grid
-    m_grid.resize(nRow);
+    //make frag_grid
+    frag_grid.resize(nRow);
     for(int i = 0; i < nRow; i++){
-        m_grid[i].resize(nCol);
+        frag_grid[i].resize(nCol);
     }
 
     const float halfGridSideLen = 0.5 * m_gridSideLen;
@@ -133,11 +134,14 @@ void ShatterSprite::createShatter(){
         for (int j = 0; j < nCol; j++){
             ShatterFrag* frag = new ShatterFrag();
             frag->autorelease();
+            //auto sprite_frame = this->getSpriteFrame();
+            //frag->initWithSpriteFrameName("weapon_ice.png");
             frag->initWithTexture(this->getTexture());
+
             //set to grid
-            m_grid[i][j] = frag;
+            frag_grid[i][j] = frag;
             //add to batchNode
-            m_fragBatchNode->addChild(frag);
+            frag_batch_node->addChild(frag);
             //random 
             frag->m_randomNumber = rand();
         }
@@ -146,12 +150,14 @@ void ShatterSprite::createShatter(){
 
 void ShatterSprite::resetShatter(){
     Size contentSize = this->getContentSize();
-    int nRow = (int)m_grid.size();
-    int nCol = (nRow == 0?0:(int)m_grid[0].size());
+
+    int nRow = (int)frag_grid.size();
+    int nCol = (nRow == 0?0:(int)frag_grid[0].size());
     const float halfGridSideLen = 0.5*m_gridSideLen;
+
     for (int i = 0; i < nRow; i++){
         for(int j = 0; j < nCol; j++){
-            ShatterFrag* frag = m_grid[i][j];
+            ShatterFrag* frag = frag_grid[i][j];
             //position
             float x = j * m_gridSideLen+halfGridSideLen;
             float y = contentSize.height - (i * m_gridSideLen+halfGridSideLen);
@@ -166,7 +172,7 @@ void ShatterSprite::resetShatter(){
             //set position
             frag->setPosition(Vec2(x,y));
             //scale
-            frag->setScale(m_initalFragScale);
+            frag->setScale(initial_frag_scale);
             //opacity
             frag->setOpacity(255);
             //visible
@@ -175,6 +181,7 @@ void ShatterSprite::resetShatter(){
     }
 
 }
+
 void ShatterSprite::updateShatterAction(float time,float dt,float growSpeedOfTargetR){
     //update frags
     Size contentSize = this->getContentSize();
@@ -183,12 +190,12 @@ void ShatterSprite::updateShatterAction(float time,float dt,float growSpeedOfTar
     //radius of surrounding circle
     float initalTargetR = Vec2(contentSize.width, contentSize.height).getLength()/2;
 
-    int nRow = (int)m_grid.size();
-    int nCol = nRow?(int)m_grid[0].size():0;
+    int nRow = (int)frag_grid.size();
+    int nCol = nRow?(int)frag_grid[0].size():0;
 
     for (int i = 0; i < nRow; i++){
         for (int j = 0; j < nCol;j ++){
-            ShatterFrag*frag = m_grid[i][j];
+            ShatterFrag*frag = frag_grid[i][j];
 
             if (frag->getOpacity() == 0 || frag->getScale() == 0){
                 frag->setVisible(false);
@@ -200,32 +207,34 @@ void ShatterSprite::updateShatterAction(float time,float dt,float growSpeedOfTar
             //update postion
 
             Vec2 fragPos = frag->getPosition();
+
+            Vec2 direction;
             float disToCenter = Vec2(fragPos-center).getLength();
-            Vec2 dir;
-            if (disToCenter == 0)
-            {
-                dir = Vec2(0,0);
-            }
-            else
-            {
-                dir = fragPos-center;
-                dir.x /= disToCenter;
-                dir.y /= disToCenter;
+
+            if (disToCenter == 0) {
+                direction = Vec2::ZERO;
+            } else {
+                direction = fragPos-center;
+                direction.x /= disToCenter;
+                direction.y /= disToCenter;
             }
 
-            float disToEdge = targetR-disToCenter;
-            float disToEdgeWithRandom = disToEdge + frag->m_randomNumber % (int)initalTargetR - initalTargetR/2;//add random to disToEdge
-            float movLen = disToEdgeWithRandom*0.0333;//we only move some percent of disToEdgeWithRandom
+            float edge_dist = targetR - disToCenter;
+            float edge_random_dist = edge_dist + frag->m_randomNumber % (int)initalTargetR - initalTargetR / 2;//add random to disToEdge
 
-            Vec2 movVec = dir * movLen;
-            frag->setPosition(fragPos + movVec);
+            float move_length = edge_random_dist*0.0333; //we only move some percent of disToEdgeWithRandom
+
+            Vec2 moved_pos = direction * move_length;
+            frag->setPosition(fragPos + moved_pos);
+
             //update opacity
             float opacity = MAX(0, 255 - 255 * disToCenter / initalTargetR);
             frag->setOpacity(opacity);
+
             //update scale
             float scale = MAX(
                 0,
-                m_initalFragScale - m_initalFragScale * disToCenter / initalTargetR
+                this->initial_frag_scale - this->initial_frag_scale * disToCenter / initalTargetR
                 );
             frag->setScale(scale);
         }
@@ -261,7 +270,7 @@ bool ShatterAction::isDone(){
 void ShatterAction::stop(){
 
     //clean up and reset
-    ((ShatterSprite*)_target)->m_fragBatchNode->setVisible(true);
+    ((ShatterSprite*)_target)->frag_batch_node->setVisible(true);
     //call father stop
     ActionInterval::stop();
 }
@@ -269,7 +278,7 @@ void ShatterAction::stop(){
 void ShatterAction::startWithTarget(Node *pTarget){
     //reset
     ((ShatterSprite*)pTarget)->resetShatter();
-    ((ShatterSprite*)pTarget)->m_fragBatchNode->setVisible(true);
+    ((ShatterSprite*)pTarget)->frag_batch_node->setVisible(true);
     //call father startWithTarget
     ActionInterval::startWithTarget(pTarget);
 
