@@ -10,6 +10,7 @@ class Resource : public Nameable
 {
     public:
         enum ResourceType {
+            ALL = -1,
             Ingredient = 0,
             Product = 1,
             Waste = 2

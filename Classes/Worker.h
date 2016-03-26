@@ -8,31 +8,25 @@ template<typename Rtype>
 class ResourceCondition : public Nameable
 {
     public:
-        enum TypeChoices {
-            Any = 0,
-            Ingredient,
-            Product, 
-            Waste
-        };
-        TypeChoices type_choice;
+        Resource::ResourceType type_choice;
         Rtype choice;
 
         int quantity;
 
-        ResourceCondition(TypeChoices type_choice, Rtype choice, int quantity, std::string name) : Nameable(name) {
+        ResourceCondition(Resource::ResourceType type_choice, Rtype chosen_resource, int quantity, std::string name) : Nameable(name) {
             this->type_choice;
-            this->choice = choice;
+            this->choice = chosen_resource;
             this->quantity = quantity;
         };
 
         bool is_satisfied(spBuilding building) {
-            if (this->type_choice == Ingredient) {
+            if (this->type_choice == Resource::Ingredient) {
                 return (int)building->ingredients.size() >= this->quantity;
             }
-            else if (this->type_choice == Product) {
+            else if (this->type_choice == Resource::Product) {
                 return (int)building->products.size() >= this->quantity;
             }
-            else if (this->type_choice == Ingredient) {
+            else if (this->type_choice == Resource::Ingredient) {
                 return (int)building->wastes.size() >= this->quantity;
             }
             else {
@@ -45,11 +39,13 @@ class ResourceCondition : public Nameable
 };
 
 typedef ResourceCondition<Ingredient::IngredientType> IngredientCondition;
-#define IngredientConditionEx(ingredient_enum, quantity, name) IngredientCondition(IngredientCondition::TypeChoices::Ingredient, Ingredient::ingredient_enum, quantity, name)
+#define INGREDIENT_CONDITION(ingredient_enum, quantity, name) IngredientCondition(Resource::Ingredient, Ingredient::ingredient_enum, quantity, name)
+
 typedef ResourceCondition<Product::ProductType> ProductCondition;
-#define ProductConditionEx(product_enum, quantity, name) ProductCondition(ProductCondition::TypeChoices::Product, Product::product_enum, quantity, name)
+#define PRODUCT_CONDITION(product_enum, quantity, name) ProductCondition(Resource::Product, Product::product_enum, quantity, name)
+
 typedef ResourceCondition<Waste::WasteType> WasteCondition;
-#define WasteConditionEx(waste_enum, quantity, name) WasteCondition(WasteCondition::TypeChoices::Waste, Waste::waste_enum, quantity, name)
+#define WASTE_CONDITION(waste_enum, quantity, name) WasteCondition(Resource::Waste, Waste::waste_enum, quantity, name)
 
 //if this is satisfied, the action can happen
 class Condition : public Nameable
