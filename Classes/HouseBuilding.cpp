@@ -897,24 +897,26 @@ void test_conditions()
     auto farm = std::make_shared<Building>(city, "The Test Farm", "test_farm", TaskFunc());
     farm->ingredients = inputs;
     
-    IngredientCondition rc = INGREDIENT_CONDITION(Grain, 2, "test condition");
+    ResourceCondition* rc = ResourceCondition::create_ingredient_condition(Ingredient::Grain, 2, "test condition");
     // IngredientCondition rc = IngredientCondition(
     //         IngredientCondition::TypeChoices::Ingredient,
     //         Ingredient::Grain,
     //         2,
     //         "test condition");
 
-    assert(rc.is_satisfied(farm) == true);
+    assert(rc->is_satisfied(farm) == true);
 
     farm->ingredients = {
         std::make_shared<Ingredient>("iron")
     };
-    assert(rc.is_satisfied(farm) == false);
+    assert(rc->is_satisfied(farm) == false);
 
-    rc.choice = Ingredient::Iron;
-    assert(rc.is_satisfied(farm) == false);
-    rc.quantity = 1;
-    assert(rc.is_satisfied(farm) == true);
+    rc->ing_type = Ingredient::Iron;
+    assert(rc->is_satisfied(farm) == false);
+    rc->quantity = 1;
+    assert(rc->is_satisfied(farm) == true);
+
+    delete rc;
 
 };
 

@@ -4,20 +4,25 @@
 
 #include "HouseBuilding.h"
 
-template<typename Rtype>
 class ResourceCondition : public Nameable
 {
     public:
         Resource::ResourceType type_choice;
-        Rtype choice;
+
+        Ingredient::IngredientType ing_type;
+        Product::ProductType pro_type;
+        Waste::WasteType wst_type;
 
         int quantity;
 
-        ResourceCondition(Resource::ResourceType type_choice, Rtype chosen_resource, int quantity, std::string name) : Nameable(name) {
-            this->type_choice;
-            this->choice = chosen_resource;
+        ResourceCondition(Resource::ResourceType type_choice, int quantity, std::string name) : Nameable(name) {
+            this->type_choice = type_choice;
             this->quantity = quantity;
         };
+
+        static ResourceCondition* create_ingredient_condition(Ingredient::IngredientType ing_type, int quantity, std::string condition_name);
+        static ResourceCondition* create_product_condition(Product::ProductType pro_type, int quantity, std::string condition_name);
+        static ResourceCondition* create_waste_condition(Waste::WasteType wst_type, int quantity, std::string condition_name);
 
         bool is_satisfied(spBuilding building) {
             if (this->type_choice == Resource::Ingredient) {
@@ -38,14 +43,6 @@ class ResourceCondition : public Nameable
         };
 };
 
-typedef ResourceCondition<Ingredient::IngredientType> IngredientCondition;
-#define INGREDIENT_CONDITION(ingredient_enum, quantity, name) IngredientCondition(Resource::Ingredient, Ingredient::ingredient_enum, quantity, name)
-
-typedef ResourceCondition<Product::ProductType> ProductCondition;
-#define PRODUCT_CONDITION(product_enum, quantity, name) ProductCondition(Resource::Product, Product::product_enum, quantity, name)
-
-typedef ResourceCondition<Waste::WasteType> WasteCondition;
-#define WASTE_CONDITION(waste_enum, quantity, name) WasteCondition(Resource::Waste, Waste::waste_enum, quantity, name)
 
 //if this is satisfied, the action can happen
 class Condition : public Nameable
