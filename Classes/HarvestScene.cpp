@@ -20,6 +20,9 @@ bool HarvestScene::init()
     ui::Button* city_button = this->create_city_button();
     this->addChild(city_button);
 
+    ui::Layout* info_panel = this->create_info_panel();
+    this->addChild(info_panel);
+
     this->add_harvestable();
 
     this->scheduleUpdate();
@@ -74,6 +77,35 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     {
         Director::getInstance()->popScene();
     }
+};
+
+ui::Layout* HarvestScene::create_info_panel()
+{
+    auto building = GameLogic::getInstance()->buildup->target_building;
+
+    auto inst = CSLoader::getInstance();
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+
+    ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("building_info_panel"));
+    building_info_panel->removeFromParent();
+
+    auto create_count = [](std::string prefix, int count) {
+        std::stringstream ss;
+        ss << prefix << ": " << count;
+        return ss.str();
+    };
+
+    auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
+    ing_count->setString(create_count("ING", building->ingredients.size()));
+
+    auto pro_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("product_count"));
+    pro_count->setString(create_count("PRO", building->products.size()));
+
+    auto wst_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("waste_count"));
+    wst_count->setString(create_count("WST", building->wastes.size()));
+
+
+    return building_info_panel;
 };
 
 ui::Button* HarvestScene::create_shop_button()
