@@ -96,14 +96,14 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="back_btn" ActionTag="-552791013" CallBackType="Touch" CallBackName="pop_scene" Tag="74" IconVisible="False" LeftMargin="67.0000" RightMargin="847.0000" TopMargin="82.0000" BottomMargin="522.0000" TouchEnable="True" FontSize="14" ButtonText="Go Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="46.0000" Y="36.0000" />
+          <AbstractNodeData Name="back_btn" ActionTag="-552791013" CallBackType="Touch" CallBackName="pop_scene" Tag="74" IconVisible="False" LeftMargin="51.0000" RightMargin="831.0000" TopMargin="82.0000" BottomMargin="522.0000" TouchEnable="True" FontSize="14" ButtonText="Go Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="78.0000" Y="36.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="90.0000" Y="540.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.0938" Y="0.8438" />
-            <PreSize X="0.0479" Y="0.0562" />
+            <PreSize X="0.0812" Y="0.0562" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
             <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />

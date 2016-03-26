@@ -852,6 +852,12 @@ bool CityMenu::init()
         auto director = Director::getInstance();
         director->popScene();
     });
+    back_btn->loadTextures(
+            "main_UI_export_10_x4.png",
+            "main_UI_export_10_x4_pressed.png",
+            "main_UI_export_10_x4_disabled.png",
+            cocos2d::ui::TextureResType::PLIST
+        );
 
     auto create_count = [](std::string prefix, int count) {
         std::stringstream ss;
