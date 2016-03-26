@@ -130,7 +130,7 @@ void AppDelegate::applicationWillEnterForeground() {
 void AppDelegate::preload_all()
 {
     this->preload_sprites();
-    this->preload_sounds();
+    // this->preload_sounds(); //TODO enable this once audio gets put in
     this->preload_particles();
 };
 
