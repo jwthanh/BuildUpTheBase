@@ -96,13 +96,22 @@ ui::Layout* HarvestScene::create_info_panel()
     };
 
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
-    ing_count->setString(create_count("ING", building->ingredients.size()));
+    this->schedule([create_count, building, ing_count](float dt)
+    {
+        ing_count->setString(create_count("ING", building->ingredients.size()));
+    }, "ing_count_update");
 
     auto pro_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("product_count"));
-    pro_count->setString(create_count("PRO", building->products.size()));
+    this->schedule([create_count, building, pro_count](float dt)
+    {
+        pro_count->setString(create_count("PRO", building->products.size()));
+    }, "pro_count_update");
 
     auto wst_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("waste_count"));
-    wst_count->setString(create_count("WST", building->wastes.size()));
+    this->schedule([create_count, building, wst_count](float dt)
+    {
+        wst_count->setString(create_count("WST", building->wastes.size()));
+    }, "wst_count_update");
 
 
     return building_info_panel;
