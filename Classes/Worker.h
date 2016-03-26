@@ -26,20 +26,16 @@ class ResourceCondition : public Nameable
         };
 
         bool is_satisfied(spBuilding building) {
-            if (this->type_choice == Ingredient)
-            {
+            if (this->type_choice == Ingredient) {
                 return (int)building->ingredients.size() >= this->quantity;
             }
-            else if (this->type_choice == Product)
-            {
+            else if (this->type_choice == Product) {
                 return (int)building->products.size() >= this->quantity;
             }
-            else if (this->type_choice == Ingredient)
-            {
+            else if (this->type_choice == Ingredient) {
                 return (int)building->wastes.size() >= this->quantity;
             }
-            else
-            {
+            else {
                 unsigned int size = building->ingredients.size() +
                     building->products.size() +
                     building->wastes.size();
@@ -68,16 +64,14 @@ class Action : public Nameable
 };
 
 //
-//attaches to a building and builds recipes once certain conditions are hit
+//attaches to a building and does something once certain conditions are hit
 //
 class Worker : public Nameable
 {
     public:
         spBuilding building;
 
-        Worker(spBuilding building, std::string name) : Nameable(name) {
-            this->building = building;
-        };
+        Worker(spBuilding building, std::string name);
 };
 
 #endif
