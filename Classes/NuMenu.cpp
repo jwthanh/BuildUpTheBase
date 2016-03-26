@@ -91,6 +91,7 @@ void ShopNuItem::my_init(Beatup* beatup, Node* parent, std::string id_key)
 
 void ShopNuItem::update_func(float dt)
 {
+    //anytime the disk is checked, this slows down
     if (this->get_been_bought()) 
     {
         //Check if image has been updated
@@ -186,7 +187,7 @@ void BuyBuildingsNuMenu::init_items()
         menu_item->my_init(building, scrollview);
 
         auto scheduler = Director::getInstance()->getScheduler();
-        scheduler->schedule(CC_SCHEDULE_SELECTOR(BuildingShopNuItem::update_func), menu_item, 0.01f, true);
+        scheduler->schedule(CC_SCHEDULE_SELECTOR(BuildingShopNuItem::update_func), menu_item, 0.5f, true); //TODO make this happen more optimally, reading disk is slow
 
         auto buy_stuff = [this, building](){
             //can afford
