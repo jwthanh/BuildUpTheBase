@@ -849,8 +849,11 @@ bool CityMenu::init()
 
     auto back_btn = dynamic_cast<ui::Button*>(city_scene->getChildByName("back_btn"));
     back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        auto director = Director::getInstance();
-        director->popScene();
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            auto director = Director::getInstance();
+            director->popScene();
+        }
     });
     back_btn->loadTextures(
             "main_UI_export_10_x4.png",
