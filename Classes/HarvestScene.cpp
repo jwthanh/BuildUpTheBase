@@ -98,23 +98,25 @@ ui::Layout* HarvestScene::create_info_panel()
         return ss.str();
     };
 
+    const float update_delay = 0.1f;
+
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
     this->schedule([create_count, building, ing_count](float dt)
     {
         ing_count->setString(create_count("ING", building->ingredients.size()));
-    }, "ing_count_update");
+    }, update_delay, "ing_count_update");
 
     auto pro_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("product_count"));
     this->schedule([create_count, building, pro_count](float dt)
     {
         pro_count->setString(create_count("PRO", building->products.size()));
-    }, "pro_count_update");
+    }, update_delay, "pro_count_update");
 
     auto wst_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("waste_count"));
     this->schedule([create_count, building, wst_count](float dt)
     {
         wst_count->setString(create_count("WST", building->wastes.size()));
-    }, "wst_count_update");
+    }, update_delay, "wst_count_update");
 
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
     this->schedule([building, harvester_count](float dt)
@@ -122,7 +124,7 @@ ui::Layout* HarvestScene::create_info_panel()
         std::stringstream ss;
         ss << "Robo-harvesters: " << building->harvesters.size();
         harvester_count->setString(ss.str());
-    }, "harvester_count_update");
+    }, update_delay, "harvester_count_update");
 
 
     return building_info_panel;
