@@ -107,6 +107,16 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
+          <AbstractNodeData Name="detail_pos" ActionTag="-771564754" Tag="159" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="0.7390" RightMargin="759.2610" TopMargin="349.9922" BottomMargin="190.0078" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+            <Size X="200.0000" Y="100.0000" />
+            <AnchorPoint />
+            <Position X="0.7390" Y="190.0078" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0008" Y="0.2969" />
+            <PreSize X="0.2083" Y="0.1563" />
+            <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

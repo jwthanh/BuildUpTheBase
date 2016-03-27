@@ -62,6 +62,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // no matter the screen size, have it act like a base size screen, 960x640
     glview->setDesignResolutionSize(base_size.width, base_size.height, ResolutionPolicy::EXACT_FIT);
 
+    glfwWindowHint(GLFW_SAMPLES, 0);
+
 #ifdef __ANDROID__
 #else
     system("xcopy \"C:\\Users\\Primary\\workspace\\basebuilder\\proj.win32\\..\\Resources\" \"C:\\Users\\Primary\\workspace\\basebuilder\\proj.win32\\Debug.win32\" /E /I /F /Y  /D /K ");

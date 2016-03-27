@@ -20,6 +20,9 @@ bool HarvestScene::init()
     ui::Button* city_button = this->create_city_button();
     this->addChild(city_button);
 
+    ui::Button* detail_button = this->create_detail_button();
+    this->addChild(detail_button);
+
     ui::Layout* info_panel = this->create_info_panel();
     this->addChild(info_panel);
 
@@ -197,4 +200,46 @@ ui::Button* HarvestScene::create_city_button()
     });
 
     return city_button;
+};
+
+ui::Button* HarvestScene::create_detail_button()
+{
+
+    auto inst = CSLoader::getInstance();
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+
+    auto detail_button = ui::Button::create(
+        "shop_banner.png",
+        "shop_banner_hili.png",
+        "shop_banner.png",
+        ui::TextureResType::PLIST
+    );
+
+    auto shop_text_img = ui::Text::create(
+        "detail",
+        "Arial",
+        10.0f
+    );
+
+    shop_text_img->setPosition(Vec2(28, 17));
+    detail_button->addChild(shop_text_img);
+    detail_button->setScale(4);
+
+    Node* shop_pos_node = harvest_scene_editor->getChildByName("detail_pos");
+    detail_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    detail_button->setPosition(shop_pos_node->getPosition());
+
+    detail_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
+    {
+        if (evt == ui::Widget::TouchEventType::ENDED) {
+           auto scene = Scene::create();
+           BuildingNuMenu* building_menu = BuildingNuMenu::create(GameLogic::getInstance()->beatup, GameLogic::getInstance()->buildup->target_building);
+           scene->addChild(building_menu);
+
+           auto director = Director::getInstance();
+           director->pushScene(scene);
+        };
+    });
+
+    return detail_button;
 };
