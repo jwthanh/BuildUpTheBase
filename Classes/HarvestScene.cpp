@@ -116,6 +116,14 @@ ui::Layout* HarvestScene::create_info_panel()
         wst_count->setString(create_count("WST", building->wastes.size()));
     }, "wst_count_update");
 
+    auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
+    this->schedule([building, harvester_count](float dt)
+    {
+        std::stringstream ss;
+        ss << "Robo-harvesters: " << building->harvesters.size();
+        harvester_count->setString(ss.str());
+    }, "harvester_count_update");
+
 
     return building_info_panel;
 };
