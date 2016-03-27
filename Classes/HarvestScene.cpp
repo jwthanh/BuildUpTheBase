@@ -126,6 +126,14 @@ ui::Layout* HarvestScene::create_info_panel()
         harvester_count->setString(ss.str());
     }, update_delay, "harvester_count_update");
 
+    building_info_panel->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt_type)
+    {
+        if (evt_type == ui::Widget::TouchEventType::ENDED)
+        {
+            GameDirector::switch_to_inventory_menu();
+        }
+    });
+
 
     return building_info_panel;
 };
