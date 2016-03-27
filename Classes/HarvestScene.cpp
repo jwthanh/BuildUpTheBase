@@ -164,7 +164,7 @@ ui::Button* HarvestScene::create_city_button()
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
 
-    auto shop_button = ui::Button::create(
+    auto city_button = ui::Button::create(
         "shop_banner.png",
         "shop_banner_hili.png",
         "shop_banner.png",
@@ -177,14 +177,14 @@ ui::Button* HarvestScene::create_city_button()
     );
 
     shop_text_img->setPosition(Vec2(28, 17));
-    shop_button->addChild(shop_text_img);
-    shop_button->setScale(4);
+    city_button->addChild(shop_text_img);
+    city_button->setScale(4);
 
     Node* shop_pos_node = harvest_scene_editor->getChildByName("city_pos");
-    shop_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-    shop_button->setPosition(shop_pos_node->getPosition());
+    city_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    city_button->setPosition(shop_pos_node->getPosition());
 
-    shop_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
+    city_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED) {
             auto scene = Scene::create();
@@ -196,5 +196,5 @@ ui::Button* HarvestScene::create_city_button()
         };
     });
 
-    return shop_button;
+    return city_button;
 };
