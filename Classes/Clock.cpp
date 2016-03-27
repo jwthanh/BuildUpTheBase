@@ -4,6 +4,7 @@ Clock::Clock(float threshold)
 {
     this->threshold = threshold;
     this->start_time = 0;
+    this->time_left = 0;
 };
 
 void Clock::reset()

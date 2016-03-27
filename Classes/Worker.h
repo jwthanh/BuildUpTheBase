@@ -70,7 +70,6 @@ class Worker : public Nameable, Updateable
 
         Worker(spBuilding building, std::string name);
 
-        //update calls on_update after threshold has been passed
         void update(float dt);
         virtual void on_update();
 };

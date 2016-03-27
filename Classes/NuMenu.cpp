@@ -6,10 +6,12 @@
 #include "HouseBuilding.h"
 #include "MainMenu.h"
 
-USING_NS_CC;
-
 #include "BaseMenu.h"
 #include "Util.h"
+#include "Worker.h"
+
+USING_NS_CC;
+
 
 void NuItem::my_init(Beatup* beatup, cocos2d::Node* parent)
 {
@@ -238,7 +240,9 @@ void BuildingNuMenu::init_items()
     menu_item->set_touch_ended_callback([this]()
     {
         CCLOG("Buying auto havester");
-        //this->building->
+        auto harvester = std::make_shared<Harvester>(this->building, "test worker");
+        harvester->active_count += 1;
+        this->building->harvesters.push_back(harvester);
     });
 
 };

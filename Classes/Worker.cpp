@@ -1,11 +1,11 @@
 #include "Worker.h"
 
 
-Worker::Worker(spBuilding building, std::string name) : Nameable(name) {
+Worker::Worker(spBuilding building, std::string name)
+    : Nameable(name), Updateable() {
     this->building = building;
 
-
-    //std::shared_ptr<ResourceCondition> sp_ingredient_condition = std::make_shared<ResourceCondition>(Resource::Ingredient, Ingredient::Berry, 1, "asda");
+    this->update_clock->set_threshold(1.0f); //unused
 
     ResourceCondition* ingredient_condition = ResourceCondition::create_ingredient_condition(Ingredient::Berry, 1, "berry_name_huh");
     ingredient_condition->is_satisfied(building);
@@ -19,13 +19,10 @@ void Worker::update(float dt)
         return;
     };
 
-    Updateable::update(dt);
-
-    if (this->update_clock->passed_threshold())
-    {
-        this->on_update();
-        this->update_clock->reset();
-    };
+    //used to use update_timer, but this only gets called when a building gets
+    //updated so it doesnt need to be regulated anyway
+    this->on_update();
+    this->update_clock->reset();
 };
 
 void Worker::on_update()
@@ -65,5 +62,6 @@ Harvester::Harvester(spBuilding building, std::string name) :
 
 void Harvester::on_update()
 {
+    this->building->create_resources(Resource::ResourceType::Ingredient, 1, "grain");
     CCLOG("harvester update %s", this->name.c_str());
 };
