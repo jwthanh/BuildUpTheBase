@@ -126,6 +126,8 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         vsFighter fighters;
         vsWorker workers;
 
+        vsHarvester harvesters;
+
         Clock* spawn_clock;
 
         unsigned int num_workers; //people who work here, help make things faster

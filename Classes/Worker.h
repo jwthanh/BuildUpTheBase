@@ -59,12 +59,28 @@ class Action : public Nameable
 //
 //attaches to a building and does something once certain conditions are hit
 //
-class Worker : public Nameable
+class Worker : public Nameable, Updateable
 {
     public:
         spBuilding building;
 
+        //amount of workers of this type, ie if this unlocks 1 grain per update,
+        //and there's 10 active, it'll get you 10 grain
+        int active_count = 0; 
+
         Worker(spBuilding building, std::string name);
+
+        //update calls on_update after threshold has been passed
+        void update(float dt);
+        virtual void on_update();
+};
+
+class Harvester : public Worker
+{
+    public:
+        Harvester(spBuilding building, std::string name);
+
+        virtual void on_update();
 };
 
 #endif

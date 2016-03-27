@@ -75,6 +75,8 @@ class Fighter;
 class Battle;
 class Worker;
 class BuildingData;
+class Harvester;
+class ResourceCondition;
 
 
 typedef std::function<void()> VoidFunc;
@@ -93,6 +95,8 @@ MAKE_SP_VS(Battle);
 MAKE_SP_VS(Fighter);
 MAKE_SP_VS(Worker);
 MAKE_SP_VS(BuildingData);
+MAKE_SP_VS(Harvester);
+MAKE_SP_VS(ResourceCondition);
 
 #undef MAKE_SP_VS
 #undef _MAKE_VS

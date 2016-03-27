@@ -263,6 +263,7 @@ void Battle::distribute_exp(spFighter dead_fighter)
 
 void farm_task(spBuilding farm, float dt)
 {
+    CCLOG("fark task");
     RandomWeightMap<std::string> farm_spawn_map = RandomWeightMap<std::string>();
     farm_spawn_map.add_item("grain", 10);
     farm_spawn_map.add_item("seed", 5);
@@ -667,7 +668,7 @@ Building::Building(Village* city, std::string name, std::string id_key, TaskFunc
 {
     num_workers = 1;
 
-    update_clock->set_threshold(1.0f);
+    update_clock->set_threshold(0.5f);
     spawn_clock = new Clock(3);
 
     products = vsProduct();
@@ -676,6 +677,8 @@ Building::Building(Village* city, std::string name, std::string id_key, TaskFunc
 
     fighters = vsFighter();
     workers = vsWorker();
+
+    harvesters = vsHarvester();
 
     menu_items = {};
 
@@ -753,16 +756,24 @@ void Building::update(float dt)
 {
     Updateable::update(dt);
 
-    // if (update_clock->passed_threshold())
-    // {
-    //     this->spawn_clock->update(dt);
-    //     this->do_task(dt);
-    //     update_clock->reset();
-    // }
+
+    if (update_clock->passed_threshold())
+    {
+        /* this->spawn_clock->update(dt); */
+        // this->do_task(dt);
+        // CCLOG("building update %s", this->name.c_str());
+
+        update_clock->reset();
+
+        for (auto harvester : this->harvesters) {
+            harvester->update(dt);
+        };
+    }
     // else
     // {
     // }
 };
+
 std::string Building::get_specifics()
 {
     return this->get_ingredients() + " " +
@@ -1003,7 +1014,6 @@ Village* Buildup::init_city(Buildup* buildup)
     auto city = new Village(buildup, "Burlington");
 
     auto farm = std::make_shared<Building>(city, "The Farm", "the_farm", farm_task);
-    farm->update_clock->set_threshold(2);
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
     farm->punched_ingredient_type = "grain";
     buildup->target_building = farm;
@@ -1026,7 +1036,6 @@ Village* Buildup::init_city(Buildup* buildup)
     grave->punched_ingredient_type = "flesh";
 
     auto necro = std::make_shared<Building>(city, "The Underscape", "the_underscape", necro_task);
-    mine->update_clock->set_threshold(3);
 
     auto forest = std::make_shared<Building>(city, "The Forest", "the_forest", forest_task);
     forest->punched_ingredient_type = "berry";

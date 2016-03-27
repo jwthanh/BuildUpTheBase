@@ -234,7 +234,12 @@ void BuildingNuMenu::init_items()
     menu_item->my_init(this->beatup, scrollview);
 
     menu_item->set_title(building->name);
-    menu_item->set_description(building->data->get_task_name());
+    menu_item->set_description("Buy Auto-Harvester");
+    menu_item->set_touch_ended_callback([this]()
+    {
+        CCLOG("Buying auto havester");
+        //this->building->
+    });
 
 };
 
