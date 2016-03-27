@@ -37,7 +37,7 @@ void NuItem::my_init(Beatup* beatup, cocos2d::Node* parent)
 
     this->set_title("");
     this->set_description("");
-    this->set_cost("");
+    this->set_cost_lbl("");
     // this->set_image("");
 
 };
@@ -78,7 +78,7 @@ void NuItem::set_description(std::string description)
     this->desc_lbl->setString(description);
 };
 
-void NuItem::set_cost(std::string cost)
+void NuItem::set_cost_lbl(std::string cost)
 {
     this->cost_lbl->setString(cost);
 };
@@ -107,17 +107,39 @@ void ShopNuItem::update_func(float dt)
 
     int cost = this->get_cost();
 
+    this->cost_lbl->setTextColor(Color4B::BLACK);
     if (this->beatup->get_total_coins() < cost)
     {
         this->button->setBright(false);
         this->button->setEnabled(false);
+
+
+        //float tint = 0.1f;
+        //Color3B color = Color3B(
+        //    Color3B::RED.r*tint,
+        //    Color3B::RED.g*tint,
+        //    Color3B::RED.b*tint
+        //    );
+
+        Color3B color = { 205, 49, 45 };
+        Color3B alt_color = { 124, 3, 0 };
+
+        CCLOG("r %d", color.r);
+        CCLOG("g %d", color.g);
+        CCLOG("b %d", color.b);
+
+        //this->button->setColor(Color3B::RED);
+        this->cost_lbl->setTextColor(Color4B(color));
+        this->button->setColor(color);
+        //this->cost_lbl->setTextColor(Color4B::RED);
     }
 
     if (this->get_been_bought())
     {
-        this->set_cost("---");
+        this->set_cost_lbl("---");
         this->button->setBright(false);
         this->button->setEnabled(false);
+        this->cost_lbl->setTextColor(Color4B::GRAY);
     };
 
 };
@@ -125,10 +147,13 @@ void ShopNuItem::update_func(float dt)
 void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
 {
     ShopNuItem::my_init(building->city->buildup->beatup, parent, building->id_key);
+
     this->set_image(building->data->get_img_large());
     this->set_title(building->name);
     this->set_description(building->data->get_description());
-    this->set_cost(std::to_string(building->get_cost()));
+
+    this->set_cost_lbl(std::to_string(building->get_cost()));
+    this->_shop_cost = building->get_cost();
 };
 
 bool NuMenu::init()

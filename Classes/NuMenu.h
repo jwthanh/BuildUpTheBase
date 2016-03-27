@@ -32,7 +32,7 @@ class NuItem : public cocos2d::ui::Widget
         void set_image(std::string path);
         void set_title(std::string title);
         void set_description(std::string description);
-        void set_cost(std::string cost);
+        void set_cost_lbl(std::string cost);
 
         void set_touch_ended_callback(std::function<void(void)> callback);
 
