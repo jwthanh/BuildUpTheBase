@@ -985,9 +985,9 @@ bool InventoryMenu::init()
     //load dummy node to get size
     //and pull the panel out of node because node's not a widget and has no size
     auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
-    auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
+    auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("item_panel"));
     original_panel->removeFromParent();
-    auto cat = dynamic_cast<Sprite*>(original_panel->getChildByName("cat_1"));
+    auto cat = dynamic_cast<Sprite*>(original_panel->getChildByName("item_img"));
 
     float panel_width = original_panel->getContentSize().width;
 
@@ -1032,8 +1032,8 @@ bool InventoryMenu::init()
                 auto panel = original_panel->clone();
                 panel->setLayoutParameter(param);
 
-                auto raw_butn = panel->getChildByName("resource_btn");
-                auto btn = dynamic_cast<ui::Button*>(raw_butn);
+                auto raw_btn = panel->getChildByName("item_lbl");
+                auto btn = dynamic_cast<ui::Text*>(raw_btn);
 
                 auto cb = [ing_type, this](Ref*, ui::Widget::TouchEventType type) {
                     if (type == ui::Widget::TouchEventType::ENDED) {
@@ -1041,13 +1041,13 @@ bool InventoryMenu::init()
                         this->addChild(alert);
                     };
                 };
-                btn->addTouchEventListener(cb);
+                panel->addTouchEventListener(cb);
 
                 auto type_str = Ingredient::type_to_string(ing_type);
 
                 std::stringstream ss;
-                ss << count << std::endl << type_str;
-                btn->setTitleText(ss.str());
+                ss << count << " " << type_str;
+                btn->setString(ss.str());
 
                 inner_layout->addChild(panel);
 
