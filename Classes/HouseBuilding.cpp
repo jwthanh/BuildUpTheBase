@@ -25,6 +25,7 @@
 #include <tinyxml2/tinyxml2.h>
 #include <json/document.h>
 #include "FileOperation.h"
+#include "GameLogic.h"
 
 USING_NS_CC;
 
@@ -82,7 +83,7 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     node->sprite->setTouchEnabled(true);
     node->sprite->addTouchEventListener([node](Ref*, TouchEventType)
     {
-        node->beatup->switch_to_character_menu(node->fighter);
+        GameDirector::switch_to_character_menu(node->fighter);
     });
 
     //hp bar

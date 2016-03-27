@@ -3,6 +3,8 @@
 #include "Beatup.h"
 #include "HouseBuilding.h"
 #include "DataManager.h"
+#include "NuMenu.h"
+#include "MainMenu.h"
 
 GameLogic* GameLogic::_instance = NULL;
 
@@ -48,3 +50,74 @@ int GameLogic::get_total_harvests()
 {
     return DataManager::get_int_from_data("total_harvests");
 };
+
+
+void GameDirector::switch_to_building_menu()
+{
+    auto scene = cocos2d::Scene::create();
+    BuildingNuMenu* building_menu = BuildingNuMenu::create(
+            GameLogic::getInstance()->beatup,
+            GameLogic::getInstance()->buildup->target_building
+        );
+    scene->addChild(building_menu);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
+
+void GameDirector::switch_to_city_menu()
+{
+    auto scene = cocos2d::Scene::create();
+    CityMenu* building_menu = CityMenu::create();
+    scene->addChild(building_menu);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
+
+void GameDirector::switch_to_inventory_menu()
+{
+    auto scene = cocos2d::Scene::create();
+    InventoryMenu* building_menu = InventoryMenu::create(GameLogic::getInstance()->buildup->target_building);
+    scene->addChild(building_menu);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
+
+void GameDirector::switch_to_test()
+{
+    auto scene = cocos2d::Scene::create();
+    BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(GameLogic::getInstance()->beatup);
+    scene->addChild(building_menu);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
+
+void GameDirector::switch_to_character_menu(spFighter fighter)
+{
+    if (fighter == NULL)
+    {
+        printj("fighter is null, no character menu");
+        return;
+    }
+
+    auto scene = cocos2d::Scene::create();
+    CharacterMenu* building_menu = CharacterMenu::create(fighter);
+    scene->addChild(building_menu);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
+
+void GameDirector::switch_to_shop()
+{
+    auto scene = cocos2d::Scene::create();
+    BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(GameLogic::getInstance()->beatup);
+    scene->addChild(building_menu);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
+

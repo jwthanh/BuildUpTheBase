@@ -215,12 +215,6 @@ class Beatup : public GameLayer
 
         BaseMenu* shop;
         cocos2d::Scene* shop_scene;
-        void switch_to_shop();
-        void switch_to_building_menu();
-        void switch_to_city_menu();
-        void switch_to_inventory_menu();
-        void switch_to_test();
-        void switch_to_character_menu(spFighter fighter);
 
 
         cocos2d::MotionStreak* motion;

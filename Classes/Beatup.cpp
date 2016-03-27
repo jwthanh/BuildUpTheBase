@@ -31,6 +31,7 @@
 #include "attribute.h"
 #include "FShake.h"
 #include "NuMenu.h"
+#include "GameLogic.h"
 
 USING_NS_CC;
 
@@ -340,72 +341,6 @@ void Beatup::onEnter()
     }
 };
 
-void Beatup::switch_to_building_menu()
-{
-    auto scene = Scene::create();
-    BuildingNuMenu* building_menu = BuildingNuMenu::create(this, this->buildup->target_building);
-    scene->addChild(building_menu);
-
-    auto director = Director::getInstance();
-    director->pushScene(scene);
-};
-
-void Beatup::switch_to_city_menu()
-{
-    auto scene = Scene::create();
-    CityMenu* building_menu = CityMenu::create();
-    scene->addChild(building_menu);
-
-    auto director = Director::getInstance();
-    director->pushScene(scene);
-};
-
-void Beatup::switch_to_inventory_menu()
-{
-    auto scene = Scene::create();
-    InventoryMenu* building_menu = InventoryMenu::create(this->buildup->target_building);
-    scene->addChild(building_menu);
-
-    auto director = Director::getInstance();
-    director->pushScene(scene);
-};
-
-void Beatup::switch_to_test()
-{
-    auto scene = Scene::create();
-    BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(this);
-    scene->addChild(building_menu);
-
-    auto director = Director::getInstance();
-    director->pushScene(scene);
-};
-
-void Beatup::switch_to_character_menu(spFighter fighter)
-{
-    if (fighter == NULL)
-    {
-        printj("fighter is null, no character menu");
-        return;
-    }
-
-    auto scene = Scene::create();
-    CharacterMenu* building_menu = CharacterMenu::create(fighter);
-    scene->addChild(building_menu);
-
-    auto director = Director::getInstance();
-    director->pushScene(scene);
-};
-
-void Beatup::switch_to_shop()
-{
-    auto scene = Scene::create();
-    BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(this);
-    scene->addChild(building_menu);
-
-    auto director = Director::getInstance();
-    director->pushScene(scene);
-};
-
 bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     GameLayer::onTouchBegan(touch, event);
@@ -452,7 +387,7 @@ bool Beatup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
         Rect face_rect = get_sprite_rect(this->get_target_face(), this->get_target_face()->get_sprite());
 
         if (vec2_in_rect(&face_rect, touch_loc)) {
-            this->switch_to_city_menu();
+            GameDirector::switch_to_city_menu();
             return false;
         };
     }
@@ -780,7 +715,7 @@ void Beatup::prep_other()
     shop_button->addTouchEventListener([this](Ref*, ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
-        this->switch_to_shop();
+        GameDirector::switch_to_shop();
     });
 
     this->addChild(shop_button);
@@ -1072,7 +1007,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F) 
     {
-        this->switch_to_city_menu();
+        GameDirector::switch_to_city_menu();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_W) 
     {
@@ -1081,7 +1016,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
         // {
         //     q_alert->shrink_close(Vec2(0, 0));
         // }
-        this->switch_to_test();
+        GameDirector::switch_to_test();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_C) 
     {
@@ -1170,7 +1105,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_S) 
     {
-        this->switch_to_shop();
+        GameDirector::switch_to_shop();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_B) 
     {
@@ -1184,17 +1119,17 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_1) 
     {
-        this->switch_to_city_menu();
+        GameDirector::switch_to_city_menu();
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_2) 
     {
-        this->switch_to_building_menu();
+        GameDirector::switch_to_building_menu();
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_3) 
     {
-        this->switch_to_inventory_menu();
+        GameDirector::switch_to_inventory_menu();
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_4) 
