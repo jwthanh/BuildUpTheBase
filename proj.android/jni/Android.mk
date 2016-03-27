@@ -22,6 +22,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/GameLogic.cpp \
                    ../../Classes/GameLayer.cpp \
                    ../../Classes/MiscUI.cpp \
+                   ../../Classes/Network.cpp \
                    ../../Classes/Weapons.cpp \
                    ../../Classes/Fist.cpp \
                    ../../Classes/FileOperation.cpp \

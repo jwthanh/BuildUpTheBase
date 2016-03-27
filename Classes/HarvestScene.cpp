@@ -7,6 +7,7 @@
 #include "Beatup.h"
 #include "Util.h"
 #include "MainMenu.h"
+#include "Network.h"
 
 USING_NS_CC;
 
@@ -79,6 +80,10 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_GRAVE)
     {
         Director::getInstance()->popScene();
+    }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
+    {
+        Request("http://icanhazip.com");
     }
 };
 
