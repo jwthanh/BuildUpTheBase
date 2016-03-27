@@ -190,8 +190,9 @@ void BuyBuildingsNuMenu::init_items()
 
         auto scheduler = Director::getInstance()->getScheduler();
         scheduler->schedule(CC_SCHEDULE_SELECTOR(BuildingShopNuItem::update_func), menu_item, 0.5f, true); //TODO make this happen more optimally, reading disk is slow
+        menu_item->update_func(0);
 
-        auto buy_stuff = [this, building](){
+        auto buy_stuff = [this, building, menu_item](){
             //can afford
             auto cost = building->get_cost();
             auto total_coins = this->beatup->get_total_coins();
@@ -200,6 +201,8 @@ void BuyBuildingsNuMenu::init_items()
                 CCLOG("buying stuff");
                 building->set_been_bought(true);
                 this->beatup->add_total_coin(-building->get_cost());
+
+                menu_item->update_func(0);
             }
         };
 
