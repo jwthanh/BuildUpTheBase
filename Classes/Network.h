@@ -37,4 +37,11 @@ public:
     bool is_valid_response() const;
 };
 
+class NetworkConsole
+{
+public:
+    static void get_vec2();
+    static void get_string();
+};
+
 #endif

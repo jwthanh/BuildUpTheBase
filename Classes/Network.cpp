@@ -74,7 +74,7 @@ Request* Request::create_post(std::string url, std::string data)
 bool Request::is_valid_response() const
 {
     return this->_response && this->_response->getResponseCode() == 200 && this->_response->getResponseData();
-};
+}
 
 std::string Request::get_response_str() const
 {
@@ -88,4 +88,16 @@ std::string Request::get_response_str() const
         CCLOG("no response set");
         return "";
     };
+};
+
+void NetworkConsole::get_vec2()
+{
+    auto request = Request::create_get("localhost:8080/get_vec2");
+    request->retain();
+}
+
+void NetworkConsole::get_string()
+{
+    auto request = Request::create_get("localhost:8080/get_string");
+    request->retain();
 };
