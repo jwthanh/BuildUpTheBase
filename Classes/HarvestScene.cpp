@@ -83,7 +83,8 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        Request("http://icanhazip.com");
+        Request* request = Request::create_get("http://icanhazip.com");
+        request->retain();
     }
 };
 

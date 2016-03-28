@@ -2,6 +2,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 #include <string>
+#include <cocos2d/cocos/base/CCRef.h>
 
 namespace cocos2d{
     namespace network{
@@ -9,9 +10,7 @@ namespace cocos2d{
     }
 }
 
-class HttpResponse;
-
-class Request 
+class Request : public cocos2d::Ref
 {
 public:
     enum class Type
@@ -23,12 +22,16 @@ public:
         UNKNOWN,
     };
 
-    Type type = Type::GET;
-    std::string _url = "";
+    static Request* Request::create_get(std::string url);
+    static Request* Request::create_post(std::string url, std::string data);
+    static Request* Request::create(Type request_type, std::string url, std::string data);
 
-    cocos2d::network::HttpResponse* _response = NULL;
+    Request();
+    bool init(Type request_type, std::string url, std::string data);
 
-    Request(std::string url);
+    Type type;
+    std::string _url;
+    cocos2d::network::HttpResponse* _response;
 
     std::string get_response_str() const;
     bool is_valid_response() const;
