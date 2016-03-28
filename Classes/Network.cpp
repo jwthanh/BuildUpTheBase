@@ -97,9 +97,24 @@ std::string Request::get_response_str() const
     };
 };
 
+cocos2d::Vec2 NetworkConsole::parse_vec2(std::string response_body)
+{
+    rapidjson::Document document;
+    document.Parse(response_body.c_str());
+    Vec2 input = {
+        (float)document["x"].GetDouble(),
+        (float)document["y"].GetDouble()
+    };
+
+    CCLOG("x: %f y: %f", input.x, input.y);
+
+    return input;
+};
+
 void NetworkConsole::get_position(Node* node)
 {
     auto request = Request::create_get("localhost:8080/get_vec2");
+
     request->_request->setResponseCallback([request, node](network::HttpClient* client, network::HttpResponse* response)
     {
         request->_response = response;
@@ -107,14 +122,12 @@ void NetworkConsole::get_position(Node* node)
         std::string resp_str = request->get_response_str();
         CCLOG("got the following string: '%s'", resp_str.c_str());
 
-        rapidjson::Document document;
-        document.Parse(resp_str.c_str());
-        Vec2 input = { (float)document["x"].GetDouble(), (float)document["y"].GetDouble()};
-        CCLOG("x: %f y: %f", input.x, input.y);
+        auto input = NetworkConsole::parse_vec2(resp_str);
 
         node->setPosition(input);
 
     });
+
     request->send();
     request->retain();
 }
