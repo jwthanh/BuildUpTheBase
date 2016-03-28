@@ -966,6 +966,29 @@ bool InventoryMenu::init()
         )
     );
 
+    auto back_btn = ui::Button::create();
+    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            auto director = Director::getInstance();
+            director->popScene();
+        }
+    });
+    back_btn->loadTextures(
+            "main_UI_export_10_x4.png",
+            "main_UI_export_10_x4_pressed.png",
+            "main_UI_export_10_x4_disabled.png",
+            cocos2d::ui::TextureResType::PLIST
+        );
+    back_btn->setPosition(Vec2(90, 540));
+    back_btn->ignoreContentAdaptWithSize(false);
+    back_btn->setContentSize(Size(76, 36));
+    back_btn->setTitleText("Back");
+    back_btn->setTitleFontSize(24);
+    back_btn->setTitleColor(Color3B::BLACK);
+
+    this->addChild(back_btn);
+
     auto resize_btn = [](ui::Button* button) {
         auto lbl_size = button->getTitleRenderer()->getContentSize();
 
