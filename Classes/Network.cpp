@@ -23,8 +23,6 @@ bool Request::init(Type request_type, std::string url, std::string data)
     network::HttpRequest* request = new network::HttpRequest();
     request->setRequestType(rtype);
 
-    CCLOG("sending request");
-
     request->setUrl(url.c_str());
     request->setResponseCallback([this](network::HttpClient* sender, network::HttpResponse* response)
     {
@@ -39,8 +37,6 @@ bool Request::init(Type request_type, std::string url, std::string data)
         }
         this->release();
     });
-
-    //request->setTag("test_request"+CCRANDOM_0_1());
 
     network::HttpClient::getInstance()->send(request);
     request->release();

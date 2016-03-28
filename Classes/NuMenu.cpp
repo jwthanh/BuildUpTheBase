@@ -114,24 +114,18 @@ void ShopNuItem::update_func(float dt)
         this->button->setEnabled(false);
 
 
-        //float tint = 0.1f;
-        //Color3B color = Color3B(
-        //    Color3B::RED.r*tint,
-        //    Color3B::RED.g*tint,
-        //    Color3B::RED.b*tint
-        //    );
 
-        Color3B color = { 205, 49, 45 };
-        Color3B alt_color = { 124, 3, 0 };
+        Color3B color = { 254, 81, 81 };
 
-        CCLOG("r %d", color.r);
-        CCLOG("g %d", color.g);
-        CCLOG("b %d", color.b);
+        float tint = 0.9f;
+        Color3B text_color = Color3B(
+            color.r*tint,
+            color.g*tint,
+            color.b*tint
+            );
 
-        //this->button->setColor(Color3B::RED);
-        this->cost_lbl->setTextColor(Color4B(color));
+        this->cost_lbl->setTextColor(Color4B(text_color));
         this->button->setColor(color);
-        //this->cost_lbl->setTextColor(Color4B::RED);
     }
 
     if (this->get_been_bought())
