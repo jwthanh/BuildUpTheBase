@@ -18,7 +18,7 @@ bool Request::init(Type request_type, std::string url, std::string data)
     network::HttpRequest::Type rtype = network::HttpRequest::Type::GET;
     if (request_type == Type::GET) { rtype = network::HttpRequest::Type::GET; }
     else if (request_type == Type::POST) { rtype = network::HttpRequest::Type::POST; }
-    else { throw std::exception("need to implement this Request::Type"); }
+    else { CCASSERT(false, "need to implement this Request::Type"); }
 
     network::HttpRequest* request = new network::HttpRequest();
     request->setRequestType(rtype);

@@ -2,7 +2,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 #include <string>
-#include <cocos2d/cocos/base/CCRef.h>
+#include "base/CCRef.h"
 
 namespace cocos2d{
     namespace network{
@@ -22,9 +22,9 @@ public:
         UNKNOWN,
     };
 
-    static Request* Request::create_get(std::string url);
-    static Request* Request::create_post(std::string url, std::string data);
-    static Request* Request::create(Type request_type, std::string url, std::string data);
+    static Request* create_get(std::string url);
+    static Request* create_post(std::string url, std::string data);
+    static Request* create(Type request_type, std::string url, std::string data);
 
     Request();
     bool init(Type request_type, std::string url, std::string data);
