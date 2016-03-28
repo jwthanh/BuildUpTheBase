@@ -73,7 +73,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     FileUtils::getInstance()->addSearchPath("editor");
 
 
-    //LoadingScene* loading_scene = LoadingScene::create(this);
+    // auto console = director->getConsole();
+    // console->listenOnTCP(1234);
+
     Scene* loading_scene = Scene::create();
     loading_scene->setOnEnterCallback(
         std::function<void()>([this, loading_scene](){

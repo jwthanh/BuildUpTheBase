@@ -1,6 +1,9 @@
 #include "Network.h"
 
 #include "network/HttpClient.h"
+#include <json/document.h>
+
+#include "cocos2d.h"
 
 using namespace cocos2d;
 
@@ -20,11 +23,11 @@ bool Request::init(Type request_type, std::string url, std::string data)
     else if (request_type == Type::POST) { rtype = network::HttpRequest::Type::POST; }
     else { CCASSERT(false, "need to implement this Request::Type"); }
 
-    network::HttpRequest* request = new network::HttpRequest();
-    request->setRequestType(rtype);
+    this->_request = new network::HttpRequest();
+    this->_request->setRequestType(rtype);
 
-    request->setUrl(url.c_str());
-    request->setResponseCallback([this](network::HttpClient* sender, network::HttpResponse* response)
+    this->_request->setUrl(url.c_str());
+    this->_request->setResponseCallback([this](network::HttpClient* sender, network::HttpResponse* response)
     {
         this->_response = response;
 
@@ -38,10 +41,14 @@ bool Request::init(Type request_type, std::string url, std::string data)
         this->release();
     });
 
-    network::HttpClient::getInstance()->send(request);
-    request->release();
 
     return true;
+};
+
+void Request::send()
+{
+    network::HttpClient::getInstance()->send(this->_request);
+    this->_request->release();
 };
 
 Request* Request::create(Type request_type, std::string url, std::string data) 
@@ -90,14 +97,42 @@ std::string Request::get_response_str() const
     };
 };
 
-void NetworkConsole::get_vec2()
+void NetworkConsole::get_position(Node* node)
 {
     auto request = Request::create_get("localhost:8080/get_vec2");
+    request->_request->setResponseCallback([request, node](network::HttpClient* client, network::HttpResponse* response)
+    {
+        request->_response = response;
+
+        std::string resp_str = request->get_response_str();
+        CCLOG("got the following string: '%s'", resp_str.c_str());
+
+        rapidjson::Document document;
+        document.Parse(resp_str.c_str());
+        Vec2 input = { (float)document["x"].GetDouble(), (float)document["y"].GetDouble()};
+        CCLOG("x: %f y: %f", input.x, input.y);
+
+        node->setPosition(input);
+
+    });
+    request->send();
     request->retain();
 }
 
 void NetworkConsole::get_string()
 {
-    auto request = Request::create_get("localhost:8080/get_string");
-    request->retain();
+    //auto request = Request::create_get("localhost:8080/get_string");
+    // request->send();
+    //request->retain();
+
+    auto request = new network::HttpRequest();
+    request->setUrl("localhost:8080/get_string");
+    request->setRequestType(network::HttpRequest::Type::GET);
+    request->setResponseCallback([](network::HttpClient* client, network::HttpResponse* response)
+    {
+        CCLOG("got the following string: '%s'", std::string(response->getResponseData()->begin(), response->getResponseData()->end()).c_str());
+    });
+
+    network::HttpClient::getInstance()->send(request);
+    request->release();
 };

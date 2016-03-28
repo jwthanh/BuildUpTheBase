@@ -7,8 +7,11 @@
 namespace cocos2d{
     namespace network{
         class HttpResponse;
+        class HttpRequest;
     }
+    class Node;
 }
+
 
 class Request : public cocos2d::Ref
 {
@@ -32,15 +35,18 @@ public:
     Type type;
     std::string _url;
     cocos2d::network::HttpResponse* _response;
+    cocos2d::network::HttpRequest* _request;
 
     std::string get_response_str() const;
     bool is_valid_response() const;
+
+    void send();
 };
 
 class NetworkConsole
 {
 public:
-    static void get_vec2();
+    static void get_position(cocos2d::Node* node);
     static void get_string();
 };
 
