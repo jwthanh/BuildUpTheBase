@@ -6,7 +6,7 @@
       <ObjectData Name="Node" Tag="25" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="Panel_1" ActionTag="-960689000" Tag="26" IconVisible="False" LeftMargin="-200.0000" RightMargin="-200.0000" TopMargin="-200.0000" BottomMargin="-200.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_1" ActionTag="-960689000" Tag="26" IconVisible="False" LeftMargin="-200.0000" RightMargin="-200.0000" TopMargin="-200.0000" BottomMargin="-200.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="400.0000" Y="400.0000" />
             <Children>
               <AbstractNodeData Name="resource_name" ActionTag="-1958392294" Tag="27" IconVisible="False" LeftMargin="82.6616" RightMargin="57.3384" TopMargin="37.3578" BottomMargin="321.6422" FontSize="36" LabelText="Resource Name" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -20,7 +20,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="resource_description" ActionTag="-468974190" Tag="28" IconVisible="False" LeftMargin="20.9367" RightMargin="29.0633" TopMargin="95.4514" BottomMargin="109.5486" IsCustomSize="True" FontSize="20" LabelText="This is some sample description&#xA;&#xA;it's multiline, no big deal&#xA;&#xA;&#xA;&#xA;sdsd&#xA;botton of it here" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="resource_description" ActionTag="-468974190" Tag="28" IconVisible="False" LeftMargin="20.9367" RightMargin="29.0633" TopMargin="95.4514" BottomMargin="109.5486" IsCustomSize="True" FontSize="20" LabelText="This is some sample description&#xA;&#xA;it's multiline, no big deal&#xA;&#xA;&#xA;&#xA;&#xA;bottom of it here" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="350.0000" Y="195.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="195.9367" Y="207.0486" />
