@@ -41,13 +41,16 @@ public:
     std::string get_response_str() const;
     bool is_valid_response() const;
 
+    template<typename Func>
+    void set_callback(Func func);
+
     void send();
 };
 
 class NetworkConsole
 {
 public:
-    static void get_position(cocos2d::Node* node);
+    static void set_position(cocos2d::Node* node);
     static void get_string();
 
     static cocos2d::Vec2 parse_vec2(std::string response_body);

@@ -97,6 +97,16 @@ std::string Request::get_response_str() const
     };
 };
 
+template <typename Func>
+void Request::set_callback(Func func)
+{
+    this->_request->setResponseCallback(
+            [this, func](network::HttpClient* client, network::HttpResponse* response){
+            this->_response = response;
+            func(this->get_response_str());
+            });
+}
+
 cocos2d::Vec2 NetworkConsole::parse_vec2(std::string response_body)
 {
     rapidjson::Document document;
@@ -111,22 +121,16 @@ cocos2d::Vec2 NetworkConsole::parse_vec2(std::string response_body)
     return input;
 };
 
-void NetworkConsole::get_position(Node* node)
+void NetworkConsole::set_position(Node* node)
 {
     auto request = Request::create_get("localhost:8080/get_vec2");
 
-    request->_request->setResponseCallback([request, node](network::HttpClient* client, network::HttpResponse* response)
-    {
-        request->_response = response;
-
-        std::string resp_str = request->get_response_str();
-        CCLOG("got the following string: '%s'", resp_str.c_str());
-
-        auto input = NetworkConsole::parse_vec2(resp_str);
-
+    auto set_pos_cb = [node](std::string data) {
+        auto input = NetworkConsole::parse_vec2(data);
         node->setPosition(input);
+    };
+    request->set_callback(set_pos_cb);
 
-    });
 
     request->send();
     request->retain();
