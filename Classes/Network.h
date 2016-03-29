@@ -3,6 +3,7 @@
 #define NETWORK_H
 #include <string>
 #include "base/CCRef.h"
+#include <functional>
 
 namespace cocos2d{
     namespace network{
@@ -41,8 +42,7 @@ public:
     std::string get_response_str() const;
     bool is_valid_response() const;
 
-    template<typename Func>
-    void set_callback(Func func);
+    void set_callback( std::function<void(std::string)> callback);
 
     void send();
 };
@@ -54,6 +54,8 @@ public:
     static void get_string();
 
     static cocos2d::Vec2 parse_vec2(std::string response_body);
+
+    static void send_helper(std::string url, std::function<void(std::string)> callback);
 };
 
 #endif

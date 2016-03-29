@@ -97,14 +97,14 @@ std::string Request::get_response_str() const
     };
 };
 
-template <typename Func>
-void Request::set_callback(Func func)
+void Request::set_callback( std::function<void(std::string)> callback)
 {
-    this->_request->setResponseCallback(
-            [this, func](network::HttpClient* client, network::HttpResponse* response){
-            this->_response = response;
-            func(this->get_response_str());
-            });
+    auto response_callback = [this, callback](network::HttpClient* client, network::HttpResponse* response){
+        this->_response = response;
+        callback(this->get_response_str());
+    };
+
+    this->_request->setResponseCallback(response_callback);
 }
 
 cocos2d::Vec2 NetworkConsole::parse_vec2(std::string response_body)
@@ -119,21 +119,26 @@ cocos2d::Vec2 NetworkConsole::parse_vec2(std::string response_body)
     CCLOG("x: %f y: %f", input.x, input.y);
 
     return input;
+}
+
+void NetworkConsole::send_helper(std::string url, std::function<void(std::string)> callback)
+{
+    auto request = Request::create_get(url);
+    request->set_callback(callback);
+
+    request->send();
+    request->retain();
+
 };
 
 void NetworkConsole::set_position(Node* node)
 {
-    auto request = Request::create_get("localhost:8080/get_vec2");
-
     auto set_pos_cb = [node](std::string data) {
         auto input = NetworkConsole::parse_vec2(data);
         node->setPosition(input);
     };
-    request->set_callback(set_pos_cb);
 
-
-    request->send();
-    request->retain();
+    NetworkConsole::send_helper("localhost:8080/get_vec2", set_pos_cb);
 }
 
 void NetworkConsole::get_string()
