@@ -58,7 +58,7 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
         this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
 
         auto building = GameLogic::getInstance()->buildup->target_building;
-        building->create_resources(Resource::Ingredient, 1, "Berry");
+        building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
 
         float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
         float rotation = 0.0f;
