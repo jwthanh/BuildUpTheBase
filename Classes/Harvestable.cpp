@@ -15,6 +15,8 @@ bool Harvestable::init()
     this->setTouchEnabled(true); //true otherwise it cant be clicked
     this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 
+    this->building = GameLogic::getInstance()->buildup->target_building;
+
     this->clip = cocos2d::ClippingNode::create();
     this->stencil = cocos2d::DrawNode::create();
 
@@ -55,8 +57,8 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 
         this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
 
-        auto farm = this->beatup->buildup->city->building_by_name("The Farm");
-        farm->create_resources(Resource::Ingredient, 1, "Berry");
+        auto building = GameLogic::getInstance()->buildup->target_building;
+        building->create_resources(Resource::Ingredient, 1, "Berry");
 
         float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
         float rotation = 0.0f;

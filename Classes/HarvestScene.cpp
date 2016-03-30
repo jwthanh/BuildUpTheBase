@@ -49,8 +49,11 @@ void HarvestScene::update(float dt)
 {
     GameLogic::getInstance()->update(dt);
 
-    if (!this->getChildByName("harvestable")) {
+    auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
+    if (!harvestable) {
         this->add_harvestable();
+    } else if (GameLogic::getInstance()->buildup->target_building != harvestable->building) {
+        harvestable->removeFromParent();
     };
 };
 
@@ -109,26 +112,31 @@ ui::Layout* HarvestScene::create_info_panel()
     const float update_delay = 0.1f;
 
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
-    this->schedule([create_count, building, ing_count](float dt)
+    this->schedule([create_count, ing_count](float dt)
     {
+        spBuilding building = GameLogic::getInstance()->buildup->target_building;
         ing_count->setString(create_count("ING", building->ingredients.size()));
     }, update_delay, "ing_count_update");
 
     auto pro_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("product_count"));
-    this->schedule([create_count, building, pro_count](float dt)
+    this->schedule([create_count, pro_count](float dt)
     {
+        spBuilding building = GameLogic::getInstance()->buildup->target_building;
         pro_count->setString(create_count("PRO", building->products.size()));
     }, update_delay, "pro_count_update");
 
     auto wst_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("waste_count"));
-    this->schedule([create_count, building, wst_count](float dt)
+    this->schedule([create_count, wst_count](float dt)
     {
+        spBuilding building = GameLogic::getInstance()->buildup->target_building;
         wst_count->setString(create_count("WST", building->wastes.size()));
     }, update_delay, "wst_count_update");
 
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
-    this->schedule([building, harvester_count](float dt)
+    this->schedule([harvester_count](float dt)
     {
+        spBuilding building = GameLogic::getInstance()->buildup->target_building;
+
         std::stringstream ss;
         ss << "Robo-harvesters: " << building->harvesters.size();
         harvester_count->setString(ss.str());

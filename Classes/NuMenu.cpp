@@ -9,6 +9,7 @@
 #include "BaseMenu.h"
 #include "Util.h"
 #include "Worker.h"
+#include "GameLogic.h"
 
 USING_NS_CC;
 
@@ -265,6 +266,17 @@ void BuildingNuMenu::init_items()
         auto harvester = std::make_shared<Harvester>(this->building, "test worker");
         harvester->active_count += 1;
         this->building->harvesters.push_back(harvester);
+    });
+
+    auto target_item = NuItem::create();
+    target_item->my_init(this->beatup, scrollview);
+
+    target_item->set_title(building->name);
+    target_item->set_description("Target this building");
+    target_item->set_touch_ended_callback([this]()
+    {
+        CCLOG("Targetting building");
+        GameLogic::getInstance()->buildup->target_building = this->building;
     });
 
 };

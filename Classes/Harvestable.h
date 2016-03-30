@@ -16,6 +16,8 @@ class Harvestable : public cocos2d::ui::Widget
     //it might represent a building or a specific resource
     public:
         Beatup* beatup;
+        spBuilding building;
+
         BEATUP_CREATE_FUNC(Harvestable);
         bool init() override;
         void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
