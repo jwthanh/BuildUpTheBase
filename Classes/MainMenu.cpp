@@ -1060,7 +1060,12 @@ bool InventoryMenu::init()
 
                 auto cb = [ing_type, this](Ref*, ui::Widget::TouchEventType type) {
                     if (type == ui::Widget::TouchEventType::ENDED) {
-                        auto alert = InventoryMenu::create_detail_alert(building, ing_type);
+                        //make sure one doesn't already exist first
+                        if (this->getChildByName("inventory_detail_panel")) {
+                            this->getChildByName("inventory_detail_panel")->removeFromParent();
+                        };
+
+                        auto alert = InventoryMenu::create_detail_alert(this->building, ing_type);
                         this->addChild(alert);
                     };
                 };
@@ -1171,6 +1176,8 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     count_lbl->setString(std::to_string(count));
 
     original_panel->setPosition(this->get_center_pos());
+
+    original_panel->setName("inventory_detail_panel");
 
     return original_panel;
 };
