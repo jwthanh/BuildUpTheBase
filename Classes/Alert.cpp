@@ -209,14 +209,6 @@ void Alert::shrink_close(Vec2 pos)
 {
     float duration = 0.25f;
 
-    auto sx = [](float x) {
-        auto frs = Director::getInstance()->getOpenGLView()->getFrameSize();
-        return x * (frs.width / 960.0);
-    };
-    auto sy = [](float y) {
-        auto frs = Director::getInstance()->getOpenGLView()->getFrameSize();
-        return y * (frs.height / 640.0);
-    };
     auto scale = ScaleTo::create(duration, 0.01f, 0.01f);
     auto move = MoveTo::create(duration, pos);
     auto clean = CallFunc::create(

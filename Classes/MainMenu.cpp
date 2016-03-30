@@ -1058,8 +1058,10 @@ bool InventoryMenu::init()
                 auto raw_btn = panel->getChildByName("item_lbl");
                 auto btn = dynamic_cast<ui::Text*>(raw_btn);
 
-                auto cb = [ing_type, this](Ref*, ui::Widget::TouchEventType type) {
+                auto cb = [ing_type, this, panel](Ref* ref, ui::Widget::TouchEventType type) {
+
                     if (type == ui::Widget::TouchEventType::ENDED) {
+
                         //make sure one doesn't already exist first
                         if (this->getChildByName("inventory_detail_panel")) {
                             this->getChildByName("inventory_detail_panel")->removeFromParent();
@@ -1067,6 +1069,20 @@ bool InventoryMenu::init()
 
                         auto alert = InventoryMenu::create_detail_alert(this->building, ing_type);
                         this->addChild(alert);
+
+                        Vec2 start_pos = panel->getTouchEndPosition();
+                        alert->setPosition(start_pos);
+
+                        alert->setScale(0);
+
+                        float duration = 0.25f;
+                        auto scale = ScaleTo::create(duration, 1.0f, 1.0f);
+
+                        Vec2 end_pos = this->get_center_pos();
+                        auto move = MoveTo::create(duration, end_pos);
+
+                        Sequence* seq = Sequence::create(Spawn::createWithTwoActions(move, scale), NULL);
+                        alert->runAction(seq);
                     };
                 };
                 panel->addTouchEventListener(cb);
