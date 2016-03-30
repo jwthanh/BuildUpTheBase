@@ -97,11 +97,16 @@ std::string Request::get_response_str() const
     };
 };
 
-void Request::set_callback( std::function<void(std::string)> callback)
+void Request::set_callback(std::function<void(std::string)> callback)
 {
     auto response_callback = [this, callback](network::HttpClient* client, network::HttpResponse* response){
         this->_response = response;
-        callback(this->get_response_str());
+
+        if (this->is_valid_response()) {
+            callback(this->get_response_str());
+        } else {
+            CCLOG("Error bad response from server with %s", this->_request->getUrl());
+        }
     };
 
     this->_request->setResponseCallback(response_callback);

@@ -42,7 +42,8 @@ public:
     std::string get_response_str() const;
     bool is_valid_response() const;
 
-    void set_callback( std::function<void(std::string)> callback);
+    //validates the response and then calls the callback
+    void set_callback(std::function<void(std::string)> callback);
 
     void send();
 };
