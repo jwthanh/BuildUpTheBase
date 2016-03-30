@@ -111,6 +111,12 @@ ui::Layout* HarvestScene::create_info_panel()
 
     const float update_delay = 0.1f;
 
+    auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
+    this->schedule([building_name](float dt)
+    {
+        building_name->setString(GameLogic::getInstance()->buildup->target_building->name);
+    }, update_delay, "building_name_update");
+
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
     this->schedule([create_count, ing_count](float dt)
     {
