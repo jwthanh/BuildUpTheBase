@@ -62,6 +62,6 @@ Harvester::Harvester(spBuilding building, std::string name) :
 
 void Harvester::on_update()
 {
-    this->building->create_resources(Resource::ResourceType::Ingredient, 1, "grain");
+    this->building->create_resources(Resource::ResourceType::Ingredient, 1, this->building->punched_ingredient_type);
     CCLOG("harvester update %s", this->name.c_str());
 };
