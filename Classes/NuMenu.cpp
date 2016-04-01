@@ -179,19 +179,29 @@ bool NuMenu::init()
 
 void NuMenu::create_back_item(cocos2d::Node* parent)
 {
-    auto menu_item = NuItem::create();
-    menu_item->my_init(this->beatup, parent);
 
-    menu_item->set_title("Back");
-    menu_item->set_description("Return to previous screen");
+    auto back_btn = ui::Button::create();
+    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            auto director = Director::getInstance();
+            director->popScene();
+        }
+    });
+    back_btn->loadTextures(
+            "main_UI_export_10_x4.png",
+            "main_UI_export_10_x4_pressed.png",
+            "main_UI_export_10_x4_disabled.png",
+            cocos2d::ui::TextureResType::PLIST
+        );
+    back_btn->setPosition(Vec2(90, 540));
+    back_btn->ignoreContentAdaptWithSize(false);
+    back_btn->setContentSize(Size(150, 60));
+    back_btn->setTitleText("Back");
+    back_btn->setTitleFontSize(55);
+    back_btn->setTitleColor(Color3B::BLACK);
 
-    menu_item->set_image("arrowLeft.png");
-
-    auto pop_scene = [](){
-        auto director = Director::getInstance();
-        director->popScene();
-    };
-    menu_item->set_touch_ended_callback(pop_scene);
+    this->addChild(back_btn);
 
 };
 
