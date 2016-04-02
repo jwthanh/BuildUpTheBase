@@ -44,7 +44,9 @@ class ShopNuItem : public Buyable, public NuItem
 {
     public:
         CREATE_FUNC(ShopNuItem);
-        ShopNuItem():Buyable("unset_in_shopnuitem") {};
+        ShopNuItem() : Buyable("unset_in_shopnuitem"), resource_cost(NULL) {};
+
+        ResourceCondition* resource_cost;
 
         void my_init(Beatup* beatup, Node* parent, std::string id_key);
         virtual void update_func(float dt);
