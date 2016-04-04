@@ -1008,11 +1008,10 @@ bool InventoryMenu::init()
     //load dummy node to get size
     //and pull the panel out of node because node's not a widget and has no size
     auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
-    auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("item_panel"));
-    original_panel->removeFromParent();
-    auto cat = dynamic_cast<Sprite*>(original_panel->getChildByName("item_img"));
+    auto orig_item_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("item_panel"));
+    orig_item_panel->removeFromParent();
 
-    float panel_width = original_panel->getContentSize().width;
+    float panel_width = orig_item_panel->getContentSize().width;
 
     //prep param to apply to rows and cols
     auto param = ui::LinearLayoutParameter::create();
@@ -1052,13 +1051,13 @@ bool InventoryMenu::init()
                     continue;
                 };
 
-                auto panel = original_panel->clone();
-                panel->setLayoutParameter(param);
+                auto new_item_panel = orig_item_panel->clone();
+                new_item_panel->setLayoutParameter(param);
 
-                auto raw_btn = panel->getChildByName("item_lbl");
+                auto raw_btn = new_item_panel->getChildByName("item_lbl");
                 auto btn = dynamic_cast<ui::Text*>(raw_btn);
 
-                auto cb = [ing_type, this, panel](Ref* ref, ui::Widget::TouchEventType type) {
+                auto cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
 
                     if (type == ui::Widget::TouchEventType::ENDED) {
 
@@ -1070,7 +1069,7 @@ bool InventoryMenu::init()
                         auto alert = InventoryMenu::create_detail_alert(this->building, ing_type);
                         this->addChild(alert);
 
-                        Vec2 start_pos = panel->getTouchEndPosition();
+                        Vec2 start_pos = new_item_panel->getTouchEndPosition();
                         alert->setPosition(start_pos);
 
                         alert->setScale(0);
@@ -1085,7 +1084,7 @@ bool InventoryMenu::init()
                         alert->runAction(seq);
                     };
                 };
-                panel->addTouchEventListener(cb);
+                new_item_panel->addTouchEventListener(cb);
 
                 auto type_str = Ingredient::type_to_string(ing_type);
 
@@ -1093,7 +1092,7 @@ bool InventoryMenu::init()
                 ss << count << " " << type_str;
                 btn->setString(ss.str());
 
-                inner_layout->addChild(panel);
+                inner_layout->addChild(new_item_panel);
 
             }
 
@@ -1188,8 +1187,13 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
 
     auto count_desc = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_desc"));
     auto count_lbl = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_lbl"));
-    int count = building->get_ingredient_count()[ing_type];
-    count_lbl->setString(std::to_string(count));
+
+    auto update_delay = 0.1f;
+
+    original_panel->schedule([count_lbl, building, ing_type](float) {
+        int count = building->get_ingredient_count()[ing_type];
+        count_lbl->setString(std::to_string(count));
+    }, update_delay, "alert_count_update");
 
     auto sell_btn = dynamic_cast<ui::Button*>(original_panel->getChildByName("sell_btn"));
     sell_btn->loadTextures(
@@ -1216,8 +1220,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
                 if (!found_one_to_sell && ingredient->ingredient_type == ing_type){
                     found_one_to_sell = true;
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }}
             );
