@@ -1187,6 +1187,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     resource_name->setString(res_name);
 
     auto resource_description = dynamic_cast<ui::Text*>(original_panel->getChildByName("resource_description"));
+    //TODO: load resource desc from json
     resource_description->setString("Grain is good to eat\nits a lot of fun to touch\ni could go for some right now");
 
     auto count_desc = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_desc"));
@@ -1239,6 +1240,20 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
                 
         }
     });
+    sell_btn->schedule([sell_btn, this, ing_type](float){
+        vsIngredient& ingredients = this->building->ingredients;
+        if (ingredients.empty()){
+            sell_btn->setBright(false);
+        }
+        else if (this->building->get_ingredients()[ing_type] == 0)
+        {
+            sell_btn->setBright(false);
+        }
+        else
+        {
+            sell_btn->setEnabled(true);
+        }
+    }, update_delay, "sell_btn_state_cb");
 
     original_panel->setPosition(this->get_center_pos());
 
