@@ -1027,14 +1027,14 @@ bool InventoryMenu::init()
     layout->setContentSize(Size(width, 500)); 
     layout->setAnchorPoint(Vec2(0.5, 0.5));
 
-    auto map_type = building->get_ingredient_count();
-    auto it = map_type.begin();
-    auto end_it = map_type.end();
+    auto ingredient_count_map = building->get_ingredient_count();
+    auto it = ingredient_count_map.begin();
+    auto end_it = ingredient_count_map.end();
 
     for (int i = 0; i < 99; i++) {
-        auto inner_layout = ui::HBox::create();
-        inner_layout->setContentSize(Size(width, 100));
-        inner_layout->setLayoutParameter(param);
+        auto horiz_layout = ui::HBox::create();
+        horiz_layout->setContentSize(Size(width, 100));
+        horiz_layout->setLayoutParameter(param);
 
         for (int j = 0; j < num_cols; j++) {
             if (it == end_it){
@@ -1084,14 +1084,17 @@ bool InventoryMenu::init()
                 };
                 new_item_panel->addTouchEventListener(cb);
 
-                auto type_str = Ingredient::type_to_string(ing_type);
+                float update_delay = 0.1f;
+                new_item_panel->schedule([new_item_panel, this, ing_type](float)
+                {
+                    auto type_str = Ingredient::type_to_string(ing_type);
+                    std::stringstream ss;
+                    ss << this->building->get_ingredient_count()[ing_type] << " " << type_str;
+                    auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
+                    item_lbl->setString(ss.str());
+                }, update_delay, "item_lbl_update");
 
-                std::stringstream ss;
-                ss << count << " " << type_str;
-                auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
-                item_lbl->setString(ss.str());
-
-                inner_layout->addChild(new_item_panel);
+                horiz_layout->addChild(new_item_panel);
 
             }
 
@@ -1099,7 +1102,7 @@ bool InventoryMenu::init()
 
         };
 
-        layout->addChild(inner_layout);
+        layout->addChild(horiz_layout);
 
         if (it == end_it){
             break;
