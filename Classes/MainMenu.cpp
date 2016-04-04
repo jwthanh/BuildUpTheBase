@@ -1210,10 +1210,11 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
             "main_UI_export_10_x4_disabled.png",
             cocos2d::ui::TextureResType::PLIST
         );
+    int coins_gained = 10;
     std::stringstream cost_ss;
-    cost_ss << "Sell for " << 10;
+    cost_ss << "Sell for " << coins_gained;
     sell_btn->setTitleText(cost_ss.str());
-    sell_btn->addTouchEventListener([this, ing_type](Ref* touch, ui::Widget::TouchEventType type){
+    sell_btn->addTouchEventListener([this, ing_type, coins_gained](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             vsIngredient& ingredients = this->building->ingredients;
@@ -1235,6 +1236,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
             ingredients.erase(remove_cb);
             if (found_one_to_sell)
             {
+                GameLogic::getInstance()->beatup->add_total_coin(coins_gained);
                 CCLOG("SELLING STUFF");
             } else
             {
