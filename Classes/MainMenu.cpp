@@ -1085,14 +1085,16 @@ bool InventoryMenu::init()
                 new_item_panel->addTouchEventListener(cb);
 
                 float update_delay = 0.1f;
-                new_item_panel->schedule([new_item_panel, this, ing_type](float)
+                auto update_lbl_cb = [new_item_panel, this, ing_type](float)
                 {
                     auto type_str = Ingredient::type_to_string(ing_type);
                     std::stringstream ss;
                     ss << this->building->get_ingredient_count()[ing_type] << " " << type_str;
                     auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
                     item_lbl->setString(ss.str());
-                }, update_delay, "item_lbl_update");
+                };
+                update_lbl_cb(0); //fire once immediately
+                new_item_panel->schedule(update_lbl_cb, update_delay, "item_lbl_update");
 
                 horiz_layout->addChild(new_item_panel);
 
