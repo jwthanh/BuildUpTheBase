@@ -1164,7 +1164,7 @@ InventoryMenu* InventoryMenu::create(spBuilding building)
     }
 };
 
-ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::IngredientType type)
+ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::IngredientType ing_type)
 {
     auto inst = CSLoader::getInstance();
     auto raw_node = inst->createNode("editor/details/inventory_detail.csb");
@@ -1180,7 +1180,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     original_panel->addTouchEventListener(cb);
 
     auto resource_name = dynamic_cast<ui::Text*>(original_panel->getChildByName("resource_name"));
-    std::string res_name = Ingredient::type_to_string(type);
+    std::string res_name = Ingredient::type_to_string(ing_type);
     resource_name->setString(res_name);
 
     auto resource_description = dynamic_cast<ui::Text*>(original_panel->getChildByName("resource_description"));
@@ -1188,8 +1188,50 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
 
     auto count_desc = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_desc"));
     auto count_lbl = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_lbl"));
-    int count = building->get_ingredient_count()[type];
+    int count = building->get_ingredient_count()[ing_type];
     count_lbl->setString(std::to_string(count));
+
+    auto sell_btn = dynamic_cast<ui::Button*>(original_panel->getChildByName("sell_btn"));
+    sell_btn->loadTextures(
+            "main_UI_export_10_x4.png",
+            "main_UI_export_10_x4_pressed.png",
+            "main_UI_export_10_x4_disabled.png",
+            cocos2d::ui::TextureResType::PLIST
+        );
+    std::stringstream cost_ss;
+    cost_ss << "Sell for " << 10;
+    sell_btn->setTitleText(cost_ss.str());
+    sell_btn->addTouchEventListener([this, ing_type](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            vsIngredient& ingredients = this->building->ingredients;
+            if (ingredients.empty()){ return; }
+
+            bool found_one_to_sell = false;
+            auto i_begin = ingredients.begin();
+            auto i_end = ingredients.end();
+
+            auto remove_cb = std::remove_if(i_begin, i_end,
+                [&found_one_to_sell, ing_type](spIngredient ingredient) {
+                if (!found_one_to_sell && ingredient->ingredient_type == ing_type){
+                    found_one_to_sell = true;
+                    return true;
+                }
+                else {
+                    return false;
+                }}
+            );
+            ingredients.erase(remove_cb);
+            if (found_one_to_sell)
+            {
+                CCLOG("SELLING STUFF");
+            } else
+            {
+                CCLOG("didnt find any"); //this should never happen
+            }
+                
+        }
+    });
 
     original_panel->setPosition(this->get_center_pos());
 

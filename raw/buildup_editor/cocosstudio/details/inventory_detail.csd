@@ -20,14 +20,14 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="resource_description" ActionTag="-468974190" Tag="28" IconVisible="False" LeftMargin="20.9367" RightMargin="29.0633" TopMargin="95.4514" BottomMargin="109.5486" IsCustomSize="True" FontSize="20" LabelText="This is some sample description&#xA;&#xA;it's multiline, no big deal&#xA;&#xA;&#xA;&#xA;&#xA;bottom of it here" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="350.0000" Y="195.0000" />
+              <AbstractNodeData Name="resource_description" ActionTag="-468974190" Tag="28" IconVisible="False" LeftMargin="20.9368" RightMargin="29.0632" TopMargin="92.8836" BottomMargin="219.9565" IsCustomSize="True" FontSize="20" LabelText="This is some sample description" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="350.0000" Y="87.1599" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="195.9367" Y="207.0486" />
+                <Position X="195.9368" Y="263.5364" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4898" Y="0.5176" />
-                <PreSize X="0.8750" Y="0.4875" />
+                <PrePosition X="0.4898" Y="0.6588" />
+                <PreSize X="0.8750" Y="0.2179" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -50,6 +50,21 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.6333" Y="0.1126" />
                 <PreSize X="0.1375" Y="0.0575" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="sell_btn" ActionTag="-214602728" Tag="207" IconVisible="False" LeftMargin="0.2730" RightMargin="-0.2730" TopMargin="258.7551" BottomMargin="74.4334" TouchEnable="True" FontSize="14" ButtonText="Sell for $$$" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="400.0000" Y="66.8115" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.2730" Y="107.8392" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5007" Y="0.2696" />
+                <PreSize X="1.0000" Y="0.1670" />
+                <TextColor A="255" R="65" G="65" B="70" />
+                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
