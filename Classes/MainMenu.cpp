@@ -1054,9 +1054,6 @@ bool InventoryMenu::init()
                 auto new_item_panel = orig_item_panel->clone();
                 new_item_panel->setLayoutParameter(param);
 
-                auto raw_btn = new_item_panel->getChildByName("item_lbl");
-                auto btn = dynamic_cast<ui::Text*>(raw_btn);
-
                 auto cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
 
                     if (type == ui::Widget::TouchEventType::ENDED) {
@@ -1069,6 +1066,7 @@ bool InventoryMenu::init()
                         auto alert = InventoryMenu::create_detail_alert(this->building, ing_type);
                         this->addChild(alert);
 
+                        //animate
                         Vec2 start_pos = new_item_panel->getTouchEndPosition();
                         alert->setPosition(start_pos);
 
@@ -1090,7 +1088,8 @@ bool InventoryMenu::init()
 
                 std::stringstream ss;
                 ss << count << " " << type_str;
-                btn->setString(ss.str());
+                auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
+                item_lbl->setString(ss.str());
 
                 inner_layout->addChild(new_item_panel);
 
