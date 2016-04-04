@@ -1171,36 +1171,39 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
 {
     auto inst = CSLoader::getInstance();
     auto raw_node = inst->createNode("editor/details/inventory_detail.csb");
-    auto original_panel = dynamic_cast<ui::Widget*>(raw_node->getChildByName("Panel_1"));
-    original_panel->removeFromParent();
+    auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
+    alert_panel->removeFromParent();
 
-    auto cb = [original_panel](Ref*, ui::Widget::TouchEventType type) {
+    //alert_panel->setBackGroundImage("main_UI_export_10_x4.png", ui::TextureResType::PLIST);
+    //alert_panel->setBackGroundImageScale9Enabled(true);
+
+    auto cb = [alert_panel](Ref*, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            original_panel->removeFromParent();
+            alert_panel->removeFromParent();
         };
     };
-    original_panel->addTouchEventListener(cb);
+    alert_panel->addTouchEventListener(cb);
 
-    auto resource_name = dynamic_cast<ui::Text*>(original_panel->getChildByName("resource_name"));
+    auto resource_name = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_name"));
     std::string res_name = Ingredient::type_to_string(ing_type);
     resource_name->setString(res_name);
 
-    auto resource_description = dynamic_cast<ui::Text*>(original_panel->getChildByName("resource_description"));
+    auto resource_description = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_description"));
     //TODO: load resource desc from json
     resource_description->setString("Grain is good to eat\nits a lot of fun to touch\ni could go for some right now");
 
-    auto count_desc = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_desc"));
-    auto count_lbl = dynamic_cast<ui::Text*>(original_panel->getChildByName("count_lbl"));
+    auto count_desc = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_desc"));
+    auto count_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_lbl"));
 
     auto update_delay = 0.1f;
 
-    original_panel->schedule([count_lbl, building, ing_type](float) {
+    alert_panel->schedule([count_lbl, building, ing_type](float) {
         int count = building->get_ingredient_count()[ing_type];
         count_lbl->setString(std::to_string(count));
     }, update_delay, "alert_count_update");
 
-    auto sell_btn = dynamic_cast<ui::Button*>(original_panel->getChildByName("sell_btn"));
+    auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("sell_btn"));
     sell_btn->loadTextures(
             "main_UI_export_10_x4.png",
             "main_UI_export_10_x4_pressed.png",
@@ -1255,11 +1258,11 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
         }
     }, update_delay, "sell_btn_state_cb");
 
-    original_panel->setPosition(this->get_center_pos());
+    alert_panel->setPosition(this->get_center_pos());
 
-    original_panel->setName("inventory_detail_panel");
+    alert_panel->setName("inventory_detail_panel");
 
-    return original_panel;
+    return alert_panel;
 };
 
 bool CharacterMenu::init()
