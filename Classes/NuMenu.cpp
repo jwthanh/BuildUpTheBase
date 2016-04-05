@@ -283,7 +283,7 @@ void BuildingNuMenu::init_items()
 
     target_item->set_title(building->name);
     target_item->set_description("Target this building");
-    target_item->set_image("crossair_red.png");
+    target_item->set_image("crossair_black.png");
     target_item->set_touch_ended_callback([this]()
     {
         CCLOG("Targetting building");

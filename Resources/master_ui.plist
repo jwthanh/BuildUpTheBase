@@ -139,7 +139,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>crossair_red.png</key>
+            <key>crossair_black.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -888,7 +888,7 @@
             <key>size</key>
             <string>{789,473}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:bc38e3e6f3d59051d1e3b829473c028d:a4aac63f27b61749f13f0c236f3ed822:46d5613a345bde46170341c988b3c4b9$</string>
+            <string>$TexturePacker:SmartUpdate:1086166479e6242b64d634823a32f496:1c2c7d2ca83b0cdbb6c6a4f70285162a:46d5613a345bde46170341c988b3c4b9$</string>
             <key>textureFileName</key>
             <string>master_ui.png</string>
         </dict>
