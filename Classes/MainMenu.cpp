@@ -677,9 +677,9 @@ bool ResetMenu::reset_levels()
     return true;
 };
 
-BuildingMenu* BuildingMenu::create(spBuilding building)
+BuildingDetailMenu* BuildingDetailMenu::create(spBuilding building)
 {
-    BuildingMenu *pRet = new(std::nothrow) BuildingMenu();
+    BuildingDetailMenu *pRet = new(std::nothrow) BuildingDetailMenu();
     pRet->building = building; //this should be after init, cause i guess init should fail, but its fine for now.
 
     if (pRet && pRet->init()) {
@@ -694,12 +694,12 @@ BuildingMenu* BuildingMenu::create(spBuilding building)
     }
 };
 
-bool BuildingMenu::init()
+bool BuildingDetailMenu::init()
 {
 #ifdef _WIN32
-    FUNC_INIT_WIN32(BuildingMenu);
+    FUNC_INIT_WIN32(BuildingDetailMenu);
 #else
-    FUNC_INIT(BuildingMenu);
+    FUNC_INIT(BuildingDetailMenu);
 #endif
 
     menu_font = DEFAULT_FONT;
@@ -780,7 +780,7 @@ bool BuildingMenu::init()
     return true;
 };
 
-void BuildingMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
+void BuildingDetailMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
 {
     if(keyCode == EventKeyboard::KeyCode::KEY_SPACE 
             || keyCode == EventKeyboard::KeyCode::KEY_ENTER) 
@@ -791,7 +791,7 @@ void BuildingMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d
     };
 };
 
-void BuildingMenu::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *pEvent)
+void BuildingDetailMenu::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *pEvent)
 {
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
     {

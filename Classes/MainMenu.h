@@ -102,12 +102,12 @@ class ResetMenu : public BaseMenu
 
 };
 
-class BuildingMenu : public BaseMenu
+class BuildingDetailMenu : public BaseMenu
 {
     public:
         spBuilding building;
 
-        static BuildingMenu* create(spBuilding building);
+        static BuildingDetailMenu* create(spBuilding building);
         static cocos2d::Scene* createScene();
 
         virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
