@@ -108,8 +108,7 @@ class CityMenu : public GameLayer
     public:
         cocos2d::Label* main_lbl;
 
-        static CityMenu* create();
-        static cocos2d::Scene* createScene();
+        CREATE_FUNC(CityMenu);
 
         virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
 

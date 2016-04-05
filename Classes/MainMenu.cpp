@@ -677,22 +677,6 @@ bool ResetMenu::reset_levels()
     return true;
 };
 
-CityMenu* CityMenu::create()
-{
-    CityMenu *pRet = new(std::nothrow) CityMenu();
-
-    if (pRet && pRet->init()) {
-        pRet->autorelease();
-        return pRet;
-    }
-    else
-    {
-        delete pRet;
-        pRet = nullptr; 
-        return pRet;
-    }
-};
-
 bool CityMenu::init()
 {
 #ifdef _WIN32
