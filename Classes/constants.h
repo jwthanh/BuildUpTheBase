@@ -2,12 +2,10 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#include <string>
 #include <algorithm>
 #include <functional>
 #include <vector>
 #include <memory>
-#include <sstream>
 
 #include "CCPlatformMacros.h"
 
