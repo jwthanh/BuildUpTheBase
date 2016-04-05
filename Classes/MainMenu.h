@@ -102,22 +102,6 @@ class ResetMenu : public BaseMenu
 
 };
 
-class BuildingDetailMenu : public BaseMenu
-{
-    public:
-        spBuilding building;
-
-        static BuildingDetailMenu* create(spBuilding building);
-        static cocos2d::Scene* createScene();
-
-        virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
-
-        virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
-        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
-
-        bool init() override;
-
-};
 
 class CityMenu : public GameLayer
 {
