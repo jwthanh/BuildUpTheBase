@@ -10,6 +10,7 @@
 #include "Util.h"
 #include "Worker.h"
 #include "GameLogic.h"
+#include "Recipe.h"
 
 USING_NS_CC;
 
@@ -288,6 +289,22 @@ void BuildingNuMenu::init_items()
     {
         CCLOG("Targetting building");
         GameLogic::getInstance()->buildup->target_building = this->building;
+    });
+
+    auto convert_item = NuItem::create();
+    convert_item->my_init(this->beatup, scrollview);
+
+    convert_item->set_title("Convert grain to bread");
+    convert_item->set_description("Turn 15 grain into a sweet slice of bread");
+    convert_item->set_touch_ended_callback([this]() {
+        CCLOG("trying to convert 15 grain");
+        Recipe recipe = Recipe("Farm Recipe");
+        recipe.components = ComponentMap();
+        recipe.components[Ingredient::IngredientType::Grain] = 15;
+        recipe._callback = [this](Beatup* beatup) {
+            this->building->create_resources(Resource::Ingredient, 1, "bread");
+        };
+        this->building->consume_recipe(&recipe);
     });
 
 };

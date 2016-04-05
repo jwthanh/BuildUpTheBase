@@ -1,5 +1,6 @@
 #include "Recipe.h"
 #include <algorithm>
+#include "GameLogic.h"
 
 
 void Recipe::callback(Beatup* beatup)
@@ -92,6 +93,8 @@ void Recipe::consume(vsIngredient& input)
             input.end()
         );
         printj("consumed " << this->name);
+
+        this->callback(GameLogic::getInstance()->beatup);
     }
     else
     {

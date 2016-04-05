@@ -938,7 +938,7 @@ void test_recipe()
         std::make_shared<Ingredient>("grain"),
         std::make_shared<Ingredient>("grain"),
         std::make_shared<Ingredient>("iron")
-    } ;
+    };
 
     Recipe recipe = Recipe("test recipe");
     recipe.components = ComponentMap();

@@ -39,6 +39,7 @@ class Ingredient : public Resource
             None,
             Grain,
             PileOfGrain,
+            Bread,
             Seed,
             Tree,
             Iron,
