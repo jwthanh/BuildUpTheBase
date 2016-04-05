@@ -96,7 +96,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="back_btn" ActionTag="-552791013" CallBackType="Touch" CallBackName="pop_scene" Tag="74" IconVisible="False" LeftMargin="17.0000" RightMargin="817.0000" TopMargin="74.0000" BottomMargin="510.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="back_btn" ActionTag="-552791013" Tag="74" IconVisible="False" LeftMargin="17.0000" RightMargin="817.0000" TopMargin="74.0000" BottomMargin="510.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="126.0000" Y="56.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="80.0000" Y="538.0000" />
