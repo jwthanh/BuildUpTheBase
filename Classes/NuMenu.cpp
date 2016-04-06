@@ -317,12 +317,14 @@ void BuildingNuMenu::init_items()
     });
 
     auto convert_item = RecipeNuItem::create();
-    building->data->get_recipe("bread_recipe");
+    spRecipe recipe = building->data->get_recipe("bread_recipe");
 
-    spRecipe recipe = std::make_shared<Recipe>(("Farm Recipe"));
-    recipe->components[Ingredient::IngredientType::Grain] = 15;
-    recipe->_callback = [this](Beatup* beatup) {
-        this->building->create_resources(Resource::Ingredient, 1, "bread");
+    recipe->_callback = [this, recipe](Beatup* beatup) {
+        for (auto pair : recipe->outputs) {
+            Ingredient::IngredientType ing_type = pair.first;
+            int count = pair.second;
+            this->building->create_resources(Resource::Ingredient, count, Ingredient::type_to_string(ing_type));
+        };
     };
 
     convert_item->my_init(recipe, this->building, scrollview);

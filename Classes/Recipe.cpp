@@ -14,6 +14,11 @@ void Recipe::callback(Beatup* beatup)
 Recipe::Recipe(std::string name) : Nameable(name)
 {
     this->components = ComponentMap();
+    this->outputs = OutputMap();
+
+    // this->_callback = [this](Beatup* bu) {
+    //     this-> //TODO figure out how to add this output to building
+    // };
 
     //example recipe
     // this->components[Ingredient::IngredientType::Grain] = 2;
