@@ -46,9 +46,10 @@ class RecipeNuItem : public NuItem
         CREATE_FUNC(RecipeNuItem);
 
         spRecipe recipe;
+        spBuilding building;
 
         void my_init(spRecipe recipe, std::shared_ptr<Building> building, Node* parent);
-        virtual void update_func(float dt) {};
+        virtual void update_func(float dt);
 };
 
 class ShopNuItem : public Buyable, public NuItem

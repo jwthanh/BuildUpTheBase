@@ -42,6 +42,8 @@ void NuItem::my_init(Beatup* beatup, cocos2d::Node* parent)
     this->set_cost_lbl("");
     // this->set_image("");
 
+    this->schedule(CC_SCHEDULE_SELECTOR(NuItem::update_func));
+
 };
 
 void NuItem::set_touch_ended_callback(std::function<void(void)> callback)
@@ -143,7 +145,22 @@ void RecipeNuItem::my_init(spRecipe recipe, std::shared_ptr<Building> building, 
     NuItem::my_init(building->city->buildup->beatup, parent);
 
     this->recipe = recipe;
+    this->building = building;
 
+    this->set_touch_ended_callback([this]() {
+        CCLOG("trying to consume %s recipe", this->recipe->name.c_str());
+        this->building->consume_recipe(this->recipe.get());
+    });
+
+};
+
+void RecipeNuItem::update_func(float dt)
+{
+    if (this->recipe->is_satisfied(this->building->ingredients)){
+        this->button->setEnabled(true);
+    } else {
+        this->button->setEnabled(false);
+    }
 };
 
 void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
@@ -302,27 +319,14 @@ void BuildingNuMenu::init_items()
     auto convert_item = RecipeNuItem::create();
 
     spRecipe recipe = std::make_shared<Recipe>(("Farm Recipe"));
-    recipe->components = ComponentMap();
     recipe->components[Ingredient::IngredientType::Grain] = 15;
     recipe->_callback = [this](Beatup* beatup) {
         this->building->create_resources(Resource::Ingredient, 1, "bread");
     };
-    convert_item->my_init(recipe, this->building, scrollview);
 
+    convert_item->my_init(recipe, this->building, scrollview);
     convert_item->set_title("Convert grain to bread");
     convert_item->set_description("Turn 15 grain into a sweet slice of bread");
-    convert_item->set_touch_ended_callback([this, convert_item]() {
-        CCLOG("trying to convert 15 grain");
-        this->building->consume_recipe(convert_item->recipe.get());
-    });
-    convert_item->schedule([this, convert_item](float dt){
-        if (convert_item->recipe->is_satisfied(this->building->ingredients)){
-            convert_item->button->setEnabled(true);
-        } else {
-            convert_item->button->setEnabled(false);
-        }
-    }, update_delay, "convert_item_recipe_check");
-
 };
 
 void BuildingNuMenu::create_inventory_item(cocos2d::Node* parent)
