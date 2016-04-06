@@ -115,8 +115,6 @@ void ShopNuItem::update_func(float dt)
         this->button->setBright(false);
         this->button->setEnabled(false);
 
-
-
         Color3B color = { 254, 81, 81 };
 
         float tint = 0.9f;
@@ -263,6 +261,8 @@ BuildingNuMenu* BuildingNuMenu::create(Beatup* beatup, std::shared_ptr<Building>
 
 void BuildingNuMenu::init_items()
 {
+    float update_delay = 0.1f;
+
     auto scrollview = this->scrollable;
     this->create_inventory_item(scrollview);
 
@@ -306,6 +306,18 @@ void BuildingNuMenu::init_items()
         };
         this->building->consume_recipe(&recipe);
     });
+    convert_item->schedule([this, convert_item](float dt){
+        
+        //figure out a better way to not duplicate the recipe
+        Recipe recipe = Recipe("Farm Recipe");
+        recipe.components = ComponentMap();
+        recipe.components[Ingredient::IngredientType::Grain] = 15;
+        if (recipe.is_satisfied(this->building->ingredients)){
+            convert_item->button->setEnabled(true);
+        } else {
+            convert_item->button->setEnabled(false);
+        }
+    }, update_delay, "convert_item_recipe_check");
 
 };
 
