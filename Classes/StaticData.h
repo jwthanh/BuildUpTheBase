@@ -4,6 +4,8 @@
 
 #include <string>
 
+#include "constants.h"
+
 class BaseData
 {
     private:
@@ -30,6 +32,8 @@ class BuildingData : public BaseData
         std::string get_description();
         std::string get_gold_cost();
         std::string get_img_large();
+
+        spRecipe get_recipe(std::string recipe_key);
 };
 
 #endif

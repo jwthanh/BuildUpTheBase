@@ -317,6 +317,7 @@ void BuildingNuMenu::init_items()
     });
 
     auto convert_item = RecipeNuItem::create();
+    building->data->get_recipe("bread_recipe");
 
     spRecipe recipe = std::make_shared<Recipe>(("Farm Recipe"));
     recipe->components[Ingredient::IngredientType::Grain] = 15;

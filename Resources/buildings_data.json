@@ -4,7 +4,18 @@
             "task_name":"10grain -> 1 pile, move 1/2 ING",
             "description": "Green farmland spreads to all corners of the horizons.",
             "gold_cost": "0",
-            "img_large": "buildingTiles_001.png"
+            "img_large": "buildingTiles_001.png",
+            "recipes": {
+                "bread_recipe" : {
+                    "name": "Farm Recipe",
+                    "components": {
+                        "grain": 15
+                    },
+                    "output": {
+                        "bread": 1
+                    }
+                }
+            }
         },
         "The Workshop" : {
             "task_name":"Sword (2 iron), Shield (3 wood)",

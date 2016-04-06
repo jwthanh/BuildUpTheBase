@@ -5,6 +5,9 @@
 
 #include "FileOperation.h"
 
+#include "cocos2d.h"
+#include "Recipe.h"
+
 std::string BaseData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)
 {
     auto jsonDoc = FileIO::open_json(this->_filename);
@@ -50,4 +53,47 @@ std::string BuildingData::get_gold_cost()
 std::string BuildingData::get_img_large()
 {
     return this->getter("img_large");
+};
+
+spRecipe BuildingData::get_recipe(std::string recipe_key)
+{
+
+    auto jsonDoc = FileIO::open_json(this->_filename);
+    auto body = &jsonDoc["buildings"];
+    auto building_info = &(*body)[this->building_name.c_str()];
+    auto recipe_info = &(*building_info)["recipes"];
+
+    auto recipe_data = &(*recipe_info)[recipe_key.c_str()];
+
+    auto recipe_name = &(*recipe_data)["name"];
+    auto recipe_components = &(*recipe_data)["components"];
+
+    spRecipe result = std::make_shared<Recipe>();
+
+    CCLOG("Components: ");
+    for (rapidjson::Value::MemberIterator itr = recipe_components->MemberBegin();
+        itr != recipe_components->MemberEnd();
+        itr+=1)
+    {
+        std::string val = itr->name.GetString();
+        int count = itr->value.GetInt();
+        CCLOG("\t%s: %d", val.c_str(), count);
+        result->components[Ingredient::string_to_type(val)] = count;
+    };
+
+    CCLOG("Output: ");
+    auto recipe_output = &(*recipe_data)["output"];
+    for (rapidjson::Value::MemberIterator itr = recipe_output->MemberBegin();
+        itr != recipe_output->MemberEnd();
+        itr+=1)
+    {
+        std::string val = itr->name.GetString();
+        int count = itr->value.GetInt();
+        CCLOG("\t%s: %d", val.c_str(), count);
+        result->outputs[Ingredient::string_to_type(val)] = count;
+    };
+
+    CCLOG("raw val: %s", recipe_name->GetString());
+
+    return result;
 };

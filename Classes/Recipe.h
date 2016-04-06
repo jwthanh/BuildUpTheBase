@@ -8,11 +8,14 @@
 #include "constants.h"
 
 typedef std::map<Ingredient::IngredientType, int> ComponentMap;
+typedef std::map<Ingredient::IngredientType, int> OutputMap;
+typedef std::map<Product::ProductType, int> ProductMap;
 
 class Recipe : public Nameable
 {
     public:
         ComponentMap components;
+        OutputMap outputs;
 
         VoidFuncBeatupNoArgs _callback;
         void callback(Beatup* beatup);
