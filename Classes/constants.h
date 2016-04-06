@@ -95,6 +95,7 @@ MAKE_SP_VS(Worker);
 MAKE_SP_VS(BuildingData);
 MAKE_SP_VS(Harvester);
 MAKE_SP_VS(ResourceCondition);
+MAKE_SP_VS(Recipe);
 
 #undef MAKE_SP_VS
 #undef _MAKE_VS

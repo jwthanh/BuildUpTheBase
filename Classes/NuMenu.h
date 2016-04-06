@@ -40,6 +40,17 @@ class NuItem : public cocos2d::ui::Widget
         virtual void update_func(float dt) {};
 };
 
+class RecipeNuItem : public NuItem
+{
+    public:
+        CREATE_FUNC(RecipeNuItem);
+
+        spRecipe recipe;
+
+        void my_init(spRecipe recipe, std::shared_ptr<Building> building, Node* parent);
+        virtual void update_func(float dt) {};
+};
+
 class ShopNuItem : public Buyable, public NuItem
 {
     public:

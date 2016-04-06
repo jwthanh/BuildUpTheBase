@@ -138,6 +138,14 @@ void ShopNuItem::update_func(float dt)
 
 };
 
+void RecipeNuItem::my_init(spRecipe recipe, std::shared_ptr<Building> building, Node* parent)
+{
+    NuItem::my_init(building->city->buildup->beatup, parent);
+
+    this->recipe = recipe;
+
+};
+
 void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
 {
     ShopNuItem::my_init(building->city->buildup->beatup, parent, building->id_key);
