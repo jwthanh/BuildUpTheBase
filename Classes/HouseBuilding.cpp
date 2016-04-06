@@ -749,7 +749,6 @@ void Building::consume_recipe(Recipe* recipe)
     if (recipe->is_satisfied(this->ingredients))
     {
         recipe->consume(this->ingredients);
-        recipe->callback(NULL); //TODO add beatup
     }
 };
 
