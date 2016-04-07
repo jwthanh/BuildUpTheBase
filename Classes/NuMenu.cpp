@@ -329,8 +329,8 @@ void BuildingNuMenu::init_items()
         };
 
         convert_item->my_init(recipe, this->building, scrollview);
-        convert_item->set_title("Convert grain to bread");
-        convert_item->set_description("Turn 15 grain into a sweet slice of bread");
+        convert_item->set_title(recipe->name);
+        convert_item->set_description(recipe->description);
 
     }
 

@@ -11,6 +11,7 @@ const std::map<Ingredient::IngredientType, std::string> Ingredient::type_map = {
     {Ingredient::Grain, "grain"},
     {Ingredient::PileOfGrain, "pileofgrain"},
     {Ingredient::Bread, "bread"},
+    {Ingredient::Loaf, "loaf"},
     {Ingredient::Seed, "seed"},
     {Ingredient::Wood, "wood"},
     {Ingredient::Iron, "iron"},

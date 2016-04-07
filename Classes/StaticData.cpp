@@ -81,10 +81,11 @@ vsRecipe BuildingData::get_all_recipes()
 
 spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* recipe_data)
 {
-    auto recipe_name = &(*recipe_data)["name"];
     auto recipe_components = &(*recipe_data)["components"];
 
-    spRecipe result = std::make_shared<Recipe>();
+    auto recipe_name = (&(*recipe_data)["name"])->GetString();
+    auto recipe_description = (&(*recipe_data)["description"])->GetString();
+    spRecipe result = std::make_shared<Recipe>(recipe_name, recipe_description);
 
     CCLOG("Components: ");
     for (rapidjson::Value::MemberIterator itr = recipe_components->MemberBegin();
@@ -109,7 +110,7 @@ spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* 
         result->outputs[Ingredient::string_to_type(val)] = count;
     };
 
-    CCLOG("raw val: %s", recipe_name->GetString());
+    CCLOG("raw val: %s", recipe_name);
 
     return result;
 }

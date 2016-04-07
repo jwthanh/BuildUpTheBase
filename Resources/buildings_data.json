@@ -7,12 +7,23 @@
             "img_large": "buildingTiles_001.png",
             "recipes": {
                 "bread_recipe" : {
-                    "name": "Farm Recipe",
+                    "name": "Make some bread",
+                    "description": "Take 15 grain, make a sweet slice of bread",
                     "components": {
                         "grain": 15
                     },
                     "output": {
                         "bread": 1
+                    }
+                },
+                "loaf_recipe" : {
+                    "name": "Loaf of bread",
+                    "description": "Take 3 slices of bread, stick em together, you got yourself a loaf, buddy.",
+                    "components": {
+                        "bread": 3
+                    },
+                    "output": {
+                        "loaf": 1
                     }
                 }
             }

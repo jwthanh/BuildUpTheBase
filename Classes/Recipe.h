@@ -20,7 +20,9 @@ class Recipe : public Nameable
         VoidFuncBeatupNoArgs _callback;
         void callback(Beatup* beatup);
 
-        Recipe(std::string name="Unnamed");
+        std::string description;
+
+        Recipe(std::string name="Unnamed", std::string description="");
 
         //if there's enough ingredients in the input vector to make recipe
         bool is_satisfied(vsIngredient input);

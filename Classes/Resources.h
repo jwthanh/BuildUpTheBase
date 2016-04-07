@@ -40,6 +40,7 @@ class Ingredient : public Resource
             Grain,
             PileOfGrain,
             Bread,
+            Loaf,
             Seed,
             Tree,
             Iron,

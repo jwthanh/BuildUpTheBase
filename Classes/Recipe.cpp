@@ -11,7 +11,7 @@ void Recipe::callback(Beatup* beatup)
     }
 }
 
-Recipe::Recipe(std::string name) : Nameable(name)
+Recipe::Recipe(std::string name, std::string description) : Nameable(name), description(description)
 {
     this->components = ComponentMap();
     this->outputs = OutputMap();
