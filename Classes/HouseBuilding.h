@@ -7,7 +7,6 @@
 
 #include "../../Classes/Clock.h"
 #include "../../Classes/attribute_container.h"
-#include "../../Classes/StaticData.h"
 #include "../../Classes/Resources.h"
 
 

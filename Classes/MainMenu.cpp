@@ -17,6 +17,7 @@
 #include "attribute.h"
 #include "NuMenu.h"
 #include "GameLogic.h"
+#include "StaticData.h"
 
 USING_NS_CC;
 

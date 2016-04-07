@@ -26,6 +26,7 @@
 #include <json/document.h>
 #include "FileOperation.h"
 #include "GameLogic.h"
+#include "StaticData.h"
 
 USING_NS_CC;
 
