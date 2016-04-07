@@ -316,20 +316,24 @@ void BuildingNuMenu::init_items()
         GameLogic::getInstance()->buildup->target_building = this->building;
     });
 
-    auto convert_item = RecipeNuItem::create();
-    spRecipe recipe = building->data->get_recipe("bread_recipe");
+    for (auto recipe : building->data->get_all_recipes())
+    {
+        auto convert_item = RecipeNuItem::create();
 
-    recipe->_callback = [this, recipe](Beatup* beatup) {
-        for (auto pair : recipe->outputs) {
-            Ingredient::IngredientType ing_type = pair.first;
-            int count = pair.second;
-            this->building->create_resources(Resource::Ingredient, count, Ingredient::type_to_string(ing_type));
+        recipe->_callback = [this, recipe](Beatup* beatup) {
+            for (auto pair : recipe->outputs) {
+                Ingredient::IngredientType ing_type = pair.first;
+                int count = pair.second;
+                this->building->create_resources(Resource::Ingredient, count, Ingredient::type_to_string(ing_type));
+            };
         };
-    };
 
-    convert_item->my_init(recipe, this->building, scrollview);
-    convert_item->set_title("Convert grain to bread");
-    convert_item->set_description("Turn 15 grain into a sweet slice of bread");
+        convert_item->my_init(recipe, this->building, scrollview);
+        convert_item->set_title("Convert grain to bread");
+        convert_item->set_description("Turn 15 grain into a sweet slice of bread");
+
+    }
+
 };
 
 void BuildingNuMenu::create_inventory_item(cocos2d::Node* parent)

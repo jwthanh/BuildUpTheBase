@@ -55,26 +55,29 @@ std::string BuildingData::get_img_large()
     return this->getter("img_large");
 };
 
-//vsRecipe BuildingData::get_all_recipes()
-//{
-//    auto jsonDoc = FileIO::open_json(this->_filename);
-//    auto body = &jsonDoc["buildings"];
-//    auto building_info = &(*body)[this->building_name.c_str()];
-//    auto recipe_info = &(*building_info)["recipes"];
-//
-//    for (rapidjson::Value::MemberIterator itr = recipe_info->MemberBegin();
-//        itr != recipe_info->MemberEnd();
-//        itr+=1)
-//    {
-//        std::string recipe_id = itr->name.GetString();
-//        auto recipe_data = &(itr->value)[recipe_id.c_str()];
-//
-//        auto recipe_name = &(*recipe_data)["name"];
-//        auto recipe_components = &(*recipe_data)["components"];
-//
-//    };
-//
-//};
+vsRecipe BuildingData::get_all_recipes()
+{
+    auto jsonDoc = FileIO::open_json(this->_filename);
+    auto body = &jsonDoc["buildings"];
+    auto building_info = &(*body)[this->building_name.c_str()];
+    auto recipe_info = &(*building_info)["recipes"];
+
+    vsRecipe recipes;
+
+    for (auto itr = recipe_info->MemberBegin();
+        itr != recipe_info->MemberEnd();
+        itr += 1)
+    {
+        std::string recipe_id = itr->name.GetString();
+        auto recipe_data = &itr->value;
+
+        recipes.push_back(this->build_recipe(recipe_data));
+
+    };
+
+    return recipes;
+
+};
 
 spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* recipe_data)
 {
