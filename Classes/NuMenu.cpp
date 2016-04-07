@@ -156,6 +156,13 @@ void RecipeNuItem::my_init(spRecipe recipe, std::shared_ptr<Building> building, 
 
 void RecipeNuItem::update_func(float dt)
 {
+    //FIXME, this lets someone press a button early i think
+    // and avoid having the button disabled. Not sure.
+    if (this->button->isHighlighted())
+    {
+        return;
+    };
+
     if (this->recipe->is_satisfied(this->building->ingredients)){
         this->button->setEnabled(true);
     } else {
