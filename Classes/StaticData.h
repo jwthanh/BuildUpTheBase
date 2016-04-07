@@ -5,6 +5,8 @@
 #include <string>
 
 #include "constants.h"
+#include <json/allocators.h>
+#include <json/document.h>
 
 class BaseData
 {
@@ -33,7 +35,8 @@ class BuildingData : public BaseData
         std::string get_gold_cost();
         std::string get_img_large();
 
-        spRecipe get_recipe(std::string recipe_key);
+    spRecipe build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* recipe_data);
+    spRecipe get_recipe(std::string recipe_key);
 };
 
 #endif

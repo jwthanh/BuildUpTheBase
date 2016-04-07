@@ -55,16 +55,29 @@ std::string BuildingData::get_img_large()
     return this->getter("img_large");
 };
 
-spRecipe BuildingData::get_recipe(std::string recipe_key)
+//vsRecipe BuildingData::get_all_recipes()
+//{
+//    auto jsonDoc = FileIO::open_json(this->_filename);
+//    auto body = &jsonDoc["buildings"];
+//    auto building_info = &(*body)[this->building_name.c_str()];
+//    auto recipe_info = &(*building_info)["recipes"];
+//
+//    for (rapidjson::Value::MemberIterator itr = recipe_info->MemberBegin();
+//        itr != recipe_info->MemberEnd();
+//        itr+=1)
+//    {
+//        std::string recipe_id = itr->name.GetString();
+//        auto recipe_data = &(itr->value)[recipe_id.c_str()];
+//
+//        auto recipe_name = &(*recipe_data)["name"];
+//        auto recipe_components = &(*recipe_data)["components"];
+//
+//    };
+//
+//};
+
+spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* recipe_data)
 {
-
-    auto jsonDoc = FileIO::open_json(this->_filename);
-    auto body = &jsonDoc["buildings"];
-    auto building_info = &(*body)[this->building_name.c_str()];
-    auto recipe_info = &(*building_info)["recipes"];
-
-    auto recipe_data = &(*recipe_info)[recipe_key.c_str()];
-
     auto recipe_name = &(*recipe_data)["name"];
     auto recipe_components = &(*recipe_data)["components"];
 
@@ -72,8 +85,8 @@ spRecipe BuildingData::get_recipe(std::string recipe_key)
 
     CCLOG("Components: ");
     for (rapidjson::Value::MemberIterator itr = recipe_components->MemberBegin();
-        itr != recipe_components->MemberEnd();
-        itr+=1)
+         itr != recipe_components->MemberEnd();
+         itr+=1)
     {
         std::string val = itr->name.GetString();
         int count = itr->value.GetInt();
@@ -84,8 +97,8 @@ spRecipe BuildingData::get_recipe(std::string recipe_key)
     CCLOG("Output: ");
     auto recipe_output = &(*recipe_data)["output"];
     for (rapidjson::Value::MemberIterator itr = recipe_output->MemberBegin();
-        itr != recipe_output->MemberEnd();
-        itr+=1)
+         itr != recipe_output->MemberEnd();
+         itr+=1)
     {
         std::string val = itr->name.GetString();
         int count = itr->value.GetInt();
@@ -96,4 +109,17 @@ spRecipe BuildingData::get_recipe(std::string recipe_key)
     CCLOG("raw val: %s", recipe_name->GetString());
 
     return result;
+}
+
+spRecipe BuildingData::get_recipe(std::string recipe_key)
+{
+
+    auto jsonDoc = FileIO::open_json(this->_filename);
+    auto body = &jsonDoc["buildings"];
+    auto building_info = &(*body)[this->building_name.c_str()];
+    auto recipe_info = &(*building_info)["recipes"];
+
+    auto recipe_data = &(*recipe_info)[recipe_key.c_str()];
+
+    return build_recipe(recipe_data);
 };
