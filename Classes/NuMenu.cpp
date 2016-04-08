@@ -295,17 +295,28 @@ void BuildingNuMenu::init_items()
     auto scrollview = this->scrollable;
     this->create_inventory_item(scrollview);
 
-    auto menu_item = NuItem::create();
-    menu_item->my_init(this->beatup, scrollview);
+    auto menu_item = ShopNuItem::create();
+    menu_item->my_init(this->beatup, scrollview, "harvester_buy");
+    menu_item->_shop_cost = 25;
+    menu_item->set_cost_lbl("25");
 
     menu_item->set_title(building->name);
     menu_item->set_description("Buy Auto-Harvester");
-    menu_item->set_touch_ended_callback([this]()
+    menu_item->set_touch_ended_callback([this, menu_item]()
     {
-        CCLOG("Buying auto havester");
-        auto harvester = std::make_shared<Harvester>(this->building, "test worker");
-        harvester->active_count += 1;
-        this->building->harvesters.push_back(harvester);
+        auto cost = menu_item->get_cost();
+        auto total_coins = this->beatup->get_total_coins();
+
+        if (cost <= total_coins)
+        {
+            CCLOG("buying a harvester");
+            this->beatup->add_total_coin(-cost);
+            auto harvester = std::make_shared<Harvester>(this->building, "test worker");
+            harvester->active_count += 1;
+            this->building->harvesters.push_back(harvester);
+
+            menu_item->update_func(0);
+        }
     });
 
     auto target_item = NuItem::create();
