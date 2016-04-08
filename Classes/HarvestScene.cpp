@@ -115,41 +115,50 @@ ui::Layout* HarvestScene::create_info_panel()
     const float update_delay = 0.1f;
 
     auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
-    this->schedule([building_name](float dt)
-    {
+    auto update_building_name = [building_name](float dt){
         building_name->setString(GameLogic::getInstance()->buildup->target_building->name);
-    }, update_delay, "building_name_update");
+    };
+    this->schedule(update_building_name, update_delay, "building_name_update");
+    update_building_name(0);
 
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
-    this->schedule([create_count, ing_count](float dt)
+    auto update_ing_count = [create_count, ing_count](float dt)
     {
         spBuilding building = GameLogic::getInstance()->buildup->target_building;
         ing_count->setString(create_count("ING", building->ingredients.size()));
-    }, update_delay, "ing_count_update");
+    };
+    this->schedule(update_ing_count, update_delay, "ing_count_update");
+    update_ing_count(0);
 
     auto pro_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("product_count"));
-    this->schedule([create_count, pro_count](float dt)
+    auto update_pro_count = [create_count, pro_count](float dt)
     {
         spBuilding building = GameLogic::getInstance()->buildup->target_building;
         pro_count->setString(create_count("PRO", building->products.size()));
-    }, update_delay, "pro_count_update");
+    };
+    this->schedule(update_pro_count, update_delay, "pro_count_update");
+    update_pro_count(0);
 
     auto wst_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("waste_count"));
-    this->schedule([create_count, wst_count](float dt)
+    auto update_wst_count = [create_count, wst_count](float dt)
     {
         spBuilding building = GameLogic::getInstance()->buildup->target_building;
         wst_count->setString(create_count("WST", building->wastes.size()));
-    }, update_delay, "wst_count_update");
+    };
+    this->schedule(update_wst_count, update_delay, "wst_count_update");
+    update_wst_count(0);
 
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
-    this->schedule([harvester_count](float dt)
+    auto update_harvester_count = [harvester_count](float dt)
     {
         spBuilding building = GameLogic::getInstance()->buildup->target_building;
 
         std::stringstream ss;
         ss << "Robo-harvesters: " << building->harvesters.size();
         harvester_count->setString(ss.str());
-    }, update_delay, "harvester_count_update");
+    };
+    this->schedule(update_harvester_count, update_delay, "harvester_count_update");
+    update_harvester_count(0);
 
     building_info_panel->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt_type)
     {
@@ -182,13 +191,14 @@ ui::Layout* HarvestScene::create_player_info_panel()
     const float update_delay = 0.1f;
 
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
-    this->schedule([player_gold_lbl](float dt)
-    {
+    auto update_gold_lbl = [player_gold_lbl](float dt){
         std::stringstream coin_ss;
         coin_ss << "You have " << GameLogic::getInstance()->beatup->get_total_coins();
         std::string coin_msg = coin_ss.str();
         player_gold_lbl->setString(coin_msg);
-    }, update_delay, "player_gold_lbl_update");
+    };
+    this->schedule(update_gold_lbl, update_delay, "player_gold_lbl_update");
+    update_gold_lbl(0);
 
     return player_info_panel;
 };
