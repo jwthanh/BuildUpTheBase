@@ -670,7 +670,7 @@ Building::Building(Village* city, std::string name, std::string id_key, TaskFunc
 {
     num_workers = 1;
 
-    update_clock->set_threshold(0.5f);
+    update_clock->set_threshold(1.0f);
     spawn_clock = new Clock(3);
 
     products = vsProduct();
