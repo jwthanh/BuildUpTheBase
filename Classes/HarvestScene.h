@@ -17,6 +17,7 @@ class HarvestScene : public GameLayer
         cocos2d::ui::Button* create_detail_button();
 
         cocos2d::ui::Layout* create_info_panel();
+        cocos2d::ui::Layout* create_player_info_panel();
 
         void add_harvestable();
 

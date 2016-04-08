@@ -27,6 +27,9 @@ bool HarvestScene::init()
     ui::Layout* info_panel = this->create_info_panel();
     this->addChild(info_panel);
 
+    ui::Layout* player_info_panel = this->create_player_info_panel();
+    this->addChild(player_info_panel);
+
     this->add_harvestable();
 
     this->scheduleUpdate();
@@ -158,6 +161,36 @@ ui::Layout* HarvestScene::create_info_panel()
 
 
     return building_info_panel;
+};
+
+ui::Layout* HarvestScene::create_player_info_panel()
+{
+    auto building = GameLogic::getInstance()->buildup->target_building;
+
+    auto inst = CSLoader::getInstance();
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+
+    ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("player_info_panel"));
+    player_info_panel->removeFromParent();
+
+    auto create_count = [](std::string prefix, int count) {
+        std::stringstream ss;
+        ss << prefix << ": " << count;
+        return ss.str();
+    };
+
+    const float update_delay = 0.1f;
+
+    auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
+    this->schedule([player_gold_lbl](float dt)
+    {
+        std::stringstream coin_ss;
+        coin_ss << "You have " << GameLogic::getInstance()->beatup->get_total_coins();
+        std::string coin_msg = coin_ss.str();
+        player_gold_lbl->setString(coin_msg);
+    }, update_delay, "player_gold_lbl_update");
+
+    return player_info_panel;
 };
 
 ui::Button* HarvestScene::create_shop_button()
