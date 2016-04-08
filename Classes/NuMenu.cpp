@@ -295,13 +295,15 @@ void BuildingNuMenu::init_items()
     auto scrollview = this->scrollable;
     this->create_inventory_item(scrollview);
 
+    //buy an auto harvester button
     auto menu_item = ShopNuItem::create();
     menu_item->my_init(this->beatup, scrollview, "harvester_buy");
     menu_item->_shop_cost = 25;
     menu_item->set_cost_lbl("25");
 
-    menu_item->set_title(building->name);
+    menu_item->set_title("Jamal");
     menu_item->set_description("Buy Auto-Harvester");
+    menu_item->set_image("harvester.png");
     menu_item->set_touch_ended_callback([this, menu_item]()
     {
         auto cost = menu_item->get_cost();
@@ -319,6 +321,7 @@ void BuildingNuMenu::init_items()
         }
     });
 
+    //target building to punch
     auto target_item = NuItem::create();
     target_item->my_init(this->beatup, scrollview);
 
