@@ -193,7 +193,8 @@ ui::Layout* HarvestScene::create_player_info_panel()
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
     auto update_gold_lbl = [player_gold_lbl](float dt){
         std::stringstream coin_ss;
-        coin_ss << "You have " << GameLogic::getInstance()->beatup->get_total_coins();
+        auto gold = GameLogic::getInstance()->beatup->get_total_coins();
+        coin_ss << "You have " << gold << " coins";
         std::string coin_msg = coin_ss.str();
         player_gold_lbl->setString(coin_msg);
     };
