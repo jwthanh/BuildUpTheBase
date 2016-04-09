@@ -843,7 +843,7 @@ bool InventoryMenu::init()
         );
     back_btn->setPosition(Vec2(90, 540));
     back_btn->ignoreContentAdaptWithSize(false);
-    back_btn->setContentSize(Size(76, 36));
+    back_btn->setContentSize(Size(125, 55));
     back_btn->setTitleText("Back");
     back_btn->setTitleFontSize(24);
     back_btn->setTitleColor(Color3B::BLACK);
