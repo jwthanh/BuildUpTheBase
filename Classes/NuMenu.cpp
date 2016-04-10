@@ -62,6 +62,12 @@ void NuItem::set_touch_ended_callback(std::function<void(void)> callback)
 
 void NuItem::set_image(std::string path)
 {
+    //same loaded image, do nothing
+    if (this->item_icon->getRenderFile().file == path)
+    {
+        return;
+    };
+
     this->item_icon->loadTexture(path, ui::TextureResType::PLIST);
 
     ui::Scale9Sprite* sprite = dynamic_cast<ui::Scale9Sprite*>(this->item_icon->getVirtualRenderer());
@@ -352,6 +358,14 @@ void BuildingNuMenu::init_items()
         CCLOG("Targetting building");
         GameLogic::getInstance()->buildup->target_building = this->building;
     });
+    auto update_img_cb = [this, target_item](float dt){
+        if (GameLogic::getInstance()->buildup->target_building == this->building) {
+            target_item->set_image("crossair_red.png");
+        } else {
+            target_item->set_image("crossair_black.png");
+        };
+    };
+    target_item->schedule(update_img_cb, update_delay, "image_update");
 
     for (auto recipe : building->data->get_all_recipes())
     {

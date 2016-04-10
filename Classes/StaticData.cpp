@@ -60,6 +60,11 @@ vsRecipe BuildingData::get_all_recipes()
     auto jsonDoc = FileIO::open_json(this->_filename);
     auto body = &jsonDoc["buildings"];
     auto building_info = &(*body)[this->building_name.c_str()];
+
+    if (!building_info->HasMember("recipes"))
+    {
+        return vsRecipe();
+    }
     auto recipe_info = &(*building_info)["recipes"];
 
     vsRecipe recipes;
