@@ -123,3 +123,50 @@ void Harvestable::shatter()
     shatter_sprite->runAction(Sequence::createWithTwoActions(shatter_action, remove));
 
 };
+
+void MiningHarvestable::init_sprite()
+{
+
+    float scale = 4;
+    auto create_sprite = [this,scale](std::string sprite_path, Vec2 relative_pos)
+    {
+        auto sprite = Sprite::createWithSpriteFrameName(sprite_path);
+        sprite->setScale(scale);
+        sprite->setAnchorPoint(relative_pos);
+
+        auto pos = get_relative(this->getContentSize(), relative_pos);
+        sprite->setPosition(pos);
+
+        return sprite;
+
+    };
+
+
+    auto sprite_size = Size(15, 16);
+    sprite_size.width *= scale * 2;
+    sprite_size.height *= scale * 2;
+    this->setContentSize(sprite_size);
+
+    auto top_left_sprite = create_sprite("dirt_1.png", Vec2::ANCHOR_TOP_LEFT);
+    auto top_right_sprite = create_sprite("dirt_2.png", Vec2::ANCHOR_TOP_RIGHT);
+    auto bot_left_sprite = create_sprite("dirt_2.png", Vec2::ANCHOR_BOTTOM_LEFT);
+    auto bot_right_sprite = create_sprite("dirt_1.png", Vec2::ANCHOR_BOTTOM_RIGHT);
+
+
+
+    auto rt = RenderTexture::create(this->getContentSize().width, this->getContentSize().height);
+    rt->retain();
+    rt->begin();
+    top_left_sprite->visit();
+    top_right_sprite->visit();
+    bot_left_sprite->visit();
+    bot_right_sprite->visit();
+    rt->end();
+
+    this->sprite = Sprite::createWithTexture(rt->getSprite()->getTexture());
+
+    this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    this->sprite->setPosition(get_relative(this->getContentSize()));
+    this->clip->addChild(this->sprite);
+    
+};

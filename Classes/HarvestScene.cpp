@@ -40,7 +40,7 @@ bool HarvestScene::init()
 
 void HarvestScene::add_harvestable()
 {
-    auto harvestable = Harvestable::create(GameLogic::getInstance()->beatup);
+    auto harvestable = MiningHarvestable::create(GameLogic::getInstance()->beatup);
     harvestable->setPosition(this->get_center_pos());
     harvestable->setName("harvestable");
 
@@ -91,8 +91,9 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         // NetworkConsole::set_position(this->getChildByName("harvestable"));
-        auto harvestable = (Harvestable*)this->getChildByName("harvestable");
-        harvestable->shatter();
+
+        // auto harvestable = (Harvestable*)this->getChildByName("harvestable");
+        // harvestable->shatter();
 
     }
 };

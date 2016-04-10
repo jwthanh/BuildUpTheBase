@@ -39,6 +39,8 @@ class Harvestable : public cocos2d::ui::Widget
 class MiningHarvestable : public Harvestable
 {
     public:
+        BEATUP_CREATE_FUNC(MiningHarvestable);
+        void init_sprite() override;
 };
 
 #endif
