@@ -19,7 +19,10 @@ class Harvestable : public cocos2d::ui::Widget
         spBuilding building;
 
         BEATUP_CREATE_FUNC(Harvestable);
+
         bool init() override;
+        virtual void init_sprite();
+
         void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         cocos2d::ClippingNode* clip;
@@ -31,6 +34,11 @@ class Harvestable : public cocos2d::ui::Widget
 
         void shatter();
 
+};
+
+class MiningHarvestable : public Harvestable
+{
+    public:
 };
 
 #endif

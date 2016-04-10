@@ -10,6 +10,20 @@
 
 USING_NS_CC;
 
+void Harvestable::init_sprite()
+{
+    this->sprite = cocos2d::Sprite::createWithSpriteFrameName("weapon_ice.png");
+    this->sprite->setScale(4);
+
+    auto sprite_size = this->sprite->getContentSize();
+    this->setContentSize(sprite_size*this->sprite->getScale());
+
+    this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    this->sprite->setPosition(get_relative(this->getContentSize()));
+
+    this->clip->addChild(this->sprite);
+}
+
 bool Harvestable::init()
 {
     this->setTouchEnabled(true); //true otherwise it cant be clicked
@@ -22,18 +36,10 @@ bool Harvestable::init()
 
     this->clip->setStencil(this->stencil);
     this->clip->setInverted(true);
-
-    this->sprite = cocos2d::Sprite::createWithSpriteFrameName("weapon_ice.png");
-    this->sprite->setScale(4);
-    this->clip->addChild(this->sprite);
-
     this->addChild(this->clip);
 
-    auto sprite_size = this->sprite->getContentSize();
-    this->setContentSize(sprite_size*this->sprite->getScale());
-
-    this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    this->sprite->setPosition(get_relative(this->getContentSize()));
+    //NOTE: this needs to add the sprite to this->clip
+    this->init_sprite();
 
     this->click_limit = 15;
     this->current_clicks = 0;
