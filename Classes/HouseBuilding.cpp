@@ -722,6 +722,20 @@ Building::Building(Village* city, std::string name, std::string id_key, TaskFunc
 
 };
 
+int Building::count_ingredients(Ingredient::IngredientType ing_type)
+{
+    return this->get_ingredient_count()[ing_type];
+};
+
+int Building::count_products(Product::ProductType pro_type)
+{
+    return this->get_product_count()[pro_type];
+};
+
+int Building::count_wastes(Waste::WasteType wst_type)
+{
+    return this->get_waste_count()[wst_type];
+};
 
 void Building::create_resources(Resource::ResourceType type, int quantity, std::string name)
 {

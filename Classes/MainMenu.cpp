@@ -950,7 +950,7 @@ bool InventoryMenu::init()
                 {
                     auto type_str = Ingredient::type_to_string(ing_type);
                     std::stringstream ss;
-                    ss << this->building->get_ingredient_count()[ing_type] << " " << type_str;
+                    ss << this->building->count_ingredients(ing_type) << " " << type_str;
                     auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
                     item_lbl->setString(ss.str());
                 };
@@ -1060,7 +1060,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     auto update_delay = 0.1f;
 
     alert_panel->schedule([count_lbl, building, ing_type](float) {
-        int count = building->get_ingredient_count()[ing_type];
+        int count = building->count_ingredients(ing_type);
         count_lbl->setString(std::to_string(count));
     }, update_delay, "alert_count_update");
 
@@ -1112,7 +1112,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
         if (ingredients.empty()){
             sell_btn->setBright(false);
         }
-        else if (this->building->get_ingredient_count()[ing_type] == 0)
+        else if (this->building->count_ingredients(ing_type) == 0)
         {
             sell_btn->setBright(false);
         }

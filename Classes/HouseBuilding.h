@@ -143,9 +143,13 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         std::string get_inventory();
         void print_inventory();
 
+        int count_ingredients(Ingredient::IngredientType ing_type);
+        int count_products(Product::ProductType pro_type);
+        int count_wastes(Waste::WasteType wst_type);
         std::map<Ingredient::IngredientType, int> get_ingredient_count();
         std::map<Product::ProductType, int> get_product_count();
         std::map<Waste::WasteType, int> get_waste_count();
+
         std::string get_ingredients();
         std::string get_products();
         std::string get_wastes();
