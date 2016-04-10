@@ -41,10 +41,10 @@ bool HarvestScene::init()
 void HarvestScene::add_harvestable()
 {
     Harvestable* harvestable;
-    if (GameLogic::getInstance()->buildup->target_building->name == "The Mine") {
-        harvestable = MiningHarvestable::create(GameLogic::getInstance()->beatup);
+    if (BUILDUP->target_building->name == "The Mine") {
+        harvestable = MiningHarvestable::create(BEATUP);
     } else {
-        harvestable = Harvestable::create(GameLogic::getInstance()->beatup);
+        harvestable = Harvestable::create(BEATUP);
     };
 
     harvestable->setPosition(this->get_center_pos());
@@ -62,7 +62,7 @@ void HarvestScene::update(float dt)
     auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
     if (!harvestable) {
         this->add_harvestable();
-    } else if (GameLogic::getInstance()->buildup->target_building != harvestable->building) {
+    } else if (BUILDUP->target_building != harvestable->building) {
         harvestable->removeFromParent();
     };
 };
@@ -88,7 +88,7 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_F5)
     {
-        GameLogic::getInstance()->beatup->reload_resources();
+        BEATUP->reload_resources();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_GRAVE)
     {
@@ -106,7 +106,7 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
 ui::Layout* HarvestScene::create_info_panel()
 {
-    auto building = GameLogic::getInstance()->buildup->target_building;
+    auto building = BUILDUP->target_building;
 
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
@@ -124,7 +124,7 @@ ui::Layout* HarvestScene::create_info_panel()
 
     auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
     auto update_building_name = [building_name](float dt){
-        building_name->setString(GameLogic::getInstance()->buildup->target_building->name);
+        building_name->setString(BUILDUP->target_building->name);
     };
     this->schedule(update_building_name, update_delay, "building_name_update");
     update_building_name(0);
@@ -132,7 +132,7 @@ ui::Layout* HarvestScene::create_info_panel()
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
     auto update_ing_count = [create_count, ing_count](float dt)
     {
-        spBuilding building = GameLogic::getInstance()->buildup->target_building;
+        spBuilding building = BUILDUP->target_building;
         ing_count->setString(create_count("ING", building->ingredients.size()));
     };
     this->schedule(update_ing_count, update_delay, "ing_count_update");
@@ -141,7 +141,7 @@ ui::Layout* HarvestScene::create_info_panel()
     auto pro_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("product_count"));
     auto update_pro_count = [create_count, pro_count](float dt)
     {
-        spBuilding building = GameLogic::getInstance()->buildup->target_building;
+        spBuilding building = BUILDUP->target_building;
         pro_count->setString(create_count("PRO", building->products.size()));
     };
     this->schedule(update_pro_count, update_delay, "pro_count_update");
@@ -150,7 +150,7 @@ ui::Layout* HarvestScene::create_info_panel()
     auto wst_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("waste_count"));
     auto update_wst_count = [create_count, wst_count](float dt)
     {
-        spBuilding building = GameLogic::getInstance()->buildup->target_building;
+        spBuilding building = BUILDUP->target_building;
         wst_count->setString(create_count("WST", building->wastes.size()));
     };
     this->schedule(update_wst_count, update_delay, "wst_count_update");
@@ -159,7 +159,7 @@ ui::Layout* HarvestScene::create_info_panel()
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
     auto update_harvester_count = [harvester_count](float dt)
     {
-        spBuilding building = GameLogic::getInstance()->buildup->target_building;
+        spBuilding building = BUILDUP->target_building;
 
         std::stringstream ss;
         ss << "Robo-harvesters: " << building->harvesters.size();
@@ -182,7 +182,7 @@ ui::Layout* HarvestScene::create_info_panel()
 
 ui::Layout* HarvestScene::create_player_info_panel()
 {
-    auto building = GameLogic::getInstance()->buildup->target_building;
+    auto building = BUILDUP->target_building;
 
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
@@ -201,7 +201,7 @@ ui::Layout* HarvestScene::create_player_info_panel()
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
     auto update_gold_lbl = [player_gold_lbl](float dt){
         std::stringstream coin_ss;
-        auto gold = GameLogic::getInstance()->beatup->get_total_coins();
+        auto gold = BEATUP->get_total_coins();
         coin_ss << "You have " << gold << " coins";
         std::string coin_msg = coin_ss.str();
         player_gold_lbl->setString(coin_msg);
@@ -242,7 +242,7 @@ ui::Button* HarvestScene::create_shop_button()
     {
         if (evt == ui::Widget::TouchEventType::ENDED) {
             auto scene = Scene::create();
-            BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(GameLogic::getInstance()->beatup);
+            BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(BEATUP);
             scene->addChild(building_menu);
 
             auto director = Director::getInstance();
@@ -325,7 +325,7 @@ ui::Button* HarvestScene::create_detail_button()
     {
         if (evt == ui::Widget::TouchEventType::ENDED) {
            auto scene = Scene::create();
-           BuildingNuMenu* building_menu = BuildingNuMenu::create(GameLogic::getInstance()->beatup, GameLogic::getInstance()->buildup->target_building);
+           BuildingNuMenu* building_menu = BuildingNuMenu::create(BEATUP, BUILDUP->target_building);
            scene->addChild(building_menu);
 
            auto director = Director::getInstance();

@@ -365,10 +365,10 @@ void BuildingNuMenu::init_items()
     target_item->set_touch_ended_callback([this]()
     {
         CCLOG("Targetting building");
-        GameLogic::getInstance()->buildup->target_building = this->building;
+        BUILDUP->target_building = this->building;
     });
     auto update_img_cb = [this, target_item](float dt){
-        if (GameLogic::getInstance()->buildup->target_building == this->building) {
+        if (BUILDUP->target_building == this->building) {
             target_item->set_image("crossair_red.png");
         } else {
             target_item->set_image("crossair_black.png");

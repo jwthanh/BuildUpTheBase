@@ -99,7 +99,7 @@ void Recipe::consume(vsIngredient& input)
         );
         printj("consumed " << this->name);
 
-        this->callback(GameLogic::getInstance()->beatup);
+        this->callback(BEATUP);
     }
     else
     {

@@ -729,7 +729,7 @@ bool CityMenu::init()
         return ss.str();
     };
 
-    for (auto building : GameLogic::getInstance()->buildup->city->buildings)
+    for (auto building : BUILDUP->city->buildings)
     {
 
        auto node = city_scene->getChildByName(building->name);
@@ -757,7 +757,7 @@ bool CityMenu::init()
 
        auto cb = [this, building](Ref*, ui::Widget::TouchEventType) {
            auto scene = Scene::create();
-           BuildingNuMenu* building_menu = BuildingNuMenu::create(GameLogic::getInstance()->beatup, building);
+           BuildingNuMenu* building_menu = BuildingNuMenu::create(BEATUP, building);
            scene->addChild(building_menu);
 
            auto director = Director::getInstance();
@@ -1098,7 +1098,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
             ingredients.erase(remove_cb, ingredients.end());
             if (found_one_to_sell)
             {
-                GameLogic::getInstance()->beatup->add_total_coin(coins_gained);
+                BEATUP->add_total_coin(coins_gained);
                 CCLOG("SELLING STUFF");
             } else
             {

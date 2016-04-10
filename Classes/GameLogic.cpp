@@ -56,8 +56,8 @@ void GameDirector::switch_to_building_menu()
 {
     auto scene = cocos2d::Scene::create();
     BuildingNuMenu* building_menu = BuildingNuMenu::create(
-            GameLogic::getInstance()->beatup,
-            GameLogic::getInstance()->buildup->target_building
+            BEATUP,
+            BUILDUP->target_building
         );
     scene->addChild(building_menu);
 
@@ -78,7 +78,7 @@ void GameDirector::switch_to_city_menu()
 void GameDirector::switch_to_inventory_menu()
 {
     auto scene = cocos2d::Scene::create();
-    InventoryMenu* building_menu = InventoryMenu::create(GameLogic::getInstance()->buildup->target_building);
+    InventoryMenu* building_menu = InventoryMenu::create(BUILDUP->target_building);
     scene->addChild(building_menu);
 
     auto director = cocos2d::Director::getInstance();
@@ -88,7 +88,7 @@ void GameDirector::switch_to_inventory_menu()
 void GameDirector::switch_to_test()
 {
     auto scene = cocos2d::Scene::create();
-    BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(GameLogic::getInstance()->beatup);
+    BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(BEATUP);
     scene->addChild(building_menu);
 
     auto director = cocos2d::Director::getInstance();
@@ -114,7 +114,7 @@ void GameDirector::switch_to_character_menu(spFighter fighter)
 void GameDirector::switch_to_shop()
 {
     auto scene = cocos2d::Scene::create();
-    BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(GameLogic::getInstance()->beatup);
+    BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(BEATUP);
     scene->addChild(building_menu);
 
     auto director = cocos2d::Director::getInstance();

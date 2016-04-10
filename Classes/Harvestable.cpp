@@ -29,7 +29,7 @@ bool Harvestable::init()
     this->setTouchEnabled(true); //true otherwise it cant be clicked
     this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 
-    this->building = GameLogic::getInstance()->buildup->target_building;
+    this->building = BUILDUP->target_building;
 
     this->clip = cocos2d::ClippingNode::create();
     this->stencil = cocos2d::DrawNode::create();
@@ -60,7 +60,7 @@ void Harvestable::animate_harvest()
 
     this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
 
-    auto building = GameLogic::getInstance()->buildup->target_building;
+    auto building = BUILDUP->target_building;
     building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
 
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
@@ -177,7 +177,7 @@ void MiningHarvestable::init_sprite()
 
 void MiningHarvestable::animate_harvest()
 {
-    auto building = GameLogic::getInstance()->buildup->target_building;
+    auto building = BUILDUP->target_building;
     building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
 
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;

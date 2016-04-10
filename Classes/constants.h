@@ -112,4 +112,7 @@ MAKE_SP_VS(Recipe);
 typedef void(*TaskFunc)(spBuilding, float);
 typedef bool(*BoolFuncBuilding)(spBuilding);
 
+#define BEATUP GameLogic::getInstance()->beatup
+#define BUILDUP GameLogic::getInstance()->buildup
+
 #endif
