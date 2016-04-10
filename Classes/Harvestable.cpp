@@ -189,8 +189,8 @@ void MiningHarvestable::animate_harvest()
 
     auto size = 20.0f;
     Vec2 origin = Vec2(
-        MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(),
-        MIN(sprite_size.height-(click_ratio*sprite_size.height), sprite_size.height - size)
+        MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
+        MIN(sprite_size.height-(click_ratio*sprite_size.height), sprite_size.height - size) //from the top, go a percentage of the way down
     );
 
     Vec2 destination = origin + Vec2(size, size);
