@@ -103,7 +103,7 @@ void NuItem::set_count_lbl(int count)
     };
 
     std::stringstream count_ss;
-    count_ss << "x" << count;
+    count_ss << "[x" << count << "]";
     this->count_lbl->setString(count_ss.str());
 };
 
