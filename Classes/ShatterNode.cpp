@@ -34,13 +34,13 @@ ShatterSprite* ShatterSprite::createWithSpriteFrame(SpriteFrame *spriteFrame)
 ShatterSprite* ShatterSprite::createWithSpriteFrameName(const std::string& spriteFrameName)
 {
     SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
-    
+
 #if COCOS2D_DEBUG > 0
-    char msg[256] = {0};
+    char msg[256] = { 0 };
     sprintf(msg, "Invalid spriteFrameName: %s", spriteFrameName.c_str());
     CCASSERT(frame != nullptr, msg);
 #endif
-    
+
     return createWithSpriteFrame(frame);
 }
 
@@ -70,7 +70,7 @@ ShatterSprite* ShatterSprite::createWithTexture(Texture2D *texture, const Rect& 
 
 bool ShatterSprite::initWithFile(const std::string& filename)
 {
-    CCASSERT(filename.size()>0, "Invalid filename for sprite");
+    CCASSERT(filename.size() > 0, "Invalid filename for sprite");
 
     Texture2D *texture = Director::getInstance()->getTextureCache()->addImage(filename);
     if (texture)
@@ -105,7 +105,6 @@ bool ShatterSprite::initWithSpriteFrame(SpriteFrame *spriteFrame)
 
     setSpriteFrame(spriteFrame);
 
-
     return bRet;
 }
 
@@ -113,22 +112,20 @@ bool ShatterSprite::initWithSpriteFrame(SpriteFrame *spriteFrame)
 void ShatterSprite::createShatter(){
     //----calculate grid size and fragCount
     Size contentSize = this->getContentSize();
-    const int nRow = (int)floorf(contentSize.height/grid_side_len);//grid row count
-    const int nCol = (int)floorf(contentSize.width/grid_side_len);//grid col count
+    const int nRow = (int)floorf(contentSize.height / grid_side_len);//grid row count
+    const int nCol = (int)floorf(contentSize.width / grid_side_len);//grid col count
     const int fragCount = nRow*nCol;
     //----create fragBatchNode
-    frag_batch_node = SpriteBatchNode::createWithTexture(this->getTexture(),fragCount);
+    frag_batch_node = SpriteBatchNode::createWithTexture(this->getTexture(), fragCount);
     //frag_batch_node->
     this->addChild(frag_batch_node);
     frag_batch_node->setVisible(false);
     //----create frags and add them to fragBatchNode and grid
     //make frag_grid
     frag_grid.resize(nRow);
-    for(int i = 0; i < nRow; i++){
+    for (int i = 0; i < nRow; i++){
         frag_grid[i].resize(nCol);
     }
-
-    const float halfGridSideLen = 0.5 * grid_side_len;
 
     for (int i = 0; i < nRow; i++){
         for (int j = 0; j < nCol; j++){
@@ -152,25 +149,25 @@ void ShatterSprite::resetShatter(){
     Size contentSize = this->getContentSize();
 
     int nRow = (int)frag_grid.size();
-    int nCol = (nRow == 0?0:(int)frag_grid[0].size());
-    const float halfGridSideLen = 0.5*grid_side_len;
+    int nCol = (nRow == 0 ? 0 : (int)frag_grid[0].size());
+    const float half_grid_len = 0.5*grid_side_len;
 
     for (int i = 0; i < nRow; i++){
-        for(int j = 0; j < nCol; j++){
+        for (int j = 0; j < nCol; j++){
             ShatterFrag* frag = frag_grid[i][j];
             //position
-            float x = j * grid_side_len+halfGridSideLen;
-            float y = contentSize.height - (i * grid_side_len+halfGridSideLen);
+            float x = j * grid_side_len + half_grid_len;
+            float y = contentSize.height - (i * grid_side_len + half_grid_len);
             //texture and textureRect
             frag->setTextureRect(Rect(
-                x-halfGridSideLen,
-                (contentSize.height-y) - halfGridSideLen,
+                x - half_grid_len,
+                (contentSize.height - y) - half_grid_len,
                 grid_side_len,
                 grid_side_len
-            ));
+                ));
 
             //set position
-            frag->setPosition(Vec2(x,y));
+            frag->setPosition(Vec2(x, y));
             //scale
             frag->setScale(initial_frag_scale);
             //opacity
@@ -182,19 +179,19 @@ void ShatterSprite::resetShatter(){
 
 }
 
-void ShatterSprite::updateShatterAction(float time,float dt,float growSpeedOfTargetR){
+void ShatterSprite::updateShatterAction(float time, float dt, float growSpeedOfTargetR){
     //update frags
     Size contentSize = this->getContentSize();
-    Vec2 center = Vec2(contentSize.width/2, contentSize.height/2);
+    Vec2 center = Vec2(contentSize.width / 2, contentSize.height / 2);
 
     //radius of surrounding circle
-    float initalTargetR = Vec2(contentSize.width, contentSize.height).getLength()/2;
+    float initalTargetR = Vec2(contentSize.width, contentSize.height).getLength() / 2;
 
     int nRow = (int)frag_grid.size();
-    int nCol = nRow?(int)frag_grid[0].size():0;
+    int nCol = nRow ? (int)frag_grid[0].size() : 0;
 
     for (int i = 0; i < nRow; i++){
-        for (int j = 0; j < nCol;j ++){
+        for (int j = 0; j < nCol; j++){
             ShatterFrag*frag = frag_grid[i][j];
 
             if (frag->getOpacity() == 0 || frag->getScale() == 0){
@@ -209,12 +206,13 @@ void ShatterSprite::updateShatterAction(float time,float dt,float growSpeedOfTar
             Vec2 fragPos = frag->getPosition();
 
             Vec2 direction;
-            float disToCenter = Vec2(fragPos-center).getLength();
+            float disToCenter = Vec2(fragPos - center).getLength();
 
             if (disToCenter == 0) {
                 direction = Vec2::ZERO;
-            } else {
-                direction = fragPos-center;
+            }
+            else {
+                direction = fragPos - center;
                 direction.x /= disToCenter;
                 direction.y /= disToCenter;
             }
@@ -293,6 +291,6 @@ void ShatterAction::update(float time){
     time_foe = cur_time;
     float progressPercentage = time;
     cur_time = progressPercentage*getDuration();
-    ((ShatterSprite*)_target)->updateShatterAction(cur_time,cur_time-time_foe,m_growSpeedOfTargetR);
+    ((ShatterSprite*)_target)->updateShatterAction(cur_time, cur_time - time_foe, m_growSpeedOfTargetR);
 
 }
