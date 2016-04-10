@@ -248,6 +248,8 @@ void CraftingHarvestable::animate_harvest()
     auto spark_parts = ParticleSystemQuad::create("particles/anvil_spark.plist");
     spark_parts->setScale(1.0 / 4.0f);
     spark_parts->setPosition(origin);
+    int total_particles = spark_parts->getTotalParticles();
+    spark_parts->setTotalParticles(total_particles * click_ratio);
     this->addChild(spark_parts);
 
 
