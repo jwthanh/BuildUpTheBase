@@ -28,11 +28,13 @@ class NuItem : public cocos2d::ui::Widget
         cocos2d::ui::Text* title_lbl;
         cocos2d::ui::Text* desc_lbl;
         cocos2d::ui::Text* cost_lbl;
+        cocos2d::ui::Text* count_lbl;
 
         void set_image(std::string path);
         void set_title(std::string title);
         void set_description(std::string description);
         void set_cost_lbl(std::string cost);
+        void set_count_lbl(int count);
 
         void set_touch_ended_callback(std::function<void(void)> callback);
 

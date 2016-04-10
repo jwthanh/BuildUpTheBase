@@ -36,10 +36,12 @@ void NuItem::my_init(Beatup* beatup, cocos2d::Node* parent)
     this->title_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
     this->desc_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
     this->cost_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
+    this->count_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
 
     this->set_title("");
     this->set_description("");
     this->set_cost_lbl("");
+    this->set_count_lbl(0);
     // this->set_image("");
 
     this->schedule(CC_SCHEDULE_SELECTOR(NuItem::update_func));
@@ -85,6 +87,18 @@ void NuItem::set_description(std::string description)
 void NuItem::set_cost_lbl(std::string cost)
 {
     this->cost_lbl->setString(cost);
+};
+
+void NuItem::set_count_lbl(int count)
+{
+    if (count == 0) {
+        this->count_lbl->setString("");
+        return;
+    };
+
+    std::stringstream count_ss;
+    count_ss << "x" << count;
+    this->count_lbl->setString(count_ss.str());
 };
 
 void ShopNuItem::my_init(Beatup* beatup, Node* parent, std::string id_key)

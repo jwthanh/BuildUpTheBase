@@ -48,14 +48,14 @@
               <AbstractNodeData Name="description_panel" ActionTag="-65130128" Tag="17" IconVisible="False" LeftMargin="185.1844" RightMargin="314.8156" TopMargin="129.4048" BottomMargin="25.5952" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="300.0000" Y="45.0000" />
                 <Children>
-                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" Tag="20" IconVisible="False" LeftMargin="0.6173" RightMargin="2.5682" TopMargin="-0.5603" BottomMargin="1.9683" IsCustomSize="True" FontSize="12" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="296.8145" Y="43.5920" />
+                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" Tag="20" IconVisible="False" LeftMargin="0.6173" RightMargin="54.6412" TopMargin="-0.5603" BottomMargin="1.9683" IsCustomSize="True" FontSize="12" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="244.7415" Y="43.5920" />
                     <AnchorPoint />
                     <Position X="0.6173" Y="1.9683" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="0" G="0" B="0" />
                     <PrePosition X="0.0021" Y="0.0437" />
-                    <PreSize X="0.9894" Y="0.9687" />
+                    <PreSize X="0.8158" Y="0.9687" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -81,6 +81,17 @@
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="0" G="0" B="0" />
                     <PrePosition X="0.5082" Y="0.5046" />
+                    <PreSize X="0.8917" Y="0.7667" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="count_lbl" ActionTag="-1594456649" Tag="125" IconVisible="False" LeftMargin="2.4952" RightMargin="2.9209" TopMargin="44.8808" BottomMargin="-37.8808" IsCustomSize="True" FontSize="20" LabelText="x00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="44.5839" Y="23.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="24.7871" Y="-26.3808" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="0" G="0" B="0" />
+                    <PrePosition X="0.4957" Y="-0.8794" />
                     <PreSize X="0.8917" Y="0.7667" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
