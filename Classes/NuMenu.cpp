@@ -185,6 +185,15 @@ void RecipeNuItem::update_func(float dt)
     } else {
         this->button->setEnabled(false);
     }
+
+    //TODO this'll get fucky when recipes output more than one type,
+    // you make one recipe, the count'll go up by two
+    int result_count = 0;
+    for (auto output_ing : this->recipe->outputs) {
+        auto out_type = output_ing.first;
+        result_count += this->building->count_ingredients(out_type);
+    };
+    this->set_count_lbl(result_count);
 };
 
 void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
