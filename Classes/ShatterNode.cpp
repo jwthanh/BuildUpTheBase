@@ -148,20 +148,23 @@ void ShatterSprite::createShatter(){
 void ShatterSprite::resetShatter(){
     Size contentSize = this->getContentSize();
 
-    int nRow = (int)frag_grid.size();
-    int nCol = (nRow == 0 ? 0 : (int)frag_grid[0].size());
+    int num_rows = (int)frag_grid.size();
+    int num_cols = (num_rows == 0 ? 0 : (int)frag_grid[0].size());
     const float half_grid_len = 0.5*grid_side_len;
 
-    for (int i = 0; i < nRow; i++){
-        for (int j = 0; j < nCol; j++){
+    int offset_x = this->getTextureRect().origin.x;
+    int offset_y = this->getTextureRect().origin.y;
+
+    for (int i = 0; i < num_rows; i++){
+        for (int j = 0; j < num_cols; j++){
             ShatterFrag* frag = frag_grid[i][j];
             //position
             float x = j * grid_side_len + half_grid_len;
             float y = contentSize.height - (i * grid_side_len + half_grid_len);
             //texture and textureRect
             frag->setTextureRect(Rect(
-                x - half_grid_len,
-                (contentSize.height - y) - half_grid_len,
+                x - half_grid_len + offset_x,
+                (contentSize.height - y) - half_grid_len + offset_y,
                 grid_side_len,
                 grid_side_len
                 ));
