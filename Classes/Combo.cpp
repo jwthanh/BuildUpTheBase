@@ -5,14 +5,14 @@
 #include "Clock.h"
 #include "Util.h"
 #include "SoundEngine.h"
+#include "constants.h"
+#include "GameLogic.h"
 
 USING_NS_CC;
 
 
-Combo::Combo(Beatup* beatup, std::string id_key, std::string name) : Buyable(id_key)
+Combo::Combo(std::string id_key, std::string name) : Buyable(id_key)
 {
-    this->beatup = beatup;
-
     this->activate_count = 0;
 
     this->name = name;
@@ -36,7 +36,7 @@ Combo::Combo(Beatup* beatup, std::string id_key, std::string name) : Buyable(id_
     this->cooldown = this->defaults.cooldown;
     this->cooldown_clock = new Clock(this->cooldown);
 
-    this->cd_bar = new ProgressBar(beatup, "combo_bar.png", "combo_mid.png");
+    this->cd_bar = new ProgressBar("combo_bar.png", "combo_mid.png");
     this->cd_bar->update_string(name); //TODO renable once bars work
     this->cd_bar->setScale(sx(5));
 
@@ -56,7 +56,7 @@ bool Combo::can_punch()
 
 void Combo::update(float dt)
 {
-    if (this->beatup->get_level_over())
+    if (BEATUP->get_level_over())
     {
         if (this->order_lbl != NULL)
         {
@@ -67,7 +67,7 @@ void Combo::update(float dt)
     };
  
     //FIXME actuall remove this
-    if (false && this->get_been_bought() && !this->beatup->get_level_over())
+    if (false && this->get_been_bought() && !BEATUP->get_level_over())
     {
         this->cd_bar->front_timer->setVisible(true);
         this->cd_bar->back_timer->setVisible(false); //FIXME hack to make the back timer always invisible
@@ -190,7 +190,7 @@ void Combo::activate()
 
     SoundEngine::play_sound("sounds\\new\\real_punch\\C_combo_1.mp3");
 
-    this->beatup->add_to_stamina(this->stamina_regen);
+    BEATUP->add_to_stamina(this->stamina_regen);
 };
 
 bool Combo::handle_hand(FistHands hand)

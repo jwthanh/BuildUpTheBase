@@ -7,7 +7,6 @@
 
 class ProgressBar;
 
-class Beatup;
 class Fist;
 
 #include "Fist.h"
@@ -15,9 +14,7 @@ class Fist;
 class Combo : public Buyable
 {
     public:
-        Combo(Beatup* beatup, std::string id_key, std::string name);
-
-        Beatup* beatup;
+        Combo(std::string id_key, std::string name);
 
 
         std::string name;
