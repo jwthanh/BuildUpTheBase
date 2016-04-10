@@ -113,8 +113,8 @@ bool ShatterSprite::initWithSpriteFrame(SpriteFrame *spriteFrame)
 void ShatterSprite::createShatter(){
     //----calculate grid size and fragCount
     Size contentSize = this->getContentSize();
-    const int nRow = (int)floorf(contentSize.height/m_gridSideLen);//grid row count
-    const int nCol = (int)floorf(contentSize.width/m_gridSideLen);//grid col count
+    const int nRow = (int)floorf(contentSize.height/grid_side_len);//grid row count
+    const int nCol = (int)floorf(contentSize.width/grid_side_len);//grid col count
     const int fragCount = nRow*nCol;
     //----create fragBatchNode
     frag_batch_node = SpriteBatchNode::createWithTexture(this->getTexture(),fragCount);
@@ -128,7 +128,7 @@ void ShatterSprite::createShatter(){
         frag_grid[i].resize(nCol);
     }
 
-    const float halfGridSideLen = 0.5 * m_gridSideLen;
+    const float halfGridSideLen = 0.5 * grid_side_len;
 
     for (int i = 0; i < nRow; i++){
         for (int j = 0; j < nCol; j++){
@@ -143,7 +143,7 @@ void ShatterSprite::createShatter(){
             //add to batchNode
             frag_batch_node->addChild(frag);
             //random 
-            frag->m_randomNumber = rand();
+            frag->random_number = rand();
         }
     }
 }
@@ -153,20 +153,20 @@ void ShatterSprite::resetShatter(){
 
     int nRow = (int)frag_grid.size();
     int nCol = (nRow == 0?0:(int)frag_grid[0].size());
-    const float halfGridSideLen = 0.5*m_gridSideLen;
+    const float halfGridSideLen = 0.5*grid_side_len;
 
     for (int i = 0; i < nRow; i++){
         for(int j = 0; j < nCol; j++){
             ShatterFrag* frag = frag_grid[i][j];
             //position
-            float x = j * m_gridSideLen+halfGridSideLen;
-            float y = contentSize.height - (i * m_gridSideLen+halfGridSideLen);
+            float x = j * grid_side_len+halfGridSideLen;
+            float y = contentSize.height - (i * grid_side_len+halfGridSideLen);
             //texture and textureRect
             frag->setTextureRect(Rect(
                 x-halfGridSideLen,
                 (contentSize.height-y) - halfGridSideLen,
-                m_gridSideLen,
-                m_gridSideLen
+                grid_side_len,
+                grid_side_len
             ));
 
             //set position
@@ -220,7 +220,7 @@ void ShatterSprite::updateShatterAction(float time,float dt,float growSpeedOfTar
             }
 
             float edge_dist = targetR - disToCenter;
-            float edge_random_dist = edge_dist + frag->m_randomNumber % (int)initalTargetR - initalTargetR / 2;//add random to disToEdge
+            float edge_random_dist = edge_dist + frag->random_number % (int)initalTargetR - initalTargetR / 2;//add random to disToEdge
 
             float move_length = edge_random_dist*0.0333; //we only move some percent of disToEdgeWithRandom
 
@@ -290,9 +290,9 @@ void ShatterAction::update(float time){
     //t in action's update(t) means the progress percentage, see ActionInterval::step()
     //t in sprite's update(t) means the deltaTime between current frame and previous frame, see Director::drawScene()
     //cout<<"time:"<<time<<endl;
-    m_timeFoe = m_timeCur;
+    time_foe = cur_time;
     float progressPercentage = time;
-    m_timeCur = progressPercentage*getDuration();
-    ((ShatterSprite*)_target)->updateShatterAction(m_timeCur,m_timeCur-m_timeFoe,m_growSpeedOfTargetR);
+    cur_time = progressPercentage*getDuration();
+    ((ShatterSprite*)_target)->updateShatterAction(cur_time,cur_time-time_foe,m_growSpeedOfTargetR);
 
 }

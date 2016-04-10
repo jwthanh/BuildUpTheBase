@@ -7,8 +7,8 @@ using namespace cocos2d;
 class ShatterFrag : public Sprite
 {
     public:
-        int m_randomNumber;
-        ShatterFrag() { m_randomNumber = -1; }
+        int random_number;
+        ShatterFrag() { random_number = -1; }
 };
 
 class ShatterAction;
@@ -19,7 +19,7 @@ class ShatterSprite : public Sprite
         friend class ShatterAction;
 
         ShatterSprite(){
-            m_gridSideLen = 2.7f;
+            grid_side_len = 2.7f;
             initial_frag_scale = 4.5f;
             frag_batch_node = NULL;
         }
@@ -40,7 +40,7 @@ class ShatterSprite : public Sprite
         void resetShatter();
         void updateShatterAction(float time, float dt, float growSpeedOfTargetR);
 
-        float m_gridSideLen;//grid side length, also frag size
+        float grid_side_len;//grid side length, also frag size
         float initial_frag_scale;//we want to make frags a litte bigger at start time.
         std::vector<std::vector<ShatterFrag*> > frag_grid;//hold all the frags
         SpriteBatchNode* frag_batch_node;//all frags add to this batchNode
@@ -64,14 +64,14 @@ public:
 
 protected:
     void initMembers(){
-        m_timeFoe = 0;
-        m_timeCur = 0;
+        time_foe = 0;
+        cur_time = 0;
 
         m_growSpeedOfTargetR = 50;
     }
 
-    float m_timeFoe;
-    float m_timeCur;
+    float time_foe;
+    float cur_time;
 
     float m_growSpeedOfTargetR;
 
