@@ -334,6 +334,11 @@ void BuildingNuMenu::init_items()
             menu_item->update_func(0);
         }
     });
+    auto update_harvesters_cb = [this, menu_item](float dt) {
+        menu_item->set_count_lbl(this->building->harvesters.size());
+    };
+    menu_item->schedule(update_harvesters_cb, update_delay, "harvester_count");
+    update_harvesters_cb(0);
 
     //target building to punch
     auto target_item = NuItem::create();
