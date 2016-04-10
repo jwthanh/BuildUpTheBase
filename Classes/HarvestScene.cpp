@@ -90,9 +90,9 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        //Request* request = Request::create_get("http://icanhazip.com");
-        //request->retain();
-        NetworkConsole::set_position(this->getChildByName("harvestable"));
+        // NetworkConsole::set_position(this->getChildByName("harvestable"));
+        auto harvestable = (Harvestable*)this->getChildByName("harvestable");
+        harvestable->shatter();
 
     }
 };

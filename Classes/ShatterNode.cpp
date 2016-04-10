@@ -150,6 +150,7 @@ void ShatterSprite::resetShatter(){
 
     int num_rows = (int)frag_grid.size();
     int num_cols = (num_rows == 0 ? 0 : (int)frag_grid[0].size());
+
     const float half_grid_len = 0.5*grid_side_len;
 
     int offset_x = this->getTextureRect().origin.x;

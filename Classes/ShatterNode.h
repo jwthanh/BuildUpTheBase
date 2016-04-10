@@ -20,7 +20,7 @@ class ShatterSprite : public Sprite
 
         ShatterSprite(){
             grid_side_len = 2.7f;
-            initial_frag_scale = 4.5f;
+            initial_frag_scale = 4.0f;
             frag_batch_node = NULL;
         }
         virtual ~ShatterSprite(){}
