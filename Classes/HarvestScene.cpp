@@ -100,8 +100,7 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     {
         // NetworkConsole::set_position(this->getChildByName("harvestable"));
 
-        // auto harvestable = (Harvestable*)this->getChildByName("harvestable");
-        // harvestable->shatter();
+        auto harvestable = (Harvestable*)this->getChildByName("harvestable");
 
     }
 };

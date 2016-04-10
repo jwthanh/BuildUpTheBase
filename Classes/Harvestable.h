@@ -50,7 +50,7 @@ class CraftingHarvestable : public Harvestable
     public:
         CREATE_FUNC(CraftingHarvestable);
         std::string get_sprite_path() override;
-        // virtual void animate_harvest() override;
+        virtual void animate_harvest() override;
 };
 
 #endif

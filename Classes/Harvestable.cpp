@@ -224,3 +224,47 @@ std::string CraftingHarvestable::get_sprite_path()
 {
     return "anvil.png";
 };
+
+void CraftingHarvestable::animate_harvest()
+{
+    auto building = BUILDUP->target_building;
+    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
+
+    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
+
+    auto sprite_size = Size(
+            this->sprite->getContentSize().width*this->sprite->getScaleX(),
+            this->sprite->getContentSize().height*this->sprite->getScaleY()
+            );
+
+    auto size = 20.0f;
+    Vec2 origin = Vec2(
+        MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
+        sprite_size.height
+    );
+
+    this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
+
+    auto spark_parts = ParticleSystemQuad::create("particles/anvil_spark.plist");
+    spark_parts->setScale(1.0 / 4.0f);
+    spark_parts->setPosition(origin);
+    this->addChild(spark_parts);
+
+
+    float rotation = 0.0f;
+
+    if (click_ratio >= 0.8f) {
+        rotation = 15.0f;
+    } else if (click_ratio >= 0.6f) {
+        rotation = 6.0f;
+    } else if (click_ratio >= 0.4f) {
+        rotation = 2.0f;
+    };
+
+    if (rotation != 0.0f) {
+        auto rotate_by = RotateBy::create(0.05f, rotation);
+        auto rotate_to = RotateTo::create(0.05f, 0);
+        this->sprite->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
+        this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
+    };
+}
