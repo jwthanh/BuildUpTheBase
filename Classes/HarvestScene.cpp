@@ -43,6 +43,8 @@ void HarvestScene::add_harvestable()
     Harvestable* harvestable;
     if (BUILDUP->target_building->name == "The Mine") {
         harvestable = MiningHarvestable::create();
+    } else if (BUILDUP->target_building->name == "The Workshop") {
+        harvestable = CraftingHarvestable::create();
     } else {
         harvestable = Harvestable::create();
     };

@@ -12,7 +12,7 @@ USING_NS_CC;
 
 void Harvestable::init_sprite()
 {
-    this->sprite = cocos2d::Sprite::createWithSpriteFrameName("weapon_ice.png");
+    this->sprite = cocos2d::Sprite::createWithSpriteFrameName(this->get_sprite_path());
     this->sprite->setScale(4);
     this->sprite->getTexture()->setAliasTexParameters();
 
@@ -23,7 +23,12 @@ void Harvestable::init_sprite()
     this->sprite->setPosition(get_relative(this->getContentSize()));
 
     this->clip->addChild(this->sprite);
-}
+};
+
+std::string Harvestable::get_sprite_path()
+{
+    return "weapon_ice.png";
+};
 
 bool Harvestable::init()
 {
@@ -146,7 +151,6 @@ void MiningHarvestable::init_sprite()
 
     };
 
-
     auto sprite_size = Size(15, 16);
     sprite_size.width *= scale * 2;
     sprite_size.height *= scale * 2;
@@ -156,8 +160,6 @@ void MiningHarvestable::init_sprite()
     auto top_right_sprite = create_sprite("dirt_2.png", Vec2::ANCHOR_TOP_RIGHT);
     auto bot_left_sprite = create_sprite("dirt_2.png", Vec2::ANCHOR_BOTTOM_LEFT);
     auto bot_right_sprite = create_sprite("dirt_1.png", Vec2::ANCHOR_BOTTOM_RIGHT);
-
-
 
     auto rt = RenderTexture::create(this->getContentSize().width, this->getContentSize().height);
     rt->retain();
@@ -217,3 +219,8 @@ void MiningHarvestable::animate_harvest()
         this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
     };
 }
+
+std::string CraftingHarvestable::get_sprite_path()
+{
+    return "anvil.png";
+};

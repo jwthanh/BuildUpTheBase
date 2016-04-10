@@ -22,6 +22,7 @@ class Harvestable : public cocos2d::ui::Widget
         bool init() override;
         virtual void animate_harvest();
         virtual void init_sprite();
+        virtual std::string get_sprite_path();
 
         void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
@@ -42,6 +43,14 @@ class MiningHarvestable : public Harvestable
         CREATE_FUNC(MiningHarvestable);
         void init_sprite() override;
         virtual void animate_harvest() override;
+};
+
+class CraftingHarvestable : public Harvestable
+{
+    public:
+        CREATE_FUNC(CraftingHarvestable);
+        std::string get_sprite_path() override;
+        // virtual void animate_harvest() override;
 };
 
 #endif
