@@ -13,6 +13,9 @@ void Recipe::callback()
 
 Recipe::Recipe(std::string name, std::string description) : Nameable(name), description(description)
 {
+    this->current_clicks = 0;
+    this->clicks_required = 15;
+
     this->components = ComponentMap();
     this->outputs = OutputMap();
 

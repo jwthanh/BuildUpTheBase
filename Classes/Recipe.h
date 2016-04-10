@@ -14,6 +14,9 @@ typedef std::map<Product::ProductType, int> ProductMap;
 class Recipe : public Nameable
 {
     public:
+        int current_clicks;
+        int clicks_required;
+
         ComponentMap components;
         OutputMap outputs;
 

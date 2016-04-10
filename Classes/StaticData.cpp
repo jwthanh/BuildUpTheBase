@@ -92,18 +92,21 @@ spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* 
     auto recipe_description = (&(*recipe_data)["description"])->GetString();
     spRecipe result = std::make_shared<Recipe>(recipe_name, recipe_description);
 
-    CCLOG("Components: ");
+    if ((*recipe_data).HasMember("clicks_required"))
+    {
+        result->clicks_required = (*recipe_data)["clicks_required"].GetInt();
+    }
+
+
     for (rapidjson::Value::MemberIterator itr = recipe_components->MemberBegin();
          itr != recipe_components->MemberEnd();
          itr+=1)
     {
         std::string val = itr->name.GetString();
         int count = itr->value.GetInt();
-        CCLOG("\t%s: %d", val.c_str(), count);
         result->components[Ingredient::string_to_type(val)] = count;
     };
 
-    CCLOG("Output: ");
     auto recipe_output = &(*recipe_data)["output"];
     for (rapidjson::Value::MemberIterator itr = recipe_output->MemberBegin();
          itr != recipe_output->MemberEnd();
@@ -111,11 +114,8 @@ spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* 
     {
         std::string val = itr->name.GetString();
         int count = itr->value.GetInt();
-        CCLOG("\t%s: %d", val.c_str(), count);
         result->outputs[Ingredient::string_to_type(val)] = count;
     };
-
-    CCLOG("raw val: %s", recipe_name);
 
     return result;
 }
