@@ -47,43 +47,47 @@ bool Harvestable::init()
     return true;
 };
 
+void Harvestable::animate_harvest()
+{
+    auto size = 20.0f;
+    Vec2 origin = Vec2(
+        this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
+        this->sprite->getContentSize().height*this->sprite->getScaleY()*CCRANDOM_0_1()
+    );
+
+    Vec2 destination = origin +Vec2(size, size);
+    this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
+
+    this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
+
+    auto building = GameLogic::getInstance()->buildup->target_building;
+    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
+
+    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
+    float rotation = 0.0f;
+
+    if (click_ratio >= 0.8f) {
+        rotation = 15.0f;
+    } else if (click_ratio >= 0.6f) {
+        rotation = 6.0f;
+    } else if (click_ratio >= 0.4f) {
+        rotation = 2.0f;
+    };
+
+    if (rotation != 0.0f) {
+        auto rotate_by = RotateBy::create(0.05f, rotation);
+        auto rotate_to = RotateTo::create(0.05f, 0);
+        this->sprite->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
+        this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
+    };
+}
+
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     //TODO dont dig out points already dug out OR dig consecutively more from the top
     this->current_clicks += 1;
     if (this->current_clicks < this->click_limit) {
-        auto size = 20.0f;
-        Vec2 origin = Vec2(
-                this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
-                this->sprite->getContentSize().height*this->sprite->getScaleY()*CCRANDOM_0_1()
-                );
-
-        Vec2 destination = origin +Vec2(size, size);
-        this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
-
-        this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
-
-        auto building = GameLogic::getInstance()->buildup->target_building;
-        building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
-
-        float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
-        float rotation = 0.0f;
-
-        if (click_ratio >= 0.8f) {
-            rotation = 15.0f;
-        } else if (click_ratio >= 0.6f) {
-            rotation = 6.0f;
-        } else if (click_ratio >= 0.4f) {
-            rotation = 2.0f;
-        };
-
-        if (rotation != 0.0f) {
-            auto rotate_by = RotateBy::create(0.05f, rotation);
-            auto rotate_to = RotateTo::create(0.05f, 0);
-            this->sprite->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
-            this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
-        };
-
+        this->animate_harvest();
     } else {
         this->shatter();
 
@@ -170,3 +174,45 @@ void MiningHarvestable::init_sprite()
     this->clip->addChild(this->sprite);
     
 };
+
+void MiningHarvestable::animate_harvest()
+{
+    auto building = GameLogic::getInstance()->buildup->target_building;
+    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
+
+    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
+
+    auto sprite_size = Size(
+            this->sprite->getContentSize().width*this->sprite->getScaleX(),
+            this->sprite->getContentSize().height*this->sprite->getScaleY()
+            );
+
+    auto size = 20.0f;
+    Vec2 origin = Vec2(
+        MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(),
+        MIN(sprite_size.height-(click_ratio*sprite_size.height), sprite_size.height - size)
+    );
+
+    Vec2 destination = origin + Vec2(size, size);
+    this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
+
+    this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
+
+
+    float rotation = 0.0f;
+
+    if (click_ratio >= 0.8f) {
+        rotation = 15.0f;
+    } else if (click_ratio >= 0.6f) {
+        rotation = 6.0f;
+    } else if (click_ratio >= 0.4f) {
+        rotation = 2.0f;
+    };
+
+    if (rotation != 0.0f) {
+        auto rotate_by = RotateBy::create(0.05f, rotation);
+        auto rotate_to = RotateTo::create(0.05f, 0);
+        this->sprite->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
+        this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
+    };
+}

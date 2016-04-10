@@ -21,6 +21,7 @@ class Harvestable : public cocos2d::ui::Widget
         BEATUP_CREATE_FUNC(Harvestable);
 
         bool init() override;
+        virtual void animate_harvest();
         virtual void init_sprite();
 
         void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
@@ -41,6 +42,7 @@ class MiningHarvestable : public Harvestable
     public:
         BEATUP_CREATE_FUNC(MiningHarvestable);
         void init_sprite() override;
+        virtual void animate_harvest() override;
 };
 
 #endif
