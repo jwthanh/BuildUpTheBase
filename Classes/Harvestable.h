@@ -15,10 +15,9 @@ class Harvestable : public cocos2d::ui::Widget
     //
     //it might represent a building or a specific resource
     public:
-        Beatup* beatup;
         spBuilding building;
 
-        BEATUP_CREATE_FUNC(Harvestable);
+        CREATE_FUNC(Harvestable);
 
         bool init() override;
         virtual void animate_harvest();
@@ -40,7 +39,7 @@ class Harvestable : public cocos2d::ui::Widget
 class MiningHarvestable : public Harvestable
 {
     public:
-        BEATUP_CREATE_FUNC(MiningHarvestable);
+        CREATE_FUNC(MiningHarvestable);
         void init_sprite() override;
         virtual void animate_harvest() override;
 };

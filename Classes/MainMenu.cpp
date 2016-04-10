@@ -757,7 +757,7 @@ bool CityMenu::init()
 
        auto cb = [this, building](Ref*, ui::Widget::TouchEventType) {
            auto scene = Scene::create();
-           BuildingNuMenu* building_menu = BuildingNuMenu::create(BEATUP, building);
+           BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
            scene->addChild(building_menu);
 
            auto director = Director::getInstance();

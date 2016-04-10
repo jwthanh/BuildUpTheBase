@@ -66,7 +66,6 @@ class BaseMenu : public GameLayer
         cocos2d::Label* main_lbl;
         void set_main_lbl();
 
-        Beatup* beatup;
         cocos2d::Scene* beatup_scene;
 
         std::vector<ShopItem*>* shop_items;
@@ -87,8 +86,6 @@ class ShopItem :  public Buyable
         bool is_infinite_buy = true;
 
         ShopItem(BaseMenu* shop, cocos2d::Menu* menu, cocos2d::ui::Button* button, std::string id_key);
-
-        Beatup* beatup;
 
         cocos2d::ui::Button* button;
 

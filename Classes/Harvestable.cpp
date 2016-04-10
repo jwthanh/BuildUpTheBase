@@ -14,6 +14,7 @@ void Harvestable::init_sprite()
 {
     this->sprite = cocos2d::Sprite::createWithSpriteFrameName("weapon_ice.png");
     this->sprite->setScale(4);
+    this->sprite->getTexture()->setAliasTexParameters();
 
     auto sprite_size = this->sprite->getContentSize();
     this->setContentSize(sprite_size*this->sprite->getScale());

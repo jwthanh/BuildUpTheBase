@@ -9,7 +9,6 @@
 class PlainShopItem;
 class Fist;
 class ShopItem;
-class Beatup;
 class Scrollable;
 class Building;
 
@@ -18,10 +17,9 @@ class NuItem : public cocos2d::ui::Widget
 {
     public:
         CREATE_FUNC(NuItem);
-        Beatup* beatup;
 
         NuItem(){};
-        void my_init(Beatup* beatup, cocos2d::Node* parent);
+        void my_init(cocos2d::Node* parent);
 
         cocos2d::ui::Button* button;
         cocos2d::ui::ImageView* item_icon;
@@ -62,7 +60,7 @@ class ShopNuItem : public Buyable, public NuItem
 
         ResourceCondition* resource_cost;
 
-        void my_init(Beatup* beatup, Node* parent, std::string id_key);
+        void my_init(Node* parent, std::string id_key);
         virtual void update_func(float dt);
 };
 
@@ -79,7 +77,7 @@ class BuildingShopNuItem : public ShopNuItem
 class NuMenu : public GameLayer
 {
     public:
-        BEATUP_CREATE_FUNC(NuMenu);
+        CREATE_FUNC(NuMenu);
 
         Scrollable* scrollable;
 
@@ -88,14 +86,13 @@ class NuMenu : public GameLayer
 
         virtual void init_items(){};
 
-        Beatup* beatup;
 
 };
 
 class BuyBuildingsNuMenu : public NuMenu
 {
     public:
-        BEATUP_CREATE_FUNC(BuyBuildingsNuMenu);
+        CREATE_FUNC(BuyBuildingsNuMenu);
         void init_items();
 };
 
@@ -104,7 +101,7 @@ class BuildingNuMenu : public NuMenu
     public:
         std::shared_ptr<Building> building;
 
-        static BuildingNuMenu* create(Beatup* beatup, std::shared_ptr<Building> building);
+        static BuildingNuMenu* create(std::shared_ptr<Building> building);
         void init_items();
 
         void create_inventory_item(cocos2d::Node* parent);

@@ -67,13 +67,12 @@ std::string Fighter::get_stats()
 }
 
 
-FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
+FighterNode* FighterNode::create(spFighter fighter)
 {
 
     FighterNode* node = FighterNode::create();
     node->setTouchEnabled(true);
 
-    node->beatup = beatup;
     node->fighter = fighter;
 
     node->sprite = ui::ImageView::create(fighter ? fighter->sprite_name : "townsmen8x8.png", TextureResType::PLIST);
@@ -88,7 +87,7 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     });
 
     //hp bar
-    node->hp_bar = new ProgressBar(node->beatup, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
+    node->hp_bar = new ProgressBar("enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
     node->hp_bar->back_timer->setVisible(false);
     node->hp_bar->setPosition(Vec2(0, 0));
     node->hp_bar->setAnchorPoint(Vec2(0.5, 0.5));
@@ -100,7 +99,7 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     node->addChild(node->hp_bar->base_node);
 
     //xp bar
-    node->xp_bar = new ProgressBar(node->beatup, "enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
+    node->xp_bar = new ProgressBar("enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
     node->xp_bar->back_timer->setVisible(false);
     node->xp_bar->setPosition(Vec2(0, -25));
     node->xp_bar->setAnchorPoint(Vec2(0.5, 0.5));
@@ -109,9 +108,9 @@ FighterNode* FighterNode::create(Beatup* beatup, spFighter fighter)
     node->xp_bar->front_timer->setColor(Color3B::BLUE);
     node->addChild(node->xp_bar->base_node);
 
-    node->setPosition(node->beatup->get_center_pos(sx(300)));
+    node->setPosition(BEATUP->get_center_pos(sx(300)));
     node->setAnchorPoint(Vec2(0.5, 0.5));
-    node->beatup->addChild(node);
+    BEATUP->addChild(node);
 
     return node;
 };
@@ -202,9 +201,9 @@ void Battle::fight(spFighter left, spFighter right)
     {
         ss << " and it died!";
 
-        if (this->buildup->beatup->enemy_node->fighter == right) {
+        if (BEATUP->enemy_node->fighter == right) {
             printj("matched fighternode, removing");
-            this->buildup->beatup->enemy_node->clear_fighter();
+            BEATUP->enemy_node->clear_fighter();
         };
 
         //only give exp to killer
@@ -316,7 +315,7 @@ void workshop_task(spBuilding workshop, float dt)
                 printj1("creating one ruined iron");
                 workshop->create_resources(Resource::Waste, 1, "wasted_iron");
                 recipe.consume(workshop->ingredients);
-                workshop->city->buildup->beatup->fighter_node->setColor(Color3B::RED);
+                BEATUP->fighter_node->setColor(Color3B::RED);
                 workshop->city->buildup->fighter->has_sword = true;
             }
             else 
@@ -433,9 +432,9 @@ void arena_task(spBuilding arena, float dt)
         squirrel->attrs->damage->set_vals(10);
         arena->fighters.push_back(squirrel);
 
-        if (arena->city->buildup->beatup->enemy_node->fighter == NULL) {
-            arena->city->buildup->beatup->enemy_node->fighter = squirrel;
-            arena->city->buildup->beatup->enemy_node->load_new_sprite(squirrel->sprite_name);
+        if (BEATUP->enemy_node->fighter == NULL) {
+            BEATUP->enemy_node->fighter = squirrel;
+            BEATUP->enemy_node->load_new_sprite(squirrel->sprite_name);
         }
     };
 

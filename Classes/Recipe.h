@@ -17,8 +17,8 @@ class Recipe : public Nameable
         ComponentMap components;
         OutputMap outputs;
 
-        VoidFuncBeatupNoArgs _callback;
-        void callback(Beatup* beatup);
+        VoidFunc _callback;
+        void callback();
 
         std::string description;
 

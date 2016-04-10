@@ -95,7 +95,6 @@ bool Beatup::init()
     CCLOG("beatup init");
 
     this->buildup = new Buildup();
-    this->buildup->beatup = this;
 
     this->face_fight_node = Node::create();
     this->face_fight_node->setPositionY(this->get_center_pos().y/2);
@@ -186,16 +185,6 @@ bool Beatup::init()
     this->setup_commands();
 
     this->has_been_initialized = true;
-
-    auto gold__plistFile = FileUtils::getInstance()->fullPathForFilename("gold.plist");
-    Coin::particle_map = FileUtils::getInstance()->getValueMapFromFile(gold__plistFile.c_str());
-
-    auto _plistFile = FileUtils::getInstance()->fullPathForFilename("blood.plist");
-    Gore::particle_map = FileUtils::getInstance()->getValueMapFromFile(_plistFile.c_str());
-
-    this->hide_ui();
-
-    this->schedule(schedule_selector(Beatup::update_buildup));
 
     return true;
 }
@@ -660,75 +649,8 @@ void Beatup::prep_other()
     this->player_hp = 10; //these number gets replaced in setup_level
     this->player_total_hp = 10;
 
-    this->player_hp_bar = new ProgressBar(this, "healthbar_bar.png", "healthbar.png");
-    this->player_hp_bar->back_timer->setSprite(Sprite::createWithSpriteFrameName("healthbar_bar_white.png"));
-    this->player_hp_bar->setAnchorPoint(Vec2(0.5f, 0.5f));
-    this->player_hp_bar->setPosition(Vec2(
-        this->get_center_pos().x,
-        this->player_hp_bar->front_timer->getSprite()->getContentSize().height*2
-    ));
-    this->player_hp_bar->setScale(sx(5));
-
-    this->update_player_hp_bar();
-
-    this->stamina_clock = new Clock(0.25f);
-    this->stamina_max = 80000;
-    this->stamina_count = this->stamina_max;
-
-    this->stamina_prog = new ProgressBar(this, "combo_bar.png", "");
-    this->stamina_prog->back_timer->setSprite(Sprite::createWithSpriteFrameName("combo_bar_white.png"));
-    this->stamina_prog->fit_back_to_front();
-    this->stamina_prog->setPosition( this->get_center_pos(0, -sy(230)));
-    this->stamina_prog->setAnchorPoint(Vec2(0.5f, 0.5f));
-    this->stamina_prog->set_percentage(100.0f);
-     // this->stamina_prog->setScale(sx(4));
-    this->stamina_prog->wait_to_clear = false;
-
-    this->defaults.stamina_punch_cost = 2;
-    this->stamina_punch_cost = this->defaults.stamina_punch_cost;
-
-    this->defaults.stamina_regen_rate = 1;
-    this->stamina_regen_rate = this->defaults.stamina_regen_rate;
-
     this->shop = NULL;
     this->shop_scene = NULL;
-
-    auto shop_button = ui::Button::create(
-            "shop_banner.png",
-            "shop_banner_hili.png",
-            "shop_banner.png",
-            ui::TextureResType::PLIST
-            );
-    auto text_shop = ui::ImageView::create(
-        "text_shop.png",
-        ui::TextureResType::PLIST
-        );
-    text_shop->setPosition(Vec2(28, 17));
-    shop_button->addChild(
-        text_shop
-    );
-    shop_button->setScale(4);
-    auto center_pos = this->get_center_pos();
-    shop_button->setPositionX(100.0f);
-    shop_button->setPositionY(center_pos.y * 2 * 0.85f);
-
-    shop_button->addTouchEventListener([this](Ref*, ui::Widget::TouchEventType evt)
-    {
-        if (evt == ui::Widget::TouchEventType::ENDED)
-        GameDirector::switch_to_shop();
-    });
-
-    this->addChild(shop_button);
-
-
-    this->enemy_node = FighterNode::create(this, NULL);
-    this->enemy_node->setPosition(this->get_center_pos(sx(350), sy(0)));
-
-    this->fighter_node = FighterNode::create(this, this->buildup->fighter);
-    this->fighter_node->setPosition(this->get_center_pos(sx(200), sy(50)));
-
-    this->brawler_node = FighterNode::create(this, this->buildup->brawler);
-    this->brawler_node->setPosition(this->get_center_pos(sx(200), sy(-150)));
 
 };
 

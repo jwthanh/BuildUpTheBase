@@ -3,11 +3,11 @@
 #include "GameLogic.h"
 
 
-void Recipe::callback(Beatup* beatup)
+void Recipe::callback()
 {
     if (_callback != NULL)
     {
-        this->_callback(beatup);
+        this->_callback();
     }
 }
 
@@ -99,7 +99,7 @@ void Recipe::consume(vsIngredient& input)
         );
         printj("consumed " << this->name);
 
-        this->callback(BEATUP);
+        this->callback();
     }
     else
     {

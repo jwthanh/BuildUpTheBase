@@ -8,6 +8,8 @@
 #include "Clock.h"
 #include "Util.h"
 #include "MainMenu.h"
+#include "constants.h"
+#include "GameLogic.h"
 
 USING_NS_CC;
 
@@ -18,8 +20,6 @@ bool BaseMenu::init()
 #else
     FUNC_INIT(BaseMenu);
 #endif
-
-	this->beatup = NULL;
 
     BaseMenu::menu_font = DEFAULT_FONT;
     BaseMenu::menu_fontsize = 35;
@@ -57,7 +57,7 @@ bool BaseMenu::init()
 void BaseMenu::set_main_lbl()
 {
     std::stringstream ss;
-    ss << this->beatup->get_total_coins() << " coins";
+    ss << BEATUP->get_total_coins() << " coins";
     this->main_lbl->setString(ss.str());
 };
 
@@ -72,7 +72,7 @@ void BaseMenu::buy_stuff(int cost)
 
 bool BaseMenu::can_afford(int cost)
 {
-    if (this->beatup->get_total_coins() >= cost)
+    if (BEATUP->get_total_coins() >= cost)
     {
         return true;
     };
@@ -207,16 +207,13 @@ void BaseMenu::pop_scene(Ref* pSender)
     return;
 #endif
 
-    this->beatup->update(0);
+    BEATUP->update(0);
     Director::getInstance()->pushScene(this->beatup_scene);
 
 }
 
 ShopItem::ShopItem(BaseMenu* shop, Menu* menu, ui::Button* button, std::string id_key) : button(button), Buyable(id_key)
 {
-    this->beatup = shop->beatup;
-
-
     this->afford_color = std::shared_ptr<Color3B>(new Color3B(0, 255, 0));
     this->cant_afford_color = std::shared_ptr<Color3B>(new Color3B(255, 0, 0));
     this->disabled_color = std::shared_ptr<Color3B>(new Color3B(25, 25, 25));
@@ -236,7 +233,7 @@ std::string ShopItem::get_cost_string()
 
 bool ShopItem::can_afford()
 {
-    return this->beatup->get_total_coins() >= this->get_cost();
+    return BEATUP->get_total_coins() >= this->get_cost();
 };
 
 void ShopItem::update(float dt)

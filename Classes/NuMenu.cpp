@@ -15,10 +15,8 @@
 USING_NS_CC;
 
 
-void NuItem::my_init(Beatup* beatup, cocos2d::Node* parent)
+void NuItem::my_init(cocos2d::Node* parent)
 {
-    this->beatup = beatup;
-
     auto inst = cocos2d::CSLoader::getInstance();
 
     this->button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
@@ -107,9 +105,9 @@ void NuItem::set_count_lbl(int count)
     this->count_lbl->setString(count_ss.str());
 };
 
-void ShopNuItem::my_init(Beatup* beatup, Node* parent, std::string id_key)
+void ShopNuItem::my_init(Node* parent, std::string id_key)
 {
-    NuItem::my_init(beatup, parent);
+    NuItem::my_init(parent);
 
     this->id_key = id_key;
     this->_shop_cost = -1;
@@ -137,7 +135,7 @@ void ShopNuItem::update_func(float dt)
         this->set_cost_lbl("---");
         this->button->setEnabled(false);
         this->cost_lbl->setTextColor(Color4B::GRAY);
-    } else if (this->beatup->get_total_coins() < cost)
+    } else if (BEATUP->get_total_coins() < cost)
     {
         this->button->setEnabled(false);
 
@@ -159,7 +157,7 @@ void ShopNuItem::update_func(float dt)
 
 void RecipeNuItem::my_init(spRecipe recipe, std::shared_ptr<Building> building, Node* parent)
 {
-    NuItem::my_init(building->city->buildup->beatup, parent);
+    NuItem::my_init(parent);
 
     this->recipe = recipe;
     this->building = building;
@@ -198,7 +196,7 @@ void RecipeNuItem::update_func(float dt)
 
 void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
 {
-    ShopNuItem::my_init(building->city->buildup->beatup, parent, building->id_key);
+    ShopNuItem::my_init(parent, building->id_key);
 
     this->set_image(building->data->get_img_large());
     this->set_title(building->name);
@@ -269,7 +267,7 @@ void BuyBuildingsNuMenu::init_items()
     //setup menu items
     auto inst = cocos2d::CSLoader::getInstance();
 
-    for (auto building : this->beatup->buildup->city->buildings) {
+    for (auto building : BUILDUP->city->buildings) {
         // CCLOG("upper key %s", building->id_key.c_str());
         //auto menu_item = std::make_shared<BuildingShopNuItem>(building, scrollable);
         auto menu_item = BuildingShopNuItem::create();
@@ -282,12 +280,12 @@ void BuyBuildingsNuMenu::init_items()
         auto buy_stuff = [this, building, menu_item](){
             //can afford
             auto cost = building->get_cost();
-            auto total_coins = this->beatup->get_total_coins();
+            auto total_coins = BEATUP->get_total_coins();
             if (cost <= total_coins)
             {
                 CCLOG("buying stuff");
                 building->set_been_bought(true);
-                this->beatup->add_total_coin(-building->get_cost());
+                BEATUP->add_total_coin(-building->get_cost());
 
                 menu_item->update_func(0);
             }
@@ -299,10 +297,9 @@ void BuyBuildingsNuMenu::init_items()
 
 };
 
-BuildingNuMenu* BuildingNuMenu::create(Beatup* beatup, std::shared_ptr<Building> building)
+BuildingNuMenu* BuildingNuMenu::create(std::shared_ptr<Building> building)
 {
     BuildingNuMenu *menu = new(std::nothrow) BuildingNuMenu();
-    menu->beatup = beatup; //this should be after init, cause i guess init should fail, but its fine for now.
     menu->building = building;
 
     if (menu && menu->init()) {
@@ -326,7 +323,7 @@ void BuildingNuMenu::init_items()
 
     //buy an auto harvester button
     auto menu_item = ShopNuItem::create();
-    menu_item->my_init(this->beatup, scrollview, "harvester_buy");
+    menu_item->my_init(scrollview, "harvester_buy");
     menu_item->_shop_cost = 25;
     menu_item->set_cost_lbl("25");
 
@@ -336,12 +333,12 @@ void BuildingNuMenu::init_items()
     menu_item->set_touch_ended_callback([this, menu_item]()
     {
         auto cost = menu_item->get_cost();
-        auto total_coins = this->beatup->get_total_coins();
+        auto total_coins = BEATUP->get_total_coins();
 
         if (cost <= total_coins)
         {
             CCLOG("buying a harvester");
-            this->beatup->add_total_coin(-cost);
+            BEATUP->add_total_coin(-cost);
             auto harvester = std::make_shared<Harvester>(this->building, "test worker");
             harvester->active_count += 1;
             this->building->harvesters.push_back(harvester);
@@ -357,7 +354,7 @@ void BuildingNuMenu::init_items()
 
     //target building to punch
     auto target_item = NuItem::create();
-    target_item->my_init(this->beatup, scrollview);
+    target_item->my_init(scrollview);
 
     target_item->set_title(building->name);
     target_item->set_description("Target this building");
@@ -380,7 +377,7 @@ void BuildingNuMenu::init_items()
     {
         auto convert_item = RecipeNuItem::create();
 
-        recipe->_callback = [this, recipe](Beatup* beatup) {
+        recipe->_callback = [this, recipe]() {
             for (auto pair : recipe->outputs) {
                 Ingredient::IngredientType ing_type = pair.first;
                 int count = pair.second;
@@ -399,7 +396,7 @@ void BuildingNuMenu::init_items()
 void BuildingNuMenu::create_inventory_item(cocos2d::Node* parent)
 {
     auto inventory_item = NuItem::create();
-    inventory_item->my_init(this->beatup, parent);
+    inventory_item->my_init(parent);
 
     inventory_item->set_title("Inventory");
     inventory_item->set_description("Check out what this building contains.");

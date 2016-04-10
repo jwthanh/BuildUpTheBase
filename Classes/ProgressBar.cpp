@@ -2,17 +2,18 @@
 
 #include "Beatup.h"
 #include "Util.h"
+#include "constants.h"
+#include "GameLogic.h"
 
 USING_NS_CC;
 
 
 ProgressBar::ProgressBar(
-        Beatup* beatup, std::string front_sprite_frame_path, std::string back_sprite_frame_path
+        std::string front_sprite_frame_path, std::string back_sprite_frame_path
         )
 {
     this->target_percentage = 100.0f;
 
-    this->beatup = beatup;
     this->base_node = Node::create();
 
     auto get_sprite = [](std::string sprite_path, std::string frame_path)
@@ -91,12 +92,11 @@ ProgressBar::ProgressBar(
 
     this->setScale(sx(4));
 
-    this->beatup->addChild(this->base_node);
+    BEATUP->addChild(this->base_node);
 };
 
 ProgressBar::~ProgressBar()
 {
-    this->beatup = NULL;
     this->front_timer->removeFromParentAndCleanup(true);
     this->back_timer->removeFromParentAndCleanup(true);
     this->background->removeFromParentAndCleanup(true);

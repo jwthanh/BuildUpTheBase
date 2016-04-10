@@ -42,9 +42,9 @@ void HarvestScene::add_harvestable()
 {
     Harvestable* harvestable;
     if (BUILDUP->target_building->name == "The Mine") {
-        harvestable = MiningHarvestable::create(BEATUP);
+        harvestable = MiningHarvestable::create();
     } else {
-        harvestable = Harvestable::create(BEATUP);
+        harvestable = Harvestable::create();
     };
 
     harvestable->setPosition(this->get_center_pos());
@@ -242,7 +242,7 @@ ui::Button* HarvestScene::create_shop_button()
     {
         if (evt == ui::Widget::TouchEventType::ENDED) {
             auto scene = Scene::create();
-            BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create(BEATUP);
+            BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create();
             scene->addChild(building_menu);
 
             auto director = Director::getInstance();
@@ -325,7 +325,7 @@ ui::Button* HarvestScene::create_detail_button()
     {
         if (evt == ui::Widget::TouchEventType::ENDED) {
            auto scene = Scene::create();
-           BuildingNuMenu* building_menu = BuildingNuMenu::create(BEATUP, BUILDUP->target_building);
+           BuildingNuMenu* building_menu = BuildingNuMenu::create(BUILDUP->target_building);
            scene->addChild(building_menu);
 
            auto director = Director::getInstance();

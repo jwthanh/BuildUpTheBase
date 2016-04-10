@@ -69,14 +69,13 @@ class FighterNode : public cocos2d::ui::Widget
 {
     public:
         CREATE_FUNC(FighterNode);
-        static FighterNode* create(Beatup* beatup, spFighter fighter);
+        static FighterNode* create(spFighter fighter);
 
         void update(float dt);
 
         void set_fighter(spFighter fighter);
         void clear_fighter();
 
-        Beatup* beatup;
         spFighter fighter;
 
         cocos2d::ui::ImageView* sprite;
@@ -221,7 +220,6 @@ class Enemy : public Person
 class Buildup
 {
     public:
-        Beatup* beatup;
         Player* player;
         spFighter fighter;
         spFighter brawler;
