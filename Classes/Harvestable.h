@@ -23,8 +23,8 @@ class Harvestable : public cocos2d::ui::Widget
         virtual void animate_harvest();
         virtual void init_sprite();
         virtual std::string get_sprite_path();
-    virtual void init_clicks();
-    void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
+        virtual void init_clicks();
+        void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         cocos2d::ClippingNode* clip;
         cocos2d::DrawNode* stencil;

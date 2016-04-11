@@ -266,7 +266,6 @@ void CraftingHarvestable::animate_harvest()
     auto building = BUILDUP->target_building;
     building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
 
-
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
 
     auto sprite_size = Size(
