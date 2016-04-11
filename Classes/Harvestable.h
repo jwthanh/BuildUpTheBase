@@ -18,13 +18,14 @@ class Harvestable : public cocos2d::ui::Widget
         spBuilding building;
 
         CREATE_FUNC(Harvestable);
+        void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         bool init() override;
-    cocos2d::Size get_sprite_size();
-    virtual void init_sprite();
         virtual std::string get_sprite_path();
+        virtual void init_sprite();
+        cocos2d::Size get_sprite_size();
+
         virtual void init_clicks();
-        void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         cocos2d::ClippingNode* clip;
         cocos2d::DrawNode* stencil;
@@ -34,7 +35,8 @@ class Harvestable : public cocos2d::ui::Widget
         int current_clicks;
 
         virtual void animate_harvest();
-        void animate_rotate(float click_ratio);
+        virtual void animate_rotate(float click_ratio);
+        virtual void animate_clip();
         virtual void shatter();
 
 };
@@ -44,7 +46,9 @@ class MiningHarvestable : public Harvestable
     public:
         CREATE_FUNC(MiningHarvestable);
         void init_sprite() override;
-    virtual void animate_harvest() override;
+
+        virtual void animate_harvest() override;
+        virtual void animate_clip() override;
 };
 
 class CraftingHarvestable : public Harvestable
@@ -58,6 +62,7 @@ class CraftingHarvestable : public Harvestable
         std::string get_sprite_path() override;
 
         virtual void animate_harvest() override;
+        virtual void animate_clip() override;
         virtual void shatter() override;
 };
 

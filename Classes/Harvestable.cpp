@@ -63,11 +63,8 @@ bool Harvestable::init()
     return true;
 };
 
-void Harvestable::animate_harvest()
+void Harvestable::animate_clip()
 {
-    auto building = BUILDUP->target_building;
-    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
-
     auto size = 20.0f;
     Vec2 origin = Vec2(
         this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
@@ -76,6 +73,14 @@ void Harvestable::animate_harvest()
 
     Vec2 destination = origin +Vec2(size, size);
     this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
+}
+
+void Harvestable::animate_harvest()
+{
+    auto building = BUILDUP->target_building;
+    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
+
+    this->animate_clip();
 
     this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
 
@@ -194,25 +199,30 @@ void MiningHarvestable::init_sprite()
 };
 
 
+void MiningHarvestable::animate_clip()
+{
+    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
+    auto sprite_size = this->get_sprite_size();
+    auto size = 20.0f;
+    Vec2 origin = Vec2(
+        MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
+        MIN(sprite_size.height - (click_ratio*sprite_size.height), sprite_size.height - size) //from the top, go a percentage of the way down
+        );
+
+    Vec2 destination = origin + Vec2(size, size);
+    this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
+}
+
 void MiningHarvestable::animate_harvest()
 {
     auto building = BUILDUP->target_building;
     building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
 
-    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
-
-    auto sprite_size = this->get_sprite_size();
-    auto size = 20.0f;
-    Vec2 origin = Vec2(
-        MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
-        MIN(sprite_size.height-(click_ratio*sprite_size.height), sprite_size.height - size) //from the top, go a percentage of the way down
-    );
-
-    Vec2 destination = origin + Vec2(size, size);
-    this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
+    this->animate_clip();
 
     this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
 
+    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
     this->animate_rotate(click_ratio);
 }
 
@@ -251,30 +261,35 @@ void CraftingHarvestable::init_clicks()
     this->click_limit = this->recipe->clicks_required;
 };
 
-void CraftingHarvestable::animate_harvest()
+void CraftingHarvestable::animate_clip()
 {
-    auto building = BUILDUP->target_building;
-    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
-
-    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
-
     auto sprite_size = this->get_sprite_size();
-
     auto size = 20.0f;
     Vec2 origin = Vec2(
         MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
-        sprite_size.height
+                                                        sprite_size.height
     );
 
-    this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
-
+    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
     auto spark_parts = ParticleSystemQuad::create("particles/anvil_spark.plist");
     spark_parts->setScale(1.0 / 4.0f);
     spark_parts->setPosition(origin);
     int total_particles = spark_parts->getTotalParticles();
     spark_parts->setTotalParticles(total_particles * click_ratio);
     this->addChild(spark_parts);
+}
 
+void CraftingHarvestable::animate_harvest()
+{
+    auto building = BUILDUP->target_building;
+    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
+
+
+    animate_clip();
+
+    this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
+
+    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
     this->animate_rotate(click_ratio);
 }
 
