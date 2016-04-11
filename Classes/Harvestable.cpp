@@ -266,12 +266,6 @@ void CraftingHarvestable::animate_harvest()
     auto building = BUILDUP->target_building;
     building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
 
-    if (this->recipe != NULL) {
-        this->recipe->current_clicks += 1;
-        if (this->recipe->current_clicks >= this->recipe->clicks_required) {
-            CCLOG("clicked enough, time to output");
-        };
-    };
 
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
 
@@ -313,3 +307,12 @@ void CraftingHarvestable::animate_harvest()
         this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
     };
 }
+
+void CraftingHarvestable::shatter()
+{
+    if (this->recipe != NULL) {
+            CCLOG("clicked enough, time to output");
+    };
+
+    Harvestable::shatter();
+};

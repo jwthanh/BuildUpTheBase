@@ -33,7 +33,7 @@ class Harvestable : public cocos2d::ui::Widget
         int click_limit;
         int current_clicks;
 
-        void shatter();
+        virtual void shatter();
 
 };
 
@@ -56,6 +56,7 @@ class CraftingHarvestable : public Harvestable
         std::string get_sprite_path() override;
 
         virtual void animate_harvest() override;
+        virtual void shatter() override;
 };
 
 #endif
