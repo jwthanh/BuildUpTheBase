@@ -9,12 +9,15 @@
 #include "MainMenu.h"
 #include "Network.h"
 #include "StaticData.h"
+#include "Recipe.h"
 
 USING_NS_CC;
 
 bool HarvestScene::init()
 {
     FUNC_INIT(HarvestScene);
+
+    this->target_recipe = NULL;
 
     ui::Button* shop_button = this->create_shop_button();
     this->addChild(shop_button);
@@ -31,6 +34,12 @@ bool HarvestScene::init()
     ui::Layout* player_info_panel = this->create_player_info_panel();
     this->addChild(player_info_panel);
 
+    auto inst = CSLoader::getInstance();
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+    this->recipe_lbl = dynamic_cast<ui::Text*>(harvest_scene_editor->getChildByName("recipe_lbl"));
+    this->recipe_lbl->removeFromParent();
+    this->addChild(recipe_lbl);
+
     this->add_harvestable();
 
     // this->scheduleUpdate(); //something else is already calling
@@ -42,10 +51,13 @@ bool HarvestScene::init()
 void HarvestScene::add_harvestable()
 {
     Harvestable* harvestable;
+    this->target_recipe = NULL; //TODO move this somewhere else
+
     if (BUILDUP->target_building->name == "The Mine") {
         harvestable = MiningHarvestable::create();
     } else if (BUILDUP->target_building->name == "The Workshop") {
-        harvestable = CraftingHarvestable::create(BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe"));
+        this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
+        harvestable = CraftingHarvestable::create(this->target_recipe);
     } else {
         harvestable = Harvestable::create();
     };
@@ -61,6 +73,11 @@ void HarvestScene::add_harvestable()
 void HarvestScene::update(float dt)
 {
     GameLogic::getInstance()->update(dt);
+
+    if (this->target_recipe != NULL)
+    {
+        this->recipe_lbl->setString("Current recipe: "+this->target_recipe->name);
+    }
 
     auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
     if (!harvestable) {

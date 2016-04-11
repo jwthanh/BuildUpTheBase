@@ -8,6 +8,10 @@ class HarvestScene : public GameLayer
 {
     public:
         CREATE_FUNC(HarvestScene);
+
+        cocos2d::ui::Text* recipe_lbl;
+        spRecipe target_recipe;
+
         bool init();
         void update(float dt);
         virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;

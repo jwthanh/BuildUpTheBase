@@ -165,6 +165,17 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
+          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="323.0000" RightMargin="323.0000" TopMargin="52.5000" BottomMargin="564.5000" IsCustomSize="True" FontSize="20" LabelText="Current recipe: Bread" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="314.0000" Y="23.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="480.0000" Y="576.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="0.9000" />
+            <PreSize X="0.3271" Y="0.0359" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>
