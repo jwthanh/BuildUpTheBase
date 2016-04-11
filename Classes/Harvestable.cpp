@@ -63,6 +63,19 @@ bool Harvestable::init()
     return true;
 };
 
+void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+    this->current_clicks += 1;
+    this->animate_harvest();
+
+    if (this->current_clicks >= this->click_limit) {
+        this->shatter();
+    };
+
+    GameLogic::getInstance()->add_total_harvests(1);
+    CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
+};
+
 void Harvestable::animate_clip()
 {
     auto size = 20.0f;
@@ -87,19 +100,6 @@ void Harvestable::animate_harvest()
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
     this->animate_rotate(click_ratio);
 }
-
-void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
-{
-    this->current_clicks += 1;
-    this->animate_harvest();
-
-    if (this->current_clicks >= this->click_limit) {
-        this->shatter();
-    };
-
-    GameLogic::getInstance()->add_total_harvests(1);
-    CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
-};
 
 void Harvestable::animate_rotate(float click_ratio)
 {
@@ -253,7 +253,7 @@ void CraftingHarvestable::animate_clip()
     auto size = 20.0f;
     Vec2 origin = Vec2(
         MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
-                                                        sprite_size.height
+        sprite_size.height
     );
 
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
@@ -268,7 +268,7 @@ void CraftingHarvestable::animate_clip()
 void CraftingHarvestable::shatter()
 {
     if (this->recipe != NULL) {
-            CCLOG("clicked enough, time to output");
+        CCLOG("clicked enough, time to output");
     };
 
     Harvestable::shatter();
