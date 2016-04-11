@@ -42,9 +42,6 @@ bool HarvestScene::init()
 
     this->add_harvestable();
 
-    // this->scheduleUpdate(); //something else is already calling
-    // HarvestScene::update so dont need to do it manually
-
     return true;
 };
 
