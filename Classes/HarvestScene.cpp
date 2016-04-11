@@ -38,6 +38,7 @@ bool HarvestScene::init()
     Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
     this->recipe_lbl = dynamic_cast<ui::Text*>(harvest_scene_editor->getChildByName("recipe_lbl"));
     this->recipe_lbl->removeFromParent();
+    this->recipe_lbl->setString("");
     this->addChild(recipe_lbl);
 
     this->add_harvestable();
@@ -74,6 +75,9 @@ void HarvestScene::update(float dt)
     if (this->target_recipe != NULL)
     {
         this->recipe_lbl->setString("Current recipe: "+this->target_recipe->name);
+    } else
+    {
+        this->recipe_lbl->setString("");
     }
 
     auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
