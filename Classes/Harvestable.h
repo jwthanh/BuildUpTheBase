@@ -20,7 +20,6 @@ class Harvestable : public cocos2d::ui::Widget
         CREATE_FUNC(Harvestable);
 
         bool init() override;
-        virtual void animate_harvest();
         virtual void init_sprite();
         virtual std::string get_sprite_path();
         virtual void init_clicks();
@@ -33,6 +32,8 @@ class Harvestable : public cocos2d::ui::Widget
         int click_limit;
         int current_clicks;
 
+        virtual void animate_harvest();
+        void animate_rotate(float click_ratio);
         virtual void shatter();
 
 };
@@ -42,7 +43,7 @@ class MiningHarvestable : public Harvestable
     public:
         CREATE_FUNC(MiningHarvestable);
         void init_sprite() override;
-        virtual void animate_harvest() override;
+    virtual void animate_harvest() override;
 };
 
 class CraftingHarvestable : public Harvestable

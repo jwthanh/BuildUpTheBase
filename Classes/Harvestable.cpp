@@ -76,6 +76,25 @@ void Harvestable::animate_harvest()
     building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
 
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
+    this->animate_rotate(click_ratio);
+}
+
+void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+    //TODO dont dig out points already dug out OR dig consecutively more from the top
+    this->current_clicks += 1;
+    this->animate_harvest();
+
+    if (this->current_clicks >= this->click_limit) {
+        this->shatter();
+    };
+
+    GameLogic::getInstance()->add_total_harvests(1);
+    CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
+};
+
+void Harvestable::animate_rotate(float click_ratio)
+{
     float rotation = 0.0f;
 
     if (click_ratio >= 0.8f) {
@@ -93,20 +112,6 @@ void Harvestable::animate_harvest()
         this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
     };
 }
-
-void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
-{
-    //TODO dont dig out points already dug out OR dig consecutively more from the top
-    this->current_clicks += 1;
-    this->animate_harvest();
-
-    if (this->current_clicks >= this->click_limit) {
-        this->shatter();
-    };
-
-    GameLogic::getInstance()->add_total_harvests(1);
-    CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
-};
 
 void Harvestable::shatter()
 {
@@ -184,6 +189,7 @@ void MiningHarvestable::init_sprite()
     
 };
 
+
 void MiningHarvestable::animate_harvest()
 {
     auto building = BUILDUP->target_building;
@@ -207,23 +213,7 @@ void MiningHarvestable::animate_harvest()
 
     this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
 
-
-    float rotation = 0.0f;
-
-    if (click_ratio >= 0.8f) {
-        rotation = 15.0f;
-    } else if (click_ratio >= 0.6f) {
-        rotation = 6.0f;
-    } else if (click_ratio >= 0.4f) {
-        rotation = 2.0f;
-    };
-
-    if (rotation != 0.0f) {
-        auto rotate_by = RotateBy::create(0.05f, rotation);
-        auto rotate_to = RotateTo::create(0.05f, 0);
-        this->sprite->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
-        this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
-    };
+    this->animate_rotate(click_ratio);
 }
 
 CraftingHarvestable::CraftingHarvestable(spRecipe recipe)
@@ -288,23 +278,7 @@ void CraftingHarvestable::animate_harvest()
     spark_parts->setTotalParticles(total_particles * click_ratio);
     this->addChild(spark_parts);
 
-
-    float rotation = 0.0f;
-
-    if (click_ratio >= 0.8f) {
-        rotation = 15.0f;
-    } else if (click_ratio >= 0.6f) {
-        rotation = 6.0f;
-    } else if (click_ratio >= 0.4f) {
-        rotation = 2.0f;
-    };
-
-    if (rotation != 0.0f) {
-        auto rotate_by = RotateBy::create(0.05f, rotation);
-        auto rotate_to = RotateTo::create(0.05f, 0);
-        this->sprite->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
-        this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
-    };
+    this->animate_rotate(click_ratio);
 }
 
 void CraftingHarvestable::shatter()
