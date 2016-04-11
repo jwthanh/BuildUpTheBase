@@ -1071,6 +1071,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
             "main_UI_export_10_x4_disabled.png",
             cocos2d::ui::TextureResType::PLIST
         );
+
     int coins_gained = 10;
     std::stringstream cost_ss;
     cost_ss << "Sell for " << coins_gained;
@@ -1121,6 +1122,40 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
             sell_btn->setEnabled(true);
         }
     }, update_delay, "sell_btn_state_cb");
+
+
+    auto move_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("move_btn"));
+    move_btn->loadTextures(
+            "main_UI_export_10_x4.png",
+            "main_UI_export_10_x4_pressed.png",
+            "main_UI_export_10_x4_disabled.png",
+            cocos2d::ui::TextureResType::PLIST
+        );
+    move_btn->schedule([move_btn, this, ing_type](float){
+        vsIngredient& ingredients = this->building->ingredients;
+        if (ingredients.empty()){
+            move_btn->setBright(false);
+        }
+        else if (this->building->count_ingredients(ing_type) == 0)
+        {
+            move_btn->setBright(false);
+        }
+        else
+        {
+            move_btn->setEnabled(true);
+        }
+    }, update_delay, "move_btn_state_cb");
+
+    move_btn->addTouchEventListener([this, ing_type, coins_gained](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            vsIngredient& ingredients = this->building->ingredients;
+            if (ingredients.empty()){ return; }
+
+            CCLOG("not implemented");
+
+        }
+    });
 
     alert_panel->setPosition(this->get_center_pos());
 
