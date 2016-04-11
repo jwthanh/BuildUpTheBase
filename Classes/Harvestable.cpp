@@ -7,6 +7,7 @@
 #include "MiscUI.h"
 #include "GameLogic.h"
 #include "Util.h"
+#include "Recipe.h"
 
 USING_NS_CC;
 
@@ -30,6 +31,12 @@ std::string Harvestable::get_sprite_path()
     return "weapon_ice.png";
 };
 
+void Harvestable::init_clicks()
+{
+    this->click_limit = 15;
+    this->current_clicks = 0;
+}
+
 bool Harvestable::init()
 {
     this->setTouchEnabled(true); //true otherwise it cant be clicked
@@ -47,8 +54,7 @@ bool Harvestable::init()
     //NOTE: this needs to add the sprite to this->clip
     this->init_sprite();
 
-    this->click_limit = 15;
-    this->current_clicks = 0;
+    this->init_clicks();
 
     return true;
 };
@@ -220,15 +226,51 @@ void MiningHarvestable::animate_harvest()
     };
 }
 
+CraftingHarvestable::CraftingHarvestable(spRecipe recipe)
+    : recipe(recipe)
+{
+}
+
+CraftingHarvestable* CraftingHarvestable::create(spRecipe recipe)
+{
+    CraftingHarvestable *pRet = new(std::nothrow) CraftingHarvestable(recipe);
+    if (pRet && pRet->init()) {
+        pRet->autorelease(); return pRet;
+    }
+    else {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+}
+
 std::string CraftingHarvestable::get_sprite_path()
 {
     return "anvil.png";
+};
+
+void CraftingHarvestable::init_clicks()
+{
+    if (!this->recipe) {
+        CCLOG("trying to init_clicks without a recipe");
+        Harvestable::init_clicks();
+        return;
+    };
+
+    this->click_limit = this->recipe->clicks_required;
 };
 
 void CraftingHarvestable::animate_harvest()
 {
     auto building = BUILDUP->target_building;
     building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
+
+    if (this->recipe != NULL) {
+        this->recipe->current_clicks += 1;
+        if (this->recipe->current_clicks >= this->recipe->clicks_required) {
+            CCLOG("clicked enough, time to output");
+        };
+    };
 
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
 

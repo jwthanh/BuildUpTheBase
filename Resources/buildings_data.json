@@ -8,9 +8,10 @@
             "recipes": {
                 "bread_recipe" : {
                     "name": "Make some bread",
+                    "clicks_required": 15,
                     "description": "Take 15 grain, make a sweet slice of bread",
                     "components": {
-                        "grain": 15
+                        "grain": 4
                     },
                     "output": {
                         "bread": 1
@@ -18,6 +19,7 @@
                 },
                 "loaf_recipe" : {
                     "name": "Loaf of bread",
+                    "clicks_required": 30,
                     "description": "Take 3 slices of bread, stick em together, you got yourself a loaf, buddy.",
                     "components": {
                         "bread": 3
