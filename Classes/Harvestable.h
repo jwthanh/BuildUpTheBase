@@ -20,7 +20,8 @@ class Harvestable : public cocos2d::ui::Widget
         CREATE_FUNC(Harvestable);
 
         bool init() override;
-        virtual void init_sprite();
+    cocos2d::Size get_sprite_size();
+    virtual void init_sprite();
         virtual std::string get_sprite_path();
         virtual void init_clicks();
         void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;

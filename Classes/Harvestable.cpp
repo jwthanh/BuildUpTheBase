@@ -11,14 +11,18 @@
 
 USING_NS_CC;
 
+Size Harvestable::get_sprite_size()
+{
+    return this->sprite->getContentSize() * this->sprite->getScale();
+}
+
 void Harvestable::init_sprite()
 {
     this->sprite = cocos2d::Sprite::createWithSpriteFrameName(this->get_sprite_path());
     this->sprite->setScale(4);
     this->sprite->getTexture()->setAliasTexParameters();
 
-    auto sprite_size = this->sprite->getContentSize();
-    this->setContentSize(sprite_size*this->sprite->getScale());
+    this->setContentSize(this->get_sprite_size());
 
     this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     this->sprite->setPosition(get_relative(this->getContentSize()));
@@ -61,6 +65,9 @@ bool Harvestable::init()
 
 void Harvestable::animate_harvest()
 {
+    auto building = BUILDUP->target_building;
+    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
+
     auto size = 20.0f;
     Vec2 origin = Vec2(
         this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
@@ -71,9 +78,6 @@ void Harvestable::animate_harvest()
     this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
 
     this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
-
-    auto building = BUILDUP->target_building;
-    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
 
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
     this->animate_rotate(click_ratio);
@@ -119,7 +123,7 @@ void Harvestable::shatter()
     this->setTouchEnabled(false);
 
     float sprite_scale = this->sprite->getScale();
-    Size sprite_size = this->sprite->getContentSize();
+    Size sprite_size = this->get_sprite_size();
 
     auto shatter_sprite = ShatterSprite::createWithSpriteFrame(this->sprite->getSpriteFrame());
     shatter_sprite->setScale(sprite_scale);
@@ -132,7 +136,7 @@ void Harvestable::shatter()
     //spawn label //TODO fix hardcoded name
     auto floating_label = FloatingLabel::createWithTTF("+1 Harvest", DEFAULT_FONT, 24);
     floating_label->setPosition(
-            this->getPosition() + Vec2(sprite_size*sprite_scale)
+            this->getPosition() + Vec2(sprite_size)
         );
     floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
     this->getParent()->addChild(floating_label);
@@ -197,11 +201,7 @@ void MiningHarvestable::animate_harvest()
 
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
 
-    auto sprite_size = Size(
-            this->sprite->getContentSize().width*this->sprite->getScaleX(),
-            this->sprite->getContentSize().height*this->sprite->getScaleY()
-            );
-
+    auto sprite_size = this->get_sprite_size();
     auto size = 20.0f;
     Vec2 origin = Vec2(
         MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
@@ -258,10 +258,7 @@ void CraftingHarvestable::animate_harvest()
 
     float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
 
-    auto sprite_size = Size(
-            this->sprite->getContentSize().width*this->sprite->getScaleX(),
-            this->sprite->getContentSize().height*this->sprite->getScaleY()
-            );
+    auto sprite_size = this->get_sprite_size();
 
     auto size = 20.0f;
     Vec2 origin = Vec2(
