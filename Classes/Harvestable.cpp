@@ -213,19 +213,6 @@ void MiningHarvestable::animate_clip()
     this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
 }
 
-void MiningHarvestable::animate_harvest()
-{
-    auto building = BUILDUP->target_building;
-    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
-
-    this->animate_clip();
-
-    this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
-
-    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
-    this->animate_rotate(click_ratio);
-}
-
 CraftingHarvestable::CraftingHarvestable(spRecipe recipe)
     : recipe(recipe)
 {
@@ -277,20 +264,6 @@ void CraftingHarvestable::animate_clip()
     int total_particles = spark_parts->getTotalParticles();
     spark_parts->setTotalParticles(total_particles * click_ratio);
     this->addChild(spark_parts);
-}
-
-void CraftingHarvestable::animate_harvest()
-{
-    auto building = BUILDUP->target_building;
-    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
-
-
-    animate_clip();
-
-    this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
-
-    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
-    this->animate_rotate(click_ratio);
 }
 
 void CraftingHarvestable::shatter()

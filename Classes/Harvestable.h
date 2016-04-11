@@ -47,7 +47,6 @@ class MiningHarvestable : public Harvestable
         CREATE_FUNC(MiningHarvestable);
         void init_sprite() override;
 
-        virtual void animate_harvest() override;
         virtual void animate_clip() override;
 };
 
@@ -61,7 +60,6 @@ class CraftingHarvestable : public Harvestable
         void init_clicks() override;
         std::string get_sprite_path() override;
 
-        virtual void animate_harvest() override;
         virtual void animate_clip() override;
         virtual void shatter() override;
 };
