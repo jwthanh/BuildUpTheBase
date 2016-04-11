@@ -90,7 +90,6 @@ void Harvestable::animate_harvest()
 
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-    //TODO dont dig out points already dug out OR dig consecutively more from the top
     this->current_clicks += 1;
     this->animate_harvest();
 
