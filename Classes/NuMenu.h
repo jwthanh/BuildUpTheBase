@@ -78,6 +78,7 @@ class NuMenu : public GameLayer
 {
     public:
         CREATE_FUNC(NuMenu);
+        virtual void onEnter() override;
 
         Scrollable* scrollable;
 

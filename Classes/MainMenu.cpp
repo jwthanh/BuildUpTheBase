@@ -686,6 +686,8 @@ bool CityMenu::init()
     FUNC_INIT(CityMenu);
 #endif
 
+    CCLOG("city init");
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -710,6 +712,7 @@ bool CityMenu::init()
 
     auto back_btn = dynamic_cast<ui::Button*>(city_scene->getChildByName("back_btn"));
     back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        CCLOG("city touch %i", type);
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             auto director = Director::getInstance();
@@ -755,13 +758,23 @@ bool CityMenu::init()
        auto wst_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("waste_count"));
        wst_count->setString(create_count("WST", building->wastes.size()));
 
-       auto cb = [this, building](Ref*, ui::Widget::TouchEventType) {
-           auto scene = Scene::create();
-           BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
-           scene->addChild(building_menu);
+       auto cb = [this, building](Ref*, ui::Widget::TouchEventType event) {
+           CCLOG("touch building panel %i", event);
+           if (event == ui::Widget::TouchEventType::ENDED)
+           {
+               auto scene = Scene::create();
+               BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
+               scene->addChild(building_menu);
 
-           auto director = Director::getInstance();
-           director->pushScene(scene);
+               auto director = Director::getInstance();
+               director->pushScene(scene);
+
+               CCLOG("post city press scene count %i %s", director->_scenesStack.size(), building->name.c_str());
+           }
+           else
+           {
+               CCLOG("not ending touch of building");
+           }
        };
        building_panel->addTouchEventListener(cb);
 
@@ -771,6 +784,17 @@ bool CityMenu::init()
 
     return true;
 };
+
+void CityMenu::pop_scene(cocos2d::Ref* pSender)
+{
+    GameLayer::pop_scene(pSender);
+}
+
+void CityMenu::onEnter()
+{
+    CCLOG("city menu enter");
+    GameLayer::onEnter();
+}
 
 void CityMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent)
 {

@@ -204,6 +204,17 @@ void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
 
     this->set_cost_lbl(std::to_string(building->get_cost()));
     this->_shop_cost = building->get_cost();
+}
+
+void NuMenu::onEnter()
+{
+    int size = Director::getInstance()->_scenesStack.size();
+    if (size != 4)
+    {
+        CCLOG("not 4!! %i", size);
+    }
+    CCLOG("onEnter NuMenu, scene stack size %i", size);
+    GameLayer::onEnter();
 };
 
 bool NuMenu::init()
@@ -237,10 +248,14 @@ void NuMenu::create_back_item(cocos2d::Node* parent)
 
     auto back_btn = ui::Button::create();
     back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        CCLOG("numenu touch %i", type);
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             auto director = Director::getInstance();
+            auto stack = director->_scenesStack;
+            CCLOG("%i %s", stack.size(), "scene vector");
             director->popScene();
+            CCLOG("numenu pop scene");
         }
     });
     back_btn->loadTextures(

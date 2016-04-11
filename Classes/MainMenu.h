@@ -110,7 +110,8 @@ class CityMenu : public GameLayer
 
         CREATE_FUNC(CityMenu);
 
-        virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
+        virtual void pop_scene(cocos2d::Ref* pSender) override; //use GameLayer instead of ShopScene's pop_scene
+        void onEnter() override;
 
         virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
