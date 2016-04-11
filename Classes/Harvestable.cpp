@@ -98,14 +98,14 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     //TODO dont dig out points already dug out OR dig consecutively more from the top
     this->current_clicks += 1;
-    if (this->current_clicks < this->click_limit) {
-        this->animate_harvest();
-    } else {
-        this->shatter();
+    this->animate_harvest();
 
-        GameLogic::getInstance()->add_total_harvests(1);
-        CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
+    if (this->current_clicks >= this->click_limit) {
+        this->shatter();
     };
+
+    GameLogic::getInstance()->add_total_harvests(1);
+    CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
 };
 
 void Harvestable::shatter()
