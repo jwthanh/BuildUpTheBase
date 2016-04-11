@@ -23,7 +23,7 @@ class Harvestable : public cocos2d::ui::Widget
         virtual void animate_harvest();
         virtual void init_sprite();
         virtual std::string get_sprite_path();
-    void init_clicks();
+    virtual void init_clicks();
     void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         cocos2d::ClippingNode* clip;
@@ -52,7 +52,7 @@ class CraftingHarvestable : public Harvestable
         CraftingHarvestable(spRecipe recipe);
         static CraftingHarvestable* create(spRecipe recipe);
 
-        void init_clicks();
+        void init_clicks() override;
         std::string get_sprite_path() override;
 
         virtual void animate_harvest() override;

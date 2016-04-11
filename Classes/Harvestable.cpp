@@ -257,6 +257,7 @@ void CraftingHarvestable::init_clicks()
         return;
     };
 
+    this->current_clicks = 0;
     this->click_limit = this->recipe->clicks_required;
 };
 
