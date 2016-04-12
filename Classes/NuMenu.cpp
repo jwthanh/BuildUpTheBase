@@ -208,12 +208,6 @@ void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
 
 void NuMenu::onEnter()
 {
-    int size = Director::getInstance()->_scenesStack.size();
-    if (size != 4)
-    {
-        CCLOG("not 4!! %i", size);
-    }
-    CCLOG("onEnter NuMenu, scene stack size %i", size);
     GameLayer::onEnter();
 };
 
@@ -248,14 +242,10 @@ void NuMenu::create_back_item(cocos2d::Node* parent)
 
     auto back_btn = ui::Button::create();
     back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        CCLOG("numenu touch %i", type);
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             auto director = Director::getInstance();
-            auto stack = director->_scenesStack;
-            CCLOG("%i %s", stack.size(), "scene vector");
             director->popScene();
-            CCLOG("numenu pop scene");
         }
     });
     back_btn->loadTextures(
@@ -283,8 +273,6 @@ void BuyBuildingsNuMenu::init_items()
     auto inst = cocos2d::CSLoader::getInstance();
 
     for (auto building : BUILDUP->city->buildings) {
-        // CCLOG("upper key %s", building->id_key.c_str());
-        //auto menu_item = std::make_shared<BuildingShopNuItem>(building, scrollable);
         auto menu_item = BuildingShopNuItem::create();
         menu_item->my_init(building, scrollview);
 

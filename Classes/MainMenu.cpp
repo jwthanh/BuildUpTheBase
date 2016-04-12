@@ -686,8 +686,6 @@ bool CityMenu::init()
     FUNC_INIT(CityMenu);
 #endif
 
-    CCLOG("city init");
-
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -712,7 +710,6 @@ bool CityMenu::init()
 
     auto back_btn = dynamic_cast<ui::Button*>(city_scene->getChildByName("back_btn"));
     back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        CCLOG("city touch %i", type);
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             auto director = Director::getInstance();
@@ -759,7 +756,6 @@ bool CityMenu::init()
        wst_count->setString(create_count("WST", building->wastes.size()));
 
        auto cb = [this, building](Ref*, ui::Widget::TouchEventType event) {
-           CCLOG("touch building panel %i", event);
            if (event == ui::Widget::TouchEventType::ENDED)
            {
                auto scene = Scene::create();
@@ -768,13 +764,7 @@ bool CityMenu::init()
 
                auto director = Director::getInstance();
                director->pushScene(scene);
-
-               CCLOG("post city press scene count %i %s", director->_scenesStack.size(), building->name.c_str());
-           }
-           else
-           {
-               CCLOG("not ending touch of building");
-           }
+           };
        };
        building_panel->addTouchEventListener(cb);
 
@@ -792,7 +782,6 @@ void CityMenu::pop_scene(cocos2d::Ref* pSender)
 
 void CityMenu::onEnter()
 {
-    CCLOG("city menu enter");
     GameLayer::onEnter();
 }
 
