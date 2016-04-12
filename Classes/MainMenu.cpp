@@ -755,9 +755,10 @@ bool CityMenu::init()
        auto wst_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("waste_count"));
        wst_count->setString(create_count("WST", building->wastes.size()));
 
-       auto cb = [this, building](Ref*, ui::Widget::TouchEventType event) {
+       auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
            if (event == ui::Widget::TouchEventType::ENDED)
            {
+               auto building_panel = dynamic_cast<ui::Layout*>(target);
                auto scene = Scene::create();
                BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
                scene->addChild(building_menu);
