@@ -3,21 +3,21 @@
 
 #include "HouseBuilding.h"
 
-template<typename from_V, typename to_V>
-void transfer(from_V& from_vs, to_V& to_vs, unsigned int quantity)
+template<typename ResourceVector>
+void transfer(ResourceVector& origin_vs, ResourceVector& destination, unsigned int quantity)
 {
-    if (from_vs.size() < quantity)
+    if (origin_vs.size() < quantity)
     {
         std::cout << quantity << " is too many.";
-        quantity = from_vs.size();
+        quantity = origin_vs.size();
         std::cout << " new size is" << quantity << std::endl;
     }
 
     if (quantity > 0)
     {
-        auto it = std::next(from_vs.begin(), quantity);
-        std::move(from_vs.begin(), it, std::back_inserter(to_vs));
-        from_vs.erase(from_vs.begin(), it);
+        auto it = std::next(origin_vs.begin(), quantity);
+        std::move(origin_vs.begin(), it, std::back_inserter(destination));
+        origin_vs.erase(origin_vs.begin(), it);
     }
 };
 
