@@ -32,6 +32,7 @@
 #include "FShake.h"
 #include "NuMenu.h"
 #include "GameLogic.h"
+#include "Animal.h"
 
 USING_NS_CC;
 

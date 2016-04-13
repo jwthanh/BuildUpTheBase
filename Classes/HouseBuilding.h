@@ -187,14 +187,6 @@ class Village : public Nameable, public Updateable
 };
 
 
-class Animal : public Nameable
-{
-    public:
-        Animal(std::string name) : Nameable(name) {};
-
-        void b2b_transfer(spBuilding from_bldg, spBuilding to_bldg, Resource::ResourceType res_type, int quantity);
-};
-
 class Person : public Nameable, public Updateable
 {
     public:

@@ -11,6 +11,11 @@
 #include <algorithm>
 #include <locale>
 
+#include <tinyxml2/tinyxml2.h>
+#include <json/document.h>
+
+#include "cocos2d.h"
+
 #include "HouseBuilding.h"
 #include "Recipe.h"
 #include "Worker.h"
@@ -21,12 +26,11 @@
 #include <Util.h>
 #include <FShake.h>
 
-#include "cocos2d.h"
-#include <tinyxml2/tinyxml2.h>
-#include <json/document.h>
 #include "FileOperation.h"
 #include "GameLogic.h"
 #include "StaticData.h"
+
+#include "Animal.h"
 
 USING_NS_CC;
 
@@ -591,45 +595,6 @@ void move_if_sized(Resource::ResourceType res_type,
     };
 };
 
-template<typename from_V, typename to_V>
-void transfer(from_V& from_vs, to_V& to_vs, unsigned int quantity)
-{
-    if (from_vs.size() < quantity)
-    {
-        std::cout << quantity << " is too many.";
-        quantity = from_vs.size();
-        std::cout << " new size is" << quantity << std::endl;
-    }
-
-    if (quantity > 0)
-    {
-        auto it = std::next(from_vs.begin(), quantity);
-        std::move(from_vs.begin(), it, std::back_inserter(to_vs));
-        from_vs.erase(from_vs.begin(), it);
-    }
-};
-
-void Animal::b2b_transfer(spBuilding from_bldg, spBuilding to_bldg, Resource::ResourceType res_type, int quantity)
-{
-    //printj1("moving x" << quantity << " " << Resource::type_str(res_type) << " from " << from_bldg->name << " to " << to_bldg->name);
-    if (res_type == Resource::Ingredient)
-    {
-        transfer(from_bldg->ingredients, to_bldg->ingredients, quantity);
-    }
-    else if (res_type == Resource::Product)
-    {
-        transfer(from_bldg->products, to_bldg->products, quantity);
-    }
-    else if (res_type == Resource::Waste)
-    {
-        transfer(from_bldg->wastes, to_bldg->wastes, quantity);
-    }
-    else
-    {
-        std::cout << "type not recognized" << std::endl;
-    }
-
-};
 
 template<typename T>
 std::shared_ptr<T> create_one(std::string name)
