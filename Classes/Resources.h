@@ -25,17 +25,17 @@ class Resource : public Nameable
 };
 
 #define TYPE_MAP_CONVERSION(Rtype, Rlowertype) \
-    static const std::map<Rtype##Type, std::string> type_map; \
-Rtype##Type Rlowertype##_type; \
-static std::string type_to_string(Rtype::Rtype##Type type); \
-static Rtype::Rtype##Type string_to_type(std::string string_type); 
+    static const std::map<SubType, std::string> type_map; \
+SubType Rlowertype##_type; \
+static std::string type_to_string(Rtype::SubType type); \
+static Rtype::SubType string_to_type(std::string string_type); 
 
 class Ingredient : public Resource
 {
     public:
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
 
-        enum IngredientType {
+        enum SubType {
             None,
             Grain,
             PileOfGrain,
@@ -70,7 +70,7 @@ class Product : public Resource
     public:
         static const ResourceType resource_type = Resource::ResourceType::Product;
 
-        enum ProductType {
+        enum SubType {
             None,
             Veggies,
             Meat,
@@ -96,7 +96,7 @@ class Waste : public Resource
     public:
         static const ResourceType resource_type = Resource::ResourceType::Waste;
 
-        enum WasteType {
+        enum SubType {
             None,
             Corpse,
             Wasted_Iron

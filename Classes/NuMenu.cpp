@@ -382,7 +382,7 @@ void BuildingNuMenu::init_items()
 
         recipe->_callback = [this, recipe]() {
             for (auto pair : recipe->outputs) {
-                Ingredient::IngredientType ing_type = pair.first;
+                Ingredient::SubType ing_type = pair.first;
                 int count = pair.second;
                 this->building->create_resources(Resource::Ingredient, count, Ingredient::type_to_string(ing_type));
             };

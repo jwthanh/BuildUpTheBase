@@ -917,7 +917,7 @@ bool InventoryMenu::init()
             };
 
             if (it != end_it) {
-                Ingredient::IngredientType ing_type = it->first;
+                Ingredient::SubType ing_type = it->first;
                 int count = it->second;
 
                 if (count == 0) {
@@ -1020,7 +1020,7 @@ void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
-        auto original_panel = InventoryMenu::create_detail_alert(this->building, Ingredient::IngredientType::Grain);
+        auto original_panel = InventoryMenu::create_detail_alert(this->building, Ingredient::SubType::Grain);
         this->addChild(original_panel);
     }
 };
@@ -1042,7 +1042,7 @@ InventoryMenu* InventoryMenu::create(spBuilding building)
     }
 };
 
-ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::IngredientType ing_type)
+ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::SubType ing_type)
 {
     auto inst = CSLoader::getInstance();
     auto raw_node = inst->createNode("editor/details/inventory_detail.csb");

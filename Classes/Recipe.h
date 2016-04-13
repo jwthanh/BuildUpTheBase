@@ -7,9 +7,9 @@
 #include "HouseBuilding.h"
 #include "constants.h"
 
-typedef std::map<Ingredient::IngredientType, int> ComponentMap;
-typedef std::map<Ingredient::IngredientType, int> OutputMap;
-typedef std::map<Product::ProductType, int> ProductMap;
+typedef std::map<Ingredient::SubType, int> ComponentMap;
+typedef std::map<Ingredient::SubType, int> OutputMap;
+typedef std::map<Product::SubType, int> ProductMap;
 
 class Recipe : public Nameable
 {

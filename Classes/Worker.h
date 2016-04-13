@@ -9,9 +9,9 @@ class ResourceCondition : public Nameable
     public:
         Resource::ResourceType type_choice;
 
-        Ingredient::IngredientType ing_type;
-        Product::ProductType pro_type;
-        Waste::WasteType wst_type;
+        Ingredient::SubType ing_type;
+        Product::SubType pro_type;
+        Waste::SubType wst_type;
 
         int quantity;
 
@@ -20,9 +20,9 @@ class ResourceCondition : public Nameable
             this->quantity = quantity;
         };
 
-        static ResourceCondition* create_ingredient_condition(Ingredient::IngredientType ing_type, int quantity, std::string condition_name);
-        static ResourceCondition* create_product_condition(Product::ProductType pro_type, int quantity, std::string condition_name);
-        static ResourceCondition* create_waste_condition(Waste::WasteType wst_type, int quantity, std::string condition_name);
+        static ResourceCondition* create_ingredient_condition(Ingredient::SubType ing_type, int quantity, std::string condition_name);
+        static ResourceCondition* create_product_condition(Product::SubType pro_type, int quantity, std::string condition_name);
+        static ResourceCondition* create_waste_condition(Waste::SubType wst_type, int quantity, std::string condition_name);
 
         bool is_satisfied(spBuilding building) {
             if (this->type_choice == Resource::Ingredient) {

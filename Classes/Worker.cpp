@@ -30,7 +30,7 @@ void Worker::on_update()
 
 };
 
-ResourceCondition* ResourceCondition::create_ingredient_condition(Ingredient::IngredientType ing_type, int quantity, std::string condition_name)
+ResourceCondition* ResourceCondition::create_ingredient_condition(Ingredient::SubType ing_type, int quantity, std::string condition_name)
 {
     auto ingredient_condition = new ResourceCondition(Resource::Ingredient, quantity, condition_name);
     ingredient_condition->ing_type = ing_type;
@@ -38,7 +38,7 @@ ResourceCondition* ResourceCondition::create_ingredient_condition(Ingredient::In
     return ingredient_condition;
 };
 
-ResourceCondition* ResourceCondition::create_product_condition(Product::ProductType pro_type, int quantity, std::string condition_name)
+ResourceCondition* ResourceCondition::create_product_condition(Product::SubType pro_type, int quantity, std::string condition_name)
 {
     auto product_condition = new ResourceCondition(Resource::Product, quantity, condition_name);
     product_condition->pro_type = pro_type;
@@ -46,7 +46,7 @@ ResourceCondition* ResourceCondition::create_product_condition(Product::ProductT
     return product_condition;
 };
 
-ResourceCondition* ResourceCondition::create_waste_condition(Waste::WasteType wst_type, int quantity, std::string condition_name)
+ResourceCondition* ResourceCondition::create_waste_condition(Waste::SubType wst_type, int quantity, std::string condition_name)
 {
     auto waste_condition = new ResourceCondition(Resource::Waste, quantity, condition_name);
     waste_condition->wst_type = wst_type;

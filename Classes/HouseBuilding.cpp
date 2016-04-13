@@ -285,7 +285,7 @@ void farm_task(spBuilding farm, float dt)
     farm->create_resources(Resource::Ingredient, new_products, "grain");
 
     Recipe recipe = Recipe("pileofgrain");
-    recipe.components[Ingredient::IngredientType::Grain] = 10;
+    recipe.components[Ingredient::SubType::Grain] = 10;
     if (recipe.is_satisfied(farm->ingredients))
     {
         farm->create_resources(Resource::Ingredient, 1, "PileOfGrain");
@@ -309,7 +309,7 @@ void workshop_task(spBuilding workshop, float dt)
     {
         {
             Recipe recipe = Recipe("sword");
-            recipe.components[Ingredient::IngredientType::Iron] = 2;
+            recipe.components[Ingredient::SubType::Iron] = 2;
 
             bool can_make_sword = recipe.is_satisfied(workshop->ingredients);
             if (can_make_sword)
@@ -330,7 +330,7 @@ void workshop_task(spBuilding workshop, float dt)
         {
 
             Recipe shield_rcp = Recipe("shield");
-            shield_rcp.components[Ingredient::IngredientType::Wood] = 3;
+            shield_rcp.components[Ingredient::SubType::Wood] = 3;
 
             bool can_make_sword = shield_rcp.is_satisfied(workshop->ingredients);
             if (can_make_sword)
@@ -378,7 +378,7 @@ void necro_task(spBuilding necro, float dt)
     spBuilding grave = necro->city->building_by_name("The Graveyard");
 
     Recipe skeleton_recipe = Recipe("Skeletons");
-    skeleton_recipe.components[Ingredient::IngredientType::Flesh] = 7;
+    skeleton_recipe.components[Ingredient::SubType::Flesh] = 7;
     if (skeleton_recipe.is_satisfied(necro->ingredients))
     {
         printj1("creating skeleton!");
@@ -686,17 +686,17 @@ Building::Building(Village* city, std::string name, std::string id_key, TaskFunc
 
 };
 
-int Building::count_ingredients(Ingredient::IngredientType ing_type)
+int Building::count_ingredients(Ingredient::SubType ing_type)
 {
     return this->get_ingredient_count()[ing_type];
 };
 
-int Building::count_products(Product::ProductType pro_type)
+int Building::count_products(Product::SubType pro_type)
 {
     return this->get_product_count()[pro_type];
 };
 
-int Building::count_wastes(Waste::WasteType wst_type)
+int Building::count_wastes(Waste::SubType wst_type)
 {
     return this->get_waste_count()[wst_type];
 };
@@ -771,12 +771,12 @@ void Building::print_specifics()
 };
 
 #define PRINT_RESOURCE(Rtype, Rlowertype) \
-std::map<Rtype::Rtype##Type,int> Building::get_##Rlowertype##_count()\
+std::map<Rtype::SubType,int> Building::get_##Rlowertype##_count()\
 {\
-    std::map<Rtype::Rtype##Type, int> Rlowertype_map = std::map<Rtype::Rtype##Type, int>();\
+    std::map<Rtype::SubType, int> Rlowertype_map = std::map<Rtype::SubType, int>();\
     for (auto type_str : Rtype::type_map) \
     { \
-        Rtype::Rtype##Type type = type_str.first; \
+        Rtype::SubType type = type_str.first; \
  \
         auto type_matches = [type](sp##Rtype ing){ \
             return ing->Rlowertype##_type == type;\
@@ -798,7 +798,7 @@ std::string Building::get_##Rlowertype##s() \
  \
     for (auto type_str : Rtype::type_map) \
     { \
-        Rtype::Rtype##Type type = type_str.first; \
+        Rtype::SubType type = type_str.first; \
         std::string str = type_str.second; \
  \
         auto type_matches = [type](sp##Rtype ing){ \
@@ -920,24 +920,24 @@ void test_recipe()
 
     Recipe recipe = Recipe("test recipe");
     recipe.components = ComponentMap();
-    recipe.components[Ingredient::IngredientType::Grain] = 2;
-    recipe.components[Ingredient::IngredientType::Iron] = 1;
+    recipe.components[Ingredient::SubType::Grain] = 2;
+    recipe.components[Ingredient::SubType::Iron] = 1;
     bool result = recipe.is_satisfied(inputs);
     assert(result && "everythings there");
     std::cout << "is the recipe satisfied? " << std::boolalpha << result << std::endl << std::endl;
 
     recipe.components = ComponentMap();
-    recipe.components[Ingredient::IngredientType::Grain] = 3;
+    recipe.components[Ingredient::SubType::Grain] = 3;
     result = recipe.is_satisfied(inputs);
     assert(!result && " missing one type but has the other");
 
     recipe.components = ComponentMap();
-    recipe.components[Ingredient::IngredientType::Grain] = 1;
+    recipe.components[Ingredient::SubType::Grain] = 1;
     result = recipe.is_satisfied(inputs);
     assert(result && "over shoots reqs");
 
     recipe.components = ComponentMap();
-    recipe.components[Ingredient::IngredientType::Fly] = 5;
+    recipe.components[Ingredient::SubType::Fly] = 5;
     result = recipe.is_satisfied(inputs);
     assert(!result && "looks for ingredient not in input");
 

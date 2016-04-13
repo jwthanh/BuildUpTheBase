@@ -920,7 +920,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
 
         auto farm = this->buildup->city->building_by_name("The Farm");
         Recipe recipe = Recipe("pileofgrain");
-        recipe.components[Ingredient::IngredientType::Grain] = 10;
+        recipe.components[Ingredient::SubType::Grain] = 10;
         if (recipe.is_satisfied(farm->ingredients))
         {
             farm->create_resources(Resource::Ingredient, 1, "PileOfGrain");
@@ -990,7 +990,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     {
         auto farm = this->buildup->city->building_by_name("The Farm");
         Recipe heal_recipe = Recipe("HealingGrain");
-        heal_recipe.components[Ingredient::IngredientType::Grain] = 5;
+        heal_recipe.components[Ingredient::SubType::Grain] = 5;
         if (heal_recipe.is_satisfied(farm->ingredients))
         {
             auto arena = this->buildup->city->building_by_name("The Arena");
