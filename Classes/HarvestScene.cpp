@@ -59,7 +59,6 @@ void HarvestScene::add_harvestable()
     } else {
         harvestable = Harvestable::create();
     };
-    harvestable = MiningHarvestable::create();
 
     harvestable->setPosition(this->get_center_pos());
     harvestable->setName("harvestable");
