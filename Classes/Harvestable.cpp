@@ -212,6 +212,22 @@ void MiningHarvestable::animate_clip()
     this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
 }
 
+void MiningHarvestable::animate_rotate(float click_ratio)
+{
+    float intensity = 0.0f;
+
+    if (click_ratio >= 0.8f) {
+        intensity = 15.0f;
+    } else if (click_ratio >= 0.6f) {
+        intensity = 6.0f;
+    } else if (click_ratio >= 0.4f) {
+        intensity = 2.0f;
+    };
+
+    if (intensity != 0.0f) {
+        this->runAction(FShake::actionWithDuration(0.075f, intensity));
+    };
+}
 CraftingHarvestable::CraftingHarvestable(spRecipe recipe)
     : recipe(recipe)
 {

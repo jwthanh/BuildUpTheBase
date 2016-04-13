@@ -48,6 +48,7 @@ class MiningHarvestable : public Harvestable
         void init_sprite() override;
 
         virtual void animate_clip() override;
+        virtual void animate_rotate(float click_ratio) override;
 };
 
 class CraftingHarvestable : public Harvestable
