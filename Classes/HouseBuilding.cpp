@@ -1035,6 +1035,8 @@ Village* Buildup::init_city(Buildup* buildup)
 
     vsIngredient a, b;
     transfer2(a, b, 12);
+    Animal animal("ASD");
+    animal.b2b_transfer(farm, dump, Resource::Ingredient, 10);
 
     city->buildings.push_back(farm);
     city->buildings.push_back(dump);
