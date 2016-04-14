@@ -687,6 +687,8 @@ bool CityMenu::init()
     FUNC_INIT(CityMenu);
 #endif
 
+    this->menu_state = OpenMenu;
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -718,6 +720,25 @@ bool CityMenu::init()
         }
     });
     back_btn->loadTextures(
+            "main_UI_export_10_x4.png",
+            "main_UI_export_10_x4_pressed.png",
+            "main_UI_export_10_x4_disabled.png",
+            cocos2d::ui::TextureResType::PLIST
+        );
+
+    auto target_btn = dynamic_cast<ui::Button*>(city_scene->getChildByName("target_btn"));
+    target_btn->addTouchEventListener([this](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            if (this->menu_state == OpenMenu) {
+                this->menu_state = ChangeTarget;
+            } else {
+                this->menu_state = OpenMenu;
+            };
+
+        }
+    });
+    target_btn->loadTextures(
             "main_UI_export_10_x4.png",
             "main_UI_export_10_x4_pressed.png",
             "main_UI_export_10_x4_disabled.png",
@@ -759,13 +780,17 @@ bool CityMenu::init()
        auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
            if (event == ui::Widget::TouchEventType::ENDED)
            {
-               auto building_panel = dynamic_cast<ui::Layout*>(target);
-               auto scene = Scene::create();
-               BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
-               scene->addChild(building_menu);
+               if (this->menu_state == OpenMenu) {
+                   auto building_panel = dynamic_cast<ui::Layout*>(target);
+                   auto scene = Scene::create();
+                   BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
+                   scene->addChild(building_menu);
 
-               auto director = Director::getInstance();
-               director->pushScene(scene);
+                   auto director = Director::getInstance();
+                   director->pushScene(scene);
+               } else {
+                   BUILDUP->target_building = building;
+               };
            };
        };
        building_panel->addTouchEventListener(cb);

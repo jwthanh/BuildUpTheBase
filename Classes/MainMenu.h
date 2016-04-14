@@ -108,6 +108,11 @@ class CityMenu : public GameLayer
     public:
         cocos2d::Label* main_lbl;
 
+        enum MenuState {
+            OpenMenu = 0,
+            ChangeTarget = 1
+        } menu_state;
+
         CREATE_FUNC(CityMenu);
 
         virtual void pop_scene(cocos2d::Ref* pSender) override; //use GameLayer instead of ShopScene's pop_scene
