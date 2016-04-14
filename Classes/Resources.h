@@ -26,7 +26,7 @@ class Resource : public Nameable
 
 #define TYPE_MAP_CONVERSION(Rtype, Rlowertype) \
     static const std::map<SubType, std::string> type_map; \
-SubType Rlowertype##_type; \
+SubType sub_type; \
 static std::string type_to_string(Rtype::SubType type); \
 static Rtype::SubType string_to_type(std::string string_type); 
 
@@ -56,11 +56,11 @@ class Ingredient : public Resource
         TYPE_MAP_CONVERSION(Ingredient, ingredient);
 
         Ingredient(std::string name) : Resource(name) {
-            this->ingredient_type = Ingredient::string_to_type(name);
+            this->sub_type = Ingredient::string_to_type(name);
         };
 
         Ingredient(const Ingredient& other) : Resource(other) {
-            this->ingredient_type = other.ingredient_type;
+            this->sub_type = other.sub_type;
         };
 
 };
@@ -83,11 +83,11 @@ class Product : public Resource
         TYPE_MAP_CONVERSION(Product, product);
 
         Product(std::string name) : Resource(name) {
-            this->product_type = Product::string_to_type(name);
+            this->sub_type = Product::string_to_type(name);
         };
 
         Product(const Product& other) : Resource(other) {
-            this->product_type = other.product_type;
+            this->sub_type = other.sub_type;
         };
 };
 
@@ -106,11 +106,11 @@ class Waste : public Resource
 
 
         Waste(std::string name) : Resource(name) {
-            this->waste_type = Waste::string_to_type(name);
+            this->sub_type = Waste::string_to_type(name);
         };
 
         Waste(const Waste& other) : Resource(other) {
-            this->waste_type = other.waste_type;
+            this->sub_type = other.sub_type;
         };
 };
 

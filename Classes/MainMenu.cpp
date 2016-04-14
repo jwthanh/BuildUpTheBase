@@ -1102,7 +1102,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
 
             auto remove_cb = std::remove_if(i_begin, i_end,
                 [&found_one_to_sell, ing_type](spIngredient ingredient) {
-                    if (!found_one_to_sell && ingredient->ingredient_type == ing_type){
+                    if (!found_one_to_sell && ingredient->sub_type == ing_type){
                         found_one_to_sell = true;
                         return true;
                     }

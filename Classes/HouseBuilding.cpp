@@ -606,7 +606,7 @@ template<>
 std::shared_ptr<Ingredient> create_one(std::string name)
 { //TODO do this for all types of IPW
     auto ing =  std::make_shared<Ingredient>(name);
-    ing->ingredient_type = Ingredient::string_to_type(name);
+    ing->sub_type = Ingredient::string_to_type(name);
     return ing;
 };
 
@@ -779,7 +779,7 @@ std::map<Rtype::SubType,int> Building::get_##Rlowertype##_count()\
         Rtype::SubType type = type_str.first; \
  \
         auto type_matches = [type](sp##Rtype ing){ \
-            return ing->Rlowertype##_type == type;\
+            return ing->sub_type == type;\
         }; \
         int count = std::count_if(\
             this->Rlowertype##s.begin(),\
@@ -802,7 +802,7 @@ std::string Building::get_##Rlowertype##s() \
         std::string str = type_str.second; \
  \
         auto type_matches = [type](sp##Rtype ing){ \
-            return ing->Rlowertype##_type == type;\
+            return ing->sub_type == type;\
         }; \
         int count = std::count_if(\
             this->Rlowertype##s.begin(),\
@@ -994,30 +994,30 @@ Village* Buildup::init_city(Buildup* buildup)
 
     auto farm = std::make_shared<Building>(city, "The Farm", "the_farm", farm_task);
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
-    farm->punched_ingredient_type = "grain";
+    farm->punched_sub_type = "grain";
     buildup->target_building = farm;
 
     auto dump = std::make_shared<Building>(city, "The Dump", "the_dump", dump_task);
-    dump->punched_ingredient_type = "fly";
+    dump->punched_sub_type = "fly";
 
     auto workshop = std::make_shared<Building>(city, "The Workshop", "the_workshop", workshop_task);
-    workshop->punched_ingredient_type = "wood";
+    workshop->punched_sub_type = "wood";
 
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", "the_marketplace", marketplace_task);
 
     auto arena = std::make_shared<Building>(city, "The Arena", "the_arena", arena_task);
-    arena->punched_ingredient_type = "sand";
+    arena->punched_sub_type = "sand";
 
     auto mine = std::make_shared<Building>(city, "The Mine", "the_mine", mine_task);
-    mine->punched_ingredient_type = "copper";
+    mine->punched_sub_type = "copper";
 
     auto grave = std::make_shared<Building>(city, "The Graveyard", "the_graveyard", grave_task);
-    grave->punched_ingredient_type = "flesh";
+    grave->punched_sub_type = "flesh";
 
     auto necro = std::make_shared<Building>(city, "The Underscape", "the_underscape", necro_task);
 
     auto forest = std::make_shared<Building>(city, "The Forest", "the_forest", forest_task);
-    forest->punched_ingredient_type = "berry";
+    forest->punched_sub_type = "berry";
 
     buildup->fighter = std::make_shared<Fighter>(arena->city, "Fighter");
     buildup->fighter->sprite_name = "townsmen8x8.png";

@@ -115,7 +115,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         Village* city;
 
-        std::string punched_ingredient_type = "wood";
+        std::string punched_sub_type = "wood";
 
         vsProduct products;
         vsWaste wastes;

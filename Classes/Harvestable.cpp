@@ -91,7 +91,7 @@ void Harvestable::animate_clip()
 void Harvestable::animate_harvest()
 {
     auto building = BUILDUP->target_building;
-    building->create_resources(Resource::Ingredient, 1, building->punched_ingredient_type);
+    building->create_resources(Resource::Ingredient, 1, building->punched_sub_type);
 
     this->animate_clip();
 

@@ -36,7 +36,7 @@ bool Recipe::is_satisfied(vsIngredient input)
     {
         //if ingredient type's not in matches map, add it regardless of whether
         //its relevant or not
-        Ingredient::SubType i_type = ingredient->ingredient_type; 
+        Ingredient::SubType i_type = ingredient->sub_type; 
         auto it = input_components.find(i_type);
         if (it == input_components.end())
         {
@@ -81,7 +81,7 @@ void Recipe::consume(vsIngredient& input)
     {
         auto removal_fun = [&temp_map](spIngredient element) -> bool {
             try {
-                int& val = temp_map.at(element->ingredient_type);
+                int& val = temp_map.at(element->sub_type);
 
                 if (val > 0) {
                     val -= 1;

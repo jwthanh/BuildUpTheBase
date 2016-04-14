@@ -10,19 +10,34 @@ void transfer(ResourceVector& origin_vs, ResourceVector& destination,
     typename ResourceVector::value_type::element_type::SubType sub_type
     )
 {
-
-    if (origin_vs.size() < quantity)
+    auto count_subtypes = [sub_type](typename ResourceVector::value_type resource)
     {
-        std::cout << quantity << " is too many.";
-        quantity = origin_vs.size();
-        std::cout << " new size is" << quantity << std::endl;
+        return resource->sub_type == sub_type;
+    };
+    unsigned int count = std::count_if(origin_vs.begin(), origin_vs.end(), count_subtypes);
+    if (origin_vs.size() < quantity || count < quantity )
+    {
+        std::stringstream ss;
+        ss << quantity << " is too many.";
+        CCLOG("%s", ss.str().c_str());
+        ss.str("");
+
+        quantity = count;
+        ss << " new size is " << quantity << std::endl;
+        CCLOG("%s", ss.str().c_str());
     }
 
     if (quantity > 0)
     {
-        auto it = std::next(origin_vs.begin(), quantity);
-        std::move(origin_vs.begin(), it, std::back_inserter(destination));
-        origin_vs.erase(origin_vs.begin(), it);
+        //TODO figure out if this is correct
+        while (quantity > 0)
+        {
+            auto it = std::next(origin_vs.begin(), 1);
+            std::move(origin_vs.begin(), it, std::back_inserter(destination));
+            origin_vs.erase(origin_vs.begin(), it);
+
+            quantity--;
+        }
     }
 };
 
