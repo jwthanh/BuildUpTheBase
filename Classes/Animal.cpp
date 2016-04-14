@@ -20,6 +20,21 @@ void transfer(ResourceVector& origin_vs, ResourceVector& destination, unsigned i
         origin_vs.erase(origin_vs.begin(), it);
     }
 };
+void transfer2(std::vector<spIngredient>& origin_vs, std::vector<spIngredient>& destination, unsigned int quantity)
+{
+    typedef std::vector<spIngredient>::value_type qwe;
+    typedef decltype(origin_vs.at(110000).get()) IngredientPointer;
+    //if (Ingredient::Grain == qwe::SubType::Grain)
+    //{
+    //    CCLOG("it matches");
+    //}
+
+    auto temp = new Ingredient("grain");
+    CCLOG("%s", typeid(IngredientPointer).name());
+    CCLOG("%s", typeid(Ingredient).name());
+    CCLOG("%s", typeid(temp).name());
+
+}
 
 
 void Animal::b2b_transfer(spBuilding from_bldg, spBuilding to_bldg, Resource::ResourceType res_type, int quantity)
