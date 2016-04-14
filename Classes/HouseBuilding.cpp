@@ -1033,8 +1033,6 @@ Village* Buildup::init_city(Buildup* buildup)
     arena->fighters.push_back(buildup->fighter);
     arena->fighters.push_back(buildup->brawler);
 
-    vsIngredient a, b;
-    transfer2(a, b, 12);
     Animal animal("ASD");
     animal.b2b_transfer(farm, dump, Resource::Ingredient, 10);
 
