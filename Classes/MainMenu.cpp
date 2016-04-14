@@ -687,6 +687,8 @@ bool CityMenu::init()
     FUNC_INIT(CityMenu);
 #endif
 
+    float update_delay = 0.1f;
+
     this->menu_state = OpenMenu;
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -790,10 +792,21 @@ bool CityMenu::init()
                    director->pushScene(scene);
                } else {
                    BUILDUP->target_building = building;
+                   this->menu_state = OpenMenu;
                };
            };
        };
        building_panel->addTouchEventListener(cb);
+
+       auto update_panel = [this, building_panel, building](float dt) {
+           if (BUILDUP->target_building == building) {
+               building_panel->setBackGroundColor(Color3B::BLUE);
+           } else {
+               building_panel->setBackGroundColor(Color3B(150, 200, 255));
+           }
+       };
+       update_panel(0);
+       building_panel->schedule(update_panel, update_delay, "update_panel");
 
     }
 
