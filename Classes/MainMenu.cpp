@@ -1166,14 +1166,13 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
         {
             vsIngredient& ingredients = this->building->ingredients;
             if (ingredients.empty()){ return; }
+
             Animal animal("WorkshopWagon");
-            animal.b2b_transfer(
+            animal.transfer_ingredients(
                 this->building,
                 BUILDUP->city->building_by_name("The Workshop"),
-                Resource::Ingredient,
+                ing_type,
                 10);
-
-            CCLOG("not implemented");
 
         }
     });

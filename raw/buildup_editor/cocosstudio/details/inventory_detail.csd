@@ -20,7 +20,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="resource_description" ActionTag="-468974190" Tag="28" IconVisible="False" LeftMargin="20.9296" RightMargin="29.0704" TopMargin="67.4061" BottomMargin="345.4340" IsCustomSize="True" FontSize="20" LabelText="This is some sample description" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="resource_description" ActionTag="-468974190" Tag="28" IconVisible="False" LeftMargin="20.9296" RightMargin="29.0704" TopMargin="67.4062" BottomMargin="345.4339" IsCustomSize="True" FontSize="20" LabelText="This is some sample description" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="350.0000" Y="87.1599" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="195.9296" Y="389.0139" />
@@ -68,7 +68,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="move_btn" ActionTag="-1600088707" Tag="24" IconVisible="False" LeftMargin="-0.0009" RightMargin="0.0009" TopMargin="184.9186" BottomMargin="195.0814" TouchEnable="True" FontSize="36" ButtonText="Move to Workshop" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="move_btn" ActionTag="-1600088707" Tag="24" IconVisible="False" LeftMargin="-0.0009" RightMargin="0.0009" TopMargin="184.9186" BottomMargin="195.0814" TouchEnable="True" FontSize="36" ButtonText="Move 10 to Workshop" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="400.0000" Y="120.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="199.9991" Y="255.0814" />
