@@ -740,6 +740,15 @@ bool CityMenu::init()
 
         }
     });
+
+    auto update_target_btn = [target_btn, this](float dt)
+    {
+        if (this->menu_state == OpenMenu) { target_btn->setTitleText("Menu mode"); }
+        else { target_btn->setTitleText("Target mode"); }
+    };
+    update_target_btn(0);
+    target_btn->schedule(update_target_btn, update_delay, "update_target_btn");
+
     target_btn->loadTextures(
             "main_UI_export_10_x4.png",
             "main_UI_export_10_x4_pressed.png",
