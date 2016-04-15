@@ -70,6 +70,8 @@ void HarvestScene::add_harvestable()
 
 void HarvestScene::update(float dt)
 {
+    GameLayer::update(dt);
+
     GameLogic::getInstance()->update(dt);
 
     if (this->target_recipe != NULL)
