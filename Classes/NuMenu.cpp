@@ -366,14 +366,18 @@ void BuildingNuMenu::init_items()
         CCLOG("Targetting building");
         BUILDUP->target_building = this->building;
     });
-    auto update_img_cb = [this, target_item](float dt){
+    auto update_target_item = [this, target_item](float dt){
         if (BUILDUP->target_building == this->building) {
             target_item->set_image("crossair_red.png");
+            target_item->button->setEnabled(false);
+            target_item->set_description("Building is currently targetted");
         } else {
             target_item->set_image("crossair_black.png");
+            target_item->button->setEnabled(true);
+            target_item->set_description("Target this building");
         };
     };
-    target_item->schedule(update_img_cb, update_delay, "image_update");
+    target_item->schedule(update_target_item, update_delay, "image_update");
 
     for (auto recipe : building->data->get_all_recipes())
     {
