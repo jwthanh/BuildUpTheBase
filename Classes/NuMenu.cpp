@@ -11,6 +11,7 @@
 #include "Worker.h"
 #include "GameLogic.h"
 #include "Recipe.h"
+#include "MiscUI.h"
 
 USING_NS_CC;
 
@@ -20,11 +21,7 @@ void NuItem::my_init(cocos2d::Node* parent)
     auto inst = cocos2d::CSLoader::getInstance();
 
     this->button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
-    button->loadTextures(
-            "main_UI_export_10_x4.png",
-            "main_UI_export_10_x4_pressed.png",
-            "main_UI_export_10_x4_disabled.png",
-            cocos2d::ui::TextureResType::PLIST);
+    load_default_button_textures(this->button);
     button->removeFromParent();
 
     parent->addChild(this); //FIXME hack to get the selector to run. ideally the button would be a child of this but then button doesnt go on the right spot
@@ -247,12 +244,7 @@ void NuMenu::create_back_item(cocos2d::Node* parent)
             director->popScene();
         }
     });
-    back_btn->loadTextures(
-            "main_UI_export_10_x4.png",
-            "main_UI_export_10_x4_pressed.png",
-            "main_UI_export_10_x4_disabled.png",
-            cocos2d::ui::TextureResType::PLIST
-        );
+    load_default_button_textures(back_btn);
     back_btn->setPosition(Vec2(90, 540));
     back_btn->ignoreContentAdaptWithSize(false);
     back_btn->setContentSize(Size(150, 60));

@@ -19,6 +19,7 @@
 #include "GameLogic.h"
 #include "StaticData.h"
 #include "Animal.h"
+#include "MiscUI.h"
 
 USING_NS_CC;
 
@@ -721,12 +722,7 @@ bool CityMenu::init()
             director->popScene();
         }
     });
-    back_btn->loadTextures(
-            "main_UI_export_10_x4.png",
-            "main_UI_export_10_x4_pressed.png",
-            "main_UI_export_10_x4_disabled.png",
-            cocos2d::ui::TextureResType::PLIST
-        );
+    load_default_button_textures(back_btn);
 
     auto target_btn = dynamic_cast<ui::Button*>(city_scene->getChildByName("target_btn"));
     target_btn->addTouchEventListener([this](Ref* touch, ui::Widget::TouchEventType type){
@@ -749,12 +745,7 @@ bool CityMenu::init()
     update_target_btn(0);
     target_btn->schedule(update_target_btn, update_delay, "update_target_btn");
 
-    target_btn->loadTextures(
-            "main_UI_export_10_x4.png",
-            "main_UI_export_10_x4_pressed.png",
-            "main_UI_export_10_x4_disabled.png",
-            cocos2d::ui::TextureResType::PLIST
-        );
+    load_default_button_textures(target_btn);
 
     auto create_count = [](std::string prefix, int count) {
         std::stringstream ss;
@@ -899,12 +890,7 @@ bool InventoryMenu::init()
             director->popScene();
         }
     });
-    back_btn->loadTextures(
-            "main_UI_export_10_x4.png",
-            "main_UI_export_10_x4_pressed.png",
-            "main_UI_export_10_x4_disabled.png",
-            cocos2d::ui::TextureResType::PLIST
-        );
+    load_default_button_textures(back_btn);
     back_btn->setPosition(Vec2(90, 540));
     back_btn->ignoreContentAdaptWithSize(false);
     back_btn->setContentSize(Size(125, 55));
@@ -1129,12 +1115,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     }, update_delay, "alert_count_update");
 
     auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("sell_btn"));
-    sell_btn->loadTextures(
-            "main_UI_export_10_x4.png",
-            "main_UI_export_10_x4_pressed.png",
-            "main_UI_export_10_x4_disabled.png",
-            cocos2d::ui::TextureResType::PLIST
-        );
+    load_default_button_textures(sell_btn);
 
     int coins_gained = 10;
     std::stringstream cost_ss;
@@ -1189,12 +1170,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
 
 
     auto move_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("move_btn"));
-    move_btn->loadTextures(
-            "main_UI_export_10_x4.png",
-            "main_UI_export_10_x4_pressed.png",
-            "main_UI_export_10_x4_disabled.png",
-            cocos2d::ui::TextureResType::PLIST
-        );
+    load_default_button_textures(move_btn);
     move_btn->schedule([move_btn, this, ing_type](float){
         vsIngredient& ingredients = this->building->ingredients;
         if (ingredients.empty()){

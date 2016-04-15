@@ -4,6 +4,14 @@
 
 #include "cocos2d.h"
 
+namespace cocos2d
+{
+    namespace ui
+    {
+        class Button;
+    }
+}
+
 class FloatingLabel : public cocos2d::Label
 {
 public:
@@ -20,5 +28,7 @@ public:
 
     void do_float();
 };
+
+void load_default_button_textures(cocos2d::ui::Button* button);
 
 #endif

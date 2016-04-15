@@ -1,5 +1,7 @@
 #include "MiscUI.h"
+
 #include "Util.h"
+#include "ui/CocosGUI.h"
 
 USING_NS_CC;
 
@@ -65,4 +67,13 @@ void FloatingLabel::do_float()
         )
     );
 
+};
+
+void load_default_button_textures(cocos2d::ui::Button* button)
+{
+    button->loadTextures(
+            "main_UI_export_10_x4.png",
+            "main_UI_export_10_x4_pressed.png",
+            "main_UI_export_10_x4_disabled.png",
+            cocos2d::ui::TextureResType::PLIST);
 };
