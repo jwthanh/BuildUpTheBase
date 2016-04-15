@@ -140,7 +140,6 @@ void ShopNuItem::update_func(float dt)
         this->button->setEnabled(false);
 
         Color3B color = { 254, 81, 81 };
-
         float tint = 0.9f;
         Color3B text_color = Color3B(
             color.r*tint,

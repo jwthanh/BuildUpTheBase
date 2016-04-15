@@ -791,17 +791,19 @@ bool CityMenu::init()
        auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
            if (event == ui::Widget::TouchEventType::ENDED)
            {
+               auto director = Director::getInstance();
                if (this->menu_state == OpenMenu) {
                    auto building_panel = dynamic_cast<ui::Layout*>(target);
                    auto scene = Scene::create();
                    BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
                    scene->addChild(building_menu);
 
-                   auto director = Director::getInstance();
                    director->pushScene(scene);
                } else {
+                   //change target building and exit menu
                    BUILDUP->target_building = building;
                    this->menu_state = OpenMenu;
+                   director->popScene();
                };
            };
        };
