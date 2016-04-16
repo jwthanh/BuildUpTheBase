@@ -7,6 +7,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <map>
 
 #include "CCPlatformMacros.h"
 
@@ -82,21 +83,22 @@ typedef std::function<void()> VoidFunc;
 
 #define _MAKE_SP(Cls)typedef std::shared_ptr<Cls> sp##Cls
 #define _MAKE_VS(Cls)typedef std::vector<sp##Cls> vs##Cls
+#define _MAKE_MI(Cls)typedef std::map<sp##Cls, unsigned int> mi##Cls
 
-#define MAKE_SP_VS(Cls)_MAKE_SP(Cls);_MAKE_VS(Cls)
+#define MAKE_SP_VS_MI(Cls)_MAKE_SP(Cls);_MAKE_VS(Cls);_MAKE_MI(Cls)
 
-MAKE_SP_VS(Building);
-MAKE_SP_VS(Resource);
-MAKE_SP_VS(Product);
-MAKE_SP_VS(Ingredient);
-MAKE_SP_VS(Waste);
-MAKE_SP_VS(Battle);
-MAKE_SP_VS(Fighter);
-MAKE_SP_VS(Worker);
-MAKE_SP_VS(BuildingData);
-MAKE_SP_VS(Harvester);
-MAKE_SP_VS(ResourceCondition);
-MAKE_SP_VS(Recipe);
+MAKE_SP_VS_MI(Building);
+MAKE_SP_VS_MI(Resource);
+MAKE_SP_VS_MI(Product);
+MAKE_SP_VS_MI(Ingredient);
+MAKE_SP_VS_MI(Waste);
+MAKE_SP_VS_MI(Battle);
+MAKE_SP_VS_MI(Fighter);
+MAKE_SP_VS_MI(Worker);
+MAKE_SP_VS_MI(BuildingData);
+MAKE_SP_VS_MI(Harvester);
+MAKE_SP_VS_MI(ResourceCondition);
+MAKE_SP_VS_MI(Recipe);
 
 #undef MAKE_SP_VS
 #undef _MAKE_VS
