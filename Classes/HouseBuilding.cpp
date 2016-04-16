@@ -410,17 +410,17 @@ Building::Building(Village* city, std::string name, std::string id_key) :
 
 int Building::count_ingredients(Ingredient::SubType ing_type)
 {
-    return this->get_ingredient_count()[ing_type];
+    return this->ingredients[ing_type];
 };
 
 int Building::count_products(Product::SubType pro_type)
 {
-    return this->get_product_count()[pro_type];
+    return this->products[pro_type];
 };
 
 int Building::count_wastes(Waste::SubType wst_type)
 {
-    return this->get_waste_count()[wst_type];
+    return this->wastes[wst_type];
 };
 
 void Building::create_ingredients(Ingredient::SubType sub_type, int quantity)
@@ -487,44 +487,16 @@ void Building::print_specifics()
 };
 
 #define PRINT_RESOURCE(Rtype, Rlowertype) \
-std::map<Rtype::SubType,int> Building::get_##Rlowertype##_count()\
-{\
-    std::map<Rtype::SubType, int> Rlowertype_map = std::map<Rtype::SubType, int>();\
-    for (auto type_str : Rtype::type_map) \
-    { \
-        Rtype::SubType type = type_str.first; \
- \
-        auto type_matches = [type](sp##Rtype ing){ \
-            return ing->sub_type == type;\
-        }; \
-        int count = std::count_if(\
-            this->Rlowertype##s.begin(),\
-            this->Rlowertype##s.end(),\
-            type_matches\
-        ); \
-        \
-        Rlowertype_map[type] = count;\
-    };\
-    return Rlowertype_map;\
-};\
-\
 std::string Building::get_##Rlowertype##s() \
 { \
     std::stringstream ss; \
  \
     for (auto type_str : Rtype::type_map) \
-    { \
+        { \
         Rtype::SubType type = type_str.first; \
         std::string str = type_str.second; \
  \
-        auto type_matches = [type](sp##Rtype ing){ \
-            return ing->sub_type == type;\
-        }; \
-        int count = std::count_if(\
-            this->Rlowertype##s.begin(),\
-            this->Rlowertype##s.end(),\
-            type_matches\
-        ); \
+        unsigned int count = this->Rlowertype##s[type];\
  \
         if (count != 0) \
         { \

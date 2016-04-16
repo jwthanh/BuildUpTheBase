@@ -7,7 +7,7 @@
 template<typename ResourceVector>
 void transfer(ResourceVector& origin_mi, ResourceVector& destination_mi,
     unsigned int quantity,
-    typename ResourceVector::value_type::element_type::SubType sub_type
+    typename ResourceVector::key_type sub_type
     )
 {
     unsigned int count = origin_mi.at(sub_type);

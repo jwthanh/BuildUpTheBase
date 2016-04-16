@@ -147,9 +147,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         int count_ingredients(Ingredient::SubType ing_type);
         int count_products(Product::SubType pro_type);
         int count_wastes(Waste::SubType wst_type);
-        std::map<Ingredient::SubType, int> get_ingredient_count();
-        std::map<Product::SubType, int> get_product_count();
-        std::map<Waste::SubType, int> get_waste_count();
 
         std::string get_ingredients();
         std::string get_products();

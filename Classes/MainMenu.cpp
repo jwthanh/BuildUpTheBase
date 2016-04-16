@@ -938,9 +938,9 @@ bool InventoryMenu::init()
     layout->setContentSize(Size(width, 500)); 
     layout->setAnchorPoint(Vec2(0.5, 0.5));
 
-    auto ingredient_count_map = building->get_ingredient_count();
-    auto it = ingredient_count_map.begin();
-    auto end_it = ingredient_count_map.end();
+    auto ingredients = building->ingredients;
+    auto it = ingredients.begin();
+    auto end_it = ingredients.end();
 
     for (int i = 0; i < 99; i++) {
         auto horiz_layout = ui::HBox::create();
