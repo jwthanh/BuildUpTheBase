@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "HouseBuilding.h"
+#include "Util.h"
 
 
 template<typename ResourceVector>
@@ -10,7 +11,8 @@ void transfer(ResourceVector& origin_mi, ResourceVector& destination_mi,
     typename ResourceVector::key_type sub_type
     )
 {
-    unsigned int count = origin_mi.at(sub_type);
+    unsigned int count = map_get(origin_mi, sub_type, 0);
+
     if (count < quantity )
     {
         std::stringstream ss;

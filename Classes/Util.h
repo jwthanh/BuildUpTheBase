@@ -22,4 +22,14 @@ T pick_one(std::vector<T> vec)
 
 void log_vector(cocos2d::Vec2 vector, std::string message="");
 
+template<typename mapT>
+typename mapT::mapped_type map_get(mapT& input_map, typename mapT::key_type key, typename mapT::mapped_type default_result)
+{
+    if (input_map.count(key)){
+        return input_map[key];
+    } else {
+        return default_result;
+    };
+};
+
 #endif

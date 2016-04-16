@@ -2,9 +2,9 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
 #include "Nameable.h"
+#include <map>
 
 #include <string>
-#include <map>
 
 class Resource
 {
