@@ -597,27 +597,20 @@ void move_if_sized(Resource::ResourceType res_type,
 
 
 template<typename T>
-std::shared_ptr<T> create_one(std::string name)
+std::shared_ptr<T> create_one(typename T::SubType sub_type)
 {
-    return std::make_shared<T>(name);
+    return std::make_shared<T>(sub_type);
 };
 
-template<>
-std::shared_ptr<Ingredient> create_one(std::string name)
-{ //TODO do this for all types of IPW
-    auto ing =  std::make_shared<Ingredient>(name);
-    ing->sub_type = Ingredient::string_to_type(name);
-    return ing;
-};
 
 template<typename T, typename vectorT>
-void create(vectorT& vec, int quantity, typename vectorT::value_type::element_type::SubType name)
+void create(vectorT& vec, int quantity, typename vectorT::value_type::element_type::SubType sub_type)
 {
     vectorT created_resources = vectorT();
 
     for (int i = 0; i < quantity; i++)
     {
-        std::shared_ptr<T> p = create_one<T>(T::type_to_string(name));
+        std::shared_ptr<T> p = create_one<T>(sub_type);
         created_resources.push_back(p);
     };
 
@@ -872,9 +865,9 @@ void Building::do_task(float dt)
 void test_conditions()
 {
     vsIngredient inputs = {
-        std::make_shared<Ingredient>("grain"),
-        std::make_shared<Ingredient>("grain"),
-        std::make_shared<Ingredient>("iron")
+        std::make_shared<Ingredient>(Ingredient::Grain),
+        std::make_shared<Ingredient>(Ingredient::Grain),
+        std::make_shared<Ingredient>(Ingredient::Iron)
     };
 
     auto city = new Village(NULL, "The Test City");
@@ -891,7 +884,7 @@ void test_conditions()
     assert(rc->is_satisfied(farm) == true);
 
     farm->ingredients = {
-        std::make_shared<Ingredient>("iron")
+        std::make_shared<Ingredient>(Ingredient::Iron)
     };
     assert(rc->is_satisfied(farm) == false);
 
@@ -907,9 +900,9 @@ void test_conditions()
 void test_recipe()
 {
     vsIngredient inputs = {
-        std::make_shared<Ingredient>("grain"),
-        std::make_shared<Ingredient>("grain"),
-        std::make_shared<Ingredient>("iron")
+        std::make_shared<Ingredient>(Ingredient::Grain),
+        std::make_shared<Ingredient>(Ingredient::Grain),
+        std::make_shared<Ingredient>(Ingredient::Iron)
     };
 
     Recipe recipe = Recipe("test recipe");

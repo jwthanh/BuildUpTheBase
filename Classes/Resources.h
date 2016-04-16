@@ -6,7 +6,7 @@
 #include <string>
 #include <map>
 
-class Resource : public Nameable
+class Resource
 {
     public:
         enum ResourceType {
@@ -20,8 +20,6 @@ class Resource : public Nameable
         static std::string type_str(ResourceType type);
 
         static const ResourceType resource_type;
-
-        Resource(std::string name) :Nameable(name){};
 };
 
 #define TYPE_MAP_CONVERSION(Rtype, Rlowertype) \
@@ -55,8 +53,8 @@ class Ingredient : public Resource
 
         TYPE_MAP_CONVERSION(Ingredient, ingredient);
 
-        Ingredient(std::string name) : Resource(name) {
-            this->sub_type = Ingredient::string_to_type(name);
+        Ingredient(Ingredient::SubType sub_type) : Resource() {
+            this->sub_type = sub_type;
         };
 
         Ingredient(const Ingredient& other) : Resource(other) {
@@ -82,8 +80,8 @@ class Product : public Resource
 
         TYPE_MAP_CONVERSION(Product, product);
 
-        Product(std::string name) : Resource(name) {
-            this->sub_type = Product::string_to_type(name);
+        Product(Product::SubType sub_type) : Resource() {
+            this->sub_type = sub_type;
         };
 
         Product(const Product& other) : Resource(other) {
@@ -105,8 +103,8 @@ class Waste : public Resource
         TYPE_MAP_CONVERSION(Waste, waste);
 
 
-        Waste(std::string name) : Resource(name) {
-            this->sub_type = Waste::string_to_type(name);
+        Waste(Waste::SubType sub_type) : Resource() {
+            this->sub_type = sub_type;
         };
 
         Waste(const Waste& other) : Resource(other) {
