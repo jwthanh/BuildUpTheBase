@@ -1125,23 +1125,14 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             mistIngredient& ingredients = this->building->ingredients;
-            if (ingredients.empty()){ return; }
 
-            bool found_one_to_sell = false;
-            if (ingredients[ing_type] > 0)
-            {
-                found_one_to_sell = true;
-            }
-            if (found_one_to_sell)
+            int num_sellable = map_get(ingredients, ing_type, 0);
+            if (num_sellable != 0)
             {
                 --ingredients[ing_type];
                 BEATUP->add_total_coin(coins_gained);
                 CCLOG("SELLING STUFF");
-            } else
-            {
-                CCLOG("didnt find any"); //this should never happen
             }
-                
         }
     });
     sell_btn->schedule([sell_btn, this, ing_type](float){
@@ -1177,7 +1168,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
         }
     }, update_delay, "move_btn_state_cb");
 
-    move_btn->addTouchEventListener([this, ing_type, coins_gained](Ref* touch, ui::Widget::TouchEventType type){
+    move_btn->addTouchEventListener([this, ing_type](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             mistIngredient& ingredients = this->building->ingredients;
