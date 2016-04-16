@@ -28,7 +28,7 @@ Recipe::Recipe(std::string name, std::string description) : Nameable(name), desc
     // this->components[Ingredient::SubType::Iron] = 1;
 };
 
-bool Recipe::is_satisfied(vsIngredient input)
+bool Recipe::is_satisfied(mistIngredient input)
 {
     ComponentMap input_components = ComponentMap();
 
@@ -36,15 +36,8 @@ bool Recipe::is_satisfied(vsIngredient input)
     {
         //if ingredient type's not in matches map, add it regardless of whether
         //its relevant or not
-        Ingredient::SubType i_type = ingredient->sub_type; 
-        auto it = input_components.find(i_type);
-        if (it == input_components.end())
-        {
-            input_components[i_type] = 0;
-        };
-
-        //increment the match for the given i_type
-        input_components[i_type] += 1;
+        Ingredient::SubType i_type = ingredient.first; 
+        input_components[i_type] = input[i_type];
     };
 
     for (auto pair : input_components)
@@ -74,32 +67,15 @@ bool Recipe::is_satisfied(vsIngredient input)
     return true;
 };
 
-void Recipe::consume(vsIngredient& input)
+void Recipe::consume(mistIngredient& input)
 {
     ComponentMap temp_map = ComponentMap(this->components);
     if (this->is_satisfied(input))
     {
-        auto removal_fun = [&temp_map](spIngredient element) -> bool {
-            try {
-                int& val = temp_map.at(element->sub_type);
-
-                if (val > 0) {
-                    val -= 1;
-                    return true;
-                } else {
-                    return false;
-                }
-
-            }
-            catch (const std::out_of_range&) {
-                return false;
-            }
-        };
-
-        input.erase(
-            std::remove_if(input.begin(), input.end(), removal_fun),
-            input.end()
-        );
+        for (auto component_pair : temp_map)
+        {
+            input[component_pair.first] -= component_pair.second;
+        }
         printj("consumed " << this->name);
 
         this->callback();

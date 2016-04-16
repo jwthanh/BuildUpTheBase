@@ -1124,26 +1124,17 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     sell_btn->addTouchEventListener([this, ing_type, coins_gained](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            vsIngredient& ingredients = this->building->ingredients;
+            mistIngredient& ingredients = this->building->ingredients;
             if (ingredients.empty()){ return; }
 
             bool found_one_to_sell = false;
-            auto i_begin = ingredients.begin();
-            auto i_end = ingredients.end();
-
-            auto remove_cb = std::remove_if(i_begin, i_end,
-                [&found_one_to_sell, ing_type](spIngredient ingredient) {
-                    if (!found_one_to_sell && ingredient->sub_type == ing_type){
-                        found_one_to_sell = true;
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }}
-            );
-            ingredients.erase(remove_cb, ingredients.end());
+            if (ingredients[ing_type] > 0)
+            {
+                found_one_to_sell = true;
+            }
             if (found_one_to_sell)
             {
+                --ingredients[ing_type];
                 BEATUP->add_total_coin(coins_gained);
                 CCLOG("SELLING STUFF");
             } else
@@ -1154,7 +1145,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
         }
     });
     sell_btn->schedule([sell_btn, this, ing_type](float){
-        vsIngredient& ingredients = this->building->ingredients;
+        mistIngredient& ingredients = this->building->ingredients;
         if (ingredients.empty()){
             sell_btn->setBright(false);
         }
@@ -1172,7 +1163,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     auto move_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("move_btn"));
     load_default_button_textures(move_btn);
     move_btn->schedule([move_btn, this, ing_type](float){
-        vsIngredient& ingredients = this->building->ingredients;
+        mistIngredient& ingredients = this->building->ingredients;
         if (ingredients.empty()){
             move_btn->setBright(false);
         }
@@ -1189,7 +1180,7 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     move_btn->addTouchEventListener([this, ing_type, coins_gained](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            vsIngredient& ingredients = this->building->ingredients;
+            mistIngredient& ingredients = this->building->ingredients;
             if (ingredients.empty()){ return; }
 
             Animal animal("WorkshopWagon");

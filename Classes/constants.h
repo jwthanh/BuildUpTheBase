@@ -67,16 +67,17 @@ class Beatup;
 class Building;
 class Buildup;
 class Village;
-class Product;
-class Ingredient;
-class Waste;
-class Resource;
 class Fighter;
 class Battle;
 class Worker;
 class BuildingData;
 class Harvester;
 class ResourceCondition;
+
+class Resource;
+class Ingredient;
+class Product;
+class Waste;
 
 
 typedef std::function<void()> VoidFunc;
@@ -88,10 +89,6 @@ typedef std::function<void()> VoidFunc;
 #define MAKE_SP_VS_MI(Cls)_MAKE_SP(Cls);_MAKE_VS(Cls);_MAKE_MI(Cls)
 
 MAKE_SP_VS_MI(Building);
-MAKE_SP_VS_MI(Resource);
-MAKE_SP_VS_MI(Product);
-MAKE_SP_VS_MI(Ingredient);
-MAKE_SP_VS_MI(Waste);
 MAKE_SP_VS_MI(Battle);
 MAKE_SP_VS_MI(Fighter);
 MAKE_SP_VS_MI(Worker);
@@ -99,6 +96,12 @@ MAKE_SP_VS_MI(BuildingData);
 MAKE_SP_VS_MI(Harvester);
 MAKE_SP_VS_MI(ResourceCondition);
 MAKE_SP_VS_MI(Recipe);
+
+MAKE_SP_VS_MI(Resource);
+MAKE_SP_VS_MI(Product);
+MAKE_SP_VS_MI(Ingredient);
+MAKE_SP_VS_MI(Waste);
+
 
 #undef MAKE_SP_VS
 #undef _MAKE_VS

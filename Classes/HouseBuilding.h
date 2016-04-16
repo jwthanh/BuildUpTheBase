@@ -117,9 +117,9 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         std::string punched_sub_type = "wood";
 
-        vsProduct products;
-        vsWaste wastes;
-        vsIngredient ingredients;
+        mistIngredient ingredients;
+        mistProduct products;
+        mistWaste wastes;
 
         vsFighter fighters;
         vsWorker workers;
@@ -130,10 +130,9 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         unsigned int num_workers; //people who work here, help make things faster
 
-        TaskFunc task = NULL; //shop might sell product, farm creates ingredients, etc
         std::vector<ItemData> menu_items;
 
-        Building(Village* city, std::string name, std::string id_key, TaskFunc task);
+        Building(Village* city, std::string name, std::string id_key);
         void create_ingredients(Ingredient::SubType sub_type, int quantity);
         void create_products(Product::SubType sub_type, int quantity);
         void create_wastes(Waste::SubType sub_type, int quantity);
@@ -163,9 +162,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         void print_wastes();
 
         void print_fighters();
-
-        void do_task(float dt);
-
 
 };
 

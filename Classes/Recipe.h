@@ -6,10 +6,11 @@
 
 #include "HouseBuilding.h"
 #include "constants.h"
+#include "Resources.h"
 
-typedef std::map<Ingredient::SubType, int> ComponentMap;
-typedef std::map<Ingredient::SubType, int> OutputMap;
-typedef std::map<Product::SubType, int> ProductMap;
+typedef mistIngredient ComponentMap;
+typedef mistIngredient OutputMap;
+typedef mistProduct ProductMap;
 
 class Recipe : public Nameable
 {
@@ -28,9 +29,9 @@ class Recipe : public Nameable
         Recipe(std::string name="Unnamed", std::string description="");
 
         //if there's enough ingredients in the input vector to make recipe
-        bool is_satisfied(vsIngredient input);
+        bool is_satisfied(mistIngredient input);
         //remove ING from input
-        void consume(vsIngredient& input);
+        void consume(mistIngredient& input);
 
 };
 

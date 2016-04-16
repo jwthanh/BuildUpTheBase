@@ -112,4 +112,10 @@ class Waste : public Resource
         };
 };
 
+#define MAKE_MI_SUBTYPE(Cls)typedef std::map<Cls::SubType, unsigned int> mist##Cls
+MAKE_MI_SUBTYPE(Ingredient);
+MAKE_MI_SUBTYPE(Product);
+MAKE_MI_SUBTYPE(Waste);
+#undef  MAKE_MI_SUBTYPE
+
 #endif
