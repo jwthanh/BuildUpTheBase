@@ -54,14 +54,12 @@ ResourceCondition* ResourceCondition::create_waste_condition(Waste::SubType wst_
     return waste_condition;
 };
 
-Harvester::Harvester(spBuilding building, std::string name) :
-    Worker(building, name)
+Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type)
+    : Worker(building, name), ing_type(ing_type)
 {
-
 };
 
 void Harvester::on_update()
 {
-    this->building->create_resources(Resource::ResourceType::Ingredient, 1, this->building->punched_sub_type);
-    CCLOG("harvester %i update %s", this, this->name.c_str());
+    this->building->create_ingredients(this->ing_type, 1);
 };

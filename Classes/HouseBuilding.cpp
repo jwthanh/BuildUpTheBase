@@ -282,13 +282,13 @@ void farm_task(spBuilding farm, float dt)
     farm_count_map.add_item(7, 5);
     int new_products = farm_count_map.get_item();
 
-    farm->create_resources(Resource::Ingredient, new_products, "grain");
+    farm->create_ingredients(Ingredient::Grain, new_products);
 
     Recipe recipe = Recipe("pileofgrain");
     recipe.components[Ingredient::SubType::Grain] = 10;
     if (recipe.is_satisfied(farm->ingredients))
     {
-        farm->create_resources(Resource::Ingredient, 1, "PileOfGrain");
+        farm->create_ingredients(Ingredient::PileOfGrain, 1);
         printj1("Created a pile of grain (no todo)");
         recipe.consume(farm->ingredients);
     };
@@ -315,9 +315,9 @@ void workshop_task(spBuilding workshop, float dt)
             if (can_make_sword)
             {
                 printj1("convert recipe's ingredient to 1 Sword");
-                workshop->create_resources(Resource::Product, 1, "Sword");
+                workshop->create_products(Product::Sword, 1);
                 printj1("creating one ruined iron");
-                workshop->create_resources(Resource::Waste, 1, "wasted_iron");
+                workshop->create_wastes(Waste::Wasted_Iron, 1);
                 recipe.consume(workshop->ingredients);
                 BEATUP->fighter_node->setColor(Color3B::RED);
                 workshop->city->buildup->fighter->has_sword = true;
@@ -336,10 +336,10 @@ void workshop_task(spBuilding workshop, float dt)
             if (can_make_sword)
             {
                 printj1("convert shield_rcp's ingredient to 1 shield");
-                workshop->create_resources(Resource::Product, 1, "Shield");
+                workshop->create_products(Product::Shield, 1);
                 shield_rcp.consume(workshop->ingredients);
                 printj1("creating one ruined iron");
-                workshop->create_resources(Resource::Waste, 1, "wasted_iron");
+                workshop->create_wastes(Waste::Wasted_Iron, 1);
                 shield_rcp.consume(workshop->ingredients);
             }
             else 
@@ -353,7 +353,7 @@ void workshop_task(spBuilding workshop, float dt)
     // {
     //     workshop->products.pop_back();
     //     printj1("One product wasted away");
-    //     workshop->create_resources(Resource::Waste, 1, "Wasted product");
+    //     workshop->create_wastes(Product::Wasted product, 1);
     // }
 
     VoidFunc pay = [workshop](){
@@ -390,7 +390,7 @@ void necro_task(spBuilding necro, float dt)
 
     if (necro->wastes.size() > 0)
     {
-        necro->create_resources(Resource::Ingredient, 5, "Flesh");
+        necro->create_ingredients(Ingredient::Flesh, 5);
         necro->wastes.pop_back();
     };
 
@@ -414,7 +414,7 @@ void dump_task(spBuilding dump, float dt)
     if (dump->wastes.size() > 5)
     {
         printj1("more than 5 dump wastes, flies are gathering");
-        dump->create_resources(Resource::Ingredient, 2, "fly");
+        dump->create_ingredients(Ingredient::Fly, 2);
     };
 };
 
@@ -481,7 +481,7 @@ void arena_task(spBuilding arena, float dt)
     for (int i = 0; i < bodies_to_create; i++)
     {
         auto grave = arena->city->building_by_name("The Graveyard");
-        grave->create_resources(Resource::Waste, 1, "Corpse");
+        grave->create_wastes(Waste::Corpse, 1);
     }
 
     //needs to be after because bodies_to_create gets incremented in this too
@@ -497,11 +497,11 @@ void mine_task(spBuilding mine, float dt)
 {
     std::cout << "\tDoing mine stuff" << std::endl;
 
-    RandomWeightMap<std::string> mine_spawn_map = RandomWeightMap<std::string>();
-    mine_spawn_map.add_item("iron", 30);
-    mine_spawn_map.add_item("copper", 70);
-    std::string ing_type = mine_spawn_map.get_item();
-    mine->create_resources(Resource::Ingredient, 9, ing_type);
+    RandomWeightMap<Ingredient::SubType> mine_spawn_map = RandomWeightMap<Ingredient::SubType>();
+    mine_spawn_map.add_item(Ingredient::Iron, 30);
+    mine_spawn_map.add_item(Ingredient::Copper, 70);
+    Ingredient::SubType ing_type = mine_spawn_map.get_item();
+    mine->create_ingredients(ing_type, 9);
 
     move_if_sized(Resource::Ingredient,
         2, 2,
@@ -512,8 +512,8 @@ void mine_task(spBuilding mine, float dt)
 void forest_task(spBuilding forest, float dt)
 {
     std::cout << "\tDoing forest stuff" << std::endl;
-    forest->create_resources(Resource::Ingredient, 3, "berry");
-    forest->create_resources(Resource::Ingredient, 1, "wood");
+    forest->create_ingredients(Ingredient::Berry, 3);
+    forest->create_ingredients(Ingredient::Wood, 1);
 
     if (forest->spawn_clock->passed_threshold())
     {
@@ -611,13 +611,13 @@ std::shared_ptr<Ingredient> create_one(std::string name)
 };
 
 template<typename T, typename vectorT>
-void create(vectorT& vec, int quantity, std::string name)
+void create(vectorT& vec, int quantity, typename vectorT::value_type::element_type::SubType name)
 {
     vectorT created_resources = vectorT();
 
     for (int i = 0; i < quantity; i++)
     {
-        std::shared_ptr<T> p = create_one<T>(name);
+        std::shared_ptr<T> p = create_one<T>(T::type_to_string(name));
         created_resources.push_back(p);
     };
 
@@ -701,27 +701,21 @@ int Building::count_wastes(Waste::SubType wst_type)
     return this->get_waste_count()[wst_type];
 };
 
-void Building::create_resources(Resource::ResourceType type, int quantity, std::string name)
+void Building::create_ingredients(Ingredient::SubType sub_type, int quantity)
 {
-
-    std::cout << "creating " << name << "("<<Resource::type_str(type) << ") x" << quantity << std::endl;
-    if (type == Resource::Ingredient)
-    {
-        create<Ingredient>(this->ingredients, quantity, name);
-    }
-    else if (type == Resource::Product)
-    {
-        create<Product>(this->products, quantity, name);
-    }
-    else if (type == Resource::Waste)
-    {
-        create<Waste>(this->wastes, quantity, name);
-    }
-    else
-    {
-        std::cout << "type not recognized" << std::endl;
-    }
+    create<Ingredient>(this->ingredients, quantity, sub_type);
 };
+
+void Building::create_products(Product::SubType sub_type, int quantity)
+{
+    create<Product>(this->products, quantity, sub_type);
+};
+
+void Building::create_wastes(Waste::SubType sub_type, int quantity)
+{
+    create<Waste>(this->wastes, quantity, sub_type);
+};
+
 
 void Building::consume_recipe(Recipe* recipe)
 {

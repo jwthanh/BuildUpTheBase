@@ -77,7 +77,9 @@ class Worker : public Nameable, Updateable
 class Harvester : public Worker
 {
     public:
-        Harvester(spBuilding building, std::string name);
+        Ingredient::SubType ing_type;
+
+        Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type);
 
         virtual void on_update();
 };

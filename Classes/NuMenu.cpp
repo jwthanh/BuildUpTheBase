@@ -333,7 +333,7 @@ void BuildingNuMenu::init_items()
         {
             CCLOG("buying a harvester");
             BEATUP->add_total_coin(-cost);
-            auto harvester = std::make_shared<Harvester>(this->building, "test worker");
+            auto harvester = std::make_shared<Harvester>(this->building, "test worker", Ingredient::string_to_type(this->building->punched_sub_type));
             harvester->active_count += 1;
             this->building->harvesters.push_back(harvester);
 
@@ -379,7 +379,7 @@ void BuildingNuMenu::init_items()
             for (auto pair : recipe->outputs) {
                 Ingredient::SubType ing_type = pair.first;
                 int count = pair.second;
-                this->building->create_resources(Resource::Ingredient, count, Ingredient::type_to_string(ing_type));
+                this->building->create_ingredients(ing_type, count);
             };
         };
 

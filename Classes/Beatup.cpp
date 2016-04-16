@@ -923,7 +923,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
         recipe.components[Ingredient::SubType::Grain] = 10;
         if (recipe.is_satisfied(farm->ingredients))
         {
-            farm->create_resources(Resource::Ingredient, 1, "PileOfGrain");
+            farm->create_ingredients(Ingredient::PileOfGrain, 1);
             printj1("Created a pile of grain)");
             recipe.consume(farm->ingredients);
         };

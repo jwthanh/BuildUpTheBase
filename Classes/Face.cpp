@@ -1026,7 +1026,7 @@ Coin* Coin::spawn(Face* face, Fist* attacker, bool use_particles)
     face->beatup->add_total_coin(1);
 
     spBuilding target_building = face->beatup->buildup->target_building;
-    target_building->create_resources(Resource::Ingredient, 1, target_building->punched_sub_type);
+    target_building->create_ingredients(Ingredient::string_to_type(target_building->punched_sub_type), 1);
 
     SoundEngine::play_sound("sounds\\old\\coin.mp3");
     // SoundEngine::play_sound("sounds\\new\\coin\\C_coin_2.mp3");
