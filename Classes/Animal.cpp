@@ -5,10 +5,10 @@
 #include "Util.h"
 
 
-template<typename ResourceVector>
-void transfer(ResourceVector& origin_mi, ResourceVector& destination_mi,
+template<typename mistMap>
+void transfer(mistMap& origin_mi, mistMap& destination_mi,
     unsigned int quantity,
-    typename ResourceVector::key_type sub_type
+    typename mistMap::key_type sub_type
     )
 {
     unsigned int count = map_get(origin_mi, sub_type, 0);
