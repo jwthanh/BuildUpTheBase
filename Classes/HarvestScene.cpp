@@ -155,7 +155,7 @@ ui::Layout* HarvestScene::create_info_panel()
     auto update_ing_count = [create_count, ing_count](float dt)
     {
         spBuilding building = BUILDUP->target_building;
-        ing_count->setString(create_count("ING", building->ingredients.size()));
+        ing_count->setString(create_count("ING", building->count_ingredients()));
     };
     this->schedule(update_ing_count, update_delay, "ing_count_update");
     update_ing_count(0);
@@ -164,7 +164,7 @@ ui::Layout* HarvestScene::create_info_panel()
     auto update_pro_count = [create_count, pro_count](float dt)
     {
         spBuilding building = BUILDUP->target_building;
-        pro_count->setString(create_count("PRO", building->products.size()));
+        pro_count->setString(create_count("PRO", building->count_products()));
     };
     this->schedule(update_pro_count, update_delay, "pro_count_update");
     update_pro_count(0);
@@ -173,7 +173,7 @@ ui::Layout* HarvestScene::create_info_panel()
     auto update_wst_count = [create_count, wst_count](float dt)
     {
         spBuilding building = BUILDUP->target_building;
-        wst_count->setString(create_count("WST", building->wastes.size()));
+        wst_count->setString(create_count("WST", building->count_wastes()));
     };
     this->schedule(update_wst_count, update_delay, "wst_count_update");
     update_wst_count(0);

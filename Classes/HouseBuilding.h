@@ -158,6 +158,10 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         void print_products();
         void print_wastes();
 
+        unsigned int count_ingredients();
+        unsigned int count_products();
+        unsigned int count_wastes();
+
         void print_fighters();
 
 };

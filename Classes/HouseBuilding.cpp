@@ -487,6 +487,21 @@ void Building::print_specifics()
 };
 
 #define PRINT_RESOURCE(Rtype, Rlowertype) \
+unsigned int Building::count_##Rlowertype##s() \
+{ \
+    unsigned int total = 0; \
+ \
+    for (auto type_str : Rtype::type_map) \
+            { \
+        Rtype::SubType type = type_str.first; \
+ \
+        unsigned int count = map_get(this->Rlowertype##s, type, 0);\
+ \
+        total += count; \
+    }; \
+    return total;\
+ \
+};\
 std::string Building::get_##Rlowertype##s() \
 { \
     std::stringstream ss; \
