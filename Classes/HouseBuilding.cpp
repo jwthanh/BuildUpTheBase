@@ -115,7 +115,7 @@ FighterNode* FighterNode::create(spFighter fighter)
 
     node->setAnchorPoint(Vec2(0.5, 0.5));
 
-    node->setName(fighter->name+"_fighter_node");
+    node->setName("fighter_node");
 
     float update_delay = 0.1f;
     node->schedule(CC_CALLBACK_1(FighterNode::update, node), update_delay, "fighter_node_update");
@@ -139,6 +139,12 @@ void FighterNode::update(float dt)
 
     this->hp_bar->set_percentage(hp_percentage);
     this->xp_bar->set_percentage(this->fighter->xp->get_progress_percentage()*100);
+
+    if (this->fighter->attrs->health->is_empty()){
+        this->hp_bar->setVisible(false);
+        this->xp_bar->setVisible(false);
+        this->load_new_sprite("bones.png");
+    };
 };
 
 void FighterNode::load_new_sprite(std::string name)

@@ -319,7 +319,7 @@ bool FightingHarvestable::init()
     auto brawler = std::make_shared<Fighter>(BUILDUP->city, "Brawler");
     brawler->team = Fighter::TeamTwo;
     brawler->sprite_name = "ogre10x10.png";
-    brawler->attrs->health->set_vals(200);
+    brawler->attrs->health->set_vals(20);
 
     FighterNode* fighter_node = FighterNode::create(brawler);
     fighter_node->setScale(0.25f);
@@ -367,8 +367,18 @@ void FightingHarvestable::on_harvest()
 
     auto battle = std::make_shared<Battle>(BUILDUP);
     battle->combatants.push_back(player);
-    auto brawler = dynamic_cast<FighterNode*>(this->getChildByName("Brawler_fighter_node"))->fighter;
+    auto fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
+    spFighter brawler = fighter_node->fighter;
     battle->combatants.push_back(brawler);
 
     battle->do_battle();
+
+    if (brawler->attrs->health->is_empty())
+    {
+        auto challenger = std::make_shared<Fighter>(BUILDUP->city, "Challenger");
+        challenger->team = Fighter::TeamTwo;
+        // challenger->sprite_name = "ogre10x10.png";
+        challenger->attrs->health->set_vals(30);
+        fighter_node->set_fighter(challenger);
+    }
 };
