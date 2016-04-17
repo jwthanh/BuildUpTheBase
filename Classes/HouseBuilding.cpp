@@ -210,11 +210,6 @@ void Battle::fight(spFighter left, spFighter right)
     {
         ss << " and it died!";
 
-        if (BEATUP->enemy_node->fighter == right) {
-            printj("matched fighternode, removing");
-            BEATUP->enemy_node->clear_fighter();
-        };
-
         //only give exp to killer
         left->combat->give_exp(right->xp->value);
         // this->distribute_exp(right);
