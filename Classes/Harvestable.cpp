@@ -324,6 +324,7 @@ bool FightingHarvestable::init()
     FighterNode* fighter_node = FighterNode::create(brawler);
     fighter_node->setScale(0.25f);
     fighter_node->setPosition(Vec2(50, 0));
+    fighter_node->xp_bar->setVisible(false); //dont need to see this for an enemy
     this->addChild(fighter_node);
 
     // auto pos = this->getPosition();
@@ -377,7 +378,7 @@ void FightingHarvestable::on_harvest()
     {
         auto challenger = std::make_shared<Fighter>(BUILDUP->city, "Challenger");
         challenger->team = Fighter::TeamTwo;
-        // challenger->sprite_name = "ogre10x10.png";
+        challenger->sprite_name = "harvester.png";
         challenger->attrs->health->set_vals(30);
         fighter_node->set_fighter(challenger);
     }
