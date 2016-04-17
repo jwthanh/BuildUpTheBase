@@ -113,11 +113,12 @@ FighterNode* FighterNode::create(spFighter fighter)
     node->xp_bar->front_timer->setColor(Color3B::BLUE);
     node->addChild(node->xp_bar->base_node);
 
-    // node->setPosition(BEATUP->get_center_pos(sx(300)));
     node->setAnchorPoint(Vec2(0.5, 0.5));
-    // BEATUP->addChild(node); //dont add child anymore, do it manually
 
     node->setName(fighter->name+"_fighter_node");
+
+    float update_delay = 0.1f;
+    node->schedule(CC_CALLBACK_1(FighterNode::update, node), update_delay, "fighter_node_update");
 
     return node;
 };
