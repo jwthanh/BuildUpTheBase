@@ -80,6 +80,8 @@ class FightingHarvestable : public Harvestable
         std::string get_sprite_path() override;
 
         virtual bool should_shatter() override;
+        virtual void shatter();
+
         virtual void animate_clip() override;
         virtual void animate_rotate() override;
 

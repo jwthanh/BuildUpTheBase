@@ -354,13 +354,23 @@ void FightingHarvestable::animate_rotate()
 
 bool FightingHarvestable::should_shatter()
 {
-    //this class should never shatter
-    return false;
-};
+    if (this->enemy == NULL) { return false; }
+    return this->enemy->attrs->health->is_empty();
+}
+
+void FightingHarvestable::shatter()
+{
+    this->enemy = std::make_shared<Fighter>(BUILDUP->city, "Challenger");
+    this->enemy->team = Fighter::TeamTwo;
+    this->enemy->sprite_name = "harvester.png";
+    this->enemy->attrs->health->set_vals(30);
+
+    FighterNode* fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
+    fighter_node->FighterNode::set_fighter(this->enemy);
+}
 
 void FightingHarvestable::on_harvest()
 {
-    //TODO do fight stuff
     auto player = std::make_shared<Fighter>(BUILDUP->city, "PlayerCharacter");
     player->team = Fighter::TeamOne;
     player->attrs->health->set_vals(2000);
@@ -372,13 +382,4 @@ void FightingHarvestable::on_harvest()
     battle->combatants.push_back(this->enemy);
 
     battle->do_battle();
-
-    if (this->enemy->attrs->health->is_empty())
-    {
-        this->enemy = std::make_shared<Fighter>(BUILDUP->city, "Challenger");
-        this->enemy->team = Fighter::TeamTwo;
-        this->enemy->sprite_name = "harvester.png";
-        this->enemy->attrs->health->set_vals(30);
-        fighter_node->set_fighter(this->enemy);
-    }
 };
