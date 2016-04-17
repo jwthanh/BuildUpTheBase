@@ -249,7 +249,7 @@ void NuMenu::create_back_item(cocos2d::Node* parent)
     back_btn->ignoreContentAdaptWithSize(false);
     back_btn->setContentSize(Size(150, 60));
     back_btn->setTitleText("Back");
-    back_btn->setTitleFontSize(55);
+    back_btn->setTitleFontSize(24);
     back_btn->setTitleColor(Color3B::BLACK);
 
     this->addChild(back_btn);
