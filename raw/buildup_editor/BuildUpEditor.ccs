@@ -19,7 +19,7 @@
         </Folder>
         <Folder Name="scenes">
           <Project Name="city_scene.csd" Type="Scene" />
-          <Project Name="harvest_scene.csd" Type="Scene" />
+          <Project Name="base_scene.csd" Type="Scene" />
         </Folder>
       </RootFolder>
     </Group>

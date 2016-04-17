@@ -33,7 +33,7 @@ bool HarvestScene::init()
     this->create_player_info_panel();
 
     auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
     this->recipe_lbl = dynamic_cast<ui::Text*>(harvest_scene_editor->getChildByName("recipe_lbl"));
     this->recipe_lbl->removeFromParent();
     this->recipe_lbl->setString("");
@@ -129,7 +129,7 @@ void HarvestScene::create_info_panel()
     auto building = BUILDUP->target_building;
 
     auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
 
     ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("building_info_panel"));
     building_info_panel->removeFromParent();
@@ -205,7 +205,7 @@ void HarvestScene::create_player_info_panel()
     auto building = BUILDUP->target_building;
 
     auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
 
     ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("player_info_panel"));
     player_info_panel->removeFromParent();
@@ -236,7 +236,7 @@ void HarvestScene::create_shop_button()
 {
 
     auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
 
     auto shop_button = ui::Button::create(
         "shop_banner.png",
@@ -277,7 +277,7 @@ void HarvestScene::create_city_button()
 {
 
     auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
 
     auto city_button = ui::Button::create(
         "shop_banner.png",
@@ -318,7 +318,7 @@ void HarvestScene::create_detail_button()
 {
 
     auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
 
     auto detail_button = ui::Button::create(
         "shop_banner.png",
