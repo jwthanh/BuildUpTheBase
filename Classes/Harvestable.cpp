@@ -64,12 +64,17 @@ bool Harvestable::init()
     return true;
 };
 
+bool Harvestable::should_shatter()
+{
+    return this->current_clicks >= this->click_limit;
+}
+
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     this->current_clicks += 1;
     this->animate_harvest();
 
-    if (this->current_clicks >= this->click_limit) {
+    if (this->should_shatter()) {
         this->shatter();
     };
 
@@ -339,4 +344,10 @@ void FightingHarvestable::animate_rotate()
     auto rotate_to = RotateTo::create(0.05f, 0);
     this->sprite->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
     this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
+};
+
+bool FightingHarvestable::should_shatter()
+{
+    //this class should never shatter
+    return false;
 };
