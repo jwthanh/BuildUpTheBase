@@ -38,7 +38,7 @@ class Fist
 
         Beatup* beatup;
 
-        int x, y;
+        float x, y;
 
 
         bool is_left;
@@ -78,7 +78,7 @@ class Fist
         Clock* charging_clock;
 
         struct Defaults {
-            int x, y;
+            float x, y;
             float punch_dmg;
             float scale;
             float charge_threshold;

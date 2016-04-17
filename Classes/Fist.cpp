@@ -214,7 +214,7 @@ void Fist::block()
    if (this->beatup->is_blocking)
    {
        float distance = sx(150);
-       this->sprite->setRotation(adj(30.0));
+       this->sprite->setRotation(adj(30.0f));
        Vec2 new_pos = Vec2(this->defaults.x + adj(distance), this->defaults.y);
        this->sprite->setPosition(new_pos);
    }
@@ -275,9 +275,9 @@ void Fist::punch(bool is_charged_punch)
             float total_punch_dmg = this->get_punch_dmg();
             //CCLOG("total %f", total_punch_dmg);
 
-            face->spawn_dmg_lbl(total_punch_dmg);
+            face->spawn_dmg_lbl((int)total_punch_dmg);
 
-            face->hit(total_punch_dmg);
+            face->hit((int)total_punch_dmg);
 
             this->beatup->punch_count += rand() % int(total_punch_dmg);
             if (this->beatup->punch_count >= this->beatup->punches_to_coin)
@@ -423,7 +423,7 @@ void Fist::set_weapon_active(FistWeaponTypes weapon_type, bool is_active)
 
 Vec2 Fist::get_punch_pos()
 {
-    int x_diff = sx(adj(50));
+    float x_diff = sx(adj(50.0f));
     Vec2 punch_pos = Vec2(
             this->sprite->getPosition().x + x_diff,
             this->sprite->getPosition().y + sy(100)
@@ -519,7 +519,7 @@ void Fist::speed_flames(float scale)
         flames->setSpeed(default_speed*scale);
         flames->setLife(default_lifespan/scale);
         //fist_flame->setTotalParticles(default_max*scale);
-        flames->setTotalParticles(default_max); //need to do this or else there doens't seem to be enough parts AND this resets particles
+        flames->setTotalParticles((int)default_max); //need to do this or else there doens't seem to be enough parts AND this resets particles
         //fist_flame->setBlendFunc(BlendFunc::ADDITIVE);
 
     }
@@ -550,7 +550,7 @@ float Fist::get_punch_dmg()
     }
     else 
     {
-        total_punch_dmg = this->punch_dmg*0.33;
+        total_punch_dmg = this->punch_dmg*0.33f;
     };
     total_punch_dmg = round(total_punch_dmg);
 

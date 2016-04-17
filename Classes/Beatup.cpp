@@ -567,7 +567,7 @@ void Beatup::prep_face(Face* face)
 
     //hide all unused sprites
     face->update_sprite();
-    face->width = (int)(face->get_sprite()->getTextureRect().size.width * face->getScaleX());
+    face->width = (float)(face->get_sprite()->getTextureRect().size.width * face->getScaleX());
 
     face->setCascadeColorEnabled(true);
     face->reset_color();
@@ -585,8 +585,8 @@ void Beatup::prep_fists()
     this->left_fist->hit_sprite = FistSprite::createWithSpriteFrameName("fist_hit.png");
     this->left_fist->hand = FistHands::Left;
     this->left_fist->beatup = this;
-    this->left_fist->defaults.x = (int)(visibleSize.width / 2 + origin.x-sx(200));
-    this->left_fist->defaults.y = (int)(visibleSize.height / 2 + origin.y-sx(250));
+    this->left_fist->defaults.x = (visibleSize.width / 2 + origin.x-sx(200));
+    this->left_fist->defaults.y = (visibleSize.height / 2 + origin.y-sx(250));
     this->left_fist->reset_pos();
 
     if (this->tutorials_enabled())
@@ -607,8 +607,8 @@ void Beatup::prep_fists()
     this->right_fist->hit_sprite = FistSprite::createWithSpriteFrameName("fist_hit.png");
     this->right_fist->beatup = this;
     this->right_fist->hand = FistHands::Right;
-    this->right_fist->defaults.x = (int)(visibleSize.width / 2 + origin.x+sx(200));
-    this->right_fist->defaults.y = (int)(visibleSize.height / 2 + origin.y-sx(250));
+    this->right_fist->defaults.x = (float)(visibleSize.width / 2 + origin.x+sx(200));
+    this->right_fist->defaults.y = (float)(visibleSize.height / 2 + origin.y-sx(250));
     this->right_fist->reset_pos();
 
     this->right_fist->sprite->prep(this->right_fist, flames_pos);

@@ -30,7 +30,7 @@ class Face : public cocos2d::Node, public Hittable
     public:
 
         struct Defaults {
-            int charge_dmg;
+            float charge_dmg;
             float last_attack_threshold;
         } defaults;
 
@@ -42,7 +42,7 @@ class Face : public cocos2d::Node, public Hittable
 
         bool long_enough_since_last_attack();
         Clock* last_attack_clock;
-        int charge_dmg;
+        float charge_dmg;
 
         bool is_fully_charged();
         Clock* charge_clock;
@@ -72,14 +72,14 @@ class Face : public cocos2d::Node, public Hittable
         void destroy_shield();
         void disable_shield();
 
-        int width;
+        float width;
 
 
         void spawn_dmg_lbl(int damage);
 
-        int center_x, center_y;
+        float center_x, center_y;
         void set_center(cocos2d::Vec2);
-        void set_center(int x, int y);
+        void set_center(float x, float y);
         void swap_center(Face* other);
 
         cocos2d::Rect get_swipable_rect();
@@ -150,10 +150,10 @@ class Shield : public Hittable
 
         cocos2d::MotionStreak* tutorial_swipe;
 
-        int width;
-        int center_x, center_y;
+        float width;
+        float center_x, center_y;
         void set_center(cocos2d::Vec2);
-        void set_center(int x, int y);
+        void set_center(float x, float y);
 
         std::vector<cocos2d::Sprite*>* sprite_list;
         cocos2d::Sprite* get_sprite();
@@ -171,7 +171,7 @@ class Shield : public Hittable
 class Coin
 {
     public:
-        Coin(int full_width, Beatup* beatup);
+        Coin(float full_width, Beatup* beatup);
 
         static Coin* spawn(Face* face, Fist* attacker, bool use_particles);
 
@@ -193,7 +193,7 @@ class Coin
 
         bool should_remove;
 
-        int height_extra;
+        float height_extra;
 
         Clock* time_alive_clock;
         float expiry_time;
@@ -211,7 +211,7 @@ class Gore : public Coin
 {
 
     public:
-        Gore(int full_width, Beatup* beatup);
+        Gore(float full_width, Beatup* beatup);
         static Coin* spawn(Face* face, Fist* attacker, bool use_particles);
 
         static cocos2d::ValueMap particle_map;

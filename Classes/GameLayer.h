@@ -22,8 +22,8 @@ class GameLayer : public cocos2d::Layer
         std::shared_ptr<Clock> long_press_clock;
     public:
         static std::string menu_font;
-        static int menu_fontsize;
-        static int menu_heightdiff;
+        static float menu_fontsize;
+        static float menu_heightdiff;
 
         CREATE_FUNC(GameLayer);
         static cocos2d::Scene* createScene();

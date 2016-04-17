@@ -14,8 +14,8 @@ USING_NS_CC;
 
 
 std::string GameLayer::menu_font = DEFAULT_FONT;
-int GameLayer::menu_fontsize = 0;
-int GameLayer::menu_heightdiff = 0;
+float GameLayer::menu_fontsize = 0;
+float GameLayer::menu_heightdiff = 0;
 
 bool GameLayer::touch_in_node(Node* target, cocos2d::Touch* touch, float scale)
 {
@@ -27,8 +27,8 @@ bool GameLayer::touch_in_node(Node* target, cocos2d::Touch* touch, float scale)
         new_rect.size.width = bbox.size.width*scale;
         new_rect.size.height = bbox.size.height*scale;
 
-        new_rect.origin.x -= (bbox.size.width / 2.0)*(scale - 1.0);// - bbox.size.width );
-        new_rect.origin.y -= (bbox.size.height / 2.0)*(scale - 1.0);// - bbox.size.height);
+        new_rect.origin.x -= (bbox.size.width / 2.0f)*(scale - 1.0f);// - bbox.size.width );
+        new_rect.origin.y -= (bbox.size.height / 2.0f)*(scale - 1.0f);// - bbox.size.height);
 
         bbox.setRect(
             new_rect.origin.x,
@@ -87,7 +87,7 @@ void GameLayer::update(float dt)
     Size visibleSize = Director::getInstance()->getVisibleSize();
     if (this->isTouchDown)
     {
-        float threshold = visibleSize.width * 0.05;
+        float threshold = visibleSize.width * 0.05f;
 
         this->long_press_clock->update(dt);
 
@@ -203,8 +203,8 @@ Scrollable* GameLayer::create_center_scrollview()
 
     auto scroll = Scrollable::create();
     //scroll->setBackGroundColorType(ui::Layout::BackGroundColorType::SOLID);
-    int scroll_w = sx(800);
-    int scroll_h = sy(400);
+    float scroll_w = sx(800);
+    float scroll_h = sy(400);
     Size scroll_size = Size(scroll_w, scroll_h);
     scroll->setContentSize(scroll_size);
 

@@ -7,11 +7,11 @@
 
 template<typename mistMap>
 void transfer(mistMap& origin_mi, mistMap& destination_mi,
-    unsigned int quantity,
+    res_count_t quantity,
     typename mistMap::key_type sub_type
     )
 {
-    unsigned int count = map_get(origin_mi, sub_type, 0);
+    res_count_t count = map_get(origin_mi, sub_type, 0);
 
     if (count < quantity )
     {

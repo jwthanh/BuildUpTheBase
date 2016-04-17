@@ -52,8 +52,8 @@ void Combat::level_up(int levels)
 
         // log(x^x)*(x*100)+200
         double result = std::log(std::pow(level, level)) * (level*100) + 200;
-        this->master->xp->required_to_lvlup = std::floor(result);
-        this->master->xp->this_level = std::max((double)this->master->xp->this_level - this->master->xp->required_to_lvlup, 0.0); 
+        this->master->xp->required_to_lvlup = (unsigned int)std::floor(result);
+        this->master->xp->this_level = (unsigned int)std::max((double)this->master->xp->this_level - this->master->xp->required_to_lvlup, 0.0); 
 
         this->level_up_stats(1);
         this->level_up_skills(1);
@@ -197,7 +197,7 @@ void Combat::try_to_die()
 int Combat::adjust_damage_to_armor(Damage* dmg)
 {
     int total_damage = 0;
-    total_damage += dmg->normal - this->master->attrs->armor->current_val;
+    total_damage += (int)(dmg->normal - this->master->attrs->armor->current_val);
     //TODO handle other armor types, need to find a place to store them on the
     //combat or actor
     total_damage += dmg->fire;

@@ -180,7 +180,7 @@ void MiningHarvestable::init_sprite()
     auto bot_left_sprite = create_sprite("dirt_2.png", Vec2::ANCHOR_BOTTOM_LEFT);
     auto bot_right_sprite = create_sprite("dirt_1.png", Vec2::ANCHOR_BOTTOM_RIGHT);
 
-    auto rt = RenderTexture::create(this->getContentSize().width, this->getContentSize().height);
+    auto rt = RenderTexture::create((int)this->getContentSize().width, (int)this->getContentSize().height);
     rt->retain();
     rt->begin();
     top_left_sprite->visit();
@@ -277,7 +277,7 @@ void CraftingHarvestable::animate_clip()
     spark_parts->setScale(1.0 / 4.0f);
     spark_parts->setPosition(origin);
     int total_particles = spark_parts->getTotalParticles();
-    spark_parts->setTotalParticles(total_particles * click_ratio);
+    spark_parts->setTotalParticles((int)(total_particles * click_ratio));
     this->addChild(spark_parts);
 }
 

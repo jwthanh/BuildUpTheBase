@@ -188,13 +188,13 @@ void Face::do_charge_attack()
         SoundEngine::play_sound("sounds\\old\\barrel.mp3");
         this->beatup->shake_clock->set_threshold(1.0f);
         this->beatup->shake_clock->start();
-        this->beatup->deal_player_dmg(this->charge_dmg);
+        this->beatup->deal_player_dmg((int)this->charge_dmg);
 
         vibrate_ms = 400;
     }
     else
     {
-        this->beatup->deal_player_dmg(this->charge_dmg/2.0);
+        this->beatup->deal_player_dmg((int)(this->charge_dmg/2.0f));
         this->beatup->left_fist->spark_part->resetSystem();
         this->beatup->right_fist->spark_part->resetSystem();
         vibrate_ms = 100;
@@ -569,8 +569,8 @@ void Face::remove_all_features()
 void Face::swap_center(Face* other)
 {
 	if (other == NULL) { return; }
-    int old_x = this->center_x;
-    int old_y = this->center_y;
+    float old_x = this->center_x;
+    float old_y = this->center_y;
 
     this->center_x = other->center_x;
     this->center_y = other->center_y;
@@ -622,7 +622,7 @@ void Face::set_center(Vec2 new_pos)
     this->set_center(new_pos.x, new_pos.y);
 };
 
-void Face::set_center(int x, int y)
+void Face::set_center(float x, float y)
 {
     this->center_x = x;
     this->center_y = y;
@@ -918,7 +918,7 @@ void Shield::set_center(Vec2 new_pos)
     this->set_center(new_pos.x, new_pos.y);
 };
 
-void Shield::set_center(int x, int y)
+void Shield::set_center(float x, float y)
 {
     this->center_x = x;
     this->center_y = y;
@@ -988,7 +988,7 @@ void Shield::prep_brickwall()
 };
 
 
-Coin::Coin(int full_width, Beatup* beatup) : beatup(beatup)
+Coin::Coin(float full_width, Beatup* beatup) : beatup(beatup)
 {
 	//AnimationCache* ac = AnimationCache::getInstance();
     auto anim = Coin::get_spin_animation();
@@ -1012,14 +1012,14 @@ Coin::Coin(int full_width, Beatup* beatup) : beatup(beatup)
     );
     this->sprite->setPosition(pos);
 
-    this->angle = cocos2d::rand_minus1_1()*1.5;
+    this->angle = cocos2d::rand_minus1_1()*1.5f;
 
 };
 
 Coin* Coin::spawn(Face* face, Fist* attacker, bool use_particles)
 {
     Coin* coin = new Coin(face->get_spawnable_width(), face->beatup);
-    coin->height_extra = rand() % 150 - 25;
+    coin->height_extra = (float)(rand() % 150 - 25);
 
     coin->init(face, attacker, use_particles);
 
@@ -1132,7 +1132,7 @@ RepeatForever* Coin::get_spin_animation()
     //return  Coin::_spin_animation->clone();
 };
 
-Gore::Gore(int full_width, Beatup* beatup) : Coin(full_width, beatup)
+Gore::Gore(float full_width, Beatup* beatup) : Coin(full_width, beatup)
 {
     this->move_to_coins_lbl = false;
 
@@ -1163,7 +1163,7 @@ Gore::Gore(int full_width, Beatup* beatup) : Coin(full_width, beatup)
     );
     this->sprite->setPosition(pos);
 
-    this->angle = cocos2d::rand_minus1_1()*1.5;
+    this->angle = (float)(cocos2d::rand_minus1_1()*1.5f);
 };
 
 ParticleSystemQuad* Coin::get_particles()
@@ -1195,7 +1195,7 @@ Sequence* Coin::get_movement_action()
             sy(y_scale)
     );
     float height = 100;
-    float jumps = 1;
+    int jumps = 1;
 
     JumpBy* jump_by = JumpBy::create(this->expiry_time, jump_vec, height, jumps);
 
@@ -1216,7 +1216,7 @@ Coin* Gore::spawn(Face* face, Fist* attacker, bool use_particles)
     auto rotate = RotateBy::create(1, attacker->adj(80.0f));
     gore->sprite->runAction(rotate);
 
-    gore->height_extra = rand() % 220 - 105;
+    gore->height_extra = (float)(rand() % 220 - 105);
 
     gore->init(face, attacker, use_particles);
 

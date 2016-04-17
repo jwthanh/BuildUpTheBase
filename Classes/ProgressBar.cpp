@@ -104,7 +104,7 @@ ProgressBar::~ProgressBar()
 
 void ProgressBar::update_string(std::string msg)
 {
-    int font_size = 20;
+    float font_size = 20.0f;
     
     if (msg == "Knuckle Avalanche") msg = "Knuckle AVs";
     else if (msg == "Impressive Hook") msg = "Impr. Hook";

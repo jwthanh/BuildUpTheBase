@@ -7,7 +7,7 @@ float sx (float x, bool do_scale)
         return x;
     }
     auto frs = cocos2d::Director::getInstance()->getOpenGLView()->getFrameSize();
-    return x * (frs.width / 960.0);
+    return (float)(x * (frs.width / 960.0));
 };
 
 float sy (float y, bool do_scale)
@@ -17,7 +17,7 @@ float sy (float y, bool do_scale)
         return y;
     }
     auto frs = cocos2d::Director::getInstance()->getOpenGLView()->getFrameSize();
-    return y * (frs.height / 640.0);
+    return (float)(y * (float)(frs.height / 640.0));
 };
 
 cocos2d::Vec2 sv(cocos2d::Vec2 input)

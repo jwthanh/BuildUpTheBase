@@ -90,9 +90,9 @@ class FistWeapon : public Weapon
     public:
         void scale_face_color(Face* face);
         void update(float dt);
-        GLuint r_scale;
-        GLuint g_scale;
-        GLuint b_scale;
+        GLubyte r_scale;
+        GLubyte g_scale;
+        GLubyte b_scale;
 
         bool is_active;
         void call_on_activated();

@@ -40,7 +40,7 @@ void AttributeContainer::Update()
 
 Damage* AttributeContainer::get_effective_damage()
 {
-    int initial_damage = this->damage->current_val;
+    int initial_damage = (int)this->damage->current_val;
 	return NULL;
 };
 

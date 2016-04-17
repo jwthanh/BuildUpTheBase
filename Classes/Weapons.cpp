@@ -311,9 +311,9 @@ void FistWeapon::init_psionic(FistSprite* fs)
 
     fs->psionic_part->stopSystem();
 
-    this->r_scale = 0;
-    this->g_scale = 0.5;
-    this->b_scale = 1;
+    this->r_scale = (GLubyte)0;
+    this->g_scale = (GLubyte)0.5;
+    this->b_scale = (GLubyte)1;
 
     this->on_activated = [this]()
     {

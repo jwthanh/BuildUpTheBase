@@ -88,7 +88,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <EnablePREfast>false</EnablePREfast>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalOptions>/w3"4122" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/w3"4122" /w3"4267" /w3"4244" %(AdditionalOptions)</AdditionalOptions>
       <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>

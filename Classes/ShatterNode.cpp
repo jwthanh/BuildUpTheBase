@@ -151,10 +151,10 @@ void ShatterSprite::resetShatter(){
     int num_rows = (int)frag_grid.size();
     int num_cols = (num_rows == 0 ? 0 : (int)frag_grid[0].size());
 
-    const float half_grid_len = 0.5*grid_side_len;
+    const float half_grid_len = (float)0.5*grid_side_len;
 
-    int offset_x = this->getTextureRect().origin.x;
-    int offset_y = this->getTextureRect().origin.y;
+    float offset_x = this->getTextureRect().origin.x;
+    float offset_y = this->getTextureRect().origin.y;
 
     for (int i = 0; i < num_rows; i++){
         for (int j = 0; j < num_cols; j++){
@@ -224,13 +224,13 @@ void ShatterSprite::updateShatterAction(float time, float dt, float growSpeedOfT
             float edge_dist = targetR - disToCenter;
             float edge_random_dist = edge_dist + frag->random_number % (int)initalTargetR - initalTargetR / 2;//add random to disToEdge
 
-            float move_length = edge_random_dist*0.0333; //we only move some percent of disToEdgeWithRandom
+            float move_length = (float)(edge_random_dist*0.0333f); //we only move some percent of disToEdgeWithRandom
 
             Vec2 moved_pos = direction * move_length;
             frag->setPosition(fragPos + moved_pos);
 
             //update opacity
-            float opacity = MAX(0, 255 - 255 * disToCenter / initalTargetR);
+            GLubyte opacity = (GLubyte)MAX(0, 255 - 255 * disToCenter / initalTargetR);
             frag->setOpacity(opacity);
 
             //update scale
