@@ -69,6 +69,16 @@ bool Harvestable::should_shatter()
     return this->current_clicks >= this->click_limit;
 }
 
+void Harvestable::on_harvest()
+{
+    //this is on every click
+    this->building->create_ingredients(Ingredient::string_to_type(this->building->punched_sub_type), 1);
+
+    //this should be on shatter eventually, to line up with the floating label
+    GameLogic::getInstance()->add_total_harvests(1);
+    CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
+}
+
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     this->current_clicks += 1;
@@ -78,8 +88,7 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
         this->shatter();
     };
 
-    GameLogic::getInstance()->add_total_harvests(1);
-    CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
+    this->on_harvest();
 };
 
 void Harvestable::animate_clip()
@@ -101,9 +110,6 @@ float Harvestable::get_click_ratio() const
 
 void Harvestable::animate_harvest()
 {
-    auto building = BUILDUP->target_building;
-    building->create_ingredients(Ingredient::string_to_type(building->punched_sub_type), 1);
-
     this->animate_clip();
 
     this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
@@ -350,4 +356,9 @@ bool FightingHarvestable::should_shatter()
 {
     //this class should never shatter
     return false;
+};
+
+void FightingHarvestable::on_harvest()
+{
+    //TODO do fight stuff
 };

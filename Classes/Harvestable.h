@@ -21,7 +21,6 @@ class Harvestable : public cocos2d::ui::Widget
         void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         virtual bool init() override;
-        virtual bool should_shatter();
         virtual std::string get_sprite_path();
         virtual void init_sprite();
         cocos2d::Size get_sprite_size();
@@ -37,10 +36,12 @@ class Harvestable : public cocos2d::ui::Widget
 
         float get_click_ratio() const;
 
+        virtual bool should_shatter();
         virtual void animate_harvest();
         virtual void animate_rotate();
         virtual void animate_clip();
         virtual void shatter();
+        virtual void on_harvest();
 
 };
 
@@ -79,6 +80,8 @@ class FightingHarvestable : public Harvestable
         virtual bool should_shatter() override;
         virtual void animate_clip() override;
         virtual void animate_rotate() override;
+
+        virtual void on_harvest() override;
 
 };
 
