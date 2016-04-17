@@ -51,7 +51,12 @@ void FShake::update(float time)
 	float rand_y = fgRangeRand( -_strength_y, _strength_y );
 
 	// move the target to a shaked position
-	this->getTarget()->setPosition( Vec2( this->_initial_x+rand_x, this->_initial_y+rand_y) );
+    if (this->getTarget()){
+        this->getTarget()->setPosition(Vec2(
+            this->_initial_x + rand_x,
+            this->_initial_y + rand_y
+        ));
+    };
 }
 
 void FShake::startWithTarget(Node *pTarget)
@@ -66,7 +71,9 @@ void FShake::startWithTarget(Node *pTarget)
 void FShake::stop(void)
 {
 	// Action is done, reset clip position
-	this->getTarget()->setPosition( Vec2( _initial_x, _initial_y ) );
+    if (this->getTarget()) {
+        this->getTarget()->setPosition(Vec2(_initial_x, _initial_y));
+    };
 
 	ActionInterval::stop();
 } 
