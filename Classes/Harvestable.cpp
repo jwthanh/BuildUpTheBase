@@ -82,13 +82,14 @@ void Harvestable::on_harvest()
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     this->current_clicks += 1;
+
     this->animate_harvest();
+    this->on_harvest();
 
     if (this->should_shatter()) {
         this->shatter();
     };
 
-    this->on_harvest();
 };
 
 void Harvestable::animate_clip()
@@ -318,20 +319,16 @@ bool FightingHarvestable::init()
 
     this->click_limit = 1000000; //some really high number they'll never click
 
-    auto brawler = std::make_shared<Fighter>(BUILDUP->city, "Brawler");
-    brawler->team = Fighter::TeamTwo;
-    brawler->sprite_name = "ogre10x10.png";
-    brawler->attrs->health->set_vals(20);
+    this->enemy = std::make_shared<Fighter>(BUILDUP->city, "Brawler");
+    this->enemy->team = Fighter::TeamTwo;
+    this->enemy->sprite_name = "ogre10x10.png";
+    this->enemy->attrs->health->set_vals(20);
 
-    FighterNode* fighter_node = FighterNode::create(brawler);
+    FighterNode* fighter_node = FighterNode::create(this->enemy);
     fighter_node->setScale(0.25f);
     fighter_node->setPosition(Vec2(50, 0));
     fighter_node->xp_bar->setVisible(false); //dont need to see this for an enemy
     this->addChild(fighter_node);
-
-    // auto pos = this->getPosition();
-    // pos.x += 100;
-    // this->setPosition(pos);
 
     return true;
 };
@@ -371,17 +368,17 @@ void FightingHarvestable::on_harvest()
     auto battle = std::make_shared<Battle>(BUILDUP);
     battle->combatants.push_back(player);
     auto fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
-    spFighter brawler = fighter_node->fighter;
-    battle->combatants.push_back(brawler);
+
+    battle->combatants.push_back(this->enemy);
 
     battle->do_battle();
 
-    if (brawler->attrs->health->is_empty())
+    if (this->enemy->attrs->health->is_empty())
     {
-        auto challenger = std::make_shared<Fighter>(BUILDUP->city, "Challenger");
-        challenger->team = Fighter::TeamTwo;
-        challenger->sprite_name = "harvester.png";
-        challenger->attrs->health->set_vals(30);
-        fighter_node->set_fighter(challenger);
+        this->enemy = std::make_shared<Fighter>(BUILDUP->city, "Challenger");
+        this->enemy->team = Fighter::TeamTwo;
+        this->enemy->sprite_name = "harvester.png";
+        this->enemy->attrs->health->set_vals(30);
+        fighter_node->set_fighter(this->enemy);
     }
 };

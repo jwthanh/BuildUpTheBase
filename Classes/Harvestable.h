@@ -75,6 +75,8 @@ class FightingHarvestable : public Harvestable
         CREATE_FUNC(FightingHarvestable);
         bool init() override;
 
+        spFighter enemy;
+
         std::string get_sprite_path() override;
 
         virtual bool should_shatter() override;
