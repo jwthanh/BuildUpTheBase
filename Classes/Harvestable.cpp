@@ -317,7 +317,7 @@ bool FightingHarvestable::init()
     this->click_limit = 1000000; //some really high number they'll never click
 
     auto brawler = std::make_shared<Fighter>(BUILDUP->city, "Brawler");
-    brawler->team = Fighter::TeamOne;
+    brawler->team = Fighter::TeamTwo;
     brawler->sprite_name = "ogre10x10.png";
     brawler->attrs->health->set_vals(200);
 
@@ -361,4 +361,14 @@ bool FightingHarvestable::should_shatter()
 void FightingHarvestable::on_harvest()
 {
     //TODO do fight stuff
+    auto player = std::make_shared<Fighter>(BUILDUP->city, "PlayerCharacter");
+    player->team = Fighter::TeamOne;
+    player->attrs->health->set_vals(2000);
+
+    auto battle = std::make_shared<Battle>(BUILDUP);
+    battle->combatants.push_back(player);
+    auto brawler = dynamic_cast<FighterNode*>(this->getChildByName("Brawler_fighter_node"))->fighter;
+    battle->combatants.push_back(brawler);
+
+    battle->do_battle();
 };
