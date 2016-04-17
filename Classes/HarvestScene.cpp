@@ -13,26 +13,24 @@
 
 USING_NS_CC;
 
+void HarvestScene::create_side_buttons()
+{
+    this->create_shop_button();
+    this->create_city_button();
+    this->create_detail_button();
+}
+
 bool HarvestScene::init()
 {
     FUNC_INIT(HarvestScene);
 
     this->target_recipe = NULL;
 
-    ui::Button* shop_button = this->create_shop_button();
-    this->addChild(shop_button);
+    this->create_side_buttons();
 
-    ui::Button* city_button = this->create_city_button();
-    this->addChild(city_button);
+    this->create_info_panel();
 
-    ui::Button* detail_button = this->create_detail_button();
-    this->addChild(detail_button);
-
-    ui::Layout* info_panel = this->create_info_panel();
-    this->addChild(info_panel);
-
-    ui::Layout* player_info_panel = this->create_player_info_panel();
-    this->addChild(player_info_panel);
+    this->create_player_info_panel();
 
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/harvest_scene.csb");
@@ -126,7 +124,7 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
 };
 
-ui::Layout* HarvestScene::create_info_panel()
+void HarvestScene::create_info_panel()
 {
     auto building = BUILDUP->target_building;
 
@@ -199,10 +197,10 @@ ui::Layout* HarvestScene::create_info_panel()
     });
 
 
-    return building_info_panel;
+    this->addChild(building_info_panel);
 };
 
-ui::Layout* HarvestScene::create_player_info_panel()
+void HarvestScene::create_player_info_panel()
 {
     auto building = BUILDUP->target_building;
 
@@ -231,10 +229,10 @@ ui::Layout* HarvestScene::create_player_info_panel()
     this->schedule(update_gold_lbl, update_delay, "player_gold_lbl_update");
     update_gold_lbl(0);
 
-    return player_info_panel;
+    this->addChild(player_info_panel);
 };
 
-ui::Button* HarvestScene::create_shop_button()
+void HarvestScene::create_shop_button()
 {
 
     auto inst = CSLoader::getInstance();
@@ -272,10 +270,10 @@ ui::Button* HarvestScene::create_shop_button()
         };
     });
 
-    return shop_button;
+    this->addChild(shop_button);
 };
 
-ui::Button* HarvestScene::create_city_button()
+void HarvestScene::create_city_button()
 {
 
     auto inst = CSLoader::getInstance();
@@ -313,10 +311,10 @@ ui::Button* HarvestScene::create_city_button()
         };
     });
 
-    return city_button;
+    this->addChild(city_button);
 };
 
-ui::Button* HarvestScene::create_detail_button()
+void HarvestScene::create_detail_button()
 {
 
     auto inst = CSLoader::getInstance();
@@ -355,5 +353,5 @@ ui::Button* HarvestScene::create_detail_button()
         };
     });
 
-    return detail_button;
+    this->addChild(detail_button);
 };
