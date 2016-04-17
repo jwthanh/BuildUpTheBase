@@ -69,8 +69,10 @@ class CraftingHarvestable : public Harvestable
 
 class FightingHarvestable : public Harvestable
 {
-public:
+    public:
         CREATE_FUNC(FightingHarvestable);
+        bool init() override;
+
         std::string get_sprite_path() override;
 
         virtual void animate_clip() override;

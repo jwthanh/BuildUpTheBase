@@ -298,6 +298,15 @@ void CraftingHarvestable::shatter()
     Harvestable::shatter();
 }
 
+bool FightingHarvestable::init()
+{
+    Harvestable::init();
+
+    this->click_limit = 1000000; //some really high number they'll never click
+
+    return true;
+};
+
 std::string FightingHarvestable::get_sprite_path()
 {
     return "sword.png";
