@@ -88,6 +88,11 @@ void Harvestable::animate_clip()
     this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
 }
 
+float Harvestable::get_click_ratio() const
+{
+    return static_cast<float>(this->current_clicks) / this->click_limit;
+}
+
 void Harvestable::animate_harvest()
 {
     auto building = BUILDUP->target_building;
@@ -97,12 +102,13 @@ void Harvestable::animate_harvest()
 
     this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
 
-    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
-    this->animate_rotate(click_ratio);
+    this->animate_rotate();
 }
 
-void Harvestable::animate_rotate(float click_ratio)
+void Harvestable::animate_rotate()
 {
+
+    float click_ratio = this->get_click_ratio();
     float rotation = 0.0f;
 
     if (click_ratio >= 0.8f) {
@@ -200,7 +206,8 @@ void MiningHarvestable::init_sprite()
 
 void MiningHarvestable::animate_clip()
 {
-    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
+    float click_ratio = this->get_click_ratio();
+
     auto sprite_size = this->get_sprite_size();
     auto size = 20.0f;
     Vec2 origin = Vec2(
@@ -212,9 +219,10 @@ void MiningHarvestable::animate_clip()
     this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
 }
 
-void MiningHarvestable::animate_rotate(float click_ratio)
+void MiningHarvestable::animate_rotate()
 {
     float intensity = 0.0f;
+    float click_ratio = this->get_click_ratio();
 
     if (click_ratio >= 0.8f) {
         intensity = 15.0f;
@@ -272,7 +280,7 @@ void CraftingHarvestable::animate_clip()
         sprite_size.height
     );
 
-    float click_ratio = static_cast<float>(this->current_clicks) / this->click_limit;
+    float click_ratio = this->get_click_ratio();
     auto spark_parts = ParticleSystemQuad::create("particles/anvil_spark.plist");
     spark_parts->setScale(1.0 / 4.0f);
     spark_parts->setPosition(origin);
@@ -293,4 +301,18 @@ void CraftingHarvestable::shatter()
 std::string FightingHarvestable::get_sprite_path()
 {
     return "sword.png";
+}
+
+void FightingHarvestable::animate_clip()
+{
+    //Do nothing deliberately
+};
+
+void FightingHarvestable::animate_rotate()
+{
+    float rotation = 30.0f;
+    auto rotate_by = RotateBy::create(0.05f, rotation);
+    auto rotate_to = RotateTo::create(0.05f, 0);
+    this->sprite->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
+    this->clip->runAction(Sequence::createWithTwoActions(rotate_by, rotate_to));
 };
