@@ -20,24 +20,28 @@ void HarvestScene::create_side_buttons()
     this->create_detail_button();
 }
 
-bool HarvestScene::init()
+void HarvestScene::create_recipe_lbl()
 {
-    FUNC_INIT(HarvestScene);
-
-    this->target_recipe = NULL;
-
-    this->create_side_buttons();
-
-    this->create_info_panel();
-
-    this->create_player_info_panel();
-
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
     this->recipe_lbl = dynamic_cast<ui::Text*>(harvest_scene_editor->getChildByName("recipe_lbl"));
     this->recipe_lbl->removeFromParent();
     this->recipe_lbl->setString("");
     this->addChild(recipe_lbl);
+}
+
+bool HarvestScene::init()
+{
+    FUNC_INIT(HarvestScene);
+
+
+    this->create_side_buttons();
+
+    this->create_info_panel();
+    this->create_player_info_panel();
+
+    this->target_recipe = NULL;
+    this->create_recipe_lbl();
 
     this->add_harvestable();
 

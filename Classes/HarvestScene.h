@@ -21,6 +21,8 @@ class HarvestScene : public GameLayer
         void create_city_button();
         void create_detail_button();
 
+        void create_recipe_lbl();
+
         void create_info_panel();
         void create_player_info_panel();
 
