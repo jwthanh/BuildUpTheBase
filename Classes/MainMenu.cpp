@@ -739,8 +739,8 @@ bool CityMenu::init()
 
     auto update_target_btn = [target_btn, this](float dt)
     {
-        if (this->menu_state == OpenMenu) { target_btn->setTitleText("Menu mode"); }
-        else { target_btn->setTitleText("Target mode"); }
+        if (this->menu_state == ChangeTarget) { target_btn->setTitleText("Open"); }
+        else { target_btn->setTitleText("Target"); }
     };
     update_target_btn(0);
     target_btn->schedule(update_target_btn, update_delay, "update_target_btn");
