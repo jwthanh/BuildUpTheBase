@@ -355,6 +355,8 @@ void HarvestScene::add_harvestable()
     } else if (BUILDUP->target_building->name == "The Workshop") {
         this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
         harvestable = CraftingHarvestable::create(this->target_recipe);
+    } else if (BUILDUP->target_building->name == "The Arena") {
+        harvestable = FightingHarvestable::create();
     } else {
         harvestable = Harvestable::create();
     };

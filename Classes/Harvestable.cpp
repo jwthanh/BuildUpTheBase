@@ -288,4 +288,9 @@ void CraftingHarvestable::shatter()
     };
 
     Harvestable::shatter();
+}
+
+std::string FightingHarvestable::get_sprite_path()
+{
+    return "sword.png";
 };

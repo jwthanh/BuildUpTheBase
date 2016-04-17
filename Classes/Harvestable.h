@@ -65,4 +65,12 @@ class CraftingHarvestable : public Harvestable
         virtual void shatter() override;
 };
 
+class FightingHarvestable : public Harvestable
+{
+public:
+        CREATE_FUNC(FightingHarvestable);
+        std::string get_sprite_path() override;
+
+};
+
 #endif
