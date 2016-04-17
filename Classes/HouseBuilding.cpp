@@ -82,6 +82,7 @@ FighterNode* FighterNode::create(spFighter fighter)
     node->sprite = ui::ImageView::create(fighter ? fighter->sprite_name : "townsmen8x8.png", TextureResType::PLIST);
     node->sprite->setScale(8);
     node->sprite->setPosition(Vec2(0, 100));
+    dynamic_cast<cocos2d::ui::Scale9Sprite*>(node->sprite->getVirtualRenderer())->getSprite()->getTexture()->setAliasTexParameters();
     node->addChild(node->sprite);
 
     node->sprite->setTouchEnabled(true);
@@ -112,9 +113,11 @@ FighterNode* FighterNode::create(spFighter fighter)
     node->xp_bar->front_timer->setColor(Color3B::BLUE);
     node->addChild(node->xp_bar->base_node);
 
-    node->setPosition(BEATUP->get_center_pos(sx(300)));
+    // node->setPosition(BEATUP->get_center_pos(sx(300)));
     node->setAnchorPoint(Vec2(0.5, 0.5));
-    BEATUP->addChild(node);
+    // BEATUP->addChild(node); //dont add child anymore, do it manually
+
+    node->setName(fighter->name+"_fighter_node");
 
     return node;
 };
@@ -140,6 +143,7 @@ void FighterNode::update(float dt)
 void FighterNode::load_new_sprite(std::string name)
 {
     this->sprite->loadTexture(name, TextureResType::PLIST);
+    dynamic_cast<cocos2d::ui::Scale9Sprite*>(this->sprite->getVirtualRenderer())->getSprite()->getTexture()->setAliasTexParameters();
 };
 
 void FighterNode::set_fighter(spFighter fighter)

@@ -8,6 +8,7 @@
 #include "GameLogic.h"
 #include "Util.h"
 #include "Recipe.h"
+#include "attribute.h"
 
 USING_NS_CC;
 
@@ -303,6 +304,20 @@ bool FightingHarvestable::init()
     Harvestable::init();
 
     this->click_limit = 1000000; //some really high number they'll never click
+
+    auto brawler = std::make_shared<Fighter>(BUILDUP->city, "Brawler");
+    brawler->team = Fighter::TeamOne;
+    brawler->sprite_name = "ogre10x10.png";
+    brawler->attrs->health->set_vals(200);
+
+    FighterNode* fighter_node = FighterNode::create(brawler);
+    fighter_node->setScale(0.25f);
+    fighter_node->setPosition(Vec2(50, 0));
+    this->addChild(fighter_node);
+
+    // auto pos = this->getPosition();
+    // pos.x += 100;
+    // this->setPosition(pos);
 
     return true;
 };
