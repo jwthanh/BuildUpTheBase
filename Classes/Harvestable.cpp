@@ -112,7 +112,9 @@ void Harvestable::animate_harvest()
 {
     this->animate_clip();
 
-    this->runAction(FShake::actionWithDuration(0.075f, 2.5f));
+    auto shake_action = FShake::actionWithDuration(0.075f, 2.5f);
+    shake_action->setTag(1); //idk if there's a reason to pick a specific number over another
+    this->runAction(shake_action);
 
     this->animate_rotate();
 }

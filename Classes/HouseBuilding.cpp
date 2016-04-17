@@ -131,10 +131,28 @@ void FighterNode::update(float dt)
 
     if (this->hp_bar->target_percentage != hp_percentage)
     {
-        FShake* shake = FShake::actionWithDuration(0.1f, 1.0f);
-        this->hp_bar->front_timer->runAction(shake);
-        this->hp_bar->back_timer->runAction(shake->clone());
-        this->hp_bar->background->runAction(shake->clone());
+        int shake_tag = 10;
+        if (this->hp_bar->front_timer->getActionByTag(shake_tag) != NULL)
+        {
+            this->hp_bar->front_timer->getActionByTag(shake_tag)->stop();
+            this->hp_bar->back_timer->getActionByTag(shake_tag+1)->stop();
+            this->hp_bar->background->getActionByTag(shake_tag+2)->stop();
+        }
+        else if (this->hp_bar->front_timer->getActionByTag(shake_tag) == NULL)
+        {
+            FShake* shake = FShake::actionWithDuration(0.1f, 1.0f);
+            shake->setTag(shake_tag);
+            this->hp_bar->front_timer->runAction(shake);
+
+            auto back_shake = shake->clone();
+            back_shake->setTag(shake_tag + 1);
+            this->hp_bar->back_timer->runAction(back_shake);
+
+            auto bg_shake = shake->clone();
+            bg_shake->setTag(shake_tag + 2);
+            this->hp_bar->background->runAction(bg_shake);
+        }
+
     }
 
     this->hp_bar->set_percentage(hp_percentage);
