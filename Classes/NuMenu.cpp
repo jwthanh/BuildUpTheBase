@@ -125,14 +125,17 @@ void ShopNuItem::update_func(float dt)
     };
 
     int cost = this->get_cost();
+    int total_coins = BEATUP->get_total_coins();
 
     this->cost_lbl->setTextColor(Color4B::BLACK);
+
     if (this->get_been_bought())
     {
         this->set_cost_lbl("---");
         this->button->setEnabled(false);
         this->cost_lbl->setTextColor(Color4B::GRAY);
-    } else if (BEATUP->get_total_coins() < cost)
+    } 
+    else if (total_coins < cost)
     {
         this->button->setEnabled(false);
 
@@ -147,6 +150,12 @@ void ShopNuItem::update_func(float dt)
         this->cost_lbl->setTextColor(Color4B(text_color));
         this->button->setColor(color);
     }
+    else
+    {
+        this->button->setEnabled(true);
+        this->set_cost_lbl(std::to_string(this->get_cost()));
+        this->button->setColor(Color3B::WHITE);
+    };
 
 
 };
