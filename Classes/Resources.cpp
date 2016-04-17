@@ -20,7 +20,8 @@ const std::map<Ingredient::SubType, std::string> Ingredient::type_map = {
     {Ingredient::Fly, "fly"},
     {Ingredient::Sand, "sand"},
     {Ingredient::Flesh, "flesh"},
-    {Ingredient::Berry, "berry"}
+    {Ingredient::Berry, "berry"},
+    {Ingredient::Soul, "soul"}
 };
 
 const std::map<Product::SubType, std::string> Product::type_map = {
@@ -81,5 +82,6 @@ std::string Resource::type_str(ResourceType type)
     mapping[ResourceType::Waste] = "Waste";
 
     return mapping[type];
+
 
 }

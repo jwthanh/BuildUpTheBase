@@ -34,20 +34,8 @@ class Ingredient : public Resource
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
 
         enum SubType {
-            None,
-            Grain,
-            PileOfGrain,
-            Bread,
-            Loaf,
-            Seed,
-            Tree,
-            Iron,
-            Copper,
-            Wood,
-            Fly,
-            Sand,
-            Flesh,
-            Berry
+            None, Grain, PileOfGrain, Bread, Loaf, Seed, Tree, Iron, Copper,
+            Wood, Fly, Sand, Flesh, Berry, Soul
         };
 
 

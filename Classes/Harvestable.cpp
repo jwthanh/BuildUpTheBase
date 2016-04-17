@@ -367,6 +367,8 @@ void FightingHarvestable::shatter()
 
     FighterNode* fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
     fighter_node->FighterNode::set_fighter(this->enemy);
+
+    this->building->create_ingredients(Ingredient::Soul, 1);
 }
 
 void FightingHarvestable::on_harvest()
