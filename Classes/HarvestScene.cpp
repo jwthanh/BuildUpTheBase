@@ -13,26 +13,16 @@
 
 USING_NS_CC;
 
-void HarvestScene::create_side_buttons()
+void BaseScene::create_side_buttons()
 {
     this->create_shop_button();
     this->create_city_button();
     this->create_detail_button();
 }
 
-void HarvestScene::create_recipe_lbl()
+bool BaseScene::init()
 {
-    auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
-    this->recipe_lbl = dynamic_cast<ui::Text*>(harvest_scene_editor->getChildByName("recipe_lbl"));
-    this->recipe_lbl->removeFromParent();
-    this->recipe_lbl->setString("");
-    this->addChild(recipe_lbl);
-}
-
-bool HarvestScene::init()
-{
-    FUNC_INIT(HarvestScene);
+    FUNC_INIT(BaseScene);
 
 
     this->create_side_buttons();
@@ -40,59 +30,18 @@ bool HarvestScene::init()
     this->create_info_panel();
     this->create_player_info_panel();
 
-    this->target_recipe = NULL;
-    this->create_recipe_lbl();
-
-    this->add_harvestable();
-
     return true;
 };
 
-void HarvestScene::add_harvestable()
-{
-    Harvestable* harvestable;
-    this->target_recipe = NULL; //TODO move this somewhere else
-
-    if (BUILDUP->target_building->name == "The Mine") {
-        harvestable = MiningHarvestable::create();
-    } else if (BUILDUP->target_building->name == "The Workshop") {
-        this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
-        harvestable = CraftingHarvestable::create(this->target_recipe);
-    } else {
-        harvestable = Harvestable::create();
-    };
-
-    harvestable->setPosition(this->get_center_pos());
-    harvestable->setName("harvestable");
-
-    harvestable->setScale(harvestable->getScale()*4); //4*4 scale now
-
-    this->addChild(harvestable);
-};
-
-void HarvestScene::update(float dt)
+void BaseScene::update(float dt)
 {
     GameLayer::update(dt);
 
     GameLogic::getInstance()->update(dt);
 
-    if (this->target_recipe != NULL)
-    {
-        this->recipe_lbl->setString("Current recipe: "+this->target_recipe->name);
-    } else
-    {
-        this->recipe_lbl->setString("");
-    }
-
-    auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
-    if (!harvestable) {
-        this->add_harvestable();
-    } else if (BUILDUP->target_building != harvestable->building) {
-        harvestable->removeFromParent();
-    };
 };
 
-void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
+void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
     if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
     {
@@ -128,7 +77,7 @@ void HarvestScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
 };
 
-void HarvestScene::create_info_panel()
+void BaseScene::create_info_panel()
 {
     auto building = BUILDUP->target_building;
 
@@ -204,7 +153,7 @@ void HarvestScene::create_info_panel()
     this->addChild(building_info_panel);
 };
 
-void HarvestScene::create_player_info_panel()
+void BaseScene::create_player_info_panel()
 {
     auto building = BUILDUP->target_building;
 
@@ -236,7 +185,7 @@ void HarvestScene::create_player_info_panel()
     this->addChild(player_info_panel);
 };
 
-void HarvestScene::create_shop_button()
+void BaseScene::create_shop_button()
 {
 
     auto inst = CSLoader::getInstance();
@@ -277,7 +226,7 @@ void HarvestScene::create_shop_button()
     this->addChild(shop_button);
 };
 
-void HarvestScene::create_city_button()
+void BaseScene::create_city_button()
 {
 
     auto inst = CSLoader::getInstance();
@@ -318,7 +267,7 @@ void HarvestScene::create_city_button()
     this->addChild(city_button);
 };
 
-void HarvestScene::create_detail_button()
+void BaseScene::create_detail_button()
 {
 
     auto inst = CSLoader::getInstance();
@@ -359,3 +308,71 @@ void HarvestScene::create_detail_button()
 
     this->addChild(detail_button);
 };
+
+bool HarvestScene::init()
+{
+    BaseScene::init();
+
+    this->target_recipe = NULL;
+    this->create_recipe_lbl();
+
+    this->add_harvestable();
+
+    return true;
+
+}
+
+void HarvestScene::update(float dt)
+{
+    BaseScene::update(dt);
+
+    if (this->target_recipe != NULL)
+    {
+        this->recipe_lbl->setString("Current recipe: " + this->target_recipe->name);
+    }
+    else
+    {
+        this->recipe_lbl->setString("");
+    }
+
+    auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
+    if (!harvestable) {
+        this->add_harvestable();
+    }
+    else if (BUILDUP->target_building != harvestable->building) {
+        harvestable->removeFromParent();
+    };
+
+}
+
+void HarvestScene::add_harvestable()
+{
+    Harvestable* harvestable;
+    this->target_recipe = NULL; //TODO move this somewhere else
+
+    if (BUILDUP->target_building->name == "The Mine") {
+        harvestable = MiningHarvestable::create();
+    } else if (BUILDUP->target_building->name == "The Workshop") {
+        this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
+        harvestable = CraftingHarvestable::create(this->target_recipe);
+    } else {
+        harvestable = Harvestable::create();
+    };
+
+    harvestable->setPosition(this->get_center_pos());
+    harvestable->setName("harvestable");
+
+    harvestable->setScale(harvestable->getScale()*4); //4*4 scale now
+
+    this->addChild(harvestable);
+};
+
+void HarvestScene::create_recipe_lbl()
+{
+    auto inst = CSLoader::getInstance();
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    this->recipe_lbl = dynamic_cast<ui::Text*>(harvest_scene_editor->getChildByName("recipe_lbl"));
+    this->recipe_lbl->removeFromParent();
+    this->recipe_lbl->setString("");
+    this->addChild(recipe_lbl);
+}
