@@ -397,3 +397,27 @@ void FightingHarvestable::on_harvest()
 
     battle->do_battle();
 };
+
+std::string UndeadHarvestable::get_sprite_path()
+{
+    return "necro_open.png";
+};
+
+void UndeadHarvestable::animate_clip()
+{
+    auto sprite_size = this->get_sprite_size();
+    auto size = 20.0f;
+    Vec2 origin = Vec2(
+        MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
+        MIN(sprite_size.height, sprite_size.height - size)*CCRANDOM_0_1() //random along the width, dont go so far right
+    );
+
+    float click_ratio = this->get_click_ratio();
+    auto spark_parts = ParticleSystemQuad::create("particles/blood.plist");
+    //spark_parts->setScale(1.0 / 2.0f);
+     spark_parts->setPosition(origin);
+    int total_particles = spark_parts->getTotalParticles();
+    spark_parts->setTotalParticles((int)(total_particles * click_ratio));
+    this->addChild(spark_parts);
+
+};
