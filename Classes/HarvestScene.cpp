@@ -188,6 +188,12 @@ void BaseScene::create_player_info_panel()
         hp_ss << "HP: " << hp->current_val << "/" << hp->max_val;
         player_hp_lbl->setString(hp_ss.str());
 
+        if (hp->is_empty()) {
+            player_hp_lbl->setTextColor(Color4B::RED);
+        } else {
+            player_hp_lbl->setTextColor(Color4B::WHITE);
+        }
+
     };
     this->schedule(update_gold_lbl, update_delay, "player_gold_lbl_update");
     update_gold_lbl(0);

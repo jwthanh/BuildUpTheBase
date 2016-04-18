@@ -386,9 +386,8 @@ void FightingHarvestable::shatter()
 
 void FightingHarvestable::on_harvest()
 {
-    auto player = std::make_shared<Fighter>(BUILDUP->city, "PlayerCharacter");
-    player->team = Fighter::TeamOne;
-    player->attrs->health->set_vals(2000);
+    //TODO name fighter to player_avatar or something
+    auto player = BUILDUP->fighter;
 
     auto battle = std::make_shared<Battle>(BUILDUP);
     battle->combatants.push_back(player);
