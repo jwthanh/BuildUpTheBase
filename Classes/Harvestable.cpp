@@ -408,16 +408,34 @@ void UndeadHarvestable::animate_clip()
     auto sprite_size = this->get_sprite_size();
     auto size = 20.0f;
     Vec2 origin = Vec2(
-        MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
-        MIN(sprite_size.height, sprite_size.height - size)*CCRANDOM_0_1() //random along the width, dont go so far right
+        sprite_size.width*CCRANDOM_0_1(),
+        sprite_size.height*CCRANDOM_0_1()
     );
 
     float click_ratio = this->get_click_ratio();
     auto spark_parts = ParticleSystemQuad::create("particles/blood.plist");
-    //spark_parts->setScale(1.0 / 2.0f);
+    spark_parts->setScale(1.0 / 4.0f);
      spark_parts->setPosition(origin);
     int total_particles = spark_parts->getTotalParticles();
     spark_parts->setTotalParticles((int)(total_particles * click_ratio));
     this->addChild(spark_parts);
 
 };
+
+void UndeadHarvestable::animate_rotate()
+{
+    float intensity = 0.0f;
+    float click_ratio = this->get_click_ratio();
+
+    if (click_ratio >= 0.8f) {
+        intensity = 15.0f;
+    } else if (click_ratio >= 0.6f) {
+        intensity = 6.0f;
+    } else if (click_ratio >= 0.4f) {
+        intensity = 2.0f;
+    };
+
+    if (intensity != 0.0f) {
+        this->runAction(FShake::actionWithDuration(0.075f, intensity));
+    };
+}

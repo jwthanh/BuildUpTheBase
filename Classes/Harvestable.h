@@ -94,6 +94,7 @@ class UndeadHarvestable : public Harvestable
         CREATE_FUNC(UndeadHarvestable);
         virtual std::string get_sprite_path() override;
         virtual void animate_clip() override;
+        virtual void animate_rotate() override;
 };
 
 #endif
