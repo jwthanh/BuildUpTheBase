@@ -82,6 +82,4 @@ std::string Resource::type_str(ResourceType type)
     mapping[ResourceType::Waste] = "Waste";
 
     return mapping[type];
-
-
 }

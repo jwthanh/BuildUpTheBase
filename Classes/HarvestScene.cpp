@@ -361,11 +361,6 @@ void HarvestScene::add_harvestable()
         harvestable = Harvestable::create();
     };
 
-    harvestable->setPosition(this->get_center_pos());
-    harvestable->setName("harvestable");
-
-    harvestable->setScale(harvestable->getScale()*4); //4*4 scale now
-
     this->addChild(harvestable);
 };
 

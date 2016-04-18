@@ -61,6 +61,12 @@ bool Harvestable::init()
 
     this->init_clicks();
 
+    this->setPosition(((GameLayer*)NULL)->get_center_pos()); //hack to call without access to an instance
+    this->setName("harvestable");
+
+    this->setScale(this->getScale()*4); //4*4 scale now
+
+
     return true;
 };
 
@@ -324,11 +330,18 @@ bool FightingHarvestable::init()
     this->enemy->sprite_name = "ogre10x10.png";
     this->enemy->attrs->health->set_vals(20);
 
+    //this->sprite->setScale(this->sprite->getScale()*2);
+    //this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    //this->setContentSize(this->get_sprite_size());
+
     FighterNode* fighter_node = FighterNode::create(this->enemy);
     fighter_node->setScale(0.25f);
     fighter_node->setPosition(Vec2(50, 0));
     fighter_node->xp_bar->setVisible(false); //dont need to see this for an enemy
     this->addChild(fighter_node);
+
+    this->setScale(this->getScale()*1.5f);
+    this->setPosition(((GameLayer*)NULL)->get_center_pos(-150, 0)); //hack to call without access to an instance
 
     return true;
 };
