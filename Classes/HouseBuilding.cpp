@@ -739,6 +739,7 @@ Village* Buildup::init_city(Buildup* buildup)
     grave->punched_sub_type = "flesh";
 
     auto necro = std::make_shared<Building>(city, "The Underscape", "the_underscape");
+    necro->punched_sub_type = "blood";
 
     auto forest = std::make_shared<Building>(city, "The Forest", "the_forest");
     forest->punched_sub_type = "berry";

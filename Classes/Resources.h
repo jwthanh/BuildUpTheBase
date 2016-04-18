@@ -35,7 +35,7 @@ class Ingredient : public Resource
 
         enum SubType {
             None, Grain, PileOfGrain, Bread, Loaf, Seed, Tree, Iron, Copper,
-            Wood, Fly, Sand, Flesh, Berry, Soul
+            Wood, Fly, Sand, Flesh, Berry, Soul, Blood
         };
 
 
