@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="harvest_scene" Type="Scene" ID="8ce07d85-9e14-413f-8700-3b9067bcad23" Version="3.10.0.0" />
+  <PropertyGroup Name="base_scene" Type="Scene" ID="8ce07d85-9e14-413f-8700-3b9067bcad23" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -128,7 +128,7 @@
             <PreSize X="0.2083" Y="0.1563" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" LeftMargin="745.0000" RightMargin="25.0000" TopMargin="505.0000" BottomMargin="25.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" LeftMargin="741.7330" RightMargin="28.2670" TopMargin="505.0000" BottomMargin="25.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="190.0000" Y="110.0000" />
             <Children>
               <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="45.7977" RightMargin="49.2023" TopMargin="7.5557" BottomMargin="79.4443" FontSize="20" LabelText="Player Info" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -153,12 +153,23 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
+              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="19.0602" RightMargin="9.0599" TopMargin="77.5000" BottomMargin="9.5000" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="161.8799" Y="23.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="100.0001" Y="21.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5263" Y="0.1909" />
+                <PreSize X="0.8520" Y="0.2091" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint />
-            <Position X="745.0000" Y="25.0000" />
+            <Position X="741.7330" Y="25.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7760" Y="0.0391" />
+            <PrePosition X="0.7726" Y="0.0391" />
             <PreSize X="0.1979" Y="0.1719" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />

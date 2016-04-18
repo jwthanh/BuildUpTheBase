@@ -10,6 +10,7 @@
 #include "Network.h"
 #include "StaticData.h"
 #include "Recipe.h"
+#include "attribute.h"
 
 USING_NS_CC;
 
@@ -172,12 +173,21 @@ void BaseScene::create_player_info_panel()
     const float update_delay = 0.1f;
 
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
-    auto update_gold_lbl = [player_gold_lbl](float dt){
+    auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
+    auto update_gold_lbl = [player_gold_lbl, player_hp_lbl](float dt){
+        //set gold
         std::stringstream coin_ss;
         auto gold = BEATUP->get_total_coins();
         coin_ss << "You have " << gold << " coins";
         std::string coin_msg = coin_ss.str();
         player_gold_lbl->setString(coin_msg);
+
+        //set hp
+        std::stringstream hp_ss;
+        auto hp = BUILDUP->fighter->attrs->health;
+        hp_ss << "HP: " << hp->current_val << "/" << hp->max_val;
+        player_hp_lbl->setString(hp_ss.str());
+
     };
     this->schedule(update_gold_lbl, update_delay, "player_gold_lbl_update");
     update_gold_lbl(0);

@@ -103,7 +103,7 @@ bool Beatup::init()
 
     auto player = new Player("Jimothy");
     player->coins = 100;
-    this->buildup->player = player;
+    this->buildup->player = player; //this shouldn't set the other class right?
 
     auto animal = std::make_shared<Animal>("Tank");
 

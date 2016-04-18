@@ -39,6 +39,12 @@ Buildup::Buildup()
 {
     this->city = NULL;
     this->target_building = NULL;
+
+    //TODO change this to player_avatar or something. I don't want to wait for a recompile atm
+    this->fighter = std::make_shared<Fighter>(this->city, "Jimothy2");
+    this->fighter->attrs->health->set_vals(100);
+
+    this->player = NULL;
 };
 
 Updateable::Updateable()
