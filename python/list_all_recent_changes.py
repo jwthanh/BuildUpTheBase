@@ -54,7 +54,7 @@ def main(argv):
 
     print "<head><title>Build Up the Base! Changelog</title></head>"
     print "<body>"
-    for version in version_codes:
+    for version in version_codes[::-1]:
         listings_result = service.edits().apklistings().list(
                 editId=edit_id, packageName=package_name, apkVersionCode=version
             ).execute()
