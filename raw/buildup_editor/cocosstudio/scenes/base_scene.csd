@@ -131,14 +131,14 @@
           <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" LeftMargin="741.7330" RightMargin="28.2670" TopMargin="505.0000" BottomMargin="25.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="190.0000" Y="110.0000" />
             <Children>
-              <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="45.7977" RightMargin="49.2023" TopMargin="7.5557" BottomMargin="79.4443" FontSize="20" LabelText="Player Info" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="95.0000" Y="23.0000" />
+              <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="0.2978" RightMargin="-0.2978" TopMargin="7.5557" BottomMargin="79.4443" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="190.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="93.2977" Y="90.9443" />
+                <Position X="95.2978" Y="90.9443" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4910" Y="0.8268" />
-                <PreSize X="0.5000" Y="0.2091" />
+                <PrePosition X="0.5016" Y="0.8268" />
+                <PreSize X="1.0000" Y="0.2091" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -153,14 +153,14 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="19.0602" RightMargin="9.0599" TopMargin="77.5000" BottomMargin="9.5000" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="161.8799" Y="23.0000" />
+              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="1.0004" RightMargin="-1.0004" TopMargin="77.5000" BottomMargin="9.5000" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="190.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0001" Y="21.0000" />
+                <Position X="96.0004" Y="21.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5263" Y="0.1909" />
-                <PreSize X="0.8520" Y="0.2091" />
+                <PrePosition X="0.5053" Y="0.1909" />
+                <PreSize X="1.0000" Y="0.2091" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
