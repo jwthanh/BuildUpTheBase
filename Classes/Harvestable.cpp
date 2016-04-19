@@ -356,6 +356,14 @@ void FightingHarvestable::animate_clip()
     //Do nothing deliberately
 };
 
+void FightingHarvestable::animate_harvest()
+{
+    if (BUILDUP->fighter->attrs->health->is_empty() == false)
+    {
+        Harvestable::animate_harvest();
+    }
+}
+
 void FightingHarvestable::animate_rotate()
 {
     float rotation = 30.0f;

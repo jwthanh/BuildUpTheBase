@@ -83,6 +83,7 @@ class FightingHarvestable : public Harvestable
         virtual void shatter();
 
         virtual void animate_clip() override;
+        virtual void animate_harvest() override;
         virtual void animate_rotate() override;
 
         virtual void on_harvest() override;
