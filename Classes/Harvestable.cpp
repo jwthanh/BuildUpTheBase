@@ -431,7 +431,8 @@ void UndeadHarvestable::animate_clip()
     spark_parts->setScale(1.0 / 4.0f);
      spark_parts->setPosition(origin);
     int total_particles = spark_parts->getTotalParticles();
-    spark_parts->setTotalParticles((int)(total_particles * click_ratio));
+    int particle_count = (int)(total_particles * click_ratio);
+    spark_parts->setTotalParticles(particle_count+10);
     this->addChild(spark_parts);
 
 };
@@ -446,7 +447,7 @@ void UndeadHarvestable::animate_rotate()
     } else if (click_ratio >= 0.6f) {
         intensity = 6.0f;
     } else if (click_ratio >= 0.4f) {
-        intensity = 2.0f;
+        intensity = 4.0f;
     };
 
     if (intensity != 0.0f) {
