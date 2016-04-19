@@ -362,6 +362,12 @@ void FightingHarvestable::animate_harvest()
     {
         Harvestable::animate_harvest();
     }
+    else
+    {
+        auto harvest_scene = this->getParent();
+        auto player_info_panel = harvest_scene->getChildByName("player_info_panel");
+        player_info_panel->runAction(FShake::actionWithDuration(0.075f, 10));
+    }
 }
 
 void FightingHarvestable::animate_rotate()
