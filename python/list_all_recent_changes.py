@@ -52,7 +52,7 @@ def main(argv):
 
     version_codes = [apk['versionCode'] for apk in apks_result['apks']]
 
-    print "<head><title>Changelog</title></head>"
+    print "<head><title>Build Up the Base! Changelog</title></head>"
     print "<body>"
     for version in version_codes:
         listings_result = service.edits().apklistings().list(
