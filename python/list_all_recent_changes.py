@@ -56,12 +56,12 @@ def main(argv):
         listings_result = service.edits().apklistings().list(
                 editId=edit_id, packageName=package_name, apkVersionCode=version
             ).execute()
+        print "VERSION", version
         if 'listings' in listings_result:
             print listings_result['listings'][0]['recentChanges']
         else:
-            print version, "no listings found"
-        print 
-    import ipdb; ipdb.set_trace()
+            print "no listings found"
+        print "----"
 
 
   except client.AccessTokenRefreshError:
