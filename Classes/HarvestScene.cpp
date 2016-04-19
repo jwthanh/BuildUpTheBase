@@ -173,8 +173,12 @@ void BaseScene::create_player_info_panel()
             int heal_cost = 10;
             if (gold > heal_cost)
             {
-                BUILDUP->fighter->attrs->health->add_to_current_val(5);
-                BEATUP->add_total_coin(-heal_cost);
+                auto health = BUILDUP->fighter->attrs->health;
+                if (health->is_full() == false)
+                {
+                    health->add_to_current_val(5);
+                    BEATUP->add_total_coin(-heal_cost);
+                }
             }
             else
             {
