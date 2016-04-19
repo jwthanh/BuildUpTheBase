@@ -21,6 +21,9 @@ import sys
 from apiclient import sample_tools
 from oauth2client import client
 
+import dominate
+from dominate import tags
+
 # Declare command-line flags.
 argparser = argparse.ArgumentParser(add_help=False)
 argparser.add_argument('package_name',
@@ -52,20 +55,21 @@ def main(argv):
 
     version_codes = [apk['versionCode'] for apk in apks_result['apks']]
 
-    print "<head><title>Build Up the Base! Changelog</title></head>"
-    print "<body>"
-    for version in version_codes[::-1]:
-        listings_result = service.edits().apklistings().list(
-                editId=edit_id, packageName=package_name, apkVersionCode=version
-            ).execute()
-        print "VERSION", version
-        if 'listings' in listings_result:
-            for line in  listings_result['listings'][0]['recentChanges'].splitlines():
-                print "<div>%s</div>"%line
-        else:
-            print "<div>no listings found</div>"
-        print "<div>----</div>"
-    print "</body>"
+    doc = dominate.document(title="Build Up The Base! Changelog")
+    with doc:
+        for version in version_codes[::-1]:
+            listings_result = service.edits().apklistings().list(
+                    editId=edit_id, packageName=package_name, apkVersionCode=version
+                ).execute()
+            tags.h3("VERSION %s" % version)
+            if 'listings' in listings_result:
+                for line in  listings_result['listings'][0]['recentChanges'].splitlines():
+                    tags.div(line)
+            else:
+                tags.div("No listing found")
+            tags.div("----")
+
+    print doc
 
 
   except client.AccessTokenRefreshError:
