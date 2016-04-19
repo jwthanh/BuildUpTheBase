@@ -67,7 +67,6 @@ def main(argv):
                     tags.div(line)
             else:
                 tags.div("No listing found")
-            tags.div("----")
 
     print doc
 
