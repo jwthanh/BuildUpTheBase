@@ -52,16 +52,20 @@ def main(argv):
 
     version_codes = [apk['versionCode'] for apk in apks_result['apks']]
 
+    print "<head><title>Changelog</title></head>"
+    print "<body>"
     for version in version_codes:
         listings_result = service.edits().apklistings().list(
                 editId=edit_id, packageName=package_name, apkVersionCode=version
             ).execute()
         print "VERSION", version
         if 'listings' in listings_result:
-            print listings_result['listings'][0]['recentChanges']
+            for line in  listings_result['listings'][0]['recentChanges'].splitlines():
+                print "<div>%s</div>"%line
         else:
-            print "no listings found"
-        print "----"
+            print "<div>no listings found</div>"
+        print "<div>----</div>"
+    print "</body>"
 
 
   except client.AccessTokenRefreshError:
