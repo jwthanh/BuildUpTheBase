@@ -11,6 +11,7 @@
 #include "StaticData.h"
 #include "Recipe.h"
 #include "attribute.h"
+#include "FShake.h"
 
 USING_NS_CC;
 
@@ -163,6 +164,25 @@ void BaseScene::create_player_info_panel()
 
     ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("player_info_panel"));
     player_info_panel->removeFromParent();
+
+    player_info_panel->addTouchEventListener([player_info_panel, this](Ref* target, ui::Widget::TouchEventType type)
+    {
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            auto gold = BEATUP->get_total_coins();
+            int heal_cost = 10;
+            if (gold > heal_cost)
+            {
+                BUILDUP->fighter->attrs->health->add_to_current_val(5);
+                BEATUP->add_total_coin(-heal_cost);
+            }
+            else
+            {
+                auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
+                player_gold_lbl->runAction(FShake::actionWithDuration(0.05f, 10));
+            }
+        }
+    });
 
     auto create_count = [](std::string prefix, int count) {
         std::stringstream ss;
