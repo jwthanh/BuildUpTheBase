@@ -1,20 +1,3 @@
-#!/usr/bin/python
-#
-# Copyright 2014 Google Inc. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-"""Lists all the apks for a given app."""
 
 import argparse
 import sys
@@ -56,17 +39,30 @@ def main(argv):
     version_codes = [apk['versionCode'] for apk in apks_result['apks']]
 
     doc = dominate.document(title="Build Up The Base! Changelog")
+    with doc.head:
+        tags.script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+        tags.link(rel='stylesheet', href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css')
+        tags.script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js')
+        tags.script("""
+        $(function(){
+            $('#change_log').accordion();
+        });
+        """,type='text/javascript')
+
     with doc:
-        for version in version_codes[::-1]:
-            listings_result = service.edits().apklistings().list(
-                    editId=edit_id, packageName=package_name, apkVersionCode=version
-                ).execute()
-            tags.h3("VERSION %s" % version)
-            if 'listings' in listings_result:
-                for line in  listings_result['listings'][0]['recentChanges'].splitlines():
-                    tags.div(line)
-            else:
-                tags.div("No listing found")
+        with tags.div(id="change_log"):
+            for version in version_codes[::-1]:
+                listings_result = service.edits().apklistings().list(
+                        editId=edit_id, packageName=package_name, apkVersionCode=version
+                    ).execute()
+
+                tags.h3("VERSION %s" % version, id="version_%s"%version)
+                with tags.div():
+                    if 'listings' in listings_result:
+                        for line in  listings_result['listings'][0]['recentChanges'].splitlines():
+                            tags.div(line)
+                    else:
+                        tags.div("No listing found")
 
     print doc
 
