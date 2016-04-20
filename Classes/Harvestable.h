@@ -45,6 +45,13 @@ class Harvestable : public cocos2d::ui::Widget
 
 };
 
+class FarmingHarvestable : public Harvestable
+{
+    public:
+        CREATE_FUNC(FarmingHarvestable);
+        std::string get_sprite_path();
+};
+
 class MiningHarvestable : public Harvestable
 {
     public:

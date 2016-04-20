@@ -180,6 +180,11 @@ void Harvestable::shatter()
 
 };
 
+std::string FarmingHarvestable::get_sprite_path()
+{
+    return "bush.png";
+};
+
 void MiningHarvestable::init_sprite()
 {
 

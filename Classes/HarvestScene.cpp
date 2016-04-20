@@ -399,6 +399,8 @@ void HarvestScene::add_harvestable()
         harvestable = FightingHarvestable::create();
     } else if (BUILDUP->target_building->name == "The Underscape") {
         harvestable = UndeadHarvestable::create();
+    } else if (BUILDUP->target_building->name == "The Farm") {
+        harvestable = FarmingHarvestable::create();
     } else {
         harvestable = Harvestable::create();
     };
