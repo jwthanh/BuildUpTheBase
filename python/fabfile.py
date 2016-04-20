@@ -16,5 +16,4 @@ def update_changelog():
 
     print "putting changelog on server"
     with cd(TEMPLATE_DIR):
-        run("ls")
         put("changelog.txt", "index.html")
