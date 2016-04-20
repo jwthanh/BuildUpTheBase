@@ -82,7 +82,7 @@ void Harvestable::on_harvest()
 
     //this should be on shatter eventually, to line up with the floating label
     GameLogic::getInstance()->add_total_harvests(1);
-    CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
+    //CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
 }
 
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
@@ -156,13 +156,43 @@ void Harvestable::shatter()
     float sprite_scale = this->sprite->getScale();
     Size sprite_size = this->get_sprite_size();
 
+    //RenderTexture* rt = RenderTexture::create((int)sprite_size.width, (int)sprite_size.height);
+    RenderTexture* rt = RenderTexture::create((int)sprite_size.width, (int)sprite_size.height, Texture2D::PixelFormat::RGBA8888, GL_DEPTH24_STENCIL8);
+    rt->retain();
+
+    auto container = Node::create();
+    //this->clip->removeFromParent();
+    //container->addChild(this->clip);
+    //this->addChild(container);
+    //this->addChild(rt);
+
+    rt->begin();
+    container->visit();
+    //auto& parentTransform = _director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+    // this->clip->setPosition(0.5f, 0.5f);
+    // this->clip->setVisible(true);
+    // this->stencil->setVisible(true);
+     //this->clip->Node::visit();
+    rt->end();
+
+
+
+    auto texture = rt->getSprite()->getTexture();
+    rt->saveToFile("out2.png", Image::Format::PNG,
+            true, [&] (RenderTexture * rt, const std::string & path) {
+
+            CCLOG("Image finally saved...");
+
+            // Proceed further with saved image.
+            });
+    //auto shatter_sprite = ShatterSprite::createWithTexture(texture);
     auto shatter_sprite = ShatterSprite::createWithSpriteFrame(this->sprite->getSpriteFrame());
     shatter_sprite->setScale(sprite_scale);
     shatter_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     shatter_sprite->setPosition(get_relative(this->getContentSize()));
     this->addChild(shatter_sprite);
 
-    shatter_sprite->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
+    //shatter_sprite->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
 
     //spawn label //TODO fix hardcoded name
     auto floating_label = FloatingLabel::createWithTTF("+1 Harvest", DEFAULT_FONT, 24);
@@ -262,6 +292,7 @@ void MiningHarvestable::animate_rotate()
         this->runAction(FShake::actionWithDuration(0.075f, intensity));
     };
 }
+
 CraftingHarvestable::CraftingHarvestable(spRecipe recipe)
     : recipe(recipe)
 {
