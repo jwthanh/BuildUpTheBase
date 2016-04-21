@@ -149,22 +149,22 @@ void Harvestable::animate_rotate()
 
 void Harvestable::shatter()
 {
-    //this->sprite->setVisible(false);
-
-    auto rt = RenderTexture::create(
-        (int)(this->get_sprite_size().width*this->getScaleX()) * 2,
-        (int)(this->get_sprite_size().height*this->getScaleY()) * 2,
-        Texture2D::PixelFormat::RGBA8888,
-        CC_GL_DEPTH24_STENCIL8
-        );
-    rt->retain();
-
-    rt->begin();
-    this->Node::visit();
-    rt->end();
-
-    rt->saveToFile("out4.png");
+    this->sprite->setVisible(false);
     this->setTouchEnabled(false);
+
+    // auto rt = RenderTexture::create(
+    //     (int)(this->get_sprite_size().width*this->getScaleX()) * 2,
+    //     (int)(this->get_sprite_size().height*this->getScaleY()) * 2,
+    //     Texture2D::PixelFormat::RGBA8888,
+    //     CC_GL_DEPTH24_STENCIL8
+    //     );
+    // rt->retain();
+
+    // rt->begin();
+    // this->Node::visit();
+    // rt->end();
+
+    // rt->saveToFile("out4.png");
 
     float sprite_scale = this->sprite->getScale();
     Size sprite_size = this->get_sprite_size();
