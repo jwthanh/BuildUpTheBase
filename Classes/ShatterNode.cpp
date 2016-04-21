@@ -50,6 +50,7 @@ ShatterSprite* ShatterSprite::createWithTexture(Texture2D *texture)
     if (sprite && sprite->initWithTexture(texture))
     {
         sprite->autorelease();
+        sprite->createShatter();
         return sprite;
     }
     CC_SAFE_DELETE(sprite);
@@ -62,6 +63,7 @@ ShatterSprite* ShatterSprite::createWithTexture(Texture2D *texture, const Rect& 
     if (sprite && sprite->initWithTexture(texture, rect, rotated))
     {
         sprite->autorelease();
+        sprite->createShatter();
         return sprite;
     }
     CC_SAFE_DELETE(sprite);
