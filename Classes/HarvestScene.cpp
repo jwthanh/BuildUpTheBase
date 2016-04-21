@@ -72,9 +72,8 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        // NetworkConsole::set_position(this->getChildByName("harvestable"));
-
         auto harvestable = (Harvestable*)this->getChildByName("harvestable");
+        harvestable->shatter();
 
     }
 };

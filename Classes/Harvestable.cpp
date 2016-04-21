@@ -120,7 +120,6 @@ void Harvestable::animate_harvest()
     this->animate_clip();
 
     auto shake_action = FShake::actionWithDuration(0.075f, 2.5f);
-    shake_action->setTag(1); //idk if there's a reason to pick a specific number over another
     this->runAction(shake_action);
 
     this->animate_rotate();
@@ -150,7 +149,21 @@ void Harvestable::animate_rotate()
 
 void Harvestable::shatter()
 {
-    this->sprite->setVisible(false);
+    //this->sprite->setVisible(false);
+
+    auto rt = RenderTexture::create(
+        (int)(this->get_sprite_size().width*this->getScaleX()) * 2,
+        (int)(this->get_sprite_size().height*this->getScaleY()) * 2,
+        Texture2D::PixelFormat::RGBA8888,
+        CC_GL_DEPTH24_STENCIL8
+        );
+    rt->retain();
+
+    rt->begin();
+    this->Node::visit();
+    rt->end();
+
+    rt->saveToFile("out4.png");
     this->setTouchEnabled(false);
 
     float sprite_scale = this->sprite->getScale();
@@ -167,7 +180,7 @@ void Harvestable::shatter()
     //spawn label //TODO fix hardcoded name
     auto floating_label = FloatingLabel::createWithTTF("+1 Harvest", DEFAULT_FONT, 24);
     floating_label->setPosition(
-            this->getPosition() + Vec2(sprite_size)
+        this->getPosition() + Vec2(sprite_size)
         );
     floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
     this->getParent()->addChild(floating_label);
@@ -176,6 +189,7 @@ void Harvestable::shatter()
     CallFunc* remove = CallFunc::create([this](){ this->removeFromParent(); });
 
     auto shatter_action = ShatterAction::create(0.75f);
+    //shatter_sprite->runAction(shatter_action);
     shatter_sprite->runAction(Sequence::createWithTwoActions(shatter_action, remove));
 
 };
