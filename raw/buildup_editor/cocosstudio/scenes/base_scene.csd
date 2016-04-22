@@ -187,6 +187,19 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="building_pageview" ActionTag="-1705781852" Tag="40" IconVisible="False" LeftMargin="746.4965" RightMargin="13.5035" TopMargin="268.1393" BottomMargin="171.8607" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="0" ctype="PageViewObjectData">
+            <Size X="200.0000" Y="200.0000" />
+            <AnchorPoint />
+            <Position X="746.4965" Y="171.8607" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.7776" Y="0.2685" />
+            <PreSize X="0.2083" Y="0.3125" />
+            <SingleColor A="255" R="150" G="150" B="100" />
+            <FirstColor A="255" R="150" G="150" B="100" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

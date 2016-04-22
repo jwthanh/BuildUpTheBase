@@ -12,6 +12,7 @@
 #include "Recipe.h"
 #include "attribute.h"
 #include "FShake.h"
+#include "MiscUI.h"
 
 USING_NS_CC;
 
@@ -31,6 +32,8 @@ bool BaseScene::init()
 
     this->create_info_panel();
     this->create_player_info_panel();
+
+    this->create_building_scrollview();
 
     return true;
 };
@@ -223,6 +226,77 @@ void BaseScene::create_player_info_panel()
 
     this->addChild(player_info_panel);
 };
+
+void BaseScene::create_building_scrollview()
+{
+    auto inst = CSLoader::getInstance();
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+
+    ui::PageView* building_pageview = dynamic_cast<ui::PageView*>(harvest_scene_editor->getChildByName("building_pageview"));
+    building_pageview->setClippingEnabled(true);
+    building_pageview->removeFromParent();
+
+    auto city_scene = inst->createNode("editor/scenes/city_scene.csb");
+
+    float update_delay = 0.1f;
+
+    auto create_count = [](std::string prefix, int count) {
+        std::stringstream ss;
+        ss << prefix << ": " << count;
+        return ss.str();
+    };
+
+    for (auto building : BUILDUP->city->buildings)
+    {
+
+        auto node = city_scene->getChildByName(building->name);
+        auto building_panel = dynamic_cast<ui::Layout*>(node->getChildByName("building_panel"));
+        building_panel->removeFromParent();
+        building_pageview->addPage(building_panel);
+
+        if (building->get_been_bought() == false) {
+            node->setVisible(false);
+            continue;
+        };
+
+        auto building_name_lbl = dynamic_cast<ui::Text*>(building_panel->getChildByName("building_name"));
+        building_name_lbl->setString(building->name);
+
+        auto building_image = dynamic_cast<ui::ImageView*>(building_panel->getChildByName("building_image"));
+        building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
+
+        auto ing_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("ingredient_count"));
+        ing_count->setString(create_count("ING", building->ingredients.size()));
+
+        auto pro_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("product_count"));
+        pro_count->setString(create_count("PRO", building->products.size()));
+
+        auto wst_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("waste_count"));
+        wst_count->setString(create_count("WST", building->wastes.size()));
+
+        auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
+            if (event == ui::Widget::TouchEventType::ENDED)
+            {
+                BUILDUP->target_building = building;
+            };
+        };
+        building_panel->addTouchEventListener(cb);
+
+        auto update_panel = [this, building_panel, building](float dt) {
+            if (BUILDUP->target_building == building) {
+                building_panel->setBackGroundColor(Color3B::BLUE);
+            }
+            else {
+                building_panel->setBackGroundColor(Color3B(150, 200, 255));
+            }
+        };
+        update_panel(0);
+        building_panel->schedule(update_panel, update_delay, "update_panel");
+
+    }
+
+    this->addChild(building_pageview);
+}
 
 void BaseScene::create_shop_button()
 {
