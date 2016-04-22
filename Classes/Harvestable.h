@@ -18,6 +18,7 @@ class Harvestable : public cocos2d::ui::Widget
         spBuilding building;
 
         CREATE_FUNC(Harvestable);
+        bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) override;
         void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         virtual bool init() override;

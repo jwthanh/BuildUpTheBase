@@ -85,8 +85,25 @@ void Harvestable::on_harvest()
     CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
 }
 
+bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+    float end_scale = 3.5f;
+    float duration = 0.5f;
+    auto scale_to = ScaleTo::create(duration, end_scale);
+    auto ease = EaseElasticOut::create(scale_to, duration);
+    this->runAction(ease);
+
+    return true;
+};
+
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
+    float end_scale = 4.0f;
+    float duration = 0.5f;
+    auto scale_to = ScaleTo::create(duration, end_scale);
+    auto ease = EaseElasticOut::create(scale_to, duration);
+    this->runAction(ease);
+
     this->current_clicks += 1;
 
     this->animate_harvest();
