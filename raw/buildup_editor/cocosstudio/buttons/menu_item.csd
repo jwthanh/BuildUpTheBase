@@ -74,25 +74,25 @@
               <AbstractNodeData Name="cost_panel" ActionTag="-1877787221" Tag="18" IconVisible="False" LeftMargin="683.6465" RightMargin="66.3535" TopMargin="51.0865" BottomMargin="118.9135" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="50.0000" Y="30.0000" />
                 <Children>
-                  <AbstractNodeData Name="cost_lbl" ActionTag="183630071" Tag="19" IconVisible="False" LeftMargin="3.1185" RightMargin="2.2976" TopMargin="3.3615" BottomMargin="3.6385" IsCustomSize="True" FontSize="20" LabelText="44u&#xA;" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="44.5839" Y="23.0000" />
+                  <AbstractNodeData Name="cost_lbl" ActionTag="183630071" Tag="19" IconVisible="False" LeftMargin="-7.5000" RightMargin="-7.5000" TopMargin="3.3616" BottomMargin="3.6384" IsCustomSize="True" FontSize="20" LabelText="44u&#xA;" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="65.0000" Y="23.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="25.4104" Y="15.1385" />
+                    <Position X="25.0000" Y="15.1384" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="0" G="0" B="0" />
-                    <PrePosition X="0.5082" Y="0.5046" />
-                    <PreSize X="0.8917" Y="0.7667" />
+                    <PrePosition X="0.5000" Y="0.5046" />
+                    <PreSize X="1.3000" Y="0.7667" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="count_lbl" ActionTag="-1594456649" Tag="125" IconVisible="False" LeftMargin="2.4952" RightMargin="2.9209" TopMargin="44.8808" BottomMargin="-37.8808" IsCustomSize="True" FontSize="20" LabelText="x00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="44.5839" Y="23.0000" />
+                  <AbstractNodeData Name="count_lbl" ActionTag="-1594456649" Tag="125" IconVisible="False" LeftMargin="-7.5000" RightMargin="-7.5000" TopMargin="44.8808" BottomMargin="-37.8808" IsCustomSize="True" FontSize="20" LabelText="x00&#xA;" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="65.0000" Y="23.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="24.7871" Y="-26.3808" />
+                    <Position X="25.0000" Y="-26.3808" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="0" G="0" B="0" />
-                    <PrePosition X="0.4957" Y="-0.8794" />
-                    <PreSize X="0.8917" Y="0.7667" />
+                    <PrePosition X="0.5000" Y="-0.8794" />
+                    <PreSize X="1.3000" Y="0.7667" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
