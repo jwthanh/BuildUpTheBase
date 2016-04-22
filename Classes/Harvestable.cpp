@@ -87,17 +87,24 @@ void Harvestable::on_harvest()
 
 bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-    float end_scale = 3.5f;
-    float duration = 0.5f;
-    auto scale_to = ScaleTo::create(duration, end_scale);
-    auto ease = EaseElasticOut::create(scale_to, duration);
-    this->runAction(ease);
+    bool base_val = Widget::onTouchBegan(touch, event);
 
-    return true;
+    if (this->_hitted)
+    {
+        float end_scale = 3.5f;
+        float duration = 0.5f;
+        auto scale_to = ScaleTo::create(duration, end_scale);
+        auto ease = EaseElasticOut::create(scale_to, duration);
+        this->runAction(ease);
+    }
+
+    return base_val;
 };
 
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
+    //Widget::onTouchEnded(touch, event); //this shouldnt be called because releaseUpEvent hasnt been set I guess. 
+
     float end_scale = 4.0f;
     float duration = 0.5f;
     auto scale_to = ScaleTo::create(duration, end_scale);
