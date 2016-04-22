@@ -253,6 +253,16 @@ void BaseScene::create_building_scrollview()
         auto building_panel = dynamic_cast<ui::Layout*>(node->getChildByName("building_panel"));
         building_panel->removeFromParent();
         building_pageview->addPage(building_panel);
+        int page_index = building_pageview->getItems().size() - 1;
+
+        auto change_target_page = [this, building_pageview, building, page_index](float dt)
+        {
+            if (building_pageview->getCurrentPageIndex() == page_index)
+            {
+                BUILDUP->target_building = building;
+            }
+        };
+        building_panel->schedule(change_target_page, 0.5f, "update_target");
 
         if (building->get_been_bought() == false) {
             node->setVisible(false);
@@ -277,7 +287,10 @@ void BaseScene::create_building_scrollview()
         auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
             if (event == ui::Widget::TouchEventType::ENDED)
             {
-                BUILDUP->target_building = building;
+                   auto scene = Scene::create();
+                   BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
+                   scene->addChild(building_menu);
+                   Director::getInstance()->pushScene(scene);
             };
         };
         building_panel->addTouchEventListener(cb);
@@ -294,6 +307,7 @@ void BaseScene::create_building_scrollview()
         building_panel->schedule(update_panel, update_delay, "update_panel");
 
     }
+
 
     this->addChild(building_pageview);
 }

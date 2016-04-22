@@ -784,11 +784,9 @@ bool CityMenu::init()
            {
                auto director = Director::getInstance();
                if (this->menu_state == OpenMenu) {
-                   auto building_panel = dynamic_cast<ui::Layout*>(target);
                    auto scene = Scene::create();
                    BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
                    scene->addChild(building_menu);
-
                    director->pushScene(scene);
                } else {
                    //change target building and exit menu
