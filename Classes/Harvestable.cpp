@@ -64,7 +64,8 @@ bool Harvestable::init()
     this->setPosition(((GameLayer*)NULL)->get_center_pos()); //hack to call without access to an instance
     this->setName("harvestable");
 
-    this->setScale(this->getScale()*4); //4*4 scale now
+    this->initial_scale = 4;
+    this->setScale(this->initial_scale);
 
 
     return true;
@@ -91,7 +92,7 @@ bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 
     if (this->_hitted)
     {
-        float end_scale = 3.5f;
+        float end_scale = this->initial_scale*0.85f;
         float duration = 0.5f;
         auto scale_to = ScaleTo::create(duration, end_scale);
         auto ease = EaseElasticOut::create(scale_to, duration);
@@ -105,7 +106,7 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     //Widget::onTouchEnded(touch, event); //this shouldnt be called because releaseUpEvent hasnt been set I guess. 
 
-    float end_scale = 4.0f;
+    float end_scale = this->initial_scale;
     float duration = 0.5f;
     auto scale_to = ScaleTo::create(duration, end_scale);
     auto ease = EaseElasticOut::create(scale_to, duration);
@@ -366,6 +367,9 @@ bool FightingHarvestable::init()
 {
     Harvestable::init();
 
+    this->initial_scale = 6;
+    this->setScale(this->initial_scale);
+
     this->click_limit = 1000000; //some really high number they'll never click
 
     this->enemy = std::make_shared<Fighter>(BUILDUP->city, "Brawler");
@@ -383,7 +387,6 @@ bool FightingHarvestable::init()
     fighter_node->xp_bar->setVisible(false); //dont need to see this for an enemy
     this->addChild(fighter_node);
 
-    this->setScale(this->getScale()*1.5f);
     this->setPosition(((GameLayer*)NULL)->get_center_pos(-150, 0)); //hack to call without access to an instance
 
     return true;
