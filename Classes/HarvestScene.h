@@ -14,6 +14,8 @@ class BaseScene : public GameLayer
         virtual void update(float dt);
         virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
+        virtual void onEnter() override;
+
         void create_side_buttons();
         void create_shop_button();
         void create_city_button();

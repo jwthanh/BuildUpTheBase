@@ -81,6 +81,31 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         harvestable->shatter();
 
     }
+}
+
+void BaseScene::onEnter()
+{
+    GameLayer::onEnter();
+    auto building_pageview = dynamic_cast<ui::PageView*>(this->getChildByName("building_pageview"));
+    if (building_pageview)
+    {
+        vsBuilding buildings = BUILDUP->city->buildings;
+        auto find_cb = [](spBuilding building) {
+            return building == BUILDUP->target_building;
+        };
+        int index = std::find_if(buildings.begin(),
+                buildings.end(),
+                find_cb) - buildings.begin();
+
+        if (index > (int)buildings.size())
+        {
+            CCLOG("no building found, not moving building pageview");
+        } else
+        {
+            
+            building_pageview->ListView::scrollToItem(index, { 0, 0 }, { 0, 0 }, 0.0f);
+        }
+    }
 };
 
 void BaseScene::create_info_panel()
@@ -297,7 +322,7 @@ void BaseScene::create_building_scrollview()
         };
         building_panel->addTouchEventListener(cb);
 
-        auto update_panel = [this, building_panel, building](float dt) {
+        auto update_panel = [this, building_pageview, building_panel, building](float dt) {
             if (BUILDUP->target_building == building) {
                 building_panel->setBackGroundColor(Color3B::BLUE);
             }
