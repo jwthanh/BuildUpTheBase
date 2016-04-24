@@ -1,4 +1,3 @@
-
 import argparse
 import sys
 from apiclient import sample_tools
@@ -65,7 +64,6 @@ def main(argv):
                         tags.div("No listing found")
 
     print doc
-
 
   except client.AccessTokenRefreshError:
     print ('The credentials have been revoked or expired, please re-run the '
