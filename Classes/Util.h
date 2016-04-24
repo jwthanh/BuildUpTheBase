@@ -32,4 +32,9 @@ typename mapT::mapped_type map_get(mapT& input_map, typename mapT::key_type key,
     };
 };
 
+std::vector<std::string>& split(const std::string &s, char delim, std::vector<std::string> &elems);
+std::vector<std::string> split(const std::string &s, char delim);
+std::string beautify_float(float value);
+void test_beautify_float();
+
 #endif
