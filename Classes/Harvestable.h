@@ -52,6 +52,7 @@ class FarmingHarvestable : public Harvestable
 {
     public:
         CREATE_FUNC(FarmingHarvestable);
+        bool init();
         std::string get_sprite_path();
 };
 

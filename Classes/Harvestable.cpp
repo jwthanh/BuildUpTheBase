@@ -219,6 +219,16 @@ void Harvestable::shatter()
 
 };
 
+bool FarmingHarvestable::init()
+{
+    bool val = Harvestable::init();
+
+    this->initial_scale = 3;
+    this->setScale(this->initial_scale);
+
+    return val;
+};
+
 std::string FarmingHarvestable::get_sprite_path()
 {
     return "bush.png";
@@ -227,7 +237,7 @@ std::string FarmingHarvestable::get_sprite_path()
 void MiningHarvestable::init_sprite()
 {
 
-    float scale = 4;
+    float scale = 3;
     auto create_sprite = [this,scale](std::string sprite_path, Vec2 relative_pos)
     {
         auto sprite = Sprite::createWithSpriteFrameName(sprite_path);
