@@ -319,7 +319,7 @@ void BaseScene::create_inventory_scrollview()
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
     ui::PageView* inventory_pageview = dynamic_cast<ui::PageView*>(harvest_scene_editor->getChildByName("inventory_pageview"));
-    inventory_pageview->setScale(0.5f);
+    inventory_pageview->setClippingEnabled(true);
     inventory_pageview->removeFromParent();
     this->addChild(inventory_pageview);
 
@@ -343,6 +343,7 @@ void BaseScene::create_inventory_scrollview()
         //    new_item_panel->setVisible(true);
         //    new_item_panel->setContentSize(orig_item_panel->getContentSize());
         //}
+
 
         auto cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
 
