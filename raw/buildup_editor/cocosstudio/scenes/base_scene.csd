@@ -200,6 +200,19 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
+          <AbstractNodeData Name="inventory_pageview" ActionTag="2120983081" Tag="136" IconVisible="False" LeftMargin="310.4266" RightMargin="529.5734" TopMargin="413.9537" BottomMargin="26.0463" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="0" ctype="PageViewObjectData">
+            <Size X="120.0000" Y="200.0000" />
+            <AnchorPoint />
+            <Position X="310.4266" Y="26.0463" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3234" Y="0.0407" />
+            <PreSize X="0.1250" Y="0.3125" />
+            <SingleColor A="255" R="150" G="150" B="100" />
+            <FirstColor A="255" R="150" G="150" B="100" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

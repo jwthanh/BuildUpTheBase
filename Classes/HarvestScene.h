@@ -22,6 +22,7 @@ class BaseScene : public GameLayer
         void create_info_panel();
         void create_player_info_panel();
         void create_building_scrollview();
+        void create_inventory_scrollview();
 
 
 };
