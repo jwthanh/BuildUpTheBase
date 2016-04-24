@@ -327,16 +327,22 @@ void BaseScene::create_inventory_scrollview()
     auto orig_item_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("item_panel"));
     orig_item_panel->removeFromParent();
 
-    for (auto mist : BUILDUP->target_building->ingredients)
+    for (auto type_to_str : Ingredient::type_map)
     {
-        Ingredient::SubType ing_type = mist.first;
-        res_count_t count = mist.second;
+        Ingredient::SubType ing_type = type_to_str.first;
+        //res_count_t count = mist.second;
 
         auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
-        if (count <= 0)
-        {
-            new_item_panel->setVisible(false);
-        }
+        //if (BUILDUP->target_building->ingredients[ing_type] <= 0)
+        //{
+        //    new_item_panel->setVisible(false);
+        //    new_item_panel->setSizePercent({ 0.0f, 0.0f });
+        //}
+        //else
+        //{
+        //    new_item_panel->setVisible(true);
+        //    new_item_panel->setContentSize(orig_item_panel->getContentSize());
+        //}
 
         auto cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
 
