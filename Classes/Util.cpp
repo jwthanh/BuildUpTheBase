@@ -119,7 +119,7 @@ std::string _humanize_number(double value)
     return str + suffix;
 }
 
-std::string beautify_float(double value)
+std::string beautify_double(double value)
 {
     bool is_negative = value < 0;
     std::string decimal = "";
@@ -149,32 +149,32 @@ std::string beautify_float(double value)
     return output;
 }
 
-std::string test_float(float input)
+std::string test_double(float input)
 {
-    auto s = beautify_float(input);
+    auto s = beautify_double(input);
     CCLOG("%s\n", s.c_str());
 
     return s;
 }
 
-void test_beautify_float()
+void test_beautify_double()
 {
     CCLOG("first should be 1, 10, 100\n");
-    test_float(1.0f);
-    test_float(10.0f);
-    test_float(100.0f);
-    test_float(1000.0f);
-    test_float(10000.0f);
-    test_float(100000.0f);
-    test_float(1000000.0f);
+    test_double(1.0f);
+    test_double(10.0f);
+    test_double(100.0f);
+    test_double(1000.0f);
+    test_double(10000.0f);
+    test_double(100000.0f);
+    test_double(1000000.0f);
 
     CCLOG("\nfloats, first should be like 5.55f\n");
-    test_float(5.55f);
-    test_float(5.777f);
-    test_float(1234.5678f);
+    test_double(5.55f);
+    test_double(5.777f);
+    test_double(1234.5678f);
     CCLOG("\na bunch of millions, first should be 1.222b\n");
-    test_float(1222333444.0f);
-    test_float(523411111111.0f);
-    test_float(12312317653411111111.0f);
-    test_float(-123.04f);
+    test_double(1222333444.0f);
+    test_double(523411111111.0f);
+    test_double(12312317653411111111.0f);
+    test_double(-123.04f);
 }
