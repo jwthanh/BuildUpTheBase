@@ -409,8 +409,23 @@ void BaseScene::create_inventory_pageview()
 
                     if (type == ui::Widget::TouchEventType::ENDED) {
                         CCLOG("touched a panel %i", ing_type);
-                        auto panel = this->create_detail_alert(ing_type);
-                        this->addChild(panel);
+                        auto alert = this->create_detail_alert(ing_type);
+                        this->addChild(alert);
+
+                        //animate
+                        Vec2 start_pos = new_item_panel->getTouchEndPosition();
+                        alert->setPosition(start_pos);
+
+                        alert->setScale(0);
+
+                        float duration = 0.25f;
+                        auto scale = ScaleTo::create(duration, 1.0f, 1.0f);
+
+                        Vec2 end_pos = this->get_center_pos();
+                        auto move = MoveTo::create(duration, end_pos);
+
+                        Sequence* seq = Sequence::create(Spawn::createWithTwoActions(move, scale), NULL);
+                        alert->runAction(seq);
                     };
                 };
                 new_item_panel->addTouchEventListener(cb);
@@ -608,6 +623,11 @@ void HarvestScene::update(float dt)
 
 ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
 {
+    //make sure one doesn't already exist first
+    if (this->getChildByName("inventory_detail_panel")) {
+        this->getChildByName("inventory_detail_panel")->removeFromParent();
+    };
+
     auto inst = CSLoader::getInstance();
     auto raw_node = inst->createNode("editor/details/inventory_detail.csb");
     auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
