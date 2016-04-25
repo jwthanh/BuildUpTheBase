@@ -11,7 +11,7 @@
                     "clicks_required": 15,
                     "description": "Take 15 grain, make a sweet slice of bread",
                     "components": {
-                        "grain": 4
+                        "grain": 15
                     },
                     "output": {
                         "bread": 1
