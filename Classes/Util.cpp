@@ -110,6 +110,24 @@ std::string _humanize_number(double value)
     std::string str = spss.str();
     str.erase ( str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
 
+    auto split_string = split(str, '.');
+
+    //add a comma every 3rd digit (on the left of a period)
+    int insertPosition = split_string.at(0).length() - 3;
+    while (insertPosition > 0) {
+        split_string.at(0).insert(insertPosition, ",");
+        insertPosition -= 3;
+    }
+
+    std::stringstream ss;
+    ss << split_string.at(0);
+    if (split_string.size() > 1) //assumes only two elems in vector
+    {
+        ss << "." << split_string.at(1);
+    }
+
+    str = ss.str();
+
     //remove trailing period
     if (str.back() == '.')
     {
@@ -138,6 +156,7 @@ std::string beautify_double(double value)
     value = std::floor(std::abs(value));
 
     std::string output = _humanize_number(value);
+
     output = output + decimal;
 
 
