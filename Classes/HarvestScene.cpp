@@ -664,7 +664,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
 
     int coins_gained = 10;
     std::stringstream cost_ss;
-    cost_ss << "Sell for " << coins_gained;
+    cost_ss << "Sell 1 for " << coins_gained;
     sell_btn->setTitleText(cost_ss.str());
     sell_btn->addTouchEventListener([this, ing_type, coins_gained](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
