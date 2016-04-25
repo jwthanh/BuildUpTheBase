@@ -350,114 +350,108 @@ void BaseScene::create_inventory_pageview()
     inventory_listview->removeFromParent();
     this->addChild(inventory_listview);
 
-    //FIXME not the farm, so the name in the update_listview always hits the true condition
-    inventory_listview->setUserData(static_cast<void*>(BUILDUP->city->building_by_name("The Arena").get()));
-
     auto update_listview = [this, inst, inventory_listview](float dt)
     {
-        if (static_cast<Building*>(inventory_listview->getUserData())->name != BUILDUP->get_target_building()->name)
-        //if (true) //FIXME this doesnt need to get fully rebuilt every 0.1s does it?
+        auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
+        auto orig_item_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("item_panel"));
+        orig_item_panel->removeFromParent();
+
+        typedef std::pair<Ingredient::SubType, res_count_t> maptype;
+        auto order_by_count = [](maptype left, maptype right)
         {
-            inventory_listview->removeAllChildrenWithCleanup(true);
-            inventory_listview->setUserData(static_cast<void*>(BUILDUP->get_target_building().get()));
+            return left.second > right.second;
+        };
 
+        std::vector<maptype> type_vec;
 
-            auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
-            auto orig_item_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("item_panel"));
-            orig_item_panel->removeFromParent();
+        for (auto ts : Ingredient::type_map)
+        {
+            type_vec.push_back({ ts.first, map_get(BUILDUP->get_target_building()->ingredients, ts.first, 0) });
+        }
 
-            typedef std::pair<Ingredient::SubType, res_count_t> mt;
-            auto order_by_count = [](mt left, mt right)
+        auto b = type_vec.begin();
+        auto e = type_vec.end();
+        std::sort(b, e, order_by_count);
+
+        for (auto type_to_count : type_vec)
+        {
+            Ingredient::SubType ing_type = type_to_count.first;
+            auto str_type = Ingredient::type_to_string(ing_type);
+
+            //if the child already exists, put it at the back 
+            auto existing_node = inventory_listview->getChildByName(str_type);
+            if (existing_node)
             {
-                return left.second > right.second;
-            };
-
-
-            std::vector<mt> type_vec;
-
-            for (auto ts : Ingredient::type_map)
-            {
-                type_vec.push_back({ ts.first, map_get(BUILDUP->get_target_building()->ingredients, ts.first, 0) });
+                existing_node->removeFromParentAndCleanup(false);
+                inventory_listview->addChild(existing_node);
+                continue;
             }
 
-            auto b = type_vec.begin();
-            auto e = type_vec.end();
-            std::sort(b, e, order_by_count);
+            auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
+            new_item_panel->setName(str_type);
 
-            CCLOG("rebuild");
-
-            for (auto type_to_str : type_vec)
+            //if there's less than 1 ingredient, hide the item panel altogether
+            if (BUILDUP->get_target_building()->ingredients[ing_type] <= 0)
             {
-                Ingredient::SubType ing_type = type_to_str.first;
-                //res_count_t count = mist.second;
+                new_item_panel->setVisible(false);
+            }
+            else
+            {
+                new_item_panel->setVisible(true);
+            }
 
-                auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
-                if (BUILDUP->get_target_building()->ingredients[ing_type] <= 0)
+            auto on_touch_cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
+
+                if (type == ui::Widget::TouchEventType::ENDED) {
+                    CCLOG("touched a panel %i", ing_type);
+                    auto alert = this->create_detail_alert(ing_type);
+                    this->addChild(alert);
+
+                    //animate
+                    Vec2 start_pos = new_item_panel->getTouchEndPosition();
+                    alert->setPosition(start_pos);
+
+                    alert->setScale(0);
+
+                    float duration = 0.25f;
+                    auto scale = ScaleTo::create(duration, 1.0f, 1.0f);
+
+                    Vec2 end_pos = this->get_center_pos();
+                    auto move = MoveTo::create(duration, end_pos);
+
+                    Sequence* seq = Sequence::create(Spawn::createWithTwoActions(move, scale), NULL);
+                    alert->runAction(seq);
+                };
+            };
+            new_item_panel->addTouchEventListener(on_touch_cb);
+
+            float update_delay = 0.1f;
+            auto update_lbl_cb = [new_item_panel, this, ing_type](float)
+            {
+                auto type_str = Ingredient::type_to_string(ing_type);
+                std::stringstream ss;
+
+                res_count_t count = BUILDUP->get_target_building()->count_ingredients(ing_type);
+                ss << count << " " << type_str;
+                auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
+                item_lbl->setString(ss.str());
+
+                if (count >= 1)
                 {
-                    new_item_panel->setVisible(false);
-                    new_item_panel->setSizePercent({ 0.0f, 0.0f });
-                    //continue;
+                    new_item_panel->setVisible(true);
                 }
                 else
                 {
-                    new_item_panel->setVisible(true);
-                    new_item_panel->setContentSize(orig_item_panel->getContentSize());
+                    new_item_panel->setVisible(false);
                 }
-
-
-                auto cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
-
-                    if (type == ui::Widget::TouchEventType::ENDED) {
-                        CCLOG("touched a panel %i", ing_type);
-                        auto alert = this->create_detail_alert(ing_type);
-                        this->addChild(alert);
-
-                        //animate
-                        Vec2 start_pos = new_item_panel->getTouchEndPosition();
-                        alert->setPosition(start_pos);
-
-                        alert->setScale(0);
-
-                        float duration = 0.25f;
-                        auto scale = ScaleTo::create(duration, 1.0f, 1.0f);
-
-                        Vec2 end_pos = this->get_center_pos();
-                        auto move = MoveTo::create(duration, end_pos);
-
-                        Sequence* seq = Sequence::create(Spawn::createWithTwoActions(move, scale), NULL);
-                        alert->runAction(seq);
-                    };
-                };
-                new_item_panel->addTouchEventListener(cb);
-
-                float update_delay = 0.1f;
-                auto update_lbl_cb = [new_item_panel, this, ing_type](float)
-                {
-                    auto type_str = Ingredient::type_to_string(ing_type);
-                    std::stringstream ss;
-
-                    res_count_t count = BUILDUP->get_target_building()->count_ingredients(ing_type);
-                    ss << count << " " << type_str;
-                    auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
-                    item_lbl->setString(ss.str());
-
-                    if (count >= 1)
-                    {
-                        new_item_panel->setVisible(true);
-                    }
-                    else
-                    {
-                        new_item_panel->setVisible(false);
-                    }
-                };
-                update_lbl_cb(0); //fire once immediately
-                new_item_panel->schedule(update_lbl_cb, update_delay, "item_lbl_update");
-
-                inventory_listview->addChild(new_item_panel);
             };
+            update_lbl_cb(0); //fire once immediately
+            new_item_panel->schedule(update_lbl_cb, update_delay, "item_lbl_update");
 
-        }
+            inventory_listview->addChild(new_item_panel);
+        };
     };
+
     inventory_listview->schedule(update_listview, 0.1f, "update_listview");
 };
 
