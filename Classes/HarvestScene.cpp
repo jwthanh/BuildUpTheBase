@@ -13,7 +13,9 @@
 #include "attribute.h"
 #include "FShake.h"
 #include "MiscUI.h"
+#include "Animal.h"
 
+class Animal;
 USING_NS_CC;
 
 void BaseScene::create_side_buttons()
@@ -387,6 +389,8 @@ void BaseScene::create_inventory_pageview()
 
                     if (type == ui::Widget::TouchEventType::ENDED) {
                         CCLOG("touched a panel %i", ing_type);
+                        auto panel = this->create_detail_alert(ing_type);
+                        this->addChild(panel);
                     };
                 };
                 new_item_panel->addTouchEventListener(cb);
@@ -570,6 +574,116 @@ void HarvestScene::update(float dt)
     };
 
 }
+
+ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
+{
+    auto inst = CSLoader::getInstance();
+    auto raw_node = inst->createNode("editor/details/inventory_detail.csb");
+    auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
+    alert_panel->removeFromParent();
+
+    auto cb = [alert_panel](Ref*, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            alert_panel->removeFromParent();
+        };
+    };
+    alert_panel->addTouchEventListener(cb);
+
+    auto resource_name = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_name"));
+    std::string res_name = Ingredient::type_to_string(ing_type);
+    resource_name->setString(res_name);
+
+    auto resource_description = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_description"));
+    //TODO: load resource desc from json
+    resource_description->setString("Grain is good to eat\nits a lot of fun to touch\ni could go for some right now");
+
+    auto count_desc = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_desc"));
+    auto count_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_lbl"));
+
+    auto update_delay = 0.1f;
+
+    alert_panel->schedule([count_lbl, ing_type](float) {
+        int count = BUILDUP->get_target_building()->count_ingredients(ing_type);
+        count_lbl->setString(std::to_string(count));
+    }, update_delay, "alert_count_update");
+
+    auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("sell_btn"));
+    load_default_button_textures(sell_btn);
+
+    int coins_gained = 10;
+    std::stringstream cost_ss;
+    cost_ss << "Sell for " << coins_gained;
+    sell_btn->setTitleText(cost_ss.str());
+    sell_btn->addTouchEventListener([this, ing_type, coins_gained](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
+
+            int num_sellable = map_get(ingredients, ing_type, 0);
+            if (num_sellable != 0)
+            {
+                --ingredients[ing_type];
+                BEATUP->add_total_coin(coins_gained);
+                CCLOG("SELLING STUFF");
+            }
+        }
+    });
+    sell_btn->schedule([sell_btn, this, ing_type](float){
+        mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
+        if (ingredients.empty()){
+            sell_btn->setBright(false);
+        }
+        else if (BUILDUP->get_target_building()->count_ingredients(ing_type) == 0)
+        {
+            sell_btn->setBright(false);
+        }
+        else
+        {
+            sell_btn->setEnabled(true);
+        }
+    }, update_delay, "sell_btn_state_cb");
+
+
+    auto move_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("move_btn"));
+    load_default_button_textures(move_btn);
+    move_btn->schedule([move_btn, this, ing_type](float){
+        mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
+        if (ingredients.empty()){
+            move_btn->setBright(false);
+        }
+        else if (BUILDUP->get_target_building()->count_ingredients(ing_type) == 0)
+        {
+            move_btn->setBright(false);
+        }
+        else
+        {
+            move_btn->setEnabled(true);
+        }
+    }, update_delay, "move_btn_state_cb");
+
+    move_btn->addTouchEventListener([this, ing_type](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
+            if (ingredients.empty()){ return; }
+
+            Animal animal("WorkshopWagon");
+            animal.transfer_ingredients(
+                BUILDUP->get_target_building(),
+                BUILDUP->city->building_by_name("The Workshop"),
+                ing_type,
+                10);
+
+        }
+    });
+
+    alert_panel->setPosition(this->get_center_pos());
+
+    alert_panel->setName("inventory_detail_panel");
+
+    return alert_panel;
+};
 
 void HarvestScene::add_harvestable()
 {

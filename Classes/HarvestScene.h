@@ -3,6 +3,7 @@
 #define HARVESTSCENE_H
 
 #include "GameLayer.h"
+#include "Resources.h"
 
 class BaseScene : public GameLayer
 {
@@ -26,6 +27,8 @@ class BaseScene : public GameLayer
         void create_building_scrollview();
         void create_inventory_pageview();
 
+        cocos2d::ui::Widget* create_detail_alert(Ingredient::SubType ing_type);
+
 
 };
 
@@ -35,11 +38,11 @@ class HarvestScene : public BaseScene
         CREATE_FUNC(HarvestScene);
         virtual bool init();
         virtual void update(float dt);
-
         cocos2d::ui::Text* recipe_lbl;
         spRecipe target_recipe;
 
         void create_recipe_lbl();
+
 
         void add_harvestable();
 };

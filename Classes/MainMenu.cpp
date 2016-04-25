@@ -1083,9 +1083,6 @@ ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::
     auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
     alert_panel->removeFromParent();
 
-    //alert_panel->setBackGroundImage("main_UI_export_10_x4.png", ui::TextureResType::PLIST);
-    //alert_panel->setBackGroundImageScale9Enabled(true);
-
     auto cb = [alert_panel](Ref*, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
