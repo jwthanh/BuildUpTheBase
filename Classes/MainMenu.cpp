@@ -967,28 +967,6 @@ bool InventoryMenu::init()
 
                     if (type == ui::Widget::TouchEventType::ENDED) {
 
-                        //make sure one doesn't already exist first
-                        if (this->getChildByName("inventory_detail_panel")) {
-                            this->getChildByName("inventory_detail_panel")->removeFromParent();
-                        };
-
-                        auto alert = InventoryMenu::create_detail_alert(this->building, ing_type);
-                        this->addChild(alert);
-
-                        //animate
-                        Vec2 start_pos = new_item_panel->getTouchEndPosition();
-                        alert->setPosition(start_pos);
-
-                        alert->setScale(0);
-
-                        float duration = 0.25f;
-                        auto scale = ScaleTo::create(duration, 1.0f, 1.0f);
-
-                        Vec2 end_pos = this->get_center_pos();
-                        auto move = MoveTo::create(duration, end_pos);
-
-                        Sequence* seq = Sequence::create(Spawn::createWithTwoActions(move, scale), NULL);
-                        alert->runAction(seq);
                     };
                 };
                 new_item_panel->addTouchEventListener(cb);
@@ -1054,8 +1032,6 @@ void InventoryMenu::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
     }
     else  if (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
-        auto original_panel = InventoryMenu::create_detail_alert(this->building, Ingredient::SubType::Grain);
-        this->addChild(original_panel);
     }
 };
 
@@ -1074,116 +1050,6 @@ InventoryMenu* InventoryMenu::create(spBuilding building)
         menu = nullptr; 
         return menu;
     }
-};
-
-ui::Widget* InventoryMenu::create_detail_alert(spBuilding building, Ingredient::SubType ing_type)
-{
-    auto inst = CSLoader::getInstance();
-    auto raw_node = inst->createNode("editor/details/inventory_detail.csb");
-    auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
-    alert_panel->removeFromParent();
-
-    auto cb = [alert_panel](Ref*, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            alert_panel->removeFromParent();
-        };
-    };
-    alert_panel->addTouchEventListener(cb);
-
-    auto resource_name = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_name"));
-    std::string res_name = Ingredient::type_to_string(ing_type);
-    resource_name->setString(res_name);
-
-    auto resource_description = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_description"));
-    //TODO: load resource desc from json
-    resource_description->setString("Grain is good to eat\nits a lot of fun to touch\ni could go for some right now");
-
-    auto count_desc = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_desc"));
-    auto count_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_lbl"));
-
-    auto update_delay = 0.1f;
-
-    alert_panel->schedule([count_lbl, building, ing_type](float) {
-        int count = building->count_ingredients(ing_type);
-        count_lbl->setString(std::to_string(count));
-    }, update_delay, "alert_count_update");
-
-    auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("sell_btn"));
-    load_default_button_textures(sell_btn);
-
-    int coins_gained = 10;
-    std::stringstream cost_ss;
-    cost_ss << "Sell for " << coins_gained;
-    sell_btn->setTitleText(cost_ss.str());
-    sell_btn->addTouchEventListener([this, ing_type, coins_gained](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            mistIngredient& ingredients = this->building->ingredients;
-
-            int num_sellable = map_get(ingredients, ing_type, 0);
-            if (num_sellable != 0)
-            {
-                --ingredients[ing_type];
-                BEATUP->add_total_coin(coins_gained);
-                CCLOG("SELLING STUFF");
-            }
-        }
-    });
-    sell_btn->schedule([sell_btn, this, ing_type](float){
-        mistIngredient& ingredients = this->building->ingredients;
-        if (ingredients.empty()){
-            sell_btn->setBright(false);
-        }
-        else if (this->building->count_ingredients(ing_type) == 0)
-        {
-            sell_btn->setBright(false);
-        }
-        else
-        {
-            sell_btn->setEnabled(true);
-        }
-    }, update_delay, "sell_btn_state_cb");
-
-
-    auto move_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("move_btn"));
-    load_default_button_textures(move_btn);
-    move_btn->schedule([move_btn, this, ing_type](float){
-        mistIngredient& ingredients = this->building->ingredients;
-        if (ingredients.empty()){
-            move_btn->setBright(false);
-        }
-        else if (this->building->count_ingredients(ing_type) == 0)
-        {
-            move_btn->setBright(false);
-        }
-        else
-        {
-            move_btn->setEnabled(true);
-        }
-    }, update_delay, "move_btn_state_cb");
-
-    move_btn->addTouchEventListener([this, ing_type](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            mistIngredient& ingredients = this->building->ingredients;
-            if (ingredients.empty()){ return; }
-
-            Animal animal("WorkshopWagon");
-            animal.transfer_ingredients(
-                this->building,
-                BUILDUP->city->building_by_name("The Workshop"),
-                ing_type,
-                10);
-
-        }
-    });
-
-    alert_panel->setPosition(this->get_center_pos());
-
-    alert_panel->setName("inventory_detail_panel");
-
-    return alert_panel;
 };
 
 bool CharacterMenu::init()
