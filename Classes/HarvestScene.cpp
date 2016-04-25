@@ -753,11 +753,8 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
                 {
                     int to_sell = std::min(num_sellable, amount_sold);
                     CCLOG("selling %i of %s", to_sell, Ingredient::type_to_string(ing_type).c_str());
-                    for (int i = 0; i < to_sell; i++)
-                    {
-                        --ingredients[ing_type];
-                        BEATUP->add_total_coin(coins_gained);
-                    }
+                    ingredients[ing_type] -= to_sell;
+                    BEATUP->add_total_coin(to_sell*coins_gained);
                     CCLOG("SELLING STUFF");
                 }
             }
