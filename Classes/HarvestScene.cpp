@@ -36,8 +36,8 @@ bool BaseScene::init()
     this->create_player_info_panel();
 
     this->create_building_scrollview();
-    this->create_inventory_pageview();
-    this->create_shop_pageview();
+    this->create_inventory_listview();
+    this->create_shop_listview();
 
 
     return true;
@@ -342,7 +342,7 @@ void BaseScene::create_building_scrollview()
     this->addChild(building_pageview);
 }
 
-void BaseScene::create_inventory_pageview()
+void BaseScene::create_inventory_listview()
 {
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
@@ -456,7 +456,7 @@ void BaseScene::create_inventory_pageview()
     inventory_listview->schedule(update_listview, 0.1f, "update_listview");
 };
 
-void BaseScene::create_shop_pageview()
+void BaseScene::create_shop_listview()
 {
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
