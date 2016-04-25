@@ -200,16 +200,16 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="inventory_pageview" ActionTag="2120983081" Tag="136" IconVisible="False" LeftMargin="310.4266" RightMargin="409.5734" TopMargin="413.9537" BottomMargin="26.0463" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="0" ctype="PageViewObjectData">
-            <Size X="240.0000" Y="200.0000" />
+          <AbstractNodeData Name="inventory_listview" ActionTag="1072656337" Tag="220" IconVisible="False" LeftMargin="274.7353" RightMargin="-117.7228" TopMargin="420.7430" BottomMargin="19.2570" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="0" ctype="ListViewObjectData">
+            <Size X="802.9875" Y="200.0000" />
             <AnchorPoint />
-            <Position X="310.4266" Y="26.0463" />
+            <Position X="274.7353" Y="19.2570" />
             <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.3234" Y="0.0407" />
-            <PreSize X="0.2500" Y="0.3125" />
-            <SingleColor A="255" R="150" G="150" B="100" />
-            <FirstColor A="255" R="150" G="150" B="100" />
+            <PrePosition X="0.2862" Y="0.0301" />
+            <PreSize X="0.8364" Y="0.3125" />
+            <SingleColor A="255" R="150" G="150" B="255" />
+            <FirstColor A="255" R="150" G="150" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>

@@ -34,7 +34,7 @@ bool BaseScene::init()
     this->create_player_info_panel();
 
     this->create_building_scrollview();
-    this->create_inventory_scrollview();
+    this->create_inventory_pageview();
 
 
     return true;
@@ -339,14 +339,14 @@ void BaseScene::create_building_scrollview()
     this->addChild(building_pageview);
 }
 
-void BaseScene::create_inventory_scrollview()
+void BaseScene::create_inventory_pageview()
 {
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
-    ui::PageView* inventory_pageview = dynamic_cast<ui::PageView*>(harvest_scene_editor->getChildByName("inventory_pageview"));
-    inventory_pageview->setClippingEnabled(true);
-    inventory_pageview->removeFromParent();
-    this->addChild(inventory_pageview);
+    ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("inventory_listview"));
+    // inventory_listview->setClippingEnabled(true);
+    inventory_listview->removeFromParent();
+    this->addChild(inventory_listview);
 
     auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
     auto orig_item_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("item_panel"));
@@ -358,16 +358,17 @@ void BaseScene::create_inventory_scrollview()
         //res_count_t count = mist.second;
 
         auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
-        //if (BUILDUP->target_building->ingredients[ing_type] <= 0)
-        //{
-        //    new_item_panel->setVisible(false);
-        //    new_item_panel->setSizePercent({ 0.0f, 0.0f });
-        //}
-        //else
-        //{
-        //    new_item_panel->setVisible(true);
-        //    new_item_panel->setContentSize(orig_item_panel->getContentSize());
-        //}
+        if (BUILDUP->target_building->ingredients[ing_type] <= 0)
+        {
+            //new_item_panel->setVisible(false);
+            //new_item_panel->setSizePercent({ 0.0f, 0.0f });
+            continue;
+        }
+        else
+        {
+            new_item_panel->setVisible(true);
+            new_item_panel->setContentSize(orig_item_panel->getContentSize());
+        }
 
 
         auto cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
@@ -390,7 +391,7 @@ void BaseScene::create_inventory_scrollview()
         update_lbl_cb(0); //fire once immediately
         new_item_panel->schedule(update_lbl_cb, update_delay, "item_lbl_update");
 
-        inventory_pageview->addPage(new_item_panel);
+        inventory_listview->addChild(new_item_panel);
     };
 
 };
