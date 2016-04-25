@@ -348,14 +348,16 @@ void BaseScene::create_inventory_pageview()
     inventory_listview->removeFromParent();
     this->addChild(inventory_listview);
 
-    inventory_listview->setUserData((void*)BUILDUP->get_target_building().get());
+    //FIXME not the farm, so the name in the update_listview always hits the true condition
+    inventory_listview->setUserData(static_cast<void*>(BUILDUP->city->building_by_name("The Arena").get()));
 
     auto update_listview = [this, inst, inventory_listview](float dt)
     {
-        if (static_cast<Building*>(inventory_listview->getUserData())->name != BUILDUP->get_target_building()->name)
+        //if (static_cast<Building*>(inventory_listview->getUserData())->name != BUILDUP->get_target_building()->name)
+        if (true) //FIXME this doesnt need to get fully rebuilt every 0.1s does it?
         {
             inventory_listview->removeAllChildrenWithCleanup(true);
-            inventory_listview->setUserData((void*)BUILDUP->get_target_building().get());
+            inventory_listview->setUserData(static_cast<void*>(BUILDUP->get_target_building().get()));
 
 
             auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
