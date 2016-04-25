@@ -153,7 +153,8 @@ void ShopNuItem::update_func(float dt)
     else
     {
         this->button->setEnabled(true);
-        this->set_cost_lbl(std::to_string(this->get_cost()));
+        //NOTE get_cost returns int
+        this->set_cost_lbl(beautify_double((double)this->get_cost()));
         this->button->setColor(Color3B::WHITE);
     };
 
@@ -358,7 +359,9 @@ void BuildingNuMenu::init_items()
         }
     });
     auto update_harvesters_cb = [this, menu_item](float dt) {
-        menu_item->set_count_lbl(this->building->harvesters.size());
+        auto harvesters_owned = this->building->harvesters.size();
+        menu_item->set_count_lbl(harvesters_owned);
+        menu_item->_shop_cost = 25 * std::pow(1.15f, std::max(0, (int)harvesters_owned));
     };
     menu_item->schedule(update_harvesters_cb, update_delay, "harvester_count");
     update_harvesters_cb(0);
