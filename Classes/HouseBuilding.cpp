@@ -38,7 +38,7 @@ USING_NS_CC;
 Buildup::Buildup()
 {
     this->city = NULL;
-    this->target_building = NULL;
+    this->set_target_building(NULL);
 
     //TODO change this to player_avatar or something. I don't want to wait for a recompile atm
     this->fighter = std::make_shared<Fighter>(this->city, "Jimothy2");
@@ -719,7 +719,7 @@ Village* Buildup::init_city(Buildup* buildup)
     auto farm = std::make_shared<Building>(city, "The Farm", "the_farm");
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
     farm->punched_sub_type = "grain";
-    buildup->target_building = farm;
+    buildup->set_target_building(farm);
 
     auto dump = std::make_shared<Building>(city, "The Dump", "the_dump");
     dump->punched_sub_type = "fly";
@@ -772,6 +772,16 @@ Village* Buildup::init_city(Buildup* buildup)
     city->buildings.push_back(forest);
 
     return city;
+};
+
+spBuilding Buildup::get_target_building()
+{
+    return this->_target_building;
+};
+
+void Buildup::set_target_building(spBuilding building)
+{
+    this->_target_building = building;
 };
 
 void Player::update(float dt)

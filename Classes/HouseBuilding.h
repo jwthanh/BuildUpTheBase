@@ -211,12 +211,15 @@ class Enemy : public Person
 
 class Buildup
 {
+private:
+        spBuilding _target_building;
     public:
         Player* player;
         spFighter fighter;
         spFighter brawler;
 
-        spBuilding target_building;
+        spBuilding get_target_building();
+        void set_target_building(spBuilding building);
 
         Village* city;
 

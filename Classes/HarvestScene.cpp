@@ -91,7 +91,7 @@ void BaseScene::onEnter()
     {
         vsBuilding buildings = BUILDUP->city->buildings;
         auto find_cb = [](spBuilding building) {
-            return building == BUILDUP->target_building;
+            return building == BUILDUP->get_target_building();
         };
         int index = std::find_if(buildings.begin(),
                 buildings.end(),
@@ -110,7 +110,7 @@ void BaseScene::onEnter()
 
 void BaseScene::create_info_panel()
 {
-    auto building = BUILDUP->target_building;
+    auto building = BUILDUP->get_target_building();
 
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
@@ -128,7 +128,7 @@ void BaseScene::create_info_panel()
 
     auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
     auto update_building_name = [building_name](float dt){
-        building_name->setString(BUILDUP->target_building->name);
+        building_name->setString(BUILDUP->get_target_building()->name);
     };
     this->schedule(update_building_name, update_delay, "building_name_update");
     update_building_name(0);
@@ -136,7 +136,7 @@ void BaseScene::create_info_panel()
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
     auto update_ing_count = [create_count, ing_count](float dt)
     {
-        spBuilding building = BUILDUP->target_building;
+        spBuilding building = BUILDUP->get_target_building();
         ing_count->setString(create_count("ING", building->count_ingredients()));
     };
     this->schedule(update_ing_count, update_delay, "ing_count_update");
@@ -145,7 +145,7 @@ void BaseScene::create_info_panel()
     auto pro_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("product_count"));
     auto update_pro_count = [create_count, pro_count](float dt)
     {
-        spBuilding building = BUILDUP->target_building;
+        spBuilding building = BUILDUP->get_target_building();
         pro_count->setString(create_count("PRO", building->count_products()));
     };
     this->schedule(update_pro_count, update_delay, "pro_count_update");
@@ -154,7 +154,7 @@ void BaseScene::create_info_panel()
     auto wst_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("waste_count"));
     auto update_wst_count = [create_count, wst_count](float dt)
     {
-        spBuilding building = BUILDUP->target_building;
+        spBuilding building = BUILDUP->get_target_building();
         wst_count->setString(create_count("WST", building->count_wastes()));
     };
     this->schedule(update_wst_count, update_delay, "wst_count_update");
@@ -163,7 +163,7 @@ void BaseScene::create_info_panel()
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
     auto update_harvester_count = [harvester_count](float dt)
     {
-        spBuilding building = BUILDUP->target_building;
+        spBuilding building = BUILDUP->get_target_building();
 
         std::stringstream ss;
         ss << "Robo-harvesters: " << building->harvesters.size();
@@ -186,7 +186,7 @@ void BaseScene::create_info_panel()
 
 void BaseScene::create_player_info_panel()
 {
-    auto building = BUILDUP->target_building;
+    auto building = BUILDUP->get_target_building();
 
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
@@ -286,7 +286,7 @@ void BaseScene::create_building_scrollview()
         {
             if (building_pageview->getCurrentPageIndex() == page_index)
             {
-                BUILDUP->target_building = building;
+                BUILDUP->set_target_building(building);
             }
         };
         building_panel->schedule(change_target_page, 0.5f, "update_target");
@@ -323,7 +323,7 @@ void BaseScene::create_building_scrollview()
         building_panel->addTouchEventListener(cb);
 
         auto update_panel = [this, building_pageview, building_panel, building](float dt) {
-            if (BUILDUP->target_building == building) {
+            if (BUILDUP->get_target_building() == building) {
                 building_panel->setBackGroundColor(Color3B::BLUE);
             }
             else {
@@ -358,7 +358,7 @@ void BaseScene::create_inventory_pageview()
         //res_count_t count = mist.second;
 
         auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
-        if (BUILDUP->target_building->ingredients[ing_type] <= 0)
+        if (BUILDUP->get_target_building()->ingredients[ing_type] <= 0)
         {
             //new_item_panel->setVisible(false);
             //new_item_panel->setSizePercent({ 0.0f, 0.0f });
@@ -384,7 +384,7 @@ void BaseScene::create_inventory_pageview()
         {
             auto type_str = Ingredient::type_to_string(ing_type);
             std::stringstream ss;
-            ss << BUILDUP->target_building->count_ingredients(ing_type) << " " << type_str;
+            ss << BUILDUP->get_target_building()->count_ingredients(ing_type) << " " << type_str;
             auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
             item_lbl->setString(ss.str());
         };
@@ -509,7 +509,7 @@ void BaseScene::create_detail_button()
     {
         if (evt == ui::Widget::TouchEventType::ENDED) {
            auto scene = Scene::create();
-           BuildingNuMenu* building_menu = BuildingNuMenu::create(BUILDUP->target_building);
+           BuildingNuMenu* building_menu = BuildingNuMenu::create(BUILDUP->get_target_building());
            scene->addChild(building_menu);
 
            auto director = Director::getInstance();
@@ -550,7 +550,7 @@ void HarvestScene::update(float dt)
     if (!harvestable) {
         this->add_harvestable();
     }
-    else if (BUILDUP->target_building != harvestable->building) {
+    else if (BUILDUP->get_target_building() != harvestable->building) {
         harvestable->removeFromParent();
     };
 
@@ -561,16 +561,16 @@ void HarvestScene::add_harvestable()
     Harvestable* harvestable;
     this->target_recipe = NULL; //TODO move this somewhere else
 
-    if (BUILDUP->target_building->name == "The Mine") {
+    if (BUILDUP->get_target_building()->name == "The Mine") {
         harvestable = MiningHarvestable::create();
-    } else if (BUILDUP->target_building->name == "The Workshop") {
+    } else if (BUILDUP->get_target_building()->name == "The Workshop") {
         this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
         harvestable = CraftingHarvestable::create(this->target_recipe);
-    } else if (BUILDUP->target_building->name == "The Arena") {
+    } else if (BUILDUP->get_target_building()->name == "The Arena") {
         harvestable = FightingHarvestable::create();
-    } else if (BUILDUP->target_building->name == "The Underscape") {
+    } else if (BUILDUP->get_target_building()->name == "The Underscape") {
         harvestable = UndeadHarvestable::create();
-    } else if (BUILDUP->target_building->name == "The Farm") {
+    } else if (BUILDUP->get_target_building()->name == "The Farm") {
         harvestable = FarmingHarvestable::create();
     } else {
         harvestable = Harvestable::create();

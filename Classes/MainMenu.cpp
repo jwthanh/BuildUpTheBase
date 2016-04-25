@@ -790,7 +790,7 @@ bool CityMenu::init()
                    director->pushScene(scene);
                } else {
                    //change target building and exit menu
-                   BUILDUP->target_building = building;
+                   BUILDUP->set_target_building(building);
                    this->menu_state = OpenMenu;
                    director->popScene();
                };
@@ -799,7 +799,7 @@ bool CityMenu::init()
        building_panel->addTouchEventListener(cb);
 
        auto update_panel = [this, building_panel, building](float dt) {
-           if (BUILDUP->target_building == building) {
+           if (BUILDUP->get_target_building() == building) {
                building_panel->setBackGroundColor(Color3B::BLUE);
            } else {
                building_panel->setBackGroundColor(Color3B(150, 200, 255));

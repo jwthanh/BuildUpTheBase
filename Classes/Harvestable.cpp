@@ -47,7 +47,7 @@ bool Harvestable::init()
     this->setTouchEnabled(true); //true otherwise it cant be clicked
     this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 
-    this->building = BUILDUP->target_building;
+    this->building = BUILDUP->get_target_building();
 
     this->clip = cocos2d::ClippingNode::create();
     this->stencil = cocos2d::DrawNode::create();

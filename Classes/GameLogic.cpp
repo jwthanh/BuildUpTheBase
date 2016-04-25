@@ -56,7 +56,7 @@ void GameDirector::switch_to_building_menu()
 {
     auto scene = cocos2d::Scene::create();
     BuildingNuMenu* building_menu = BuildingNuMenu::create(
-            BUILDUP->target_building
+        BUILDUP->get_target_building()
         );
     scene->addChild(building_menu);
 
@@ -77,7 +77,7 @@ void GameDirector::switch_to_city_menu()
 void GameDirector::switch_to_inventory_menu()
 {
     auto scene = cocos2d::Scene::create();
-    InventoryMenu* building_menu = InventoryMenu::create(BUILDUP->target_building);
+    InventoryMenu* building_menu = InventoryMenu::create(BUILDUP->get_target_building());
     scene->addChild(building_menu);
 
     auto director = cocos2d::Director::getInstance();
