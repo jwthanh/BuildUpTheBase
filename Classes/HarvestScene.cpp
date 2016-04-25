@@ -314,10 +314,10 @@ void BaseScene::create_building_scrollview()
         auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
             if (event == ui::Widget::TouchEventType::ENDED)
             {
-                   auto scene = Scene::create();
-                   BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
-                   scene->addChild(building_menu);
-                   Director::getInstance()->pushScene(scene);
+                auto scene = Scene::create();
+                BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
+                scene->addChild(building_menu);
+                Director::getInstance()->pushScene(scene);
             };
         };
         building_panel->addTouchEventListener(cb);
@@ -348,52 +348,65 @@ void BaseScene::create_inventory_pageview()
     inventory_listview->removeFromParent();
     this->addChild(inventory_listview);
 
-    auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
-    auto orig_item_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("item_panel"));
-    orig_item_panel->removeFromParent();
+    inventory_listview->setUserData((void*)BUILDUP->get_target_building().get());
 
-    for (auto type_to_str : Ingredient::type_map)
+    auto update_listview = [this, inst, inventory_listview](float dt)
     {
-        Ingredient::SubType ing_type = type_to_str.first;
-        //res_count_t count = mist.second;
-
-        auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
-        if (BUILDUP->get_target_building()->ingredients[ing_type] <= 0)
+        if (static_cast<Building*>(inventory_listview->getUserData())->name != BUILDUP->get_target_building()->name)
         {
-            //new_item_panel->setVisible(false);
-            //new_item_panel->setSizePercent({ 0.0f, 0.0f });
-            continue;
-        }
-        else
-        {
-            new_item_panel->setVisible(true);
-            new_item_panel->setContentSize(orig_item_panel->getContentSize());
-        }
+            inventory_listview->removeAllChildrenWithCleanup(true);
+            inventory_listview->setUserData((void*)BUILDUP->get_target_building().get());
 
 
-        auto cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
+            auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
+            auto orig_item_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("item_panel"));
+            orig_item_panel->removeFromParent();
 
-            if (type == ui::Widget::TouchEventType::ENDED) {
-                CCLOG("touched a panel %i", ing_type);
+            for (auto type_to_str : Ingredient::type_map)
+            {
+                Ingredient::SubType ing_type = type_to_str.first;
+                //res_count_t count = mist.second;
+
+                auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
+                if (BUILDUP->get_target_building()->ingredients[ing_type] <= 0)
+                {
+                    //new_item_panel->setVisible(false);
+                    //new_item_panel->setSizePercent({ 0.0f, 0.0f });
+                    continue;
+                }
+                else
+                {
+                    new_item_panel->setVisible(true);
+                    new_item_panel->setContentSize(orig_item_panel->getContentSize());
+                }
+
+
+                auto cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
+
+                    if (type == ui::Widget::TouchEventType::ENDED) {
+                        CCLOG("touched a panel %i", ing_type);
+                    };
+                };
+                new_item_panel->addTouchEventListener(cb);
+
+                float update_delay = 0.1f;
+                auto update_lbl_cb = [new_item_panel, this, ing_type](float)
+                {
+                    auto type_str = Ingredient::type_to_string(ing_type);
+                    std::stringstream ss;
+                    ss << BUILDUP->get_target_building()->count_ingredients(ing_type) << " " << type_str;
+                    auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
+                    item_lbl->setString(ss.str());
+                };
+                update_lbl_cb(0); //fire once immediately
+                new_item_panel->schedule(update_lbl_cb, update_delay, "item_lbl_update");
+
+                inventory_listview->addChild(new_item_panel);
             };
-        };
-        new_item_panel->addTouchEventListener(cb);
 
-        float update_delay = 0.1f;
-        auto update_lbl_cb = [new_item_panel, this, ing_type](float)
-        {
-            auto type_str = Ingredient::type_to_string(ing_type);
-            std::stringstream ss;
-            ss << BUILDUP->get_target_building()->count_ingredients(ing_type) << " " << type_str;
-            auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
-            item_lbl->setString(ss.str());
-        };
-        update_lbl_cb(0); //fire once immediately
-        new_item_panel->schedule(update_lbl_cb, update_delay, "item_lbl_update");
-
-        inventory_listview->addChild(new_item_panel);
+        }
     };
-
+    inventory_listview->schedule(update_listview, 0.1f, "update_listview");
 };
 
 void BaseScene::create_shop_button()
