@@ -330,7 +330,15 @@ void BuildingNuMenu::init_items()
     menu_item->_shop_cost = 25;
     menu_item->set_cost_lbl("25");
 
-    menu_item->set_title("Jamal");
+    std::vector<std::string> names = {
+        "Jamal", "Josh", "James", "Jimmy", "Jonathan", "Javert", "John",
+        "Jackson", "Jax", "Jimothy", "Jasper", "Joe", "Jenson", "Jack",
+        "Justin", "Jaleel", "Jamar", "Jesse", "Jaromir", "Jebediah", 
+        "Johan", "Jericho"
+    };
+    std::string name = pick_one(names);
+
+    menu_item->set_title(name);
     menu_item->set_description("Buy Auto-Harvester");
     menu_item->set_image("harvester.png");
     menu_item->set_touch_ended_callback([this, menu_item]()
