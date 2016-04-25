@@ -37,6 +37,7 @@ bool BaseScene::init()
 
     this->create_building_scrollview();
     this->create_inventory_pageview();
+    this->create_shop_pageview();
 
 
     return true;
@@ -453,6 +454,68 @@ void BaseScene::create_inventory_pageview()
     };
 
     inventory_listview->schedule(update_listview, 0.1f, "update_listview");
+};
+
+void BaseScene::create_shop_pageview()
+{
+    auto inst = CSLoader::getInstance();
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    ui::ListView* shop_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("shop_listview"));
+    // shop_listview->setClippingEnabled(true);
+    shop_listview->removeFromParent();
+    this->addChild(shop_listview);
+
+    float update_delay = 0.1f;
+    auto update_listview = [this, inst, shop_listview, update_delay](float dt)
+    {
+        auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
+        auto orig_item_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("item_panel"));
+        orig_item_panel->removeFromParent();
+
+        //dont recreate nuitems
+        //update the strings
+
+
+        //placeholder for things we'll need to put in the sidebar
+        std::vector<int> nuitems_config;
+
+        for (auto type_to_count : nuitems_config)
+        {
+
+            //if the child already exists, put it at the back 
+            std::string child_name = "";
+            auto existing_node = shop_listview->getChildByName(child_name);
+            if (existing_node)
+            {
+                existing_node->removeFromParentAndCleanup(false);
+                shop_listview->addChild(existing_node);
+                continue;
+            }
+
+            //clone the new item
+            auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
+            new_item_panel->setName(child_name);
+
+            //touch handler prep
+            auto on_touch_cb = [this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
+
+                if (type == ui::Widget::TouchEventType::ENDED) {
+                };
+            };
+            new_item_panel->addTouchEventListener(on_touch_cb);
+
+            //update callback
+            auto update_lbl_cb = [new_item_panel, this](float)
+            {
+            };
+            update_lbl_cb(0); //fire once immediately
+            new_item_panel->schedule(update_lbl_cb, update_delay, "item_lbl_update");
+
+            shop_listview->addChild(new_item_panel);
+        };
+    };
+
+    shop_listview->schedule(update_listview, 0.1f, "update_listview");
 };
 
 void BaseScene::create_shop_button()
