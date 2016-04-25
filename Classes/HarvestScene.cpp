@@ -492,6 +492,7 @@ void BaseScene::create_shop_listview()
             //clone the new item
             auto menu_item = ShopNuItem::create();
             menu_item->my_init(shop_listview, "harvester_buy");
+            menu_item->desc_lbl->setFontSize(18);
             menu_item->_shop_cost = 25;
             menu_item->set_cost_lbl("25");
             menu_item->setName(child_name);
