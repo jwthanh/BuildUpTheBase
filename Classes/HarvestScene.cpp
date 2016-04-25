@@ -659,41 +659,54 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
         count_lbl->setString(std::to_string(count));
     }, update_delay, "alert_count_update");
 
-    auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("sell_btn"));
-    load_default_button_textures(sell_btn);
-
     int coins_gained = 10;
-    std::stringstream cost_ss;
-    cost_ss << "Sell 1 for " << coins_gained;
-    sell_btn->setTitleText(cost_ss.str());
-    sell_btn->addTouchEventListener([this, ing_type, coins_gained](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
+    auto create_sell_button = [this, alert_panel, ing_type, coins_gained, update_delay](std::string name, int amount_sold)
+    {
+        auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
+        load_default_button_textures(sell_btn);
 
-            int num_sellable = map_get(ingredients, ing_type, 0);
-            if (num_sellable != 0)
+        //std::stringstream cost_ss;
+        //cost_ss << amount_sold << "/" << coins_gained;
+        //sell_btn->setTitleText(cost_ss.str());
+        sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold, update_delay](Ref* touch, ui::Widget::TouchEventType type){
+            if (type == ui::Widget::TouchEventType::ENDED)
             {
-                --ingredients[ing_type];
-                BEATUP->add_total_coin(coins_gained);
-                CCLOG("SELLING STUFF");
+                mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
+
+                int num_sellable = map_get(ingredients, ing_type, 0);
+                if (num_sellable != 0)
+                {
+                    int to_sell = std::min(num_sellable, amount_sold);
+                    CCLOG("selling %i of %s", to_sell, Ingredient::type_to_string(ing_type).c_str());
+                    for (int i = 0; i < to_sell; i++)
+                    {
+                        --ingredients[ing_type];
+                        BEATUP->add_total_coin(coins_gained);
+                    }
+                    CCLOG("SELLING STUFF");
+                }
             }
-        }
-    });
-    sell_btn->schedule([sell_btn, this, ing_type](float){
-        mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
-        if (ingredients.empty()){
-            sell_btn->setBright(false);
-        }
-        else if (BUILDUP->get_target_building()->count_ingredients(ing_type) == 0)
-        {
-            sell_btn->setBright(false);
-        }
-        else
-        {
-            sell_btn->setEnabled(true);
-        }
-    }, update_delay, "sell_btn_state_cb");
+        });
+        sell_btn->schedule([sell_btn, this, ing_type](float){
+            mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
+            if (ingredients.empty()){
+                sell_btn->setBright(false);
+            }
+            else if (BUILDUP->get_target_building()->count_ingredients(ing_type) == 0)
+            {
+                sell_btn->setBright(false);
+            }
+            else
+            {
+                sell_btn->setEnabled(true);
+            }
+        }, update_delay, "sell_btn_state_cb");
+    };
+
+    create_sell_button("sell_1_btn", 1);
+    create_sell_button("sell_10_btn", 10);
+    create_sell_button("sell_100_btn", 100);
+    create_sell_button("sell_1000_btn", 1000);
 
 
     auto move_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("move_btn"));
