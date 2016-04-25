@@ -14,6 +14,7 @@
 #include "FShake.h"
 #include "MiscUI.h"
 #include "Animal.h"
+#include "Worker.h"
 
 class Animal;
 USING_NS_CC;
@@ -468,22 +469,18 @@ void BaseScene::create_shop_listview()
     float update_delay = 0.1f;
     auto update_listview = [this, inst, shop_listview, update_delay](float dt)
     {
-        auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
-        auto orig_item_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("item_panel"));
-        orig_item_panel->removeFromParent();
-
         //dont recreate nuitems
         //update the strings
 
 
         //placeholder for things we'll need to put in the sidebar
-        std::vector<int> nuitems_config;
+        std::vector<std::string> nuitems_config = {"harvester_buy"};
 
-        for (auto type_to_count : nuitems_config)
+        for (auto name : nuitems_config)
         {
 
             //if the child already exists, put it at the back 
-            std::string child_name = "";
+            std::string child_name = name;
             auto existing_node = shop_listview->getChildByName(child_name);
             if (existing_node)
             {
@@ -493,25 +490,46 @@ void BaseScene::create_shop_listview()
             }
 
             //clone the new item
-            auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
-            new_item_panel->setName(child_name);
+            auto menu_item = ShopNuItem::create();
+            menu_item->my_init(shop_listview, "harvester_buy");
+            menu_item->_shop_cost = 25;
+            menu_item->set_cost_lbl("25");
+            menu_item->setName(child_name);
 
-            //touch handler prep
-            auto on_touch_cb = [this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
-
-                if (type == ui::Widget::TouchEventType::ENDED) {
-                };
+            std::vector<std::string> names = {
+                "Jamal", "Josh", "James", "Jimmy", "Jonathan", "Javert", "John",
+                "Jackson", "Jax", "Jimothy", "Jasper", "Joe", "Jenson", "Jack",
+                "Justin", "Jaleel", "Jamar", "Jesse", "Jaromir", "Jebediah", 
+                "Johan", "Jericho"
             };
-            new_item_panel->addTouchEventListener(on_touch_cb);
+            std::string name = pick_one(names);
 
-            //update callback
-            auto update_lbl_cb = [new_item_panel, this](float)
+            menu_item->set_title(name);
+            menu_item->set_description("Buy Auto-Harvester");
+            menu_item->set_image("harvester.png");
+            menu_item->set_touch_ended_callback([this, menu_item]()
             {
-            };
-            update_lbl_cb(0); //fire once immediately
-            new_item_panel->schedule(update_lbl_cb, update_delay, "item_lbl_update");
+                auto cost = menu_item->get_cost();
+                auto total_coins = BEATUP->get_total_coins();
 
-            shop_listview->addChild(new_item_panel);
+                if (cost <= total_coins)
+                {
+                    CCLOG("buying a harvester");
+                    BEATUP->add_total_coin(-cost);
+                    auto harvester = std::make_shared<Harvester>(BUILDUP->get_target_building(), "test worker", Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type));
+                    harvester->active_count += 1;
+                    BUILDUP->get_target_building()->harvesters.push_back(harvester);
+
+                    menu_item->update_func(0);
+                }
+            });
+            auto update_harvesters_cb = [this, menu_item](float dt) {
+                auto harvesters_owned = BUILDUP->get_target_building()->harvesters.size();
+                menu_item->set_count_lbl(harvesters_owned);
+                menu_item->_shop_cost = 25 * std::pow(1.15f, std::max(0, (int)harvesters_owned));
+            };
+            menu_item->schedule(update_harvesters_cb, update_delay, "harvester_count");
+            update_harvesters_cb(0);
         };
     };
 
