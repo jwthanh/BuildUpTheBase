@@ -355,8 +355,8 @@ void BaseScene::create_inventory_pageview()
 
     auto update_listview = [this, inst, inventory_listview](float dt)
     {
-        //if (static_cast<Building*>(inventory_listview->getUserData())->name != BUILDUP->get_target_building()->name)
-        if (true) //FIXME this doesnt need to get fully rebuilt every 0.1s does it?
+        if (static_cast<Building*>(inventory_listview->getUserData())->name != BUILDUP->get_target_building()->name)
+        //if (true) //FIXME this doesnt need to get fully rebuilt every 0.1s does it?
         {
             inventory_listview->removeAllChildrenWithCleanup(true);
             inventory_listview->setUserData(static_cast<void*>(BUILDUP->get_target_building().get()));
@@ -366,7 +366,27 @@ void BaseScene::create_inventory_pageview()
             auto orig_item_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("item_panel"));
             orig_item_panel->removeFromParent();
 
-            for (auto type_to_str : Ingredient::type_map)
+            typedef std::pair<Ingredient::SubType, res_count_t> mt;
+            auto order_by_count = [](mt left, mt right)
+            {
+                return left.second > right.second;
+            };
+
+
+            std::vector<mt> type_vec;
+
+            for (auto ts : Ingredient::type_map)
+            {
+                type_vec.push_back({ ts.first, map_get(BUILDUP->get_target_building()->ingredients, ts.first, 0) });
+            }
+
+            auto b = type_vec.begin();
+            auto e = type_vec.end();
+            std::sort(b, e, order_by_count);
+
+            CCLOG("rebuild");
+
+            for (auto type_to_str : type_vec)
             {
                 Ingredient::SubType ing_type = type_to_str.first;
                 //res_count_t count = mist.second;
@@ -374,9 +394,9 @@ void BaseScene::create_inventory_pageview()
                 auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
                 if (BUILDUP->get_target_building()->ingredients[ing_type] <= 0)
                 {
-                    //new_item_panel->setVisible(false);
-                    //new_item_panel->setSizePercent({ 0.0f, 0.0f });
-                    continue;
+                    new_item_panel->setVisible(false);
+                    new_item_panel->setSizePercent({ 0.0f, 0.0f });
+                    //continue;
                 }
                 else
                 {
@@ -400,9 +420,20 @@ void BaseScene::create_inventory_pageview()
                 {
                     auto type_str = Ingredient::type_to_string(ing_type);
                     std::stringstream ss;
-                    ss << BUILDUP->get_target_building()->count_ingredients(ing_type) << " " << type_str;
+
+                    res_count_t count = BUILDUP->get_target_building()->count_ingredients(ing_type);
+                    ss << count << " " << type_str;
                     auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
                     item_lbl->setString(ss.str());
+
+                    if (count >= 1)
+                    {
+                        new_item_panel->setVisible(true);
+                    }
+                    else
+                    {
+                        new_item_panel->setVisible(false);
+                    }
                 };
                 update_lbl_cb(0); //fire once immediately
                 new_item_panel->schedule(update_lbl_cb, update_delay, "item_lbl_update");
