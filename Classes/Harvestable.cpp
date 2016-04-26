@@ -45,6 +45,10 @@ void Harvestable::init_clicks()
 bool Harvestable::init()
 {
     this->setTouchEnabled(true); //true otherwise it cant be clicked
+
+    //allow touches to propagate passed it
+    this->setSwallowTouches(false); //this seems to mean to let the events propagate past this, i dont see the harm in allowing it
+
     this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 
     this->building = BUILDUP->get_target_building();

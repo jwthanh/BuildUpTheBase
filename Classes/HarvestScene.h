@@ -13,9 +13,11 @@ class BaseScene : public GameLayer
 
         virtual bool init();
         virtual void update(float dt);
-        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
 
+        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
         virtual void onEnter() override;
+        virtual void onSwipeLeft(float dt) override;
+        virtual void onSwipeRight(float dt) override;
 
         void create_side_buttons();
         void create_shop_button();
@@ -30,6 +32,7 @@ class BaseScene : public GameLayer
 
         cocos2d::ui::Widget* create_detail_alert(Ingredient::SubType ing_type);
 
+        void scroll_to_target_building();
 
 };
 

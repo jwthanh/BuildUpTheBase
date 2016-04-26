@@ -87,9 +87,8 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
 }
 
-void BaseScene::onEnter()
+void BaseScene::scroll_to_target_building()
 {
-    GameLayer::onEnter();
     auto building_pageview = dynamic_cast<ui::PageView*>(this->getChildByName("building_pageview"));
     if (building_pageview)
     {
@@ -98,8 +97,8 @@ void BaseScene::onEnter()
             return building == BUILDUP->get_target_building();
         };
         int index = std::find_if(buildings.begin(),
-                buildings.end(),
-                find_cb) - buildings.begin();
+                                 buildings.end(),
+                                 find_cb) - buildings.begin();
 
         if (index > (int)buildings.size())
         {
@@ -110,6 +109,27 @@ void BaseScene::onEnter()
             building_pageview->ListView::scrollToItem(index, { 0, 0 }, { 0, 0 }, 0.0f);
         }
     }
+}
+
+void BaseScene::onEnter()
+{
+    GameLayer::onEnter();
+    scroll_to_target_building();
+};
+
+void BaseScene::onSwipeLeft(float dt)
+{
+    GameLayer::onSwipeLeft(dt);
+    BEATUP->cycle_next_building(true);
+    scroll_to_target_building();
+};
+
+void BaseScene::onSwipeRight(float dt)
+{
+    GameLayer::onSwipeRight(dt);
+    BEATUP->cycle_next_building();
+    scroll_to_target_building();
+    
 };
 
 void BaseScene::create_info_panel()

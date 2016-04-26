@@ -1491,11 +1491,11 @@ void Beatup::cycle_next_building(bool reverse)
     {
         if (reverse == false)
         {
-            vsBuilding::iterator face_iter = std::find(buildings.begin(), buildings.end(), this->get_target_building());
+            vsBuilding::iterator next_building_iter = std::find(buildings.begin(), buildings.end(), this->get_target_building());
 
-            if (face_iter + 1 != buildings.end())
+            if (next_building_iter + 1 != buildings.end())
             {
-                this->set_target_building(*(face_iter + 1));
+                this->set_target_building(*(next_building_iter + 1));
             }
             else
             {
@@ -1505,11 +1505,11 @@ void Beatup::cycle_next_building(bool reverse)
         }
         else if (reverse == true)
         {
-            vsBuilding::reverse_iterator face_iter = std::find(buildings.rbegin(), buildings.rend(), this->get_target_building());
+            vsBuilding::reverse_iterator next_building_riter = std::find(buildings.rbegin(), buildings.rend(), this->get_target_building());
 
-            if (face_iter + 1 != buildings.rend())
+            if (next_building_riter + 1 != buildings.rend())
             {
-                this->set_target_building(*(face_iter + 1));
+                this->set_target_building(*(next_building_riter + 1));
             }
             else
             {
