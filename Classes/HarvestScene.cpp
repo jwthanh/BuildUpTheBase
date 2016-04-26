@@ -518,7 +518,6 @@ void BaseScene::create_shop_listview()
             std::string harvester_name = pick_one(names);
 
             menu_item->set_title(harvester_name);
-            menu_item->set_description("Buy Auto-Harvester");
 
             auto gen_paths = [](std::string base_path, int max_num)
             {
@@ -580,6 +579,10 @@ void BaseScene::create_shop_listview()
                 auto harvesters_owned = BUILDUP->get_target_building()->harvesters.size();
                 menu_item->set_count_lbl(harvesters_owned);
                 menu_item->_shop_cost = 25 * std::pow(1.15f, std::max(0, (int)harvesters_owned));
+
+                std::stringstream ss;
+                ss << "Buy Auto-Harvester\nAdds 1 " << BUILDUP->get_target_building()->punched_sub_type << " per sec";
+                menu_item->set_description(ss.str());
             };
             menu_item->schedule(update_harvesters_cb, update_delay, "harvester_count");
             update_harvesters_cb(0);
