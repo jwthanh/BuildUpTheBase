@@ -142,12 +142,18 @@ void AppDelegate::preload_sprites()
 {
     auto cache = SpriteFrameCache::getInstance();
 
-
     CCLOG("start loading sprites");
-	cache->addSpriteFramesWithFile("master.plist");
-	cache->addSpriteFramesWithFile("master_ui.plist");
-	cache->addSpriteFramesWithFile("kenney_iso_buildings.plist");
-	cache->addSpriteFramesWithFile("master_harvesters.plist");
+
+    auto sheet_paths = {
+        "master.plist",
+        "master_ui.plist",
+        "kenney_iso_buildings.plist",
+        "master_harvesters_50.plist"
+    };
+
+    for (auto path : sheet_paths) {
+        cache->addSpriteFramesWithFile(path);
+    };
     CCLOG("done loading sprites");
 
 };
