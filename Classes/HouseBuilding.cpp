@@ -82,6 +82,7 @@ FighterNode* FighterNode::create(spFighter fighter)
 
     FighterNode* node = FighterNode::create();
     node->setTouchEnabled(true);
+    node->setSwallowTouches(false);
 
     node->fighter = fighter;
 
@@ -92,9 +93,13 @@ FighterNode* FighterNode::create(spFighter fighter)
     node->addChild(node->sprite);
 
     node->sprite->setTouchEnabled(true);
-    node->sprite->addTouchEventListener([node](Ref*, TouchEventType)
+    node->sprite->setSwallowTouches(false);
+    node->sprite->addTouchEventListener([node](Ref*, TouchEventType type)
     {
-        GameDirector::switch_to_character_menu(node->fighter);
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            GameDirector::switch_to_character_menu(node->fighter);
+        };
     });
 
     //hp bar
