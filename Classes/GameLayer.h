@@ -9,7 +9,6 @@
 
 
 class Scrollable;
-class Clock;
 
 class GameLayer : public cocos2d::Layer
 {
@@ -18,8 +17,6 @@ class GameLayer : public cocos2d::Layer
 
         float initialTouchPos[2];
         float currentTouchPos[2];
-
-        std::shared_ptr<Clock> long_press_clock;
     public:
         static std::string menu_font;
         static float menu_fontsize;
@@ -46,7 +43,6 @@ class GameLayer : public cocos2d::Layer
         virtual void onSwipeUp(float dt);
         virtual void onSwipeRight(float dt);
         virtual void onSwipeDown(float dt);
-        virtual void onLongPress(float dt);
 
         virtual bool init();
         virtual void update(float dt);

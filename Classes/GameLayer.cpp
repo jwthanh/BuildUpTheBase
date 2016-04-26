@@ -1,14 +1,10 @@
 #include "GameLayer.h"
-
 #ifdef __ANDROID__
 #include "DataManager.h"
 #endif
-
 #include "BaseMenu.h"
 #include "Util.h"
 #include "SoundEngine.h"
-#include "Clock.h"
-
 USING_NS_CC;
 
 
@@ -77,48 +73,38 @@ bool GameLayer::init()
     initialTouchPos[0] = 0;
     initialTouchPos[1] = 0;
 
-    this->long_press_clock = std::make_shared<Clock>(0.5f);
-
     return true;
 };
 
 void GameLayer::update(float dt)
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    if (this->isTouchDown)
+    if (true == isTouchDown)
     {
-        float threshold = visibleSize.width * 0.05f;
-
-        this->long_press_clock->update(dt);
-
-        if (initialTouchPos[0] - currentTouchPos[0] > threshold)
+        if (initialTouchPos[0] - currentTouchPos[0] > visibleSize.width * 0.05)
         {
             this->onSwipeLeft(dt);
-            this->isTouchDown = false;
+            isTouchDown = false;
         }
-        else if (initialTouchPos[0] - currentTouchPos[0] < - threshold)
+        else if (initialTouchPos[0] - currentTouchPos[0] < - visibleSize.width * 0.05)
         {
             this->onSwipeRight(dt);
-            this->isTouchDown = false;
+            isTouchDown = false;
         }
-        else if (initialTouchPos[1] - currentTouchPos[1] > threshold)
+        else if (initialTouchPos[1] - currentTouchPos[1] > visibleSize.width * 0.05)
         {
             this->onSwipeDown(dt);
-            this->isTouchDown = false;
+            isTouchDown = false;
         }
-        else if (initialTouchPos[1] - currentTouchPos[1] < - threshold)
+        else if (initialTouchPos[1] - currentTouchPos[1] < - visibleSize.width * 0.05)
         {
             this->onSwipeUp(dt);
-            this->isTouchDown = false;
+            isTouchDown = false;
         }
-        else
+        else if (initialTouchPos[0] == currentTouchPos[0] && initialTouchPos[1] == currentTouchPos[1])
         {
-            if (this->long_press_clock->passed_threshold()){
-                this->long_press_clock->reset();
-                this->onLongPress(dt);
-                this->isTouchDown = false;
-            };
-        };
+            // CCLOG("no move?");
+        }
     }
 };
 
@@ -168,11 +154,6 @@ void GameLayer::onSwipeRight(float dt)
 void GameLayer::onSwipeDown(float dt)
 {
     CCLOG("SWIPED DOWN");
-};
-
-void GameLayer::onLongPress(float dt)
-{
-    CCLOG("LONG PRESS");
 };
 
 void GameLayer::pop_scene(Ref* pSender)
