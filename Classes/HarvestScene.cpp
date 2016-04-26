@@ -287,6 +287,8 @@ void BaseScene::create_building_scrollview()
     building_pageview->setClippingEnabled(true);
     building_pageview->removeFromParent();
 
+    building_pageview->setBounceEnabled(true);
+
     auto city_scene = inst->createNode("editor/scenes/city_scene.csb");
 
     float update_delay = 0.1f;
