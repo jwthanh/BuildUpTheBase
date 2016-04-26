@@ -102,6 +102,15 @@ void NuItem::set_count_lbl(int count)
     this->count_lbl->setString(count_ss.str());
 };
 
+void NuItem::try_set_enable(bool is_enable)
+{
+    if (this->button->isEnabled() != is_enable)
+    {
+        this->button->setEnabled(is_enable);
+    }
+};
+
+
 void ShopNuItem::my_init(Node* parent, std::string id_key)
 {
     NuItem::my_init(parent);
@@ -132,12 +141,12 @@ void ShopNuItem::update_func(float dt)
     if (this->get_been_bought())
     {
         this->set_cost_lbl("---");
-        this->button->setEnabled(false);
+        try_set_enable(false);
         this->cost_lbl->setTextColor(Color4B::GRAY);
     } 
     else if (total_coins < cost)
     {
-        this->button->setEnabled(false);
+        try_set_enable(false);
 
         Color3B color = { 254, 81, 81 };
         float tint = 0.9f;
@@ -152,7 +161,7 @@ void ShopNuItem::update_func(float dt)
     }
     else
     {
-        this->button->setEnabled(true);
+        try_set_enable(true);
         //NOTE get_cost returns int
         this->set_cost_lbl(beautify_double((double)this->get_cost()));
         this->button->setColor(Color3B::WHITE);
@@ -185,9 +194,9 @@ void RecipeNuItem::update_func(float dt)
     };
 
     if (this->recipe->is_satisfied(this->building->ingredients)){
-        this->button->setEnabled(true);
+        this->try_set_enable(true);
     } else {
-        this->button->setEnabled(false);
+        this->try_set_enable(false);
     }
 
     //TODO this'll get fucky when recipes output more than one type,

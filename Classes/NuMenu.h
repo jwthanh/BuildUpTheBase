@@ -34,6 +34,8 @@ class NuItem : public cocos2d::ui::Widget
         void set_cost_lbl(std::string cost);
         void set_count_lbl(int count);
 
+        void try_set_enable(bool is_enable);
+
         void set_touch_ended_callback(std::function<void(void)> callback);
 
         //handle stuff like been bought, can be pressed etc
