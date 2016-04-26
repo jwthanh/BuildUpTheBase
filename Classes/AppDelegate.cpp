@@ -147,6 +147,7 @@ void AppDelegate::preload_sprites()
 	cache->addSpriteFramesWithFile("master.plist");
 	cache->addSpriteFramesWithFile("master_ui.plist");
 	cache->addSpriteFramesWithFile("kenney_iso_buildings.plist");
+	cache->addSpriteFramesWithFile("master_harvesters.plist");
     CCLOG("done loading sprites");
 
 };
