@@ -313,7 +313,7 @@ void BaseScene::create_building_scrollview()
                 BUILDUP->set_target_building(building);
             }
         };
-        building_panel->schedule(change_target_page, 0.5f, "update_target");
+        building_panel->schedule(change_target_page, 0.1f, "update_target");
 
         if (building->get_been_bought() == false) {
             node->setVisible(false);
@@ -345,17 +345,6 @@ void BaseScene::create_building_scrollview()
             };
         };
         building_panel->addTouchEventListener(cb);
-
-        auto update_panel = [this, building_pageview, building_panel, building](float dt) {
-            if (BUILDUP->get_target_building() == building) {
-                building_panel->setBackGroundColor(Color3B::BLUE);
-            }
-            else {
-                building_panel->setBackGroundColor(Color3B(150, 200, 255));
-            }
-        };
-        update_panel(0);
-        building_panel->schedule(update_panel, update_delay, "update_panel");
 
     }
 
