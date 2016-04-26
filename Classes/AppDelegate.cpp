@@ -72,6 +72,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     //add the cocos studio paths. it ignores its own export path so you need to tell it where else to look
     FileUtils::getInstance()->addSearchPath("editor");
 
+    //seed rng
+    std::srand((int)time(NULL));
 
     // auto console = director->getConsole();
     // console->listenOnTCP(1234);
