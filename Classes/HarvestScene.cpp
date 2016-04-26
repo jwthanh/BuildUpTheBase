@@ -518,7 +518,34 @@ void BaseScene::create_shop_listview()
 
             menu_item->set_title(harvester_name);
             menu_item->set_description("Buy Auto-Harvester");
-            menu_item->set_image("harvester.png");
+            auto base_node = Node::create();
+            auto sprites = {
+                "set_0.png",
+                "body_0.png",
+                "headwear_0.png",
+                "legs_0.png",
+                "shield_0.png",
+                "weapon_0.png",
+            };
+            for (auto path : sprites)
+            {
+                base_node->addChild(Sprite::createWithSpriteFrameName(path));
+            }
+
+            this->addChild(base_node);
+            base_node->setPosition(8,8);
+
+
+            auto rt = RenderTexture::create(16, 16);
+            rt->retain();
+            rt->begin();
+            base_node->visit();
+            base_node->setScaleY(-1.0f);
+            rt->end();
+
+            ui::Scale9Sprite* vr = (ui::Scale9Sprite*)menu_item->item_icon->getVirtualRenderer();
+            vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
+
             menu_item->set_touch_ended_callback([this, menu_item]()
             {
                 auto cost = menu_item->get_cost();
