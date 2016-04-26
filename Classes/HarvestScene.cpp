@@ -15,6 +15,7 @@
 #include "MiscUI.h"
 #include "Animal.h"
 #include "Worker.h"
+#include <numeric>
 
 class Animal;
 USING_NS_CC;
@@ -518,29 +519,42 @@ void BaseScene::create_shop_listview()
 
             menu_item->set_title(harvester_name);
             menu_item->set_description("Buy Auto-Harvester");
+
+            auto gen_paths = [](std::string base_path, int max_num)
+            {
+                std::vector<int> nums(max_num);
+                std::iota(nums.begin(), nums.end(), 0);
+
+                std::vector<std::string> output;
+                for (auto num : nums)
+                {
+                    output.push_back(base_path + "_" + std::to_string(num)+".png");
+                }
+
+                return  output;
+            };
+
             auto base_node = Node::create();
             auto sprites = {
-                "set_0.png",
-                "body_0.png",
-                "headwear_0.png",
-                "legs_0.png",
-                "shield_0.png",
-                "weapon_0.png",
+                pick_one(gen_paths("set", 4)),
+                pick_one(gen_paths("body", 49)),
+                pick_one(gen_paths("headwear", 49)),
+                pick_one(gen_paths("legs", 22)),
+                pick_one(gen_paths("shield", 49)),
+                pick_one(gen_paths("weapon", 49))
             };
             for (auto path : sprites)
             {
                 base_node->addChild(Sprite::createWithSpriteFrameName(path));
             }
 
-            this->addChild(base_node);
             base_node->setPosition(8,8);
-
+            base_node->setScaleY(-1.0f);
 
             auto rt = RenderTexture::create(16, 16);
             rt->retain();
             rt->begin();
             base_node->visit();
-            base_node->setScaleY(-1.0f);
             rt->end();
 
             ui::Scale9Sprite* vr = (ui::Scale9Sprite*)menu_item->item_icon->getVirtualRenderer();
