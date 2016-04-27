@@ -90,31 +90,41 @@ void Harvestable::on_harvest()
     CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
 }
 
+void Harvestable::animate_touch_start()
+{
+    float end_scale = this->initial_scale*0.85f;
+    float duration = 0.5f;
+    auto scale_to = ScaleTo::create(duration, end_scale);
+    auto ease = EaseElasticOut::create(scale_to, duration);
+    this->runAction(ease);
+}
+
 bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     bool base_val = Widget::onTouchBegan(touch, event);
 
     if (this->_hitted)
     {
-        float end_scale = this->initial_scale*0.85f;
-        float duration = 0.5f;
-        auto scale_to = ScaleTo::create(duration, end_scale);
-        auto ease = EaseElasticOut::create(scale_to, duration);
-        this->runAction(ease);
+        this->animate_touch_start();
     }
 
     return base_val;
 };
 
-void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
+void Harvestable::animate_touch_end()
 {
-    //Widget::onTouchEnded(touch, event); //this shouldnt be called because releaseUpEvent hasnt been set I guess. 
-
     float end_scale = this->initial_scale;
     float duration = 0.5f;
     auto scale_to = ScaleTo::create(duration, end_scale);
     auto ease = EaseElasticOut::create(scale_to, duration);
     this->runAction(ease);
+}
+
+void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+    //Widget::onTouchEnded(touch, event); //this shouldnt be called because releaseUpEvent hasnt been set I guess. 
+
+    animate_touch_end();
 
     this->current_clicks += 1;
 
