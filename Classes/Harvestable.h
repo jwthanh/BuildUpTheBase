@@ -21,7 +21,7 @@ class Harvestable : public cocos2d::ui::Widget
 
         CREATE_FUNC(Harvestable);
         bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) override;
-    void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
+        void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         virtual bool init() override;
         virtual std::string get_sprite_path();
@@ -98,6 +98,9 @@ class FightingHarvestable : public Harvestable
         virtual void animate_clip() override;
         virtual void animate_harvest() override;
         virtual void animate_rotate() override;
+
+        virtual void animate_touch_start();
+        virtual void animate_touch_end();
 
         virtual void on_harvest() override;
 };

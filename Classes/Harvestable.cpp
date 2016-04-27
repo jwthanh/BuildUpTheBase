@@ -482,6 +482,16 @@ void FightingHarvestable::on_harvest()
     battle->do_battle();
 };
 
+void FightingHarvestable::animate_touch_start()
+{
+    //do nothing
+};
+
+void FightingHarvestable::animate_touch_end()
+{
+    //do nothing
+};
+
 std::string UndeadHarvestable::get_sprite_path()
 {
     return "necro_open.png";
