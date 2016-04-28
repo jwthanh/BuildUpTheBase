@@ -82,5 +82,5 @@ Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType 
 
 void Harvester::on_update()
 {
-    this->building->create_ingredients(this->ing_type, 1);
+    this->building->create_ingredients(this->ing_type, this->active_count);
 };
