@@ -77,6 +77,8 @@ class Harvester : public Worker
         Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
 
         virtual void on_update();
+
+        static res_count_t get_base_shop_cost(Harvester::SubType harv_type);
 };
 
 typedef std::map<std::pair<Harvester::SubType, Ingredient::SubType>, res_count_t> mistHarvester;

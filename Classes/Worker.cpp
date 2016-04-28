@@ -84,3 +84,17 @@ void Harvester::on_update()
 {
     this->building->create_ingredients(this->ing_type, this->active_count);
 };
+
+res_count_t Harvester::get_base_shop_cost(Harvester::SubType harv_type)
+{
+    res_count_t base_cost = 25;
+    
+    if (harv_type == Harvester::SubType::One) { base_cost = 25; }
+    else if (harv_type == Harvester::SubType::Two) { base_cost = 200; }
+    else if (harv_type == Harvester::SubType::Three) { base_cost = 1000; }
+    else if (harv_type == Harvester::SubType::Four) { base_cost = 5000; }
+    else if (harv_type == Harvester::SubType::Five) { base_cost = 10000; }
+    else { base_cost = 9999;}
+
+    return base_cost;
+};
