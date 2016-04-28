@@ -570,7 +570,7 @@ void BaseScene::create_shop_listview()
                 {
                     CCLOG("buying a harvester");
                     BEATUP->add_total_coin(-cost);
-                    auto harvester = std::make_shared<Harvester>(BUILDUP->get_target_building(), "test worker", Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type));
+                    auto harvester = std::make_shared<Harvester>(BUILDUP->get_target_building(), "test worker", Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type), Harvester::SubType::One);
                     harvester->active_count += 1;
                     BUILDUP->get_target_building()->harvesters.push_back(harvester);
 

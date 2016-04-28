@@ -79,7 +79,12 @@ class Harvester : public Worker
     public:
         Ingredient::SubType ing_type;
 
-        Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type);
+        enum class SubType {
+            One, Two, Three, Four, Five, Six, Seven, Eigth, Nine, Ten,
+            eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty
+        } sub_type;
+
+        Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
 
         virtual void on_update();
 };

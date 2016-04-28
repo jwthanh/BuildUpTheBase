@@ -54,8 +54,8 @@ ResourceCondition* ResourceCondition::create_waste_condition(Waste::SubType wst_
     return waste_condition;
 };
 
-Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type)
-    : Worker(building, name), ing_type(ing_type)
+Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type)
+    : Worker(building, name), ing_type(ing_type), sub_type(sub_type)
 {
 };
 

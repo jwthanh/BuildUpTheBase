@@ -360,7 +360,7 @@ void BuildingNuMenu::init_items()
         {
             CCLOG("buying a harvester");
             BEATUP->add_total_coin(-cost);
-            auto harvester = std::make_shared<Harvester>(this->building, "test worker", Ingredient::string_to_type(this->building->punched_sub_type));
+            auto harvester = std::make_shared<Harvester>(this->building, "test worker", Ingredient::string_to_type(this->building->punched_sub_type), Harvester::SubType::One);
             harvester->active_count += 1;
             this->building->harvesters.push_back(harvester);
 
