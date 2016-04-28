@@ -32,7 +32,7 @@ class Harvestable : public cocos2d::ui::Widget
 
         cocos2d::ClippingNode* clip;
         cocos2d::DrawNode* stencil;
-        cocos2d::Sprite* sprite;
+        cocos2d::ui::ImageView* sprite;
 
         int click_limit;
         int current_clicks;

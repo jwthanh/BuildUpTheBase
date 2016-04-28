@@ -20,9 +20,12 @@ Size Harvestable::get_sprite_size()
 
 void Harvestable::init_sprite()
 {
-    this->sprite = cocos2d::Sprite::createWithSpriteFrameName(this->get_sprite_path());
+    //this->sprite = cocos2d::Sprite::createWithSpriteFrameName(this->get_sprite_path());
+    this->sprite = cocos2d::ui::ImageView::create(this->get_sprite_path(), TextureResType::PLIST);
     this->sprite->setScale(4);
-    this->sprite->getTexture()->setAliasTexParameters();
+    Node* virtual_renderer = this->sprite->getVirtualRenderer();
+    auto cast_sprite = dynamic_cast<ui::Scale9Sprite*>(virtual_renderer);
+    cast_sprite->getSprite()->getTexture()->setAliasTexParameters();
 
     this->setContentSize(this->get_sprite_size());
 
@@ -71,6 +74,9 @@ bool Harvestable::init()
     Node* harvestable_pos = harvest_scene_editor->getChildByName("harvestable_pos");
     this->setPosition(harvestable_pos->getPosition()); 
     this->setName("harvestable");
+
+    // this->sprite->setScale9Enabled(false); //is default off but whatever
+    // this->sprite->setContentSize(Size(10, 10));
 
     this->initial_scale = 4;
     this->setScale(this->initial_scale);
@@ -212,7 +218,7 @@ void Harvestable::shatter()
     float sprite_scale = this->sprite->getScale();
     Size sprite_size = this->get_sprite_size();
 
-    auto shatter_sprite = ShatterSprite::createWithSpriteFrame(this->sprite->getSpriteFrame());
+    auto shatter_sprite = ShatterSprite::createWithSpriteFrame(((ui::Scale9Sprite*)this->sprite->getVirtualRenderer())->getSprite()->getSpriteFrame());
     shatter_sprite->setScale(sprite_scale);
     shatter_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     shatter_sprite->setPosition(get_relative(this->getContentSize()));
@@ -288,10 +294,20 @@ void MiningHarvestable::init_sprite()
     bot_right_sprite->visit();
     rt->end();
 
-    this->sprite = Sprite::createWithTexture(rt->getSprite()->getTexture());
+    rt->saveToFile("minemap.png");
+
+    auto rt_tex = rt->getSprite()->getTexture();
+
+    auto temp_sprite = Sprite::createWithTexture(rt->getSprite()->getTexture());
+
+    this->sprite = ui::ImageView::create("harvester.png", TextureResType::PLIST);
+    auto cast_sprite = dynamic_cast<ui::Scale9Sprite*>(this->sprite->getVirtualRenderer());
+    cast_sprite->init(temp_sprite, temp_sprite->getTextureRect(), false, Rect::ZERO);
 
     this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     this->sprite->setPosition(get_relative(this->getContentSize()));
+    cast_sprite->setScale(4);
+
     this->clip->addChild(this->sprite);
     
 };
