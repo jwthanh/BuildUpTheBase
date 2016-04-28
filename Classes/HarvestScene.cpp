@@ -611,13 +611,15 @@ void BaseScene::create_shop_button()
         "text_shop.png",
         ui::TextureResType::PLIST
     );
+    shop_text_img->setFlippedX(true);
 
-    shop_text_img->setPosition(Vec2(28, 17));
+    shop_text_img->setPosition(Vec2(25, 17));
     shop_button->addChild(shop_text_img);
     shop_button->setScale(4);
+    shop_button->setFlippedX(true);
 
     Node* shop_pos_node = harvest_scene_editor->getChildByName("shop_pos");
-    shop_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    shop_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
     shop_button->setPosition(shop_pos_node->getPosition());
 
     shop_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
