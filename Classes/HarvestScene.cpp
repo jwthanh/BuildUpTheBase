@@ -493,13 +493,24 @@ void BaseScene::create_shop_listview()
 
 
         //placeholder for things we'll need to put in the sidebar
-        std::vector<std::string> nuitems_config = {"harvester_buy"};
+        struct HarvestConfig{
+            std::string node_name;
+            Harvester::SubType harv_type;
+        };
 
-        for (auto name : nuitems_config)
+        std::vector<HarvestConfig> nuitems_config = {
+            {"harvester_item_one", Harvester::SubType::One},
+            {"harvester_item_two", Harvester::SubType::Two},
+            {"harvester_item_three", Harvester::SubType::Three},
+            {"harvester_item_four", Harvester::SubType::Four},
+            {"harvester_item_five", Harvester::SubType::Five}
+        };
+
+        for (auto config : nuitems_config)
         {
 
             //if the child already exists, put it at the back 
-            std::string child_name = name;
+            std::string child_name = config.node_name;
             auto existing_node = shop_listview->getChildByName(child_name);
             if (existing_node)
             {
@@ -510,7 +521,7 @@ void BaseScene::create_shop_listview()
 
             //clone the new item
             auto menu_item = HarvesterShopNuItem::create();
-            menu_item->my_init(shop_listview, Harvester::SubType::One, Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type));
+            menu_item->my_init(shop_listview, config.harv_type, Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type));
             menu_item->setName(child_name);
 
             //since we only set the int_type of the menu item above, it doesn't
