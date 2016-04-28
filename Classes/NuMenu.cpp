@@ -271,8 +271,17 @@ void HarvesterShopNuItem::my_init_sprite()
     };
 
     auto base_node = Node::create();
+
+    std::string set_path;
+    auto set_paths = gen_paths("set", 4);
+    if (this->harv_type == Harvester::SubType::One) { set_path = set_paths.at(0); }
+    else if (this->harv_type == Harvester::SubType::Two) { set_path = set_paths.at(1); }
+    else if (this->harv_type == Harvester::SubType::Three) { set_path = set_paths.at(2); }
+    else if (this->harv_type == Harvester::SubType::Four) { set_path = set_paths.at(3); }
+    else { set_path = "set_0.png"; }
+
     auto sprites = {
-        pick_one(gen_paths("set", 4)),
+        set_path,
         pick_one(gen_paths("body", 49)),
         pick_one(gen_paths("headwear", 49)),
         pick_one(gen_paths("legs", 22)),
