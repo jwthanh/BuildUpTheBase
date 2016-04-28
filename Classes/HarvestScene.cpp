@@ -426,7 +426,7 @@ void BaseScene::create_inventory_listview()
                 if (type == ui::Widget::TouchEventType::ENDED) {
                     CCLOG("touched a panel %i", ing_type);
                     auto alert = this->create_detail_alert(ing_type);
-                    this->addChild(alert);
+                    this->addChild(alert, 10);
 
                     //animate
                     Vec2 start_pos = new_item_panel->getTouchEndPosition();
