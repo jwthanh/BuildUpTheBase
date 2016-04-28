@@ -82,7 +82,9 @@ Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType 
 
 void Harvester::on_update()
 {
-    this->building->create_ingredients(this->ing_type, this->active_count);
+    auto harvested_count = Harvester::get_harvested_count(this->sub_type);
+    //TODO change create_ingredients and active_count to res_count_t type, i dont want to recompile again
+    this->building->create_ingredients(this->ing_type, (int)harvested_count*(res_count_t)this->active_count);
 };
 
 res_count_t Harvester::get_base_shop_cost(Harvester::SubType harv_type)
@@ -97,4 +99,18 @@ res_count_t Harvester::get_base_shop_cost(Harvester::SubType harv_type)
     else { base_cost = 9999;}
 
     return base_cost;
+};
+
+res_count_t Harvester::get_harvested_count(Harvester::SubType harv_type)
+{
+    res_count_t harvested_count = 1;
+    
+    if (harv_type == Harvester::SubType::One) { harvested_count = 1; }
+    else if (harv_type == Harvester::SubType::Two) { harvested_count = 25; }
+    else if (harv_type == Harvester::SubType::Three) { harvested_count = 345; }
+    else if (harv_type == Harvester::SubType::Four) { harvested_count = 500; }
+    else if (harv_type == Harvester::SubType::Five) { harvested_count = 2000; }
+    else { harvested_count = 9999;}
+
+    return harvested_count;
 };

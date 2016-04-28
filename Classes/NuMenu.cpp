@@ -326,7 +326,8 @@ void HarvesterShopNuItem::my_init_update_callback()
         this->_shop_cost = Harvester::get_base_shop_cost(this->harv_type) * std::pow(1.15f, std::max(0, (int)harvesters_owned));
 
         std::stringstream ss;
-        ss << "Buy Auto-Harvester\nAdds 1 " << building->punched_sub_type << " per sec";
+        auto harvested_count = Harvester::get_harvested_count(this->harv_type);
+        ss << "Buy Auto-Harvester\nAdds " << harvested_count << " " << building->punched_sub_type << " per sec";
         this->set_description(ss.str());
     };
     this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
