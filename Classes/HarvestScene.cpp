@@ -191,7 +191,12 @@ void BaseScene::create_info_panel()
         spBuilding building = BUILDUP->get_target_building();
 
         std::stringstream ss;
-        ss << "Robo-harvesters: " << building->harvesters.size();
+        res_count_t total_active = 0;
+        for (auto types_to_count : building->harvesters)
+        {
+            total_active += types_to_count.second;
+        };
+        ss << "Robo-harvesters: " << total_active;
         harvester_count->setString(ss.str());
     };
     this->schedule(update_harvester_count, update_delay, "harvester_count_update");
