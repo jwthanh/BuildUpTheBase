@@ -319,7 +319,9 @@ void BaseScene::create_building_scrollview()
         building_panel->schedule(change_target_page, 0.1f, "update_target");
 
         if (building->get_been_bought() == false) {
-            node->setVisible(false);
+            //hide panel from pageview if not bought
+            //NOTE still need to solve the same problem as the ingredients panel and its sorting
+            building_panel->setVisible(false);
             continue;
         };
 
