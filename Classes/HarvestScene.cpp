@@ -504,22 +504,10 @@ void BaseScene::create_shop_listview()
             }
 
             //clone the new item
-            auto menu_item = ShopNuItem::create();
-            menu_item->my_init(shop_listview, "harvester_buy");
-            menu_item->desc_lbl->setFontSize(18);
-            menu_item->_shop_cost = 25;
-            menu_item->set_cost_lbl("25");
+            auto menu_item = HarvesterShopNuItem::create();
+            menu_item->my_init(shop_listview, BUILDUP->get_target_building());
             menu_item->setName(child_name);
 
-            std::vector<std::string> names = {
-                "Jamal", "Josh", "James", "Jimmy", "Jonathan", "Javert", "John",
-                "Jackson", "Jax", "Jimothy", "Jasper", "Joe", "Jenson", "Jack",
-                "Justin", "Jaleel", "Jamar", "Jesse", "Jaromir", "Jebediah", 
-                "Johan", "Jericho"
-            };
-            std::string harvester_name = pick_one(names);
-
-            menu_item->set_title(harvester_name);
 
             auto gen_paths = [](std::string base_path, int max_num)
             {

@@ -19,7 +19,7 @@ class NuItem : public cocos2d::ui::Widget
         CREATE_FUNC(NuItem);
 
         NuItem(){};
-        void my_init(cocos2d::Node* parent);
+        virtual void my_init(cocos2d::Node* parent);
 
         cocos2d::ui::Button* button;
         cocos2d::ui::ImageView* item_icon;
@@ -50,7 +50,7 @@ class RecipeNuItem : public NuItem
         spRecipe recipe;
         spBuilding building;
 
-        void my_init(spRecipe recipe, std::shared_ptr<Building> building, Node* parent);
+        virtual void my_init(spRecipe recipe, std::shared_ptr<Building> building, Node* parent);
         virtual void update_func(float dt);
 };
 
@@ -62,7 +62,7 @@ class ShopNuItem : public Buyable, public NuItem
 
         ResourceCondition* resource_cost;
 
-        void my_init(Node* parent, std::string id_key);
+        virtual void my_init(Node* parent, std::string id_key);
         virtual void update_func(float dt);
 };
 
@@ -73,7 +73,14 @@ class BuildingShopNuItem : public ShopNuItem
         BuildingShopNuItem(){};
 
         std::shared_ptr<Building> building;
-        void my_init(std::shared_ptr<Building> building, Node* parent);
+        virtual void my_init(std::shared_ptr<Building> building, Node* parent);
+};
+
+class HarvesterShopNuItem : public ShopNuItem
+{
+    public:
+        CREATE_FUNC(HarvesterShopNuItem);
+        virtual void my_init(Node* parent, std::shared_ptr<Building> building);
 };
 
 class NuMenu : public GameLayer

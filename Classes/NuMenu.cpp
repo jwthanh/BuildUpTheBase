@@ -221,6 +221,25 @@ void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
     this->_shop_cost = building->get_cost();
 }
 
+void HarvesterShopNuItem::my_init(Node* parent, spBuilding building)
+{
+            ShopNuItem::my_init(parent, "harvester_buy");
+            this->desc_lbl->setFontSize(18);
+            this->_shop_cost = 25;
+            this->set_cost_lbl("25");
+
+            std::vector<std::string> names = {
+                "Jamal", "Josh", "James", "Jimmy", "Jonathan", "Javert", "John",
+                "Jackson", "Jax", "Jimothy", "Jasper", "Joe", "Jenson", "Jack",
+                "Justin", "Jaleel", "Jamar", "Jesse", "Jaromir", "Jebediah", 
+                "Johan", "Jericho"
+            };
+            std::string harvester_name = pick_one(names);
+
+            this->set_title(harvester_name);
+
+};
+
 void NuMenu::onEnter()
 {
     GameLayer::onEnter();
