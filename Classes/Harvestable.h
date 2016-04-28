@@ -58,6 +58,14 @@ class FarmingHarvestable : public Harvestable
         std::string get_sprite_path();
 };
 
+class GraveyardHarvestable : public Harvestable
+{
+    public:
+        CREATE_FUNC(GraveyardHarvestable);
+        bool init();
+        std::string get_sprite_path();
+};
+
 class MiningHarvestable : public Harvestable
 {
     public:

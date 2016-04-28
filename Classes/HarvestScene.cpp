@@ -891,6 +891,8 @@ void HarvestScene::add_harvestable()
         harvestable = CraftingHarvestable::create(this->target_recipe);
     } else if (BUILDUP->get_target_building()->name == "The Arena") {
         harvestable = FightingHarvestable::create();
+    } else if (BUILDUP->get_target_building()->name == "The Graveyard") {
+        harvestable = GraveyardHarvestable::create();
     } else if (BUILDUP->get_target_building()->name == "The Underscape") {
         harvestable = UndeadHarvestable::create();
     } else if (BUILDUP->get_target_building()->name == "The Farm") {

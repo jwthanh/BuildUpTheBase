@@ -9,7 +9,7 @@
 #include "Util.h"
 #include "Recipe.h"
 #include "attribute.h"
-#include <cocos2d/cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h>
+#include "cocostudio/ActionTimeline/CSLoader.h"
 
 USING_NS_CC;
 
@@ -250,6 +250,21 @@ bool FarmingHarvestable::init()
 std::string FarmingHarvestable::get_sprite_path()
 {
     return "bush.png";
+};
+
+bool GraveyardHarvestable::init()
+{
+    bool val = Harvestable::init();
+
+    this->initial_scale = 7.0f;
+    this->setScale(this->initial_scale);
+
+    return val;
+};
+
+std::string GraveyardHarvestable::get_sprite_path()
+{
+    return "bones.png";
 };
 
 void MiningHarvestable::init_sprite()
