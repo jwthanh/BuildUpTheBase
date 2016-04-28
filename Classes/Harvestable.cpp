@@ -400,14 +400,11 @@ bool FightingHarvestable::init()
 
     this->click_limit = 1000000; //some really high number they'll never click
 
+    //setup enemy node
     this->enemy = std::make_shared<Fighter>(BUILDUP->city, "Brawler");
     this->enemy->team = Fighter::TeamTwo;
     this->enemy->sprite_name = "ogre10x10.png";
     this->enemy->attrs->health->set_vals(20);
-
-    //this->sprite->setScale(this->sprite->getScale()*2);
-    //this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    //this->setContentSize(this->get_sprite_size());
 
     FighterNode* fighter_node = FighterNode::create(this->enemy);
     fighter_node->setScale(0.25f);
@@ -415,7 +412,8 @@ bool FightingHarvestable::init()
     fighter_node->xp_bar->setVisible(false); //dont need to see this for an enemy
     this->addChild(fighter_node);
 
-    this->setPosition(((GameLayer*)NULL)->get_center_pos(-150, 0)); //hack to call without access to an instance
+    //adjust position because the enemy and sword are both offset from the center
+    this->setPosition(Vec2(this->getPosition().x-150, this->getPosition().y)); 
 
     return true;
 };
