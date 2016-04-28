@@ -490,12 +490,14 @@ void Building::update(float dt)
 
         for (auto harvester : this->harvesters) {
             std::pair<Harvester::SubType, Ingredient::SubType> sub_type = harvester.first;
+            auto harv_type = sub_type.first;
+            auto ing_type = sub_type.second;
             res_count_t count = harvester.second;
 
-            auto harvester = std::make_shared<Harvester>(this, "test worker", sub_type.second, sub_type.first);
-            harvester->active_count += 1;
-            BUILDUP->get_target_building()->harvesters.push_back(harvester);
-            harvester->update(dt);
+
+            auto temp_harvester = std::make_shared<Harvester>(this->shared_from_this(), "test worker", sub_type.second, sub_type.first);
+            temp_harvester->active_count = count;
+            temp_harvester->update(dt);
         };
     }
     // else
