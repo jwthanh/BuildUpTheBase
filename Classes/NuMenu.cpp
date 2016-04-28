@@ -250,6 +250,8 @@ void HarvesterShopNuItem::my_init(Node* parent, Harvester::SubType harv_type, In
     this->my_init_sprite();
     this->my_init_touch_ended_callback();
     this->my_init_update_callback();
+
+    this->update_func(0);
 };
 
 void HarvesterShopNuItem::my_init_sprite()

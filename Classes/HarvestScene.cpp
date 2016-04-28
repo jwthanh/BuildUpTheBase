@@ -537,6 +537,7 @@ void BaseScene::create_shop_listview()
     };
 
     shop_listview->schedule(update_listview, 0.1f, "update_listview");
+    update_listview(0);
 };
 
 void BaseScene::create_shop_button()
