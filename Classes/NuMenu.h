@@ -5,6 +5,8 @@
 #include "cocos2d.h"
 #include "GameLayer.h"
 #include "Buyable.h"
+#include "Worker.h"
+#include "Resources.h"
 
 class PlainShopItem;
 class Fist;
@@ -81,11 +83,14 @@ class HarvesterShopNuItem : public ShopNuItem
     public:
         CREATE_FUNC(HarvesterShopNuItem);
 
-    virtual void my_init(Node* parent, std::shared_ptr<Building> building);
+    virtual void my_init(Node* parent, Harvester::SubType harv_type, Ingredient::SubType ing_type);
     void my_init_title();
     void my_init_sprite();
     void my_init_touch_ended_callback();
     void my_init_update_callback();
+
+    Harvester::SubType harv_type;
+    Ingredient::SubType ing_type;
 };
 
 class NuMenu : public GameLayer

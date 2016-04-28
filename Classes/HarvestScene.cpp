@@ -505,7 +505,7 @@ void BaseScene::create_shop_listview()
 
             //clone the new item
             auto menu_item = HarvesterShopNuItem::create();
-            menu_item->my_init(shop_listview, BUILDUP->get_target_building());
+            menu_item->my_init(shop_listview, Harvester::SubType::One, Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type));
             menu_item->setName(child_name);
 
 

@@ -235,9 +235,13 @@ void HarvesterShopNuItem::my_init_title()
     this->set_title(harvester_name);
 }
 
-void HarvesterShopNuItem::my_init(Node* parent, spBuilding building)
+void HarvesterShopNuItem::my_init(Node* parent, Harvester::SubType harv_type, Ingredient::SubType ing_type)
 {
     ShopNuItem::my_init(parent, "harvester_buy");
+
+    this->harv_type = harv_type;
+    this->ing_type = ing_type;
+
     this->desc_lbl->setFontSize(18);
     this->_shop_cost = 25;
     this->set_cost_lbl("25");
@@ -303,9 +307,6 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
             CCLOG("buying a harvester");
             BEATUP->add_total_coin(-cost);
             auto building = BUILDUP->get_target_building();
-
-            auto ing_type = Ingredient::string_to_type(building->punched_sub_type);
-            auto harv_type = Harvester::SubType::One;
 
             auto harvester_count = map_get(building->harvesters, { harv_type, ing_type }, 0);
             harvester_count++;
