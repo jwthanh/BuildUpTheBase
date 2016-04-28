@@ -9,6 +9,7 @@
 #include "Util.h"
 #include "Recipe.h"
 #include "attribute.h"
+#include <cocos2d/cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h>
 
 USING_NS_CC;
 
@@ -65,7 +66,10 @@ bool Harvestable::init()
 
     this->init_clicks();
 
-    this->setPosition(((GameLayer*)NULL)->get_center_pos()); //hack to call without access to an instance
+    auto inst = CSLoader::getInstance();
+    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    Node* harvestable_pos = harvest_scene_editor->getChildByName("harvestable_pos");
+    this->setPosition(harvestable_pos->getPosition()); 
     this->setName("harvestable");
 
     this->initial_scale = 4;
