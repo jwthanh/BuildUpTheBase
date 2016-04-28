@@ -22,14 +22,9 @@
 #include "constants.h"
 #include "Nameable.h"
 
-class Updateable
-{
-    public:
-        Clock* update_clock;
-
-        Updateable();
-        void update(float dt);
-};
+//it would be nice to not need this
+#include "Worker.h"
+#include "Updateable.h"
 
 
 class Fighter : public Nameable, public Updateable
@@ -124,7 +119,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         vsFighter fighters;
         vsWorker workers;
 
-        vsHarvester harvesters;
+        mistHarvester harvesters;
 
         Clock* spawn_clock;
 

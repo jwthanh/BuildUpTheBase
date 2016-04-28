@@ -51,6 +51,7 @@
     <ClCompile Include="..\Classes\MiscUI.cpp" />
     <ClCompile Include="..\Classes\Network.cpp" />
     <ClCompile Include="..\Classes\Animal.cpp" />
+    <ClCompile Include="..\Classes\Updateable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -98,6 +99,7 @@
     <ClInclude Include="..\Classes\MiscUI.h" />
     <ClInclude Include="..\Classes\Network.h" />
     <ClInclude Include="..\Classes\Animal.h" />
+    <ClInclude Include="..\Classes\Updateable.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

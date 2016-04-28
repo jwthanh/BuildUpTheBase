@@ -1,5 +1,8 @@
 #include "Worker.h"
 
+#include "Clock.h"
+
+#include "HouseBuilding.h"
 
 Worker::Worker(spBuilding building, std::string name)
     : Nameable(name), Updateable() {
@@ -28,6 +31,24 @@ void Worker::update(float dt)
 void Worker::on_update()
 {
 
+};
+
+bool ResourceCondition::is_satisfied(spBuilding building){
+    if (this->type_choice == Resource::Ingredient) {
+        return (int)building->ingredients.size() >= this->quantity;
+    }
+    else if (this->type_choice == Resource::Product) {
+        return (int)building->products.size() >= this->quantity;
+    }
+    else if (this->type_choice == Resource::Ingredient) {
+        return (int)building->wastes.size() >= this->quantity;
+    }
+    else {
+        unsigned int size = building->ingredients.size() +
+            building->products.size() +
+            building->wastes.size();
+        return (int)size >= this->quantity;
+    };
 };
 
 ResourceCondition* ResourceCondition::create_ingredient_condition(Ingredient::SubType ing_type, int quantity, std::string condition_name)

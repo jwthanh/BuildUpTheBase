@@ -2,7 +2,13 @@
 #ifndef WORKER_H
 #define WORKER_H
 
-#include "HouseBuilding.h"
+#include "constants.h"
+
+#include "Updateable.h"
+#include "Nameable.h"
+
+
+#include "Resources.h"
 
 class ResourceCondition : public Nameable
 {
@@ -24,23 +30,7 @@ class ResourceCondition : public Nameable
         static ResourceCondition* create_product_condition(Product::SubType pro_type, int quantity, std::string condition_name);
         static ResourceCondition* create_waste_condition(Waste::SubType wst_type, int quantity, std::string condition_name);
 
-        bool is_satisfied(spBuilding building) {
-            if (this->type_choice == Resource::Ingredient) {
-                return (int)building->ingredients.size() >= this->quantity;
-            }
-            else if (this->type_choice == Resource::Product) {
-                return (int)building->products.size() >= this->quantity;
-            }
-            else if (this->type_choice == Resource::Ingredient) {
-                return (int)building->wastes.size() >= this->quantity;
-            }
-            else {
-                unsigned int size = building->ingredients.size() +
-                    building->products.size() +
-                    building->wastes.size();
-                return (int)size >= this->quantity;
-            };
-        };
+        bool is_satisfied(spBuilding building);
 };
 
 
@@ -88,5 +78,7 @@ class Harvester : public Worker
 
         virtual void on_update();
 };
+
+typedef std::map<std::pair<Harvester::SubType, Ingredient::SubType>, res_count_t> mistHarvester;
 
 #endif

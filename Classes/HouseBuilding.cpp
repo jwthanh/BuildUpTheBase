@@ -47,16 +47,6 @@ Buildup::Buildup()
     this->player = NULL;
 };
 
-Updateable::Updateable()
-{
-    this->update_clock = new Clock(15.0f);
-};
-
-void Updateable::update(float dt)
-{
-    this->update_clock->update(dt);
-};
-
 void Fighter::update(float dt)
 {
     Updateable::update(dt);
@@ -404,7 +394,7 @@ Building::Building(Village* city, std::string name, std::string id_key) :
     fighters = vsFighter();
     workers = vsWorker();
 
-    harvesters = vsHarvester();
+    harvesters = mistHarvester();
 
     menu_items = {};
 
@@ -499,6 +489,12 @@ void Building::update(float dt)
         update_clock->reset();
 
         for (auto harvester : this->harvesters) {
+            std::pair<Harvester::SubType, Ingredient::SubType> sub_type = harvester.first;
+            res_count_t count = harvester.second;
+
+            auto harvester = std::make_shared<Harvester>(this, "test worker", sub_type.second, sub_type.first);
+            harvester->active_count += 1;
+            BUILDUP->get_target_building()->harvesters.push_back(harvester);
             harvester->update(dt);
         };
     }
