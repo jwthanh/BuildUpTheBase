@@ -241,7 +241,7 @@ bool FarmingHarvestable::init()
 {
     bool val = Harvestable::init();
 
-    this->initial_scale = 3;
+    this->initial_scale = 2.5f;
     this->setScale(this->initial_scale);
 
     return val;
@@ -395,7 +395,7 @@ bool FightingHarvestable::init()
 {
     Harvestable::init();
 
-    this->initial_scale = 6;
+    this->initial_scale = 4;
     this->setScale(this->initial_scale);
 
     this->click_limit = 1000000; //some really high number they'll never click
@@ -413,7 +413,7 @@ bool FightingHarvestable::init()
     this->addChild(fighter_node);
 
     //adjust position because the enemy and sword are both offset from the center
-    this->setPosition(Vec2(this->getPosition().x-150, this->getPosition().y)); 
+    this->setPosition(Vec2(this->getPosition().x-110, this->getPosition().y)); 
 
     return true;
 };
