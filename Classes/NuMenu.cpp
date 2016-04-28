@@ -319,12 +319,13 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
 void HarvesterShopNuItem::my_init_update_callback()
 {
     auto update_harvesters_cb = [this](float dt) {
-        auto harvesters_owned = BUILDUP->get_target_building()->harvesters.size();
+        auto building = BUILDUP->get_target_building();
+        auto harvesters_owned = map_get(building->harvesters, {Harvester::SubType::One, Ingredient::string_to_type(building->punched_sub_type)}, 0);
         this->set_count_lbl(harvesters_owned);
         this->_shop_cost = 25 * std::pow(1.15f, std::max(0, (int)harvesters_owned));
 
         std::stringstream ss;
-        ss << "Buy Auto-Harvester\nAdds 1 " << BUILDUP->get_target_building()->punched_sub_type << " per sec";
+        ss << "Buy Auto-Harvester\nAdds 1 " << building->punched_sub_type << " per sec";
         this->set_description(ss.str());
     };
     this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
