@@ -12,6 +12,7 @@
 #include "GameLogic.h"
 #include "Recipe.h"
 #include "MiscUI.h"
+#include <numeric>
 
 USING_NS_CC;
 
@@ -221,22 +222,113 @@ void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
     this->_shop_cost = building->get_cost();
 }
 
+void HarvesterShopNuItem::my_init_title()
+{
+    std::vector<std::string> names = {
+        "Jamal", "Josh", "James", "Jimmy", "Jonathan", "Javert", "John",
+        "Jackson", "Jax", "Jimothy", "Jasper", "Joe", "Jenson", "Jack",
+        "Justin", "Jaleel", "Jamar", "Jesse", "Jaromir", "Jebediah", 
+        "Johan", "Jericho"
+    };
+    std::string harvester_name = pick_one(names);
+
+    this->set_title(harvester_name);
+}
+
 void HarvesterShopNuItem::my_init(Node* parent, spBuilding building)
 {
-            ShopNuItem::my_init(parent, "harvester_buy");
-            this->desc_lbl->setFontSize(18);
-            this->_shop_cost = 25;
-            this->set_cost_lbl("25");
+    ShopNuItem::my_init(parent, "harvester_buy");
+    this->desc_lbl->setFontSize(18);
+    this->_shop_cost = 25;
+    this->set_cost_lbl("25");
 
-            std::vector<std::string> names = {
-                "Jamal", "Josh", "James", "Jimmy", "Jonathan", "Javert", "John",
-                "Jackson", "Jax", "Jimothy", "Jasper", "Joe", "Jenson", "Jack",
-                "Justin", "Jaleel", "Jamar", "Jesse", "Jaromir", "Jebediah", 
-                "Johan", "Jericho"
-            };
-            std::string harvester_name = pick_one(names);
+    this->my_init_title();
+    this->my_init_sprite();
+    this->my_init_touch_ended_callback();
+    this->my_init_update_callback();
+};
 
-            this->set_title(harvester_name);
+void HarvesterShopNuItem::my_init_sprite()
+{
+    auto gen_paths = [](std::string base_path, int max_num)
+    {
+        std::vector<int> nums(max_num);
+        std::iota(nums.begin(), nums.end(), 0);
+
+        std::vector<std::string> output;
+        for (auto num : nums)
+        {
+            output.push_back(base_path + "_" + std::to_string(num)+".png");
+        }
+
+        return  output;
+    };
+
+    auto base_node = Node::create();
+    auto sprites = {
+        pick_one(gen_paths("set", 4)),
+        pick_one(gen_paths("body", 49)),
+        pick_one(gen_paths("headwear", 49)),
+        pick_one(gen_paths("legs", 22)),
+        pick_one(gen_paths("shield", 49)),
+        pick_one(gen_paths("weapon", 49))
+    };
+    for (auto path : sprites)
+    {
+        base_node->addChild(Sprite::createWithSpriteFrameName(path));
+    }
+
+    base_node->setPosition(8,8);
+    base_node->setScaleY(-1.0f);
+
+    auto rt = RenderTexture::create(16, 16);
+    rt->retain();
+    rt->begin();
+    base_node->visit();
+    rt->end();
+
+    ui::Scale9Sprite* vr = (ui::Scale9Sprite*)this->item_icon->getVirtualRenderer();
+    vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
+};
+
+void HarvesterShopNuItem::my_init_touch_ended_callback()
+{
+    this->set_touch_ended_callback([this]()
+    {
+        auto cost = this->get_cost();
+        auto total_coins = BEATUP->get_total_coins();
+
+        if (cost <= total_coins)
+        {
+            CCLOG("buying a harvester");
+            BEATUP->add_total_coin(-cost);
+            auto building = BUILDUP->get_target_building();
+
+            auto ing_type = Ingredient::string_to_type(building->punched_sub_type);
+            auto harv_type = Harvester::SubType::One;
+
+            auto harvester_count = map_get(building->harvesters, { harv_type, ing_type }, 0);
+            harvester_count++;
+            building->harvesters[{ harv_type, ing_type }] = harvester_count;
+            this->update_func(0);
+        }
+    });
+
+};
+
+void HarvesterShopNuItem::my_init_update_callback()
+{
+    auto update_harvesters_cb = [this](float dt) {
+        auto harvesters_owned = BUILDUP->get_target_building()->harvesters.size();
+        this->set_count_lbl(harvesters_owned);
+        this->_shop_cost = 25 * std::pow(1.15f, std::max(0, (int)harvesters_owned));
+
+        std::stringstream ss;
+        ss << "Buy Auto-Harvester\nAdds 1 " << BUILDUP->get_target_building()->punched_sub_type << " per sec";
+        this->set_description(ss.str());
+    };
+    this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
+    update_harvesters_cb(0);
 
 };
 
