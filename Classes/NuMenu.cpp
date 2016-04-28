@@ -304,7 +304,7 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
 
         if (cost <= total_coins)
         {
-            CCLOG("buying a harvester");
+            CCLOG("HarvesterShopNuItem bought a harvester");
             BEATUP->add_total_coin(-cost);
             auto building = BUILDUP->get_target_building();
 

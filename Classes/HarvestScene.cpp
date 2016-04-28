@@ -508,6 +508,14 @@ void BaseScene::create_shop_listview()
             menu_item->my_init(shop_listview, Harvester::SubType::One, Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type));
             menu_item->setName(child_name);
 
+            //since we only set the int_type of the menu item above, it doesn't
+            //change to adapt for the building, so we cheat and do it here.
+            //this'll get moved to a json map or something between building and
+            //harvest sub types
+            menu_item->schedule([menu_item](float dt){
+                menu_item->ing_type = Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type);
+            }, 0.1f, "update_ing_type");
+
 
         };
     };
