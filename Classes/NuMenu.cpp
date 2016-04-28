@@ -459,50 +459,6 @@ void BuildingNuMenu::init_items()
     auto scrollview = this->scrollable;
     this->create_inventory_item(scrollview);
 
-    //buy an auto harvester button
-    auto menu_item = ShopNuItem::create();
-    menu_item->my_init(scrollview, "harvester_buy");
-    menu_item->_shop_cost = 25;
-    menu_item->set_cost_lbl("25");
-
-    std::vector<std::string> names = {
-        "Jamal", "Josh", "James", "Jimmy", "Jonathan", "Javert", "John",
-        "Jackson", "Jax", "Jimothy", "Jasper", "Joe", "Jenson", "Jack",
-        "Justin", "Jaleel", "Jamar", "Jesse", "Jaromir", "Jebediah", 
-        "Johan", "Jericho"
-    };
-    std::string name = pick_one(names);
-
-    menu_item->set_title(name);
-    menu_item->set_description("Buy Auto-Harvester");
-    menu_item->set_image("harvester.png");
-    menu_item->set_touch_ended_callback([this, menu_item]()
-    {
-        auto cost = menu_item->get_cost();
-        auto total_coins = BEATUP->get_total_coins();
-
-        if (cost <= total_coins)
-        {
-            CCLOG("buying a harvester");
-            BEATUP->add_total_coin(-cost);
-            auto ing_type = Ingredient::string_to_type(this->building->punched_sub_type);
-            auto harv_type = Harvester::SubType::One;
-
-            auto harvester_count = map_get(this->building->harvesters, { harv_type, ing_type }, 0);
-            harvester_count++;
-            this->building->harvesters.at({ harv_type, ing_type }) = harvester_count;
-
-            menu_item->update_func(0);
-        }
-    });
-    auto update_harvesters_cb = [this, menu_item](float dt) {
-        auto harvesters_owned = this->building->harvesters.size();
-        menu_item->set_count_lbl(harvesters_owned);
-        menu_item->_shop_cost = 25 * std::pow(1.15f, std::max(0, (int)harvesters_owned));
-    };
-    menu_item->schedule(update_harvesters_cb, update_delay, "harvester_count");
-    update_harvesters_cb(0);
-
     for (auto recipe : building->data->get_all_recipes())
     {
         auto convert_item = RecipeNuItem::create();
