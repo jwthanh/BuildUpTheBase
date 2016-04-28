@@ -495,7 +495,7 @@ void Building::update(float dt)
             res_count_t count = harvester.second;
 
 
-            auto temp_harvester = std::make_shared<Harvester>(this->shared_from_this(), "test worker", sub_type.second, sub_type.first);
+            auto temp_harvester = std::make_shared<Harvester>(this->shared_from_this(), "test worker", ing_type, harv_type);
             temp_harvester->active_count = count;
             temp_harvester->update(dt);
         };
