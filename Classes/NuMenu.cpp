@@ -232,7 +232,7 @@ void HarvesterShopNuItem::my_init_title()
     };
     std::string harvester_name = pick_one(names);
 
-    this->set_title(harvester_name);
+    this->set_title("Buy "+harvester_name);
 }
 
 void HarvesterShopNuItem::my_init(Node* parent, Harvester::SubType harv_type, Ingredient::SubType ing_type)
@@ -338,7 +338,7 @@ void HarvesterShopNuItem::my_init_update_callback()
 
         std::stringstream ss;
         auto harvested_count = Harvester::get_harvested_count(this->harv_type);
-        ss << "Buy Auto-Harvester\nAdds " << harvested_count << " " << building->punched_sub_type << " per sec";
+        ss << "Adds " << harvested_count << " " << building->punched_sub_type << " per sec";
         this->set_description(ss.str());
     };
     this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
