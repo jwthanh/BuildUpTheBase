@@ -375,7 +375,7 @@ void create(mistT& mist, int quantity, typename mistT::key_type sub_type)
         mist[sub_type] = 0;
     }
 
-    mist[sub_type] += 10000000;
+    mist[sub_type] += quantity;
 
 };
 
