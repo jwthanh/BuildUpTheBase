@@ -778,18 +778,15 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
                 }
             }
         });
-        sell_btn->schedule([sell_btn, this, ing_type](float){
-            mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
-            if (ingredients.empty()){
-                sell_btn->setBright(false);
-            }
-            else if (BUILDUP->get_target_building()->count_ingredients(ing_type) == 0)
+        sell_btn->schedule([sell_btn, this, ing_type, amount_sold](float){
+            if (BUILDUP->get_target_building()->count_ingredients(ing_type) < amount_sold)
             {
-                sell_btn->setBright(false);
+                //this doesnt let the button accept touches, so we need to subclass widget or something to fix it
+                try_set_enabled(sell_btn, false);
             }
             else
             {
-                sell_btn->setEnabled(true);
+                try_set_enabled(sell_btn, true);
             }
         }, update_delay, "sell_btn_state_cb");
     };

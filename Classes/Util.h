@@ -37,4 +37,6 @@ std::vector<std::string> split(const std::string &s, char delim);
 std::string beautify_double(double value);
 void test_beautify_double();
 
+void try_set_enabled(cocos2d::ui::Widget* widget, bool new_value);
+
 #endif

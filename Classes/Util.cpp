@@ -1,6 +1,8 @@
 #include "Util.h"
 #include <iomanip>
 
+#include "ui/CocosGUI.h"
+
 float sx (float x, bool do_scale)
 {
     if (!do_scale)
@@ -197,3 +199,11 @@ void test_beautify_double()
     test_double(12312317653411111111.0f);
     test_double(-123.04f);
 }
+
+void try_set_enabled(cocos2d::ui::Widget* widget, bool new_value)
+{
+    if (widget->isEnabled() != new_value)
+    {
+        widget->setEnabled(new_value);
+    }
+};
