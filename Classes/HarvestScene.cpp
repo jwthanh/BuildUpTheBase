@@ -143,9 +143,9 @@ void BaseScene::create_info_panel()
     ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("building_info_panel"));
     building_info_panel->removeFromParent();
 
-    auto create_count = [](std::string prefix, int count) {
+    auto create_count = [](std::string prefix, res_count_t count) {
         std::stringstream ss;
-        ss << prefix << ": " << count;
+        ss << prefix << ": " << beautify_double(count);
         return ss.str();
     };
 
@@ -299,9 +299,9 @@ void BaseScene::create_building_scrollview()
 
     float update_delay = 0.1f;
 
-    auto create_count = [](std::string prefix, int count) {
+    auto create_count = [](std::string prefix, res_count_t count) {
         std::stringstream ss;
-        ss << prefix << ": " << count;
+        ss << prefix << ": " << beautify_double(count);
         return ss.str();
     };
 
@@ -337,13 +337,26 @@ void BaseScene::create_building_scrollview()
         building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
 
         auto ing_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("ingredient_count"));
-        ing_count->setString(create_count("ING", building->ingredients.size()));
+        auto update_ing_count = [create_count, ing_count, building](float dt)
+        {
+            ing_count->setString(create_count("ING", building->count_ingredients()));
+        };
+        ing_count->schedule(update_ing_count, update_delay, "update_ing_count");
 
         auto pro_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("product_count"));
-        pro_count->setString(create_count("PRO", building->products.size()));
+        auto update_pro_count = [create_count, pro_count, building](float dt)
+        {
+            pro_count->setString(create_count("pro", building->count_products()));
+        };
+        pro_count->schedule(update_pro_count, update_delay, "update_pro_count");
 
         auto wst_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("waste_count"));
-        wst_count->setString(create_count("WST", building->wastes.size()));
+        wst_count->setString(create_count("WST", building->count_ingredients()));
+        auto update_wst_count = [create_count, wst_count, building](float dt)
+        {
+            wst_count->setString(create_count("wst", building->count_wastes()));
+        };
+        wst_count->schedule(update_wst_count, update_delay, "update_wst_count");
 
         auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
             if (event == ui::Widget::TouchEventType::ENDED)

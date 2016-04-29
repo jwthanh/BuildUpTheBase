@@ -139,9 +139,9 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         std::string get_inventory();
         void print_inventory();
 
-        int count_ingredients(Ingredient::SubType ing_type);
-        int count_products(Product::SubType pro_type);
-        int count_wastes(Waste::SubType wst_type);
+        res_count_t count_ingredients(Ingredient::SubType ing_type);
+        res_count_t count_products(Product::SubType pro_type);
+        res_count_t count_wastes(Waste::SubType wst_type);
 
         std::string get_ingredients();
         std::string get_products();
@@ -153,9 +153,9 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         void print_products();
         void print_wastes();
 
-        unsigned int count_ingredients();
-        unsigned int count_products();
-        unsigned int count_wastes();
+        res_count_t count_ingredients();
+        res_count_t count_products();
+        res_count_t count_wastes();
 
         void print_fighters();
 

@@ -375,7 +375,7 @@ void create(mistT& mist, int quantity, typename mistT::key_type sub_type)
         mist[sub_type] = 0;
     }
 
-    mist[sub_type] += quantity;
+    mist[sub_type] += 10000000;
 
 };
 
@@ -436,17 +436,17 @@ Building::Building(Village* city, std::string name, std::string id_key) :
 
 };
 
-int Building::count_ingredients(Ingredient::SubType ing_type)
+res_count_t Building::count_ingredients(Ingredient::SubType ing_type)
 {
     return this->ingredients[ing_type];
 };
 
-int Building::count_products(Product::SubType pro_type)
+res_count_t Building::count_products(Product::SubType pro_type)
 {
     return this->products[pro_type];
 };
 
-int Building::count_wastes(Waste::SubType wst_type)
+res_count_t Building::count_wastes(Waste::SubType wst_type)
 {
     return this->wastes[wst_type];
 };
@@ -522,15 +522,15 @@ void Building::print_specifics()
 };
 
 #define PRINT_RESOURCE(Rtype, Rlowertype) \
-unsigned int Building::count_##Rlowertype##s() \
+res_count_t Building::count_##Rlowertype##s() \
 { \
-    unsigned int total = 0; \
+    res_count_t total = 0; \
  \
     for (auto type_str : Rtype::type_map) \
             { \
         Rtype::SubType type = type_str.first; \
  \
-        unsigned int count = map_get(this->Rlowertype##s, type, 0);\
+        res_count_t count = map_get(this->Rlowertype##s, type, 0);\
  \
         total += count; \
     }; \
