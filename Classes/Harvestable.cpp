@@ -480,7 +480,7 @@ void FightingHarvestable::shatter()
     this->enemy->attrs->health->set_vals(30);
 
     FighterNode* fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
-    fighter_node->FighterNode::set_fighter(this->enemy);
+    fighter_node->set_fighter(this->enemy);
 
     this->building->create_ingredients(Ingredient::Soul, 1);
 }
