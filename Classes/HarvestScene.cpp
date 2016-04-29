@@ -800,17 +800,18 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     auto move_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("move_btn"));
     load_default_button_textures(move_btn);
     move_btn->schedule([move_btn, this, ing_type](float){
-        mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
-        if (ingredients.empty()){
-            move_btn->setBright(false);
+        spBuilding target_building = BUILDUP->get_target_building();
+        mistIngredient& ingredients = target_building->ingredients;
+        if (target_building == BUILDUP->city->building_by_name("The Workshop")){
+            move_btn->setVisible(false);
         }
-        else if (BUILDUP->get_target_building()->count_ingredients(ing_type) == 0)
+        else if (target_building->count_ingredients(ing_type) < 10)
         {
-            move_btn->setBright(false);
+            try_set_enabled(move_btn, false);
         }
         else
         {
-            move_btn->setEnabled(true);
+            try_set_enabled(move_btn, true);
         }
     }, update_delay, "move_btn_state_cb");
 
