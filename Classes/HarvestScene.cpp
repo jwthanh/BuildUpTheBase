@@ -741,7 +741,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
 
     auto resource_description = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_description"));
     //TODO: load resource desc from json
-    resource_description->setString("Grain is good to eat\nits a lot of fun to touch\ni could go for some right now");
+    resource_description->setString("Resource Description not yet implemented");
 
     auto count_desc = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_desc"));
     auto count_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_lbl"));

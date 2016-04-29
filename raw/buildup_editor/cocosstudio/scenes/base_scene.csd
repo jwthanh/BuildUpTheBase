@@ -195,7 +195,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7917" Y="0.1711" />
             <PreSize X="0.2083" Y="0.3125" />
-            <SingleColor A="255" R="150" G="150" B="100" />
+            <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="150" B="100" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
@@ -208,7 +208,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4188" />
             <PreSize X="0.7462" Y="0.3438" />
-            <SingleColor A="255" R="150" G="150" B="255" />
+            <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="150" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
@@ -221,7 +221,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.0024" />
             <PreSize X="0.8333" Y="1.5625" />
-            <SingleColor A="255" R="150" G="150" B="255" />
+            <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="150" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
