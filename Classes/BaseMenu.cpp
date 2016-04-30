@@ -58,16 +58,16 @@ void BaseMenu::set_main_lbl()
     this->main_lbl->setString(ss.str());
 };
 
-void BaseMenu::buy_stuff(int cost)
+void BaseMenu::buy_stuff(unsigned long long int cost)
 {
-    DataManager::decr_key(Beatup::total_coin_key, cost);
+    DataManager::decr_key(Beatup::total_coin_key, (double)cost);
     cocos2d::log("spent %d", cost);
     this->set_main_lbl();
     // SoundEngine::play_sound("sounds\\old\\coin.mp3");
     SoundEngine::play_sound("sounds\\new\\coin\\C_coin_1.mp3");
 };
 
-bool BaseMenu::can_afford(int cost)
+bool BaseMenu::can_afford(unsigned long long int cost)
 {
     if (BEATUP->get_total_coins() >= cost)
     {
@@ -76,7 +76,7 @@ bool BaseMenu::can_afford(int cost)
     return false;
 };
 
-bool BaseMenu::buy(ShopItem* shop_item, int cost, BoolFuncNoArgs on_bought)
+bool BaseMenu::buy(ShopItem* shop_item, unsigned long long int cost, BoolFuncNoArgs on_bought)
 {
     if (this->can_afford(cost))
     {
@@ -344,7 +344,7 @@ cocos2d::Size Scrollable::get_accumulated_size()
 
 void Scrollable::resize_to_fit()
 {
-    //TODO maintain scroll position after this gets called
+    //TODO maunsigned long long intain scroll position after this gets called
     float scroll_w = sx(800);
     this->setInnerContainerSize(cocos2d::Size(
         scroll_w,

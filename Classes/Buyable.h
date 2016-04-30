@@ -10,11 +10,11 @@ class Buyable
 {
     public:
     std::string id_key;
-    int _shop_cost;
+    unsigned long long int _shop_cost;
 
     Buyable(std::string id_key) : id_key(id_key) { _shop_cost=0; };
 
-    int get_cost();
+    unsigned long long int get_cost();
     void set_been_bought(bool been_bought);
     bool get_been_bought();
 };

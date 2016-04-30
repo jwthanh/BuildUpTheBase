@@ -311,13 +311,13 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
 {
     this->set_touch_ended_callback([this]()
     {
-        auto cost = this->get_cost();
-        auto total_coins = BEATUP->get_total_coins();
+        res_count_t cost = this->get_cost();
+        double total_coins = BEATUP->get_total_coins();
 
         if (cost <= total_coins)
         {
             CCLOG("HarvesterShopNuItem bought a harvester");
-            BEATUP->add_total_coin(-cost);
+            BEATUP->add_total_coin(-((double)(cost)));
             auto building = BUILDUP->get_target_building();
 
             auto harvester_count = map_get(building->harvesters, { harv_type, ing_type }, 0);
@@ -424,7 +424,7 @@ void BuyBuildingsNuMenu::init_items()
             {
                 CCLOG("buying stuff");
                 building->set_been_bought(true);
-                BEATUP->add_total_coin(-building->get_cost());
+                BEATUP->add_total_coin(-(double)building->get_cost());
 
                 menu_item->update_func(0);
             }
