@@ -48,7 +48,7 @@
               <AbstractNodeData Name="description_panel" ActionTag="-65130128" Tag="17" IconVisible="False" LeftMargin="185.1844" RightMargin="314.8156" TopMargin="129.4048" BottomMargin="25.5952" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="300.0000" Y="45.0000" />
                 <Children>
-                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" Tag="20" IconVisible="False" LeftMargin="-2.3827" RightMargin="120.3148" TopMargin="-0.5603" BottomMargin="1.9683" IsCustomSize="True" FontSize="12" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" Tag="20" IconVisible="False" LeftMargin="-2.3827" RightMargin="120.3148" TopMargin="-0.5603" BottomMargin="1.9683" IsCustomSize="True" FontSize="18" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="182.0679" Y="43.5920" />
                     <AnchorPoint />
                     <Position X="-2.3827" Y="1.9683" />

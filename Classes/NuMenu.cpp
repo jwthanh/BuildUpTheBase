@@ -244,7 +244,6 @@ void HarvesterShopNuItem::my_init(Node* parent, Harvester::SubType harv_type, In
     this->harv_type = harv_type;
     this->ing_type = ing_type;
 
-    this->desc_lbl->setFontSize(18);
     this->_shop_cost = 25;
     this->set_cost_lbl("25");
 
