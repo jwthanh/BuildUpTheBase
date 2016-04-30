@@ -18,6 +18,8 @@
 #include "Animal.h"
 #include "Worker.h"
 #include "Fighter.h"
+#include "attribute_container.h"
+#include "attribute.h"
 
 class Animal;
 USING_NS_CC;

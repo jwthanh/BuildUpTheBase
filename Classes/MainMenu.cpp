@@ -21,6 +21,7 @@
 #include "Animal.h"
 #include "MiscUI.h"
 #include "Fighter.h"
+#include "attribute_container.h"
 
 USING_NS_CC;
 

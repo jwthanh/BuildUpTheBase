@@ -17,14 +17,14 @@
 #include "cocos2d.h"
 
 #include "HouseBuilding.h"
+
 #include "Recipe.h"
 #include "Worker.h"
-#include "../../Classes/RandomWeightMap.h"
-#include "../../Classes/attribute.h"
+#include "RandomWeightMap.h"
 
-#include "../../Classes/Beatup.h"
-#include <Util.h>
-#include <FShake.h>
+#include "Beatup.h"
+#include "Util.h"
+#include "FShake.h"
 
 #include "FileOperation.h"
 #include "GameLogic.h"
@@ -32,6 +32,10 @@
 
 #include "Animal.h"
 #include "Fighter.h"
+
+#include "ProgressBar.h"
+#include "attribute_container.h"
+#include "attribute.h"
 
 USING_NS_CC;
 

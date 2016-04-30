@@ -4,25 +4,19 @@
 
 #include <functional>
 #include <memory>
-
-#include "../../Classes/Clock.h"
-#include "../../Classes/attribute_container.h"
-#include "../../Classes/Resources.h"
-
-
-#include "../../cocos2d/cocos/cocos2d.h"
-
 #include <map>
 
-#include "../../Classes/combat.h"
-#include <ProgressBar.h>
-#include <BaseMenu.h>
+#include "Clock.h"
+#include "Resources.h"
+#include "combat.h"
+
+#include "BaseMenu.h"
 #include "Buyable.h"
 
 #include "constants.h"
 #include "Nameable.h"
 
-//it would be nice to not need this
+//it would be nice to not need this, but mistHarvesters uses it
 #include "Worker.h"
 #include "Updateable.h"
 

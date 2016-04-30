@@ -34,6 +34,7 @@
 #include "NuMenu.h"
 #include "GameLogic.h"
 #include "Animal.h"
+#include "attribute_container.h"
 
 USING_NS_CC;
 
