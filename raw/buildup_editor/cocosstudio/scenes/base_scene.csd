@@ -6,20 +6,20 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="760.0448" RightMargin="-0.0448" TopMargin="226.7183" BottomMargin="313.2817" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="760.0320" RightMargin="-0.0320" TopMargin="226.7200" BottomMargin="313.2800" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
             <Size X="200.0000" Y="100.0000" />
             <AnchorPoint />
-            <Position X="760.0448" Y="313.2817" />
+            <Position X="760.0320" Y="313.2800" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7917" Y="0.4895" />
             <PreSize X="0.2083" Y="0.1563" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="city_pos" ActionTag="-1746362178" Tag="77" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="2.7328" RightMargin="757.2672" TopMargin="2.4000" BottomMargin="537.6000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="city_pos" ActionTag="-1746362178" Tag="77" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="2.6880" RightMargin="757.3120" TopMargin="2.4000" BottomMargin="537.6000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
             <Size X="200.0000" Y="100.0000" />
             <AnchorPoint />
-            <Position X="2.7328" Y="537.6000" />
+            <Position X="2.6880" Y="537.6000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.0028" Y="0.8400" />
@@ -73,7 +73,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" LeftMargin="22.5905" RightMargin="32.4095" TopMargin="128.9068" BottomMargin="73.0932" FontSize="16" LabelText="Robo-harvesters: XX" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" LeftMargin="22.5973" RightMargin="32.4027" TopMargin="128.9075" BottomMargin="73.0925" FontSize="16" LabelText="Robo-harvesters: XX" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="145.0000" Y="18.0000" />
                 <AnchorPoint ScaleX="0.6540" ScaleY="2.9266" />
                 <Position X="117.4273" Y="125.7713" />
@@ -118,10 +118,10 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="detail_pos" ActionTag="-771564754" Tag="159" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="204.4271" RightMargin="555.5729" TopMargin="2.4000" BottomMargin="537.6000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="detail_pos" ActionTag="-771564754" Tag="159" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="204.3840" RightMargin="555.6160" TopMargin="2.4000" BottomMargin="537.6000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
             <Size X="200.0000" Y="100.0000" />
             <AnchorPoint />
-            <Position X="204.4271" Y="537.6000" />
+            <Position X="204.3840" Y="537.6000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2129" Y="0.8400" />
@@ -142,7 +142,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" RotationSkewY="0.0000" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="10.0001" RightMargin="-0.0001" TopMargin="41.5942" BottomMargin="50.4058" IsCustomSize="True" FontSize="16" LabelText="100 Gold" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="10.0001" RightMargin="-0.0001" TopMargin="41.5942" BottomMargin="50.4058" IsCustomSize="True" FontSize="16" LabelText="100 Gold" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="18.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="105.0001" Y="59.4058" />
@@ -234,6 +234,36 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.6095" Y="0.4719" />
             <PreSize X="0.0000" Y="0.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="tab_1_btn" ActionTag="2032519568" Tag="160" IconVisible="False" LeftMargin="0.2215" RightMargin="759.7785" TopMargin="103.9670" BottomMargin="500.0330" TouchEnable="True" FontSize="14" ButtonText="Harvesters" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="200.0000" Y="36.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="100.2215" Y="518.0330" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.1044" Y="0.8094" />
+            <PreSize X="0.2083" Y="0.0562" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+            <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+            <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="tab_2_btn" ActionTag="34953680" Tag="161" IconVisible="False" LeftMargin="200.0000" RightMargin="560.0000" TopMargin="103.9669" BottomMargin="500.0331" TouchEnable="True" FontSize="14" ButtonText="Detail" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="200.0000" Y="36.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="300.0000" Y="518.0331" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3125" Y="0.8094" />
+            <PreSize X="0.2083" Y="0.0562" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+            <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+            <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

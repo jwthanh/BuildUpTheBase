@@ -497,9 +497,30 @@ void BaseScene::create_shop_listview()
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
     ui::ListView* shop_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("shop_listview"));
-    // shop_listview->setClippingEnabled(true);
     shop_listview->removeFromParent();
     this->addChild(shop_listview);
+
+    ui::Button* tab_1_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_1_btn"));
+    tab_1_btn->removeFromParent();
+    this->addChild(tab_1_btn);
+    tab_1_btn->addTouchEventListener([this, tab_1_btn, shop_listview](Ref* target, ui::Widget::TouchEventType evt)
+    {
+        if (evt == ui::Widget::TouchEventType::ENDED)
+        {
+            shop_listview->setVisible(true);
+        }
+    });
+
+    ui::Button* tab_2_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_2_btn"));
+    tab_2_btn->removeFromParent();
+    this->addChild(tab_2_btn);
+    tab_2_btn->addTouchEventListener([this, tab_2_btn, shop_listview](Ref* target, ui::Widget::TouchEventType evt)
+    {
+        if (evt == ui::Widget::TouchEventType::ENDED)
+        {
+            shop_listview->setVisible(false);
+        }
+    });
 
     float update_delay = 0.1f;
     auto update_listview = [this, inst, shop_listview, update_delay](float dt)
