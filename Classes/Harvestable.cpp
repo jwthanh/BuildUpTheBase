@@ -97,7 +97,6 @@ void Harvestable::on_harvest()
 
     //this should be on shatter eventually, to line up with the floating label
     GameLogic::getInstance()->add_total_harvests(1);
-    CCLOG("total of %i harvests now", GameLogic::getInstance()->get_total_harvests());
 }
 
 void Harvestable::animate_touch_start()

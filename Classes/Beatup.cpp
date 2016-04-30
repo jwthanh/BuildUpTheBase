@@ -81,7 +81,6 @@ bool Beatup::init()
     this->buildup->city->update_buildings(0);
 
     this->block_count = 0;
-    this->temp_coins = 0;
 
     this->level_been_won = false;
     this->level_been_lost = false;
@@ -191,14 +190,13 @@ int Beatup::get_total_hits()
     return DataManager::get_int_from_data(Beatup::total_hit_key);
 };
 
-int Beatup::get_total_coins()
+double Beatup::get_total_coins()
 {
-    return DataManager::get_int_from_data(Beatup::total_coin_key);
+    return DataManager::get_double_from_data(Beatup::total_coin_key);
 };
 
-void Beatup::add_total_coin(int x)
+void Beatup::add_total_coin(double x)
 {
-    this->temp_coins += x;
     DataManager::incr_key("total_coin_key", x);
 };
 
@@ -382,8 +380,8 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_C) 
     {
-        int new_val = this->get_total_coins()*10;
-        DataManager::set_int_from_data(Beatup::total_coin_key, new_val);
+        double new_val = this->get_total_coins()*10;
+        DataManager::set_double_from_data(Beatup::total_coin_key, new_val);
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_TAB) 
     {

@@ -143,9 +143,8 @@ class Beatup : public GameLayer
         static std::string total_hit_key;
         static std::string total_coin_key;
 
-        int temp_coins;
-        void add_total_coin(int x);
-        int get_total_coins();
+        void add_total_coin(double x);
+        double get_total_coins();
 
         void reload_resources();
         void apply_flash_shader();

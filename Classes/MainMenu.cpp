@@ -23,7 +23,6 @@
 
 USING_NS_CC;
 
-
 Scene* MainMenu::beatup_scene = NULL;
 
 bool MainMenu::init()
