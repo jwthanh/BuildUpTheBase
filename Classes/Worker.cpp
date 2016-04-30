@@ -94,8 +94,8 @@ res_count_t Harvester::get_base_shop_cost(Harvester::SubType harv_type)
     if (harv_type == Harvester::SubType::One) { base_cost = 25; }
     else if (harv_type == Harvester::SubType::Two) { base_cost = 200; }
     else if (harv_type == Harvester::SubType::Three) { base_cost = 1000; }
-    else if (harv_type == Harvester::SubType::Four) { base_cost = 5000; }
-    else if (harv_type == Harvester::SubType::Five) { base_cost = 10000; }
+    else if (harv_type == Harvester::SubType::Four) { base_cost = 12000; }
+    else if (harv_type == Harvester::SubType::Five) { base_cost = 100000; }
     else { base_cost = 9999;}
 
     return base_cost;
@@ -107,7 +107,7 @@ res_count_t Harvester::get_harvested_count(Harvester::SubType harv_type)
     
     if (harv_type == Harvester::SubType::One) { harvested_count = 1; }
     else if (harv_type == Harvester::SubType::Two) { harvested_count = 3; }
-    else if (harv_type == Harvester::SubType::Three) { harvested_count = 10; }
+    else if (harv_type == Harvester::SubType::Three) { harvested_count = 8; }
     else if (harv_type == Harvester::SubType::Four) { harvested_count = 25; }
     else if (harv_type == Harvester::SubType::Five) { harvested_count = 100; }
     else { harvested_count = 9999;}
