@@ -29,14 +29,14 @@ class Fighter : public Nameable, public Updateable
         bool has_armor = false;
         bool has_shield = false;
 
-        Experience* xp;
-        AttributeContainer* attrs;
-        Village* city;
-        Combat* combat;
+        spExperience xp;
+        spAttributeContainer attrs;
+        spVillage city;
+        spCombat combat;
 
         std::string sprite_name = "weapon_gauntlet.png";
 
-        Fighter(Village* city, std::string name);
+        Fighter(std::string name);
         void update(float dt);
 
         std::string get_stats();
@@ -58,19 +58,17 @@ class FighterNode : public cocos2d::ui::Widget
         cocos2d::ui::ImageView* sprite;
         void load_new_sprite(std::string name);
 
-        ProgressBar* hp_bar;
-        ProgressBar* xp_bar;
+        spProgressBar hp_bar;
+        spProgressBar xp_bar;
 };
 
 class Battle : public Updateable
 {
     public:
-        Buildup* buildup;
-
         vsFighter combatants;
         vsFighter combatants_by_team(Fighter::TeamsType team);
 
-        Battle(Buildup* buildup) : buildup(buildup), Updateable() {
+        Battle() : Updateable() {
             this->combatants = vsFighter();
         };
 

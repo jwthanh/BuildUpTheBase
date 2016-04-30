@@ -10,6 +10,7 @@
 #include "Recipe.h"
 #include "attribute.h"
 #include "cocostudio/ActionTimeline/CSLoader.h"
+#include <numeric>
 
 #include "Fighter.h"
 #include "attribute_container.h"
@@ -421,7 +422,7 @@ bool FightingHarvestable::init()
     this->click_limit = 1000000; //some really high number they'll never click
 
     //setup enemy node
-    this->enemy = std::make_shared<Fighter>(BUILDUP->city, "Brawler");
+    this->enemy = std::make_shared<Fighter>("Brawler");
     this->enemy->team = Fighter::TeamTwo;
     this->enemy->sprite_name = "ogre10x10.png";
     this->enemy->attrs->health->set_vals(20);
@@ -479,13 +480,55 @@ bool FightingHarvestable::should_shatter()
 
 void FightingHarvestable::shatter()
 {
-    this->enemy = std::make_shared<Fighter>(BUILDUP->city, "Challenger");
+    this->enemy = std::make_shared<Fighter>("Challenger");
     this->enemy->team = Fighter::TeamTwo;
     this->enemy->sprite_name = "harvester.png";
     this->enemy->attrs->health->set_vals(30);
 
     FighterNode* fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
     fighter_node->set_fighter(this->enemy);
+
+    auto gen_paths = [](std::string base_path, int max_num)
+    {
+        std::vector<int> nums(max_num);
+        std::iota(nums.begin(), nums.end(), 0);
+
+        std::vector<std::string> output;
+        for (auto num : nums)
+        {
+            output.push_back(base_path + "_" + std::to_string(num)+".png");
+        }
+
+        return  output;
+    };
+
+    auto base_node = Node::create();
+
+    auto sprites = {
+        pick_one(gen_paths("set", 4)),
+        pick_one(gen_paths("body", 49)),
+        pick_one(gen_paths("headwear", 49)),
+        pick_one(gen_paths("legs", 22)),
+        pick_one(gen_paths("shield", 49)),
+        pick_one(gen_paths("weapon", 49))
+    };
+
+    for (auto path : sprites)
+    {
+        base_node->addChild(Sprite::createWithSpriteFrameName(path));
+    }
+
+    base_node->setPosition(8,8);
+    base_node->setScaleY(-1.0f);
+
+     auto rt = RenderTexture::create(16, 16);
+     rt->retain();
+     rt->begin();
+     base_node->visit();
+     rt->end();
+
+     ui::Scale9Sprite* vr = dynamic_cast<ui::Scale9Sprite*>(fighter_node->sprite->getVirtualRenderer());
+     vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
 
     this->building->create_ingredients(Ingredient::Soul, 1);
 }
@@ -495,7 +538,7 @@ void FightingHarvestable::on_harvest()
     //TODO name fighter to player_avatar or something
     auto player = BUILDUP->fighter;
 
-    auto battle = std::make_shared<Battle>(BUILDUP);
+    auto battle = std::make_shared<Battle>();
     battle->combatants.push_back(player);
     auto fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
 

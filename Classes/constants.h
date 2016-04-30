@@ -79,6 +79,15 @@ class Ingredient;
 class Product;
 class Waste;
 
+class Attribute;
+class AttributeContainer;
+class FighterNode;
+class Fighter;
+class Combat;
+class ProgressBar;
+class Buildup;
+class Experience;
+
 
 typedef std::function<void()> VoidFunc;
 
@@ -101,6 +110,16 @@ MAKE_SP_VS_MI(Resource);
 MAKE_SP_VS_MI(Product);
 MAKE_SP_VS_MI(Ingredient);
 MAKE_SP_VS_MI(Waste);
+
+MAKE_SP_VS_MI(Attribute);
+MAKE_SP_VS_MI(AttributeContainer);
+MAKE_SP_VS_MI(FighterNode);
+MAKE_SP_VS_MI(Fighter);
+MAKE_SP_VS_MI(Combat);
+MAKE_SP_VS_MI(ProgressBar);
+MAKE_SP_VS_MI(Buildup);
+MAKE_SP_VS_MI(Experience);
+MAKE_SP_VS_MI(Village);
 
 
 #undef MAKE_SP_VS
