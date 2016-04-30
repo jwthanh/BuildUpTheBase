@@ -496,39 +496,44 @@ void BaseScene::create_shop_listview()
 {
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+
     ui::ListView* shop_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("shop_listview"));
     shop_listview->removeFromParent();
     this->addChild(shop_listview);
 
+    ui::ListView* detail_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("detail_listview"));
+    detail_listview->removeFromParent();
+    this->addChild(detail_listview);
+
     ui::Button* tab_1_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_1_btn"));
     tab_1_btn->removeFromParent();
     this->addChild(tab_1_btn);
-    tab_1_btn->addTouchEventListener([this, tab_1_btn, shop_listview](Ref* target, ui::Widget::TouchEventType evt)
+    tab_1_btn->addTouchEventListener([this, tab_1_btn, shop_listview, detail_listview](Ref* target, ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
             shop_listview->setVisible(true);
+            detail_listview->setVisible(false);
         }
     });
 
     ui::Button* tab_2_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_2_btn"));
     tab_2_btn->removeFromParent();
     this->addChild(tab_2_btn);
-    tab_2_btn->addTouchEventListener([this, tab_2_btn, shop_listview](Ref* target, ui::Widget::TouchEventType evt)
+    tab_2_btn->addTouchEventListener([this, tab_2_btn, shop_listview, detail_listview](Ref* target, ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
             shop_listview->setVisible(false);
+            detail_listview->setVisible(true);
         }
     });
 
     float update_delay = 0.1f;
-    auto update_listview = [this, inst, shop_listview, update_delay](float dt)
+
+    ///HARVESTER LISTVIEW
+    auto update_harvester_listview = [this, inst, shop_listview, update_delay](float dt)
     {
-        //dont recreate nuitems
-        //update the strings
-
-
         //placeholder for things we'll need to put in the sidebar
         struct HarvestConfig{
             std::string node_name;
@@ -545,7 +550,6 @@ void BaseScene::create_shop_listview()
 
         for (auto config : nuitems_config)
         {
-
             //if the child already exists, put it at the back 
             std::string child_name = config.node_name;
             auto existing_node = shop_listview->getChildByName(child_name);
@@ -561,7 +565,7 @@ void BaseScene::create_shop_listview()
             menu_item->my_init(shop_listview, config.harv_type, Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type));
             menu_item->setName(child_name);
 
-            //since we only set the int_type of the menu item above, it doesn't
+            //since we only set the ing_type of the menu item above, it doesn't
             //change to adapt for the building, so we cheat and do it here.
             //this'll get moved to a json map or something between building and
             //harvest sub types
@@ -573,8 +577,66 @@ void BaseScene::create_shop_listview()
         };
     };
 
-    shop_listview->schedule(update_listview, 0.1f, "update_listview");
-    update_listview(0);
+    shop_listview->schedule(update_harvester_listview, 0.1f, "update_listview");
+    update_harvester_listview(0);
+
+    ///DETAIL LISTVIEW
+    auto update_detail_listview = [this, inst, detail_listview, update_delay](float dt)
+    {
+        //placeholder for things we'll need to put in the sidebar
+        struct DetailConfig{
+            spRecipe recipe;
+        };
+
+        std::vector<DetailConfig> nuitems_config;
+
+        for (spRecipe recipe : BUILDUP->get_target_building()->data->get_all_recipes())
+        {
+            nuitems_config.push_back({recipe});
+        };
+
+
+        int i = 0;
+        for (auto config : nuitems_config)
+        {
+            //if the child already exists, put it at the back 
+            int child_tag = i;
+            i++;
+
+            spRecipe recipe = config.recipe;
+
+            auto existing_node = detail_listview->getChildByTag(child_tag);
+            if (existing_node)
+            {
+                existing_node->removeFromParentAndCleanup(false);
+                detail_listview->addChild(existing_node);
+                continue;
+            }
+
+            //clone the new item
+            auto menu_item = RecipeNuItem::create();
+            recipe->_callback = [this, recipe]() {
+                for (auto pair : recipe->outputs) {
+                    Ingredient::SubType ing_type = pair.first;
+                    int count = pair.second;
+                    BUILDUP->get_target_building()->create_ingredients(ing_type, count);
+                };
+            };
+            menu_item->setTag(child_tag);
+
+            menu_item->my_init(recipe, BUILDUP->get_target_building(), detail_listview);
+            menu_item->set_title(recipe->name);
+            menu_item->set_description(recipe->description);
+
+            menu_item->schedule([menu_item](float dt){
+
+            }, 0.1f, "update_ing_type");
+
+        };
+    };
+
+    detail_listview->schedule(update_detail_listview, 0.1f, "update_listview");
+    update_detail_listview(0);
 };
 
 void BaseScene::create_shop_button()

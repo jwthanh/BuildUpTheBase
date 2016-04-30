@@ -226,6 +226,19 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
+          <AbstractNodeData Name="detail_listview" ActionTag="-840505419" VisibleForFrame="False" Tag="162" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="2.3500" RightMargin="157.6500" TopMargin="-360.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+            <Size X="800.0000" Y="1000.0000" />
+            <AnchorPoint />
+            <Position X="2.3500" />
+            <Scale ScaleX="0.5000" ScaleY="0.5000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0024" />
+            <PreSize X="0.8333" Y="1.5625" />
+            <SingleColor A="255" R="150" G="200" B="255" />
+            <FirstColor A="255" R="150" G="150" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
           <AbstractNodeData Name="harvestable_pos" ActionTag="-169141685" Tag="21" IconVisible="True" LeftMargin="585.1599" RightMargin="374.8401" TopMargin="338.0134" BottomMargin="301.9866" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
