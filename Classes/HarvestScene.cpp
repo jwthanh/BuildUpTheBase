@@ -41,10 +41,9 @@ bool BaseScene::init()
     this->create_info_panel();
     this->create_player_info_panel();
 
-    //this->create_building_scrollview();
-    //this->create_inventory_listview();
-    //this->create_shop_listview();
-
+    this->create_building_scrollview();
+    this->create_inventory_listview();
+    this->create_shop_listview();
 
     return true;
 };

@@ -61,7 +61,7 @@ FighterNode* FighterNode::create(spFighter fighter)
     });
 
     //hp bar
-    node->hp_bar = std::make_shared<ProgressBar>(ProgressBar("enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png"));
+    node->hp_bar = std::make_shared<ProgressBar>("enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
     node->hp_bar->back_timer->setVisible(false);
     node->hp_bar->setPosition(Vec2(0, 0));
     node->hp_bar->setAnchorPoint(Vec2(0.5, 0.5));
@@ -73,7 +73,7 @@ FighterNode* FighterNode::create(spFighter fighter)
     node->addChild(node->hp_bar->base_node);
 
     //xp bar
-    node->xp_bar = std::make_shared<ProgressBar>(ProgressBar("enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png"));
+    node->xp_bar = std::make_shared<ProgressBar>("enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
     node->xp_bar->back_timer->setVisible(false);
     node->xp_bar->setPosition(Vec2(0, -25));
     node->xp_bar->setAnchorPoint(Vec2(0.5, 0.5));
@@ -137,10 +137,7 @@ void FighterNode::update(float dt)
 void FighterNode::load_new_sprite(std::string name)
 {
 
-    //this->sprite->loadTexture(name, TextureResType::PLIST);
-
-    this->sprite->removeFromParent();
-    this->sprite = ui::ImageView::create(name, TextureResType::PLIST);
+    this->sprite->loadTexture(name, TextureResType::PLIST);
 
     //set aliasing on the new texture
     auto scale9_sprite = dynamic_cast<cocos2d::ui::Scale9Sprite*>(this->sprite->getVirtualRenderer());

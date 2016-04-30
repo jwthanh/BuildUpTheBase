@@ -527,8 +527,12 @@ void FightingHarvestable::shatter()
      base_node->visit();
      rt->end();
 
-     ui::Scale9Sprite* vr = dynamic_cast<ui::Scale9Sprite*>(fighter_node->sprite->getVirtualRenderer());
-     vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
+     //use the texture from RenderTexture and replace the ImageView's Scale9
+     //texture
+     auto img_view = fighter_node->sprite;
+     ui::Scale9Sprite* scale9_sprite = dynamic_cast<ui::Scale9Sprite*>(img_view->getVirtualRenderer());
+     Sprite* tex_sprite = dynamic_cast<Sprite*>(rt->getSprite());
+     scale9_sprite->setSpriteFrame(tex_sprite->getSpriteFrame());
 
     this->building->create_ingredients(Ingredient::Soul, 1);
 }
