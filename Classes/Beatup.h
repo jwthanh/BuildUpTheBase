@@ -8,7 +8,6 @@
 
 class BaseMenu;
 
-class Face;
 class FacialFeature;
 class Shield;
 class Fist;
@@ -40,12 +39,6 @@ class Beatup : public GameLayer
 {
 
     private:
-        void prep_face(Face* face);
-        void prep_fists();
-        void prep_other();
-
-        Face* target_face;
-
         bool _visible_inventory = false;
 
     public:
@@ -65,11 +58,8 @@ class Beatup : public GameLayer
         bool level_been_won;
         bool level_been_lost;
         bool get_level_over();
-        void prep_level(int level);
 
-        void check_quest();
         void win_level();
-        void lose_level();
         void hide_ui();
 
         bool has_been_initialized = false;
@@ -80,7 +70,6 @@ class Beatup : public GameLayer
         virtual bool init();
         void update(float dt);
         void update_buildup(float dt);
-        void update_coins(float dt);
         void reset();
 
         PunchLog* punch_log;
@@ -96,10 +85,6 @@ class Beatup : public GameLayer
 
 
         ProgressBar* progress_bar;
-
-        int get_activation_count();
-
-        void reset_hits();
 
         bool should_shake();
         Clock* shake_clock;
@@ -120,26 +105,18 @@ class Beatup : public GameLayer
         float punches_to_coin; //1 punch to 1 coin 
         int punch_count;
 
-        void flash_color_on_face(float total_duration, cocos2d::Color3B flash_color, cocos2d::Color3B reset_color = cocos2d::Color3B::WHITE);
-
         void print_inventory();
         void hide_inventory();
 
         void set_target_building(spBuilding target);
         spBuilding get_target_building();
 
-        void set_target_face(Face* target);
-        Face* get_target_face();
 
         cocos2d::Node* face_fight_node;
 
         std::vector<Coin*>* coins;
         std::vector<Gore*>* gores;
         int coins_banked;
-
-        std::vector<Face*>* faces;
-        void cycle_next_face();
-        void remove_all_faces();
 
         void cycle_next_building(bool reverse = false);
 
@@ -164,34 +141,20 @@ class Beatup : public GameLayer
         void add_total_hit(int x);
         int get_total_hits();
         static std::string total_hit_key;
+        static std::string total_coin_key;
 
         int temp_coins;
         void add_total_coin(int x);
         int get_total_coins();
-        static std::string total_coin_key;
-
-        cocos2d::Label* title_lbl;
 
         void reload_resources();
         void apply_flash_shader();
-
-        void set_background(BackgroundTypes bg_type);
-
-        Level* level;
-        Quest* quest;
-        bool quest_completed;
-
-        int temp_charges;
-        void create_quest_alert();
 
         void setup_commands();
 
         int player_hp;
         int player_total_hp;
         void deal_player_dmg(int dmg);
-
-        ProgressBar* player_hp_bar;
-        void update_player_hp_bar();
 
         // implement the "static create()" method manually
         CREATE_FUNC(Beatup);
@@ -201,17 +164,6 @@ class Beatup : public GameLayer
         void back_to_menu();
 
         void onEnter();
-
-        virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
-        void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) ;
-
-        void swipe_face_horizontal(float dt);
-        void swipe_face_vertical(float dt);
-
-        void onSwipeLeft(float dt);
-        void onSwipeUp(float dt);
-        void onSwipeRight(float dt);
-        void onSwipeDown(float dt);
 
         BaseMenu* shop;
         cocos2d::Scene* shop_scene;

@@ -6,15 +6,12 @@
 #include "BaseMenu.h"
 
 #include "constants.h"
-#include "HouseBuilding.h"
 
 class MainMenu : public BaseMenu
 {
     public:
         CREATE_FUNC(MainMenu);
-        static cocos2d::Scene* createScene();
 
-        static void cleanup_beatup_scene();
         static cocos2d::Scene* beatup_scene;
 
 
@@ -24,11 +21,6 @@ class MainMenu : public BaseMenu
         void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
         bool init() override;
-        static bool quick_start_game();
-        static bool resume_game();
-        static bool open_options();
-        static bool open_levelselect();
-        static bool open_objective();
 
 };
 
@@ -53,35 +45,6 @@ class OptionsMenu : public BaseMenu
 
 };
 
-class LevelSelectMenu : public BaseMenu
-{
-    public:
-        CREATE_FUNC(LevelSelectMenu);
-        static cocos2d::Scene* createScene();
-
-        virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
-
-        virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
-
-        bool init() override;
-
-        BoolFuncNoArgs start_new_game(int level);
-
-};
-
-class ObjectiveMenu : public BaseMenu
-{
-    public:
-        CREATE_FUNC(ObjectiveMenu);
-        static cocos2d::Scene* createScene();
-
-        virtual void pop_scene(cocos2d::Ref* pSender) { GameLayer::pop_scene(pSender); }; //use GameLayer instead of ShopScene's pop_scene
-
-        virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent) override;
-
-        bool init() override;
-
-};
 
 class ResetMenu : public BaseMenu
 {
@@ -98,7 +61,6 @@ class ResetMenu : public BaseMenu
         static bool reset_all();
         static bool reset_total_hit_stat();
         static bool reset_total_coin_stat();
-        static bool reset_levels();
 
 };
 

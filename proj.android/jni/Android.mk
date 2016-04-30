@@ -23,8 +23,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/GameLayer.cpp \
                    ../../Classes/MiscUI.cpp \
                    ../../Classes/Network.cpp \
-                   ../../Classes/Weapons.cpp \
-                   ../../Classes/Fist.cpp \
                    ../../Classes/FileOperation.cpp \
                    ../../Classes/StaticData.cpp \
                    ../../Classes/Face.cpp \
@@ -32,13 +30,10 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Buyable.cpp \
                    ../../Classes/SoundEngine.cpp \
                    ../../Classes/DataManager.cpp \
-                   ../../Classes/Combo.cpp \
                    ../../Classes/ProgressBar.cpp \
                    ../../Classes/ShatterNode.cpp \
-                   ../../Classes/Quest.cpp \
                    ../../Classes/Alert.cpp \
                    ../../Classes/Util.cpp \
-                   ../../Classes/Level.cpp \
                    ../../Classes/FShake.cpp \
                    ../../Classes/MainMenu.cpp \
                    ../../Classes/HouseBuilding.cpp \
