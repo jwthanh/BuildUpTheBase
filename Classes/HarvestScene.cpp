@@ -506,26 +506,32 @@ void BaseScene::create_shop_listview()
     this->addChild(detail_listview);
 
     ui::Button* tab_1_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_1_btn"));
+    ui::Button* tab_2_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_2_btn"));
+
     tab_1_btn->removeFromParent();
+    tab_1_btn->setEnabled(false); //it starts out active tab already
     this->addChild(tab_1_btn);
-    tab_1_btn->addTouchEventListener([this, tab_1_btn, shop_listview, detail_listview](Ref* target, ui::Widget::TouchEventType evt)
+    tab_1_btn->addTouchEventListener([this, tab_1_btn, tab_2_btn, shop_listview, detail_listview](Ref* target, ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
             shop_listview->setVisible(true);
             detail_listview->setVisible(false);
+            try_set_enabled(tab_1_btn, false);
+            try_set_enabled(tab_2_btn, true);
         }
     });
 
-    ui::Button* tab_2_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_2_btn"));
     tab_2_btn->removeFromParent();
     this->addChild(tab_2_btn);
-    tab_2_btn->addTouchEventListener([this, tab_2_btn, shop_listview, detail_listview](Ref* target, ui::Widget::TouchEventType evt)
+    tab_2_btn->addTouchEventListener([this, tab_1_btn, tab_2_btn, shop_listview, detail_listview](Ref* target, ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
             shop_listview->setVisible(false);
             detail_listview->setVisible(true);
+            try_set_enabled(tab_1_btn, true);
+            try_set_enabled(tab_2_btn, false);
         }
     });
 
