@@ -20,6 +20,7 @@
 #include "StaticData.h"
 #include "Animal.h"
 #include "MiscUI.h"
+#include "Fighter.h"
 
 USING_NS_CC;
 

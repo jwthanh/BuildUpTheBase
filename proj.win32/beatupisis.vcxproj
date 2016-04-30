@@ -163,6 +163,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\combat.cpp" />
     <ClCompile Include="..\Classes\DataManager.cpp" />
     <ClCompile Include="..\Classes\Face.cpp" />
+    <ClCompile Include="..\Classes\Fighter.cpp" />
     <ClCompile Include="..\Classes\FileOperation.cpp" />
     <ClCompile Include="..\Classes\Fist.cpp" />
     <ClCompile Include="..\Classes\FShake.cpp" />
@@ -206,6 +207,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\DataManager.h" />
     <ClInclude Include="..\Classes\elements_t.h" />
     <ClInclude Include="..\Classes\Face.h" />
+    <ClInclude Include="..\Classes\Fighter.h" />
     <ClInclude Include="..\Classes\FileOperation.h" />
     <ClInclude Include="..\Classes\Fist.h" />
     <ClInclude Include="..\Classes\FShake.h" />

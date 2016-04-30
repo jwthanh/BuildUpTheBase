@@ -20,6 +20,7 @@
 #include "Level.h"
 
 #include "HouseBuilding.h"
+#include "Fighter.h"
 
 
 #pragma warning(default:4267)

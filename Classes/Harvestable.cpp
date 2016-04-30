@@ -11,6 +11,8 @@
 #include "attribute.h"
 #include "cocostudio/ActionTimeline/CSLoader.h"
 
+#include "Fighter.h"
+
 USING_NS_CC;
 
 Size Harvestable::get_sprite_size()

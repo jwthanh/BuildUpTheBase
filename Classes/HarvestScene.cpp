@@ -1,6 +1,8 @@
 #include "HarvestScene.h"
-#include "Harvestable.h"
 
+#include <numeric>
+
+#include "Harvestable.h"
 #include "GameLogic.h"
 #include "cocostudio/ActionTimeline/CSLoader.h"
 #include "NuMenu.h"
@@ -15,7 +17,7 @@
 #include "MiscUI.h"
 #include "Animal.h"
 #include "Worker.h"
-#include <numeric>
+#include "Fighter.h"
 
 class Animal;
 USING_NS_CC;
