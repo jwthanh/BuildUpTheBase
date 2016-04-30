@@ -506,7 +506,9 @@ void BaseScene::create_shop_listview()
     this->addChild(detail_listview);
 
     ui::Button* tab_1_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_1_btn"));
+    load_default_button_textures(tab_1_btn);
     ui::Button* tab_2_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_2_btn"));
+    load_default_button_textures(tab_2_btn);
 
     tab_1_btn->removeFromParent();
     tab_1_btn->setEnabled(false); //it starts out active tab already
