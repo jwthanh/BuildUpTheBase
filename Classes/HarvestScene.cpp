@@ -580,9 +580,24 @@ void BaseScene::create_shop_listview()
     shop_listview->schedule(update_harvester_listview, 0.1f, "update_listview");
     update_harvester_listview(0);
 
+    spBuilding current_target = BUILDUP->get_target_building();
+    detail_listview->setUserData(reinterpret_cast<void*>(current_target.get()));
+
     ///DETAIL LISTVIEW
     auto update_detail_listview = [this, inst, detail_listview, update_delay](float dt)
     {
+
+        void* raw_ptr = detail_listview->getUserData();
+        Building* building = static_cast<Building*>(raw_ptr);
+
+        spBuilding target_building = BUILDUP->get_target_building();
+
+        if (target_building->name != building->name)
+        {
+            CCLOG("Changed building!, rebuilding detail listview");
+            detail_listview->setUserData(reinterpret_cast<void*>(target_building.get()));
+            detail_listview->removeAllChildren();
+        }
         //placeholder for things we'll need to put in the sidebar
         struct DetailConfig{
             spRecipe recipe;
@@ -599,12 +614,12 @@ void BaseScene::create_shop_listview()
         int i = 0;
         for (auto config : nuitems_config)
         {
-            //if the child already exists, put it at the back 
             int child_tag = i;
             i++;
 
             spRecipe recipe = config.recipe;
 
+            //if the child already exists, put it at the back 
             auto existing_node = detail_listview->getChildByTag(child_tag);
             if (existing_node)
             {
@@ -613,7 +628,7 @@ void BaseScene::create_shop_listview()
                 continue;
             }
 
-            //clone the new item
+            //create (not clone) the new item
             auto menu_item = RecipeNuItem::create();
             recipe->_callback = [this, recipe]() {
                 for (auto pair : recipe->outputs) {
@@ -629,7 +644,7 @@ void BaseScene::create_shop_listview()
             menu_item->set_description(recipe->description);
 
             menu_item->schedule([menu_item](float dt){
-
+                menu_item->building = BUILDUP->get_target_building();
             }, 0.1f, "update_ing_type");
 
         };
