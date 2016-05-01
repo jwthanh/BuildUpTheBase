@@ -115,7 +115,10 @@ bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
     pos.x += cocos2d::rand_minus1_1()*20.0f;
     pos.y += cocos2d::rand_minus1_1()*20.0f;
 
+#ifdef __ANDROID__
     pos.y += 75.0f; //dont get hidden by finger
+#endif
+
     floating_label->setPosition(pos);
     floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
     this->getParent()->addChild(floating_label);
