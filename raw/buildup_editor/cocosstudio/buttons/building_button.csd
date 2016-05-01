@@ -31,38 +31,14 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="ingredient_count" ActionTag="-1560266654" Tag="45" IconVisible="False" LeftMargin="-0.0285" RightMargin="127.0285" TopMargin="165.5441" BottomMargin="14.4559" FontSize="16" LabelText="ING: XX" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="73.0000" Y="20.0000" />
+              <AbstractNodeData Name="ingredient_count" ActionTag="-1560266654" Tag="45" IconVisible="False" TopMargin="165.5441" BottomMargin="14.4559" IsCustomSize="True" FontSize="16" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="200.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="36.4715" Y="24.4559" />
+                <Position X="100.0000" Y="24.4559" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1824" Y="0.1223" />
-                <PreSize X="0.3650" Y="0.1000" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="0" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="product_count" ActionTag="-107981303" Tag="46" IconVisible="False" LeftMargin="64.9715" RightMargin="58.0285" TopMargin="165.5441" BottomMargin="14.4559" FontSize="16" LabelText="PRO: XX" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="77.0000" Y="20.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="103.4715" Y="24.4559" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5174" Y="0.1223" />
-                <PreSize X="0.3850" Y="0.1000" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="0" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="waste_count" ActionTag="-1316618129" Tag="47" IconVisible="False" LeftMargin="132.9719" RightMargin="-9.9719" TopMargin="165.5441" BottomMargin="14.4559" FontSize="16" LabelText="WST: XX" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="77.0000" Y="20.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="171.4719" Y="24.4559" />
-                <Scale ScaleX="0.7283" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.8574" Y="0.1223" />
-                <PreSize X="0.3850" Y="0.1000" />
+                <PrePosition X="0.5000" Y="0.1223" />
+                <PreSize X="1.0000" Y="0.1000" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />

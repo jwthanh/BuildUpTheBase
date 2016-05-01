@@ -329,21 +329,6 @@ void BaseScene::create_building_scrollview()
         };
         ing_count->schedule(update_ing_count, update_delay, "update_ing_count");
 
-        auto pro_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("product_count"));
-        auto update_pro_count = [create_count, pro_count, building](float dt)
-        {
-            pro_count->setString(create_count("PRO", building->count_products()));
-        };
-        pro_count->schedule(update_pro_count, update_delay, "update_pro_count");
-
-        auto wst_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("waste_count"));
-        wst_count->setString(create_count("WST", building->count_ingredients()));
-        auto update_wst_count = [create_count, wst_count, building](float dt)
-        {
-            wst_count->setString(create_count("WST", building->count_wastes()));
-        };
-        wst_count->schedule(update_wst_count, update_delay, "update_wst_count");
-
         auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
             if (event == ui::Widget::TouchEventType::ENDED)
             {
