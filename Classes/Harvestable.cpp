@@ -99,13 +99,28 @@ void Harvestable::on_harvest()
     GameLogic::getInstance()->add_total_harvests(1);
 }
 
-void Harvestable::animate_touch_start()
+void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 {
     float end_scale = this->initial_scale*0.85f;
     float duration = 0.5f;
     auto scale_to = ScaleTo::create(duration, end_scale);
     auto ease = EaseElasticOut::create(scale_to, duration);
     this->runAction(ease);
+
+    auto floating_label = FloatingLabel::createWithTTF("+1", DEFAULT_FONT, 30);
+    auto pos = touch->getLocation();
+    pos.x += cocos2d::rand_minus1_1()*20.0f;
+    pos.y += cocos2d::rand_minus1_1()*20.0f;
+
+#ifdef __ANDROID__
+    pos.y += 75.0f; //dont get hidden by finger
+#endif
+
+    floating_label->setPosition(pos);
+    floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
+    this->getParent()->addChild(floating_label);
+    floating_label->do_float();
+
 }
 
 bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
@@ -114,28 +129,13 @@ bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 
     if (this->_hitted)
     {
-        this->animate_touch_start();
-
-        auto floating_label = FloatingLabel::createWithTTF("+1", DEFAULT_FONT, 30);
-        auto pos = touch->getLocation();
-        pos.x += cocos2d::rand_minus1_1()*20.0f;
-        pos.y += cocos2d::rand_minus1_1()*20.0f;
-
-#ifdef __ANDROID__
-        pos.y += 75.0f; //dont get hidden by finger
-#endif
-
-        floating_label->setPosition(pos);
-        floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
-        this->getParent()->addChild(floating_label);
-        floating_label->do_float();
-
+        this->animate_touch_start(touch);
     }
 
     return base_val;
 };
 
-void Harvestable::animate_touch_end()
+void Harvestable::animate_touch_end(cocos2d::Touch* touch)
 {
     float end_scale = this->initial_scale;
     float duration = 0.5f;
@@ -148,7 +148,7 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     //Widget::onTouchEnded(touch, event); //this shouldnt be called because releaseUpEvent hasnt been set I guess. 
 
-    animate_touch_end();
+    animate_touch_end(touch);
 
     this->current_clicks += 1;
 
@@ -565,12 +565,12 @@ void FightingHarvestable::on_harvest()
     battle->do_battle();
 };
 
-void FightingHarvestable::animate_touch_start()
+void FightingHarvestable::animate_touch_start(cocos2d::Touch* touch)
 {
     //do nothing
 };
 
-void FightingHarvestable::animate_touch_end()
+void FightingHarvestable::animate_touch_end(cocos2d::Touch* touch)
 {
     //do nothing
 };

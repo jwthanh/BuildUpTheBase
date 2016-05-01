@@ -41,8 +41,8 @@ class Harvestable : public cocos2d::ui::Widget
 
         virtual bool should_shatter();
         virtual void animate_harvest();
-        virtual void animate_touch_start();
-        virtual void animate_touch_end();
+        virtual void animate_touch_start(cocos2d::Touch* touch);
+        virtual void animate_touch_end(cocos2d::Touch* touch);
         virtual void animate_rotate();
         virtual void animate_clip();
         virtual void shatter();
@@ -107,8 +107,8 @@ class FightingHarvestable : public Harvestable
         virtual void animate_harvest() override;
         virtual void animate_rotate() override;
 
-        virtual void animate_touch_start();
-        virtual void animate_touch_end();
+        virtual void animate_touch_start(cocos2d::Touch* touch);
+        virtual void animate_touch_end(cocos2d::Touch* touch);
 
         virtual void on_harvest() override;
 };
