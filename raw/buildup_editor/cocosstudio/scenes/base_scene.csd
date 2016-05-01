@@ -40,47 +40,25 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="waste_count" ActionTag="1780408824" Tag="154" IconVisible="False" LeftMargin="137.9203" RightMargin="-0.9203" TopMargin="69.1854" BottomMargin="132.8146" FontSize="16" LabelText="WST: XX" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="63.0000" Y="18.0000" />
+              <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="4.6829" RightMargin="4.6829" TopMargin="69.8685" BottomMargin="132.1315" IsCustomSize="True" FontSize="16" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="190.6343" Y="18.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="169.4203" Y="141.8146" />
-                <Scale ScaleX="0.7283" ScaleY="1.0000" />
+                <Position X="100.0000" Y="141.1315" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.8471" Y="0.6446" />
-                <PreSize X="0.3150" Y="0.0818" />
+                <PrePosition X="0.5000" Y="0.6415" />
+                <PreSize X="0.9532" Y="0.0818" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="product_count" ActionTag="-1782884436" Tag="155" IconVisible="False" LeftMargin="72.4085" RightMargin="63.5915" TopMargin="69.1854" BottomMargin="132.8146" FontSize="16" LabelText="PRO: XX" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="64.0000" Y="18.0000" />
+              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="23.6189" RightMargin="31.3811" TopMargin="128.9075" BottomMargin="13.8472" IsCustomSize="True" FontSize="16" LabelText="Harvesters 0&#xA;at XX/sec" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="145.0000" Y="77.2453" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="104.4085" Y="141.8146" />
+                <Position X="96.1189" Y="52.4699" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5220" Y="0.6446" />
-                <PreSize X="0.3200" Y="0.0818" />
-                <OutlineColor A="255" R="255" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" LeftMargin="9.4059" RightMargin="134.5941" TopMargin="69.1854" BottomMargin="132.8146" FontSize="16" LabelText="ING: XX" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="56.0000" Y="18.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="37.4059" Y="141.8146" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1870" Y="0.6446" />
-                <PreSize X="0.2800" Y="0.0818" />
-                <OutlineColor A="255" R="255" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" LeftMargin="22.5973" RightMargin="32.4027" TopMargin="128.9075" BottomMargin="73.0925" FontSize="16" LabelText="Robo-harvesters: XX" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="145.0000" Y="18.0000" />
-                <AnchorPoint ScaleX="0.6540" ScaleY="2.9266" />
-                <Position X="117.4273" Y="125.7713" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5871" Y="0.5717" />
-                <PreSize X="0.7250" Y="0.0818" />
+                <PrePosition X="0.4806" Y="0.2385" />
+                <PreSize X="0.7250" Y="0.3511" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>

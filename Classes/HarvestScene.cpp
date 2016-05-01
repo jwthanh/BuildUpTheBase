@@ -170,24 +170,6 @@ void BaseScene::create_info_panel()
     this->schedule(update_ing_count, update_delay, "ing_count_update");
     update_ing_count(0);
 
-    auto pro_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("product_count"));
-    auto update_pro_count = [create_count, pro_count](float dt)
-    {
-        spBuilding building = BUILDUP->get_target_building();
-        pro_count->setString(create_count("PRO", building->count_products()));
-    };
-    this->schedule(update_pro_count, update_delay, "pro_count_update");
-    update_pro_count(0);
-
-    auto wst_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("waste_count"));
-    auto update_wst_count = [create_count, wst_count](float dt)
-    {
-        spBuilding building = BUILDUP->get_target_building();
-        wst_count->setString(create_count("WST", building->count_wastes()));
-    };
-    this->schedule(update_wst_count, update_delay, "wst_count_update");
-    update_wst_count(0);
-
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
     auto update_harvester_count = [harvester_count](float dt)
     {
