@@ -137,7 +137,7 @@ void ShopNuItem::update_func(float dt)
     int cost = this->get_cost();
     int total_coins = BEATUP->get_total_coins();
 
-    this->cost_lbl->setTextColor(Color4B::BLACK);
+    this->cost_lbl->setTextColor(Color4B::WHITE);
 
     if (this->get_been_bought())
     {
