@@ -22,7 +22,6 @@ class BaseScene : public GameLayer
         void create_side_buttons();
         void create_shop_button();
         void create_city_button();
-        void create_detail_button();
 
         void create_info_panel();
         void create_player_info_panel();
