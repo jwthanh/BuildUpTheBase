@@ -110,25 +110,26 @@ void Harvestable::animate_touch_start()
 
 bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-    auto floating_label = FloatingLabel::createWithTTF("+1", DEFAULT_FONT, 30);
-    auto pos = touch->getLocation();
-    pos.x += cocos2d::rand_minus1_1()*20.0f;
-    pos.y += cocos2d::rand_minus1_1()*20.0f;
-
-#ifdef __ANDROID__
-    pos.y += 75.0f; //dont get hidden by finger
-#endif
-
-    floating_label->setPosition(pos);
-    floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
-    this->getParent()->addChild(floating_label);
-    floating_label->do_float();
-
     bool base_val = Widget::onTouchBegan(touch, event);
 
     if (this->_hitted)
     {
         this->animate_touch_start();
+
+        auto floating_label = FloatingLabel::createWithTTF("+1", DEFAULT_FONT, 30);
+        auto pos = touch->getLocation();
+        pos.x += cocos2d::rand_minus1_1()*20.0f;
+        pos.y += cocos2d::rand_minus1_1()*20.0f;
+
+#ifdef __ANDROID__
+        pos.y += 75.0f; //dont get hidden by finger
+#endif
+
+        floating_label->setPosition(pos);
+        floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
+        this->getParent()->addChild(floating_label);
+        floating_label->do_float();
+
     }
 
     return base_val;
