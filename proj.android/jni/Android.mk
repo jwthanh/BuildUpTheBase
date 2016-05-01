@@ -25,7 +25,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Network.cpp \
                    ../../Classes/FileOperation.cpp \
                    ../../Classes/StaticData.cpp \
-                   ../../Classes/Face.cpp \
                    ../../Classes/Clock.cpp \
                    ../../Classes/Buyable.cpp \
                    ../../Classes/SoundEngine.cpp \
