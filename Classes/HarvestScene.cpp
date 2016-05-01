@@ -452,7 +452,7 @@ void BaseScene::create_inventory_listview()
                 std::stringstream ss;
 
                 res_count_t count = BUILDUP->get_target_building()->count_ingredients(ing_type);
-                ss << beautify_double(count) << " " << type_str;
+                ss << beautify_double(count) << "\n" << type_str;
                 auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
                 item_lbl->setString(ss.str());
 
@@ -819,7 +819,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
     alert_panel->removeFromParent();
 
-    auto cb = [alert_panel](Ref*, ui::Widget::TouchEventType type) {
+    auto cb = [alert_panel](Ref* target, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             alert_panel->removeFromParent();

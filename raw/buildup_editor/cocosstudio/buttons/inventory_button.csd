@@ -9,24 +9,24 @@
           <AbstractNodeData Name="item_panel" ActionTag="1133385842" Tag="22" IconVisible="False" RightMargin="-120.0000" TopMargin="-200.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="120.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="item_img" ActionTag="818745422" Tag="28" IconVisible="False" PercentWidthEnable="True" PercentWidthEnabled="True" LeftMargin="20.0321" RightMargin="21.9679" TopMargin="72.7697" BottomMargin="27.2303" LeftEage="12" RightEage="12" TopEage="16" BottomEage="16" Scale9OriginX="12" Scale9OriginY="16" Scale9Width="15" Scale9Height="18" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="item_img" ActionTag="818745422" Tag="28" IconVisible="False" PercentWidthEnable="True" PercentWidthEnabled="True" LeftMargin="20.0305" RightMargin="21.9695" TopMargin="85.7689" BottomMargin="14.2311" LeftEage="12" RightEage="12" TopEage="16" BottomEage="16" Scale9OriginX="12" Scale9OriginY="16" Scale9Width="15" Scale9Height="18" ctype="ImageViewObjectData">
                 <Size X="78.0000" Y="100.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="59.0321" Y="77.2303" />
+                <Position X="59.0305" Y="64.2311" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4919" Y="0.3862" />
+                <PrePosition X="0.4919" Y="0.3212" />
                 <PreSize X="0.6500" Y="0.5000" />
                 <FileData Type="Normal" Path="images/cat.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="item_lbl" ActionTag="1258482361" Tag="160" IconVisible="False" LeftMargin="3.6061" RightMargin="5.1810" TopMargin="23.1422" BottomMargin="153.8578" IsCustomSize="True" FontSize="20" LabelText="5 Berry" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="111.2129" Y="23.0000" />
+              <AbstractNodeData Name="item_lbl" ActionTag="1258482361" Tag="160" IconVisible="False" LeftMargin="4.3936" RightMargin="4.3936" TopMargin="7.5000" BottomMargin="117.5000" IsCustomSize="True" FontSize="30" LabelText="5&#xA; Berry" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="111.2129" Y="75.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="59.2125" Y="165.3578" />
+                <Position X="60.0000" Y="155.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4934" Y="0.8268" />
-                <PreSize X="0.9268" Y="0.1150" />
+                <PrePosition X="0.5000" Y="0.7750" />
+                <PreSize X="0.9268" Y="0.3750" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
