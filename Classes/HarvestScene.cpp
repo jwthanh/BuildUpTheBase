@@ -764,13 +764,14 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     alert_panel->setBackGroundColor(Color3B(85, 114, 145));
     alert_panel->setBackGroundColorOpacity(255);
 
+    ui::Layout* close_panel = dynamic_cast<ui::Layout*>(alert_panel->getChildByName("close_panel"));
     auto cb = [alert_panel](Ref* target, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             alert_panel->removeFromParent();
         };
     };
-    alert_panel->addTouchEventListener(cb);
+    close_panel->addTouchEventListener(cb);
 
     auto resource_name = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_name"));
     std::string res_name = Ingredient::type_to_string(ing_type);
