@@ -500,31 +500,31 @@ Village* Buildup::init_city(Buildup* buildup)
 
     auto farm = std::make_shared<Building>(city, "The Farm", "the_farm");
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
-    farm->punched_sub_type = "grain";
+    farm->punched_sub_type = Ingredient::Grain;
     buildup->set_target_building(farm);
 
     auto dump = std::make_shared<Building>(city, "The Dump", "the_dump");
-    dump->punched_sub_type = "fly";
+    dump->punched_sub_type = Ingredient::Fly;
 
     auto workshop = std::make_shared<Building>(city, "The Workshop", "the_workshop");
-    workshop->punched_sub_type = "wood";
+    workshop->punched_sub_type = Ingredient::Wood;
 
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", "the_marketplace");
 
     auto arena = std::make_shared<Building>(city, "The Arena", "the_arena");
-    arena->punched_sub_type = "sand";
+    arena->punched_sub_type = Ingredient::Sand;
 
     auto mine = std::make_shared<Building>(city, "The Mine", "the_mine");
-    mine->punched_sub_type = "copper";
+    mine->punched_sub_type = Ingredient::Copper;
 
     auto grave = std::make_shared<Building>(city, "The Graveyard", "the_graveyard");
-    grave->punched_sub_type = "flesh";
+    grave->punched_sub_type = Ingredient::Flesh;
 
     auto necro = std::make_shared<Building>(city, "The Underscape", "the_underscape");
-    necro->punched_sub_type = "blood";
+    necro->punched_sub_type = Ingredient::Blood;
 
     auto forest = std::make_shared<Building>(city, "The Forest", "the_forest");
-    forest->punched_sub_type = "berry";
+    forest->punched_sub_type = Ingredient::Berry;
 
     buildup->fighter = std::make_shared<Fighter>("Fighter");
     buildup->fighter->sprite_name = "townsmen8x8.png";

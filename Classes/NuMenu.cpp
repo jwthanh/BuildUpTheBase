@@ -333,13 +333,13 @@ void HarvesterShopNuItem::my_init_update_callback()
 {
     auto update_harvesters_cb = [this](float dt) {
         auto building = BUILDUP->get_target_building();
-        auto harvesters_owned = map_get(building->harvesters, {this->harv_type, Ingredient::string_to_type(building->punched_sub_type)}, 0);
+        auto harvesters_owned = map_get(building->harvesters, {this->harv_type, building->punched_sub_type}, 0);
         this->set_count_lbl(harvesters_owned);
         this->_shop_cost = Harvester::get_base_shop_cost(this->harv_type) * std::pow(1.15f, std::max(0, (int)harvesters_owned));
 
         std::stringstream ss;
         auto harvested_count = Harvester::get_harvested_count(this->harv_type);
-        ss << "Adds " << harvested_count << " " << building->punched_sub_type << " per sec";
+        ss << "Adds " << harvested_count << " " << Ingredient::type_to_string(building->punched_sub_type) << " per sec";
         this->set_description(ss.str());
     };
     this->schedule(update_harvesters_cb, 0.1f, "harvester_count");

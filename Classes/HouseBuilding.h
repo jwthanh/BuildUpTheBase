@@ -30,7 +30,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         Village* city;
 
-        std::string punched_sub_type = "wood";
+        Ingredient::SubType punched_sub_type;
 
         mistIngredient ingredients;
         mistProduct products;

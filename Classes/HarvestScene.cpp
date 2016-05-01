@@ -44,6 +44,7 @@ bool BaseScene::init()
     this->create_inventory_listview();
     this->create_shop_listview();
 
+
     return true;
 };
 
@@ -552,7 +553,7 @@ void BaseScene::create_shop_listview()
 
             //clone the new item
             auto menu_item = HarvesterShopNuItem::create();
-            menu_item->my_init(shop_listview, config.harv_type, Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type));
+            menu_item->my_init(shop_listview, config.harv_type, BUILDUP->get_target_building()->punched_sub_type);
             menu_item->setName(child_name);
 
             //since we only set the ing_type of the menu item above, it doesn't
@@ -560,7 +561,7 @@ void BaseScene::create_shop_listview()
             //this'll get moved to a json map or something between building and
             //harvest sub types
             menu_item->schedule([menu_item](float dt){
-                menu_item->ing_type = Ingredient::string_to_type(BUILDUP->get_target_building()->punched_sub_type);
+                menu_item->ing_type = BUILDUP->get_target_building()->punched_sub_type;
             }, 0.1f, "update_ing_type");
 
 
