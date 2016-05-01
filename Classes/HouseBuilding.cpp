@@ -198,6 +198,21 @@ Building::Building(Village* city, std::string name, std::string id_key) :
 
 };
 
+res_count_t Building::get_total_harvester_output()
+{
+    res_count_t total = 0;
+
+    for (auto h_mist : this->harvesters)
+    {
+        Harvester::SubType harv_type = h_mist.first.first;
+        Ingredient::SubType ing_type = h_mist.first.second;
+        res_count_t active_count = h_mist.second;
+        total += Harvester::get_harvested_count(harv_type)*active_count;
+    };
+
+    return total;
+};
+
 res_count_t Building::count_ingredients(Ingredient::SubType ing_type)
 {
     return this->ingredients[ing_type];

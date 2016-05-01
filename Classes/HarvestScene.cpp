@@ -199,7 +199,8 @@ void BaseScene::create_info_panel()
         {
             total_active += types_to_count.second;
         };
-        ss << "Robo-harvesters: " << total_active;
+        ss << "Harvesters: " << beautify_double(total_active) << "\nat " << beautify_double(building->get_total_harvester_output()) << "/sec";
+
         harvester_count->setString(ss.str());
     };
     this->schedule(update_harvester_count, update_delay, "harvester_count_update");
