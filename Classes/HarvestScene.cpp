@@ -21,6 +21,8 @@
 #include "attribute_container.h"
 #include "attribute.h"
 
+#include "BuildingsSideBar.h"
+
 class Animal;
 USING_NS_CC;
 
@@ -468,6 +470,9 @@ void BaseScene::create_shop_listview()
     ui::ListView* shop_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("shop_listview"));
     shop_listview->removeFromParent();
     this->addChild(shop_listview);
+   
+    auto sidebar = SideListView::create();
+    //sidebar->copyClonedWidgetChildren
 
     ui::ListView* detail_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("detail_listview"));
     detail_listview->removeFromParent();
