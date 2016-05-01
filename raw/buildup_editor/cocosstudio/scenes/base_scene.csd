@@ -6,13 +6,13 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="760.0320" RightMargin="-0.0320" TopMargin="226.7200" BottomMargin="313.2800" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="760.0320" RightMargin="-0.0320" TopMargin="231.7200" BottomMargin="308.2800" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
             <Size X="200.0000" Y="100.0000" />
             <AnchorPoint />
-            <Position X="760.0320" Y="313.2800" />
+            <Position X="760.0320" Y="308.2800" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7917" Y="0.4895" />
+            <PrePosition X="0.7917" Y="0.4817" />
             <PreSize X="0.2083" Y="0.1563" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
@@ -106,39 +106,39 @@
             <PreSize X="0.2083" Y="0.1563" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="760.0000" TopMargin="530.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-            <Size X="200.0000" Y="110.0000" />
+          <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="760.0000" TopMargin="540.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+            <Size X="200.0000" Y="100.0000" />
             <Children>
-              <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="0.2978" RightMargin="9.7022" TopMargin="7.5557" BottomMargin="79.4443" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="5.0000" RightMargin="5.0000" TopMargin="1.5000" BottomMargin="75.5000" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="95.2978" Y="90.9443" />
+                <Position X="100.0000" Y="87.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4765" Y="0.8268" />
-                <PreSize X="0.9500" Y="0.2091" />
+                <PrePosition X="0.5000" Y="0.8700" />
+                <PreSize X="0.9500" Y="0.2300" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="10.0001" RightMargin="-0.0001" TopMargin="41.5942" BottomMargin="50.4058" IsCustomSize="True" FontSize="16" LabelText="100 Gold" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="5.0000" RightMargin="5.0000" TopMargin="38.0000" BottomMargin="44.0000" IsCustomSize="True" FontSize="16" LabelText="100 Gold" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="18.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="105.0001" Y="59.4058" />
+                <Position X="100.0000" Y="53.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5250" Y="0.5401" />
-                <PreSize X="0.9500" Y="0.1636" />
+                <PrePosition X="0.5000" Y="0.5300" />
+                <PreSize X="0.9500" Y="0.1800" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="1.0004" RightMargin="8.9996" TopMargin="77.5000" BottomMargin="9.5000" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="5.0000" RightMargin="5.0000" TopMargin="67.5000" BottomMargin="9.5000" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="96.0004" Y="21.0000" />
+                <Position X="100.0000" Y="21.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.1909" />
-                <PreSize X="0.9500" Y="0.2091" />
+                <PrePosition X="0.5000" Y="0.2100" />
+                <PreSize X="0.9500" Y="0.2300" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -148,7 +148,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7917" />
-            <PreSize X="0.2083" Y="0.1719" />
+            <PreSize X="0.2083" Y="0.1563" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
@@ -165,27 +165,27 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="building_pageview" ActionTag="-1705781852" Tag="40" IconVisible="False" LeftMargin="760.0008" RightMargin="-0.0008" TopMargin="330.0000" BottomMargin="110.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="PageViewObjectData">
+          <AbstractNodeData Name="building_pageview" ActionTag="-1705781852" Tag="40" IconVisible="False" LeftMargin="760.0009" RightMargin="-0.0009" TopMargin="339.9999" BottomMargin="100.0001" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="PageViewObjectData">
             <Size X="200.0000" Y="200.0000" />
             <AnchorPoint />
-            <Position X="760.0008" Y="110.0000" />
+            <Position X="760.0009" Y="100.0001" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7917" Y="0.1719" />
+            <PrePosition X="0.7917" Y="0.1563" />
             <PreSize X="0.2083" Y="0.3125" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="150" B="100" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="inventory_listview" ActionTag="1072656337" Tag="220" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="402.0000" RightMargin="-158.0000" TopMargin="420.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="ListViewObjectData">
-            <Size X="716.0000" Y="220.0000" />
+          <AbstractNodeData Name="inventory_listview" ActionTag="1072656337" Tag="220" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="402.0000" RightMargin="-158.0000" TopMargin="440.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="ListViewObjectData">
+            <Size X="716.0000" Y="200.0000" />
             <AnchorPoint />
             <Position X="402.0000" />
             <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4187" />
-            <PreSize X="0.7458" Y="0.3438" />
+            <PreSize X="0.7458" Y="0.3125" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="150" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
