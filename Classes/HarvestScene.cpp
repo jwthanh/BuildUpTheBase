@@ -247,7 +247,7 @@ void BaseScene::create_player_info_panel()
         //set gold
         std::stringstream coin_ss;
         auto gold = BEATUP->get_total_coins();
-        coin_ss << "You have " << beautify_double(gold) << " coins";
+        coin_ss << "You have " << beautify_double(gold) << "$";
         std::string coin_msg = coin_ss.str();
         player_gold_lbl->setString(coin_msg);
 
@@ -809,9 +809,6 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
         auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
         load_default_button_textures(sell_btn);
 
-        //std::stringstream cost_ss;
-        //cost_ss << amount_sold << "/" << coins_gained;
-        //sell_btn->setTitleText(cost_ss.str());
         sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold, update_delay](Ref* touch, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
