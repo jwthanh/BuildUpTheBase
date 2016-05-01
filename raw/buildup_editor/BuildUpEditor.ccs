@@ -21,6 +21,7 @@
           <Project Name="base_scene.csd" Type="Scene" />
           <Project Name="city_scene.csd" Type="Scene" />
         </Folder>
+        <TTF Name="pixelmix.ttf" />
       </RootFolder>
     </Group>
   </SolutionFolder>

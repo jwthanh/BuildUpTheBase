@@ -19,15 +19,16 @@
                 <PreSize X="0.6500" Y="0.5000" />
                 <FileData Type="Normal" Path="images/cat.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="item_lbl" ActionTag="1258482361" Tag="160" IconVisible="False" LeftMargin="4.3936" RightMargin="4.3936" TopMargin="7.5000" BottomMargin="117.5000" IsCustomSize="True" FontSize="30" LabelText="5&#xA; Berry" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="111.2129" Y="75.0000" />
+              <AbstractNodeData Name="item_lbl" ActionTag="1258482361" Tag="160" IconVisible="False" LeftMargin="4.3936" RightMargin="4.3936" TopMargin="1.9929" BottomMargin="111.9929" IsCustomSize="True" FontSize="30" LabelText="5&#xA;Berry" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="111.2129" Y="86.0141" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="60.0000" Y="155.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.7750" />
-                <PreSize X="0.9268" Y="0.3750" />
-                <OutlineColor A="255" R="255" G="0" B="0" />
+                <PreSize X="0.9268" Y="0.4301" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
