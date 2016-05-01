@@ -106,7 +106,7 @@
             <PreSize X="0.2083" Y="0.1563" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="760.1862" RightMargin="-0.1862" TopMargin="530.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="760.0000" TopMargin="530.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="110.0000" />
             <Children>
               <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="0.2978" RightMargin="9.7022" TopMargin="7.5557" BottomMargin="79.4443" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -144,10 +144,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint />
-            <Position X="760.1862" />
+            <Position X="760.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7919" />
+            <PrePosition X="0.7917" />
             <PreSize X="0.2083" Y="0.1719" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
@@ -165,27 +165,27 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="building_pageview" ActionTag="-1705781852" Tag="40" IconVisible="False" LeftMargin="760.0008" RightMargin="-0.0008" TopMargin="330.4754" BottomMargin="109.5246" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="PageViewObjectData">
+          <AbstractNodeData Name="building_pageview" ActionTag="-1705781852" Tag="40" IconVisible="False" LeftMargin="760.0008" RightMargin="-0.0008" TopMargin="330.0000" BottomMargin="110.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="PageViewObjectData">
             <Size X="200.0000" Y="200.0000" />
             <AnchorPoint />
-            <Position X="760.0008" Y="109.5246" />
+            <Position X="760.0008" Y="110.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7917" Y="0.1711" />
+            <PrePosition X="0.7917" Y="0.1719" />
             <PreSize X="0.2083" Y="0.3125" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="150" B="100" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="inventory_listview" ActionTag="1072656337" Tag="220" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="402.0271" RightMargin="-158.4080" TopMargin="420.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="ListViewObjectData">
-            <Size X="716.3809" Y="220.0000" />
+          <AbstractNodeData Name="inventory_listview" ActionTag="1072656337" Tag="220" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="402.0000" RightMargin="-158.0000" TopMargin="420.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="ListViewObjectData">
+            <Size X="716.0000" Y="220.0000" />
             <AnchorPoint />
-            <Position X="402.0271" />
+            <Position X="402.0000" />
             <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4188" />
-            <PreSize X="0.7462" Y="0.3438" />
+            <PrePosition X="0.4187" />
+            <PreSize X="0.7458" Y="0.3438" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="150" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
