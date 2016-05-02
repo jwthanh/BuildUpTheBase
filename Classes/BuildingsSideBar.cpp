@@ -114,13 +114,13 @@ void SideListView::setup_shop_listview_as_harvesters()
             //harvest sub types
             menu_item->schedule([menu_item](float dt){
                 menu_item->ing_type = BUILDUP->get_target_building()->punched_sub_type;
-            }, 0.1f, "update_ing_type");
+            }, update_delay, "update_ing_type");
 
 
         };
     };
 
-    shop_listview->schedule(update_harvester_listview, 0.1f, "update_listview");
+    shop_listview->schedule(update_harvester_listview, update_delay, "update_listview");
     update_harvester_listview(0);
 };
 
@@ -131,7 +131,6 @@ void SideListView::setup_detail_listview_as_recipes()
     auto update_detail_listview = [this, update_delay](float dt)
     {
 
-
         spBuilding target_building = BUILDUP->get_target_building();
 
         if (target_building->name != this->current_target->name)
@@ -140,6 +139,7 @@ void SideListView::setup_detail_listview_as_recipes()
             this->current_target = target_building;
             detail_listview->removeAllChildren();
         }
+
         //placeholder for things we'll need to put in the sidebar
         struct DetailConfig{
             spRecipe recipe;
@@ -187,12 +187,12 @@ void SideListView::setup_detail_listview_as_recipes()
 
             menu_item->schedule([menu_item](float dt){
                 menu_item->building = BUILDUP->get_target_building();
-            }, 0.1f, "update_ing_type");
+            }, update_delay, "update_ing_type");
 
         };
     };
 
-    detail_listview->schedule(update_detail_listview, 0.1f, "update_listview");
+    detail_listview->schedule(update_detail_listview, update_delay, "update_listview");
     update_detail_listview(0);
 };
 

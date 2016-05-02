@@ -475,7 +475,6 @@ void BaseScene::create_shop_listview()
 
 
     sidebar->setup_shop_listview_as_harvesters();
-
     sidebar->setup_detail_listview_as_recipes();
 };
 
