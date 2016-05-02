@@ -510,6 +510,7 @@ Village* Buildup::init_city(Buildup* buildup)
     workshop->punched_sub_type = Ingredient::Wood;
 
     auto marketplace = std::make_shared<Building>(city, "The Marketplace", "the_marketplace");
+    marketplace->punched_sub_type = Ingredient::Seed;
 
     auto arena = std::make_shared<Building>(city, "The Arena", "the_arena");
     arena->punched_sub_type = Ingredient::Sand;
