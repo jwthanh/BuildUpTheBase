@@ -70,6 +70,21 @@ void SideListView::setup_listviews()
 {
     this->shop_listview = this->_create_listview("shop_listview");
     this->detail_listview = this->_create_listview("detail_listview");
+
+    float update_delay = 0.1f;
+
+    auto clean_children_on_target_change = [this](float dt)
+    {
+        spBuilding target_building = BUILDUP->get_target_building();
+        if (target_building->name != this->current_target->name)
+        {
+            CCLOG("Changed building!, rebuilding detail and shop listview");
+            this->current_target = target_building;
+            this->detail_listview->removeAllChildren();
+            this->shop_listview->removeAllChildren();
+        }
+    };
+    this->parent->schedule(clean_children_on_target_change, update_delay, "clean_children");
 };
 
 void SideListView::setup_shop_listview_as_harvesters()
@@ -126,19 +141,12 @@ void SideListView::setup_shop_listview_as_harvesters()
 
 void SideListView::setup_detail_listview_as_recipes()
 {
-    ///DETAIL LISTVIEW
     float update_delay = 0.1f;
+
+    ///DETAIL LISTVIEW
     auto update_detail_listview = [this, update_delay](float dt)
     {
-
         spBuilding target_building = BUILDUP->get_target_building();
-
-        if (target_building->name != this->current_target->name)
-        {
-            CCLOG("Changed building!, rebuilding detail listview");
-            this->current_target = target_building;
-            detail_listview->removeAllChildren();
-        }
 
         //placeholder for things we'll need to put in the sidebar
         struct DetailConfig{
