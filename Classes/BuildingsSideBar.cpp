@@ -205,26 +205,12 @@ void SideListView::setup_detail_listview_as_recipes()
             menu_item->set_title(config.config.name);
             menu_item->set_description(config.config.description);
 
-            //RecipeNuItem specifics
-            spRecipe recipe = config.recipe;
-            menu_item->recipe = recipe;
-            menu_item->building = target_building;
-            menu_item->set_touch_ended_callback([menu_item]() {
-                CCLOG("trying to consume %s recipe", menu_item->recipe->name.c_str());
-                menu_item->building->consume_recipe(menu_item->recipe.get());
-            });
-
-            recipe->_callback = [target_building, recipe]() {
-                for (auto pair : recipe->outputs) {
-                    Ingredient::SubType ing_type = pair.first;
-                    int count = pair.second;
-                    target_building->create_ingredients(ing_type, count);
-                };
-            };
-
             menu_item->schedule([menu_item](float dt){
                 menu_item->building = BUILDUP->get_target_building();
             }, update_delay, "update_ing_type");
+
+            //RecipeNuItem specifics
+            menu_item->other_init(config.recipe);
 
         };
     };

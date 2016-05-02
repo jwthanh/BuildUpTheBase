@@ -178,19 +178,37 @@ void ShopNuItem::update_func(float dt)
 
 };
 
-void RecipeNuItem::my_init(spRecipe recipe, std::shared_ptr<Building> building, Node* parent)
+void BuildingNuItem::my_init(std::shared_ptr<Building> building, Node* parent)
 {
     NuItem::my_init(parent);
-
-    this->recipe = recipe;
     this->building = building;
+};
 
+void RecipeNuItem::other_init(spRecipe recipe)
+{
+    this->recipe = recipe;
     this->set_touch_ended_callback([this]() {
         CCLOG("trying to consume %s recipe", this->recipe->name.c_str());
         this->building->consume_recipe(this->recipe.get());
     });
 
-};
+    spBuilding target_building = BUILDUP->get_target_building();
+
+    this->recipe = recipe;
+    this->building = target_building;
+    this->set_touch_ended_callback([this]() {
+        CCLOG("trying to consume %s recipe", this->recipe->name.c_str());
+        this->building->consume_recipe(this->recipe.get());
+    });
+
+    recipe->_callback = [target_building, recipe]() {
+        for (auto pair : recipe->outputs) {
+            Ingredient::SubType ing_type = pair.first;
+            int count = pair.second;
+            target_building->create_ingredients(ing_type, count);
+        };
+    };
+}
 
 void RecipeNuItem::update_func(float dt)
 {
@@ -469,18 +487,8 @@ void BuildingNuMenu::init_items()
     {
         auto convert_item = RecipeNuItem::create();
 
-        recipe->_callback = [this, recipe]() {
-            for (auto pair : recipe->outputs) {
-                Ingredient::SubType ing_type = pair.first;
-                int count = pair.second;
-                this->building->create_ingredients(ing_type, count);
-            };
-        };
-
-        convert_item->my_init(recipe, this->building, scrollview);
-        convert_item->set_title(recipe->name);
-        convert_item->set_description(recipe->description);
-
+        convert_item->my_init(this->building, scrollview);
+        convert_item->other_init(recipe);
     }
 
 };

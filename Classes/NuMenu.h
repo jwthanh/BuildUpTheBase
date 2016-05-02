@@ -44,16 +44,24 @@ class NuItem : public cocos2d::ui::Widget
         virtual void update_func(float dt) {};
 };
 
-class RecipeNuItem : public NuItem
+class BuildingNuItem : public NuItem
+{
+    public:
+        spBuilding building;
+
+        CREATE_FUNC(BuildingNuItem);
+        virtual void my_init(std::shared_ptr<Building> building, Node* parent);
+};
+
+class RecipeNuItem : public BuildingNuItem
 {
     public:
         CREATE_FUNC(RecipeNuItem);
 
         spRecipe recipe;
-        spBuilding building;
 
-        virtual void my_init(spRecipe recipe, std::shared_ptr<Building> building, Node* parent);
-        virtual void update_func(float dt);
+        virtual void other_init(spRecipe recipe);
+        virtual void update_func(float dt) override;
 };
 
 class ShopNuItem : public Buyable, public NuItem
