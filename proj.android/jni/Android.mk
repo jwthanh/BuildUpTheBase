@@ -17,6 +17,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/BaseMenu.cpp \
                    ../../Classes/NuMenu.cpp \
                    ../../Classes/HarvestScene.cpp \
+                   ../../Classes/BuildingsSideBar.cpp \
                    ../../Classes/Harvestable.cpp \
                    ../../Classes/Resources.cpp \
                    ../../Classes/GameLogic.cpp \
