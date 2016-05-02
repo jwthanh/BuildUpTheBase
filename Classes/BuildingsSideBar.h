@@ -2,6 +2,7 @@
 #ifndef BUILDINGSSIDEBAR_H
 #define BUILDINGSSIDEBAR_H
 #include <string>
+#include <memory>
 
 namespace cocos2d
 {
@@ -14,12 +15,16 @@ namespace cocos2d
         class Button;
     }
 }
+
+class Building;
+
 ///Base ListView for sidebar
 /// 
 ///It creates a ui::ListView specific to each building
 class SideListView
 {
     public:
+        std::shared_ptr<Building> current_target;
         cocos2d::Node* parent;
 
         cocos2d::ui::ListView* shop_listview;
@@ -29,7 +34,7 @@ class SideListView
         cocos2d::ui::Button* tab_detail_btn;
 
 
-        SideListView(cocos2d::Node* parent);
+        SideListView(cocos2d::Node* parent, std::shared_ptr<Building> current_target);
 
         virtual cocos2d::ui::ListView* _create_listview(std::string node_name);
         virtual cocos2d::ui::Button* _create_button(std::string node_name);

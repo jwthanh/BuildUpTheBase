@@ -465,7 +465,7 @@ void BaseScene::create_inventory_listview()
 void BaseScene::create_shop_listview()
 {
 
-    SideListView* sidebar = new SideListView(this);
+    SideListView* sidebar = new SideListView(this, BUILDUP->get_target_building());
 
     ui::ListView* shop_listview = sidebar->shop_listview;
     ui::ListView* detail_listview = sidebar->detail_listview;
@@ -524,22 +524,17 @@ void BaseScene::create_shop_listview()
     shop_listview->schedule(update_harvester_listview, 0.1f, "update_listview");
     update_harvester_listview(0);
 
-    spBuilding current_target = BUILDUP->get_target_building();
-    detail_listview->setUserData(reinterpret_cast<void*>(current_target.get()));
-
     ///DETAIL LISTVIEW
-    auto update_detail_listview = [this, detail_listview, update_delay](float dt)
+    auto update_detail_listview = [this, detail_listview, update_delay, sidebar](float dt)
     {
 
-        void* raw_ptr = detail_listview->getUserData();
-        Building* building = static_cast<Building*>(raw_ptr);
 
         spBuilding target_building = BUILDUP->get_target_building();
 
-        if (target_building->name != building->name)
+        if (target_building->name != sidebar->current_target->name)
         {
             CCLOG("Changed building!, rebuilding detail listview");
-            detail_listview->setUserData(reinterpret_cast<void*>(target_building.get()));
+            sidebar->current_target = target_building;
             detail_listview->removeAllChildren();
         }
         //placeholder for things we'll need to put in the sidebar

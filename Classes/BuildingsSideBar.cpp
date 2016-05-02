@@ -1,14 +1,17 @@
 #include "BuildingsSideBar.h"
 
+#include "constants.h"
+
 #include "cocos2d.h"
 #include "cocostudio/ActionTimeline/CSLoader.h"
 #include "ui/CocosGUI.h"
 
 #include "MiscUI.h"
 
+
 USING_NS_CC;
 
-SideListView::SideListView(Node* parent) : parent(parent)
+SideListView::SideListView(Node* parent, spBuilding current_target) : current_target(current_target), parent(parent)
 {
     this->setup_listviews();
     this->setup_tab_buttons();
