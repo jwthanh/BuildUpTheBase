@@ -28,5 +28,19 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="scenes/city_scene.csd" />
+          <FilePathData Path="scenes/base_scene.csd" />
+          <FilePathData Path="buttons/inventory_button.csd" />
+          <FilePathData Path="buttons/menu_item.csd" />
+          <FilePathData Path="buttons/building_button.csd" />
+          <FilePathData Path="details/character_detail.csd" />
+          <FilePathData Path="details/inventory_detail.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="scenes/base_scene.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

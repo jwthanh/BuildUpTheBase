@@ -464,51 +464,46 @@ void BaseScene::create_inventory_listview()
 
 void BaseScene::create_shop_listview()
 {
+
+    SideListView* sidebar = new SideListView(this);
+
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
 
-    ui::ListView* shop_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("shop_listview"));
-    shop_listview->removeFromParent();
-    this->addChild(shop_listview);
-   
-    auto sidebar = SideListView::create();
-    //sidebar->copyClonedWidgetChildren
+    //ui::ListView* shop_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("shop_listview"));
+    //NOTE huge hack since the shop_listview isnt a sidelist view
+    // ui::ListView* shop_listview = sidebar->_create_listview("shop_listview");
+    // ui::ListView* detail_listview = sidebar->_create_listview("detail_listview");
+    ui::ListView* shop_listview = sidebar->shop_listview;
+    ui::ListView* detail_listview = sidebar->detail_listview;
 
-    ui::ListView* detail_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("detail_listview"));
-    detail_listview->removeFromParent();
-    this->addChild(detail_listview);
+    // ui::Button* tab_1_btn = sidebar->_create_button("tab_1_btn");
+    // ui::Button* tab_2_btn = sidebar->_create_button("tab_2_btn");
+    ui::Button* tab_1_btn = sidebar->tab_shop_btn;
+    ui::Button* tab_2_btn = sidebar->tab_detail_btn;
 
-    ui::Button* tab_1_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_1_btn"));
-    load_default_button_textures(tab_1_btn);
-    ui::Button* tab_2_btn = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName("tab_2_btn"));
-    load_default_button_textures(tab_2_btn);
+    // tab_1_btn->setEnabled(false); //it starts out active tab already
+    // tab_1_btn->addTouchEventListener([this, tab_1_btn, tab_2_btn, shop_listview, detail_listview](Ref* target, ui::Widget::TouchEventType evt)
+    // {
+    //     if (evt == ui::Widget::TouchEventType::ENDED)
+    //     {
+    //         shop_listview->setVisible(true);
+    //         detail_listview->setVisible(false);
+    //         try_set_enabled(tab_1_btn, false);
+    //         try_set_enabled(tab_2_btn, true);
+    //     }
+    // });
 
-    tab_1_btn->removeFromParent();
-    tab_1_btn->setEnabled(false); //it starts out active tab already
-    this->addChild(tab_1_btn);
-    tab_1_btn->addTouchEventListener([this, tab_1_btn, tab_2_btn, shop_listview, detail_listview](Ref* target, ui::Widget::TouchEventType evt)
-    {
-        if (evt == ui::Widget::TouchEventType::ENDED)
-        {
-            shop_listview->setVisible(true);
-            detail_listview->setVisible(false);
-            try_set_enabled(tab_1_btn, false);
-            try_set_enabled(tab_2_btn, true);
-        }
-    });
-
-    tab_2_btn->removeFromParent();
-    this->addChild(tab_2_btn);
-    tab_2_btn->addTouchEventListener([this, tab_1_btn, tab_2_btn, shop_listview, detail_listview](Ref* target, ui::Widget::TouchEventType evt)
-    {
-        if (evt == ui::Widget::TouchEventType::ENDED)
-        {
-            shop_listview->setVisible(false);
-            detail_listview->setVisible(true);
-            try_set_enabled(tab_1_btn, true);
-            try_set_enabled(tab_2_btn, false);
-        }
-    });
+    // tab_2_btn->addTouchEventListener([this, tab_1_btn, tab_2_btn, shop_listview, detail_listview](Ref* target, ui::Widget::TouchEventType evt)
+    // {
+    //     if (evt == ui::Widget::TouchEventType::ENDED)
+    //     {
+    //         shop_listview->setVisible(false);
+    //         detail_listview->setVisible(true);
+    //         try_set_enabled(tab_1_btn, true);
+    //         try_set_enabled(tab_2_btn, false);
+    //     }
+    // });
 
     float update_delay = 0.1f;
 
