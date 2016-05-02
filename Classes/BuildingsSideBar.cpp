@@ -139,6 +139,23 @@ void SideListView::setup_shop_listview_as_harvesters()
     update_harvester_listview(0);
 };
 
+///tries to push the node at child_tag to the back of the listview. if it didn't exist,
+/// it returns false
+bool SideListView::try_push_back(int child_tag, ui::ListView* listview)
+{
+    bool existed = false;
+
+    auto existing_node = listview->getChildByTag(child_tag);
+    if (existing_node)
+    {
+        existing_node->removeFromParentAndCleanup(false); //dont remove the callbacks, just move it around
+        listview->addChild(existing_node);
+        existed = true;
+    }
+
+    return existed;
+}
+
 void SideListView::setup_detail_listview_as_recipes()
 {
     float update_delay = 0.1f;
@@ -148,18 +165,26 @@ void SideListView::setup_detail_listview_as_recipes()
     {
         spBuilding target_building = BUILDUP->get_target_building();
 
-        //placeholder for things we'll need to put in the sidebar
-        struct DetailConfig{
+        struct MenuItemConfig {
+            std::string name;
+            std::string description;
+        };
+
+        struct DetailConfig {
             spRecipe recipe;
+            MenuItemConfig config;
         };
 
         std::vector<DetailConfig> nuitems_config;
 
         for (spRecipe recipe : BUILDUP->get_target_building()->data->get_all_recipes())
         {
-            nuitems_config.push_back({recipe});
+            nuitems_config.push_back({
+                recipe, {
+                    recipe->name,
+                    recipe->description
+                } });
         };
-
 
         int i = 0;
         for (auto config : nuitems_config)
@@ -168,18 +193,16 @@ void SideListView::setup_detail_listview_as_recipes()
             i++;
 
             spRecipe recipe = config.recipe;
+            ui::ListView* listview = detail_listview;
 
-            //if the child already exists, put it at the back 
-            auto existing_node = detail_listview->getChildByTag(child_tag);
-            if (existing_node)
-            {
-                existing_node->removeFromParentAndCleanup(false);
-                detail_listview->addChild(existing_node);
-                continue;
-            }
+            //if the child already exists, put it at the end of the listview, maintaining order as config
+            bool existed = this->try_push_back(child_tag, listview);
+            if (existed) { continue; };
 
             //create (not clone) the new item
             auto menu_item = RecipeNuItem::create();
+            menu_item->setTag(child_tag);
+
             recipe->_callback = [this, recipe]() {
                 for (auto pair : recipe->outputs) {
                     Ingredient::SubType ing_type = pair.first;
@@ -187,11 +210,10 @@ void SideListView::setup_detail_listview_as_recipes()
                     BUILDUP->get_target_building()->create_ingredients(ing_type, count);
                 };
             };
-            menu_item->setTag(child_tag);
 
-            menu_item->my_init(recipe, BUILDUP->get_target_building(), detail_listview);
-            menu_item->set_title(recipe->name);
-            menu_item->set_description(recipe->description);
+            menu_item->my_init(recipe, BUILDUP->get_target_building(), listview);
+            menu_item->set_title(config.config.name);
+            menu_item->set_description(config.config.description);
 
             menu_item->schedule([menu_item](float dt){
                 menu_item->building = BUILDUP->get_target_building();
