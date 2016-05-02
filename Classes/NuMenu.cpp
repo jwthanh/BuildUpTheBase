@@ -192,19 +192,21 @@ void RecipeNuItem::other_init(spRecipe recipe)
         this->building->consume_recipe(this->recipe.get());
     });
 
-    this->recipe = recipe;
-    this->set_touch_ended_callback([this]() {
-        CCLOG("trying to consume %s recipe", this->recipe->name.c_str());
-        this->building->consume_recipe(this->recipe.get());
-    });
-
-    recipe->_callback = [this]() {
-        for (auto pair : this->recipe->outputs) {
-            Ingredient::SubType ing_type = pair.first;
-            int count = pair.second;
-            this->building->create_ingredients(ing_type, count);
+    if (recipe->_callback == NULL)
+    {
+        CCLOG("no callback set, using default, recipe %s", this->recipe->name.c_str());
+        recipe->_callback = [this]() {
+            for (auto pair : this->recipe->outputs) {
+                Ingredient::SubType ing_type = pair.first;
+                int count = pair.second;
+                this->building->create_ingredients(ing_type, count);
+            };
         };
-    };
+    }
+    else
+    {
+        CCLOG("callback set, using existing callback, recipe %s", this->recipe->name.c_str());
+    }
 }
 
 void RecipeNuItem::update_func(float dt)

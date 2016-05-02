@@ -13,6 +13,9 @@
 #include "HouseBuilding.h"
 #include "StaticData.h"
 #include "Recipe.h"
+#include "Fighter.h"
+#include "attribute_container.h"
+#include "attribute.h"
 
 
 USING_NS_CC;
@@ -175,7 +178,7 @@ void SideListView::setup_detail_listview_as_recipes()
         enum class DetailType
         {
             Recipe = 0,
-            Boost = 1
+            Misc = 1
         };
 
         struct DetailConfig {
@@ -197,13 +200,29 @@ void SideListView::setup_detail_listview_as_recipes()
                 } });
         };
 
-        nuitems_config.push_back({
-            NULL,
-            DetailType::Boost,
+        if (target_building->name == "The Underscape")
+        {
+            spRecipe blood_oath = std::make_shared<Recipe>("Regenerate Youth", "Consume blood");
+            blood_oath->components = mistIngredient({
+                {Ingredient::Blood, 5}
+            });
+            blood_oath->_callback = []()
             {
-                "Example other button",
-                "This does nothing"
-            } });
+                auto health = BUILDUP->fighter->attrs->health;
+                if (health->is_full() == false)
+                {
+                    health->add_to_current_val(5);
+                }
+                CCLOG("regen from blood oath");
+            };
+            nuitems_config.push_back({
+                blood_oath,
+                DetailType::Recipe,
+                {
+                    blood_oath->name,
+                    blood_oath->description
+                } });
+        };
 
         int i = 0;
         for (auto config : nuitems_config)
@@ -220,7 +239,7 @@ void SideListView::setup_detail_listview_as_recipes()
             if (config.type == DetailType::Recipe) {
                 menu_item = RecipeNuItem::create();
             }
-            else if (config.type == DetailType::Boost) {
+            else if (config.type == DetailType::Misc) {
                 menu_item = BuildingNuItem::create();
             }
 
