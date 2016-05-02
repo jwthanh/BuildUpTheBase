@@ -454,11 +454,6 @@ bool CityMenu::init()
        auto ing_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("ingredient_count"));
        ing_count->setString(create_count("ING", building->ingredients.size()));
 
-       auto pro_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("product_count"));
-       pro_count->setString(create_count("PRO", building->products.size()));
-
-       auto wst_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("waste_count"));
-       wst_count->setString(create_count("WST", building->wastes.size()));
 
        auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
            if (event == ui::Widget::TouchEventType::ENDED)
