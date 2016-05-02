@@ -40,13 +40,20 @@ void SideListView::setup_tab_buttons()
 
             ui::Button* target_button = dynamic_cast<ui::Button*>(target);
             target_button->setEnabled(false);
+
+            if (target_button == this->tab_shop_btn) { this->shop_listview->setVisible(true); }
+            else if (target_button == this->tab_detail_btn) { this->detail_listview->setVisible(true); }
         };
     };
 
     this->tab_shop_btn = this->_create_button("tab_1_btn");
     this->tab_shop_btn->addTouchEventListener(toggle_buttons);
+
     this->tab_detail_btn = this->_create_button("tab_2_btn");
     this->tab_detail_btn->addTouchEventListener(toggle_buttons);
+
+    //prepress the shop button
+    this->tab_shop_btn->setEnabled(false);
 
 }
 
