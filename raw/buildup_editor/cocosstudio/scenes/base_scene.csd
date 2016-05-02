@@ -6,85 +6,61 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="200.6000" RightMargin="559.4000" TopMargin="2.4000" BottomMargin="537.6000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="200.6400" RightMargin="559.3600" TopMargin="2.4000" BottomMargin="537.6000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
             <Size X="200.0000" Y="100.0000" />
             <AnchorPoint />
-            <Position X="200.6000" Y="537.6000" />
+            <Position X="200.6400" Y="537.6000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2090" Y="0.8400" />
             <PreSize X="0.2083" Y="0.1563" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="city_pos" ActionTag="-1746362178" Tag="77" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="0.0000" RightMargin="760.0000" TopMargin="2.4000" BottomMargin="537.6000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="city_pos" ActionTag="-1746362178" Tag="77" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" RightMargin="760.0000" TopMargin="2.4000" BottomMargin="537.6000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
             <Size X="200.0000" Y="100.0000" />
             <AnchorPoint />
-            <Position X="0.0000" Y="537.6000" />
+            <Position Y="537.6000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0000" Y="0.8400" />
+            <PrePosition Y="0.8400" />
             <PreSize X="0.2083" Y="0.1563" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="759.8344" RightMargin="0.1656" TopMargin="0.9990" BottomMargin="419.0010" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="220.0000" />
             <Children>
-              <AbstractNodeData Name="info_title" ActionTag="1877563915" Tag="142" IconVisible="False" LeftMargin="26.4429" RightMargin="34.5571" TopMargin="39.6277" BottomMargin="164.3723" FontSize="16" LabelText="Building info" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="141.0000" Y="20.0000" />
+              <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="4.6830" RightMargin="4.6827" TopMargin="47.4357" BottomMargin="151.6962" IsCustomSize="True" FontSize="16" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="190.6343" Y="20.8681" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="95.9429" Y="172.3723" />
+                <Position X="100.0002" Y="162.1302" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4797" Y="0.7835" />
-                <PreSize X="0.6950" Y="0.0727" />
+                <PrePosition X="0.5000" Y="0.7370" />
+                <PreSize X="0.9532" Y="0.0949" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="4.6829" RightMargin="4.6829" TopMargin="69.8685" BottomMargin="132.1315" IsCustomSize="True" FontSize="14" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="190.6343" Y="18.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="141.1315" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.6415" />
-                <PreSize X="0.9532" Y="0.0818" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="0" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="6.9771" RightMargin="14.7393" TopMargin="128.9075" BottomMargin="13.8472" IsCustomSize="True" FontSize="16" LabelText="Harvesters 0&#xA;at XX/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="9.8993" RightMargin="11.8170" TopMargin="78.6769" BottomMargin="64.0778" IsCustomSize="True" FontSize="16" LabelText="Harvesters 0&#xA;at XX/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="178.2837" Y="77.2453" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="96.1189" Y="52.4699" />
+                <Position X="99.0411" Y="102.7005" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4806" Y="0.2385" />
+                <PrePosition X="0.4952" Y="0.4668" />
                 <PreSize X="0.8914" Y="0.3511" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="inventory_title" ActionTag="-189399336" Tag="158" IconVisible="False" LeftMargin="47.0779" RightMargin="56.9221" TopMargin="98.7879" BottomMargin="101.2121" FontSize="20" LabelText="Details" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="98.0000" Y="24.0000" />
+              <AbstractNodeData Name="building_name" ActionTag="595339504" Tag="50" IconVisible="False" TopMargin="10.0819" BottomMargin="189.9181" IsCustomSize="True" FontSize="16" LabelText="The Marketplace" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="200.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="95.0779" Y="111.2121" />
+                <Position X="100.0000" Y="199.9181" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4754" Y="0.5055" />
-                <PreSize X="0.4800" Y="0.0909" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="0" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="building_name" ActionTag="595339504" Tag="50" IconVisible="False" LeftMargin="4.5360" RightMargin="14.4640" TopMargin="8.0819" BottomMargin="187.9181" FontSize="20" LabelText="Building Name" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="181.0000" Y="24.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="95.0360" Y="199.9181" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4752" Y="0.9087" />
-                <PreSize X="0.9050" Y="0.1091" />
+                <PrePosition X="0.5000" Y="0.9087" />
+                <PreSize X="1.0000" Y="0.0909" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -152,18 +128,18 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="446.2473" RightMargin="199.7527" TopMargin="91.0141" BottomMargin="525.9859" IsCustomSize="True" FontSize="20" LabelText="Current recipe: Bread" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="429.7188" RightMargin="216.2813" TopMargin="33.1626" BottomMargin="583.8374" IsCustomSize="True" FontSize="20" LabelText="Current recipe: Bread" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="314.0000" Y="23.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="603.2473" Y="537.4859" />
+            <Position X="586.7188" Y="595.3374" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6284" Y="0.8398" />
+            <PrePosition X="0.6112" Y="0.9302" />
             <PreSize X="0.3271" Y="0.0359" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="building_pageview" ActionTag="-1705781852" Tag="40" IconVisible="False" LeftMargin="760.0009" RightMargin="-0.0009" TopMargin="339.9999" BottomMargin="100.0001" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="PageViewObjectData">
+          <AbstractNodeData Name="building_pageview" ActionTag="-1705781852" Tag="40" IconVisible="False" LeftMargin="760.0009" RightMargin="-0.0009" TopMargin="339.9999" BottomMargin="100.0001" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="PageViewObjectData">
             <Size X="200.0000" Y="200.0000" />
             <AnchorPoint />
             <Position X="760.0009" Y="100.0001" />

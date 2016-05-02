@@ -19,14 +19,14 @@
                 <PreSize X="0.9331" Y="0.5663" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="building_name" ActionTag="657517655" Tag="44" IconVisible="False" LeftMargin="8.7357" RightMargin="10.2643" TopMargin="120.8627" BottomMargin="55.1373" FontSize="20" LabelText="Building Name" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="181.0000" Y="24.0000" />
+              <AbstractNodeData Name="building_name" ActionTag="657517655" Tag="44" IconVisible="False" LeftMargin="26.7357" RightMargin="28.2643" TopMargin="122.8627" BottomMargin="57.1373" FontSize="16" LabelText="Building Name" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="145.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="99.2357" Y="67.1373" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4962" Y="0.3357" />
-                <PreSize X="0.9050" Y="0.1200" />
+                <PreSize X="0.7250" Y="0.1000" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
