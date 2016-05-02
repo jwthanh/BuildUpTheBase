@@ -192,7 +192,6 @@ void SideListView::setup_detail_listview_as_recipes()
             int child_tag = i;
             i++;
 
-            spRecipe recipe = config.recipe;
             ui::ListView* listview = detail_listview;
 
             //if the child already exists, put it at the end of the listview, maintaining order as config
@@ -202,9 +201,18 @@ void SideListView::setup_detail_listview_as_recipes()
             auto menu_item = RecipeNuItem::create();
             menu_item->setTag(child_tag);
 
-            menu_item->my_init(recipe, target_building, listview);
+            menu_item->NuItem::my_init(listview); //doesnt call RecipeNuItem::my_init to avoid specifying too much
             menu_item->set_title(config.config.name);
             menu_item->set_description(config.config.description);
+
+            //RecipeNuItem specifics
+            spRecipe recipe = config.recipe;
+            menu_item->recipe = recipe;
+            menu_item->building = target_building;
+            menu_item->set_touch_ended_callback([menu_item]() {
+                CCLOG("trying to consume %s recipe", menu_item->recipe->name.c_str());
+                menu_item->building->consume_recipe(menu_item->recipe.get());
+            });
 
             recipe->_callback = [target_building, recipe]() {
                 for (auto pair : recipe->outputs) {
@@ -213,7 +221,6 @@ void SideListView::setup_detail_listview_as_recipes()
                     target_building->create_ingredients(ing_type, count);
                 };
             };
-
 
             menu_item->schedule([menu_item](float dt){
                 menu_item->building = BUILDUP->get_target_building();
