@@ -177,7 +177,7 @@ void SideListView::setup_detail_listview_as_recipes()
 
         std::vector<DetailConfig> nuitems_config;
 
-        for (spRecipe recipe : BUILDUP->get_target_building()->data->get_all_recipes())
+        for (spRecipe recipe : target_building->data->get_all_recipes())
         {
             nuitems_config.push_back({
                 recipe, {
@@ -199,21 +199,21 @@ void SideListView::setup_detail_listview_as_recipes()
             bool existed = this->try_push_back(child_tag, listview);
             if (existed) { continue; };
 
-            //create (not clone) the new item
             auto menu_item = RecipeNuItem::create();
             menu_item->setTag(child_tag);
 
-            recipe->_callback = [this, recipe]() {
+            menu_item->my_init(recipe, target_building, listview);
+            menu_item->set_title(config.config.name);
+            menu_item->set_description(config.config.description);
+
+            recipe->_callback = [target_building, recipe]() {
                 for (auto pair : recipe->outputs) {
                     Ingredient::SubType ing_type = pair.first;
                     int count = pair.second;
-                    BUILDUP->get_target_building()->create_ingredients(ing_type, count);
+                    target_building->create_ingredients(ing_type, count);
                 };
             };
 
-            menu_item->my_init(recipe, BUILDUP->get_target_building(), listview);
-            menu_item->set_title(config.config.name);
-            menu_item->set_description(config.config.description);
 
             menu_item->schedule([menu_item](float dt){
                 menu_item->building = BUILDUP->get_target_building();
