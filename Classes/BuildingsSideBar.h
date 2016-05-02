@@ -40,7 +40,10 @@ class SideListView
         virtual cocos2d::ui::Button* _create_button(std::string node_name);
 
         void setup_tab_buttons();
+
         void setup_listviews();
+        void setup_shop_listview_as_harvesters();
+        void setup_detail_listview_as_recipes();
 };
 
 #endif
