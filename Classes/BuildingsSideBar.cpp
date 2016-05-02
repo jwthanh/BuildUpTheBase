@@ -160,8 +160,10 @@ void SideListView::setup_detail_listview_as_recipes()
 {
     float update_delay = 0.1f;
 
+    ui::ListView* listview = detail_listview;
+
     ///DETAIL LISTVIEW
-    auto update_detail_listview = [this, update_delay](float dt)
+    auto update_listview = [this, update_delay, listview](float dt)
     {
         spBuilding target_building = BUILDUP->get_target_building();
 
@@ -170,8 +172,15 @@ void SideListView::setup_detail_listview_as_recipes()
             std::string description;
         };
 
+        enum class DetailType
+        {
+            Recipe = 0,
+            Boost = 1
+        };
+
         struct DetailConfig {
-            spRecipe recipe;
+            std::shared_ptr<void> object;
+            DetailType type;
             MenuItemConfig config;
         };
 
@@ -180,11 +189,21 @@ void SideListView::setup_detail_listview_as_recipes()
         for (spRecipe recipe : target_building->data->get_all_recipes())
         {
             nuitems_config.push_back({
-                recipe, {
+                recipe,
+                DetailType::Recipe,
+                {
                     recipe->name,
                     recipe->description
                 } });
         };
+
+        nuitems_config.push_back({
+            NULL,
+            DetailType::Boost,
+            {
+                "Example other button",
+                "This does nothing"
+            } });
 
         int i = 0;
         for (auto config : nuitems_config)
@@ -192,16 +211,22 @@ void SideListView::setup_detail_listview_as_recipes()
             int child_tag = i;
             i++;
 
-            ui::ListView* listview = detail_listview;
 
             //if the child already exists, put it at the end of the listview, maintaining order as config
             bool existed = this->try_push_back(child_tag, listview);
             if (existed) { continue; };
 
-            auto menu_item = RecipeNuItem::create();
+            BuildingNuItem* menu_item;
+            if (config.type == DetailType::Recipe) {
+                menu_item = RecipeNuItem::create();
+            }
+            else if (config.type == DetailType::Boost) {
+                menu_item = BuildingNuItem::create();
+            }
+
             menu_item->setTag(child_tag);
 
-            menu_item->NuItem::my_init(listview); //doesnt call RecipeNuItem::my_init to avoid specifying too much
+            menu_item->my_init(target_building, listview);
             menu_item->set_title(config.config.name);
             menu_item->set_description(config.config.description);
 
@@ -210,13 +235,17 @@ void SideListView::setup_detail_listview_as_recipes()
             }, update_delay, "update_ing_type");
 
             //RecipeNuItem specifics
-            menu_item->other_init(config.recipe);
+            if (dynamic_cast<RecipeNuItem*>(menu_item))
+            {
+                spRecipe recipe = static_pointer_cast<Recipe>(config.object);
+                dynamic_cast<RecipeNuItem*>(menu_item)->other_init(recipe);
+            }
 
         };
     };
 
-    detail_listview->schedule(update_detail_listview, update_delay, "update_listview");
-    update_detail_listview(0);
+    listview->schedule(update_listview, update_delay, "update_listview");
+    update_listview(0);
 };
 
 ui::ListView* SideListView::_create_listview(std::string node_name)

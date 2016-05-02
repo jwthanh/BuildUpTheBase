@@ -192,20 +192,17 @@ void RecipeNuItem::other_init(spRecipe recipe)
         this->building->consume_recipe(this->recipe.get());
     });
 
-    spBuilding target_building = BUILDUP->get_target_building();
-
     this->recipe = recipe;
-    this->building = target_building;
     this->set_touch_ended_callback([this]() {
         CCLOG("trying to consume %s recipe", this->recipe->name.c_str());
         this->building->consume_recipe(this->recipe.get());
     });
 
-    recipe->_callback = [target_building, recipe]() {
-        for (auto pair : recipe->outputs) {
+    recipe->_callback = [this]() {
+        for (auto pair : this->recipe->outputs) {
             Ingredient::SubType ing_type = pair.first;
             int count = pair.second;
-            target_building->create_ingredients(ing_type, count);
+            this->building->create_ingredients(ing_type, count);
         };
     };
 }
