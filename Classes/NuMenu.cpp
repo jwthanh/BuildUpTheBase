@@ -303,7 +303,7 @@ void HarvesterShopNuItem::my_init_sprite()
     else if (this->harv_type == Harvester::SubType::Four) { set_path = set_paths.at(3); }
     else { set_path = "set_0.png"; }
 
-    auto sprites = {
+    std::vector<std::string> sprites = {
         set_path,
         pick_one(gen_paths("body", 49)),
         pick_one(gen_paths("headwear", 49)),
