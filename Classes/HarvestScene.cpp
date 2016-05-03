@@ -730,6 +730,8 @@ void HarvestScene::add_harvestable()
 
     if (BUILDUP->get_target_building()->name == "The Mine") {
         harvestable = MiningHarvestable::create();
+    } else if (BUILDUP->get_target_building()->name == "The Forest") {
+        harvestable = TreeHarvestable::create();
     } else if (BUILDUP->get_target_building()->name == "The Workshop") {
         this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
         harvestable = CraftingHarvestable::create(this->target_recipe);

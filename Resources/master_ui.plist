@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{100,100}</string>
                 <key>textureRect</key>
-                <string>{{846,105},{100,100}}</string>
+                <string>{{930,105},{100,100}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -420,7 +420,7 @@
                 <key>spriteSourceSize</key>
                 <string>{180,135}</string>
                 <key>textureRect</key>
-                <string>{{1137,105},{180,135}}</string>
+                <string>{{1221,105},{180,135}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -450,7 +450,7 @@
                 <key>spriteSourceSize</key>
                 <string>{5,102}</string>
                 <key>textureRect</key>
-                <string>{{948,105},{5,102}}</string>
+                <string>{{1032,105},{5,102}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -874,6 +874,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>tree.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{82,98}</string>
+                <key>spriteSourceSize</key>
+                <string>{82,98}</string>
+                <key>textureRect</key>
+                <string>{{846,105},{82,98}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>weapon_flame.png</key>
             <dict>
                 <key>aliases</key>
@@ -1020,7 +1035,7 @@
                 <key>spriteSourceSize</key>
                 <string>{180,135}</string>
                 <key>textureRect</key>
-                <string>{{955,105},{180,135}}</string>
+                <string>{{1039,105},{180,135}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1053,7 +1068,7 @@
             <key>size</key>
             <string>{1920,242}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:80bfdc88e2433375aeb8df733df428a3:c8a5887c76ae96508d016668ca0c3042:46d5613a345bde46170341c988b3c4b9$</string>
+            <string>$TexturePacker:SmartUpdate:abbcba9a4ab73f02b1732a31b37875b8:2053992312176411fbb4bf2197b630ca:46d5613a345bde46170341c988b3c4b9$</string>
             <key>textureFileName</key>
             <string>master_ui.png</string>
         </dict>

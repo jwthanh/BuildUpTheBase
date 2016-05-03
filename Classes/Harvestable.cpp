@@ -287,6 +287,21 @@ std::string GraveyardHarvestable::get_sprite_path()
     return "bones.png";
 };
 
+bool TreeHarvestable::init()
+{
+    bool val = Harvestable::init();
+
+    this->initial_scale = 1.0f;
+    this->setScale(this->initial_scale);
+
+    return val;
+}
+
+std::string TreeHarvestable::get_sprite_path()
+{
+    return "tree.png";
+}
+
 void MiningHarvestable::init_sprite()
 {
 
