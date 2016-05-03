@@ -16,13 +16,30 @@
 
 USING_NS_CC;
 
+cocos2d::ui::Button* NuItem::orig_button = NULL;
 
 void NuItem::my_init(cocos2d::Node* parent)
 {
     auto inst = cocos2d::CSLoader::getInstance();
 
-    this->button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
-    load_default_button_textures(this->button);
+    if (NuItem::orig_button == NULL)
+    {
+        CCLOG("reload");
+        NuItem::orig_button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
+        load_default_button_textures(NuItem::orig_button);
+        NuItem::orig_button->retain();
+        ((ui::Text*)NuItem::orig_button->getChildByName("title_panel")->getChildByName("title_lbl"))->setString("");
+        ((ui::Text*)NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl"))->setString("");
+        ((ui::Text*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"))->setString("");
+        ((ui::Text*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"))->setString("");
+
+    }
+
+    this->button = (ui::Button*)NuItem::orig_button->clone();
+
+    //this->button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
+    //load_default_button_textures(this->button);
+
     button->removeFromParent();
 
     parent->addChild(this); //FIXME hack to get the selector to run. ideally the button would be a child of this but then button doesnt go on the right spot
@@ -33,11 +50,6 @@ void NuItem::my_init(cocos2d::Node* parent)
     this->desc_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
     this->cost_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
     this->count_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
-
-    this->set_title("");
-    this->set_description("");
-    this->set_cost_lbl("");
-    this->set_count_lbl(0);
     // this->set_image("");
 
     this->schedule(CC_SCHEDULE_SELECTOR(NuItem::update_func));

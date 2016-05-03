@@ -23,6 +23,7 @@ class NuItem : public cocos2d::ui::Widget
         NuItem(){};
         virtual void my_init(cocos2d::Node* parent);
 
+        static cocos2d::ui::Button* orig_button;
         cocos2d::ui::Button* button;
         cocos2d::ui::ImageView* item_icon;
         cocos2d::ui::Text* title_lbl;
