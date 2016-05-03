@@ -6,23 +6,23 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="200.6400" RightMargin="559.3600" TopMargin="2.4000" BottomMargin="537.6000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="200.6400" RightMargin="559.3600" TopMargin="-34.8443" BottomMargin="574.8443" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
             <Size X="200.0000" Y="100.0000" />
             <AnchorPoint />
-            <Position X="200.6400" Y="537.6000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Position X="200.6400" Y="574.8443" />
+            <Scale ScaleX="1.0000" ScaleY="0.6351" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2090" Y="0.8400" />
+            <PrePosition X="0.2090" Y="0.8982" />
             <PreSize X="0.2083" Y="0.1563" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="city_pos" ActionTag="-1746362178" Tag="77" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" RightMargin="760.0000" TopMargin="2.4000" BottomMargin="537.6000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="city_pos" ActionTag="-1746362178" Tag="77" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="0.0001" RightMargin="759.9999" TopMargin="-34.8443" BottomMargin="574.8443" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
             <Size X="200.0000" Y="100.0000" />
             <AnchorPoint />
-            <Position Y="537.6000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Position X="0.0001" Y="574.8443" />
+            <Scale ScaleX="1.0000" ScaleY="0.6351" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition Y="0.8400" />
+            <PrePosition X="0.0000" Y="0.8982" />
             <PreSize X="0.2083" Y="0.1563" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
@@ -200,14 +200,14 @@
             <PrePosition X="0.6095" Y="0.4719" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="tab_1_btn" ActionTag="2032519568" Tag="160" IconVisible="False" LeftMargin="0.2215" RightMargin="759.7785" TopMargin="103.9670" BottomMargin="500.0330" TouchEnable="True" FontSize="14" ButtonText="Harvesters" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="200.0000" Y="36.0000" />
+          <AbstractNodeData Name="tab_1_btn" ActionTag="2032519568" Tag="160" IconVisible="False" LeftMargin="0.2215" RightMargin="759.7785" TopMargin="66.9676" BottomMargin="503.0324" TouchEnable="True" FontSize="18" ButtonText="Harvesters" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="200.0000" Y="70.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="100.2215" Y="518.0330" />
+            <Position X="100.2215" Y="538.0324" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1044" Y="0.8094" />
-            <PreSize X="0.2083" Y="0.0562" />
+            <PrePosition X="0.1044" Y="0.8407" />
+            <PreSize X="0.2083" Y="0.1094" />
             <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
@@ -216,14 +216,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="tab_2_btn" ActionTag="34953680" Tag="161" IconVisible="False" LeftMargin="200.0000" RightMargin="560.0000" TopMargin="103.9669" BottomMargin="500.0331" TouchEnable="True" FontSize="14" ButtonText="Detail" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="200.0000" Y="36.0000" />
+          <AbstractNodeData Name="tab_2_btn" ActionTag="34953680" Tag="161" IconVisible="False" LeftMargin="200.0001" RightMargin="559.9999" TopMargin="66.9676" BottomMargin="503.0324" TouchEnable="True" FontSize="18" ButtonText="Detail" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="200.0000" Y="70.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="300.0000" Y="518.0331" />
+            <Position X="300.0001" Y="538.0324" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.3125" Y="0.8094" />
-            <PreSize X="0.2083" Y="0.0562" />
+            <PrePosition X="0.3125" Y="0.8407" />
+            <PreSize X="0.2083" Y="0.1094" />
             <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />

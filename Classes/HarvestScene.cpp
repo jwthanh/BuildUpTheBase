@@ -505,6 +505,7 @@ void BaseScene::create_shop_button()
     Node* shop_pos_node = harvest_scene_editor->getChildByName("shop_pos");
     shop_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
     shop_button->setPosition(shop_pos_node->getPosition());
+    shop_button->setScaleY(shop_button->getScaleY()/1.5f);
 
     shop_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
     {
@@ -542,6 +543,7 @@ void BaseScene::create_city_button()
     shop_text_img->setPosition(Vec2(28, 17));
     city_button->addChild(shop_text_img);
     city_button->setScale(4);
+    city_button->setScaleY(city_button->getScaleY()/1.5f);
 
     Node* shop_pos_node = harvest_scene_editor->getChildByName("city_pos");
     city_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
