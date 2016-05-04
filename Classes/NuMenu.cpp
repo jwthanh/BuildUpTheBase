@@ -44,7 +44,7 @@ void NuItem::my_init(cocos2d::Node* parent)
     }
 
     //this->button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
-    //load_default_button_textures(this->button);
+    load_default_button_textures(this->button); //TODO figure out why this is still needed, why the clone doesnt do this for me
 
     button->removeFromParent();
 
