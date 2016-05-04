@@ -35,7 +35,13 @@ void NuItem::my_init(cocos2d::Node* parent)
 
     }
 
+    //clone orig button, background is still messed though
     this->button = (ui::Button*)NuItem::orig_button->clone();
+    this->button->setCascadeColorEnabled(true);
+    for (auto child : this->button->getChildren())
+    {
+        child->setCascadeColorEnabled(true);
+    }
 
     //this->button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
     //load_default_button_textures(this->button);
