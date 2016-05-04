@@ -191,13 +191,13 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="harvestable_pos" ActionTag="-169141685" Tag="21" IconVisible="True" LeftMargin="585.1599" RightMargin="374.8401" TopMargin="338.0134" BottomMargin="301.9866" ctype="SingleNodeObjectData">
+          <AbstractNodeData Name="harvestable_pos" ActionTag="-169141685" Tag="21" IconVisible="True" LeftMargin="579.1605" RightMargin="380.8395" TopMargin="338.0134" BottomMargin="301.9866" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
-            <Position X="585.1599" Y="301.9866" />
+            <Position X="579.1605" Y="301.9866" />
             <Scale ScaleX="4.0000" ScaleY="4.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6095" Y="0.4719" />
+            <PrePosition X="0.6033" Y="0.4719" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
           <AbstractNodeData Name="tab_1_btn" ActionTag="2032519568" Tag="160" IconVisible="False" LeftMargin="0.2215" RightMargin="759.7785" TopMargin="66.9676" BottomMargin="503.0324" TouchEnable="True" FontSize="18" ButtonText="Harvesters" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">

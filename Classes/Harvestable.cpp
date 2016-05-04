@@ -305,7 +305,7 @@ std::string TreeHarvestable::get_sprite_path()
 void MiningHarvestable::init_sprite()
 {
 
-    float scale = 3;
+    float scale = 2.75f;
     auto create_sprite = [this,scale](std::string sprite_path, Vec2 relative_pos)
     {
         auto sprite = Sprite::createWithSpriteFrameName(sprite_path);
