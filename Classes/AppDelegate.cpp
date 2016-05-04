@@ -1,7 +1,4 @@
 #include "AppDelegate.h"
-#include "MainMenu.h"
-#include "Beatup.h"
-#include <SimpleAudioEngine.h>
 #include "HarvestScene.h"
 
 USING_NS_CC;
@@ -92,18 +89,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
             Scene* scene = Scene::create();
 
-            bool use_new_scene = true;
-
-            if (use_new_scene) {
-                scene->addChild(HarvestScene::create());
-            } else {
-
-                MainMenu* main_menu = MainMenu::create();
-                scene->addChild(main_menu);
-
-                Beatup::main_menu_scene = scene;
-                Beatup::main_menu_scene->retain();
-            };
+            scene->addChild(HarvestScene::create());
 
             auto director = Director::getInstance();
             director->pushScene(scene);
