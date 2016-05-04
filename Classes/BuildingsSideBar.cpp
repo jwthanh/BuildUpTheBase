@@ -81,7 +81,10 @@ void SideListView::setup_listviews()
         spBuilding target_building = BUILDUP->get_target_building();
         if (target_building->name != this->current_target->name)
         {
-            CCLOG("Changed building!, rebuilding detail and shop listview");
+            CCLOG("Changed building!, from %s to %s; rebuilding detail and shop listview",
+                this->current_target->name.c_str(),
+                target_building->name.c_str()
+                );
             this->current_target = target_building;
             this->detail_listview->removeAllChildren();
             this->shop_listview->removeAllChildren();

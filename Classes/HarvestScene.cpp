@@ -112,7 +112,7 @@ void BaseScene::scroll_to_target_building()
         } else
         {
             
-            building_pageview->ListView::scrollToItem(index, { 0, 0 }, { 0, 0 }, 0.0f);
+            building_pageview->ListView::scrollToItem(index, { 0, 0 }, { 0, 0 }, 0.5f);
         }
     }
 }
@@ -281,7 +281,7 @@ void BaseScene::create_building_scrollview()
     building_pageview->setClippingEnabled(true);
     building_pageview->removeFromParent();
 
-    building_pageview->setBounceEnabled(true);
+    // building_pageview->setBounceEnabled(true);
 
     auto city_scene = inst->createNode("editor/scenes/city_scene.csb");
 
@@ -302,14 +302,6 @@ void BaseScene::create_building_scrollview()
         building_pageview->addPage(building_panel);
         int page_index = building_pageview->getItems().size() - 1;
 
-        auto change_target_page = [this, building_pageview, building, page_index](float dt)
-        {
-            if (building_pageview->getCurrentPageIndex() == page_index)
-            {
-                BUILDUP->set_target_building(building);
-            }
-        };
-        building_panel->schedule(change_target_page, 0.1f, "update_target");
 
         if (building->get_been_bought() == false) {
             //hide panel from pageview if not bought
