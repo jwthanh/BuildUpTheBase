@@ -21,14 +21,14 @@ void Worker::update(float dt)
     if (this->active_count < 1){
         return;
     };
-
+    
     //used to use update_timer, but this only gets called when a building gets
     //updated so it doesnt need to be regulated anyway
-    this->on_update();
+    this->on_update(dt);
     this->update_clock->reset();
 };
 
-void Worker::on_update()
+void Worker::on_update(float dt)
 {
 
 };
@@ -80,11 +80,15 @@ Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType 
 {
 };
 
-void Harvester::on_update()
+void Harvester::on_update(float dt)
 {
     auto harvested_count = Harvester::get_harvested_count(this->sub_type);
     //TODO change create_ingredients and active_count to res_count_t type, i dont want to recompile again
-    this->building->create_ingredients(this->ing_type, (int)harvested_count*(res_count_t)this->active_count);
+    res_count_t to_create = harvested_count*(res_count_t)this->active_count;
+    if (to_create > 0)
+    {
+        this->building->create_ingredients(this->ing_type, to_create);
+    }
 };
 
 res_count_t Harvester::get_base_shop_cost(Harvester::SubType harv_type)

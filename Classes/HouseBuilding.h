@@ -48,9 +48,9 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         std::vector<ItemData> menu_items;
 
         Building(Village* city, std::string name, std::string id_key);
-        void create_ingredients(Ingredient::SubType sub_type, int quantity);
-        void create_products(Product::SubType sub_type, int quantity);
-        void create_wastes(Waste::SubType sub_type, int quantity);
+        void create_ingredients(Ingredient::SubType sub_type, res_count_t quantity);
+        void create_products(Product::SubType sub_type, res_count_t quantity);
+        void create_wastes(Waste::SubType sub_type, res_count_t quantity);
     
         void consume_recipe(Recipe* recipe);
 

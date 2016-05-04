@@ -228,17 +228,17 @@ res_count_t Building::count_wastes(Waste::SubType wst_type)
     return this->wastes[wst_type];
 };
 
-void Building::create_ingredients(Ingredient::SubType sub_type, int quantity)
+void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t quantity)
 {
     create<mistIngredient>(this->ingredients, quantity, sub_type);
 };
 
-void Building::create_products(Product::SubType sub_type, int quantity)
+void Building::create_products(Product::SubType sub_type, res_count_t quantity)
 {
     create<mistProduct>(this->products, quantity, sub_type);
 };
 
-void Building::create_wastes(Waste::SubType sub_type, int quantity)
+void Building::create_wastes(Waste::SubType sub_type, res_count_t quantity)
 {
     create<mistWaste>(this->wastes, quantity, sub_type);
 };

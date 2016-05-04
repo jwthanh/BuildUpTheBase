@@ -61,7 +61,7 @@ class Worker : public Nameable, Updateable
         Worker(spBuilding building, std::string name);
 
         void update(float dt);
-        virtual void on_update();
+        virtual void on_update(float dt);
 };
 
 class Harvester : public Worker
@@ -76,7 +76,7 @@ class Harvester : public Worker
 
         Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
 
-        virtual void on_update();
+        virtual void on_update(float dt);
 
         static res_count_t get_base_shop_cost(Harvester::SubType harv_type);
         static res_count_t get_harvested_count(Harvester::SubType harv_type);
