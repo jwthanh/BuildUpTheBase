@@ -79,6 +79,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     loading_scene->setOnEnterCallback(
         std::function<void()>([this, loading_scene](){
         auto lbl = Label::createWithTTF("LOADING...", TITLE_FONT, 24);
+        lbl->runAction(Spawn::createWithTwoActions(
+            JumpBy::create(2.0f, Vec2(200, 300), 200, 10),
+            ScaleTo::create(2.0f, 10)
+            ));
         loading_scene->setPosition(300, 300);
         loading_scene->addChild(lbl);
 
@@ -94,7 +98,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
             auto director = Director::getInstance();
             director->pushScene(scene);
         };
-        loading_scene->scheduleOnce(load_func, 0.05f, "whateverloading");
+        loading_scene->scheduleOnce(load_func, 0.00f, "whateverloading");
     })
         );
     director->runWithScene(loading_scene);
