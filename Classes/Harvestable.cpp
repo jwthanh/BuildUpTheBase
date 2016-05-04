@@ -324,10 +324,11 @@ void MiningHarvestable::init_sprite()
     sprite_size.height *= scale * 2;
     this->setContentSize(sprite_size);
 
-    auto top_left_sprite = create_sprite("dirt_1.png", Vec2::ANCHOR_TOP_LEFT);
-    auto top_right_sprite = create_sprite("dirt_2.png", Vec2::ANCHOR_TOP_RIGHT);
-    auto bot_left_sprite = create_sprite("dirt_2.png", Vec2::ANCHOR_BOTTOM_LEFT);
-    auto bot_right_sprite = create_sprite("dirt_1.png", Vec2::ANCHOR_BOTTOM_RIGHT);
+    std::vector<std::string> choices = {"dirt_1.png", "dirt_2.png"};
+    auto top_left_sprite = create_sprite(pick_one(choices), Vec2::ANCHOR_TOP_LEFT);
+    auto top_right_sprite = create_sprite(pick_one(choices), Vec2::ANCHOR_TOP_RIGHT);
+    auto bot_left_sprite = create_sprite(pick_one(choices), Vec2::ANCHOR_BOTTOM_LEFT);
+    auto bot_right_sprite = create_sprite(pick_one(choices), Vec2::ANCHOR_BOTTOM_RIGHT);
 
     auto rt = RenderTexture::create((int)this->getContentSize().width, (int)this->getContentSize().height);
     rt->retain();
