@@ -9,13 +9,13 @@
           <AbstractNodeData Name="menu_item_btn" ActionTag="-490875392" Tag="21" IconVisible="False" LeftMargin="-400.0000" RightMargin="-400.0000" TopMargin="-100.0000" BottomMargin="-100.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="800.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="item_icon" ActionTag="647280568" Tag="14" IconVisible="False" LeftMargin="47.2670" RightMargin="688.7330" TopMargin="67.7499" BottomMargin="68.2501" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="item_icon" ActionTag="647280568" Tag="14" IconVisible="False" LeftMargin="51.0000" RightMargin="684.9999" TopMargin="67.7499" BottomMargin="68.2501" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
                 <Size X="64.0000" Y="64.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="79.2670" Y="100.2501" />
+                <Position X="83.0000" Y="100.2501" />
                 <Scale ScaleX="1.9981" ScaleY="1.8664" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0991" Y="0.5013" />
+                <PrePosition X="0.1038" Y="0.5013" />
                 <PreSize X="0.0800" Y="0.3200" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
