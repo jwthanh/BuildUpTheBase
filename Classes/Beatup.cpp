@@ -253,7 +253,6 @@ void Beatup::set_target_building(spBuilding target)
         // old_target->swap_center(target);
     }
     this->buildup->set_target_building(target);
-    SoundEngine::play_sound("sounds\\old\\Swoosh.mp3");
 };
 
 spBuilding Beatup::get_target_building()
