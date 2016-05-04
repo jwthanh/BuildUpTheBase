@@ -87,7 +87,7 @@ void Harvester::on_update(float dt)
     res_count_t to_create = harvested_count*(res_count_t)this->active_count;
     if (to_create > 0)
     {
-        this->building->create_ingredients(this->ing_type, to_create);
+        this->building->create_ingredients(this->ing_type, to_create*dt);
     }
 };
 
