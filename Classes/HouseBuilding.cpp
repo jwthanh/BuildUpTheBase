@@ -129,7 +129,7 @@ std::shared_ptr<T> create_one(typename T::SubType sub_type)
 
 
 template<typename mistT>
-void create(mistT& mist, int quantity, typename mistT::key_type sub_type)
+void create(mistT& mist, res_count_t quantity, typename mistT::key_type sub_type)
 {
     if (mist.count(sub_type) == 0)
     {
