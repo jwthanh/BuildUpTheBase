@@ -144,14 +144,24 @@ std::string beautify_double(double value)
     bool is_negative = value < 0;
     std::string decimal = "";
 
-    if (value < 1000000 && std::floor(value) != value) //check for decimal
+    if (value < 1000 && std::floor(value) != value) //check for decimal
     {
         std::stringstream ss; 
         ss << std::fixed << std::setprecision(3) << value;
         std::string fixed_value = ss.str();
         std::string splitted = split(fixed_value, '.').at(1);
-        splitted.erase(splitted.find_last_not_of('0') + 1, std::string::npos); //rstrip zeroes
-        decimal = "." + splitted;
+        ss.str("");
+        //splitted.erase(splitted.find_last_not_of('0') + 1, std::string::npos); //rstrip zeroes
+
+        if (splitted.empty() != true)
+        {
+            ss << "." << splitted.at(0);
+        }
+        else
+        {
+            ss << ".0";
+        }
+        decimal = ss.str();
     }
 
     //get rid of decimal bits of the number, already take care of
