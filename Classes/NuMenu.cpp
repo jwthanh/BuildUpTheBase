@@ -114,7 +114,7 @@ void NuItem::set_cost_lbl(std::string cost)
     }
 };
 
-void NuItem::set_count_lbl(int count)
+void NuItem::set_count_lbl(res_count_t count)
 {
     if (count == 0) {
         this->count_lbl->setString("");
@@ -157,8 +157,8 @@ void ShopNuItem::update_func(float dt)
         }
     };
 
-    int cost = this->get_cost();
-    int total_coins = BEATUP->get_total_coins();
+    res_count_t cost = this->get_cost();
+    res_count_t total_coins = BEATUP->get_total_coins();
 
     this->cost_lbl->setTextColor(Color4B::WHITE);
 
@@ -216,7 +216,7 @@ void RecipeNuItem::other_init(spRecipe recipe)
         recipe->_callback = [this]() {
             for (auto pair : this->recipe->outputs) {
                 Ingredient::SubType ing_type = pair.first;
-                int count = pair.second;
+                res_count_t count = pair.second;
                 this->building->create_ingredients(ing_type, count);
             };
         };
@@ -244,7 +244,7 @@ void RecipeNuItem::update_func(float dt)
 
     //TODO this'll get fucky when recipes output more than one type,
     // you make one recipe, the count'll go up by two
-    int result_count = 0;
+    res_count_t result_count = 0;
     for (auto output_ing : this->recipe->outputs) {
         auto out_type = output_ing.first;
         result_count += this->building->count_ingredients(out_type);
@@ -373,9 +373,9 @@ void HarvesterShopNuItem::my_init_update_callback()
 {
     auto update_harvesters_cb = [this](float dt) {
         auto building = BUILDUP->get_target_building();
-        auto harvesters_owned = map_get(building->harvesters, {this->harv_type, building->punched_sub_type}, 0);
+        res_count_t harvesters_owned = map_get(building->harvesters, {this->harv_type, building->punched_sub_type}, 0);
         this->set_count_lbl(harvesters_owned);
-        this->_shop_cost = Harvester::get_base_shop_cost(this->harv_type) * std::pow(1.15f, std::max(0, (int)harvesters_owned));
+        this->_shop_cost = Harvester::get_base_shop_cost(this->harv_type) * std::pow(1.15f, std::max((long double)0.0, harvesters_owned));
 
         std::stringstream ss;
         auto harvested_count = Harvester::get_harvested_count(this->harv_type);

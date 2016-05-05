@@ -35,7 +35,7 @@ class NuItem : public cocos2d::ui::Widget
         void set_title(std::string title);
         void set_description(std::string description);
         void set_cost_lbl(std::string cost);
-        void set_count_lbl(int count);
+        void set_count_lbl(res_count_t count);
 
         void try_set_enable(bool is_enable);
 

@@ -27,13 +27,13 @@ struct ItemData {
 };
 
 struct PricedItemData : public ItemData {
-    unsigned long long int cost;
+    long double cost;
     PricedItemData(
         std::string id_string, 
         std::string default_text,
         BoolFuncNoArgs callback,
         bool start_disabled,
-        unsigned long long int cost
+        long double cost
     ) : ItemData(id_string, default_text, callback, start_disabled) , cost(cost){};
 };
 
@@ -42,9 +42,9 @@ class BaseMenu : public GameLayer
     public:
         cocos2d::Vec2 last_pos;
 
-        bool buy(ShopItem* shop_item, unsigned long long int cost, BoolFuncNoArgs on_bought);
-        void buy_stuff(unsigned long long int cost);
-        bool can_afford(unsigned long long int cost);
+        bool buy(ShopItem* shop_item, long double cost, BoolFuncNoArgs on_bought);
+        void buy_stuff(long double cost);
+        bool can_afford(long double cost);
 
         void menu_init();
         void init_menu_from_data(cocos2d::ui::ScrollView* scroll, std::vector<ItemData> item_data);
