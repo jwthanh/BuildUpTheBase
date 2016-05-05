@@ -171,7 +171,7 @@ void ShopNuItem::update_func(float dt)
     else if (total_coins < cost)
     {
         try_set_enable(false);
-        this->set_cost_lbl(beautify_double((double)this->get_cost()));
+        this->set_cost_lbl(beautify_double(std::round(this->get_cost())));
 
         Color3B color = { 243, 162, 173 };
         float tint = 0.4f;
@@ -187,8 +187,7 @@ void ShopNuItem::update_func(float dt)
     else
     {
         try_set_enable(true);
-        //NOTE get_cost returns int
-        this->set_cost_lbl(beautify_double((double)this->get_cost()));
+        this->set_cost_lbl(beautify_double((double)std::round(this->get_cost())));
 
         this->button->setColor(Color3B::WHITE);
     };

@@ -248,7 +248,7 @@ void BaseScene::create_player_info_panel()
     auto update_gold_lbl = [player_gold_lbl, player_hp_lbl](float dt){
         //set gold
         std::stringstream coin_ss;
-        auto gold = BEATUP->get_total_coins();
+        auto gold = std::round(BEATUP->get_total_coins());
         coin_ss << "$" << beautify_double(gold);
         std::string coin_msg = coin_ss.str();
         player_gold_lbl->setString(coin_msg);
