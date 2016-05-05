@@ -107,7 +107,7 @@ void NuItem::set_description(std::string description)
 void NuItem::set_cost_lbl(std::string cost)
 {
     if (cost != ""){
-        this->cost_lbl->setString(cost+"$");
+        this->cost_lbl->setString("$"+cost);
     } else
     {
         this->cost_lbl->setString("");

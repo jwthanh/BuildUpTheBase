@@ -249,7 +249,7 @@ void BaseScene::create_player_info_panel()
         //set gold
         std::stringstream coin_ss;
         auto gold = BEATUP->get_total_coins();
-        coin_ss << "You have " << beautify_double(gold) << "$";
+        coin_ss << "$" << beautify_double(gold);
         std::string coin_msg = coin_ss.str();
         player_gold_lbl->setString(coin_msg);
 
