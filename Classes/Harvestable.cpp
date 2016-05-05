@@ -302,6 +302,21 @@ std::string TreeHarvestable::get_sprite_path()
     return "tree.png";
 }
 
+bool DumpsterHarvestable::init()
+{
+    bool val = Harvestable::init();
+
+    this->initial_scale = 0.70f;
+    this->setScale(this->initial_scale);
+
+    return val;
+}
+
+std::string DumpsterHarvestable::get_sprite_path()
+{
+    return "dump_darker.png";
+}
+
 void MiningHarvestable::init_sprite()
 {
 

@@ -74,6 +74,14 @@ class TreeHarvestable : public Harvestable
         std::string get_sprite_path();
 };
 
+class DumpsterHarvestable : public Harvestable
+{
+    public:
+        CREATE_FUNC(DumpsterHarvestable);
+        bool init();
+        std::string get_sprite_path();
+};
+
 class MiningHarvestable : public Harvestable
 {
     public:
