@@ -56,7 +56,8 @@ void NuItem::my_init(cocos2d::Node* parent)
     this->desc_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
     this->cost_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
     this->count_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
-    // this->set_image("");
+
+    this->set_cost_lbl("");
 
     this->schedule(CC_SCHEDULE_SELECTOR(NuItem::update_func));
 
@@ -106,11 +107,14 @@ void NuItem::set_description(std::string description)
 
 void NuItem::set_cost_lbl(std::string cost)
 {
-    if (cost != ""){
+    if (cost != ""){ //cost has content
         this->cost_lbl->setString("$"+cost);
-    } else
-    {
+        this->desc_lbl->setContentSize(Size(208.0f, this->desc_lbl->getContentSize().height));
+        this->count_lbl->setPosition(Vec2(this->count_lbl->getPositionX(), -25.00f));
+    } else { //cost is blank, widen description TODO use orig_buttons positions so this isnt hardcoded
         this->cost_lbl->setString("");
+        this->desc_lbl->setContentSize(Size(300.0f, this->desc_lbl->getContentSize().height));
+        this->count_lbl->setPosition(Vec2(this->count_lbl->getPositionX(), 17.00f));
     }
 };
 
