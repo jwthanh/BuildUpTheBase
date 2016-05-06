@@ -109,8 +109,8 @@ res_count_t Harvester::get_harvested_count(Harvester::SubType harv_type)
 {
     res_count_t harvested_count = 1;
     
-    if (harv_type == Harvester::SubType::One) { harvested_count = 1; }
-    else if (harv_type == Harvester::SubType::Two) { harvested_count = 3; }
+    if (harv_type == Harvester::SubType::One) { harvested_count = 0.1; }
+    else if (harv_type == Harvester::SubType::Two) { harvested_count = 1; }
     else if (harv_type == Harvester::SubType::Three) { harvested_count = 8; }
     else if (harv_type == Harvester::SubType::Four) { harvested_count = 25; }
     else if (harv_type == Harvester::SubType::Five) { harvested_count = 100; }
