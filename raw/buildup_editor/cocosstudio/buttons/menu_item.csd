@@ -49,14 +49,14 @@
               <AbstractNodeData Name="description_panel" ActionTag="-65130128" Tag="17" IconVisible="False" LeftMargin="185.1844" RightMargin="314.8156" TopMargin="129.4048" BottomMargin="25.5952" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="300.0000" Y="45.0000" />
                 <Children>
-                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" Tag="20" IconVisible="False" LeftMargin="-16.0005" RightMargin="108.0627" TopMargin="-0.5603" BottomMargin="1.9683" IsCustomSize="True" FontSize="16" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="207.9378" Y="43.5920" />
+                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" Tag="20" IconVisible="False" LeftMargin="-16.0005" RightMargin="108.0005" TopMargin="-0.5603" BottomMargin="1.9683" IsCustomSize="True" FontSize="16" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="208.0000" Y="43.5920" />
                     <AnchorPoint />
                     <Position X="-16.0005" Y="1.9683" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="-0.0533" Y="0.0437" />
-                    <PreSize X="0.6931" Y="0.9687" />
+                    <PreSize X="0.6933" Y="0.9687" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
