@@ -109,7 +109,8 @@ void SideListView::setup_shop_listview_as_harvesters()
             {"harvester_item_two", Harvester::SubType::Two},
             {"harvester_item_three", Harvester::SubType::Three},
             {"harvester_item_four", Harvester::SubType::Four},
-            {"harvester_item_five", Harvester::SubType::Five}
+            {"harvester_item_five", Harvester::SubType::Five},
+            {"harvester_item_six", Harvester::SubType::Six}
         };
 
         for (auto config : nuitems_config)
