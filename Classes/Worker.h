@@ -71,7 +71,7 @@ class Harvester : public Worker
 
         enum class SubType {
             One, Two, Three, Four, Five, Six, Seven, Eigth, Nine, Ten,
-            eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty
+            Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen, Twenty
         } sub_type;
 
         Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
