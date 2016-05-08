@@ -208,12 +208,11 @@ void SideListView::setup_building_listview_as_upgrades()
             bool existed = this->try_push_back(child_tag, listview);
             if (existed) { continue; };
 
-            BuildingShopNuItem* menu_item;
-            menu_item = UpgradeBuildingShopNuItem::create();
+            UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create();
 
             menu_item->setTag(child_tag);
 
-            menu_item->my_init(target_building, listview);
+            menu_item->my_init(target_building, listview, level);
 
             menu_item->schedule([menu_item](float dt){
                 menu_item->building = BUILDUP->get_target_building();

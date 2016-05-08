@@ -267,15 +267,54 @@ void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
     this->_shop_cost = building->get_cost();
 }
 
-void UpgradeBuildingShopNuItem::my_init(spBuilding building, Node* parent)
+bool UpgradeBuildingShopNuItem::get_been_bought()
 {
-    BuildingShopNuItem::my_init(building, parent);
+    return this->_been_bought;
+}
+
+void UpgradeBuildingShopNuItem::set_been_bought(bool val)
+{
+    this->_been_bought = val;
+}
+
+void UpgradeBuildingShopNuItem::my_init(spBuilding building, Node* parent, int building_level)
+{
+    ShopNuItem::my_init(parent, "upgrade_building");
+
+    this->building = building;
+    this->building_level = building_level;
 
     this->set_title(building->name);
     this->set_description("Upgrade this building, increasing its storage");
 
-    this->set_cost_lbl(std::to_string(building->get_cost()));
-    this->_shop_cost = building->get_cost();
+    this->set_cost_lbl(std::to_string(100*this->building_level));
+    this->_shop_cost = 100*this->building_level;
+
+    auto update_func = [this](float dt) {
+        this->set_been_bought(this->building->building_level >= this->building_level);
+        //if (this->building->building_level >= this->building_level) {
+        //    this->try_set_enable(false);
+        //}
+    };
+    this->schedule(update_func, 0.1f, "set_enabled");
+    update_func(0);
+
+    auto touch_ended_cb = [this](){
+        res_count_t cost = this->get_cost();
+        double total_coins = BEATUP->get_total_coins();
+
+        if (cost <= total_coins)
+        {
+            CCLOG("Bought level %i", this->building_level);
+
+            BEATUP->add_total_coin(-((double)(cost)));
+            auto building = BUILDUP->get_target_building();
+            building->building_level = this->building_level;
+
+            this->update_func(0);
+        }
+    };
+    this->set_touch_ended_callback(touch_ended_cb);
 }
 
 void HarvesterShopNuItem::my_init_title()

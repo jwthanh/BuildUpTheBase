@@ -89,10 +89,20 @@ class BuildingShopNuItem : public ShopNuItem
 
 class UpgradeBuildingShopNuItem : public BuildingShopNuItem
 {
+    private:
+        bool _been_bought;
+
     public:
         CREATE_FUNC(UpgradeBuildingShopNuItem);
         UpgradeBuildingShopNuItem(){};
-        virtual void my_init(std::shared_ptr<Building> building, Node* parent) override;
+        
+        int building_level;
+
+        bool get_been_bought() override;
+        void set_been_bought(bool val) override;
+
+
+        virtual void my_init(std::shared_ptr<Building> building, Node* parent, int building_level);
 };
 
 class HarvesterShopNuItem : public ShopNuItem
