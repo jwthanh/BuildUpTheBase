@@ -314,9 +314,6 @@ void UpgradeBuildingShopNuItem::my_init(spBuilding building, Node* parent, int b
 
     auto update_func = [this](float dt) {
         this->set_been_bought(this->building->building_level >= this->building_level);
-        //if (this->building->building_level >= this->building_level) {
-        //    this->try_set_enable(false);
-        //}
     };
     this->schedule(update_func, 0.1f, "set_enabled");
     update_func(0);
@@ -330,6 +327,7 @@ void UpgradeBuildingShopNuItem::my_init(spBuilding building, Node* parent, int b
             CCLOG("Bought level %i", this->building_level);
 
             BEATUP->add_total_coin(-((double)(cost)));
+
             auto building = BUILDUP->get_target_building();
             building->building_level = this->building_level;
 
