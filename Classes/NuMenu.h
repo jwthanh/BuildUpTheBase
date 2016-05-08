@@ -87,6 +87,14 @@ class BuildingShopNuItem : public ShopNuItem
         virtual void my_init(std::shared_ptr<Building> building, Node* parent);
 };
 
+class UpgradeBuildingShopNuItem : public BuildingShopNuItem
+{
+    public:
+        CREATE_FUNC(UpgradeBuildingShopNuItem);
+        UpgradeBuildingShopNuItem(){};
+        virtual void my_init(std::shared_ptr<Building> building, Node* parent) override;
+};
+
 class HarvesterShopNuItem : public ShopNuItem
 {
     public:

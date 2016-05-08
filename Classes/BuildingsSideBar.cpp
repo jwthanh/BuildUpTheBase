@@ -185,6 +185,47 @@ bool SideListView::try_push_back(int child_tag, ui::ListView* listview)
     return existed;
 }
 
+void SideListView::setup_building_listview_as_upgrades()
+{
+    float update_delay = 0.1f;
+
+    ui::ListView* listview = this->building_listview;
+
+    ///DETAIL LISTVIEW
+    auto update_listview = [this, update_delay, listview](float dt)
+    {
+        spBuilding target_building = BUILDUP->get_target_building();
+
+
+        int i = 0;
+        for (int level : {1, 2, 3, 4})
+        {
+            int child_tag = i;
+            i++;
+
+
+            //if the child already exists, put it at the end of the listview, maintaining order as config
+            bool existed = this->try_push_back(child_tag, listview);
+            if (existed) { continue; };
+
+            BuildingShopNuItem* menu_item;
+            menu_item = UpgradeBuildingShopNuItem::create();
+
+            menu_item->setTag(child_tag);
+
+            menu_item->my_init(target_building, listview);
+
+            menu_item->schedule([menu_item](float dt){
+                menu_item->building = BUILDUP->get_target_building();
+            }, update_delay, "update_ing_type");
+
+        };
+    };
+
+    listview->schedule(update_listview, update_delay, "update_listview");
+    update_listview(0);
+};
+
 void SideListView::setup_detail_listview_as_recipes()
 {
     float update_delay = 0.1f;

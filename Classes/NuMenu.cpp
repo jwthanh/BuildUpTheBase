@@ -267,6 +267,17 @@ void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
     this->_shop_cost = building->get_cost();
 }
 
+void UpgradeBuildingShopNuItem::my_init(spBuilding building, Node* parent)
+{
+    BuildingShopNuItem::my_init(building, parent);
+
+    this->set_title(building->name);
+    this->set_description("Upgrade this building, increasing its storage");
+
+    this->set_cost_lbl(std::to_string(building->get_cost()));
+    this->_shop_cost = building->get_cost();
+}
+
 void HarvesterShopNuItem::my_init_title()
 {
     std::vector<std::string> names = {

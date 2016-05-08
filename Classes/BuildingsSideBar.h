@@ -47,6 +47,7 @@ class SideListView
         bool try_push_back(int child_tag, cocos2d::ui::ListView* listview);
         void setup_shop_listview_as_harvesters();
         void setup_detail_listview_as_recipes();
+        void setup_building_listview_as_upgrades();
 };
 
 #endif
