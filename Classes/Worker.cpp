@@ -3,6 +3,7 @@
 #include "Clock.h"
 
 #include "HouseBuilding.h"
+#include "Util.h"
 
 Worker::Worker(spBuilding building, std::string name, WorkerSubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
@@ -119,4 +120,22 @@ res_count_t Harvester::get_harvested_count(WorkerSubType harv_type)
     else { harvested_count = 9999;}
 
     return harvested_count;
+}
+
+res_count_t Salesman::get_base_shop_cost(WorkerSubType sub_type)
+{
+    mistWorkerSubType map = {
+        {WorkerSubType::One, 10}
+    };
+
+    return map_get(map, sub_type, 9999);
+}
+
+res_count_t Salesman::get_sold_count(WorkerSubType sub_type)
+{
+    mistWorkerSubType map = {
+        {WorkerSubType::One, 1}
+    };
+
+    return map_get(map, sub_type, 9999);
 };
