@@ -120,27 +120,6 @@ void move_if_sized(Resource::ResourceType res_type,
     };
 };
 
-
-template<typename T>
-std::shared_ptr<T> create_one(typename T::SubType sub_type)
-{
-    return std::make_shared<T>(sub_type);
-};
-
-
-template<typename mistT>
-void create(mistT& mist, res_count_t quantity, typename mistT::key_type sub_type)
-{
-    if (mist.count(sub_type) == 0)
-    {
-        //this resets 0 to 0 if it already exists instead of only adding a default
-        mist[sub_type] = 0;
-    }
-
-    mist[sub_type] += quantity;
-
-};
-
 Building::Building(Village* city, std::string name, std::string id_key) :
              Nameable(name), Buyable(id_key), Updateable(), city(city)
 {
@@ -243,6 +222,19 @@ res_count_t Building::count_wastes(Waste::SubType wst_type)
     return map_get(this->wastes, wst_type, 0);
 };
 
+template<typename T>
+std::shared_ptr<T> create_one(typename T::SubType sub_type)
+{
+    return std::make_shared<T>(sub_type);
+};
+
+template<typename mistT>
+void create(mistT& mist, res_count_t quantity, typename mistT::key_type sub_type)
+{
+    auto exisiting_count = map_get(mist, sub_type, 0);
+    mist[sub_type] = exisiting_count + quantity;
+};
+
 void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t quantity)
 {
     create<mistIngredient>(this->ingredients, quantity, sub_type);
@@ -257,7 +249,6 @@ void Building::create_wastes(Waste::SubType sub_type, res_count_t quantity)
 {
     create<mistWaste>(this->wastes, quantity, sub_type);
 };
-
 
 void Building::consume_recipe(Recipe* recipe)
 {
