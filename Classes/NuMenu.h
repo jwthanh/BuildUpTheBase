@@ -94,7 +94,7 @@ class HarvesterShopNuItem : public ShopNuItem
 
     virtual void my_init(Node* parent, WorkerSubType harv_type, Ingredient::SubType ing_type);
     virtual void my_init_title();
-    void my_init_sprite();
+    virtual void my_init_sprite();
     virtual void my_init_touch_ended_callback();
     virtual void my_init_update_callback();
 
@@ -108,6 +108,7 @@ class SalesmanShopNuItem : public HarvesterShopNuItem
         CREATE_FUNC(SalesmanShopNuItem);
 
         virtual void my_init_title() override;
+        virtual void my_init_sprite() override;
         void my_init_touch_ended_callback() override;
         void my_init_update_callback() override;
 };

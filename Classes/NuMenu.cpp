@@ -443,6 +443,56 @@ void SalesmanShopNuItem::my_init_title()
     this->set_title("Buy "+harvester_name);
 }
 
+void SalesmanShopNuItem::my_init_sprite()
+{
+    auto gen_paths = [](std::string base_path, int max_num)
+    {
+        std::vector<int> nums(max_num);
+        std::iota(nums.begin(), nums.end(), 0);
+
+        std::vector<std::string> output;
+        for (auto num : nums)
+        {
+            output.push_back(base_path + "_" + std::to_string(num)+".png");
+        }
+
+        return  output;
+    };
+
+    auto base_node = Node::create();
+
+    std::string set_path;
+    auto set_paths = gen_paths("set", 4);
+    if (this->harv_type == WorkerSubType::One) { set_path = set_paths.at(0); }
+    else if (this->harv_type == WorkerSubType::Two) { set_path = set_paths.at(1); }
+    else if (this->harv_type == WorkerSubType::Three) { set_path = set_paths.at(2); }
+    else if (this->harv_type == WorkerSubType::Four) { set_path = set_paths.at(3); }
+    else { set_path = "set_0.png"; }
+
+    std::vector<std::string> sprites = {
+        set_path,
+        pick_one(gen_paths("body", 49)),
+        pick_one(gen_paths("headwear", 49)),
+        pick_one(gen_paths("legs", 22)),
+    };
+    for (auto path : sprites)
+    {
+        base_node->addChild(Sprite::createWithSpriteFrameName(path));
+    }
+
+    base_node->setPosition(8,8);
+    base_node->setScaleY(-1.0f);
+
+    auto rt = RenderTexture::create(16, 16);
+    rt->retain();
+    rt->begin();
+    base_node->visit();
+    rt->end();
+
+    ui::Scale9Sprite* vr = (ui::Scale9Sprite*)this->item_icon->getVirtualRenderer();
+    vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
+};
+
 void NuMenu::onEnter()
 {
     GameLayer::onEnter();
