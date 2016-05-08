@@ -125,6 +125,8 @@ Building::Building(Village* city, std::string name, std::string id_key) :
 {
     num_workers = 1;
 
+    building_level = 1;
+
     update_clock->set_threshold(1.0f);
     spawn_clock = new Clock(3);
 
@@ -237,7 +239,19 @@ void create(mistT& mist, res_count_t quantity, typename mistT::key_type sub_type
 
 void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t quantity)
 {
-    create<mistIngredient>(this->ingredients, quantity, sub_type);
+    if (this->count_ingredients(sub_type) + quantity > this->get_storage_space())
+    {
+        quantity = this->get_storage_space() - this->count_ingredients(sub_type);
+    };
+
+    if (quantity > 0)
+    {
+        create<mistIngredient>(this->ingredients, quantity, sub_type);
+    } 
+    else
+    {
+        CCLOG("skipping ingredient creation for %s", Ingredient::type_to_string(sub_type).c_str());
+    };
 };
 
 void Building::create_products(Product::SubType sub_type, res_count_t quantity)
@@ -403,6 +417,17 @@ std::string Building::get_inventory()
     return ss.str();
 };
 
+res_count_t Building::get_storage_space()
+{
+    std::map<unsigned int, res_count_t> level_output = {
+        {1, 50.0},
+        {2, 500.0},
+        {3, 5000.0},
+        {4, 50000.0},
+        {5, 500000.0}
+    };
+    return map_get(level_output, this->building_level, 9999999);
+};
 
 void test_conditions()
 {
@@ -588,7 +613,6 @@ void Buildup::set_target_building(spBuilding building)
 {
     this->_target_building = building;
 };
-
 void Player::update(float dt)
 {
     // printj("   The Player has "<< this->coins << "coins");

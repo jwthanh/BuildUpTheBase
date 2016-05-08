@@ -44,6 +44,9 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         Clock* spawn_clock;
 
+        unsigned int building_level; //affects only resource limits for now
+        res_count_t get_storage_space();
+
         unsigned int num_workers; //people who work here, help make things faster
 
         std::vector<ItemData> menu_items;
