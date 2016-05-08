@@ -333,6 +333,12 @@ void UpgradeBuildingShopNuItem::my_init(spBuilding building, Node* parent, int b
             auto building = BUILDUP->get_target_building();
             building->building_level = this->building_level;
 
+            auto explosion_parts = ParticleSystemQuad::create("particles/explosion.plist");
+            explosion_parts->setPosition({570, 300});
+            Scene* scene = Director::getInstance()->getRunningScene();
+            scene->runAction(FShake::actionWithDuration(0.25f, 2.5f));
+            scene->addChild(explosion_parts);
+
             this->update_func(0);
         }
     };
