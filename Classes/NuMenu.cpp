@@ -306,7 +306,9 @@ void UpgradeBuildingShopNuItem::my_init(spBuilding building, Node* parent, int b
     this->building = building;
     this->building_level = building_level;
 
-    this->set_title(building->name);
+    std::stringstream ss;
+    ss << "Level " << building_level;
+    this->set_title(ss.str());
     this->set_description("Upgrade this building, increasing its storage");
 
     this->set_cost_lbl(std::to_string(100*this->building_level));
