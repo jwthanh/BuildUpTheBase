@@ -86,7 +86,7 @@ Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType 
 void Harvester::on_update(float dt)
 {
     auto harvested_count = Harvester::get_to_harvest_count(this->sub_type);
-    res_count_t to_create = harvested_count*(res_count_t)this->active_count;
+    res_count_t to_create = harvested_count*this->active_count;
     if (to_create > 0)
     {
         this->building->create_ingredients(this->ing_type, to_create*dt);
@@ -149,22 +149,22 @@ res_count_t Salesman::get_to_sell_count(WorkerSubType sub_type)
 ///NOTE this only gets called once per building->update_clock, not once a frame
 void Salesman::on_update(float dt)
 {
-    res_count_t to_sell_count = Salesman::get_to_sell_count(this->sub_type);
-    res_count_t to_create = to_sell_count*(res_count_t)this->active_count;
-    if (to_create > 0)
+    res_count_t base_sell_count = Salesman::get_to_sell_count(this->sub_type);
+    res_count_t active_sell_count = base_sell_count*this->active_count;
+
+    if (active_sell_count > 0)
     {
-        res_count_t can_sell_count = map_get(this->building->ingredients, ing_type, 0);
-        if (can_sell_count != 0)
+        res_count_t max_can_sell = map_get(this->building->ingredients, ing_type, 0);
+        if (max_can_sell != 0)
         {
-            res_count_t amount_sold = to_sell_count*to_create;
-            res_count_t to_sell = std::min(can_sell_count, amount_sold);
+            res_count_t to_sell = std::min(max_can_sell, active_sell_count);
             res_count_t coins_gained = 10;
 
             if (to_sell >= 1.0)
             {
                 std::string string_type = Ingredient::type_to_string(ing_type);
-                const char* char_type = string_type.c_str();
-                CCLOG("auto selling %f of %s", to_sell, char_type);
+                CCLOG("auto selling %f of %s", to_sell, string_type.c_str());
+
                 this->building->ingredients[ing_type] -= to_sell;
                 BEATUP->add_total_coin((double)(to_sell*coins_gained));
                 CCLOG("auto SELLING STUFF");
