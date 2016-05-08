@@ -183,9 +183,15 @@ void BaseScene::create_info_panel()
         {
             total_active += types_to_count.second;
         };
-        ss << "Harvesters: " << beautify_double(total_active) << "\n " << beautify_double(building->get_total_harvester_output()) << "/sec";
 
-        harvester_count->setString(ss.str());
+        if (total_active >= 1){
+            ss << "Harvesters: " << beautify_double(total_active) << "\n " << beautify_double(building->get_total_harvester_output()) << "/sec";
+            harvester_count->setString(ss.str());
+            harvester_count->setVisible(true);
+        }
+        else {
+            harvester_count->setVisible(false);
+        }
     };
     this->schedule(update_harvester_count, update_delay, "harvester_count_update");
     update_harvester_count(0);
@@ -201,9 +207,14 @@ void BaseScene::create_info_panel()
         {
             total_active += types_to_count.second;
         };
-        ss << "Salesmen: " << beautify_double(total_active) << "\n " << beautify_double(building->get_total_salesmen_output()) << "/sec";
-
-        salesmen_count->setString(ss.str());
+        if (total_active >= 1){
+            ss << "Salesmen: " << beautify_double(total_active) << "\n " << beautify_double(building->get_total_salesmen_output()) << "/sec";
+            salesmen_count->setString(ss.str());
+            salesmen_count->setVisible(true);
+        }
+        else {
+            salesmen_count->setVisible(false);
+        }
     };
     this->schedule(update_salesmen_count, update_delay, "salesmen_count_update");
     update_salesmen_count(0);
