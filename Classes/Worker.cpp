@@ -4,6 +4,8 @@
 
 #include "HouseBuilding.h"
 #include "Util.h"
+#include "GameLogic.h"
+#include "Beatup.h"
 
 Worker::Worker(spBuilding building, std::string name, WorkerSubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
@@ -122,6 +124,11 @@ res_count_t Harvester::get_harvested_count(WorkerSubType harv_type)
     return harvested_count;
 }
 
+Salesman::Salesman(spBuilding building, std::string name, Ingredient::SubType ing_type, WorkerSubType sub_type)
+    : Harvester(building, name, ing_type, sub_type)
+{
+}
+
 res_count_t Salesman::get_base_shop_cost(WorkerSubType sub_type)
 {
     mistWorkerSubType map = {
@@ -139,3 +146,36 @@ res_count_t Salesman::get_sold_count(WorkerSubType sub_type)
 
     return map_get(map, sub_type, 9999);
 };
+
+///NOTE this only gets called once per building->update_clock, not once a frame
+void Salesman::on_update(float dt)
+{
+    res_count_t to_sell_count = Salesman::get_sold_count(this->sub_type);
+    //TODO change create_ingredients and active_count to res_count_t type, i dont want to recompile again
+    res_count_t to_create = to_sell_count*(res_count_t)this->active_count;
+    if (to_create > 0)
+    {
+        res_count_t can_sell_count = map_get(this->building->ingredients, ing_type, 0);
+        if (can_sell_count != 0)
+        {
+            res_count_t amount_sold = to_sell_count;
+            res_count_t to_sell = std::min(can_sell_count, amount_sold);
+            res_count_t coins_gained = 10;
+
+            if (to_sell >= 1.0)
+            {
+            std::string string_type = Ingredient::type_to_string(ing_type);
+            const char* char_type = string_type.c_str();
+            CCLOG("auto selling %f of %s", to_sell, char_type);
+            this->building->ingredients[ing_type] -= to_sell;
+            BEATUP->add_total_coin((double)(to_sell*coins_gained));
+            CCLOG("auto SELLING STUFF");
+            }
+            else
+            {
+                CCLOG("waiting for more, cant sell only %f", to_sell);
+            }
+        }
+    }
+};
+

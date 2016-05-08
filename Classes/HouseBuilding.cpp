@@ -146,7 +146,7 @@ Building::Building(Village* city, std::string name, std::string id_key) :
 {
     num_workers = 1;
 
-    update_clock->set_threshold(0.0f);
+    update_clock->set_threshold(1.0f);
     spawn_clock = new Clock(3);
 
     ingredients = mistIngredient();
@@ -256,6 +256,17 @@ void Building::update(float dt)
 {
     Updateable::update(dt);
 
+    for (auto harvester : this->harvesters) {
+        std::pair<WorkerSubType, Ingredient::SubType> sub_type = harvester.first;
+        WorkerSubType harv_type = sub_type.first;
+        Ingredient::SubType ing_type = sub_type.second;
+        res_count_t count = harvester.second;
+
+        auto temp_harvester = std::make_shared<Harvester>(this->shared_from_this(), "test worker", ing_type, harv_type);
+        temp_harvester->active_count = count;
+        temp_harvester->update(dt);
+    };
+
 
     if (update_clock->passed_threshold())
     {
@@ -265,13 +276,13 @@ void Building::update(float dt)
 
         update_clock->reset();
 
-        for (auto harvester : this->harvesters) {
-            std::pair<WorkerSubType, Ingredient::SubType> sub_type = harvester.first;
-            auto harv_type = sub_type.first;
-            auto ing_type = sub_type.second;
-            res_count_t count = harvester.second;
+        for (auto saleman : this->salesmen) {
+            std::pair<WorkerSubType, Ingredient::SubType> sub_type = saleman.first;
+            WorkerSubType harv_type = sub_type.first;
+            Ingredient::SubType ing_type = sub_type.second;
+            res_count_t count = saleman.second;
 
-            auto temp_harvester = std::make_shared<Harvester>(this->shared_from_this(), "test worker", ing_type, harv_type);
+            auto temp_harvester = std::make_shared<Salesman>(this->shared_from_this(), "test salesman", ing_type, harv_type);
             temp_harvester->active_count = count;
             temp_harvester->update(dt);
         };

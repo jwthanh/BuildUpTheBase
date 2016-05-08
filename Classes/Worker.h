@@ -89,6 +89,8 @@ class Harvester : public Worker
 class Salesman : public Harvester
 {
     public:
+        Salesman(spBuilding building, std::string name, Ingredient::SubType ing_type, WorkerSubType sub_type);
+
         virtual void on_update(float dt) override;
         static res_count_t get_base_shop_cost(WorkerSubType sub_type);
         static res_count_t get_sold_count(WorkerSubType sub_type);
