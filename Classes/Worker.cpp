@@ -160,18 +160,17 @@ void Salesman::on_update(float dt)
             res_count_t to_sell = std::min(max_can_sell, active_sell_count);
             res_count_t coins_gained = 10;
 
-            if (to_sell >= 1.0)
+            if (to_sell >= active_sell_count)
             {
                 std::string string_type = Ingredient::type_to_string(ing_type);
                 CCLOG("auto selling %f of %s", to_sell, string_type.c_str());
 
                 this->building->ingredients[ing_type] -= to_sell;
                 BEATUP->add_total_coin((double)(to_sell*coins_gained));
-                CCLOG("auto SELLING STUFF");
             }
             else
             {
-                CCLOG("waiting for more, cant sell only %f", to_sell);
+                CCLOG("waiting for more, cant sell only %f, need %f", to_sell, active_sell_count);
             }
         }
     }
