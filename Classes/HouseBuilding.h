@@ -46,6 +46,8 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         int building_level; //affects only resource limits for now
         res_count_t get_storage_space();
+        bool is_storage_full_of_ingredients(Ingredient::SubType);
+        bool can_fit_more_ingredients(Ingredient::SubType sub_type, res_count_t quantity = 1);
 
         unsigned int num_workers; //people who work here, help make things faster
 

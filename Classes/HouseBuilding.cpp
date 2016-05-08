@@ -428,6 +428,16 @@ res_count_t Building::get_storage_space()
         {5, 500000.0}
     };
     return map_get(level_output, this->building_level, 9999999);
+}
+
+bool Building::is_storage_full_of_ingredients(Ingredient::SubType sub_type)
+{
+    return this->can_fit_more_ingredients(sub_type, 0);
+};
+
+bool Building::can_fit_more_ingredients(Ingredient::SubType sub_type, res_count_t quantity /*= 1*/)
+{
+    return this->count_ingredients(sub_type) + quantity <= this->get_storage_space();
 };
 
 void test_conditions()

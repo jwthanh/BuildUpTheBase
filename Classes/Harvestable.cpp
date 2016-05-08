@@ -103,11 +103,27 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 {
     float end_scale = this->initial_scale*0.85f;
     float duration = 0.5f;
+
+    std::string floating_msg = "+1";
+    if (this->building->can_fit_more_ingredients(this->building->punched_sub_type) == false)
+    {
+        std::vector<std::string> choices = {
+            "Storage full",
+            "Upgrade building",
+            "Too many ingredients",
+            "Sell some ingredients"
+        };
+        floating_msg = pick_one(choices);
+
+        end_scale = this->initial_scale*0.95f;
+        duration = 0.15f;
+    };
+
     auto scale_to = ScaleTo::create(duration, end_scale);
     auto ease = EaseElasticOut::create(scale_to, duration);
     this->runAction(ease);
 
-    auto floating_label = FloatingLabel::createWithTTF("+1", DEFAULT_FONT, 30);
+    auto floating_label = FloatingLabel::createWithTTF(floating_msg, DEFAULT_FONT, 30);
     auto pos = touch->getLocation();
     pos.x += cocos2d::rand_minus1_1()*20.0f;
     pos.y += cocos2d::rand_minus1_1()*20.0f;
@@ -117,7 +133,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 #endif
 
     floating_label->setPosition(pos);
-    floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
+    floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
     this->getParent()->addChild(floating_label);
     floating_label->do_float();
 
@@ -148,7 +164,13 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     //Widget::onTouchEnded(touch, event); //this shouldnt be called because releaseUpEvent hasnt been set I guess. 
 
+
     animate_touch_end(touch);
+
+    if (this->building->can_fit_more_ingredients(this->building->punched_sub_type) == false) 
+    {
+        return;
+    };
 
     this->current_clicks += 1;
 
