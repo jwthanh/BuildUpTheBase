@@ -213,6 +213,21 @@ res_count_t Building::get_total_harvester_output()
     return total;
 };
 
+res_count_t Building::get_total_salesmen_output()
+{
+    res_count_t total = 0;
+
+    for (auto h_mist : this->salesmen)
+    {
+        WorkerSubType harv_type = h_mist.first.first;
+        Ingredient::SubType ing_type = h_mist.first.second;
+        res_count_t active_count = h_mist.second;
+        total += Salesman::get_to_sell_count(harv_type)*active_count;
+    };
+
+    return total;
+};
+
 res_count_t Building::count_ingredients(Ingredient::SubType ing_type)
 {
     return this->ingredients[ing_type];

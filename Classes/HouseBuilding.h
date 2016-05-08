@@ -61,6 +61,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         void print_inventory();
 
         res_count_t get_total_harvester_output();
+        res_count_t get_total_salesmen_output();
 
         res_count_t count_ingredients();
         res_count_t count_ingredients(Ingredient::SubType ing_type);

@@ -183,12 +183,30 @@ void BaseScene::create_info_panel()
         {
             total_active += types_to_count.second;
         };
-        ss << "Harvesters: " << beautify_double(total_active) << "\nat " << beautify_double(building->get_total_harvester_output()) << "/sec";
+        ss << "Harvesters: " << beautify_double(total_active) << "\n " << beautify_double(building->get_total_harvester_output()) << "/sec";
 
         harvester_count->setString(ss.str());
     };
     this->schedule(update_harvester_count, update_delay, "harvester_count_update");
     update_harvester_count(0);
+
+    auto salesmen_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("salesmen_count"));
+    auto update_salesmen_count = [salesmen_count](float dt)
+    {
+        spBuilding building = BUILDUP->get_target_building();
+
+        std::stringstream ss;
+        res_count_t total_active = 0;
+        for (auto types_to_count : building->salesmen)
+        {
+            total_active += types_to_count.second;
+        };
+        ss << "Salesmen: " << beautify_double(total_active) << "\n " << beautify_double(building->get_total_salesmen_output()) << "/sec";
+
+        salesmen_count->setString(ss.str());
+    };
+    this->schedule(update_salesmen_count, update_delay, "salesmen_count_update");
+    update_salesmen_count(0);
 
     building_info_panel->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt_type)
     {
