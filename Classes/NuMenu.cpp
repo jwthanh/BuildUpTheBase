@@ -13,6 +13,7 @@
 #include "Recipe.h"
 #include "MiscUI.h"
 #include <numeric>
+#include "FShake.h"
 
 USING_NS_CC;
 
@@ -88,11 +89,13 @@ void NuItem::my_init(cocos2d::Node* parent)
 
 void NuItem::set_touch_ended_callback(std::function<void(void)> callback)
 {
-    this->button->addTouchEventListener([callback](Ref* sender, ui::Widget::TouchEventType type)
+    this->button->addTouchEventListener([this, callback](Ref* sender, ui::Widget::TouchEventType type)
     {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             callback();
+
+            this->button->runAction(FShake::actionWithDuration(0.1f, 5.0f));
         }
     });
 
