@@ -430,6 +430,19 @@ void SalesmanShopNuItem::my_init_update_callback()
 
 };
 
+void SalesmanShopNuItem::my_init_title()
+{
+    std::vector<std::string> names = {
+        "Samson", "Sonny", "Smokey", "Sinead", "Sebastian", "Saul", "Stan",
+        "Scott", "Spencer", "Sam", "Seth", "Stefan", "Jenson", "Shiloh",
+        "Sequoia", "Sergeo", "Seren", "Seamus", "Spartacus", "Spike", 
+        "Siegfried", "Sylvain"
+    };
+    std::string harvester_name = pick_one(names);
+
+    this->set_title("Buy "+harvester_name);
+}
+
 void NuMenu::onEnter()
 {
     GameLayer::onEnter();
