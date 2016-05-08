@@ -86,7 +86,6 @@ Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType 
 void Harvester::on_update(float dt)
 {
     auto harvested_count = Harvester::get_harvested_count(this->sub_type);
-    //TODO change create_ingredients and active_count to res_count_t type, i dont want to recompile again
     res_count_t to_create = harvested_count*(res_count_t)this->active_count;
     if (to_create > 0)
     {
@@ -151,7 +150,6 @@ res_count_t Salesman::get_sold_count(WorkerSubType sub_type)
 void Salesman::on_update(float dt)
 {
     res_count_t to_sell_count = Salesman::get_sold_count(this->sub_type);
-    //TODO change create_ingredients and active_count to res_count_t type, i dont want to recompile again
     res_count_t to_create = to_sell_count*(res_count_t)this->active_count;
     if (to_create > 0)
     {
@@ -164,12 +162,12 @@ void Salesman::on_update(float dt)
 
             if (to_sell >= 1.0)
             {
-            std::string string_type = Ingredient::type_to_string(ing_type);
-            const char* char_type = string_type.c_str();
-            CCLOG("auto selling %f of %s", to_sell, char_type);
-            this->building->ingredients[ing_type] -= to_sell;
-            BEATUP->add_total_coin((double)(to_sell*coins_gained));
-            CCLOG("auto SELLING STUFF");
+                std::string string_type = Ingredient::type_to_string(ing_type);
+                const char* char_type = string_type.c_str();
+                CCLOG("auto selling %f of %s", to_sell, char_type);
+                this->building->ingredients[ing_type] -= to_sell;
+                BEATUP->add_total_coin((double)(to_sell*coins_gained));
+                CCLOG("auto SELLING STUFF");
             }
             else
             {
