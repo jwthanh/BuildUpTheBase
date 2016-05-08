@@ -85,7 +85,7 @@ Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType 
 
 void Harvester::on_update(float dt)
 {
-    auto harvested_count = Harvester::get_harvested_count(this->sub_type);
+    auto harvested_count = Harvester::get_to_harvest_count(this->sub_type);
     res_count_t to_create = harvested_count*(res_count_t)this->active_count;
     if (to_create > 0)
     {
@@ -108,7 +108,7 @@ res_count_t Harvester::get_base_shop_cost(WorkerSubType harv_type)
     return base_cost;
 };
 
-res_count_t Harvester::get_harvested_count(WorkerSubType harv_type)
+res_count_t Harvester::get_to_harvest_count(WorkerSubType harv_type)
 {
     res_count_t harvested_count = 1;
     
@@ -137,7 +137,7 @@ res_count_t Salesman::get_base_shop_cost(WorkerSubType sub_type)
     return map_get(map, sub_type, 9999);
 }
 
-res_count_t Salesman::get_sold_count(WorkerSubType sub_type)
+res_count_t Salesman::get_to_sell_count(WorkerSubType sub_type)
 {
     mistWorkerSubType map = {
         {WorkerSubType::One, 1}
@@ -149,7 +149,7 @@ res_count_t Salesman::get_sold_count(WorkerSubType sub_type)
 ///NOTE this only gets called once per building->update_clock, not once a frame
 void Salesman::on_update(float dt)
 {
-    res_count_t to_sell_count = Salesman::get_sold_count(this->sub_type);
+    res_count_t to_sell_count = Salesman::get_to_sell_count(this->sub_type);
     res_count_t to_create = to_sell_count*(res_count_t)this->active_count;
     if (to_create > 0)
     {

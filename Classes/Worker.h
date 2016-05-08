@@ -83,7 +83,7 @@ class Harvester : public Worker
         virtual void on_update(float dt) override;
 
         static res_count_t get_base_shop_cost(WorkerSubType harv_type);
-        static res_count_t get_harvested_count(WorkerSubType harv_type);
+        static res_count_t get_to_harvest_count(WorkerSubType harv_type);
 };
 
 class Salesman : public Harvester
@@ -93,7 +93,7 @@ class Salesman : public Harvester
 
         virtual void on_update(float dt) override;
         static res_count_t get_base_shop_cost(WorkerSubType sub_type);
-        static res_count_t get_sold_count(WorkerSubType sub_type);
+        static res_count_t get_to_sell_count(WorkerSubType sub_type);
 };
 
 typedef std::map<std::pair<WorkerSubType, Ingredient::SubType>, res_count_t> mistHarvester;
