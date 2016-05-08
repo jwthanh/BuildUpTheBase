@@ -204,7 +204,7 @@ res_count_t Building::get_total_harvester_output()
 
     for (auto h_mist : this->harvesters)
     {
-        Harvester::SubType harv_type = h_mist.first.first;
+        WorkerSubType harv_type = h_mist.first.first;
         Ingredient::SubType ing_type = h_mist.first.second;
         res_count_t active_count = h_mist.second;
         total += Harvester::get_harvested_count(harv_type)*active_count;
@@ -266,7 +266,7 @@ void Building::update(float dt)
         update_clock->reset();
 
         for (auto harvester : this->harvesters) {
-            std::pair<Harvester::SubType, Ingredient::SubType> sub_type = harvester.first;
+            std::pair<WorkerSubType, Ingredient::SubType> sub_type = harvester.first;
             auto harv_type = sub_type.first;
             auto ing_type = sub_type.second;
             res_count_t count = harvester.second;
@@ -499,7 +499,7 @@ Village* Buildup::init_city(Buildup* buildup)
     auto city = new Village(buildup, "Burlington");
 
     auto farm = std::make_shared<Building>(city, "The Farm", "the_farm");
-    farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer"));
+    farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer", WorkerSubType::ZERO));
     farm->punched_sub_type = Ingredient::Grain;
     buildup->set_target_building(farm);
 

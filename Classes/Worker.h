@@ -49,16 +49,25 @@ class Action : public Nameable
 //
 //attaches to a building and does something once certain conditions are hit
 //
+enum class WorkerSubType
+{
+    ZERO = 0, //ZERO is unset
+    One, Two, Three, Four, Five, Six, Seven, Eigth, Nine, Ten,
+    Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen, Twenty
+};
+
 class Worker : public Nameable, Updateable
 {
     public:
+        WorkerSubType sub_type;
+
         spBuilding building;
 
         //amount of workers of this type, ie if this unlocks 1 grain per update,
         //and there's 10 active, it'll get you 10 grain
         int active_count = 0; 
 
-        Worker(spBuilding building, std::string name);
+        Worker(spBuilding building, std::string name, WorkerSubType sub_type);
 
         void update(float dt);
         virtual void on_update(float dt);
@@ -69,19 +78,14 @@ class Harvester : public Worker
     public:
         Ingredient::SubType ing_type;
 
-        enum class SubType {
-            One, Two, Three, Four, Five, Six, Seven, Eigth, Nine, Ten,
-            Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen, Twenty
-        } sub_type;
-
-        Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
+        Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, WorkerSubType sub_type);
 
         virtual void on_update(float dt);
 
-        static res_count_t get_base_shop_cost(Harvester::SubType harv_type);
-        static res_count_t get_harvested_count(Harvester::SubType harv_type);
+        static res_count_t get_base_shop_cost(WorkerSubType harv_type);
+        static res_count_t get_harvested_count(WorkerSubType harv_type);
 };
 
-typedef std::map<std::pair<Harvester::SubType, Ingredient::SubType>, res_count_t> mistHarvester;
+typedef std::map<std::pair<WorkerSubType, Ingredient::SubType>, res_count_t> mistHarvester;
 
 #endif

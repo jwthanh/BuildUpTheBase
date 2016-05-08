@@ -101,16 +101,16 @@ void SideListView::setup_shop_listview_as_harvesters()
         //placeholder for things we'll need to put in the sidebar
         struct HarvestConfig{
             std::string node_name;
-            Harvester::SubType harv_type;
+            WorkerSubType harv_type;
         };
 
         std::vector<HarvestConfig> nuitems_config = {
-            {"harvester_item_one", Harvester::SubType::One},
-            {"harvester_item_two", Harvester::SubType::Two},
-            {"harvester_item_three", Harvester::SubType::Three},
-            {"harvester_item_four", Harvester::SubType::Four},
-            {"harvester_item_five", Harvester::SubType::Five},
-            {"harvester_item_six", Harvester::SubType::Six}
+            {"harvester_item_one", WorkerSubType::One},
+            {"harvester_item_two", WorkerSubType::Two},
+            {"harvester_item_three", WorkerSubType::Three},
+            {"harvester_item_four", WorkerSubType::Four},
+            {"harvester_item_five", WorkerSubType::Five},
+            {"harvester_item_six", WorkerSubType::Six}
         };
 
         for (auto config : nuitems_config)

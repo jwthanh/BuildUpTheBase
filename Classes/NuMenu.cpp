@@ -280,7 +280,7 @@ void HarvesterShopNuItem::my_init_title()
     this->set_title("Buy "+harvester_name);
 }
 
-void HarvesterShopNuItem::my_init(Node* parent, Harvester::SubType harv_type, Ingredient::SubType ing_type)
+void HarvesterShopNuItem::my_init(Node* parent, WorkerSubType harv_type, Ingredient::SubType ing_type)
 {
     ShopNuItem::my_init(parent, "harvester_buy");
 
@@ -318,10 +318,10 @@ void HarvesterShopNuItem::my_init_sprite()
 
     std::string set_path;
     auto set_paths = gen_paths("set", 4);
-    if (this->harv_type == Harvester::SubType::One) { set_path = set_paths.at(0); }
-    else if (this->harv_type == Harvester::SubType::Two) { set_path = set_paths.at(1); }
-    else if (this->harv_type == Harvester::SubType::Three) { set_path = set_paths.at(2); }
-    else if (this->harv_type == Harvester::SubType::Four) { set_path = set_paths.at(3); }
+    if (this->harv_type == WorkerSubType::One) { set_path = set_paths.at(0); }
+    else if (this->harv_type == WorkerSubType::Two) { set_path = set_paths.at(1); }
+    else if (this->harv_type == WorkerSubType::Three) { set_path = set_paths.at(2); }
+    else if (this->harv_type == WorkerSubType::Four) { set_path = set_paths.at(3); }
     else { set_path = "set_0.png"; }
 
     std::vector<std::string> sprites = {

@@ -4,8 +4,8 @@
 
 #include "HouseBuilding.h"
 
-Worker::Worker(spBuilding building, std::string name)
-    : Nameable(name), Updateable() {
+Worker::Worker(spBuilding building, std::string name, WorkerSubType sub_type)
+    : Nameable(name), Updateable(), sub_type(sub_type) {
     this->building = building;
 
     this->update_clock->set_threshold(1.0f); //unused
@@ -75,8 +75,8 @@ ResourceCondition* ResourceCondition::create_waste_condition(Waste::SubType wst_
     return waste_condition;
 };
 
-Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type)
-    : Worker(building, name), ing_type(ing_type), sub_type(sub_type)
+Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, WorkerSubType sub_type)
+    : Worker(building, name, sub_type), ing_type(ing_type)
 {
 };
 
@@ -91,31 +91,31 @@ void Harvester::on_update(float dt)
     }
 };
 
-res_count_t Harvester::get_base_shop_cost(Harvester::SubType harv_type)
+res_count_t Harvester::get_base_shop_cost(WorkerSubType harv_type)
 {
     res_count_t base_cost = 25;
     
-    if (harv_type == Harvester::SubType::One) { base_cost = 25; }
-    else if (harv_type == Harvester::SubType::Two) { base_cost = 200; }
-    else if (harv_type == Harvester::SubType::Three) { base_cost = 1000; }
-    else if (harv_type == Harvester::SubType::Four) { base_cost = 12000; }
-    else if (harv_type == Harvester::SubType::Five) { base_cost = 100000; }
-    else if (harv_type == Harvester::SubType::Six) { base_cost = 500000; }
+    if (harv_type == WorkerSubType::One) { base_cost = 25; }
+    else if (harv_type == WorkerSubType::Two) { base_cost = 200; }
+    else if (harv_type == WorkerSubType::Three) { base_cost = 1000; }
+    else if (harv_type == WorkerSubType::Four) { base_cost = 12000; }
+    else if (harv_type == WorkerSubType::Five) { base_cost = 100000; }
+    else if (harv_type == WorkerSubType::Six) { base_cost = 500000; }
     else { base_cost = 9999;}
 
     return base_cost;
 };
 
-res_count_t Harvester::get_harvested_count(Harvester::SubType harv_type)
+res_count_t Harvester::get_harvested_count(WorkerSubType harv_type)
 {
     res_count_t harvested_count = 1;
     
-    if (harv_type == Harvester::SubType::One) { harvested_count = 0.1; }
-    else if (harv_type == Harvester::SubType::Two) { harvested_count = 1; }
-    else if (harv_type == Harvester::SubType::Three) { harvested_count = 8; }
-    else if (harv_type == Harvester::SubType::Four) { harvested_count = 25; }
-    else if (harv_type == Harvester::SubType::Five) { harvested_count = 100; }
-    else if (harv_type == Harvester::SubType::Six) { harvested_count = 350; }
+    if (harv_type == WorkerSubType::One) { harvested_count = 0.1; }
+    else if (harv_type == WorkerSubType::Two) { harvested_count = 1; }
+    else if (harv_type == WorkerSubType::Three) { harvested_count = 8; }
+    else if (harv_type == WorkerSubType::Four) { harvested_count = 25; }
+    else if (harv_type == WorkerSubType::Five) { harvested_count = 100; }
+    else if (harv_type == WorkerSubType::Six) { harvested_count = 350; }
     else { harvested_count = 9999;}
 
     return harvested_count;
