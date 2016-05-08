@@ -451,9 +451,6 @@ bool CityMenu::init()
        auto building_image = dynamic_cast<ui::ImageView*>(building_panel->getChildByName("building_image")); 
        building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
 
-       auto ing_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("ingredient_count"));
-       ing_count->setString(create_count("ING", building->ingredients.size()));
-
 
        auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
            if (event == ui::Widget::TouchEventType::ENDED)

@@ -167,7 +167,9 @@ void BaseScene::create_info_panel()
     auto update_ing_count = [create_count, ing_count](float dt)
     {
         spBuilding building = BUILDUP->get_target_building();
-        ing_count->setString(create_count("ING", building->count_ingredients()));
+        std::stringstream ss;
+        ss << create_count("ING", building->count_ingredients()) << "/" << beautify_double(building->get_storage_space());
+        ing_count->setString(ss.str());
     };
     this->schedule(update_ing_count, update_delay, "ing_count_update");
     update_ing_count(0);
