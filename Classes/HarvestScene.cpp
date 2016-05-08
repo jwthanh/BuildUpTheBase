@@ -345,12 +345,14 @@ void BaseScene::create_building_scrollview()
         auto building_image = dynamic_cast<ui::ImageView*>(building_panel->getChildByName("building_image"));
         building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
 
-        auto ing_count = dynamic_cast<ui::Text*>(building_panel->getChildByName("ingredient_count"));
-        auto update_ing_count = [create_count, ing_count, building](float dt)
+        auto lvl_lbl = dynamic_cast<ui::Text*>(building_panel->getChildByName("level_lbl"));
+        auto update_lvl_lbl = [create_count, lvl_lbl, building](float dt)
         {
-            ing_count->setString(create_count("ING", building->count_ingredients()));
+            std::stringstream ss;
+            ss << "Lv. " << building->building_level;
+            lvl_lbl->setString(ss.str());
         };
-        ing_count->schedule(update_ing_count, update_delay, "update_ing_count");
+        lvl_lbl->schedule(update_lvl_lbl, update_delay, "update_lvl_lbl");
 
         auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
             if (event == ui::Widget::TouchEventType::ENDED)

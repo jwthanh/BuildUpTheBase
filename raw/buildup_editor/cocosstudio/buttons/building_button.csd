@@ -31,7 +31,7 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="ingredient_count" ActionTag="-1560266654" Tag="45" IconVisible="False" TopMargin="165.5441" BottomMargin="14.4559" IsCustomSize="True" FontSize="16" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="level_lbl" ActionTag="-1560266654" Tag="45" IconVisible="False" TopMargin="165.5441" BottomMargin="14.4559" IsCustomSize="True" FontSize="16" LabelText="Lv: 0" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="200.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="100.0000" Y="24.4559" />
