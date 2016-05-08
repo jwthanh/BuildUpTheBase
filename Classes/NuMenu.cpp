@@ -421,8 +421,8 @@ void SalesmanShopNuItem::my_init_update_callback()
         this->_shop_cost = Salesman::get_base_shop_cost(this->harv_type) * std::pow(1.15f, std::max((long double)0.0, harvesters_owned));
 
         std::stringstream ss;
-        auto harvested_count = Salesman::get_harvested_count(this->harv_type);
-        ss << "Sells " << harvested_count << " " << Ingredient::type_to_string(building->punched_sub_type) << " per sec";
+        auto sold_count = Salesman::get_sold_count(this->harv_type);
+        ss << "Sells " << sold_count << " " << Ingredient::type_to_string(building->punched_sub_type) << " per sec";
         this->set_description(ss.str());
     };
     this->schedule(update_harvesters_cb, 0.1f, "harvester_count");

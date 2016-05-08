@@ -158,7 +158,7 @@ void Salesman::on_update(float dt)
         res_count_t can_sell_count = map_get(this->building->ingredients, ing_type, 0);
         if (can_sell_count != 0)
         {
-            res_count_t amount_sold = to_sell_count;
+            res_count_t amount_sold = to_sell_count*to_create;
             res_count_t to_sell = std::min(can_sell_count, amount_sold);
             res_count_t coins_gained = 10;
 
