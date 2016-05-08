@@ -71,7 +71,7 @@ void SideListView::setup_tab_buttons()
     this->tab_building_btn->addTouchEventListener(toggle_buttons);
 
     //prepress the shop button
-    this->tab_shop_btn->setEnabled(false);
+    toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
 
 }
 

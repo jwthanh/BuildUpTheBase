@@ -316,77 +316,89 @@ std::string Building::get_specifics()
 
 };
 
-void Building::print_specifics()
+res_count_t Building::count_ingredients()
 {
-    this->print_ingredients();
-    this->print_products();
-    this->print_wastes();
-    this->print_fighters();
+    res_count_t total = 0;
+    for (auto type_str : Ingredient::type_map)
+    {
+        Ingredient::SubType type = type_str.first;
+        res_count_t count = map_get(this->ingredients, type, 0);
+        total += count;
+    };
+    return total;
 };
 
-#define PRINT_RESOURCE(Rtype, Rlowertype) \
-res_count_t Building::count_##Rlowertype##s() \
-{ \
-    res_count_t total = 0; \
- \
-    for (auto type_str : Rtype::type_map) \
-            { \
-        Rtype::SubType type = type_str.first; \
- \
-        res_count_t count = map_get(this->Rlowertype##s, type, 0);\
- \
-        total += count; \
-    }; \
-    return total;\
- \
-};\
-std::string Building::get_##Rlowertype##s() \
-{ \
-    std::stringstream ss; \
- \
-    for (auto type_str : Rtype::type_map) \
-        { \
-        Rtype::SubType type = type_str.first; \
-        std::string str = type_str.second; \
- \
-        unsigned int count = this->Rlowertype##s[type];\
- \
-        if (count != 0) \
-        { \
-            ss << str << "(x" << count << ") "; \
-        } \
-    }; \
-    return ss.str();\
- \
-};\
-\
-void Building::print_##Rlowertype##s() \
-{ \
-    std::string ss = this->get_##Rlowertype##s(); \
-    if (!ss.empty()) \
-    { \
-        printj("   " << #Rtype << ": " << ss); \
-    }\
-};
-
-PRINT_RESOURCE(Ingredient, ingredient);
-PRINT_RESOURCE(Product, product);
-PRINT_RESOURCE(Waste, waste);
-
-void Building::print_fighters()
+std::string Building::get_ingredients()
 {
     std::stringstream ss;
-    for (spFighter fighter : this->fighters) 
+    for (auto type_str : Ingredient::type_map)
     {
-        ss << fighter->get_stats() << " ";
+        Ingredient::SubType type = type_str.first;
+        std::string str = type_str.second;
+        unsigned int count = this->ingredients[type];
+        if (count != 0)
+        {
+            ss << str << "(x" << count << ") ";
+        }
     };
-
-    if (!ss.str().empty()) 
-    {
-        std::cout << "   " << ss.str() << std::endl;
-    };
+    return ss.str();
 };
 
+res_count_t Building::count_products()
+{
+    res_count_t total = 0;
+    for (auto type_str : Product::type_map)
+    {
+        Product::SubType type = type_str.first;
+        res_count_t count = map_get(this->products, type, 0);
+        total += count;
+    };
+    return total;
+};
+
+std::string Building::get_products()
+{
+    std::stringstream ss;
+    for (auto type_str : Product::type_map)
+    {
+        Product::SubType type = type_str.first;
+        std::string str = type_str.second;
+        unsigned int count = this->products[type];
+        if (count != 0)
+        {
+            ss << str << "(x" << count << ") ";
+        }
+    };
+    return ss.str();
+};
+
+res_count_t Building::count_wastes()
+{
+    res_count_t total = 0;
+    for (auto type_str : Waste::type_map)
+    {
+        Waste::SubType type = type_str.first;
+        res_count_t count = map_get(this->wastes, type, 0);
+        total += count;
+    };
+    return total;
+};
+
+std::string Building::get_wastes()
+{
+    std::stringstream ss;
+    for (auto type_str : Waste::type_map)
+    {
+        Waste::SubType type = type_str.first;
+        std::string str = type_str.second;
+        unsigned int count = this->wastes[type];
+        if (count != 0)
+        {
+            ss << str << "(x" << count << ") ";
+        }
+    };
+    return ss.str();
+};
 
 std::string Building::get_inventory()
 {
@@ -400,13 +412,6 @@ std::string Building::get_inventory()
     return ss.str();
 };
 
-void Building::print_inventory()
-{
-    std::string inventory = this->get_inventory();
-    printj("   " << inventory);
-    this->print_specifics();
-
-};
 
 void test_conditions()
 {

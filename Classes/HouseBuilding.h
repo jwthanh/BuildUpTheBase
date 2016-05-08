@@ -58,7 +58,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         void update(float dt);
 
         std::string get_inventory();
-        void print_inventory();
 
         res_count_t get_total_harvester_output();
         res_count_t get_total_salesmen_output();
@@ -74,14 +73,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         std::string get_products();
         std::string get_wastes();
         std::string get_specifics();
-
-        void print_specifics();
-        void print_ingredients();
-        void print_products();
-        void print_wastes();
-
-
-        void print_fighters();
 
 };
 
