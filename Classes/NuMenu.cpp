@@ -390,6 +390,46 @@ void HarvesterShopNuItem::my_init_update_callback()
 
 };
 
+void SalesmanShopNuItem::my_init_touch_ended_callback()
+{
+    this->set_touch_ended_callback([this]()
+    {
+        res_count_t cost = this->get_cost();
+        double total_coins = BEATUP->get_total_coins();
+
+        if (cost <= total_coins)
+        {
+            CCLOG("SalesmanShopNuItem bought a salesman");
+            BEATUP->add_total_coin(-((double)(cost)));
+            auto building = BUILDUP->get_target_building();
+
+            auto harvester_count = map_get(building->salesmen, { harv_type, ing_type }, 0);
+            harvester_count++;
+            building->salesmen[{ harv_type, ing_type }] = harvester_count;
+            this->update_func(0);
+        }
+    });
+
+};
+
+void SalesmanShopNuItem::my_init_update_callback()
+{
+    auto update_harvesters_cb = [this](float dt) {
+        auto building = BUILDUP->get_target_building();
+        res_count_t harvesters_owned = map_get(building->salesmen, {this->harv_type, building->punched_sub_type}, 0);
+        this->set_count_lbl(harvesters_owned);
+        this->_shop_cost = Salesman::get_base_shop_cost(this->harv_type) * std::pow(1.15f, std::max((long double)0.0, harvesters_owned));
+
+        std::stringstream ss;
+        auto harvested_count = Salesman::get_harvested_count(this->harv_type);
+        ss << "Sells " << harvested_count << " " << Ingredient::type_to_string(building->punched_sub_type) << " per sec";
+        this->set_description(ss.str());
+    };
+    this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
+    update_harvesters_cb(0);
+
+};
+
 void NuMenu::onEnter()
 {
     GameLayer::onEnter();

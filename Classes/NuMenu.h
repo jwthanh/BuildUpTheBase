@@ -95,11 +95,20 @@ class HarvesterShopNuItem : public ShopNuItem
     virtual void my_init(Node* parent, WorkerSubType harv_type, Ingredient::SubType ing_type);
     void my_init_title();
     void my_init_sprite();
-    void my_init_touch_ended_callback();
-    void my_init_update_callback();
+    virtual void my_init_touch_ended_callback();
+    virtual void my_init_update_callback();
 
     WorkerSubType harv_type;
     Ingredient::SubType ing_type;
+};
+
+class SalesmanShopNuItem : public HarvesterShopNuItem
+{
+    public:
+        CREATE_FUNC(SalesmanShopNuItem);
+
+        void my_init_touch_ended_callback() override;
+        void my_init_update_callback() override;
 };
 
 class NuMenu : public GameLayer

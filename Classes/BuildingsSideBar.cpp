@@ -98,19 +98,26 @@ void SideListView::setup_shop_listview_as_harvesters()
     float update_delay = 0.1f;
     auto update_harvester_listview = [this, update_delay](float dt)
     {
+        enum class WorkerType
+        {
+            Harvester,
+            Salesman
+        };
+
         //placeholder for things we'll need to put in the sidebar
         struct HarvestConfig{
+            WorkerType worker_type;
             std::string node_name;
             WorkerSubType harv_type;
         };
-
         std::vector<HarvestConfig> nuitems_config = {
-            {"harvester_item_one", WorkerSubType::One},
-            {"harvester_item_two", WorkerSubType::Two},
-            {"harvester_item_three", WorkerSubType::Three},
-            {"harvester_item_four", WorkerSubType::Four},
-            {"harvester_item_five", WorkerSubType::Five},
-            {"harvester_item_six", WorkerSubType::Six}
+            {WorkerType::Harvester, "harvester_item_one", WorkerSubType::One},
+            {WorkerType::Salesman, "salesman_item_one", WorkerSubType::One},
+            {WorkerType::Harvester, "harvester_item_two", WorkerSubType::Two},
+            {WorkerType::Harvester, "harvester_item_three", WorkerSubType::Three},
+            {WorkerType::Harvester, "harvester_item_four", WorkerSubType::Four},
+            {WorkerType::Harvester, "harvester_item_five", WorkerSubType::Five},
+            {WorkerType::Harvester, "harvester_item_six", WorkerSubType::Six}
         };
 
         for (auto config : nuitems_config)
@@ -126,7 +133,14 @@ void SideListView::setup_shop_listview_as_harvesters()
             }
 
             //clone the new item
-            auto menu_item = HarvesterShopNuItem::create();
+            HarvesterShopNuItem* menu_item;
+            if (config.worker_type == WorkerType::Harvester){
+                menu_item = HarvesterShopNuItem::create();
+            }
+            else if (config.worker_type == WorkerType::Salesman)
+            {
+                menu_item = SalesmanShopNuItem::create();
+            }
             menu_item->my_init(shop_listview, config.harv_type, BUILDUP->get_target_building()->punched_sub_type);
             menu_item->setName(child_name);
 

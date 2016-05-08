@@ -40,6 +40,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         vsWorker workers;
 
         mistHarvester harvesters;
+        mistHarvester salesmen;
 
         Clock* spawn_clock;
 
