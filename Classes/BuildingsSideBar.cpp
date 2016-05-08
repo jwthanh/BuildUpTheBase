@@ -46,15 +46,18 @@ void SideListView::setup_tab_buttons()
         if (evt == ui::Widget::TouchEventType::ENDED) {
             this->shop_listview->setVisible(false);
             this->detail_listview->setVisible(false);
+            this->building_listview->setVisible(false);
 
             this->tab_shop_btn->setEnabled(true);
             this->tab_detail_btn->setEnabled(true);
+            this->tab_building_btn->setEnabled(true);
 
             ui::Button* target_button = dynamic_cast<ui::Button*>(target);
             target_button->setEnabled(false);
 
             if (target_button == this->tab_shop_btn) { this->shop_listview->setVisible(true); }
             else if (target_button == this->tab_detail_btn) { this->detail_listview->setVisible(true); }
+            else if (target_button == this->tab_building_btn) { this->building_listview->setVisible(true); }
         };
     };
 
@@ -63,6 +66,9 @@ void SideListView::setup_tab_buttons()
 
     this->tab_detail_btn = this->_create_button("tab_2_btn");
     this->tab_detail_btn->addTouchEventListener(toggle_buttons);
+
+    this->tab_building_btn = this->_create_button("tab_3_btn");
+    this->tab_building_btn->addTouchEventListener(toggle_buttons);
 
     //prepress the shop button
     this->tab_shop_btn->setEnabled(false);
@@ -73,6 +79,7 @@ void SideListView::setup_listviews()
 {
     this->shop_listview = this->_create_listview("shop_listview");
     this->detail_listview = this->_create_listview("detail_listview");
+    this->building_listview = this->_create_listview("building_listview");
 
     float update_delay = 0.1f;
 
@@ -88,6 +95,7 @@ void SideListView::setup_listviews()
             this->current_target = target_building;
             this->detail_listview->removeAllChildren();
             this->shop_listview->removeAllChildren();
+            this->building_listview->removeAllChildren();
         }
     };
     this->parent->schedule(clean_children_on_target_change, update_delay, "clean_children");

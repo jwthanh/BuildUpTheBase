@@ -29,9 +29,11 @@ class SideListView
 
         cocos2d::ui::ListView* shop_listview;
         cocos2d::ui::ListView* detail_listview;
+        cocos2d::ui::ListView* building_listview;
 
         cocos2d::ui::Button* tab_shop_btn;
         cocos2d::ui::Button* tab_detail_btn;
+        cocos2d::ui::Button* tab_building_btn;
 
 
         SideListView(cocos2d::Node* parent, std::shared_ptr<Building> current_target);
