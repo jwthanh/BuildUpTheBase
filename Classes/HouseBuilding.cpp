@@ -230,17 +230,17 @@ res_count_t Building::get_total_salesmen_output()
 
 res_count_t Building::count_ingredients(Ingredient::SubType ing_type)
 {
-    return this->ingredients[ing_type];
+    return map_get(this->ingredients, ing_type, 0);
 };
 
 res_count_t Building::count_products(Product::SubType pro_type)
 {
-    return this->products[pro_type];
+    return map_get(this->products, pro_type, 0);
 };
 
 res_count_t Building::count_wastes(Waste::SubType wst_type)
 {
-    return this->wastes[wst_type];
+    return map_get(this->wastes, wst_type, 0);
 };
 
 void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t quantity)
