@@ -125,7 +125,7 @@ Building::Building(Village* city, std::string name, std::string id_key) :
 {
     num_workers = 1;
 
-    building_level = 1;
+    building_level = 0;
 
     update_clock->set_threshold(1.0f);
     spawn_clock = new Clock(3);
@@ -419,7 +419,8 @@ std::string Building::get_inventory()
 
 res_count_t Building::get_storage_space()
 {
-    std::map<unsigned int, res_count_t> level_output = {
+    std::map<int, res_count_t> level_output = {
+        {0, 10.0},
         {1, 50.0},
         {2, 500.0},
         {3, 5000.0},
