@@ -22,6 +22,7 @@ void NuItem::my_init(cocos2d::Node* parent)
 {
     auto inst = cocos2d::CSLoader::getInstance();
 
+
     if (NuItem::orig_button == NULL)
     {
         CCLOG("reload");
@@ -43,7 +44,6 @@ void NuItem::my_init(cocos2d::Node* parent)
         child->setCascadeColorEnabled(true);
     }
 
-    //this->button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
     load_default_button_textures(this->button); //TODO figure out why this is still needed, why the clone doesnt do this for me
 
     button->removeFromParent();
@@ -60,6 +60,29 @@ void NuItem::my_init(cocos2d::Node* parent)
     this->set_cost_lbl("");
 
     this->schedule(CC_SCHEDULE_SELECTOR(NuItem::update_func));
+
+    auto reposition_labels = [this](float dt)
+    {
+        //defaults
+        this->cost_lbl->setPosition(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl")->getPosition());
+        this->count_lbl->setPosition(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl")->getPosition());
+        this->desc_lbl->setPosition(NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl")->getPosition());
+        this->desc_lbl->setContentSize(NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl")->getContentSize());
+
+        //if theres no cost, move count up
+        if (this->cost_lbl->getStringLength() == 0) {
+            this->count_lbl->setPosition(this->cost_lbl->getPosition());
+            this->desc_lbl->setContentSize({ 300.0f, 44.0f });
+        };
+
+        //if theres no count in place, widen description
+        if (this->count_lbl->getStringLength() == 0)
+        {
+            this->desc_lbl->setContentSize({ 300.0f, 44.0f });
+        }
+    };
+    this->schedule(reposition_labels, 0.1f, "reposition_labels");
+    reposition_labels(0);
 
 };
 
@@ -109,12 +132,8 @@ void NuItem::set_cost_lbl(std::string cost)
 {
     if (cost != ""){ //cost has content
         this->cost_lbl->setString("$"+cost);
-        this->desc_lbl->setContentSize(Size(208.0f, this->desc_lbl->getContentSize().height));
-        this->count_lbl->setPosition(Vec2(this->count_lbl->getPositionX(), -25.00f));
     } else { //cost is blank, widen description TODO use orig_buttons positions so this isnt hardcoded
         this->cost_lbl->setString("");
-        this->desc_lbl->setContentSize(Size(300.0f, this->desc_lbl->getContentSize().height));
-        this->count_lbl->setPosition(Vec2(this->count_lbl->getPositionX(), 17.00f));
     }
 };
 
