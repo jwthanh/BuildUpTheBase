@@ -14,7 +14,6 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/Beatup.cpp \
-                   ../../Classes/BaseMenu.cpp \
                    ../../Classes/NuMenu.cpp \
                    ../../Classes/HarvestScene.cpp \
                    ../../Classes/BuildingsSideBar.cpp \
@@ -35,7 +34,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Alert.cpp \
                    ../../Classes/Util.cpp \
                    ../../Classes/FShake.cpp \
-                   ../../Classes/MainMenu.cpp \
                    ../../Classes/HouseBuilding.cpp \
                    ../../Classes/Recipe.cpp \
                    ../../Classes/Combat.cpp \
