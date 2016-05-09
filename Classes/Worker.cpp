@@ -163,14 +163,12 @@ void Salesman::on_update(float dt)
             if (to_sell >= active_sell_count)
             {
                 std::string string_type = Ingredient::type_to_string(ing_type);
-                CCLOG("auto selling %f of %s", to_sell, string_type.c_str());
 
                 this->building->ingredients[ing_type] -= to_sell;
                 BEATUP->add_total_coin((double)(to_sell*coins_gained));
             }
             else
             {
-                CCLOG("waiting for more, cant sell only %f, need %f", to_sell, active_sell_count);
             }
         }
     }

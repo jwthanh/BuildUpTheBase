@@ -238,7 +238,6 @@ void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t quan
     } 
     else
     {
-        CCLOG("skipping ingredient creation for %s", Ingredient::type_to_string(sub_type).c_str());
     };
 };
 
