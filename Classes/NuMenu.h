@@ -99,13 +99,13 @@ class UpgradeBuildingShopNuItem : public BuildingShopNuItem
 {
 
     public:
-    static UpgradeBuildingShopNuItem* create(cocos2d::Node* parent, spBuilding building);;
+        static UpgradeBuildingShopNuItem* create(cocos2d::Node* parent, spBuilding building);;
         UpgradeBuildingShopNuItem(){};
         
         int building_level;
 
 
-        virtual bool init(Node* parent, spBuilding building, int building_level = 0);
+        virtual bool my_init(int building_level);
 };
 
 class HarvesterShopNuItem : public BuildingShopNuItem

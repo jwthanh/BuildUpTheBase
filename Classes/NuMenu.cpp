@@ -369,6 +369,7 @@ ShopNuItem* ShopNuItem::create(cocos2d::Node* parent)
 bool BuildingShopNuItem::init(Node* parent, spBuilding building)
 {
     ShopNuItem::init(parent, building->id_key);
+    this->building = building;
 
     this->set_image(building->data->get_img_large());
     this->set_title(building->name);
@@ -408,11 +409,8 @@ void BuildingShopNuItem::set_been_bought(bool val)
     this->_been_bought = val;
 }
 
-bool UpgradeBuildingShopNuItem::init(Node* parent, spBuilding building, int building_level)
+bool UpgradeBuildingShopNuItem::my_init(int building_level)
 {
-    ShopNuItem::init(parent, "upgrade_building");
-
-    this->building = building;
     this->building_level = building_level;
 
     std::stringstream ss;

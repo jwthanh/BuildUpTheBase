@@ -210,10 +210,9 @@ void SideListView::setup_building_listview_as_upgrades()
             if (existed) { continue; };
 
             UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create(listview, target_building);
+            menu_item->my_init(level);
 
             menu_item->setTag(child_tag);
-
-            menu_item->building_level = level; //i think this is all my_init used to do
 
             menu_item->schedule([menu_item](float dt){
                 menu_item->building = BUILDUP->get_target_building();
