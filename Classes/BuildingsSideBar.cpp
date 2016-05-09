@@ -119,8 +119,8 @@ void SideListView::setup_shop_listview_as_harvesters()
             WorkerSubType harv_type;
         };
         std::vector<HarvestConfig> nuitems_config = {
-            {WorkerType::Harvester, "harvester_item_one", WorkerSubType::One},
             {WorkerType::Salesman, "salesman_item_one", WorkerSubType::One},
+            {WorkerType::Harvester, "harvester_item_one", WorkerSubType::One},
             {WorkerType::Harvester, "harvester_item_two", WorkerSubType::Two},
             {WorkerType::Harvester, "harvester_item_three", WorkerSubType::Three},
             {WorkerType::Harvester, "harvester_item_four", WorkerSubType::Four},
