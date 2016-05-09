@@ -75,13 +75,11 @@ void Recipe::consume(mistIngredient& input)
         {
             input[component_pair.first] -= component_pair.second;
         }
-        printj("consumed " << this->name);
 
         this->callback();
     }
     else
     {
 
-        printj("can't make recipe " << this->name);
     };
 };

@@ -56,7 +56,7 @@ FighterNode* FighterNode::create(spFighter fighter)
     {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            GameDirector::switch_to_character_menu(node->fighter);
+            //GameDirector::switch_to_character_menu(node->fighter);
         };
     });
 

@@ -164,10 +164,6 @@ class Beatup : public GameLayer
 
         void onEnter();
 
-        BaseMenu* shop;
-        cocos2d::Scene* shop_scene;
-
-
         cocos2d::MotionStreak* motion;
 
         bool tutorials_enabled();

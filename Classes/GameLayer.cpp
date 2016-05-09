@@ -2,7 +2,6 @@
 #ifdef __ANDROID__
 #include "DataManager.h"
 #endif
-#include "BaseMenu.h"
 #include "Util.h"
 #include "SoundEngine.h"
 USING_NS_CC;
@@ -177,12 +176,12 @@ void GameLayer::quit(Ref* pSender)
 };
 
 
-Scrollable* GameLayer::create_center_scrollview()
+ui::ScrollView* GameLayer::create_center_scrollview()
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto scroll = Scrollable::create();
+    auto scroll = ui::ScrollView::create();
     //scroll->setBackGroundColorType(ui::Layout::BackGroundColorType::SOLID);
     float scroll_w = sx(800);
     float scroll_h = sy(400);

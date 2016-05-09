@@ -4,9 +4,7 @@
 #include "StaticData.h"
 
 #include "HouseBuilding.h"
-#include "MainMenu.h"
 
-#include "BaseMenu.h"
 #include "Util.h"
 #include "Worker.h"
 #include "GameLogic.h"
@@ -744,9 +742,6 @@ bool NuMenu::init()
     //setup backbutton
     this->create_back_item(scrollable);
 
-    //resizes scrollable based on size of contents TODO:actually measure sizes
-    scrollable->resize_to_fit();
-
     return true;
 };
 
@@ -773,39 +768,6 @@ void NuMenu::create_back_item(cocos2d::Node* parent)
 
 };
 
-void BuyBuildingsNuMenu::init_items()
-{
-    auto scrollview = this->scrollable;
-
-    //setup menu items
-    auto inst = cocos2d::CSLoader::getInstance();
-
-    for (auto building : BUILDUP->city->buildings) {
-        auto menu_item = BuildingShopNuItem::create(scrollview, building);
-
-        auto scheduler = Director::getInstance()->getScheduler();
-        scheduler->schedule(CC_SCHEDULE_SELECTOR(BuildingShopNuItem::update_func), menu_item, 0.5f, true); //TODO make this happen more optimally, reading disk is slow
-        menu_item->update_func(0);
-
-        auto buy_stuff = [this, building, menu_item](){
-            //can afford
-            auto cost = building->get_cost();
-            auto total_coins = BEATUP->get_total_coins();
-            if (cost <= total_coins)
-            {
-                CCLOG("buying stuff");
-                building->set_been_bought(true);
-                BEATUP->add_total_coin(-(double)building->get_cost());
-
-                menu_item->update_func(0);
-            }
-        };
-
-        menu_item->set_touch_ended_callback(buy_stuff);
-
-    };
-
-};
 
 BuildingNuMenu* BuildingNuMenu::create(std::shared_ptr<Building> building)
 {
@@ -841,22 +803,5 @@ void BuildingNuMenu::init_items()
 
 void BuildingNuMenu::create_inventory_item(cocos2d::Node* parent)
 {
-    auto inventory_item = NuItem::create(parent);
-
-    inventory_item->set_title("Inventory");
-    inventory_item->set_description("Check out what this building contains.");
-
-    inventory_item->set_image("zoomIn.png");
-
-    auto open_inventory = [this](){
-        auto scene = Scene::create();
-        InventoryMenu* building_menu = InventoryMenu::create(this->building);
-        scene->addChild(building_menu);
-
-        auto director = Director::getInstance();
-        director->pushScene(scene);
-    };
-
-    inventory_item->set_touch_ended_callback(open_inventory);
 
 };

@@ -11,7 +11,6 @@
 class PlainShopItem;
 class Fist;
 class ShopItem;
-class Scrollable;
 class Building;
 
 
@@ -141,7 +140,7 @@ class NuMenu : public GameLayer
         CREATE_FUNC(NuMenu);
         virtual void onEnter() override;
 
-        Scrollable* scrollable;
+        cocos2d::ui::ScrollView* scrollable;
 
         bool init();
         void create_back_item(cocos2d::Node* parent);
@@ -149,13 +148,6 @@ class NuMenu : public GameLayer
         virtual void init_items(){};
 
 
-};
-
-class BuyBuildingsNuMenu : public NuMenu
-{
-    public:
-        CREATE_FUNC(BuyBuildingsNuMenu);
-        void init_items();
 };
 
 class BuildingNuMenu : public NuMenu

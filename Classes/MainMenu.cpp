@@ -2,7 +2,6 @@
 
 #include <algorithm>
 
-#include "BaseMenu.h"
 #include "Beatup.h"
 #include "ui/CocosGUI.h"
 #include "SoundEngine.h"

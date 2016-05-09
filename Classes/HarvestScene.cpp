@@ -8,7 +8,6 @@
 #include "NuMenu.h"
 #include "Beatup.h"
 #include "Util.h"
-#include "MainMenu.h"
 #include "StaticData.h"
 #include "Recipe.h"
 #include "attribute.h"
@@ -20,21 +19,11 @@
 
 #include "BuildingsSideBar.h"
 
-class Animal;
 USING_NS_CC;
-
-void BaseScene::create_side_buttons()
-{
-    this->create_shop_button();
-    this->create_city_button();
-}
 
 bool BaseScene::init()
 {
     FUNC_INIT(BaseScene);
-
-
-    this->create_side_buttons();
 
     this->create_info_panel();
     this->create_player_info_panel();
@@ -217,15 +206,6 @@ void BaseScene::create_info_panel()
     };
     this->schedule(update_salesmen_count, update_delay, "salesmen_count_update");
     update_salesmen_count(0);
-
-    building_info_panel->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt_type)
-    {
-        if (evt_type == ui::Widget::TouchEventType::ENDED)
-        {
-            GameDirector::switch_to_inventory_menu();
-        }
-    });
-
 
     this->addChild(building_info_panel);
 };
@@ -499,92 +479,6 @@ void BaseScene::create_shop_listview()
     sidebar->setup_shop_listview_as_harvesters();
     sidebar->setup_detail_listview_as_recipes();
     sidebar->setup_building_listview_as_upgrades();
-};
-
-void BaseScene::create_shop_button()
-{
-
-    auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
-
-    auto shop_button = ui::Button::create(
-        "shop_banner.png",
-        "shop_banner_hili.png",
-        "shop_banner.png",
-        ui::TextureResType::PLIST
-    );
-
-    auto shop_text_img = ui::ImageView::create(
-        "text_shop.png",
-        ui::TextureResType::PLIST
-    );
-    shop_text_img->setFlippedX(true);
-
-    shop_text_img->setPosition(Vec2(25, 17));
-    shop_button->addChild(shop_text_img);
-    shop_button->setScale(4);
-    shop_button->setFlippedX(true);
-
-    Node* shop_pos_node = harvest_scene_editor->getChildByName("shop_pos");
-    shop_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
-    shop_button->setPosition(shop_pos_node->getPosition());
-    shop_button->setScaleY(shop_button->getScaleY()/1.5f);
-
-    shop_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
-    {
-        if (evt == ui::Widget::TouchEventType::ENDED) {
-            auto scene = Scene::create();
-            BuyBuildingsNuMenu* building_menu = BuyBuildingsNuMenu::create();
-            scene->addChild(building_menu);
-
-            auto director = Director::getInstance();
-            director->pushScene(scene);
-        };
-    });
-
-    this->addChild(shop_button);
-};
-
-void BaseScene::create_city_button()
-{
-
-    auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
-
-    auto city_button = ui::Button::create(
-        "shop_banner.png",
-        "shop_banner_hili.png",
-        "shop_banner.png",
-        ui::TextureResType::PLIST
-    );
-
-    auto shop_text_img = ui::ImageView::create(
-        "text_city.png",
-        ui::TextureResType::PLIST
-    );
-
-    shop_text_img->setPosition(Vec2(28, 17));
-    city_button->addChild(shop_text_img);
-    city_button->setScale(4);
-    city_button->setScaleY(city_button->getScaleY()/1.5f);
-
-    Node* shop_pos_node = harvest_scene_editor->getChildByName("city_pos");
-    city_button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-    city_button->setPosition(shop_pos_node->getPosition());
-
-    city_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
-    {
-        if (evt == ui::Widget::TouchEventType::ENDED) {
-            auto scene = Scene::create();
-            CityMenu* building_menu = CityMenu::create();
-            scene->addChild(building_menu);
-
-            auto director = Director::getInstance();
-            director->pushScene(scene);
-        };
-    });
-
-    this->addChild(city_button);
 };
 
 bool HarvestScene::init()

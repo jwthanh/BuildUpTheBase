@@ -19,10 +19,6 @@ class BaseScene : public GameLayer
         virtual void onSwipeLeft(float dt) override;
         virtual void onSwipeRight(float dt) override;
 
-        void create_side_buttons();
-        void create_shop_button();
-        void create_city_button();
-
         void create_info_panel();
         void create_player_info_panel();
         void create_building_scrollview();

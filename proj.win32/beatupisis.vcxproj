@@ -172,14 +172,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\GameLogic.cpp" />
     <ClCompile Include="..\Classes\Harvestable.cpp" />
     <ClCompile Include="..\Classes\HarvestScene.cpp" />
-    <ClCompile Include="..\Classes\MainMenu.cpp" />
     <ClCompile Include="..\Classes\MiscUI.cpp" />
     <ClCompile Include="..\Classes\Network.cpp" />
     <ClCompile Include="..\Classes\NuMenu.cpp" />
     <ClCompile Include="..\Classes\ProgressBar.cpp" />
     <ClCompile Include="..\Classes\Resources.cpp" />
     <ClCompile Include="..\Classes\ShatterNode.cpp" />
-    <ClCompile Include="..\Classes\BaseMenu.cpp" />
     <ClCompile Include="..\Classes\SoundEngine.cpp" />
     <ClCompile Include="..\Classes\StaticData.cpp" />
     <ClCompile Include="..\Classes\Updateable.cpp" />
@@ -212,7 +210,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\GameLogic.h" />
     <ClInclude Include="..\Classes\Harvestable.h" />
     <ClInclude Include="..\Classes\HarvestScene.h" />
-    <ClInclude Include="..\Classes\MainMenu.h" />
     <ClInclude Include="..\Classes\MiscUI.h" />
     <ClInclude Include="..\Classes\Nameable.h" />
     <ClInclude Include="..\Classes\Network.h" />
@@ -221,7 +218,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\RandomWeightMap.h" />
     <ClInclude Include="..\Classes\Resources.h" />
     <ClInclude Include="..\Classes\ShatterNode.h" />
-    <ClInclude Include="..\Classes\BaseMenu.h" />
     <ClInclude Include="..\Classes\SoundEngine.h" />
     <ClInclude Include="..\Classes\StaticData.h" />
     <ClInclude Include="..\Classes\Updateable.h" />

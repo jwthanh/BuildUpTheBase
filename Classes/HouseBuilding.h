@@ -8,7 +8,6 @@
 #include "Clock.h"
 #include "Resources.h"
 
-#include "BaseMenu.h"
 #include "Buyable.h"
 
 #include "constants.h"
@@ -46,8 +45,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         bool can_fit_more_ingredients(Ingredient::SubType sub_type, res_count_t quantity = 1);
 
         unsigned int num_workers; //people who work here, help make things faster
-
-        std::vector<ItemData> menu_items;
 
         Building(Village* city, std::string name, std::string id_key);
         void create_ingredients(Ingredient::SubType sub_type, res_count_t quantity);

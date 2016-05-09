@@ -19,7 +19,6 @@
 #pragma warning(default:4251)
 #pragma warning(default:4244)
 #include "Util.h"
-#include "MainMenu.h"
 #include "Recipe.h"
 #include "attribute.h"
 #include "GameLogic.h"
@@ -202,11 +201,6 @@ void Beatup::back_to_menu()
     SoundEngine::stop_all_sound_and_music();
     SoundEngine::play_music("music\\menu.mp3");
 
-    if (this->get_level_over())
-    {
-        MainMenu::beatup_scene = NULL; //this is to disable the resume button
-    };
-
     auto director = Director::getInstance();
     director->pushScene(Beatup::main_menu_scene);
 }
@@ -363,16 +357,9 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F) 
     {
-        GameDirector::switch_to_city_menu();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_W) 
     {
-        // Alert* q_alert = dynamic_cast<Alert*>(this->getChildByName("quest_alert"));
-        // if (q_alert)
-        // {
-        //     q_alert->shrink_close(Vec2(0, 0));
-        // }
-        GameDirector::switch_to_test();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_C) 
     {
@@ -448,7 +435,6 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_S) 
     {
-        GameDirector::switch_to_shop();
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_B) 
     {
@@ -462,7 +448,6 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_1) 
     {
-        GameDirector::switch_to_city_menu();
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_2) 
@@ -472,7 +457,6 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_3) 
     {
-        GameDirector::switch_to_inventory_menu();
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_4) 

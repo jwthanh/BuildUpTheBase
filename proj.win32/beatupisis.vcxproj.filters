@@ -18,7 +18,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\GameLayer.cpp" />
     <ClCompile Include="..\Classes\Beatup.cpp" />
-    <ClCompile Include="..\Classes\MainMenu.cpp" />
     <ClCompile Include="..\Classes\SoundEngine.cpp" />
     <ClCompile Include="..\Classes\Clock.cpp" />
     <ClCompile Include="..\Classes\Buyable.cpp" />
@@ -36,7 +35,6 @@
     <ClCompile Include="..\Classes\HouseBuilding.cpp" />
     <ClCompile Include="..\Classes\Recipe.cpp" />
     <ClCompile Include="..\Classes\Worker.cpp" />
-    <ClCompile Include="..\Classes\BaseMenu.cpp" />
     <ClCompile Include="..\Classes\NuMenu.cpp" />
     <ClCompile Include="..\Classes\StaticData.cpp" />
     <ClCompile Include="..\Classes\Harvestable.cpp" />
@@ -58,7 +56,6 @@
     <ClInclude Include="..\Classes\GameLayer.h" />
     <ClInclude Include="..\Classes\constants.h" />
     <ClInclude Include="..\Classes\Beatup.h" />
-    <ClInclude Include="..\Classes\MainMenu.h" />
     <ClInclude Include="..\Classes\SoundEngine.h" />
     <ClInclude Include="..\Classes\Clock.h" />
     <ClInclude Include="..\Classes\Buyable.h" />
@@ -80,7 +77,6 @@
     <ClInclude Include="..\Classes\Recipe.h" />
     <ClInclude Include="..\Classes\targetver.h" />
     <ClInclude Include="..\Classes\Worker.h" />
-    <ClInclude Include="..\Classes\BaseMenu.h" />
     <ClInclude Include="..\Classes\NuMenu.h" />
     <ClInclude Include="..\Classes\StaticData.h" />
     <ClInclude Include="..\Classes\Harvestable.h" />

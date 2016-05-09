@@ -35,12 +35,7 @@ class GameLogic
 class GameDirector
 {
     public:
-        static void switch_to_shop();
         static void switch_to_building_menu();
-        static void switch_to_city_menu();
-        static void switch_to_inventory_menu();
-        static void switch_to_test();
-        static void switch_to_character_menu(spFighter fighter);
 };
 
 #endif
