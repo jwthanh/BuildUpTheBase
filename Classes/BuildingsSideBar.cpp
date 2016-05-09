@@ -128,6 +128,7 @@ void SideListView::setup_shop_listview_as_harvesters()
             {WorkerType::Harvester, "harvester_item_six", WorkerSubType::Six}
         };
 
+        auto target_building = BUILDUP->get_target_building();
         for (auto config : nuitems_config)
         {
             //if the child already exists, put it at the back 
@@ -143,13 +144,13 @@ void SideListView::setup_shop_listview_as_harvesters()
             //clone the new item
             HarvesterShopNuItem* menu_item;
             if (config.worker_type == WorkerType::Harvester){
-                menu_item = HarvesterShopNuItem::create();
+                menu_item = HarvesterShopNuItem::create(shop_listview, target_building);
             }
             else if (config.worker_type == WorkerType::Salesman)
             {
-                menu_item = SalesmanShopNuItem::create();
+                menu_item = SalesmanShopNuItem::create(shop_listview, target_building);
             }
-            menu_item->my_init(shop_listview, config.harv_type, BUILDUP->get_target_building()->punched_sub_type);
+            menu_item->my_init(config.harv_type, target_building->punched_sub_type);
             menu_item->setName(child_name);
 
             //since we only set the ing_type of the menu item above, it doesn't
@@ -208,11 +209,11 @@ void SideListView::setup_building_listview_as_upgrades()
             bool existed = this->try_push_back(child_tag, listview);
             if (existed) { continue; };
 
-            UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create();
+            UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create(listview, target_building);
 
             menu_item->setTag(child_tag);
 
-            menu_item->my_init(target_building, listview, level);
+            menu_item->building_level = level; //i think this is all my_init used to do
 
             menu_item->schedule([menu_item](float dt){
                 menu_item->building = BUILDUP->get_target_building();
@@ -303,15 +304,14 @@ void SideListView::setup_detail_listview_as_recipes()
 
             BuildingNuItem* menu_item;
             if (config.type == DetailType::Recipe) {
-                menu_item = RecipeNuItem::create();
+                menu_item = RecipeNuItem::create(listview, target_building);
             }
             else if (config.type == DetailType::Misc) {
-                menu_item = BuildingNuItem::create();
+                menu_item = BuildingNuItem::create(listview, target_building);
             }
 
             menu_item->setTag(child_tag);
 
-            menu_item->my_init(target_building, listview);
             menu_item->set_title(config.config.name);
             menu_item->set_description(config.config.description);
 

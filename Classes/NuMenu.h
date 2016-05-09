@@ -18,10 +18,11 @@ class Building;
 class NuItem : public cocos2d::ui::Widget
 {
     public:
-        CREATE_FUNC(NuItem);
+
+    static NuItem* create(cocos2d::Node* parent);
 
         NuItem(){};
-        virtual void my_init(cocos2d::Node* parent);
+        virtual bool init(cocos2d::Node* parent);
 
         static cocos2d::ui::Button* orig_button;
         cocos2d::ui::Button* button;
@@ -50,14 +51,15 @@ class BuildingNuItem : public NuItem
     public:
         spBuilding building;
 
-        CREATE_FUNC(BuildingNuItem);
-        virtual void my_init(std::shared_ptr<Building> building, Node* parent);
+        static BuildingNuItem* create();
+        static BuildingNuItem* create(Node* parent, std::shared_ptr<Building> building);
+        virtual bool init(Node* parent, std::shared_ptr<Building> building);
 };
 
 class RecipeNuItem : public BuildingNuItem
 {
     public:
-        CREATE_FUNC(RecipeNuItem);
+    static RecipeNuItem* create(cocos2d::Node* parent, spBuilding);
 
         spRecipe recipe;
 
@@ -68,23 +70,23 @@ class RecipeNuItem : public BuildingNuItem
 class ShopNuItem : public Buyable, public NuItem
 {
     public:
-        CREATE_FUNC(ShopNuItem);
+        static ShopNuItem* create(cocos2d::Node* parent);
         ShopNuItem() : Buyable("unset_in_shopnuitem"), resource_cost(NULL) {};
 
         ResourceCondition* resource_cost;
 
-        virtual void my_init(Node* parent, std::string id_key);
+        virtual bool init(Node* parent, std::string id_key = "");
         virtual void update_func(float dt);
 };
 
 class BuildingShopNuItem : public ShopNuItem
 {
     public:
-        CREATE_FUNC(BuildingShopNuItem);
+    static BuildingShopNuItem* create(cocos2d::Node* parent, spBuilding building);;
         BuildingShopNuItem(){};
 
         std::shared_ptr<Building> building;
-        virtual void my_init(std::shared_ptr<Building> building, Node* parent);
+        virtual bool init(Node* parent, std::shared_ptr<Building> building);
 };
 
 class UpgradeBuildingShopNuItem : public BuildingShopNuItem
@@ -93,7 +95,7 @@ class UpgradeBuildingShopNuItem : public BuildingShopNuItem
         bool _been_bought;
 
     public:
-        CREATE_FUNC(UpgradeBuildingShopNuItem);
+    static UpgradeBuildingShopNuItem* create(cocos2d::Node* parent, spBuilding building);;
         UpgradeBuildingShopNuItem(){};
         
         int building_level;
@@ -102,15 +104,16 @@ class UpgradeBuildingShopNuItem : public BuildingShopNuItem
         void set_been_bought(bool val) override;
 
 
-        virtual void my_init(std::shared_ptr<Building> building, Node* parent, int building_level);
+        virtual bool init(Node* parent, spBuilding building, int building_level = 0);
 };
 
-class HarvesterShopNuItem : public ShopNuItem
+class HarvesterShopNuItem : public BuildingShopNuItem
 {
     public:
-        CREATE_FUNC(HarvesterShopNuItem);
+    static HarvesterShopNuItem* create(Node* parent, spBuilding building);
 
-    virtual void my_init(Node* parent, WorkerSubType harv_type, Ingredient::SubType ing_type);
+    bool init(Node* parent, spBuilding building);
+    virtual void my_init(WorkerSubType harv_type, Ingredient::SubType ing_type);
     virtual void my_init_title();
     virtual void my_init_sprite();
     virtual void my_init_touch_ended_callback();
@@ -123,7 +126,7 @@ class HarvesterShopNuItem : public ShopNuItem
 class SalesmanShopNuItem : public HarvesterShopNuItem
 {
     public:
-        CREATE_FUNC(SalesmanShopNuItem);
+    static SalesmanShopNuItem* create(Node* parent, spBuilding building);
 
         virtual void my_init_title() override;
         virtual void my_init_sprite() override;

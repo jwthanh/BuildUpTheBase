@@ -19,8 +19,26 @@ USING_NS_CC;
 
 cocos2d::ui::Button* NuItem::orig_button = NULL;
 
-void NuItem::my_init(cocos2d::Node* parent)
+NuItem* NuItem::create(cocos2d::Node* parent)
 {
+    NuItem* pRet = new(std::nothrow) NuItem();
+    if (pRet && pRet->init(parent))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+}
+
+bool NuItem::init(cocos2d::Node* parent)
+{
+    ui::Widget::init();
+
     auto inst = cocos2d::CSLoader::getInstance();
 
 
@@ -84,6 +102,8 @@ void NuItem::my_init(cocos2d::Node* parent)
     };
     this->schedule(reposition_labels, 0.1f, "reposition_labels");
     reposition_labels(0);
+
+    return true;
 
 };
 
@@ -161,12 +181,14 @@ void NuItem::try_set_enable(bool is_enable)
 };
 
 
-void ShopNuItem::my_init(Node* parent, std::string id_key)
+bool ShopNuItem::init(Node* parent, std::string id_key)
 {
-    NuItem::my_init(parent);
+    NuItem::init(parent);
 
     this->id_key = id_key;
     this->_shop_cost = -1;
+
+    return true;
 };
 
 void ShopNuItem::update_func(float dt)
@@ -219,12 +241,62 @@ void ShopNuItem::update_func(float dt)
     };
 
 
+}
+
+BuildingShopNuItem* BuildingShopNuItem::create(cocos2d::Node* parent, spBuilding building)
+{
+    BuildingShopNuItem* pRet = new(std::nothrow) BuildingShopNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
 };
 
-void BuildingNuItem::my_init(std::shared_ptr<Building> building, Node* parent)
+BuildingNuItem* BuildingNuItem::create(Node* parent, std::shared_ptr<Building> building)
 {
-    NuItem::my_init(parent);
+    BuildingNuItem* pRet = new(std::nothrow) BuildingNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+}
+
+bool BuildingNuItem::init(Node* parent, std::shared_ptr<Building> building)
+{
+    NuItem::init(parent);
     this->building = building;
+
+    return true;
+}
+
+RecipeNuItem* RecipeNuItem::create(Node* parent, spBuilding building)
+{
+    RecipeNuItem* pRet = new(std::nothrow) RecipeNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
 };
 
 void RecipeNuItem::other_init(spRecipe recipe)
@@ -250,6 +322,7 @@ void RecipeNuItem::other_init(spRecipe recipe)
     {
         CCLOG("callback set, using existing callback, recipe %s", this->recipe->name.c_str());
     }
+
 }
 
 void RecipeNuItem::update_func(float dt)
@@ -275,11 +348,27 @@ void RecipeNuItem::update_func(float dt)
         result_count += this->building->count_ingredients(out_type);
     };
     this->set_count_lbl(result_count);
+}
+
+ShopNuItem* ShopNuItem::create(cocos2d::Node* parent)
+{
+    ShopNuItem* pRet = new(std::nothrow) ShopNuItem();
+    if (pRet && pRet->init(parent))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
 };
 
-void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
+bool BuildingShopNuItem::init(Node* parent, spBuilding building)
 {
-    ShopNuItem::my_init(parent, building->id_key);
+    ShopNuItem::init(parent, building->id_key);
 
     this->set_image(building->data->get_img_large());
     this->set_title(building->name);
@@ -287,6 +376,24 @@ void BuildingShopNuItem::my_init(spBuilding building, Node* parent)
 
     this->set_cost_lbl(std::to_string(building->get_cost()));
     this->_shop_cost = building->get_cost();
+
+    return true;
+}
+
+UpgradeBuildingShopNuItem* UpgradeBuildingShopNuItem::create(cocos2d::Node* parent, spBuilding building)
+{
+    UpgradeBuildingShopNuItem* pRet = new(std::nothrow) UpgradeBuildingShopNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
 }
 
 bool UpgradeBuildingShopNuItem::get_been_bought()
@@ -299,9 +406,9 @@ void UpgradeBuildingShopNuItem::set_been_bought(bool val)
     this->_been_bought = val;
 }
 
-void UpgradeBuildingShopNuItem::my_init(spBuilding building, Node* parent, int building_level)
+bool UpgradeBuildingShopNuItem::init(Node* parent, spBuilding building, int building_level)
 {
-    ShopNuItem::my_init(parent, "upgrade_building");
+    ShopNuItem::init(parent, "upgrade_building");
 
     this->building = building;
     this->building_level = building_level;
@@ -345,6 +452,24 @@ void UpgradeBuildingShopNuItem::my_init(spBuilding building, Node* parent, int b
         }
     };
     this->set_touch_ended_callback(touch_ended_cb);
+
+    return true;
+}
+
+HarvesterShopNuItem* HarvesterShopNuItem::create(Node* parent, spBuilding building)
+{
+    HarvesterShopNuItem* pRet = new(std::nothrow) HarvesterShopNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
 }
 
 void HarvesterShopNuItem::my_init_title()
@@ -360,10 +485,14 @@ void HarvesterShopNuItem::my_init_title()
     this->set_title("Buy "+harvester_name);
 }
 
-void HarvesterShopNuItem::my_init(Node* parent, WorkerSubType harv_type, Ingredient::SubType ing_type)
+bool HarvesterShopNuItem::init(Node* parent, spBuilding building)
 {
-    ShopNuItem::my_init(parent, "harvester_buy");
+    BuildingShopNuItem::init(parent, building);
+    return true;
+}
 
+void HarvesterShopNuItem::my_init(WorkerSubType harv_type, Ingredient::SubType ing_type)
+{
     this->harv_type = harv_type;
     this->ing_type = ing_type;
 
@@ -376,6 +505,7 @@ void HarvesterShopNuItem::my_init(Node* parent, WorkerSubType harv_type, Ingredi
     this->my_init_update_callback();
 
     this->update_func(0);
+
 };
 
 void HarvesterShopNuItem::my_init_sprite()
@@ -510,6 +640,22 @@ void SalesmanShopNuItem::my_init_update_callback()
 
 };
 
+SalesmanShopNuItem* SalesmanShopNuItem::create(Node* parent, spBuilding building)
+{
+    SalesmanShopNuItem* pRet = new(std::nothrow) SalesmanShopNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+}
+
 void SalesmanShopNuItem::my_init_title()
 {
     std::vector<std::string> names = {
@@ -635,8 +781,7 @@ void BuyBuildingsNuMenu::init_items()
     auto inst = cocos2d::CSLoader::getInstance();
 
     for (auto building : BUILDUP->city->buildings) {
-        auto menu_item = BuildingShopNuItem::create();
-        menu_item->my_init(building, scrollview);
+        auto menu_item = BuildingShopNuItem::create(scrollview, building);
 
         auto scheduler = Director::getInstance()->getScheduler();
         scheduler->schedule(CC_SCHEDULE_SELECTOR(BuildingShopNuItem::update_func), menu_item, 0.5f, true); //TODO make this happen more optimally, reading disk is slow
@@ -688,9 +833,7 @@ void BuildingNuMenu::init_items()
 
     for (auto recipe : building->data->get_all_recipes())
     {
-        auto convert_item = RecipeNuItem::create();
-
-        convert_item->my_init(this->building, scrollview);
+        auto convert_item = RecipeNuItem::create(scrollview, building);
         convert_item->other_init(recipe);
     }
 
@@ -698,8 +841,7 @@ void BuildingNuMenu::init_items()
 
 void BuildingNuMenu::create_inventory_item(cocos2d::Node* parent)
 {
-    auto inventory_item = NuItem::create();
-    inventory_item->my_init(parent);
+    auto inventory_item = NuItem::create(parent);
 
     inventory_item->set_title("Inventory");
     inventory_item->set_description("Check out what this building contains.");
