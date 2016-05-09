@@ -28,7 +28,7 @@ bool BaseScene::init()
     this->create_info_panel();
     this->create_player_info_panel();
 
-    this->create_building_scrollview();
+    this->create_building_pageview();
     this->create_inventory_listview();
     this->create_shop_listview();
 
@@ -280,7 +280,7 @@ void BaseScene::create_player_info_panel()
     this->addChild(player_info_panel);
 };
 
-void BaseScene::create_building_scrollview()
+void BaseScene::create_building_pageview()
 {
     auto inst = CSLoader::getInstance();
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
