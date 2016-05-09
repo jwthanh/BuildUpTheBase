@@ -333,19 +333,7 @@ void BaseScene::create_building_scrollview()
         };
         lvl_lbl->schedule(update_lvl_lbl, update_delay, "update_lvl_lbl");
 
-        auto cb = [this, building](Ref* target, ui::Widget::TouchEventType event) {
-            if (event == ui::Widget::TouchEventType::ENDED)
-            {
-                auto scene = Scene::create();
-                BuildingNuMenu* building_menu = BuildingNuMenu::create(building);
-                scene->addChild(building_menu);
-                Director::getInstance()->pushScene(scene);
-            };
-        };
-        building_panel->addTouchEventListener(cb);
-
     }
-
 
     this->addChild(building_pageview);
 }
