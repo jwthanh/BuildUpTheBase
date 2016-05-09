@@ -1,9 +1,9 @@
 #include "ProgressBar.h"
 
-#include "Beatup.h"
 #include "Util.h"
 #include "constants.h"
 #include "GameLogic.h"
+#include "Beatup.h" //used in BEATUP macro
 
 USING_NS_CC;
 

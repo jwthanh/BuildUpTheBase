@@ -14,12 +14,12 @@
 #include "NuMenu.h"
 #include "GameLogic.h"
 #include "StaticData.h"
-#include "Animal.h"
 #include "MiscUI.h"
 #include "Fighter.h"
 #include "attribute_container.h"
 
 #include "HouseBuilding.h"
+#include "combat.h"
 
 USING_NS_CC;
 

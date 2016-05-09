@@ -6,12 +6,10 @@
 
 #include "Clock.h"
 #include "SoundEngine.h"
-#include "BaseMenu.h"
 #include "constants.h"
 #include "DataManager.h"
 #include "ProgressBar.h"
 #include "ShatterNode.h" //is used on android
-#include "Alert.h"
 
 #include "HouseBuilding.h"
 #include "Fighter.h"
@@ -24,11 +22,10 @@
 #include "MainMenu.h"
 #include "Recipe.h"
 #include "attribute.h"
-#include "FShake.h"
-#include "NuMenu.h"
 #include "GameLogic.h"
 #include "Animal.h"
 #include "attribute_container.h"
+#include "combat.h"
 
 USING_NS_CC;
 

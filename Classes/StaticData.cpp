@@ -5,7 +5,6 @@
 
 #include "FileOperation.h"
 
-#include "cocos2d.h"
 #include "Recipe.h"
 
 std::string BaseData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)

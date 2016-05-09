@@ -9,17 +9,14 @@
 #include "Beatup.h"
 #include "Util.h"
 #include "MainMenu.h"
-#include "Network.h"
 #include "StaticData.h"
 #include "Recipe.h"
 #include "attribute.h"
 #include "FShake.h"
 #include "MiscUI.h"
 #include "Animal.h"
-#include "Worker.h"
 #include "Fighter.h"
 #include "attribute_container.h"
-#include "attribute.h"
 
 #include "BuildingsSideBar.h"
 

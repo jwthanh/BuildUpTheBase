@@ -2,13 +2,11 @@
 #ifndef HOUSEBUILDING_H
 #define HOUSEBUILDING_H
 
-#include <functional>
 #include <memory>
 #include <map>
 
 #include "Clock.h"
 #include "Resources.h"
-#include "combat.h"
 
 #include "BaseMenu.h"
 #include "Buyable.h"
@@ -19,8 +17,6 @@
 //it would be nice to not need this, but mistHarvesters uses it
 #include "Worker.h"
 #include "Updateable.h"
-
-
 
 class Building : public Nameable, public Updateable, public Buyable, public std::enable_shared_from_this<Building>
 {

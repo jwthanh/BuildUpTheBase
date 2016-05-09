@@ -1,7 +1,6 @@
 #include "Harvestable.h"
 #include "FShake.h"
 
-#include "Beatup.h"
 #include "HouseBuilding.h"
 #include "ShatterNode.h"
 #include "MiscUI.h"
@@ -14,7 +13,6 @@
 
 #include "Fighter.h"
 #include "attribute_container.h"
-#include "attribute.h"
 #include "ProgressBar.h"
 
 USING_NS_CC;

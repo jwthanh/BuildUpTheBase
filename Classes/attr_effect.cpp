@@ -1,10 +1,7 @@
 
 #include "attr_effect.h"
 #include "attribute_container.h"
-#include "attribute.h"
 #include "combat.h"
-#include "elements_t.h"
-#include "attributes_t.h"
 
 bool TimedEffect::is_expired(long double turn_count)
 {

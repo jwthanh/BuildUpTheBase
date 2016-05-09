@@ -8,8 +8,6 @@
 #include <ctime>
 #include <assert.h>
 #include <sstream>
-#include <algorithm>
-#include <locale>
 
 #include <tinyxml2/tinyxml2.h>
 #include <json/document.h>
@@ -22,18 +20,14 @@
 #include "Worker.h"
 #include "RandomWeightMap.h"
 
-#include "Beatup.h"
 #include "Util.h"
-#include "FShake.h"
 
 #include "FileOperation.h"
-#include "GameLogic.h"
 #include "StaticData.h"
 
 #include "Animal.h"
 #include "Fighter.h"
 
-#include "ProgressBar.h"
 #include "attribute_container.h"
 #include "attribute.h"
 
