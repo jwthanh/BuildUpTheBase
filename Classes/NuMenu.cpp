@@ -377,6 +377,8 @@ bool BuildingShopNuItem::init(Node* parent, spBuilding building)
     this->set_cost_lbl(std::to_string(building->get_cost()));
     this->_shop_cost = building->get_cost();
 
+    this->set_been_bought(false);
+
     return true;
 }
 
@@ -396,12 +398,12 @@ UpgradeBuildingShopNuItem* UpgradeBuildingShopNuItem::create(cocos2d::Node* pare
     }
 }
 
-bool UpgradeBuildingShopNuItem::get_been_bought()
+bool BuildingShopNuItem::get_been_bought()
 {
     return this->_been_bought;
 }
 
-void UpgradeBuildingShopNuItem::set_been_bought(bool val)
+void BuildingShopNuItem::set_been_bought(bool val)
 {
     this->_been_bought = val;
 }

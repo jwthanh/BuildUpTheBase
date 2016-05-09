@@ -81,27 +81,28 @@ class ShopNuItem : public Buyable, public NuItem
 
 class BuildingShopNuItem : public ShopNuItem
 {
+    private:
+        bool _been_bought;
+
     public:
     static BuildingShopNuItem* create(cocos2d::Node* parent, spBuilding building);;
         BuildingShopNuItem(){};
 
         std::shared_ptr<Building> building;
         virtual bool init(Node* parent, std::shared_ptr<Building> building);
+
+        bool get_been_bought() override;
+        void set_been_bought(bool val) override;
 };
 
 class UpgradeBuildingShopNuItem : public BuildingShopNuItem
 {
-    private:
-        bool _been_bought;
 
     public:
     static UpgradeBuildingShopNuItem* create(cocos2d::Node* parent, spBuilding building);;
         UpgradeBuildingShopNuItem(){};
         
         int building_level;
-
-        bool get_been_bought() override;
-        void set_been_bought(bool val) override;
 
 
         virtual bool init(Node* parent, spBuilding building, int building_level = 0);
