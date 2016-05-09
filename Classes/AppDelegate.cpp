@@ -92,8 +92,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
             CCLOG("done preloading");
 
             Scene* scene = Scene::create();
+            scene->setName("root_scene");
+            HarvestScene* harvest_scene = HarvestScene::create();
+            harvest_scene->setName("HarvestScene");
 
-            scene->addChild(HarvestScene::create());
+            scene->addChild(harvest_scene);
 
             auto director = Director::getInstance();
             director->pushScene(scene);
