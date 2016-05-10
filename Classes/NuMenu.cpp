@@ -213,6 +213,7 @@ void ShopNuItem::update_func(float dt)
         this->set_cost_lbl("---");
         try_set_enable(false);
         this->cost_lbl->setTextColor(Color4B::GRAY);
+        this->button->setColor(Color3B::WHITE);
     } 
     else if (total_coins < cost)
     {
