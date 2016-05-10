@@ -220,13 +220,6 @@ void ShopNuItem::update_func(float dt)
         this->set_cost_lbl(beautify_double(std::round(this->get_cost())));
 
         Color3B color = { 243, 162, 173 };
-        float tint = 0.4f;
-        Color3B text_color = Color3B(
-            color.r*tint,
-            color.g*tint,
-            color.b*tint
-            );
-
         this->cost_lbl->setTextColor(Color4B(Color3B::RED));
         this->button->setColor(color);
     }
