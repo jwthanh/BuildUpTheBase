@@ -375,6 +375,16 @@ bool BuildingShopNuItem::init(Node* parent, spBuilding building)
     return true;
 }
 
+bool BuildingShopNuItem::get_been_bought()
+{
+    return this->_been_bought;
+}
+
+void BuildingShopNuItem::set_been_bought(bool val)
+{
+    this->_been_bought = val;
+}
+
 UpgradeBuildingShopNuItem* UpgradeBuildingShopNuItem::create(cocos2d::Node* parent, spBuilding building)
 {
     UpgradeBuildingShopNuItem* pRet = new(std::nothrow) UpgradeBuildingShopNuItem();
@@ -391,16 +401,6 @@ UpgradeBuildingShopNuItem* UpgradeBuildingShopNuItem::create(cocos2d::Node* pare
     }
 }
 
-bool BuildingShopNuItem::get_been_bought()
-{
-    return this->_been_bought;
-}
-
-void BuildingShopNuItem::set_been_bought(bool val)
-{
-    this->_been_bought = val;
-}
-
 bool UpgradeBuildingShopNuItem::my_init(int building_level)
 {
     this->building_level = building_level;
@@ -410,7 +410,8 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     this->set_title(ss.str());
     this->set_description("Upgrade this building, increasing its storage");
 
-    int shop_cost = 100*this->building_level;
+    long double shop_cost = scale_number(10, this->building_level, 15);
+    //long double shop_cost = 100*this->building_level; //OLD
     this->set_cost_lbl(std::to_string(shop_cost));
     this->_shop_cost = shop_cost;
 
