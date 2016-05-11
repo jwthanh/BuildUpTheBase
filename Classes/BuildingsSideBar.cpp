@@ -158,7 +158,7 @@ void SideListView::setup_shop_listview_as_harvesters()
             //change to adapt for the building, so we cheat and do it here.
             //this'll get moved to a json map or something between building and
             //harvest sub types
-            menu_item->schedule([menu_item](float dt){
+            auto update_target_and_prereq = [menu_item](float dt){
                 spBuilding target_building = BUILDUP->get_target_building();
                 menu_item->ing_type = target_building->punched_sub_type;
 
@@ -181,22 +181,17 @@ void SideListView::setup_shop_listview_as_harvesters()
                         menu_item->ing_type
                     };
 
-                    auto prereq_harvester_found = map_get(
-                        target_building->harvesters,
-                        key,
-                        0
-                        );
-                    if (prereq_harvester_found == 0)
-                    {
+                    auto prereq_harvester_found = map_get( target_building->harvesters, key, 0);
+
+                    if (prereq_harvester_found == 0) {
                         menu_item->button->setVisible(false);
-                    }
-                    else
-                    {
+                    } else {
                         menu_item->button->setVisible(true);
                     }
                 };
-            }, update_delay, "update_ing_type");
-
+            };
+            menu_item->schedule(update_target_and_prereq, update_delay, "update_ing_type");
+            update_target_and_prereq(0);
 
         };
     };
