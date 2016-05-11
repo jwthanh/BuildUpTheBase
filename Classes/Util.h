@@ -39,4 +39,11 @@ void test_beautify_double();
 
 void try_set_enabled(cocos2d::ui::Widget* widget, bool new_value);
 
+template<typename number_t>
+number_t scale_number(number_t base_number, number_t current_number, number_t rate)
+{
+    //base * (rate**current)
+    return base_number * std::pow(rate, std::max((number_t)0.0, current_number));
+};
+
 #endif

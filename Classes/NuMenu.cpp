@@ -581,7 +581,7 @@ void HarvesterShopNuItem::my_init_update_callback()
         auto building = BUILDUP->get_target_building();
         res_count_t harvesters_owned = map_get(building->harvesters, {this->harv_type, building->punched_sub_type}, 0);
         this->set_count_lbl(harvesters_owned);
-        this->_shop_cost = Harvester::get_base_shop_cost(this->harv_type) * std::pow(1.15f, std::max((long double)0.0, harvesters_owned));
+        this->_shop_cost = scale_number(Harvester::get_base_shop_cost(this->harv_type), harvesters_owned, 1.15L);
 
         std::stringstream ss;
         auto harvested_count = Harvester::get_to_harvest_count(this->harv_type);
