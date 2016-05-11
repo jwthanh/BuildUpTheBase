@@ -496,30 +496,19 @@ bool HarvestScene::init()
 
         this->_layer_building_level = target_building->building_level;
 
-        if (target_building->building_level == 0)
-        {
-            layer_color->setColor(Color3B::BLACK);
-        }
-        else if (target_building->building_level == 1)
-        {
-            layer_color->setColor(Color3B::RED);
-        }
-        else if (target_building->building_level == 2)
-        {
-            layer_color->setColor(Color3B::ORANGE);
-        }
-        else if (target_building->building_level == 3)
-        {
-            layer_color->setColor(Color3B::YELLOW);
-        }
-        else if (target_building->building_level == 4)
-        {
-            layer_color->setColor(Color3B::GREEN);
-        }
-        else if (target_building->building_level == 5)
-        {
-            layer_color->setColor(Color3B::WHITE);
-        }
+        std::map<int, Color3B> color_map ={
+            {1, Color3B::BLACK},
+            {2, Color3B::RED},
+            {3, Color3B::ORANGE},
+            {4, Color3B::YELLOW},
+            {5, Color3B::GREEN},
+            {6, Color3B::BLUE},
+            {7, {128, 0, 128}}
+        };
+
+        layer_color->setColor(map_get(color_map, this->_layer_building_level, Color3B::BLACK));
+
+
     };
     this->schedule(update_layer_color, 0.0f, "update_layer_color");
     update_layer_color(0.0f);
