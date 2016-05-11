@@ -73,8 +73,8 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        auto harvestable = (Harvestable*)this->getChildByName("harvestable");
-        harvestable->shatter();
+        //auto harvestable = (Harvestable*)this->getChildByName("harvestable");
+        //harvestable->shatter();
 
     }
 }
@@ -477,6 +477,53 @@ bool HarvestScene::init()
     this->create_recipe_lbl();
 
     this->add_harvestable();
+
+    //color layer based on building level
+    LayerColor* layer_color = LayerColor::create(Color4B(255, 0, 0, 120));
+    layer_color->setName("building_level_color");
+    this->addChild(layer_color, -100); //set it behind everything
+
+    this->_layer_building_level = -99; //using some bogus number
+
+    //update layer color when the building's level has changed
+    std::function<void(float)> update_layer_color = [this, layer_color](float dt)
+    {
+        spBuilding target_building = BUILDUP->get_target_building();
+        if (target_building->building_level == this->_layer_building_level)
+        {
+            return;
+        }
+
+        this->_layer_building_level = target_building->building_level;
+
+        if (target_building->building_level == 0)
+        {
+            layer_color->setColor(Color3B::BLACK);
+        }
+        else if (target_building->building_level == 1)
+        {
+            layer_color->setColor(Color3B::RED);
+        }
+        else if (target_building->building_level == 2)
+        {
+            layer_color->setColor(Color3B::ORANGE);
+        }
+        else if (target_building->building_level == 3)
+        {
+            layer_color->setColor(Color3B::YELLOW);
+        }
+        else if (target_building->building_level == 4)
+        {
+            layer_color->setColor(Color3B::GREEN);
+        }
+        else if (target_building->building_level == 5)
+        {
+            layer_color->setColor(Color3B::WHITE);
+        }
+    };
+    this->schedule(update_layer_color, 0.0f, "update_layer_color");
+    update_layer_color(0.0f);
+
 
     return true;
 

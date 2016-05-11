@@ -33,12 +33,16 @@ class BaseScene : public GameLayer
 
 class HarvestScene : public BaseScene
 {
+    private:
+        int _layer_building_level;
+
     public:
         CREATE_FUNC(HarvestScene);
         virtual bool init();
         virtual void update(float dt);
         cocos2d::ui::Text* recipe_lbl;
         spRecipe target_recipe;
+
 
         void create_recipe_lbl();
 
