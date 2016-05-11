@@ -16,6 +16,7 @@
 #include "Fighter.h"
 #include "attribute_container.h"
 #include "attribute.h"
+#include "Util.h"
 
 
 USING_NS_CC;
@@ -158,7 +159,42 @@ void SideListView::setup_shop_listview_as_harvesters()
             //this'll get moved to a json map or something between building and
             //harvest sub types
             menu_item->schedule([menu_item](float dt){
-                menu_item->ing_type = BUILDUP->get_target_building()->punched_sub_type;
+                spBuilding target_building = BUILDUP->get_target_building();
+                menu_item->ing_type = target_building->punched_sub_type;
+
+                if (menu_item->harv_type != WorkerSubType::One) {
+                    std::map<WorkerSubType, WorkerSubType> req_map = {
+                        { WorkerSubType::ZERO, WorkerSubType::ZERO },
+                        { WorkerSubType::One, WorkerSubType::ZERO },
+                        { WorkerSubType::Two, WorkerSubType::One },
+                        { WorkerSubType::Three, WorkerSubType::Two },
+                        { WorkerSubType::Four, WorkerSubType::Three },
+                        { WorkerSubType::Five, WorkerSubType::Four },
+                        { WorkerSubType::Six, WorkerSubType::Five },
+                        { WorkerSubType::Seven, WorkerSubType::Six },
+                        { WorkerSubType::Eigth, WorkerSubType::Seven },
+                        { WorkerSubType::Nine, WorkerSubType::Eigth }
+                    };
+
+                    std::pair<WorkerSubType, Ingredient::SubType> key = { 
+                        map_get(req_map, menu_item->harv_type, WorkerSubType::ZERO),
+                        menu_item->ing_type
+                    };
+
+                    auto prereq_harvester_found = map_get(
+                        target_building->harvesters,
+                        key,
+                        0
+                        );
+                    if (prereq_harvester_found == 0)
+                    {
+                        menu_item->button->setVisible(false);
+                    }
+                    else
+                    {
+                        menu_item->button->setVisible(true);
+                    }
+                };
             }, update_delay, "update_ing_type");
 
 
