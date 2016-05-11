@@ -410,8 +410,9 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     this->set_title(ss.str());
     this->set_description("Upgrade this building, increasing its storage");
 
-    this->set_cost_lbl(std::to_string(100*this->building_level));
-    this->_shop_cost = 100*this->building_level;
+    int shop_cost = 100*this->building_level;
+    this->set_cost_lbl(std::to_string(shop_cost));
+    this->_shop_cost = shop_cost;
 
     auto update_func = [this](float dt) {
         this->set_been_bought(this->building->building_level >= this->building_level);

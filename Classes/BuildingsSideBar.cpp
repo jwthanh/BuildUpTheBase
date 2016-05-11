@@ -199,7 +199,7 @@ void SideListView::setup_building_listview_as_upgrades()
 
 
         int i = 0;
-        for (int level : {1, 2, 3, 4})
+        for (int level : {2, 3, 4, 5, 6, 7})
         {
             int child_tag = i;
             i++;
