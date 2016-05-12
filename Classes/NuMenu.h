@@ -75,6 +75,7 @@ class ShopNuItem : public Buyable, public NuItem
         ResourceCondition* resource_cost;
 
         virtual bool init(Node* parent, std::string id_key = "");
+        virtual void post_shop_update(float dt);
         virtual void update_func(float dt);
 };
 
@@ -132,6 +133,8 @@ class SalesmanShopNuItem : public HarvesterShopNuItem
         virtual void my_init_sprite() override;
         void my_init_touch_ended_callback() override;
         void my_init_update_callback() override;
+
+        virtual void post_shop_update(float dt) override;
 };
 
 class NuMenu : public GameLayer
