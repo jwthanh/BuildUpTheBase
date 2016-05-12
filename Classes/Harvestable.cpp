@@ -43,7 +43,7 @@ std::string Harvestable::get_sprite_path()
 
 void Harvestable::init_clicks()
 {
-    this->click_limit = 15;
+    this->click_limit = 150;
     this->current_clicks = 0;
 }
 
