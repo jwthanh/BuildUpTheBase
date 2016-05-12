@@ -188,6 +188,7 @@ void SideListView::setup_shop_listview_as_harvesters()
                     } else {
                         menu_item->button->setVisible(true);
                     }
+
                 };
             };
             menu_item->schedule(update_target_and_prereq, update_delay, "update_ing_type");
