@@ -567,7 +567,7 @@ void HarvestScene::update(float dt)
     //    this->recipe_lbl->setString("");
     //}
 
-    this->recipe_lbl->setString("Gold progress to next upgrade");
+    this->recipe_lbl->setString("To Next Upgrade");
 
     auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
     if (!harvestable) {

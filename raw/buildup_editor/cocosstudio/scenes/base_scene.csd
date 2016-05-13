@@ -140,14 +140,15 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="428.0000" RightMargin="218.0000" TopMargin="33.5000" BottomMargin="583.5000" IsCustomSize="True" FontSize="20" LabelText="Current recipe: Bread" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="427.9999" RightMargin="218.0001" TopMargin="51.5002" BottomMargin="565.4998" IsCustomSize="True" FontSize="16" LabelText="To Next Upgrade" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="314.0000" Y="23.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="585.0000" Y="595.0000" />
+            <Position X="584.9999" Y="576.9998" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6094" Y="0.9297" />
+            <PrePosition X="0.6094" Y="0.9016" />
             <PreSize X="0.3271" Y="0.0359" />
+            <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -273,15 +274,15 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="485.0000" RightMargin="275.0000" TopMargin="68.0000" BottomMargin="558.0000" ctype="LoadingBarObjectData">
-            <Size X="200.0000" Y="14.0000" />
+          <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="501.0001" RightMargin="290.9999" TopMargin="76.0000" BottomMargin="546.0000" ProgressInfo="100" ctype="LoadingBarObjectData">
+            <Size X="168.0000" Y="18.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="585.0000" Y="565.0000" />
+            <Position X="585.0001" Y="555.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6094" Y="0.8828" />
-            <PreSize X="0.2083" Y="0.0219" />
-            <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
+            <PrePosition X="0.6094" Y="0.8672" />
+            <PreSize X="0.1750" Y="0.0281" />
+            <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
