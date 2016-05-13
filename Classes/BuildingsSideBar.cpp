@@ -94,9 +94,11 @@ void SideListView::setup_listviews()
                 target_building->name.c_str()
                 );
             this->current_target = target_building;
+
+            //TODO this is only necessary when the buildings have different items, like the Detail tab
             this->detail_listview->removeAllChildren();
-            this->shop_listview->removeAllChildren();
-            this->building_listview->removeAllChildren();
+            //this->shop_listview->removeAllChildren();
+            //this->building_listview->removeAllChildren();
         }
     };
     this->parent->schedule(clean_children_on_target_change, update_delay, "clean_children");
