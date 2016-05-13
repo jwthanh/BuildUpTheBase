@@ -814,8 +814,8 @@ void BuildingNuMenu::init_items()
 
     for (auto recipe : building->data->get_all_recipes())
     {
-        auto convert_item = RecipeNuItem::create(scrollview, building);
-        convert_item->other_init(recipe);
+       auto convert_item = RecipeNuItem::create(scrollview, building);
+       convert_item->other_init(recipe);
     }
 
 };

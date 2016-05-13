@@ -129,7 +129,25 @@ void BaseScene::create_info_panel()
     auto building = BUILDUP->get_target_building();
 
     auto inst = CSLoader::getInstance();
+
     Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+
+    ui::LoadingBar* loading_bar = (ui::LoadingBar*)harvest_scene_editor->getChildByName("goal_loadingbar");
+    loading_bar->setPercent(0.0f);
+    loading_bar->removeFromParent();
+
+    auto update_loading_bar = [loading_bar](float dt)
+    {
+        //set progress to 1000 dollars
+        float coin_goal = 1000.0f;
+        loading_bar->setPercent(BEATUP->get_total_coins() / coin_goal * 100);
+
+    };
+    loading_bar->schedule(update_loading_bar, 0.1f, "loadingbar_update");
+    update_loading_bar(0);
+    
+    this->addChild(loading_bar);
+
 
     ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("building_info_panel"));
     building_info_panel->removeFromParent();
@@ -550,6 +568,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
 
     auto inst = CSLoader::getInstance();
     auto raw_node = inst->createNode("editor/details/inventory_detail.csb");
+
     auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
     alert_panel->removeFromParent();
     alert_panel->setBackGroundColor(Color3B(85, 114, 145));

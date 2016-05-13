@@ -6,10 +6,10 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="200.6404" RightMargin="559.3596" TopMargin="-29.8480" BottomMargin="569.8480" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="200.6400" RightMargin="559.3600" TopMargin="-29.8560" BottomMargin="569.8560" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
             <Size X="200.0000" Y="100.0000" />
             <AnchorPoint />
-            <Position X="200.6404" Y="569.8480" />
+            <Position X="200.6400" Y="569.8560" />
             <Scale ScaleX="1.0000" ScaleY="0.6351" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2090" Y="0.8904" />
@@ -140,13 +140,13 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="429.7188" RightMargin="216.2812" TopMargin="33.1626" BottomMargin="583.8374" IsCustomSize="True" FontSize="20" LabelText="Current recipe: Bread" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="428.0000" RightMargin="218.0000" TopMargin="33.5000" BottomMargin="583.5000" IsCustomSize="True" FontSize="20" LabelText="Current recipe: Bread" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="314.0000" Y="23.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="586.7188" Y="595.3374" />
+            <Position X="585.0000" Y="595.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6112" Y="0.9302" />
+            <PrePosition X="0.6094" Y="0.9297" />
             <PreSize X="0.3271" Y="0.0359" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -177,7 +177,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="shop_listview" ActionTag="-890238903" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="2.0003" RightMargin="157.9998" TopMargin="-354.9999" BottomMargin="-5.0001" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+          <AbstractNodeData Name="shop_listview" ActionTag="-890238903" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="2.0003" RightMargin="157.9997" TopMargin="-354.9999" BottomMargin="-5.0001" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
             <Size X="800.0000" Y="1000.0000" />
             <AnchorPoint />
             <Position X="2.0003" Y="-5.0001" />
@@ -203,7 +203,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="building_listview" ActionTag="51939430" Tag="79" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="2.0003" RightMargin="157.9998" TopMargin="-354.9999" BottomMargin="-5.0001" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+          <AbstractNodeData Name="building_listview" ActionTag="51939430" Tag="79" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="2.0003" RightMargin="157.9997" TopMargin="-354.9999" BottomMargin="-5.0001" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
             <Size X="800.0000" Y="1000.0000" />
             <AnchorPoint />
             <Position X="2.0003" Y="-5.0001" />
@@ -225,7 +225,7 @@
             <PrePosition X="0.6033" Y="0.4719" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="tab_1_btn" ActionTag="2032519568" Tag="160" IconVisible="False" LeftMargin="0.0003" RightMargin="759.9998" TopMargin="74.9993" BottomMargin="495.0007" TouchEnable="True" FontSize="18" ButtonText="Harvesters" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="tab_1_btn" ActionTag="2032519568" Tag="160" IconVisible="False" LeftMargin="0.0003" RightMargin="759.9997" TopMargin="74.9993" BottomMargin="495.0007" TouchEnable="True" FontSize="18" ButtonText="Harvesters" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="200.0000" Y="70.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="100.0003" Y="530.0007" />
@@ -241,7 +241,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="tab_2_btn" ActionTag="34953680" Tag="161" IconVisible="False" LeftMargin="200.0002" RightMargin="559.9999" TopMargin="74.9999" BottomMargin="495.0001" TouchEnable="True" FontSize="18" ButtonText="Detail" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="tab_2_btn" ActionTag="34953680" Tag="161" IconVisible="False" LeftMargin="200.0002" RightMargin="559.9998" TopMargin="74.9999" BottomMargin="495.0001" TouchEnable="True" FontSize="18" ButtonText="Detail" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="200.0000" Y="70.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="300.0002" Y="530.0001" />
@@ -257,7 +257,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="tab_3_btn" ActionTag="-2035028012" Tag="78" IconVisible="False" LeftMargin="0.0003" RightMargin="759.9998" TopMargin="4.9999" BottomMargin="565.0001" TouchEnable="True" FontSize="18" ButtonText="Building" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="tab_3_btn" ActionTag="-2035028012" Tag="78" IconVisible="False" LeftMargin="0.0003" RightMargin="759.9997" TopMargin="4.9999" BottomMargin="565.0001" TouchEnable="True" FontSize="18" ButtonText="Building" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="200.0000" Y="70.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="100.0003" Y="600.0001" />
@@ -272,6 +272,16 @@
             <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="485.0000" RightMargin="275.0000" TopMargin="68.0000" BottomMargin="558.0000" ctype="LoadingBarObjectData">
+            <Size X="200.0000" Y="14.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="585.0000" Y="565.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6094" Y="0.8828" />
+            <PreSize X="0.2083" Y="0.0219" />
+            <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
