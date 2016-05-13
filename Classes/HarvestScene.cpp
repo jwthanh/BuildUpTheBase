@@ -139,7 +139,7 @@ void BaseScene::create_goal_loadingbar()
     auto update_loading_bar = [loading_bar](float dt)
         {
             //set progress to 1000 dollars
-            float coin_goal = 1000.0f;
+            float coin_goal = scale_number(10, BUILDUP->get_target_building()->building_level, 15);
             loading_bar->setPercent(BEATUP->get_total_coins() / coin_goal * 100);
 
         };
@@ -557,14 +557,17 @@ void HarvestScene::update(float dt)
 {
     BaseScene::update(dt);
 
-    if (this->target_recipe != NULL)
-    {
-        this->recipe_lbl->setString("Current recipe: " + this->target_recipe->name);
-    }
-    else
-    {
-        this->recipe_lbl->setString("");
-    }
+    ////TODO leave current recipe on the cutting room floor for now, NOTE that we still change target_recipe elsewhere, it's just the label we're ignoring
+    //if (this->target_recipe != NULL)
+    //{
+    //    this->recipe_lbl->setString("Current recipe: " + this->target_recipe->name);
+    //}
+    //else
+    //{
+    //    this->recipe_lbl->setString("");
+    //}
+
+    this->recipe_lbl->setString("Gold progress to next upgrade");
 
     auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
     if (!harvestable) {
