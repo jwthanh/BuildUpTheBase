@@ -21,6 +21,8 @@
 
 USING_NS_CC;
 
+Node* BaseScene::_harvest_scene_from_editor = NULL;
+
 bool BaseScene::init()
 {
     FUNC_INIT(BaseScene);
@@ -31,6 +33,8 @@ bool BaseScene::init()
     this->create_building_pageview();
     this->create_inventory_listview();
     this->create_shop_listview();
+    
+    this->create_goal_loadingbar();
 
 
     return true;
@@ -124,29 +128,43 @@ void BaseScene::onSwipeRight(float dt)
     
 };
 
-void BaseScene::create_info_panel()
+void BaseScene::create_goal_loadingbar()
 {
-    auto building = BUILDUP->get_target_building();
-
-    auto inst = CSLoader::getInstance();
-
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    Node* harvest_scene_editor = this->get_original_scene_from_editor();
 
     ui::LoadingBar* loading_bar = (ui::LoadingBar*)harvest_scene_editor->getChildByName("goal_loadingbar");
     loading_bar->setPercent(0.0f);
     loading_bar->removeFromParent();
 
     auto update_loading_bar = [loading_bar](float dt)
-    {
-        //set progress to 1000 dollars
-        float coin_goal = 1000.0f;
-        loading_bar->setPercent(BEATUP->get_total_coins() / coin_goal * 100);
+        {
+            //set progress to 1000 dollars
+            float coin_goal = 1000.0f;
+            loading_bar->setPercent(BEATUP->get_total_coins() / coin_goal * 100);
 
-    };
+        };
     loading_bar->schedule(update_loading_bar, 0.1f, "loadingbar_update");
     update_loading_bar(0);
     
     this->addChild(loading_bar);
+}
+
+Node* BaseScene::get_original_scene_from_editor()
+{
+    if (BaseScene::_harvest_scene_from_editor == NULL)
+    {
+        auto inst = CSLoader::getInstance();
+        BaseScene::_harvest_scene_from_editor = inst->CSLoader::createNode("editor/scenes/base_scene.csb");
+    };
+
+    return BaseScene::_harvest_scene_from_editor;
+}
+
+void BaseScene::create_info_panel()
+{
+    auto building = BUILDUP->get_target_building();
+
+    Node* harvest_scene_editor = this->get_original_scene_from_editor();
 
 
     ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("building_info_panel"));
@@ -232,8 +250,7 @@ void BaseScene::create_player_info_panel()
 {
     auto building = BUILDUP->get_target_building();
 
-    auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    Node* harvest_scene_editor = this->get_original_scene_from_editor();
 
     ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("player_info_panel"));
     player_info_panel->removeFromParent();
@@ -300,8 +317,7 @@ void BaseScene::create_player_info_panel()
 
 void BaseScene::create_building_pageview()
 {
-    auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    Node* harvest_scene_editor = this->get_original_scene_from_editor();
 
     ui::PageView* building_pageview = dynamic_cast<ui::PageView*>(harvest_scene_editor->getChildByName("building_pageview"));
     building_pageview->setClippingEnabled(true);
@@ -309,6 +325,7 @@ void BaseScene::create_building_pageview()
 
     // building_pageview->setBounceEnabled(true);
 
+    auto inst = CSLoader::getInstance();
     auto city_scene = inst->createNode("editor/scenes/city_scene.csb");
 
     float update_delay = 0.1f;
@@ -358,13 +375,13 @@ void BaseScene::create_building_pageview()
 
 void BaseScene::create_inventory_listview()
 {
-    auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    Node* harvest_scene_editor = this->get_original_scene_from_editor();
     ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("inventory_listview"));
     // inventory_listview->setClippingEnabled(true);
     inventory_listview->removeFromParent();
     this->addChild(inventory_listview);
 
+     auto inst = CSLoader::getInstance();
     auto update_listview = [this, inst, inventory_listview](float dt)
     {
         auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
@@ -714,8 +731,7 @@ void HarvestScene::add_harvestable()
 
 void HarvestScene::create_recipe_lbl()
 {
-    auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    Node* harvest_scene_editor = this->get_original_scene_from_editor();
     this->recipe_lbl = dynamic_cast<ui::Text*>(harvest_scene_editor->getChildByName("recipe_lbl"));
     this->recipe_lbl->removeFromParent();
     this->recipe_lbl->setString("");

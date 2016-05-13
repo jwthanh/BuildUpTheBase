@@ -7,9 +7,13 @@
 
 class BaseScene : public GameLayer
 {
+    private:
+        static Node* _harvest_scene_from_editor;
+
     public:
         CREATE_FUNC(BaseScene);
 
+        Node* get_original_scene_from_editor();
 
         virtual bool init();
         virtual void update(float dt);
@@ -19,6 +23,7 @@ class BaseScene : public GameLayer
         virtual void onSwipeLeft(float dt) override;
         virtual void onSwipeRight(float dt) override;
 
+        void create_goal_loadingbar();
         void create_info_panel();
         void create_player_info_panel();
         void create_building_pageview();
@@ -43,9 +48,7 @@ class HarvestScene : public BaseScene
         cocos2d::ui::Text* recipe_lbl;
         spRecipe target_recipe;
 
-
         void create_recipe_lbl();
-
 
         void add_harvestable();
 };
