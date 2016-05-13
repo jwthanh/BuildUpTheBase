@@ -140,7 +140,15 @@ void BaseScene::create_goal_loadingbar()
         {
             //set progress to 1000 dollars
             float coin_goal = scale_number(10, BUILDUP->get_target_building()->building_level, 15);
-            loading_bar->setPercent(BEATUP->get_total_coins() / coin_goal * 100);
+            float percentage = BEATUP->get_total_coins() / coin_goal * 100;
+            loading_bar->setPercent(percentage);
+
+            if (percentage >= 100.0f) {
+                loading_bar->setColor(Color3B::GREEN);
+            }
+            else {
+                loading_bar->setColor(Color3B::RED);
+            };
 
         };
     loading_bar->schedule(update_loading_bar, 0.1f, "loadingbar_update");
