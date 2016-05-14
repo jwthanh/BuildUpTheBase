@@ -414,7 +414,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     std::stringstream ss;
     ss << "Level " << building_level;
     this->set_title(ss.str());
-    this->set_description("Upgrade this building, increasing its storage");
+    this->set_description("Upgrade building\nincreasing its storage");
 
     long double shop_cost = scale_number(10, this->building_level-1, 15);
     //long double shop_cost = 100*this->building_level; //OLD

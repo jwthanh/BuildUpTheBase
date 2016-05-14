@@ -27,6 +27,8 @@ bool BaseScene::init()
 {
     FUNC_INIT(BaseScene);
 
+    BaseScene::_harvest_scene_from_editor = NULL; //reset this because after it gets GCed, it points to garbage
+
     this->create_info_panel();
     this->create_player_info_panel();
 
