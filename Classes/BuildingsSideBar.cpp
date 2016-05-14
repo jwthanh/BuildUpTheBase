@@ -375,6 +375,14 @@ ui::ListView* SideListView::_create_listview(std::string node_name)
 
     auto listview = static_cast<ui::ListView*>(harvest_scene_editor->getChildByName(node_name));
     listview->removeFromParent();
+
+    listview->setScrollBarAutoHideEnabled(false);
+    listview->setScrollBarPositionFromCorner(Vec2(40, 20));
+    listview->setScrollBarWidth(20.0f);
+
+    listview->setMagneticType(ui::ListView::MagneticType::TOP); //scrolls to TOP of current item, if needed
+    //listview->setMagneticAllowedOutOfBoundary(true); //not sure what this does, true is default
+
     this->parent->addChild(listview);
 
     return listview;
