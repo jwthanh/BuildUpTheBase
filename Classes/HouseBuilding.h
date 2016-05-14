@@ -17,6 +17,7 @@
 #include "Worker.h"
 #include "Updateable.h"
 
+
 class Building : public Nameable, public Updateable, public Buyable, public std::enable_shared_from_this<Building>
 {
     public:
@@ -33,6 +34,8 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         vsFighter fighters;
         vsWorker workers;
+
+        spVisitors visitors;
 
         mistHarvester harvesters;
         mistHarvester salesmen;

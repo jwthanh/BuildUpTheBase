@@ -47,6 +47,7 @@
     <ClCompile Include="..\Classes\Updateable.cpp" />
     <ClCompile Include="..\Classes\Fighter.cpp" />
     <ClCompile Include="..\Classes\BuildingsSideBar.cpp" />
+    <ClCompile Include="..\Classes\Visitors.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -90,6 +91,7 @@
     <ClInclude Include="..\Classes\Updateable.h" />
     <ClInclude Include="..\Classes\Fighter.h" />
     <ClInclude Include="..\Classes\BuildingsSideBar.h" />
+    <ClInclude Include="..\Classes\Visitors.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
