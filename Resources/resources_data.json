@@ -32,10 +32,6 @@
             "description": "copper description",
             "img_large": "ingredients/copper.png"
         },
-        "wood": {
-            "description": "wood description",
-            "img_large": "ingredients/wood.png"
-        },
         "fly": {
             "description": "fly description",
             "img_large": "ingredients/fly.png"

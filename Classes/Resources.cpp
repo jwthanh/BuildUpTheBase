@@ -16,7 +16,6 @@ const std::map<Ingredient::SubType, std::string> Ingredient::type_map = {
     {Ingredient::SubType::Wood, "wood"},
     {Ingredient::SubType::Iron, "iron"},
     {Ingredient::SubType::Copper, "copper"},
-    {Ingredient::SubType::Wood, "wood"},
     {Ingredient::SubType::Fly, "fly"},
     {Ingredient::SubType::Sand, "sand"},
     {Ingredient::SubType::Flesh, "flesh"},
