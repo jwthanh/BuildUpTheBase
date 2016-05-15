@@ -4,6 +4,8 @@
 #include "Nameable.h"
 #include <map>
 
+#include "constants.h"
+
 #include <string>
 
 #include "SubTypes.h"
@@ -86,8 +88,6 @@ class Waste : public Resource
             this->sub_type = other.sub_type;
         };
 };
-
-typedef long double res_count_t;
 
 #define MAKE_MI_SUBTYPE(Cls)typedef std::map<Cls::SubType, res_count_t> mist##Cls
 MAKE_MI_SUBTYPE(Ingredient);

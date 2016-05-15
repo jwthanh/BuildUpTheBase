@@ -146,4 +146,6 @@ typedef bool(*BoolFuncBuilding)(spBuilding);
 #define BEATUP GameLogic::getInstance()->beatup
 #define BUILDUP GameLogic::getInstance()->buildup
 
+typedef long double res_count_t;
+
 #endif

@@ -5,7 +5,8 @@
 #include "cocos2d.h"
 #include "GameLayer.h"
 #include "Buyable.h"
-#include "Worker.h"
+#include "SubTypes.h"
+#include "constants.h"
 
 class PlainShopItem;
 class Fist;
@@ -124,14 +125,14 @@ class HarvesterShopNuItem : public BuildingShopNuItem
     static HarvesterShopNuItem* create(Node* parent, spBuilding building);
 
     bool init(Node* parent, spBuilding building);
-    virtual void my_init(WorkerSubType harv_type, Ingredient::SubType ing_type);
+    virtual void my_init(WorkerSubType harv_type, IngredientSubType ing_type);
     virtual void my_init_title();
     virtual void my_init_sprite();
     virtual void my_init_touch_ended_callback();
     virtual void my_init_update_callback();
 
     WorkerSubType harv_type;
-    Ingredient::SubType ing_type;
+    IngredientSubType ing_type;
 };
 
 class SalesmanShopNuItem : public HarvesterShopNuItem
