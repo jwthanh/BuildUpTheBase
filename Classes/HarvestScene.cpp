@@ -544,13 +544,13 @@ bool HarvestScene::init()
         this->_layer_building_level = target_building->building_level;
 
         std::map<int, Color3B> color_map ={
-            {1, Color3B::BLACK},
-            {2, Color3B::RED},
-            {3, Color3B::ORANGE},
-            {4, Color3B::YELLOW},
-            {5, Color3B::GREEN},
-            {6, Color3B::BLUE},
-            {7, {128, 0, 128}}
+            {1, {0, 0, 0}},
+            {2, {25, 25, 25}},
+            {3, {50, 50, 50}},
+            {4, {75, 75, 75}},
+            {5, {100, 100, 100}},
+            {6, {125, 125, 125}},
+            {6, {150, 150, 150}},
         };
 
         layer_color->setColor(map_get(color_map, this->_layer_building_level, Color3B::BLACK));
