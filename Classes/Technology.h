@@ -30,6 +30,7 @@ class Technology
         void set_been_unlocked(bool val);
 
         mistIngredient get_ingredient_requirements();
+        void set_ingredient_requirements(mistIngredient requirements);
 };
 
 #endif

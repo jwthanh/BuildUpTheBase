@@ -28,3 +28,8 @@ mistIngredient Technology::get_ingredient_requirements()
 {
     return this->_ing_requirements;
 };
+
+void Technology::set_ingredient_requirements(mistIngredient requirements)
+{
+    this->_ing_requirements = requirements;
+};
