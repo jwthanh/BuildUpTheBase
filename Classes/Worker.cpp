@@ -13,7 +13,7 @@ Worker::Worker(spBuilding building, std::string name, WorkerSubType sub_type)
 
     this->update_clock->set_threshold(1.0f); //unused
 
-    ResourceCondition* ingredient_condition = ResourceCondition::create_ingredient_condition(Ingredient::Berry, 1, "berry_name_huh");
+    ResourceCondition* ingredient_condition = ResourceCondition::create_ingredient_condition(Ingredient::SubType::Berry, 1, "berry_name_huh");
     ingredient_condition->is_satisfied(building);
 
 };

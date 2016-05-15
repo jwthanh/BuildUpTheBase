@@ -308,7 +308,7 @@ void SideListView::setup_detail_listview_as_recipes()
         {
             spRecipe blood_oath = std::make_shared<Recipe>("Regenerate Life", "Consume 10 blood");
             blood_oath->components = mistIngredient({
-                {Ingredient::Blood, 10}
+                {Ingredient::SubType::Blood, 10}
             });
             blood_oath->_callback = []()
             {
@@ -333,7 +333,7 @@ void SideListView::setup_detail_listview_as_recipes()
             spTechnology double_click_pwr = std::make_shared<Technology>();
             spRecipe recipe = std::make_shared<Recipe>("double_click_power", "no desc for tech recipe");
             recipe->components = mistIngredient({
-                {Ingredient::Seed, 5}
+                {Ingredient::SubType::Seed, 5}
             });
             double_click_pwr->set_ingredient_requirements(recipe);
             //double_click_pwr->_callback = []()

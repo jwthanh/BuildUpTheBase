@@ -430,29 +430,29 @@ bool Building::can_fit_more_ingredients(Ingredient::SubType sub_type, res_count_
 void test_conditions()
 {
     mistIngredient inputs = {
-        { Ingredient::Grain , 2 },
-        { Ingredient::Iron, 1 }
+        { Ingredient::SubType::Grain , 2 },
+        { Ingredient::SubType::Iron, 1 }
     };
 
     auto city = new Village(NULL, "The Test City");
     auto farm = std::make_shared<Building>(city, "The Test Farm", "test_farm");
     farm->ingredients = inputs;
     
-    ResourceCondition* rc = ResourceCondition::create_ingredient_condition(Ingredient::Grain, 2, "test condition");
+    ResourceCondition* rc = ResourceCondition::create_ingredient_condition(Ingredient::SubType::Grain, 2, "test condition");
     // IngredientCondition rc = IngredientCondition(
     //         IngredientCondition::TypeChoices::Ingredient,
-    //         Ingredient::Grain,
+    //         Ingredient::SubType::Grain,
     //         2,
     //         "test condition");
 
     assert(rc->is_satisfied(farm) == true);
 
     farm->ingredients = mistIngredient({
-        { Ingredient::Iron, 1 }
+        { Ingredient::SubType::Iron, 1 }
     });
     assert(rc->is_satisfied(farm) == false);
 
-    rc->ing_type = Ingredient::Iron;
+    rc->ing_type = Ingredient::SubType::Iron;
     assert(rc->is_satisfied(farm) == false);
     rc->quantity = 1;
     assert(rc->is_satisfied(farm) == true);
@@ -465,8 +465,8 @@ void test_conditions()
 //void test_recipe()
 //{
 //    mistIngredient inputs = {
-//        { Ingredient::Grain, 2 },
-//        { Ingredient::Iron, 1 }
+//        { Ingredient::SubType::Grain, 2 },
+//        { Ingredient::SubType::Iron, 1 }
 //    };
 //
 //    Recipe recipe = Recipe("test recipe");
@@ -551,23 +551,23 @@ Village* Buildup::init_city(Buildup* buildup)
 
     std::vector<BuildingConfig> configs = {
         {
-            "The Farm", "the_farm", Ingredient::Grain
+            "The Farm", "the_farm", Ingredient::SubType::Grain
         }, {
-            "The Marketplace", "the_marketplace", Ingredient::Seed
+            "The Marketplace", "the_marketplace", Ingredient::SubType::Seed
         }, {
-            "The Dump", "the_dump", Ingredient::Fly
+            "The Dump", "the_dump", Ingredient::SubType::Fly
         }, {
-            "The Workshop", "the_workshop", Ingredient::Seed
+            "The Workshop", "the_workshop", Ingredient::SubType::Seed
         }, {
-            "The Arena", "the_arena", Ingredient::Sand
+            "The Arena", "the_arena", Ingredient::SubType::Sand
         }, {
-            "The Mine", "the_mine", Ingredient::Copper
+            "The Mine", "the_mine", Ingredient::SubType::Copper
         }, {
-            "The Graveyard", "the_graveyard", Ingredient::Flesh
+            "The Graveyard", "the_graveyard", Ingredient::SubType::Flesh
         }, {
-            "The Underscape", "the_underscape", Ingredient::Blood
+            "The Underscape", "the_underscape", Ingredient::SubType::Blood
         }, {
-            "The Forest", "the_forest", Ingredient::Berry
+            "The Forest", "the_forest", Ingredient::SubType::Berry
         }
     };
 

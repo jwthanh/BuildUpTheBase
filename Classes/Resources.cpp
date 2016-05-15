@@ -8,36 +8,36 @@
 #include "cocos2d.h"
 
 const std::map<Ingredient::SubType, std::string> Ingredient::type_map = {
-    {Ingredient::Grain, "grain"},
-    {Ingredient::PileOfGrain, "pileofgrain"},
-    {Ingredient::Bread, "bread"},
-    {Ingredient::Loaf, "loaf"},
-    {Ingredient::Seed, "seed"},
-    {Ingredient::Wood, "wood"},
-    {Ingredient::Iron, "iron"},
-    {Ingredient::Copper, "copper"},
-    {Ingredient::Wood, "wood"},
-    {Ingredient::Fly, "fly"},
-    {Ingredient::Sand, "sand"},
-    {Ingredient::Flesh, "flesh"},
-    {Ingredient::Berry, "berry"},
-    {Ingredient::Soul, "soul"},
-    {Ingredient::Blood, "blood"}
+    {Ingredient::SubType::Grain, "grain"},
+    {Ingredient::SubType::PileOfGrain, "pileofgrain"},
+    {Ingredient::SubType::Bread, "bread"},
+    {Ingredient::SubType::Loaf, "loaf"},
+    {Ingredient::SubType::Seed, "seed"},
+    {Ingredient::SubType::Wood, "wood"},
+    {Ingredient::SubType::Iron, "iron"},
+    {Ingredient::SubType::Copper, "copper"},
+    {Ingredient::SubType::Wood, "wood"},
+    {Ingredient::SubType::Fly, "fly"},
+    {Ingredient::SubType::Sand, "sand"},
+    {Ingredient::SubType::Flesh, "flesh"},
+    {Ingredient::SubType::Berry, "berry"},
+    {Ingredient::SubType::Soul, "soul"},
+    {Ingredient::SubType::Blood, "blood"}
 };
 
 const std::map<Product::SubType, std::string> Product::type_map = {
-    {Product::Veggies, "veggies"},
-    {Product::Meat, "meat"},
-    {Product::Dairy, "dairy"},
-    {Product::Cereals, "cereals"},
-    {Product::Sword, "sword"},
-    {Product::Shield, "shield"},
-    {Product::Meat, "meat"},
+    {Product::SubType::Veggies, "veggies"},
+    {Product::SubType::Meat, "meat"},
+    {Product::SubType::Dairy, "dairy"},
+    {Product::SubType::Cereals, "cereals"},
+    {Product::SubType::Sword, "sword"},
+    {Product::SubType::Shield, "shield"},
+    {Product::SubType::Meat, "meat"},
 };
 
 const std::map<Waste::SubType, std::string> Waste::type_map = {
-    {Waste::Corpse, "corpse"},
-    {Waste::Wasted_Iron, "wasted_iron"},
+    {Waste::SubType::Corpse, "corpse"},
+    {Waste::SubType::Wasted_Iron, "wasted_iron"},
 };
 
 #define type_stuff(ResType)std::string ResType::type_to_string(ResType::SubType type) \

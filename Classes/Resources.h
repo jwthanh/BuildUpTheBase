@@ -6,6 +6,8 @@
 
 #include <string>
 
+#include "SubTypes.h"
+
 class Resource
 {
     public:
@@ -33,10 +35,7 @@ class Ingredient : public Resource
     public:
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
 
-        enum SubType {
-            None, Grain, PileOfGrain, Bread, Loaf, Seed, Tree, Iron, Copper,
-            Wood, Fly, Sand, Flesh, Berry, Soul, Blood
-        };
+        using SubType = IngredientSubType;
 
 
         TYPE_MAP_CONVERSION(Ingredient, ingredient);
@@ -56,15 +55,7 @@ class Product : public Resource
     public:
         static const ResourceType resource_type = Resource::ResourceType::Product;
 
-        enum SubType {
-            None,
-            Veggies,
-            Meat,
-            Dairy,
-            Cereals,
-            Sword,
-            Shield
-        };
+        using SubType = ProductSubType;
 
         TYPE_MAP_CONVERSION(Product, product);
 
@@ -82,11 +73,7 @@ class Waste : public Resource
     public:
         static const ResourceType resource_type = Resource::ResourceType::Waste;
 
-        enum SubType {
-            None,
-            Corpse,
-            Wasted_Iron
-        };
+        using SubType = WasteSubType;
 
         TYPE_MAP_CONVERSION(Waste, waste);
 

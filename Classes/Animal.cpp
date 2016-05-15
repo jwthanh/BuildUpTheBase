@@ -57,15 +57,15 @@ void Animal::b2b_transfer(spBuilding from_bldg, spBuilding to_bldg, Resource::Re
 {
     if (res_type == Resource::Ingredient)
     {
-        transfer(from_bldg->ingredients, to_bldg->ingredients, quantity , Ingredient::Grain);
+        transfer(from_bldg->ingredients, to_bldg->ingredients, quantity , Ingredient::SubType::Grain);
     }
     else if (res_type == Resource::Product)
     {
-        transfer(from_bldg->products, to_bldg->products, quantity, Product::Cereals);
+        transfer(from_bldg->products, to_bldg->products, quantity, Product::SubType::Cereals);
     }
     else if (res_type == Resource::Waste)
     {
-        transfer(from_bldg->wastes, to_bldg->wastes, quantity, Waste::Corpse);
+        transfer(from_bldg->wastes, to_bldg->wastes, quantity, Waste::SubType::Corpse);
     }
     else
     {

@@ -6,6 +6,7 @@
 
 #include "Resources.h"
 
+#include "SubTypes.h"
 
 ///Container and handler for the tech researched
 class TechTree
@@ -26,11 +27,16 @@ class Technology
     public:
         Technology();
 
+        using SubType = TechSubType;
+
         bool get_been_unlocked();
         void set_been_unlocked(bool val);
 
         spRecipe get_ingredient_requirements();
         void set_ingredient_requirements(spRecipe requirements);
 };
+
+using TechMap = std::map<Technology::SubType, bool>;
+
 
 #endif

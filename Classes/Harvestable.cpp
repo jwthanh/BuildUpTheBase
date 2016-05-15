@@ -613,7 +613,7 @@ void FightingHarvestable::shatter()
      Sprite* tex_sprite = dynamic_cast<Sprite*>(rt->getSprite());
      scale9_sprite->setSpriteFrame(tex_sprite->getSpriteFrame());
 
-    this->building->create_ingredients(Ingredient::Soul, 1);
+    this->building->create_ingredients(Ingredient::SubType::Soul, 1);
 }
 
 void FightingHarvestable::on_harvest()
