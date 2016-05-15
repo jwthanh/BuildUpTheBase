@@ -1,59 +1,59 @@
 {
     "resources": {
         "grain": {
-            "description": "grain description",
+            "description": "Grain is good.",
             "img_large": "ingredients/grain.png"
         },
         "pileofgrain": {
-            "description": "pileofgrain description",
+            "description": "More grain is better.",
             "img_large": "ingredients/pileofgrain.png"
         },
         "bread": {
-            "description": "bread description",
+            "description": "Bread is a required for a loaf.",
             "img_large": "ingredients/bread.png"
         },
         "loaf": {
-            "description": "loaf description",
+            "description": "Can't make a loaf without bread.",
             "img_large": "ingredients/loaf.png"
         },
         "seed": {
-            "description": "seed description",
+            "description": "This is the seed of something huge.",
             "img_large": "ingredients/seed.png"
         },
         "wood": {
-            "description": "wood description",
+            "description": "Wood off a giant tree.",
             "img_large": "ingredients/wood.png"
         },
         "iron": {
-            "description": "iron description",
+            "description": "Shimmering in the darkness, you are alone.",
             "img_large": "ingredients/iron.png"
         },
         "copper": {
-            "description": "copper description",
+            "description": "A rarity, even today.",
             "img_large": "ingredients/copper.png"
         },
         "fly": {
-            "description": "fly description",
+            "description": "Tries to fly as near to your ear as possible.",
             "img_large": "ingredients/fly.png"
         },
         "sand": {
-            "description": "sand description",
+            "description": "You hate sand, it's coarse and irritating and it gets everywhere.",
             "img_large": "ingredients/sand.png"
         },
         "flesh": {
-            "description": "flesh description",
+            "description": "The flesh of the dead, why keep it?",
             "img_large": "ingredients/flesh.png"
         },
         "berry": {
-            "description": "berry description",
+            "description": "A tasty treat.",
             "img_large": "ingredients/berry.png"
         },
         "soul": {
-            "description": "soul description",
+            "description": "Perhaps used to bring the dead to life...",
             "img_large": "ingredients/soul.png"
         },
         "blood": {
-            "description": "blood description",
+            "description": "Drink this and feel alive.",
             "img_large": "ingredients/blood.png"
         }
     }

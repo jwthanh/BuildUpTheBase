@@ -603,6 +603,8 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
         this->getChildByName("inventory_detail_panel")->removeFromParent();
     };
 
+    IngredientData res_data = IngredientData(Ingredient::type_to_string(ing_type));
+
     auto inst = CSLoader::getInstance();
     auto raw_node = inst->createNode("editor/details/inventory_detail.csb");
 
@@ -625,8 +627,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     resource_name->setString(res_name);
 
     auto resource_description = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_description"));
-    //TODO: load resource desc from json
-    resource_description->setString("Resource Description not yet implemented");
+    resource_description->setString(res_data.get_description());
 
     auto count_desc = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_desc"));
     auto count_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_lbl"));
