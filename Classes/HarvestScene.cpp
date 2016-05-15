@@ -589,6 +589,7 @@ void HarvestScene::update(float dt)
     //}
 
     this->recipe_lbl->setString("To Next Upgrade");
+    ((Label*)this->recipe_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
 
     auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
     if (!harvestable) {

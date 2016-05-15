@@ -19,7 +19,7 @@
                 <PreSize X="0.1600" Y="0.0800" />
                 <FileData Type="Normal" Path="images/cat.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="item_lbl" ActionTag="1258482361" Tag="160" IconVisible="False" LeftMargin="4.3936" RightMargin="4.3936" TopMargin="1.9930" BottomMargin="111.9930" IsCustomSize="True" FontSize="30" LabelText="5&#xA;Berry" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="item_lbl" ActionTag="1258482361" Tag="160" IconVisible="False" LeftMargin="4.3936" RightMargin="4.3936" TopMargin="1.9930" BottomMargin="111.9930" IsCustomSize="True" FontSize="28" LabelText="5&#xA;Berry" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="111.2129" Y="86.0141" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="60.0000" Y="155.0000" />
