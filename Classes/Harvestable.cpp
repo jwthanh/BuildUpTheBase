@@ -119,7 +119,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
     res_count_t output = get_per_touch_output();
 
     std::stringstream ss;
-    ss << "+" << beautify_double(output);
+    ss << "+" << beautify_double(output) << " " << Ingredient::type_to_string(this->building->punched_sub_type);
 
     std::string floating_msg = ss.str();
     if (this->building->can_fit_more_ingredients(this->building->punched_sub_type) == false)
