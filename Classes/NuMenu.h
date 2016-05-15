@@ -6,7 +6,6 @@
 #include "GameLayer.h"
 #include "Buyable.h"
 #include "Worker.h"
-#include "Resources.h"
 
 class PlainShopItem;
 class Fist;

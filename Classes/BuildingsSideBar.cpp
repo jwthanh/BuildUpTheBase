@@ -120,16 +120,16 @@ void SideListView::setup_shop_listview_as_harvesters()
         struct HarvestConfig{
             WorkerType worker_type;
             std::string node_name;
-            WorkerSubType harv_type;
+            Worker::SubType harv_type;
         };
         std::vector<HarvestConfig> nuitems_config = {
-            {WorkerType::Salesman, "salesman_item_one", WorkerSubType::One},
-            {WorkerType::Harvester, "harvester_item_one", WorkerSubType::One},
-            {WorkerType::Harvester, "harvester_item_two", WorkerSubType::Two},
-            {WorkerType::Harvester, "harvester_item_three", WorkerSubType::Three},
-            {WorkerType::Harvester, "harvester_item_four", WorkerSubType::Four},
-            {WorkerType::Harvester, "harvester_item_five", WorkerSubType::Five},
-            {WorkerType::Harvester, "harvester_item_six", WorkerSubType::Six}
+            {WorkerType::Salesman, "salesman_item_one", Worker::SubType::One},
+            {WorkerType::Harvester, "harvester_item_one", Worker::SubType::One},
+            {WorkerType::Harvester, "harvester_item_two", Worker::SubType::Two},
+            {WorkerType::Harvester, "harvester_item_three", Worker::SubType::Three},
+            {WorkerType::Harvester, "harvester_item_four", Worker::SubType::Four},
+            {WorkerType::Harvester, "harvester_item_five", Worker::SubType::Five},
+            {WorkerType::Harvester, "harvester_item_six", Worker::SubType::Six}
         };
 
         auto target_building = BUILDUP->get_target_building();
@@ -165,22 +165,22 @@ void SideListView::setup_shop_listview_as_harvesters()
                 spBuilding target_building = BUILDUP->get_target_building();
                 menu_item->ing_type = target_building->punched_sub_type;
 
-                if (menu_item->harv_type != WorkerSubType::One) {
-                    std::map<WorkerSubType, WorkerSubType> req_map = {
-                        { WorkerSubType::ZERO, WorkerSubType::ZERO },
-                        { WorkerSubType::One, WorkerSubType::ZERO },
-                        { WorkerSubType::Two, WorkerSubType::One },
-                        { WorkerSubType::Three, WorkerSubType::Two },
-                        { WorkerSubType::Four, WorkerSubType::Three },
-                        { WorkerSubType::Five, WorkerSubType::Four },
-                        { WorkerSubType::Six, WorkerSubType::Five },
-                        { WorkerSubType::Seven, WorkerSubType::Six },
-                        { WorkerSubType::Eigth, WorkerSubType::Seven },
-                        { WorkerSubType::Nine, WorkerSubType::Eigth }
+                if (menu_item->harv_type != Worker::SubType::One) {
+                    std::map<Worker::SubType, Worker::SubType> req_map = {
+                        { Worker::SubType::ZERO, Worker::SubType::ZERO },
+                        { Worker::SubType::One, Worker::SubType::ZERO },
+                        { Worker::SubType::Two, Worker::SubType::One },
+                        { Worker::SubType::Three, Worker::SubType::Two },
+                        { Worker::SubType::Four, Worker::SubType::Three },
+                        { Worker::SubType::Five, Worker::SubType::Four },
+                        { Worker::SubType::Six, Worker::SubType::Five },
+                        { Worker::SubType::Seven, Worker::SubType::Six },
+                        { Worker::SubType::Eigth, Worker::SubType::Seven },
+                        { Worker::SubType::Nine, Worker::SubType::Eigth }
                     };
 
-                    std::pair<WorkerSubType, Ingredient::SubType> key = { 
-                        map_get(req_map, menu_item->harv_type, WorkerSubType::ZERO),
+                    std::pair<Worker::SubType, Ingredient::SubType> key = { 
+                        map_get(req_map, menu_item->harv_type, Worker::SubType::ZERO),
                         menu_item->ing_type
                     };
 

@@ -7,7 +7,7 @@
 #include "GameLogic.h"
 #include "Beatup.h"
 
-Worker::Worker(spBuilding building, std::string name, WorkerSubType sub_type)
+Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
     this->building = building;
 
@@ -78,7 +78,7 @@ ResourceCondition* ResourceCondition::create_waste_condition(Waste::SubType wst_
     return waste_condition;
 };
 
-Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, WorkerSubType sub_type)
+Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type)
     : Worker(building, name, sub_type), ing_type(ing_type)
 {
 };
@@ -93,54 +93,54 @@ void Harvester::on_update(float dt)
     }
 };
 
-res_count_t Harvester::get_base_shop_cost(WorkerSubType harv_type)
+res_count_t Harvester::get_base_shop_cost(SubType harv_type)
 {
     res_count_t base_cost = 25;
     
-    if (harv_type == WorkerSubType::One) { base_cost = 25; }
-    else if (harv_type == WorkerSubType::Two) { base_cost = 200; }
-    else if (harv_type == WorkerSubType::Three) { base_cost = 1000; }
-    else if (harv_type == WorkerSubType::Four) { base_cost = 12000; }
-    else if (harv_type == WorkerSubType::Five) { base_cost = 100000; }
-    else if (harv_type == WorkerSubType::Six) { base_cost = 500000; }
+    if (harv_type == SubType::One) { base_cost = 25; }
+    else if (harv_type == SubType::Two) { base_cost = 200; }
+    else if (harv_type == SubType::Three) { base_cost = 1000; }
+    else if (harv_type == SubType::Four) { base_cost = 12000; }
+    else if (harv_type == SubType::Five) { base_cost = 100000; }
+    else if (harv_type == SubType::Six) { base_cost = 500000; }
     else { base_cost = 9999;}
 
     return base_cost;
 };
 
-res_count_t Harvester::get_to_harvest_count(WorkerSubType harv_type)
+res_count_t Harvester::get_to_harvest_count(SubType harv_type)
 {
     res_count_t harvested_count = 1;
     
-    if (harv_type == WorkerSubType::One) { harvested_count = 0.1; }
-    else if (harv_type == WorkerSubType::Two) { harvested_count = 1; }
-    else if (harv_type == WorkerSubType::Three) { harvested_count = 8; }
-    else if (harv_type == WorkerSubType::Four) { harvested_count = 25; }
-    else if (harv_type == WorkerSubType::Five) { harvested_count = 100; }
-    else if (harv_type == WorkerSubType::Six) { harvested_count = 350; }
+    if (harv_type == SubType::One) { harvested_count = 0.1; }
+    else if (harv_type == SubType::Two) { harvested_count = 1; }
+    else if (harv_type == SubType::Three) { harvested_count = 8; }
+    else if (harv_type == SubType::Four) { harvested_count = 25; }
+    else if (harv_type == SubType::Five) { harvested_count = 100; }
+    else if (harv_type == SubType::Six) { harvested_count = 350; }
     else { harvested_count = 9999;}
 
     return harvested_count;
 }
 
-Salesman::Salesman(spBuilding building, std::string name, Ingredient::SubType ing_type, WorkerSubType sub_type)
+Salesman::Salesman(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type)
     : Harvester(building, name, ing_type, sub_type)
 {
 }
 
-res_count_t Salesman::get_base_shop_cost(WorkerSubType sub_type)
+res_count_t Salesman::get_base_shop_cost(SubType sub_type)
 {
     mistWorkerSubType map = {
-        {WorkerSubType::One, 10}
+        {SubType::One, 10}
     };
 
     return map_get(map, sub_type, 9999);
 }
 
-res_count_t Salesman::get_to_sell_count(WorkerSubType sub_type)
+res_count_t Salesman::get_to_sell_count(SubType sub_type)
 {
     mistWorkerSubType map = {
-        {WorkerSubType::One, 1}
+        {SubType::One, 1}
     };
 
     return map_get(map, sub_type, 9999);

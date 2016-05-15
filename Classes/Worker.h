@@ -7,6 +7,8 @@
 #include "Updateable.h"
 #include "Nameable.h"
 
+#include "SubTypes.h"
+
 
 #include "Resources.h"
 
@@ -49,17 +51,12 @@ class Action : public Nameable
 //
 //attaches to a building and does something once certain conditions are hit
 //
-enum class WorkerSubType
-{
-    ZERO = 0, //ZERO is unset
-    One = 1, Two, Three, Four, Five, Six, Seven, Eigth, Nine, Ten,
-    Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen, Twenty
-};
 
 class Worker : public Nameable, Updateable
 {
     public:
-        WorkerSubType sub_type;
+        using SubType = WorkerSubType;
+        SubType sub_type;
 
         spBuilding building;
 
@@ -67,7 +64,7 @@ class Worker : public Nameable, Updateable
         //and there's 10 active, it'll get you 10 grain
         res_count_t active_count = 0; 
 
-        Worker(spBuilding building, std::string name, WorkerSubType sub_type);
+        Worker(spBuilding building, std::string name, SubType sub_type);
 
         void update(float dt);
         virtual void on_update(float dt);
@@ -78,25 +75,25 @@ class Harvester : public Worker
     public:
         Ingredient::SubType ing_type;
 
-        Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, WorkerSubType sub_type);
+        Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
 
         virtual void on_update(float dt) override;
 
-        static res_count_t get_base_shop_cost(WorkerSubType harv_type);
-        static res_count_t get_to_harvest_count(WorkerSubType harv_type);
+        static res_count_t get_base_shop_cost(SubType harv_type);
+        static res_count_t get_to_harvest_count(SubType harv_type);
 };
 
 class Salesman : public Harvester
 {
     public:
-        Salesman(spBuilding building, std::string name, Ingredient::SubType ing_type, WorkerSubType sub_type);
+        Salesman(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
 
         virtual void on_update(float dt) override;
-        static res_count_t get_base_shop_cost(WorkerSubType sub_type);
-        static res_count_t get_to_sell_count(WorkerSubType sub_type);
+        static res_count_t get_base_shop_cost(SubType sub_type);
+        static res_count_t get_to_sell_count(SubType sub_type);
 };
 
-typedef std::map<std::pair<WorkerSubType, Ingredient::SubType>, res_count_t> mistHarvester;
-typedef std::map<WorkerSubType, res_count_t> mistWorkerSubType;
+typedef std::map<std::pair<Worker::SubType, Ingredient::SubType>, res_count_t> mistHarvester;
+typedef std::map<Worker::SubType, res_count_t> mistWorkerSubType;
 
 #endif
