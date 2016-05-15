@@ -84,6 +84,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         //auto harvestable = (Harvestable*)this->getChildByName("harvestable");
         //harvestable->shatter();
 
+        auto shop_listview = dynamic_cast<ui::ListView*>(this->getChildByName("shop_listview"));
+        shop_listview->requestDoLayout();
+
     }
 }
 

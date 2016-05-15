@@ -201,6 +201,7 @@ void SideListView::setup_shop_listview_as_harvesters()
             update_target_and_prereq(0);
 
         };
+
     };
 
     shop_listview->schedule(update_harvester_listview, update_delay, "update_listview");
@@ -410,7 +411,7 @@ ui::ListView* SideListView::_create_listview(std::string node_name)
     listview->setScrollBarWidth(20.0f);
 
     listview->setMagneticType(ui::ListView::MagneticType::TOP); //scrolls to TOP of current item, if needed
-    //listview->setMagneticAllowedOutOfBoundary(true); //not sure what this does, true is default
+    listview->setMagneticAllowedOutOfBoundary(false); //true is default, doesnt allow overscrolling sort of. if you go out of bounds, it'll scroll it back
 
     this->parent->addChild(listview);
 
