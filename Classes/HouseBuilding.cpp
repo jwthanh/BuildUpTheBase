@@ -195,7 +195,7 @@ res_count_t Building::get_total_salesmen_output()
         WorkerSubType harv_type = h_mist.first.first;
         Ingredient::SubType ing_type = h_mist.first.second;
         res_count_t active_count = h_mist.second;
-        total += Salesman::get_to_sell_count(harv_type)*active_count;
+        total += Salesman::get_to_sell_count(harv_type)*active_count*this->building_level;
     };
 
     return total;

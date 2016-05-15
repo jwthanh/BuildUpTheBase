@@ -125,6 +125,8 @@ void SideListView::setup_shop_listview_as_harvesters()
         };
         std::vector<HarvestConfig> nuitems_config = {
             {WorkerType::Salesman, "salesman_item_one", Worker::SubType::One},
+            // {WorkerType::Salesman, "salesman_item_two", Worker::SubType::Two}, //TODO fix sorting before we can add this in
+            // {WorkerType::Salesman, "salesman_item_three", Worker::SubType::Three},
             {WorkerType::Harvester, "harvester_item_one", Worker::SubType::One},
             {WorkerType::Harvester, "harvester_item_two", Worker::SubType::Two},
             {WorkerType::Harvester, "harvester_item_three", Worker::SubType::Three},
@@ -192,9 +194,6 @@ void SideListView::setup_shop_listview_as_harvesters()
                     } else {
                         menu_item->button->setVisible(true);
                     }
-
-                    //menu_item->try_set_enable(false);
-
                 };
             };
             menu_item->schedule(update_target_and_prereq, update_delay, "update_ing_type");
