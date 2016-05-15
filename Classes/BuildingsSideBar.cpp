@@ -336,15 +336,7 @@ void SideListView::setup_detail_listview_as_recipes()
                 {Ingredient::SubType::Seed, 5}
             });
             double_click_pwr->set_ingredient_requirements(recipe);
-            //double_click_pwr->_callback = []()
-            //{
-            //    auto health = BUILDUP->fighter->attrs->health;
-            //    if (health->is_full() == false)
-            //    {
-            //        health->add_to_current_val(5);
-            //    }
-            //    CCLOG("regen from blood oath");
-            //};
+
             nuitems_config.push_back({
                 double_click_pwr,
                 DetailType::Tech,

@@ -78,3 +78,23 @@ void load_default_button_textures(cocos2d::ui::Button* button)
         cocos2d::ui::TextureResType::PLIST
     );
 };
+
+void animate_flash_action(
+    cocos2d::Node* target, float duration, float scale,
+    cocos2d::Color3B to_color /* RED */, cocos2d::Color3B end_color /* WHITE */
+    )
+{
+    auto tint = TintTo::create(duration, to_color.r, to_color.g, to_color.b);
+    auto tint_rev = TintTo::create(duration/2.0f, end_color.r, end_color.g, end_color.b);
+
+    auto scale_to = ScaleTo::create(duration, scale);
+    auto scale_rev = ScaleTo::create(duration/2.0f, 1.0f);
+    target->runAction(
+        Sequence::create(
+            Spawn::createWithTwoActions(tint, scale_to),
+            Spawn::createWithTwoActions(tint_rev, scale_rev),
+            NULL
+        )
+    );
+
+};

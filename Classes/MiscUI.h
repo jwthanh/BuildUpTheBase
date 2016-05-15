@@ -31,4 +31,10 @@ public:
 
 void load_default_button_textures(cocos2d::ui::Button* button);
 
+void animate_flash_action(
+    cocos2d::Node* target, float duration, float scale,
+    cocos2d::Color3B to_color = cocos2d::Color3B::RED,
+    cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
+    );
+
 #endif
