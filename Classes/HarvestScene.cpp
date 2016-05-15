@@ -550,7 +550,7 @@ bool HarvestScene::init()
             {4, {75, 75, 75}},
             {5, {100, 100, 100}},
             {6, {125, 125, 125}},
-            {6, {150, 150, 150}},
+            {7, {150, 150, 150}},
         };
 
         layer_color->setColor(map_get(color_map, this->_layer_building_level, Color3B::BLACK));
