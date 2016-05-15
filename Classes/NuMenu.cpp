@@ -372,6 +372,10 @@ void TechNuItem::other_init(spTechnology technology)
         CCLOG("trying to consume %s technology", "A Technology");
         this->building->consume_recipe(this->technology->get_ingredient_requirements().get());
         this->technology->set_been_unlocked(true);
+
+        //TODO fix this duplicating techs already in the vector, might need to
+        //go to a map like resources
+        this->building->techtree->technologies.push_back(this->technology);
     });
 
 }
