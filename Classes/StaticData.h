@@ -40,11 +40,11 @@ class BuildingData : public BaseData
         spRecipe get_recipe(std::string recipe_key);
 };
 
-class ResourceData : public BaseData
+class IngredientData : public BaseData
 {
     public:
         std::string resource_id;
-        ResourceData(std::string resource_id);
+        IngredientData(std::string resource_id);
 
         std::string getter(std::string key) override;
 

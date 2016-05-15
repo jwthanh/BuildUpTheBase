@@ -55,6 +55,6 @@
         "blood": {
             "description": "blood description",
             "img_large": "ingredients/blood.png"
-        },
+        }
     }
 }

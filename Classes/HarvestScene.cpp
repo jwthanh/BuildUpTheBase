@@ -422,6 +422,8 @@ void BaseScene::create_inventory_listview()
             Ingredient::SubType ing_type = type_to_count.first;
             auto str_type = Ingredient::type_to_string(ing_type);
 
+            IngredientData res_data = IngredientData(str_type);
+
             //if the child already exists, put it at the back 
             auto existing_node = inventory_listview->getChildByName(str_type);
             if (existing_node)
@@ -438,6 +440,9 @@ void BaseScene::create_inventory_listview()
             if (BUILDUP->get_target_building()->ingredients[ing_type] <= 0)
             {
                 new_item_panel->setVisible(false);
+                ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
+                item_img->loadTexture(res_data.get_img_large());
+                ((ui::Scale9Sprite*)item_img->getVirtualRenderer())->getSprite()->getTexture()->setAliasTexParameters();
             }
             else
             {

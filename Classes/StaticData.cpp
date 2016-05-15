@@ -9,8 +9,9 @@
 
 std::string BaseData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)
 {
-    auto jsonDoc = FileIO::open_json(this->_filename);
+    rapidjson::Document jsonDoc = FileIO::open_json(this->_filename);
 
+    CC_ASSERT(jsonDoc.HasMember(key_top.c_str()) && "this should be here");
     auto body = &jsonDoc[key_top.c_str()];
 
     if (key_child == "") { return body->GetString(); };
@@ -133,23 +134,23 @@ spRecipe BuildingData::get_recipe(std::string recipe_key)
 };
 
 
-ResourceData::ResourceData(std::string resource_id)
+IngredientData::IngredientData(std::string resource_id)
 {
     this->resource_id = resource_id;
     this->_filename = "resources_data.json";
 }
 
-std::string ResourceData::getter(std::string key)
+std::string IngredientData::getter(std::string key)
 {
     return this->_get_data("resources", this->resource_id, key);
 };
 
-std::string ResourceData::get_description()
+std::string IngredientData::get_description()
 {
     return this->getter("description");
 };
 
-std::string ResourceData::get_img_large()
+std::string IngredientData::get_img_large()
 {
     return this->getter("img_large");
 };
