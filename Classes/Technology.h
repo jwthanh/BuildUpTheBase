@@ -7,7 +7,7 @@
 
 #include "SubTypes.h"
 
-using TechMap = std::map<TechSubType, bool>;
+using TechMap = std::map<TechSubType, res_count_t>;
 
 ///Container and handler for the tech researched
 class TechTree

@@ -103,9 +103,9 @@ res_count_t Harvestable::get_per_touch_output()
     res_count_t base = 1.0L;
 
     auto tech_map = this->building->techtree->get_tech_map();
-    bool has_double_power = map_get(tech_map, Technology::SubType::ClickDoublePower, false);
-    if (has_double_power){
-        base *= 2.0L;
+    res_count_t times_doubled = map_get(tech_map, Technology::SubType::ClickDoublePower, 0L);
+    if (times_doubled > 0){
+        base *= 2.0L * times_doubled;
     };
 
     return base;
