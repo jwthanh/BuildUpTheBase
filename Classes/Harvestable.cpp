@@ -139,7 +139,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         Node* building_info_panel = running_scene->getChildByName("building_info_panel");
         Node* raw_ingredient_count = building_info_panel->getChildByName("ingredient_count");
         ui::Text* ingredient_count = dynamic_cast<ui::Text*>(raw_ingredient_count);
-        animate_flash_action(ingredient_count, 2.0f, 1.15f);
+        animate_flash_action(ingredient_count, 0.2f, 1.15f);
     };
 
     auto scale_to = ScaleTo::create(duration, end_scale);
