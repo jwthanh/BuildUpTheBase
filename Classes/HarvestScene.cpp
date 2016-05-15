@@ -143,7 +143,7 @@ void BaseScene::create_goal_loadingbar()
     loading_bar->setPercent(0.0f);
     loading_bar->removeFromParent();
 
-    auto update_loading_bar = [loading_bar](float dt)
+    auto update_loading_bar = [this, loading_bar](float dt)
         {
             //set progress to 1000 dollars
             float coin_goal = scale_number(10, BUILDUP->get_target_building()->building_level, 15);
@@ -151,10 +151,11 @@ void BaseScene::create_goal_loadingbar()
             loading_bar->setPercent(percentage);
 
             if (percentage >= 100.0f) {
-                loading_bar->setColor(Color3B::GREEN);
+                loading_bar->setColor({20, 92, 68});
+
             }
             else {
-                loading_bar->setColor(Color3B::RED);
+                loading_bar->setColor({177, 212, 200});
             };
 
         };
@@ -591,8 +592,15 @@ void HarvestScene::update(float dt)
     //    this->recipe_lbl->setString("");
     //}
 
-    this->recipe_lbl->setString("To Next Upgrade");
-    ((Label*)this->recipe_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+    //TODO get this percentage from a method or something
+    float coin_goal = scale_number(10, BUILDUP->get_target_building()->building_level, 15);
+    float percentage = BEATUP->get_total_coins() / coin_goal * 100;
+    if (percentage >= 100.0f) {
+        ((HarvestScene*)this)->recipe_lbl->setString("Upgrade available!");
+    }
+    else {
+        ((HarvestScene*)this)->recipe_lbl->setString("Next upgrade:");
+    };
 
     auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
     if (!harvestable) {
@@ -764,5 +772,7 @@ void HarvestScene::create_recipe_lbl()
     this->recipe_lbl = dynamic_cast<ui::Text*>(harvest_scene_editor->getChildByName("recipe_lbl"));
     this->recipe_lbl->removeFromParent();
     this->recipe_lbl->setString("");
+
+    ((Label*)this->recipe_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
     this->addChild(recipe_lbl);
 }
