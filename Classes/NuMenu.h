@@ -58,11 +58,22 @@ class BuildingNuItem : public NuItem
 class RecipeNuItem : public BuildingNuItem
 {
     public:
-    static RecipeNuItem* create(cocos2d::Node* parent, spBuilding);
+        static RecipeNuItem* create(cocos2d::Node* parent, spBuilding building);
 
         spRecipe recipe;
 
         virtual void other_init(spRecipe recipe);
+        virtual void update_func(float dt) override;
+};
+
+class TechNuItem : public BuildingNuItem
+{
+    public:
+        static TechNuItem* create(cocos2d::Node* parent, spBuilding building);
+
+        spTechnology technology;
+
+        virtual void other_init(spTechnology technology);
         virtual void update_func(float dt) override;
 };
 

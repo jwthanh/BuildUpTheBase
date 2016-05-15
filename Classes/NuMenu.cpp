@@ -12,6 +12,7 @@
 #include "MiscUI.h"
 #include <numeric>
 #include "FShake.h"
+#include "Technology.h"
 
 USING_NS_CC;
 
@@ -346,6 +347,66 @@ void RecipeNuItem::update_func(float dt)
         result_count += this->building->count_ingredients(out_type);
     };
     this->set_count_lbl(result_count);
+}
+
+TechNuItem* TechNuItem::create(Node* parent, spBuilding building)
+{
+    TechNuItem* pRet = new(std::nothrow) TechNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+};
+
+void TechNuItem::other_init(spTechnology technology)
+{
+    this->technology = technology;
+    this->set_touch_ended_callback([this]() {
+        CCLOG("trying to consume %s technology", "A Technology");
+        this->building->consume_recipe(this->technology->get_ingredient_requirements().get());
+    });
+
+    if (technology->get_ingredient_requirements()->_callback == NULL)
+    {
+        this->technology->set_been_unlocked(true);
+    }
+    else
+    {
+        CCLOG("callback set, using existing callback, technology %s", "A Technology");
+    }
+
+}
+
+void TechNuItem::update_func(float dt)
+{
+    //FIXME, this lets someone press a button early i think
+    // and avoid having the button disabled. Not sure.
+    if (this->button->isHighlighted())
+    {
+        return;
+    };
+
+    if (this->technology->get_ingredient_requirements()->is_satisfied(this->building->ingredients)){
+        this->try_set_enable(true);
+    } else {
+        this->try_set_enable(false);
+    }
+
+    ////TODO this'll get fucky when technologys output more than one type,
+    //// you make one technology, the count'll go up by two
+    //res_count_t result_count = 0;
+    //for (auto output_ing : this->technology->outputs) {
+    //    auto out_type = output_ing.first;
+    //    result_count += this->building->count_ingredients(out_type);
+    //};
+    //this->set_count_lbl(result_count);
 }
 
 ShopNuItem* ShopNuItem::create(cocos2d::Node* parent)

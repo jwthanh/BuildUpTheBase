@@ -24,12 +24,12 @@ bool Technology::get_been_unlocked()
     return this->_been_unlocked;
 };
 
-mistIngredient Technology::get_ingredient_requirements()
+spRecipe Technology::get_ingredient_requirements()
 {
     return this->_ing_requirements;
 };
 
-void Technology::set_ingredient_requirements(mistIngredient requirements)
+void Technology::set_ingredient_requirements(spRecipe requirements)
 {
     this->_ing_requirements = requirements;
 };

@@ -21,7 +21,7 @@ class Technology
 {
     private:
         bool _been_unlocked;
-        mistIngredient _ing_requirements;
+        spRecipe _ing_requirements;
 
     public:
         Technology();
@@ -29,8 +29,8 @@ class Technology
         bool get_been_unlocked();
         void set_been_unlocked(bool val);
 
-        mistIngredient get_ingredient_requirements();
-        void set_ingredient_requirements(mistIngredient requirements);
+        spRecipe get_ingredient_requirements();
+        void set_ingredient_requirements(spRecipe requirements);
 };
 
 #endif
