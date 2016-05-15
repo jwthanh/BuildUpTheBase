@@ -7,6 +7,8 @@
 
 #include "SubTypes.h"
 
+using TechMap = std::map<TechSubType, bool>;
+
 ///Container and handler for the tech researched
 class TechTree
 {
@@ -14,6 +16,8 @@ class TechTree
         TechTree();
 
         vsTechnology technologies;
+
+        TechMap get_tech_map();
 
 };
 
@@ -24,9 +28,10 @@ class Technology
         spRecipe _ing_requirements;
 
     public:
-        Technology();
-
         using SubType = TechSubType;
+        Technology(Technology::SubType sub_type);
+
+        SubType sub_type;
 
         bool get_been_unlocked();
         void set_been_unlocked(bool val);
@@ -34,8 +39,6 @@ class Technology
         spRecipe get_ingredient_requirements();
         void set_ingredient_requirements(spRecipe requirements);
 };
-
-using TechMap = std::map<Technology::SubType, bool>;
 
 
 #endif

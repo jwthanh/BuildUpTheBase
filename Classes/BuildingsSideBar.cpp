@@ -330,7 +330,7 @@ void SideListView::setup_detail_listview_as_recipes()
 
         if (target_building->name == "The Marketplace")
         {
-            spTechnology double_click_pwr = std::make_shared<Technology>();
+            spTechnology double_click_pwr = std::make_shared<Technology>(Technology::SubType::ClickDoublePower);
             spRecipe recipe = std::make_shared<Recipe>("double_click_power", "no desc for tech recipe");
             recipe->components = mistIngredient({
                 {Ingredient::SubType::Seed, 5}
