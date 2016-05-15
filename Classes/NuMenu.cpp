@@ -64,16 +64,26 @@ bool NuItem::init(cocos2d::Node* parent)
 
     load_default_button_textures(this->button); //TODO figure out why this is still needed, why the clone doesnt do this for me
 
-    button->removeFromParent();
+    this->button->removeFromParent();
+
 
     parent->addChild(this); //FIXME hack to get the selector to run. ideally the button would be a child of this but then button doesnt go on the right spot
     parent->addChild(button);
 
+    auto set_aliasing = [](ui::Text* text_node)
+    {
+            ((Label*)text_node->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+    };
+
     this->item_icon = static_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
     this->title_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
+    set_aliasing(this->title_lbl);
     this->desc_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
+    set_aliasing(this->desc_lbl);
     this->cost_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
+    set_aliasing(this->cost_lbl);
     this->count_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
+    set_aliasing(this->count_lbl);
 
     this->set_cost_lbl("");
 
