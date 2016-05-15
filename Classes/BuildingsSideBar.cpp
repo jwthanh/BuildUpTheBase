@@ -187,7 +187,7 @@ void SideListView::setup_shop_listview_as_harvesters()
 
                     auto prereq_harvester_found = map_get( target_building->harvesters, key, 0);
 
-                    if (prereq_harvester_found == 0) {
+                    if (prereq_harvester_found < 5) {
                         menu_item->button->setVisible(false);
                     } else {
                         menu_item->button->setVisible(true);
