@@ -1,0 +1,64 @@
+{
+    "resources": {
+        "grain": {
+            "description": "grain description",
+            "img_large": "ingredients/grain.png"
+        },
+        "pileofgrain": {
+            "description": "pileofgrain description",
+            "img_large": "ingredients/pileofgrain.png"
+        },
+        "bread": {
+            "description": "bread description",
+            "img_large": "ingredients/bread.png"
+        },
+        "loaf": {
+            "description": "loaf description",
+            "img_large": "ingredients/loaf.png"
+        },
+        "seed": {
+            "description": "seed description",
+            "img_large": "ingredients/seed.png"
+        },
+        "wood": {
+            "description": "wood description",
+            "img_large": "ingredients/wood.png"
+        },
+        "iron": {
+            "description": "iron description",
+            "img_large": "ingredients/iron.png"
+        },
+        "copper": {
+            "description": "copper description",
+            "img_large": "ingredients/copper.png"
+        },
+        "wood": {
+            "description": "wood description",
+            "img_large": "ingredients/wood.png"
+        },
+        "fly": {
+            "description": "fly description",
+            "img_large": "ingredients/fly.png"
+        },
+        "sand": {
+            "description": "sand description",
+            "img_large": "ingredients/sand.png"
+        },
+        "flesh": {
+            "description": "flesh description",
+            "img_large": "ingredients/flesh.png"
+        },
+        "berry": {
+            "description": "berry description",
+            "img_large": "ingredients/berry.png"
+        },
+        "soul": {
+            "description": "soul description",
+            "img_large": "ingredients/soul.png"
+        },
+        "blood": {
+            "description": "blood description",
+            "img_large": "ingredients/blood.png"
+        },
+    }
+}

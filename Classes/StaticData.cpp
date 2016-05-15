@@ -131,3 +131,25 @@ spRecipe BuildingData::get_recipe(std::string recipe_key)
 
     return build_recipe(recipe_data);
 };
+
+
+ResourceData::ResourceData(std::string resource_id)
+{
+    this->resource_id = resource_id;
+    this->_filename = "resources_data.json";
+}
+
+std::string ResourceData::getter(std::string key)
+{
+    return this->_get_data("resources", this->resource_id, key);
+};
+
+std::string ResourceData::get_description()
+{
+    return this->getter("description");
+};
+
+std::string ResourceData::get_img_large()
+{
+    return this->getter("img_large");
+};

@@ -35,9 +35,22 @@ class BuildingData : public BaseData
         std::string get_gold_cost();
         std::string get_img_large();
 
-    vsRecipe get_all_recipes();
-    spRecipe build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* recipe_data);
-    spRecipe get_recipe(std::string recipe_key);
+        vsRecipe get_all_recipes();
+        spRecipe build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* recipe_data);
+        spRecipe get_recipe(std::string recipe_key);
+};
+
+class ResourceData : public BaseData
+{
+    public:
+        std::string resource_id;
+        ResourceData(std::string resource_id);
+
+        std::string getter(std::string key) override;
+
+        std::string get_description();
+        std::string get_img_large();
+
 };
 
 #endif
