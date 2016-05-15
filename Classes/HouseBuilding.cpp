@@ -553,6 +553,8 @@ Village* Buildup::init_city(Buildup* buildup)
         {
             "The Farm", "the_farm", Ingredient::Grain
         }, {
+            "The Marketplace", "the_marketplace", Ingredient::Seed
+        }, {
             "The Dump", "the_dump", Ingredient::Fly
         }, {
             "The Workshop", "the_workshop", Ingredient::Seed

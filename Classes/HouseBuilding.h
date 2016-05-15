@@ -124,8 +124,9 @@ class Enemy : public Person
 
 class Buildup
 {
-private:
+    private:
         spBuilding _target_building;
+
     public:
         Player* player;
         spFighter fighter;
