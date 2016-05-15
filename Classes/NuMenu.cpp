@@ -371,16 +371,8 @@ void TechNuItem::other_init(spTechnology technology)
     this->set_touch_ended_callback([this]() {
         CCLOG("trying to consume %s technology", "A Technology");
         this->building->consume_recipe(this->technology->get_ingredient_requirements().get());
-    });
-
-    if (technology->get_ingredient_requirements()->_callback == NULL)
-    {
         this->technology->set_been_unlocked(true);
-    }
-    else
-    {
-        CCLOG("callback set, using existing callback, technology %s", "A Technology");
-    }
+    });
 
 }
 
@@ -393,20 +385,18 @@ void TechNuItem::update_func(float dt)
         return;
     };
 
-    if (this->technology->get_ingredient_requirements()->is_satisfied(this->building->ingredients)){
-        this->try_set_enable(true);
+    bool tech_is_satisfied = this->technology->get_ingredient_requirements()->is_satisfied(this->building->ingredients);
+    if (tech_is_satisfied){
+        if (this->technology->get_been_unlocked() == false) {
+            this->try_set_enable(true);
+        } else {
+            this->try_set_enable(false);
+        }
     } else {
         this->try_set_enable(false);
     }
 
-    ////TODO this'll get fucky when technologys output more than one type,
-    //// you make one technology, the count'll go up by two
-    //res_count_t result_count = 0;
-    //for (auto output_ing : this->technology->outputs) {
-    //    auto out_type = output_ing.first;
-    //    result_count += this->building->count_ingredients(out_type);
-    //};
-    //this->set_count_lbl(result_count);
+    //TODO implement count_lbl for TechNuItem
 }
 
 ShopNuItem* ShopNuItem::create(cocos2d::Node* parent)
