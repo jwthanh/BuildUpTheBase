@@ -30,6 +30,7 @@
 
 #include "attribute_container.h"
 #include "attribute.h"
+#include "Technology.h"
 
 USING_NS_CC;
 
@@ -164,6 +165,9 @@ Building::Building(Village* city, std::string name, std::string id_key) :
 
     //TODO make these buyable again
     this->set_been_bought(true);
+
+
+    this->techtree = std::make_shared<TechTree>();
 
 };
 

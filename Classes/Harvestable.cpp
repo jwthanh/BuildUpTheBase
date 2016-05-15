@@ -14,6 +14,7 @@
 #include "Fighter.h"
 #include "attribute_container.h"
 #include "ProgressBar.h"
+#include "Technology.h"
 
 USING_NS_CC;
 
@@ -97,12 +98,30 @@ void Harvestable::on_harvest()
     GameLogic::getInstance()->add_total_harvests(1);
 }
 
+res_count_t Harvestable::get_per_touch_output()
+{
+    res_count_t base = 1.0L;
+
+    auto tech_map = this->building->techtree->get_tech_map();
+    bool has_double_power = map_get(tech_map, Technology::SubType::ClickDoublePower, false);
+    if (has_double_power){
+        base *= 2.0L;
+    };
+
+    return base;
+}
+
 void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 {
     float end_scale = this->initial_scale*0.85f;
     float duration = 0.5f;
 
-    std::string floating_msg = "+1";
+    res_count_t output = get_per_touch_output();
+
+    std::stringstream ss;
+    ss << "+" << beautify_double(output);
+
+    std::string floating_msg = ss.str();
     if (this->building->can_fit_more_ingredients(this->building->punched_sub_type) == false)
     {
         std::vector<std::string> choices = {
