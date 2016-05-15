@@ -4,7 +4,6 @@
 
 #include "constants.h"
 
-#include "Resources.h"
 
 #include "SubTypes.h"
 

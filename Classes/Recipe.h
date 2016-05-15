@@ -4,7 +4,6 @@
 
 #include <map>
 
-#include "HouseBuilding.h"
 #include "constants.h"
 #include "Resources.h"
 

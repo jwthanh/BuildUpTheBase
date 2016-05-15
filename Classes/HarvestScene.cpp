@@ -2,14 +2,14 @@
 
 #include <numeric>
 
+#include "cocostudio/ActionTimeline/CSLoader.h"
+
 #include "Harvestable.h"
 #include "GameLogic.h"
-#include "cocostudio/ActionTimeline/CSLoader.h"
 #include "NuMenu.h"
 #include "Beatup.h"
 #include "Util.h"
 #include "StaticData.h"
-#include "Recipe.h"
 #include "attribute.h"
 #include "FShake.h"
 #include "MiscUI.h"
@@ -18,6 +18,8 @@
 #include "attribute_container.h"
 
 #include "BuildingsSideBar.h"
+
+#include "HouseBuilding.h"
 
 USING_NS_CC;
 
