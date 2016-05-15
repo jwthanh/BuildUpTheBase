@@ -37,6 +37,8 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         spVisitors visitors;
 
+        spTechTree techtree;
+
         mistHarvester harvesters;
         mistHarvester salesmen;
 

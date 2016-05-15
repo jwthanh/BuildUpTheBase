@@ -4,12 +4,16 @@
 
 #include "constants.h"
 
-class Visitors
+#include "Updateable.h"
+
+class Visitors : public Updateable
 {
     public:
         spBuilding building;
 
         Visitors(spBuilding building);
+
+        void update(float dt);
 };
 
 #endif

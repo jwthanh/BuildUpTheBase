@@ -5,3 +5,8 @@ Visitors::Visitors(spBuilding building)
 {
 
 };
+
+void Visitors::update(float dt)
+{
+
+};

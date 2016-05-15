@@ -89,6 +89,8 @@ class ProgressBar;
 class Buildup;
 class Experience;
 
+class TechTree;
+class Technology;
 
 typedef std::function<void()> VoidFunc;
 
@@ -122,6 +124,9 @@ MAKE_SP_VS_MI(ProgressBar);
 MAKE_SP_VS_MI(Buildup);
 MAKE_SP_VS_MI(Experience);
 MAKE_SP_VS_MI(Village);
+
+MAKE_SP_VS_MI(TechTree);
+MAKE_SP_VS_MI(Technology);
 
 
 #undef MAKE_SP_VS
