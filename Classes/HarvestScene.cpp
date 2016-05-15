@@ -267,6 +267,9 @@ void BaseScene::create_player_info_panel()
     ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("player_info_panel"));
     player_info_panel->removeFromParent();
 
+    ui::Text* player_info_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_info_lbl"));
+    ((Label*)player_info_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+
     player_info_panel->addTouchEventListener([player_info_panel, this](Ref* target, ui::Widget::TouchEventType type)
     {
         if (type == ui::Widget::TouchEventType::ENDED)
@@ -299,6 +302,7 @@ void BaseScene::create_player_info_panel()
     const float update_delay = 0.1f;
 
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
+    ((Label*)player_gold_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
     auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
     auto update_gold_lbl = [player_gold_lbl, player_hp_lbl](float dt){
         //set gold
