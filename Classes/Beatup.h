@@ -42,6 +42,15 @@ class Beatup : public GameLayer
         bool _visible_inventory = false;
 
     public:
+        CREATE_FUNC(Beatup);
+        static cocos2d::Scene* createScene();
+        static cocos2d::Scene* createScene(int level);
+
+        void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent);
+        void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent);
+
+        virtual bool init();
+
         std::map<cocos2d::EventKeyboard::KeyCode, bool> key_state;
         cocos2d::Sprite* background;
 
@@ -63,11 +72,6 @@ class Beatup : public GameLayer
         void hide_ui();
 
         bool has_been_initialized = false;
-        static cocos2d::Scene* createScene();
-        void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent);
-        void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent);
-
-        virtual bool init();
         void update(float dt);
         void update_buildup(float dt);
         void reset();
@@ -154,11 +158,6 @@ class Beatup : public GameLayer
         int player_hp;
         int player_total_hp;
         void deal_player_dmg(int dmg);
-
-        // implement the "static create()" method manually
-        CREATE_FUNC(Beatup);
-        static cocos2d::Scene* createScene(int level);
-        // static cocos2d::Scene* create_scene_level(Levels level);
 
         void back_to_menu();
 
