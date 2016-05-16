@@ -139,6 +139,8 @@ class Buildup
 
         static Village* init_city(Buildup*);
 
+        spClock server_clock;
+
         Buildup();
         void main_loop();
         void update(float dt);

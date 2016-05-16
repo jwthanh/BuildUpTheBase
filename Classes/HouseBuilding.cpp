@@ -32,6 +32,13 @@
 #include "attribute.h"
 #include "Technology.h"
 
+//this is all for the server stuff
+#include "DataManager.h"
+#include "GameLogic.h"
+#include "Beatup.h"
+#include "Network.h"
+#include "Clock.h"
+
 USING_NS_CC;
 
 
@@ -512,6 +519,33 @@ void Buildup::update(float dt)
 {
     this->city->update(dt);
     this->player->update(dt);
+
+    this->server_clock->update(dt);
+    if (this->server_clock->passed_threshold()){
+        this->server_clock->reset();
+
+        //Use username to auto update
+        auto username = DataManager::get_string_from_data("username", "");
+        CCLOG("the existing username is %s", username.c_str());
+
+        if (username == "") {
+            CCLOG("blank username, not going to update");
+        }
+        else {
+            auto server_url = "http://tankorsmash.webfactional.com/users/"+username;
+            //auto server_url = "http://localhost:8080/users/"+username;
+
+            auto coins = (long long)BEATUP->get_total_coins();
+            std::stringstream data_ss;
+            data_ss << "coins=" << coins;
+            std::string data = data_ss.str();
+            NetworkConsole::post_helper(server_url, data.substr(0, data.find('.')), [](std::string response)
+            {
+                CCLOG("reponse %s", response.c_str());
+            });
+        };
+
+    };
 };
 
 //this isn't used anymore
@@ -555,6 +589,10 @@ void Buildup::main_loop()
 
 Village* Buildup::init_city(Buildup* buildup)
 {
+
+
+    buildup->server_clock = std::make_shared<Clock>(5.0f); //update server every 5 seconds
+
     auto city = new Village(buildup, "Burlington");
 
     struct BuildingConfig {
