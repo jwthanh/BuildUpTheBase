@@ -91,6 +91,10 @@ void DataManager::incr_key(std::string key, double x)
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
     double val = ud->getDoubleForKey(key.c_str());
-    CCASSERT(val != val + 3, "how does math work????");
+    //CCASSERT(val != val + 3, "how does math work????");
+    if (val != val + 3)
+    {
+        CCLOG("we're rounding stuff out now %s", std::to_string(val));
+    }
     ud->setDoubleForKey(key.c_str(), val + x);
 };

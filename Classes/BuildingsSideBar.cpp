@@ -237,7 +237,7 @@ void SideListView::setup_building_listview_as_upgrades()
 
 
         int i = 0;
-        int max_level = 7;
+        int max_level = 15;
         for (int level = 2; level <= max_level; level++)
         {
             int child_tag = i;

@@ -43,7 +43,7 @@ template<typename number_t>
 number_t scale_number(number_t base_number, number_t current_number, number_t rate)
 {
     //base * (rate**current)
-    return base_number * std::pow(rate, std::max((number_t)0.0, current_number));
+    return base_number * std::pow(rate, std::max(static_cast<number_t>(0), current_number));
 };
 
 #endif
