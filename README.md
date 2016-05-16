@@ -1,5 +1,5 @@
 # BaseBuilder
-An upcoming game about building a base. Checkout the latest update video https://www.youtube.com/watch?v=oNZ5dbS90yQ
+An upcoming incremental game about building up a base. Check out the latest update video https://www.youtube.com/watch?v=t5YXjfZRVlE
 
 ## Features
 * A bunch of buildings exist
