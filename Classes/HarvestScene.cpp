@@ -152,7 +152,6 @@ void BaseScene::create_goal_loadingbar()
 
             if (percentage >= 100.0f) {
                 loading_bar->setColor({20, 92, 68});
-
             }
             else {
                 loading_bar->setColor({177, 212, 200});

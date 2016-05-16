@@ -657,7 +657,7 @@ void HarvesterShopNuItem::my_init_update_callback()
 
         std::stringstream ss;
         auto harvested_count = Harvester::get_to_harvest_count(this->harv_type);
-        ss << "Adds " << harvested_count << " " << Ingredient::type_to_string(building->punched_sub_type) << " per sec";
+        ss << "Adds " << harvested_count << " " << Ingredient::type_to_string(building->punched_sub_type) << "\nper sec";
         this->set_description(ss.str());
     };
     this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
@@ -697,7 +697,7 @@ void SalesmanShopNuItem::my_init_update_callback()
 
         std::stringstream ss;
         auto sold_count = Salesman::get_to_sell_count(this->harv_type) * building->building_level;
-        ss << "Sells " << sold_count << " " << Ingredient::type_to_string(building->punched_sub_type) << " per sec";
+        ss << "Sells " << sold_count << " " << Ingredient::type_to_string(building->punched_sub_type) << "\nper sec";
         this->set_description(ss.str());
     };
     this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
