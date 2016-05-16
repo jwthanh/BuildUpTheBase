@@ -96,9 +96,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         std::stringstream data_ss;
         data_ss << "coins=" << coins;
         std::string data = data_ss.str();
-        NetworkConsole::post_helper(server_url, data.substr(0, data.find('.')), [](std::string response)
+        NetworkConsole::post_helper(server_url, data.substr(0, data.find('.')), [server_url](std::string response)
         {
-            CCLOG("reponse %s", response.c_str());
+            CCLOG("response from %s:\n %s", server_url.c_str(), response.c_str());
         });
 
     }

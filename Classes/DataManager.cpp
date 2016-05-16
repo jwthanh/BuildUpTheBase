@@ -109,7 +109,7 @@ void DataManager::incr_key(std::string key, double x)
     //CCASSERT(val != val + 3, "how does math work????");
     if (val != val + 3)
     {
-        CCLOG("we're rounding stuff out now %s", std::to_string(val));
+        CCLOG("we're rounding stuff out now %s", std::to_string(val).c_str());
     }
     ud->setDoubleForKey(key.c_str(), val + x);
 };

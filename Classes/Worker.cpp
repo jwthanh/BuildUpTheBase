@@ -158,7 +158,7 @@ void Salesman::on_update(float dt)
         if (max_can_sell != 0)
         {
             res_count_t to_sell = std::min(max_can_sell, active_sell_count);
-            res_count_t coins_gained = 10;
+            res_count_t coins_gained = 3; //TODO use actual resource price instead of hardcoded FIXME
 
             if (to_sell >= active_sell_count)
             {
