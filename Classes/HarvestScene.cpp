@@ -92,7 +92,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         auto server_url = "http://tankorsmash.webfactional.com/users/"+username;
         //auto server_url = "http://localhost:8080/users/"+username;
 
-        NetworkConsole::post_helper(server_url, "coins=123", [](std::string response)
+        auto coins = (long long)BEATUP->get_total_coins();
+        std::stringstream data_ss;
+        data_ss << "coins=" << coins;
+        std::string data = data_ss.str();
+        NetworkConsole::post_helper(server_url, data.substr(0, data.find('.')), [](std::string response)
         {
             CCLOG("reponse %s", response.c_str());
         });
