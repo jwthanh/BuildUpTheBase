@@ -410,7 +410,7 @@ ui::ListView* SideListView::_create_listview(std::string node_name)
     listview->setScrollBarPositionFromCorner(Vec2(40, 20));
     listview->setScrollBarWidth(20.0f);
 
-    listview->setMagneticType(ui::ListView::MagneticType::TOP); //scrolls to TOP of current item, if needed
+    // listview->setMagneticType(ui::ListView::MagneticType::TOP); //scrolls to TOP of current item, if needed
     listview->setMagneticAllowedOutOfBoundary(false); //true is default, doesnt allow overscrolling sort of. if you go out of bounds, it'll scroll it back
 
     this->parent->addChild(listview);
