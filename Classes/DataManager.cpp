@@ -34,18 +34,18 @@ void DataManager::set_bool_from_data(std::string key, bool val)
     ud->setBoolForKey(key.c_str(), val);
 };
 
-int DataManager::get_int_from_data(std::string key)
+int DataManager::get_int_from_data(std::string key, int _default)
 {
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
-    return ud->getIntegerForKey(key.c_str());
+    return ud->getIntegerForKey(key.c_str(), _default);
 };
 
-double DataManager::get_double_from_data(std::string key)
+double DataManager::get_double_from_data(std::string key, double _default)
 {
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
-    return ud->getDoubleForKey(key.c_str());
+    return ud->getDoubleForKey(key.c_str(), _default);
 }
 
 void DataManager::set_double_from_data(std::string key, double val)
@@ -53,6 +53,21 @@ void DataManager::set_double_from_data(std::string key, double val)
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
     ud->setDoubleForKey(key.c_str(), val);
+};
+
+
+std::string DataManager::get_string_from_data(std::string key, std::string _default)
+{
+    validate_key(key);
+    cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
+    return ud->getStringForKey(key.c_str(), _default);
+}
+
+void DataManager::set_string_from_data(std::string key, std::string val)
+{
+    validate_key(key);
+    cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
+    ud->setStringForKey(key.c_str(), val);
 };
 
 void DataManager::set_int_from_data(std::string key, int val)

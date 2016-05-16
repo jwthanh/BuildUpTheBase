@@ -20,6 +20,7 @@
 #include "BuildingsSideBar.h"
 
 #include "HouseBuilding.h"
+#include "DataManager.h"
 
 USING_NS_CC;
 
@@ -84,8 +85,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         //auto harvestable = (Harvestable*)this->getChildByName("harvestable");
         //harvestable->shatter();
 
-        auto shop_listview = dynamic_cast<ui::ListView*>(this->getChildByName("shop_listview"));
-        shop_listview->requestDoLayout();
+        DataManager::get_string_from_data("username");
 
     }
 }
