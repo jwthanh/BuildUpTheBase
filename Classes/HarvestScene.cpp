@@ -21,6 +21,7 @@
 
 #include "HouseBuilding.h"
 #include "DataManager.h"
+#include "Network.h"
 
 USING_NS_CC;
 
@@ -87,6 +88,13 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
         auto username = DataManager::get_string_from_data("username", "no username set");
         CCLOG("the existing username is %s", username.c_str());
+
+        auto server_url = "http://localhost:8080/users/"+username;
+
+        NetworkConsole::post_helper(server_url, "coins=123", [](std::string response)
+        {
+            CCLOG("reponse %s", response.c_str());
+        });
 
     }
 }

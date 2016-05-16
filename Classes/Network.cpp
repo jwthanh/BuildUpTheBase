@@ -26,6 +26,8 @@ bool Request::init(Type request_type, std::string url, std::string data)
     this->_request = new network::HttpRequest();
     this->_request->setRequestType(rtype);
 
+    this->_request->setRequestData(data.c_str(), data.size());
+
     this->_request->setUrl(url.c_str());
     this->_request->setResponseCallback([this](network::HttpClient* sender, network::HttpResponse* response)
     {
@@ -74,7 +76,7 @@ Request* Request::create_get(std::string url)
 
 Request* Request::create_post(std::string url, std::string data)
 {
-    return Request::create(Type::GET, url, data);
+    return Request::create(Type::POST, url, data);
 }
 
 
@@ -126,9 +128,19 @@ cocos2d::Vec2 NetworkConsole::parse_vec2(std::string response_body)
     return input;
 }
 
-void NetworkConsole::send_helper(std::string url, std::function<void(std::string)> callback)
+void NetworkConsole::get_helper(std::string url, std::function<void(std::string)> callback)
 {
     auto request = Request::create_get(url);
+    request->set_callback(callback);
+
+    request->send();
+    request->retain();
+
+};
+
+void NetworkConsole::post_helper(std::string url, std::string payload, std::function<void(std::string)> callback)
+{
+    auto request = Request::create_post(url, payload);
     request->set_callback(callback);
 
     request->send();
@@ -143,7 +155,7 @@ void NetworkConsole::set_position(Node* node)
         node->setPosition(input);
     };
 
-    NetworkConsole::send_helper("localhost:8080/get_vec2", set_pos_cb);
+    NetworkConsole::get_helper("localhost:8080/get_vec2", set_pos_cb);
 }
 
 void NetworkConsole::get_string()

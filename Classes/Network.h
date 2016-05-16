@@ -56,7 +56,8 @@ public:
 
     static cocos2d::Vec2 parse_vec2(std::string response_body);
 
-    static void send_helper(std::string url, std::function<void(std::string)> callback);
+    static void get_helper(std::string url, std::function<void(std::string)> callback);
+    static void post_helper(std::string url, std::string payload, std::function<void(std::string)> callback);
 };
 
 #endif
