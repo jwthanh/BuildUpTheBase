@@ -76,16 +76,11 @@ bool Beatup::init()
     this->buildup->city = Buildup::init_city(this->buildup);
     this->buildup->city->update_buildings(0);
 
-    this->block_count = 0;
-
     this->level_been_won = false;
     this->level_been_lost = false;
 
     this->color_layer = LayerColor::create(Color4B(0, 0, 0, 25));
     this->addChild(this->color_layer);
-
-    this->punches_to_coin = 1;
-    this->punch_count = 0;
 
     this->shake_clock = new Clock(0.0f);
 
@@ -119,8 +114,6 @@ bool Beatup::init()
 
     this->coins = new std::vector<Coin*>();
     this->gores = new std::vector<Gore*>();
-
-    this->block_clock = new Clock(0.0f);
 
     this->setup_commands();
 
@@ -403,7 +396,6 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE) 
     {
-        this->toggle_is_blocking();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_H)
     {
@@ -504,15 +496,6 @@ void Beatup::update(float dt)
     };
 
     this->spawn_coin_clock->update(dt);
-
-    if (this->block_clock->is_active())
-    {
-        this->block_clock->update(dt);
-    }
-    else
-    {
-        this->set_is_blocking(false);
-    };
 
     this->stamina_clock->update(dt);
     if (this->stamina_clock->passed_threshold())
@@ -664,23 +647,6 @@ void Beatup::cycle_next_building(bool reverse)
     };
 };
 
-void Beatup::toggle_is_blocking()
-{
-    this->set_is_blocking(!this->is_blocking);
-};
-
-void Beatup::set_is_blocking(bool val)
-{
-    if (val)
-    {
-        this->block_clock->start_for_thres(1);
-    }
-    else
-    {
-        this->block_clock->reset();
-    }
-    this->is_blocking = val;
-};
 
 void Beatup::shake_screen(int intensity, bool left_angle)
 {

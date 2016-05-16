@@ -76,16 +76,11 @@ class Beatup : public GameLayer
         void update_buildup(float dt);
         void reset();
 
-        PunchLog* punch_log;
-
         void shake_screen(int intensity, bool left_angle);
         void shake_color(GLuint opacity);
 
 
         cocos2d::LayerColor* color_layer;
-
-        cocos2d::Sprite* shop_lbl;
-        cocos2d::Sprite* shop_banner;
 
 
         ProgressBar* progress_bar;
@@ -93,21 +88,9 @@ class Beatup : public GameLayer
         bool should_shake();
         Clock* shake_clock;
 
-        int block_count;
-
-        bool is_blocking = false;
-        Clock* block_clock;
-        void toggle_is_blocking();
-        void set_is_blocking(bool val);
-
         Clock* spawn_coin_clock;
 
-        std::vector<cocos2d::Sprite*>* slist;
-
         cocos2d::NodeGrid* node_grid;
-
-        float punches_to_coin; //1 punch to 1 coin 
-        int punch_count;
 
         void print_inventory();
         void hide_inventory();
@@ -123,11 +106,6 @@ class Beatup : public GameLayer
         int coins_banked;
 
         void cycle_next_building(bool reverse = false);
-
-        cocos2d::NodeGrid* left_fist_node_grid;
-        cocos2d::NodeGrid* right_fist_node_grid;
-        Fist* left_fist;
-        Fist* right_fist;
 
         Clock* stamina_clock;
         ProgressBar* stamina_prog;
