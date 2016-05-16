@@ -100,13 +100,13 @@ bool NuItem::init(cocos2d::Node* parent)
         //if theres no cost, move count up
         if (this->cost_lbl->getStringLength() == 0) {
             this->count_lbl->setPosition(this->cost_lbl->getPosition());
-            this->desc_lbl->setContentSize({ 300.0f, 44.0f });
+            this->desc_lbl->setContentSize({ 221.0f, 44.0f });
         };
 
         //if theres no count in place, widen description
         if (this->count_lbl->getStringLength() == 0)
         {
-            this->desc_lbl->setContentSize({ 300.0f, 44.0f });
+            this->desc_lbl->setContentSize({ 221.0f, 44.0f });
         }
     };
     this->schedule(reposition_labels, 0.1f, "reposition_labels");

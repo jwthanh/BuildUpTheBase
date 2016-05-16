@@ -9,27 +9,27 @@
           <AbstractNodeData Name="menu_item_btn" ActionTag="-490875392" Tag="21" IconVisible="False" LeftMargin="-400.0000" RightMargin="-400.0000" TopMargin="-100.0000" BottomMargin="-100.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="800.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="item_icon" ActionTag="647280568" Tag="14" IconVisible="False" LeftMargin="51.0000" RightMargin="685.0000" TopMargin="68.0000" BottomMargin="68.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="item_icon" ActionTag="647280568" Tag="14" IconVisible="False" LeftMargin="40.9999" RightMargin="695.0001" TopMargin="68.0000" BottomMargin="68.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
                 <Size X="64.0000" Y="64.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="83.0000" Y="100.0000" />
-                <Scale ScaleX="1.9981" ScaleY="1.8664" />
+                <Position X="72.9999" Y="100.0000" />
+                <Scale ScaleX="1.7500" ScaleY="1.7500" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1037" Y="0.5000" />
+                <PrePosition X="0.0912" Y="0.5000" />
                 <PreSize X="0.0800" Y="0.3200" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="title_panel" ActionTag="1455973353" Tag="15" IconVisible="False" LeftMargin="185.1844" RightMargin="364.8156" TopMargin="51.0865" BottomMargin="118.9135" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="250.0000" Y="30.0000" />
                 <Children>
-                  <AbstractNodeData Name="title_lbl" ActionTag="2133409854" Tag="16" IconVisible="False" LeftMargin="-15.0000" RightMargin="83.0000" TopMargin="1.5000" BottomMargin="5.5000" IsCustomSize="True" FontSize="19" LabelText="Example Item Title" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="182.0000" Y="23.0000" />
+                  <AbstractNodeData Name="title_lbl" ActionTag="2133409854" Tag="16" IconVisible="False" LeftMargin="-24.1612" RightMargin="87.8389" TopMargin="1.5000" BottomMargin="5.5000" IsCustomSize="True" FontSize="19" LabelText="Example Item Title" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="186.3223" Y="23.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="76.0000" Y="17.0000" />
+                    <Position X="68.9999" Y="17.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.3040" Y="0.5667" />
-                    <PreSize X="0.7280" Y="0.7667" />
+                    <PrePosition X="0.2760" Y="0.5667" />
+                    <PreSize X="0.7453" Y="0.7667" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
@@ -49,14 +49,14 @@
               <AbstractNodeData Name="description_panel" ActionTag="-65130128" Tag="17" IconVisible="False" LeftMargin="185.1844" RightMargin="314.8156" TopMargin="129.4048" BottomMargin="25.5952" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="300.0000" Y="45.0000" />
                 <Children>
-                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" UserData="300" Tag="20" IconVisible="False" LeftMargin="-16.0005" RightMargin="108.0005" TopMargin="-1.0000" BottomMargin="2.0000" IsCustomSize="True" FontSize="16" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="208.0000" Y="44.0000" />
-                    <AnchorPoint />
-                    <Position X="-16.0005" Y="2.0000" />
+                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" UserData="300" Tag="20" IconVisible="False" LeftMargin="-23.4844" RightMargin="102.4574" TopMargin="0.1568" BottomMargin="0.8432" IsCustomSize="True" FontSize="16" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="221.0271" Y="44.0000" />
+                    <AnchorPoint ScaleX="0.4977" ScaleY="0.5000" />
+                    <Position X="86.5189" Y="22.8432" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-0.0533" Y="0.0444" />
-                    <PreSize X="0.6933" Y="0.9778" />
+                    <PrePosition X="0.2884" Y="0.5076" />
+                    <PreSize X="0.7368" Y="0.9778" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
