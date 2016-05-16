@@ -332,6 +332,20 @@ void BaseScene::create_player_info_panel()
     update_gold_lbl(0);
 
     this->addChild(player_info_panel);
+
+    ui::TextField* username_input = dynamic_cast<ui::TextField*>(harvest_scene_editor->getChildByName("username_input"));
+    username_input->removeFromParent();
+    this->addChild(username_input);
+
+    auto textfield_listener = [username_input](Ref* target, ui::TextField::EventType evt)
+    {
+        if (evt == ui::TextField::EventType::INSERT_TEXT)
+        {
+           CCLOG("the text so far: %s", username_input->getString().c_str());
+        }
+    };
+    username_input->addEventListener(textfield_listener);
+
 };
 
 void BaseScene::create_building_pageview()

@@ -6,27 +6,7 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="shop_pos" ActionTag="60628340" Tag="266" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="200.6400" RightMargin="559.3600" TopMargin="-29.8560" BottomMargin="569.8560" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
-            <Size X="200.0000" Y="100.0000" />
-            <AnchorPoint />
-            <Position X="200.6400" Y="569.8560" />
-            <Scale ScaleX="1.0000" ScaleY="0.6351" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2090" Y="0.8904" />
-            <PreSize X="0.2083" Y="0.1563" />
-            <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="city_pos" ActionTag="-1746362178" Tag="77" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="760.0320" RightMargin="-0.0320" TopMargin="186.8480" BottomMargin="353.1520" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
-            <Size X="200.0000" Y="100.0000" />
-            <AnchorPoint />
-            <Position X="760.0320" Y="353.1520" />
-            <Scale ScaleX="1.0000" ScaleY="0.6351" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7917" Y="0.5518" />
-            <PreSize X="0.2083" Y="0.1563" />
-            <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="759.8344" RightMargin="0.1656" TopMargin="0.9990" BottomMargin="419.0010" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="760.0000" TopMargin="0.9990" BottomMargin="419.0010" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="220.0000" />
             <Children>
               <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="4.6829" RightMargin="4.6829" TopMargin="47.4259" BottomMargin="151.7059" IsCustomSize="True" FontSize="16" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -79,10 +59,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint />
-            <Position X="759.8344" Y="419.0010" />
+            <Position X="760.0000" Y="419.0010" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7915" Y="0.6547" />
+            <PrePosition X="0.7917" Y="0.6547" />
             <PreSize X="0.2083" Y="0.3438" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
@@ -283,6 +263,16 @@
             <PrePosition X="0.6094" Y="0.8672" />
             <PreSize X="0.1750" Y="0.0281" />
             <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="760.0000" TopMargin="221.3485" BottomMargin="399.8390" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="16" ctype="TextFieldObjectData">
+            <Size X="200.0000" Y="18.8125" />
+            <AnchorPoint />
+            <Position X="760.0000" Y="399.8390" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.7917" Y="0.6247" />
+            <PreSize X="0.2083" Y="0.0294" />
+            <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
