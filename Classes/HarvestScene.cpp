@@ -85,7 +85,8 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         //auto harvestable = (Harvestable*)this->getChildByName("harvestable");
         //harvestable->shatter();
 
-        DataManager::get_string_from_data("username");
+        auto username = DataManager::get_string_from_data("username", "no username set");
+        CCLOG("the existing username is %s", username.c_str());
 
     }
 }
@@ -335,13 +336,18 @@ void BaseScene::create_player_info_panel()
 
     ui::TextField* username_input = dynamic_cast<ui::TextField*>(harvest_scene_editor->getChildByName("username_input"));
     username_input->removeFromParent();
+    auto username = DataManager::get_string_from_data("username");
+    username_input->setString(username);
     this->addChild(username_input);
 
     auto textfield_listener = [username_input](Ref* target, ui::TextField::EventType evt)
     {
         if (evt == ui::TextField::EventType::INSERT_TEXT)
         {
-           CCLOG("the text so far: %s", username_input->getString().c_str());
+            std::string text = username_input->getString();
+            CCLOG("Updating username: %s", text.c_str());
+
+            DataManager::set_string_from_data("username", text);
         }
     };
     username_input->addEventListener(textfield_listener);
