@@ -200,8 +200,9 @@ bool ShopNuItem::init(Node* parent, std::string id_key)
     return true;
 }
 
-void ShopNuItem::post_shop_update(float dt)
+bool ShopNuItem::custom_status_check(float dt)
 {
+    return true;
 };
 
 void ShopNuItem::update_func(float dt)
@@ -230,7 +231,7 @@ void ShopNuItem::update_func(float dt)
         this->cost_lbl->setTextColor(Color4B::GRAY);
         this->button->setColor(Color3B::WHITE);
     } 
-    else if (total_coins < cost)
+    else if (total_coins < cost || !this->custom_status_check(dt))
     {
         try_set_enable(false);
         this->set_cost_lbl(beautify_double(std::round(this->get_cost())));
@@ -247,7 +248,6 @@ void ShopNuItem::update_func(float dt)
         this->button->setColor(Color3B::WHITE);
     };
 
-    this->post_shop_update(dt);
 
 
 }
@@ -705,21 +705,27 @@ void SalesmanShopNuItem::my_init_update_callback()
 
 }
 
-void SalesmanShopNuItem::post_shop_update(float dt)
+bool SalesmanShopNuItem::custom_status_check(float dt)
 {
     spBuilding target_building = BUILDUP->get_target_building();
 
     // check if high enough building level to fit more
     bool is_enabled = false;
     res_count_t harvesters_owned = map_get(
-            target_building->salesmen,
-            { this->harv_type, target_building->punched_sub_type },
-            0);
-    if (harvesters_owned < target_building->get_storage_space()){
-            is_enabled = true;
-        };
+        target_building->salesmen,
+        {
+            this->harv_type,
+            target_building->punched_sub_type
+        },
+        0
+    );
 
-    this->try_set_enable(is_enabled);
+    if (harvesters_owned < target_building->get_storage_space())
+    {
+        is_enabled = true;
+    };
+
+    return is_enabled;
 };
 
 SalesmanShopNuItem* SalesmanShopNuItem::create(Node* parent, spBuilding building)
