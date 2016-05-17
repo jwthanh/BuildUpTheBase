@@ -399,7 +399,8 @@ void TechNuItem::update_func(float dt)
         return;
     };
 
-    bool tech_is_satisfied = this->technology->get_ingredient_requirements()->is_satisfied(this->building->ingredients);
+    auto ing_requirements = this->technology->get_ingredient_requirements();
+    bool tech_is_satisfied = ing_requirements->is_satisfied(this->building->ingredients);
     if (tech_is_satisfied){
         if (this->technology->get_been_unlocked() == false) {
             this->try_set_enable(true);
