@@ -101,6 +101,11 @@ void SideListView::setup_listviews()
             this->detail_listview->removeAllChildren();
             //this->shop_listview->removeAllChildren();
             //this->building_listview->removeAllChildren();
+
+            //scroll to top of all the listviews
+            this->detail_listview->scrollToTop(0, false);
+            this->shop_listview->scrollToTop(0, false);
+            this->building_listview->scrollToTop(0, false);
         }
     };
     this->parent->schedule(clean_children_on_target_change, update_delay, "clean_children");
