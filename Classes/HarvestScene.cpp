@@ -83,9 +83,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        //auto harvestable = (Harvestable*)this->getChildByName("harvestable");
-        //harvestable->shatter();
-
         auto username = DataManager::get_string_from_data("username", "no username set");
         CCLOG("the existing username is %s", username.c_str());
 
@@ -153,7 +150,7 @@ void BaseScene::create_goal_loadingbar()
 {
     Node* harvest_scene_editor = this->get_original_scene_from_editor();
 
-    ui::LoadingBar* loading_bar = (ui::LoadingBar*)harvest_scene_editor->getChildByName("goal_loadingbar");
+    ui::LoadingBar* loading_bar = dynamic_cast<ui::LoadingBar*>(harvest_scene_editor->getChildByName("goal_loadingbar"));
     loading_bar->setPercent(0.0f);
     loading_bar->removeFromParent();
 
@@ -319,7 +316,7 @@ void BaseScene::create_player_info_panel()
     const float update_delay = 0.1f;
 
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
-    ((Label*)player_gold_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+    static_cast<Label*>(player_gold_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
     auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
     auto update_gold_lbl = [player_gold_lbl, player_hp_lbl](float dt){
         //set gold
