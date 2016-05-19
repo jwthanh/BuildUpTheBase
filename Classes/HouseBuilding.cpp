@@ -589,6 +589,7 @@ void Buildup::post_update()
     {
         CCLOG("response from %s:\n %s", server_url.c_str(), response.c_str());
     });
+
 };
 
 //this isn't used anymore
