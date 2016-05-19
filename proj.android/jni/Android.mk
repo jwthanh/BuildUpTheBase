@@ -46,6 +46,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Updateable.cpp \
                    ../../Classes/Fighter.cpp \
                    ../../Classes/Animal.cpp \
+                   ../../Classes/Serializer.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
