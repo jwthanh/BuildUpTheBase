@@ -408,6 +408,8 @@ void BaseScene::create_building_pageview()
         auto building_image = dynamic_cast<ui::ImageView*>(building_panel->getChildByName("building_image"));
         building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
 
+        
+
         auto lvl_lbl = dynamic_cast<ui::Text*>(building_panel->getChildByName("level_lbl"));
         auto update_lvl_lbl = [create_count, lvl_lbl, building](float dt)
         {
