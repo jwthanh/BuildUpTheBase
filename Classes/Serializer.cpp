@@ -25,4 +25,7 @@ rj::Document BaseSerializer::get_document(std::string filename) const
 void BaseSerializer::save_document(std::string filename) const
 {
     if (filename == "") filename = this->filename;
+
+    //TODO make this use a document
+    FileIO::save_json(filename, NULL);
 }
