@@ -418,7 +418,7 @@ std::string Building::get_inventory()
 res_count_t Building::get_storage_space()
 {
     std::map<int, res_count_t> level_output = {
-        { 1, 10.0},
+        { 1, 25.0},
         { 2, 50.0},
         { 3, 500.0},
         { 4, 5000.0},
