@@ -38,6 +38,8 @@
 #include "Beatup.h"
 #include "Network.h"
 #include "Clock.h"
+#include <json/stringbuffer.h>
+#include <json/writer.h>
 
 USING_NS_CC;
 
@@ -535,17 +537,58 @@ void Buildup::update(float dt)
             auto server_url = "http://tankorsmash.webfactional.com/users/"+username;
             //auto server_url = "http://localhost:8080/users/"+username;
 
-            auto coins = (long long)BEATUP->get_total_coins();
-            std::stringstream data_ss;
-            data_ss << "coins=" << coins;
-            std::string data = data_ss.str();
-            NetworkConsole::post_helper(server_url, data.substr(0, data.find('.')), [server_url](std::string response)
-            {
-                CCLOG("response from %s:\n%s", server_url.c_str(), response.c_str());
-            });
+            this->post_update();
         };
 
     };
+};
+
+void Buildup::post_update()
+{
+    //Use username to auto update
+    auto username = DataManager::get_string_from_data("username", "");
+    CCLOG("the existing username is %s", username.c_str());
+
+    if (username == "") {
+        CCLOG("blank username, not going to update");
+        return;
+    }
+
+    //auto server_url = "http://tankorsmash.webfactional.com/users/"+username;
+    auto server_url = "http://localhost:8080/users/" + username;
+
+    //build up string of coins
+    auto coins = (long long)BEATUP->get_total_coins();
+    std::stringstream coin_stream;
+    coin_stream << coins;
+    std::string coins_string = coin_stream.str();
+    coins_string = coins_string.substr(0, coins_string.find('.'));
+
+    //create a json doc, set the { 'coins' : coins } json obj
+    rapidjson::Document doc = rapidjson::Document();
+    doc.SetObject();
+
+    //build the Values that become the key and values
+    rapidjson::Value key = rapidjson::Value(rapidjson::kStringType);
+    key.SetString("coins");
+    rapidjson::Value value = rapidjson::Value();
+    value.SetString(coins_string.c_str(), coins_string.size());
+
+    //all the member to the document
+    rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
+    doc.AddMember(key, value, allocator);
+
+    //write out the json string
+    rapidjson::StringBuffer buffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+    doc.Accept(writer);
+
+    NetworkConsole::post_helper(server_url,
+        buffer.GetString(),
+        [server_url](std::string response)
+    {
+        CCLOG("response from %s:\n %s", server_url.c_str(), response.c_str());
+    });
 };
 
 //this isn't used anymore

@@ -3,11 +3,11 @@
 #include "network/HttpClient.h"
 #include <json/document.h>
 
-#ifdef __ANDROID__
-    #include "curl/include/android/curl/curl.h"
-#else
-    #include "curl/include/win32/curl/curl.h"
-#endif
+// #ifdef __ANDROID__
+//     #include "curl/include/android/curl/curl.h"
+// #else
+//     #include "curl/include/win32/curl/curl.h"
+// #endif
 
 #include "cocos2d.h"
 
@@ -32,11 +32,15 @@ bool Request::init(Type request_type, std::string url, std::string data)
     this->_request = new network::HttpRequest();
     this->_request->setRequestType(rtype);
 
-    auto raw_data = curl_easy_escape(NULL, data.c_str(), data.size());
-    auto escaped_data = std::string(raw_data);
-    curl_free(raw_data);
+    //this may not be necessary
+    // auto raw_data = curl_easy_escape(NULL, data.c_str(), data.size());
+    // auto escaped_data = std::string(raw_data);
+    // curl_free(raw_data);
 
-    this->_request->setRequestData(escaped_data.c_str(), escaped_data.size());
+    this->_request->setRequestData(data.c_str(), data.size());
+    this->_request->setHeaders({
+        "Content-Type: application/json; charset=utf-8"
+    });
 
     this->_request->setUrl(url.c_str());
     this->_request->setResponseCallback([this](network::HttpClient* sender, network::HttpResponse* response)

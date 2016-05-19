@@ -144,6 +144,8 @@ class Buildup
         Buildup();
         void main_loop();
         void update(float dt);
+
+        void post_update();
 };
 
 template<typename from_V>

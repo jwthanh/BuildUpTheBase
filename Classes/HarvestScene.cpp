@@ -23,6 +23,9 @@
 #include "DataManager.h"
 #include "Network.h"
 
+#include "json/rapidjson.h"
+#include <json/stringbuffer.h>
+#include <json/writer.h>
 
 USING_NS_CC;
 
@@ -87,19 +90,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         auto username = DataManager::get_string_from_data("username", "no username set");
         CCLOG("the existing username is %s", username.c_str());
 
-        //auto server_url = "http://tankorsmash.webfactional.com/users/"+username;
-        auto server_url = "http://localhost:8080/users/"+username;
-
-        auto coins = (long long)BEATUP->get_total_coins();
-        std::stringstream params_ss;
-        params_ss << "coins=" << coins;
-        std::string params = params_ss.str();
-        params = params.substr(0, params.find('.'));
-
-        NetworkConsole::post_helper(server_url, params, [server_url](std::string response)
-        {
-            CCLOG("response from %s:\n %s", server_url.c_str(), response.c_str());
-        });
+        BUILDUP->post_update();
 
     }
 }
