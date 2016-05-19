@@ -23,6 +23,7 @@
 #include "DataManager.h"
 #include "Network.h"
 
+
 USING_NS_CC;
 
 Node* BaseScene::_harvest_scene_from_editor = NULL;
@@ -90,10 +91,12 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         auto server_url = "http://localhost:8080/users/"+username;
 
         auto coins = (long long)BEATUP->get_total_coins();
-        std::stringstream data_ss;
-        data_ss << "coins=" << coins;
-        std::string data = data_ss.str();
-        NetworkConsole::post_helper(server_url, data.substr(0, data.find('.')), [server_url](std::string response)
+        std::stringstream params_ss;
+        params_ss << "coins=" << coins;
+        std::string params = params_ss.str();
+        params = params.substr(0, params.find('.'));
+
+        NetworkConsole::post_helper(server_url, params, [server_url](std::string response)
         {
             CCLOG("response from %s:\n %s", server_url.c_str(), response.c_str());
         });
