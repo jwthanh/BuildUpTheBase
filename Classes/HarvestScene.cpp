@@ -87,11 +87,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        auto username = DataManager::get_string_from_data("username", "no username set");
-        CCLOG("the existing username is %s", username.c_str());
-
         BUILDUP->post_update();
-
     }
 }
 
@@ -346,7 +342,8 @@ void BaseScene::create_player_info_panel()
 
     auto textfield_listener = [username_input](Ref* target, ui::TextField::EventType evt)
     {
-        if (evt == ui::TextField::EventType::INSERT_TEXT)
+        if (evt == ui::TextField::EventType::INSERT_TEXT || 
+            evt == ui::TextField::EventType::DELETE_BACKWARD)
         {
             std::string text = username_input->getString();
             CCLOG("Updating username: %s", text.c_str());

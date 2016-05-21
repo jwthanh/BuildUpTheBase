@@ -526,19 +526,8 @@ void Buildup::update(float dt)
     if (this->server_clock->passed_threshold()){
         this->server_clock->reset();
 
-        //Use username to auto update
-        auto username = DataManager::get_string_from_data("username", "");
-        CCLOG("the existing username is %s", username.c_str());
-
-        if (username == "") {
-            CCLOG("blank username, not going to update");
-        }
-        else {
-            auto server_url = "http://tankorsmash.webfactional.com/users/"+username;
-            //auto server_url = "http://localhost:8080/users/"+username;
-
-            this->post_update();
-        };
+        //try to update remote server
+        this->post_update();
 
     };
 };
@@ -547,7 +536,7 @@ void Buildup::post_update()
 {
     //Use username to auto update
     auto username = DataManager::get_string_from_data("username", "");
-    CCLOG("the existing username is %s", username.c_str());
+    CCLOG("the existing username is '%s'", username.c_str());
 
     if (username == "") {
         CCLOG("blank username, not going to update");
