@@ -120,13 +120,13 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="759.2246" RightMargin="4.8860" TopMargin="244.0716" BottomMargin="372.9284" IsCustomSize="True" FontSize="16" LabelText="To Next Upgrade" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="759.2245" RightMargin="4.8861" TopMargin="281.0734" BottomMargin="335.9266" IsCustomSize="True" FontSize="16" LabelText="To Next Upgrade" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="195.8894" Y="23.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="857.1693" Y="384.4284" />
+            <Position X="857.1692" Y="347.4266" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8929" Y="0.6007" />
+            <PrePosition X="0.8929" Y="0.5429" />
             <PreSize X="0.2041" Y="0.0359" />
             <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
@@ -254,23 +254,23 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="773.1677" RightMargin="18.8323" TopMargin="268.5719" BottomMargin="353.4281" ProgressInfo="100" ctype="LoadingBarObjectData">
+          <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="773.1666" RightMargin="18.8334" TopMargin="305.5729" BottomMargin="316.4271" ProgressInfo="100" ctype="LoadingBarObjectData">
             <Size X="168.0000" Y="18.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="857.1677" Y="362.4281" />
+            <Position X="857.1666" Y="325.4271" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8929" Y="0.5663" />
+            <PrePosition X="0.8929" Y="0.5085" />
             <PreSize X="0.1750" Y="0.0281" />
             <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="760.0000" TopMargin="221.3485" BottomMargin="399.8390" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="16" ctype="TextFieldObjectData">
+          <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="760.0000" TopMargin="223.3485" BottomMargin="397.8390" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="16" ctype="TextFieldObjectData">
             <Size X="200.0000" Y="18.8125" />
             <AnchorPoint />
-            <Position X="760.0000" Y="399.8390" />
+            <Position X="760.0000" Y="397.8390" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7917" Y="0.6247" />
+            <PrePosition X="0.7917" Y="0.6216" />
             <PreSize X="0.2083" Y="0.0294" />
             <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
           </AbstractNodeData>

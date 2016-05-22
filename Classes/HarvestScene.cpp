@@ -336,9 +336,12 @@ void BaseScene::create_player_info_panel()
 
     ui::TextField* username_input = dynamic_cast<ui::TextField*>(harvest_scene_editor->getChildByName("username_input"));
     username_input->removeFromParent();
+    this->addChild(username_input);
+
+    username_input->setTextHorizontalAlignment(TextHAlignment::CENTER);
+
     auto username = DataManager::get_string_from_data("username");
     username_input->setString(username);
-    this->addChild(username_input);
 
     auto textfield_listener = [username_input](Ref* target, ui::TextField::EventType evt)
     {
