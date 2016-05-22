@@ -72,7 +72,7 @@
           <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="760.0000" TopMargin="540.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="100.0000" />
             <Children>
-              <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="4.2148" RightMargin="5.7852" TopMargin="0.7149" BottomMargin="73.1447" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="4.2148" RightMargin="5.7852" TopMargin="0.7150" BottomMargin="73.1447" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="26.1403" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="99.2148" Y="86.2149" />
@@ -120,14 +120,14 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="427.9999" RightMargin="218.0001" TopMargin="51.5002" BottomMargin="565.4998" IsCustomSize="True" FontSize="16" LabelText="To Next Upgrade" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="314.0000" Y="23.0000" />
+          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="759.2246" RightMargin="4.8860" TopMargin="244.0716" BottomMargin="372.9284" IsCustomSize="True" FontSize="16" LabelText="To Next Upgrade" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="195.8894" Y="23.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="584.9999" Y="576.9998" />
+            <Position X="857.1693" Y="384.4284" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6094" Y="0.9016" />
-            <PreSize X="0.3271" Y="0.0359" />
+            <PrePosition X="0.8929" Y="0.6007" />
+            <PreSize X="0.2041" Y="0.0359" />
             <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -254,13 +254,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="501.0001" RightMargin="290.9999" TopMargin="76.0000" BottomMargin="546.0000" ProgressInfo="100" ctype="LoadingBarObjectData">
+          <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="773.1677" RightMargin="18.8323" TopMargin="268.5719" BottomMargin="353.4281" ProgressInfo="100" ctype="LoadingBarObjectData">
             <Size X="168.0000" Y="18.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="585.0001" Y="555.0000" />
+            <Position X="857.1677" Y="362.4281" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6094" Y="0.8672" />
+            <PrePosition X="0.8929" Y="0.5663" />
             <PreSize X="0.1750" Y="0.0281" />
             <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
           </AbstractNodeData>

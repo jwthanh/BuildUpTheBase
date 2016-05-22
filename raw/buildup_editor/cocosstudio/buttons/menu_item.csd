@@ -22,7 +22,7 @@
               <AbstractNodeData Name="title_panel" ActionTag="1455973353" Tag="15" IconVisible="False" LeftMargin="185.1844" RightMargin="364.8156" TopMargin="51.0865" BottomMargin="118.9135" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="250.0000" Y="30.0000" />
                 <Children>
-                  <AbstractNodeData Name="title_lbl" ActionTag="2133409854" Tag="16" IconVisible="False" LeftMargin="-22.6598" RightMargin="86.3375" TopMargin="1.5001" BottomMargin="5.4999" IsCustomSize="True" FontSize="19" LabelText="Example Item Title" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="title_lbl" ActionTag="2133409854" Tag="16" IconVisible="False" LeftMargin="-22.6599" RightMargin="86.3376" TopMargin="1.5001" BottomMargin="5.4999" IsCustomSize="True" FontSize="19" LabelText="Example Item Title" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="186.3223" Y="23.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="70.5013" Y="16.9999" />
@@ -49,8 +49,8 @@
               <AbstractNodeData Name="description_panel" ActionTag="-65130128" Tag="17" IconVisible="False" LeftMargin="185.1844" RightMargin="314.8156" TopMargin="129.4048" BottomMargin="25.5952" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="300.0000" Y="45.0000" />
                 <Children>
-                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" UserData="300" Tag="20" IconVisible="False" LeftMargin="-21.9831" RightMargin="100.9560" TopMargin="0.1568" BottomMargin="0.8432" IsCustomSize="True" FontSize="16" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="221.0271" Y="44.0000" />
+                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" UserData="300" Tag="20" IconVisible="False" LeftMargin="-21.9864" RightMargin="100.9564" TopMargin="0.1568" BottomMargin="0.8432" IsCustomSize="True" FontSize="16" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="221.0300" Y="44.0000" />
                     <AnchorPoint ScaleX="0.4977" ScaleY="0.5000" />
                     <Position X="88.0202" Y="22.8432" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
