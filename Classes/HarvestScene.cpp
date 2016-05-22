@@ -39,6 +39,7 @@ bool BaseScene::init()
 
     this->create_info_panel();
     this->create_player_info_panel();
+    this->create_username_input();
 
     this->create_building_pageview();
     this->create_inventory_listview();
@@ -262,6 +263,31 @@ void BaseScene::create_info_panel()
     this->addChild(building_info_panel);
 };
 
+void BaseScene::create_username_input()
+{
+    ui::TextField* username_input = dynamic_cast<ui::TextField*>(this->get_original_scene_from_editor()->getChildByName("username_input"));
+    username_input->removeFromParent();
+    this->addChild(username_input);
+
+    username_input->setTextHorizontalAlignment(TextHAlignment::CENTER);
+
+    auto username = DataManager::get_string_from_data("username");
+    username_input->setString(username);
+
+    auto textfield_listener = [username_input](Ref* target, ui::TextField::EventType evt)
+        {
+            if (evt == ui::TextField::EventType::INSERT_TEXT || 
+                evt == ui::TextField::EventType::DELETE_BACKWARD)
+            {
+                std::string text = username_input->getString();
+                CCLOG("Updating username: %s", text.c_str());
+
+                DataManager::set_string_from_data("username", text);
+            }
+        };
+    username_input->addEventListener(textfield_listener);
+}
+
 void BaseScene::create_player_info_panel()
 {
     auto building = BUILDUP->get_target_building();
@@ -333,29 +359,6 @@ void BaseScene::create_player_info_panel()
     update_gold_lbl(0);
 
     this->addChild(player_info_panel);
-
-    ui::TextField* username_input = dynamic_cast<ui::TextField*>(harvest_scene_editor->getChildByName("username_input"));
-    username_input->removeFromParent();
-    this->addChild(username_input);
-
-    username_input->setTextHorizontalAlignment(TextHAlignment::CENTER);
-
-    auto username = DataManager::get_string_from_data("username");
-    username_input->setString(username);
-
-    auto textfield_listener = [username_input](Ref* target, ui::TextField::EventType evt)
-    {
-        if (evt == ui::TextField::EventType::INSERT_TEXT || 
-            evt == ui::TextField::EventType::DELETE_BACKWARD)
-        {
-            std::string text = username_input->getString();
-            CCLOG("Updating username: %s", text.c_str());
-
-            DataManager::set_string_from_data("username", text);
-        }
-    };
-    username_input->addEventListener(textfield_listener);
-
 };
 
 void BaseScene::create_building_pageview()
