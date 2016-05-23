@@ -5,8 +5,6 @@
 #include <json/stringbuffer.h>
 #include <json/writer.h>
 
-#include "cocos2d.h"
-
 #include "FileOperation.h"
 
 #include "HouseBuilding.h"

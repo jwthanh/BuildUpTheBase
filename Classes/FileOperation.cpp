@@ -27,5 +27,11 @@ void FileIO::save_json(std::string json_path, rapidjson::Document& document)
     document.Accept(writer);
     std::string str(buffer.GetString(), buffer.GetSize());
 
-    file_utils->writeStringToFile(str, json_path);
+    //Use the same folder UserDefaults is in, otherwise it saves in Resources
+    std::string full_path = cocos2d::FileUtils::getInstance()->getWritablePath() + json_path;
+    bool success = file_utils->writeStringToFile(str, full_path);
+    if (!success)
+    {
+        CCLOG("%s was not saved", full_path.c_str());
+    }
 }
