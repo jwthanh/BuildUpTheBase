@@ -116,7 +116,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
     float end_scale = this->initial_scale*0.85f;
     float duration = 0.5f;
 
-    res_count_t output = get_per_touch_output();
+    res_count_t output = this->get_per_touch_output();
 
     std::stringstream ss;
     ss << "+" << beautify_double(output) << " " << Ingredient::type_to_string(this->building->punched_sub_type);
@@ -537,6 +537,33 @@ std::string FightingHarvestable::get_sprite_path()
 void FightingHarvestable::animate_clip()
 {
     //Do nothing deliberately
+    float end_scale = this->initial_scale*0.85f;
+    float duration = 0.5f;
+
+    auto player = BUILDUP->fighter;
+    auto damage = player->attrs->damage->current_val;
+    res_count_t output = damage;
+
+    std::stringstream ss;
+    ss << beautify_double(output);
+
+    std::string floating_msg = ss.str();
+    auto floating_label = FloatingLabel::createWithTTF(floating_msg, DEFAULT_FONT, 30);
+
+    auto fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
+    auto pos = fighter_node->convertToWorldSpace(this->getTouchEndPosition());
+    pos.x += cocos2d::rand_minus1_1()*20.0f;
+    pos.y += cocos2d::rand_minus1_1()*20.0f;
+
+#ifdef __ANDROID__
+    pos.y += 75.0f; //dont get hidden by finger
+#endif
+
+    floating_label->setPosition(pos);
+    floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+    this->getParent()->addChild(floating_label);
+    floating_label->do_float();
+
 };
 
 void FightingHarvestable::animate_harvest()
@@ -634,38 +661,6 @@ void FightingHarvestable::on_harvest()
     auto damage = this->get_per_touch_output();
     player->attrs->damage->set_vals(damage);
 
-    float end_scale = this->initial_scale*0.85f;
-    float duration = 0.5f;
-
-    res_count_t output = damage;
-
-    std::stringstream ss;
-    ss << beautify_double(output);
-
-    std::string floating_msg = ss.str();
-    auto scale_to = ScaleTo::create(duration, end_scale);
-    auto ease = EaseElasticOut::create(scale_to, duration);
-    this->runAction(ease);
-
-    auto floating_label = FloatingLabel::createWithTTF(floating_msg, DEFAULT_FONT, 30);
-
-    auto fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
-    auto pos = fighter_node->convertToWorldSpace(this->getTouchEndPosition());
-    pos.x += cocos2d::rand_minus1_1()*20.0f;
-    pos.y += cocos2d::rand_minus1_1()*20.0f;
-
-#ifdef __ANDROID__
-    pos.y += 75.0f; //dont get hidden by finger
-#endif
-
-    floating_label->setPosition(pos);
-    floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
-    this->getParent()->addChild(floating_label);
-    floating_label->do_float();
-
-
-
-
     auto battle = std::make_shared<Battle>();
     battle->combatants.push_back(player);
 
@@ -686,7 +681,7 @@ void FightingHarvestable::animate_touch_end(cocos2d::Touch* touch)
 
 res_count_t FightingHarvestable::get_per_touch_output()
 {
-    res_count_t base = 10.0L;
+    res_count_t base = 5.0L;
 
     auto tech_map = this->building->techtree->get_tech_map();
     res_count_t times_doubled = map_get(tech_map, Technology::SubType::CombatDamage, 0L);
