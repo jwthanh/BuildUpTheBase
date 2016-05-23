@@ -5,36 +5,6 @@
 #include "GameLayer.h"
 #include "constants.h"
 
-
-class BaseMenu;
-
-class FacialFeature;
-class Shield;
-class Fist;
-class Clock;
-
-class Coin;
-class Gore;
-
-class PunchLog;
-struct PunchLogItem;
-
-class ProgressBar;
-class RocketWeapon;
-class GrenadeWeapon;
-class FistWeapon;
-
-class WeaponButton;
-
-class Quest;
-class Level;
-
-class FighterNode;
-class Buildup;
-class Building;
-class Fighter;
-
-
 class Beatup : public GameLayer
 {
 
@@ -100,10 +70,6 @@ class Beatup : public GameLayer
 
 
         cocos2d::Node* face_fight_node;
-
-        std::vector<Coin*>* coins;
-        std::vector<Gore*>* gores;
-        int coins_banked;
 
         void cycle_next_building(bool reverse = false);
 

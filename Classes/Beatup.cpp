@@ -111,10 +111,6 @@ bool Beatup::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-
-    this->coins = new std::vector<Coin*>();
-    this->gores = new std::vector<Gore*>();
-
     this->setup_commands();
 
     this->has_been_initialized = true;
