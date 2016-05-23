@@ -339,7 +339,7 @@ void SideListView::setup_detail_listview_as_recipes()
 
         if (target_building->name == "The Arena")
         {
-            spTechnology combat_dmg = std::make_shared<Technology>(Technology::SubType::ClickDoublePower);
+            spTechnology combat_dmg = std::make_shared<Technology>(Technology::SubType::CombatDamage);
             spRecipe recipe = std::make_shared<Recipe>("combat_damage", "no desc for tech recipe");
             recipe->components = mistIngredient({
                 {Ingredient::SubType::Soul, 2}

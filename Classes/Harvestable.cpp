@@ -631,7 +631,7 @@ void FightingHarvestable::on_harvest()
 {
     //TODO name fighter to player_avatar or something
     auto player = BUILDUP->fighter;
-    player->attrs->damage->set_vals(10);
+    player->attrs->damage->set_vals(this->get_per_touch_output());
 
     auto battle = std::make_shared<Battle>();
     battle->combatants.push_back(player);
@@ -651,6 +651,19 @@ void FightingHarvestable::animate_touch_end(cocos2d::Touch* touch)
 {
     //do nothing
 };
+
+res_count_t FightingHarvestable::get_per_touch_output()
+{
+    res_count_t base = 10.0L;
+
+    auto tech_map = this->building->techtree->get_tech_map();
+    res_count_t times_doubled = map_get(tech_map, Technology::SubType::CombatDamage, 0L);
+    if (times_doubled > 0){
+        base += 2.0L * times_doubled;
+    };
+
+    return base;
+}
 
 std::string UndeadHarvestable::get_sprite_path()
 {

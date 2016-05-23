@@ -128,6 +128,7 @@ class FightingHarvestable : public Harvestable
         virtual void animate_touch_end(cocos2d::Touch* touch);
 
         virtual void on_harvest() override;
+        res_count_t get_per_touch_output();
 };
 
 class UndeadHarvestable : public Harvestable
