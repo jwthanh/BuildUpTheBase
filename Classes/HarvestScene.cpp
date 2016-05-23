@@ -144,26 +144,23 @@ void BaseScene::create_goal_loadingbar()
 {
     Node* harvest_scene_editor = this->get_original_scene_from_editor();
 
-    ui::LoadingBar* loading_bar = dynamic_cast<ui::LoadingBar*>(harvest_scene_editor->getChildByName("goal_loadingbar"));
+    auto progress_panel = (ui::Layout*)harvest_scene_editor->getChildByName("progress_panel");
+    progress_panel->removeFromParent();
+    this->addChild(progress_panel);
+
+    ui::LoadingBar* loading_bar = dynamic_cast<ui::LoadingBar*>(progress_panel->getChildByName("goal_loadingbar"));
     loading_bar->setPercent(0.0f);
-    loading_bar->removeFromParent();
     loading_bar->setTouchEnabled(true);
 
-    loading_bar->addTouchEventListener([this, loading_bar](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType evt)
+    progress_panel->addTouchEventListener([this](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
-
             float coin_goal = scale_number(10, BUILDUP->get_target_building()->building_level, 15);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
-            loading_bar->setPercent(percentage);
-
             if (percentage >= 100.0f) {
                 this->sidebar->toggle_buttons(this->sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
             }
-            else {
-                //this->sidebar;
-            };
         }
 
     });
@@ -185,8 +182,11 @@ void BaseScene::create_goal_loadingbar()
         };
     loading_bar->schedule(update_loading_bar, 0.1f, "loadingbar_update");
     update_loading_bar(0);
-    
-    this->addChild(loading_bar);
+
+    this->recipe_lbl = dynamic_cast<ui::Text*>(progress_panel->getChildByName("upgrade_lbl"));
+    this->recipe_lbl->setString("");
+
+    ((Label*)this->recipe_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
 }
 
 Node* BaseScene::get_original_scene_from_editor()
@@ -834,10 +834,4 @@ void HarvestScene::add_harvestable()
 void HarvestScene::create_recipe_lbl()
 {
     Node* harvest_scene_editor = this->get_original_scene_from_editor();
-    this->recipe_lbl = dynamic_cast<ui::Text*>(harvest_scene_editor->getChildByName("recipe_lbl"));
-    this->recipe_lbl->removeFromParent();
-    this->recipe_lbl->setString("");
-
-    ((Label*)this->recipe_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
-    this->addChild(recipe_lbl);
 }

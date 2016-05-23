@@ -120,22 +120,10 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="recipe_lbl" ActionTag="-2107902589" Tag="16" IconVisible="False" LeftMargin="759.2245" RightMargin="4.8861" TopMargin="281.0734" BottomMargin="335.9266" IsCustomSize="True" FontSize="16" LabelText="To Next Upgrade" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="195.8894" Y="23.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="857.1692" Y="347.4266" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8929" Y="0.5429" />
-            <PreSize X="0.2041" Y="0.0359" />
-            <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="building_pageview" ActionTag="-1705781852" Tag="40" IconVisible="False" LeftMargin="760.0009" RightMargin="-0.0009" TopMargin="339.9999" BottomMargin="100.0001" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="PageViewObjectData">
+          <AbstractNodeData Name="building_pageview" ActionTag="-1705781852" Tag="40" IconVisible="False" LeftMargin="760.0007" RightMargin="-0.0007" TopMargin="340.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="PageViewObjectData">
             <Size X="200.0000" Y="200.0000" />
             <AnchorPoint />
-            <Position X="760.0009" Y="100.0001" />
+            <Position X="760.0007" Y="100.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7917" Y="0.1563" />
@@ -254,16 +242,6 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="773.1666" RightMargin="18.8334" TopMargin="305.5729" BottomMargin="316.4271" ProgressInfo="100" ctype="LoadingBarObjectData">
-            <Size X="168.0000" Y="18.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="857.1666" Y="325.4271" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8929" Y="0.5085" />
-            <PreSize X="0.1750" Y="0.0281" />
-            <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
-          </AbstractNodeData>
           <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="760.0000" TopMargin="223.3485" BottomMargin="397.8390" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="16" ctype="TextFieldObjectData">
             <Size X="200.0000" Y="18.8125" />
             <AnchorPoint />
@@ -273,6 +251,43 @@
             <PrePosition X="0.7917" Y="0.6216" />
             <PreSize X="0.2083" Y="0.0294" />
             <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="progress_panel" ActionTag="150151942" Tag="27" IconVisible="False" LeftMargin="759.9999" RightMargin="0.0001" TopMargin="264.9998" BottomMargin="300.0002" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+            <Size X="200.0000" Y="75.0000" />
+            <Children>
+              <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="18.4350" RightMargin="13.5650" TopMargin="40.3520" BottomMargin="16.6480" ProgressInfo="100" ctype="LoadingBarObjectData">
+                <Size X="168.0000" Y="18.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="102.4350" Y="25.6480" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5122" Y="0.3420" />
+                <PreSize X="0.8400" Y="0.2400" />
+                <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="upgrade_lbl" ActionTag="-61553329" Tag="28" IconVisible="False" LeftMargin="2.0141" RightMargin="2.0965" TopMargin="2.3925" BottomMargin="49.6075" IsCustomSize="True" FontSize="16" LabelText="To Next Upgrade" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="195.8894" Y="23.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="99.9588" Y="61.1075" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4998" Y="0.8148" />
+                <PreSize X="0.9794" Y="0.3067" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position X="759.9999" Y="300.0002" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.7917" Y="0.4688" />
+            <PreSize X="0.2083" Y="0.1172" />
+            <SingleColor A="255" R="150" G="200" B="255" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

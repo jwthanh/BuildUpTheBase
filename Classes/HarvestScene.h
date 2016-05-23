@@ -27,7 +27,10 @@ class BaseScene : public GameLayer
 
         std::shared_ptr<SideListView> sidebar;
 
+        cocos2d::ui::Text* recipe_lbl;
+        spRecipe target_recipe;
         void create_goal_loadingbar();
+
         void create_info_panel();
         void create_username_input();
         void create_player_info_panel();
@@ -50,8 +53,6 @@ class HarvestScene : public BaseScene
         CREATE_FUNC(HarvestScene);
         virtual bool init();
         virtual void update(float dt);
-        cocos2d::ui::Text* recipe_lbl;
-        spRecipe target_recipe;
 
         void create_recipe_lbl();
 
