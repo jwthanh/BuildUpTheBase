@@ -150,7 +150,6 @@ void BaseScene::create_goal_loadingbar()
 
     ui::LoadingBar* loading_bar = dynamic_cast<ui::LoadingBar*>(progress_panel->getChildByName("goal_loadingbar"));
     loading_bar->setPercent(0.0f);
-    loading_bar->setTouchEnabled(true);
 
     progress_panel->addTouchEventListener([this](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType evt)
     {
