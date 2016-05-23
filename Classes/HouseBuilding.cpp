@@ -638,19 +638,19 @@ Village* Buildup::init_city(Buildup* buildup)
         {
             "The Farm", "the_farm", Ingredient::SubType::Grain
         }, {
+            "The Arena", "the_arena", Ingredient::SubType::Sand
+        }, {
+            "The Underscape", "the_underscape", Ingredient::SubType::Blood
+        }, {
             "The Marketplace", "the_marketplace", Ingredient::SubType::Seed
         }, {
             "The Dump", "the_dump", Ingredient::SubType::Fly
         }, {
             "The Workshop", "the_workshop", Ingredient::SubType::Seed
         }, {
-            "The Arena", "the_arena", Ingredient::SubType::Sand
-        }, {
             "The Mine", "the_mine", Ingredient::SubType::Copper
         }, {
             "The Graveyard", "the_graveyard", Ingredient::SubType::Flesh
-        }, {
-            "The Underscape", "the_underscape", Ingredient::SubType::Blood
         }, {
             "The Forest", "the_forest", Ingredient::SubType::Berry
         }

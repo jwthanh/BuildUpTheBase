@@ -516,6 +516,7 @@ bool FightingHarvestable::init()
     this->enemy->team = Fighter::TeamTwo;
     this->enemy->sprite_name = "ogre10x10.png";
     this->enemy->attrs->health->set_vals(20);
+    this->enemy->attrs->damage->set_vals(3);
 
     FighterNode* fighter_node = FighterNode::create(this->enemy);
     fighter_node->setScale(0.25f);
@@ -600,7 +601,8 @@ void FightingHarvestable::shatter()
     this->enemy = std::make_shared<Fighter>("Challenger");
     this->enemy->team = Fighter::TeamTwo;
     this->enemy->sprite_name = "harvester.png";
-    this->enemy->attrs->health->set_vals(30);
+    this->enemy->attrs->health->set_vals(20);
+    this->enemy->attrs->damage->set_vals(3);
 
     FighterNode* fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
     fighter_node->set_fighter(this->enemy);
