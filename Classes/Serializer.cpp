@@ -8,6 +8,7 @@
 #include "FileOperation.h"
 
 #include "HouseBuilding.h"
+#include <sstream>
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -93,8 +94,34 @@ void BuildingSerializer::serialize_building_level(rapidjson::Document& doc)
 
 void BuildingSerializer::serialize_ingredients(rapidjson::Document& doc)
 {
+    for (auto mist : this->building->ingredients)
+    {
+        IngredientSubType sub_type = mist.first;
+        res_count_t count = mist.second;
+
+        this->set_double(doc, Ingredient::type_to_string(sub_type), count);
+    }
 }
 
 void BuildingSerializer::serialize_workers(rapidjson::Document& doc)
 {
+    for (auto mist : this->building->harvesters)
+    {
+        std::pair<WorkerSubType, IngredientSubType> sub_type = mist.first;
+        res_count_t count = mist.second;
+
+        std::stringstream ss;
+        ss << "harvester_" << Ingredient::type_to_string(sub_type.second) << "_" << static_cast<int>(sub_type.first);
+        this->set_double(doc, ss.str(), count);
+    }
+
+    for (auto mist : this->building->salesmen)
+    {
+        std::pair<WorkerSubType, IngredientSubType> sub_type = mist.first;
+        res_count_t count = mist.second;
+
+        std::stringstream ss;
+        ss << "salesmen_" << Ingredient::type_to_string(sub_type.second) << "_" << static_cast<int>(sub_type.first);
+        this->set_double(doc, ss.str(), count);
+    }
 }
