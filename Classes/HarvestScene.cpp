@@ -471,6 +471,8 @@ void BaseScene::create_inventory_listview()
 
             auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
             new_item_panel->setName(str_type);
+            auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
+            dynamic_cast<Label*>(item_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
 
             //if there's less than 1 ingredient, hide the item panel altogether
             if (BUILDUP->get_target_building()->ingredients[ing_type] <= 0)
