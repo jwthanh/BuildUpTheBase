@@ -26,6 +26,7 @@
 #include "json/rapidjson.h"
 #include <json/stringbuffer.h>
 #include <json/writer.h>
+#include "Serializer.h"
 
 USING_NS_CC;
 
@@ -88,7 +89,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        BUILDUP->post_update();
+        // BUILDUP->post_update();
+        auto bldg_serializer = BuildingSerializer("test_building.json", BUILDUP->get_target_building());
+        bldg_serializer.serialize();
     }
 }
 
