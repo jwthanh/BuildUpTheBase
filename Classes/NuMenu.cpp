@@ -388,7 +388,9 @@ void TechNuItem::other_init(spTechnology technology)
 
         //TODO fix this duplicating techs already in the vector, might need to
         //go to a map like resources
-        this->building->techtree->technologies.push_back(this->technology);
+        //this->building->techtree->technologies.push_back(this->technology);
+        res_count_t num_researched = map_get(this->building->techtree->tech_map, this->technology->sub_type, 0.0L);
+        this->building->techtree->tech_map[this->technology->sub_type] = num_researched + 1;
     });
 
 }

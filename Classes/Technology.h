@@ -15,7 +15,9 @@ class TechTree
     public:
         TechTree();
 
+
         vsTechnology technologies;
+        TechMap tech_map;
 
         TechMap get_tech_map();
 

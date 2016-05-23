@@ -92,7 +92,7 @@ bool Harvestable::should_shatter()
 void Harvestable::on_harvest()
 {
     //this is on every click
-    this->building->create_ingredients(this->building->punched_sub_type, 1);
+    this->building->create_ingredients(this->building->punched_sub_type, this->get_per_touch_output());
 
     //this should be on shatter eventually, to line up with the floating label
     GameLogic::getInstance()->add_total_harvests(1);
