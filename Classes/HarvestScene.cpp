@@ -147,6 +147,26 @@ void BaseScene::create_goal_loadingbar()
     ui::LoadingBar* loading_bar = dynamic_cast<ui::LoadingBar*>(harvest_scene_editor->getChildByName("goal_loadingbar"));
     loading_bar->setPercent(0.0f);
     loading_bar->removeFromParent();
+    loading_bar->setTouchEnabled(true);
+
+    loading_bar->addTouchEventListener([this, loading_bar](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType evt)
+    {
+        if (evt == ui::Widget::TouchEventType::ENDED)
+        {
+
+            float coin_goal = scale_number(10, BUILDUP->get_target_building()->building_level, 15);
+            float percentage = BEATUP->get_total_coins() / coin_goal * 100;
+            loading_bar->setPercent(percentage);
+
+            if (percentage >= 100.0f) {
+                this->sidebar->toggle_buttons(this->sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
+            }
+            else {
+                //this->sidebar;
+            };
+        }
+
+    });
 
     auto update_loading_bar = [this, loading_bar](float dt)
         {
@@ -548,7 +568,7 @@ void BaseScene::create_inventory_listview()
 void BaseScene::create_shop_listview()
 {
 
-    SideListView* sidebar = new SideListView(this, BUILDUP->get_target_building());
+    this->sidebar = std::make_shared<SideListView>(this, BUILDUP->get_target_building());
 
     ui::ListView* shop_listview = sidebar->shop_listview;
     ui::ListView* detail_listview = sidebar->detail_listview;

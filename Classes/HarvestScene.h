@@ -5,6 +5,8 @@
 #include "GameLayer.h"
 #include "Resources.h"
 
+class SideListView;
+
 class BaseScene : public GameLayer
 {
     private:
@@ -22,6 +24,8 @@ class BaseScene : public GameLayer
         virtual void onEnter() override;
         virtual void onSwipeLeft(float dt) override;
         virtual void onSwipeRight(float dt) override;
+
+        std::shared_ptr<SideListView> sidebar;
 
         void create_goal_loadingbar();
         void create_info_panel();

@@ -43,35 +43,37 @@ ui::Button* SideListView::_create_button(std::string node_name)
     return button;
 };
 
+void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
+{
+    if (evt == ui::Widget::TouchEventType::ENDED) {
+        this->shop_listview->setVisible(false);
+        this->detail_listview->setVisible(false);
+        this->building_listview->setVisible(false);
+
+        this->tab_shop_btn->setEnabled(true);
+        this->tab_detail_btn->setEnabled(true);
+        this->tab_building_btn->setEnabled(true);
+
+        ui::Button* target_button = dynamic_cast<ui::Button*>(target);
+        target_button->setEnabled(false);
+
+        if (target_button == this->tab_shop_btn) { this->shop_listview->setVisible(true); }
+        else if (target_button == this->tab_detail_btn) { this->detail_listview->setVisible(true); }
+        else if (target_button == this->tab_building_btn) { this->building_listview->setVisible(true); }
+    };
+};
+
+
 void SideListView::setup_tab_buttons()
 {
-    auto toggle_buttons = [this](Ref* target, ui::Widget::TouchEventType evt) {
-        if (evt == ui::Widget::TouchEventType::ENDED) {
-            this->shop_listview->setVisible(false);
-            this->detail_listview->setVisible(false);
-            this->building_listview->setVisible(false);
-
-            this->tab_shop_btn->setEnabled(true);
-            this->tab_detail_btn->setEnabled(true);
-            this->tab_building_btn->setEnabled(true);
-
-            ui::Button* target_button = dynamic_cast<ui::Button*>(target);
-            target_button->setEnabled(false);
-
-            if (target_button == this->tab_shop_btn) { this->shop_listview->setVisible(true); }
-            else if (target_button == this->tab_detail_btn) { this->detail_listview->setVisible(true); }
-            else if (target_button == this->tab_building_btn) { this->building_listview->setVisible(true); }
-        };
-    };
-
     this->tab_shop_btn = this->_create_button("tab_1_btn");
-    this->tab_shop_btn->addTouchEventListener(toggle_buttons);
+    this->tab_shop_btn->addTouchEventListener(CC_CALLBACK_2(SideListView::toggle_buttons, this));
 
     this->tab_detail_btn = this->_create_button("tab_2_btn");
-    this->tab_detail_btn->addTouchEventListener(toggle_buttons);
+    this->tab_detail_btn->addTouchEventListener(CC_CALLBACK_2(SideListView::toggle_buttons, this));
 
     this->tab_building_btn = this->_create_button("tab_3_btn");
-    this->tab_building_btn->addTouchEventListener(toggle_buttons);
+    this->tab_building_btn->addTouchEventListener(CC_CALLBACK_2(SideListView::toggle_buttons, this));
 
     //prepress the shop button
     toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);

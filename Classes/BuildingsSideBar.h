@@ -3,6 +3,7 @@
 #define BUILDINGSSIDEBAR_H
 #include <string>
 #include <memory>
+#include <cocos2d/cocos/ui/UIWidget.h>
 
 namespace cocos2d
 {
@@ -41,6 +42,7 @@ class SideListView
         virtual cocos2d::ui::ListView* _create_listview(std::string node_name);
         virtual cocos2d::ui::Button* _create_button(std::string node_name);
 
+        void toggle_buttons(cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType evt);
         void setup_tab_buttons();
 
         void setup_listviews();
