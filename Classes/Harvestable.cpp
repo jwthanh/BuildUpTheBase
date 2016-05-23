@@ -631,11 +631,43 @@ void FightingHarvestable::on_harvest()
 {
     //TODO name fighter to player_avatar or something
     auto player = BUILDUP->fighter;
-    player->attrs->damage->set_vals(this->get_per_touch_output());
+    auto damage = this->get_per_touch_output();
+    player->attrs->damage->set_vals(damage);
+
+    float end_scale = this->initial_scale*0.85f;
+    float duration = 0.5f;
+
+    res_count_t output = damage;
+
+    std::stringstream ss;
+    ss << beautify_double(output);
+
+    std::string floating_msg = ss.str();
+    auto scale_to = ScaleTo::create(duration, end_scale);
+    auto ease = EaseElasticOut::create(scale_to, duration);
+    this->runAction(ease);
+
+    auto floating_label = FloatingLabel::createWithTTF(floating_msg, DEFAULT_FONT, 30);
+
+    auto fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
+    auto pos = fighter_node->convertToWorldSpace(this->getTouchEndPosition());
+    pos.x += cocos2d::rand_minus1_1()*20.0f;
+    pos.y += cocos2d::rand_minus1_1()*20.0f;
+
+#ifdef __ANDROID__
+    pos.y += 75.0f; //dont get hidden by finger
+#endif
+
+    floating_label->setPosition(pos);
+    floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+    this->getParent()->addChild(floating_label);
+    floating_label->do_float();
+
+
+
 
     auto battle = std::make_shared<Battle>();
     battle->combatants.push_back(player);
-    auto fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
 
     battle->combatants.push_back(this->enemy);
 
@@ -662,7 +694,7 @@ res_count_t FightingHarvestable::get_per_touch_output()
         base += 2.0L * times_doubled;
     };
 
-    return base;
+    return std::floor(base + (base*0.15*CCRANDOM_MINUS1_1()));
 }
 
 std::string UndeadHarvestable::get_sprite_path()
