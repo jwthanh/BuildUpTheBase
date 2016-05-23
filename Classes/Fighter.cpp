@@ -196,15 +196,17 @@ void Battle::fight(spFighter left, spFighter right)
     ss << left->name << " vs " << right->name;
 
     double& health = right->attrs->health->current_val;
-    auto dmg = left->attrs->damage->current_val;
+    double dmg = left->attrs->damage->current_val;
 
     if (left->has_sword)
     {
         dmg *= 2;
     };
-    health -= ceil(cocos2d::rand_0_1() * dmg);
+    double adjusted_dmg = ceil(cocos2d::rand_0_1() * dmg);
+    health -= adjusted_dmg;
 
-    ss << " " << right->name << " at " << right->attrs->health->current_val << " hp;";
+    ss << " " << right->name << " at " << right->attrs->health->current_val << " hp;" << std::endl;
+    ss << " " << right->name << " dealing " << adjusted_dmg << " dmg;";
 
     if (right->combat->is_dead())
     {
@@ -216,6 +218,7 @@ void Battle::fight(spFighter left, spFighter right)
     }
 
     //printj(ss.str());
+    CCLOG("clog: %s", ss.str().c_str());
 };
 
 void Battle::do_battle()

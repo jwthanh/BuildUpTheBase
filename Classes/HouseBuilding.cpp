@@ -670,12 +670,12 @@ Village* Buildup::init_city(Buildup* buildup)
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer", WorkerSubType::ZERO));
     buildup->set_target_building(farm);
 
-    buildup->fighter = std::make_shared<Fighter>("Fighter");
+    buildup->fighter = std::make_shared<Fighter>("PC");
     buildup->fighter->sprite_name = "townsmen8x8.png";
     buildup->fighter->team = Fighter::TeamOne;
     buildup->fighter->attrs->health->set_vals(100);
 
-    buildup->brawler = std::make_shared<Fighter>("Brawler");
+    buildup->brawler = std::make_shared<Fighter>("BRAWLER");
     buildup->brawler->team = Fighter::TeamOne;
     buildup->brawler->sprite_name = "ogre10x10.png";
     buildup->brawler->attrs->health->set_vals(200);

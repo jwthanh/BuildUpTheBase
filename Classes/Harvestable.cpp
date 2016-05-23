@@ -631,6 +631,7 @@ void FightingHarvestable::on_harvest()
 {
     //TODO name fighter to player_avatar or something
     auto player = BUILDUP->fighter;
+    player->attrs->damage->set_vals(10);
 
     auto battle = std::make_shared<Battle>();
     battle->combatants.push_back(player);
