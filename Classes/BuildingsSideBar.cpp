@@ -339,19 +339,19 @@ void SideListView::setup_detail_listview_as_recipes()
 
         if (target_building->name == "The Arena")
         {
-            spTechnology double_click_pwr = std::make_shared<Technology>(Technology::SubType::ClickDoublePower);
+            spTechnology combat_dmg = std::make_shared<Technology>(Technology::SubType::ClickDoublePower);
             spRecipe recipe = std::make_shared<Recipe>("combat_damage", "no desc for tech recipe");
             recipe->components = mistIngredient({
-                {Ingredient::SubType::Seed, 10}
+                {Ingredient::SubType::Soul, 2}
             });
-            double_click_pwr->set_ingredient_requirements(recipe);
+            combat_dmg->set_ingredient_requirements(recipe);
 
             nuitems_config.push_back({
-                double_click_pwr,
+                combat_dmg,
                 DetailType::Tech,
                 {
                     "Buy Sword",
-                    "Increases combat damage"
+                    "Increases combat damage\n-- costs 2 souls"
                 } });
         };
 
