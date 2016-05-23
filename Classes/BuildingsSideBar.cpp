@@ -326,7 +326,12 @@ void SideListView::setup_detail_listview_as_recipes()
                 {
                     health->add_to_current_val(5);
                 }
-                CCLOG("regen from blood oath");
+                else
+                {
+                    //refund the cost
+                    spBuilding target_building = BUILDUP->get_target_building();
+                    target_building->create_ingredients(Ingredient::SubType::Blood, 10);
+                };
             };
             nuitems_config.push_back({
                 blood_oath,
