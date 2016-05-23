@@ -21,6 +21,8 @@ class BaseSerializer
         rj::Document get_document(std::string filename = "") const;
         void save_document(rj::Document& doc, std::string filename = "") const;
 
+        void add_member(rj::Document& doc, std::string key, rj::Value& value);
+
         void set_string(rj::Document & doc, std::string key, std::string value);
         void set_double(rj::Document & doc, std::string key, double value);
         void set_int(rj::Document & doc, std::string key, int value);

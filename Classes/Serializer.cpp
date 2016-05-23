@@ -31,51 +31,44 @@ void BaseSerializer::save_document(rj::Document& doc, std::string filename) cons
     FileIO::save_json(filename, doc);
 }
 
+void BaseSerializer::add_member(rj::Document& doc, std::string key, rj::Value& value)
+{
+    //build the Values that become the key and values
+    rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
+    rapidjson::Value doc_key = rapidjson::Value();
+    //NOTE need to use allocator here, AND move the key later it seems like,
+    //otherwise the value gets cleaned up
+    doc_key.SetString(key.c_str(), key.size(), allocator);
+
+    //all the member to the document
+    doc.AddMember(doc_key.Move(), value.Move(), allocator);
+};
+
 void BaseSerializer::set_string(rj::Document & doc, std::string key, std::string value)
 {
     rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
-
-    //build the Values that become the key and values
-    rapidjson::Value doc_key = rapidjson::Value();
-    doc_key.SetString(key.c_str(), key.size(), allocator);
-
     rapidjson::Value doc_value = rapidjson::Value();
-    doc_value.SetString(value.c_str(), value.size());
-
-    //all the member to the document
-    doc.AddMember(doc_key.Move(), doc_value.Move(), allocator);
+    doc_value.SetString(value.c_str(), value.size(), allocator);
+    
+    this->add_member(doc, key, doc_value);
 
 };
 
 void BaseSerializer::set_double(rj::Document & doc, std::string key, double value)
 {
-    rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
-
-    //build the Values that become the key and values
-    rapidjson::Value doc_key = rapidjson::Value();
-    doc_key.SetString(key.c_str(), key.size()), allocator;
-
     rapidjson::Value doc_value = rapidjson::Value();
     doc_value.SetDouble(value);
-
-    //all the member to the document
-    doc.AddMember(doc_key.Move(), doc_value.Move(), allocator);
+    
+    this->add_member(doc, key, doc_value);
 
 };
 
 void BaseSerializer::set_int(rj::Document & doc, std::string key, int value)
 {
-    rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
-    //build the Values that become the key and values
-    rapidjson::Value doc_key = rapidjson::Value();
-    doc_key.SetString(key.c_str(), key.size(), allocator);
-
     rapidjson::Value doc_value = rapidjson::Value();
     doc_value.SetInt(value);
 
-    //all the member to the document
-    doc.AddMember(doc_key.Move(), doc_value.Move(), allocator);
-
+    this->add_member(doc, key, doc_value);
 };
 
 BuildingSerializer::BuildingSerializer(std::string filename, spBuilding building)
