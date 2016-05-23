@@ -315,7 +315,7 @@ void SideListView::setup_detail_listview_as_recipes()
 
         if (target_building->name == "The Underscape")
         {
-            spRecipe blood_oath = std::make_shared<Recipe>("Regenerate Life", "Consume 10 blood");
+            spRecipe blood_oath = std::make_shared<Recipe>("Bloodoath", "Gain 5 health\n-- costs 10 blood");
             blood_oath->components = mistIngredient({
                 {Ingredient::SubType::Blood, 10}
             });
