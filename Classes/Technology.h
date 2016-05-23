@@ -35,6 +35,9 @@ class Technology
 
         SubType sub_type;
 
+        //can only be bought once
+        bool is_unique;
+
         bool get_been_unlocked();
         void set_been_unlocked(bool val);
 

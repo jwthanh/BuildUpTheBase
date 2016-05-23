@@ -22,7 +22,8 @@ TechMap TechTree::get_tech_map()
 Technology::Technology(Technology::SubType sub_type)
     : _been_unlocked(false),
     _ing_requirements({}),
-    sub_type(sub_type)
+    sub_type(sub_type),
+    is_unique(false)
 {
 
 };

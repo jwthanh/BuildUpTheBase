@@ -406,13 +406,26 @@ void TechNuItem::update_func(float dt)
 
     auto ing_requirements = this->technology->get_ingredient_requirements();
     bool tech_is_satisfied = ing_requirements->is_satisfied(this->building->ingredients);
-    if (tech_is_satisfied){
-        if (this->technology->get_been_unlocked() == false) {
+    if (tech_is_satisfied)
+    {
+        if (this->technology->get_been_unlocked() == false)
+        {
             this->try_set_enable(true);
-        } else {
-            this->try_set_enable(false);
         }
-    } else {
+        else
+        {
+            //if its not unique, means you can buy it again
+            if (this->technology->is_unique == false)
+            {
+                this->try_set_enable(true);
+            }
+            else
+            {
+                this->try_set_enable(false);
+            };
+        }
+    }
+    else {
         this->try_set_enable(false);
     }
 
