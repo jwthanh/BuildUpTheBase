@@ -418,7 +418,7 @@ ui::ListView* SideListView::_create_listview(std::string node_name)
     listview->setScrollBarOpacity(255);
     listview->setScrollBarAutoHideEnabled(false);
 
-    listview->setScrollBarColor({36, 31, 96});
+    listview->setScrollBarColor({48, 96, 130});
 
     // listview->setMagneticType(ui::ListView::MagneticType::TOP); //scrolls to TOP of current item, if needed
     listview->setMagneticAllowedOutOfBoundary(false); //true is default, doesnt allow overscrolling sort of. if you go out of bounds, it'll scroll it back
