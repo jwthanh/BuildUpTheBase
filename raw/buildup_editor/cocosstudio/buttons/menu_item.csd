@@ -51,11 +51,11 @@
                 <Children>
                   <AbstractNodeData Name="description_lbl" ActionTag="2007594687" UserData="300" Tag="20" IconVisible="False" LeftMargin="-21.9864" RightMargin="100.9564" TopMargin="0.1568" BottomMargin="0.8432" IsCustomSize="True" FontSize="16" LabelText="This is a multiline description and I'm curious what happens once it goes over the width. Feels like two sentences should be able to fit here" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="221.0300" Y="44.0000" />
-                    <AnchorPoint ScaleX="0.4977" ScaleY="0.5000" />
-                    <Position X="88.0202" Y="22.8432" />
+                    <AnchorPoint />
+                    <Position X="-21.9864" Y="0.8432" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.2934" Y="0.5076" />
+                    <PrePosition X="-0.0733" Y="0.0187" />
                     <PreSize X="0.7368" Y="0.9778" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />

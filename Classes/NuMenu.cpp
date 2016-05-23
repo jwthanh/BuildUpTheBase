@@ -94,21 +94,22 @@ bool NuItem::init(cocos2d::Node* parent)
         //defaults
         this->cost_lbl->setPosition(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl")->getPosition());
         this->count_lbl->setPosition(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl")->getPosition());
-        this->desc_lbl->setPosition(NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl")->getPosition());
-        this->desc_lbl->setContentSize(NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl")->getContentSize());
+
+        auto orig_desc_pos = NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl")->getPosition();
+        this->desc_lbl->setPosition(orig_desc_pos);
+        auto orig_desc_size = NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl")->getContentSize();
+        this->desc_lbl->setContentSize(orig_desc_size);
 
         //if theres no cost, move count up, widen description
         if (this->cost_lbl->getStringLength() == 0) {
             this->count_lbl->setPosition(this->cost_lbl->getPosition());
             this->desc_lbl->setContentSize({ 300.0f, 44.0f });
-            this->desc_lbl->setPosition({ 132.0f, 28.0f });
         };
 
         //if theres no count in place, widen description
         if (this->count_lbl->getStringLength() == 0)
         {
             this->desc_lbl->setContentSize({ 300.0f, 44.0f });
-            this->desc_lbl->setPosition({ 132.0f, 28.0f });
         }
     };
     this->schedule(reposition_labels, 0.1f, "reposition_labels");
