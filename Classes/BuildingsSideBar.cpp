@@ -341,17 +341,22 @@ void SideListView::setup_detail_listview_as_recipes()
         {
             spTechnology combat_dmg = std::make_shared<Technology>(Technology::SubType::CombatDamage);
             spRecipe recipe = std::make_shared<Recipe>("combat_damage", "no desc for tech recipe");
+
+            res_count_t souls_cost = std::floor(scale_number(2.0L, map_get(target_building->techtree->tech_map, combat_dmg->sub_type, 0), 1.15L));
             recipe->components = mistIngredient({
-                {Ingredient::SubType::Soul, 2}
+                {Ingredient::SubType::Soul, souls_cost}
             });
             combat_dmg->set_ingredient_requirements(recipe);
+
+            std::stringstream ss;
+            ss << "Increases combat damage\n-- costs " << souls_cost << " souls";
 
             nuitems_config.push_back({
                 combat_dmg,
                 DetailType::Tech,
                 {
                     "Buy Sword",
-                    "Increases combat damage\n-- costs 2 souls"
+                    ss.str()
                 } });
         };
 
@@ -382,7 +387,16 @@ void SideListView::setup_detail_listview_as_recipes()
 
             //if the child already exists, put it at the end of the listview, maintaining order as config
             bool existed = this->try_push_back(child_tag, listview);
-            if (existed) { continue; };
+            if (existed)
+            {
+                auto existing_node = dynamic_cast<NuItem*>(listview->getChildByTag(child_tag));
+                if (existing_node)
+                {
+                    existing_node->set_title(config.config.name);
+                    existing_node->set_description(config.config.description);
+                }
+                continue;
+            };
 
             BuildingNuItem* menu_item;
             if (config.type == DetailType::Recipe) {
