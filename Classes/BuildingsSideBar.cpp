@@ -291,7 +291,7 @@ void SideListView::setup_detail_listview_as_recipes()
         {
             Recipe = 0,
             Misc = 1,
-            Tech = 2
+            Tech = 2,
         };
 
         struct DetailConfig {
@@ -334,6 +334,24 @@ void SideListView::setup_detail_listview_as_recipes()
                 {
                     blood_oath->name,
                     blood_oath->description
+                } });
+        };
+
+        if (target_building->name == "The Arena")
+        {
+            spTechnology double_click_pwr = std::make_shared<Technology>(Technology::SubType::ClickDoublePower);
+            spRecipe recipe = std::make_shared<Recipe>("combat_damage", "no desc for tech recipe");
+            recipe->components = mistIngredient({
+                {Ingredient::SubType::Seed, 10}
+            });
+            double_click_pwr->set_ingredient_requirements(recipe);
+
+            nuitems_config.push_back({
+                double_click_pwr,
+                DetailType::Tech,
+                {
+                    "Buy Sword",
+                    "Increases combat damage"
                 } });
         };
 

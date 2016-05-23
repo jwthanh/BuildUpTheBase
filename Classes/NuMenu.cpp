@@ -811,6 +811,77 @@ void SalesmanShopNuItem::my_init_sprite()
     vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
 };
 
+void CombatShopNuItem::my_init_touch_ended_callback()
+{
+    this->set_touch_ended_callback([this]()
+    {
+        res_count_t cost = this->get_cost();
+        double total_coins = BEATUP->get_total_coins();
+
+        if (cost <= total_coins)
+        {
+            //enable this combat item
+            this->update_func(0);
+        }
+    });
+
+};
+
+void CombatShopNuItem::my_init_update_callback()
+{
+    auto update_harvesters_cb = [this](float dt) {
+        auto building = BUILDUP->get_target_building();
+
+        res_count_t combats_owned = 0;
+        this->set_count_lbl(combats_owned);
+        this->_shop_cost = scale_number(10.0L, combats_owned, 1.15L);
+
+        std::stringstream ss;
+        ss << "Buffs your fighting skills";
+        this->set_description(ss.str());
+    };
+    this->schedule(update_harvesters_cb, 0.1f, "update_combat");
+    update_harvesters_cb(0);
+
+}
+
+bool CombatShopNuItem::custom_status_check(float dt)
+{
+    //TODO implement a check to see if this is available
+    spBuilding target_building = BUILDUP->get_target_building();
+
+    bool is_enabled = true;
+
+    return is_enabled;
+};
+
+CombatShopNuItem* CombatShopNuItem::create(Node* parent, spBuilding building)
+{
+    CombatShopNuItem* pRet = new(std::nothrow) CombatShopNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+}
+
+void CombatShopNuItem::my_init_title()
+{
+    std::string title = "CombatTool";
+    this->set_title("Buy "+title);
+}
+
+void CombatShopNuItem::my_init_sprite()
+{
+    //TODO use a custom sprite
+};
+
 void NuMenu::onEnter()
 {
     GameLayer::onEnter();

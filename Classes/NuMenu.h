@@ -138,12 +138,27 @@ class HarvesterShopNuItem : public BuildingShopNuItem
 class SalesmanShopNuItem : public HarvesterShopNuItem
 {
     public:
-    static SalesmanShopNuItem* create(Node* parent, spBuilding building);
+        static SalesmanShopNuItem* create(Node* parent, spBuilding building);
 
         virtual void my_init_title() override;
         virtual void my_init_sprite() override;
         void my_init_touch_ended_callback() override;
         void my_init_update_callback() override;
+
+        virtual bool custom_status_check(float dt) override;
+};
+
+///UNUSED, not working probably
+class CombatShopNuItem : public BuildingShopNuItem
+{
+    public:
+        static CombatShopNuItem* create(Node* parent, spBuilding building);
+
+        //NOTE these dont override anything, HarvesterShopNuItem introduced these. TODO make them part of the base stuff
+        virtual void my_init_title();
+        virtual void my_init_sprite();
+        void my_init_touch_ended_callback();
+        void my_init_update_callback();
 
         virtual bool custom_status_check(float dt) override;
 };
