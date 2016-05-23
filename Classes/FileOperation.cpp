@@ -17,7 +17,7 @@ rapidjson::Document FileIO::open_json(std::string json_path)
     return jsonDoc;
 }
 
-void FileIO::save_json(std::string json_path, rapidjson::Document document)
+void FileIO::save_json(std::string json_path, rapidjson::Document& document)
 {
     auto file_utils = cocos2d::FileUtils::getInstance();
 
