@@ -287,18 +287,6 @@ void Building::update(float dt)
         temp_harvester->update(dt);
     };
 
-    for (auto consumer : this->consumers) {
-        std::pair<WorkerSubType, Ingredient::SubType> sub_type = consumer.first;
-        WorkerSubType harv_type = sub_type.first;
-        Ingredient::SubType ing_type = sub_type.second;
-        res_count_t count = consumer.second;
-
-        auto temp_consumer = std::make_shared<ConsumerHarvester>(this->shared_from_this(), "test worker", ing_type, harv_type);
-        temp_consumer->active_count = count;
-        temp_consumer->update(dt);
-    };
-
-
     if (update_clock->passed_threshold())
     {
         /* this->spawn_clock->update(dt); */
@@ -317,6 +305,19 @@ void Building::update(float dt)
             temp_harvester->active_count = count;
             temp_harvester->update(dt);
         };
+
+        for (auto consumer : this->consumers) {
+            std::pair<WorkerSubType, Ingredient::SubType> sub_type = consumer.first;
+            WorkerSubType harv_type = sub_type.first;
+            Ingredient::SubType ing_type = sub_type.second;
+            res_count_t count = consumer.second;
+
+            auto temp_consumer = std::make_shared<ConsumerHarvester>(this->shared_from_this(), "test worker", ing_type, harv_type);
+            temp_consumer->active_count = count;
+            temp_consumer->update(dt);
+        };
+
+
     }
     // else
     // {
