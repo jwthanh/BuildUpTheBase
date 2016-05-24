@@ -539,7 +539,7 @@ void Buildup::update(float dt)
         this->server_clock->reset();
 
         //try to update remote server
-        this->post_update();
+        //this->post_update();
 
     };
 };
