@@ -207,6 +207,14 @@ void SideListView::setup_shop_listview_as_harvesters()
                     } else {
                         menu_item->button->setVisible(true);
                     }
+
+                    //hides the item if there's not enough to consume, but this doesnt get run often enough
+                    //if (dynamic_cast<ConsumerShopNuItem*>(menu_item)) {
+                    //    auto consumer_item = dynamic_cast<ConsumerShopNuItem*>(menu_item);
+                    //    if (target_building->count_ingredients(consumer_item->consumed_type) < 1){
+                    //        menu_item->button->setVisible(false);
+                    //    };
+                    //};
                 };
             };
             menu_item->schedule(update_target_and_prereq, update_delay, "update_ing_type");
