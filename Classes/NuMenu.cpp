@@ -73,6 +73,7 @@ bool NuItem::init(cocos2d::Node* parent)
     auto set_aliasing = [](ui::Text* text_node)
     {
         ((Label*)text_node->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+        ((Label*)text_node->getVirtualRenderer())->setOverflow(Label::Overflow::SHRINK);
     };
 
     this->item_icon = static_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
