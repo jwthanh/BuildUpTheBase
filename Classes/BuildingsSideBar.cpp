@@ -168,7 +168,7 @@ void SideListView::setup_shop_listview_as_harvesters()
             }
             else if (config.worker_type == WorkerType::Consumer)
             {
-                menu_item = ConsumerShopNuItem::create(shop_listview, target_building);
+                menu_item = ConsumerShopNuItem::create(shop_listview, target_building, Ingredient::SubType::Blood);
             }
             menu_item->my_init(config.harv_type, target_building->punched_sub_type);
             menu_item->setName(child_name);

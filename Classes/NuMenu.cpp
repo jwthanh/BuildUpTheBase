@@ -835,7 +835,7 @@ void ConsumerShopNuItem::my_init_touch_ended_callback()
 
         if (cost <= total_coins)
         {
-            CCLOG("ConsumerShopNuItem bought a salesman");
+            CCLOG("ConsumerShopNuItem bought a consumer");
             BEATUP->add_total_coin(-((double)(cost)));
             auto building = BUILDUP->get_target_building();
 
@@ -858,7 +858,7 @@ void ConsumerShopNuItem::my_init_update_callback()
 
         std::stringstream ss;
         auto sold_count = Salesman::get_to_sell_count(this->harv_type) * building->building_level;
-        ss << "Sells " << sold_count << " " << Ingredient::type_to_string(building->punched_sub_type) << "\nper sec";
+        ss << "Consumes " << sold_count << " " << Ingredient::type_to_string(this->consumed_type) << "\nper sec";
         this->set_description(ss.str());
     };
     this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
@@ -889,9 +889,10 @@ bool ConsumerShopNuItem::custom_status_check(float dt)
     return is_enabled;
 };
 
-ConsumerShopNuItem* ConsumerShopNuItem::create(Node* parent, spBuilding building)
+ConsumerShopNuItem* ConsumerShopNuItem::create(Node* parent, spBuilding building, IngredientSubType consumed_type)
 {
     ConsumerShopNuItem* pRet = new(std::nothrow) ConsumerShopNuItem();
+    pRet->consumed_type = consumed_type;
     if (pRet && pRet->init(parent, building))
     {
         pRet->autorelease();

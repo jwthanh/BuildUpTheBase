@@ -151,7 +151,7 @@ class SalesmanShopNuItem : public HarvesterShopNuItem
 class ConsumerShopNuItem : public HarvesterShopNuItem
 {
     public:
-        static ConsumerShopNuItem* create(Node* parent, spBuilding building);
+        static ConsumerShopNuItem* create(Node* parent, spBuilding building, IngredientSubType consumed_type);
 
         virtual void my_init_title() override;
         virtual void my_init_sprite() override;
@@ -159,6 +159,8 @@ class ConsumerShopNuItem : public HarvesterShopNuItem
         void my_init_update_callback() override;
 
         virtual bool custom_status_check(float dt) override;
+
+        IngredientSubType consumed_type;
 };
 
 ///UNUSED, not working probably
