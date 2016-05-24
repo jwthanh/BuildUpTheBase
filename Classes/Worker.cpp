@@ -6,6 +6,9 @@
 #include "Util.h"
 #include "GameLogic.h"
 #include "Beatup.h"
+#include "Fighter.h"
+#include "attribute_container.h"
+#include "attribute.h"
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
@@ -174,3 +177,21 @@ void Salesman::on_update(float dt)
     }
 };
 
+ConsumerHarvester::ConsumerHarvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type)
+    : Harvester(building, name, ing_type, sub_type)
+{
+    
+}
+
+void ConsumerHarvester::on_update(float dt)
+{
+    if (this->building->count_ingredients(Ingredient::SubType::Blood) >= dt*5*this->active_count) {
+        CCLOG("this building has enough blood");
+        auto health = BUILDUP->fighter->attrs->health;
+        if (health->is_full() == false)
+        {
+            health->add_to_current_val((int)(5.0f*dt));
+        }
+
+    };
+}

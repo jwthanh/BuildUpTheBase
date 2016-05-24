@@ -93,6 +93,14 @@ class Salesman : public Harvester
         static res_count_t get_to_sell_count(SubType sub_type);
 };
 
+class ConsumerHarvester : public Harvester
+{
+    public:
+        ConsumerHarvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
+        virtual void on_update(float dt) override;
+
+};
+
 typedef std::map<std::pair<Worker::SubType, Ingredient::SubType>, res_count_t> mistHarvester;
 typedef std::map<Worker::SubType, res_count_t> mistWorkerSubType;
 

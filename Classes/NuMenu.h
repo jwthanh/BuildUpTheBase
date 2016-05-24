@@ -148,6 +148,19 @@ class SalesmanShopNuItem : public HarvesterShopNuItem
         virtual bool custom_status_check(float dt) override;
 };
 
+class ConsumerShopNuItem : public HarvesterShopNuItem
+{
+    public:
+        static ConsumerShopNuItem* create(Node* parent, spBuilding building);
+
+        virtual void my_init_title() override;
+        virtual void my_init_sprite() override;
+        void my_init_touch_ended_callback() override;
+        void my_init_update_callback() override;
+
+        virtual bool custom_status_check(float dt) override;
+};
+
 ///UNUSED, not working probably
 class CombatShopNuItem : public BuildingShopNuItem
 {

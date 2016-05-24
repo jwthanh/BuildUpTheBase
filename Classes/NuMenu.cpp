@@ -697,7 +697,7 @@ void SalesmanShopNuItem::my_init_touch_ended_callback()
             BEATUP->add_total_coin(-((double)(cost)));
             auto building = BUILDUP->get_target_building();
 
-            auto harvester_count = map_get(building->salesmen, { harv_type, ing_type }, 0);
+            auto harvester_count = map_get(building->consumers, { harv_type, ing_type }, 0);
             harvester_count++;
             building->salesmen[{ harv_type, ing_type }] = harvester_count;
             this->update_func(0);
@@ -777,6 +777,148 @@ void SalesmanShopNuItem::my_init_title()
 }
 
 void SalesmanShopNuItem::my_init_sprite()
+{
+    auto gen_paths = [](std::string base_path, int max_num)
+    {
+        std::vector<int> nums(max_num);
+        std::iota(nums.begin(), nums.end(), 0);
+
+        std::vector<std::string> output;
+        for (auto num : nums)
+        {
+            output.push_back(base_path + "_" + std::to_string(num)+".png");
+        }
+
+        return  output;
+    };
+
+    auto base_node = Node::create();
+
+    std::string set_path;
+    auto set_paths = gen_paths("set", 4);
+    if (this->harv_type == WorkerSubType::One) { set_path = set_paths.at(0); }
+    else if (this->harv_type == WorkerSubType::Two) { set_path = set_paths.at(1); }
+    else if (this->harv_type == WorkerSubType::Three) { set_path = set_paths.at(2); }
+    else if (this->harv_type == WorkerSubType::Four) { set_path = set_paths.at(3); }
+    else { set_path = "set_0.png"; }
+
+    std::vector<std::string> sprites = {
+        set_path,
+        pick_one(gen_paths("body", 49)),
+        pick_one(gen_paths("headwear", 49)),
+        pick_one(gen_paths("legs", 22)),
+    };
+    for (auto path : sprites)
+    {
+        base_node->addChild(Sprite::createWithSpriteFrameName(path));
+    }
+
+    base_node->setPosition(8,8);
+    base_node->setScaleY(-1.0f);
+
+    auto rt = RenderTexture::create(16, 16);
+    rt->retain();
+    rt->begin();
+    base_node->visit();
+    rt->end();
+
+    ui::Scale9Sprite* vr = (ui::Scale9Sprite*)this->item_icon->getVirtualRenderer();
+    vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
+};
+
+void ConsumerShopNuItem::my_init_touch_ended_callback()
+{
+    this->set_touch_ended_callback([this]()
+    {
+        res_count_t cost = this->get_cost();
+        double total_coins = BEATUP->get_total_coins();
+
+        if (cost <= total_coins)
+        {
+            CCLOG("ConsumerShopNuItem bought a salesman");
+            BEATUP->add_total_coin(-((double)(cost)));
+            auto building = BUILDUP->get_target_building();
+
+            auto harvester_count = map_get(building->consumers, { harv_type, ing_type }, 0);
+            harvester_count++;
+            building->consumers[{ harv_type, ing_type }] = harvester_count;
+            this->update_func(0);
+        }
+    });
+
+};
+
+void ConsumerShopNuItem::my_init_update_callback()
+{
+    auto update_harvesters_cb = [this](float dt) {
+        auto building = BUILDUP->get_target_building();
+        res_count_t harvesters_owned = map_get(building->consumers, {this->harv_type, building->punched_sub_type}, 0);
+        this->set_count_lbl(harvesters_owned);
+        this->_shop_cost = scale_number(Salesman::get_base_shop_cost(this->harv_type), harvesters_owned, 1.15L);
+
+        std::stringstream ss;
+        auto sold_count = Salesman::get_to_sell_count(this->harv_type) * building->building_level;
+        ss << "Sells " << sold_count << " " << Ingredient::type_to_string(building->punched_sub_type) << "\nper sec";
+        this->set_description(ss.str());
+    };
+    this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
+    update_harvesters_cb(0);
+
+}
+
+bool ConsumerShopNuItem::custom_status_check(float dt)
+{
+    spBuilding target_building = BUILDUP->get_target_building();
+
+    // check if high enough building level to fit more
+    bool is_enabled = false;
+    res_count_t harvesters_owned = map_get(
+        target_building->consumers,
+        {
+            this->harv_type,
+            target_building->punched_sub_type
+        },
+        0
+    );
+
+    if (harvesters_owned < target_building->get_storage_space())
+    {
+        is_enabled = true;
+    };
+
+    return is_enabled;
+};
+
+ConsumerShopNuItem* ConsumerShopNuItem::create(Node* parent, spBuilding building)
+{
+    ConsumerShopNuItem* pRet = new(std::nothrow) ConsumerShopNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+}
+
+void ConsumerShopNuItem::my_init_title()
+{
+    std::vector<std::string> names = {
+        "Samson", "Sonny", "Smokey", "Sinead", "Sebastian", "Saul", "Stan",
+        "Scott", "Spencer", "Sam", "Seth", "Stefan", "Jenson", "Shiloh",
+        "Sequoia", "Sergeo", "Seren", "Seamus", "Spartacus", "Spike", 
+        "Siegfried", "Sylvain"
+    };
+    std::string harvester_name = pick_one(names);
+
+    this->set_title("Buy "+harvester_name);
+}
+
+void ConsumerShopNuItem::my_init_sprite()
 {
     auto gen_paths = [](std::string base_path, int max_num)
     {

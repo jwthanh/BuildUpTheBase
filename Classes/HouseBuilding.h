@@ -41,6 +41,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         mistHarvester harvesters;
         mistHarvester salesmen;
+        mistHarvester consumers;
 
         Clock* spawn_clock;
 

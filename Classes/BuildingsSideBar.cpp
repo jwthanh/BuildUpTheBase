@@ -121,7 +121,8 @@ void SideListView::setup_shop_listview_as_harvesters()
         enum class WorkerType
         {
             Harvester,
-            Salesman
+            Salesman,
+            Consumer
         };
 
         //placeholder for things we'll need to put in the sidebar
@@ -132,6 +133,7 @@ void SideListView::setup_shop_listview_as_harvesters()
         };
         std::vector<HarvestConfig> nuitems_config = {
             {WorkerType::Salesman, "salesman_item_one", Worker::SubType::One},
+            {WorkerType::Consumer, "consumer_item_one", Worker::SubType::One},
             // {WorkerType::Salesman, "salesman_item_two", Worker::SubType::Two}, //TODO fix sorting before we can add this in
             // {WorkerType::Salesman, "salesman_item_three", Worker::SubType::Three},
             {WorkerType::Harvester, "harvester_item_one", Worker::SubType::One},
@@ -163,6 +165,10 @@ void SideListView::setup_shop_listview_as_harvesters()
             else if (config.worker_type == WorkerType::Salesman)
             {
                 menu_item = SalesmanShopNuItem::create(shop_listview, target_building);
+            }
+            else if (config.worker_type == WorkerType::Consumer)
+            {
+                menu_item = ConsumerShopNuItem::create(shop_listview, target_building);
             }
             menu_item->my_init(config.harv_type, target_building->punched_sub_type);
             menu_item->setName(child_name);
