@@ -101,8 +101,8 @@ void SideListView::setup_listviews()
 
             //TODO this is only necessary when the buildings have different items, like the Detail tab
             this->detail_listview->removeAllChildren();
-            //this->shop_listview->removeAllChildren();
-            //this->building_listview->removeAllChildren();
+            this->shop_listview->removeAllChildren();
+            this->building_listview->removeAllChildren();
 
             //scroll to top of all the listviews
             this->detail_listview->scrollToTop(0, false);
