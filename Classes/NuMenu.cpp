@@ -794,19 +794,11 @@ void SalesmanShopNuItem::my_init_sprite()
 
     auto base_node = Node::create();
 
-    std::string set_path;
-    auto set_paths = gen_paths("set", 4);
-    if (this->harv_type == WorkerSubType::One) { set_path = set_paths.at(0); }
-    else if (this->harv_type == WorkerSubType::Two) { set_path = set_paths.at(1); }
-    else if (this->harv_type == WorkerSubType::Three) { set_path = set_paths.at(2); }
-    else if (this->harv_type == WorkerSubType::Four) { set_path = set_paths.at(3); }
-    else { set_path = "set_0.png"; }
-
     std::vector<std::string> sprites = {
-        set_path,
-        pick_one(gen_paths("body", 49)),
-        pick_one(gen_paths("headwear", 49)),
-        pick_one(gen_paths("legs", 22)),
+        "set_3.png",
+        pick_one(gen_paths("body", 5)),
+        pick_one(gen_paths("headwear", 5)),
+        pick_one(gen_paths("legs", 5)),
     };
     for (auto path : sprites)
     {
@@ -909,10 +901,8 @@ ConsumerShopNuItem* ConsumerShopNuItem::create(Node* parent, spBuilding building
 void ConsumerShopNuItem::my_init_title()
 {
     std::vector<std::string> names = {
-        "Samson", "Sonny", "Smokey", "Sinead", "Sebastian", "Saul", "Stan",
-        "Scott", "Spencer", "Sam", "Seth", "Stefan", "Jenson", "Shiloh",
-        "Sequoia", "Sergeo", "Seren", "Seamus", "Spartacus", "Spike", 
-        "Siegfried", "Sylvain"
+        "Charles", "Chaplin", "Champlain", "Connor", "Chap", "Chris", "Caleb",
+        "Cameron", "Cyrill", "Cyrus", "Cody", "Corey", "Caiden", "Carter"
     };
     std::string harvester_name = pick_one(names);
 
