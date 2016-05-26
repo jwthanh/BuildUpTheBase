@@ -143,7 +143,6 @@ class Buildup
         spClock server_clock;
 
         Buildup();
-        void main_loop();
         void update(float dt);
 
         void post_update();

@@ -593,45 +593,6 @@ void Buildup::post_update()
 
 };
 
-//this isn't used anymore
-void Buildup::main_loop()
-{
-    Clock game_clock = Clock(CLOCKS_PER_SEC);
-    clock_t start_time = clock() / CLOCKS_PER_SEC;
-
-    printj("starting tests...");
-    //test_recipe(); //TODO fix with mist
-    test_conditions();
-    printj("...done tests");
-    int total_loops = 0;
-
-    int current_ticks = 0;
-    while (true)
-    {
-        total_loops++;
-        game_clock.update((float)current_ticks);
-
-        //current_ticks = clock() / CLOCKS_PER_SEC - start_time;
-        current_ticks += 1000;
-        if (game_clock.passed_threshold())
-        {
-            this->city->update(game_clock.start_time);
-            this->player->update(game_clock.start_time);
-
-            game_clock.reset();
-
-            current_ticks = 0;
-            start_time = clock() / CLOCKS_PER_SEC;
-
-            std::string temp;
-            std::cout << "enter to continue " << std::endl;
-            std::getline(std::cin, temp);
-        }
-    }
-
-
-}
-
 Village* Buildup::init_city(Buildup* buildup)
 {
 
