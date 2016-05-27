@@ -393,7 +393,7 @@ void SideListView::setup_detail_listview_as_recipes()
                 DetailType::Tech,
                 {
                     "Double click power",
-                    "Doubles click output"
+                    "Doubles click output\n-- 5 seeds"
                 } });
         };
 

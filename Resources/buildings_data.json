@@ -9,7 +9,7 @@
                 "bread_recipe" : {
                     "name": "Make some bread",
                     "clicks_required": 15,
-                    "description": "Take 15 grain, make a sweet slice of bread",
+                    "description": "Make a sweet slice of bread\n--costs 15 grain",
                     "components": {
                         "grain": 15
                     },
@@ -20,7 +20,7 @@
                 "loaf_recipe" : {
                     "name": "Loaf of bread",
                     "clicks_required": 30,
-                    "description": "Take 3 slices of bread, stick em together, you got yourself a loaf, buddy.",
+                    "description": "Stick em together, got a loaf\n--costs 3 slices",
                     "components": {
                         "bread": 3
                     },
