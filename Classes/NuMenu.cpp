@@ -40,6 +40,12 @@ bool NuItem::init(cocos2d::Node* parent)
 
 
 
+    auto set_aliasing = [](ui::Text* text_node)
+    {
+        ((Label*)text_node->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+        ((Label*)text_node->getVirtualRenderer())->setOverflow(Label::Overflow::SHRINK);
+    };
+
     if (NuItem::orig_button == NULL)
     {
         CCLOG("creating NuItem::orig_button, should only happen once");
@@ -51,6 +57,7 @@ bool NuItem::init(cocos2d::Node* parent)
         ((ui::Text*)NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl"))->setString(std::string("", 200));
         ((ui::Text*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"))->setString(std::string("", 200));
         ((ui::Text*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"))->setString(std::string("", 200));
+
 
     }
 
@@ -69,12 +76,6 @@ bool NuItem::init(cocos2d::Node* parent)
 
     parent->addChild(this); //FIXME hack to get the selector to run. ideally the button would be a child of this but then button doesnt go on the right spot
     parent->addChild(button);
-
-    auto set_aliasing = [](ui::Text* text_node)
-    {
-        ((Label*)text_node->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
-        ((Label*)text_node->getVirtualRenderer())->setOverflow(Label::Overflow::SHRINK);
-    };
 
     this->item_icon = static_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
     this->title_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
