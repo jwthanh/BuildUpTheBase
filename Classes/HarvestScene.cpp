@@ -485,10 +485,12 @@ void BaseScene::create_building_pageview()
     {
 
         auto node = city_scene->getChildByName(building->name);
-        auto building_panel = dynamic_cast<ui::Button*>(node->getChildByName("building_panel"));
+        ui::Button* building_panel = dynamic_cast<ui::Button*>(node->getChildByName("building_panel"));
         building_panel->removeFromParent();
         building_pageview->addPage(building_panel);
         int page_index = building_pageview->getItems().size() - 1;
+
+        load_default_button_textures(building_panel);
 
 
         if (building->get_been_bought() == false) {
