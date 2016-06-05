@@ -1,18 +1,21 @@
 #include "NuMenu.h"
-#include <editor-support/cocostudio/ActionTimeline/CSLoader.h>
-#include "Beatup.h"
-#include "StaticData.h"
+#include <numeric>
 
-#include "HouseBuilding.h"
+#include <editor-support/cocostudio/ActionTimeline/CSLoader.h>
 
 #include "Util.h"
+#include "MiscUI.h"
+#include "FShake.h"
+
+#include "HouseBuilding.h"
+#include "Beatup.h"
+#include "StaticData.h"
 #include "Worker.h"
 #include "GameLogic.h"
 #include "Recipe.h"
-#include "MiscUI.h"
-#include <numeric>
-#include "FShake.h"
 #include "Technology.h"
+
+#include <random>
 
 USING_NS_CC;
 
@@ -20,6 +23,7 @@ cocos2d::ui::Button* NuItem::orig_button = NULL;
 
 NuItem* NuItem::create(cocos2d::Node* parent)
 {
+
     NuItem* pRet = new(std::nothrow) NuItem();
     if (pRet && pRet->init(parent))
     {
@@ -37,8 +41,6 @@ NuItem* NuItem::create(cocos2d::Node* parent)
 bool NuItem::init(cocos2d::Node* parent)
 {
     ui::Widget::init();
-
-
 
     auto set_aliasing = [](ui::Text* text_node)
     {
@@ -570,6 +572,7 @@ void HarvesterShopNuItem::my_init_title()
         "Justin", "Jaleel", "Jamar", "Jesse", "Jaromir", "Jebediah", 
         "Johan", "Jericho"
     };
+
     std::string harvester_name = pick_one(names);
 
     this->set_title("Buy "+harvester_name);
