@@ -27,6 +27,7 @@
 #include <json/stringbuffer.h>
 #include <json/writer.h>
 #include "Serializer.h"
+#include <regex>
 
 USING_NS_CC;
 
@@ -233,8 +234,9 @@ void BaseScene::create_building_choicelist()
 
         //set building name
         ui::Text* building_name = (ui::Text*)panel->getChildByName("building_name");
-        building_name->setString(building->name);
-        building_name->setFontSize(22);
+        std::string name_str = std::regex_replace(building->name, std::regex("The "), "");
+        building_name->setFontSize(23);
+        building_name->setString(name_str);
         ((Label*)building_name->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
 
         //remove level label
