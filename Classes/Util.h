@@ -3,6 +3,7 @@
 #define UTIL_H
 
 #include <vector>
+#include <random>
 
 #include "cocos2d.h"
 
@@ -13,10 +14,19 @@ cocos2d::Vec2 sv(cocos2d::Vec2 input); //note do_scale is true
 cocos2d::Vec2 get_relative(cocos2d::Size input, cocos2d::Vec2 relative_pos=cocos2d::Vec2::ANCHOR_MIDDLE);
 
 template<typename T>
-T pick_one(std::vector<T> vec)
+T pick_one(std::vector<T> vec, std::mt19937* generator=NULL)
 {
+    //create the generator if it doesnt exist
+    if (!generator) { 
+        auto temp_gen = std::mt19937(std::random_device{}());
+         generator = &temp_gen;
+    };
+
     int size = vec.size();
-    int index = rand() % size;
+
+    std::uniform_int_distribution<int> distribution(0, size-1);
+    auto index = distribution(*generator);
+
     return vec.at(index);
 };
 
