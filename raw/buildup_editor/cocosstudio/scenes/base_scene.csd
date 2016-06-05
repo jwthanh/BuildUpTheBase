@@ -252,7 +252,7 @@
             <PreSize X="0.2083" Y="0.0294" />
             <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="progress_panel" ActionTag="150151942" Tag="27" IconVisible="False" LeftMargin="759.9999" RightMargin="0.0001" TopMargin="264.9998" BottomMargin="300.0002" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="progress_panel" ActionTag="150151942" Tag="27" IconVisible="False" LeftMargin="759.9999" RightMargin="0.0001" TopMargin="264.9998" BottomMargin="300.0002" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="75.0000" />
             <Children>
               <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="18.4350" RightMargin="13.5650" TopMargin="40.3520" BottomMargin="16.6480" ProgressInfo="100" ctype="LoadingBarObjectData">
@@ -288,6 +288,96 @@
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="dump_node" ActionTag="-1570892639" Tag="29" IconVisible="True" LeftMargin="439.9999" RightMargin="520.0001" TopMargin="110.0000" BottomMargin="530.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="439.9999" Y="530.0000" />
+            <Scale ScaleX="0.3500" ScaleY="0.3500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.4583" Y="0.8281" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="farm_node" ActionTag="1987764201" Tag="35" IconVisible="True" LeftMargin="439.9996" RightMargin="520.0004" TopMargin="40.0000" BottomMargin="600.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="439.9996" Y="600.0000" />
+            <Scale ScaleX="0.3500" ScaleY="0.3500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.4583" Y="0.9375" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="workshop_node" ActionTag="1698919684" Tag="41" IconVisible="True" LeftMargin="510.0000" RightMargin="450.0000" TopMargin="110.0000" BottomMargin="530.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="510.0000" Y="530.0000" />
+            <Scale ScaleX="0.3500" ScaleY="0.3500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5313" Y="0.8281" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="arena_node" ActionTag="-180336604" Tag="47" IconVisible="True" LeftMargin="510.0000" RightMargin="450.0000" TopMargin="40.0000" BottomMargin="600.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="510.0000" Y="600.0000" />
+            <Scale ScaleX="0.3500" ScaleY="0.3500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5313" Y="0.9375" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="mine_node" ActionTag="-852651593" Tag="53" IconVisible="True" LeftMargin="580.0000" RightMargin="380.0000" TopMargin="110.0000" BottomMargin="530.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="580.0000" Y="530.0000" />
+            <Scale ScaleX="0.3500" ScaleY="0.3500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6042" Y="0.8281" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="underscape_node" ActionTag="1510388644" Tag="59" IconVisible="True" LeftMargin="580.0000" RightMargin="380.0000" TopMargin="40.0000" BottomMargin="600.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="580.0000" Y="600.0000" />
+            <Scale ScaleX="0.3500" ScaleY="0.3500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6042" Y="0.9375" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="graveyard_node" ActionTag="202254515" Tag="65" IconVisible="True" LeftMargin="650.0000" RightMargin="310.0000" TopMargin="110.0000" BottomMargin="530.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="650.0000" Y="530.0000" />
+            <Scale ScaleX="0.3500" ScaleY="0.3500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6771" Y="0.8281" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="marketplace_node" ActionTag="-1319617117" Tag="71" IconVisible="True" LeftMargin="650.0000" RightMargin="310.0000" TopMargin="40.0000" BottomMargin="600.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="650.0000" Y="600.0000" />
+            <Scale ScaleX="0.3500" ScaleY="0.3500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6771" Y="0.9375" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="forest_node" ActionTag="1118871465" Tag="83" IconVisible="True" LeftMargin="720.0000" RightMargin="240.0000" TopMargin="40.0000" BottomMargin="600.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="720.0000" Y="600.0000" />
+            <Scale ScaleX="0.3500" ScaleY="0.3500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.7500" Y="0.9375" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
