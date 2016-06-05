@@ -717,7 +717,7 @@ void SalesmanShopNuItem::my_init_touch_ended_callback()
             BEATUP->add_total_coin(-((double)(cost)));
             auto building = BUILDUP->get_target_building();
 
-            auto harvester_count = map_get(building->consumers, { harv_type, ing_type }, 0);
+            auto harvester_count = map_get(building->salesmen, { harv_type, ing_type }, 0);
             harvester_count++;
             building->salesmen[{ harv_type, ing_type }] = harvester_count;
             this->update_func(0);
