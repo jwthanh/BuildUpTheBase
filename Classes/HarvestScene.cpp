@@ -222,23 +222,44 @@ void BaseScene::create_building_choicelist()
 
     for (auto conf : configs)
     {
-        auto building_node = harvest_scene_editor->getChildByName(conf.node_name);
+        spBuilding building = BUILDUP->city->building_by_name(conf.building_name);
+
+        //get initial node from the prebuilt scene
+        Node* building_node = harvest_scene_editor->getChildByName(conf.node_name);
+        ui::Layout* panel = (ui::Layout*)building_node->getChildByName("building_panel");
         building_node->removeFromParent();
         this->addChild(building_node);
 
-        spBuilding building = BUILDUP->city->building_by_name(conf.building_name);
 
-        auto panel = building_node->getChildByName("building_panel");
+        //set building name
         ui::Text* building_name = (ui::Text*)panel->getChildByName("building_name");
         building_name->setString(building->name);
         building_name->setFontSize(22);
         ((Label*)building_name->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
 
+        //remove level label
         ui::Text* level_lbl = (ui::Text*)panel->getChildByName("level_lbl");
         level_lbl->removeFromParent();
 
+        //add building image
         ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
         building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
+
+        auto update_func = [panel, building](float dt)
+        {
+            auto target_building = BUILDUP->get_target_building();
+            if (target_building == building)
+            {
+                panel->setBackGroundColor(Color3B::RED);
+            }
+            else
+            {
+                panel->setBackGroundColor({150, 200, 255});
+            }
+
+        };
+        building_node->schedule(update_func, 0.01f, "update_func");
+        update_func(0);
     };
 };
 
