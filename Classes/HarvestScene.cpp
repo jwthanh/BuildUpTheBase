@@ -542,7 +542,7 @@ void BaseScene::create_inventory_listview()
     auto update_listview = [this, inst, inventory_listview](float dt)
     {
         auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
-        auto orig_item_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("item_panel"));
+        auto orig_item_panel = dynamic_cast<ui::Button*>(raw_node->getChildByName("item_panel"));
         orig_item_panel->removeFromParent();
 
         typedef std::pair<Ingredient::SubType, res_count_t> maptype;
@@ -578,7 +578,8 @@ void BaseScene::create_inventory_listview()
                 continue;
             }
 
-            auto new_item_panel = dynamic_cast<ui::Layout*>(orig_item_panel->clone());
+            auto new_item_panel = dynamic_cast<ui::Button*>(orig_item_panel->clone());
+            load_default_button_textures(new_item_panel);
             new_item_panel->setName(str_type);
             auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
             dynamic_cast<Label*>(item_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
