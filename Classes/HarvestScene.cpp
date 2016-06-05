@@ -48,6 +48,8 @@ bool BaseScene::init()
     
     this->create_goal_loadingbar();
 
+    this->create_building_choicelist();
+
 
     return true;
 };
@@ -187,6 +189,58 @@ void BaseScene::create_goal_loadingbar()
 
     ((Label*)this->recipe_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
 }
+
+void BaseScene::create_building_choicelist()
+{
+    struct ChoiceConfig {
+        std::string building_name;
+        std::string node_name;
+    };
+    std::vector<ChoiceConfig> configs = {
+        {
+            "The Farm", "farm_node"
+        }, {
+            "The Arena", "arena_node"
+        }, {
+            "The Underscape", "underscape_node"
+        }, {
+            "The Marketplace", "marketplace_node"
+        }, {
+            "The Dump", "dump_node"
+        }, {
+            "The Workshop", "workshop_node"
+        }, {
+            "The Mine", "mine_node"
+        }, {
+            "The Graveyard", "graveyard_node"
+        }, {
+            "The Forest", "forest_node"
+        }
+    };
+
+    Node* harvest_scene_editor = this->get_original_scene_from_editor();
+
+    for (auto conf : configs)
+    {
+        auto building_node = harvest_scene_editor->getChildByName(conf.node_name);
+        building_node->removeFromParent();
+        this->addChild(building_node);
+
+        spBuilding building = BUILDUP->city->building_by_name(conf.building_name);
+
+        auto panel = building_node->getChildByName("building_panel");
+        ui::Text* building_name = (ui::Text*)panel->getChildByName("building_name");
+        building_name->setString(building->name);
+        building_name->setFontSize(22);
+        ((Label*)building_name->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+
+        ui::Text* level_lbl = (ui::Text*)panel->getChildByName("level_lbl");
+        level_lbl->removeFromParent();
+
+        ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
+        building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
+    };
+};
 
 Node* BaseScene::get_original_scene_from_editor()
 {
