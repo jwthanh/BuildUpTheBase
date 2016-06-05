@@ -42,6 +42,15 @@ class SideListView
         virtual cocos2d::ui::ListView* _create_listview(std::string node_name);
         virtual cocos2d::ui::Button* _create_button(std::string node_name);
 
+        std::vector<cocos2d::Node*> _cached_nuitems;
+        std::vector<cocos2d::Node*> _cached_building_nuitems;
+        std::vector<cocos2d::Node*> _cached_recipe_nuitems;
+        std::vector<cocos2d::Node*> _cached_upgrade_nuitems;
+        std::vector<cocos2d::Node*> _cached_harvester_nuitems;
+        std::vector<cocos2d::Node*> _cached_salesmen_nuitems;
+        std::vector<cocos2d::Node*> _cached_consumer_nuitems;
+        void cache_nuitems();
+
         void toggle_buttons(cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType evt);
         void setup_tab_buttons();
 

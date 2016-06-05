@@ -24,8 +24,42 @@ USING_NS_CC;
 
 SideListView::SideListView(Node* parent, spBuilding current_target) : current_target(current_target), parent(parent)
 {
+    this->cache_nuitems();
     this->setup_listviews();
     this->setup_tab_buttons();
+};
+
+void SideListView::cache_nuitems()
+{
+    this->_cached_nuitems = {};
+    this->_cached_building_nuitems;
+    this->_cached_recipe_nuitems;
+    this->_cached_upgrade_nuitems;
+    this->_cached_harvester_nuitems;
+    this->_cached_salesmen_nuitems;
+    this->_cached_consumer_nuitems;
+
+    for (int i = 0; i < 200; i++){
+        _cached_nuitems.push_back(NuItem::create(NULL));
+    };
+    for (int i = 0; i < 100; i++){
+        _cached_upgrade_nuitems.push_back(BuildingNuItem::create(NULL, NULL));
+    };
+    for (int i = 0; i < 100; i++){
+        _cached_recipe_nuitems.push_back(RecipeNuItem::create(NULL, NULL));
+    };
+    for (int i = 0; i < 100; i++){
+        _cached_building_nuitems.push_back(UpgradeBuildingShopNuItem::create(NULL, NULL));
+    };
+    for (int i = 0; i < 100; i++){
+        _cached_harvester_nuitems.push_back(HarvesterShopNuItem::create(NULL, NULL));
+    };
+    for (int i = 0; i < 100; i++){
+        _cached_salesmen_nuitems.push_back(SalesmanShopNuItem::create(NULL, NULL));
+    };
+    for (int i = 0; i < 100; i++){
+        _cached_consumer_nuitems.push_back(ConsumerShopNuItem::create(NULL, NULL, IngredientSubType::None));
+    };
 };
 
 ui::Button* SideListView::_create_button(std::string node_name)
