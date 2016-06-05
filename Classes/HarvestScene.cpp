@@ -226,7 +226,7 @@ void BaseScene::create_building_choicelist()
 
         //get initial node from the prebuilt scene
         Node* building_node = harvest_scene_editor->getChildByName(conf.node_name);
-        ui::Layout* panel = (ui::Layout*)building_node->getChildByName("building_panel");
+        ui::Button* panel = (ui::Button*)building_node->getChildByName("building_panel");
         building_node->removeFromParent();
         this->addChild(building_node);
 
@@ -245,16 +245,18 @@ void BaseScene::create_building_choicelist()
         ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
         building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
 
+        load_default_button_textures(panel);
+
         auto update_func = [panel, building](float dt)
         {
             auto target_building = BUILDUP->get_target_building();
             if (target_building == building)
             {
-                panel->setBackGroundColor(Color3B::RED);
+                //panel->setBackGroundColor(Color3B::RED);
             }
             else
             {
-                panel->setBackGroundColor({150, 200, 255});
+                //panel->setBackGroundColor({150, 200, 255});
             }
 
         };
@@ -483,7 +485,7 @@ void BaseScene::create_building_pageview()
     {
 
         auto node = city_scene->getChildByName(building->name);
-        auto building_panel = dynamic_cast<ui::Layout*>(node->getChildByName("building_panel"));
+        auto building_panel = dynamic_cast<ui::Button*>(node->getChildByName("building_panel"));
         building_panel->removeFromParent();
         building_pageview->addPage(building_panel);
         int page_index = building_pageview->getItems().size() - 1;
