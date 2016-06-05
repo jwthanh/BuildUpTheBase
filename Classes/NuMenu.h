@@ -124,7 +124,7 @@ class HarvesterShopNuItem : public BuildingShopNuItem
     public:
     static HarvesterShopNuItem* create(Node* parent, spBuilding building);
 
-    std::mt19937 HarvesterShopNuItem::get_generator();
+    std::mt19937 get_generator();
 
     bool init(Node* parent, spBuilding building);
     virtual void my_init(WorkerSubType harv_type, IngredientSubType ing_type);
