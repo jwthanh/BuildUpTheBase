@@ -247,18 +247,17 @@ void BaseScene::create_building_choicelist()
 
         load_default_button_textures(panel);
 
-        auto update_func = [panel, building](float dt)
+        auto update_func = [panel, building, building_image](float dt)
         {
             auto target_building = BUILDUP->get_target_building();
             if (target_building == building)
             {
-                //panel->setBackGroundColor(Color3B::RED);
+                building_image->loadTexture("crosshair_red.png", ui::TextureResType::PLIST);
             }
             else
             {
-                //panel->setBackGroundColor({150, 200, 255});
+                building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
             }
-
         };
         building_node->schedule(update_func, 0.01f, "update_func");
         update_func(0);
