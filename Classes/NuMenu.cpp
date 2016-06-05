@@ -508,9 +508,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     this->set_title(ss.str());
     this->set_description("Upgrade building\nincreasing its storage");
 
-    long double shop_cost = scale_number((res_count_t)10L, ((res_count_t)this->building_level)-(res_count_t)1L, (res_count_t)15L);
-    //long double shop_cost = 100*this->building_level; //OLD
-    this->set_cost_lbl(std::to_string(shop_cost));
+    long double shop_cost = scale_number(10.0L, ((res_count_t)this->building_level)-1.0L, 15.0L);
     this->_shop_cost = shop_cost;
 
     auto update_func = [this](float dt) {
