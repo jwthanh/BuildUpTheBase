@@ -369,13 +369,13 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="forest_node" ActionTag="1118871465" Tag="83" IconVisible="True" LeftMargin="720.0000" RightMargin="240.0000" TopMargin="40.0000" BottomMargin="600.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+          <AbstractNodeData Name="forest_node" ActionTag="1118871465" Tag="83" IconVisible="True" LeftMargin="720.0000" RightMargin="240.0000" TopMargin="110.0000" BottomMargin="530.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
-            <Position X="720.0000" Y="600.0000" />
+            <Position X="720.0000" Y="530.0000" />
             <Scale ScaleX="0.3500" ScaleY="0.3500" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7500" Y="0.9375" />
+            <PrePosition X="0.7500" Y="0.8281" />
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
           </AbstractNodeData>
