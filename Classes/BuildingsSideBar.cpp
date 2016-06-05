@@ -133,7 +133,6 @@ void SideListView::setup_shop_listview_as_harvesters()
         };
         std::vector<HarvestConfig> nuitems_config = {
             {WorkerType::Salesman, "salesman_item_one", Worker::SubType::One},
-            {WorkerType::Consumer, "consumer_item_one", Worker::SubType::One},
             // {WorkerType::Salesman, "salesman_item_two", Worker::SubType::Two}, //TODO fix sorting before we can add this in
             // {WorkerType::Salesman, "salesman_item_three", Worker::SubType::Three},
             {WorkerType::Harvester, "harvester_item_one", Worker::SubType::One},
@@ -145,6 +144,11 @@ void SideListView::setup_shop_listview_as_harvesters()
         };
 
         auto target_building = BUILDUP->get_target_building();
+
+        if (target_building->name == "The Underscape"){
+            nuitems_config.insert(nuitems_config.begin()+1, {WorkerType::Consumer, "consumer_item_one", Worker::SubType::One});
+        };
+
         for (auto config : nuitems_config)
         {
             //if the child already exists, put it at the back 
