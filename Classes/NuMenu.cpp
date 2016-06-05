@@ -573,6 +573,14 @@ void HarvesterShopNuItem::my_init_title()
         "Johan", "Jericho"
     };
 
+    std::mt19937 gen = std::mt19937(std::random_device{}());
+    auto seeder = std::hash<std::string>();
+    gen.seed(seeder(this->building->name));
+
+    std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
+    float x = distribution(gen);
+    CCLOG("random out: %f", x);
+
     std::string harvester_name = pick_one(names);
 
     this->set_title("Buy "+harvester_name);
