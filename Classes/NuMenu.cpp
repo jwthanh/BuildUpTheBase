@@ -564,6 +564,15 @@ HarvesterShopNuItem* HarvesterShopNuItem::create(Node* parent, spBuilding buildi
     }
 }
 
+std::mt19937 HarvesterShopNuItem::get_generator()
+{
+    auto gen = std::mt19937(std::default_random_engine{}());
+    auto seeder = std::hash<std::string>();
+    gen.seed(seeder(this->building->name+this->building->name)+ (int)this->harv_type);
+
+    return gen;
+}
+
 void HarvesterShopNuItem::my_init_title()
 {
     std::vector<std::string> names = {
@@ -573,10 +582,7 @@ void HarvesterShopNuItem::my_init_title()
         "Johan", "Jericho"
     };
 
-    std::mt19937 gen = std::mt19937(std::default_random_engine{}());
-    auto seeder = std::hash<std::string>();
-    gen.seed(seeder(this->building->name)+ (int)this->harv_type);
-
+    auto gen = get_generator();
     std::string harvester_name = pick_one(names, &gen);
 
     this->set_title("Buy "+harvester_name);
@@ -631,13 +637,14 @@ void HarvesterShopNuItem::my_init_sprite()
     else if (this->harv_type == WorkerSubType::Four) { set_path = set_paths.at(3); }
     else { set_path = "set_0.png"; }
 
+    auto gen = get_generator();
     std::vector<std::string> sprites = {
         set_path,
-        pick_one(gen_paths("body", 49)),
-        pick_one(gen_paths("headwear", 49)),
-        pick_one(gen_paths("legs", 22)),
-        pick_one(gen_paths("shield", 49)),
-        pick_one(gen_paths("weapon", 49))
+        pick_one(gen_paths("body", 49), &gen),
+        pick_one(gen_paths("headwear", 49), &gen),
+        pick_one(gen_paths("legs", 22), &gen),
+        pick_one(gen_paths("shield", 49), &gen),
+        pick_one(gen_paths("weapon", 49), &gen)
     };
     for (auto path : sprites)
     {
@@ -784,7 +791,9 @@ void SalesmanShopNuItem::my_init_title()
         "Sequoia", "Sergeo", "Seren", "Seamus", "Spartacus", "Spike", 
         "Siegfried", "Sylvain"
     };
-    std::string harvester_name = pick_one(names);
+
+    auto gen = get_generator();
+    std::string harvester_name = pick_one(names, &gen);
 
     this->set_title("Buy "+harvester_name);
 }
@@ -807,11 +816,12 @@ void SalesmanShopNuItem::my_init_sprite()
 
     auto base_node = Node::create();
 
+    auto gen = get_generator();
     std::vector<std::string> sprites = {
         "set_3.png",
-        pick_one(gen_paths("body", 5)),
-        pick_one(gen_paths("headwear", 5)),
-        pick_one(gen_paths("legs", 5)),
+        pick_one(gen_paths("body", 5), &gen),
+        pick_one(gen_paths("headwear", 5), &gen),
+        pick_one(gen_paths("legs", 5), &gen),
     };
     for (auto path : sprites)
     {
@@ -917,7 +927,8 @@ void ConsumerShopNuItem::my_init_title()
         "Charles", "Chaplin", "Champlain", "Connor", "Chap", "Chris", "Caleb",
         "Cameron", "Cyrill", "Cyrus", "Cody", "Corey", "Caiden", "Carter"
     };
-    std::string harvester_name = pick_one(names);
+    auto gen = get_generator();
+    std::string harvester_name = pick_one(names, &gen);
 
     this->set_title("Buy "+harvester_name);
 }
@@ -948,11 +959,12 @@ void ConsumerShopNuItem::my_init_sprite()
     else if (this->harv_type == WorkerSubType::Four) { set_path = set_paths.at(3); }
     else { set_path = "set_0.png"; }
 
+    auto gen = get_generator();
     std::vector<std::string> sprites = {
         set_path,
-        pick_one(gen_paths("body", 49)),
-        pick_one(gen_paths("headwear", 49)),
-        pick_one(gen_paths("legs", 22)),
+        pick_one(gen_paths("body", 49), &gen),
+        pick_one(gen_paths("headwear", 49), &gen),
+        pick_one(gen_paths("legs", 22), &gen),
     };
     for (auto path : sprites)
     {
