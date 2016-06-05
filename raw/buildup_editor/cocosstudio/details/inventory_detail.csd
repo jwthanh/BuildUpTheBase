@@ -149,17 +149,17 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="close_panel" ActionTag="-996767842" Tag="210" IconVisible="False" LeftMargin="4.6670" RightMargin="2.1554" TopMargin="1.4045" BottomMargin="364.4033" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" ctype="PanelObjectData">
+              <AbstractNodeData Name="close_panel" ActionTag="-996767842" Tag="210" IconVisible="False" LeftMargin="4.6670" RightMargin="2.1554" TopMargin="1.4044" BottomMargin="364.4033" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="393.1776" Y="134.1923" />
                 <Children>
-                  <AbstractNodeData Name="close_alert_lbl" ActionTag="-930629592" Tag="211" IconVisible="False" LeftMargin="375.1447" RightMargin="2.0329" TopMargin="3.1910" BottomMargin="111.0013" FontSize="20" LabelText="X" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="18.0000" Y="24.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="383.1447" Y="121.0013" />
+                  <AbstractNodeData Name="close_alert_lbl" ActionTag="-930629592" Tag="211" IconVisible="False" LeftMargin="335.1448" RightMargin="-1.9672" TopMargin="-0.8090" BottomMargin="91.0013" FontSize="40" LabelText="[x]" HorizontalAlignmentType="HT_Right" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="60.0000" Y="44.0000" />
+                    <AnchorPoint ScaleX="1.0000" ScaleY="1.0000" />
+                    <Position X="395.1448" Y="135.0013" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.9745" Y="0.9017" />
-                    <PreSize X="0.0407" Y="0.1490" />
+                    <PrePosition X="1.0050" Y="1.0060" />
+                    <PreSize X="0.1526" Y="0.3279" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
