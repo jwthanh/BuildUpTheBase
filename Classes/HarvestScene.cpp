@@ -261,6 +261,15 @@ void BaseScene::create_building_choicelist()
         };
         building_node->schedule(update_func, 0.01f, "update_func");
         update_func(0);
+
+        auto touch_handler = [panel, building](Ref*, ui::Widget::TouchEventType evt)
+        {
+            if (evt == ui::Widget::TouchEventType::ENDED)
+            {
+                BUILDUP->set_target_building(building);
+            }
+        };
+        panel->addTouchEventListener(touch_handler);
     };
 };
 
