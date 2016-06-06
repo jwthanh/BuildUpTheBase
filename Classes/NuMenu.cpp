@@ -583,7 +583,7 @@ void HarvesterShopNuItem::my_init_title()
     auto gen = get_generator();
     std::string harvester_name = pick_one(names, &gen);
 
-    this->set_title("Buy "+harvester_name);
+    this->set_title("Buy "+harvester_name+", a harvester");
 }
 
 bool HarvesterShopNuItem::init(Node* parent, spBuilding building)
@@ -793,7 +793,7 @@ void SalesmanShopNuItem::my_init_title()
     auto gen = get_generator();
     std::string harvester_name = pick_one(names, &gen);
 
-    this->set_title("Buy "+harvester_name);
+    this->set_title("Buy "+harvester_name+", a salesman");
 }
 
 void SalesmanShopNuItem::my_init_sprite()
@@ -928,7 +928,7 @@ void ConsumerShopNuItem::my_init_title()
     auto gen = get_generator();
     std::string harvester_name = pick_one(names, &gen);
 
-    this->set_title("Buy "+harvester_name);
+    this->set_title("Buy "+harvester_name+", a consumer");
 }
 
 void ConsumerShopNuItem::my_init_sprite()
