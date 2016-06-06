@@ -185,13 +185,17 @@ ConsumerHarvester::ConsumerHarvester(spBuilding building, std::string name, Ingr
 
 void ConsumerHarvester::on_update(float dt)
 {
-    if (this->building->count_ingredients(Ingredient::SubType::Blood) >= 5*this->active_count) {
+    res_count_t blood_cost = 5.0;
+    res_count_t active_cost = blood_cost * this->active_count;
+    if (this->building->count_ingredients(Ingredient::SubType::Blood) >= active_cost) {
         auto health = BUILDUP->fighter->attrs->health;
         if (health->is_full() == false)
         {
-            CCLOG("this building has enough blood, healing %d", 5 * this->active_count);
-            health->add_to_current_val((int)(5.0f));
-            this->building->ingredients[Ingredient::SubType::Blood] -= 5 * this->active_count;
+            res_count_t healing = 5 * this->active_count;
+            CCLOG("this building has enough blood, healing %L", healing);
+
+            health->add_to_current_val((int)healing);
+            this->building->ingredients[Ingredient::SubType::Blood] -= active_cost;
         }
 
     };
