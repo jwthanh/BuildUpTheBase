@@ -44,8 +44,10 @@ bool NuItem::init(cocos2d::Node* parent)
 
     auto set_aliasing = [](ui::Text* text_node)
     {
-        ((Label*)text_node->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
-        ((Label*)text_node->getVirtualRenderer())->setOverflow(Label::Overflow::SHRINK);
+        Label* renderer = (Label*)text_node->getVirtualRenderer();
+        renderer->getFontAtlas()->setAliasTexParameters();
+        renderer->setOverflow(Label::Overflow::SHRINK);
+        renderer->setTTFConfig(((Label*)((ui::Text*)NuItem::orig_button->getChildByName("title_panel")->getChildByName("title_lbl"))->getVirtualRenderer())->getTTFConfig());
     };
 
     if (NuItem::orig_button == NULL)
@@ -55,13 +57,13 @@ bool NuItem::init(cocos2d::Node* parent)
         NuItem::orig_button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
         load_default_button_textures(NuItem::orig_button);
         NuItem::orig_button->retain();
+
         ((ui::Text*)NuItem::orig_button->getChildByName("title_panel")->getChildByName("title_lbl"))->setString(std::string("", 200));
         ((ui::Text*)NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl"))->setString(std::string("", 200));
         ((ui::Text*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"))->setString(std::string("", 200));
         ((ui::Text*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"))->setString(std::string("", 200));
 
-
-    }
+    };
 
     //clone orig button, background is still messed though
     this->button = (ui::Button*)NuItem::orig_button->clone();
