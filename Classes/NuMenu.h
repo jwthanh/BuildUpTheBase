@@ -24,6 +24,8 @@ class NuItem : public cocos2d::ui::Widget
         virtual bool init(cocos2d::Node* parent);
 
         static cocos2d::ui::Button* orig_button;
+        static cocos2d::TTFConfig ttf_config;
+
         cocos2d::ui::Button* button;
         cocos2d::ui::ImageView* item_icon;
         cocos2d::ui::Text* title_lbl;

@@ -20,6 +20,7 @@
 USING_NS_CC;
 
 cocos2d::ui::Button* NuItem::orig_button = NULL;
+cocos2d::TTFConfig NuItem::ttf_config = TTFConfig("pixelmix.ttf", 16, GlyphCollection::ASCII, nullptr, false, 2);
 
 NuItem* NuItem::create(cocos2d::Node* parent)
 {
@@ -42,12 +43,20 @@ bool NuItem::init(cocos2d::Node* parent)
 {
     ui::Widget::init();
 
-    auto set_aliasing = [](ui::Text* text_node)
+    //TTFConfig ttf_config = TTFConfig("pixelmix.ttf", 16, GlyphCollection::ASCII, nullptr, false, 2);
+    auto set_renderer = [/*ttf_config*/](ui::Text* text_node){
+        Label* renderer = (Label*)text_node->getVirtualRenderer();
+        renderer->setTTFConfig(NuItem::ttf_config);
+    };
+
+
+    auto set_aliasing = [set_renderer](ui::Text* text_node)
     {
         Label* renderer = (Label*)text_node->getVirtualRenderer();
         renderer->getFontAtlas()->setAliasTexParameters();
         renderer->setOverflow(Label::Overflow::SHRINK);
-        renderer->setTTFConfig(((Label*)((ui::Text*)NuItem::orig_button->getChildByName("title_panel")->getChildByName("title_lbl"))->getVirtualRenderer())->getTTFConfig());
+
+        set_renderer(text_node);
     };
 
     if (NuItem::orig_button == NULL)
@@ -90,12 +99,6 @@ bool NuItem::init(cocos2d::Node* parent)
     set_aliasing(this->cost_lbl);
     this->count_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
     set_aliasing(this->count_lbl);
-
-    //this is supposed to offset the spritebatchnodes inside of Labels getting resized all the time
-    //this->set_title("abcdefghijklmnopqrstuvwxyzyzABCDEFGHIJKLMNOPQRSTUVWXYZYZ");
-    //this->set_cost_lbl("abcdefghijklmnopqrstuvwxyzyzABCDEFGHIJKLMNOPQRSTUVWXYZYZ");
-    //this->count_lbl->setString("abcdefghijklmnopqrstuvwxyzyzABCDEFGHIJKLMNOPQRSTUVWXYZYZ");
-    //this->set_description("abcdefghijklmnopqrstuvwxyzyzABCDEFGHIJKLMNOPQRSTUVWXYZYZ");
 
     this->schedule(CC_SCHEDULE_SELECTOR(NuItem::update_func));
 
