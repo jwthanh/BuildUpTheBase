@@ -263,7 +263,8 @@ void BaseScene::create_building_choicelist()
 
             if (building->is_storage_full_of_ingredients(building->punched_sub_type))
             {
-                panel->setColor(Color3B::RED);
+                Color3B reddish = { 243, 162, 173 };
+                panel->setColor(reddish);
             }
             else 
             {
