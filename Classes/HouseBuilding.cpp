@@ -454,7 +454,7 @@ res_count_t Building::get_storage_space()
 
 bool Building::is_storage_full_of_ingredients(Ingredient::SubType sub_type)
 {
-    return this->can_fit_more_ingredients(sub_type, 0);
+    return !this->can_fit_more_ingredients(sub_type, 1);
 };
 
 bool Building::can_fit_more_ingredients(Ingredient::SubType sub_type, res_count_t quantity /*= 1*/)

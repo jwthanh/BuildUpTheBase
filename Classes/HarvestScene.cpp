@@ -260,6 +260,15 @@ void BaseScene::create_building_choicelist()
             {
                 building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
             }
+
+            if (building->is_storage_full_of_ingredients(building->punched_sub_type))
+            {
+                panel->setColor(Color3B::RED);
+            }
+            else 
+            {
+                panel->setColor(Color3B::WHITE);
+            }
         };
         building_node->schedule(update_func, 0.01f, "update_func");
         update_func(0);
