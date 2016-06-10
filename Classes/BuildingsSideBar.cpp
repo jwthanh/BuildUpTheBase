@@ -365,7 +365,8 @@ void SideListView::setup_detail_listview_as_recipes()
             spTechnology combat_dmg = std::make_shared<Technology>(Technology::SubType::CombatDamage);
             spRecipe recipe = std::make_shared<Recipe>("combat_damage", "no desc for tech recipe");
 
-            res_count_t souls_cost = std::floor(scale_number(2.0L, map_get(target_building->techtree->tech_map, combat_dmg->sub_type, 0), 1.15L));
+            auto tech_map = target_building->techtree->tech_map;
+            res_count_t souls_cost = std::floor(scale_number(2.0L, map_get(tech_map, combat_dmg->sub_type, 0), 1.45L));
             recipe->components = mistIngredient({
                 {Ingredient::SubType::Soul, souls_cost}
             });
