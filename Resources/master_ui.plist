@@ -1079,13 +1079,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>master_ui.png</string>
+            <string>master_ui.pvr.ccz</string>
             <key>size</key>
             <string>{1920,242}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:787afbb53b0fed79775660e6cc3396f5:9048851b36c95eb0f0f1eb9fc3980f73:46d5613a345bde46170341c988b3c4b9$</string>
+            <string>$TexturePacker:SmartUpdate:74ffda92f351fc7b1f02642bce800677:9048851b36c95eb0f0f1eb9fc3980f73:d6d9c045c071fe6ed4473e4bcc88e783$</string>
             <key>textureFileName</key>
-            <string>master_ui.png</string>
+            <string>master_ui.pvr.ccz</string>
         </dict>
     </dict>
 </plist>
