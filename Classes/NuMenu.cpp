@@ -53,8 +53,8 @@ bool NuItem::init(cocos2d::Node* parent)
     auto set_aliasing = [set_renderer](ui::Text* text_node)
     {
         Label* renderer = (Label*)text_node->getVirtualRenderer();
-        renderer->getFontAtlas()->setAliasTexParameters();
         renderer->setOverflow(Label::Overflow::SHRINK);
+        renderer->getFontAtlas()->setAliasTexParameters();
 
         set_renderer(text_node);
     };
