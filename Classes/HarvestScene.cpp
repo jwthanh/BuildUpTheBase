@@ -570,9 +570,9 @@ void BaseScene::create_inventory_listview()
             type_vec.push_back({ ts.first, map_get(BUILDUP->get_target_building()->ingredients, ts.first, 0) });
         }
 
-        auto b = type_vec.begin();
-        auto e = type_vec.end();
-        std::sort(b, e, order_by_count);
+        auto begin = type_vec.begin();
+        auto end = type_vec.end();
+        std::sort(begin, end, order_by_count);
 
         for (auto type_to_count : type_vec)
         {
