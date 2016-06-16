@@ -56,6 +56,24 @@ Buildup::Buildup()
     this->player = NULL;
 };
 
+///for building in buildings, sum up their ingredients and return the map
+mistIngredient Buildup::get_all_ingredients() const
+{
+
+    mistIngredient result;
+    for (spBuilding building : this->city->buildings)
+    {
+        mistIngredient ingredients = building->ingredients;
+
+        for (std::pair<Ingredient::SubType, res_count_t> mist : ingredients)
+        {
+            res_count_t existing_val = map_get(result, mist.first, 0);
+            result[mist.first] = existing_val + mist.second;
+        }
+    }
+
+    return result;
+}
 
 
 

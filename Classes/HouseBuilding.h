@@ -142,6 +142,8 @@ class Buildup
 
         spClock server_clock;
 
+        mistIngredient get_all_ingredients() const;
+
         Buildup();
         void update(float dt);
 
