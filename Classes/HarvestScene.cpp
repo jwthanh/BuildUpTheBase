@@ -565,9 +565,11 @@ void BaseScene::create_inventory_listview()
 
         std::vector<maptype> type_vec;
 
+        mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+
         for (auto ts : Ingredient::type_map)
         {
-            type_vec.push_back({ ts.first, map_get(BUILDUP->get_target_building()->ingredients, ts.first, 0) });
+            type_vec.push_back({ ts.first, map_get(city_ingredients, ts.first, 0) });
         }
 
         auto begin = type_vec.begin();
@@ -597,7 +599,7 @@ void BaseScene::create_inventory_listview()
             dynamic_cast<Label*>(item_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
 
             //if there's less than 1 ingredient, hide the item panel altogether
-            if (BUILDUP->get_target_building()->ingredients[ing_type] <= 0)
+            if (city_ingredients[ing_type] <= 0)
             {
                 new_item_panel->setVisible(false);
                 ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
@@ -640,7 +642,8 @@ void BaseScene::create_inventory_listview()
                 auto type_str = Ingredient::type_to_string(ing_type);
                 std::stringstream ss;
 
-                res_count_t count = BUILDUP->get_target_building()->count_ingredients(ing_type);
+                mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+                res_count_t count = map_get(city_ingredients, ing_type, 0);
                 ss << beautify_double(count) << "\n" << type_str;
                 auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
                 item_lbl->setString(ss.str());
@@ -815,7 +818,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     auto update_delay = 0.1f;
 
     alert_panel->schedule([count_lbl, ing_type](float) {
-        res_count_t count = BUILDUP->get_target_building()->count_ingredients(ing_type);
+        res_count_t count = map_get(BUILDUP->get_all_ingredients(), ing_type, 0);
         count_lbl->setString(beautify_double(count));
     }, update_delay, "alert_count_update");
 
@@ -828,21 +831,22 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
         sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold, update_delay](Ref* touch, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
+                mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
 
-                int num_sellable = map_get(ingredients, ing_type, 0);
+                int num_sellable = map_get(city_ingredients, ing_type, 0);
                 if (num_sellable != 0)
                 {
                     int to_sell = std::min(num_sellable, amount_sold);
                     CCLOG("selling %i of %s", to_sell, Ingredient::type_to_string(ing_type).c_str());
-                    ingredients[ing_type] -= to_sell;
+                    city_ingredients[ing_type] -= to_sell;
                     BEATUP->add_total_coin(to_sell*coins_gained);
                     CCLOG("SELLING STUFF");
                 }
             }
         });
         sell_btn->schedule([sell_btn, this, ing_type, amount_sold](float){
-            if (BUILDUP->get_target_building()->count_ingredients(ing_type) < amount_sold)
+            mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+            if (map_get(city_ingredients, ing_type, 0) < amount_sold)
             {
                 //this doesnt let the button accept touches, so we need to subclass widget or something to fix it
                 try_set_enabled(sell_btn, false);

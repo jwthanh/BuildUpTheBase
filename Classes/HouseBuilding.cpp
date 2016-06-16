@@ -61,6 +61,7 @@ mistIngredient Buildup::get_all_ingredients() const
 {
 
     mistIngredient result;
+    result[Ingredient::SubType::Grain];
     for (spBuilding building : this->city->buildings)
     {
         mistIngredient ingredients = building->ingredients;
