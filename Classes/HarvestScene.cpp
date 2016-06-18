@@ -936,5 +936,4 @@ void HarvestScene::add_harvestable()
 
 void HarvestScene::create_recipe_lbl()
 {
-    Node* harvest_scene_editor = this->get_original_scene_from_editor();
 }
