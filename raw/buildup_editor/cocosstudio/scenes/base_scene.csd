@@ -379,6 +379,35 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
           </AbstractNodeData>
+          <AbstractNodeData Name="tab_4_btn" ActionTag="243979730" Tag="78" IconVisible="False" LeftMargin="200.0000" RightMargin="560.0000" TopMargin="5.0000" BottomMargin="565.0000" TouchEnable="True" FontSize="18" ButtonText="Powers" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="200.0000" Y="70.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="300.0000" Y="600.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3125" Y="0.9375" />
+            <PreSize X="0.2083" Y="0.1094" />
+            <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+            <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+            <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="powers_listview" ActionTag="1504007663" Tag="169" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="-0.0001" RightMargin="160.0001" TopMargin="-355.0000" BottomMargin="-5.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+            <Size X="800.0000" Y="1000.0000" />
+            <AnchorPoint />
+            <Position X="-0.0001" Y="-5.0000" />
+            <Scale ScaleX="0.5000" ScaleY="0.5000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0000" Y="-0.0078" />
+            <PreSize X="0.8333" Y="1.5625" />
+            <SingleColor A="255" R="150" G="200" B="255" />
+            <FirstColor A="255" R="150" G="150" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

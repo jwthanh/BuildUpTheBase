@@ -49,10 +49,12 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
         this->shop_listview->setVisible(false);
         this->detail_listview->setVisible(false);
         this->building_listview->setVisible(false);
+        this->powers_listview->setVisible(false);
 
         this->tab_shop_btn->setEnabled(true);
         this->tab_detail_btn->setEnabled(true);
         this->tab_building_btn->setEnabled(true);
+        this->tab_powers_btn->setEnabled(true);
 
         ui::Button* target_button = dynamic_cast<ui::Button*>(target);
         target_button->setEnabled(false);
@@ -60,6 +62,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
         if (target_button == this->tab_shop_btn) { this->shop_listview->setVisible(true); }
         else if (target_button == this->tab_detail_btn) { this->detail_listview->setVisible(true); }
         else if (target_button == this->tab_building_btn) { this->building_listview->setVisible(true); }
+        else if (target_button == this->tab_powers_btn) { this->powers_listview->setVisible(true); }
     };
 };
 
@@ -75,6 +78,9 @@ void SideListView::setup_tab_buttons()
     this->tab_building_btn = this->_create_button("tab_3_btn");
     this->tab_building_btn->addTouchEventListener(CC_CALLBACK_2(SideListView::toggle_buttons, this));
 
+    this->tab_powers_btn = this->_create_button("tab_4_btn");
+    this->tab_powers_btn->addTouchEventListener(CC_CALLBACK_2(SideListView::toggle_buttons, this));
+
     //prepress the shop button
     toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
 
@@ -85,6 +91,7 @@ void SideListView::setup_listviews()
     this->shop_listview = this->_create_listview("shop_listview");
     this->detail_listview = this->_create_listview("detail_listview");
     this->building_listview = this->_create_listview("building_listview");
+    this->powers_listview = this->_create_listview("powers_listview");
 
     float update_delay = 0.1f;
 
@@ -103,11 +110,13 @@ void SideListView::setup_listviews()
             this->detail_listview->removeAllChildren();
             this->shop_listview->removeAllChildren();
             this->building_listview->removeAllChildren();
+            this->powers_listview->removeAllChildren();
 
             //scroll to top of all the listviews
             this->detail_listview->scrollToTop(0, false);
             this->shop_listview->scrollToTop(0, false);
             this->building_listview->scrollToTop(0, false);
+            this->powers_listview->scrollToTop(0, false);
         }
     };
     this->parent->schedule(clean_children_on_target_change, update_delay, "clean_children");
