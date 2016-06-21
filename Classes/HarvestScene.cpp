@@ -675,6 +675,7 @@ void BaseScene::create_shop_listview()
     this->sidebar->setup_shop_listview_as_harvesters();
     this->sidebar->setup_detail_listview_as_recipes();
     this->sidebar->setup_building_listview_as_upgrades();
+    this->sidebar->setup_powers_listview_as_powers();
 };
 
 bool HarvestScene::init()
