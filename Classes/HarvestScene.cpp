@@ -672,16 +672,9 @@ void BaseScene::create_shop_listview()
 
     this->sidebar = std::make_shared<SideListView>(this, BUILDUP->get_target_building());
 
-    ui::ListView* shop_listview = sidebar->shop_listview;
-    ui::ListView* detail_listview = sidebar->detail_listview;
-
-    ui::Button* tab_1_btn = sidebar->tab_shop_btn;
-    ui::Button* tab_2_btn = sidebar->tab_detail_btn;
-
-
-    sidebar->setup_shop_listview_as_harvesters();
-    sidebar->setup_detail_listview_as_recipes();
-    sidebar->setup_building_listview_as_upgrades();
+    this->sidebar->setup_shop_listview_as_harvesters();
+    this->sidebar->setup_detail_listview_as_recipes();
+    this->sidebar->setup_building_listview_as_upgrades();
 };
 
 bool HarvestScene::init()
