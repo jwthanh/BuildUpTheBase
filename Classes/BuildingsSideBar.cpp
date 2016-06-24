@@ -18,6 +18,7 @@
 #include "attribute.h"
 #include "Util.h"
 #include "Technology.h"
+#include "Beatup.h"
 
 
 USING_NS_CC;
@@ -495,6 +496,23 @@ void SideListView::setup_powers_listview_as_powers()
         menu_item->setName(child_name);
         menu_item->set_title("[WIP] Sell all");
         menu_item->set_description("Sells all resources");
+
+        menu_item->set_touch_ended_callback([]()
+        {
+            CCLOG("selling all");
+
+            res_count_t sale_price = 10; //TODO use proper price
+            for (spBuilding building : BUILDUP->city->buildings)
+            {
+                for (auto ingredient : building->ingredients)
+                {
+                    IngredientSubType ing_type = ingredient.first;
+                    res_count_t ing_count = map_get(building->ingredients, ing_type, 0);
+                    BEATUP->add_total_coin(ing_count*sale_price);
+                    building->ingredients[ing_type] = 0;
+                }
+            }
+        });
 
         auto handle_prequistites = [menu_item](float dt){
             bool prereq_satisfied = true;
