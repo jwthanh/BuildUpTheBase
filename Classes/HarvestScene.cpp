@@ -648,7 +648,7 @@ void BaseScene::create_inventory_listview()
                 auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
                 item_lbl->setString(ss.str());
 
-                if (count >= 1)
+                if (count > 0)
                 {
                     new_item_panel->setVisible(true);
                 }
