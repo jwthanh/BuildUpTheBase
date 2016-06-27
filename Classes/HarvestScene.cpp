@@ -93,8 +93,16 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         // BUILDUP->post_update();
-        auto bldg_serializer = BuildingSerializer("test_building.json", BUILDUP->get_target_building());
-        bldg_serializer.serialize();
+        // auto bldg_serializer = BuildingSerializer("test_building.json", BUILDUP->get_target_building());
+        // bldg_serializer.serialize();
+
+        {
+        auto listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
+        listview->requestDoLayout();
+        };
+
+        auto listview = dynamic_cast<ui::ListView*>(this->getChildByName("shop_listview"));
+        listview->requestDoLayout();
     }
 }
 
@@ -569,6 +577,9 @@ void BaseScene::create_inventory_listview()
 
         for (auto ts : Ingredient::type_map)
         {
+            // type_vec.push_back({ ts.first, map_get(city_ingredients, ts.first, 0) });
+
+            // this helps but doesnt load the images correctly for some reason
             auto count = map_get(city_ingredients, ts.first, 0);
             if (count != 0) type_vec.push_back({ ts.first, count });
         }
