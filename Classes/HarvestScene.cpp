@@ -569,7 +569,8 @@ void BaseScene::create_inventory_listview()
 
         for (auto ts : Ingredient::type_map)
         {
-            type_vec.push_back({ ts.first, map_get(city_ingredients, ts.first, 0) });
+            auto count = map_get(city_ingredients, ts.first, 0);
+            if (count != 0) type_vec.push_back({ ts.first, count });
         }
 
         auto begin = type_vec.begin();
