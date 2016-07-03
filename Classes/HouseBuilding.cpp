@@ -76,7 +76,33 @@ mistIngredient Buildup::get_all_ingredients() const
     return result;
 }
 
+//for each building that has one of the ingredients, remove one at a time until there's no to sell left
+void Buildup::remove_shared_ingredients_from_all(Ingredient::SubType ing_type, res_count_t count) const
+{
 
+    vsBuilding matching_buildings;
+
+    for (spBuilding building : this->city->buildings)
+    {
+        mistIngredient ingredients = building->ingredients;
+
+        res_count_t existing_val = map_get(ingredients, ing_type, 0);
+        if (existing_val != 0) {
+            matching_buildings.push_back(building);
+        };
+    }
+
+    unsigned int matches = matching_buildings.size();
+    if (matches != 0) {
+        res_count_t individual_cost = count/matches;
+
+        for (spBuilding building : matching_buildings)
+        {
+            mistIngredient& ingredients = building->ingredients;
+            ingredients.at(ing_type) -= individual_cost;
+        };
+    }
+};
 
 void Village::update(float dt)
 {

@@ -843,11 +843,14 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
                 {
                     int to_sell = std::min(num_sellable, amount_sold);
                     CCLOG("selling %i of %s", to_sell, Ingredient::type_to_string(ing_type).c_str());
-                    city_ingredients[ing_type] -= to_sell;
                     BEATUP->add_total_coin(to_sell*coins_gained);
+
+                    //for each building that has one of the ingredients, remove one at a time until there's no to sell left
+                    BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
                 }
             }
         });
+
         sell_btn->schedule([sell_btn, this, ing_type, amount_sold](float){
             mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
             if (map_get(city_ingredients, ing_type, 0) < amount_sold)
