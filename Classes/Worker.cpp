@@ -175,20 +175,21 @@ void Salesman::on_update(float dt)
                 //create floating label for the amount sold over the correct
                 //ing panel
                 cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
-                //auto children = scene->getChildren();
-                //CCLOG("children 0 %s", children.at(0)->getName().c_str());
-                //CCLOG("children 1 %s", children.at(1)->getName().c_str());
                 auto inventory_listview = scene->getChildByName("HarvestScene")->getChildByName("inventory_listview");
                 if (inventory_listview)
                 {
-                    CCLOG("found listview");
                     auto ing_panel = inventory_listview->getChildByName(string_type);
                     if (ing_panel)
                     {
-                        CCLOG("found panel");
-                        auto floating_label = FloatingLabel::createWithTTF(beautify_double(actual_value), "pixelmix.ttf", 25);
-                        ing_panel->addChild(floating_label);
+                        auto floating_label = FloatingLabel::createWithTTF("+"+beautify_double(actual_value), "pixelmix.ttf", 25);
+                        scene->addChild(floating_label);
                         floating_label->do_float();
+
+                        cocos2d::Vec2 pos = {
+                            ing_panel->getContentSize().width / 2 ,
+                            ing_panel->getContentSize().height
+                        };
+                        floating_label->setPosition(ing_panel->convertToWorldSpace(pos));
                     }
                 }
             }
