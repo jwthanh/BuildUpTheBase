@@ -40,10 +40,10 @@ FloatingLabel* FloatingLabel::createWithTTF(const TTFConfig& ttfConfig, const st
 }
 
 
-void FloatingLabel::do_float(float x, float y, float duration)
+void FloatingLabel::do_float(float x, float x_variation, float y, float y_variation, float duration)
 {
-    float x_scale = sx(100*(x * CCRANDOM_0_1()));
-    float y_scale = sy(100 + (y * CCRANDOM_0_1()));
+    float x_scale = sx(x + (x_variation * CCRANDOM_0_1()));
+    float y_scale = sy(y + (y_variation * CCRANDOM_0_1()));
 
     ccBezierConfig config = {
         Vec2(x_scale, y_scale),

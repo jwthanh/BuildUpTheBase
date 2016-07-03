@@ -184,7 +184,7 @@ void Salesman::on_update(float dt)
                         auto floating_label = FloatingLabel::createWithTTF("+$"+beautify_double(actual_value), "pixelmix.ttf", 25);
                         floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
                         scene->addChild(floating_label);
-                        floating_label->do_float(1, 10, 1);
+                        floating_label->do_float(50, 1, 50, 10, 1);
 
                         cocos2d::Vec2 pos = {
                             ing_panel->getContentSize().width / 2 ,

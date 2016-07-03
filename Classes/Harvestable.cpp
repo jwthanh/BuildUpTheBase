@@ -158,7 +158,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
     floating_label->setPosition(pos);
     floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
     this->getParent()->addChild(floating_label);
-    floating_label->do_float(1, 10, 1);
+    floating_label->do_float();
 
 }
 
@@ -292,7 +292,7 @@ void Harvestable::shatter()
         );
     floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
     this->getParent()->addChild(floating_label);
-    floating_label->do_float(1, 10, 1);
+    floating_label->do_float(1, 100, 10, 100, 1);
 
     CallFunc* remove = CallFunc::create([this](){ this->removeFromParent(); });
 
@@ -563,7 +563,7 @@ void FightingHarvestable::animate_clip()
     floating_label->setPosition(pos);
     floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
     this->getParent()->addChild(floating_label);
-    floating_label->do_float(1, 10, 1);
+    floating_label->do_float();
 
 };
 
