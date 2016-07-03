@@ -137,14 +137,14 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sell_lbl" ActionTag="1021894158" Tag="31" IconVisible="False" LeftMargin="5.0261" RightMargin="7.0261" TopMargin="142.5000" BottomMargin="334.5000" IsCustomSize="True" FontSize="20" LabelText="Manually Sell:" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="387.9478" Y="23.0000" />
+              <AbstractNodeData Name="sell_lbl" ActionTag="1021894158" Tag="31" IconVisible="False" TopMargin="143.5000" BottomMargin="333.5000" IsCustomSize="True" FontSize="20" LabelText="Manually Sell:" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="400.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="199.0000" Y="346.0000" />
+                <Position X="200.0000" Y="345.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4975" Y="0.6920" />
-                <PreSize X="0.9699" Y="0.0460" />
+                <PrePosition X="0.5000" Y="0.6900" />
+                <PreSize X="1.0000" Y="0.0460" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -176,14 +176,14 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="value_lbl" ActionTag="1397573822" Tag="30" IconVisible="False" LeftMargin="6.0261" RightMargin="6.0261" TopMargin="303.5000" BottomMargin="173.5000" IsCustomSize="True" FontSize="20" LabelText="for XXX each" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="387.9478" Y="23.0000" />
+              <AbstractNodeData Name="value_lbl" ActionTag="1397573822" Tag="30" IconVisible="False" TopMargin="315.5001" BottomMargin="161.4999" IsCustomSize="True" FontSize="20" LabelText="for XXX each" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="400.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="200.0000" Y="185.0000" />
+                <Position X="200.0000" Y="172.9999" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.3700" />
-                <PreSize X="0.9699" Y="0.0460" />
+                <PrePosition X="0.5000" Y="0.3460" />
+                <PreSize X="1.0000" Y="0.0460" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
