@@ -626,7 +626,6 @@ void BaseScene::create_inventory_listview()
             auto on_touch_cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
 
                 if (type == ui::Widget::TouchEventType::ENDED) {
-                    CCLOG("touched a panel %i", ing_type);
                     auto alert = this->create_detail_alert(ing_type);
                     this->addChild(alert, 10);
 
@@ -828,7 +827,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
         count_lbl->setString(beautify_double(count));
     }, update_delay, "alert_count_update");
 
-    int coins_gained = 3;
+    res_count_t coins_gained = 3;
     auto create_sell_button = [this, alert_panel, ing_type, coins_gained, update_delay](std::string name, int amount_sold)
     {
         auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
@@ -846,7 +845,6 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
                     CCLOG("selling %i of %s", to_sell, Ingredient::type_to_string(ing_type).c_str());
                     city_ingredients[ing_type] -= to_sell;
                     BEATUP->add_total_coin(to_sell*coins_gained);
-                    CCLOG("SELLING STUFF");
                 }
             }
         });
@@ -868,6 +866,16 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     create_sell_button("sell_10_btn", 10);
     create_sell_button("sell_100_btn", 100);
     create_sell_button("sell_1000_btn", 1000);
+
+    auto value_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("value_lbl"));
+    auto update_value_lbl = [coins_gained, alert_panel, value_lbl](float dt){
+        std::stringstream value_ss;
+        value_ss << "for " << beautify_double(coins_gained) << " each";
+        value_lbl->setString(value_ss.str().c_str());
+    };
+    value_lbl->schedule(update_value_lbl, 0.2f, "update_value_lbl");
+    update_value_lbl(0);
+
 
 
     auto move_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("move_btn"));
