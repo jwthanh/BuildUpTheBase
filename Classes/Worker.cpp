@@ -9,6 +9,7 @@
 #include "Fighter.h"
 #include "attribute_container.h"
 #include "attribute.h"
+#include "MiscUI.h"
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
@@ -168,7 +169,28 @@ void Salesman::on_update(float dt)
                 std::string string_type = Ingredient::type_to_string(ing_type);
 
                 this->building->ingredients[ing_type] -= to_sell;
-                BEATUP->add_total_coin((double)(to_sell*coins_gained));
+                double actual_value = (double)(to_sell*coins_gained);
+                BEATUP->add_total_coin(actual_value);
+
+                //create floating label for the amount sold over the correct
+                //ing panel
+                cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+                //auto children = scene->getChildren();
+                //CCLOG("children 0 %s", children.at(0)->getName().c_str());
+                //CCLOG("children 1 %s", children.at(1)->getName().c_str());
+                auto inventory_listview = scene->getChildByName("HarvestScene")->getChildByName("inventory_listview");
+                if (inventory_listview)
+                {
+                    CCLOG("found listview");
+                    auto ing_panel = inventory_listview->getChildByName(string_type);
+                    if (ing_panel)
+                    {
+                        CCLOG("found panel");
+                        auto floating_label = FloatingLabel::createWithTTF(beautify_double(actual_value), "pixelmix.ttf", 25);
+                        ing_panel->addChild(floating_label);
+                        floating_label->do_float();
+                    }
+                }
             }
             else
             {
