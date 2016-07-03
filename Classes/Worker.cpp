@@ -181,7 +181,7 @@ void Salesman::on_update(float dt)
                     auto ing_panel = inventory_listview->getChildByName(string_type);
                     if (ing_panel)
                     {
-                        auto floating_label = FloatingLabel::createWithTTF("+"+beautify_double(actual_value), "pixelmix.ttf", 25);
+                        auto floating_label = FloatingLabel::createWithTTF("+$"+beautify_double(actual_value), "pixelmix.ttf", 25);
                         floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
                         scene->addChild(floating_label);
                         floating_label->do_float();
