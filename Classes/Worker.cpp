@@ -182,6 +182,7 @@ void Salesman::on_update(float dt)
                     if (ing_panel)
                     {
                         auto floating_label = FloatingLabel::createWithTTF("+"+beautify_double(actual_value), "pixelmix.ttf", 25);
+                        floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
                         scene->addChild(floating_label);
                         floating_label->do_float();
 
