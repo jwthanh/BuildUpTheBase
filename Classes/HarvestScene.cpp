@@ -870,7 +870,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     auto value_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("value_lbl"));
     auto update_value_lbl = [coins_gained, alert_panel, value_lbl](float dt){
         std::stringstream value_ss;
-        value_ss << "for " << beautify_double(coins_gained) << " each";
+        value_ss << "for " << beautify_double(coins_gained) << "$ each";
         value_lbl->setString(value_ss.str().c_str());
     };
     value_lbl->schedule(update_value_lbl, 0.2f, "update_value_lbl");
