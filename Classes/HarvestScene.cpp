@@ -554,11 +554,11 @@ void BaseScene::create_inventory_listview()
 {
     Node* harvest_scene_editor = this->get_original_scene_from_editor();
     ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("inventory_listview"));
-    // inventory_listview->setClippingEnabled(true);
+
     inventory_listview->removeFromParent();
     this->addChild(inventory_listview);
 
-     auto inst = CSLoader::getInstance();
+    auto inst = CSLoader::getInstance();
     auto update_listview = [this, inst, inventory_listview](float dt)
     {
         auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
@@ -572,7 +572,6 @@ void BaseScene::create_inventory_listview()
         };
 
         std::vector<maptype> type_vec;
-
         mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
 
         for (auto ts : Ingredient::type_map)
@@ -596,12 +595,10 @@ void BaseScene::create_inventory_listview()
             IngredientData res_data = IngredientData(str_type);
 
             //if the child already exists, put it at the back 
-            auto existing_node = inventory_listview->getChildByName(str_type);
+            ui::Button* existing_node = dynamic_cast<ui::Button*>(inventory_listview->getChildByName(str_type));
             if (existing_node)
             {
-                existing_node->removeFromParentAndCleanup(false);
-                inventory_listview->addChild(existing_node);
-                continue;
+                inventory_listview->removeChild(existing_node, false);
             }
 
             auto new_item_panel = dynamic_cast<ui::Button*>(orig_item_panel->clone());
