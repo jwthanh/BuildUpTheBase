@@ -96,13 +96,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // auto bldg_serializer = BuildingSerializer("test_building.json", BUILDUP->get_target_building());
         // bldg_serializer.serialize();
 
-        {
-        auto listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
-        listview->requestDoLayout();
-        };
+        auto inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
+        inventory_listview->requestDoLayout();
 
-        auto listview = dynamic_cast<ui::ListView*>(this->getChildByName("shop_listview"));
-        listview->requestDoLayout();
+        auto shop_listview = dynamic_cast<ui::ListView*>(this->getChildByName("shop_listview"));
+        shop_listview->requestDoLayout();
     }
 }
 
