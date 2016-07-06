@@ -97,7 +97,15 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // bldg_serializer.serialize();
 
         auto inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
+        auto items = inventory_listview->getItems();
+        items.reverse();
+        //items.empty()
+        //auto back = items.back();
+        ////items.eraseObject(back);
+        //items.replace(0, back);
         inventory_listview->requestDoLayout();
+        inventory_listview->doLayout();
+
 
         auto shop_listview = dynamic_cast<ui::ListView*>(this->getChildByName("shop_listview"));
         shop_listview->requestDoLayout();
@@ -602,21 +610,19 @@ void BaseScene::create_inventory_listview()
             auto new_item_panel = dynamic_cast<ui::Button*>(orig_item_panel->clone());
             load_default_button_textures(new_item_panel);
             new_item_panel->setName(str_type);
+
+            //set aliasing on font
             auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
             dynamic_cast<Label*>(item_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
 
+            //add ingredient image
+            ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
+            item_img->loadTexture(res_data.get_img_large());
+            ((ui::Scale9Sprite*)item_img->getVirtualRenderer())->getSprite()->getTexture()->setAliasTexParameters();
+
             //if there's less than 1 ingredient, hide the item panel altogether
-            if (city_ingredients[ing_type] <= 0)
-            {
-                new_item_panel->setVisible(false);
-                ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
-                item_img->loadTexture(res_data.get_img_large());
-                ((ui::Scale9Sprite*)item_img->getVirtualRenderer())->getSprite()->getTexture()->setAliasTexParameters();
-            }
-            else
-            {
-                new_item_panel->setVisible(true);
-            }
+            if (city_ingredients[ing_type] <= 0) { new_item_panel->setVisible(false); }
+            else { new_item_panel->setVisible(true); }
 
             auto on_touch_cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
 
