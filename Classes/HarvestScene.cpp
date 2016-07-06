@@ -584,9 +584,9 @@ void BaseScene::create_inventory_listview()
         {
             // type_vec.push_back({ ts.first, map_get(city_ingredients, ts.first, 0) });
 
-            // this helps but doesnt load the images correctly for some reason
             auto count = map_get(city_ingredients, ts.first, 0);
-            if (count != 0) type_vec.push_back({ ts.first, count });
+            //if (count != 0)
+            type_vec.push_back({ ts.first, count });
         }
 
         auto begin = type_vec.begin();
@@ -600,11 +600,28 @@ void BaseScene::create_inventory_listview()
 
             IngredientData res_data = IngredientData(str_type);
 
+            auto zero_ingredients = city_ingredients[ing_type] <= 0;
+
             //if the child already exists, put it at the back 
             ui::Button* existing_node = dynamic_cast<ui::Button*>(inventory_listview->getChildByName(str_type));
             if (existing_node)
             {
-                inventory_listview->removeChild(existing_node, false);
+                //last frame, there was probably ingredients, so cleaup the
+                //leftover button
+                if (zero_ingredients) 
+                {
+                    inventory_listview->removeChild(existing_node, false);
+                }
+                else 
+                {
+                    continue;
+                };
+            }
+
+            //dont build the ingredient button if for zero ingredients
+            if (zero_ingredients) 
+            {
+                continue;
             }
 
             auto new_item_panel = dynamic_cast<ui::Button*>(orig_item_panel->clone());
