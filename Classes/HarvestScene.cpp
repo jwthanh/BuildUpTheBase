@@ -96,15 +96,18 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // auto bldg_serializer = BuildingSerializer("test_building.json", BUILDUP->get_target_building());
         // bldg_serializer.serialize();
 
-        auto inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
+        ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
         auto items = inventory_listview->getItems();
         items.reverse();
         //items.empty()
         //auto back = items.back();
         ////items.eraseObject(back);
         //items.replace(0, back);
+        auto old_center = inventory_listview->getCenterItemInCurrentView();
+        auto old_index = inventory_listview->getIndex(old_center);
         inventory_listview->requestDoLayout();
         inventory_listview->doLayout();
+        inventory_listview->jumpToItem(old_index, Vec2::ANCHOR_MIDDLE, Vec2::ANCHOR_MIDDLE);
 
 
         auto shop_listview = dynamic_cast<ui::ListView*>(this->getChildByName("shop_listview"));
