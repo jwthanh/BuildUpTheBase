@@ -5,6 +5,7 @@
 #include "cocos2d.h"
 #include <json/stringbuffer.h>
 #include <json/writer.h>
+#include <json/prettywriter.h>
 
 
 rapidjson::Document FileIO::open_json(std::string json_path)
@@ -22,7 +23,7 @@ void FileIO::save_json(std::string json_path, rapidjson::Document& document)
     auto file_utils = cocos2d::FileUtils::getInstance();
 
     rapidjson::StringBuffer buffer;
-    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+    rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
 
     document.Accept(writer);
     std::string str(buffer.GetString(), buffer.GetSize());
