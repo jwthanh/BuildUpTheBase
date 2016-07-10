@@ -489,7 +489,9 @@ void CraftingHarvestable::animate_clip()
     spark_parts->setScale(1.0 / 4.0f);
     spark_parts->setPosition(origin);
     int total_particles = spark_parts->getTotalParticles();
-    spark_parts->setTotalParticles((int)(total_particles * click_ratio));
+    int active_particles = (int)(total_particles * click_ratio);
+    //add 10 so there's always visible sparks, cheaper than mix/max calls
+    spark_parts->setTotalParticles(active_particles+10);
     this->addChild(spark_parts);
 }
 
