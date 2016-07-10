@@ -90,11 +90,14 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     {
         Director::getInstance()->popScene();
     }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_S)
+    {
+         auto bldg_serializer = BuildingSerializer("test_building.json", BUILDUP->get_target_building());
+         bldg_serializer.serialize();
+    }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         // BUILDUP->post_update();
-        // auto bldg_serializer = BuildingSerializer("test_building.json", BUILDUP->get_target_building());
-        // bldg_serializer.serialize();
 
         ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
         auto items = inventory_listview->getItems();
