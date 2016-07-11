@@ -35,12 +35,18 @@ void BaseSerializer::add_member(rj::Document& doc, std::string key, rj::Value& v
     //build the Values that become the key and values
     rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
     rapidjson::Value doc_key = rapidjson::Value();
+
     //NOTE need to use allocator here, AND move the key later it seems like,
     //otherwise the value gets cleaned up
     doc_key.SetString(key.c_str(), key.size(), allocator);
 
     //all the member to the document
-    doc.AddMember(doc_key.Move(), value.Move(), allocator);
+    this->_add_member(doc, doc_key, value, allocator);
+};
+
+void BaseSerializer::_add_member(rj::Document& doc, rj::Value& key, rj::Value& value, rapidjson::Document::AllocatorType& allocator)
+{
+    doc.AddMember(key.Move(), value.Move(), allocator);
 };
 
 void BaseSerializer::set_string(rj::Document & doc, std::string key, std::string value)
@@ -125,3 +131,12 @@ void BuildingSerializer::serialize_workers(rapidjson::Document& doc)
         this->set_double(doc, ss.str(), count);
     }
 }
+
+void BuildingSerializer::_add_member(rj::Document& doc, rj::Value& key, rj::Value& value, rapidjson::Document::AllocatorType& allocator)
+{
+    if (doc.HasMember(this->building->name.c_str()) == false)
+    {
+        doc.AddMember(rj::Value().SetString(rj::StringRef(building->name.c_str())), rj::Value(rj::kObjectType).Move(), allocator);
+    }
+    doc[building->name.c_str()].AddMember(key.Move(), value.Move(), allocator);
+};

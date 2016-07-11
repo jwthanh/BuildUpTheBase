@@ -23,6 +23,11 @@ class BaseSerializer
 
         void add_member(rj::Document& doc, std::string key, rj::Value& value);
 
+    private:
+        //subclasses change the way it accesses the root doc, so buildings use doc[building_name] to add to instead.
+        virtual void _add_member(rj::Document& doc, rj::Value& key, rj::Value& value, rapidjson::Document::AllocatorType& allocator);
+
+    public:
         void set_string(rj::Document & doc, std::string key, std::string value);
         void set_double(rj::Document & doc, std::string key, double value);
         void set_int(rj::Document & doc, std::string key, int value);
@@ -39,10 +44,13 @@ class BuildingSerializer : public BaseSerializer
         spBuilding building;
         BuildingSerializer(std::string filename, spBuilding building);
 
-    void serialize() override;
-    void serialize_building_level(rapidjson::Document& doc);
-    void serialize_ingredients(rapidjson::Document& doc);
-    void serialize_workers(rapidjson::Document& doc);
+        void serialize() override;
+        void serialize_building_level(rapidjson::Document& doc);
+        void serialize_ingredients(rapidjson::Document& doc);
+        void serialize_workers(rapidjson::Document& doc);
+
+    private:
+        virtual void _add_member(rj::Document& doc, rj::Value& key, rj::Value& value, rapidjson::Document::AllocatorType& allocator) override;
 };
 
 #endif
