@@ -27,7 +27,7 @@ void BaseSerializer::save_document(rj::Document& doc, std::string filename) cons
 {
     if (filename == "") filename = this->filename;
 
-    FileIO::save_json(filename, doc);
+    FileIO::save_json(filename, doc, false);
 }
 
 void BaseSerializer::add_member(rj::Document& doc, std::string key, rj::Value& value)
