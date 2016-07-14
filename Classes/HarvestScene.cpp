@@ -92,8 +92,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_S)
     {
-         auto bldg_serializer = BuildingSerializer("test_building.json", BUILDUP->get_target_building());
-         bldg_serializer.serialize();
+        for (spBuilding building : BUILDUP->city->buildings)
+        {
+            auto bldg_serializer = BuildingSerializer("test_building.json", building);
+            bldg_serializer.serialize();
+        };
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
