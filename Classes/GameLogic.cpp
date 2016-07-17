@@ -4,6 +4,7 @@
 #include "HouseBuilding.h"
 #include "DataManager.h"
 #include "NuMenu.h"
+#include "Serializer.h"
 
 GameLogic* GameLogic::_instance = NULL;
 
@@ -19,6 +20,13 @@ bool GameLogic::init()
     instance->beatup->setName("beatup");
     instance->beatup->retain();
     instance->buildup = instance->beatup->buildup;
+
+    CCLOG("loading game on startup, this should only happen once");
+    for (spBuilding building : BUILDUP->city->buildings)
+    {
+        auto bldg_serializer = BuildingSerializer("test_building.json", building);
+        bldg_serializer.load();
+    };
 
     return true;
 };
