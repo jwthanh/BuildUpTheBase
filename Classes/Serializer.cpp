@@ -203,14 +203,17 @@ void BuildingSerializer::load_ingredients(rapidjson::Document& doc)
 
 void BuildingSerializer::serialize_workers(rapidjson::Document& doc)
 {
+    auto save_worker = [&](std::string prefix, mistHarvester& workers, std::string& type_str, int i, IngredientSubType& ing_type, double count) {
+        std::stringstream ss;
+        ss << prefix << "_" << type_str << "_" << i;
+        this->set_double(doc, ss.str(), count);
+    };
+
     for (auto mist : this->building->harvesters)
     {
         std::pair<WorkerSubType, IngredientSubType> sub_type = mist.first;
         res_count_t count = mist.second;
-
-        std::stringstream ss;
-        ss << "harvester_" << Ingredient::type_to_string(sub_type.second) << "_" << static_cast<int>(sub_type.first);
-        this->set_double(doc, ss.str(), count);
+        save_worker("harvester", this->building->harvesters, Ingredient::type_to_string(sub_type.second), static_cast<int>(sub_type.first), sub_type.second, (double)count);
     }
 
     for (auto mist : this->building->salesmen)
@@ -241,6 +244,7 @@ void BuildingSerializer::load_workers(rapidjson::Document& doc)
             workers[type_pair] = harv_count;
         };
     };
+
     //NOTE this goes through each ingredient, then for each ing, makes up to 10
     //queries on the doc per worker type. this could get slow, but C++ is great so who knows
     for (std::pair<Ingredient::SubType, std::string> pair : Ingredient::type_map)
