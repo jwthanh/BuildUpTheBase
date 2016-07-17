@@ -183,6 +183,15 @@ void BuildingSerializer::serialize_ingredients(rapidjson::Document& doc)
 void BuildingSerializer::load_ingredients(rapidjson::Document& doc)
 {
     //TODO load_ingredients
+    for (std::pair<Ingredient::SubType, std::string> pair : Ingredient::type_map)
+    {
+        //NOTE this isn't res_count_t aka long double, so we are going to lose data eventually!!!!
+        double ing_count = this->get_double(doc, pair.second, -1);
+        if (ing_count != -1)
+        {
+            this->building->ingredients[pair.first] = ing_count;
+        }
+    }
 }
 
 void BuildingSerializer::serialize_workers(rapidjson::Document& doc)
