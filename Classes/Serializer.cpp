@@ -228,7 +228,8 @@ void BuildingSerializer::_add_member(rj::Document& doc, rj::Value& key, rj::Valu
 
 rj::Value& BuildingSerializer::_get_member(rj::Document& doc, rj::Value& key, rapidjson::Document::AllocatorType& allocator)
 {
-    if (doc.HasMember(this->building->name.c_str()) == false)
+    if (doc.HasMember(this->building->name.c_str()) == false ||
+        doc[this->building->name.c_str()].HasMember(key) == false)
     {
         return doc;
     }
