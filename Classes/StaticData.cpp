@@ -3,24 +3,46 @@
 #include <json/document.h>
 #include <json/reader.h>
 
+#include <sstream>
+
 #include "FileOperation.h"
 
 #include "Recipe.h"
 
 std::string BaseData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)
 {
+
+    std::stringstream ss;
+    ss << key_top << "__" << key_child << "__" << key_grandchild;
+    std::string cache_key = ss.str();
+
+    if (this->_cache.find(cache_key) != this->_cache.end())
+    {
+        return this->_cache.at(cache_key);
+    }
+
+
     rjDocument jsonDoc = FileIO::open_json(this->_filename, true);
 
     CC_ASSERT(jsonDoc.HasMember(key_top.c_str()) && "this should be here");
     auto body = &jsonDoc[key_top.c_str()];
 
-    if (key_child == "") { return body->GetString(); };
+    if (key_child == "")
+    {
+        this->_cache[cache_key] = body->GetString();
+        return body->GetString();
+    };
 
     auto child = &(*body)[key_child.c_str()];
-    if (key_grandchild == "") { return child->GetString(); };
+    if (key_grandchild == "")
+    {
+        this->_cache[cache_key] = child->GetString();
+        return child->GetString();
+    };
 
     auto grand_child = &(*child)[key_grandchild.c_str()];
     
+    this->_cache[cache_key] = grand_child->GetString();
     return grand_child->GetString();
 }
 

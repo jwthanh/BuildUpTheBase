@@ -11,6 +11,7 @@
 class BaseData
 {
     private:
+        std::map<std::string, std::string> _cache;
     protected:
         std::string _filename;
         std::string _get_data(std::string key_top, std::string key_child="", std::string key_grandchild="");
