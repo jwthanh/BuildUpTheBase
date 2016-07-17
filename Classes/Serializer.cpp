@@ -203,30 +203,30 @@ void BuildingSerializer::load_ingredients(rapidjson::Document& doc)
 
 void BuildingSerializer::serialize_workers(rapidjson::Document& doc)
 {
-    auto save_worker = [&](std::string prefix, mistHarvester& workers, std::string& type_str, int i, IngredientSubType& ing_type, double count) {
+    auto save_worker = [&](std::string prefix, mistHarvester& workers, std::map<std::pair<Worker::SubType, Ingredient::SubType>, res_count_t>::value_type mist) {
         std::stringstream ss;
-        ss << prefix << "_" << type_str << "_" << i;
-        this->set_double(doc, ss.str(), count);
+        WorkerSubType worker_type = mist.first.first;
+        IngredientSubType ing_type = mist.first.second;
+        res_count_t count = mist.second;
+
+        ss << prefix << "_" << Ingredient::type_to_string(ing_type) << "_" << static_cast<int>(worker_type);
+        this->set_double(doc, ss.str(), (double)count); //TODO fix res_count_t to double data loss here
     };
 
     for (auto mist : this->building->harvesters)
     {
-        std::pair<WorkerSubType, IngredientSubType> sub_type = mist.first;
-        res_count_t count = mist.second;
-        save_worker("harvester", this->building->harvesters, Ingredient::type_to_string(sub_type.second), static_cast<int>(sub_type.first), sub_type.second, (double)count);
+        save_worker("harvester", this->building->harvesters, mist);
     }
 
     for (auto mist : this->building->salesmen)
     {
-        std::pair<WorkerSubType, IngredientSubType> sub_type = mist.first;
-        res_count_t count = mist.second;
-
-        std::stringstream ss;
-        ss << "salesmen_" << Ingredient::type_to_string(sub_type.second) << "_" << static_cast<int>(sub_type.first);
-        this->set_double(doc, ss.str(), count);
+        save_worker("salesmen", this->building->salesmen, mist);
     }
 
-    //TODO add consumers
+    for (auto mist : this->building->consumers)
+    {
+        save_worker("consumer", this->building->consumers, mist);
+    }
 }
 
 void BuildingSerializer::load_workers(rapidjson::Document& doc)
@@ -255,6 +255,7 @@ void BuildingSerializer::load_workers(rapidjson::Document& doc)
         for (int i = 1; i <= 20; i++){
             load_worker("harvester", this->building->harvesters, type_str, i, ing_type);
             load_worker("salesmen", this->building->salesmen, type_str, i, ing_type);
+            load_worker("consumer", this->building->consumers, type_str, i, ing_type);
         };
     }
 }
