@@ -8,10 +8,14 @@
 #include <json/prettywriter.h>
 #include "constants.h"
 
+int read_counts = 0;
 
 rjDocument FileIO::open_json(std::string json_path, bool builtin_path)
 {
     auto file_utils = cocos2d::FileUtils::getInstance();
+
+    CCLOG("read count %i", read_counts);
+    read_counts += 1;
 
     //builtin paths are in Resources, otherwise its in UserDefaults folder
     if (builtin_path == false)
