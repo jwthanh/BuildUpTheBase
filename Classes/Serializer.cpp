@@ -136,7 +136,11 @@ void BuildingSerializer::_add_member(rj::Document& doc, rj::Value& key, rj::Valu
 {
     if (doc.HasMember(this->building->name.c_str()) == false)
     {
-        doc.AddMember(rj::Value().SetString(rj::StringRef(building->name.c_str())), rj::Value(rj::kObjectType).Move(), allocator);
+        doc.AddMember(
+            rj::Value().SetString(rj::StringRef(building->name.c_str())),
+            rj::Value(rj::kObjectType).Move(),
+            allocator
+        );
     }
     doc[building->name.c_str()].AddMember(key.Move(), value.Move(), allocator);
 };
