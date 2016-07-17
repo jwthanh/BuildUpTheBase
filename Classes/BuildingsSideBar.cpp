@@ -19,6 +19,7 @@
 #include "Util.h"
 #include "Technology.h"
 #include "Beatup.h"
+#include "Serializer.h"
 
 
 USING_NS_CC;
@@ -476,7 +477,7 @@ void SideListView::setup_powers_listview_as_powers()
     ui::ListView* listview = this->powers_listview;
 
     float update_delay = 0.1f;
-    auto update_listview = [this, update_delay](float dt)
+    auto update_sellall = [this, update_delay](float dt)
     {
         auto target_building = BUILDUP->get_target_building();
 
@@ -514,22 +515,50 @@ void SideListView::setup_powers_listview_as_powers()
             }
         });
 
-        auto handle_prequistites = [menu_item](float dt){
-            bool prereq_satisfied = true;
-            if (prereq_satisfied) {
-                menu_item->button->setVisible(true);
-            } else {
-                menu_item->button->setVisible(false);
-            }
-        };
+    };
 
-        menu_item->schedule(handle_prequistites, update_delay, "update_ing_type");
-        handle_prequistites(0);
+    listview->schedule(update_sellall, update_delay, "update_sellall");
+    update_sellall(0);
+
+    //------------ copy and pasted ------------------//
+
+    auto update_save = [this, update_delay](float dt)
+    {
+        auto target_building = BUILDUP->get_target_building();
+
+        //if the child already exists, put it at the back 
+        std::string child_name = "save";
+        auto existing_node = this->powers_listview->getChildByName(child_name);
+        if (existing_node)
+        {
+            existing_node->removeFromParentAndCleanup(false);
+            this->powers_listview->addChild(existing_node);
+            return;
+        }
+
+        //clone the new item
+        BuildingNuItem* menu_item;
+        menu_item = BuildingNuItem::create(this->powers_listview, target_building);
+        menu_item->setName(child_name);
+        menu_item->set_title("Save Game");
+        menu_item->set_description("Saves progress. Does not autosave");
+
+        menu_item->set_touch_ended_callback([]()
+        {
+            CCLOG("Pressed Save, saving progress");
+
+            for (spBuilding building : BUILDUP->city->buildings)
+            {
+                auto bldg_serializer = BuildingSerializer("test_building.json", building);
+                bldg_serializer.serialize();
+            };
+
+        });
 
     };
 
-    listview->schedule(update_listview, update_delay, "update_listview");
-    update_listview(0);
+    listview->schedule(update_save, update_delay, "update_save");
+    update_save(0);
 };
 
 ui::ListView* SideListView::_create_listview(std::string node_name)
