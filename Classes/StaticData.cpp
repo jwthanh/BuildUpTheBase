@@ -9,7 +9,7 @@
 
 std::string BaseData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)
 {
-    rapidjson::Document jsonDoc = FileIO::open_json(this->_filename);
+    rapidjson::Document jsonDoc = FileIO::open_json(this->_filename, true);
 
     CC_ASSERT(jsonDoc.HasMember(key_top.c_str()) && "this should be here");
     auto body = &jsonDoc[key_top.c_str()];
@@ -57,7 +57,7 @@ std::string BuildingData::get_img_large()
 
 vsRecipe BuildingData::get_all_recipes()
 {
-    auto jsonDoc = FileIO::open_json(this->_filename);
+    auto jsonDoc = FileIO::open_json(this->_filename, true);
     auto body = &jsonDoc["buildings"];
     auto building_info = &(*body)[this->building_name.c_str()];
 
@@ -123,7 +123,7 @@ spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* 
 spRecipe BuildingData::get_recipe(std::string recipe_key)
 {
 
-    auto jsonDoc = FileIO::open_json(this->_filename);
+    auto jsonDoc = FileIO::open_json(this->_filename, true);
     auto body = &jsonDoc["buildings"];
     auto building_info = &(*body)[this->building_name.c_str()];
     auto recipe_info = &(*building_info)["recipes"];

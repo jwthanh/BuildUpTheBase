@@ -196,7 +196,7 @@ Building::Building(Village* city, std::string name, std::string id_key) :
     //xmlDoc->Parse(xmlBuffer.c_str(), xmlBuffer.size());
     //auto root = xmlDoc->RootElement();
 
-    auto jsonDoc = FileIO::open_json("buildings_data.json");
+    auto jsonDoc = FileIO::open_json("buildings_data.json", true);
     assert(jsonDoc.HasMember("buildings"));
     if (jsonDoc["buildings"].HasMember(name.c_str()))
     {

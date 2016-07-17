@@ -98,6 +98,14 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
             bldg_serializer.serialize();
         };
     }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_L)
+    {
+        for (spBuilding building : BUILDUP->city->buildings)
+        {
+            auto bldg_serializer = BuildingSerializer("test_building.json", building);
+            bldg_serializer.load();
+        };
+    }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         // BUILDUP->post_update();

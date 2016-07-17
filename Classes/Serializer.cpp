@@ -20,7 +20,7 @@ rj::Document BaseSerializer::get_document(std::string filename) const
 {
     if (filename == "") filename = this->filename;
 
-    return FileIO::open_json(filename);
+    return FileIO::open_json(filename, false);
 }
 
 void BaseSerializer::save_document(rj::Document& doc, std::string filename) const
@@ -96,6 +96,11 @@ void BaseSerializer::set_int(rj::Document & doc, std::string key, int value)
 std::string BaseSerializer::get_string(rj::Document & doc, std::string key, std::string fallback)
 {
     rj::Value& doc_value = this->get_member(doc, key);
+    if (doc_value.IsObject()) 
+    {
+        //assume its returned a Document, since I don't know how to return a null reference
+        return fallback;
+    }
     return doc_value.GetString();
 
 };
@@ -103,14 +108,24 @@ std::string BaseSerializer::get_string(rj::Document & doc, std::string key, std:
 double BaseSerializer::get_double(rj::Document & doc, std::string key, double fallback)
 {
     auto& doc_value = this->get_member(doc, key);
+    if (doc_value.IsObject()) 
+    {
+        //assume its returned a Document, since I don't know how to return a null reference
+        return fallback;
+    }
     return doc_value.GetDouble();
 
 };
 
 int BaseSerializer::get_int(rj::Document & doc, std::string key, int fallback)
 {
-    rj::Value& value = this->get_member(doc, key);
-    return value.GetInt();
+    rj::Value& doc_value = this->get_member(doc, key);
+    if (doc_value.IsObject()) 
+    {
+        //assume its returned a Document, since I don't know how to return a null reference
+        return fallback;
+    }
+    return doc_value.GetInt();
 };
 
 BuildingSerializer::BuildingSerializer(std::string filename, spBuilding building)
@@ -146,8 +161,12 @@ void BuildingSerializer::serialize_building_level(rapidjson::Document& doc)
 
 void BuildingSerializer::load_building_level(rapidjson::Document& doc)
 {
-    int new_level = this->get_int(doc, "building_level");
-    this->building->building_level = new_level;
+    int new_level = this->get_int(doc, "building_level", -1);
+    if (new_level != -1)
+    {
+        //only used saved building level
+        this->building->building_level = new_level;
+    }
 }
 
 void BuildingSerializer::serialize_ingredients(rapidjson::Document& doc)

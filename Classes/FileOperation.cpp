@@ -8,9 +8,16 @@
 #include <json/prettywriter.h>
 
 
-rapidjson::Document FileIO::open_json(std::string json_path)
+rapidjson::Document FileIO::open_json(std::string json_path, bool builtin_path)
 {
     auto file_utils = cocos2d::FileUtils::getInstance();
+
+    //builtin paths are in Resources, otherwise its in UserDefaults folder
+    if (builtin_path == false)
+    {
+        json_path = cocos2d::FileUtils::getInstance()->getWritablePath() + json_path;
+    }
+
     std::string jsonBuffer = file_utils->getStringFromFile(json_path);
     auto jsonDoc = rapidjson::Document();
     jsonDoc.Parse(jsonBuffer.c_str());
