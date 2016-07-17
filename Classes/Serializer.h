@@ -61,6 +61,7 @@ class BuildingSerializer : public BaseSerializer
 
     private:
         virtual void _add_member(rj::Document& doc, rj::Value& key, rj::Value& value, rapidjson::Document::AllocatorType& allocator) override;
+        virtual rj::Value& _get_member(rj::Document& doc, rj::Value& key, rapidjson::Document::AllocatorType& allocator);
 };
 
 #endif

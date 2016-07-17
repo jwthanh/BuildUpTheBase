@@ -206,3 +206,12 @@ void BuildingSerializer::_add_member(rj::Document& doc, rj::Value& key, rj::Valu
     }
     doc[building->name.c_str()].AddMember(key.Move(), value.Move(), allocator);
 };
+
+rj::Value& BuildingSerializer::_get_member(rj::Document& doc, rj::Value& key, rapidjson::Document::AllocatorType& allocator)
+{
+    if (doc.HasMember(this->building->name.c_str()) == false)
+    {
+        return doc;
+    }
+    return doc[building->name.c_str()][key];
+};
