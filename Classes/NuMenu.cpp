@@ -875,8 +875,8 @@ void ConsumerShopNuItem::my_init_update_callback()
         this->_shop_cost = scale_number(Salesman::get_base_shop_cost(this->harv_type), harvesters_owned, 1.15L);
 
         std::stringstream ss;
-        auto sold_count = Salesman::get_to_sell_count(this->harv_type) * building->building_level;
-        ss << "Consumes " << sold_count << " " << Ingredient::type_to_string(this->consumed_type) << "\nper sec";
+        auto sold_count = 5 * building->building_level;
+        ss << "Consumes " << sold_count << " " << Ingredient::type_to_string(this->consumed_type) << "\nper sec (if hurt enough)";
         this->set_description(ss.str());
     };
     this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
