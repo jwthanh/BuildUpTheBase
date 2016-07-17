@@ -494,8 +494,8 @@ void SideListView::setup_powers_listview_as_powers()
         BuildingNuItem* menu_item;
         menu_item = BuildingNuItem::create(this->powers_listview, target_building);
         menu_item->setName(child_name);
-        menu_item->set_title("[WIP] Sell all");
-        menu_item->set_description("Sells all resources");
+        menu_item->set_title("Sell all");
+        menu_item->set_description("Sells all resources instantly");
 
         menu_item->set_touch_ended_callback([]()
         {
