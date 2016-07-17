@@ -24,6 +24,9 @@ class BaseData
 
 class BuildingData : public BaseData
 {
+    private:
+        rjDocument recipe_doc;
+
     public:
         std::string building_name;
 

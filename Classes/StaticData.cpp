@@ -79,8 +79,13 @@ std::string BuildingData::get_img_large()
 
 vsRecipe BuildingData::get_all_recipes()
 {
-    auto jsonDoc = FileIO::open_json(this->_filename, true);
-    auto body = &jsonDoc["buildings"];
+    //assume if its not an object, its null
+    if (this->recipe_doc.IsObject() == false)
+    {
+        this->recipe_doc = FileIO::open_json(this->_filename, true);
+    }
+
+    auto body = &this->recipe_doc["buildings"];
     auto building_info = &(*body)[this->building_name.c_str()];
 
     if (!building_info->HasMember("recipes"))
