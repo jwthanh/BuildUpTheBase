@@ -148,6 +148,8 @@ void BuildingSerializer::serialize()
 void BuildingSerializer::load()
 {
     rapidjson::Document doc = this->get_document();
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false){ return; }
 
     this->load_building_level(doc);
     this->load_ingredients(doc);
@@ -161,6 +163,9 @@ void BuildingSerializer::serialize_building_level(rapidjson::Document& doc)
 
 void BuildingSerializer::load_building_level(rapidjson::Document& doc)
 {
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false){ return; }
+
     int new_level = this->get_int(doc, "building_level", -1);
     if (new_level != -1)
     {
@@ -182,6 +187,9 @@ void BuildingSerializer::serialize_ingredients(rapidjson::Document& doc)
 
 void BuildingSerializer::load_ingredients(rapidjson::Document& doc)
 {
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false){ return; }
+
     for (std::pair<Ingredient::SubType, std::string> pair : Ingredient::type_map)
     {
         //NOTE this isn't res_count_t aka long double, so we are going to lose data eventually!!!!
@@ -220,6 +228,9 @@ void BuildingSerializer::serialize_workers(rapidjson::Document& doc)
 
 void BuildingSerializer::load_workers(rapidjson::Document& doc)
 {
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false){ return; }
+
     auto load_worker = [&](std::string prefix, mistHarvester& workers, std::string& type_str, int& i, IngredientSubType& ing_type) {
         std::stringstream ss;
         ss << prefix << "_" << type_str << "_" << i;
@@ -259,6 +270,8 @@ void BuildingSerializer::_add_member(rj::Document& doc, rj::Value& key, rj::Valu
 
 rj::Value& BuildingSerializer::_get_member(rj::Document& doc, rj::Value& key, rapidjson::Document::AllocatorType& allocator)
 {
+    doc.HasMember(this->building->name.c_str());
+    doc[this->building->name.c_str()].HasMember(key);
     if (doc.HasMember(this->building->name.c_str()) == false ||
         doc[this->building->name.c_str()].HasMember(key) == false)
     {
