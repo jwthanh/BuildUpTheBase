@@ -16,25 +16,25 @@ BaseSerializer::BaseSerializer(std::string filename)
 
 };
 
-rj::Document BaseSerializer::get_document(std::string filename) const
+rjDocument BaseSerializer::get_document(std::string filename) const
 {
     if (filename == "") filename = this->filename;
 
     return FileIO::open_json(filename, false);
 }
 
-void BaseSerializer::save_document(rj::Document& doc, std::string filename) const
+void BaseSerializer::save_document(rjDocument& doc, std::string filename) const
 {
     if (filename == "") filename = this->filename;
 
     FileIO::save_json(filename, doc, false);
 }
 
-void BaseSerializer::add_member(rj::Document& doc, std::string key, rj::Value& value)
+void BaseSerializer::add_member(rjDocument& doc, std::string key, rjValue& value)
 {
     //build the Values that become the key and values
-    rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
-    rapidjson::Value doc_key = rapidjson::Value();
+    auto& allocator = doc.GetAllocator();
+    rjValue doc_key = rjValue();
 
     //NOTE need to use allocator here, AND move the key later it seems like,
     //otherwise the value gets cleaned up
@@ -44,58 +44,58 @@ void BaseSerializer::add_member(rj::Document& doc, std::string key, rj::Value& v
     this->_add_member(doc, doc_key, value, allocator);
 };
 
-rj::Value& BaseSerializer::get_member(rj::Document& doc, std::string key)
+rjValue& BaseSerializer::get_member(rjDocument& doc, std::string key)
 {
     //build the Values that become the key and values
-    rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
-    rapidjson::Value doc_key = rapidjson::Value();
+    rjDocument::AllocatorType& allocator = doc.GetAllocator();
+    rjValue doc_key = rjValue();
 
-    doc_key.SetString(key.c_str(), key.size(), allocator);
+    doc_key.SetString(key.c_str(), key.size());
 
     return this->_get_member(doc, doc_key, allocator);
 };
 
-void BaseSerializer::_add_member(rj::Document& doc, rj::Value& key, rj::Value& value, rapidjson::Document::AllocatorType& allocator)
+void BaseSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rapidjson::CrtAllocator& allocator)
 {
     doc.AddMember(key.Move(), value.Move(), allocator);
 };
 
-rj::Value& BaseSerializer::_get_member(rj::Document& doc, rj::Value& key, rapidjson::Document::AllocatorType& allocator)
+rjValue& BaseSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
 {
-    rj::Value& value = doc[key];
+    rjValue& value = doc[key];
     return value;
 };
 
-void BaseSerializer::set_string(rj::Document & doc, std::string key, std::string value)
+void BaseSerializer::set_string(rjDocument & doc, std::string key, std::string value)
 {
-    rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
-    rapidjson::Value doc_value = rapidjson::Value();
+    rjDocument::AllocatorType& allocator = doc.GetAllocator();
+    rjValue doc_value = rjValue();
     doc_value.SetString(value.c_str(), value.size(), allocator);
     
     this->add_member(doc, key, doc_value);
 
 };
 
-void BaseSerializer::set_double(rj::Document & doc, std::string key, double value)
+void BaseSerializer::set_double(rjDocument & doc, std::string key, double value)
 {
-    rapidjson::Value doc_value = rapidjson::Value();
+    rjValue doc_value = rjValue();
     doc_value.SetDouble(value);
     
     this->add_member(doc, key, doc_value);
 
 };
 
-void BaseSerializer::set_int(rj::Document & doc, std::string key, int value)
+void BaseSerializer::set_int(rjDocument & doc, std::string key, int value)
 {
-    rapidjson::Value doc_value = rapidjson::Value();
+    rjValue doc_value = rjValue();
     doc_value.SetInt(value);
 
     this->add_member(doc, key, doc_value);
 };
 
-std::string BaseSerializer::get_string(rj::Document & doc, std::string key, std::string fallback)
+std::string BaseSerializer::get_string(rjDocument & doc, std::string key, std::string fallback)
 {
-    rj::Value& doc_value = this->get_member(doc, key);
+    rjValue& doc_value = this->get_member(doc, key);
     if (doc_value.IsObject()) 
     {
         //assume its returned a Document, since I don't know how to return a null reference
@@ -105,7 +105,7 @@ std::string BaseSerializer::get_string(rj::Document & doc, std::string key, std:
 
 };
 
-double BaseSerializer::get_double(rj::Document & doc, std::string key, double fallback)
+double BaseSerializer::get_double(rjDocument & doc, std::string key, double fallback)
 {
     auto& doc_value = this->get_member(doc, key);
     if (doc_value.IsObject()) 
@@ -117,9 +117,9 @@ double BaseSerializer::get_double(rj::Document & doc, std::string key, double fa
 
 };
 
-int BaseSerializer::get_int(rj::Document & doc, std::string key, int fallback)
+int BaseSerializer::get_int(rjDocument & doc, std::string key, int fallback)
 {
-    rj::Value& doc_value = this->get_member(doc, key);
+    rjValue& doc_value = this->get_member(doc, key);
     if (doc_value.IsObject()) 
     {
         //assume its returned a Document, since I don't know how to return a null reference
@@ -135,7 +135,7 @@ BuildingSerializer::BuildingSerializer(std::string filename, spBuilding building
 
 void BuildingSerializer::serialize()
 {
-    rapidjson::Document doc = rapidjson::Document();
+    rjDocument doc = rjDocument();
     doc.SetObject();
 
     this->serialize_building_level(doc);
@@ -147,7 +147,7 @@ void BuildingSerializer::serialize()
 
 void BuildingSerializer::load()
 {
-    rapidjson::Document doc = this->get_document();
+    rjDocument doc = this->get_document();
     //dont do work if there's nothing to do
     if (doc.IsObject() == false){ return; }
 
@@ -156,12 +156,12 @@ void BuildingSerializer::load()
     this->load_workers(doc);
 }
 
-void BuildingSerializer::serialize_building_level(rapidjson::Document& doc)
+void BuildingSerializer::serialize_building_level(rjDocument& doc)
 {
     this->set_int(doc, "building_level", this->building->building_level);
 }
 
-void BuildingSerializer::load_building_level(rapidjson::Document& doc)
+void BuildingSerializer::load_building_level(rjDocument& doc)
 {
     //dont do work if there's nothing to do
     if (doc.IsObject() == false){ return; }
@@ -174,7 +174,7 @@ void BuildingSerializer::load_building_level(rapidjson::Document& doc)
     }
 }
 
-void BuildingSerializer::serialize_ingredients(rapidjson::Document& doc)
+void BuildingSerializer::serialize_ingredients(rjDocument& doc)
 {
     for (auto mist : this->building->ingredients)
     {
@@ -185,7 +185,7 @@ void BuildingSerializer::serialize_ingredients(rapidjson::Document& doc)
     }
 }
 
-void BuildingSerializer::load_ingredients(rapidjson::Document& doc)
+void BuildingSerializer::load_ingredients(rjDocument& doc)
 {
     //dont do work if there's nothing to do
     if (doc.IsObject() == false){ return; }
@@ -201,7 +201,7 @@ void BuildingSerializer::load_ingredients(rapidjson::Document& doc)
     }
 }
 
-void BuildingSerializer::serialize_workers(rapidjson::Document& doc)
+void BuildingSerializer::serialize_workers(rjDocument& doc)
 {
     auto save_worker = [&](std::string prefix, mistHarvester& workers, std::map<std::pair<Worker::SubType, Ingredient::SubType>, res_count_t>::value_type mist) {
         std::stringstream ss;
@@ -229,7 +229,7 @@ void BuildingSerializer::serialize_workers(rapidjson::Document& doc)
     }
 }
 
-void BuildingSerializer::load_workers(rapidjson::Document& doc)
+void BuildingSerializer::load_workers(rjDocument& doc)
 {
     //dont do work if there's nothing to do
     if (doc.IsObject() == false){ return; }
@@ -260,20 +260,20 @@ void BuildingSerializer::load_workers(rapidjson::Document& doc)
     }
 }
 
-void BuildingSerializer::_add_member(rj::Document& doc, rj::Value& key, rj::Value& value, rapidjson::Document::AllocatorType& allocator)
+void BuildingSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
 {
     if (doc.HasMember(this->building->name.c_str()) == false)
     {
         doc.AddMember(
-            rj::Value().SetString(rj::StringRef(building->name.c_str())),
-            rj::Value(rj::kObjectType).Move(),
+            rjValue().SetString(rj::StringRef(building->name.c_str())),
+            rjValue(rj::kObjectType).Move(),
             allocator
         );
     }
     doc[building->name.c_str()].AddMember(key.Move(), value.Move(), allocator);
 };
 
-rj::Value& BuildingSerializer::_get_member(rj::Document& doc, rj::Value& key, rapidjson::Document::AllocatorType& allocator)
+rjValue& BuildingSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
 {
     doc.HasMember(this->building->name.c_str());
     doc[this->building->name.c_str()].HasMember(key);

@@ -16,26 +16,26 @@ class BaseSerializer
 {
     private:
         //subclasses change the way it accesses the root doc, so buildings use doc[building_name] to add to instead.
-        virtual void _add_member(rj::Document& doc, rj::Value& key, rj::Value& value, rapidjson::Document::AllocatorType& allocator);
-        virtual rj::Value& _get_member(rj::Document& doc, rj::Value& key, rapidjson::Document::AllocatorType& allocator);
+        virtual void _add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator);
+        virtual rjValue& _get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator);
 
     public:
         BaseSerializer(std::string filename);
         std::string filename;
 
-        rj::Document get_document(std::string filename = "") const;
-        void save_document(rj::Document& doc, std::string filename = "") const;
+        rjDocument get_document(std::string filename = "") const;
+        void save_document(rjDocument& doc, std::string filename = "") const;
 
-        void add_member(rj::Document& doc, std::string key, rj::Value& value);
-        rj::Value& get_member(rj::Document& doc, std::string key);
+        void add_member(rjDocument& doc, std::string key, rjValue& value);
+        rjValue& get_member(rjDocument& doc, std::string key);
 
-        std::string get_string(rj::Document & doc, std::string key, std::string fallback="");
-        double get_double(rj::Document & doc, std::string key, double fallback=0.0);
-        int get_int(rj::Document & doc, std::string key, int fallback=0);
+        std::string get_string(rjDocument & doc, std::string key, std::string fallback="");
+        double get_double(rjDocument & doc, std::string key, double fallback=0.0);
+        int get_int(rjDocument & doc, std::string key, int fallback=0);
 
-        void set_string(rj::Document & doc, std::string key, std::string value);
-        void set_double(rj::Document & doc, std::string key, double value);
-        void set_int(rj::Document & doc, std::string key, int value);
+        void set_string(rjDocument & doc, std::string key, std::string value);
+        void set_double(rjDocument & doc, std::string key, double value);
+        void set_int(rjDocument & doc, std::string key, int value);
 
         //override this to handle serializng the object
         virtual void serialize(){};
@@ -52,16 +52,16 @@ class BuildingSerializer : public BaseSerializer
 
         void serialize() override;
         void load() override;
-        void serialize_building_level(rapidjson::Document& doc);
-        void load_building_level(rapidjson::Document& doc);
-        void serialize_ingredients(rapidjson::Document& doc);
-        void load_ingredients(rapidjson::Document& doc);
-        void serialize_workers(rapidjson::Document& doc);
-        void load_workers(rapidjson::Document& doc);
+        void serialize_building_level(rjDocument& doc);
+        void load_building_level(rjDocument& doc);
+        void serialize_ingredients(rjDocument& doc);
+        void load_ingredients(rjDocument& doc);
+        void serialize_workers(rjDocument& doc);
+        void load_workers(rjDocument& doc);
 
     private:
-        virtual void _add_member(rj::Document& doc, rj::Value& key, rj::Value& value, rapidjson::Document::AllocatorType& allocator) override;
-        virtual rj::Value& _get_member(rj::Document& doc, rj::Value& key, rapidjson::Document::AllocatorType& allocator);
+        virtual void _add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator) override;
+        virtual rjValue& _get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator);
 };
 
 #endif

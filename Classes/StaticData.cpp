@@ -9,7 +9,7 @@
 
 std::string BaseData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)
 {
-    rapidjson::Document jsonDoc = FileIO::open_json(this->_filename, true);
+    rjDocument jsonDoc = FileIO::open_json(this->_filename, true);
 
     CC_ASSERT(jsonDoc.HasMember(key_top.c_str()) && "this should be here");
     auto body = &jsonDoc[key_top.c_str()];
@@ -84,7 +84,7 @@ vsRecipe BuildingData::get_all_recipes()
 
 };
 
-spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* recipe_data)
+spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>* recipe_data)
 {
     auto recipe_components = &(*recipe_data)["components"];
 
@@ -98,7 +98,7 @@ spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* 
     }
 
 
-    for (rapidjson::Value::MemberIterator itr = recipe_components->MemberBegin();
+    for (auto itr = recipe_components->MemberBegin();
          itr != recipe_components->MemberEnd();
          itr+=1)
     {
@@ -108,7 +108,7 @@ spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>>* 
     };
 
     auto recipe_output = &(*recipe_data)["output"];
-    for (rapidjson::Value::MemberIterator itr = recipe_output->MemberBegin();
+    for (auto itr = recipe_output->MemberBegin();
          itr != recipe_output->MemberEnd();
          itr+=1)
     {

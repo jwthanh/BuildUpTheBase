@@ -858,7 +858,8 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     auto update_delay = 0.1f;
 
     alert_panel->schedule([count_lbl, ing_type](float) {
-        res_count_t count = map_get(BUILDUP->get_all_ingredients(), ing_type, 0);
+        auto all_ing = BUILDUP->get_all_ingredients();
+        res_count_t count = map_get(all_ing, ing_type, 0.0);
         count_lbl->setString(beautify_double(count));
     }, update_delay, "alert_count_update");
 

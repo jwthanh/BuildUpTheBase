@@ -150,4 +150,7 @@ typedef bool(*BoolFuncBuilding)(spBuilding);
 
 typedef long double res_count_t;
 
+#define rjDocument rapidjson::GenericDocument<rapidjson::UTF8<>,rapidjson::CrtAllocator>
+#define rjValue rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>
+
 #endif
