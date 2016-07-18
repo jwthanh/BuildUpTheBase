@@ -660,7 +660,7 @@ Village* Buildup::init_city(Buildup* buildup)
         }, {
             "The Underscape", "the_underscape", Ingredient::SubType::Blood
         }, {
-            "The Marketplace", "the_marketplace", Ingredient::SubType::Seed
+            "The Marketplace", "the_marketplace", Ingredient::SubType::Paper
         }, {
             "The Dump", "the_dump", Ingredient::SubType::Fly
         }, {

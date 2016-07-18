@@ -55,6 +55,10 @@
         "blood": {
             "description": "Drink this and feel alive.",
             "img_large": "ingredients/blood.png"
+        },
+        "paper": {
+            "description": "Notes scribbled down, unreadable.",
+            "img_large": "ingredients/paper.png"
         }
     }
 }
