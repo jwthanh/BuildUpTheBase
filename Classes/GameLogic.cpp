@@ -31,6 +31,10 @@ bool GameLogic::init()
     std::stringstream ss;
     auto hours_since_last_login = BEATUP->hours_since_last_login();
 
+    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(hours_since_last_login);
+
+    BUILDUP->city->update(seconds.count());
+
     ss << "It's been " << hours_since_last_login.count() << " hours since last login";
     CCLOG(ss.str().c_str());
 

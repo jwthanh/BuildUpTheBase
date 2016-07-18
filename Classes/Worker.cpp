@@ -175,23 +175,32 @@ void Salesman::on_update(float dt)
                 //create floating label for the amount sold over the correct
                 //ing panel
                 cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
-                auto inventory_listview = scene->getChildByName("HarvestScene")->getChildByName("inventory_listview");
-                if (inventory_listview)
+                auto harvest_scene = scene->getChildByName("HarvestScene");
+                if (harvest_scene)
                 {
-                    auto ing_panel = inventory_listview->getChildByName(string_type);
-                    if (ing_panel)
+                    auto inventory_listview = harvest_scene->getChildByName("inventory_listview");
+                    if (inventory_listview)
                     {
-                        auto floating_label = FloatingLabel::createWithTTF("+$"+beautify_double(actual_value), "pixelmix.ttf", 25);
-                        floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
-                        scene->addChild(floating_label);
-                        floating_label->do_float(50, 1, 50, 10, 1);
+                        auto ing_panel = inventory_listview->getChildByName(string_type);
+                        if (ing_panel)
+                        {
+                            auto floating_label = FloatingLabel::createWithTTF("+$" + beautify_double(actual_value), "pixelmix.ttf", 25);
+                            floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
+                            scene->addChild(floating_label);
+                            floating_label->do_float(50, 1, 50, 10, 1);
 
-                        cocos2d::Vec2 pos = {
-                            ing_panel->getContentSize().width / 2 ,
-                            ing_panel->getContentSize().height
-                        };
-                        floating_label->setPosition(ing_panel->convertToWorldSpace(pos));
+                            cocos2d::Vec2 pos = {
+                                ing_panel->getContentSize().width / 2,
+                                ing_panel->getContentSize().height
+                            };
+                            floating_label->setPosition(ing_panel->convertToWorldSpace(pos));
+                        }
                     }
+
+                }
+                else
+                {
+                    CCLOG("warn no harvest scene found, probably due to this being on startup, so we're not going to make any floating labels");
                 }
             }
             else
