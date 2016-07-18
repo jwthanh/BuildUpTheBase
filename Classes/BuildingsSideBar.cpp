@@ -497,6 +497,7 @@ void SideListView::setup_powers_listview_as_powers()
         menu_item->setName(child_name);
         menu_item->set_title("Sell all");
         menu_item->set_description("Sells all resources instantly");
+        menu_item->set_image("fightJoy_47.png");
 
         menu_item->set_touch_ended_callback([]()
         {
@@ -542,6 +543,7 @@ void SideListView::setup_powers_listview_as_powers()
         menu_item->setName(child_name);
         menu_item->set_title("Save Game");
         menu_item->set_description("Saves progress. Does not autosave");
+        menu_item->set_image("lineDark29.png");
 
         menu_item->set_touch_ended_callback([]()
         {
