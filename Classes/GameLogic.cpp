@@ -8,6 +8,8 @@
 #include "Util.h"
 #include "cocostudio/ActionTimeline/CSLoader.h"
 
+USING_NS_CC;
+
 GameLogic* GameLogic::_instance = NULL;
 
 GameLogic::GameLogic()
@@ -43,8 +45,11 @@ void GameLogic::post_load()
         ss << "gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type) << std::endl;
     }
 
-    auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+    ss << "It's been " << hours_since_last_login.count() << " hours since last login";
+    CCLOG(ss.str().c_str());
 
+
+    auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
     auto inst = cocos2d::CSLoader::getInstance();
     cocos2d::Node* root_message_node = inst->CSLoader::createNode("editor/details/message_detail.csb");
     cocos2d::Node* message_panel = root_message_node->getChildByName("message_panel");
@@ -54,13 +59,17 @@ void GameLogic::post_load()
     auto title_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("title_lbl"));
     title_lbl->setString("Welcome Back!");
     auto body_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("body_lbl"));
-    body_lbl->setString("This is the body");
+    body_lbl->setString(ss.str());
     scene->addChild(message_panel);
 
-
-    ss << "It's been " << hours_since_last_login.count() << " hours since last login";
-    CCLOG(ss.str().c_str());
-
+    ui::Layout* close_panel = dynamic_cast<ui::Layout*>(message_panel->getChildByName("close_panel"));
+    auto cb = [message_panel](Ref* target, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            message_panel->removeFromParent();
+        };
+    };
+    close_panel->addTouchEventListener(cb);
     //set the last login time
     BEATUP->set_last_login();
 }
