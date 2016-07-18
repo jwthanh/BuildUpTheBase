@@ -101,39 +101,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_T)
     {
-         //std::chrono::time_point<std::chrono::system_clock> time_is_now = std::chrono::system_clock::now();
-         //time_t rendered = std::chrono::system_clock::to_time_t(time_is_now);
-         //struct tm* a_given_time = std::localtime(&rendered);
-         //time_t made_time = std::mktime(a_given_time);
-         //BEATUP->set_last_login();
+        std::stringstream ss;
+        auto hours_since_last_login = BEATUP->hours_since_last_login();
 
-        time_t last_login = BEATUP->get_last_login();
-
-         std::stringstream ss;
-         if (last_login != -1)
-         {
-             ss << "The last login time was " << std::ctime(&last_login);
-             std::chrono::system_clock::time_point now_time_point = std::chrono::system_clock::now();
-             std::chrono::system_clock::time_point last_login_time_point = std::chrono::system_clock::from_time_t(last_login);
-             //std::chrono::hours hours_diff = now_time_point - last_login_time_point;
-             std::chrono::system_clock::duration diff = now_time_point - last_login_time_point;
-
-             typedef std::chrono::duration<double, std::ratio<3600>> hours_fp;
-             auto hours = std::chrono::duration_cast<hours_fp>(diff);
-             ss << "this is hours since last login " << hours.count() << std::endl;
-
-             auto minutes = std::chrono::duration_cast<std::chrono::minutes>(diff);
-             ss << "this is minutes since last login " << minutes.count() << std::endl;
-
-             auto seconds = std::chrono::duration_cast<std::chrono::seconds>(diff);
-             ss << "this is seconds since last login " << seconds.count();
-             //std::chrono::hours seconds = qwe;
-         }
-         else
-         {
-             ss << "INVALID TIME";
-         }
-         CCLOG(ss.str().c_str());
+        ss << "It's been " << hours_since_last_login.count() << " hours since last login";
+        CCLOG(ss.str().c_str());
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_L)
     {

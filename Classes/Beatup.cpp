@@ -197,9 +197,27 @@ void Beatup::set_last_login()
     DataManager::set_int_from_data(Beatup::last_login_key, (int)made_time);
 }
 
-time_t Beatup::get_last_login()
+std::chrono::duration<double, std::ratio<3600>> Beatup::hours_since_last_login()
 {
-    return (time_t)DataManager::get_int_from_data(Beatup::last_login_key);
+    time_t from_file = (time_t)DataManager::get_int_from_data(Beatup::last_login_key);
+
+    std::stringstream ss;
+    ss << "The last login time was " << std::ctime(&from_file);
+    std::chrono::system_clock::time_point now_time_point = std::chrono::system_clock::now();
+    std::chrono::system_clock::time_point last_login_time_point = std::chrono::system_clock::from_time_t(from_file);
+    std::chrono::system_clock::duration diff = now_time_point - last_login_time_point;
+
+    typedef std::chrono::duration<double, std::ratio<3600>> hours_fp;
+    auto hours = std::chrono::duration_cast<hours_fp>(diff);
+    //ss << "this is hours since last login " << hours.count() << std::endl;
+
+    //auto minutes = std::chrono::duration_cast<std::chrono::minutes>(diff);
+    //ss << "this is minutes since last login " << minutes.count() << std::endl;
+
+    //auto seconds = std::chrono::duration_cast<std::chrono::seconds>(diff);
+    //ss << "this is seconds since last login " << seconds.count();
+
+    return hours;
 };
 
 void Beatup::add_total_coin(double x)

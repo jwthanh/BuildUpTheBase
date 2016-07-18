@@ -5,6 +5,8 @@
 #include "GameLayer.h"
 #include "constants.h"
 
+#include <chrono>
+
 class Beatup : public GameLayer
 {
 
@@ -96,7 +98,7 @@ class Beatup : public GameLayer
 
         static std::string last_login_key;
         void set_last_login();
-        time_t get_last_login();
+        std::chrono::duration<double, std::ratio<3600>> hours_since_last_login();
 
         void reload_resources();
         void apply_flash_shader();
