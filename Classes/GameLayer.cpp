@@ -4,7 +4,12 @@
 #endif
 #include "Util.h"
 #include "SoundEngine.h"
+#include "Serializer.h"
 USING_NS_CC;
+
+#include "GameLogic.h"
+#include "Beatup.h"
+#include "HouseBuilding.h"
 
 
 
@@ -166,6 +171,12 @@ void GameLayer::quit(Ref* pSender)
     MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.", "Alert");
     return;
 #endif
+
+    for (spBuilding building : BUILDUP->city->buildings)
+    {
+        auto bldg_serializer = BuildingSerializer("test_building.json", building);
+        bldg_serializer.serialize();
+    };
 
     CCLOG("QUITTING");
     Director::getInstance()->end();
