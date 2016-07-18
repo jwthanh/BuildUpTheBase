@@ -28,6 +28,15 @@ bool GameLogic::init()
         bldg_serializer.load();
     };
 
+    std::stringstream ss;
+    auto hours_since_last_login = BEATUP->hours_since_last_login();
+
+    ss << "It's been " << hours_since_last_login.count() << " hours since last login";
+    CCLOG(ss.str().c_str());
+
+    //set the last login time
+    BEATUP->set_last_login();
+
     return true;
 };
 

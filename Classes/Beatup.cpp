@@ -193,7 +193,6 @@ void Beatup::set_last_login()
     struct tm* a_given_time = std::localtime(&rendered);
     time_t made_time = std::mktime(a_given_time);
 
-
     DataManager::set_int_from_data(Beatup::last_login_key, (int)made_time);
 }
 
