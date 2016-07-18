@@ -42,10 +42,10 @@ void GameLogic::post_load()
 
         res_count_t old_count = map_get(original_ingredients, ing_type, 0);
 
-        ss << "gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type) << std::endl;
+        ss << "+Gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type) << std::endl;
     }
 
-    ss << "It's been " << hours_since_last_login.count() << " hours since last login";
+    ss << "\nIt's been " << beautify_double(hours_since_last_login.count()) << " hours since last login";
     CCLOG(ss.str().c_str());
 
 
