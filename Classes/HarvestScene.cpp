@@ -792,6 +792,11 @@ bool HarvestScene::init()
     this->schedule(update_layer_color, 0.0f, "update_layer_color");
     update_layer_color(0.0f);
 
+    this->setOnEnterCallback([]()
+    {
+        GameLogic::getInstance()->post_load();
+    });
+
 
     return true;
 

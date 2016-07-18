@@ -6,6 +6,7 @@
 #include "NuMenu.h"
 #include "Serializer.h"
 #include "Util.h"
+#include "cocostudio/ActionTimeline/CSLoader.h"
 
 GameLogic* GameLogic::_instance = NULL;
 
@@ -41,6 +42,22 @@ void GameLogic::post_load()
 
         ss << "gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type) << std::endl;
     }
+
+    auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+
+    auto inst = cocos2d::CSLoader::getInstance();
+    cocos2d::Node* root_message_node = inst->CSLoader::createNode("editor/details/message_detail.csb");
+    cocos2d::Node* message_panel = root_message_node->getChildByName("message_panel");
+    //root_message_node->removeFromParent();
+    //message_panel->removeFromParent();
+
+    auto title_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("title_lbl"));
+    title_lbl->setString("Welcome Back!");
+    auto body_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("body_lbl"));
+    body_lbl->setString("This is the body");
+    //scene->addChild(message_panel, 10000);
+    scene->addChild(root_message_node, 10000);
+
 
     ss << "It's been " << hours_since_last_login.count() << " hours since last login";
     CCLOG(ss.str().c_str());

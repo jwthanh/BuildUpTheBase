@@ -7,7 +7,7 @@ USING_NS_CC;
 AppDelegate::AppDelegate() {
 }
 
-AppDelegate::~AppDelegate() 
+AppDelegate::~AppDelegate()
 {
 }
 
@@ -15,7 +15,7 @@ void AppDelegate::initGLContextAttrs()
 {
     //set OpenGL context attributions,now can only set six attributions:
     //red,green,blue,alpha,depth,stencil
-    GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8};
+    GLContextAttrs glContextAttrs = { 8, 8, 8, 8, 24, 8 };
 
     GLView::setGLContextAttrs(glContextAttrs);
 }
@@ -24,7 +24,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
-    if(!glview) {
+    if (!glview) {
         glview = GLViewImpl::create("Build up a base!");
         director->setOpenGLView(glview);
     }
@@ -75,14 +75,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // console->listenOnTCP(1234);
 
     Scene* loading_scene = Scene::create();
-    loading_scene->setOnEnterCallback(
-        std::function<void()>([this, loading_scene](){
+    auto load_cb = [this, loading_scene]()
+    {
         auto lbl = Label::createWithTTF("LOADING...", TITLE_FONT, 24);
         lbl->runAction(Spawn::createWithTwoActions(
             JumpBy::create(2.0f, Vec2(200, 300), 200, 10),
             ScaleTo::create(2.0f, 10)
             ));
-        loading_scene->setPosition(300, 300);
+        lbl->setPosition(300, 300);
         loading_scene->addChild(lbl);
 
         std::function<void(float)> load_func = [this, loading_scene](float){
@@ -98,14 +98,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
             scene->addChild(harvest_scene);
 
             auto director = Director::getInstance();
-            director->pushScene(scene);
-
-            GameLogic::getInstance()->post_load();
+            director->replaceScene(scene);
         };
         loading_scene->scheduleOnce(load_func, 0.00f, "whateverloading");
-    })
-        );
-    director->runWithScene(loading_scene);
+    };
+
+    loading_scene->setOnEnterCallback(load_cb);
+    director->pushScene(loading_scene);
 
 
     return true;
