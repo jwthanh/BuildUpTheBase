@@ -23,7 +23,7 @@ class GameLayer : public cocos2d::Layer
         CREATE_FUNC(GameLayer);
         static cocos2d::Scene* createScene();
 
-        cocos2d::Vec2 get_center_pos(float offset_x = 0, float offset_y = 0);
+        static cocos2d::Vec2 get_center_pos(float offset_x = 0, float offset_y = 0);
 
         virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent);
         virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent);
