@@ -400,7 +400,7 @@ void SideListView::setup_detail_listview_as_recipes()
             spTechnology double_click_pwr = std::make_shared<Technology>(Technology::SubType::ClickDoublePower);
             spRecipe recipe = std::make_shared<Recipe>("double_click_power", "no desc for tech recipe");
             recipe->components = mistIngredient({
-                {Ingredient::SubType::Seed, 5}
+                {Ingredient::SubType::Paper, 5}
             });
             double_click_pwr->set_ingredient_requirements(recipe);
 
@@ -409,7 +409,7 @@ void SideListView::setup_detail_listview_as_recipes()
                 DetailType::Tech,
                 {
                     "Double click power",
-                    "Doubles click output\n-- 5 seeds"
+                    "Doubles click output\n-- 5 papers"
                 } });
         };
 
