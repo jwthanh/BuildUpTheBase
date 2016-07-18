@@ -204,6 +204,16 @@ std::chrono::duration<double, std::ratio<3600>> Beatup::hours_since_last_login()
     std::stringstream ss;
     ss << "The last login time was " << std::ctime(&from_file);
     std::chrono::system_clock::time_point now_time_point = std::chrono::system_clock::now();
+
+    if (from_file == 0)
+    {
+        CCLOG("last login not found, defaulting to now");
+        std::chrono::time_point<std::chrono::system_clock> time_is_now = std::chrono::system_clock::now();
+        from_file = std::chrono::system_clock::to_time_t(time_is_now);
+        auto local_tm = std::localtime(&from_file);
+        from_file = std::mktime(local_tm);
+    }
+
     std::chrono::system_clock::time_point last_login_time_point = std::chrono::system_clock::from_time_t(from_file);
     std::chrono::system_clock::duration diff = now_time_point - last_login_time_point;
 
