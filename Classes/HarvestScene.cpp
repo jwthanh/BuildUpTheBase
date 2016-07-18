@@ -71,6 +71,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         this->quit(NULL);
         event->stopPropagation();
     }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_A)
+    {
+    }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F1) 
     {
         auto glView = Director::getInstance()->getOpenGLView();

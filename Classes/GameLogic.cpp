@@ -5,6 +5,7 @@
 #include "DataManager.h"
 #include "NuMenu.h"
 #include "Serializer.h"
+#include "Util.h"
 
 GameLogic* GameLogic::_instance = NULL;
 
@@ -31,9 +32,21 @@ bool GameLogic::init()
     std::stringstream ss;
     auto hours_since_last_login = BEATUP->hours_since_last_login();
 
-    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(hours_since_last_login);
 
+    auto original_ingredients = BUILDUP->get_all_ingredients();
+    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(hours_since_last_login);
     BUILDUP->city->update(seconds.count());
+    auto new_ingredients = BUILDUP->get_all_ingredients();
+
+    for (auto mist_ing : new_ingredients)
+    {
+        Ingredient::SubType ing_type = mist_ing.first;
+        res_count_t new_count = mist_ing.second;
+
+        res_count_t old_count = map_get(original_ingredients, ing_type, 0);
+
+        ss << "gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type) << std::endl;
+    }
 
     ss << "It's been " << hours_since_last_login.count() << " hours since last login";
     CCLOG(ss.str().c_str());
