@@ -17,8 +17,6 @@ class BaseData
         std::string _get_data(std::string key_top, std::string key_child="", std::string key_grandchild="");
     public:
 
-        //BaseData(){};
-
         virtual std::string getter(std::string key) = 0;
 };
 

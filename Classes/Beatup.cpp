@@ -2,6 +2,8 @@
 
 #include "assert.h"
 #include <iostream>
+#include <chrono>
+#include <ctime>
 
 
 #include "Clock.h"
@@ -49,6 +51,7 @@ Scene* Beatup::createScene(int level = 0)
 
 std::string Beatup::total_hit_key = "total_hit_key";
 std::string Beatup::total_coin_key = "total_coin_key";
+std::string Beatup::last_login_key = "last_login_key";
 
 bool Beatup::init()
 {
@@ -178,6 +181,25 @@ int Beatup::get_total_hits()
 double Beatup::get_total_coins()
 {
     return DataManager::get_double_from_data(Beatup::total_coin_key);
+}
+
+void Beatup::set_last_login()
+{
+    //get current time
+    std::chrono::time_point<std::chrono::system_clock> time_is_now = std::chrono::system_clock::now();
+    time_t rendered = std::chrono::system_clock::to_time_t(time_is_now);
+
+    //i assume this locallizes it
+    struct tm* a_given_time = std::localtime(&rendered);
+    time_t made_time = std::mktime(a_given_time);
+
+
+    DataManager::set_int_from_data(Beatup::last_login_key, (int)made_time);
+}
+
+time_t Beatup::get_last_login()
+{
+    return (time_t)DataManager::get_int_from_data(Beatup::last_login_key);
 };
 
 void Beatup::add_total_coin(double x)
@@ -760,4 +782,4 @@ void Beatup::view_army()
     army_scene->addChild(layer);
 
     Director::getInstance()->pushScene(army_scene);
-};
+}; 

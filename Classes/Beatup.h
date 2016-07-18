@@ -86,13 +86,17 @@ class Beatup : public GameLayer
             float stamina_regen_rate;
         } defaults;
 
+        static std::string total_hit_key;
         void add_total_hit(int x);
         int get_total_hits();
-        static std::string total_hit_key;
-        static std::string total_coin_key;
 
+        static std::string total_coin_key;
         void add_total_coin(double x);
         double get_total_coins();
+
+        static std::string last_login_key;
+        void set_last_login();
+        time_t get_last_login();
 
         void reload_resources();
         void apply_flash_shader();
