@@ -11,6 +11,7 @@
         <Folder Name="details">
           <Project Name="character_detail.csd" Type="Node" />
           <Project Name="inventory_detail.csd" Type="Node" />
+          <Project Name="message_detail.csd" Type="Node" />
         </Folder>
         <Folder Name="images">
           <Image Name="cat.png" />
