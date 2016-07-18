@@ -14,14 +14,8 @@ GameLogic::GameLogic()
 
 };
 
-bool GameLogic::init()
+void GameLogic::post_load()
 {
-    GameLogic* instance = GameLogic::getInstance();
-    instance->beatup = Beatup::create();
-    instance->beatup->setName("beatup");
-    instance->beatup->retain();
-    instance->buildup = instance->beatup->buildup;
-
     CCLOG("loading game on startup, this should only happen once");
     for (spBuilding building : BUILDUP->city->buildings)
     {
@@ -53,6 +47,15 @@ bool GameLogic::init()
 
     //set the last login time
     BEATUP->set_last_login();
+}
+
+bool GameLogic::init()
+{
+    GameLogic* instance = GameLogic::getInstance();
+    instance->beatup = Beatup::create();
+    instance->beatup->setName("beatup");
+    instance->beatup->retain();
+    instance->buildup = instance->beatup->buildup;
 
     return true;
 };

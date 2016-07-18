@@ -21,6 +21,9 @@ class GameLogic
         GameLogic();
         bool init();
 
+        //handles last login and passive harvesting
+        void post_load();
+
         void update(float dt);
 
         static GameLogic* getInstance();

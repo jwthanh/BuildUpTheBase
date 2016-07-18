@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "HarvestScene.h"
+#include "GameLogic.h"
 
 USING_NS_CC;
 
@@ -98,6 +99,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
             auto director = Director::getInstance();
             director->pushScene(scene);
+
+            GameLogic::getInstance()->post_load();
         };
         loading_scene->scheduleOnce(load_func, 0.00f, "whateverloading");
     })
