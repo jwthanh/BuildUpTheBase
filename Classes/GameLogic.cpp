@@ -26,7 +26,7 @@ void GameLogic::post_load()
         bldg_serializer.load();
     };
 
-    std::stringstream ss;
+    std::stringstream gains_ss, at_capacity_ss;
     auto hours_since_last_login = BEATUP->hours_since_last_login();
 
 
@@ -44,25 +44,24 @@ void GameLogic::post_load()
 
         if (new_count - old_count > 0.0)
         {
-            ss << "+Gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type);
+            gains_ss << "+Gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type);
 
             for (spBuilding building : BUILDUP->city->buildings)
             {
                 if (building->is_storage_full_of_ingredients(ing_type))
                 {
-                    ss << " (Upgrade " << building->name << " to fit more!)";
+                    at_capacity_ss << " (Upgrade " << building->name << " to fit more "<< Ingredient::type_to_string(ing_type)<<"!)" << std::endl;
                 }
 
             }
 
-            ss << std::endl;
+            gains_ss << std::endl;
         }
     }
 
 
-
-    ss << "\nIt's been " << beautify_double(hours_since_last_login.count()) << " hours since last login";
-    CCLOG(ss.str().c_str());
+    gains_ss << "\nIt's been " << beautify_double(hours_since_last_login.count()) << " hours since last login";
+    CCLOG(gains_ss.str().c_str());
 
 
     auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
@@ -80,7 +79,7 @@ void GameLogic::post_load()
     body_scroll->setScrollBarEnabled(true);
     body_scroll->scrollToTop(0.0f, false);
     auto body_lbl = dynamic_cast<cocos2d::ui::Text*>(body_scroll->getChildByName("body_lbl"));
-    body_lbl->setString(ss.str());
+    body_lbl->setString(at_capacity_ss.str()+"\n---\n\n"+gains_ss.str());
     scene->addChild(message_panel);
 
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(message_panel->getChildByName("close_panel"));
