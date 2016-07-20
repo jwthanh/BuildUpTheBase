@@ -797,6 +797,9 @@ bool HarvestScene::init()
         GameLogic::getInstance()->post_load();
     });
 
+    //autosave every minute
+    this->autosave_clock = new Clock(60.0f);
+
 
     return true;
 
@@ -833,6 +836,22 @@ void HarvestScene::update(float dt)
     else if (BUILDUP->get_target_building() != harvestable->building) {
         harvestable->removeFromParent();
     };
+
+    this->autosave_clock->update(dt);
+    if (this->autosave_clock->passed_threshold())
+    {
+        this->autosave_clock->reset();
+
+        CCLOG("Autosaving");
+
+        for (spBuilding building : BUILDUP->city->buildings)
+        {
+            auto bldg_serializer = BuildingSerializer("test_building.json", building);
+            bldg_serializer.serialize();
+        };
+
+    };
+
 
 }
 

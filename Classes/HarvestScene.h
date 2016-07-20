@@ -55,6 +55,8 @@ class HarvestScene : public BaseScene
         virtual bool init();
         virtual void update(float dt);
 
+        Clock* autosave_clock;
+
         void create_recipe_lbl();
 
         void add_harvestable();
