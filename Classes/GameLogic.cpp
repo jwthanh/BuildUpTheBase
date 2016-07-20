@@ -58,7 +58,7 @@ void GameLogic::post_load()
 
     auto title_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("title_lbl"));
     title_lbl->setString("Welcome Back!");
-    auto body_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("body_lbl"));
+    auto body_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("body_scroll")->getChildByName("body_lbl"));
     body_lbl->setString(ss.str());
     scene->addChild(message_panel);
 
