@@ -42,7 +42,7 @@ void GameLogic::post_load()
 
         res_count_t old_count = map_get(original_ingredients, ing_type, 0);
 
-        if (old_count > 0.0)
+        if (new_count- old_count > 0.0)
         {
             ss << "+Gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type) << std::endl;
         }
@@ -61,7 +61,12 @@ void GameLogic::post_load()
 
     auto title_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("title_lbl"));
     title_lbl->setString("Welcome Back!");
-    auto body_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("body_scroll")->getChildByName("body_lbl"));
+
+    ui::ScrollView* body_scroll = dynamic_cast<ui::ScrollView*>(message_panel->getChildByName("body_scroll"));
+    body_scroll->setScrollBarAutoHideEnabled(false);
+    body_scroll->setScrollBarEnabled(true);
+    body_scroll->scrollToTop(0.0f, false);
+    auto body_lbl = dynamic_cast<cocos2d::ui::Text*>(body_scroll->getChildByName("body_lbl"));
     body_lbl->setString(ss.str());
     scene->addChild(message_panel);
 
