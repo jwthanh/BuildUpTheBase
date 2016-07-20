@@ -50,7 +50,7 @@ void GameLogic::post_load()
             {
                 if (building->is_storage_full_of_ingredients(ing_type))
                 {
-                    at_capacity_ss << " (Upgrade " << building->name << " to fit more "<< Ingredient::type_to_string(ing_type)<<"!)" << std::endl;
+                    at_capacity_ss << "- Upgrade " << building->name << " to fit more "<< Ingredient::type_to_string(ing_type)<<"!" << std::endl;
                 }
 
             }
@@ -74,12 +74,22 @@ void GameLogic::post_load()
     auto title_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("title_lbl"));
     title_lbl->setString("Welcome Back!");
 
+    //set scrollbar up
     ui::ScrollView* body_scroll = dynamic_cast<ui::ScrollView*>(message_panel->getChildByName("body_scroll"));
     body_scroll->setScrollBarAutoHideEnabled(false);
     body_scroll->setScrollBarEnabled(true);
     body_scroll->scrollToTop(0.0f, false);
+
+    //fill message up
     auto body_lbl = dynamic_cast<cocos2d::ui::Text*>(body_scroll->getChildByName("body_lbl"));
-    body_lbl->setString(at_capacity_ss.str()+"\n---\n\n"+gains_ss.str());
+    if (at_capacity_ss.str() != "")
+    {
+        body_lbl->setString(at_capacity_ss.str() + "\n---\n\n" + gains_ss.str());
+    }
+    else
+    {
+        body_lbl->setString(gains_ss.str());
+    }
     scene->addChild(message_panel);
 
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(message_panel->getChildByName("close_panel"));
