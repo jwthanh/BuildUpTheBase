@@ -42,7 +42,10 @@ void GameLogic::post_load()
 
         res_count_t old_count = map_get(original_ingredients, ing_type, 0);
 
-        ss << "+Gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type) << std::endl;
+        if (old_count > 0.0)
+        {
+            ss << "+Gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type) << std::endl;
+        }
     }
 
     ss << "\nIt's been " << beautify_double(hours_since_last_login.count()) << " hours since last login";
@@ -70,6 +73,7 @@ void GameLogic::post_load()
         };
     };
     close_panel->addTouchEventListener(cb);
+
     //set the last login time
     BEATUP->set_last_login();
 }
