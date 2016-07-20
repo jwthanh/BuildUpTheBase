@@ -63,7 +63,7 @@ void FloatingLabel::do_float(float x, float x_variation, float y, float y_variat
                 BezierBy::create(duration, config),
                 NULL
             )
-            , 1
+            , 10
         ),
         RemoveSelf::create())
     );
