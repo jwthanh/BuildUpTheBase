@@ -19,6 +19,15 @@ GameLogic::GameLogic()
 
 void GameLogic::post_load()
 {
+
+    //cheat to reset data to blank on load
+    auto username = DataManager::get_string_from_data("username");
+    if (username == "__resetdata")
+    {
+        DataManager::set_string_from_data("username", "");
+        return;
+    };
+
     CCLOG("loading game on startup, this should only happen once");
     for (spBuilding building : BUILDUP->city->buildings)
     {
