@@ -56,13 +56,16 @@ void FloatingLabel::do_float(float x, float x_variation, float y, float y_variat
     this->runAction(ScaleBy::create(duration*3, 0.35f));
     this->runAction(FadeOut::create(duration));
     this->runAction(
-        RepeatForever::create(
+        Sequence::createWithTwoActions(
+        Repeat::create(
             Sequence::create(
                 BezierBy::create(duration, config),
                 BezierBy::create(duration, config),
                 NULL
             )
-        )
+            , 1
+        ),
+        RemoveSelf::create())
     );
 
 };
