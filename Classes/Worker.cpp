@@ -164,7 +164,8 @@ void Salesman::on_update(float dt)
             res_count_t to_sell = std::min(max_can_sell, active_sell_count);
             res_count_t coins_gained = 3; //TODO use actual resource price instead of hardcoded FIXME
 
-            if (to_sell >= active_sell_count)
+            // if (to_sell >= active_sell_count)
+            if (true) //sell even if you've got less than required
             {
                 std::string string_type = Ingredient::type_to_string(ing_type);
 
