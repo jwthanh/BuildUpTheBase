@@ -62,6 +62,8 @@ bool Beatup::init()
     FUNC_INIT(Beatup);
 #endif
 
+    this->_total_coins = DataManager::get_double_from_data(Beatup::total_coin_key);
+
     CCLOG("beatup init");
 
     this->buildup = new Buildup();
@@ -177,9 +179,17 @@ int Beatup::get_total_hits()
     return DataManager::get_int_from_data(Beatup::total_hit_key);
 };
 
+void Beatup::add_total_coin(double x)
+{
+    this->_total_coins += x;
+    //DataManager::incr_key("total_coin_key", x);
+};
+
+
 double Beatup::get_total_coins()
 {
-    return DataManager::get_double_from_data(Beatup::total_coin_key);
+    return this->_total_coins;
+    //return DataManager::get_double_from_data(Beatup::total_coin_key);
 }
 
 void Beatup::set_last_login()
@@ -226,11 +236,6 @@ std::chrono::duration<double, std::ratio<3600>> Beatup::hours_since_last_login()
     //ss << "this is seconds since last login " << seconds.count();
 
     return hours;
-};
-
-void Beatup::add_total_coin(double x)
-{
-    DataManager::incr_key("total_coin_key", x);
 };
 
 void Beatup::back_to_menu()

@@ -122,12 +122,22 @@ bool GameLogic::init()
     instance->beatup->retain();
     instance->buildup = instance->beatup->buildup;
 
+    this->coin_save_clock = new Clock(15.0f);
+
     return true;
 };
 
 void GameLogic::update(float dt)
 {
     this->beatup->update_buildup(dt);
+
+    this->coin_save_clock->update(dt);
+    if (this->coin_save_clock->passed_threshold())
+    {
+        this->coin_save_clock->reset();
+        CCLOG("saving total coins");
+        DataManager::set_double_from_data(Beatup::total_coin_key, this->beatup->get_total_coins());
+    }
 };
 
 GameLogic* GameLogic::getInstance()

@@ -24,6 +24,7 @@ class GameLogic
         //handles last login and passive harvesting
         void post_load();
 
+        Clock* coin_save_clock;
         void update(float dt);
 
         static GameLogic* getInstance();
