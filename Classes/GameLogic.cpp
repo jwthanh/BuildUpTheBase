@@ -164,6 +164,10 @@ void GameLogic::save_all()
         auto bldg_serializer = BuildingSerializer("test_building.json", building);
         bldg_serializer.serialize();
     };
+
+    //save coins
+    DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());
+
 };
 
 void GameLogic::load_all()
@@ -173,6 +177,7 @@ void GameLogic::load_all()
         auto bldg_serializer = BuildingSerializer("test_building.json", building);
         bldg_serializer.load();
     };
+    BEATUP->_total_coins = DataManager::get_double_from_data(Beatup::total_coin_key);
 };
 
 
