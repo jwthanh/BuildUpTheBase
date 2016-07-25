@@ -167,7 +167,6 @@ void Beatup::setup_commands()
 
 };
 
-
 void Beatup::add_total_hit(int x)
 {
     DataManager::incr_key("total_hit_key", x);
@@ -524,57 +523,6 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     {
     }
 }
-
-void Beatup::update(float dt)
-{
-
-    GameLayer::update(dt);
-
-    if (!SoundEngine::get_playing_music())
-    {
-        SoundEngine::play_music("music\\medieval.mp3");
-    }
-
-    if (this->get_level_over())
-    {
-        this->setPosition(0, 0);
-    };
-
-    this->spawn_coin_clock->update(dt);
-
-    this->stamina_clock->update(dt);
-    if (this->stamina_clock->passed_threshold())
-    {
-        this->add_to_stamina(this->stamina_regen_rate);
-        this->stamina_clock->reset();
-    };
-    float percentage = this->stamina_count/this->stamina_max;
-    this->stamina_prog->scroll_to_percentage(percentage);
-
-    if (_visible_inventory) {
-        this->print_inventory();
-    } else {
-        this->hide_inventory();
-    };
-
-    this->fighter_node->update(dt);
-    this->brawler_node->update(dt);
-    this->enemy_node->update(dt);
-    // for (auto node : this->enemy_nodes) {
-    //     node->update(dt);
-    // };
-
-    if (this->buildup->fighter->xp->lvl == 2) {
-        this->fighter_node->load_new_sprite("thief8x8.png");
-    }
-    else if (this->buildup->fighter->xp->lvl == 3) {
-        this->fighter_node->load_new_sprite("hero8x8.png");
-    }
-    else if (this->buildup->fighter->xp->lvl == 4) {
-        this->fighter_node->load_new_sprite("badmother20x20.png");
-    };
-
-};
 
 
 void Beatup::hide_ui()

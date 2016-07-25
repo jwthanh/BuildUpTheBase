@@ -20,7 +20,7 @@
 USING_NS_CC;
 
 cocos2d::ui::Button* NuItem::orig_button = NULL;
-cocos2d::TTFConfig NuItem::ttf_config = TTFConfig("pixelmix.ttf", 16, GlyphCollection::ASCII, nullptr, false, 2);
+cocos2d::TTFConfig NuItem::ttf_config = TTFConfig("pixelmix.ttf", 16, GlyphCollection::CUSTOM, "\"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~΅Ά£¤¥¦§¨©ª«¬­®―°±²³΄µ¶·ΈΉΊ»Ό½ΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡÒΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώ \n", false, 2);
 
 NuItem* NuItem::create(cocos2d::Node* parent)
 {

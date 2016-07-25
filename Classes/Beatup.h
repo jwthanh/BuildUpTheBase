@@ -44,7 +44,6 @@ class Beatup : public GameLayer
         void hide_ui();
 
         bool has_been_initialized = false;
-        void update(float dt);
         void update_buildup(float dt);
         void reset();
 
