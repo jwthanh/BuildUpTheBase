@@ -24,6 +24,7 @@ bool DataManager::get_bool_from_data(std::string key, bool _default)
 {
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
+    CCLOG("getting bool %s for %d", key.c_str());
     return ud->getBoolForKey(key.c_str(), _default);
 };
 
@@ -32,18 +33,29 @@ void DataManager::set_bool_from_data(std::string key, bool val)
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
     ud->setBoolForKey(key.c_str(), val);
+    CCLOG("setting bool %s for %d", key.c_str(), val);
 };
 
 int DataManager::get_int_from_data(std::string key, int _default)
 {
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
+    CCLOG("getting int %s", key.c_str());
     return ud->getIntegerForKey(key.c_str(), _default);
+};
+
+void DataManager::set_int_from_data(std::string key, int val)
+{
+    validate_key(key);
+    cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
+    CCLOG("setting int %s for %i", key.c_str(), val);
+    ud->setIntegerForKey(key.c_str(), val);
 };
 
 double DataManager::get_double_from_data(std::string key, double _default)
 {
     validate_key(key);
+    CCLOG("getting double %s", key.c_str());
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
     return ud->getDoubleForKey(key.c_str(), _default);
 }
@@ -52,6 +64,7 @@ void DataManager::set_double_from_data(std::string key, double val)
 {
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
+    CCLOG("setting double %s for %d", key.c_str(), val);
     ud->setDoubleForKey(key.c_str(), val);
 };
 
@@ -60,6 +73,7 @@ std::string DataManager::get_string_from_data(std::string key, std::string _defa
 {
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
+    CCLOG("getting string %s", key.c_str());
     return ud->getStringForKey(key.c_str(), _default);
 }
 
@@ -67,15 +81,10 @@ void DataManager::set_string_from_data(std::string key, std::string val)
 {
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
+    CCLOG("setting string %s for %s", key.c_str(), val.c_str());
     ud->setStringForKey(key.c_str(), val);
 };
 
-void DataManager::set_int_from_data(std::string key, int val)
-{
-    validate_key(key);
-    cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
-    ud->setIntegerForKey(key.c_str(), val);
-};
 
 void DataManager::decr_key(std::string key, int x)
 {
