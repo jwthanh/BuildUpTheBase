@@ -549,12 +549,7 @@ void SideListView::setup_powers_listview_as_powers()
         {
             CCLOG("Pressed Save, saving progress");
 
-            for (spBuilding building : BUILDUP->city->buildings)
-            {
-                auto bldg_serializer = BuildingSerializer("test_building.json", building);
-                bldg_serializer.serialize();
-            };
-
+            GameLogic::save_all();
         });
 
     };

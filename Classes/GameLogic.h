@@ -32,6 +32,9 @@ class GameLogic
         Beatup* beatup;
         Buildup* buildup;
 
+        static void save_all();
+        static void load_all();
+
         void add_total_harvests(int value);
         int get_total_harvests();
 };

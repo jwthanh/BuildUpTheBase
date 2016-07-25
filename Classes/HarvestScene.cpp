@@ -96,11 +96,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_S)
     {
-        for (spBuilding building : BUILDUP->city->buildings)
-        {
-            auto bldg_serializer = BuildingSerializer("test_building.json", building);
-            bldg_serializer.serialize();
-        };
+        GameLogic::save_all();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_T)
     {
@@ -112,11 +108,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_L)
     {
-        for (spBuilding building : BUILDUP->city->buildings)
-        {
-            auto bldg_serializer = BuildingSerializer("test_building.json", building);
-            bldg_serializer.load();
-        };
+        GameLogic::load_all();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
@@ -843,13 +835,7 @@ void HarvestScene::update(float dt)
         this->autosave_clock->reset();
 
         CCLOG("Autosaving");
-
-        for (spBuilding building : BUILDUP->city->buildings)
-        {
-            auto bldg_serializer = BuildingSerializer("test_building.json", building);
-            bldg_serializer.serialize();
-        };
-
+        GameLogic::save_all();
     };
 
 

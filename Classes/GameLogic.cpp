@@ -29,11 +29,7 @@ void GameLogic::post_load()
     };
 
     CCLOG("loading game on startup, this should only happen once");
-    for (spBuilding building : BUILDUP->city->buildings)
-    {
-        auto bldg_serializer = BuildingSerializer("test_building.json", building);
-        bldg_serializer.load();
-    };
+    GameLogic::load_all();
 
     std::stringstream gains_ss, at_capacity_ss;
     auto hours_since_last_login = BEATUP->hours_since_last_login();
@@ -159,6 +155,24 @@ void GameLogic::add_total_harvests(int value)
 int GameLogic::get_total_harvests()
 {
     return DataManager::get_int_from_data("total_harvests");
+};
+
+void GameLogic::save_all()
+{
+    for (spBuilding building : BUILDUP->city->buildings)
+    {
+        auto bldg_serializer = BuildingSerializer("test_building.json", building);
+        bldg_serializer.serialize();
+    };
+};
+
+void GameLogic::load_all()
+{
+    for (spBuilding building : BUILDUP->city->buildings)
+    {
+        auto bldg_serializer = BuildingSerializer("test_building.json", building);
+        bldg_serializer.load();
+    };
 };
 
 
