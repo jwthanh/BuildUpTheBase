@@ -44,7 +44,6 @@ bool BaseScene::init()
     this->create_player_info_panel();
     this->create_username_input();
 
-    this->create_building_pageview();
     this->create_inventory_listview();
     this->create_shop_listview();
     
@@ -514,68 +513,6 @@ void BaseScene::create_player_info_panel()
 
     this->addChild(player_info_panel);
 };
-
-void BaseScene::create_building_pageview()
-{
-    Node* harvest_scene_editor = this->get_original_scene_from_editor();
-
-    ui::PageView* building_pageview = dynamic_cast<ui::PageView*>(harvest_scene_editor->getChildByName("building_pageview"));
-    building_pageview->setClippingEnabled(true);
-    building_pageview->removeFromParent();
-
-    // building_pageview->setBounceEnabled(true);
-
-    auto inst = CSLoader::getInstance();
-    auto city_scene = inst->createNode("editor/scenes/city_scene.csb");
-
-    float update_delay = 0.1f;
-
-    auto create_count = [](std::string prefix, res_count_t count) {
-        std::stringstream ss;
-        ss << prefix << ": " << beautify_double(count);
-        return ss.str();
-    };
-
-    for (auto building : BUILDUP->city->buildings)
-    {
-
-        auto node = city_scene->getChildByName(building->name);
-        ui::Button* building_panel = dynamic_cast<ui::Button*>(node->getChildByName("building_panel"));
-        building_panel->removeFromParent();
-        building_pageview->addPage(building_panel);
-        int page_index = building_pageview->getItems().size() - 1;
-
-        load_default_button_textures(building_panel);
-
-
-        if (building->get_been_bought() == false) {
-            //hide panel from pageview if not bought
-            //NOTE still need to solve the same problem as the ingredients panel and its sorting
-            building_panel->setVisible(false);
-            continue;
-        };
-
-        auto building_name_lbl = dynamic_cast<ui::Text*>(building_panel->getChildByName("building_name"));
-        building_name_lbl->setString(building->name);
-
-        auto building_image = dynamic_cast<ui::ImageView*>(building_panel->getChildByName("building_image"));
-        building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
-
-        
-
-        auto lvl_lbl = dynamic_cast<ui::Text*>(building_panel->getChildByName("level_lbl"));
-        auto update_lvl_lbl = [create_count, lvl_lbl, building](float dt)
-        {
-            std::stringstream ss;
-            ss << "Lv. " << building->building_level;
-            lvl_lbl->setString(ss.str());
-        };
-        lvl_lbl->schedule(update_lvl_lbl, update_delay, "update_lvl_lbl");
-
-    }
-
-    this->addChild(building_pageview);
-}
 
 void BaseScene::create_inventory_listview()
 {

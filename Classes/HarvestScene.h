@@ -34,7 +34,6 @@ class BaseScene : public GameLayer
         void create_info_panel();
         void create_username_input();
         void create_player_info_panel();
-        void create_building_pageview();
         void create_building_choicelist();
         void create_inventory_listview();
         void create_shop_listview();
