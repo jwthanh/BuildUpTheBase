@@ -69,41 +69,41 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="760.0001" RightMargin="-0.0001" TopMargin="440.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-            <Size X="200.0000" Y="100.0000" />
+          <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="760.0001" RightMargin="-0.0001" TopMargin="340.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+            <Size X="200.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="4.2148" RightMargin="5.7852" TopMargin="0.7150" BottomMargin="73.1447" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="4.2147" RightMargin="5.7853" TopMargin="9.7150" BottomMargin="164.1447" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="26.1403" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="99.2148" Y="86.2149" />
+                <Position X="99.2147" Y="177.2149" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4961" Y="0.8621" />
-                <PreSize X="0.9500" Y="0.2614" />
+                <PrePosition X="0.4961" Y="0.8861" />
+                <PreSize X="0.9500" Y="0.1307" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="5.0000" RightMargin="5.0000" TopMargin="35.2263" BottomMargin="41.2263" IsCustomSize="True" FontSize="16" LabelText="100 Gold" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="5.0000" RightMargin="5.0000" TopMargin="134.2264" BottomMargin="42.2263" IsCustomSize="True" FontSize="16" LabelText="100 Gold" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="23.5473" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="53.0000" />
+                <Position X="100.0000" Y="54.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.5300" />
-                <PreSize X="0.9500" Y="0.2355" />
+                <PrePosition X="0.5000" Y="0.2700" />
+                <PreSize X="0.9500" Y="0.1177" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="5.0000" RightMargin="5.0000" TopMargin="67.5000" BottomMargin="9.5000" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="5.0000" RightMargin="5.0000" TopMargin="156.5001" BottomMargin="20.4999" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="21.0000" />
+                <Position X="100.0000" Y="31.9999" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.2100" />
-                <PreSize X="0.9500" Y="0.2300" />
+                <PrePosition X="0.5000" Y="0.1600" />
+                <PreSize X="0.9500" Y="0.1150" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -114,7 +114,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7917" Y="0.1563" />
-            <PreSize X="0.2083" Y="0.1563" />
+            <PreSize X="0.2083" Y="0.3125" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
