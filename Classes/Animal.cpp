@@ -11,7 +11,9 @@ void transfer(mistMap& origin_mi, mistMap& destination_mi,
     typename mistMap::key_type sub_type
     )
 {
-    res_count_t count = map_get(origin_mi, sub_type, 0);
+    res_count_t _def = 0;
+    auto st = sub_type;
+    res_count_t count = map_get(origin_mi, st, _def);
 
     if (count < quantity )
     {

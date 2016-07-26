@@ -411,7 +411,8 @@ void TechNuItem::other_init(spTechnology technology)
         //TODO fix this duplicating techs already in the vector, might need to
         //go to a map like resources
         //this->building->techtree->technologies.push_back(this->technology);
-        res_count_t num_researched = map_get(this->building->techtree->tech_map, this->technology->sub_type, 0.0L);
+        res_count_t def = 0.0;
+        res_count_t num_researched = map_get(this->building->techtree->tech_map, this->technology->sub_type, def);
         this->building->techtree->tech_map[this->technology->sub_type] = num_researched + 1;
     });
 
@@ -689,7 +690,9 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
             BEATUP->add_total_coin(-((double)(cost)));
             auto building = BUILDUP->get_target_building();
 
-            auto harvester_count = map_get(building->harvesters, { harv_type, ing_type }, 0);
+            res_count_t def = 0.0;
+            work_ing_t map = { harv_type, ing_type };
+            auto harvester_count = map_get(building->harvesters, map, def);
             harvester_count++;
             building->harvesters[{ harv_type, ing_type }] = harvester_count;
             this->update_func(0);
@@ -702,7 +705,9 @@ void HarvesterShopNuItem::my_init_update_callback()
 {
     auto update_harvesters_cb = [this](float dt) {
         auto building = BUILDUP->get_target_building();
-        res_count_t harvesters_owned = map_get(building->harvesters, {this->harv_type, building->punched_sub_type}, 0);
+        res_count_t def = 0.0;
+        work_ing_t pair = { this->harv_type, building->punched_sub_type };
+        res_count_t harvesters_owned = map_get(building->harvesters, pair, def);
         this->set_count_lbl(harvesters_owned);
         this->_shop_cost = scale_number(Harvester::get_base_shop_cost(this->harv_type), harvesters_owned, 1.15L);
 
@@ -729,7 +734,9 @@ void SalesmanShopNuItem::my_init_touch_ended_callback()
             BEATUP->add_total_coin(-((double)(cost)));
             auto building = BUILDUP->get_target_building();
 
-            auto harvester_count = map_get(building->salesmen, { harv_type, ing_type }, 0);
+            res_count_t def = 0.0;
+            work_ing_t pair = { harv_type, ing_type };
+            auto harvester_count = map_get(building->salesmen, pair, def);
             harvester_count++;
             building->salesmen[{ harv_type, ing_type }] = harvester_count;
             this->update_func(0);
@@ -742,7 +749,9 @@ void SalesmanShopNuItem::my_init_update_callback()
 {
     auto update_harvesters_cb = [this](float dt) {
         auto building = BUILDUP->get_target_building();
-        res_count_t harvesters_owned = map_get(building->salesmen, {this->harv_type, building->punched_sub_type}, 0);
+        res_count_t def = 0.0;
+        work_ing_t pair = { this->harv_type, building->punched_sub_type };
+        res_count_t harvesters_owned = map_get(building->salesmen, pair, def);
         this->set_count_lbl(harvesters_owned);
         this->_shop_cost = scale_number(Salesman::get_base_shop_cost(this->harv_type), harvesters_owned, 1.15L);
 
@@ -762,14 +771,9 @@ bool SalesmanShopNuItem::custom_status_check(float dt)
 
     // check if high enough building level to fit more
     bool is_enabled = false;
-    res_count_t harvesters_owned = map_get(
-        target_building->salesmen,
-        {
-            this->harv_type,
-            target_building->punched_sub_type
-        },
-        0
-    );
+    res_count_t def = 0.0;
+    work_ing_t pair = { this->harv_type, target_building->punched_sub_type };
+    res_count_t harvesters_owned = map_get(target_building->salesmen, pair, def);
 
     if (harvesters_owned < target_building->get_storage_space())
     {
@@ -866,7 +870,9 @@ void ConsumerShopNuItem::my_init_touch_ended_callback()
             BEATUP->add_total_coin(-((double)(cost)));
             auto building = BUILDUP->get_target_building();
 
-            auto harvester_count = map_get(building->consumers, { harv_type, ing_type }, 0);
+            res_count_t def = 0.0;
+            work_ing_t pair = { harv_type, ing_type };
+            auto harvester_count = map_get(building->consumers, pair, def);
             harvester_count++;
             building->consumers[{ harv_type, ing_type }] = harvester_count;
             this->update_func(0);
@@ -879,7 +885,9 @@ void ConsumerShopNuItem::my_init_update_callback()
 {
     auto update_harvesters_cb = [this](float dt) {
         auto building = BUILDUP->get_target_building();
-        res_count_t harvesters_owned = map_get(building->consumers, {this->harv_type, building->punched_sub_type}, 0);
+        work_ing_t pair = {this->harv_type, building->punched_sub_type};
+        res_count_t def = 0;
+        res_count_t harvesters_owned = map_get(building->consumers, pair, def);
         this->set_count_lbl(harvesters_owned);
         this->_shop_cost = scale_number(Salesman::get_base_shop_cost(this->harv_type), harvesters_owned, 1.15L);
 
@@ -899,14 +907,9 @@ bool ConsumerShopNuItem::custom_status_check(float dt)
 
     // check if high enough building level to fit more
     bool is_enabled = false;
-    res_count_t harvesters_owned = map_get(
-        target_building->consumers,
-        {
-            this->harv_type,
-            target_building->punched_sub_type
-        },
-        0
-    );
+    work_ing_t pair = { this->harv_type, target_building->punched_sub_type };
+    res_count_t def = 0.0;
+    res_count_t harvesters_owned = map_get( target_building->consumers, pair, def);
 
     if (harvesters_owned < target_building->get_storage_space())
     {

@@ -103,7 +103,9 @@ res_count_t Harvestable::get_per_touch_output()
     res_count_t base = 1.0L;
 
     auto tech_map = this->building->techtree->get_tech_map();
-    res_count_t times_doubled = map_get(tech_map, Technology::SubType::ClickDoublePower, 0L);
+    TechSubType tech_type = Technology::SubType::ClickDoublePower;
+    res_count_t _def = 0L;
+    res_count_t times_doubled = map_get(tech_map, tech_type, _def);
     if (times_doubled > 0){
         base *= 2.0L * times_doubled;
     };
@@ -688,7 +690,11 @@ res_count_t FightingHarvestable::get_per_touch_output()
     res_count_t base = 5.0L;
 
     auto tech_map = this->building->techtree->get_tech_map();
-    res_count_t times_doubled = map_get(tech_map, Technology::SubType::CombatDamage, 0L);
+
+    auto tech_type = Technology::SubType::CombatDamage;
+    res_count_t _def = 0L;
+    res_count_t times_doubled = map_get(tech_map, tech_type, _def);
+
     if (times_doubled > 0){
         base += 2.0L * times_doubled;
     };

@@ -45,7 +45,8 @@ void GameLogic::post_load()
         Ingredient::SubType ing_type = mist_ing.first;
         res_count_t new_count = mist_ing.second;
 
-        res_count_t old_count = map_get(original_ingredients, ing_type, 0);
+        res_count_t _def = 0;
+        res_count_t old_count = map_get(original_ingredients, ing_type, _def);
 
         if (new_count - old_count > 0.0)
         {

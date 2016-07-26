@@ -132,22 +132,24 @@ Salesman::Salesman(spBuilding building, std::string name, Ingredient::SubType in
 {
 }
 
+mistWorkerSubType base_salesman_cost_map = {
+    { Salesman::SubType::One, 10 }
+};
+
 res_count_t Salesman::get_base_shop_cost(SubType sub_type)
 {
-    mistWorkerSubType map = {
-        {SubType::One, 10}
-    };
-
-    return map_get(map, sub_type, 9999);
+    res_count_t default_shop_cost = 9999.0;
+    return map_get(base_salesman_cost_map, sub_type, default_shop_cost);
 }
+
+mistWorkerSubType base_salesman_to_sell_count = {
+    {Salesman::SubType::One, 1}
+};
 
 res_count_t Salesman::get_to_sell_count(SubType sub_type)
 {
-    mistWorkerSubType map = {
-        {SubType::One, 1}
-    };
-
-    return map_get(map, sub_type, 9999);
+    res_count_t default_to_sell_count = 9999.0;
+    return map_get(base_salesman_to_sell_count, sub_type, default_to_sell_count);
 };
 
 ///NOTE this only gets called once per building->update_clock, not once a frame
@@ -158,7 +160,8 @@ void Salesman::on_update(float dt)
 
     if (active_sell_count > 0)
     {
-        res_count_t max_can_sell = map_get(this->building->ingredients, ing_type, 0);
+        res_count_t def = 0.0;
+        res_count_t max_can_sell = map_get(this->building->ingredients, ing_type, def);
         if (max_can_sell != 0)
         {
             res_count_t to_sell = std::min(max_can_sell, active_sell_count);

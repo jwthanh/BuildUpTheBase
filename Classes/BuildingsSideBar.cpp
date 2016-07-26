@@ -210,12 +210,14 @@ void SideListView::setup_shop_listview_as_harvesters()
                         { Worker::SubType::Nine, Worker::SubType::Eigth }
                     };
 
+                    Worker::SubType zero = Worker::SubType::ZERO;
                     std::pair<Worker::SubType, Ingredient::SubType> key = { 
-                        map_get(req_map, menu_item->harv_type, Worker::SubType::ZERO),
+                        map_get(req_map, menu_item->harv_type, zero),
                         menu_item->ing_type
                     };
 
-                    auto prereq_harvester_found = map_get( target_building->harvesters, key, 0);
+                    res_count_t _def = 0;
+                    auto prereq_harvester_found = map_get( target_building->harvesters, key, _def);
 
                     if (prereq_harvester_found < 5) {
                         menu_item->button->setVisible(false);
@@ -377,7 +379,8 @@ void SideListView::setup_detail_listview_as_recipes()
             spRecipe recipe = std::make_shared<Recipe>("combat_damage", "no desc for tech recipe");
 
             auto tech_map = target_building->techtree->tech_map;
-            res_count_t souls_cost = std::floor(scale_number(2.0L, map_get(tech_map, combat_dmg->sub_type, 0), 1.45L));
+            res_count_t _def = 0;
+            res_count_t souls_cost = std::floor(scale_number(2.0L, map_get(tech_map, combat_dmg->sub_type, _def), 1.45L));
             recipe->components = mistIngredient({
                 {Ingredient::SubType::Soul, souls_cost}
             });
@@ -509,7 +512,8 @@ void SideListView::setup_powers_listview_as_powers()
                 for (auto ingredient : building->ingredients)
                 {
                     IngredientSubType ing_type = ingredient.first;
-                    res_count_t ing_count = map_get(building->ingredients, ing_type, 0);
+                    res_count_t _def = 0;
+                    res_count_t ing_count = map_get(building->ingredients, ing_type, _def);
                     BEATUP->add_total_coin(ing_count*sale_price);
                     building->ingredients[ing_type] = 0;
                 }

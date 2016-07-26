@@ -68,7 +68,8 @@ mistIngredient Buildup::get_all_ingredients() const
 
         for (std::pair<Ingredient::SubType, res_count_t> mist : ingredients)
         {
-            res_count_t existing_val = map_get(result, mist.first, 0);
+            res_count_t def = 0.0;
+            res_count_t existing_val = map_get(result, mist.first, def);
             result[mist.first] = existing_val + mist.second;
         }
     }
@@ -86,7 +87,8 @@ void Buildup::remove_shared_ingredients_from_all(Ingredient::SubType ing_type, r
     {
         mistIngredient ingredients = building->ingredients;
 
-        res_count_t existing_val = map_get(ingredients, ing_type, 0);
+        res_count_t def = 0;
+        res_count_t existing_val = map_get(ingredients, ing_type, def);
         if (existing_val != 0) {
             matching_buildings.push_back(building);
         };
@@ -257,17 +259,20 @@ res_count_t Building::get_total_salesmen_output()
 
 res_count_t Building::count_ingredients(Ingredient::SubType ing_type)
 {
-    return map_get(this->ingredients, ing_type, 0);
+    res_count_t def = 0;
+    return map_get(this->ingredients, ing_type, def);
 };
 
 res_count_t Building::count_products(Product::SubType pro_type)
 {
-    return map_get(this->products, pro_type, 0);
+    res_count_t def = 0;
+    return map_get(this->products, pro_type, def);
 };
 
 res_count_t Building::count_wastes(Waste::SubType wst_type)
 {
-    return map_get(this->wastes, wst_type, 0);
+    res_count_t def = 0;
+    return map_get(this->wastes, wst_type, def);
 };
 
 template<typename T>
@@ -279,7 +284,8 @@ std::shared_ptr<T> create_one(typename T::SubType sub_type)
 template<typename mistT>
 void create(mistT& mist, res_count_t quantity, typename mistT::key_type sub_type)
 {
-    auto exisiting_count = map_get(mist, sub_type, 0);
+    res_count_t def = 0;
+    auto exisiting_count = map_get(mist, sub_type, def);
     mist[sub_type] = exisiting_count + quantity;
 };
 
@@ -384,7 +390,8 @@ res_count_t Building::count_ingredients()
     for (auto type_str : Ingredient::type_map)
     {
         Ingredient::SubType type = type_str.first;
-        res_count_t count = map_get(this->ingredients, type, 0);
+        res_count_t def = 0;
+        res_count_t count = map_get(this->ingredients, type, def);
         total += count;
     };
     return total;
@@ -412,7 +419,8 @@ res_count_t Building::count_products()
     for (auto type_str : Product::type_map)
     {
         Product::SubType type = type_str.first;
-        res_count_t count = map_get(this->products, type, 0);
+        res_count_t _def = 0;
+        res_count_t count = map_get(this->products, type, _def);
         total += count;
     };
     return total;
@@ -440,7 +448,8 @@ res_count_t Building::count_wastes()
     for (auto type_str : Waste::type_map)
     {
         Waste::SubType type = type_str.first;
-        res_count_t count = map_get(this->wastes, type, 0);
+        res_count_t _def = 0;
+        res_count_t count = map_get(this->wastes, type, _def);
         total += count;
     };
     return total;
@@ -495,7 +504,8 @@ std::map<int, res_count_t> level_output = {
 
 res_count_t Building::get_storage_space()
 {
-    return map_get(level_output, this->building_level, 9999999);
+    res_count_t _def = 9999999;
+    return map_get(level_output, this->building_level, _def);
 }
 
 bool Building::is_storage_full_of_ingredients(Ingredient::SubType sub_type)
