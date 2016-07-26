@@ -170,7 +170,7 @@ void Salesman::on_update(float dt)
                 std::string string_type = Ingredient::type_to_string(ing_type);
 
                 this->building->ingredients[ing_type] -= to_sell;
-                double actual_value = (double)(to_sell*coins_gained);
+                res_count_t actual_value = (res_count_t)(to_sell*coins_gained);
                 BEATUP->add_total_coin(actual_value);
 
                 //create floating label for the amount sold over the correct

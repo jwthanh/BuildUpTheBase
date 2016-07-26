@@ -239,6 +239,7 @@ void ShopNuItem::update_func(float dt)
     res_count_t total_coins = BEATUP->get_total_coins();
 
     this->cost_lbl->setTextColor(Color4B::WHITE);
+    res_count_t rounded_cost = std::round(this->get_cost());
 
     if (this->get_been_bought())
     {
@@ -250,7 +251,7 @@ void ShopNuItem::update_func(float dt)
     else if (total_coins < cost || !this->custom_status_check(dt))
     {
         try_set_enable(false);
-        this->set_cost_lbl(beautify_double(std::round(this->get_cost())));
+        this->set_cost_lbl(beautify_double(rounded_cost));
 
         Color3B color = { 243, 162, 173 };
         this->cost_lbl->setTextColor(Color4B(Color3B::RED));
@@ -259,7 +260,7 @@ void ShopNuItem::update_func(float dt)
     else
     {
         try_set_enable(true);
-        this->set_cost_lbl(beautify_double((double)std::round(this->get_cost())));
+        this->set_cost_lbl(beautify_double(rounded_cost));
 
         this->button->setColor(Color3B::WHITE);
     };

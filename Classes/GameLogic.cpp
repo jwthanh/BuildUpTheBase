@@ -49,7 +49,8 @@ void GameLogic::post_load()
 
         if (new_count - old_count > 0.0)
         {
-            gains_ss << "+Gained " << beautify_double(new_count - old_count) << " " << Ingredient::type_to_string(ing_type);
+            res_count_t gained = new_count - old_count;
+            gains_ss << "+Gained " << beautify_double(gained) << " " << Ingredient::type_to_string(ing_type);
 
             for (spBuilding building : BUILDUP->city->buildings)
             {
@@ -65,7 +66,8 @@ void GameLogic::post_load()
     }
 
 
-    gains_ss << "\nIt's been " << beautify_double(hours_since_last_login.count()) << " hours since last login";
+    res_count_t hours_since_login = hours_since_last_login.count();
+    gains_ss << "\nIt's been " << beautify_double(hours_since_login) << " hours since last login";
     CCLOG(gains_ss.str().c_str());
 
 

@@ -360,7 +360,8 @@ void BaseScene::create_info_panel()
     {
         spBuilding building = BUILDUP->get_target_building();
         std::stringstream ss;
-        ss << create_count("ING", building->count_ingredients()) << "/" << beautify_double(building->get_storage_space());
+        res_count_t storage_space = building->get_storage_space();
+        ss << create_count("ING", building->count_ingredients()) << "/" << beautify_double(storage_space);
         ing_count->setString(ss.str());
     };
     this->schedule(update_ing_count, update_delay, "ing_count_update");
@@ -379,7 +380,8 @@ void BaseScene::create_info_panel()
         };
 
         if (total_active >= 1){
-            ss << "Harvesters: " << beautify_double(total_active) << "\n " << beautify_double(building->get_total_harvester_output()) << "/sec";
+            res_count_t harvester_output = building->get_total_harvester_output();
+            ss << "Harvesters: " << beautify_double(total_active) << "\n " << beautify_double(harvester_output) << "/sec";
             harvester_count->setString(ss.str());
             harvester_count->setVisible(true);
         }
@@ -402,7 +404,8 @@ void BaseScene::create_info_panel()
             total_active += types_to_count.second;
         };
         if (total_active >= 1){
-            ss << "Salesmen: " << beautify_double(total_active) << "\n " << beautify_double(building->get_total_salesmen_output()) << "/sec";
+            res_count_t salesmen_output = building->get_total_salesmen_output();
+            ss << "Salesmen: " << beautify_double(total_active) << "\n " << beautify_double(salesmen_output) << "/sec";
             salesmen_count->setString(ss.str());
             salesmen_count->setVisible(true);
         }
@@ -490,7 +493,8 @@ void BaseScene::create_player_info_panel()
     auto update_gold_lbl = [player_gold_lbl, player_hp_lbl](float dt){
         //set gold
         std::stringstream coin_ss;
-        auto gold = std::round(BEATUP->get_total_coins());
+        res_count_t total_coins = BEATUP->get_total_coins();
+        auto gold = std::round(total_coins);
         coin_ss << "$" << beautify_double(gold);
         std::string coin_msg = coin_ss.str();
         player_gold_lbl->setString(coin_msg);
@@ -866,7 +870,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     create_sell_button("sell_1000_btn", 1000);
 
     auto value_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("value_lbl"));
-    auto update_value_lbl = [coins_gained, alert_panel, value_lbl](float dt){
+    auto update_value_lbl = [&coins_gained, alert_panel, value_lbl](float dt){
         std::stringstream value_ss;
         value_ss << "for " << beautify_double(coins_gained) << "$ each";
         value_lbl->setString(value_ss.str().c_str());

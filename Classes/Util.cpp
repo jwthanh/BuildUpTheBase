@@ -79,7 +79,7 @@ std::vector<std::string> suffixes = {
     "QiD"
 };
 
-std::string _humanize_number(double value)
+std::string _humanize_number(long double value)
 {
     float base = 0;
     std::string suffix = suffixes.at(0);
@@ -139,7 +139,7 @@ std::string _humanize_number(double value)
     return str + suffix;
 }
 
-std::string beautify_double(double value)
+std::string beautify_double(long double& value)
 {
     bool is_negative = value < 0;
     std::string decimal = "";
@@ -165,9 +165,9 @@ std::string beautify_double(double value)
     }
 
     //get rid of decimal bits of the number, already take care of
-    value = std::floor(std::abs(value));
+    long double plain_value = std::floor(std::abs(value));
 
-    std::string output = _humanize_number(value);
+    std::string output = _humanize_number(plain_value);
 
     output = output + decimal;
 
@@ -182,7 +182,8 @@ std::string beautify_double(double value)
 
 std::string test_double(float input)
 {
-    auto s = beautify_double(input);
+    long double dbl_input = (long double)input;
+    auto s = beautify_double(dbl_input);
     CCLOG("%s\n", s.c_str());
 
     return s;

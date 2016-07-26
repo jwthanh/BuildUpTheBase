@@ -179,7 +179,7 @@ int Beatup::get_total_hits()
     return DataManager::get_int_from_data(Beatup::total_hit_key);
 };
 
-void Beatup::add_total_coin(double x)
+void Beatup::add_total_coin(res_count_t x)
 {
     this->_total_coins += x;
     //DataManager::incr_key("total_coin_key", x);
