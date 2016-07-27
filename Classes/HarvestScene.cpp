@@ -549,7 +549,7 @@ void BaseScene::create_inventory_listview()
             res_count_t _def = 0;
             Ingredient::SubType ing_type = ts.first;
             auto count = map_get(city_ingredients, ing_type, _def);
-            //if (count != 0)
+            // if (count != 0)
             type_vec.push_back({ ts.first, count });
         }
 
@@ -630,14 +630,15 @@ void BaseScene::create_inventory_listview()
             new_item_panel->addTouchEventListener(on_touch_cb);
 
             float update_delay = 0.1f;
-            auto update_lbl_cb = [new_item_panel, this, &ing_type](float)
+            auto update_lbl_cb = [new_item_panel, this, ing_type](float)
             {
-                auto type_str = Ingredient::type_to_string(ing_type);
+                auto it = ing_type; 
+                auto type_str = Ingredient::type_to_string(it);
                 std::stringstream ss;
 
                 mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
                 res_count_t _def = 0;
-                res_count_t count = map_get(city_ingredients, ing_type, _def);
+                res_count_t count = map_get(city_ingredients, it, _def);
                 ss << beautify_double(count) << "\n" << type_str;
                 auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
                 item_lbl->setString(ss.str());
@@ -824,10 +825,11 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
 
     auto update_delay = 0.1f;
 
-    alert_panel->schedule([count_lbl, &ing_type](float) {
+    alert_panel->schedule([count_lbl, ing_type](float) {
+        auto it = ing_type;
         auto all_ing = BUILDUP->get_all_ingredients();
         res_count_t _def = 0.0;
-        res_count_t count = map_get(all_ing, ing_type, _def);
+        res_count_t count = map_get(all_ing, it, _def);
         count_lbl->setString(beautify_double(count));
     }, update_delay, "alert_count_update");
 
@@ -879,9 +881,10 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     create_sell_button("sell_1000_btn", 1000);
 
     auto value_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("value_lbl"));
-    auto update_value_lbl = [&coins_gained, alert_panel, value_lbl](float dt){
+    auto update_value_lbl = [coins_gained, alert_panel, value_lbl](float dt){
+        auto cg = coins_gained;
         std::stringstream value_ss;
-        value_ss << "for " << beautify_double(coins_gained) << "$ each";
+        value_ss << "for " << beautify_double(cg) << "$ each";
         value_lbl->setString(value_ss.str().c_str());
     };
     value_lbl->schedule(update_value_lbl, 0.2f, "update_value_lbl");
