@@ -120,11 +120,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         //auto back = items.back();
         ////items.eraseObject(back);
         //items.replace(0, back);
-        auto old_center = inventory_listview->getCenterItemInCurrentView();
-        auto old_index = inventory_listview->getIndex(old_center);
+        // auto old_center = inventory_listview->getCenterItemInCurrentView();
+        // auto old_index = inventory_listview->getIndex(old_center);
         inventory_listview->requestDoLayout();
         inventory_listview->doLayout();
-        inventory_listview->jumpToItem(old_index, Vec2::ANCHOR_MIDDLE, Vec2::ANCHOR_MIDDLE);
+        // inventory_listview->jumpToItem(old_index, Vec2::ANCHOR_MIDDLE, Vec2::ANCHOR_MIDDLE);
 
 
         auto shop_listview = dynamic_cast<ui::ListView*>(this->getChildByName("shop_listview"));
@@ -659,6 +659,7 @@ void BaseScene::create_inventory_listview()
         };
     };
 
+    update_listview(0.0f); //why doesnt this do anything
     inventory_listview->schedule(update_listview, 0.1f, "update_listview");
 };
 
