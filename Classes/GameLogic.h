@@ -25,6 +25,7 @@ class GameLogic
         void post_load();
 
         Clock* coin_save_clock;
+        Clock* coin_rate_per_sec_clock;
         void update(float dt);
 
         static GameLogic* getInstance();

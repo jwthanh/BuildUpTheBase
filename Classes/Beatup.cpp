@@ -63,6 +63,7 @@ bool Beatup::init()
 #endif
 
     this->_total_coins = DataManager::get_double_from_data(Beatup::total_coin_key);
+    this->_last_total_coins = this->_total_coins;
 
     CCLOG("beatup init");
 

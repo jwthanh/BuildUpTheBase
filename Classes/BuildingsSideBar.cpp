@@ -109,6 +109,7 @@ void SideListView::setup_listviews()
             this->current_target = target_building;
 
             //TODO this is only necessary when the buildings have different items, like the Detail tab
+            //FIXME this is the cause of the lag on switch, buttons should be smarter than this
             this->detail_listview->removeAllChildren();
             this->shop_listview->removeAllChildren();
             this->building_listview->removeAllChildren();

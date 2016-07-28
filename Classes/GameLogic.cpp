@@ -122,6 +122,7 @@ bool GameLogic::init()
     instance->buildup = instance->beatup->buildup;
 
     this->coin_save_clock = new Clock(15.0f);
+    this->coin_rate_per_sec_clock = new Clock(1.0f);
 
     return true;
 };
@@ -136,6 +137,27 @@ void GameLogic::update(float dt)
         this->coin_save_clock->reset();
         CCLOG("saving total coins");
         DataManager::set_double_from_data(Beatup::total_coin_key, this->beatup->get_total_coins());
+    }
+
+    this->coin_rate_per_sec_clock->update(dt);
+    if (this->coin_rate_per_sec_clock->passed_threshold())
+    {
+        this->coin_rate_per_sec_clock->reset();
+        auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+        if (scene) //might be at some other screen
+        {
+
+            ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(scene->getChildByName("player_info_panel"));
+            auto player_gold_per_sec_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
+
+            res_count_t coin_diff = BEATUP->get_total_coins() - BEATUP->_last_total_coins;
+            std::string beautified_diff = "+"+beautify_double(coin_diff)+"/sec";
+            player_gold_per_sec_lbl->setString(beautified_diff);
+
+            BEATUP->_last_total_coins = BEATUP->get_total_coins();
+
+        };
+        CCLOG("saving total coins");
     }
 };
 
