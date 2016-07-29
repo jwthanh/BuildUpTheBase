@@ -32,43 +32,69 @@ void GameLogic::post_load()
     GameLogic::load_all();
 
     std::stringstream gains_ss, at_capacity_ss;
-    auto hours_since_last_login = BEATUP->hours_since_last_login();
+    std::chrono::duration<double, std::ratio<3600>> hours_since_last_login = BEATUP->hours_since_last_login();
 
 
     auto original_ingredients = BUILDUP->get_all_ingredients();
     auto seconds = std::chrono::duration_cast<std::chrono::seconds>(hours_since_last_login);
-    BUILDUP->city->update(seconds.count());
-    auto new_ingredients = BUILDUP->get_all_ingredients();
+    long long seconds_count = seconds.count();
 
-    for (auto mist_ing : new_ingredients)
+
+    //if the time is is over a day in the passed, assume that they're cheating
+    // anything less than 24 hours could be a timezone thing
+    bool is_cheating = false;
+    if (hours_since_last_login.count() < -24.0)
     {
-        Ingredient::SubType ing_type = mist_ing.first;
-        res_count_t new_count = mist_ing.second;
+        is_cheating = true;
+    }
 
-        res_count_t _def = 0;
-        res_count_t old_count = map_get(original_ingredients, ing_type, _def);
+    if (is_cheating == false)
+    {
+        BUILDUP->city->update(seconds_count);
 
-        if (new_count - old_count > 0.0)
+        auto new_ingredients = BUILDUP->get_all_ingredients();
+        for (auto mist_ing : new_ingredients)
         {
-            res_count_t gained = new_count - old_count;
-            gains_ss << "+Gained " << beautify_double(gained) << " " << Ingredient::type_to_string(ing_type);
+            Ingredient::SubType ing_type = mist_ing.first;
+            res_count_t new_count = mist_ing.second;
 
-            for (spBuilding building : BUILDUP->city->buildings)
+            res_count_t _def = 0;
+            res_count_t old_count = map_get(original_ingredients, ing_type, _def);
+
+            if (new_count - old_count > 0.0)
             {
-                if (building->is_storage_full_of_ingredients(ing_type))
+                res_count_t gained = new_count - old_count;
+                gains_ss << "+Gained " << beautify_double(gained) << " " << Ingredient::type_to_string(ing_type);
+
+                for (spBuilding building : BUILDUP->city->buildings)
                 {
-                    at_capacity_ss << "- Upgrade " << building->name << " to fit more "<< Ingredient::type_to_string(ing_type)<<"!" << std::endl;
+                    if (building->is_storage_full_of_ingredients(ing_type))
+                    {
+                        at_capacity_ss << "- Upgrade " << building->name << " to fit more " << Ingredient::type_to_string(ing_type) << "!" << std::endl;
+                    }
+
                 }
 
+                gains_ss << std::endl;
             }
-
-            gains_ss << std::endl;
         }
+    }
+    else
+    {
+        gains_ss << "Awfully suspicious..." << std::endl;
+
+        for (spBuilding building : BUILDUP->city->buildings)
+        {
+            building->ingredients = mistIngredient();
+        }
+
+        BEATUP->_total_coins = 0;
     }
 
 
     res_count_t hours_since_login = hours_since_last_login.count();
     gains_ss << "\nIt's been " << beautify_double(hours_since_login) << " hours since last login";
+
     CCLOG(gains_ss.str().c_str());
 
 
