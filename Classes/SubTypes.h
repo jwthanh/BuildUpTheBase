@@ -33,7 +33,7 @@ enum class TechSubType
 enum class WorkerSubType
 {
     ZERO = 0, //ZERO is unset
-    One = 1, Two, Three, Four, Five, Six, Seven, Eigth, Nine, Ten,
+    One = 1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
     Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen, Twenty
 };
 

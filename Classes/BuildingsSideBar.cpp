@@ -167,7 +167,9 @@ void SideListView::setup_shop_listview_as_harvesters()
             {WorkerType::Harvester, "harvester_item_three", Worker::SubType::Three},
             {WorkerType::Harvester, "harvester_item_four", Worker::SubType::Four},
             {WorkerType::Harvester, "harvester_item_five", Worker::SubType::Five},
-            {WorkerType::Harvester, "harvester_item_six", Worker::SubType::Six}
+            {WorkerType::Harvester, "harvester_item_six", Worker::SubType::Six},
+            {WorkerType::Harvester, "harvester_item_seven", Worker::SubType::Seven},
+            {WorkerType::Harvester, "harvester_item_eight", Worker::SubType::Eight}
         };
 
         auto target_building = BUILDUP->get_target_building();
@@ -222,8 +224,8 @@ void SideListView::setup_shop_listview_as_harvesters()
                         { Worker::SubType::Five, Worker::SubType::Four },
                         { Worker::SubType::Six, Worker::SubType::Five },
                         { Worker::SubType::Seven, Worker::SubType::Six },
-                        { Worker::SubType::Eigth, Worker::SubType::Seven },
-                        { Worker::SubType::Nine, Worker::SubType::Eigth }
+                        { Worker::SubType::Eight, Worker::SubType::Seven },
+                        { Worker::SubType::Nine, Worker::SubType::Eight }
                     };
 
                     Worker::SubType zero = Worker::SubType::ZERO;
