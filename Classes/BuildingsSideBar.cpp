@@ -125,34 +125,8 @@ void SideListView::setup_listviews()
                 target_building->name.c_str()
              );
             this->current_target = target_building;
+            toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
 
-            //TODO this is only necessary when the buildings have different items, like the Detail tab
-            //FIXME this is the cause of the lag on switch, buttons should be smarter than this
-            //this->detail_listview->removeAllChildren();
-            //this->detail_listview->scheduleOnce([this](float dt){
-            //    this->detail_listview->requestDoLayout();
-            //}, 0.3f, "one_time_do_layout");
-
-            //this->shop_listview->removeAllChildren();
-            //this->shop_listview->scheduleOnce([this](float dt){
-            //    this->shop_listview->requestDoLayout();
-            //}, 0.3f, "one_time_do_layout");
-
-            //this->building_listview->removeAllChildren();
-            //this->building_listview->scheduleOnce([this](float dt){
-            //    this->building_listview->requestDoLayout();
-            //}, 0.3f, "one_time_do_layout");
-
-            //this->powers_listview->removeAllChildren();
-            //this->powers_listview->scheduleOnce([this](float dt){
-            //    this->powers_listview->requestDoLayout();
-            //}, 0.3f, "one_time_do_layout");
-
-            ////scroll to top of all the listviews
-            //this->detail_listview->scrollToTop(0, false);
-            //this->shop_listview->scrollToTop(0, false);
-            //this->building_listview->scrollToTop(0, false);
-            //this->powers_listview->scrollToTop(0, false);
         }
     };
     this->parent->schedule(clean_children_on_target_change, update_delay, "clean_children");
