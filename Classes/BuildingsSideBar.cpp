@@ -251,15 +251,9 @@ void SideListView::setup_shop_listview_as_harvesters()
                             menu_item->button->setVisible(true);
                         }
 
-                        //hides the item if there's not enough to consume, but this doesnt get run often enough
-                        //if (dynamic_cast<ConsumerShopNuItem*>(menu_item)) {
-                        //    auto consumer_item = dynamic_cast<ConsumerShopNuItem*>(menu_item);
-                        //    if (building->count_ingredients(consumer_item->consumed_type) < 1){
-                        //        menu_item->button->setVisible(false);
-                        //    };
-                        //};
                     };
                 };
+
                 menu_item->schedule(update_target_and_prereq, update_delay, "update_ing_type");
                 update_target_and_prereq(0);
 
@@ -293,14 +287,12 @@ bool SideListView::try_push_back(int child_tag, ui::ListView* listview)
 void SideListView::setup_building_listview_as_upgrades()
 {
     float update_delay = 0.1f;
-        TabManager::TabTypes tab_type = TabManager::TabTypes::BuildingTab;
-
+    TabManager::TabTypes tab_type = TabManager::TabTypes::BuildingTab;
 
     for (spBuilding building : BUILDUP->city->buildings)
     {
         ui::ListView* listview = this->building_listviews->at(building->name);
 
-        ///BUILDING LISTVIEW
         auto update_listview = [this, update_delay, listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
@@ -354,6 +346,7 @@ void SideListView::setup_detail_listview_as_recipes()
                 return;
             }
             listview->setVisible(true);
+
             struct MenuItemConfig {
                 std::string name;
                 std::string description;
@@ -459,20 +452,12 @@ void SideListView::setup_detail_listview_as_recipes()
             int i = 0;
             for (auto config : nuitems_config)
             {
-                int child_tag = i;
-                i++;
-
+                int child_tag = i++;
 
                 //if the child already exists, put it at the end of the listview, maintaining order as config
                 bool existed = this->try_push_back(child_tag, listview);
                 if (existed)
                 {
-                    auto existing_node = dynamic_cast<NuItem*>(listview->getChildByTag(child_tag));
-                    if (existing_node)
-                    {
-                        existing_node->set_title(config.config.name);
-                        existing_node->set_description(config.config.description);
-                    }
                     continue;
                 };
 
@@ -550,8 +535,6 @@ void SideListView::setup_powers_listview_as_powers()
 
             menu_item->set_touch_ended_callback([]()
             {
-                CCLOG("selling all");
-
                 res_count_t sale_price = 10; //TODO use proper price
                 for (spBuilding building : BUILDUP->city->buildings)
                 {
@@ -570,8 +553,6 @@ void SideListView::setup_powers_listview_as_powers()
 
         listview->schedule(update_sellall, update_delay, "update_sellall");
         update_sellall(0);
-
-        //------------ copy and pasted ------------------//
 
         auto update_save = [this, update_delay, listview, building, tab_type](float dt)
         {
