@@ -298,7 +298,7 @@ void BaseScene::create_building_choicelist()
             else
             {
                 tex_name = building->data->get_img_large();
-                res_type = (int)ui::TextureResType::PLIST;
+                res_type = (int)ui::Widget::TextureResType::PLIST;
             }
 
             ResourceData r_data = building_image->getRenderFile();
