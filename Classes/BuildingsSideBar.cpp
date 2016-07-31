@@ -72,10 +72,16 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 
         spBuilding target_building = BUILDUP->get_target_building();
 
-        if (target_button == this->tab_shop_btn) { this->shop_listviews->at(target_building->name)->setVisible(true); }
-        else if (target_button == this->tab_detail_btn) { (this->detail_listviews)->at(target_building->name)->setVisible(true); }
-        else if (target_button == this->tab_building_btn) { (this->building_listviews)->at(target_building->name)->setVisible(true); }
-        else if (target_button == this->tab_powers_btn) { (this->powers_listviews)->at(target_building->name)->setVisible(true); }
+        auto activate_listview = [](ui::ListView* listview)
+        {
+            listview->setVisible(true);
+            listview->requestDoLayout();
+        };
+
+        if (target_button == this->tab_shop_btn) { activate_listview(this->shop_listviews->at(target_building->name)); }
+        else if (target_button == this->tab_detail_btn) { activate_listview((this->detail_listviews)->at(target_building->name)); }
+        else if (target_button == this->tab_building_btn) { activate_listview((this->building_listviews)->at(target_building->name)); }
+        else if (target_button == this->tab_powers_btn) { activate_listview((this->powers_listviews)->at(target_building->name)); }
     };
 };
 
@@ -113,10 +119,11 @@ void SideListView::setup_listviews()
         spBuilding target_building = BUILDUP->get_target_building();
         if (target_building->name != this->current_target->name)
         {
-            CCLOG("Changed building!, from %s to %s; rebuilding detail and shop listview",
+            CCLOG(
+                "Changed building!, from %s to %s; rebuilding detail and shop listview",
                 this->current_target->name.c_str(),
                 target_building->name.c_str()
-                );
+             );
             this->current_target = target_building;
 
             //TODO this is only necessary when the buildings have different items, like the Detail tab
@@ -157,7 +164,7 @@ void SideListView::setup_shop_listview_as_harvesters()
     for (spBuilding building : BUILDUP->city->buildings)
     {
         ui::ListView* shop_listview = this->shop_listviews->at(building->name);
-        auto update_harvester_listview = [this, update_delay, shop_listview](float dt)
+        auto update_harvester_listview = [this, update_delay, shop_listview, building](float dt)
         {
             enum class WorkerType
             {
@@ -186,9 +193,7 @@ void SideListView::setup_shop_listview_as_harvesters()
                 { WorkerType::Harvester, "harvester_item_eight", Worker::SubType::Eight }
             };
 
-            auto target_building = BUILDUP->get_target_building();
-
-            if (target_building->name == "The Underscape"){
+            if (building->name == "The Underscape"){
                 nuitems_config.insert(nuitems_config.begin() + 1, { WorkerType::Consumer, "consumer_item_one", Worker::SubType::One });
             };
 
@@ -207,17 +212,17 @@ void SideListView::setup_shop_listview_as_harvesters()
                 //clone the new item
                 HarvesterShopNuItem* menu_item;
                 if (config.worker_type == WorkerType::Harvester){
-                    menu_item = HarvesterShopNuItem::create(shop_listview, target_building);
+                    menu_item = HarvesterShopNuItem::create(shop_listview, building);
                 }
                 else if (config.worker_type == WorkerType::Salesman)
                 {
-                    menu_item = SalesmanShopNuItem::create(shop_listview, target_building);
+                    menu_item = SalesmanShopNuItem::create(shop_listview, building);
                 }
                 else if (config.worker_type == WorkerType::Consumer)
                 {
-                    menu_item = ConsumerShopNuItem::create(shop_listview, target_building, Ingredient::SubType::Blood);
+                    menu_item = ConsumerShopNuItem::create(shop_listview, building, Ingredient::SubType::Blood);
                 }
-                menu_item->my_init(config.harv_type, target_building->punched_sub_type);
+                menu_item->my_init(config.harv_type, building->punched_sub_type);
                 menu_item->setName(child_name);
                 menu_item->setTag(tag);
 
@@ -225,9 +230,8 @@ void SideListView::setup_shop_listview_as_harvesters()
                 //change to adapt for the building, so we cheat and do it here.
                 //this'll get moved to a json map or something between building and
                 //harvest sub types
-                auto update_target_and_prereq = [menu_item](float dt){
-                    spBuilding target_building = BUILDUP->get_target_building();
-                    menu_item->ing_type = target_building->punched_sub_type;
+                auto update_target_and_prereq = [menu_item, building](float dt){
+                    menu_item->ing_type = building->punched_sub_type;
 
                     if (menu_item->harv_type != Worker::SubType::One) {
                         std::map<Worker::SubType, Worker::SubType> req_map = {
@@ -250,7 +254,7 @@ void SideListView::setup_shop_listview_as_harvesters()
                         };
 
                         res_count_t _def = 0;
-                        auto prereq_harvester_found = map_get(target_building->harvesters, key, _def);
+                        auto prereq_harvester_found = map_get(building->harvesters, key, _def);
 
                         if (prereq_harvester_found < 5) {
                             menu_item->button->setVisible(false);
@@ -262,7 +266,7 @@ void SideListView::setup_shop_listview_as_harvesters()
                         //hides the item if there's not enough to consume, but this doesnt get run often enough
                         //if (dynamic_cast<ConsumerShopNuItem*>(menu_item)) {
                         //    auto consumer_item = dynamic_cast<ConsumerShopNuItem*>(menu_item);
-                        //    if (target_building->count_ingredients(consumer_item->consumed_type) < 1){
+                        //    if (building->count_ingredients(consumer_item->consumed_type) < 1){
                         //        menu_item->button->setVisible(false);
                         //    };
                         //};
@@ -307,10 +311,8 @@ void SideListView::setup_building_listview_as_upgrades()
         ui::ListView* listview = this->building_listviews->at(building->name);
 
         ///BUILDING LISTVIEW
-        auto update_listview = [this, update_delay, listview](float dt)
+        auto update_listview = [this, update_delay, listview, building](float dt)
         {
-            spBuilding target_building = BUILDUP->get_target_building();
-
 
             int i = 0;
             int max_level = 15;
@@ -324,14 +326,10 @@ void SideListView::setup_building_listview_as_upgrades()
                 bool existed = this->try_push_back(child_tag, listview);
                 if (existed) { continue; };
 
-                UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create(listview, target_building);
+                UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create(listview, building);
                 menu_item->my_init(level);
 
                 menu_item->setTag(child_tag);
-
-                menu_item->schedule([menu_item](float dt){
-                    menu_item->building = BUILDUP->get_target_building();
-                }, update_delay, "update_ing_type");
 
             };
         };
@@ -350,10 +348,8 @@ void SideListView::setup_detail_listview_as_recipes()
         ui::ListView* listview = this->detail_listviews->at(building->name);
 
         ///DETAIL LISTVIEW
-        auto update_listview = [this, update_delay, listview](float dt)
+        auto update_listview = [this, update_delay, listview, building](float dt)
         {
-            spBuilding target_building = BUILDUP->get_target_building();
-
             struct MenuItemConfig {
                 std::string name;
                 std::string description;
@@ -374,7 +370,7 @@ void SideListView::setup_detail_listview_as_recipes()
 
             std::vector<DetailConfig> nuitems_config;
 
-            for (spRecipe recipe : target_building->data->get_all_recipes())
+            for (spRecipe recipe : building->data->get_all_recipes())
             {
                 nuitems_config.push_back({
                     recipe,
@@ -385,13 +381,13 @@ void SideListView::setup_detail_listview_as_recipes()
                     } });
             };
 
-            if (target_building->name == "The Underscape")
+            if (building->name == "The Underscape")
             {
                 spRecipe blood_oath = std::make_shared<Recipe>("Bloodoath", "Gain 5 health\n-- costs 10 blood");
                 blood_oath->components = mistIngredient({
                     { Ingredient::SubType::Blood, 10 }
                 });
-                blood_oath->_callback = []()
+                blood_oath->_callback = [building]()
                 {
                     auto health = BUILDUP->fighter->attrs->health;
                     if (health->is_full() == false)
@@ -401,8 +397,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     else
                     {
                         //refund the cost
-                        spBuilding target_building = BUILDUP->get_target_building();
-                        target_building->create_ingredients(Ingredient::SubType::Blood, 10);
+                        building->create_ingredients(Ingredient::SubType::Blood, 10);
                     };
                 };
                 nuitems_config.push_back({
@@ -414,12 +409,12 @@ void SideListView::setup_detail_listview_as_recipes()
                     } });
             };
 
-            if (target_building->name == "The Arena")
+            if (building->name == "The Arena")
             {
                 spTechnology combat_dmg = std::make_shared<Technology>(Technology::SubType::CombatDamage);
                 spRecipe recipe = std::make_shared<Recipe>("combat_damage", "no desc for tech recipe");
 
-                auto tech_map = target_building->techtree->tech_map;
+                auto tech_map = building->techtree->tech_map;
                 res_count_t _def = 0;
                 res_count_t souls_cost = std::floor(scale_number(2.0L, map_get(tech_map, combat_dmg->sub_type, _def), 1.45L));
                 recipe->components = mistIngredient({
@@ -439,7 +434,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     } });
             };
 
-            if (target_building->name == "The Marketplace")
+            if (building->name == "The Marketplace")
             {
                 spTechnology double_click_pwr = std::make_shared<Technology>(Technology::SubType::ClickDoublePower);
                 spRecipe recipe = std::make_shared<Recipe>("double_click_power", "no desc for tech recipe");
@@ -479,23 +474,19 @@ void SideListView::setup_detail_listview_as_recipes()
 
                 BuildingNuItem* menu_item;
                 if (config.type == DetailType::Recipe) {
-                    menu_item = RecipeNuItem::create(listview, target_building);
+                    menu_item = RecipeNuItem::create(listview, building);
                 }
                 else if (config.type == DetailType::Misc) {
-                    menu_item = BuildingNuItem::create(listview, target_building);
+                    menu_item = BuildingNuItem::create(listview, building);
                 }
                 else if (config.type == DetailType::Tech) {
-                    menu_item = TechNuItem::create(listview, target_building);
+                    menu_item = TechNuItem::create(listview, building);
                 }
 
                 menu_item->setTag(child_tag);
 
                 menu_item->set_title(config.config.name);
                 menu_item->set_description(config.config.description);
-
-                menu_item->schedule([menu_item](float dt){
-                    menu_item->building = BUILDUP->get_target_building();
-                }, update_delay, "update_ing_type");
 
                 //RecipeNuItem specifics
                 if (dynamic_cast<RecipeNuItem*>(menu_item))
@@ -524,10 +515,8 @@ void SideListView::setup_powers_listview_as_powers()
         ui::ListView* listview = this->powers_listviews->at(building->name);
 
         float update_delay = 0.1f;
-        auto update_sellall = [this, update_delay, listview](float dt)
+        auto update_sellall = [this, update_delay, listview, building](float dt)
         {
-            auto target_building = BUILDUP->get_target_building();
-
             //if the child already exists, put it at the back 
             std::string child_name = "sell_all";
             auto existing_node = listview->getChildByName(child_name);
@@ -540,7 +529,7 @@ void SideListView::setup_powers_listview_as_powers()
 
             //clone the new item
             BuildingNuItem* menu_item;
-            menu_item = BuildingNuItem::create(listview, target_building);
+            menu_item = BuildingNuItem::create(listview, building);
             menu_item->setName(child_name);
             menu_item->set_title("Sell all");
             menu_item->set_description("Sells all resources instantly");
@@ -571,10 +560,8 @@ void SideListView::setup_powers_listview_as_powers()
 
         //------------ copy and pasted ------------------//
 
-        auto update_save = [this, update_delay, listview](float dt)
+        auto update_save = [this, update_delay, listview, building](float dt)
         {
-            auto target_building = BUILDUP->get_target_building();
-
             //if the child already exists, put it at the back 
             std::string child_name = "save";
             auto existing_node = listview->getChildByName(child_name);
@@ -587,7 +574,7 @@ void SideListView::setup_powers_listview_as_powers()
 
             //clone the new item
             BuildingNuItem* menu_item;
-            menu_item = BuildingNuItem::create(listview, target_building);
+            menu_item = BuildingNuItem::create(listview, building);
             menu_item->setName(child_name);
             menu_item->set_title("Save Game");
             menu_item->set_description("Saves progress. Autosaves on quit, but you never know.");
