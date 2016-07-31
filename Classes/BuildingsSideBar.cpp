@@ -66,21 +66,7 @@ ui::Button* SideListView::_create_button(std::string node_name)
 
 void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 {
-    auto reset_state = [this](spListviewMap listview_map)
-    {
-        for (auto pair : *listview_map)
-        {
-            cocos2d::ui::ListView* lv = pair.second;
-            lv->setVisible(false);
-        }
-    };
-
     if (evt == ui::Widget::TouchEventType::ENDED) {
-        reset_state(this->shop_listviews);
-        reset_state(this->detail_listviews);
-        reset_state(this->building_listviews);
-        reset_state(this->powers_listviews);
-
         this->tab_shop_btn->setEnabled(true);
         this->tab_detail_btn->setEnabled(true);
         this->tab_building_btn->setEnabled(true);
@@ -91,19 +77,23 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 
         spBuilding target_building = BUILDUP->get_target_building();
 
-        auto activate_listview = [](ui::ListView* listview)
+        auto activate = [this, target_building](spListviewMap& listviews, TabManager::TabTypes tab_type)
         {
-            listview->setVisible(true);
+            ui::ListView* listview = listviews->at(target_building->name);
             listview->requestDoLayout();
+            this->tabs.set_tab_active(tab_type, target_building);
         };
 
-        TabManager::TabTypes tab_type;
-        if (target_button == this->tab_shop_btn) { tab_type = TabManager::TabTypes::ShopTab;  activate_listview(this->shop_listviews->at(target_building->name)); }
-        else if (target_button == this->tab_detail_btn) { tab_type = TabManager::TabTypes::DetailTab; activate_listview((this->detail_listviews)->at(target_building->name)); }
-        else if (target_button == this->tab_building_btn) { tab_type = TabManager::TabTypes::BuildingTab; activate_listview((this->building_listviews)->at(target_building->name)); }
-        else if (target_button == this->tab_powers_btn) { tab_type = TabManager::TabTypes::PowersTab; activate_listview((this->powers_listviews)->at(target_building->name)); }
+        std::map<ui::Button*, std::pair<TabManager::TabTypes, spListviewMap>> button_map = {
+            { this->tab_shop_btn, { TabManager::TabTypes::ShopTab, this->shop_listviews } },
+            { this->tab_detail_btn, { TabManager::TabTypes::DetailTab, this->detail_listviews } },
+            { this->tab_building_btn, { TabManager::TabTypes::BuildingTab, this->building_listviews } },
+            { this->tab_powers_btn, { TabManager::TabTypes::PowersTab, this->powers_listviews } }
+        };
 
-        this->tabs.set_tab_active(tab_type, target_building);
+        auto result = button_map[target_button];
+        activate(result.second, result.first);
+
     };
 };
 
@@ -141,11 +131,6 @@ void SideListView::setup_listviews()
         spBuilding target_building = BUILDUP->get_target_building();
         if (target_building->name != this->current_target->name)
         {
-            CCLOG(
-                "Changed building!, from %s to %s; rebuilding detail and shop listview",
-                this->current_target->name.c_str(),
-                target_building->name.c_str()
-             );
             this->current_target = target_building;
             toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
 
@@ -165,8 +150,10 @@ void SideListView::setup_shop_listview_as_harvesters()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
+                shop_listview->setVisible(false);
                 return;
             }
+            shop_listview->setVisible(true);
             enum class WorkerType
             {
                 Harvester,
@@ -318,8 +305,10 @@ void SideListView::setup_building_listview_as_upgrades()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
+                listview->setVisible(false);
                 return;
             }
+            listview->setVisible(true);
 
             int i = 0;
             int max_level = 15;
@@ -361,8 +350,10 @@ void SideListView::setup_detail_listview_as_recipes()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
+                listview->setVisible(false);
                 return;
             }
+            listview->setVisible(true);
             struct MenuItemConfig {
                 std::string name;
                 std::string description;
@@ -523,7 +514,7 @@ void SideListView::setup_detail_listview_as_recipes()
 
 void SideListView::setup_powers_listview_as_powers()
 {
-    TabManager::TabTypes tab_type = TabManager::TabTypes::ShopTab;
+    TabManager::TabTypes tab_type = TabManager::TabTypes::PowersTab;
 
     for (spBuilding building : BUILDUP->city->buildings)
     {
@@ -534,8 +525,11 @@ void SideListView::setup_powers_listview_as_powers()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
+                listview->setVisible(false);
                 return;
             }
+            listview->setVisible(true);
+
             //if the child already exists, put it at the back 
             std::string child_name = "sell_all";
             auto existing_node = listview->getChildByName(child_name);
@@ -583,8 +577,11 @@ void SideListView::setup_powers_listview_as_powers()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
+                listview->setVisible(false);
                 return;
             }
+            listview->setVisible(true);
+
             //if the child already exists, put it at the back 
             std::string child_name = "save";
             auto existing_node = listview->getChildByName(child_name);
