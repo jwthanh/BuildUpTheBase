@@ -21,14 +21,14 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="0.0000" RightMargin="0.0000" TopMargin="90.4052" BottomMargin="75.8064" IsCustomSize="True" FontSize="16" LabelText="Harvesters 0&#xA;at XX/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="200.0000" Y="53.7883" />
+              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="-2.0000" RightMargin="-2.0000" TopMargin="90.4052" BottomMargin="75.8064" IsCustomSize="True" FontSize="16" LabelText="Harvesters: 30,000&#xA;at 99,999/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="204.0000" Y="53.7883" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="100.0000" Y="102.7006" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.4668" />
-                <PreSize X="1.0000" Y="0.2445" />
+                <PreSize X="1.0200" Y="0.2445" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -45,14 +45,14 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="salesmen_count" ActionTag="564918455" Tag="77" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="0.0000" RightMargin="0.0000" TopMargin="154.3560" BottomMargin="11.8557" IsCustomSize="True" FontSize="16" LabelText="Salesmen 0&#xA;at XX/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="200.0000" Y="53.7883" />
+              <AbstractNodeData Name="salesmen_count" ActionTag="564918455" Tag="77" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="-2.0000" RightMargin="-2.0000" TopMargin="154.3560" BottomMargin="11.8557" IsCustomSize="True" FontSize="16" LabelText="Salesmen: 30,000&#xA;at 99,999/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="204.0000" Y="53.7883" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="100.0000" Y="38.7498" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.1761" />
-                <PreSize X="1.0000" Y="0.2445" />
+                <PreSize X="1.0200" Y="0.2445" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
