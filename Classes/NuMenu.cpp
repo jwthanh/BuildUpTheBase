@@ -168,17 +168,20 @@ void NuItem::set_image(std::string path)
 
 void NuItem::set_title(std::string title)
 {
+    //CCLOG(title.c_str());
     this->title_lbl->setString(title);
 };
 
 void NuItem::set_description(std::string description)
 {
+    //CCLOG(description.c_str());
     this->desc_lbl->setString(description);
 };
 
 void NuItem::set_cost_lbl(std::string cost)
 {
     if (cost != ""){ //cost has content
+        //CCLOG(cost.c_str());
         this->cost_lbl->setString("$"+cost);
     } else { //cost is blank, widen description TODO use orig_buttons positions so this isnt hardcoded
         this->cost_lbl->setString("");
