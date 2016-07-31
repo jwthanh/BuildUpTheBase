@@ -49,7 +49,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 {
     auto reset_state = [this](spListviewMap listview_map)
     {
-        for (auto pair : *this->shop_listviews)
+        for (auto pair : *listview_map)
         {
             cocos2d::ui::ListView* lv = pair.second;
             lv->setVisible(false);
