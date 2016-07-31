@@ -76,7 +76,13 @@ std::vector<std::string> suffixes = {
     "DoD",
     "TrD",
     "QaD",
-    "QiD"
+    "QiD",
+    "QuD",
+    "SxD",
+    "SpD",
+    "OcD",
+    "NoD",
+    "Vin"
 };
 
 std::string _humanize_number(long double value)

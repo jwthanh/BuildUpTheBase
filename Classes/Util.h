@@ -57,7 +57,7 @@ number_t scale_number(number_t base_number, number_t current_number, number_t ra
     if (std::isinf(result))
     {
         CCLOG("oh no!, %f * (%f ** %f)", base_number, rate, current_number);
-        return 0;
+        return std::numeric_limits<number_t>::max();
     }
     return result;
 };
