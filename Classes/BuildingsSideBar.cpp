@@ -178,15 +178,15 @@ void SideListView::setup_shop_listview_as_harvesters()
             nuitems_config.insert(nuitems_config.begin()+1, {WorkerType::Consumer, "consumer_item_one", Worker::SubType::One});
         };
 
+        int i = 0;
         for (auto config : nuitems_config)
         {
             //if the child already exists, put it at the back 
             std::string child_name = config.node_name;
-            auto existing_node = shop_listview->getChildByName(child_name);
+            int tag = i++;
+            auto existing_node = try_push_back(tag, shop_listview);
             if (existing_node)
             {
-                existing_node->removeFromParentAndCleanup(false);
-                shop_listview->addChild(existing_node);
                 continue;
             }
 
@@ -205,6 +205,7 @@ void SideListView::setup_shop_listview_as_harvesters()
             }
             menu_item->my_init(config.harv_type, target_building->punched_sub_type);
             menu_item->setName(child_name);
+            menu_item->setTag(tag);
 
             //since we only set the ing_type of the menu item above, it doesn't
             //change to adapt for the building, so we cheat and do it here.
@@ -272,6 +273,7 @@ bool SideListView::try_push_back(int child_tag, ui::ListView* listview)
     auto existing_node = listview->getChildByTag(child_tag);
     if (existing_node)
     {
+        return true;
         existing_node->removeFromParentAndCleanup(false); //dont remove the callbacks, just move it around
         listview->addChild(existing_node);
         existed = true;
@@ -286,7 +288,7 @@ void SideListView::setup_building_listview_as_upgrades()
 
     ui::ListView* listview = this->building_listview;
 
-    ///DETAIL LISTVIEW
+    ///BUILDING LISTVIEW
     auto update_listview = [this, update_delay, listview](float dt)
     {
         spBuilding target_building = BUILDUP->get_target_building();
