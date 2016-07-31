@@ -24,8 +24,27 @@
 
 USING_NS_CC;
 
+TabManager::TabManager()
+{
+    this->active_building = BUILDUP->city->building_by_name("The Farm");
+    this->active_tab = TabTypes::ShopTab;
+}
+
+bool TabManager::is_tab_active(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const
+{
+    return this->active_tab == tab_type && this->active_building == building;
+}
+
+void TabManager::set_tab_active(TabTypes tab_type, const spBuilding& building)
+{
+    this->active_tab = tab_type;
+    this->active_building = building;
+}
+
 SideListView::SideListView(Node* parent, spBuilding current_target) : current_target(current_target), parent(parent)
 {
+    this->tabs = TabManager();
+
     this->setup_listviews();
     this->setup_tab_buttons();
 };
@@ -78,10 +97,13 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
             listview->requestDoLayout();
         };
 
-        if (target_button == this->tab_shop_btn) { activate_listview(this->shop_listviews->at(target_building->name)); }
-        else if (target_button == this->tab_detail_btn) { activate_listview((this->detail_listviews)->at(target_building->name)); }
-        else if (target_button == this->tab_building_btn) { activate_listview((this->building_listviews)->at(target_building->name)); }
-        else if (target_button == this->tab_powers_btn) { activate_listview((this->powers_listviews)->at(target_building->name)); }
+        TabManager::TabTypes tab_type;
+        if (target_button == this->tab_shop_btn) { tab_type = TabManager::TabTypes::ShopTab;  activate_listview(this->shop_listviews->at(target_building->name)); }
+        else if (target_button == this->tab_detail_btn) { tab_type = TabManager::TabTypes::DetailTab; activate_listview((this->detail_listviews)->at(target_building->name)); }
+        else if (target_button == this->tab_building_btn) { tab_type = TabManager::TabTypes::BuildingTab; activate_listview((this->building_listviews)->at(target_building->name)); }
+        else if (target_button == this->tab_powers_btn) { tab_type = TabManager::TabTypes::PowersTab; activate_listview((this->powers_listviews)->at(target_building->name)); }
+
+        this->tabs.set_tab_active(tab_type, target_building);
     };
 };
 
@@ -135,11 +157,16 @@ void SideListView::setup_listviews()
 void SideListView::setup_shop_listview_as_harvesters()
 {
     float update_delay = 0.1f;
+    TabManager::TabTypes tab_type = TabManager::TabTypes::ShopTab;
     for (spBuilding building : BUILDUP->city->buildings)
     {
         ui::ListView* shop_listview = this->shop_listviews->at(building->name);
-        auto update_harvester_listview = [this, update_delay, shop_listview, building](float dt)
+        auto update_harvester_listview = [this, update_delay, shop_listview, building, tab_type](float dt)
         {
+            if (this->tabs.is_tab_active(tab_type, building) == false)
+            {
+                return;
+            }
             enum class WorkerType
             {
                 Harvester,
@@ -204,7 +231,7 @@ void SideListView::setup_shop_listview_as_harvesters()
                 //change to adapt for the building, so we cheat and do it here.
                 //this'll get moved to a json map or something between building and
                 //harvest sub types
-                auto update_target_and_prereq = [menu_item, building](float dt){
+                auto update_target_and_prereq = [menu_item, building, tab_type](float dt){
                     menu_item->ing_type = building->punched_sub_type;
 
                     if (menu_item->harv_type != Worker::SubType::One) {
@@ -279,14 +306,20 @@ bool SideListView::try_push_back(int child_tag, ui::ListView* listview)
 void SideListView::setup_building_listview_as_upgrades()
 {
     float update_delay = 0.1f;
+        TabManager::TabTypes tab_type = TabManager::TabTypes::BuildingTab;
+
 
     for (spBuilding building : BUILDUP->city->buildings)
     {
         ui::ListView* listview = this->building_listviews->at(building->name);
 
         ///BUILDING LISTVIEW
-        auto update_listview = [this, update_delay, listview, building](float dt)
+        auto update_listview = [this, update_delay, listview, building, tab_type](float dt)
         {
+            if (this->tabs.is_tab_active(tab_type, building) == false)
+            {
+                return;
+            }
 
             int i = 0;
             int max_level = 15;
@@ -316,14 +349,20 @@ void SideListView::setup_building_listview_as_upgrades()
 void SideListView::setup_detail_listview_as_recipes()
 {
     float update_delay = 0.1f;
+    TabManager::TabTypes tab_type = TabManager::TabTypes::DetailTab;
+
 
     for (spBuilding building : BUILDUP->city->buildings)
     {
         ui::ListView* listview = this->detail_listviews->at(building->name);
 
         ///DETAIL LISTVIEW
-        auto update_listview = [this, update_delay, listview, building](float dt)
+        auto update_listview = [this, update_delay, listview, building, tab_type](float dt)
         {
+            if (this->tabs.is_tab_active(tab_type, building) == false)
+            {
+                return;
+            }
             struct MenuItemConfig {
                 std::string name;
                 std::string description;
@@ -484,13 +523,19 @@ void SideListView::setup_detail_listview_as_recipes()
 
 void SideListView::setup_powers_listview_as_powers()
 {
+    TabManager::TabTypes tab_type = TabManager::TabTypes::ShopTab;
+
     for (spBuilding building : BUILDUP->city->buildings)
     {
         ui::ListView* listview = this->powers_listviews->at(building->name);
 
         float update_delay = 0.1f;
-        auto update_sellall = [this, update_delay, listview, building](float dt)
+        auto update_sellall = [this, update_delay, listview, building, tab_type](float dt)
         {
+            if (this->tabs.is_tab_active(tab_type, building) == false)
+            {
+                return;
+            }
             //if the child already exists, put it at the back 
             std::string child_name = "sell_all";
             auto existing_node = listview->getChildByName(child_name);
@@ -534,8 +579,12 @@ void SideListView::setup_powers_listview_as_powers()
 
         //------------ copy and pasted ------------------//
 
-        auto update_save = [this, update_delay, listview, building](float dt)
+        auto update_save = [this, update_delay, listview, building, tab_type](float dt)
         {
+            if (this->tabs.is_tab_active(tab_type, building) == false)
+            {
+                return;
+            }
             //if the child already exists, put it at the back 
             std::string child_name = "save";
             auto existing_node = listview->getChildByName(child_name);

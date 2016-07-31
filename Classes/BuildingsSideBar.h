@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include "ui/CocosGUI.h"
+#include "constants.h"
 
 namespace cocos2d
 {
@@ -27,11 +28,37 @@ using str_listview_t = std::pair<std::string, cocos2d::ui::ListView*>;
 using listviewMap = std::map<std::string, cocos2d::ui::ListView*>;
 using spListviewMap = std::shared_ptr<listviewMap>;
 
+///for managing which tab and building is active
+/// ideally only the visible tab would need to get loaded in 
+/// and maybe the rest would get loaded in overtime
+///
+/// if a tab wasn't active, it wouldnt do its processing
+class TabManager
+{
+    public:
+        std::shared_ptr<Building> active_building;
+
+        enum class TabTypes
+        {
+            ShopTab = 0,
+            DetailTab = 1,
+            BuildingTab = 2,
+            PowersTab = 3
+        } active_tab;
+
+        TabManager();
+
+        bool is_tab_active(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const;
+        void set_tab_active(TabTypes tab_type, const spBuilding& building);
+};
+
 class SideListView
 {
     public:
         std::shared_ptr<Building> current_target;
         cocos2d::Node* parent;
+
+        TabManager tabs;
 
         spListviewMap shop_listviews;
         spListviewMap detail_listviews;
