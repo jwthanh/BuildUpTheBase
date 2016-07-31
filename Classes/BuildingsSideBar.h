@@ -22,16 +22,21 @@ class Building;
 ///Base ListView for sidebar
 /// 
 ///It creates a ui::ListView specific to each building
+
+using str_listview_t = std::pair<std::string, cocos2d::ui::ListView*>;
+using listviewMap = std::map<std::string, cocos2d::ui::ListView*>;
+using spListviewMap = std::shared_ptr<listviewMap>;
+
 class SideListView
 {
     public:
         std::shared_ptr<Building> current_target;
         cocos2d::Node* parent;
 
-        cocos2d::ui::ListView* shop_listview;
-        cocos2d::ui::ListView* detail_listview;
-        cocos2d::ui::ListView* building_listview;
-        cocos2d::ui::ListView* powers_listview;
+        spListviewMap shop_listviews;
+        spListviewMap detail_listviews;
+        spListviewMap building_listviews;
+        spListviewMap powers_listviews;
 
         cocos2d::ui::Button* tab_shop_btn;
         cocos2d::ui::Button* tab_detail_btn;
@@ -41,7 +46,7 @@ class SideListView
 
         SideListView(cocos2d::Node* parent, std::shared_ptr<Building> current_target);
 
-        virtual cocos2d::ui::ListView* _create_listview(std::string node_name);
+        virtual spListviewMap _create_listview(std::string node_name);
         virtual cocos2d::ui::Button* _create_button(std::string node_name);
 
         void toggle_buttons(cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType evt);
