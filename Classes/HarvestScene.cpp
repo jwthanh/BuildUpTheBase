@@ -209,10 +209,10 @@ void BaseScene::create_goal_loadingbar()
             loading_bar->setPercent(percentage);
 
             if (percentage >= 100.0f) {
-                loading_bar->setColor({20, 92, 68});
+                try_set_node_color(loading_bar, { 20, 92, 68 });
             }
             else {
-                loading_bar->setColor({177, 212, 200});
+                try_set_node_color(loading_bar, { 177, 212, 200 });
             };
 
         };
@@ -311,17 +311,11 @@ void BaseScene::create_building_choicelist()
             if (building->is_storage_full_of_ingredients(building->punched_sub_type))
             {
                 Color3B reddish = { 243, 162, 173 };
-                if (panel->getColor() != reddish)
-                {
-                    panel->setColor(reddish);
-                }
+                try_set_node_color(panel, reddish);
             }
             else
             {
-                if (panel->getColor() != Color3B::WHITE)
-                {
-                    panel->setColor(Color3B::WHITE);
-                }
+                try_set_node_color(panel, Color3B::WHITE);
             }
         };
         building_node->schedule(update_func, 0.01f, "update_func");
@@ -525,9 +519,9 @@ void BaseScene::create_player_info_panel()
         player_hp_lbl->setString(hp_ss.str());
 
         if (hp->is_empty()) {
-            player_hp_lbl->setTextColor(Color4B::RED);
+            try_set_text_color(player_hp_lbl, Color4B::RED);
         } else {
-            player_hp_lbl->setTextColor(Color4B::WHITE);
+            try_set_text_color(player_hp_lbl, Color4B::WHITE);
         }
 
     };
@@ -743,7 +737,8 @@ bool HarvestScene::init()
         };
 
         Color3B _def = Color3B::BLACK;
-        layer_color->setColor(map_get(color_map, this->_layer_building_level, _def));
+        auto color = map_get(color_map, this->_layer_building_level, _def);
+        try_set_node_color(layer_color, color);
 
 
     };

@@ -262,7 +262,7 @@ void ShopNuItem::update_func(float dt)
         try_set_enable(true);
         this->set_cost_lbl(beautify_double(rounded_cost));
 
-        this->button->setColor(Color3B::WHITE);
+        try_set_node_color(this->button, Color3B::WHITE);
     };
 
 
