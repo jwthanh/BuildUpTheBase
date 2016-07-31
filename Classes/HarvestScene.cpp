@@ -286,23 +286,42 @@ void BaseScene::create_building_choicelist()
         auto update_func = [panel, building, building_image](float dt)
         {
             auto target_building = BUILDUP->get_target_building();
+
+            std::string tex_name;
+            int res_type;
+
             if (target_building == building)
             {
-                building_image->loadTexture("crosshair_red.png", ui::TextureResType::PLIST);
+                tex_name = "crosshair_red.png";
+                res_type = (int)ui::TextureResType::PLIST;
             }
             else
             {
-                building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
+                tex_name = building->data->get_img_large();
+                res_type = (int)ui::TextureResType::PLIST;
+            }
+
+            ResourceData r_data = building_image->getRenderFile();
+            if (r_data.file != tex_name || r_data.type != (int)res_type)
+            {
+                CCLOG("loading new building texture");
+                building_image->loadTexture(tex_name, (ui::TextureResType)res_type);
             }
 
             if (building->is_storage_full_of_ingredients(building->punched_sub_type))
             {
                 Color3B reddish = { 243, 162, 173 };
-                panel->setColor(reddish);
+                if (panel->getColor() != reddish)
+                {
+                    panel->setColor(reddish);
+                }
             }
-            else 
+            else
             {
-                panel->setColor(Color3B::WHITE);
+                if (panel->getColor() != Color3B::WHITE)
+                {
+                    panel->setColor(Color3B::WHITE);
+                }
             }
         };
         building_node->schedule(update_func, 0.01f, "update_func");
