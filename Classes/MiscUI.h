@@ -8,6 +8,7 @@ namespace cocos2d
 {
     namespace ui
     {
+        class Text;
         class Button;
     }
 }
@@ -36,5 +37,8 @@ void animate_flash_action(
     cocos2d::Color3B to_color = cocos2d::Color3B::RED,
     cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
     );
+
+void try_set_text_color(cocos2d::ui::Text* text_node, const cocos2d::Color4B color);
+void try_set_node_color(cocos2d::Node* node, const cocos2d::Color3B color);
 
 #endif

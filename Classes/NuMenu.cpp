@@ -245,8 +245,8 @@ void ShopNuItem::update_func(float dt)
     {
         this->set_cost_lbl("---");
         try_set_enable(false);
-        this->cost_lbl->setTextColor(Color4B::GRAY);
-        this->button->setColor(Color3B::WHITE);
+        try_set_text_color(this->cost_lbl, Color4B::GRAY);
+        try_set_node_color(this->button, Color3B::WHITE);
     } 
     else if (total_coins < cost || !this->custom_status_check(dt))
     {
@@ -254,8 +254,8 @@ void ShopNuItem::update_func(float dt)
         this->set_cost_lbl(beautify_double(rounded_cost));
 
         Color3B color = { 243, 162, 173 };
-        this->cost_lbl->setTextColor(Color4B(Color3B::RED));
-        this->button->setColor(color);
+        try_set_text_color(this->cost_lbl, Color4B::RED);
+        try_set_node_color(this->button, color);
     }
     else
     {

@@ -99,3 +99,19 @@ void animate_flash_action(
     );
 
 };
+
+void try_set_text_color(cocos2d::ui::Text* text_node, const cocos2d::Color4B color)
+{
+    if (text_node->getTextColor() != color)
+    {
+        text_node->setTextColor(color);
+    }
+};
+
+void try_set_node_color(cocos2d::Node* node, const cocos2d::Color3B color)
+{
+    if (node->getColor() != color)
+    {
+        node->setColor(color);
+    }
+};
