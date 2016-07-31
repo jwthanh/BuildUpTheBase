@@ -192,7 +192,7 @@ void BaseScene::create_goal_loadingbar()
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
-            float coin_goal = scale_number(10, BUILDUP->get_target_building()->building_level, 15);
+            float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 15.0f);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             if (percentage >= 100.0f) {
                 this->sidebar->toggle_buttons(this->sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
@@ -204,7 +204,7 @@ void BaseScene::create_goal_loadingbar()
     auto update_loading_bar = [this, loading_bar](float dt)
         {
             //set progress to 1000 dollars
-            float coin_goal = scale_number(10, BUILDUP->get_target_building()->building_level, 15);
+            float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 15.0f);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             loading_bar->setPercent(percentage);
 
@@ -759,7 +759,7 @@ void HarvestScene::update(float dt)
     //}
 
     //TODO get this percentage from a method or something
-    float coin_goal = scale_number(10, BUILDUP->get_target_building()->building_level, 15);
+    float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 15.0f);
     float percentage = BEATUP->get_total_coins() / coin_goal * 100;
     if (percentage >= 100.0f) {
         ((HarvestScene*)this)->recipe_lbl->setString("Upgrade available!");
