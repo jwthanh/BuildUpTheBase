@@ -264,16 +264,16 @@
                 <PreSize X="0.8400" Y="0.2400" />
                 <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="upgrade_lbl" ActionTag="-61553329" Tag="28" IconVisible="False" LeftMargin="2.0141" RightMargin="2.0965" TopMargin="2.3925" BottomMargin="49.6075" IsCustomSize="True" FontSize="16" LabelText="To Next Upgrade" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="195.8894" Y="23.0000" />
+              <AbstractNodeData Name="upgrade_lbl" ActionTag="-61553329" Tag="28" IconVisible="False" LeftMargin="-0.0412" RightMargin="0.0412" TopMargin="2.3925" BottomMargin="49.6075" IsCustomSize="True" FontSize="16" LabelText="Upgrade Progress:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="200.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="99.9588" Y="61.1075" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4998" Y="0.8148" />
-                <PreSize X="0.9794" Y="0.3067" />
+                <PreSize X="1.0000" Y="0.3067" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="255" G="0" B="0" />
+                <OutlineColor A="255" R="10" G="10" B="10" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
