@@ -705,6 +705,35 @@ res_count_t FightingHarvestable::get_per_touch_output()
 std::string UndeadHarvestable::get_sprite_path()
 {
     return "necro_open.png";
+}
+
+void UndeadHarvestable::init_sprite()
+{
+    Harvestable::init_sprite();
+
+    auto cache = SpriteFrameCache::getInstance();
+    Vector<SpriteFrame*> frames = Vector<SpriteFrame*>();
+
+
+    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
+    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
+    cocos2d::Animation* anim = cocos2d::Animation::createWithSpriteFrames(frames, 0.1f, 1);
+
+    cocos2d::Animate* anim_action = cocos2d::Animate::create(anim);
+    this->sprite->runAction(RepeatForever::create(anim_action));
 };
 
 void UndeadHarvestable::animate_clip()
