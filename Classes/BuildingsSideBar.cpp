@@ -155,8 +155,6 @@ void SideListView::setup_listviews()
     this->building_listviews = this->_create_listview("building_listview");
     this->powers_listviews = this->_create_listview("powers_listview");
 
-    float update_delay = 0.1f;
-
     auto clean_children_on_target_change = [this](float dt)
     {
         spBuilding target_building = BUILDUP->get_target_building();
@@ -167,17 +165,16 @@ void SideListView::setup_listviews()
 
         }
     };
-    this->parent->schedule(clean_children_on_target_change, update_delay, "clean_children");
+    this->parent->schedule(clean_children_on_target_change, AVERAGE_DELAY, "clean_children");
 };
 
 void SideListView::setup_shop_listview_as_harvesters()
 {
-    float update_delay = 0.1f;
     TabManager::TabTypes tab_type = TabManager::TabTypes::ShopTab;
     for (spBuilding building : BUILDUP->city->buildings)
     {
         ui::ListView* shop_listview = this->shop_listviews->at(building->name);
-        auto update_harvester_listview = [this, update_delay, shop_listview, building, tab_type](float dt)
+        auto update_harvester_listview = [this, shop_listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
@@ -285,14 +282,14 @@ void SideListView::setup_shop_listview_as_harvesters()
                     };
                 };
 
-                menu_item->schedule(update_target_and_prereq, update_delay, "update_ing_type");
+                menu_item->schedule(update_target_and_prereq, AVERAGE_DELAY, "update_ing_type");
                 update_target_and_prereq(0);
 
             };
 
         };
 
-        shop_listview->schedule(update_harvester_listview, update_delay, "update_listview");
+        shop_listview->schedule(update_harvester_listview, AVERAGE_DELAY, "update_listview");
         update_harvester_listview(0);
     };
 };
@@ -317,14 +314,13 @@ bool SideListView::try_push_back(int child_tag, ui::ListView* listview)
 
 void SideListView::setup_building_listview_as_upgrades()
 {
-    float update_delay = 0.1f;
     TabManager::TabTypes tab_type = TabManager::TabTypes::BuildingTab;
 
     for (spBuilding building : BUILDUP->city->buildings)
     {
         ui::ListView* listview = this->building_listviews->at(building->name);
 
-        auto update_listview = [this, update_delay, listview, building, tab_type](float dt)
+        auto update_listview = [this, listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
@@ -353,14 +349,13 @@ void SideListView::setup_building_listview_as_upgrades()
             };
         };
 
-        listview->schedule(update_listview, update_delay, "update_listview");
+        listview->schedule(update_listview, AVERAGE_DELAY, "update_listview");
         update_listview(0);
     };
 };
 
 void SideListView::setup_detail_listview_as_recipes()
 {
-    float update_delay = 0.1f;
     TabManager::TabTypes tab_type = TabManager::TabTypes::DetailTab;
 
 
@@ -369,7 +364,7 @@ void SideListView::setup_detail_listview_as_recipes()
         ui::ListView* listview = this->detail_listviews->at(building->name);
 
         ///DETAIL LISTVIEW
-        auto update_listview = [this, update_delay, listview, building, tab_type](float dt)
+        auto update_listview = [this, listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
@@ -523,7 +518,7 @@ void SideListView::setup_detail_listview_as_recipes()
             };
         };
 
-        listview->schedule(update_listview, update_delay, "update_listview");
+        listview->schedule(update_listview, AVERAGE_DELAY, "update_listview");
         update_listview(0);
     };
 };
@@ -536,8 +531,7 @@ void SideListView::setup_powers_listview_as_powers()
     {
         ui::ListView* listview = this->powers_listviews->at(building->name);
 
-        float update_delay = 0.1f;
-        auto update_sellall = [this, update_delay, listview, building, tab_type](float dt)
+        auto update_sellall = [this, listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
@@ -582,10 +576,10 @@ void SideListView::setup_powers_listview_as_powers()
 
         };
 
-        listview->schedule(update_sellall, update_delay, "update_sellall");
+        listview->schedule(update_sellall, AVERAGE_DELAY, "update_sellall");
         update_sellall(0);
 
-        auto update_save = [this, update_delay, listview, building, tab_type](float dt)
+        auto update_save = [this, listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
@@ -621,7 +615,7 @@ void SideListView::setup_powers_listview_as_powers()
 
         };
 
-        listview->schedule(update_save, update_delay, "update_save");
+        listview->schedule(update_save, AVERAGE_DELAY, "update_save");
         update_save(0);
     }
 };

@@ -359,13 +359,13 @@ void BaseScene::create_info_panel()
         return ss.str();
     };
 
-    const float update_delay = 0.1f;
+    const float AVERAGE_DELAY = 0.1f;
 
     auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
     auto update_building_name = [building_name](float dt){
         building_name->setString(BUILDUP->get_target_building()->name);
     };
-    this->schedule(update_building_name, update_delay, "building_name_update");
+    this->schedule(update_building_name, AVERAGE_DELAY, "building_name_update");
     update_building_name(0);
 
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
@@ -377,7 +377,7 @@ void BaseScene::create_info_panel()
         ss << create_count("ING", building->count_ingredients()) << "/" << beautify_double(storage_space);
         ing_count->setString(ss.str());
     };
-    this->schedule(update_ing_count, update_delay, "ing_count_update");
+    this->schedule(update_ing_count, AVERAGE_DELAY, "ing_count_update");
     update_ing_count(0);
 
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
@@ -402,7 +402,7 @@ void BaseScene::create_info_panel()
             harvester_count->setVisible(false);
         }
     };
-    this->schedule(update_harvester_count, update_delay, "harvester_count_update");
+    this->schedule(update_harvester_count, AVERAGE_DELAY, "harvester_count_update");
     update_harvester_count(0);
 
     auto salesmen_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("salesmen_count"));
@@ -426,7 +426,7 @@ void BaseScene::create_info_panel()
             salesmen_count->setVisible(false);
         }
     };
-    this->schedule(update_salesmen_count, update_delay, "salesmen_count_update");
+    this->schedule(update_salesmen_count, AVERAGE_DELAY, "salesmen_count_update");
     update_salesmen_count(0);
 
     this->addChild(building_info_panel);
@@ -498,8 +498,6 @@ void BaseScene::create_player_info_panel()
         return ss.str();
     };
 
-    const float update_delay = 0.1f;
-
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
     static_cast<Label*>(player_gold_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
     auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
@@ -525,7 +523,7 @@ void BaseScene::create_player_info_panel()
         }
 
     };
-    this->schedule(update_gold_lbl, update_delay, "player_gold_lbl_update");
+    this->schedule(update_gold_lbl, AVERAGE_DELAY, "player_gold_lbl_update");
     update_gold_lbl(0);
 
     this->addChild(player_info_panel);
@@ -642,7 +640,7 @@ void BaseScene::create_inventory_listview()
             };
             new_item_panel->addTouchEventListener(on_touch_cb);
 
-            float update_delay = 0.1f;
+            float AVERAGE_DELAY = 0.1f;
             auto update_lbl_cb = [new_item_panel, this, ing_type](float)
             {
                 auto it = ing_type; 
@@ -666,7 +664,7 @@ void BaseScene::create_inventory_listview()
                 }
             };
             update_lbl_cb(0); //fire once immediately
-            new_item_panel->schedule(update_lbl_cb, update_delay, "item_lbl_update");
+            new_item_panel->schedule(update_lbl_cb, AVERAGE_DELAY, "item_lbl_update");
 
             inventory_listview->addChild(new_item_panel);
         };
@@ -838,7 +836,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     auto count_desc = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_desc"));
     auto count_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_lbl"));
 
-    auto update_delay = 0.1f;
+    auto AVERAGE_DELAY = 0.1f;
 
     alert_panel->schedule([count_lbl, ing_type](float) {
         auto it = ing_type;
@@ -846,15 +844,15 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
         res_count_t _def = 0.0;
         res_count_t count = map_get(all_ing, it, _def);
         count_lbl->setString(beautify_double(count));
-    }, update_delay, "alert_count_update");
+    }, AVERAGE_DELAY, "alert_count_update");
 
     res_count_t coins_gained = 3;
-    auto create_sell_button = [this, alert_panel, ing_type, coins_gained, update_delay](std::string name, int amount_sold)
+    auto create_sell_button = [this, alert_panel, ing_type, coins_gained, AVERAGE_DELAY](std::string name, int amount_sold)
     {
         auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
         load_default_button_textures(sell_btn);
 
-        sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold, update_delay](Ref* touch, ui::Widget::TouchEventType type){
+        sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold, AVERAGE_DELAY](Ref* touch, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
@@ -887,7 +885,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
             {
                 try_set_enabled(sell_btn, true);
             }
-        }, update_delay, "sell_btn_state_cb");
+        }, AVERAGE_DELAY, "sell_btn_state_cb");
     };
 
     create_sell_button("sell_1_btn", 1);
@@ -923,7 +921,7 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
         {
             try_set_enabled(move_btn, true);
         }
-    }, update_delay, "move_btn_state_cb");
+    }, AVERAGE_DELAY, "move_btn_state_cb");
 
     move_btn->addTouchEventListener([this, ing_type](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)

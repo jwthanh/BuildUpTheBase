@@ -1144,8 +1144,6 @@ BuildingNuMenu* BuildingNuMenu::create(std::shared_ptr<Building> building)
 
 void BuildingNuMenu::init_items()
 {
-    float update_delay = 0.1f;
-
     auto scrollview = this->scrollable;
     this->create_inventory_item(scrollview);
 

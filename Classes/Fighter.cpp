@@ -86,8 +86,8 @@ FighterNode* FighterNode::create(spFighter fighter)
 
     node->setName("fighter_node");
 
-    float update_delay = 0.1f;
-    node->schedule(CC_CALLBACK_1(FighterNode::update, node), update_delay, "fighter_node_update");
+    float AVERAGE_DELAY = 0.1f;
+    node->schedule(CC_CALLBACK_1(FighterNode::update, node), AVERAGE_DELAY, "fighter_node_update");
 
     return node;
 };
