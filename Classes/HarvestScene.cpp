@@ -274,11 +274,31 @@ void BaseScene::create_building_choicelist()
 
         //add building image
         ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
-        building_image->loadTexture(building->data->get_img_large(), ui::TextureResType::PLIST);
+        std::string img_path = "";
+        if (building->name == "The Mine") {
+            img_path = "dirt_1.png";
+        } else if (building->name == "The Forest") {
+            img_path = "tree.png";
+        } else if (building->name == "The Dump") {
+            img_path = "dump_darker.png";
+        } else if (building->name == "The Workshop") {
+            img_path = "anvil.png";
+        } else if (building->name == "The Arena") {
+            img_path = "sword.png";
+        } else if (building->name == "The Graveyard") {
+            img_path = "bones.png";
+        } else if (building->name == "The Underscape") {
+            img_path = "necro_open.png";
+        } else if (building->name == "The Farm") {
+            img_path = "bush.png";
+        } else {
+            img_path = "weapon_ice.png";
+        };
+        building_image->loadTexture(img_path, ui::TextureResType::PLIST);
 
         load_default_button_textures(panel);
 
-        auto update_func = [panel, building, building_image](float dt)
+        auto update_func = [panel, building, building_image, img_path](float dt)
         {
             auto target_building = BUILDUP->get_target_building();
 
@@ -292,7 +312,7 @@ void BaseScene::create_building_choicelist()
             }
             else
             {
-                tex_name = building->data->get_img_large();
+                tex_name = img_path;
                 res_type = (int)ui::Widget::TextureResType::PLIST;
             }
 
