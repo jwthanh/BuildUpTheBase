@@ -94,7 +94,6 @@ void GameLogic::post_load()
 
     res_count_t hours_since_login = hours_since_last_login.count();
     gains_ss << "\nIt's been " << beautify_double(hours_since_login) << " hours since last login";
-
     CCLOG(gains_ss.str().c_str());
 
 
@@ -161,7 +160,6 @@ void GameLogic::update(float dt)
     if (this->coin_save_clock->passed_threshold())
     {
         this->coin_save_clock->reset();
-        CCLOG("saving total coins");
         DataManager::set_double_from_data(Beatup::total_coin_key, this->beatup->get_total_coins());
     }
 
@@ -183,7 +181,6 @@ void GameLogic::update(float dt)
             BEATUP->_last_total_coins = BEATUP->get_total_coins();
 
         };
-        CCLOG("saving total coins");
     }
 };
 
