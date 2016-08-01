@@ -377,7 +377,7 @@ void BaseScene::create_info_panel()
         ss << create_count("ING", building->count_ingredients()) << "/" << beautify_double(storage_space);
         ing_count->setString(ss.str());
     };
-    this->schedule(update_ing_count, AVERAGE_DELAY, "ing_count_update");
+    this->schedule(update_ing_count, REALTIME_DELAY, "ing_count_update");
     update_ing_count(0);
 
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
@@ -664,7 +664,7 @@ void BaseScene::create_inventory_listview()
                 }
             };
             update_lbl_cb(0); //fire once immediately
-            new_item_panel->schedule(update_lbl_cb, AVERAGE_DELAY, "item_lbl_update");
+            new_item_panel->schedule(update_lbl_cb, SHORT_DELAY, "item_lbl_update");
 
             inventory_listview->addChild(new_item_panel);
         };
