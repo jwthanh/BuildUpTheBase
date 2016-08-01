@@ -50,6 +50,10 @@ class TabManager
 
         bool is_tab_active(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const;
         void set_tab_active(TabTypes tab_type, const spBuilding& building);
+
+        std::map<cocos2d::ui::Button*, std::pair<TabManager::TabTypes, spListviewMap>> button_map;
+        cocos2d::ui::ListView* get_active_listview();
+        cocos2d::ui::Button* get_active_button();
 };
 
 class SideListView

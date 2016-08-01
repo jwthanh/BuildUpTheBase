@@ -41,12 +41,53 @@ void TabManager::set_tab_active(TabTypes tab_type, const spBuilding& building)
     this->active_building = building;
 }
 
+cocos2d::ui::ListView* TabManager::get_active_listview()
+{
+    for (auto pair : this->button_map)
+    {
+        TabTypes tab_type = pair.second.first;
+        spListviewMap listview_map = pair.second.second;
+        if (tab_type == this->active_tab)
+        {
+            return listview_map->at(this->active_building->name);
+        }
+    }
+    return NULL;
+}
+
+cocos2d::ui::Button* TabManager::get_active_button()
+{
+    for (auto pair : this->button_map)
+    {
+        ui::Button* button = pair.first;
+        TabTypes tab_type = pair.second.first;
+        if (tab_type == this->active_tab)
+        {
+            return button;
+        }
+    }
+    return NULL;
+}
+
 SideListView::SideListView(Node* parent, spBuilding current_target) : current_target(current_target), parent(parent)
 {
     this->tabs = TabManager();
 
     this->setup_listviews();
     this->setup_tab_buttons();
+
+    this->tabs.button_map = std::map<ui::Button*, std::pair<TabManager::TabTypes, spListviewMap>>{
+        { this->tab_shop_btn, { TabManager::TabTypes::ShopTab, this->shop_listviews } },
+        { this->tab_detail_btn, { TabManager::TabTypes::DetailTab, this->detail_listviews } },
+        { this->tab_building_btn, { TabManager::TabTypes::BuildingTab, this->building_listviews } },
+        { this->tab_powers_btn, { TabManager::TabTypes::PowersTab, this->powers_listviews } }
+    };
+
+    //prepress the shop button
+    toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
+
+
+
 };
 
 ui::Button* SideListView::_create_button(std::string node_name)
@@ -84,14 +125,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
             this->tabs.set_tab_active(tab_type, target_building);
         };
 
-        std::map<ui::Button*, std::pair<TabManager::TabTypes, spListviewMap>> button_map = {
-            { this->tab_shop_btn, { TabManager::TabTypes::ShopTab, this->shop_listviews } },
-            { this->tab_detail_btn, { TabManager::TabTypes::DetailTab, this->detail_listviews } },
-            { this->tab_building_btn, { TabManager::TabTypes::BuildingTab, this->building_listviews } },
-            { this->tab_powers_btn, { TabManager::TabTypes::PowersTab, this->powers_listviews } }
-        };
-
-        auto result = button_map[target_button];
+        auto result = this->tabs.button_map[target_button];
         activate(result.second, result.first);
 
     };
@@ -112,9 +146,6 @@ void SideListView::setup_tab_buttons()
     this->tab_powers_btn = this->_create_button("tab_4_btn");
     this->tab_powers_btn->addTouchEventListener(CC_CALLBACK_2(SideListView::toggle_buttons, this));
 
-    //prepress the shop button
-    toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
-
 }
 
 void SideListView::setup_listviews()
@@ -132,7 +163,7 @@ void SideListView::setup_listviews()
         if (target_building->name != this->current_target->name)
         {
             this->current_target = target_building;
-            toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
+            toggle_buttons(this->tabs.get_active_button(), ui::Widget::TouchEventType::ENDED);
 
         }
     };
