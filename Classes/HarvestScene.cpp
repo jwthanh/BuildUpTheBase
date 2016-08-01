@@ -269,13 +269,8 @@ void BaseScene::create_building_choicelist()
         //set building name
         ui::Text* building_name = (ui::Text*)panel->getChildByName("building_name");
         std::string name_str = std::regex_replace(building->name, std::regex("The "), "");
-        building_name->setFontSize(23);
         building_name->setString(name_str);
         ((Label*)building_name->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
-
-        //remove level label
-        ui::Text* level_lbl = (ui::Text*)panel->getChildByName("level_lbl");
-        level_lbl->removeFromParent();
 
         //add building image
         ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");

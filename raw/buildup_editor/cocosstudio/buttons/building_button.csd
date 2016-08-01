@@ -19,26 +19,14 @@
                 <PreSize X="0.7181" Y="0.4528" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="building_name" ActionTag="2011617631" Tag="153" IconVisible="False" LeftMargin="26.7357" RightMargin="28.2643" TopMargin="126.8627" BottomMargin="53.1373" FontSize="16" LabelText="Building Name" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="145.0000" Y="20.0000" />
+              <AbstractNodeData Name="building_name" ActionTag="2011617631" Tag="153" IconVisible="False" LeftMargin="11.9679" RightMargin="15.3965" TopMargin="119.6818" BottomMargin="11.9561" IsCustomSize="True" FontSize="24" LabelText="Building Name" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="172.6356" Y="68.3621" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="99.2357" Y="63.1373" />
+                <Position X="98.2857" Y="46.1372" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4962" Y="0.3157" />
-                <PreSize X="0.7250" Y="0.1000" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="0" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="level_lbl" ActionTag="-527479737" Tag="154" IconVisible="False" LeftMargin="0.0000" RightMargin="0.0000" TopMargin="163.5441" BottomMargin="16.4559" IsCustomSize="True" FontSize="16" LabelText="Lv: 0" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="200.0000" Y="20.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="26.4559" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.1323" />
-                <PreSize X="1.0000" Y="0.1000" />
+                <PrePosition X="0.4914" Y="0.2307" />
+                <PreSize X="0.8632" Y="0.3418" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
