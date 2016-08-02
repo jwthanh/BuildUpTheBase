@@ -188,6 +188,28 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
+              <AbstractNodeData Name="reserve_field" ActionTag="1138750591" Tag="309" IconVisible="False" LeftMargin="208.0604" RightMargin="28.1516" TopMargin="375.0000" BottomMargin="75.0000" TouchEnable="True" FontSize="20" IsCustomSize="True" LabelText="" PlaceHolderText="123 grain" MaxLengthText="10" ctype="TextFieldObjectData">
+                <Size X="163.7880" Y="50.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="208.0604" Y="100.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5202" Y="0.2000" />
+                <PreSize X="0.4095" Y="0.1000" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="reserve_lbl" ActionTag="949308219" Tag="310" IconVisible="False" RightMargin="200.0000" TopMargin="375.0000" BottomMargin="75.0000" IsCustomSize="True" FontSize="20" LabelText="Reserve:" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="200.0000" Y="50.0000" />
+                <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="100.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.2000" />
+                <PreSize X="0.5000" Y="0.1000" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                <OutlineColor A="255" R="26" G="26" B="26" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="0.7421" Y="-0.0001" />

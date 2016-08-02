@@ -851,7 +851,26 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     auto count_desc = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_desc"));
     auto count_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_lbl"));
 
-    auto AVERAGE_DELAY = 0.1f;
+    auto reserve_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("reserve_lbl"));
+    auto reserve_field = dynamic_cast<ui::TextField*>(alert_panel->getChildByName("reserve_field"));
+    ((Label*)reserve_field->getVirtualRenderer())->setAlignment(TextHAlignment::LEFT);
+    ((Label*)reserve_field->getVirtualRenderer())->setVerticalAlignment(TextVAlignment::CENTER);
+
+    auto textfield_listener = [reserve_field](Ref* target, ui::TextField::EventType evt)
+        {
+            if (evt == ui::TextField::EventType::INSERT_TEXT || 
+                evt == ui::TextField::EventType::DELETE_BACKWARD)
+            {
+                std::string input_val = reserve_field->getString();
+                auto removed = std::remove_if(
+                    input_val.begin(),
+                    input_val.end(),
+                    std::isalnum
+                    );
+                input_val.erase(removed, input_val.end());
+                CCLOG("updating reserve: %s", input_val.c_str());
+        };
+    reserve_field->addEventListener(textfield_listener);
 
     alert_panel->schedule([count_lbl, ing_type](float) {
         auto it = ing_type;
@@ -862,12 +881,12 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
     }, AVERAGE_DELAY, "alert_count_update");
 
     res_count_t coins_gained = 3;
-    auto create_sell_button = [this, alert_panel, ing_type, coins_gained, AVERAGE_DELAY](std::string name, int amount_sold)
+    auto create_sell_button = [this, alert_panel, ing_type, coins_gained](std::string name, int amount_sold)
     {
         auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
         load_default_button_textures(sell_btn);
 
-        sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold, AVERAGE_DELAY](Ref* touch, ui::Widget::TouchEventType type){
+        sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold](Ref* touch, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
