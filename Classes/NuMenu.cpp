@@ -529,11 +529,11 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     long double shop_cost = scale_number(10.0L, ((res_count_t)this->building_level)-1.0L, 10.5L);
     this->_shop_cost = shop_cost;
 
-    auto update_func = [this](float dt) {
+    auto update_been_bought = [this](float dt) {
         this->set_been_bought(this->building->building_level >= this->building_level);
     };
-    this->schedule(update_func, 0.1f, "set_enabled");
-    update_func(0);
+    this->schedule(update_been_bought, 0.1f, "set_enabled");
+    update_been_bought(0);
 
     auto touch_ended_cb = [this](){
         res_count_t cost = this->get_cost();
@@ -560,6 +560,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
         }
     };
     this->set_touch_ended_callback(touch_ended_cb);
+    this->update_func(0);
 
     return true;
 }
