@@ -98,7 +98,10 @@ ui::Button* SideListView::_create_button(std::string node_name)
     ui::Button* button = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName(node_name));
     load_default_button_textures(button);
     button->removeFromParent();
-    ((Label*)button->getTitleRenderer())->getFontAtlas()->setAliasTexParameters();
+    Label* button_lbl = (Label*)button->getTitleRenderer();
+    button_lbl->setTextColor(Color4B::WHITE);
+    button_lbl->enableOutline(Color4B::BLACK, 2);
+    button_lbl->getFontAtlas()->setAliasTexParameters();
 
     this->parent->addChild(button);
 
