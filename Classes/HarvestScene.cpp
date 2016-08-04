@@ -449,7 +449,11 @@ void BaseScene::create_info_panel()
 
 void BaseScene::create_username_input()
 {
-    ui::TextField* username_input = dynamic_cast<ui::TextField*>(this->get_original_scene_from_editor()->getChildByName("username_input"));
+    auto inst = CSLoader::getInstance();
+    //TODO use the cached scene instead of the new one
+    auto orig_scene = inst->CSLoader::createNode("editor/scenes/base_scene.csb");
+    auto building_panel = orig_scene->getChildByName("building_info_panel");
+    ui::TextField* username_input = dynamic_cast<ui::TextField*>(building_panel->getChildByName("username_input"));
     username_input->removeFromParent();
     this->addChild(username_input);
 

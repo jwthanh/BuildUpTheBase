@@ -6,64 +6,74 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="760.0000" TopMargin="0.9990" BottomMargin="419.0010" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-            <Size X="200.0000" Y="220.0000" />
+          <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" LeftMargin="759.9991" RightMargin="0.0009" TopMargin="-0.0002" BottomMargin="375.0002" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+            <Size X="200.0000" Y="265.0000" />
             <Children>
-              <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="4.6829" RightMargin="4.6829" TopMargin="47.4259" BottomMargin="151.7059" IsCustomSize="True" FontSize="16" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="6.4258" RightMargin="2.9399" TopMargin="27.8853" BottomMargin="216.2466" IsCustomSize="True" FontSize="16" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.6343" Y="20.8681" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="162.1400" />
+                <Position X="101.7430" Y="226.6806" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.7370" />
-                <PreSize X="0.9532" Y="0.0949" />
+                <PrePosition X="0.5087" Y="0.8554" />
+                <PreSize X="0.9532" Y="0.0787" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="-2.0000" RightMargin="-2.0000" TopMargin="90.4052" BottomMargin="75.8064" IsCustomSize="True" FontSize="16" LabelText="Harvesters: 30,000&#xA;at 99,999/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="-2.0000" RightMargin="-2.0000" TopMargin="63.9381" BottomMargin="147.2736" IsCustomSize="True" FontSize="16" LabelText="Harvesters: 30,000&#xA;at 99,999/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="204.0000" Y="53.7883" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="102.7006" />
+                <Position X="100.0000" Y="174.1678" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.4668" />
-                <PreSize X="1.0200" Y="0.2445" />
+                <PrePosition X="0.5000" Y="0.6572" />
+                <PreSize X="1.0200" Y="0.2030" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="building_name" ActionTag="595339504" Tag="50" IconVisible="False" TopMargin="10.0819" BottomMargin="189.9181" IsCustomSize="True" FontSize="16" LabelText="The Marketplace" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="building_name" ActionTag="595339504" Tag="50" IconVisible="False" LeftMargin="1.7432" RightMargin="-1.7432" TopMargin="2.7888" BottomMargin="242.2112" IsCustomSize="True" FontSize="16" LabelText="The Marketplace" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="200.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="199.9181" />
+                <Position X="101.7432" Y="252.2112" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.9087" />
-                <PreSize X="1.0000" Y="0.0909" />
+                <PrePosition X="0.5087" Y="0.9517" />
+                <PreSize X="1.0000" Y="0.0755" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="salesmen_count" ActionTag="564918455" Tag="77" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="-2.0000" RightMargin="-2.0000" TopMargin="154.3560" BottomMargin="11.8557" IsCustomSize="True" FontSize="16" LabelText="Salesmen: 30,000&#xA;at 99,999/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="salesmen_count" ActionTag="564918455" Tag="77" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="-2.0000" RightMargin="-2.0000" TopMargin="127.8890" BottomMargin="83.3227" IsCustomSize="True" FontSize="16" LabelText="Salesmen: 30,000&#xA;at 99,999/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="204.0000" Y="53.7883" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="38.7498" />
+                <Position X="100.0000" Y="110.2169" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.1761" />
-                <PreSize X="1.0200" Y="0.2445" />
+                <PrePosition X="0.5000" Y="0.4159" />
+                <PreSize X="1.0200" Y="0.2030" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
+              <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="0.8724" RightMargin="-0.8724" TopMargin="234.9483" BottomMargin="11.2417" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="16" ctype="TextFieldObjectData">
+                <Size X="200.0000" Y="18.8100" />
+                <AnchorPoint ScaleX="0.4956" ScaleY="0.5000" />
+                <Position X="100.0000" Y="20.6467" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.0779" />
+                <PreSize X="1.0000" Y="0.0710" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+              </AbstractNodeData>
             </Children>
-            <AnchorPoint />
-            <Position X="760.0000" Y="419.0010" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
+            <Position X="859.9991" Y="640.0002" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7917" Y="0.6547" />
-            <PreSize X="0.2083" Y="0.3438" />
+            <PrePosition X="0.8958" Y="1.0000" />
+            <PreSize X="0.2083" Y="0.4141" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
@@ -240,16 +250,6 @@
             <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="760.0000" TopMargin="223.3485" BottomMargin="397.8390" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="16" ctype="TextFieldObjectData">
-            <Size X="200.0000" Y="18.8125" />
-            <AnchorPoint />
-            <Position X="760.0000" Y="397.8390" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7917" Y="0.6216" />
-            <PreSize X="0.2083" Y="0.0294" />
-            <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="progress_panel" ActionTag="150151942" Tag="27" IconVisible="False" LeftMargin="759.9999" RightMargin="0.0001" TopMargin="264.9998" BottomMargin="300.0002" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="75.0000" />
