@@ -134,7 +134,7 @@ void GameLogic::post_load()
     };
     close_panel->addTouchEventListener(cb);
 
-    //set the last login time
+    //set the last login time, set here and on save
     BEATUP->set_last_login();
 }
 
@@ -216,6 +216,8 @@ void GameLogic::save_all()
     //save coins
     DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());
 
+    //set the last login time, set here and on load
+    BEATUP->set_last_login();
 };
 
 void GameLogic::load_all()
