@@ -77,6 +77,11 @@ std::string BuildingData::get_img_large()
     return this->getter("img_large");
 };
 
+std::string BuildingData::get_short_name()
+{
+    return this->getter("short_name");
+};
+
 vsRecipe BuildingData::get_all_recipes()
 {
     //assume if its not an object, its null

@@ -19,7 +19,7 @@
                 <PreSize X="0.7181" Y="0.4528" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="building_name" ActionTag="2011617631" Tag="153" IconVisible="False" LeftMargin="11.9679" RightMargin="15.3965" TopMargin="119.6818" BottomMargin="11.9561" IsCustomSize="True" FontSize="24" LabelText="Building Name" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="building_name" ActionTag="2011617631" Tag="153" IconVisible="False" LeftMargin="11.9679" RightMargin="15.3965" TopMargin="119.6817" BottomMargin="11.9562" IsCustomSize="True" FontSize="48" LabelText="NAME" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="5" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="172.6356" Y="68.3621" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="98.2857" Y="46.1372" />

@@ -218,6 +218,7 @@ Building::Building(Village* city, std::string name, std::string id_key) :
 
     this->data = std::make_shared<BuildingData>(name);
     this->_shop_cost = atoi(this->data->get_gold_cost().c_str());
+    this->short_name = this->data->get_short_name();
 
     //TODO make these buyable again
     this->set_been_bought(true);

@@ -36,6 +36,7 @@ class BuildingData : public BaseData
         std::string get_description();
         std::string get_gold_cost();
         std::string get_img_large();
+        std::string get_short_name();
 
         vsRecipe get_all_recipes();
         spRecipe build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>* recipe_data);
