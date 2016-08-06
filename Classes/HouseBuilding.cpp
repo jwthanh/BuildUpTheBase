@@ -612,8 +612,8 @@ void Buildup::post_update()
         return;
     }
 
-    //auto server_url = "http://tankorsmash.webfactional.com/users/"+username;
-    auto server_url = "http://localhost:8080/users/" + username;
+    auto server_url = "http://tankorsmash.webfactional.com/users/"+username;
+    // auto server_url = "http://localhost:8080/users/" + username;
 
     //build up string of coins
     auto coins = (long long)BEATUP->get_total_coins();
@@ -623,7 +623,7 @@ void Buildup::post_update()
     coins_string = coins_string.substr(0, coins_string.find('.'));
 
     //create a json doc, set the { 'coins' : coins } json obj, along with the buildings json
-    rjDocument doc = FileIO::open_json("buildings_data.json", true);
+    rjDocument doc = FileIO::open_json("test_building.json", false);
 
     //build the rjValues that become the key and values in the dict
     rjValue key = rjValue(rapidjson::kStringType);
