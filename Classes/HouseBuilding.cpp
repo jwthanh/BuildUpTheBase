@@ -596,7 +596,7 @@ void Buildup::update(float dt)
         this->server_clock->reset();
 
         //try to update remote server
-        //this->post_update();
+        this->post_update();
 
     };
 };
@@ -622,18 +622,17 @@ void Buildup::post_update()
     std::string coins_string = coin_stream.str();
     coins_string = coins_string.substr(0, coins_string.find('.'));
 
-    //create a json doc, set the { 'coins' : coins } json obj
-    rapidjson::Document doc = rapidjson::Document();
-    doc.SetObject();
+    //create a json doc, set the { 'coins' : coins } json obj, along with the buildings json
+    rjDocument doc = FileIO::open_json("buildings_data.json", true);
 
-    //build the Values that become the key and values
-    rapidjson::Value key = rapidjson::Value(rapidjson::kStringType);
+    //build the rjValues that become the key and values in the dict
+    rjValue key = rjValue(rapidjson::kStringType);
     key.SetString("coins");
-    rapidjson::Value value = rapidjson::Value();
+    rjValue value = rjValue();
     value.SetString(coins_string.c_str(), coins_string.size());
 
-    //all the member to the document
-    rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
+    //add the member to the document
+    auto& allocator = doc.GetAllocator();
     doc.AddMember(key, value, allocator);
 
     //write out the json string

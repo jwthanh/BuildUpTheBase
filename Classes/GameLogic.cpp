@@ -218,6 +218,9 @@ void GameLogic::save_all()
 
     //set the last login time, set here and on load
     BEATUP->set_last_login();
+
+    //update the remote server
+    BUILDUP->post_update();
 };
 
 void GameLogic::load_all()

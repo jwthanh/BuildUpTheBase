@@ -157,6 +157,7 @@ void NetworkConsole::post_helper(std::string url, std::string payload, std::func
     auto request = Request::create_post(url, payload);
     request->set_callback(callback);
 
+
     request->send();
     request->retain();
 
