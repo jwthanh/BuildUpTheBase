@@ -320,7 +320,7 @@ void BaseScene::create_building_choicelist()
             if (r_data.file != tex_name || r_data.type != (int)res_type)
             {
                 CCLOG("loading new building texture");
-                building_image->loadTexture(tex_name, (ui::TextureResType)res_type);
+                building_image->loadTexture(tex_name, (ui::Widget::TextureResType)res_type);
             }
 
             if (building->is_storage_full_of_ingredients(building->punched_sub_type))
