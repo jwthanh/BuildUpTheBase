@@ -318,7 +318,6 @@ void BaseScene::create_building_choicelist()
             ResourceData r_data = building_image->getRenderFile();
             if (r_data.file != tex_name || r_data.type != (int)res_type)
             {
-                CCLOG("loading new building texture");
                 building_image->loadTexture(tex_name, (ui::Widget::TextureResType)res_type);
             }
 

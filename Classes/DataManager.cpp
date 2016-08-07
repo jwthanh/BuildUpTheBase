@@ -73,7 +73,7 @@ std::string DataManager::get_string_from_data(std::string key, std::string _defa
 {
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
-    CCLOG("getting string %s", key.c_str());
+    //CCLOG("getting string %s", key.c_str());
     return ud->getStringForKey(key.c_str(), _default);
 }
 
@@ -81,7 +81,7 @@ void DataManager::set_string_from_data(std::string key, std::string val)
 {
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
-    CCLOG("setting string %s for %s", key.c_str(), val.c_str());
+    //CCLOG("setting string %s for %s", key.c_str(), val.c_str());
     ud->setStringForKey(key.c_str(), val);
 };
 

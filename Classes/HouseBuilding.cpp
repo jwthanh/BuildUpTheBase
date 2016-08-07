@@ -644,7 +644,7 @@ void Buildup::post_update()
         buffer.GetString(),
         [server_url](std::string response)
     {
-        CCLOG("response from %s:\n %s", server_url.c_str(), response.c_str());
+        //CCLOG("response from %s:\n %s", server_url.c_str(), response.c_str());
     });
 
 };
