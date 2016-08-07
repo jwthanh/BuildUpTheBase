@@ -612,8 +612,8 @@ void Buildup::post_update()
         return;
     }
 
-    auto server_url = "http://tankorsmash.webfactional.com/users/"+username;
-    // auto server_url = "http://localhost:8080/users/" + username;
+    auto server_url = "http://tankorsmash.webfactional.com/users/"+username+"/";
+    // auto server_url = "http://localhost:8080/users/"+ username+"/";
 
     //build up string of coins
     auto coins = (long long)BEATUP->get_total_coins();
