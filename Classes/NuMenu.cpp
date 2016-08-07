@@ -408,7 +408,7 @@ void TechNuItem::other_init(spTechnology technology)
     this->technology = technology;
     this->set_touch_ended_callback([this]() {
         CCLOG("trying to consume %s technology", "A Technology");
-        this->building->consume_recipe(this->technology->get_ingredient_requirements().get());
+        this->building->consume_recipe(this->technology->get_ingredient_requirements(this->building).get());
         this->technology->set_been_unlocked(true);
 
         //TODO fix this duplicating techs already in the vector, might need to
@@ -430,7 +430,7 @@ void TechNuItem::update_func(float dt)
         return;
     };
 
-    auto ing_requirements = this->technology->get_ingredient_requirements();
+    auto ing_requirements = this->technology->get_ingredient_requirements(this->building);
     bool tech_is_satisfied = ing_requirements->is_satisfied(this->building->ingredients);
     if (tech_is_satisfied)
     {
@@ -455,7 +455,8 @@ void TechNuItem::update_func(float dt)
         this->try_set_enable(false);
     }
 
-    //TODO implement count_lbl for TechNuItem
+    spRecipe recipe = this->technology->get_ingredient_requirements(this->building);
+    this->set_description(recipe->description);
 }
 
 ShopNuItem* ShopNuItem::create(cocos2d::Node* parent)

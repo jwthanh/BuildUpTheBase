@@ -438,43 +438,24 @@ void SideListView::setup_detail_listview_as_recipes()
             if (building->name == "The Arena")
             {
                 spTechnology combat_dmg = std::make_shared<Technology>(Technology::SubType::CombatDamage);
-                spRecipe recipe = std::make_shared<Recipe>("combat_damage", "no desc for tech recipe");
-
-                auto tech_map = building->techtree->tech_map;
-                res_count_t _def = 0;
-                res_count_t souls_cost = std::floor(scale_number(2.0L, map_get(tech_map, combat_dmg->sub_type, _def), 1.45L));
-                recipe->components = mistIngredient({
-                    { Ingredient::SubType::Soul, souls_cost }
-                });
-                combat_dmg->set_ingredient_requirements(recipe);
-
-                std::stringstream ss;
-                ss << "Increases combat damage\n-- costs " << souls_cost << " souls";
-
                 nuitems_config.push_back({
                     combat_dmg,
                     DetailType::Tech,
                     {
                         "Buy Sword",
-                        ss.str()
+                        ""
                     } });
             };
 
             if (building->name == "The Marketplace")
             {
                 spTechnology double_click_pwr = std::make_shared<Technology>(Technology::SubType::ClickDoublePower);
-                spRecipe recipe = std::make_shared<Recipe>("double_click_power", "no desc for tech recipe");
-                recipe->components = mistIngredient({
-                    { Ingredient::SubType::Paper, 5 }
-                });
-                double_click_pwr->set_ingredient_requirements(recipe);
-
                 nuitems_config.push_back({
                     double_click_pwr,
                     DetailType::Tech,
                     {
                         "Double click power",
-                        "Doubles click output\n-- 5 papers"
+                        ""
                     } });
             };
 
@@ -514,8 +495,8 @@ void SideListView::setup_detail_listview_as_recipes()
                 }
                 else if (dynamic_cast<TechNuItem*>(menu_item))
                 {
-                    spTechnology recipe = static_pointer_cast<Technology>(config.object);
-                    dynamic_cast<TechNuItem*>(menu_item)->other_init(recipe);
+                    spTechnology tech = static_pointer_cast<Technology>(config.object);
+                    dynamic_cast<TechNuItem*>(menu_item)->other_init(tech);
                 }
 
             };

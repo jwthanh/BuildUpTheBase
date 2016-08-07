@@ -41,7 +41,7 @@ class Technology
         bool get_been_unlocked();
         void set_been_unlocked(bool val);
 
-        spRecipe get_ingredient_requirements();
+        spRecipe get_ingredient_requirements(spBuilding building);
         void set_ingredient_requirements(spRecipe requirements);
 };
 
