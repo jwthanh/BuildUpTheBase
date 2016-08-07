@@ -1,0 +1,10 @@
+* tapping menu items over and over can reset their position
+* detail upgrades dont save
+* everything costs the same
+
+Features
+* Stats screen
+    * Dynamic class ala Dungeon Siege
+* Fighters take names off leaderboards
+* Info panel for building with misc stats, how many fighters killed, their
+  damage etc
