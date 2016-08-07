@@ -92,10 +92,20 @@ void GameLogic::post_load()
     }
 
 
-    res_count_t hours_since_login = hours_since_last_login.count();
-    gains_ss << "\nIt's been " << beautify_double(hours_since_login) << " hours since last login";
-    CCLOG(gains_ss.str().c_str());
 
+    res_count_t hours_since_login = hours_since_last_login.count();
+    if (hours_since_login < 1.0)
+    {
+        auto minutes_since_last_login = std::chrono::duration_cast<std::chrono::minutes>(hours_since_last_login);
+        res_count_t minutes_since_login = minutes_since_last_login.count();
+        gains_ss << "\nIt's been " << beautify_double(minutes_since_login) << " minutes since last login";
+    }
+    else
+    {
+        gains_ss << "\nIt's been " << beautify_double(hours_since_login) << " hours since last login";
+    }
+
+    CCLOG(gains_ss.str().c_str());
 
     auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
     auto inst = cocos2d::CSLoader::getInstance();
