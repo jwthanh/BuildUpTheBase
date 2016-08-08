@@ -42,15 +42,16 @@ FloatingLabel* FloatingLabel::createWithTTF(const TTFConfig& ttfConfig, const st
 
 void FloatingLabel::do_float(float x, float x_variation, float y, float y_variation, float duration)
 {
-    float x_scale = sx(x + (x_variation * CCRANDOM_0_1()));
-    float y_scale = sy(y + (y_variation * CCRANDOM_0_1()));
+    float x_scale = sx(x + (x_variation * CCRANDOM_MINUS1_1()));
+    float y_scale = sy(y + (y_variation * CCRANDOM_MINUS1_1()));
 
     ccBezierConfig config = {
         Vec2(x_scale, y_scale),
-        Vec2(x_scale, 1),
-        Vec2(1, y_scale)
+        Vec2(x_scale, x_scale-y_scale),
+        Vec2(y_scale-x_scale, y_scale)
     };
 
+    duration += (CCRANDOM_MINUS1_1()*0.30f*duration);
 
     this->runAction(TintTo::create(duration*3, Color3B::RED));
     this->runAction(ScaleBy::create(duration*3, 0.35f));
