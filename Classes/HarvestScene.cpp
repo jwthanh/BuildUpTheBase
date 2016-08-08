@@ -285,7 +285,7 @@ void BaseScene::create_building_choicelist()
         } else if (building->name == "The Arena") {
             img_path = "sword.png";
         } else if (building->name == "The Graveyard") {
-            img_path = "bones.png";
+            img_path = "grave.png";
         } else if (building->name == "The Underscape") {
             img_path = "necro_open.png";
         } else if (building->name == "The Farm") {
