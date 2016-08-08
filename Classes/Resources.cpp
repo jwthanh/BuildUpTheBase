@@ -44,12 +44,12 @@ const std::map<Waste::SubType, std::string> Waste::type_map = {
 { \
     std::string result = "none"; \
     for (auto pair : ResType::type_map) \
-        { \
+    { \
         if (type == pair.first) \
-                { \
+        { \
             return pair.second; \
-                } \
         } \
+    } \
  \
     return result; \
 }; \
@@ -59,12 +59,12 @@ ResType::SubType ResType::string_to_type(std::string string_type) \
     ResType::SubType result = ResType::SubType::None; \
     std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower); \
     for (auto pair : ResType::type_map) \
-        { \
+    { \
         if (pair.second == string_type) \
-                { \
+        { \
             return pair.first; \
-                } \
         } \
+    } \
     printj("type id " << string_type); \
     assert(false && "unknown type"); \
  \
