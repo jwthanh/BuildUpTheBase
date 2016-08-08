@@ -25,9 +25,10 @@ enum class WasteSubType {
 
 enum class TechSubType
 {
+    None = -1,
     ClickDoublePower = 0,
     CombatDamage = 1,
-    CombatHealth = 2
+    CombatArmor = 2
 };
 
 enum class WorkerSubType

@@ -34,6 +34,9 @@ class Technology
         Technology(Technology::SubType sub_type);
 
         SubType sub_type;
+        static const std::map<Technology::SubType, std::string> type_map;
+        std::string type_to_string(SubType sub_type);
+        SubType string_to_type(std::string sub_type);
 
         //can only be bought once
         bool is_unique;

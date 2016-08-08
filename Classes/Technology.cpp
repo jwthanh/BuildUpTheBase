@@ -5,6 +5,13 @@
 #include "Recipe.h"
 #include "Util.h"
 
+const std::map<Technology::SubType, std::string> Technology::type_map = {
+    {Technology::SubType::None, "none_tech_subtype"},
+    {Technology::SubType::ClickDoublePower, "click_dbl_power"},
+    {Technology::SubType::CombatDamage, "combat_damage"},
+    {Technology::SubType::CombatArmor, "combat_armor"}
+};
+
 
 TechTree::TechTree()
     : technologies({}), tech_map({})
@@ -81,4 +88,35 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
 void Technology::set_ingredient_requirements(spRecipe requirements)
 {
     this->_ing_requirements = requirements;
+};
+
+std::string Technology::type_to_string(Technology::SubType type)
+{
+    std::string result = "none";
+    for (auto pair : Technology::type_map)
+    {
+        if (type == pair.first)
+        {
+            return pair.second;
+        }
+    }
+
+    return result;
+};
+
+Technology::SubType Technology::string_to_type(std::string string_type)
+{
+    std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower);
+    for (auto pair : Technology::type_map)
+    {
+        if (pair.second == string_type)
+        {
+            return pair.first;
+        }
+    }
+    printj("type id " << string_type);
+    assert(false && "unknown type");
+
+    Technology::SubType result = Technology::SubType::None;
+    return result;
 };
