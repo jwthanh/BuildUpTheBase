@@ -52,12 +52,18 @@ class BuildingSerializer : public BaseSerializer
 
         void serialize() override;
         void load() override;
+
         void serialize_building_level(rjDocument& doc);
         void load_building_level(rjDocument& doc);
+
         void serialize_ingredients(rjDocument& doc);
         void load_ingredients(rjDocument& doc);
+
         void serialize_workers(rjDocument& doc);
         void load_workers(rjDocument& doc);
+
+        void serialize_tech(rjDocument& doc);
+        void load_tech(rjDocument& doc);
 
     private:
         virtual void _add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator) override;

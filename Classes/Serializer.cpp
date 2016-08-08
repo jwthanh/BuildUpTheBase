@@ -1,5 +1,5 @@
 #include "Serializer.h"
-
+#include <sstream>
 
 #include <json/document.h>
 #include <json/stringbuffer.h>
@@ -8,7 +8,8 @@
 #include "FileOperation.h"
 
 #include "HouseBuilding.h"
-#include <sstream>
+
+#include "Technology.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -141,6 +142,7 @@ void BuildingSerializer::serialize()
     this->serialize_building_level(doc);
     this->serialize_ingredients(doc);
     this->serialize_workers(doc);
+    this->serialize_tech(doc);
 
     this->save_document(doc);
 }
@@ -154,6 +156,7 @@ void BuildingSerializer::load()
     this->load_building_level(doc);
     this->load_ingredients(doc);
     this->load_workers(doc);
+    this->load_tech(doc);
 }
 
 void BuildingSerializer::serialize_building_level(rjDocument& doc)
@@ -230,6 +233,55 @@ void BuildingSerializer::serialize_workers(rjDocument& doc)
 }
 
 void BuildingSerializer::load_workers(rjDocument& doc)
+{
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false){ return; }
+
+    auto load_worker = [&](std::string prefix, mistHarvester& workers, std::string& type_str, int& i, IngredientSubType& ing_type) {
+        std::stringstream ss;
+        ss << prefix << "_" << type_str << "_" << i;
+        double harv_count = this->get_double(doc, ss.str(), -1);
+        if (harv_count != -1)
+        {
+            std::pair<WorkerSubType, Ingredient::SubType> type_pair = { static_cast<WorkerSubType>(i), ing_type };
+            workers[type_pair] = harv_count;
+        };
+    };
+
+    //NOTE this goes through each ingredient, then for each ing, makes up to 10
+    //queries on the doc per worker type. this could get slow, but C++ is great so who knows
+    for (std::pair<Ingredient::SubType, std::string> pair : Ingredient::type_map)
+    {
+        Ingredient::SubType ing_type = pair.first;
+        std::string type_str = pair.second;
+
+        for (int i = 1; i <= 20; i++){
+            load_worker("harvester", this->building->harvesters, type_str, i, ing_type);
+            load_worker("salesmen", this->building->salesmen, type_str, i, ing_type);
+            load_worker("consumer", this->building->consumers, type_str, i, ing_type);
+        };
+    }
+}
+
+void BuildingSerializer::serialize_tech(rjDocument& doc)
+{
+    auto save_tech = [&](std::string prefix, std::map<TechSubType, res_count_t>::value_type mist) {
+        std::stringstream ss;
+        TechSubType worker_type = mist.first;
+        res_count_t count = mist.second;
+
+        ss << prefix << "_" << Technology::type_to_string(worker_type) << "_" << static_cast<int>(worker_type);
+        this->set_double(doc, ss.str(), (double)count); //TODO fix res_count_t to double data loss here
+    };
+
+    for (auto mist : this->building->techtree->get_tech_map())
+    {
+        save_tech("tech", mist);
+    }
+
+}
+
+void BuildingSerializer::load_tech(rjDocument& doc)
 {
     //dont do work if there's nothing to do
     if (doc.IsObject() == false){ return; }
