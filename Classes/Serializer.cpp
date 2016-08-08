@@ -270,7 +270,7 @@ void BuildingSerializer::serialize_tech(rjDocument& doc)
         TechSubType worker_type = mist.first;
         res_count_t count = mist.second;
 
-        ss << prefix << "_" << Technology::type_to_string(worker_type) << "_" << static_cast<int>(worker_type);
+        ss << prefix << "_" << Technology::type_to_string(worker_type);
         this->set_double(doc, ss.str(), (double)count); //TODO fix res_count_t to double data loss here
     };
 
@@ -286,29 +286,22 @@ void BuildingSerializer::load_tech(rjDocument& doc)
     //dont do work if there's nothing to do
     if (doc.IsObject() == false){ return; }
 
-    auto load_worker = [&](std::string prefix, mistHarvester& workers, std::string& type_str, int& i, IngredientSubType& ing_type) {
+    auto load_tech = [&](std::string prefix, TechMap& tech_map, std::string& type_str, TechSubType& ing_type) {
         std::stringstream ss;
-        ss << prefix << "_" << type_str << "_" << i;
+        ss << prefix << "_" << type_str;
         double harv_count = this->get_double(doc, ss.str(), -1);
         if (harv_count != -1)
         {
-            std::pair<WorkerSubType, Ingredient::SubType> type_pair = { static_cast<WorkerSubType>(i), ing_type };
-            workers[type_pair] = harv_count;
+            tech_map[ing_type] = harv_count;
         };
     };
 
-    //NOTE this goes through each ingredient, then for each ing, makes up to 10
-    //queries on the doc per worker type. this could get slow, but C++ is great so who knows
-    for (std::pair<Ingredient::SubType, std::string> pair : Ingredient::type_map)
+    for (std::pair<Technology::SubType, std::string> pair : Technology::type_map)
     {
-        Ingredient::SubType ing_type = pair.first;
+        Technology::SubType tech_type = pair.first;
         std::string type_str = pair.second;
 
-        for (int i = 1; i <= 20; i++){
-            load_worker("harvester", this->building->harvesters, type_str, i, ing_type);
-            load_worker("salesmen", this->building->salesmen, type_str, i, ing_type);
-            load_worker("consumer", this->building->consumers, type_str, i, ing_type);
-        };
+        load_tech("tech", this->building->techtree->tech_map, type_str, tech_type);
     }
 }
 
