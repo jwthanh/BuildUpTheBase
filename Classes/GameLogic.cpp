@@ -217,6 +217,16 @@ int GameLogic::get_total_harvests()
     return DataManager::get_int_from_data("total_harvests");
 };
 
+void GameLogic::add_total_kills(int value)
+{
+    DataManager::incr_key("total_kills", value);
+};
+
+int GameLogic::get_total_kills()
+{
+    return DataManager::get_int_from_data("total_kills");
+};
+
 void GameLogic::save_all()
 {
     for (spBuilding building : BUILDUP->city->buildings)

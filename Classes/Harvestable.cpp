@@ -602,11 +602,17 @@ bool FightingHarvestable::should_shatter()
 
 void FightingHarvestable::shatter()
 {
+    auto game_logic = GameLogic::getInstance();
+    game_logic->add_total_kills(1);
+
     this->enemy = std::make_shared<Fighter>("Challenger");
     this->enemy->team = Fighter::TeamTwo;
     this->enemy->sprite_name = "harvester.png";
-    this->enemy->attrs->health->set_vals(20);
-    this->enemy->attrs->damage->set_vals(3);
+
+    double enemy_hp = scale_number(20.0, 1.2, (double)game_logic->get_total_kills());
+    double enemy_dmg = 3;
+    this->enemy->attrs->health->set_vals((int)enemy_hp);
+    this->enemy->attrs->damage->set_vals((int)enemy_dmg);
 
     FighterNode* fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
     fighter_node->set_fighter(this->enemy);
