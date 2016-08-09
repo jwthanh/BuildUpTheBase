@@ -222,7 +222,7 @@ void BaseScene::create_goal_loadingbar()
     this->recipe_lbl = dynamic_cast<ui::Text*>(progress_panel->getChildByName("upgrade_lbl"));
     this->recipe_lbl->setString("");
 
-    ((Label*)this->recipe_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+    set_aliasing(this->recipe_lbl, true);
 }
 
 void BaseScene::create_building_choicelist()
@@ -269,7 +269,7 @@ void BaseScene::create_building_choicelist()
         //set building name
         ui::Text* building_name = (ui::Text*)panel->getChildByName("building_name");
         building_name->setString(building->short_name);
-        ((Label*)building_name->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+        set_aliasing(building_name, true);
 
         //add building image
         ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
@@ -479,7 +479,7 @@ void BaseScene::create_player_info_panel()
     player_info_panel->removeFromParent();
 
     ui::Text* player_info_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_info_lbl"));
-    ((Label*)player_info_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+    set_aliasing(player_info_lbl, true);
 
     player_info_panel->addTouchEventListener([player_info_panel, this](Ref* target, ui::Widget::TouchEventType type)
     {
@@ -511,7 +511,7 @@ void BaseScene::create_player_info_panel()
     };
 
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
-    static_cast<Label*>(player_gold_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+    set_aliasing(player_gold_lbl, true);
     auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
     auto update_gold_lbl = [player_gold_lbl, player_hp_lbl](float dt){
         //set gold
@@ -617,12 +617,12 @@ void BaseScene::create_inventory_listview()
 
             //set aliasing on font
             auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
-            dynamic_cast<Label*>(item_lbl->getVirtualRenderer())->getFontAtlas()->setAliasTexParameters();
+            set_aliasing(item_lbl, true);
 
             //add ingredient image
             ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
             item_img->loadTexture(res_data.get_img_large());
-            ((ui::Scale9Sprite*)item_img->getVirtualRenderer())->getSprite()->getTexture()->setAliasTexParameters();
+            set_aliasing(item_img, true);
 
             //if there's less than 1 ingredient, hide the item panel altogether
             if (city_ingredients[ing_type] <= 0) { new_item_panel->setVisible(false); }
