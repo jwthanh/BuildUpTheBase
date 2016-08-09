@@ -61,7 +61,7 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
         res_count_t _def = 0;
         res_count_t souls_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 1.45L));
         recipe->components = mistIngredient({{ Ingredient::SubType::Soul, souls_cost }});
-        ss << "Increases combat damage\n-- costs " << souls_cost << " souls";
+        ss << "Increases combat damage\n-- costs " << beautify_double(souls_cost) << " souls";
     }
     else if (this->sub_type == Technology::SubType::ClickDoublePower)
     {
@@ -72,7 +72,7 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
         res_count_t paper_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 9.45L));
         recipe->components = mistIngredient({{ Ingredient::SubType::Paper, paper_cost }});
 
-        ss << "Doubles click output here\n-- costs " << paper_cost << " paper";
+        ss << "Doubles click output here\n-- costs " << beautify_double(paper_cost) << " paper";
     }
     else
     {
