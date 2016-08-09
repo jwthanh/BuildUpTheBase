@@ -116,3 +116,61 @@ void try_set_node_color(cocos2d::Node* node, const cocos2d::Color3B color)
         node->setColor(color);
     }
 };
+
+void set_aliasing(cocos2d::Label* label, bool val)
+{
+    if (val)
+    {
+        label->getFontAtlas()->setAliasTexParameters();
+    }
+    else
+    {
+        label->getFontAtlas()->setAntiAliasTexParameters();
+    }
+};
+
+void set_aliasing(cocos2d::Texture2D* texture, bool val)
+{
+    if (val)
+    {
+        texture->setAliasTexParameters();
+    }
+    else
+    {
+        texture->setAntiAliasTexParameters();
+    }
+};
+
+void set_aliasing(cocos2d::Sprite* sprite, bool val)
+{
+    cocos2d::Texture2D* texture = sprite->getTexture();
+    set_aliasing(texture, val);
+};
+
+void set_aliasing(cocos2d::ui::Text* text, bool val)
+{
+    Label* renderer = (Label*)text->getVirtualRenderer();
+    set_aliasing(renderer, val);
+};
+
+void set_aliasing(cocos2d::ui::ImageView* img_view, bool val)
+{
+    cocos2d::ui::Scale9Sprite* scale9 = dynamic_cast<cocos2d::ui::Scale9Sprite*>(img_view->getVirtualRenderer());
+    if (scale9)
+    {
+        set_aliasing(scale9, val);
+    }
+    cocos2d::Sprite* sprite = dynamic_cast<cocos2d::Sprite*>(img_view->getVirtualRenderer());
+    if (sprite)
+    {
+        set_aliasing(sprite, val);
+    }
+
+    CCLOG("set_aliasing:: Not sprite or scale9");
+};
+
+void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val)
+{
+    cocos2d::Sprite* sprite = scale9->getSprite();
+    set_aliasing(sprite, val);
+};

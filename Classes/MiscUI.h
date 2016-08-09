@@ -8,6 +8,7 @@ namespace cocos2d
 {
     namespace ui
     {
+        class ImageView;
         class Text;
         class Button;
     }
@@ -40,5 +41,12 @@ void animate_flash_action(
 
 void try_set_text_color(cocos2d::ui::Text* text_node, const cocos2d::Color4B color);
 void try_set_node_color(cocos2d::Node* node, const cocos2d::Color3B color);
+
+void set_aliasing(cocos2d::Label* label, bool val);
+void set_aliasing(cocos2d::Texture2D* texture, bool val);
+void set_aliasing(cocos2d::Sprite* sprite, bool val);
+void set_aliasing(cocos2d::ui::Text* text, bool val);
+void set_aliasing(cocos2d::ui::ImageView* img_view, bool val);
+void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val);
 
 #endif
