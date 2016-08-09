@@ -107,7 +107,7 @@ res_count_t Harvestable::get_per_touch_output()
     res_count_t _def = 0L;
     res_count_t times_doubled = map_get(tech_map, tech_type, _def);
     if (times_doubled > 0){
-        base *= 2.0L * times_doubled;
+        base *= std::pow(2.0L, times_doubled);
     };
 
     return base;

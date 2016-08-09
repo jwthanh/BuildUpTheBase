@@ -159,11 +159,13 @@ void set_aliasing(cocos2d::ui::ImageView* img_view, bool val)
     if (scale9)
     {
         set_aliasing(scale9, val);
+        return;
     }
     cocos2d::Sprite* sprite = dynamic_cast<cocos2d::Sprite*>(img_view->getVirtualRenderer());
     if (sprite)
     {
         set_aliasing(sprite, val);
+        return;
     }
 
     CCLOG("set_aliasing:: Not sprite or scale9");
