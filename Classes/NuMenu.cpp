@@ -565,6 +565,12 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     return true;
 }
 
+bool UpgradeBuildingShopNuItem::custom_status_check(float dt)
+{
+    //only activate menuitem if the building is one level below item's building level
+    return this->building->building_level == this->building_level - 1;
+};
+
 HarvesterShopNuItem* HarvesterShopNuItem::create(Node* parent, spBuilding building)
 {
     HarvesterShopNuItem* pRet = new(std::nothrow) HarvesterShopNuItem();

@@ -116,6 +116,7 @@ class UpgradeBuildingShopNuItem : public BuildingShopNuItem
         UpgradeBuildingShopNuItem(){};
         
         int building_level;
+        virtual bool custom_status_check(float dt) override;
 
 
         virtual bool my_init(int building_level);
