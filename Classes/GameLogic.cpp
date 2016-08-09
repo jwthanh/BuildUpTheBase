@@ -7,6 +7,7 @@
 #include "Serializer.h"
 #include "Util.h"
 #include "cocostudio/ActionTimeline/CSLoader.h"
+#include "MiscUI.h"
 
 USING_NS_CC;
 
@@ -116,6 +117,7 @@ void GameLogic::post_load()
 
     auto title_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("title_lbl"));
     title_lbl->setString("Welcome Back!");
+    set_aliasing(title_lbl, true);
 
     //set scrollbar up
     ui::ScrollView* body_scroll = dynamic_cast<ui::ScrollView*>(message_panel->getChildByName("body_scroll"));

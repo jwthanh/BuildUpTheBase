@@ -50,12 +50,11 @@ bool NuItem::init(cocos2d::Node* parent)
     };
 
 
-    auto set_aliasing = [set_renderer](ui::Text* text_node)
+    auto setup_text_node = [set_renderer](ui::Text* text_node)
     {
         Label* renderer = (Label*)text_node->getVirtualRenderer();
+        set_aliasing(text_node, true);
         renderer->setOverflow(Label::Overflow::SHRINK);
-        renderer->getFontAtlas()->setAliasTexParameters();
-
         set_renderer(text_node);
     };
 
@@ -92,13 +91,13 @@ bool NuItem::init(cocos2d::Node* parent)
 
     this->item_icon = static_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
     this->title_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
-    set_aliasing(this->title_lbl);
+    setup_text_node(this->title_lbl);
     this->desc_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
-    set_aliasing(this->desc_lbl);
+    setup_text_node(this->desc_lbl);
     this->cost_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
-    set_aliasing(this->cost_lbl);
+    setup_text_node(this->cost_lbl);
     this->count_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
-    set_aliasing(this->count_lbl);
+    setup_text_node(this->count_lbl);
 
     this->schedule(CC_SCHEDULE_SELECTOR(NuItem::update_func));
 
