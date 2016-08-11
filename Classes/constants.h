@@ -74,6 +74,8 @@ class Battle;
 class Worker;
 class BuildingData;
 class Harvester;
+class Salesman;
+class ConsumerHarvester;
 class ResourceCondition;
 
 class Resource;
@@ -109,6 +111,8 @@ MAKE_SP_VS_MI(Fighter);
 MAKE_SP_VS_MI(Worker);
 MAKE_SP_VS_MI(BuildingData);
 MAKE_SP_VS_MI(Harvester);
+MAKE_SP_VS_MI(Salesman);
+MAKE_SP_VS_MI(ConsumerHarvester);
 MAKE_SP_VS_MI(ResourceCondition);
 MAKE_SP_VS_MI(Recipe);
 
