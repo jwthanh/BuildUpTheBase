@@ -18,6 +18,8 @@
 #include "Updateable.h"
 
 
+using WorkerCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Worker>>>;
+
 class Building : public Nameable, public Updateable, public Buyable, public std::enable_shared_from_this<Building>
 {
     public:
@@ -40,8 +42,11 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         spTechTree techtree;
 
         mistHarvester harvesters;
+        WorkerCache _harvester_cache;
         mistHarvester salesmen;
+        WorkerCache _salesmen_cache;
         mistHarvester consumers;
+        WorkerCache _consumers_cache;
 
         Clock* spawn_clock;
 

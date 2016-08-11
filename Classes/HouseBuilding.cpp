@@ -189,14 +189,15 @@ Building::Building(Village* city, std::string name, std::string id_key) :
     workers = vsWorker();
 
     harvesters = mistHarvester();
+    _harvester_cache = WorkerCache();
+
+    salesmen = mistHarvester();
+    _salesmen_cache = WorkerCache();
+
+    consumers = mistHarvester();
+    _consumers_cache = WorkerCache();
 
     std::stringstream ss;
-
-    //auto file_utils = FileUtils::getInstance();
-    // std::string xmlBuffer = file_utils->getStringFromFile("joshtest.dat");
-    //tinyxml2::XMLDocument* xmlDoc = new tinyxml2::XMLDocument();
-    //xmlDoc->Parse(xmlBuffer.c_str(), xmlBuffer.size());
-    //auto root = xmlDoc->RootElement();
 
     auto jsonDoc = FileIO::open_json("buildings_data.json", true);
     assert(jsonDoc.HasMember("buildings"));
