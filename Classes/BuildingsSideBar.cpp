@@ -131,6 +131,8 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
         auto result = this->tabs.button_map[target_button];
         activate(result.second, result.first);
 
+        do_vibrate(32);
+
     };
 };
 

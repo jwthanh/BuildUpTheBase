@@ -651,6 +651,8 @@ void BaseScene::create_inventory_listview()
 
                     Sequence* seq = Sequence::create(Spawn::createWithTwoActions(move, scale), NULL);
                     alert->runAction(seq);
+
+                    do_vibrate(32);
                 };
             };
             new_item_panel->addTouchEventListener(on_touch_cb);
@@ -883,7 +885,14 @@ ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
 
                     //for each building that has one of the ingredients, remove one at a time until there's no to sell left
                     BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
+
+                    do_vibrate(32);
                 }
+                else
+                {
+                    //smaller vibrate if you can't sell any
+                    do_vibrate(16);
+                };
             }
         });
 
