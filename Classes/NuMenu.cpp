@@ -555,7 +555,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
             scene->runAction(FShake::actionWithDuration(0.25f, 2.5f));
             scene->addChild(explosion_parts);
 
-            do_vibrate(250);
+            do_vibrate(175);
 
             this->update_func(0);
         }
