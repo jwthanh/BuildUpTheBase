@@ -42,6 +42,9 @@ FloatingLabel* FloatingLabel::createWithTTF(const TTFConfig& ttfConfig, const st
 
 void FloatingLabel::do_float(float x, float x_variation, float y, float y_variation, float duration)
 {
+    set_aliasing((Label*)this);
+    this->enableOutline(Color4B::BLACK, 2);
+
     float x_scale = sx(x + (x_variation * CCRANDOM_MINUS1_1()));
     float y_scale = sy(y + (y_variation * CCRANDOM_MINUS1_1()));
 
