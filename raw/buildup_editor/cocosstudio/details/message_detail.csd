@@ -18,7 +18,7 @@
                 <PrePosition X="0.5000" Y="0.8524" />
                 <PreSize X="0.8201" Y="0.2438" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="26" G="26" B="26" />
+                <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
               <AbstractNodeData Name="close_panel" ActionTag="269605077" Tag="18" IconVisible="False" LeftMargin="1.7654" RightMargin="3.2346" TopMargin="1.0454" BottomMargin="284.7622" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
