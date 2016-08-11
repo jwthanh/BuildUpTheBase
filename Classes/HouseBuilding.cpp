@@ -316,7 +316,7 @@ typename CacheT::element_type::mapped_type get_or_create_from_cache(spBuilding& 
     else
     {
         //create and add to cache
-        temp_harvester = std::make_shared<CacheT::element_type::mapped_type::element_type>(building, "test worker", key.second, key.first);
+        temp_harvester = std::make_shared<typename CacheT::element_type::mapped_type::element_type>(building, "test worker", key.second, key.first);
         (*cache)[key] = temp_harvester;
     };
 
