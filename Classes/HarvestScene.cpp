@@ -451,6 +451,9 @@ void BaseScene::create_username_input()
     ui::TextField* username_input = dynamic_cast<ui::TextField*>(building_panel->getChildByName("username_input"));
 
     username_input->setTextHorizontalAlignment(TextHAlignment::CENTER);
+    ui::UICCTextField* renderer = dynamic_cast<ui::UICCTextField*>(username_input->getVirtualRenderer());
+    cocos2d::Label* label = dynamic_cast<Label*>(renderer);
+    set_aliasing(label);
 
     auto username = DataManager::get_string_from_data("username");
     username_input->setString(username);
