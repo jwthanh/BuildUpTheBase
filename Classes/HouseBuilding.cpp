@@ -308,19 +308,19 @@ template<typename CacheT>
 typename CacheT::element_type::mapped_type get_or_create_from_cache(spBuilding building, CacheT cache, std::pair<WorkerSubType, Ingredient::SubType> key)
 {
     typename CacheT::element_type::mapped_type temp_harvester;
-        if (cache->find(key) != cache->end())
-        {
-            //pull it out of cache
-            temp_harvester = (*cache)[key];
-        }
-        else
-        {
-            //create and add to cache
-            temp_harvester = std::make_shared<CacheT::element_type::mapped_type::element_type>(building, "test worker", key.second, key.first);
-            (*cache)[key] = temp_harvester;
-        };
+    if (cache->find(key) != cache->end())
+    {
+        //pull it out of cache
+        temp_harvester = (*cache)[key];
+    }
+    else
+    {
+        //create and add to cache
+        temp_harvester = std::make_shared<CacheT::element_type::mapped_type::element_type>(building, "test worker", key.second, key.first);
+        (*cache)[key] = temp_harvester;
+    };
 
-        return temp_harvester;
+    return temp_harvester;
 };
 
 void Building::update(float dt)
