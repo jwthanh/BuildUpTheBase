@@ -197,26 +197,6 @@ Building::Building(Village* city, std::string name, std::string id_key) :
     consumers = mistHarvester();
     _consumers_cache = WorkerCache();
 
-    std::stringstream ss;
-
-    auto jsonDoc = FileIO::open_json("buildings_data.json", true);
-    assert(jsonDoc.HasMember("buildings"));
-    if (jsonDoc["buildings"].HasMember(name.c_str()))
-    {
-        auto all_buildings = &jsonDoc["buildings"];
-        auto this_building = &(*all_buildings)[name.c_str()];
-
-        if (this_building->HasMember("task_name")) {
-            auto task_name = &(*this_building)["task_name"];
-            ss << task_name->GetString() << " task";
-        } else {
-            ss << name << " task";
-        };
-    }
-    else {
-        ss << name << " task";
-    };
-
     this->data = std::make_shared<BuildingData>(name);
     this->_shop_cost = atoi(this->data->get_gold_cost().c_str());
     this->short_name = this->data->get_short_name();
@@ -224,9 +204,7 @@ Building::Building(Village* city, std::string name, std::string id_key) :
     //TODO make these buyable again
     this->set_been_bought(true);
 
-
     this->techtree = std::make_shared<TechTree>();
-
 };
 
 res_count_t Building::get_total_harvester_output()
