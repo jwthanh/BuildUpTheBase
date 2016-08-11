@@ -903,7 +903,7 @@ void ConsumerShopNuItem::my_init_update_callback()
 
         std::stringstream ss;
         auto sold_count = 5 * building->building_level;
-        ss << "Consumes " << sold_count << " " << Ingredient::type_to_string(this->consumed_type) << "\nper sec (if hurt enough)";
+        ss << "Consumes " << sold_count << " " << Ingredient::type_to_string(this->consumed_type) << "\nper sec (if hurt)";
         this->set_description(ss.str());
     };
     this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
