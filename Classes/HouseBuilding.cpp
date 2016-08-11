@@ -303,6 +303,26 @@ void Building::consume_recipe(Recipe* recipe)
     }
 };
 
+
+template<typename CacheT, typename WorkerT>
+WorkerT get_or_create_from_cache(spBuilding building, CacheT cache, std::pair<WorkerSubType, Ingredient::SubType> key)
+{
+        WorkerT temp_harvester;
+        if (cache->find(key) != cache->end())
+        {
+            //pull it out of cache
+            temp_harvester = (*cache)[key];
+        }
+        else
+        {
+            //create and add to cache
+            temp_harvester = std::make_shared<WorkerT::element_type>(building, "test worker", key.second, key.first);
+            (*cache)[key] = temp_harvester;
+        };
+
+        return temp_harvester;
+};
+
 void Building::update(float dt)
 {
     Updateable::update(dt);
@@ -317,18 +337,8 @@ void Building::update(float dt)
         
 
         //find cache worker, otherwise create and add it to cache
-        auto key = std::make_pair( harv_type, ing_type);
-        if (this->_harvester_cache->find(key) != this->_harvester_cache->end())
-        {
-            //pull it out of cache
-            temp_harvester = (*this->_harvester_cache)[key];
-        }
-        else
-        {
-            //create and add to cache
-            temp_harvester = std::make_shared<Harvester>(this->shared_from_this(), "test worker", ing_type, harv_type);
-            (*this->_harvester_cache)[key] = temp_harvester;
-        };
+        std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
+        temp_harvester = get_or_create_from_cache<HarvesterCache, spHarvester>(this->shared_from_this(), this->_harvester_cache, key);
 
         temp_harvester->active_count = count;
         temp_harvester->update(dt);
