@@ -189,13 +189,13 @@ Building::Building(Village* city, std::string name, std::string id_key) :
     workers = vsWorker();
 
     harvesters = mistHarvester();
-    _harvester_cache = WorkerCache();
+    _harvester_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<Harvester>>>(); //cant just HarvesterCache(); this for some reason
 
     salesmen = mistHarvester();
-    _salesmen_cache = WorkerCache();
+    _salesmen_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<Salesman>>>();
 
     consumers = mistHarvester();
-    _consumers_cache = WorkerCache();
+    _consumer_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<ConsumerHarvester>>>();
 
     this->data = std::make_shared<BuildingData>(name);
     this->_shop_cost = atoi(this->data->get_gold_cost().c_str());
@@ -313,7 +313,23 @@ void Building::update(float dt)
         Ingredient::SubType ing_type = sub_type.second;
         res_count_t count = harvester.second;
 
-        auto temp_harvester = std::make_shared<Harvester>(this->shared_from_this(), "test worker", ing_type, harv_type);
+        std::shared_ptr<Harvester> temp_harvester;
+        
+
+        //find cache worker, otherwise create and add it to cache
+        auto key = std::make_pair( harv_type, ing_type);
+        if (this->_harvester_cache->find(key) != this->_harvester_cache->end())
+        {
+            //pull it out of cache
+            temp_harvester = (*this->_harvester_cache)[key];
+        }
+        else
+        {
+            //create and add to cache
+            temp_harvester = std::make_shared<Harvester>(this->shared_from_this(), "test worker", ing_type, harv_type);
+            (*this->_harvester_cache)[key] = temp_harvester;
+        };
+
         temp_harvester->active_count = count;
         temp_harvester->update(dt);
     };
