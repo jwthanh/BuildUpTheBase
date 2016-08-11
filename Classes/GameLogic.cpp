@@ -127,6 +127,7 @@ void GameLogic::post_load()
 
     //fill message up
     auto body_lbl = dynamic_cast<cocos2d::ui::Text*>(body_scroll->getChildByName("body_lbl"));
+    set_aliasing(body_lbl);
     if (at_capacity_ss.str() != "")
     {
         body_lbl->setString(at_capacity_ss.str() + "\n---\n\n" + gains_ss.str());
