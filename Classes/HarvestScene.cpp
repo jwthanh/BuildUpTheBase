@@ -634,7 +634,7 @@ void BaseScene::create_inventory_listview()
             auto on_touch_cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
 
                 if (type == ui::Widget::TouchEventType::ENDED) {
-                    auto alert = this->create_detail_alert(ing_type);
+                    auto alert = this->create_ingredient_detail_alert(ing_type);
                     this->addChild(alert, 10);
 
                     //animate
@@ -817,7 +817,7 @@ void HarvestScene::update(float dt)
 
 }
 
-ui::Widget* BaseScene::create_detail_alert(Ingredient::SubType ing_type)
+ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_type)
 {
     //make sure one doesn't already exist first
     if (this->getChildByName("inventory_detail_panel")) {

@@ -38,7 +38,7 @@ class BaseScene : public GameLayer
         void create_inventory_listview();
         void create_shop_listview();
 
-        cocos2d::ui::Widget* create_detail_alert(Ingredient::SubType ing_type);
+        cocos2d::ui::Widget* create_ingredient_detail_alert(Ingredient::SubType ing_type);
 
         void scroll_to_target_building();
 
