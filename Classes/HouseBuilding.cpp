@@ -305,7 +305,7 @@ void Building::consume_recipe(Recipe* recipe)
 
 
 template<typename CacheT>
-typename CacheT::element_type::mapped_type get_or_create_from_cache(spBuilding building, CacheT cache, std::pair<WorkerSubType, Ingredient::SubType> key)
+typename CacheT::element_type::mapped_type get_or_create_from_cache(spBuilding& building, CacheT cache, std::pair<WorkerSubType, Ingredient::SubType> key)
 {
     typename CacheT::element_type::mapped_type temp_harvester;
     if (cache->find(key) != cache->end())
