@@ -188,7 +188,12 @@ void GameLogic::update(float dt)
             auto player_gold_per_sec_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
 
             res_count_t coin_diff = BEATUP->get_total_coins() - BEATUP->_last_total_coins;
-            std::string beautified_diff = "+"+beautify_double(coin_diff)+"/sec";
+            std::string prefix = "+";
+            if (coin_diff < 0.0) {
+                prefix = "";
+            };
+
+            std::string beautified_diff = prefix+beautify_double(coin_diff)+"/sec";
             player_gold_per_sec_lbl->setString(beautified_diff);
 
             BEATUP->_last_total_coins = BEATUP->get_total_coins();
