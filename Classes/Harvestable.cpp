@@ -546,7 +546,15 @@ bool FightingHarvestable::init()
             // this->sprite->getEventDispatcher()->dispatchEvent(&evt);
 
 
+            //copy and pasted from Harvester::onTouchEnded
+            this->current_clicks += 1;
+
             this->animate_harvest();
+            this->on_harvest();
+
+            if (this->should_shatter()) {
+                this->shatter();
+            };
 
         }
     });
