@@ -527,6 +527,29 @@ bool FightingHarvestable::init()
     fighter_node->setPosition(Vec2(50, 0));
     fighter_node->xp_bar->setVisible(false); //dont need to see this for an enemy
     this->addChild(fighter_node);
+    
+    fighter_node->sprite->addTouchEventListener([this](Ref* target, ui::Widget::TouchEventType type)
+    {
+        if (type == TouchEventType::BEGAN)
+        {
+            //// this nearly worked, the coords werent right, so this->_hitted
+            ////was always false, otherwise worked to sim a click
+            // EventTouch evt = cocos2d::EventTouch();
+            // evt.setEventCode(EventTouch::EventCode::BEGAN);
+            // Touch touch = Touch();
+            // Vec2 vec = { 1, 1 };
+            // vec = this->sprite->convertToWorldSpace(vec);
+
+            // touch.setTouchInfo(-1, vec.x, vec.y);
+            // std::vector<Touch*> touches ={  &touch  };
+            // evt.setTouches(touches);
+            // this->sprite->getEventDispatcher()->dispatchEvent(&evt);
+
+
+            this->animate_harvest();
+
+        }
+    });
 
     //adjust position because the enemy and sword are both offset from the center
     this->setPosition(Vec2(this->getPosition().x-110, this->getPosition().y)); 
@@ -541,7 +564,6 @@ std::string FightingHarvestable::get_sprite_path()
 
 void FightingHarvestable::animate_clip()
 {
-    //Do nothing deliberately
     float end_scale = this->initial_scale*0.85f;
     float duration = 0.5f;
 
@@ -579,6 +601,7 @@ void FightingHarvestable::animate_harvest()
     }
     else
     {
+        //shake hp panel if dead
         auto harvest_scene = this->getParent();
         auto player_info_panel = harvest_scene->getChildByName("player_info_panel");
         player_info_panel->runAction(FShake::actionWithDuration(0.075f, 10));
