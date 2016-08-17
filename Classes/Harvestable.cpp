@@ -262,20 +262,6 @@ void Harvestable::shatter()
     this->sprite->setVisible(false);
     this->setTouchEnabled(false);
 
-    // auto rt = RenderTexture::create(
-    //     (int)(this->get_sprite_size().width*this->getScaleX()) * 2,
-    //     (int)(this->get_sprite_size().height*this->getScaleY()) * 2,
-    //     Texture2D::PixelFormat::RGBA8888,
-    //     CC_GL_DEPTH24_STENCIL8
-    //     );
-    // rt->retain();
-
-    // rt->begin();
-    // this->Node::visit();
-    // rt->end();
-
-    // rt->saveToFile("out4.png");
-
     float sprite_scale = this->sprite->getScale();
     Size sprite_size = this->get_sprite_size();
 
@@ -631,10 +617,9 @@ bool FightingHarvestable::should_shatter()
     return this->enemy->attrs->health->is_empty();
 }
 
-void FightingHarvestable::shatter()
+void FightingHarvestable::spawn_enemy()
 {
     auto game_logic = GameLogic::getInstance();
-    game_logic->add_total_kills(1);
 
     this->enemy = std::make_shared<Fighter>("Challenger");
     this->enemy->team = Fighter::TeamTwo;
@@ -681,18 +666,27 @@ void FightingHarvestable::shatter()
     base_node->setPosition(8,8);
     base_node->setScaleY(-1.0f);
 
-     auto rt = RenderTexture::create(16, 16);
-     rt->retain();
-     rt->begin();
-     base_node->visit();
-     rt->end();
+    auto rt = RenderTexture::create(16, 16);
+    rt->retain();
+    rt->begin();
+    base_node->visit();
+    rt->end();
 
-     //use the texture from RenderTexture and replace the ImageView's Scale9
-     //texture
-     auto img_view = fighter_node->sprite;
-     ui::Scale9Sprite* scale9_sprite = dynamic_cast<ui::Scale9Sprite*>(img_view->getVirtualRenderer());
-     Sprite* tex_sprite = dynamic_cast<Sprite*>(rt->getSprite());
-     scale9_sprite->setSpriteFrame(tex_sprite->getSpriteFrame());
+    //use the texture from RenderTexture and replace the ImageView's Scale9
+    //texture
+    auto img_view = fighter_node->sprite;
+    ui::Scale9Sprite* scale9_sprite = dynamic_cast<ui::Scale9Sprite*>(img_view->getVirtualRenderer());
+    Sprite* tex_sprite = dynamic_cast<Sprite*>(rt->getSprite());
+    scale9_sprite->setSpriteFrame(tex_sprite->getSpriteFrame());
+
+};
+
+void FightingHarvestable::shatter()
+{
+    auto game_logic = GameLogic::getInstance();
+    game_logic->add_total_kills(1);
+
+    this->spawn_enemy();
 
     this->building->create_ingredients(Ingredient::SubType::Soul, 1);
 }

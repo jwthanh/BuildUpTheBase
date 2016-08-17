@@ -114,6 +114,7 @@ class FightingHarvestable : public Harvestable
         bool init() override;
 
         spFighter enemy;
+        void spawn_enemy();
 
         std::string get_sprite_path() override;
 
