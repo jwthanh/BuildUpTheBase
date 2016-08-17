@@ -751,10 +751,10 @@ res_count_t FightingHarvestable::get_per_touch_output()
 
     auto tech_type = Technology::SubType::CombatDamage;
     res_count_t _def = 0L;
-    res_count_t times_doubled = map_get(tech_map, tech_type, _def);
+    res_count_t times_increased = map_get(tech_map, tech_type, _def);
 
-    if (times_doubled > 0){
-        base += 2.0L * times_doubled;
+    if (times_increased > 0){
+        base += 2.0L * times_increased;
     };
 
     return std::floor(base + (base*0.15*CCRANDOM_MINUS1_1()));

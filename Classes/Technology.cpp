@@ -70,7 +70,7 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
         recipe = std::make_shared<Recipe>("combat_crit_chance", "no desc for tech recipe");
         auto tech_map = building->techtree->tech_map;
         res_count_t _def = 0;
-        res_count_t blood_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 1.45L));
+        res_count_t blood_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 2.45L));
         recipe->components = mistIngredient({{ Ingredient::SubType::Blood, blood_cost }});
         ss << "Raises chance to WOOSH\n-- costs " << beautify_double(blood_cost) << " blood";
     }
@@ -79,7 +79,7 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
         recipe = std::make_shared<Recipe>("combat_crit_factor", "no desc for tech recipe");
         auto tech_map = building->techtree->tech_map;
         res_count_t _def = 0;
-        res_count_t fly_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 1.45L));
+        res_count_t fly_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 2.45L));
         recipe->components = mistIngredient({{ Ingredient::SubType::Fly, fly_cost }});
         ss << "Improves WOOSH damage\n-- costs " << beautify_double(fly_cost) << " flies";
     }
