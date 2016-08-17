@@ -28,7 +28,9 @@ enum class TechSubType
     None = -1,
     ClickDoublePower = 0,
     CombatDamage = 1,
-    CombatArmor = 2
+    CombatArmor = 2,
+    CombatCritChance = 3,
+    CombatCritFactor = 4
 };
 
 enum class WorkerSubType

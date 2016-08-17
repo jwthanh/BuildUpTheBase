@@ -447,6 +447,24 @@ void SideListView::setup_detail_listview_as_recipes()
                         "Buy Sword",
                         ""
                     } });
+
+                spTechnology crit_chance = std::make_shared<Technology>(Technology::SubType::CombatCritChance);
+                nuitems_config.push_back({
+                    crit_chance,
+                    DetailType::Tech,
+                    {
+                        "Coat sword in oil",
+                        ""
+                    } });
+
+                spTechnology crit_factor = std::make_shared<Technology>(Technology::SubType::CombatCritFactor);
+                nuitems_config.push_back({
+                    crit_factor,
+                    DetailType::Tech,
+                    {
+                        "Sharpen blade",
+                        ""
+                    } });
             };
 
             if (building->name == "The Marketplace")
