@@ -6,7 +6,7 @@
 USING_NS_CC;
 
 // not really useful, but I like clean default constructors
-FShake::FShake() : _strength_x(0), _strength_y(0), _initial_x(0), _initial_y(0)
+FShake::FShake() : _strength_x(0), _strength_y(0), _displacement_x(0), _displacement_y(0)
 {
 }
 
@@ -47,36 +47,37 @@ float fgRangeRand( float min, float max )
 
 void FShake::update(float time)
 {
+	auto target = this->getTarget();
+    if (!target) { return; }
+
 	float rand_x = fgRangeRand( -_strength_x, _strength_x );
 	float rand_y = fgRangeRand( -_strength_y, _strength_y );
 
+	auto currentPosition = target->getPosition();
+
 	// move the target to a shaked position
-    if (this->getTarget()){
-        this->getTarget()->setPosition(Vec2(
-            this->_initial_x + rand_x,
-            this->_initial_y + rand_y
-        ));
-    };
-}
+	target->setPosition(currentPosition.x - _displacement_x + rand_x,
+						currentPosition.y - _displacement_y + rand_y);
 
-void FShake::startWithTarget(Node *pTarget)
-{
-	ActionInterval::startWithTarget( pTarget );
-
-	// save the initial position
-	_initial_x = pTarget->getPosition().x;
-	_initial_y = pTarget->getPosition().y;
+	// Keep track of the last displacement
+	_displacement_x = rand_x;
+	_displacement_y = rand_y;
 }
 
 void FShake::stop(void)
 {
-	// Action is done, reset clip position
-    if (this->getTarget()) {
-        this->getTarget()->setPosition(Vec2(_initial_x, _initial_y));
-    };
+	auto target = this->getTarget();
+    if (target)
+    {
+        auto currentPosition = target->getPosition();
 
+        // Action is done, reset clip position
+        target->setPosition(currentPosition.x - _displacement_x,
+            currentPosition.y - _displacement_y);
+    }
+	
 	ActionInterval::stop();
-} 
+}
 
 FShake* FShake::clone()
 {
