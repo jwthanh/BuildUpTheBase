@@ -1,4 +1,3 @@
-
 #ifndef __SHAKE_H__
 #define __SHAKE_H__
 
