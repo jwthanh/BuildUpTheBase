@@ -708,12 +708,14 @@ void FightingHarvestable::on_harvest()
     std::mt19937 gen = std::mt19937(std::random_device{}());
     std::uniform_int_distribution<int> distribution(0, 100);
     int crit_result = distribution(gen);
-    int crit_chance = 15;
+
+    int crit_chance = this->get_combat_crit_chance(); 
 
     if (crit_result <= crit_chance)
     {
         this->is_critical_hit = true;
-        damage *= 3.0f;
+        res_count_t crit_factor = this->get_combat_crit_factor();
+        damage *= crit_factor;
     }
     else
     {
@@ -756,6 +758,40 @@ res_count_t FightingHarvestable::get_per_touch_output()
     };
 
     return std::floor(base + (base*0.15*CCRANDOM_MINUS1_1()));
+}
+
+int FightingHarvestable::get_combat_crit_chance()
+{
+    int base = 1;
+
+    auto tech_map = this->building->techtree->get_tech_map();
+
+    auto tech_type = Technology::SubType::CombatCritChance;
+    res_count_t _def = 0L;
+    res_count_t times_increased = map_get(tech_map, tech_type, _def);
+
+    if (times_increased > 0){
+        base += 1.0L * times_increased;
+    };
+
+    return std::floor(base);
+}
+
+res_count_t FightingHarvestable::get_combat_crit_factor()
+{
+    int base = 5;
+
+    auto tech_map = this->building->techtree->get_tech_map();
+
+    auto tech_type = Technology::SubType::CombatCritFactor;
+    res_count_t _def = 0L;
+    res_count_t times_increased = map_get(tech_map, tech_type, _def);
+
+    if (times_increased > 0){
+        base += 1.0L * times_increased;
+    };
+
+    return std::floor(base);
 }
 
 std::string UndeadHarvestable::get_sprite_path()

@@ -213,7 +213,7 @@ void Battle::fight(spFighter left, spFighter right)
     }
 
     //printj(ss.str());
-    CCLOG("clog: %s", ss.str().c_str());
+    // CCLOG("clog: %s", ss.str().c_str());
 };
 
 void Battle::do_battle()

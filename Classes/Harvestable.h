@@ -132,6 +132,8 @@ class FightingHarvestable : public Harvestable
 
         virtual void on_harvest() override;
         res_count_t get_per_touch_output();
+        int get_combat_crit_chance();
+        res_count_t get_combat_crit_factor();
 };
 
 class UndeadHarvestable : public Harvestable
