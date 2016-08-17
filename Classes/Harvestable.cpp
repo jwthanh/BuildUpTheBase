@@ -716,6 +716,7 @@ void FightingHarvestable::on_harvest()
         this->is_critical_hit = true;
         res_count_t crit_factor = this->get_combat_crit_factor();
         damage *= crit_factor;
+        do_vibrate(16);
     }
     else
     {
