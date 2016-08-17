@@ -294,7 +294,7 @@ bool FarmingHarvestable::init()
 {
     bool val = Harvestable::init();
 
-    this->initial_scale = 2.5f;
+    this->initial_scale = 0.8f;
     this->setScale(this->initial_scale);
 
     return val;
@@ -302,7 +302,7 @@ bool FarmingHarvestable::init()
 
 std::string FarmingHarvestable::get_sprite_path()
 {
-    return "bush.png";
+    return "farm.png";
 };
 
 bool GraveyardHarvestable::init()

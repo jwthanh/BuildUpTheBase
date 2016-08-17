@@ -289,7 +289,7 @@ void BaseScene::create_building_choicelist()
         } else if (building->name == "The Underscape") {
             img_path = "necro_open.png";
         } else if (building->name == "The Farm") {
-            img_path = "bush.png";
+            img_path = "farm.png";
         } else {
             img_path = "weapon_ice.png";
         };
