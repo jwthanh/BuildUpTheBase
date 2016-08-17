@@ -362,6 +362,23 @@ void BaseScene::create_info_panel()
 
     Node* harvest_scene_editor = this->get_original_scene_from_editor();
 
+    ui::Layout* arena_kill_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("arena_kill_panel"));
+    arena_kill_panel->removeFromParent();
+    this->addChild(arena_kill_panel);
+    ui::Text* arena_kill_lbl = dynamic_cast<ui::Text*>(arena_kill_panel->getChildByName("arena_kill_lbl"));
+
+    auto update_arena_kill_display = [arena_kill_panel, arena_kill_lbl](float dt){
+        if (BUILDUP->get_target_building()->name != "The Arena") {
+            arena_kill_panel->setVisible(false);
+        } else {
+            arena_kill_panel->setVisible(true);
+            res_count_t kills = (res_count_t)GameLogic::getInstance()->get_total_kills(); //comes through as int though
+            arena_kill_lbl->setString("Kills: "+beautify_double(kills));
+        }
+    };
+    arena_kill_panel->schedule(update_arena_kill_display, AVERAGE_DELAY, "update_arena_kill_display");
+    update_arena_kill_display(0);
+
 
     ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("building_info_panel"));
     building_info_panel->removeFromParent();

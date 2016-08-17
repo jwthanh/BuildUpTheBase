@@ -407,6 +407,33 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="arena_kill_panel" ActionTag="-1152670340" Tag="71" IconVisible="False" LeftMargin="559.9988" RightMargin="200.0012" TopMargin="511.3903" BottomMargin="99.9998" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+            <Size X="200.0000" Y="28.6099" />
+            <Children>
+              <AbstractNodeData Name="arena_kill_lbl" ActionTag="421305276" Tag="108" IconVisible="False" LeftMargin="1.6754" RightMargin="-0.4612" TopMargin="1.3944" BottomMargin="1.4580" IsCustomSize="True" FontSize="16" LabelText="Kills: 123,123Qad" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="198.7858" Y="25.7575" />
+                <AnchorPoint ScaleX="1.0000" ScaleY="0.5629" />
+                <Position X="200.4612" Y="15.9574" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="1.0023" Y="0.5578" />
+                <PreSize X="0.9939" Y="0.9003" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                <OutlineColor A="255" R="0" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position X="559.9988" Y="99.9998" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5833" Y="0.1562" />
+            <PreSize X="0.2083" Y="0.0447" />
+            <SingleColor A="255" R="150" G="200" B="255" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>
