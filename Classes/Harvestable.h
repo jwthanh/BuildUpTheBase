@@ -116,6 +116,8 @@ class FightingHarvestable : public Harvestable
         spFighter enemy;
         void spawn_enemy();
 
+        bool is_critical_hit;
+
         std::string get_sprite_path() override;
 
         virtual bool should_shatter() override;

@@ -545,6 +545,9 @@ bool FightingHarvestable::init()
     //adjust position because the enemy and sword are both offset from the center
     this->setPosition(Vec2(this->getPosition().x-110, this->getPosition().y)); 
 
+
+    this->is_critical_hit = false;
+
     return true;
 };
 
@@ -567,6 +570,11 @@ void FightingHarvestable::animate_clip()
 
     std::string floating_msg = ss.str();
     auto floating_label = FloatingLabel::createWithTTF(floating_msg, DEFAULT_FONT, 30);
+
+    if (this->is_critical_hit)
+    {
+        floating_label->setTextColor(Color4B::ORANGE);
+    }
 
     auto fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
     auto pos = fighter_node->convertToWorldSpace(this->getTouchEndPosition());
@@ -704,7 +712,12 @@ void FightingHarvestable::on_harvest()
 
     if (crit_result <= crit_chance)
     {
+        this->is_critical_hit = true;
         damage *= 3.0f;
+    }
+    else
+    {
+        this->is_critical_hit = false;
     }
 
 
