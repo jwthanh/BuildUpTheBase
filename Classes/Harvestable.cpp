@@ -502,17 +502,14 @@ bool FightingHarvestable::init()
     this->click_limit = 1000000; //some really high number they'll never click
 
     //setup enemy node
-    this->enemy = std::make_shared<Fighter>("Brawler");
-    this->enemy->team = Fighter::TeamTwo;
-    this->enemy->sprite_name = "ogre10x10.png";
-    this->enemy->attrs->health->set_vals(20);
-    this->enemy->attrs->damage->set_vals(3);
-
+    this->enemy = std::make_shared<Fighter>("temp");
     FighterNode* fighter_node = FighterNode::create(this->enemy);
     fighter_node->setScale(0.25f);
     fighter_node->setPosition(Vec2(50, 0));
     fighter_node->xp_bar->setVisible(false); //dont need to see this for an enemy
     this->addChild(fighter_node);
+
+    this->spawn_enemy();
     
     fighter_node->sprite->addTouchEventListener([this](Ref* target, ui::Widget::TouchEventType type)
     {
