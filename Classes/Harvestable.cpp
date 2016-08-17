@@ -559,7 +559,7 @@ void FightingHarvestable::animate_clip()
     float duration = 0.5f;
 
     auto player = BUILDUP->fighter;
-    auto damage = player->attrs->damage->current_val;
+    double damage = player->attrs->damage->current_val;
     res_count_t output = damage;
 
     std::stringstream ss;
@@ -695,7 +695,19 @@ void FightingHarvestable::on_harvest()
 {
     //TODO name fighter to player_avatar or something
     auto player = BUILDUP->fighter;
-    auto damage = this->get_per_touch_output();
+    res_count_t damage = this->get_per_touch_output();
+
+    std::mt19937 gen = std::mt19937(std::random_device{}());
+    std::uniform_int_distribution<int> distribution(0, 100);
+    int crit_result = distribution(gen);
+    int crit_chance = 15;
+
+    if (crit_result <= crit_chance)
+    {
+        damage *= 3.0f;
+    }
+
+
     player->attrs->damage->set_vals(damage);
 
     auto battle = std::make_shared<Battle>();
