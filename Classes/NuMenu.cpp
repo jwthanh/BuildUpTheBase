@@ -1,5 +1,6 @@
 #include "NuMenu.h"
 #include <numeric>
+#include <random>
 
 #include <editor-support/cocostudio/ActionTimeline/CSLoader.h>
 
@@ -15,7 +16,6 @@
 #include "Recipe.h"
 #include "Technology.h"
 
-#include <random>
 
 USING_NS_CC;
 
@@ -431,7 +431,8 @@ void TechNuItem::update_func(float dt)
     };
 
     auto ing_requirements = this->technology->get_ingredient_requirements(this->building);
-    bool tech_is_satisfied = ing_requirements->is_satisfied(this->building->ingredients);
+    auto all_ingredients = BUILDUP->get_all_ingredients();
+    bool tech_is_satisfied = ing_requirements->is_satisfied(all_ingredients);
     if (tech_is_satisfied)
     {
         if (this->technology->get_been_unlocked() == false)
