@@ -85,6 +85,8 @@ std::vector<std::string> suffixes = {
     "Vin"
 };
 
+std::stringstream _humanize_number_spss = std::stringstream();
+std::stringstream _humanize_number_ss = std::stringstream();
 std::string _humanize_number(long double value)
 {
     float base = 0;
@@ -113,9 +115,10 @@ std::string _humanize_number(long double value)
     int embiggened = (int)std::round(value * 1000.0);
     //... we divide by 1000 to get the nice 1.568 number and add the suffix
     // the problem is that if we've got 1.0f, it turns into 1.000 instead of 1, so I need to clear the empty 0s
-    std::stringstream spss;
-    spss << std::fixed << std::setprecision(3) << embiggened / 1000.0;
-    std::string str = spss.str();
+
+    _humanize_number_spss.str("");
+    _humanize_number_spss << std::fixed << std::setprecision(3) << embiggened / 1000.0;
+    std::string str = _humanize_number_spss.str();
     str.erase ( str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
 
     auto split_string = split(str, '.');
@@ -127,14 +130,14 @@ std::string _humanize_number(long double value)
         insertPosition -= 3;
     }
 
-    std::stringstream ss;
-    ss << split_string.at(0);
-    if (split_string.size() > 1) //assumes only two elems in vector
+    _humanize_number_ss.str("");
+    _humanize_number_ss << split_string.at(0);
+    if (split_string.size() > 1) //a_humanize_number_ssumes only two elems in vector
     {
-        ss << "." << split_string.at(1);
+        _humanize_number_ss << "." << split_string.at(1);
     }
 
-    str = ss.str();
+    str = _humanize_number_ss.str();
 
     //remove trailing period
     if (str.back() == '.')
@@ -145,6 +148,7 @@ std::string _humanize_number(long double value)
     return str + suffix;
 }
 
+std::stringstream _beautify_double_ss;
 std::string beautify_double(long double& value)
 {
     bool is_negative = value < 0;
@@ -152,22 +156,22 @@ std::string beautify_double(long double& value)
 
     if (value < 1000 && std::floor(value) != value) //check for decimal
     {
-        std::stringstream ss; 
-        ss << std::fixed << std::setprecision(3) << value;
-        std::string fixed_value = ss.str();
+         _beautify_double_ss.str(""); 
+        _beautify_double_ss << std::fixed << std::setprecision(3) << value;
+        std::string fixed_value = _beautify_double_ss.str();
         std::string splitted = split(fixed_value, '.').at(1);
-        ss.str("");
+        _beautify_double_ss.str("");
         //splitted.erase(splitted.find_last_not_of('0') + 1, std::string::npos); //rstrip zeroes
 
         if (splitted.empty() != true)
         {
-            ss << "." << splitted.at(0);
+            _beautify_double_ss << "." << splitted.at(0);
         }
         else
         {
-            ss << ".0";
+            _beautify_double_ss << ".0";
         }
-        decimal = ss.str();
+        decimal = _beautify_double_ss.str();
     }
 
     //get rid of decimal bits of the number, already take care of
