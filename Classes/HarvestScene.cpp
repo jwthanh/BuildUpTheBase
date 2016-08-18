@@ -402,10 +402,12 @@ void BaseScene::create_info_panel()
     auto update_ing_count = [create_count, ing_count](float dt)
     {
         spBuilding building = BUILDUP->get_target_building();
-        std::stringstream ss;
         res_count_t storage_space = building->get_storage_space();
-        ss << create_count("ING", building->count_ingredients()) << "/" << beautify_double(storage_space);
-        ing_count->setString(ss.str());
+        std::string&& count = create_count("ING", building->count_ingredients());
+        std::string&& storage = beautify_double(storage_space);
+        char buffer[50];
+        sprintf(buffer, "%s/%s", count.c_str(), storage.c_str());
+        ing_count->setString(buffer);
     };
     this->schedule(update_ing_count, REALTIME_DELAY, "ing_count_update");
     update_ing_count(0);
