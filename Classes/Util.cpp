@@ -87,7 +87,7 @@ std::vector<std::string> suffixes = {
 
 std::stringstream _humanize_number_spss = std::stringstream();
 std::stringstream _humanize_number_ss = std::stringstream();
-std::string _humanize_number(long double value)
+std::string _humanize_number(long double& value)
 {
     float base = 0;
     std::string suffix = suffixes.at(0);
