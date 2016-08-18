@@ -204,7 +204,7 @@ void BaseScene::create_goal_loadingbar()
     auto update_loading_bar = [this, loading_bar](float dt)
         {
             //set progress to 1000 dollars
-            float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 15.0f);
+            float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 10.5f);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             loading_bar->setPercent(percentage);
 
@@ -794,18 +794,9 @@ void HarvestScene::update(float dt)
 {
     BaseScene::update(dt);
 
-    ////TODO leave current recipe on the cutting room floor for now, NOTE that we still change target_recipe elsewhere, it's just the label we're ignoring
-    //if (this->target_recipe != NULL)
-    //{
-    //    this->recipe_lbl->setString("Current recipe: " + this->target_recipe->name);
-    //}
-    //else
-    //{
-    //    this->recipe_lbl->setString("");
-    //}
-
-    //TODO get this percentage from a method or something
-    float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 15.0f);
+    //TODO get this percentage from a method or something so if building scale
+    //changes i dont need to adjust this
+    float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 10.5f);
     float percentage = BEATUP->get_total_coins() / coin_goal * 100;
     if (percentage >= 100.0f) {
         ((HarvestScene*)this)->recipe_lbl->setString("Upgrade available!");
