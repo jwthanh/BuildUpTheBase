@@ -1,5 +1,3 @@
-* tapping menu items over and over can reset their position
-* detail upgrades dont save
 * everything costs the same
 
 Features
@@ -8,3 +6,12 @@ Features
 * Fighters take names off leaderboards
 * Info panel for building with misc stats, how many fighters killed, their
   damage etc
+
+* sell more than 1000 at a time
+* buy more than one harvester at a time
+* reorganize the building upgrades so the next ones are along the top
+
+* trade resources in for others, catan style
+* sell workers back
+
+* dont pause application on background, maybe do the post load on return
