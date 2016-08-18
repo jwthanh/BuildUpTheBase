@@ -384,9 +384,9 @@ void BaseScene::create_info_panel()
     building_info_panel->removeFromParent();
 
     auto create_count = [](std::string prefix, res_count_t count) {
-        std::stringstream ss;
-        ss << prefix << ": " << beautify_double(count);
-        return ss.str();
+        char buffer[50];
+        sprintf(buffer,"%s: %s", prefix.c_str(), beautify_double(count).c_str());
+        return std::string(buffer);
     };
 
     const float AVERAGE_DELAY = 0.1f;
@@ -419,7 +419,7 @@ void BaseScene::create_info_panel()
 
         std::stringstream ss;
         res_count_t total_active = 0;
-        for (auto types_to_count : building->harvesters)
+        for (auto&& types_to_count : building->harvesters)
         {
             total_active += types_to_count.second;
         };
@@ -444,7 +444,7 @@ void BaseScene::create_info_panel()
 
         std::stringstream ss;
         res_count_t total_active = 0;
-        for (auto types_to_count : building->salesmen)
+        for (auto&& types_to_count : building->salesmen)
         {
             total_active += types_to_count.second;
         };
@@ -587,7 +587,7 @@ void BaseScene::create_inventory_listview()
         std::vector<maptype> type_vec;
         mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
 
-        for (auto ts : Ingredient::type_map)
+        for (auto&& ts : Ingredient::type_map)
         {
             // type_vec.push_back({ ts.first, map_get(city_ingredients, ts.first, 0) });
 
@@ -602,7 +602,7 @@ void BaseScene::create_inventory_listview()
         auto end = type_vec.end();
         std::sort(begin, end, order_by_count);
 
-        for (auto type_to_count : type_vec)
+        for (auto&& type_to_count : type_vec)
         {
             Ingredient::SubType ing_type = type_to_count.first;
             auto str_type = Ingredient::type_to_string(ing_type);
@@ -681,14 +681,14 @@ void BaseScene::create_inventory_listview()
             {
                 auto it = ing_type; 
                 auto type_str = Ingredient::type_to_string(it);
-                std::stringstream ss;
+                char buffer[50];
 
                 mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
                 res_count_t _def = 0;
                 res_count_t count = map_get(city_ingredients, it, _def);
-                ss << beautify_double(count) << "\n" << type_str;
+                sprintf(buffer, "%s\n%s", beautify_double(count).c_str(), type_str.c_str());
                 auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
-                item_lbl->setString(ss.str());
+                item_lbl->setString(buffer);
 
                 if (count > 0)
                 {
