@@ -393,7 +393,7 @@ std::string Building::get_specifics()
 res_count_t Building::count_ingredients()
 {
     res_count_t total = 0;
-    for (auto type_str : Ingredient::type_map)
+    for (auto&& type_str : Ingredient::type_map)
     {
         Ingredient::SubType type = type_str.first;
         res_count_t def = 0;
