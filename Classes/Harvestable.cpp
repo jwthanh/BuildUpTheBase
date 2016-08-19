@@ -631,7 +631,7 @@ void FightingHarvestable::spawn_enemy()
     this->enemy->sprite_name = "harvester.png";
 
     double base_hp = 20.0;
-    double enemy_hp = scale_number(base_hp, (double)game_logic->get_total_kills(), 1.05);
+    double enemy_hp = scale_number_slow(base_hp, (double)game_logic->get_total_kills(), 1.05, 3.0);
     enemy_hp = std::max(base_hp, enemy_hp); //make sure the enemy has at least 20 hp
 
     double enemy_dmg = 3;

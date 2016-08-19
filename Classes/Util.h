@@ -62,4 +62,17 @@ number_t scale_number(number_t base_number, number_t current_number, number_t ra
     return result;
 };
 
+template<typename number_t>
+number_t scale_number_slow(number_t base_number, number_t current_number, number_t rate, number_t slow_rate=2)
+{
+    //base * (rate**(current/slow_rate))
+    number_t result = base_number * std::pow(rate, std::max(static_cast<number_t>(0), current_number)/slow_rate);
+    if (std::isinf(result))
+    {
+        CCLOG("oh no!, %f * (%f ** %f)", base_number, rate, current_number);
+        return std::numeric_limits<number_t>::max();
+    }
+    return result;
+};
+
 #endif
