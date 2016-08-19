@@ -754,9 +754,7 @@ res_count_t FightingHarvestable::get_per_touch_output()
     res_count_t _def = 0L;
     res_count_t times_increased = map_get(tech_map, tech_type, _def);
 
-    if (times_increased > 0){
-        base += 2.0L * times_increased;
-    };
+    base = scale_number(base, times_increased, 1.2L);
 
     return std::floor(base + (base*0.15*CCRANDOM_MINUS1_1()));
 }
