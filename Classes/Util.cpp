@@ -60,7 +60,7 @@ std::vector<std::string> split(const std::string &s, char delim) {
 
 }
 
-std::vector<std::string> suffixes = {
+const std::vector<const std::string> suffixes = {
     "",
     "M",
     "B",
