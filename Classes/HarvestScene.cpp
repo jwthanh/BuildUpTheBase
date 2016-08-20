@@ -356,6 +356,15 @@ Node* BaseScene::get_original_scene_from_editor()
     return BaseScene::_harvest_scene_from_editor;
 }
 
+struct cached_building_info_t
+{
+    res_count_t ing_count;
+    std::string ing_count_str;
+
+    res_count_t storage_count;
+    std::string storage_str;
+};
+
 void BaseScene::create_info_panel()
 {
     auto building = BUILDUP->get_target_building();
@@ -399,15 +408,48 @@ void BaseScene::create_info_panel()
     update_building_name(0);
 
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
+    cached_building_info_t* cached_building_info = new cached_building_info_t();
+    ing_count->setUserData(static_cast<void*>(cached_building_info));
+
     auto update_ing_count = [create_count, ing_count](float dt)
     {
+        cached_building_info_t* cached = static_cast<cached_building_info_t*>(ing_count->getUserData()); //cant use dynamic_cast on void*
+        if (cached == NULL)
+        {
+            CCLOG("cached data needs to be initialized on create on widget");
+        }
+
         spBuilding building = BUILDUP->get_target_building();
         res_count_t storage_space = building->get_storage_space();
-        std::string&& count = create_count("ING", building->count_ingredients());
-        std::string&& storage = beautify_double(storage_space);
+        std::string storage;
+        if (cached->storage_count != storage_space)
+        {
+            storage = beautify_double(storage_space);
+            cached->storage_count = storage_space;
+            cached->storage_str = storage;
+        }
+        else
+        {
+            storage = cached->storage_str;
+        }
+        res_count_t ing_count_val = building->count_ingredients();
+
+        std::string count;
+        if (cached->ing_count != ing_count_val)
+        {
+            count = create_count("ING", ing_count_val);
+            cached->ing_count = ing_count_val;
+            cached->ing_count_str = count;
+        }
+        else
+        {
+            count = cached->ing_count_str;
+        }
         char buffer[50];
         sprintf(buffer, "%s/%s", count.c_str(), storage.c_str());
         ing_count->setString(buffer);
+
+        ing_count->setUserData(cached);
     };
     this->schedule(update_ing_count, REALTIME_DELAY, "ing_count_update");
     update_ing_count(0);
