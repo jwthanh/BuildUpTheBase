@@ -86,6 +86,7 @@ class ShopNuItem : public Buyable, public NuItem
         ShopNuItem() : Buyable("unset_in_shopnuitem"), resource_cost(NULL) {};
 
         ResourceCondition* resource_cost;
+        res_count_t _last_shop_cost;
 
         virtual bool init(Node* parent, std::string id_key = "");
         virtual bool custom_status_check(float dt);

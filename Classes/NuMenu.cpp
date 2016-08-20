@@ -215,6 +215,7 @@ bool ShopNuItem::init(Node* parent, std::string id_key)
 
     this->id_key = id_key;
     this->_shop_cost = -1;
+    this->_last_shop_cost = -1;
 
     return true;
 }
@@ -254,7 +255,12 @@ void ShopNuItem::update_func(float dt)
     else if (total_coins < cost || !this->custom_status_check(dt))
     {
         try_set_enable(false);
-        this->set_cost_lbl(beautify_double(rounded_cost));
+
+        // this->set_cost_lbl(beautify_double(rounded_cost));
+        if (rounded_cost != this->_last_shop_cost) {
+            this->set_cost_lbl(beautify_double(rounded_cost));
+            this->_last_shop_cost = rounded_cost;
+        };
 
         Color3B color = { 243, 162, 173 };
         try_set_text_color(this->cost_lbl, Color4B::RED);
@@ -263,7 +269,12 @@ void ShopNuItem::update_func(float dt)
     else
     {
         try_set_enable(true);
-        this->set_cost_lbl(beautify_double(rounded_cost));
+
+        // this->set_cost_lbl(beautify_double(rounded_cost));
+        if (rounded_cost != this->_last_shop_cost) {
+            this->set_cost_lbl(beautify_double(rounded_cost));
+            this->_last_shop_cost = rounded_cost;
+        };
 
         try_set_node_color(this->button, Color3B::WHITE);
     };
