@@ -119,7 +119,7 @@ std::string _humanize_number(long double& value)
     _humanize_number_spss.str("");
     _humanize_number_spss << std::fixed << std::setprecision(3) << embiggened / 1000.0;
     std::string str = _humanize_number_spss.str();
-    str.erase ( str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
+    str.erase( str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
 
     auto split_string = split(str, '.');
 
@@ -145,7 +145,7 @@ std::string _humanize_number(long double& value)
         str.pop_back();
     }
 
-    return str + suffix;
+    return str.append(suffix);
 }
 
 std::stringstream _beautify_double_ss;
