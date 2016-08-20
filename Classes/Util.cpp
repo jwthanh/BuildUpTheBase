@@ -121,21 +121,26 @@ std::string _humanize_number(long double& value)
     std::string str = _humanize_number_spss.str();
     str.erase( str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
 
-    auto split_string = split(str, '.');
+    std::string split_string = str;
+    auto start = 0U;
+    auto end = split_string.find('.');
+    std::string post_period = "";
+    if (end != std::string::npos)
+    {
+        post_period = split_string.substr(end, std::string::npos);
+        split_string = split_string.substr(start, end - start);
+    }
 
     //add a comma every 3rd digit (on the left of a period)
-    int insertPosition = split_string.at(0).length() - 3;
+    int insertPosition = split_string.length() - 3;
     while (insertPosition > 0) {
-        split_string.at(0).insert(insertPosition, ",");
+        split_string.insert(insertPosition, ",");
         insertPosition -= 3;
     }
 
     _humanize_number_ss.str("");
-    _humanize_number_ss << split_string.at(0);
-    if (split_string.size() > 1) //a_humanize_number_ssumes only two elems in vector
-    {
-        _humanize_number_ss << "." << split_string.at(1);
-    }
+    _humanize_number_ss << split_string;
+    _humanize_number_ss << post_period;
 
     str = _humanize_number_ss.str();
 
