@@ -336,7 +336,23 @@ void SideListView::setup_building_listview_as_upgrades()
 
             int i = 0;
             int max_level = 15;
-            for (int level = 2; level <= max_level; level++)
+            for (int level = building->building_level; level <= max_level; level++)
+            {
+                int child_tag = i;
+                i++;
+
+
+                //if the child already exists, put it at the end of the listview, maintaining order as config
+                bool existed = this->try_push_back(child_tag, listview);
+                if (existed) { continue; };
+
+                UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create(listview, building);
+                menu_item->my_init(level);
+
+                menu_item->setTag(child_tag);
+
+            };
+            for (int level = 2; level <= building->building_level; level++)
             {
                 int child_tag = i;
                 i++;
