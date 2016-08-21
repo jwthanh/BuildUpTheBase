@@ -159,9 +159,9 @@ bool GameLogic::init()
     instance->beatup->retain();
     instance->buildup = instance->beatup->buildup;
 
-    this->coin_save_clock = new Clock(15.0f);
-    this->coin_rate_per_sec_clock = new Clock(1.0f);
-    this->power_sell_all_cooldown = new Clock(0.5f);
+    this->coin_save_clock = std::make_shared<Clock>(15.0f);
+    this->coin_rate_per_sec_clock = std::make_shared<Clock>(1.0f);
+    this->power_sell_all_cooldown = std::make_shared<Clock>(0.5f);
 
     return true;
 };

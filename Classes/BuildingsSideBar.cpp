@@ -77,6 +77,7 @@ SideListView::SideListView(Node* parent, spBuilding current_target) : current_ta
     this->setup_listviews();
     this->setup_tab_buttons();
 
+
     this->tabs.button_map = std::map<ui::Button*, std::pair<TabManager::TabTypes, spListviewMap>>{
         { this->tab_shop_btn, { TabManager::TabTypes::ShopTab, this->shop_listviews } },
         { this->tab_detail_btn, { TabManager::TabTypes::DetailTab, this->detail_listviews } },
