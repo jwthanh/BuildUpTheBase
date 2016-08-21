@@ -20,6 +20,7 @@
 #include "Technology.h"
 #include "Beatup.h"
 #include "Serializer.h"
+#include "Clock.h"
 
 
 USING_NS_CC;
@@ -576,6 +577,9 @@ void SideListView::setup_powers_listview_as_powers()
                         building->ingredients[ing_type] = 0;
                     }
                 }
+
+                //start the countdown for the cooldown
+                GameLogic::getInstance()->power_sell_all_cooldown->reset();
             });
 
         };

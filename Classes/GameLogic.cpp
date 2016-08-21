@@ -161,6 +161,7 @@ bool GameLogic::init()
 
     this->coin_save_clock = new Clock(15.0f);
     this->coin_rate_per_sec_clock = new Clock(1.0f);
+    this->power_sell_all_cooldown = new Clock(0.5f);
 
     return true;
 };
@@ -199,6 +200,13 @@ void GameLogic::update(float dt)
             BEATUP->_last_total_coins = BEATUP->get_total_coins();
 
         };
+    }
+
+    this->power_sell_all_cooldown->update(dt);
+    if (this->power_sell_all_cooldown->passed_threshold())
+    {
+        this->power_sell_all_cooldown->reset();
+        DataManager::set_double_from_data(Beatup::total_coin_key, this->beatup->get_total_coins());
     }
 };
 
