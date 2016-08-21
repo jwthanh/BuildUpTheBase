@@ -124,6 +124,8 @@ class CraftingHarvestable : public Harvestable
         void animate_touch_start(cocos2d::Touch* touch);
 
         virtual void animate_clip() override;
+
+        virtual bool should_shatter() override;
         virtual void shatter() override;
 };
 

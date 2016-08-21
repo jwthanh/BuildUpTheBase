@@ -508,10 +508,25 @@ void CraftingHarvestable::animate_clip()
     this->addChild(spark_parts);
 }
 
+bool CraftingHarvestable::should_shatter()
+{
+    bool has_recipe = this->recipe != NULL;
+    //dont ever shatter if no recipe
+    if (has_recipe == false)
+    {
+        return false;
+    }
+
+    auto total_ingredients = BUILDUP->get_all_ingredients();
+    bool is_satisfied = this->recipe->is_satisfied(total_ingredients);
+
+    return is_satisfied;
+};
+
 void CraftingHarvestable::shatter()
 {
     if (this->recipe != NULL) {
-        CCLOG("clicked enough, time to output");
+        CCLOG("SHATTER CRAFTING, consume recipe now!");
     };
 
     Harvestable::shatter();
