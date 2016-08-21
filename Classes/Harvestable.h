@@ -11,6 +11,8 @@ class Beatup;
 
 class Harvestable : public cocos2d::ui::Widget
 {
+
+
     //needs to do something when harvested, animations
     //
     //it might represent a building or a specific resource
@@ -20,8 +22,6 @@ class Harvestable : public cocos2d::ui::Widget
         float initial_scale;
 
         CREATE_FUNC(Harvestable);
-        bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) override;
-        void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         virtual bool init() override;
         virtual std::string get_sprite_path();
@@ -37,18 +37,34 @@ class Harvestable : public cocos2d::ui::Widget
         int click_limit;
         int current_clicks;
 
-        float get_click_ratio() const;
-
-        virtual bool should_shatter();
-        virtual void animate_harvest();
+        bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) override;
+        virtual void animate_touch_start(cocos2d::Touch* touch);
         res_count_t get_per_touch_output();
         void spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, float duration, std::string floating_msg);
-        virtual void animate_touch_start(cocos2d::Touch* touch);
+
+
+        /* onTouchBegan -> animate_touch_start
+         * [animate_touch_start] -> get_per_touch_output
+         * [animate_touch_start] -> animate_flash_action
+         [animate_touch_start] -> spawn_label_on_touch
+
+         * onTouchEnded -> [animate_touch_end]
+         * [animate_touch_end] -> animate_harvest -> animate_clip ->animate_rotate
+         * [animate_touch_end] -> on_harvest
+         * [animate_touch_end] -> should_shatter -> shatter
+         */
+
+        void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
         virtual void animate_touch_end(cocos2d::Touch* touch);
-        virtual void animate_rotate();
-        virtual void animate_clip();
-        virtual void shatter();
+        virtual void animate_harvest();
         virtual void on_harvest();
+        virtual void animate_clip();
+        virtual void animate_rotate();
+
+        virtual bool should_shatter();
+        virtual void shatter();
+
+        float get_click_ratio() const;
 
 };
 
