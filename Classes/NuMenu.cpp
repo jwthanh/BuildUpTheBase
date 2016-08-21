@@ -131,6 +131,20 @@ bool NuItem::init(cocos2d::Node* parent)
 
 };
 
+void NuItem::update_func(float dt)
+{
+    //either cooldown doesnt exist or the cooldown is over
+    bool cooldown_satisfied = this->cooldown == NULL || this->cooldown->passed_threshold();
+    if (cooldown_satisfied)
+    {
+        this->try_set_enable(true);
+    }
+    else
+    {
+        this->try_set_enable(false);
+    }
+};
+
 void NuItem::set_touch_ended_callback(std::function<void(void)> callback)
 {
     this->button->addTouchEventListener([this, callback](Ref* sender, ui::Widget::TouchEventType type)

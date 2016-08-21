@@ -563,9 +563,12 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item->set_title("Sell all");
             menu_item->set_description("Sells all resources instantly");
             menu_item->set_image("fightJoy_47.png");
+            menu_item->cooldown = GameLogic::getInstance()->power_sell_all_cooldown;
+
 
             menu_item->set_touch_ended_callback([]()
             {
+                CCLOG("selling all by cb");
                 res_count_t sale_price = 10; //TODO use proper price
                 for (spBuilding building : BUILDUP->city->buildings)
                 {

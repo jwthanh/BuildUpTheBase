@@ -44,7 +44,8 @@ class NuItem : public cocos2d::ui::Widget
         void set_touch_ended_callback(std::function<void(void)> callback);
 
         //handle stuff like been bought, can be pressed etc
-        virtual void update_func(float dt) {};
+        spClock cooldown;
+        virtual void update_func(float dt);
 };
 
 class BuildingNuItem : public NuItem

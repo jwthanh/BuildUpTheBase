@@ -161,7 +161,8 @@ bool GameLogic::init()
 
     this->coin_save_clock = std::make_shared<Clock>(15.0f);
     this->coin_rate_per_sec_clock = std::make_shared<Clock>(1.0f);
-    this->power_sell_all_cooldown = std::make_shared<Clock>(0.5f);
+    this->power_sell_all_cooldown = std::make_shared<Clock>(5.0f);
+    this->power_sell_all_cooldown->start_time = 99999.0f; //start this timer off completed
 
     return true;
 };
@@ -202,12 +203,8 @@ void GameLogic::update(float dt)
         };
     }
 
+    //only ever increment this, it'll get reset on callback for power in sidebar
     this->power_sell_all_cooldown->update(dt);
-    if (this->power_sell_all_cooldown->passed_threshold())
-    {
-        this->power_sell_all_cooldown->reset();
-        DataManager::set_double_from_data(Beatup::total_coin_key, this->beatup->get_total_coins());
-    }
 };
 
 GameLogic* GameLogic::getInstance()
