@@ -60,7 +60,6 @@ bool NuItem::init(cocos2d::Node* parent)
 
     if (NuItem::orig_button == NULL)
     {
-        CCLOG("creating NuItem::orig_button, should only happen once");
         auto inst = cocos2d::CSLoader::getInstance();
         NuItem::orig_button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
         load_default_button_textures(NuItem::orig_button);
@@ -182,20 +181,17 @@ void NuItem::set_image(std::string path)
 
 void NuItem::set_title(std::string title)
 {
-    //CCLOG(title.c_str());
     this->title_lbl->setString(title);
 };
 
 void NuItem::set_description(std::string description)
 {
-    //CCLOG(description.c_str());
     this->desc_lbl->setString(description);
 };
 
 void NuItem::set_cost_lbl(std::string cost)
 {
     if (cost != ""){ //cost has content
-        //CCLOG(cost.c_str());
         this->cost_lbl->setString("$"+cost);
     } else { //cost is blank, widen description TODO use orig_buttons positions so this isnt hardcoded
         this->cost_lbl->setString("");
@@ -568,8 +564,6 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
 
         if (cost <= total_coins)
         {
-            CCLOG("Bought level %i", this->building_level);
-
             BEATUP->add_total_coin(-((double)(cost)));
 
             auto building = BUILDUP->get_target_building();
@@ -723,7 +717,6 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
 
         if (cost <= total_coins)
         {
-            CCLOG("HarvesterShopNuItem bought a harvester");
             BEATUP->add_total_coin(-((double)(cost)));
             auto building = BUILDUP->get_target_building();
 
@@ -767,7 +760,6 @@ void SalesmanShopNuItem::my_init_touch_ended_callback()
 
         if (cost <= total_coins)
         {
-            CCLOG("SalesmanShopNuItem bought a salesman");
             BEATUP->add_total_coin(-((double)(cost)));
             auto building = BUILDUP->get_target_building();
 
@@ -903,7 +895,6 @@ void ConsumerShopNuItem::my_init_touch_ended_callback()
 
         if (cost <= total_coins)
         {
-            CCLOG("ConsumerShopNuItem bought a consumer");
             BEATUP->add_total_coin(-((double)(cost)));
             auto building = BUILDUP->get_target_building();
 
