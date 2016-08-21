@@ -15,6 +15,8 @@
 #include "GameLogic.h"
 #include "Recipe.h"
 #include "Technology.h"
+#include "HarvestScene.h"
+#include "BuildingsSideBar.h"
 
 
 USING_NS_CC;
@@ -566,6 +568,12 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
             Scene* scene = Director::getInstance()->getRunningScene();
             scene->runAction(FShake::actionWithDuration(0.25f, 2.5f));
             scene->addChild(explosion_parts);
+
+            HarvestScene* base_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+            ui::ListView* building_listview = dynamic_cast<ui::ListView*>(base_scene->sidebar->building_listviews->at(this->building->name));
+            building_listview->removeAllChildren();
+
+
 
             do_vibrate(175);
 
