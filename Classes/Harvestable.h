@@ -42,6 +42,7 @@ class Harvestable : public cocos2d::ui::Widget
         virtual bool should_shatter();
         virtual void animate_harvest();
         res_count_t get_per_touch_output();
+        void spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, float duration, std::string floating_msg);
         virtual void animate_touch_start(cocos2d::Touch* touch);
         virtual void animate_touch_end(cocos2d::Touch* touch);
         virtual void animate_rotate();

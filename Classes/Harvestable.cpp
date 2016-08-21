@@ -113,6 +113,27 @@ res_count_t Harvestable::get_per_touch_output()
     return base;
 }
 
+void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, float duration, std::string floating_msg)
+{
+    auto scale_to = ScaleTo::create(duration, end_scale);
+    auto ease = EaseElasticOut::create(scale_to, duration);
+    this->runAction(ease);
+
+    auto floating_label = FloatingLabel::createWithTTF(floating_msg, DEFAULT_FONT, 30);
+    auto pos = touch->getLocation();
+    pos.x += cocos2d::rand_minus1_1()*20.0f;
+    pos.y += cocos2d::rand_minus1_1()*20.0f;
+
+#ifdef __ANDROID__
+    pos.y += 75.0f; //dont get hidden by finger
+#endif
+
+    floating_label->setPosition(pos);
+    floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+    this->getParent()->addChild(floating_label);
+    floating_label->do_float();
+}
+
 void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 {
     float end_scale = this->initial_scale*0.85f;
@@ -144,24 +165,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         animate_flash_action(ingredient_count, 0.2f, 1.15f);
     };
 
-    auto scale_to = ScaleTo::create(duration, end_scale);
-    auto ease = EaseElasticOut::create(scale_to, duration);
-    this->runAction(ease);
-
-    auto floating_label = FloatingLabel::createWithTTF(floating_msg, DEFAULT_FONT, 30);
-    auto pos = touch->getLocation();
-    pos.x += cocos2d::rand_minus1_1()*20.0f;
-    pos.y += cocos2d::rand_minus1_1()*20.0f;
-
-#ifdef __ANDROID__
-    pos.y += 75.0f; //dont get hidden by finger
-#endif
-
-    floating_label->setPosition(pos);
-    floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
-    this->getParent()->addChild(floating_label);
-    floating_label->do_float();
-
+    this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
 }
 
 bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
