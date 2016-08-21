@@ -104,6 +104,9 @@ class CraftingHarvestable : public Harvestable
         void init_clicks() override;
         std::string get_sprite_path() override;
 
+        void on_harvest();
+        void animate_touch_start(cocos2d::Touch* touch);
+
         virtual void animate_clip() override;
         virtual void shatter() override;
 };

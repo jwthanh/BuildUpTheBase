@@ -455,6 +455,27 @@ std::string CraftingHarvestable::get_sprite_path()
     return "anvil.png";
 };
 
+void CraftingHarvestable::on_harvest()
+{
+    //dont do anything yet, will need to deal with recipes or something
+};
+
+void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
+{
+    float end_scale = this->initial_scale*0.85f;
+    float duration = 0.5f;
+
+    std::stringstream ss;
+    ss << "No recipe yet";
+
+    std::string floating_msg = ss.str();
+    
+    //TODO handle message for being too full on recipe, like in
+    //Harvestable::animate_touch_start
+
+    this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
+};
+
 void CraftingHarvestable::init_clicks()
 {
     if (!this->recipe) {
