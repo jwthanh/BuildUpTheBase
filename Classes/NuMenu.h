@@ -33,7 +33,10 @@ class NuItem : public cocos2d::ui::Widget
         cocos2d::ui::Text* cost_lbl;
         cocos2d::ui::Text* count_lbl;
 
+        std::string _original_image_path;
+
         void set_image(std::string path);
+        void set_original_image(std::string path);
         void set_title(std::string title);
         void set_description(std::string description);
         void set_cost_lbl(std::string cost);

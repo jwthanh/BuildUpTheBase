@@ -88,6 +88,8 @@ bool NuItem::init(cocos2d::Node* parent)
     parent->addChild(this); //FIXME hack to get the selector to run. ideally the button would be a child of this but then button doesnt go on the right spot
     parent->addChild(button);
 
+    this->_original_image_path = "";
+
     this->item_icon = static_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
     this->title_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
     setup_text_node(this->title_lbl);
@@ -137,10 +139,12 @@ void NuItem::update_func(float dt)
     if (cooldown_satisfied)
     {
         this->try_set_enable(true);
+        this->set_image(this->_original_image_path);
     }
     else
     {
         this->try_set_enable(false);
+        this->set_image("locked.png");
     }
 };
 
@@ -157,6 +161,11 @@ void NuItem::set_touch_ended_callback(std::function<void(void)> callback)
         }
     });
 
+};
+
+void NuItem::set_original_image(std::string path)
+{
+    this->_original_image_path = path;
 };
 
 void NuItem::set_image(std::string path)

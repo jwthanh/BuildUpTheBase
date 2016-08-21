@@ -563,6 +563,7 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item->set_title("Sell all");
             menu_item->set_description("Sells all resources instantly");
             menu_item->set_image("fightJoy_47.png");
+            menu_item->set_original_image("fightJoy_47.png");
             menu_item->cooldown = GameLogic::getInstance()->power_sell_all_cooldown;
 
 
