@@ -115,12 +115,26 @@ res_count_t Harvestable::get_per_touch_output()
 
 void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, float duration, std::string floating_msg)
 {
+    /*
+     * if touch is null, it uses center of sprite
+     */
+
     auto scale_to = ScaleTo::create(duration, end_scale);
     auto ease = EaseElasticOut::create(scale_to, duration);
     this->runAction(ease);
 
+    Vec2 pos;
     auto floating_label = FloatingLabel::createWithTTF(floating_msg, DEFAULT_FONT, 30);
-    auto pos = touch->getLocation();
+    if (touch)
+    {
+        pos = touch->getLocation();
+    }
+    else 
+    {
+        auto sprite_size = this->get_sprite_size();
+        pos = this->getPosition() + Vec2(sprite_size);
+    }
+
     pos.x += cocos2d::rand_minus1_1()*20.0f;
     pos.y += cocos2d::rand_minus1_1()*20.0f;
 
@@ -277,14 +291,9 @@ void Harvestable::shatter()
 
     shatter_sprite->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
 
-    //spawn label //TODO fix hardcoded name
-    auto floating_label = FloatingLabel::createWithTTF("+1 Harvest", DEFAULT_FONT, 24);
-    floating_label->setPosition(
-        this->getPosition() + Vec2(sprite_size)
-        );
-    floating_label->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
-    this->getParent()->addChild(floating_label);
-    floating_label->do_float(1, 100, 10, 100, 1);
+    //spawn label
+    //TODO fix hardcoded name
+    this->spawn_label_on_touch(NULL, 1, 1, "+1 Harvest");
 
     CallFunc* remove = CallFunc::create([this](){ this->removeFromParent(); });
 
@@ -466,7 +475,14 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
     float duration = 0.5f;
 
     std::stringstream ss;
-    ss << "No recipe yet";
+    if (this->recipe == NULL)
+    {
+        ss << "No recipe yet";
+    }
+    else 
+    {
+        ss << "used a resource";
+    }
 
     std::string floating_msg = ss.str();
     
