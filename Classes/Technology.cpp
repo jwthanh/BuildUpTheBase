@@ -61,7 +61,7 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
         recipe = std::make_shared<Recipe>("combat_damage", "no desc for tech recipe");
         auto tech_map = building->techtree->tech_map;
         res_count_t _def = 0;
-        res_count_t souls_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 1.45L));
+        res_count_t souls_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 1.15L));
         recipe->components = mistIngredient({{ Ingredient::SubType::Soul, souls_cost }});
         ss << "Increases combat damage\n-- costs " << beautify_double(souls_cost) << " souls";
     }
