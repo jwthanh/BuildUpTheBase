@@ -1,5 +1,7 @@
 #include "Recipe.h"
 #include <algorithm>
+#include "GameLogic.h"
+#include "HouseBuilding.h"
 
 
 void Recipe::callback()
@@ -66,14 +68,15 @@ bool Recipe::is_satisfied(mistIngredient input)
     return true;
 };
 
-void Recipe::consume(mistIngredient& input)
+void Recipe::consume()
 {
     ComponentMap temp_map = ComponentMap(this->components);
-    if (this->is_satisfied(input))
+    auto all_ingredients = BUILDUP->get_all_ingredients();
+    if (this->is_satisfied(all_ingredients))
     {
         for (auto component_pair : temp_map)
         {
-            input[component_pair.first] -= component_pair.second;
+            BUILDUP->remove_shared_ingredients_from_all(component_pair.first, component_pair.second);
         }
 
         this->callback();

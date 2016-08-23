@@ -452,12 +452,15 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
         auto farm = this->buildup->city->building_by_name("The Farm");
         Recipe heal_recipe = Recipe("HealingGrain");
         heal_recipe.components[Ingredient::SubType::Grain] = 5;
-        if (heal_recipe.is_satisfied(farm->ingredients))
+
+        auto all_ingredients = BUILDUP->get_all_ingredients();
+
+        if (heal_recipe.is_satisfied(all_ingredients))
         {
             auto arena = this->buildup->city->building_by_name("The Arena");
             auto fighter = arena->fighters.front();
             fighter->attrs->health->current_val += 50;
-            heal_recipe.consume(farm->ingredients);
+            heal_recipe.consume();
             printj("healed first fighter");
         }
     }
