@@ -11,6 +11,7 @@ namespace cocos2d
     namespace ui 
     {
         class Text;
+        class ScrollView;
     };
 };
 
@@ -35,6 +36,7 @@ class TextBlobModal : public BaseModal
 {
     private:
         //TODO figure how to resize dynamically
+        cocos2d::ui::ScrollView* _body_scroll;
         cocos2d::ui::Text* _body_lbl;
 
     public:

@@ -44,16 +44,17 @@ TextBlobModal::TextBlobModal(cocos2d::Node* parent) : BaseModal(parent)
 {
 
     //scrollable body
-    ui::ScrollView* body_scroll = dynamic_cast<ui::ScrollView*>(this->_node->getChildByName("body_scroll"));
-    body_scroll->setScrollBarAutoHideEnabled(false);
-    body_scroll->setScrollBarEnabled(true);
-    body_scroll->scrollToTop(0.0f, false);
+    this->_body_scroll = dynamic_cast<ui::ScrollView*>(this->_node->getChildByName("body_scroll"));
+    this->_body_scroll->setScrollBarAutoHideEnabled(false);
+    this->_body_scroll->setScrollBarEnabled(true);
+    this->_body_scroll->scrollToTop(0.0f, false);
+    this->_body_scroll->setUnifySizeEnabled(true);
 
     //fill message up
-    this->_body_lbl = dynamic_cast<cocos2d::ui::Text*>(body_scroll->getChildByName("body_lbl"));
+    this->_body_lbl = dynamic_cast<cocos2d::ui::Text*>(this->_body_scroll->getChildByName("body_lbl"));
     set_aliasing(this->_body_lbl);
-    this->set_body("No body yet");
 
+    this->set_body("No body yet");
 };
 
 void TextBlobModal::set_body(const std::string& body)

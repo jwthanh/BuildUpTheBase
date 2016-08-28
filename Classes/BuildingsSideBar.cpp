@@ -673,7 +673,16 @@ void SideListView::setup_powers_listview_as_powers()
                 auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
                 auto modal = new TextBlobModal(scene);
                 modal->set_title("Debug Log");
-                modal->set_body(Logger::get_log_contents());
+                std::string raw_log_string = Logger::get_log_contents();
+
+                auto split_messages = split(raw_log_string, '\n');
+                std::reverse(split_messages.begin(), split_messages.end());
+                std::stringstream joined_ss;
+                for (auto s : split_messages)
+                {
+                    joined_ss << s << std::endl;
+                };
+                modal->set_body(joined_ss.str());
             });
 
         };
