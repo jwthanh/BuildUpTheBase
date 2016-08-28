@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "HarvestScene.h"
 #include "GameLogic.h"
+#include "FileOperation.h"
 
 USING_NS_CC;
 
@@ -28,6 +29,19 @@ void AppDelegate::initGLContextAttrs()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+
+    //setup logging paths
+    el::Configurations conf;
+    conf.setToDefault();
+    std::stringstream log_config_ss;
+    log_config_ss << "* GLOBAL:\n";
+    log_config_ss << " FILENAME = " << FileIO::get_correct_path("game_log.log", false) << "\n";
+    log_config_ss << " FORMAT = " << "%msg" << "\n";
+    log_config_ss << "* ERROR:\n";
+    log_config_ss << " FORMAT = " << "%datetime{%d/%M} %func %msg\n";
+    conf.parseFromText(log_config_ss.str());
+    el::Loggers::reconfigureLogger("default", conf);
+
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
