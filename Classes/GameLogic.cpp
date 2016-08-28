@@ -8,6 +8,7 @@
 #include "Util.h"
 #include "cocostudio/ActionTimeline/CSLoader.h"
 #include "MiscUI.h"
+#include "Modal.h"
 
 USING_NS_CC;
 
@@ -109,43 +110,19 @@ void GameLogic::post_load()
     CCLOG(gains_ss.str().c_str());
 
     auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-    auto inst = cocos2d::CSLoader::getInstance();
-    cocos2d::Node* root_message_node = inst->CSLoader::createNode("editor/details/message_detail.csb");
-    cocos2d::Node* message_panel = root_message_node->getChildByName("message_panel");
-    message_panel->removeFromParent();
-    message_panel->setPosition(GameLayer::get_center_pos());
 
-    auto title_lbl = dynamic_cast<cocos2d::ui::Text*>(message_panel->getChildByName("title_lbl"));
-    title_lbl->setString("Welcome Back!");
-    set_aliasing(title_lbl, true);
+    //TODO clean up modal memory
+    TextBlobModal* modal = new TextBlobModal(scene);
+    modal->set_title("Welcome Back!");
 
-    //set scrollbar up
-    ui::ScrollView* body_scroll = dynamic_cast<ui::ScrollView*>(message_panel->getChildByName("body_scroll"));
-    body_scroll->setScrollBarAutoHideEnabled(false);
-    body_scroll->setScrollBarEnabled(true);
-    body_scroll->scrollToTop(0.0f, false);
-
-    //fill message up
-    auto body_lbl = dynamic_cast<cocos2d::ui::Text*>(body_scroll->getChildByName("body_lbl"));
-    set_aliasing(body_lbl);
     if (at_capacity_ss.str() != "")
     {
-        body_lbl->setString(at_capacity_ss.str() + "\n---\n\n" + gains_ss.str());
+        modal->set_body(at_capacity_ss.str() + "\n---\n\n" + gains_ss.str());
     }
     else
     {
-        body_lbl->setString(gains_ss.str());
+        modal->set_body(gains_ss.str());
     }
-    scene->addChild(message_panel);
-
-    ui::Layout* close_panel = dynamic_cast<ui::Layout*>(message_panel->getChildByName("close_panel"));
-    auto cb = [message_panel](Ref* target, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            message_panel->removeFromParent();
-        };
-    };
-    close_panel->addTouchEventListener(cb);
 
     //set the last login time, set here and on save
     BEATUP->set_last_login();
