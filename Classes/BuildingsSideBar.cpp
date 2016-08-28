@@ -21,6 +21,8 @@
 #include "Beatup.h"
 #include "Serializer.h"
 #include "Clock.h"
+#include "Modal.h"
+#include "Logging.h"
 
 
 USING_NS_CC;
@@ -537,6 +539,7 @@ void SideListView::setup_powers_listview_as_powers()
     {
         ui::ListView* listview = this->powers_listviews->at(building->name);
 
+        ///sell all power
         auto update_sellall = [this, listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
@@ -592,6 +595,9 @@ void SideListView::setup_powers_listview_as_powers()
         listview->schedule(update_sellall, AVERAGE_DELAY, "update_sellall");
         update_sellall(0);
 
+
+
+        /// save
         auto update_save = [this, listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
@@ -630,6 +636,49 @@ void SideListView::setup_powers_listview_as_powers()
 
         listview->schedule(update_save, AVERAGE_DELAY, "update_save");
         update_save(0);
+
+
+        ///Open log alert
+        auto open_log = [this, listview, building, tab_type](float dt)
+        {
+            if (this->tabs.is_tab_active(tab_type, building) == false)
+            {
+                listview->setVisible(false);
+                return;
+            }
+            listview->setVisible(true);
+
+            //if the child already exists, put it at the back 
+            std::string child_name = "open_log";
+            auto existing_node = listview->getChildByName(child_name);
+            if (existing_node)
+            {
+                existing_node->removeFromParentAndCleanup(false);
+                listview->addChild(existing_node);
+                return;
+            }
+
+            //clone the new item
+            BuildingNuItem* menu_item;
+            menu_item = BuildingNuItem::create(listview, building);
+            menu_item->setName(child_name);
+            menu_item->set_title("Open log");
+            menu_item->set_description("See what's been happening");
+            menu_item->set_image("lineDark29.png");
+
+            menu_item->set_touch_ended_callback([]()
+            {
+                CCLOG("Pressed open log");
+
+                auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+                auto modal = new TextBlobModal(scene);
+                modal->set_body(Logger::get_log_contents());
+            });
+
+        };
+
+        listview->schedule(open_log, AVERAGE_DELAY, "open_log");
+        open_log(0);
     }
 };
 

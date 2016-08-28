@@ -10,27 +10,41 @@
 
 int read_counts = 0;
 
-rjDocument FileIO::open_json(std::string json_path, bool builtin_path)
+std::string FileIO::get_correct_path(const std::string& path, bool builtin_path)
 {
+    
+    std::string corrected_path = path;
     auto file_utils = cocos2d::FileUtils::getInstance();
+    if (builtin_path == false)
+    {
+        corrected_path = cocos2d::FileUtils::getInstance()->getWritablePath() + path;
+    }
+
+    return corrected_path;
+}
+
+std::string FileIO::get_string_from_file(const std::string& path, bool builtin_path)
+{
+
+    std::string corrected_path = FileIO::get_correct_path(path, builtin_path);
 
     CCLOG("read count %i", read_counts);
     read_counts += 1;
 
-    //builtin paths are in Resources, otherwise its in UserDefaults folder
-    if (builtin_path == false)
-    {
-        json_path = cocos2d::FileUtils::getInstance()->getWritablePath() + json_path;
-    }
+    auto file_utils = cocos2d::FileUtils::getInstance();
+    return file_utils->getStringFromFile(corrected_path);
+}
 
-    std::string jsonBuffer = file_utils->getStringFromFile(json_path);
+rjDocument FileIO::open_json(std::string& json_path, bool builtin_path)
+{
+    std::string jsonBuffer = FileIO::get_string_from_file(json_path, builtin_path);
     auto jsonDoc = rjDocument();
     jsonDoc.Parse(jsonBuffer.c_str());
 
     return jsonDoc;
 }
 
-void FileIO::save_json(std::string json_path, rapidjson::GenericDocument<rapidjson::UTF8<>,rapidjson::CrtAllocator>& document, bool overwrite)
+void FileIO::save_json(std::string& json_path, rapidjson::GenericDocument<rapidjson::UTF8<>,rapidjson::CrtAllocator>& document, bool overwrite)
 {
     auto file_utils = cocos2d::FileUtils::getInstance();
     //Use the same folder UserDefaults is in, otherwise it saves in Resources

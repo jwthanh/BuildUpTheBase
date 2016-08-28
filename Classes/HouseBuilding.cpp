@@ -629,7 +629,8 @@ void Buildup::post_update()
     coins_string = coins_string.substr(0, coins_string.find('.'));
 
     //create a json doc, set the { 'coins' : coins } json obj, along with the buildings json
-    rjDocument doc = FileIO::open_json("test_building.json", false);
+    std::string savefile_path = "test_building.json";
+    rjDocument doc = FileIO::open_json(savefile_path, false);
 
     //build the rjValues that become the key and values in the dict
     rjValue key = rjValue(rapidjson::kStringType);
