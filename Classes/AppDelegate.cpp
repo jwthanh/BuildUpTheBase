@@ -37,8 +37,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
     log_config_ss << "* GLOBAL:\n";
     log_config_ss << " FILENAME = " << FileIO::get_correct_path("game_log.log", false) << "\n";
     log_config_ss << " FORMAT = " << "%msg" << "\n";
+    log_config_ss << "* INFO:\n";
+    log_config_ss << " FORMAT = " << "%datetime{%H:%m} %msg\n";
     log_config_ss << "* ERROR:\n";
-    log_config_ss << " FORMAT = " << "%datetime{%d/%M} %func %msg\n";
+    log_config_ss << " FORMAT = " << "%datetime %level %msg\n";
+    log_config_ss << "* WARNING:\n";
+    log_config_ss << " FORMAT = " << "%datetime %level %msg\n";
     conf.parseFromText(log_config_ss.str());
     el::Loggers::reconfigureLogger("default", conf);
 
@@ -126,9 +130,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     loading_scene->setOnEnterCallback(load_cb);
     director->pushScene(loading_scene);
-
-    LOG(INFO) << "finished loading";
-
 
     return true;
 }

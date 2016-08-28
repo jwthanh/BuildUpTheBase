@@ -9,6 +9,7 @@
 #include "cocostudio/ActionTimeline/CSLoader.h"
 #include "MiscUI.h"
 #include "Modal.h"
+#include "external/easylogging.h"
 
 USING_NS_CC;
 
@@ -84,6 +85,7 @@ void GameLogic::post_load()
     else
     {
         gains_ss << "Awfully suspicious..." << std::endl;
+        LOG(WARNING) << "time jump cheat detected";
 
         for (spBuilding building : BUILDUP->city->buildings)
         {
@@ -126,6 +128,7 @@ void GameLogic::post_load()
 
     //set the last login time, set here and on save
     BEATUP->set_last_login();
+    LOG(INFO) << "game loaded";
 }
 
 bool GameLogic::init()
@@ -217,6 +220,7 @@ int GameLogic::get_total_kills()
 
 void GameLogic::save_all()
 {
+    LOG(INFO) << "Starting save";
     for (spBuilding building : BUILDUP->city->buildings)
     {
         auto bldg_serializer = BuildingSerializer("test_building.json", building);
@@ -227,10 +231,13 @@ void GameLogic::save_all()
     DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());
 
     //set the last login time, set here and on load
+    LOG(INFO) << "Marking last login";
     BEATUP->set_last_login();
 
     //update the remote server
+    LOG(INFO) << "posting to leaderboard";
     BUILDUP->post_update();
+    LOG(INFO) << "completed post to leaderboard";
 };
 
 void GameLogic::load_all()
