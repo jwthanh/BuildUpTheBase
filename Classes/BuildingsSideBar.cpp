@@ -664,7 +664,7 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item->setName(child_name);
             menu_item->set_title("Open log");
             menu_item->set_description("See what's been happening");
-            menu_item->set_image("lineDark29.png");
+            menu_item->set_image("lineDark28.png");
 
             menu_item->set_touch_ended_callback([]()
             {
@@ -672,6 +672,7 @@ void SideListView::setup_powers_listview_as_powers()
 
                 auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
                 auto modal = new TextBlobModal(scene);
+                modal->set_title("Debug Log");
                 modal->set_body(Logger::get_log_contents());
             });
 
