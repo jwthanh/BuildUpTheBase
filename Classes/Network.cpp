@@ -10,6 +10,7 @@
 // #endif
 
 #include "cocos2d.h"
+#include "external/easylogging.h"
 
 using namespace cocos2d;
 
@@ -52,6 +53,7 @@ bool Request::init(Type request_type, std::string url, std::string data)
             std::string resp_str = this->get_response_str();
             CCLOG("response is %s", resp_str.c_str());
         } else {
+            LOG(ERROR) << "web request errored out" << this->get_response_str();
             CCLOG("empty response or error");
         }
         this->release();
@@ -121,7 +123,8 @@ void Request::set_callback(std::function<void(std::string)> callback)
         if (this->is_valid_response()) {
             callback(this->get_response_str());
         } else {
-            CCLOG("Error bad response from server with %s", this->_request->getUrl());
+            LOG(ERROR) << "Error bad response from server at " << this->_request->getUrl();
+            CCLOG("Error bad response from server at %s", this->_request->getUrl());
         }
     };
 
