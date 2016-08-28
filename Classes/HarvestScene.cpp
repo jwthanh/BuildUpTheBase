@@ -29,6 +29,7 @@
 #include <json/writer.h>
 #include "Serializer.h"
 #include <regex>
+#include "Modal.h"
 
 USING_NS_CC;
 
@@ -72,6 +73,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_A)
     {
+        new TextBlobModal(this);
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F1) 
     {
