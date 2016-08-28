@@ -20,9 +20,11 @@ class BaseModal
     protected:
         //base node for all children
         cocos2d::Node* _node;
+
         cocos2d::ui::Text* _title_lbl;
 
     public:
+        //TODO figure out how to clean this up properly, maybe subclass Ref*
         BaseModal(cocos2d::Node* parent);
 
         void set_title(const std::string& title);
@@ -32,6 +34,7 @@ class BaseModal
 class TextBlobModal : public BaseModal
 {
     private:
+        //TODO figure how to resize dynamically
         cocos2d::ui::Text* _body_lbl;
 
     public:
