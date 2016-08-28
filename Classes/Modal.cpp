@@ -5,6 +5,7 @@
 
 #include "GameLayer.h"
 #include "MiscUI.h"
+#include "Util.h"
 
 USING_NS_CC;
 
@@ -44,21 +45,32 @@ TextBlobModal::TextBlobModal(cocos2d::Node* parent) : BaseModal(parent)
 {
 
     //scrollable body
-    this->_body_scroll = dynamic_cast<ui::ScrollView*>(this->_node->getChildByName("body_scroll"));
-    this->_body_scroll->setScrollBarAutoHideEnabled(false);
+    this->_body_scroll = dynamic_cast<ui::ListView*>(this->_node->getChildByName("body_scroll"));
     this->_body_scroll->setScrollBarEnabled(true);
     this->_body_scroll->scrollToTop(0.0f, false);
     this->_body_scroll->setUnifySizeEnabled(true);
 
     //fill message up
-    this->_body_lbl = dynamic_cast<cocos2d::ui::Text*>(this->_body_scroll->getChildByName("body_lbl"));
-    set_aliasing(this->_body_lbl);
-
     this->set_body("No body yet");
 };
 
 void TextBlobModal::set_body(const std::string& body)
 {
-    this->_body_lbl->setString(body);
+    std::string raw_log_string = body;
+    cocos2d::TTFConfig ttf_config = TTFConfig("pixelmix.ttf", 24, GlyphCollection::ASCII, NULL, false, 2);
+
+    this->_body_scroll->removeAllChildren();
+
+    auto split_messages = split(raw_log_string, '\n'); //TODO fix stripping deliberate whitespace
+    std::stringstream joined_ss;
+    for (auto s : split_messages)
+    {
+        auto line = ui::Text::create(s, "", 24.0f);
+        Label* renderer = (Label*)line->getVirtualRenderer();
+        renderer->setTTFConfig(ttf_config);
+        set_aliasing(renderer);
+
+        this->_body_scroll->addChild(line);
+    };
 };
 
