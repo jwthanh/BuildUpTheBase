@@ -99,6 +99,7 @@
     <ClInclude Include="..\Classes\SubTypes.h" />
     <ClInclude Include="..\Classes\Serializer.h" />
     <ClInclude Include="..\Classes\Modal.h" />
+    <ClInclude Include="..\Classes\external\easylogging.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
