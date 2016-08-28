@@ -4,6 +4,13 @@
 
 USING_NS_CC;
 
+/* easy logging stuff*/
+#include "external/easylogging.h"
+
+INITIALIZE_EASYLOGGINGPP
+/* end init of easy logging stuff*/
+
+
 AppDelegate::AppDelegate() {
 }
 
@@ -105,6 +112,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     loading_scene->setOnEnterCallback(load_cb);
     director->pushScene(loading_scene);
+
+    LOG(INFO) << "finished loading";
 
 
     return true;

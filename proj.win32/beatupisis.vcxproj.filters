@@ -51,6 +51,7 @@
     <ClCompile Include="..\Classes\Technology.cpp" />
     <ClCompile Include="..\Classes\Serializer.cpp" />
     <ClCompile Include="..\Classes\Modal.cpp" />
+    <ClCompile Include="..\Classes\Logging.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -100,6 +101,7 @@
     <ClInclude Include="..\Classes\Serializer.h" />
     <ClInclude Include="..\Classes\Modal.h" />
     <ClInclude Include="..\Classes\external\easylogging.h" />
+    <ClInclude Include="..\Classes\Logging.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

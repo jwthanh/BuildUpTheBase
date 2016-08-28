@@ -30,6 +30,7 @@
 #include "Serializer.h"
 #include <regex>
 #include "Modal.h"
+#include "Logging.h"
 
 USING_NS_CC;
 
@@ -73,7 +74,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_A)
     {
-        new TextBlobModal(this);
+        auto modal = new TextBlobModal(this);
+        modal->set_body(Logger::get_log_contents());
+
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F1) 
     {
