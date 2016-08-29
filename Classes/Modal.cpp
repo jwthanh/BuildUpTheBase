@@ -11,6 +11,10 @@ USING_NS_CC;
 
 BaseModal::BaseModal(Node* parent)
 {
+    //background color
+    auto layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
+    parent->addChild(layer_color);
+
     auto inst = cocos2d::CSLoader::getInstance();
 
     cocos2d::Node* root_message_node = inst->CSLoader::createNode("editor/details/message_detail.csb");
@@ -25,10 +29,11 @@ BaseModal::BaseModal(Node* parent)
 
 
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(this->_node->getChildByName("close_panel"));
-    auto cb = [this](Ref* target, ui::Widget::TouchEventType type) {
+    auto cb = [this, layer_color](Ref* target, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             this->_node->removeFromParent();
+            layer_color->removeFromParent();
         };
     };
     close_panel->addTouchEventListener(cb);
