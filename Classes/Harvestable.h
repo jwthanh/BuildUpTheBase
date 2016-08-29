@@ -117,11 +117,15 @@ class CraftingHarvestable : public Harvestable
         CraftingHarvestable(spRecipe recipe);
         static CraftingHarvestable* create(spRecipe recipe);
 
+        bool can_satisfy_recipe_per_click();
+
         void init_clicks() override;
         std::string get_sprite_path() override;
 
         void on_harvest();
         void animate_touch_start(cocos2d::Touch* touch);
+
+        void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
 
         virtual void animate_clip() override;
 

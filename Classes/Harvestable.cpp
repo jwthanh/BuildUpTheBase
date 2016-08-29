@@ -464,9 +464,58 @@ std::string CraftingHarvestable::get_sprite_path()
     return "anvil.png";
 };
 
+bool CraftingHarvestable::can_satisfy_recipe_per_click()
+{
+    if (this->recipe == NULL) { return false; }
+
+    auto all_ingredients = BUILDUP->get_all_ingredients();
+
+    //go through each component, for each ing, make sure we've got at least one
+    // otherwise short circuit and fail fast
+    for (auto component : this->recipe->components)
+    {
+        IngredientSubType ing_type = component.first;
+
+        //either the amount required minus click so far, or 0 so its not negative
+        res_count_t amount_required = std::max(0.0L, component.second - this->recipe->current_clicks);
+
+        //if there's at least one required, check for at least one
+        res_count_t _def = 0.0;
+        if (amount_required > 1.0 && map_get(all_ingredients, ing_type, _def) < 1.0)
+        {
+            return false;
+        }
+
+    };
+
+    return true;
+};
+
 void CraftingHarvestable::on_harvest()
 {
-    //dont do anything yet, will need to deal with recipes or something
+    if (!this->recipe) { return; }
+
+    auto all_ingredients = BUILDUP->get_all_ingredients();
+
+    bool can_satisfy = this->can_satisfy_recipe_per_click();
+    CCLOG("can satisfy %i", can_satisfy);
+
+    //if all parts are satisfied, then actually use them and increment counter
+    if (can_satisfy == true)
+    {
+        for (auto component : this->recipe->components)
+        {
+            IngredientSubType ing_type = component.first;
+            res_count_t amount_required = component.second - this->recipe->current_clicks;
+
+            if (amount_required > 0)
+            {
+                BUILDUP->remove_shared_ingredients_from_all(ing_type, 1);
+            }
+        };
+        this->recipe->current_clicks += 1;
+
+    }
 };
 
 void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
@@ -481,7 +530,14 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
     }
     else 
     {
-        ss << "used a resource";
+        if (this->can_satisfy_recipe_per_click())
+        {
+            ss << "used a resource";
+        }
+        else
+        {
+            ss << "missing a ingredient for recipe";
+        }
     }
 
     std::string floating_msg = ss.str();
@@ -502,6 +558,23 @@ void CraftingHarvestable::init_clicks()
 
     this->current_clicks = 0;
     this->click_limit = this->recipe->clicks_required;
+};
+
+//same as Harvestable::onTouchEnded except it doesn't check for room
+void CraftingHarvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
+{
+
+    animate_touch_end(touch);
+
+    this->current_clicks += 1;
+
+    this->animate_harvest();
+    this->on_harvest();
+
+    if (this->should_shatter()) {
+        this->shatter();
+    };
+
 };
 
 void CraftingHarvestable::animate_clip()
