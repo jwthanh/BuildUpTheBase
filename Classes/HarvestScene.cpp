@@ -114,6 +114,10 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     {
         GameLogic::load_all();
     }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_U)
+    {
+        BUILDUP->post_update();
+    }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         // BUILDUP->post_update();
