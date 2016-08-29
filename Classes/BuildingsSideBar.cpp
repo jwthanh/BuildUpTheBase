@@ -678,9 +678,14 @@ void SideListView::setup_powers_listview_as_powers()
                 auto split_messages = split(raw_log_string, '\n');
                 std::reverse(split_messages.begin(), split_messages.end());
                 std::stringstream joined_ss;
+
+                int i = 0;
                 for (auto s : split_messages)
                 {
                     joined_ss << s << std::endl;
+
+                    //get 100 last messages
+                    if (i++ >= 100) { break; }
                 };
                 modal->set_body(joined_ss.str());
             });
