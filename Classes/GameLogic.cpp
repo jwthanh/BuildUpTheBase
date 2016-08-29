@@ -129,7 +129,7 @@ void GameLogic::post_load()
 
     //set the last login time, set here and on save
     BEATUP->set_last_login();
-    LOG(INFO) << "game loaded";
+    LOG(INFO) << "Game loaded!";
 }
 
 bool GameLogic::init()
@@ -236,9 +236,9 @@ void GameLogic::save_all()
     BEATUP->set_last_login();
 
     //update the remote server
-    LOG(INFO) << "posting to leaderboard";
+    LOG(INFO) << "Posting to leaderboard";
     BUILDUP->post_update();
-    LOG(INFO) << "completed post to leaderboard";
+    LOG(INFO) << "Completed post to leaderboard";
 };
 
 void GameLogic::load_all()
