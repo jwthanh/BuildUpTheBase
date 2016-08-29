@@ -89,7 +89,7 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
 
         auto tech_map = building->techtree->tech_map;
         res_count_t _def = 0;
-        res_count_t paper_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 9.45L));
+        res_count_t paper_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 4.45L));
         recipe->components = mistIngredient({{ Ingredient::SubType::Paper, paper_cost }});
 
         ss << "Doubles click output here\n-- costs " << beautify_double(paper_cost) << " paper";
