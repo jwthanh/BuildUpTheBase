@@ -93,8 +93,9 @@ void GameLogic::post_load()
         }
 
         BEATUP->_total_coins = 0;
-    }
 
+        GameLogic::load_all_as_cheater();
+    }
 
 
     res_count_t hours_since_login = hours_since_last_login.count();
@@ -248,6 +249,17 @@ void GameLogic::load_all()
         bldg_serializer.load();
     };
     BEATUP->_total_coins = DataManager::get_double_from_data(Beatup::total_coin_key);
+};
+
+void GameLogic::load_all_as_cheater()
+{
+    for (spBuilding building : BUILDUP->city->buildings)
+    {
+        auto bldg_serializer = BuildingSerializer("cheat_building.json", building);
+        bldg_serializer.load();
+    };
+
+    BEATUP->_total_coins = 0.0;
 };
 
 

@@ -36,6 +36,7 @@ class GameLogic
 
         static void save_all();
         static void load_all();
+        static void load_all_as_cheater();
 
         void add_total_harvests(int value);
         int get_total_harvests();
