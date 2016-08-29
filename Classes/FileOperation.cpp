@@ -7,6 +7,7 @@
 #include <json/writer.h>
 #include <json/prettywriter.h>
 #include "constants.h"
+#include "external/easylogging.h"
 
 int read_counts = 0;
 
@@ -39,7 +40,17 @@ rjDocument FileIO::open_json(std::string& json_path, bool builtin_path)
 {
     std::string jsonBuffer = FileIO::get_string_from_file(json_path, builtin_path);
     auto jsonDoc = rjDocument();
-    jsonDoc.Parse(jsonBuffer.c_str());
+
+    if (jsonBuffer != "")
+    {
+        jsonDoc.Parse(jsonBuffer.c_str());
+        CC_ASSERT(jsonDoc.IsObject() && "needs to be a valid json");
+    }
+    else
+    {
+        jsonDoc.SetObject();
+        LOG(ERROR) << "empty json file " << json_path;
+    }
 
     return jsonDoc;
 }

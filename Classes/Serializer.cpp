@@ -242,16 +242,16 @@ void BuildingSerializer::load_workers(rjDocument& doc)
         ss << prefix << "_" << type_str << "_" << i;
         double harv_count;
 
+        //hardcode a default 1 salesmen for Farm on new game
+        if (ss.str() == "salesmen_grain_1" && this->building->name == "The Farm")
+        {
+            harv_count = this->get_double(doc, ss.str(), 1);
+        }
         //load workers defaulting to -1
-        if (ss.str() != "salesmen_grain_1")
+        else 
         {
             harv_count = this->get_double(doc, ss.str(), -1);
         }
-        //hardcode a default 1 salesmen on new game
-        else
-        {
-            harv_count = this->get_double(doc, ss.str(), 1);
-        };
 
         if (harv_count != -1)
         {
