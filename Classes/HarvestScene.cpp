@@ -394,7 +394,7 @@ void BaseScene::create_info_panel()
             arena_kill_lbl->setString("Kills: "+beautify_double(kills));
         }
     };
-    arena_kill_panel->schedule(update_arena_kill_display, AVERAGE_DELAY, "update_arena_kill_display");
+    arena_kill_panel->schedule(update_arena_kill_display, LONG_DELAY, "update_arena_kill_display");
     update_arena_kill_display(0);
 
 
