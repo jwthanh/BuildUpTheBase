@@ -477,11 +477,13 @@ bool CraftingHarvestable::can_satisfy_recipe_per_click()
         IngredientSubType ing_type = component.first;
 
         //either the amount required minus click so far, or 0 so its not negative
+        CCLOG("current clicks in can_satisfy: %i", this->recipe->current_clicks);
         res_count_t amount_required = std::max(0.0L, component.second - this->recipe->current_clicks);
+        CCLOG("... amount required: %f", amount_required);
 
         //if there's at least one required, check for at least one
         res_count_t _def = 0.0;
-        if (amount_required > 1.0 && map_get(all_ingredients, ing_type, _def) < 1.0)
+        if (amount_required >= 1.0 && map_get(all_ingredients, ing_type, _def) < 1.0)
         {
             return false;
         }
@@ -506,11 +508,16 @@ void CraftingHarvestable::on_harvest()
         for (auto component : this->recipe->components)
         {
             IngredientSubType ing_type = component.first;
-            res_count_t amount_required = component.second - this->recipe->current_clicks;
+            res_count_t amount_required = std::max(0.0L, component.second - this->recipe->current_clicks);
 
             if (amount_required > 0)
             {
                 BUILDUP->remove_shared_ingredients_from_all(ing_type, 1);
+                CCLOG("spending a %s", Ingredient::type_to_string(ing_type).c_str());
+            }
+            else
+            {
+                CCLOG("dont need to spend %s", Ingredient::type_to_string(ing_type).c_str());
             }
         };
         this->recipe->current_clicks += 1;
@@ -530,7 +537,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
     }
     else 
     {
-        if (this->can_satisfy_recipe_per_click())
+        if (this->can_satisfy_recipe_per_click() && !this->should_shatter())
         {
             ss << "used a resource";
         }
@@ -571,6 +578,7 @@ void CraftingHarvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* ev
     this->animate_harvest();
     this->on_harvest();
 
+    //recipes completed
     if (this->should_shatter()) {
         this->shatter();
     };
@@ -606,8 +614,10 @@ bool CraftingHarvestable::should_shatter()
         return false;
     }
 
-    auto total_ingredients = BUILDUP->get_all_ingredients();
-    bool is_satisfied = this->recipe->is_satisfied(total_ingredients);
+    //use clicks instead of ingredient count, because it needs partial progress
+    res_count_t clicks_required = 3.0; //TODO use biggest number of component in recipe
+    bool is_satisfied = this->recipe->current_clicks >= clicks_required;
+    CCLOG("should shatter? %i", is_satisfied);
 
     return is_satisfied;
 };
@@ -616,6 +626,8 @@ void CraftingHarvestable::shatter()
 {
     if (this->recipe != NULL) {
         CCLOG("SHATTER CRAFTING, consume recipe now!");
+        this->recipe->callback();
+        this->recipe->current_clicks = 0;
     };
 
     Harvestable::shatter();

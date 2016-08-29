@@ -31,6 +31,7 @@
 #include <regex>
 #include "Modal.h"
 #include "Logging.h"
+#include "Recipe.h"
 
 USING_NS_CC;
 
@@ -1044,6 +1045,7 @@ void HarvestScene::add_harvestable()
         harvestable = DumpsterHarvestable::create();
     } else if (BUILDUP->get_target_building()->name == "The Workshop") {
         this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
+        this->target_recipe->_callback = [](){ CCLOG("recipe shattered"); };
         harvestable = CraftingHarvestable::create(this->target_recipe);
     } else if (BUILDUP->get_target_building()->name == "The Arena") {
         harvestable = FightingHarvestable::create();
