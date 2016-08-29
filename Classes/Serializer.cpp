@@ -332,8 +332,6 @@ void BuildingSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& val
 
 rjValue& BuildingSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
 {
-    doc.HasMember(this->building->name.c_str());
-    doc[this->building->name.c_str()].HasMember(key);
     if (doc.HasMember(this->building->name.c_str()) == false ||
         doc[this->building->name.c_str()].HasMember(key) == false)
     {
