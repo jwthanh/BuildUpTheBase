@@ -101,14 +101,17 @@ res_count_t Harvester::get_base_shop_cost(SubType harv_type)
 {
     res_count_t base_cost = 25;
     
-    if (harv_type == SubType::One) { base_cost = 25; }
-    else if (harv_type == SubType::Two) { base_cost = 200; }
+    if (harv_type == SubType::One)        { base_cost = 25; }
+    else if (harv_type == SubType::Two)   { base_cost = 200; }
     else if (harv_type == SubType::Three) { base_cost = 1000; }
-    else if (harv_type == SubType::Four) { base_cost = 12000; }
-    else if (harv_type == SubType::Five) { base_cost = 100000; }
-    else if (harv_type == SubType::Six) { base_cost = 500000; }
+    else if (harv_type == SubType::Four)  { base_cost = 12000; }
+    else if (harv_type == SubType::Five)  { base_cost = 100000; }
+    else if (harv_type == SubType::Six)   { base_cost = 500000; }
     else if (harv_type == SubType::Seven) { base_cost = 1000000; }
     else if (harv_type == SubType::Eight) { base_cost = 2500000; }
+    else if (harv_type == SubType::Nine)  { base_cost = 4500000; }
+    else if (harv_type == SubType::Ten)   { base_cost = 15000000; }
+    else if (harv_type == SubType::Eleven){ base_cost = 550000000; }
     else { base_cost = 9999;}
 
     return base_cost;
@@ -118,14 +121,17 @@ res_count_t Harvester::get_to_harvest_count(SubType harv_type)
 {
     res_count_t harvested_count = 1;
     
-    if (harv_type == SubType::One) { harvested_count = 0.1; }
-    else if (harv_type == SubType::Two) { harvested_count = 1; }
-    else if (harv_type == SubType::Three) { harvested_count = 8; }
-    else if (harv_type == SubType::Four) { harvested_count = 25; }
-    else if (harv_type == SubType::Five) { harvested_count = 100; }
-    else if (harv_type == SubType::Six) { harvested_count = 350; }
-    else if (harv_type == SubType::Seven) { harvested_count = 800; }
-    else if (harv_type == SubType::Eight) { harvested_count = 1500; }
+    if (harv_type == SubType::One)         { harvested_count = 0.1; }
+    else if (harv_type == SubType::Two)    { harvested_count = 1; }
+    else if (harv_type == SubType::Three)  { harvested_count = 8; }
+    else if (harv_type == SubType::Four)   { harvested_count = 25; }
+    else if (harv_type == SubType::Five)   { harvested_count = 100; }
+    else if (harv_type == SubType::Six)    { harvested_count = 350; }
+    else if (harv_type == SubType::Seven)  { harvested_count = 800; }
+    else if (harv_type == SubType::Eight)  { harvested_count = 1500; }
+    else if (harv_type == SubType::Nine)   { harvested_count = 4300; }
+    else if (harv_type == SubType::Ten)    { harvested_count = 11000; }
+    else if (harv_type == SubType::Eleven) { harvested_count = 55000; }
     else { harvested_count = 9999;}
 
     return harvested_count;

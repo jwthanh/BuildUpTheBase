@@ -215,7 +215,10 @@ void SideListView::setup_shop_listview_as_harvesters()
                 { WorkerType::Harvester, "harvester_item_five", Worker::SubType::Five },
                 { WorkerType::Harvester, "harvester_item_six", Worker::SubType::Six },
                 { WorkerType::Harvester, "harvester_item_seven", Worker::SubType::Seven },
-                { WorkerType::Harvester, "harvester_item_eight", Worker::SubType::Eight }
+                { WorkerType::Harvester, "harvester_item_eight", Worker::SubType::Eight },
+                { WorkerType::Harvester, "harvester_item_nine", Worker::SubType::Nine },
+                { WorkerType::Harvester, "harvester_item_ten", Worker::SubType::Ten },
+                { WorkerType::Harvester, "harvester_item_eleven", Worker::SubType::Eleven }
             };
 
             if (building->name == "The Underscape"){
@@ -269,7 +272,10 @@ void SideListView::setup_shop_listview_as_harvesters()
                             { Worker::SubType::Six, Worker::SubType::Five },
                             { Worker::SubType::Seven, Worker::SubType::Six },
                             { Worker::SubType::Eight, Worker::SubType::Seven },
-                            { Worker::SubType::Nine, Worker::SubType::Eight }
+                            { Worker::SubType::Nine, Worker::SubType::Eight },
+                            { Worker::SubType::Ten, Worker::SubType::Nine },
+                            { Worker::SubType::Eleven, Worker::SubType::Ten },
+                            { Worker::SubType::Twelve, Worker::SubType::Eleven }
                         };
 
                         Worker::SubType zero = Worker::SubType::ZERO;
