@@ -80,6 +80,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         modal->set_body(Logger::get_log_contents());
 
     }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_B)
+    {
+    }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F1) 
     {
         auto glView = Director::getInstance()->getOpenGLView();
