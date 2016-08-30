@@ -1,5 +1,6 @@
 #include "HarvestScene.h"
 
+#include <cctype>
 #include <numeric>
 #include <chrono>
 
@@ -529,15 +530,26 @@ void BaseScene::create_username_input()
     auto username = DataManager::get_string_from_data("username");
     username_input->setString(username);
 
-    auto textfield_listener = [username_input](Ref* target, ui::TextField::EventType evt)
+    auto is_bad_character = [](char character){
+        return !(std::isalnum(character) || character == '_');
+    };
+    auto clean_username = [is_bad_character](std::string username) {
+        username.erase(std::remove_if(username.begin(), username.end(), is_bad_character), username.end());
+        return username;
+    };
+
+    auto textfield_listener = [username_input, clean_username](Ref* target, ui::TextField::EventType evt)
         {
             if (evt == ui::TextField::EventType::INSERT_TEXT || 
                 evt == ui::TextField::EventType::DELETE_BACKWARD)
             {
                 std::string text = username_input->getString();
-                CCLOG("Updating username: %s", text.c_str());
+                CCLOG("Got raw username: %s", text.c_str());
+                std::string cleaned_username = clean_username(text);
+                CCLOG("is cleaned to %s", cleaned_username.c_str());
+                username_input->setString(cleaned_username);
 
-                DataManager::set_string_from_data("username", text);
+                DataManager::set_string_from_data("username", cleaned_username);
             }
         };
     username_input->addEventListener(textfield_listener);

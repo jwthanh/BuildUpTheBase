@@ -25,6 +25,7 @@ bool Request::init(Type request_type, std::string url, std::string data)
     this->type = request_type;
     this->_url = url;
 
+
     network::HttpRequest::Type rtype = network::HttpRequest::Type::GET;
     if (request_type == Type::GET) { rtype = network::HttpRequest::Type::GET; }
     else if (request_type == Type::POST) { rtype = network::HttpRequest::Type::POST; }
