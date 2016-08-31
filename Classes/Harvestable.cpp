@@ -587,22 +587,25 @@ void CraftingHarvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* ev
 
 void CraftingHarvestable::animate_clip()
 {
-    auto sprite_size = this->get_sprite_size();
-    auto size = 20.0f;
-    Vec2 origin = Vec2(
-        MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
-        sprite_size.height
-    );
+    if (this->can_satisfy_recipe_per_click())
+    {
+        auto sprite_size = this->get_sprite_size();
+        auto size = 20.0f;
+        Vec2 origin = Vec2(
+                MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
+                sprite_size.height
+                );
 
-    float click_ratio = this->get_click_ratio();
-    auto spark_parts = ParticleSystemQuad::create("particles/anvil_spark.plist");
-    spark_parts->setScale(1.0 / 4.0f);
-    spark_parts->setPosition(origin);
-    int total_particles = spark_parts->getTotalParticles();
-    int active_particles = (int)(total_particles * click_ratio);
-    //add 10 so there's always visible sparks, cheaper than mix/max calls
-    spark_parts->setTotalParticles(active_particles+10);
-    this->addChild(spark_parts);
+        float click_ratio = this->get_click_ratio();
+        auto spark_parts = ParticleSystemQuad::create("particles/anvil_spark.plist");
+        spark_parts->setScale(1.0 / 4.0f);
+        spark_parts->setPosition(origin);
+        int total_particles = spark_parts->getTotalParticles();
+        int active_particles = (int)(total_particles * click_ratio);
+        //add 10 so there's always visible sparks, cheaper than mix/max calls
+        spark_parts->setTotalParticles(active_particles+10);
+        this->addChild(spark_parts);
+    };
 }
 
 bool CraftingHarvestable::should_shatter()
