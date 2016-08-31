@@ -64,7 +64,7 @@ class Harvestable : public cocos2d::ui::Widget
         virtual bool should_shatter();
         virtual void shatter();
 
-        float get_click_ratio() const;
+        virtual float get_click_ratio() const;
 
 };
 
@@ -121,6 +121,7 @@ class CraftingHarvestable : public Harvestable
 
         void init_clicks() override;
         std::string get_sprite_path() override;
+        virtual float get_click_ratio() const override;
 
         void on_harvest();
         void animate_touch_start(cocos2d::Touch* touch);

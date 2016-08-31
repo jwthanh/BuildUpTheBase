@@ -464,6 +464,19 @@ std::string CraftingHarvestable::get_sprite_path()
     return "anvil.png";
 };
 
+float CraftingHarvestable::get_click_ratio() const
+{
+    if (this->recipe == NULL)
+    {
+        return Harvestable::get_click_ratio();
+    }
+    else
+    {
+        //TODO fix harcoded 3
+        return static_cast<float>(this->recipe->current_clicks) / 3;
+    };
+}
+
 bool CraftingHarvestable::can_satisfy_recipe_per_click()
 {
     if (this->recipe == NULL) { return false; }
