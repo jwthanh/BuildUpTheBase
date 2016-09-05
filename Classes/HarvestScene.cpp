@@ -126,24 +126,21 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        // BUILDUP->post_update();
-
-        ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
-        auto items = inventory_listview->getItems();
-        items.reverse();
-        //items.empty()
-        //auto back = items.back();
-        ////items.eraseObject(back);
-        //items.replace(0, back);
-        // auto old_center = inventory_listview->getCenterItemInCurrentView();
-        // auto old_index = inventory_listview->getIndex(old_center);
-        inventory_listview->requestDoLayout();
-        inventory_listview->doLayout();
-        // inventory_listview->jumpToItem(old_index, Vec2::ANCHOR_MIDDLE, Vec2::ANCHOR_MIDDLE);
-
-
-        auto shop_listview = dynamic_cast<ui::ListView*>(this->getChildByName("shop_listview"));
-        shop_listview->requestDoLayout();
+        auto target_building = BUILDUP->get_target_building();
+        auto building_upgrade_sidebar = this->sidebar->building_listviews->at(target_building->name);
+        int index = 0;
+        for (Node* item : building_upgrade_sidebar->getChildren())
+        {
+            auto nuitem = dynamic_cast<ui::Button*>(item);
+            if (nuitem){
+                index++;
+                if (nuitem->isEnabled())
+                {
+                    break;
+                }
+            }
+        }
+        building_upgrade_sidebar->jumpToItem(index,Vec2::ONE, Vec2::ONE);
     }
 }
 
