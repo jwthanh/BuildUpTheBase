@@ -51,7 +51,7 @@ class Harvestable : public cocos2d::ui::Widget
          * onTouchEnded -> [animate_touch_end]
          * [animate_touch_end] -> animate_harvest -> animate_clip ->animate_rotate
          * [animate_touch_end] -> on_harvest
-         * [animate_touch_end] -> should_shatter -> shatter
+         * [animate_touch_end] -> should_shatter -> get_shatter_text -> shatter
          */
 
         void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
@@ -62,6 +62,7 @@ class Harvestable : public cocos2d::ui::Widget
         virtual void animate_rotate();
 
         virtual bool should_shatter();
+        virtual std::string get_shatter_text();
         virtual void shatter();
 
         virtual float get_click_ratio() const;
@@ -131,6 +132,7 @@ class CraftingHarvestable : public Harvestable
         virtual void animate_clip() override;
 
         virtual bool should_shatter() override;
+        virtual std::string get_shatter_text() override;
         virtual void shatter() override;
 };
 

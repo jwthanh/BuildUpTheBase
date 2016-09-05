@@ -275,6 +275,11 @@ void Harvestable::animate_rotate()
     };
 }
 
+std::string Harvestable::get_shatter_text()
+{
+    return "+1 Harvest";
+};
+
 void Harvestable::shatter()
 {
     this->sprite->setVisible(false);
@@ -293,7 +298,7 @@ void Harvestable::shatter()
 
     //spawn label
     //TODO fix hardcoded name
-    this->spawn_label_on_touch(NULL, 1, 1, "+1 Harvest");
+    this->spawn_label_on_touch(NULL, 1, 1, this->get_shatter_text());
 
     CallFunc* remove = CallFunc::create([this](){ this->removeFromParent(); });
 
@@ -636,6 +641,11 @@ bool CraftingHarvestable::should_shatter()
     CCLOG("should shatter? %i", is_satisfied);
 
     return is_satisfied;
+};
+
+std::string CraftingHarvestable::get_shatter_text()
+{
+    return "Crafted!";
 };
 
 void CraftingHarvestable::shatter()
