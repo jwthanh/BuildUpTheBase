@@ -15,6 +15,7 @@
 #include "GameLogic.h"
 #include "Recipe.h"
 #include "Technology.h"
+#include "HarvestScene.h"
 
 
 USING_NS_CC;
@@ -484,6 +485,66 @@ void TechNuItem::update_func(float dt)
     }
 
     spRecipe recipe = this->technology->get_ingredient_requirements(this->building);
+    this->set_description(recipe->description);
+}
+
+TargetRecipeNuItem* TargetRecipeNuItem::create(Node* parent, spBuilding building)
+{
+    TargetRecipeNuItem* pRet = new(std::nothrow) TargetRecipeNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+};
+
+void TargetRecipeNuItem::other_init(spRecipe recipe)
+{
+    this->recipe = recipe;
+    this->set_touch_ended_callback([this]() {
+        cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+        auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+        if (harvest_scene)
+        {
+        harvest_scene->target_recipe = this->recipe;
+        CCLOG("target recipe changed to %s", this->recipe->name.c_str());
+            
+        }
+        else
+        {
+            CCLOG("cant find HarvestScene");
+        }
+    });
+
+}
+
+void TargetRecipeNuItem::update_func(float dt)
+{
+    //FIXME, this lets someone press a button early i think
+    // and avoid having the button disabled. Not sure.
+    if (this->button->isHighlighted())
+    {
+        return;
+    };
+
+    cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+    auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+    if (this->recipe == harvest_scene->target_recipe)
+    {
+        //TODO change icon to disabled
+        this->try_set_enable(false);
+    }
+    else {
+        this->try_set_enable(true);
+    }
+
+    spRecipe recipe = this->recipe;
     this->set_description(recipe->description);
 }
 

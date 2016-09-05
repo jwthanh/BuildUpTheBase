@@ -83,6 +83,17 @@ class TechNuItem : public BuildingNuItem
         virtual void update_func(float dt) override;
 };
 
+class TargetRecipeNuItem : public BuildingNuItem
+{
+    public:
+        static TargetRecipeNuItem* create(cocos2d::Node* parent, spBuilding building);
+
+        spRecipe recipe;
+
+        virtual void other_init(spRecipe recipe);
+        virtual void update_func(float dt) override;
+};
+
 class ShopNuItem : public Buyable, public NuItem
 {
     public:
