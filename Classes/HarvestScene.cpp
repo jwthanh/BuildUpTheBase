@@ -180,14 +180,14 @@ void BaseScene::onEnter()
 void BaseScene::onSwipeLeft(float dt)
 {
     GameLayer::onSwipeLeft(dt);
-    BEATUP->cycle_next_building(true);
+    BEATUP->cycle_next_building(false);
     scroll_to_target_building();
 };
 
 void BaseScene::onSwipeRight(float dt)
 {
     GameLayer::onSwipeRight(dt);
-    BEATUP->cycle_next_building();
+    BEATUP->cycle_next_building(true);
     scroll_to_target_building();
     
 };
