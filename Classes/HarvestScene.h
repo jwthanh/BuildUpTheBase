@@ -27,7 +27,7 @@ class BaseScene : public GameLayer
 
         std::shared_ptr<SideListView> sidebar;
 
-        cocos2d::ui::Text* recipe_lbl;
+        cocos2d::ui::Text* upgrade_lbl;
         spRecipe target_recipe;
         void create_goal_loadingbar();
 

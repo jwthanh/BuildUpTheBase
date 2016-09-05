@@ -234,10 +234,10 @@ void BaseScene::create_goal_loadingbar()
     loading_bar->schedule(update_loading_bar, 0.1f, "loadingbar_update");
     update_loading_bar(0);
 
-    this->recipe_lbl = dynamic_cast<ui::Text*>(progress_panel->getChildByName("upgrade_lbl"));
-    this->recipe_lbl->setString("");
+    this->upgrade_lbl = dynamic_cast<ui::Text*>(progress_panel->getChildByName("upgrade_lbl"));
+    this->upgrade_lbl->setString("");
 
-    set_aliasing(this->recipe_lbl, true);
+    set_aliasing(this->upgrade_lbl, true);
 }
 
 void BaseScene::create_building_choicelist()
@@ -869,10 +869,10 @@ void HarvestScene::update(float dt)
     float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 10.5f);
     float percentage = BEATUP->get_total_coins() / coin_goal * 100;
     if (percentage >= 100.0f) {
-        ((HarvestScene*)this)->recipe_lbl->setString("Upgrade available!");
+        ((HarvestScene*)this)->upgrade_lbl->setString("Upgrade available!");
     }
     else {
-        ((HarvestScene*)this)->recipe_lbl->setString("Next upgrade:");
+        ((HarvestScene*)this)->upgrade_lbl->setString("Next upgrade:");
     };
 
     auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
