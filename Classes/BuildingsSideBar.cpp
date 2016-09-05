@@ -575,8 +575,15 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item->set_original_image("fightJoy_47.png");
             menu_item->cooldown = GameLogic::getInstance()->power_sell_all_cooldown;
 
+            //exclude types of ingredients for selling all
+            auto excluded_ing_types = std::vector<Ingredient::SubType> {
+                Ingredient::SubType::Soul,
+                Ingredient::SubType::Bread,
+                Ingredient::SubType::Loaf
+            };
 
-            menu_item->set_touch_ended_callback([]()
+
+            menu_item->set_touch_ended_callback([excluded_ing_types]()
             {
                 CCLOG("selling all by cb");
                 res_count_t sale_price = 10; //TODO use proper price
@@ -585,6 +592,11 @@ void SideListView::setup_powers_listview_as_powers()
                     for (auto ingredient : building->ingredients)
                     {
                         IngredientSubType ing_type = ingredient.first;
+                        //skip if in exclude
+                        if (std::find(excluded_ing_types.begin(), excluded_ing_types.end(), ing_type) != excluded_ing_types.end())
+                        {
+                            continue;
+                        }
                         res_count_t _def = 0;
                         res_count_t ing_count = map_get(building->ingredients, ing_type, _def);
                         BEATUP->add_total_coin(ing_count*sale_price);
