@@ -130,6 +130,29 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
             ui::ListView* listview = listviews->at(target_building->name);
             listview->requestDoLayout();
             this->tabs.set_tab_active(tab_type, target_building);
+
+            //jump to active building for this tab
+            // FIXME because buttons aren't there the first time due to
+            // update function building the items, this doesn't work the first
+            // time it happens, it requires a built tab
+            if (tab_type == TabManager::TabTypes::BuildingTab)
+            {
+                auto building_upgrade_sidebar = this->building_listviews->at(target_building->name);
+                int index = 0;
+                for (Node* item : building_upgrade_sidebar->getChildren())
+                {
+                    auto nuitem = dynamic_cast<ui::Button*>(item);
+                    if (nuitem){
+                        index++;
+                        if (nuitem->isEnabled())
+                        {
+                            break;
+                        }
+                    }
+                }
+                building_upgrade_sidebar->jumpToItem(index, Vec2::ONE, Vec2::ONE);
+
+            }
         };
 
         auto result = this->tabs.button_map[target_button];
