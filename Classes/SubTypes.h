@@ -30,7 +30,8 @@ enum class TechSubType
     CombatDamage = 1,
     CombatArmor = 2,
     CombatCritChance = 3,
-    CombatCritFactor = 4
+    CombatCritFactor = 4,
+    SalesmenBaseBoost = 5
 };
 
 enum class WorkerSubType

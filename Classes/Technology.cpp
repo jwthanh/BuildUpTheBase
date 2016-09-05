@@ -11,7 +11,8 @@ const std::map<Technology::SubType, std::string> Technology::type_map = {
     {Technology::SubType::CombatDamage, "combat_damage"},
     {Technology::SubType::CombatArmor, "combat_armor"},
     {Technology::SubType::CombatCritChance, "combat_crit_chance"},
-    {Technology::SubType::CombatCritFactor, "combat_crit_factor"}
+    {Technology::SubType::CombatCritFactor, "combat_crit_factor"},
+    {Technology::SubType::SalesmenBaseBoost, "salesmen_base_boost"}
 };
 
 
@@ -86,6 +87,17 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
     else if (this->sub_type == Technology::SubType::ClickDoublePower)
     {
         recipe = std::make_shared<Recipe>("double_click_power", "no desc for tech recipe");
+
+        auto tech_map = building->techtree->tech_map;
+        res_count_t _def = 0;
+        res_count_t paper_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 4.45L));
+        recipe->components = mistIngredient({{ Ingredient::SubType::Paper, paper_cost }});
+
+        ss << "Doubles click output here\n-- costs " << beautify_double(paper_cost) << " paper";
+    }
+    else if (this->sub_type == Technology::SubType::SalesmenBaseBoost)
+    {
+        recipe = std::make_shared<Recipe>("salesmen_base_boost", "no desc for tech recipe");
 
         auto tech_map = building->techtree->tech_map;
         res_count_t _def = 0;

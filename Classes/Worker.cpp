@@ -10,6 +10,7 @@
 #include "attribute_container.h"
 #include "attribute.h"
 #include "MiscUI.h"
+#include "Technology.h"
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
@@ -159,7 +160,21 @@ mistWorkerSubType base_salesman_to_sell_count = {
 res_count_t Salesman::get_to_sell_count(SubType sub_type)
 {
     res_count_t default_to_sell_count = 9999.0;
-    return map_get(base_salesman_to_sell_count, sub_type, default_to_sell_count);
+
+    //base count for salesmen
+    res_count_t base_count = map_get(base_salesman_to_sell_count, sub_type, default_to_sell_count);
+
+    //adjust based on how many upgrades were crafted at the Workshop
+
+    auto workshop = BUILDUP->city->building_by_name("The Workshop");
+    auto tech_map = workshop->techtree->get_tech_map();
+
+    auto tech_type = Technology::SubType::SalesmenBaseBoost;
+    res_count_t _def = 1L;
+    res_count_t times_increased = map_get(tech_map, tech_type, _def);
+
+
+    return base_count * times_increased;
 };
 
 ///NOTE this only gets called once per building->update_clock, not once a frame
