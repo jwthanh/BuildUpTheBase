@@ -170,11 +170,11 @@ res_count_t Salesman::get_to_sell_count(SubType sub_type)
     auto tech_map = workshop->techtree->get_tech_map();
 
     auto tech_type = Technology::SubType::SalesmenBaseBoost;
-    res_count_t _def = 1L;
+    res_count_t _def = 0L;
     res_count_t times_increased = map_get(tech_map, tech_type, _def);
 
 
-    return base_count * times_increased;
+    return base_count * (times_increased + 1);
 };
 
 ///NOTE this only gets called once per building->update_clock, not once a frame

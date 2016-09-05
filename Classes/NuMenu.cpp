@@ -441,9 +441,6 @@ void TechNuItem::other_init(spTechnology technology)
         this->building->consume_recipe(this->technology->get_ingredient_requirements(this->building).get());
         this->technology->set_been_unlocked(true);
 
-        //TODO fix this duplicating techs already in the vector, might need to
-        //go to a map like resources
-        //this->building->techtree->technologies.push_back(this->technology);
         res_count_t def = 0.0;
         res_count_t num_researched = map_get(this->building->techtree->tech_map, this->technology->sub_type, def);
         this->building->techtree->tech_map[this->technology->sub_type] = num_researched + 1;

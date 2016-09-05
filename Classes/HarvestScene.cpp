@@ -33,6 +33,7 @@
 #include "Modal.h"
 #include "Logging.h"
 #include "Recipe.h"
+#include "Technology.h"
 
 USING_NS_CC;
 
@@ -1052,23 +1053,35 @@ void HarvestScene::add_harvestable()
     Harvestable* harvestable;
     this->target_recipe = NULL; //TODO move this somewhere else
 
-    if (BUILDUP->get_target_building()->name == "The Mine") {
+    auto target_building = BUILDUP->get_target_building();
+
+    if (target_building->name == "The Mine") {
         harvestable = MiningHarvestable::create();
-    } else if (BUILDUP->get_target_building()->name == "The Forest") {
+    } else if (target_building->name == "The Forest") {
         harvestable = TreeHarvestable::create();
-    } else if (BUILDUP->get_target_building()->name == "The Dump") {
+    } else if (target_building->name == "The Dump") {
         harvestable = DumpsterHarvestable::create();
-    } else if (BUILDUP->get_target_building()->name == "The Workshop") {
+    } else if (target_building->name == "The Workshop") {
         this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
-        this->target_recipe->_callback = [](){ CCLOG("recipe shattered"); };
+        this->target_recipe->_callback = [target_building](){
+            CCLOG("Recipe shattered in _callback");
+
+            Technology technology = Technology(TechSubType::SalesmenBaseBoost);
+
+            technology.set_been_unlocked(true);
+
+            res_count_t def = 0.0;
+            res_count_t num_researched = map_get(target_building->techtree->tech_map, technology.sub_type, def);
+            target_building->techtree->tech_map[technology.sub_type] = num_researched + 1;
+        };
         harvestable = CraftingHarvestable::create(this->target_recipe);
-    } else if (BUILDUP->get_target_building()->name == "The Arena") {
+    } else if (target_building->name == "The Arena") {
         harvestable = FightingHarvestable::create();
-    } else if (BUILDUP->get_target_building()->name == "The Graveyard") {
+    } else if (target_building->name == "The Graveyard") {
         harvestable = GraveyardHarvestable::create();
-    } else if (BUILDUP->get_target_building()->name == "The Underscape") {
+    } else if (target_building->name == "The Underscape") {
         harvestable = UndeadHarvestable::create();
-    } else if (BUILDUP->get_target_building()->name == "The Farm") {
+    } else if (target_building->name == "The Farm") {
         harvestable = FarmingHarvestable::create();
     } else {
         harvestable = Harvestable::create();
