@@ -388,13 +388,16 @@ void BaseScene::create_info_panel()
     this->addChild(arena_kill_panel);
     ui::Text* arena_kill_lbl = dynamic_cast<ui::Text*>(arena_kill_panel->getChildByName("arena_kill_lbl"));
 
-    auto update_arena_kill_display = [arena_kill_panel, arena_kill_lbl](float dt){
-        if (BUILDUP->get_target_building()->name != "The Arena") {
-            arena_kill_panel->setVisible(false);
-        } else {
+    auto update_arena_kill_display = [this, arena_kill_panel, arena_kill_lbl](float dt){
+        if (BUILDUP->get_target_building()->name == "The Arena") {
             arena_kill_panel->setVisible(true);
             res_count_t kills = (res_count_t)GameLogic::getInstance()->get_total_kills(); //comes through as int though
             arena_kill_lbl->setString("Kills: "+beautify_double(kills));
+        } else if (BUILDUP->get_target_building()->name == "The Workshop") {
+            arena_kill_panel->setVisible(true);
+            arena_kill_lbl->setString(this->target_recipe->name);
+        } else {
+            arena_kill_panel->setVisible(false);
         }
     };
     arena_kill_panel->schedule(update_arena_kill_display, LONG_DELAY, "update_arena_kill_display");
@@ -1054,6 +1057,7 @@ void HarvestScene::add_harvestable()
     if (this->target_recipe == NULL)
     {
         this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
+        this->target_recipe->name = "Salesmen boost";
         this->target_recipe->_callback = [](){
             CCLOG("Recipe shattered in _callback");
             auto workshop = BUILDUP->city->building_by_name("The Workshop");
