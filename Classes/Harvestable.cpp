@@ -552,25 +552,29 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
     if (this->recipe == NULL)
     {
         ss << "No recipe yet";
+        std::string floating_msg = ss.str();
+        this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
     }
     else 
     {
         if (this->can_satisfy_recipe_per_click() && !this->should_shatter())
         {
             ss << "used a resource";
+            std::string floating_msg = ss.str();
+            this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
         }
         else
         {
             ss << "missing a ingredient for recipe";
+            std::string floating_msg = ss.str();
+            this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
         }
     }
 
-    std::string floating_msg = ss.str();
-    
+
     //TODO handle message for being too full on recipe, like in
     //Harvestable::animate_touch_start
 
-    this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
 };
 
 void CraftingHarvestable::init_clicks()
