@@ -210,7 +210,8 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 
     animate_touch_end(touch);
 
-    if (this->building->can_fit_more_ingredients(this->building->punched_sub_type) == false) 
+    //FIXME remove hardcoded check for arena, otherwise the sword wont rotate
+    if (this->building->can_fit_more_ingredients(this->building->punched_sub_type) == false && this->building->name != "The Arena") 
     {
         return;
     };
@@ -737,9 +738,6 @@ std::string FightingHarvestable::get_sprite_path()
 
 void FightingHarvestable::animate_clip()
 {
-    float end_scale = this->initial_scale*0.85f;
-    float duration = 0.5f;
-
     auto player = BUILDUP->fighter;
     double damage = player->attrs->damage->current_val;
     res_count_t output = damage;
