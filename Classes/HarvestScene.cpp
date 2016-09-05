@@ -207,7 +207,7 @@ void BaseScene::create_goal_loadingbar()
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
-            float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 15.0f);
+            float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 10.5f);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             if (percentage >= 100.0f) {
                 this->sidebar->toggle_buttons(this->sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
