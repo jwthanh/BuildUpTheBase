@@ -1051,9 +1051,26 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 void HarvestScene::add_harvestable()
 {
     Harvestable* harvestable;
-    this->target_recipe = NULL; //TODO move this somewhere else
-
     auto target_building = BUILDUP->get_target_building();
+
+    //use default Loaf recipe on startup, to work towards the salesmen upgrades
+    if (this->target_recipe == NULL)
+    {
+        this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
+        this->target_recipe->_callback = [](){
+            CCLOG("Recipe shattered in _callback");
+            auto workshop = BUILDUP->city->building_by_name("The Workshop");
+
+            Technology technology = Technology(TechSubType::SalesmenBaseBoost);
+
+            technology.set_been_unlocked(true);
+
+            res_count_t def = 0.0;
+            res_count_t num_researched = map_get(workshop->techtree->tech_map, technology.sub_type, def);
+            workshop->techtree->tech_map[technology.sub_type] = num_researched + 1;
+        };
+    }
+
 
     if (target_building->name == "The Mine") {
         harvestable = MiningHarvestable::create();
@@ -1062,18 +1079,6 @@ void HarvestScene::add_harvestable()
     } else if (target_building->name == "The Dump") {
         harvestable = DumpsterHarvestable::create();
     } else if (target_building->name == "The Workshop") {
-        this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
-        this->target_recipe->_callback = [target_building](){
-            CCLOG("Recipe shattered in _callback");
-
-            Technology technology = Technology(TechSubType::SalesmenBaseBoost);
-
-            technology.set_been_unlocked(true);
-
-            res_count_t def = 0.0;
-            res_count_t num_researched = map_get(target_building->techtree->tech_map, technology.sub_type, def);
-            target_building->techtree->tech_map[technology.sub_type] = num_researched + 1;
-        };
         harvestable = CraftingHarvestable::create(this->target_recipe);
     } else if (target_building->name == "The Arena") {
         harvestable = FightingHarvestable::create();
