@@ -421,6 +421,7 @@ void SideListView::setup_detail_listview_as_recipes()
                 Recipe = 0,
                 Misc = 1,
                 Tech = 2,
+                ChangeTargetRecipe = 3
             };
 
             struct DetailConfig {
@@ -512,6 +513,31 @@ void SideListView::setup_detail_listview_as_recipes()
                     } });
             };
 
+            if (building->name == "The Workshop")
+            {
+                spRecipe salesmen_boost = std::make_shared<Recipe>("Salesmen Boost", "Three bread make happy salesmen");
+                salesmen_boost->_callback = [](){
+                    CCLOG("Recipe shattered in _callback");
+                    auto workshop = BUILDUP->city->building_by_name("The Workshop");
+
+                    Technology technology = Technology(TechSubType::SalesmenBaseBoost);
+
+                    technology.set_been_unlocked(true);
+
+                    res_count_t def = 0.0;
+                    res_count_t num_researched = map_get(workshop->techtree->tech_map, technology.sub_type, def);
+                    workshop->techtree->tech_map[technology.sub_type] = num_researched + 1;
+                };
+
+                nuitems_config.push_back({
+                    salesmen_boost,
+                    DetailType::ChangeTargetRecipe,
+                    {
+                        salesmen_boost->name,
+                        salesmen_boost->description
+                    } });
+            };
+
             int i = 0;
             for (auto config : nuitems_config)
             {
@@ -534,6 +560,9 @@ void SideListView::setup_detail_listview_as_recipes()
                 else if (config.type == DetailType::Tech) {
                     menu_item = TechNuItem::create(listview, building);
                 }
+                else if (config.type == DetailType::ChangeTargetRecipe) {
+                    menu_item = TargetRecipeNuItem::create(listview, building);
+                }
 
                 menu_item->setTag(child_tag);
 
@@ -550,6 +579,11 @@ void SideListView::setup_detail_listview_as_recipes()
                 {
                     spTechnology tech = static_pointer_cast<Technology>(config.object);
                     dynamic_cast<TechNuItem*>(menu_item)->other_init(tech);
+                }
+                else if (dynamic_cast<TargetRecipeNuItem*>(menu_item))
+                {
+                    spRecipe recipe = static_pointer_cast<Recipe>(config.object);
+                    dynamic_cast<TargetRecipeNuItem*>(menu_item)->other_init(recipe);
                 }
 
             };

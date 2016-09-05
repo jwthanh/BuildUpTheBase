@@ -514,6 +514,7 @@ void TargetRecipeNuItem::other_init(spRecipe recipe)
         {
         harvest_scene->target_recipe = this->recipe;
         CCLOG("target recipe changed to %s", this->recipe->name.c_str());
+        harvest_scene->removeChildByName("harvestable");
             
         }
         else

@@ -395,7 +395,14 @@ void BaseScene::create_info_panel()
             arena_kill_lbl->setString("Kills: "+beautify_double(kills));
         } else if (BUILDUP->get_target_building()->name == "The Workshop") {
             arena_kill_panel->setVisible(true);
-            arena_kill_lbl->setString(this->target_recipe->name);
+            if (this->target_recipe != NULL)
+            {
+                arena_kill_lbl->setString(this->target_recipe->name);
+            }
+            else
+            {
+                arena_kill_lbl->setString("Choose a recipe");
+            }
         } else {
             arena_kill_panel->setVisible(false);
         }
@@ -1052,25 +1059,6 @@ void HarvestScene::add_harvestable()
 {
     Harvestable* harvestable;
     auto target_building = BUILDUP->get_target_building();
-
-    //use default Loaf recipe on startup, to work towards the salesmen upgrades
-    if (this->target_recipe == NULL)
-    {
-        this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
-        this->target_recipe->name = "Feed Salesmen";
-        this->target_recipe->_callback = [](){
-            CCLOG("Recipe shattered in _callback");
-            auto workshop = BUILDUP->city->building_by_name("The Workshop");
-
-            Technology technology = Technology(TechSubType::SalesmenBaseBoost);
-
-            technology.set_been_unlocked(true);
-
-            res_count_t def = 0.0;
-            res_count_t num_researched = map_get(workshop->techtree->tech_map, technology.sub_type, def);
-            workshop->techtree->tech_map[technology.sub_type] = num_researched + 1;
-        };
-    }
 
 
     if (target_building->name == "The Mine") {
