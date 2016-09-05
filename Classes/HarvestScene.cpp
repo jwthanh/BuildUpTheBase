@@ -1057,7 +1057,7 @@ void HarvestScene::add_harvestable()
     if (this->target_recipe == NULL)
     {
         this->target_recipe = BUILDUP->city->building_by_name("The Farm")->data->get_recipe("loaf_recipe");
-        this->target_recipe->name = "Salesmen boost";
+        this->target_recipe->name = "Feed Salesmen";
         this->target_recipe->_callback = [](){
             CCLOG("Recipe shattered in _callback");
             auto workshop = BUILDUP->city->building_by_name("The Workshop");
