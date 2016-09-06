@@ -12,7 +12,8 @@ const std::map<Technology::SubType, std::string> Technology::type_map = {
     {Technology::SubType::CombatArmor, "combat_armor"},
     {Technology::SubType::CombatCritChance, "combat_crit_chance"},
     {Technology::SubType::CombatCritFactor, "combat_crit_factor"},
-    {Technology::SubType::SalesmenBaseBoost, "salesmen_base_boost"}
+    {Technology::SubType::SalesmenBaseBoost, "salesmen_base_boost"},
+    {Technology::SubType::CombatWeakenEnemy, "combat_weaken_enemy"}
 };
 
 

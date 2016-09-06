@@ -807,8 +807,18 @@ void FightingHarvestable::spawn_enemy()
     this->enemy->team = Fighter::TeamTwo;
     this->enemy->sprite_name = "harvester.png";
 
-    double base_hp = 20.0;
-    double enemy_hp = scale_number_slow(base_hp, (double)game_logic->get_total_kills(), 1.05, 3.0);
+    res_count_t base_hp = 20.0;
+    res_count_t base_slow_rate = 3.0;
+
+    auto workshop = BUILDUP->city->building_by_name("The Workshop");
+    auto tech_map = workshop->techtree->get_tech_map();
+
+    auto tech_type = Technology::SubType::CombatWeakenEnemy;
+    res_count_t _def = 0L;
+    res_count_t decrease_count = map_get(tech_map, tech_type, _def);
+    res_count_t final_slow_rate = std::max(0.01L, base_slow_rate - (0.01*decrease_count));
+
+    res_count_t enemy_hp = scale_number_slow(base_hp, (res_count_t)game_logic->get_total_kills(), 1.05L, final_slow_rate);
     enemy_hp = std::max(base_hp, enemy_hp); //make sure the enemy has at least 20 hp
 
     double enemy_dmg = 3;

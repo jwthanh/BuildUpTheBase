@@ -515,12 +515,12 @@ void SideListView::setup_detail_listview_as_recipes()
 
             if (building->name == "The Workshop")
             {
+                //salesmen boost
                 spRecipe salesmen_boost = std::make_shared<Recipe>("Salesmen Boost", "Three bread make happy salesmen");
                 salesmen_boost->components = mistIngredient{
                     { Ingredient::SubType::Bread, 3.0 }
                 };
                 salesmen_boost->_callback = [](){
-                    CCLOG("Recipe shattered in _callback");
                     auto workshop = BUILDUP->city->building_by_name("The Workshop");
 
                     Technology technology = Technology(TechSubType::SalesmenBaseBoost);
@@ -538,6 +538,33 @@ void SideListView::setup_detail_listview_as_recipes()
                     {
                         salesmen_boost->name,
                         salesmen_boost->description
+                    } });
+
+                //weaken flesh
+                spRecipe weaken_flesh = std::make_shared<Recipe>("Dead meat", "Triple fly, flesh, and loaf make monsters weak");
+                weaken_flesh->components = mistIngredient{
+                    { Ingredient::SubType::Fly, 3.0 },   //TODO not use only three 
+                    { Ingredient::SubType::Flesh, 3.0 }, // because we've got 3
+                    { Ingredient::SubType::Loaf, 3.0 }   // hardcoded
+                };
+                weaken_flesh->_callback = [](){
+                    auto workshop = BUILDUP->city->building_by_name("The Workshop");
+
+                    Technology technology = Technology(TechSubType::CombatWeakenEnemy);
+
+                    technology.set_been_unlocked(true);
+
+                    res_count_t def = 0.0;
+                    res_count_t num_researched = map_get(workshop->techtree->tech_map, technology.sub_type, def);
+                    workshop->techtree->tech_map[technology.sub_type] = num_researched + 1;
+                };
+
+                nuitems_config.push_back({
+                    weaken_flesh,
+                    DetailType::ChangeTargetRecipe,
+                    {
+                        weaken_flesh->name,
+                        weaken_flesh->description
                     } });
             };
 
