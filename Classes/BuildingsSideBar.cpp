@@ -516,6 +516,9 @@ void SideListView::setup_detail_listview_as_recipes()
             if (building->name == "The Workshop")
             {
                 spRecipe salesmen_boost = std::make_shared<Recipe>("Salesmen Boost", "Three bread make happy salesmen");
+                salesmen_boost->components = mistIngredient{
+                    { Ingredient::SubType::Bread, 3.0 }
+                };
                 salesmen_boost->_callback = [](){
                     CCLOG("Recipe shattered in _callback");
                     auto workshop = BUILDUP->city->building_by_name("The Workshop");
