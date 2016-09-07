@@ -496,9 +496,7 @@ bool CraftingHarvestable::can_satisfy_recipe_per_click()
         IngredientSubType ing_type = component.first;
 
         //either the amount required minus click so far, or 0 so its not negative
-        CCLOG("current clicks in can_satisfy: %i", this->recipe->current_clicks);
         res_count_t amount_required = std::max(0.0L, component.second - this->recipe->current_clicks);
-        CCLOG("... amount required: %f", amount_required);
 
         //if there's at least one required, check for at least one
         res_count_t _def = 0.0;
@@ -519,7 +517,6 @@ void CraftingHarvestable::on_harvest()
     auto all_ingredients = BUILDUP->get_all_ingredients();
 
     bool can_satisfy = this->can_satisfy_recipe_per_click();
-    CCLOG("can satisfy %i", can_satisfy);
 
     //if all parts are satisfied, then actually use them and increment counter
     if (can_satisfy == true)
@@ -651,7 +648,6 @@ bool CraftingHarvestable::should_shatter()
     //use clicks instead of ingredient count, because it needs partial progress
     res_count_t clicks_required = 3.0; //TODO use biggest number of component in recipe
     bool is_satisfied = this->recipe->current_clicks >= clicks_required;
-    CCLOG("should shatter? %i", is_satisfied);
 
     return is_satisfied;
 };
@@ -664,7 +660,6 @@ std::string CraftingHarvestable::get_shatter_text()
 void CraftingHarvestable::shatter()
 {
     if (this->recipe != NULL) {
-        CCLOG("SHATTER CRAFTING, consume recipe now!");
         this->recipe->callback();
         this->recipe->current_clicks = 0;
     };
@@ -816,7 +811,7 @@ void FightingHarvestable::spawn_enemy()
     auto tech_type = Technology::SubType::CombatWeakenEnemy;
     res_count_t _def = 0L;
     res_count_t decrease_count = map_get(tech_map, tech_type, _def);
-    res_count_t final_slow_rate = std::max(0.01L, base_slow_rate - (0.01*decrease_count));
+    res_count_t final_slow_rate = std::max(0.01L, base_slow_rate + (0.005*decrease_count));
 
     res_count_t enemy_hp = scale_number_slow(base_hp, (res_count_t)game_logic->get_total_kills(), 1.05L, final_slow_rate);
     enemy_hp = std::max(base_hp, enemy_hp); //make sure the enemy has at least 20 hp
