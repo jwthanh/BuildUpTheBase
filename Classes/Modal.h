@@ -55,9 +55,12 @@ class PageModal : public BaseModal
 class PopupPanel
 {
     private:
-        cocos2d::ui::Layout* _node;
+        cocos2d::ui::Layout* _layout;
     public:
         PopupPanel(cocos2d::ui::Layout* panel);
+
+        void animate_open();
+        void animate_close();
 };
 
 #endif

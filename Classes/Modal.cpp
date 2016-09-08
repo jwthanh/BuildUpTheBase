@@ -81,7 +81,23 @@ void TextBlobModal::set_body(const std::string& body)
 
 
 PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
-_node(panel)
+_layout(panel)
 {
+    this->_layout->addTouchEventListener([this](cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType evt)
+    {
+        if (evt == ui::Widget::TouchEventType::ENDED)
+        {
+            this->animate_close();
+        }
+    });
+};
 
+void PopupPanel::animate_open()
+{
+    this->_layout->setVisible(true);
+};
+
+void PopupPanel::animate_close()
+{
+    this->_layout->setVisible(false);
 };
