@@ -363,10 +363,10 @@ void BaseScene::create_popup_panel()
 {
     auto harvest_scene = this->get_original_scene_from_editor();
 
-    auto popup_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("popup_panel"));
-    popup_panel->removeFromParent();
-    this->popup_panel = std::make_shared<PopupPanel>(popup_panel);
-    this->addChild(popup_panel);
+    auto panel_node = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("popup_panel"));
+    panel_node->removeFromParent();
+    this->popup_panel = std::make_shared<PopupPanel>(panel_node);
+    this->addChild(panel_node);
 };
 
 Node* BaseScene::get_original_scene_from_editor()
