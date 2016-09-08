@@ -97,7 +97,15 @@ _layout(panel)
 
 void PopupPanel::animate_open()
 {
-    this->_layout->setVisible(true);
+    float duration = 0.3f;
+    cocos2d::ActionInterval* hide_action = cocos2d::Spawn::createWithTwoActions(
+        cocos2d::FadeIn::create(duration),
+        cocos2d::MoveTo::create(duration, Vec2(this->initial_x, this->initial_y))
+        );
+
+    this->_layout->runAction( cocos2d::Sequence::create(
+        hide_action, NULL
+        ));
 };
 
 void PopupPanel::animate_close()

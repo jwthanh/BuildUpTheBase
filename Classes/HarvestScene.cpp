@@ -128,21 +128,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        auto target_building = BUILDUP->get_target_building();
-        auto building_upgrade_sidebar = this->sidebar->building_listviews->at(target_building->name);
-        int index = 0;
-        for (Node* item : building_upgrade_sidebar->getChildren())
-        {
-            auto nuitem = dynamic_cast<ui::Button*>(item);
-            if (nuitem){
-                index++;
-                if (nuitem->isEnabled())
-                {
-                    break;
-                }
-            }
-        }
-        building_upgrade_sidebar->jumpToItem(index,Vec2::ONE, Vec2::ONE);
+        this->popup_panel->animate_open();
     }
 }
 
