@@ -67,6 +67,7 @@ class PopupPanel
         void animate_close();
 
         void set_string(std::string message);
+        void set_visible(bool is_visible);
 };
 
 #endif

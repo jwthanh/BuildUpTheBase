@@ -97,19 +97,23 @@ _layout(panel)
 
 void PopupPanel::animate_open()
 {
+    this->set_visible(true); //because it starts off visible false, should be fixed some other way though
+
     float duration = 0.3f;
-    cocos2d::ActionInterval* hide_action = cocos2d::Spawn::createWithTwoActions(
+    cocos2d::ActionInterval* show_action = cocos2d::Spawn::createWithTwoActions(
         cocos2d::FadeIn::create(duration),
         cocos2d::MoveTo::create(duration, Vec2(this->initial_x, this->initial_y))
         );
 
     this->_layout->runAction( cocos2d::Sequence::create(
-        hide_action, NULL
+        show_action, NULL
         ));
 };
 
 void PopupPanel::animate_close()
 {
+    this->set_visible(true); //because it starts off visible false, should be fixed some other way though
+
     float duration = 0.3f;
 
     this->_layout->setPosition(Vec2(
@@ -140,4 +144,9 @@ void PopupPanel::set_string(std::string message)
 {
     auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_lbl"));
     label->setString(message);
+}
+
+void PopupPanel::set_visible(bool is_visible)
+{
+    this->_layout->setVisible(is_visible);
 };
