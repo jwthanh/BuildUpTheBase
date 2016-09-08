@@ -6,6 +6,7 @@
 #include "GameLayer.h"
 #include "MiscUI.h"
 #include "Util.h"
+#include "external/easylogging.h"
 
 USING_NS_CC;
 
@@ -99,6 +100,8 @@ void PopupPanel::animate_open()
 {
     this->set_visible(true); //because it starts off visible false, should be fixed some other way though
 
+    LOG(INFO) << "[Popup] " << this->get_string();
+
     this->_layout->setPosition(Vec2(
         this->initial_x,
         -this->initial_y
@@ -144,6 +147,12 @@ void PopupPanel::animate_close()
         disable_touch, hide_action, enable_touch, NULL
         ));
 };
+
+std::string PopupPanel::get_string()
+{
+    auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_lbl"));
+    return label->getString();
+}
 
 void PopupPanel::set_string(std::string message)
 {
