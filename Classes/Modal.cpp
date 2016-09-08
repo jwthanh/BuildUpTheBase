@@ -99,6 +99,11 @@ void PopupPanel::animate_open()
 {
     this->set_visible(true); //because it starts off visible false, should be fixed some other way though
 
+    this->_layout->setPosition(Vec2(
+        this->initial_x,
+        -this->initial_y
+        ));
+
     float duration = 0.3f;
     cocos2d::ActionInterval* show_action = cocos2d::Spawn::createWithTwoActions(
         cocos2d::FadeIn::create(duration),
