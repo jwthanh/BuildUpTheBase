@@ -23,6 +23,7 @@
 #include "Clock.h"
 #include "Modal.h"
 #include "Logging.h"
+#include "DataManager.h"
 
 
 USING_NS_CC;
@@ -833,7 +834,8 @@ void SideListView::setup_powers_listview_as_powers()
                 CCLOG("Pressed open open leaderboard");
 
                 //TODO use actual url
-                Application::getInstance()->openURL("http://tankorsmash.webfactional.com/leaderboard");
+                auto username = DataManager::get_string_from_data("username", "");
+                Application::getInstance()->openURL("http://tankorsmash.webfactional.com/leaderboard?username="+username);
             });
 
         };
