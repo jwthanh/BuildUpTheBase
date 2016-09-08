@@ -15,6 +15,7 @@
 #include "attribute_container.h"
 #include "ProgressBar.h"
 #include "Technology.h"
+#include "Modal.h"
 
 USING_NS_CC;
 
@@ -875,6 +876,10 @@ void FightingHarvestable::shatter()
 {
     auto game_logic = GameLogic::getInstance();
     game_logic->add_total_kills(1);
+
+    auto popup_panel = GameLogic::get_popup_panel();
+    popup_panel->set_string("Another kill, another day");
+    popup_panel->animate_open();
 
     this->spawn_enemy();
 

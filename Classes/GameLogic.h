@@ -6,6 +6,8 @@
 class Beatup;
 class Buildup;
 
+class PopupPanel;
+
 
 ///Handles the game's logic, most of it will handle here and
 /// be sent to the Layers to update visual stuff as needed
@@ -37,6 +39,8 @@ class GameLogic
         static void save_all();
         static void load_all();
         static void load_all_as_cheater();
+
+        static std::shared_ptr<PopupPanel> get_popup_panel();
 
         void add_total_harvests(int value);
         int get_total_harvests();

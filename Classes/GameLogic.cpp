@@ -10,6 +10,7 @@
 #include "MiscUI.h"
 #include "Modal.h"
 #include "external/easylogging.h"
+#include "HarvestScene.h"
 
 USING_NS_CC;
 
@@ -197,6 +198,17 @@ GameLogic* GameLogic::getInstance()
     };
 
     return GameLogic::_instance;
+};
+
+
+std::shared_ptr<PopupPanel> GameLogic::get_popup_panel()
+{
+    auto scene = dynamic_cast<HarvestScene*>(cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene"));
+    if (scene == NULL)
+    {
+        CCLOG("ERROR: Tried to get_popup_panel and find HarvestScene but couldn't");
+    }
+    return scene->popup_panel;
 };
 
 void GameLogic::add_total_harvests(int value)
