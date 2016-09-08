@@ -135,3 +135,9 @@ void PopupPanel::animate_close()
         disable_touch, hide_action, enable_touch, NULL
         ));
 };
+
+void PopupPanel::set_string(std::string message)
+{
+    auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_lbl"));
+    label->setString(message);
+};
