@@ -6,6 +6,7 @@
 #include "Resources.h"
 
 class SideListView;
+class PopupPanel;
 
 class BaseScene : public GameLayer
 {
@@ -26,6 +27,7 @@ class BaseScene : public GameLayer
         virtual void onSwipeRight(float dt) override;
 
         std::shared_ptr<SideListView> sidebar;
+        std::shared_ptr<PopupPanel> popup_panel;
 
         cocos2d::ui::Text* upgrade_lbl;
         spRecipe target_recipe;
@@ -37,6 +39,7 @@ class BaseScene : public GameLayer
         void create_building_choicelist();
         void create_inventory_listview();
         void create_shop_listview();
+        void create_popup_panel();
 
         cocos2d::ui::Widget* create_ingredient_detail_alert(Ingredient::SubType ing_type);
 

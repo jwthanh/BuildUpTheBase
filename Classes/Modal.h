@@ -10,6 +10,7 @@ namespace cocos2d
 
     namespace ui 
     {
+        class Layout;
         class Text;
         class ScrollView;
         class ListView;
@@ -45,10 +46,18 @@ class TextBlobModal : public BaseModal
         void set_body(const std::string& body_txt);
 };
 
-//modal with paginated items
+//modal with paginated items TODO
 class PageModal : public BaseModal
 {
+};
 
+//only one at a time, used for flavour text along the bottom
+class PopupPanel
+{
+    private:
+        cocos2d::ui::Layout* _node;
+    public:
+        PopupPanel(cocos2d::ui::Layout* panel);
 };
 
 #endif

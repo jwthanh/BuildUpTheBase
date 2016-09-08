@@ -79,3 +79,9 @@ void TextBlobModal::set_body(const std::string& body)
     };
 };
 
+
+PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
+_node(panel)
+{
+
+};
