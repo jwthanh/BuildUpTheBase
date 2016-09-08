@@ -895,13 +895,12 @@ void FightingHarvestable::shatter()
     auto popup_panel = GameLogic::get_popup_panel();
     //auto it = std::find(kill_messages.begin(), kill_messages.end(), game_logic->get_total_kills());
     auto it = kill_messages.find(game_logic->get_total_kills());
-    std::string kill_message = "Another kill, another day";
     if (it != kill_messages.end())
     {
-        kill_message = (*it).second;
+        std::string kill_message = (*it).second;
+        popup_panel->set_string(kill_message);
+        popup_panel->animate_open();
     }
-    popup_panel->set_string(kill_message);
-    popup_panel->animate_open();
 
     this->spawn_enemy();
 
