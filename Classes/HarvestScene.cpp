@@ -79,9 +79,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_A)
     {
-        auto modal = new TextBlobModal(this);
-        modal->set_body(Logger::get_log_contents());
-
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_B)
     {
@@ -108,23 +105,15 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_S)
     {
-        GameLogic::save_all();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_T)
     {
-        std::stringstream ss;
-        auto hours_since_last_login = BEATUP->hours_since_last_login();
-
-        ss << "It's been " << hours_since_last_login.count() << " hours since last login";
-        CCLOG(ss.str().c_str());
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_L)
     {
-        GameLogic::load_all();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_U)
     {
-        BUILDUP->post_update();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
