@@ -872,13 +872,35 @@ void FightingHarvestable::spawn_enemy()
 
 };
 
+const std::map<res_count_t, std::string> kill_messages = {
+    { 1.0, "The first kill!" },
+    { 2.0, "The second kill! This is a weird feeling." },
+    { 3.0, "The third kill! This isn't right." },
+    { 4.0, "The fourth kill! It doesn't matter though." },
+    { 5.0, "The fifth kill! I'll ignore this feeling." },
+    { 10.0, "The tenth kill! But I can't, it won't go away." },
+    { 15.0, "The fifteenth kill! It gnaws on me..." },
+    { 25.0, "The twenty-fifth kill! I need more." },
+    { 35.0, "The thirtieth kill! I need more strength." },
+    { 50.0, "The fiftieth kill! I need more power." },
+    { 75.0, "The seventieth kill! I need more souls." },
+    { 100.0, "The hundredth kill! I've done it. I've killed one hundred souls. I don't know what this means" }
+};
+
 void FightingHarvestable::shatter()
 {
     auto game_logic = GameLogic::getInstance();
     game_logic->add_total_kills(1);
 
     auto popup_panel = GameLogic::get_popup_panel();
-    popup_panel->set_string("Another kill, another day");
+    //auto it = std::find(kill_messages.begin(), kill_messages.end(), game_logic->get_total_kills());
+    auto it = kill_messages.find(game_logic->get_total_kills());
+    std::string kill_message = "Another kill, another day";
+    if (it != kill_messages.end())
+    {
+        kill_message = (*it).second;
+    }
+    popup_panel->set_string(kill_message);
     popup_panel->animate_open();
 
     this->spawn_enemy();

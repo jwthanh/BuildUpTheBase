@@ -437,7 +437,7 @@
           <AbstractNodeData Name="popup_panel" ActionTag="-1343836221" Tag="121" IconVisible="False" LeftMargin="30.8701" RightMargin="29.1299" TopMargin="552.5000" BottomMargin="12.5000" TouchEnable="True" ClipAble="False" ComboBoxIndex="2" ColorAngle="90.0000" ctype="PanelObjectData">
             <Size X="900.0000" Y="75.0000" />
             <Children>
-              <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="15.2886" RightMargin="14.1543" TopMargin="3.2629" BottomMargin="3.1497" IsCustomSize="True" FontSize="20" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="15.2886" RightMargin="14.1543" TopMargin="3.2629" BottomMargin="3.1497" IsCustomSize="True" FontSize="20" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="870.5571" Y="68.5874" />
                 <AnchorPoint />
                 <Position X="15.2886" Y="3.1497" />
