@@ -56,6 +56,10 @@ class PopupPanel
 {
     private:
         cocos2d::ui::Layout* _layout;
+
+        //initial position to animate to, taken from cocos studio
+        float initial_x, initial_y;
+
     public:
         PopupPanel(cocos2d::ui::Layout* panel);
 

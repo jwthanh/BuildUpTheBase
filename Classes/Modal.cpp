@@ -83,6 +83,9 @@ void TextBlobModal::set_body(const std::string& body)
 PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
 _layout(panel)
 {
+    this->initial_x = panel->getPositionX();
+    this->initial_y = panel->getPositionY();
+
     this->_layout->addTouchEventListener([this](cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
@@ -99,5 +102,16 @@ void PopupPanel::animate_open()
 
 void PopupPanel::animate_close()
 {
-    this->_layout->setVisible(false);
+    float duration = 0.3f;
+
+    this->_layout->setPosition(Vec2(
+        this->initial_x,
+        this->initial_y
+        ));
+
+    cocos2d::ActionInterval* hide_action = cocos2d::Spawn::createWithTwoActions(
+        cocos2d::FadeOut::create(duration),
+        cocos2d::MoveTo::create(duration, Vec2(this->initial_x, -this->initial_y))
+        );
+    this->_layout->runAction(hide_action);
 };
