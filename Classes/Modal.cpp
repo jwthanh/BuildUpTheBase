@@ -109,9 +109,21 @@ void PopupPanel::animate_close()
         this->initial_y
         ));
 
+    cocos2d::CallFunc* disable_touch = cocos2d::CallFunc::create([this]()
+    {
+        this->_layout->setTouchEnabled(false);
+    });
+    cocos2d::CallFunc* enable_touch = cocos2d::CallFunc::create([this]()
+    {
+        this->_layout->setTouchEnabled(true);
+    });
+
     cocos2d::ActionInterval* hide_action = cocos2d::Spawn::createWithTwoActions(
         cocos2d::FadeOut::create(duration),
         cocos2d::MoveTo::create(duration, Vec2(this->initial_x, -this->initial_y))
         );
-    this->_layout->runAction(hide_action);
+
+    this->_layout->runAction( cocos2d::Sequence::create(
+        disable_touch, hide_action, enable_touch, NULL
+        ));
 };
