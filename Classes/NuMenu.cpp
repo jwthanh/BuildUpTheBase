@@ -512,10 +512,10 @@ void TargetRecipeNuItem::other_init(spRecipe recipe)
         auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
         if (harvest_scene)
         {
-        harvest_scene->target_recipe = this->recipe;
-        CCLOG("target recipe changed to %s", this->recipe->name.c_str());
-        harvest_scene->removeChildByName("harvestable");
-            
+            harvest_scene->target_recipe = this->recipe;
+            CCLOG("target recipe changed to %s", this->recipe->name.c_str());
+            harvest_scene->removeChildByName("harvestable");
+
         }
         else
         {

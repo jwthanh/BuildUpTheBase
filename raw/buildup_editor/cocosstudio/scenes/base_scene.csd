@@ -407,10 +407,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="arena_kill_panel" ActionTag="-1152670340" Tag="71" IconVisible="False" LeftMargin="559.9988" RightMargin="200.0012" TopMargin="511.3903" BottomMargin="99.9998" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="2" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="arena_kill_panel" ActionTag="-1152670340" Tag="71" IconVisible="False" LeftMargin="559.9988" RightMargin="200.0012" TopMargin="511.3903" BottomMargin="99.9998" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="28.6099" />
             <Children>
-              <AbstractNodeData Name="arena_kill_lbl" ActionTag="421305276" Tag="108" IconVisible="False" LeftMargin="1.6754" RightMargin="-0.4612" TopMargin="1.3944" BottomMargin="1.4580" IsCustomSize="True" FontSize="16" LabelText="Kills: 123,123Qad" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="arena_kill_lbl" ActionTag="421305276" Tag="108" IconVisible="False" LeftMargin="1.6754" RightMargin="-0.4612" TopMargin="1.3939" BottomMargin="1.4585" IsCustomSize="True" FontSize="16" LabelText="Kills: 123,123Qad" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="198.7858" Y="25.7575" />
                 <AnchorPoint ScaleX="1.0000" ScaleY="0.5629" />
                 <Position X="200.4612" Y="15.9574" />
@@ -430,6 +430,33 @@
             <PrePosition X="0.5833" Y="0.1562" />
             <PreSize X="0.2083" Y="0.0447" />
             <SingleColor A="255" R="150" G="200" B="255" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="popup_panel" ActionTag="-1343836221" Tag="121" IconVisible="False" LeftMargin="30.8701" RightMargin="29.1299" TopMargin="552.5000" BottomMargin="12.5000" TouchEnable="True" ClipAble="False" ComboBoxIndex="2" ColorAngle="90.0000" ctype="PanelObjectData">
+            <Size X="900.0000" Y="75.0000" />
+            <Children>
+              <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="15.2886" RightMargin="14.1543" TopMargin="3.2629" BottomMargin="3.1497" IsCustomSize="True" FontSize="20" LabelText="HAHA Your mom died you piece of shit, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="870.5571" Y="68.5874" />
+                <AnchorPoint />
+                <Position X="15.2886" Y="3.1497" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0170" Y="0.0420" />
+                <PreSize X="0.9673" Y="0.9145" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                <OutlineColor A="255" R="26" G="26" B="26" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5046" ScaleY="0.5000" />
+            <Position X="485.0000" Y="50.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5052" Y="0.0781" />
+            <PreSize X="0.9375" Y="0.1172" />
+            <SingleColor A="255" R="139" G="105" B="20" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
