@@ -778,7 +778,15 @@ void SideListView::setup_powers_listview_as_powers()
 
                 auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
                 auto modal = new TextBlobModal(scene);
-                modal->set_title("Log");
+                std::string version_string = Application::getInstance()->getVersion();
+                if (version_string.empty())
+                {
+                    version_string = "0.0.0";
+                }
+                std::stringstream version_ss;
+                version_ss << "Log (v" << version_string << ")";
+                modal->set_title(version_ss.str());
+
                 std::string raw_log_string = Logger::get_log_contents();
 
                 auto split_messages = split(raw_log_string, '\n');
