@@ -298,7 +298,7 @@ void GameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::E
 
 void GameLayer::onEnter()
 {
-    Node::onEnter();
+    cocos2d::Layer::onEnter();
     if (!SoundEngine::is_sound_enabled())
     {
         SoundEngine::stop_all_sound_and_music();
