@@ -17,12 +17,21 @@ USING_NS_CC;
 GameLogic* GameLogic::_instance = NULL;
 
 GameLogic::GameLogic()
+    : is_loaded(false)
 {
 
 };
 
 void GameLogic::post_load()
 {
+
+    //dont re-load if done once already. this is because post_load gets called
+    //onEnter, originally only from initializing game, but now we're using
+    //different scenes
+    if (is_loaded == true)
+    {
+        return;
+    };
 
     //cheat to reset data to blank on load
     auto username = DataManager::get_string_from_data("username");
@@ -131,6 +140,8 @@ void GameLogic::post_load()
     //set the last login time, set here and on save
     BEATUP->set_last_login();
     LOG(INFO) << "Game loaded!";
+
+    this->is_loaded = true;
 }
 
 bool GameLogic::init()
@@ -291,10 +302,21 @@ void GameDirector::switch_to_city_menu()
 {
     auto inst = CSLoader::getInstance();
     auto city_menu_scene_node = inst->CSLoader::createNode("editor/scenes/city_menu_scene.csb");
+    city_menu_scene_node->removeFromParent();
 
     auto scene = cocos2d::Scene::create();
     scene->setName("city_wrapper_scene");
     scene->addChild(city_menu_scene_node);
+
+    auto back_btn = dynamic_cast<ui::Button*>(city_menu_scene_node->getChildByName("back_btn"));
+    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            auto director = Director::getInstance();
+            director->popScene();
+        }
+    });
+    load_default_button_textures(back_btn);
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);

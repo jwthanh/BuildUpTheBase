@@ -18,7 +18,9 @@ class PopupPanel;
 class GameLogic
 {
     protected:
+        bool is_loaded;
         static GameLogic* _instance;
+
     public:
         GameLogic();
         bool init();
