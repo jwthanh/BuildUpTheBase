@@ -6,6 +6,7 @@
 USING_NS_CC;
 
 /* easy logging stuff*/
+#define ELPP_DISABLE_DEFAULT_CRASH_HANDLING
 #include "external/easylogging.h"
 
 INITIALIZE_EASYLOGGINGPP
