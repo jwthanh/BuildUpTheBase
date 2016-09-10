@@ -303,12 +303,13 @@ void GameDirector::switch_to_city_menu()
     auto inst = CSLoader::getInstance();
     auto city_menu_scene_node = inst->CSLoader::createNode("editor/scenes/city_menu_scene.csb");
     city_menu_scene_node->removeFromParent();
+    auto panel = city_menu_scene_node->getChildByName("panel");
 
     auto scene = cocos2d::Scene::create();
     scene->setName("city_wrapper_scene");
     scene->addChild(city_menu_scene_node);
 
-    auto back_btn = dynamic_cast<ui::Button*>(city_menu_scene_node->getChildByName("back_btn"));
+    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
     Label* button_lbl = (Label*)back_btn->getTitleRenderer();
     button_lbl->setTextColor(Color4B::WHITE);
     button_lbl->enableOutline(Color4B::BLACK, 2);
