@@ -286,3 +286,16 @@ void GameDirector::switch_to_building_menu()
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
 };
+
+void GameDirector::switch_to_city_menu()
+{
+    auto inst = CSLoader::getInstance();
+    auto city_menu_scene_node = inst->CSLoader::createNode("editor/scenes/city_menu_scene.csb");
+
+    auto scene = cocos2d::Scene::create();
+    scene->setName("city_wrapper_scene");
+    scene->addChild(city_menu_scene_node);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};

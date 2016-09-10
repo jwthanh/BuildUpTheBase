@@ -98,11 +98,11 @@
           </AbstractNodeData>
           <AbstractNodeData Name="back_btn" ActionTag="-552791013" Tag="74" IconVisible="False" LeftMargin="15.0006" RightMargin="814.9994" TopMargin="57.8200" BottomMargin="482.1800" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="130.0000" Y="100.0000" />
-            <AnchorPoint ScaleX="0.5189" ScaleY="0.6455" />
-            <Position X="82.4576" Y="546.7300" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="80.0006" Y="532.1800" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0859" Y="0.8543" />
+            <PrePosition X="0.0833" Y="0.8315" />
             <PreSize X="0.1354" Y="0.1563" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />

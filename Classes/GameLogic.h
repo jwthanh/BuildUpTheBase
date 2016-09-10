@@ -53,6 +53,7 @@ class GameDirector
 {
     public:
         static void switch_to_building_menu();
+        static void switch_to_city_menu();
 };
 
 #endif

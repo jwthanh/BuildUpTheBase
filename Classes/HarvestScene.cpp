@@ -387,6 +387,7 @@ void BaseScene::create_building_choicelist()
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
             CCLOG("CITY BUTTON TOUCHED");
+            GameDirector::switch_to_city_menu();
         }
     };
     panel->addTouchEventListener(touch_handler);
