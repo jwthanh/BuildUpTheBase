@@ -265,21 +265,29 @@ void BaseScene::create_building_choicelist()
         std::string img_path = "";
         if (building->name == "The Mine") {
             img_path = "dirt_1.png";
-        } else if (building->name == "The Forest") {
+        }
+        else if (building->name == "The Forest") {
             img_path = "tree.png";
-        } else if (building->name == "The Dump") {
+        }
+        else if (building->name == "The Dump") {
             img_path = "dump_darker.png";
-        } else if (building->name == "The Workshop") {
+        }
+        else if (building->name == "The Workshop") {
             img_path = "anvil.png";
-        } else if (building->name == "The Arena") {
+        }
+        else if (building->name == "The Arena") {
             img_path = "sword.png";
-        } else if (building->name == "The Graveyard") {
+        }
+        else if (building->name == "The Graveyard") {
             img_path = "grave.png";
-        } else if (building->name == "The Underscape") {
+        }
+        else if (building->name == "The Underscape") {
             img_path = "necro_open.png";
-        } else if (building->name == "The Farm") {
+        }
+        else if (building->name == "The Farm") {
             img_path = "farm.png";
-        } else {
+        }
+        else {
             img_path = "weapon_ice.png";
         };
         building_image->loadTexture(img_path, ui::TextureResType::PLIST);
@@ -320,7 +328,7 @@ void BaseScene::create_building_choicelist()
                 try_set_node_color(panel, Color3B::WHITE);
             }
         };
-        building_node->schedule(update_func, 0.01f, "update_func");
+        building_node->schedule(update_func, AVERAGE_DELAY, "update_func");
         update_func(0);
 
         auto touch_handler = [panel, building](Ref*, ui::Widget::TouchEventType evt)
@@ -332,6 +340,56 @@ void BaseScene::create_building_choicelist()
         };
         panel->addTouchEventListener(touch_handler);
     };
+
+    /// Build city button separately from the rest of the buildings
+    //get initial node from the prebuilt scene
+    Node* city_node = harvest_scene_editor->getChildByName("city_node");
+    ui::Button* panel = (ui::Button*)city_node->getChildByName("building_panel");
+    city_node->removeFromParent();
+    this->addChild(city_node);
+
+
+    //set building name
+    ui::Text* building_name = (ui::Text*)panel->getChildByName("building_name");
+    building_name->setString("CITY");
+    set_aliasing(building_name, true);
+
+    //add building image
+    ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
+    std::string img_path = "buildingTiles_002.png";
+    building_image->loadTexture(img_path, ui::TextureResType::PLIST);
+
+    load_default_button_textures(panel);
+
+    auto update_func = [panel, building_image, img_path](float dt)
+    {
+        auto target_building = BUILDUP->get_target_building();
+
+        std::string tex_name;
+        int res_type;
+
+        tex_name = img_path;
+        res_type = (int)ui::Widget::TextureResType::PLIST;
+
+        ResourceData r_data = building_image->getRenderFile();
+        if (r_data.file != tex_name || r_data.type != (int)res_type)
+        {
+            building_image->loadTexture(tex_name, (ui::Widget::TextureResType)res_type);
+        }
+
+        try_set_node_color(panel, Color3B::WHITE);
+    };
+    city_node->schedule(update_func, AVERAGE_DELAY, "update_func");
+    update_func(0);
+
+    auto touch_handler = [panel](Ref*, ui::Widget::TouchEventType evt)
+    {
+        if (evt == ui::Widget::TouchEventType::ENDED)
+        {
+            CCLOG("CITY BUTTON TOUCHED");
+        }
+    };
+    panel->addTouchEventListener(touch_handler);
 };
 
 void BaseScene::create_popup_panel()

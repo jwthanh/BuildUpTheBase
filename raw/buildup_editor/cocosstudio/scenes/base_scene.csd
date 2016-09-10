@@ -391,6 +391,16 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
           </AbstractNodeData>
+          <AbstractNodeData Name="city_node" ActionTag="1228736272" Tag="303" IconVisible="True" LeftMargin="720.0000" RightMargin="240.0000" TopMargin="37.9994" BottomMargin="602.0006" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="720.0000" Y="602.0006" />
+            <Scale ScaleX="0.3500" ScaleY="0.3500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.7500" Y="0.9406" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="buttons/building_button.csd" Plist="" />
+          </AbstractNodeData>
           <AbstractNodeData Name="tab_4_btn" ActionTag="243979730" Tag="78" IconVisible="False" LeftMargin="200.0001" RightMargin="559.9999" TopMargin="2.9995" BottomMargin="567.0005" TouchEnable="True" FontSize="18" ButtonText="Menu" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="200.0000" Y="70.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
