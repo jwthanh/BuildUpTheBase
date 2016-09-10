@@ -309,6 +309,10 @@ void GameDirector::switch_to_city_menu()
     scene->addChild(city_menu_scene_node);
 
     auto back_btn = dynamic_cast<ui::Button*>(city_menu_scene_node->getChildByName("back_btn"));
+    Label* button_lbl = (Label*)back_btn->getTitleRenderer();
+    button_lbl->setTextColor(Color4B::WHITE);
+    button_lbl->enableOutline(Color4B::BLACK, 2);
+
     back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
