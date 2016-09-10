@@ -561,7 +561,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
             //TODO doesn't make sure it needs at least one of any given ing type
             for (auto component : this->recipe->components)
             {
-                ss << "used a " << Ingredient::type_to_string(component.first);
+                ss << "Used a " << Ingredient::type_to_string(component.first);
                 std::string floating_msg = ss.str();
                 this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
             }
@@ -571,10 +571,11 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
             //TODO make sure you're actually missing each ing type
             for (auto component : this->recipe->components)
             {
-                ss << "missing a " << Ingredient::type_to_string(component.first);
-                std::string floating_msg = ss.str();
-                this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
+                ss << "Need " << Ingredient::type_to_string(component.first) << ". ";
             }
+
+            std::string floating_msg = ss.str();
+            this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
         }
     }
 
