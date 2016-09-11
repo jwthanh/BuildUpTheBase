@@ -74,10 +74,10 @@
                 <OutlineColor A="255" R="26" G="26" B="26" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="invest_copper_panel" ActionTag="1062837639" Tag="654" IconVisible="False" LeftMargin="145.6230" RightMargin="151.8969" TopMargin="191.8619" BottomMargin="377.2024" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="invest_panel" ActionTag="1062837639" Tag="654" IconVisible="False" LeftMargin="145.6230" RightMargin="151.8969" TopMargin="191.8619" BottomMargin="377.2024" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="662.4801" Y="70.9357" />
                 <Children>
-                  <AbstractNodeData Name="invest_copper_lbl" ActionTag="176670848" Tag="655" IconVisible="False" LeftMargin="11.7858" RightMargin="382.7933" TopMargin="19.6372" BottomMargin="21.4710" IsCustomSize="True" FontSize="16" LabelText="Invest:" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="invest_lbl" ActionTag="176670848" Tag="655" IconVisible="False" LeftMargin="11.7858" RightMargin="382.7933" TopMargin="19.6372" BottomMargin="21.4710" IsCustomSize="True" FontSize="16" LabelText="Invest:" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="267.9010" Y="29.8275" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="11.7858" Y="36.3848" />
@@ -89,7 +89,7 @@
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="invest_copper_button" ActionTag="1405860098" Tag="657" IconVisible="False" LeftMargin="287.1983" RightMargin="8.5509" TopMargin="4.8208" BottomMargin="5.7114" TouchEnable="True" FontSize="14" ButtonText="10 copper" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="invest_button" ActionTag="1405860098" Tag="657" IconVisible="False" LeftMargin="287.1983" RightMargin="8.5509" TopMargin="4.8208" BottomMargin="5.7114" TouchEnable="True" FontSize="14" ButtonText="10 coins" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="366.7309" Y="60.4035" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="470.5638" Y="35.9133" />
