@@ -309,8 +309,15 @@ void GameDirector::switch_to_city_menu()
     scene->setName("city_wrapper_scene");
     scene->addChild(city_menu_scene_node);
 
+    auto invest_copper_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("invest_copper_panel"));
+    auto invest_copper_button = dynamic_cast<ui::Button*>(invest_copper_panel->getChildByName("invest_copper_button"));
+    load_default_button_textures(invest_copper_button);
+    cocos2d::TTFConfig ttf_config = TTFConfig("pixelmix.ttf", 24, GlyphCollection::ASCII, NULL, false, 2);
+    Label* renderer = invest_copper_button->getTitleRenderer();
+    renderer->setTTFConfig(ttf_config);
+
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
-    Label* button_lbl = (Label*)back_btn->getTitleRenderer();
+    Label* button_lbl = back_btn->getTitleRenderer();
     button_lbl->setTextColor(Color4B::WHITE);
     button_lbl->enableOutline(Color4B::BLACK, 2);
 
