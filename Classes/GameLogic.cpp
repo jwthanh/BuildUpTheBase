@@ -232,6 +232,16 @@ int GameLogic::get_total_harvests()
     return DataManager::get_int_from_data("total_harvests");
 };
 
+void GameLogic::add_city_investment(double value)
+{
+    DataManager::incr_key("city_investment", value);
+};
+
+int GameLogic::get_city_investment()
+{
+    return DataManager::get_int_from_data("city_investment");
+};
+
 void GameLogic::add_total_kills(int value)
 {
     DataManager::incr_key("total_kills", value);
