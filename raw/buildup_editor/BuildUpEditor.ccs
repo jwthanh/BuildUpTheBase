@@ -20,8 +20,8 @@
         </Folder>
         <Folder Name="scenes">
           <Project Name="base_scene.csd" Type="Scene" />
-          <Project Name="city_scene.csd" Type="Scene" />
           <Project Name="city_menu_scene.csd" Type="Scene" />
+          <Project Name="city_scene.csd" Type="Scene" />
         </Folder>
         <Image Name="main_UI_export_10.png" />
         <TTF Name="pixelmix.ttf" />

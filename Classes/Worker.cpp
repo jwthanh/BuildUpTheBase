@@ -254,7 +254,7 @@ void ConsumerHarvester::on_update(float dt)
         if (health->is_full() == false)
         {
             res_count_t healing = 5 * this->active_count;
-            CCLOG("this building has enough blood, healing %L", healing);
+            CCLOG("this building has enough blood, healing %f", healing);
 
             health->add_to_current_val((int)healing);
             this->building->ingredients[Ingredient::SubType::Blood] -= active_cost;

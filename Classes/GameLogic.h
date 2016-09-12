@@ -47,6 +47,7 @@ class GameLogic
         void add_total_harvests(int value);
         int get_total_harvests();
 
+        int city_investment;
         void add_city_investment(double value);
         int get_city_investment();
 

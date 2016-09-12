@@ -104,6 +104,18 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
+                  <AbstractNodeData Name="invested_lbl" ActionTag="-1689831456" Tag="11" IconVisible="False" LeftMargin="106.3417" RightMargin="383.7328" TopMargin="5.7303" BottomMargin="7.1067" IsCustomSize="True" FontSize="16" LabelText="123,456QaD" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="172.4056" Y="58.0987" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="192.5445" Y="36.1561" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2906" Y="0.5097" />
+                    <PreSize X="0.2602" Y="0.8190" />
+                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                    <OutlineColor A="255" R="26" G="26" B="26" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
                 <Position X="145.6230" Y="377.2024" />
