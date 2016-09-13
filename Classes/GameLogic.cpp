@@ -339,6 +339,15 @@ void GameDirector::switch_to_city_menu()
     Label* renderer = invest_button->getTitleRenderer();
     renderer->setTTFConfig(ttf_config);
 
+    auto invested_lbl = dynamic_cast<ui::Text*>(invest_panel->getChildByName("invested_lbl"));
+    auto update_invested = [invested_lbl](float dt) {
+        res_count_t invested = (res_count_t)GameLogic::getInstance()->get_city_investment();
+        invested_lbl->setString(beautify_double(invested));
+    };
+    invested_lbl->schedule(update_invested, AVERAGE_DELAY, "update_invested");
+    update_invested(0);
+
+
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
     Label* button_lbl = back_btn->getTitleRenderer();
     button_lbl->setTextColor(Color4B::WHITE);
