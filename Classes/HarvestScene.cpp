@@ -598,11 +598,11 @@ void BaseScene::create_username_input()
 
     auto textfield_listener = [username_input, clean_username](Ref* target, ui::TextField::EventType evt)
         {
-            if (evt == ui::TextField::EventType::INSERT_TEXT || 
-                evt == ui::TextField::EventType::DELETE_BACKWARD)
+            if (evt == ui::TextField::EventType::ATTACH_WITH_IME || 
+                evt == ui::TextField::EventType::DETACH_WITH_IME)
             {
                 std::string text = username_input->getString();
-                CCLOG("Got raw username: %s", text.c_str());
+                CCLOG("Got raw username from username_input: %s", text.c_str());
                 std::string cleaned_username = clean_username(text);
                 CCLOG("is cleaned to %s", cleaned_username.c_str());
                 username_input->setString(cleaned_username);
