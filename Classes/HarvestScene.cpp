@@ -205,7 +205,7 @@ void BaseScene::create_goal_loadingbar()
             };
 
         };
-    loading_bar->schedule(update_loading_bar, 0.1f, "loadingbar_update");
+    loading_bar->schedule(update_loading_bar, AVERAGE_DELAY, "loadingbar_update");
     update_loading_bar(0);
 
     this->upgrade_lbl = dynamic_cast<ui::Text*>(progress_panel->getChildByName("upgrade_lbl"));
@@ -466,8 +466,6 @@ void BaseScene::create_info_panel()
         sprintf(buffer,"%s: %s", prefix.c_str(), beautify_double(count).c_str());
         return std::string(buffer);
     };
-
-    const float AVERAGE_DELAY = 0.1f;
 
     auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
     auto update_building_name = [building_name](float dt){
@@ -798,7 +796,6 @@ void BaseScene::create_inventory_listview()
             };
             new_item_panel->addTouchEventListener(on_touch_cb);
 
-            float AVERAGE_DELAY = 0.1f;
             auto update_lbl_cb = [new_item_panel, this, ing_type](float)
             {
                 auto it = ing_type; 
@@ -829,7 +826,7 @@ void BaseScene::create_inventory_listview()
     };
 
     update_listview(0.0f); //why doesnt this do anything
-    inventory_listview->schedule(update_listview, 0.1f, "update_listview");
+    inventory_listview->schedule(update_listview, AVERAGE_DELAY, "update_listview");
 };
 
 void BaseScene::create_shop_listview()
@@ -985,8 +982,6 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     auto count_desc = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_desc"));
     auto count_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_lbl"));
 
-    auto AVERAGE_DELAY = 0.1f;
-
     alert_panel->schedule([count_lbl, ing_type](float) {
         auto it = ing_type;
         auto all_ing = BUILDUP->get_all_ingredients();
@@ -996,12 +991,12 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     }, AVERAGE_DELAY, "alert_count_update");
 
     res_count_t coins_gained = 3;
-    auto create_sell_button = [this, alert_panel, ing_type, coins_gained, AVERAGE_DELAY](std::string name, int amount_sold)
+    auto create_sell_button = [this, alert_panel, ing_type, coins_gained](std::string name, int amount_sold)
     {
         auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
         load_default_button_textures(sell_btn);
 
-        sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold, AVERAGE_DELAY](Ref* touch, ui::Widget::TouchEventType type){
+        sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold](Ref* touch, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
