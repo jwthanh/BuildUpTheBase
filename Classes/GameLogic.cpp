@@ -292,6 +292,7 @@ void GameLogic::load_all()
         bldg_serializer.load();
     };
     BEATUP->_total_coins = DataManager::get_double_from_data(Beatup::total_coin_key);
+    BUILDUP->city->name = DataManager::get_string_from_data("city_name", "");
 };
 
 void GameLogic::load_all_as_cheater()
@@ -351,6 +352,7 @@ void GameDirector::switch_to_city_menu()
             std::string cleaned_city_name = clean_city_name(text);
             CCLOG("is cleaned to %s", cleaned_city_name.c_str());
             city_name_input->setString(cleaned_city_name);
+            BUILDUP->city->name = cleaned_city_name;
 
             DataManager::set_string_from_data("city_name", cleaned_city_name);
         }
