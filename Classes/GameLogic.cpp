@@ -329,6 +329,34 @@ void GameDirector::switch_to_city_menu()
     scene->setName("city_wrapper_scene");
     scene->addChild(city_menu_scene_node);
 
+    //city name
+    auto city_name_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("city_name_panel"));
+    auto city_name_input = dynamic_cast<ui::TextField*>(city_name_panel->getChildByName("city_name_textfield"));
+    city_name_input->setString(DataManager::get_string_from_data("city_name", ""));
+
+    auto is_bad_character = [](char character){
+        return !(std::isalnum(character) || character == '_');
+    };
+    auto clean_city_name = [is_bad_character](std::string city_name) {
+        city_name.erase(std::remove_if(city_name.begin(), city_name.end(), is_bad_character), city_name.end());
+        return city_name;
+    };
+    auto textfield_listener = [city_name_input, clean_city_name](Ref* target, ui::TextField::EventType evt)
+    {
+        if (evt == ui::TextField::EventType::ATTACH_WITH_IME || 
+                evt == ui::TextField::EventType::DETACH_WITH_IME)
+        {
+            std::string text = city_name_input->getString();
+            CCLOG("Got raw city_name from city_name_input: %s", text.c_str());
+            std::string cleaned_city_name = clean_city_name(text);
+            CCLOG("is cleaned to %s", cleaned_city_name.c_str());
+            city_name_input->setString(cleaned_city_name);
+
+            DataManager::set_string_from_data("city_name", cleaned_city_name);
+        }
+    };
+    city_name_input->addEventListener(textfield_listener);
+
     //invest panel
     auto invest_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("invest_panel"));
     auto invest_button = dynamic_cast<ui::Button*>(invest_panel->getChildByName("invest_button"));

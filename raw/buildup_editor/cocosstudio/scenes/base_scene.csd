@@ -57,14 +57,14 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="0.8800" RightMargin="-0.8800" TopMargin="234.9483" BottomMargin="11.2417" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="16" ctype="TextFieldObjectData">
-                <Size X="200.0000" Y="18.8100" />
+              <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="7.2443" RightMargin="5.5973" TopMargin="234.9483" BottomMargin="11.2417" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="16" ctype="TextFieldObjectData">
+                <Size X="187.1584" Y="18.8100" />
                 <AnchorPoint ScaleX="0.4956" ScaleY="0.5000" />
                 <Position X="100.0000" Y="20.6467" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.0779" />
-                <PreSize X="1.0000" Y="0.0710" />
+                <PreSize X="0.9358" Y="0.0710" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
               </AbstractNodeData>
             </Children>
@@ -94,37 +94,37 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="6.6392" RightMargin="3.3608" TopMargin="81.2263" BottomMargin="95.2263" IsCustomSize="True" FontSize="20" LabelText="$100,200Qad" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="6.6378" RightMargin="3.3622" TopMargin="70.2265" BottomMargin="106.2262" IsCustomSize="True" FontSize="20" LabelText="$100,200Qad" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="23.5473" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="101.6392" Y="107.0000" />
+                <Position X="101.6378" Y="117.9999" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5082" Y="0.5350" />
+                <PrePosition X="0.5082" Y="0.5900" />
                 <PreSize X="0.9500" Y="0.1177" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="5.0000" RightMargin="5.0000" TopMargin="156.5001" BottomMargin="20.4999" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="4.9999" RightMargin="5.0001" TopMargin="148.5000" BottomMargin="28.5000" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="31.9999" />
+                <Position X="99.9999" Y="40.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.1600" />
+                <PrePosition X="0.5000" Y="0.2000" />
                 <PreSize X="0.9500" Y="0.1150" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_per_sec_lbl" ActionTag="-768634115" Tag="172" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="6.6392" RightMargin="3.3608" TopMargin="110.2264" BottomMargin="66.2262" IsCustomSize="True" FontSize="16" LabelText="+100/s" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_gold_per_sec_lbl" ActionTag="-768634115" Tag="172" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="6.6378" RightMargin="3.3622" TopMargin="99.2265" BottomMargin="77.2262" IsCustomSize="True" FontSize="16" LabelText="+100/s" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="23.5473" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="101.6392" Y="77.9999" />
+                <Position X="101.6378" Y="88.9998" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5082" Y="0.3900" />
+                <PrePosition X="0.5082" Y="0.4450" />
                 <PreSize X="0.9500" Y="0.1177" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
@@ -444,7 +444,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="popup_panel" ActionTag="-1343836221" Tag="121" IconVisible="False" LeftMargin="30.8701" RightMargin="29.1299" TopMargin="552.5000" BottomMargin="12.5000" TouchEnable="True" ClipAble="False" ComboBoxIndex="2" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="popup_panel" ActionTag="-1343836221" Tag="121" IconVisible="False" LeftMargin="30.8600" RightMargin="29.1400" TopMargin="552.5000" BottomMargin="12.5000" TouchEnable="True" ClipAble="False" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="900.0000" Y="75.0000" />
             <Children>
               <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="15.2886" RightMargin="14.1543" TopMargin="3.2629" BottomMargin="3.1497" IsCustomSize="True" FontSize="20" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
