@@ -381,12 +381,12 @@ void GameDirector::switch_to_city_menu()
     Label* appeasement_renderer = appeasement_button->getTitleRenderer();
     appeasement_renderer->setTTFConfig(ttf_config);
 
-    auto appeasemented_lbl = dynamic_cast<ui::Text*>(appeasement_panel->getChildByName("appeasement_lbl"));
-    auto update_appeasemented = [appeasemented_lbl](float dt) {
+    auto appeased_lbl = dynamic_cast<ui::Text*>(appeasement_panel->getChildByName("appeased_lbl"));
+    auto update_appeasemented = [appeased_lbl](float dt) {
         res_count_t appeasemented = (res_count_t)GameLogic::getInstance()->get_appeasements();
-        appeasemented_lbl->setString(beautify_double(appeasemented));
+        appeased_lbl->setString(beautify_double(appeasemented));
     };
-    appeasemented_lbl->schedule(update_appeasemented, AVERAGE_DELAY, "update_appeasemented");
+    appeased_lbl->schedule(update_appeasemented, AVERAGE_DELAY, "update_appeasemented");
     update_appeasemented(0);
 
 
