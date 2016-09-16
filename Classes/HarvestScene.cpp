@@ -709,13 +709,12 @@ void BaseScene::create_inventory_listview()
 
         for (auto&& ts : Ingredient::type_map)
         {
-            //if the count is -1, means that there was never any ingredients in
-            //the first place. count == 0 means there was at some point
-            //we use this logic to show empty ingredients that have been filled
-            //otherwise we'd show all ingredients at all times
-            res_count_t _def = -1; 
+            // type_vec.push_back({ ts.first, map_get(city_ingredients, ts.first, 0) });
+
+            res_count_t _def = 0;
             Ingredient::SubType ing_type = ts.first;
             auto count = map_get(city_ingredients, ing_type, _def);
+            // if (count != 0)
             type_vec.push_back({ ts.first, count });
         }
 
@@ -730,8 +729,7 @@ void BaseScene::create_inventory_listview()
 
             IngredientData res_data = IngredientData(str_type);
 
-            res_count_t def = -1.0;
-            auto zero_ingredients = map_get(city_ingredients, ing_type, def) < 0;
+            auto zero_ingredients = city_ingredients[ing_type] <= 0;
 
             //if the child already exists, put it at the back 
             ui::Button* existing_node = dynamic_cast<ui::Button*>(inventory_listview->getChildByName(str_type));
@@ -767,6 +765,10 @@ void BaseScene::create_inventory_listview()
             ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
             item_img->loadTexture(res_data.get_img_large());
             set_aliasing(item_img, true);
+
+            //if there's less than 1 ingredient, hide the item panel altogether
+            if (city_ingredients[ing_type] <= 0) { new_item_panel->setVisible(false); }
+            else { new_item_panel->setVisible(true); }
 
             auto on_touch_cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
 
@@ -807,6 +809,14 @@ void BaseScene::create_inventory_listview()
                 auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
                 item_lbl->setString(buffer);
 
+                if (count > 0)
+                {
+                    new_item_panel->setVisible(true);
+                }
+                else
+                {
+                    new_item_panel->setVisible(false);
+                }
             };
             update_lbl_cb(0); //fire once immediately
             new_item_panel->schedule(update_lbl_cb, SHORT_DELAY, "item_lbl_update");
