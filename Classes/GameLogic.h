@@ -51,6 +51,10 @@ class GameLogic
         void add_city_investment(double value);
         int get_city_investment();
 
+        int appeasements;
+        void add_appeasements(double value);
+        int get_appeasements();
+
         void add_total_kills(int value);
         int get_total_kills();
 };

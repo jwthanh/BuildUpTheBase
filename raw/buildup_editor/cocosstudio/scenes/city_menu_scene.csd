@@ -77,14 +77,14 @@
               <AbstractNodeData Name="invest_panel" ActionTag="1062837639" Tag="654" IconVisible="False" LeftMargin="145.6230" RightMargin="151.8969" TopMargin="191.8619" BottomMargin="377.2024" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="662.4801" Y="70.9357" />
                 <Children>
-                  <AbstractNodeData Name="invest_lbl" ActionTag="176670848" Tag="655" IconVisible="False" LeftMargin="11.7858" RightMargin="382.7933" TopMargin="19.6371" BottomMargin="21.4711" IsCustomSize="True" FontSize="16" LabelText="Invest:" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="267.9010" Y="29.8275" />
+                  <AbstractNodeData Name="invest_lbl" ActionTag="176670848" Tag="655" IconVisible="False" LeftMargin="11.7858" RightMargin="530.7933" TopMargin="7.6371" BottomMargin="9.4711" IsCustomSize="True" FontSize="16" LabelText="Invest:" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="119.9010" Y="53.8275" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="11.7858" Y="36.3848" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.0178" Y="0.5129" />
-                    <PreSize X="0.4044" Y="0.4205" />
+                    <PreSize X="0.1810" Y="0.7588" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
@@ -104,7 +104,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="invested_lbl" ActionTag="-1689831456" Tag="11" IconVisible="False" LeftMargin="106.3417" RightMargin="383.7328" TopMargin="5.7303" BottomMargin="7.1067" IsCustomSize="True" FontSize="16" LabelText="123,456QaD" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="invested_lbl" ActionTag="-1689831456" Tag="11" IconVisible="False" LeftMargin="106.3417" RightMargin="383.7328" TopMargin="5.7302" BottomMargin="7.1068" IsCustomSize="True" FontSize="16" LabelText="123,456QaD" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="172.4056" Y="58.0987" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="192.5445" Y="36.1561" />
@@ -122,6 +122,60 @@
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.1517" Y="0.5894" />
+                <PreSize X="0.6901" Y="0.1108" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="appeasement_panel" ActionTag="-1686059654" Tag="23" IconVisible="False" LeftMargin="146.6230" RightMargin="150.8969" TopMargin="285.8619" BottomMargin="283.2024" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="662.4801" Y="70.9357" />
+                <Children>
+                  <AbstractNodeData Name="appeasement_lbl" ActionTag="-713331910" Tag="24" IconVisible="False" LeftMargin="11.7858" RightMargin="528.7933" TopMargin="7.6371" BottomMargin="9.4711" IsCustomSize="True" FontSize="16" LabelText="Appease gods:" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="121.9010" Y="53.8275" />
+                    <AnchorPoint ScaleY="0.5000" />
+                    <Position X="11.7858" Y="36.3848" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.0178" Y="0.5129" />
+                    <PreSize X="0.1840" Y="0.7588" />
+                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                    <OutlineColor A="255" R="26" G="26" B="26" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="appeasement_button" ActionTag="246070718" Tag="25" IconVisible="False" LeftMargin="287.1984" RightMargin="8.5508" TopMargin="4.8206" BottomMargin="5.7115" TouchEnable="True" FontSize="14" ButtonText="1 Soul" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                    <Size X="366.7309" Y="60.4035" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="470.5638" Y="35.9133" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.7103" Y="0.5063" />
+                    <PreSize X="0.5536" Y="0.8515" />
+                    <TextColor A="255" R="255" G="255" B="255" />
+                    <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="appeasement_lbl" ActionTag="-83459881" Tag="26" IconVisible="False" LeftMargin="106.3417" RightMargin="383.7328" TopMargin="5.7302" BottomMargin="7.1068" IsCustomSize="True" FontSize="16" LabelText="123,456QaD" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="172.4056" Y="58.0987" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="192.5445" Y="36.1561" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2906" Y="0.5097" />
+                    <PreSize X="0.2602" Y="0.8190" />
+                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                    <OutlineColor A="255" R="26" G="26" B="26" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="146.6230" Y="283.2024" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.1527" Y="0.4425" />
                 <PreSize X="0.6901" Y="0.1108" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />

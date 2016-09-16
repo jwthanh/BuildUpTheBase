@@ -242,6 +242,16 @@ int GameLogic::get_city_investment()
     return DataManager::get_int_from_data("city_investment");
 };
 
+void GameLogic::add_appeasements(double value)
+{
+    DataManager::incr_key("appeasements", value);
+};
+
+int GameLogic::get_appeasements()
+{
+    return DataManager::get_int_from_data("appeasements");
+};
+
 void GameLogic::add_total_kills(int value)
 {
     DataManager::incr_key("total_kills", value);
@@ -319,6 +329,7 @@ void GameDirector::switch_to_city_menu()
     scene->setName("city_wrapper_scene");
     scene->addChild(city_menu_scene_node);
 
+    //invest panel
     auto invest_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("invest_panel"));
     auto invest_button = dynamic_cast<ui::Button*>(invest_panel->getChildByName("invest_button"));
     invest_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
@@ -346,6 +357,37 @@ void GameDirector::switch_to_city_menu()
     };
     invested_lbl->schedule(update_invested, AVERAGE_DELAY, "update_invested");
     update_invested(0);
+
+    //appeasement panel
+    auto appeasement_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("appeasement_panel"));
+    auto appeasement_button = dynamic_cast<ui::Button*>(appeasement_panel->getChildByName("appeasement_button"));
+    appeasement_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
+    {
+        if (evt == ui::Widget::TouchEventType::ENDED)
+        {
+            CCLOG("TODO add appeasement");
+            mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+            res_count_t _def = 0;
+            IngredientSubType ing_type = IngredientSubType::Soul;
+            res_count_t appease_count = 1.0;
+            if (map_get(city_ingredients, ing_type, _def) >= appease_count)
+            {
+                 GameLogic::getInstance()->add_appeasements(appease_count);
+                 BUILDUP->remove_shared_ingredients_from_all(ing_type, appease_count);
+            }
+        }
+    });
+    load_default_button_textures(appeasement_button);
+    Label* appeasement_renderer = appeasement_button->getTitleRenderer();
+    appeasement_renderer->setTTFConfig(ttf_config);
+
+    auto appeasemented_lbl = dynamic_cast<ui::Text*>(appeasement_panel->getChildByName("appeasement_lbl"));
+    auto update_appeasemented = [appeasemented_lbl](float dt) {
+        res_count_t appeasemented = (res_count_t)GameLogic::getInstance()->get_appeasements();
+        appeasemented_lbl->setString(beautify_double(appeasemented));
+    };
+    appeasemented_lbl->schedule(update_appeasemented, AVERAGE_DELAY, "update_appeasemented");
+    update_appeasemented(0);
 
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
