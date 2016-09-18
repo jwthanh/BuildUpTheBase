@@ -875,17 +875,17 @@ void FightingHarvestable::spawn_enemy()
 
 const std::map<res_count_t, std::string> kill_messages = {
     { 1.0, "The first kill!" },
-    { 2.0, "The second kill! This is a weird feeling." },
-    { 3.0, "The third kill! This isn't right." },
-    { 4.0, "The fourth kill! It doesn't matter though." },
-    { 5.0, "The fifth kill! I'll ignore this feeling." },
-    { 10.0, "The tenth kill! But I can't, it won't go away." },
-    { 15.0, "The fifteenth kill! It gnaws on me..." },
-    { 25.0, "The twenty-fifth kill! I need more." },
-    { 35.0, "The thirtieth kill! I need more strength." },
-    { 50.0, "The fiftieth kill! I need more power." },
-    { 75.0, "The seventieth kill! I need more souls." },
-    { 100.0, "The hundredth kill! I've done it. I've killed one hundred souls. I don't know what this means" }
+    { 10.0, "The tenth kill! This is a weird feeling." },
+    { 30.0, "The thirtieth kill! This isn't right." },
+    { 50.0, "The fiftieth kill! It doesn't matter though." },
+    { 75.0, "The 75th kill! I'll ignore this feeling." },
+    { 100.0, "The 100th kill! But I can't, it won't go away." },
+    { 150.0, "The 150th kill! It gnaws on me..." },
+    { 250.0, "The 250th kill! I need more." },
+    { 350.0, "The 350th kill! I need more strength." },
+    { 500.0, "The 500th kill! I need more power." },
+    { 750.0, "The 750th kill! I need more souls." },
+    { 1000.0, "The 1000th kill! I've done it. I've killed one thousand souls. I don't know what this means." }
 };
 
 void FightingHarvestable::shatter()
