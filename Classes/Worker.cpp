@@ -203,8 +203,8 @@ void Salesman::on_update(float dt)
 
                 //create floating label for the amount sold over the correct
                 //ing panel
-                cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
-                auto harvest_scene = scene->getChildByName("HarvestScene");
+                cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();
+                auto harvest_scene = root_scene->getChildByName("HarvestScene");
                 if (harvest_scene)
                 {
                     auto inventory_listview = harvest_scene->getChildByName("inventory_listview");
@@ -215,7 +215,7 @@ void Salesman::on_update(float dt)
                         {
                             auto floating_label = FloatingLabel::createWithTTF("+$" + beautify_double(actual_value), "pixelmix.ttf", 25);
                             floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
-                            scene->addChild(floating_label);
+                            harvest_scene->addChild(floating_label);
                             floating_label->do_float(50, 1, 50, 10, 1);
 
                             cocos2d::Vec2 pos = {
