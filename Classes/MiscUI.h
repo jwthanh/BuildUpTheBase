@@ -10,6 +10,7 @@ namespace cocos2d
     {
         class ImageView;
         class Text;
+        class TextField;
         class Button;
     }
 }
@@ -46,6 +47,7 @@ void set_aliasing(cocos2d::Label* label, bool val=true);
 void set_aliasing(cocos2d::Texture2D* texture, bool val=true);
 void set_aliasing(cocos2d::Sprite* sprite, bool val=true);
 void set_aliasing(cocos2d::ui::Text* text, bool val=true);
+void set_aliasing(cocos2d::ui::TextField* text, bool val=true);
 void set_aliasing(cocos2d::ui::ImageView* img_view, bool val=true);
 void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val=true);
 

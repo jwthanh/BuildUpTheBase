@@ -156,6 +156,12 @@ void set_aliasing(cocos2d::ui::Text* text, bool val)
     set_aliasing(renderer, val);
 };
 
+void set_aliasing(cocos2d::ui::TextField* text, bool val)
+{
+    Label* renderer = dynamic_cast<Label*>(text->getVirtualRenderer());
+    set_aliasing(renderer, val);
+};
+
 void set_aliasing(cocos2d::ui::ImageView* img_view, bool val)
 {
     cocos2d::ui::Scale9Sprite* scale9 = dynamic_cast<cocos2d::ui::Scale9Sprite*>(img_view->getVirtualRenderer());

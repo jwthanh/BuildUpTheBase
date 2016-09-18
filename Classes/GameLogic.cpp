@@ -340,6 +340,7 @@ void GameDirector::switch_to_city_menu()
     //city name
     auto city_name_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("city_name_panel"));
     auto city_name_input = dynamic_cast<ui::TextField*>(city_name_panel->getChildByName("city_name_textfield"));
+    set_aliasing(city_name_input);
     city_name_input->setString(DataManager::get_string_from_data("city_name", ""));
 
     auto is_bad_character = [](char character){
