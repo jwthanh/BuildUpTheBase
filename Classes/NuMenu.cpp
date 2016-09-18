@@ -749,12 +749,13 @@ void HarvesterShopNuItem::my_init_sprite()
     else if (this->harv_type == WorkerSubType::Four) { set_path = set_paths.at(3); }
     else { set_path = "set_0.png"; }
 
+
     auto gen = get_generator();
     std::vector<std::string> sprites = {
-        set_path,
-        pick_one(gen_paths("body", 49), &gen),
+        "set_0.png",
+        "body_4.png",
         pick_one(gen_paths("headwear", 49), &gen),
-        pick_one(gen_paths("legs", 22), &gen),
+        // pick_one(gen_paths("legs", 22), &gen),
         pick_one(gen_paths("shield", 49), &gen),
         pick_one(gen_paths("weapon", 49), &gen)
     };
@@ -1062,17 +1063,10 @@ void ConsumerShopNuItem::my_init_sprite()
 
     auto base_node = Node::create();
 
-    std::string set_path;
-    auto set_paths = gen_paths("set", 4);
-    if (this->harv_type == WorkerSubType::One) { set_path = set_paths.at(0); }
-    else if (this->harv_type == WorkerSubType::Two) { set_path = set_paths.at(1); }
-    else if (this->harv_type == WorkerSubType::Three) { set_path = set_paths.at(2); }
-    else if (this->harv_type == WorkerSubType::Four) { set_path = set_paths.at(3); }
-    else { set_path = "set_0.png"; }
 
     auto gen = get_generator();
     std::vector<std::string> sprites = {
-        set_path,
+        "set_2.png",
         pick_one(gen_paths("body", 49), &gen),
         pick_one(gen_paths("headwear", 49), &gen),
         pick_one(gen_paths("legs", 22), &gen),
