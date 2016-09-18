@@ -41,6 +41,13 @@ void GameLogic::post_load()
         return;
     };
 
+    //add popup to message to fill out username
+    if (username == "") {
+        auto popup = GameLogic::get_popup_panel();
+        popup->set_string("Hey there! Don't forget to set a username along the right side of the screen, and check out how you stack up on the leaderboard");
+        popup->animate_open();
+    };
+
     CCLOG("loading game on startup, this should only happen once");
     GameLogic::load_all();
 
