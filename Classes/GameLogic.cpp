@@ -407,6 +407,22 @@ void GameDirector::switch_to_city_menu()
             }
         }
     });
+    auto appeasement_btn_update = [appeasement_button](float dt) {
+        mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+        res_count_t _def = 0;
+        auto it = Ingredient::SubType::Soul;
+        if (map_get(city_ingredients, it, _def) < 1.0)
+        {
+            //this doesnt let the button accept touches, so we need to subclass widget or something to fix it
+            try_set_enabled(appeasement_button, false);
+        }
+        else
+        {
+            try_set_enabled(appeasement_button, true);
+        }
+    };
+    appeasement_button->schedule(appeasement_btn_update, SHORT_DELAY, "update_btn");
+
     load_default_button_textures(appeasement_button);
     Label* appeasement_renderer = appeasement_button->getTitleRenderer();
     appeasement_renderer->setTTFConfig(ttf_config);
