@@ -707,14 +707,11 @@ void BaseScene::create_inventory_listview()
         std::vector<maptype> type_vec;
         mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
 
+        res_count_t _def = -1;
         for (auto&& ts : Ingredient::type_map)
         {
-            // type_vec.push_back({ ts.first, map_get(city_ingredients, ts.first, 0) });
-
-            res_count_t _def = -1;
             Ingredient::SubType ing_type = ts.first;
             auto count = map_get(city_ingredients, ing_type, _def);
-            // if (count != 0)
             type_vec.push_back({ ts.first, count });
         }
 
@@ -729,7 +726,7 @@ void BaseScene::create_inventory_listview()
 
             IngredientData res_data = IngredientData(str_type);
 
-            auto zero_ingredients = city_ingredients[ing_type] < 0;
+            auto zero_ingredients = map_get(city_ingredients, ing_type, _def) < 0;
 
             //if the child already exists, put it at the back 
             ui::Button* existing_node = dynamic_cast<ui::Button*>(inventory_listview->getChildByName(str_type));
@@ -739,7 +736,7 @@ void BaseScene::create_inventory_listview()
                 //leftover button
                 if (zero_ingredients) 
                 {
-                    inventory_listview->removeChild(existing_node, false);
+                    // inventory_listview->removeChild(existing_node, false);
                 }
                 else 
                 {
@@ -765,10 +762,6 @@ void BaseScene::create_inventory_listview()
             ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
             item_img->loadTexture(res_data.get_img_large());
             set_aliasing(item_img, true);
-
-            //if there's less than 1 ingredient, hide the item panel altogether
-            if (city_ingredients[ing_type] < 0) { new_item_panel->setVisible(false); }
-            else { new_item_panel->setVisible(true); }
 
             auto on_touch_cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
 
