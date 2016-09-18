@@ -789,28 +789,21 @@ void BaseScene::create_inventory_listview()
             };
             new_item_panel->addTouchEventListener(on_touch_cb);
 
-            auto update_lbl_cb = [new_item_panel, this, ing_type](float)
+            auto update_lbl_cb = [new_item_panel, ing_type](float)
             {
                 auto it = ing_type; 
                 auto type_str = Ingredient::type_to_string(it);
                 char buffer[50];
 
-                mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
                 res_count_t _def = -1;
+                mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
                 res_count_t count = map_get(city_ingredients, it, _def);
                 sprintf(buffer, "%s\n%s", beautify_double(count).c_str(), type_str.c_str());
                 auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
                 item_lbl->setString(buffer);
 
-                if (count >= 0)
-                {
-                    new_item_panel->setVisible(true);
-                }
-                else
-                {
-                    new_item_panel->setVisible(false);
-                }
             };
+
             update_lbl_cb(0); //fire once immediately
             new_item_panel->schedule(update_lbl_cb, SHORT_DELAY, "item_lbl_update");
 
