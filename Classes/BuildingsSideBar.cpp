@@ -28,6 +28,22 @@
 
 USING_NS_CC;
 
+std::map<Worker::SubType, Worker::SubType> req_map = {
+    { Worker::SubType::ZERO, Worker::SubType::ZERO },
+    { Worker::SubType::One, Worker::SubType::ZERO },
+    { Worker::SubType::Two, Worker::SubType::One },
+    { Worker::SubType::Three, Worker::SubType::Two },
+    { Worker::SubType::Four, Worker::SubType::Three },
+    { Worker::SubType::Five, Worker::SubType::Four },
+    { Worker::SubType::Six, Worker::SubType::Five },
+    { Worker::SubType::Seven, Worker::SubType::Six },
+    { Worker::SubType::Eight, Worker::SubType::Seven },
+    { Worker::SubType::Nine, Worker::SubType::Eight },
+    { Worker::SubType::Ten, Worker::SubType::Nine },
+    { Worker::SubType::Eleven, Worker::SubType::Ten },
+    { Worker::SubType::Twelve, Worker::SubType::Eleven }
+};
+
 TabManager::TabManager()
 {
     this->active_building = BUILDUP->city->building_by_name("The Farm");
@@ -260,6 +276,30 @@ void SideListView::setup_shop_listview_as_harvesters()
                 {
                     continue;
                 }
+                else
+                {
+                    //check for prereqs before adding the next item to the menu
+                    if (config.harv_type != Worker::SubType::One) {
+                        Worker::SubType ZERO = Worker::SubType::ZERO;
+                        std::pair<Worker::SubType, Ingredient::SubType> key = {
+                            map_get(req_map, config.harv_type, ZERO),
+                            building->punched_sub_type
+                        };
+
+                        res_count_t _def = 0;
+                        auto prereq_harvester_found = map_get(building->harvesters, key, _def);
+
+                        //if cant meet prereq, dont try to add the item
+                        if (prereq_harvester_found < 5) {
+                            continue;
+                        }
+                        else {
+                            //resize scroll bar on new additions to the listview
+                            shop_listview->requestDoLayout();
+                            //shop_listview->jumpToBottom(); //seems like this adds the next item to the wrong spot
+                        };
+                    };
+                }
 
                 //clone the new item
                 HarvesterShopNuItem* menu_item;
@@ -286,25 +326,9 @@ void SideListView::setup_shop_listview_as_harvesters()
                     menu_item->ing_type = building->punched_sub_type;
 
                     if (menu_item->harv_type != Worker::SubType::One) {
-                        std::map<Worker::SubType, Worker::SubType> req_map = {
-                            { Worker::SubType::ZERO, Worker::SubType::ZERO },
-                            { Worker::SubType::One, Worker::SubType::ZERO },
-                            { Worker::SubType::Two, Worker::SubType::One },
-                            { Worker::SubType::Three, Worker::SubType::Two },
-                            { Worker::SubType::Four, Worker::SubType::Three },
-                            { Worker::SubType::Five, Worker::SubType::Four },
-                            { Worker::SubType::Six, Worker::SubType::Five },
-                            { Worker::SubType::Seven, Worker::SubType::Six },
-                            { Worker::SubType::Eight, Worker::SubType::Seven },
-                            { Worker::SubType::Nine, Worker::SubType::Eight },
-                            { Worker::SubType::Ten, Worker::SubType::Nine },
-                            { Worker::SubType::Eleven, Worker::SubType::Ten },
-                            { Worker::SubType::Twelve, Worker::SubType::Eleven }
-                        };
-
-                        Worker::SubType zero = Worker::SubType::ZERO;
+                        Worker::SubType ZERO = Worker::SubType::ZERO;
                         std::pair<Worker::SubType, Ingredient::SubType> key = {
-                            map_get(req_map, menu_item->harv_type, zero),
+                            map_get(req_map, menu_item->harv_type, ZERO),
                             menu_item->ing_type
                         };
 
