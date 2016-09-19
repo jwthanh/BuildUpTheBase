@@ -4,9 +4,11 @@
 
 #include "GameLayer.h"
 #include "Resources.h"
+//#include "Harvestable.h"
 
 class SideListView;
 class PopupPanel;
+class Harvestable;
 
 class BaseScene : public GameLayer
 {
@@ -45,6 +47,7 @@ class BaseScene : public GameLayer
 
         void scroll_to_target_building();
 
+        Harvestable* harvestable;
 };
 
 class HarvestScene : public BaseScene

@@ -221,12 +221,16 @@ void BaseScene::create_goal_loadingbar()
 
     harvester_progress_panel->setVisible(false);
     ui::LoadingBar* harvester_loading_bar = dynamic_cast<ui::LoadingBar*>(harvester_progress_panel->getChildByName("harvester_loadingbar"));
-    auto update_harvester_loading_panel = [this, harvester_progress_panel](float dt) {
+    auto update_harvester_loading_panel = [this, harvester_progress_panel, harvester_loading_bar](float dt) {
         if (BUILDUP->get_target_building()->name != "The Dump") {
             harvester_progress_panel->setVisible(false);
         }
         else {
             harvester_progress_panel->setVisible(true);
+            auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
+            if (harvestable) {
+                harvester_loading_bar->setPercent(this->harvestable->get_click_ratio()*100.0);
+            }
         };
     };
     harvester_progress_panel->schedule(update_harvester_loading_panel, SHORT_DELAY, "visibility_cb");
@@ -1104,7 +1108,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
 void HarvestScene::add_harvestable()
 {
-    Harvestable* harvestable;
+    this->harvestable = NULL;
     auto target_building = BUILDUP->get_target_building();
 
 
