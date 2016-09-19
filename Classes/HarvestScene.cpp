@@ -54,6 +54,7 @@ bool BaseScene::init()
     
     this->create_goal_loadingbar();
 
+
     this->create_building_choicelist();
 
     this->create_popup_panel();
@@ -212,6 +213,24 @@ void BaseScene::create_goal_loadingbar()
     this->upgrade_lbl->setString("");
 
     set_aliasing(this->upgrade_lbl, true);
+
+    //show progress panel
+    auto harvester_progress_panel = harvest_scene_editor->getChildByName("harvester_progress_panel");
+    harvester_progress_panel->removeFromParent();
+    this->addChild(harvester_progress_panel);
+
+    harvester_progress_panel->setVisible(false);
+    ui::LoadingBar* harvester_loading_bar = dynamic_cast<ui::LoadingBar*>(harvester_progress_panel->getChildByName("harvester_loadingbar"));
+    auto update_harvester_loading_panel = [this, harvester_progress_panel](float dt) {
+        if (BUILDUP->get_target_building()->name != "The Dump") {
+            harvester_progress_panel->setVisible(false);
+        }
+        else {
+            harvester_progress_panel->setVisible(true);
+        };
+    };
+    harvester_progress_panel->schedule(update_harvester_loading_panel, SHORT_DELAY, "visibility_cb");
+    update_harvester_loading_panel(0);
 }
 
 void BaseScene::create_building_choicelist()

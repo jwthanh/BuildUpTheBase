@@ -370,6 +370,11 @@ std::string DumpsterHarvestable::get_sprite_path()
     return "dump_darker.png";
 }
 
+void DumpsterHarvestable::animate_clip()
+{
+    //deliberately do nothing
+}
+
 void MiningHarvestable::init_sprite()
 {
 

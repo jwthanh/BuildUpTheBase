@@ -95,10 +95,13 @@ class TreeHarvestable : public Harvestable
 
 class DumpsterHarvestable : public Harvestable
 {
+
     public:
         CREATE_FUNC(DumpsterHarvestable);
         bool init();
         std::string get_sprite_path();
+
+        virtual void animate_clip() override;
 };
 
 class MiningHarvestable : public Harvestable
