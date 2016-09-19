@@ -365,6 +365,12 @@ bool DumpsterHarvestable::init()
     return val;
 }
 
+void DumpsterHarvestable::init_clicks()
+{
+    this->click_limit = 15;
+    this->current_clicks = 0;
+}
+
 std::string DumpsterHarvestable::get_sprite_path()
 {
     return "dump_darker.png";
@@ -374,6 +380,11 @@ void DumpsterHarvestable::animate_clip()
 {
     //deliberately do nothing
 }
+
+void DumpsterHarvestable::shatter()
+{
+    Harvestable::shatter();
+};
 
 void MiningHarvestable::init_sprite()
 {
