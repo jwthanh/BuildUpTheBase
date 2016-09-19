@@ -114,7 +114,7 @@ res_count_t Harvestable::get_per_touch_output()
     return base;
 }
 
-void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, float duration, std::string floating_msg)
+void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, float duration, std::string floating_msg, Color4B text_color=Color4B::WHITE)
 {
     /*
      * if touch is null, it uses center of sprite
@@ -126,6 +126,7 @@ void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, f
 
     Vec2 pos;
     auto floating_label = FloatingLabel::createWithTTF(floating_msg, DEFAULT_FONT, 30);
+    floating_label->setTextColor(text_color);
     if (touch)
     {
         pos = touch->getLocation();
@@ -178,9 +179,12 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         Node* raw_ingredient_count = building_info_panel->getChildByName("ingredient_count");
         ui::Text* ingredient_count = dynamic_cast<ui::Text*>(raw_ingredient_count);
         animate_flash_action(ingredient_count, 0.2f, 1.15f);
+        this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
+    } 
+    else 
+    {
+        this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
     };
-
-    this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
 }
 
 bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
@@ -568,7 +572,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
     {
         ss << "No recipe yet";
         std::string floating_msg = ss.str();
-        this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
+        this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
     }
     else 
     {
@@ -591,7 +595,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
             }
 
             std::string floating_msg = ss.str();
-            this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
+            this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
         }
     }
 
