@@ -495,6 +495,37 @@ void SideListView::setup_detail_listview_as_recipes()
                         blood_oath->description
                     } });
             };
+            if (building->name == "The Graveyard")
+            {
+                spRecipe blood_oath = std::make_shared<Recipe>("Raise Dead", "One soul, 6 flesh, 9 blood.");
+                blood_oath->components = mistIngredient({
+                    { Ingredient::SubType::Soul, 1 },
+                    { Ingredient::SubType::Flesh, 6 },
+                    { Ingredient::SubType::Blood, 9 }
+                });
+                blood_oath->_callback = [building]()
+                {
+                    bool can_fit_more_dead = true;
+                    if (can_fit_more_dead)
+                    {
+                        building->create_ingredients(Ingredient::SubType::Undead, 1);
+                    }
+                    else
+                    {
+                        //refund the cost
+                        building->create_ingredients(Ingredient::SubType::Soul, 1);
+                        building->create_ingredients(Ingredient::SubType::Flesh, 6);
+                        building->create_ingredients(Ingredient::SubType::Blood, 9);
+                    };
+                };
+                nuitems_config.push_back({
+                    blood_oath,
+                    DetailType::Recipe,
+                    {
+                        blood_oath->name,
+                        blood_oath->description
+                    } });
+            };
 
             if (building->name == "The Arena")
             {
@@ -691,7 +722,8 @@ void SideListView::setup_powers_listview_as_powers()
             auto excluded_ing_types = std::vector<Ingredient::SubType> {
                 Ingredient::SubType::Soul,
                 Ingredient::SubType::Bread,
-                Ingredient::SubType::Loaf
+                Ingredient::SubType::Loaf,
+                Ingredient::SubType::Undead
             };
 
 

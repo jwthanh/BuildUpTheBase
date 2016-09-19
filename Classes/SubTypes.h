@@ -4,7 +4,7 @@
 
 enum class IngredientSubType {
     None, Grain, PileOfGrain, Bread, Loaf, Seed, Tree, Iron, Copper,
-    Wood, Fly, Sand, Flesh, Berry, Soul, Blood, Paper
+    Wood, Fly, Sand, Flesh, Berry, Soul, Blood, Paper, Undead
 };
 
 enum class ProductSubType {

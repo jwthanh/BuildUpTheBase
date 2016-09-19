@@ -388,6 +388,7 @@ void DumpsterHarvestable::animate_clip()
 void DumpsterHarvestable::shatter()
 {
     Harvestable::shatter();
+    CCLOG("found item!");
 };
 
 void MiningHarvestable::init_sprite()

@@ -484,7 +484,7 @@
                 <PreSize X="0.6067" Y="0.4615" />
                 <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="harvester_progress_lbl" ActionTag="1421967100" Tag="82" IconVisible="False" LeftMargin="1.9588" RightMargin="204.0412" TopMargin="6.3925" BottomMargin="9.6075" IsCustomSize="True" FontSize="16" LabelText="Progress:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="harvester_progress_lbl" ActionTag="1421967100" Tag="82" IconVisible="False" LeftMargin="1.9588" RightMargin="204.0412" TopMargin="6.3925" BottomMargin="9.6075" IsCustomSize="True" FontSize="16" LabelText="Item find:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="150.0000" Y="23.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="1.9588" Y="21.1075" />

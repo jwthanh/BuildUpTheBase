@@ -59,6 +59,10 @@
         "paper": {
             "description": "Notes scribbled down, unreadable.",
             "img_large": "ingredients/paper.png"
+        },
+        "undead": {
+            "description": "Minion, eager to labour for you.",
+            "img_large": "ingredients/undead.png"
         }
     }
 }

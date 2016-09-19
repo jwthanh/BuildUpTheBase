@@ -402,7 +402,8 @@ void RecipeNuItem::update_func(float dt)
         return;
     };
 
-    if (this->recipe->is_satisfied(this->building->ingredients)){
+    auto all_ingredients = BUILDUP->get_all_ingredients();
+    if (this->recipe->is_satisfied(all_ingredients)){
         this->try_set_enable(true);
     } else {
         this->try_set_enable(false);

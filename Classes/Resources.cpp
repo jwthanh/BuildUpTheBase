@@ -22,7 +22,8 @@ const std::map<Ingredient::SubType, std::string> Ingredient::type_map = {
     {Ingredient::SubType::Berry, "berry"},
     {Ingredient::SubType::Soul, "soul"},
     {Ingredient::SubType::Blood, "blood"},
-    {Ingredient::SubType::Paper, "paper"}
+    {Ingredient::SubType::Paper, "paper"},
+    {Ingredient::SubType::Undead, "undead"}
 };
 
 const std::map<Product::SubType, std::string> Product::type_map = {
