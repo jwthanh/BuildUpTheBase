@@ -388,7 +388,9 @@ void DumpsterHarvestable::animate_clip()
 void DumpsterHarvestable::shatter()
 {
     Harvestable::shatter();
-    CCLOG("found item!");
+    auto popup_panel = GameLogic::get_popup_panel();
+    popup_panel->set_string("You've found an item!");
+    popup_panel->animate_open();
 };
 
 void MiningHarvestable::init_sprite()
