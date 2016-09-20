@@ -461,3 +461,32 @@ void GameDirector::switch_to_city_menu()
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
 };
+
+void GameDirector::switch_to_items_menu()
+{
+    auto inst = CSLoader::getInstance();
+    auto items_scene_node = inst->CSLoader::createNode("editor/scenes/items_scene.csb");
+    items_scene_node->removeFromParent();
+    auto panel = items_scene_node->getChildByName("panel");
+
+    auto scene = cocos2d::Scene::create();
+    scene->setName("items_wrapper_scene");
+    scene->addChild(items_scene_node);
+
+    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
+    Label* button_lbl = back_btn->getTitleRenderer();
+    button_lbl->setTextColor(Color4B::WHITE);
+    button_lbl->enableOutline(Color4B::BLACK, 2);
+
+    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            auto director = Director::getInstance();
+            director->popScene();
+        }
+    });
+    load_default_button_textures(back_btn);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
