@@ -57,3 +57,12 @@ Doxy*
 
 *.7z
 
+proj.win32/Debug.win32.zip
+proj.win32/Release.win32/
+proj.win32/buildupthebase.psess
+proj.win32/buildupthebase.sln.DotSettings.user
+proj.win32/buildupthebase.suo
+proj.win32/buildupthebase.v12.suo
+proj.win32/buildupthebase*.vsp
+
+*.pyc
