@@ -337,6 +337,10 @@ void GameDirector::switch_to_city_menu()
     scene->setName("city_wrapper_scene");
     scene->addChild(city_menu_scene_node);
 
+    //title
+    auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
+    set_aliasing(title_lbl);
+
     //city name
     auto city_name_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("city_name_panel"));
     auto city_name_input = dynamic_cast<ui::TextField*>(city_name_panel->getChildByName("city_name_textfield"));
@@ -458,6 +462,19 @@ void GameDirector::switch_to_city_menu()
     });
     load_default_button_textures(back_btn);
 
+    auto items_scene_btn = dynamic_cast<ui::Button*>(panel->getChildByName("items_scene_btn"));
+    Label* items_scene_lbl = items_scene_btn->getTitleRenderer();
+    items_scene_lbl->setTextColor(Color4B::WHITE);
+    items_scene_lbl->enableOutline(Color4B::BLACK, 2);
+
+    items_scene_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            GameDirector::switch_to_items_menu();
+        }
+    });
+    load_default_button_textures(items_scene_btn);
+
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
 };
@@ -473,6 +490,11 @@ void GameDirector::switch_to_items_menu()
     scene->setName("items_wrapper_scene");
     scene->addChild(items_scene_node);
 
+    //title
+    auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
+    set_aliasing(title_lbl);
+
+    //back button
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
     Label* button_lbl = back_btn->getTitleRenderer();
     button_lbl->setTextColor(Color4B::WHITE);

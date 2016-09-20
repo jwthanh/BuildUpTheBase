@@ -9,23 +9,28 @@
           <Project Name="menu_item.csd" Type="Node" />
         </Folder>
         <Folder Name="details">
-          <Project Name="character_detail.csd" Type="Node" />
           <Project Name="inventory_detail.csd" Type="Node" />
           <Project Name="message_detail.csd" Type="Node" />
         </Folder>
         <Folder Name="images">
           <Image Name="cat.png" />
           <Image Name="forest.png" />
-          <Image Name="HelloWorld.png" />
         </Folder>
         <Folder Name="scenes">
           <Project Name="base_scene.csd" Type="Scene" />
           <Project Name="city_menu_scene.csd" Type="Scene" />
-          <Project Name="city_scene.csd" Type="Scene" />
           <Project Name="items_scene.csd" Type="Scene" />
         </Folder>
         <Image Name="main_UI_export_10.png" />
         <TTF Name="pixelmix.ttf" />
+        <Folder Name="unused">
+          <Folder Name="scenes">
+            <Project Name="city_scene.csd" Type="Scene" />
+          </Folder>
+          <Folder Name="details">
+            <Project Name="character_detail.csd" Type="Node" />
+          </Folder>
+        </Folder>
       </RootFolder>
     </Group>
   </SolutionFolder>
