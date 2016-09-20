@@ -494,6 +494,13 @@ void GameDirector::switch_to_items_menu()
     auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
     set_aliasing(title_lbl);
 
+    //items listview
+    auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
+    for (int i = 0; i<10; i++) {
+        auto nuitem = NuItem::create(items_listview);
+        nuitem->set_title("Example Item "+i);
+    };
+
     //back button
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
     Label* button_lbl = back_btn->getTitleRenderer();
