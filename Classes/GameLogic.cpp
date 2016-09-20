@@ -498,7 +498,7 @@ void GameDirector::switch_to_items_menu()
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
     for (int i = 0; i<10; i++) {
         auto nuitem = NuItem::create(items_listview);
-        nuitem->set_title("Example Item "+i);
+        nuitem->set_title("Example Item "+std::to_string(i));
     };
 
     //back button

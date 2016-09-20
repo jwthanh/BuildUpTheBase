@@ -37,14 +37,14 @@
                 <OutlineColor A="255" R="26" G="26" B="26" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="items_listview" ActionTag="-142611743" Tag="452" IconVisible="False" LeftMargin="-198.1856" RightMargin="-357.6782" TopMargin="-162.6326" BottomMargin="-219.7809" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
-                <Size X="1515.8638" Y="1022.4135" />
+              <AbstractNodeData Name="items_listview" ActionTag="-142611743" Tag="452" IconVisible="False" HorizontalEdge="BothEdge" LeftMargin="96.7449" RightMargin="63.2551" TopMargin="-162.6337" BottomMargin="-219.7798" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+                <Size X="800.0000" Y="1022.4135" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="559.7463" Y="291.4259" />
-                <Scale ScaleX="1.0000" ScaleY="0.5000" />
+                <Position X="496.7449" Y="291.4269" />
+                <Scale ScaleX="0.8000" ScaleY="0.5000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5831" Y="0.4554" />
-                <PreSize X="1.5790" Y="1.5975" />
+                <PrePosition X="0.5174" Y="0.4554" />
+                <PreSize X="0.8333" Y="1.5975" />
                 <SingleColor A="255" R="150" G="150" B="255" />
                 <FirstColor A="255" R="150" G="150" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
