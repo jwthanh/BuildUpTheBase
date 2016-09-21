@@ -503,8 +503,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     { Ingredient::SubType::Flesh, 6 },
                     { Ingredient::SubType::Blood, 9 }
                 });
-                blood_oath->_callback = [building]()
-                {
+                blood_oath->_callback = [building](){
                     bool can_fit_more_dead = true;
                     if (can_fit_more_dead)
                     {

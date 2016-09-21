@@ -21,16 +21,16 @@
           <Project Name="city_menu_scene.csd" Type="Scene" />
           <Project Name="items_scene.csd" Type="Scene" />
         </Folder>
-        <Image Name="main_UI_export_10.png" />
-        <TTF Name="pixelmix.ttf" />
         <Folder Name="unused">
-          <Folder Name="scenes">
-            <Project Name="city_scene.csd" Type="Scene" />
-          </Folder>
           <Folder Name="details">
             <Project Name="character_detail.csd" Type="Node" />
           </Folder>
+          <Folder Name="scenes">
+            <Project Name="city_scene.csd" Type="Scene" />
+          </Folder>
         </Folder>
+        <Image Name="main_UI_export_10.png" />
+        <TTF Name="pixelmix.ttf" />
       </RootFolder>
     </Group>
   </SolutionFolder>
