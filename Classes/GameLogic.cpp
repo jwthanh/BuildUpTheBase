@@ -11,6 +11,7 @@
 #include "Modal.h"
 #include "external/easylogging.h"
 #include "HarvestScene.h"
+#include "Item.h"
 
 USING_NS_CC;
 
@@ -496,9 +497,23 @@ void GameDirector::switch_to_items_menu()
 
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
-    for (int i = 0; i<10; i++) {
+
+    vsItem items = {
+        std::make_shared<Item>("Normal lv1", "item description", 100.0, RarityType::Normal, 1.0f),
+        std::make_shared<Item>("Poor lv1", "item description", 100.0, RarityType::Poor, 1.0f),
+        std::make_shared<Item>("Rare lv1", "item description", 100.0, RarityType::Rare, 1.0f),
+        std::make_shared<Item>("Normal lv2", "item description", 100.0, RarityType::Normal, 2.0f)
+    };
+
+    for (spItem item : items) {
         auto nuitem = NuItem::create(items_listview);
-        nuitem->set_title("Example Item "+std::to_string(i));
+        nuitem->set_title(item->name);
+        nuitem->set_description(item->description);
+
+        res_count_t cost = item->get_effective_cost();
+        std::string cost_str = beautify_double(cost);
+        CCLOG("cost %f, beauty cost %s", cost, cost_str.c_str());
+        nuitem->set_cost_lbl(cost_str);
     };
 
     //back button
