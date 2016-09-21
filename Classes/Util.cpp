@@ -167,15 +167,18 @@ std::string beautify_double(long double& value)
         fixed_value.erase(fixed_value.find_last_not_of('0') + 1, std::string::npos);
 
         auto start = 0U;
-        auto end = fixed_value.find('.');
+        auto period_pos = fixed_value.find('.');
         std::string post_period = ".0";
-        if (end != std::string::npos)
+        if (period_pos != std::string::npos)
         {
-            post_period = fixed_value.substr(end, std::string::npos);
-            fixed_value = fixed_value.substr(start, end - start);
+            post_period = fixed_value.substr(period_pos, std::string::npos);
+            fixed_value = fixed_value.substr(start, period_pos - start);
         }
 
-        decimal = post_period;
+        if (post_period != ".") //dont include only a period for a decimal
+        {
+            decimal = post_period;
+        }
 
     }
 
