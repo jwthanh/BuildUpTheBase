@@ -1,0 +1,10 @@
+{
+    "items": {
+        "dagger": {
+            "name": "Dagger",
+            "summary": "This is a dagger",
+            "description": "This is a dagger, it's relatively average and otherwise non interesting",
+            "base_cost": 100.0
+        }
+    }
+}

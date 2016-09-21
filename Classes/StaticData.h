@@ -63,4 +63,19 @@ class IngredientData : public BaseData
 
 };
 
+class ItemData : public BaseData
+{
+    public:
+        std::string item_id;
+        ItemData(std::string item_id);
+
+        std::string getter(std::string key) override;
+
+        GET_JSON_ATTR(name);
+        GET_JSON_ATTR(base_cost);
+        GET_JSON_ATTR(description);
+        GET_JSON_ATTR(summary);
+
+};
+
 #endif
