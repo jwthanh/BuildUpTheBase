@@ -66,19 +66,19 @@ vsRecipe BuildingData::get_all_recipes()
         this->recipe_doc = FileIO::open_json(this->_filename, true);
     }
 
-    auto body = &this->recipe_doc["buildings"];
-    auto building_info = &(*body)[this->building_name.c_str()];
+    auto& body = this->recipe_doc["buildings"];
+    auto& building_info = body[this->building_name.c_str()];
 
-    if (!building_info->HasMember("recipes"))
+    if (!building_info.HasMember("recipes"))
     {
         return vsRecipe();
     }
-    auto recipe_info = &(*building_info)["recipes"];
+    auto& recipe_info = building_info["recipes"];
 
     vsRecipe recipes;
 
-    for (auto itr = recipe_info->MemberBegin();
-        itr != recipe_info->MemberEnd();
+    for (auto itr = recipe_info.MemberBegin();
+        itr != recipe_info.MemberEnd();
         itr += 1)
     {
         std::string recipe_id = itr->name.GetString();
@@ -92,22 +92,23 @@ vsRecipe BuildingData::get_all_recipes()
 
 };
 
-spRecipe BuildingData::build_recipe(rjValue* recipe_data)
+spRecipe BuildingData::build_recipe(rjValue* raw_data)
 {
-    rjValue* recipe_components = &(*recipe_data)["components"];
+    rjValue& recipe_ref = *raw_data;
+    rjValue& recipe_components = recipe_ref["components"];
 
-    auto recipe_name = (&(*recipe_data)["name"])->GetString();
-    auto recipe_description = (&(*recipe_data)["description"])->GetString();
+    auto recipe_name = recipe_ref["name"].GetString();
+    auto recipe_description = recipe_ref["description"].GetString();
     spRecipe result = std::make_shared<Recipe>(recipe_name, recipe_description);
 
-    if ((*recipe_data).HasMember("clicks_required"))
+    if (recipe_ref.HasMember("clicks_required"))
     {
-        result->clicks_required = (*recipe_data)["clicks_required"].GetInt();
+        result->clicks_required = recipe_ref["clicks_required"].GetInt();
     }
 
 
-    for (auto itr = recipe_components->MemberBegin();
-         itr != recipe_components->MemberEnd();
+    for (auto itr = recipe_components.MemberBegin();
+         itr != recipe_components.MemberEnd();
          itr+=1)
     {
         std::string val = itr->name.GetString();
@@ -115,9 +116,9 @@ spRecipe BuildingData::build_recipe(rjValue* recipe_data)
         result->components[Ingredient::string_to_type(val)] = count;
     };
 
-    auto recipe_output = &(*recipe_data)["output"];
-    for (auto itr = recipe_output->MemberBegin();
-         itr != recipe_output->MemberEnd();
+    rjValue& recipe_output = recipe_ref["output"];
+    for (auto itr = recipe_output.MemberBegin();
+         itr != recipe_output.MemberEnd();
          itr+=1)
     {
         std::string val = itr->name.GetString();
@@ -132,13 +133,13 @@ spRecipe BuildingData::get_recipe(std::string recipe_key)
 {
 
     auto jsonDoc = FileIO::open_json(this->_filename, true);
-    auto body = &jsonDoc["buildings"];
-    auto building_info = &(*body)[this->building_name.c_str()];
-    auto recipe_info = &(*building_info)["recipes"];
+    auto& body = jsonDoc["buildings"];
+    auto& building_info = body[this->building_name.c_str()];
+    auto& recipe_info = building_info["recipes"];
 
-    auto recipe_data = &(*recipe_info)[recipe_key.c_str()];
+    auto& recipe_data = recipe_info[recipe_key.c_str()];
 
-    return build_recipe(recipe_data);
+    return build_recipe(&recipe_data);
 };
 
 
