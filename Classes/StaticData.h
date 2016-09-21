@@ -8,6 +8,13 @@
 #include <json/allocators.h>
 #include <json/document.h>
 
+
+#define GET_JSON_ATTR(attr_name) \
+std::string get_##attr_name()\
+{\
+    return this->getter(#attr_name);\
+}\
+
 class BaseData
 {
     private:
@@ -32,11 +39,11 @@ class BuildingData : public BaseData
 
         std::string getter(std::string key) override;
 
-        std::string get_task_name();
-        std::string get_description();
-        std::string get_gold_cost();
-        std::string get_img_large();
-        std::string get_short_name();
+        GET_JSON_ATTR(task_name);
+        GET_JSON_ATTR(description);
+        GET_JSON_ATTR(gold_cost);
+        GET_JSON_ATTR(img_large);
+        GET_JSON_ATTR(short_name);
 
         vsRecipe get_all_recipes();
         spRecipe build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>* recipe_data);
@@ -51,8 +58,8 @@ class IngredientData : public BaseData
 
         std::string getter(std::string key) override;
 
-        std::string get_description();
-        std::string get_img_large();
+        GET_JSON_ATTR(description);
+        GET_JSON_ATTR(img_large);
 
 };
 

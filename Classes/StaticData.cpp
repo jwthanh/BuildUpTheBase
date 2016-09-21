@@ -57,31 +57,6 @@ std::string BuildingData::getter(std::string key)
     return this->_get_data("buildings", building_name, key);
 };
 
-std::string BuildingData::get_task_name()
-{
-    return this->getter("task_name");
-};
-
-std::string BuildingData::get_description()
-{
-    return this->getter("description");
-};
-
-std::string BuildingData::get_gold_cost()
-{
-    return this->getter("gold_cost");
-};
-
-std::string BuildingData::get_img_large()
-{
-    return this->getter("img_large");
-};
-
-std::string BuildingData::get_short_name()
-{
-    return this->getter("short_name");
-};
-
 vsRecipe BuildingData::get_all_recipes()
 {
     //assume if its not an object, its null
@@ -175,14 +150,4 @@ IngredientData::IngredientData(std::string resource_id)
 std::string IngredientData::getter(std::string key)
 {
     return this->_get_data("resources", this->resource_id, key);
-};
-
-std::string IngredientData::get_description()
-{
-    return this->getter("description");
-};
-
-std::string IngredientData::get_img_large()
-{
-    return this->getter("img_large");
 };
