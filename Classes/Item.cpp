@@ -1,7 +1,7 @@
 #include "Item.h"
 
-Item::Item(std::string name, std::string description, res_count_t base_cost, RarityType rarity, res_count_t level)
-    : Nameable(name), rarity(rarity), level(level), _base_cost(base_cost), description(description)
+Item::Item(std::string name, std::string summary, std::string description, res_count_t base_cost, RarityType rarity, res_count_t level)
+    : Nameable(name), rarity(rarity), level(level), _base_cost(base_cost), summary(summary), description(description)
 {
 };
 

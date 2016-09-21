@@ -499,10 +499,10 @@ void GameDirector::switch_to_items_menu()
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
 
     vsItem items = {
-        std::make_shared<Item>("Normal lv1", "item description", 100.0, RarityType::Normal, 1.0f),
-        std::make_shared<Item>("Poor lv1", "item description", 100.0, RarityType::Poor, 1.0f),
-        std::make_shared<Item>("Rare lv1", "item description", 100.0, RarityType::Rare, 1.0f),
-        std::make_shared<Item>("Normal lv2", "item description", 100.0, RarityType::Normal, 2.0f)
+        std::make_shared<Item>("Normal lv1", "item summary", "item description", 100.0, RarityType::Normal, 1.0f),
+        std::make_shared<Item>("Poor lv1", "item summary", "item description", 100.0, RarityType::Poor, 1.0f),
+        std::make_shared<Item>("Rare lv1", "item summary", "item description", 100.0, RarityType::Rare, 1.0f),
+        std::make_shared<Item>("Normal lv2", "item summary", "item description", 100.0, RarityType::Normal, 2.0f)
     };
 
     for (spItem item : items) {

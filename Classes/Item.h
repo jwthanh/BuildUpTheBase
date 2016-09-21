@@ -21,9 +21,10 @@ class Item : public Nameable
         RarityType rarity; //variation on item's base price
         res_count_t level; //affects base price
 
-        std::string description;
+        std::string summary; //goes into nuitem
+        std::string description; //goes into full body text
 
-        Item(std::string name, std::string description, res_count_t base_cost, RarityType rarity, res_count_t level);
+        Item(std::string name, std::string summary, std::string description, res_count_t base_cost, RarityType rarity, res_count_t level);
 
         //base_cost doubled per level, multiplied by rarity, (cost * (2**level) * rarity)
         res_count_t get_effective_cost();
