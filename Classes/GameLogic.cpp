@@ -12,6 +12,7 @@
 #include "external/easylogging.h"
 #include "HarvestScene.h"
 #include "Item.h"
+#include "StaticData.h"
 
 USING_NS_CC;
 
@@ -498,8 +499,10 @@ void GameDirector::switch_to_items_menu()
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
 
+    auto item_data = ItemData("dagger");
+
     vsItem items = {
-        std::make_shared<Item>("Normal lv1", "item summary", "item description", 100.0, RarityType::Normal, 1.0f),
+        std::make_shared<Item>(item_data.get_name(), "item summary", "item description", 100.0, RarityType::Normal, 1.0f),
         std::make_shared<Item>("Poor lv1", "item summary", "item description", 100.0, RarityType::Poor, 1.0f),
         std::make_shared<Item>("Rare lv1", "item summary", "item description", 100.0, RarityType::Rare, 1.0f),
         std::make_shared<Item>("Normal lv2", "item summary", "item description", 100.0, RarityType::Normal, 2.0f)

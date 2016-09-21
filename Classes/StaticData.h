@@ -46,7 +46,7 @@ class BuildingData : public BaseData
         GET_JSON_ATTR(short_name);
 
         vsRecipe get_all_recipes();
-        spRecipe build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>* recipe_data);
+        spRecipe build_recipe(rjValue* recipe_data);
         spRecipe get_recipe(std::string recipe_key);
 };
 
@@ -75,6 +75,9 @@ class ItemData : public BaseData
         GET_JSON_ATTR(base_cost);
         GET_JSON_ATTR(description);
         GET_JSON_ATTR(summary);
+
+        spItem build_item(rjValue* recipe_data);
+        spItem get_item(std::string item_id);
 
 };
 

@@ -8,6 +8,7 @@
 #include "FileOperation.h"
 
 #include "Recipe.h"
+#include "Item.h"
 
 std::string BaseData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)
 {
@@ -91,9 +92,9 @@ vsRecipe BuildingData::get_all_recipes()
 
 };
 
-spRecipe BuildingData::build_recipe(rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>* recipe_data)
+spRecipe BuildingData::build_recipe(rjValue* recipe_data)
 {
-    auto recipe_components = &(*recipe_data)["components"];
+    rjValue* recipe_components = &(*recipe_data)["components"];
 
     auto recipe_name = (&(*recipe_data)["name"])->GetString();
     auto recipe_description = (&(*recipe_data)["description"])->GetString();
@@ -155,10 +156,29 @@ std::string IngredientData::getter(std::string key)
 ItemData::ItemData(std::string item_id)
 {
     this->item_id = item_id;
-    this->_filename = "resources_data.json";
+    this->_filename = "item_data.json";
 }
 
 std::string ItemData::getter(std::string key)
 {
     return this->_get_data("items", this->item_id, key);
+};
+
+spItem ItemData::build_item(rjValue* recipe_data)
+{
+    return {};
+    //return std::make_shared<Item>();
+};
+
+spItem ItemData::get_item(std::string item_id)
+{
+
+    auto jsonDoc = FileIO::open_json(this->_filename, true);
+    auto body = &jsonDoc["items"];
+    auto item_info = &(*body)[item_id.c_str()];
+    auto recipe_info = &(*item_info)["recipes"];
+
+    auto recipe_data = &(*recipe_info)[item_id.c_str()];
+
+    return this->build_item(recipe_data);
 };
