@@ -53,6 +53,8 @@ Buildup::Buildup()
     this->fighter = std::make_shared<Fighter>("Jimothy2");
     this->fighter->attrs->health->set_vals(100);
 
+    this->items = {};
+
     this->player = NULL;
 };
 
