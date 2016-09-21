@@ -164,10 +164,16 @@ std::string ItemData::getter(std::string key)
     return this->_get_data("items", this->item_id, key);
 };
 
-spItem ItemData::build_item(rjValue* recipe_data)
+spItem ItemData::build_item(rjValue* item_data)
 {
-    return {};
-    //return std::make_shared<Item>();
+    auto& item_ref = *item_data;
+
+    auto name = item_ref["name"].GetString();
+    auto summary = item_ref["summary"].GetString();
+    auto description = item_ref["description"].GetString();
+    auto base_cost = item_ref["base_cost"].GetDouble();
+
+    return std::make_shared<Item>(name, summary, description, base_cost, RarityType::Normal, 1);
 };
 
 spItem ItemData::get_item(std::string item_id)
@@ -176,9 +182,6 @@ spItem ItemData::get_item(std::string item_id)
     auto jsonDoc = FileIO::open_json(this->_filename, true);
     auto body = &jsonDoc["items"];
     auto item_info = &(*body)[item_id.c_str()];
-    auto recipe_info = &(*item_info)["recipes"];
 
-    auto recipe_data = &(*recipe_info)[item_id.c_str()];
-
-    return this->build_item(recipe_data);
+    return this->build_item(item_info);
 };

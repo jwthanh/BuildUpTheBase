@@ -499,19 +499,20 @@ void GameDirector::switch_to_items_menu()
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
 
-    auto item_data = ItemData("dagger");
+    auto item_data = ItemData("dagger"); //TODO make not specific to one Item type
+    auto item = item_data.get_item("dagger");
 
     vsItem items = {
-        std::make_shared<Item>(item_data.get_name(), "item summary", "item description", 100.0, RarityType::Normal, 1.0f),
-        std::make_shared<Item>("Poor lv1", "item summary", "item description", 100.0, RarityType::Poor, 1.0f),
-        std::make_shared<Item>("Rare lv1", "item summary", "item description", 100.0, RarityType::Rare, 1.0f),
-        std::make_shared<Item>("Normal lv2", "item summary", "item description", 100.0, RarityType::Normal, 2.0f)
+        std::make_shared<Item>("Normal "+item->name, item->summary, item->description, 100.0, RarityType::Normal, 1.0f),
+        std::make_shared<Item>("Poor "+item->name, item->summary, item->description, 100.0, RarityType::Poor, 1.0f),
+        std::make_shared<Item>("Rare "+item->name, item->summary, item->description, 100.0, RarityType::Rare, 1.0f),
+        std::make_shared<Item>("Normal lv2 "+item->name, item->summary, item->description, 100.0, RarityType::Normal, 2.0f),
     };
 
     for (spItem item : items) {
         auto nuitem = NuItem::create(items_listview);
         nuitem->set_title(item->name);
-        nuitem->set_description(item->description);
+        nuitem->set_description(item->summary);
 
         res_count_t cost = item->get_effective_cost();
         std::string cost_str = beautify_double(cost);
