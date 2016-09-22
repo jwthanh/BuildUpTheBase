@@ -499,6 +499,16 @@ void GameDirector::switch_to_items_menu()
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
 
+    auto item_detail_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("item_detail"));
+    auto item_name = dynamic_cast<ui::Text*>(item_detail_panel->getChildByName("item_name"));
+    auto item_desc = dynamic_cast<ui::Text*>(item_detail_panel->getChildByName("item_description"));
+    auto item_sell_btn = dynamic_cast<ui::Button*>(item_detail_panel->getChildByName("item_sell"));
+
+    auto update_item_detail_panel = [panel, item_name, item_desc, item_sell_btn](spItem item) {
+        item_name->setString(item->get_name());
+        item_desc->setString(item->description);
+    };
+
     ItemData item_data = ItemData();
     spItem dagger = item_data.get_item("dagger");
     dagger->rarity = RarityType::Poor;
@@ -524,6 +534,10 @@ void GameDirector::switch_to_items_menu()
         std::string cost_str = beautify_double(cost);
         CCLOG("cost %f, beauty cost %s", cost, cost_str.c_str());
         nuitem->set_cost_lbl(cost_str);
+
+        nuitem->button->addTouchEventListener([item, update_item_detail_panel](Ref* sender, ui::Widget::TouchEventType type){
+            update_item_detail_panel(item);
+        });
     };
 
     //back button
