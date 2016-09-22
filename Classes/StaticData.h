@@ -67,14 +67,9 @@ class ItemData : public BaseData
 {
     public:
         std::string item_id;
-        ItemData(std::string item_id);
+        ItemData();
 
         std::string getter(std::string key) override;
-
-        GET_JSON_ATTR(name);
-        GET_JSON_ATTR(base_cost);
-        GET_JSON_ATTR(description);
-        GET_JSON_ATTR(summary);
 
         spItem build_item(rjValue* recipe_data);
         spItem get_item(std::string item_id);

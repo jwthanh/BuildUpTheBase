@@ -154,15 +154,14 @@ std::string IngredientData::getter(std::string key)
     return this->_get_data("resources", this->resource_id, key);
 };
 
-ItemData::ItemData(std::string item_id)
+ItemData::ItemData()
 {
-    this->item_id = item_id;
     this->_filename = "item_data.json";
 }
 
 std::string ItemData::getter(std::string key)
 {
-    return this->_get_data("items", this->item_id, key);
+    return "unimplemented";
 };
 
 spItem ItemData::build_item(rjValue* item_data)

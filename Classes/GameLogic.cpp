@@ -499,7 +499,7 @@ void GameDirector::switch_to_items_menu()
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
 
-    auto item_data = ItemData("dagger"); //TODO make not specific to one Item type
+    auto item_data = ItemData();
     auto item = item_data.get_item("dagger");
 
     vsItem items = {
