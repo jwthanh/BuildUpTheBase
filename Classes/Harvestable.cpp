@@ -18,6 +18,7 @@
 #include "Modal.h"
 #include "StaticData.h"
 #include "Item.h"
+#include "RandomWeightMap.h"
 
 USING_NS_CC;
 
@@ -391,8 +392,19 @@ void DumpsterHarvestable::shatter()
 {
     Harvestable::shatter();
     ItemData item_data = ItemData();
-    spItem item = item_data.get_item("dagger");
-    item->rarity = RarityType::Poor;
+
+    RandomWeightMap<std::string> item_type_map;
+    item_type_map.add_item("dagger", 33);
+    item_type_map.add_item("homunculus", 33);
+    item_type_map.add_item("ashen_mirror", 33);
+
+    RandomWeightMap<RarityType> item_rarity_map;
+    item_rarity_map.add_item(RarityType::Poor, 40);
+    item_rarity_map.add_item(RarityType::Normal, 50);
+    item_rarity_map.add_item(RarityType::Rare, 10);
+
+    spItem item = item_data.get_item(item_type_map.get_item());
+    item->rarity = item_rarity_map.get_item();
 
     BUILDUP->items.push_back(item);
     auto popup_panel = GameLogic::get_popup_panel();
