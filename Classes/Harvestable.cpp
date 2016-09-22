@@ -16,6 +16,8 @@
 #include "ProgressBar.h"
 #include "Technology.h"
 #include "Modal.h"
+#include "StaticData.h"
+#include "Item.h"
 
 USING_NS_CC;
 
@@ -388,8 +390,13 @@ void DumpsterHarvestable::animate_clip()
 void DumpsterHarvestable::shatter()
 {
     Harvestable::shatter();
+    ItemData item_data = ItemData();
+    spItem item = item_data.get_item("dagger");
+    item->rarity = RarityType::Poor;
+
+    BUILDUP->items.push_back(item);
     auto popup_panel = GameLogic::get_popup_panel();
-    popup_panel->set_string("You've found an item!");
+    popup_panel->set_string("You've found an item: "+item->get_name()+"!");
     popup_panel->animate_open();
 };
 

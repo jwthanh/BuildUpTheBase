@@ -525,7 +525,7 @@ void GameDirector::switch_to_items_menu()
         ashen_mirror_lv2
     };
 
-    for (spItem item : items) {
+    for (spItem item : BUILDUP->items) {
         auto nuitem = NuItem::create(items_listview);
         nuitem->set_title(item->get_name());
         nuitem->set_description(item->summary);
