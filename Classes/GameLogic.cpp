@@ -506,7 +506,7 @@ void GameDirector::switch_to_items_menu()
     load_default_button_textures(item_sell_btn);
     item_sell_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
     item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
-    set_aliasing(item_sell_btn->getTitleRenderer());
+    set_aliasing(item_sell_btn);
 
     auto update_item_detail_panel = [panel, item_name, item_desc, item_sell_btn](spItem item) {
         item_name->setString(item->get_name());

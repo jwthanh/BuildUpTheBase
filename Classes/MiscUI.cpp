@@ -180,6 +180,11 @@ void set_aliasing(cocos2d::ui::ImageView* img_view, bool val)
     CCLOG("set_aliasing:: Not sprite or scale9");
 };
 
+void set_aliasing(cocos2d::ui::Button* button, bool val)
+{
+    set_aliasing(button->getTitleRenderer(), val);
+};
+
 void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val)
 {
     cocos2d::Sprite* sprite = scale9->getSprite();
