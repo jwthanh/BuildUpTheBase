@@ -503,10 +503,10 @@ void GameDirector::switch_to_items_menu()
     auto item = item_data.get_item("dagger");
 
     vsItem items = {
-        std::make_shared<Item>("Normal "+item->name, item->summary, item->description, 100.0, RarityType::Normal, 1.0f),
-        std::make_shared<Item>("Poor "+item->name, item->summary, item->description, 100.0, RarityType::Poor, 1.0f),
-        std::make_shared<Item>("Rare "+item->name, item->summary, item->description, 100.0, RarityType::Rare, 1.0f),
-        std::make_shared<Item>("Normal lv2 "+item->name, item->summary, item->description, 100.0, RarityType::Normal, 2.0f),
+        std::make_shared<Item>(item->get_name(), item->summary, item->description, 100.0, RarityType::Normal, 1.0f),
+        std::make_shared<Item>(item->get_name(), item->summary, item->description, 100.0, RarityType::Poor, 1.0f),
+        std::make_shared<Item>(item->get_name(), item->summary, item->description, 100.0, RarityType::Rare, 1.0f),
+        std::make_shared<Item>(item->get_name(), item->summary, item->description, 100.0, RarityType::Normal, 2.0f),
     };
 
     for (spItem item : items) {

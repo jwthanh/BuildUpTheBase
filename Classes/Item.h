@@ -29,6 +29,9 @@ class Item : public Nameable
         //base_cost doubled per level, multiplied by rarity, (cost * (2**level) * rarity)
         res_count_t get_effective_cost();
 
+        //name, including rarity and level
+        std::string get_name();
+
 };
 
 #endif
