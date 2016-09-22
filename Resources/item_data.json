@@ -3,8 +3,20 @@
         "dagger": {
             "name": "Dagger",
             "summary": "This is a dagger",
-            "description": "This is a dagger, it's relatively average and otherwise non interesting",
+            "description": "This is a dagger, it's relatively average and otherwise non interesting.",
             "base_cost": 100.0
+        },
+        "homunculus": {
+            "name": "Homunculus",
+            "summary": "Strange little creature",
+            "description": "Tiny unsightly creature, its eyes dart around quickly.",
+            "base_cost": 250.0
+        },
+        "ashen_mirror": {
+            "name": "Ashen Mirror",
+            "summary": "Can barely make out your reflection",
+            "description": "Weighs almost nothing, despite being made of wrought iron.",
+            "base_cost": 765.0
         }
     }
 }
