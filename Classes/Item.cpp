@@ -9,7 +9,7 @@ const std::map<RarityType, float> ITEM_RARITY_MODIFIER = {
 
 const std::map<RarityType, std::string> ITEM_RARITY_STRINGS = {
     { RarityType::Poor, "Poor" },
-    { RarityType::Normal, "Normal" },
+    { RarityType::Normal, "Norm" },
     { RarityType::Rare, "Rare" }
 };
 
@@ -35,6 +35,6 @@ std::string Item::get_name()
     //Dagger
     name << this->name << " ";
     //(LV 1)
-    name << "(LV " << beautify_double(this->level) << ")";
+    name << "LV" << beautify_double(this->level);
     return name.str();
 };
