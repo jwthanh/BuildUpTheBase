@@ -31,7 +31,8 @@ std::string Item::get_name()
 {
     std::stringstream name;
     //Normal
-    name << ITEM_RARITY_STRINGS.at(this->rarity) << " ";
+    if (this->rarity != RarityType::Normal)
+        name << ITEM_RARITY_STRINGS.at(this->rarity) << " ";
     //Dagger
     name << this->name << " ";
     //(LV 1)
