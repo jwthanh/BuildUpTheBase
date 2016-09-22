@@ -15,3 +15,5 @@ Features
 * sell workers back
 
 * dont pause application on background, maybe do the post load on return
+
+* items have passives, limited slots
