@@ -499,19 +499,23 @@ void GameDirector::switch_to_items_menu()
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
 
-    auto item_data = ItemData();
-    auto item = item_data.get_item("dagger");
+    ItemData item_data = ItemData();
+    spItem dagger = item_data.get_item("dagger");
+    spItem homunc = item_data.get_item("homunculus");
+    spItem ashen_mirror = item_data.get_item("ashen_mirror");
+    spItem ashen_mirror_lv2 = item_data.get_item("ashen_mirror");
+    ashen_mirror_lv2->level = 2.0f;
 
     vsItem items = {
-        std::make_shared<Item>(item->get_name(), item->summary, item->description, 100.0, RarityType::Normal, 1.0f),
-        std::make_shared<Item>(item->get_name(), item->summary, item->description, 100.0, RarityType::Poor, 1.0f),
-        std::make_shared<Item>(item->get_name(), item->summary, item->description, 100.0, RarityType::Rare, 1.0f),
-        std::make_shared<Item>(item->get_name(), item->summary, item->description, 100.0, RarityType::Normal, 2.0f),
+        dagger,
+        homunc,
+        ashen_mirror,
+        ashen_mirror_lv2
     };
 
     for (spItem item : items) {
         auto nuitem = NuItem::create(items_listview);
-        nuitem->set_title(item->name);
+        nuitem->set_title(item->get_name());
         nuitem->set_description(item->summary);
 
         res_count_t cost = item->get_effective_cost();
