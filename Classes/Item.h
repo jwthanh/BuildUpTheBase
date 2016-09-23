@@ -24,6 +24,8 @@ class Item : public Nameable
         std::string summary; //goes into nuitem
         std::string description; //goes into full body text
 
+        std::string img_path; //full relative image path
+
         Item(std::string name, std::string summary, std::string description, res_count_t base_cost, RarityType rarity, res_count_t level);
 
         //base_cost doubled per level, multiplied by rarity, (cost * (2**level) * rarity)

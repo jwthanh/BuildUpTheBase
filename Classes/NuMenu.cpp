@@ -169,7 +169,7 @@ void NuItem::set_original_image(std::string path)
     this->_original_image_path = path;
 };
 
-void NuItem::set_image(std::string path)
+void NuItem::set_image(std::string path, ui::Widget::TextureResType texture_type)
 {
     //same loaded image, do nothing
     if (this->item_icon->getRenderFile().file == path)
@@ -177,7 +177,7 @@ void NuItem::set_image(std::string path)
         return;
     };
 
-    this->item_icon->loadTexture(path, ui::TextureResType::PLIST);
+    this->item_icon->loadTexture(path, texture_type);
 
     ui::Scale9Sprite* sprite = dynamic_cast<ui::Scale9Sprite*>(this->item_icon->getVirtualRenderer());
     if (sprite)

@@ -35,7 +35,7 @@ class NuItem : public cocos2d::ui::Widget
 
         std::string _original_image_path;
 
-        void set_image(std::string path);
+        void set_image(std::string path, Widget::TextureResType texture_type = Widget::TextureResType::PLIST);
         void set_original_image(std::string path);
         void set_title(std::string title);
         void set_description(std::string description);

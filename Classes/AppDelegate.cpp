@@ -176,6 +176,11 @@ void AppDelegate::preload_sprites()
     for (auto path : sheet_paths) {
         cache->addSpriteFramesWithFile(path);
     };
+
+    auto texture_cache = Director::getInstance()->getTextureCache();
+    texture_cache->addImage("items/dagger.png");
+    texture_cache->addImage("items/ashen_mirror.png");
+    texture_cache->addImage("items/homunculus.png");
     CCLOG("done loading sprites");
 
 };

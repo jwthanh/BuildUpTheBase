@@ -534,6 +534,8 @@ void GameDirector::switch_to_items_menu()
         nuitem->set_title(item->get_name());
         nuitem->set_description(item->summary);
 
+        nuitem->set_image(item->img_path, ui::TextureResType::LOCAL);
+
         res_count_t cost = item->get_effective_cost();
         std::string cost_str = beautify_double(cost);
         CCLOG("cost %f, beauty cost %s", cost, cost_str.c_str());
