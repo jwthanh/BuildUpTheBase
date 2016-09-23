@@ -501,16 +501,25 @@ void GameDirector::switch_to_items_menu()
 
     auto item_detail_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("item_detail"));
     auto item_name = dynamic_cast<ui::Text*>(item_detail_panel->getChildByName("item_name"));
-    auto item_desc = dynamic_cast<ui::Text*>(item_detail_panel->getChildByName("item_description"));
+    auto item_listview_description = dynamic_cast<ui::ListView*>(item_detail_panel->getChildByName("item_listview_description"));
+
+    auto item_desc = dynamic_cast<ui::Text*>(item_listview_description->getChildByName("item_description"));
+    item_desc->setTextAreaSize({ 375, 0 }); //hardcode width of textarea so that it wraps properly
+
     auto item_sell_btn = dynamic_cast<ui::Button*>(item_detail_panel->getChildByName("item_sell"));
     load_default_button_textures(item_sell_btn);
     item_sell_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
     item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
     set_aliasing(item_sell_btn);
 
-    auto update_item_detail_panel = [panel, item_name, item_desc, item_sell_btn](spItem item) {
+    auto update_item_detail_panel = [panel, item_name, item_desc, item_sell_btn, item_listview_description](spItem item) {
         item_name->setString(item->get_name());
+
         item_desc->setString(item->description);
+
+        //update listviews layout to account for different content height
+        item_listview_description->requestDoLayout();
+
     };
 
     ItemData item_data = ItemData();
@@ -529,6 +538,7 @@ void GameDirector::switch_to_items_menu()
         ashen_mirror_lv2
     };
 
+    // for (spItem item : items) {
     for (spItem item : BUILDUP->items) {
         auto nuitem = NuItem::create(items_listview);
         nuitem->set_title(item->get_name());
