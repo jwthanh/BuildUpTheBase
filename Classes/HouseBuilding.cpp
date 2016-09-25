@@ -653,8 +653,6 @@ void Buildup::post_update()
     value = rjValue();
     value.SetInt(from_file);
 
-    cocos2d::timezone tz = cocos2d::timezone();
-
     doc.AddMember(key, value, allocator);
 
 

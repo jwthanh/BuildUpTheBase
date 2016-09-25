@@ -29,7 +29,7 @@ std::string FileIO::get_string_from_file(const std::string& path, bool builtin_p
 
     std::string corrected_path = FileIO::get_correct_path(path, builtin_path);
 
-    CCLOG("read count %i", read_counts);
+    CCLOG("Current File: %s, total file reads: %i", corrected_path.c_str(), read_counts);
     read_counts += 1;
 
     auto file_utils = cocos2d::FileUtils::getInstance();
