@@ -624,7 +624,7 @@ void Buildup::post_update()
     // auto server_url = "http://localhost:8080/users/"+ username+"/";
 
     //build up string of coins
-    auto coins = (long long)BEATUP->get_total_coins();
+    res_count_t coins = BEATUP->get_total_coins();
     std::stringstream coin_stream;
     coin_stream << coins;
     std::string coins_string = coin_stream.str();
@@ -638,7 +638,8 @@ void Buildup::post_update()
     rjValue key = rjValue(rapidjson::kStringType);
     key.SetString("coins");
     rjValue value = rjValue();
-    value.SetString(coins_string.c_str(), coins_string.size());
+    const char* raw_coin_cs = coins_string.c_str();
+    value.SetString(raw_coin_cs, coins_string.size());
 
     //add the member to the document
     auto& allocator = doc.GetAllocator();

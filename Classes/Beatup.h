@@ -91,8 +91,8 @@ class Beatup : public GameLayer
         void add_total_hit(int x);
         int get_total_hits();
 
-        double _total_coins;
-        double _last_total_coins;
+        res_count_t _total_coins;
+        res_count_t _last_total_coins;
         static std::string total_coin_key;
         void add_total_coin(res_count_t x);
         double get_total_coins();
