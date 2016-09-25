@@ -507,15 +507,29 @@ void GameDirector::switch_to_items_menu()
     item_desc->setTextAreaSize({ 375, 0 }); //hardcode width of textarea so that it wraps properly
 
     auto item_sell_btn = dynamic_cast<ui::Button*>(item_detail_panel->getChildByName("item_sell"));
+    item_sell_btn->setVisible(false);
     load_default_button_textures(item_sell_btn);
     item_sell_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
     item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
     set_aliasing(item_sell_btn);
+    auto click_sell_btn = [panel, item_name, item_desc, item_sell_btn, item_listview_description](){
+        item_name->setString("default name text");
+        item_desc->setString("default desc text");
+        item_sell_btn->setVisible(false);
+    };
 
-    auto update_item_detail_panel = [panel, item_name, item_desc, item_sell_btn, item_listview_description](spItem item) {
+    item_sell_btn->addTouchEventListener([click_sell_btn](Ref* sender, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            click_sell_btn();
+        }
+    });
+
+    auto update_detail_panel_on_touch = [panel, item_name, item_desc, item_sell_btn, item_listview_description](spItem item) {
         item_name->setString(item->get_name());
-
         item_desc->setString(item->description);
+
+        item_sell_btn->setVisible(true);
 
         //update listviews layout to account for different content height
         item_listview_description->requestDoLayout();
@@ -551,8 +565,11 @@ void GameDirector::switch_to_items_menu()
         CCLOG("cost %f, beauty cost %s", cost, cost_str.c_str());
         nuitem->set_cost_lbl(cost_str);
 
-        nuitem->button->addTouchEventListener([item, update_item_detail_panel](Ref* sender, ui::Widget::TouchEventType type){
-            update_item_detail_panel(item);
+        nuitem->button->addTouchEventListener([item, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
+            if (type == ui::Widget::TouchEventType::ENDED)
+            {
+                update_detail_panel_on_touch(item);
+            }
         });
     };
 
