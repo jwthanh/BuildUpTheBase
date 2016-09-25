@@ -525,11 +525,15 @@ void GameDirector::switch_to_items_menu()
         item_desc->setString(item->description);
 
         item_sell_btn->setVisible(true);
-        item_sell_btn->addTouchEventListener([click_sell_btn, nuitem](Ref* sender, ui::Widget::TouchEventType type){
+        item_sell_btn->addTouchEventListener([click_sell_btn, nuitem, item](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 nuitem->removeFromParent();
                 nuitem->button->removeFromParent();
+                BUILDUP->items.erase(std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item), BUILDUP->items.end());
+
+                BEATUP->add_total_coin(item->get_effective_cost());
+
                 click_sell_btn();
             }
         });
