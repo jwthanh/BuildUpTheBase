@@ -46,13 +46,13 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="back_btn" ActionTag="624855446" Tag="630" IconVisible="False" LeftMargin="33.0000" RightMargin="797.0000" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="back_btn" ActionTag="624855446" Tag="630" IconVisible="False" LeftMargin="35.0000" RightMargin="795.0000" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="130.0000" Y="100.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="98.0000" Y="90.0000" />
+                <Position X="100.0000" Y="90.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1021" Y="0.1406" />
+                <PrePosition X="0.1042" Y="0.1406" />
                 <PreSize X="0.1354" Y="0.1563" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />

@@ -6,16 +6,16 @@
       <ObjectData Name="Scene" Tag="211" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="panel" ActionTag="-258685076" Tag="263" IconVisible="False" LeftMargin="-1.7432" RightMargin="1.7432" TopMargin="0.0003" BottomMargin="-0.0003" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="panel" ActionTag="-258685076" Tag="263" IconVisible="False" TopMargin="0.0003" BottomMargin="-0.0003" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="960.0000" Y="640.0000" />
             <Children>
-              <AbstractNodeData Name="back_btn" ActionTag="-2007575051" Tag="267" IconVisible="False" LeftMargin="207.9266" RightMargin="622.0734" TopMargin="502.3745" BottomMargin="37.6255" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="back_btn" ActionTag="-2007575051" Tag="267" IconVisible="False" LeftMargin="35.0000" RightMargin="795.0000" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="130.0000" Y="100.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="272.9266" Y="87.6255" />
+                <Position X="100.0000" Y="90.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2843" Y="0.1369" />
+                <PrePosition X="0.1042" Y="0.1406" />
                 <PreSize X="0.1354" Y="0.1563" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
@@ -81,7 +81,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="item_listview_description" ActionTag="-1644992312" Tag="12" IconVisible="False" LeftMargin="12.7642" RightMargin="22.6451" TopMargin="72.5739" BottomMargin="137.8580" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+                  <AbstractNodeData Name="item_listview_description" ActionTag="-1644992312" Tag="12" IconVisible="False" LeftMargin="12.7642" RightMargin="22.6451" TopMargin="72.5739" BottomMargin="137.8581" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
                     <Size X="373.5995" Y="179.5765" />
                     <Children>
                       <AbstractNodeData Name="item_description" ActionTag="-390290598" Tag="9" IconVisible="False" RightMargin="-1069.4005" BottomMargin="79.5765" FontSize="16" LabelText="Item details, maybe going into how much it costs, or what it does and where its from.&#xA;&#xA;I'm thinking it'll have a quality, from poor to rare that'll affect the base cost, and then the base cost is dependant on the level.&#xA;&#xA;The level would be increased with appeasements or something, so you're always spending more on it and getting more back." OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -122,10 +122,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleY="1.0000" />
-            <Position X="-1.7432" Y="639.9997" />
+            <Position Y="639.9997" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="-0.0018" Y="1.0000" />
+            <PrePosition Y="1.0000" />
             <PreSize X="1.0000" Y="1.0000" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
