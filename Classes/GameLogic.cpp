@@ -512,28 +512,30 @@ void GameDirector::switch_to_items_menu()
     item_sell_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
     item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
     set_aliasing(item_sell_btn);
+
     auto click_sell_btn = [panel, item_name, item_desc, item_sell_btn, item_listview_description](){
         item_name->setString("default name text");
         item_desc->setString("default desc text");
         item_sell_btn->setVisible(false);
     };
 
-    item_sell_btn->addTouchEventListener([click_sell_btn](Ref* sender, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            click_sell_btn();
-        }
-    });
 
-    auto update_detail_panel_on_touch = [panel, item_name, item_desc, item_sell_btn, item_listview_description](spItem item) {
+    auto update_detail_panel_on_touch = [panel, item_name, item_desc, item_sell_btn, item_listview_description, click_sell_btn](NuItem* nuitem, spItem item) {
         item_name->setString(item->get_name());
         item_desc->setString(item->description);
 
         item_sell_btn->setVisible(true);
+        item_sell_btn->addTouchEventListener([click_sell_btn, nuitem](Ref* sender, ui::Widget::TouchEventType type){
+            if (type == ui::Widget::TouchEventType::ENDED)
+            {
+                nuitem->removeFromParent();
+                nuitem->button->removeFromParent();
+                click_sell_btn();
+            }
+        });
 
         //update listviews layout to account for different content height
         item_listview_description->requestDoLayout();
-
     };
 
     ItemData item_data = ItemData();
@@ -552,7 +554,7 @@ void GameDirector::switch_to_items_menu()
         ashen_mirror_lv2
     };
 
-    // for (spItem item : items) {
+    //for (spItem item : items) {
     for (spItem item : BUILDUP->items) {
         auto nuitem = NuItem::create(items_listview);
         nuitem->set_title(item->get_name());
@@ -565,10 +567,10 @@ void GameDirector::switch_to_items_menu()
         CCLOG("cost %f, beauty cost %s", cost, cost_str.c_str());
         nuitem->set_cost_lbl(cost_str);
 
-        nuitem->button->addTouchEventListener([item, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
+        nuitem->button->addTouchEventListener([item, nuitem, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                update_detail_panel_on_touch(item);
+                update_detail_panel_on_touch(nuitem, item);
             }
         });
     };
