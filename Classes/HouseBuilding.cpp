@@ -645,6 +645,19 @@ void Buildup::post_update()
     auto& allocator = doc.GetAllocator();
     doc.AddMember(key, value, allocator);
 
+
+    //build last_login, overriding old vars
+    time_t from_file = (time_t)DataManager::get_int_from_data(Beatup::last_login_key);
+    key = rjValue(rapidjson::kStringType);
+    key.SetString("last_login");
+    value = rjValue();
+    value.SetInt(from_file);
+
+    cocos2d::timezone tz = cocos2d::timezone();
+
+    doc.AddMember(key, value, allocator);
+
+
     //write out the json string
     rapidjson::StringBuffer buffer;
     rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);

@@ -199,7 +199,6 @@ void Beatup::set_last_login()
     std::chrono::time_point<std::chrono::system_clock> time_is_now = std::chrono::system_clock::now();
     time_t rendered = std::chrono::system_clock::to_time_t(time_is_now);
 
-    //i assume this locallizes it
     struct tm* a_given_time = std::localtime(&rendered);
     time_t made_time = std::mktime(a_given_time);
 
