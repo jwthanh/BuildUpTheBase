@@ -84,14 +84,14 @@
                   <AbstractNodeData Name="item_listview_description" ActionTag="-1644992312" Tag="12" IconVisible="False" LeftMargin="12.7642" RightMargin="22.6451" TopMargin="72.5739" BottomMargin="137.8581" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
                     <Size X="373.5995" Y="179.5765" />
                     <Children>
-                      <AbstractNodeData Name="item_description" ActionTag="-390290598" Tag="9" IconVisible="False" RightMargin="-1069.4005" BottomMargin="79.5765" FontSize="16" LabelText="Item details, maybe going into how much it costs, or what it does and where its from.&#xA;&#xA;I'm thinking it'll have a quality, from poor to rare that'll affect the base cost, and then the base cost is dependant on the level.&#xA;&#xA;The level would be increased with appeasements or something, so you're always spending more on it and getting more back." OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="1443.0000" Y="100.0000" />
+                      <AbstractNodeData Name="item_description" ActionTag="-390290598" Tag="9" IconVisible="False" RightMargin="-205.4005" BottomMargin="79.5765" FontSize="16" LabelText="Item's description goes here.&#xA;&#xA;It can be several lines long, like totally wildly long.&#xA;&#xA;It'll be neat to see how this works out." OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="579.0000" Y="100.0000" />
                         <AnchorPoint ScaleY="1.0000" />
                         <Position Y="179.5765" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition Y="1.0000" />
-                        <PreSize X="3.8624" Y="0.5569" />
+                        <PreSize X="1.5498" Y="0.5569" />
                         <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                         <OutlineColor A="255" R="26" G="26" B="26" />
                         <ShadowColor A="255" R="110" G="110" B="110" />

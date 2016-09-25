@@ -513,19 +513,29 @@ void GameDirector::switch_to_items_menu()
     item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
     set_aliasing(item_sell_btn);
 
-    auto click_sell_btn = [panel, item_name, item_desc, item_sell_btn, item_listview_description](){
-        item_name->setString("default name text");
-        item_desc->setString("default desc text");
+    auto reset_item_detail_panel = [panel, item_name, item_desc, item_sell_btn, item_listview_description](){
+        item_name->setString("Item Details");
+        const char* raw_description = R"foo(
+Collect Items at The Dump with the help of Undead scavengers
+
+This screen will show you more information about them.
+
+You're able to sell them, and we're planning to have things like people who want items, appeasing gods, improving chances of getting better loot, and even equipping items in slots for new abilities.
+)foo";
+        auto default_description = raw_description;
+        item_desc->setString(default_description);
         item_sell_btn->setVisible(false);
     };
 
+    reset_item_detail_panel();
 
-    auto update_detail_panel_on_touch = [panel, item_name, item_desc, item_sell_btn, item_listview_description, click_sell_btn](NuItem* nuitem, spItem item) {
+
+    auto update_detail_panel_on_touch = [panel, item_name, item_desc, item_sell_btn, item_listview_description, reset_item_detail_panel](NuItem* nuitem, spItem item) {
         item_name->setString(item->get_name());
         item_desc->setString(item->description);
 
         item_sell_btn->setVisible(true);
-        item_sell_btn->addTouchEventListener([click_sell_btn, nuitem, item](Ref* sender, ui::Widget::TouchEventType type){
+        item_sell_btn->addTouchEventListener([reset_item_detail_panel, nuitem, item](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 nuitem->removeFromParent();
@@ -534,7 +544,7 @@ void GameDirector::switch_to_items_menu()
 
                 BEATUP->add_total_coin(item->get_effective_cost());
 
-                click_sell_btn();
+                reset_item_detail_panel();
             }
         });
 
