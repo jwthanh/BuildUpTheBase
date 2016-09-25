@@ -100,24 +100,34 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // auto console = director->getConsole();
     // console->listenOnTCP(1234);
 
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    Vec2 center_pos = Vec2(
+        origin.x + visibleSize.width / 2.0f,
+        origin.y + visibleSize.height / 2.0f
+    );
+
     Scene* loading_scene = Scene::create();
+    Sprite* loading_bg = Sprite::create("loading/loading.png");
+    loading_scene->addChild(loading_bg);
+
+    loading_bg->setPosition(center_pos);
+    loading_bg->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    loading_bg->getTexture()->setAliasTexParameters();
+    loading_bg->setScale(16.0f);
+
+
     auto load_cb = [this, loading_scene]()
     {
-        auto lbl = Label::createWithTTF("LOADING...", TITLE_FONT, 24);
-        lbl->runAction(Spawn::createWithTwoActions(
-            JumpBy::create(2.0f, Vec2(200, 300), 200, 10),
-            ScaleTo::create(2.0f, 10)
-            ));
-        lbl->setPosition(300, 300);
-        loading_scene->addChild(lbl);
 
         std::function<void(float)> load_func = [this, loading_scene](float){
-            CCLOG("preloading");
+            CCLOG("preloading...");
             this->preload_all();
-            CCLOG("done preloading");
+            CCLOG("...done preloading");
 
             Scene* scene = Scene::create();
             scene->setName("root_scene");
+
             HarvestScene* harvest_scene = HarvestScene::create();
             harvest_scene->setName("HarvestScene");
 
