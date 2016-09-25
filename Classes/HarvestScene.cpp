@@ -463,27 +463,26 @@ void BaseScene::create_info_panel()
     this->addChild(arena_kill_panel);
     ui::Text* arena_kill_lbl = dynamic_cast<ui::Text*>(arena_kill_panel->getChildByName("arena_kill_lbl"));
 
-    auto update_arena_kill_display = [this, arena_kill_panel, arena_kill_lbl](float dt){
-        if (BUILDUP->get_target_building()->name == "The Arena") {
+    auto update_info_display = [this, arena_kill_panel, arena_kill_lbl](float dt){
+        auto target_building = BUILDUP->get_target_building();
+        if (target_building->name == "The Arena") {
             arena_kill_panel->setVisible(true);
             res_count_t kills = (res_count_t)GameLogic::getInstance()->get_total_kills(); //comes through as int though
             arena_kill_lbl->setString("Kills: "+beautify_double(kills));
-        } else if (BUILDUP->get_target_building()->name == "The Workshop") {
+        } else if (target_building->name == "The Workshop") {
             arena_kill_panel->setVisible(true);
-            if (this->target_recipe != NULL)
-            {
+            if (this->target_recipe != NULL) {
                 arena_kill_lbl->setString(this->target_recipe->name);
             }
-            else
-            {
+            else {
                 arena_kill_lbl->setString("Choose a recipe");
             }
         } else {
             arena_kill_panel->setVisible(false);
         }
     };
-    arena_kill_panel->schedule(update_arena_kill_display, LONG_DELAY, "update_arena_kill_display");
-    update_arena_kill_display(0);
+    arena_kill_panel->schedule(update_info_display, AVERAGE_DELAY, "update_info_display");
+    update_info_display(0);
 
 
     ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("building_info_panel"));
