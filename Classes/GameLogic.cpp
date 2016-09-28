@@ -280,6 +280,9 @@ void GameLogic::save_all()
         bldg_serializer.serialize();
     };
 
+    auto item_serializer = ItemSerializer("alpha_items.json");
+    item_serializer.serialize();
+
     //save coins
     DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());
 

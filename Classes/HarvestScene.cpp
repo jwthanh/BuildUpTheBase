@@ -106,6 +106,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_S)
     {
+        GameLogic::save_all();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_T)
     {

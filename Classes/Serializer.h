@@ -70,4 +70,25 @@ class BuildingSerializer : public BaseSerializer
         virtual rjValue& _get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator);
 };
 
+/*
+ * since Items are unique, like you can't have 1000+ copies 
+ * of an Item, we serialize each one and then write it to file
+ * in a list, instead of pulling it out by key like the Buildings
+ */
+class ItemSerializer : public BaseSerializer
+{
+    public:
+        ItemSerializer(std::string filename);
+
+        void serialize() override;
+        void load() override;
+
+        void serialize_item(spItem item);
+        void load_item(rjValue& item_value);
+
+    private:
+        virtual void _add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator) override;
+        virtual rjValue& _get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator) override;
+};
+
 #endif

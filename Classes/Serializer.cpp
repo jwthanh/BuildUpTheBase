@@ -10,6 +10,8 @@
 #include "HouseBuilding.h"
 
 #include "Technology.h"
+#include "GameLogic.h"
+#include "cocos2d.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -339,3 +341,48 @@ rjValue& BuildingSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocume
     }
     return doc[building->name.c_str()][key];
 };
+
+ItemSerializer::ItemSerializer(std::string filename)
+    : BaseSerializer(filename)
+{
+}
+
+void ItemSerializer::serialize()
+{
+    for (spItem item : BUILDUP->items)
+    {
+        
+    }
+}
+
+void ItemSerializer::load()
+{
+    auto doc = this->get_document();
+    if (doc.IsArray())
+    {
+        CCLOG("found an array of items for Items, as expected");
+    }
+    else
+    {
+        CCLOG("item doc is not an array");
+    }
+}
+
+void ItemSerializer::serialize_item(spItem item)
+{
+}
+
+void ItemSerializer::load_item(rjValue& item_value)
+{
+}
+
+void ItemSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
+{
+}
+
+rjValue& ItemSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
+{
+    CCLOG("WARNING THIS SHOULD NOT BE CALLED");
+    auto temp = new rjValue();
+    return *temp;
+}
