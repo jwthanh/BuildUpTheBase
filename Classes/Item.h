@@ -36,4 +36,16 @@ class Item : public Nameable
 
 };
 
+const std::map<RarityType, float> ITEM_RARITY_MODIFIER = {
+    { RarityType::Poor, 0.85f },
+    { RarityType::Normal, 1.0f },
+    { RarityType::Rare, 1.15f }
+};
+
+const std::map<RarityType, std::string> ITEM_RARITY_STRINGS = {
+    { RarityType::Poor, "Poor" },
+    { RarityType::Normal, "Norm" },
+    { RarityType::Rare, "Rare" }
+};
+
 #endif

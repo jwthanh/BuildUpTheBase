@@ -44,7 +44,12 @@ rjDocument FileIO::open_json(std::string& json_path, bool builtin_path)
     if (jsonBuffer != "")
     {
         jsonDoc.Parse(jsonBuffer.c_str());
-        CC_ASSERT(jsonDoc.IsObject() && "needs to be a valid json");
+        bool is_valid = jsonDoc.IsObject() || jsonDoc.IsArray();
+        if (!is_valid)
+        {
+            CCLOG("This json file isn't an array or object '%s'", jsonBuffer);
+        }
+        CC_ASSERT(is_valid && "needs to be a valid json");
     }
     else
     {
@@ -89,17 +94,31 @@ void FileIO::save_json(std::string& json_path, rapidjson::GenericDocument<rapidj
 
         auto& allocator = document.GetAllocator();
 
-        //looking through existing json values, not adding existing duplicates
-        for (auto itr = existing.MemberBegin(); itr != existing.MemberEnd(); ++itr)
+        if (existing.IsObject())
         {
-            auto matches_new_member = document.FindMember(itr->name);
-            if (matches_new_member != document.MemberEnd())
+            //looking through existing json values, not adding existing duplicates
+            for (auto itr = existing.MemberBegin(); itr != existing.MemberEnd(); ++itr)
             {
-                CCLOG("found existing key, not re-adding '%s' to the saved document again", itr->name.GetString());
-                continue;
+                auto matches_new_member = document.FindMember(itr->name);
+                if (matches_new_member != document.MemberEnd())
+                {
+                    //CCLOG("found existing key, not re-adding '%s' to the saved document again", itr->name.GetString());
+                    continue;
+                }
+                document.AddMember(itr->name, itr->value, allocator);
+            };
+
+        }
+        //appends document as an array, NOTE empties existing data first
+        else if (existing.IsArray())
+        {
+            existing.Erase(existing.Begin(), existing.End());
+            for (auto itr = existing.Begin(); itr != existing.End(); ++itr)
+            {
+                document.PushBack(*itr, allocator);
+                
             }
-            document.AddMember(itr->name, itr->value, allocator);
-        };
+        }
     }
 
     rapidjson::StringBuffer buffer;

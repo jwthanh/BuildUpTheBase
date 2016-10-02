@@ -40,6 +40,7 @@
 #include "Clock.h"
 #include <json/stringbuffer.h>
 #include <json/writer.h>
+#include "Item.h"
 
 USING_NS_CC;
 
@@ -53,7 +54,24 @@ Buildup::Buildup()
     this->fighter = std::make_shared<Fighter>("Jimothy2");
     this->fighter->attrs->health->set_vals(100);
 
-    this->items = {};
+    // this->items = {};
+
+    ItemData item_data = ItemData();
+    spItem dagger = item_data.get_item("dagger");
+    dagger->rarity = RarityType::Poor;
+    spItem homunc = item_data.get_item("homunculus");
+    homunc->rarity = RarityType::Rare;
+    spItem ashen_mirror = item_data.get_item("ashen_mirror");
+    spItem ashen_mirror_lv2 = item_data.get_item("ashen_mirror");
+    ashen_mirror_lv2->level = 2.0f;
+
+    this->items = {
+        dagger,
+        homunc,
+        ashen_mirror,
+        ashen_mirror_lv2
+    };
+
 
     this->player = NULL;
 };

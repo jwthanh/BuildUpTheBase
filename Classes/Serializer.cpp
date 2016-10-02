@@ -5,13 +5,15 @@
 #include <json/stringbuffer.h>
 #include <json/writer.h>
 
+#include "cocos2d.h"
+
 #include "FileOperation.h"
 
 #include "HouseBuilding.h"
 
 #include "Technology.h"
 #include "GameLogic.h"
-#include "cocos2d.h"
+#include "Item.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -349,10 +351,40 @@ ItemSerializer::ItemSerializer(std::string filename)
 
 void ItemSerializer::serialize()
 {
+
+    //NOTE this nukes the existing items array
+    auto doc = this->get_document();
+    auto allocator = doc.GetAllocator();
+    doc.SetArray();
+    auto build_member = [&allocator](rjValue& row, std::string key, std::string value){
+
+        rjValue rj_key = rjValue();
+        auto key_str = key.c_str();
+        auto key_len = key.length();
+        rj_key.SetString(key_str, key_len, allocator);
+
+        rjValue rj_value = rjValue();
+        auto value_str = value.c_str();
+        auto value_len = value.length();
+        rj_value.SetString(value_str, value_len, allocator);
+
+
+        row.AddMember(rj_key.Move(), rj_value.Move(), allocator);
+    };
+
     for (spItem item : BUILDUP->items)
     {
+        rjValue row = rjValue();
+        row.SetObject();
         
+        build_member(row, "name", item->name);
+        build_member(row, "rarity", ITEM_RARITY_STRINGS.at(item->rarity));
+        build_member(row, "level", std::to_string(item->level));
+
+        doc.PushBack(row, allocator);
     }
+
+    this->save_document(doc);
 }
 
 void ItemSerializer::load()
