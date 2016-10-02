@@ -71,7 +71,7 @@ class ItemData : public BaseData
 
         std::string getter(std::string key) override;
 
-        spItem build_item(rjValue* recipe_data);
+        spItem build_item(std::string type_name, rjValue* recipe_data);
         spItem get_item(std::string item_id);
 
 };

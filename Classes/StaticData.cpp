@@ -164,7 +164,7 @@ std::string ItemData::getter(std::string key)
     return "unimplemented";
 };
 
-spItem ItemData::build_item(rjValue* item_data)
+spItem ItemData::build_item(std::string type_name, rjValue* item_data)
 {
     auto& item_ref = *item_data;
 
@@ -174,7 +174,7 @@ spItem ItemData::build_item(rjValue* item_data)
     auto base_cost = item_ref["base_cost"].GetDouble();
     auto img_path = item_ref["img_path"].GetString();
 
-    auto item = std::make_shared<Item>(name, summary, description, base_cost, RarityType::Normal, 1);
+    auto item = std::make_shared<Item>(type_name, RarityType::Normal, 1);
     item->img_path = img_path;
     return item;
 };
@@ -186,5 +186,5 @@ spItem ItemData::get_item(std::string item_id)
     auto body = &jsonDoc["items"];
     auto item_info = &(*body)[item_id.c_str()];
 
-    return this->build_item(item_info);
+    return this->build_item(item_id, item_info);
 };

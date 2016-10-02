@@ -22,12 +22,14 @@ class Item : public Nameable
         RarityType rarity; //variation on item's base price
         res_count_t level; //affects base price
 
+        std::string type_name; //a Dagger is dagger, Ashen Mirror is ashen_mirror. used to pull data from static and save file
+
         std::string summary; //goes into nuitem
         std::string description; //goes into full body text
 
         std::string img_path; //full relative image path
 
-        Item(std::string name, std::string summary, std::string description, res_count_t base_cost, RarityType rarity, res_count_t level);
+        Item(std::string type_name, RarityType rarity, res_count_t level); //builds static data off type_name in ItemData
 
         //base_cost doubled per level, multiplied by rarity, (cost * (2**level) * rarity)
         res_count_t get_effective_cost();

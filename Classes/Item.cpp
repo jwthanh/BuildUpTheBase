@@ -2,8 +2,8 @@
 #include "Util.h"
 
 
-Item::Item(std::string name, std::string summary, std::string description, res_count_t base_cost, RarityType rarity, res_count_t level)
-    : Nameable(name), rarity(rarity), level(level), _base_cost(base_cost), summary(summary), description(description)
+Item::Item(std::string type_name,  RarityType rarity, res_count_t level)
+    : type_name(type_name), rarity(rarity), level(level), Nameable("Unnamed")
 {
 };
 

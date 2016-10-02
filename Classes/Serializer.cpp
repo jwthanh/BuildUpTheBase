@@ -390,7 +390,7 @@ void ItemSerializer::serialize()
         rjValue row = rjValue();
         row.SetObject();
         
-        build_str_member(row, "name", item->name);
+        build_str_member(row, "type_name", item->type_name);
         build_str_member(row, "rarity", ITEM_RARITY_STRINGS.at(item->rarity));
         build_dbl_member(row, "level", item->level);
 
@@ -418,15 +418,15 @@ void ItemSerializer::load()
                 rarity = (*result_it).first;
             }
 
-            spItem item = std::make_shared<Item>(data["name"].GetString(), "summary", "desc", 10.0, rarity, data["level"].GetDouble());
+            spItem item = std::make_shared<Item>(data["type_name"].GetString(), rarity, data["level"].GetDouble());
             BUILDUP->items.push_back(item);
         }
         CCLOG("found an array of items for Items, as expected");
     }
     else
     {
-        CCLOG("item doc is not an array");
-        assert(false && "item json is not an array");
+        CCLOG("item doc is not an array, so we're assuming it doesnt exist");
+        //assert(false && "item json is not an array");
     }
 }
 
