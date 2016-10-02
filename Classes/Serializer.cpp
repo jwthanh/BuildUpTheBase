@@ -356,7 +356,7 @@ void ItemSerializer::serialize()
     auto doc = this->get_document();
     auto allocator = doc.GetAllocator();
     doc.SetArray();
-    auto build_member = [&allocator](rjValue& row, std::string key, std::string value){
+    auto build_str_member = [&allocator](rjValue& row, std::string key, std::string value){
 
         rjValue rj_key = rjValue();
         auto key_str = key.c_str();
@@ -371,15 +371,28 @@ void ItemSerializer::serialize()
 
         row.AddMember(rj_key.Move(), rj_value.Move(), allocator);
     };
+    auto build_dbl_member = [&allocator](rjValue& row, std::string key, res_count_t value){
+
+        rjValue rj_key = rjValue();
+        auto key_str = key.c_str();
+        auto key_len = key.length();
+        rj_key.SetString(key_str, key_len, allocator);
+
+        rjValue rj_value = rjValue();
+        rj_value.SetDouble(value);
+
+
+        row.AddMember(rj_key.Move(), rj_value.Move(), allocator);
+    };
 
     for (spItem item : BUILDUP->items)
     {
         rjValue row = rjValue();
         row.SetObject();
         
-        build_member(row, "name", item->name);
-        build_member(row, "rarity", ITEM_RARITY_STRINGS.at(item->rarity));
-        build_member(row, "level", std::to_string(item->level));
+        build_str_member(row, "name", item->name);
+        build_str_member(row, "rarity", ITEM_RARITY_STRINGS.at(item->rarity));
+        build_dbl_member(row, "level", item->level);
 
         doc.PushBack(row, allocator);
     }
@@ -389,14 +402,31 @@ void ItemSerializer::serialize()
 
 void ItemSerializer::load()
 {
+    BUILDUP->items = {};
     auto doc = this->get_document();
     if (doc.IsArray())
     {
+        for (auto it = doc.Begin(); it != doc.End(); it++)
+        {
+            rjValue& data = *it;
+            std::string rarity_str = data["rarity"].GetString();
+
+            auto result_it = std::find_if(ITEM_RARITY_STRINGS.begin(), ITEM_RARITY_STRINGS.end(), [rarity_str](std::pair<RarityType, std::string> pair){return pair.second == rarity_str; });
+            RarityType rarity = RarityType::Unset;
+            if (result_it != ITEM_RARITY_STRINGS.end())
+            {
+                rarity = (*result_it).first;
+            }
+
+            spItem item = std::make_shared<Item>(data["name"].GetString(), "summary", "desc", 10.0, rarity, data["level"].GetDouble());
+            BUILDUP->items.push_back(item);
+        }
         CCLOG("found an array of items for Items, as expected");
     }
     else
     {
         CCLOG("item doc is not an array");
+        assert(false && "item json is not an array");
     }
 }
 

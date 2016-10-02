@@ -303,6 +303,10 @@ void GameLogic::load_all()
         auto bldg_serializer = BuildingSerializer("test_building.json", building);
         bldg_serializer.load();
     };
+
+    auto item_serializer = ItemSerializer("alpha_items.json");
+    item_serializer.load();
+
     BEATUP->_total_coins = DataManager::get_double_from_data(Beatup::total_coin_key);
     BUILDUP->city->name = DataManager::get_string_from_data("city_name", "");
 };

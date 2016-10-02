@@ -112,7 +112,10 @@ void FileIO::save_json(std::string& json_path, rapidjson::GenericDocument<rapidj
         //appends document as an array, NOTE empties existing data first
         else if (existing.IsArray())
         {
-            existing.Erase(existing.Begin(), existing.End());
+            if (existing.Empty() == false)
+            {
+                existing.Erase(existing.Begin(), existing.End());
+            }
             for (auto itr = existing.Begin(); itr != existing.End(); ++itr)
             {
                 document.PushBack(*itr, allocator);

@@ -7,6 +7,7 @@
 
 enum class RarityType
 {
+    Unset = -1,
     Poor = 0,
     Normal = 1,
     Rare = 2
