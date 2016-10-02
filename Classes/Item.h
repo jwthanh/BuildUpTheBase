@@ -37,6 +37,8 @@ class Item : public Nameable
         //name, including rarity and level
         std::string get_name();
 
+        friend class ItemData;
+
 };
 
 const std::map<RarityType, float> ITEM_RARITY_MODIFIER = {

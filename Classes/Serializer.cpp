@@ -14,6 +14,7 @@
 #include "Technology.h"
 #include "GameLogic.h"
 #include "Item.h"
+#include "StaticData.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -409,7 +410,10 @@ void ItemSerializer::load()
         for (auto it = doc.Begin(); it != doc.End(); it++)
         {
             rjValue& data = *it;
+
+            std::string type_name = data["type_name"].GetString();
             std::string rarity_str = data["rarity"].GetString();
+            res_count_t item_level = data["level"].GetDouble();
 
             auto result_it = std::find_if(ITEM_RARITY_STRINGS.begin(), ITEM_RARITY_STRINGS.end(), [rarity_str](std::pair<RarityType, std::string> pair){return pair.second == rarity_str; });
             RarityType rarity = RarityType::Unset;
@@ -418,7 +422,9 @@ void ItemSerializer::load()
                 rarity = (*result_it).first;
             }
 
-            spItem item = std::make_shared<Item>(data["type_name"].GetString(), rarity, data["level"].GetDouble());
+            spItem item = ItemData().get_item(type_name);
+            item->rarity = rarity;
+            item->level = item_level;
             BUILDUP->items.push_back(item);
         }
         CCLOG("found an array of items for Items, as expected");

@@ -174,8 +174,15 @@ spItem ItemData::build_item(std::string type_name, rjValue* item_data)
     auto base_cost = item_ref["base_cost"].GetDouble();
     auto img_path = item_ref["img_path"].GetString();
 
+    //create item with default dynamic stats
     auto item = std::make_shared<Item>(type_name, RarityType::Normal, 1);
+
+    item->name = name;
+    item->summary = summary;
+    item->description = description;
+    item->_base_cost = base_cost;
     item->img_path = img_path;
+
     return item;
 };
 
