@@ -154,21 +154,30 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
             // time it happens, it requires a built tab
             if (tab_type == TabManager::TabTypes::BuildingTab)
             {
+                ssize_t index = 123456; //sentinel
                 auto building_upgrade_sidebar = this->building_listviews->at(target_building->name);
-                int index = 0;
                 for (Node* item : building_upgrade_sidebar->getChildren())
                 {
                     auto nuitem = dynamic_cast<ui::Button*>(item);
-                    if (nuitem){
-                        index++;
+                    if (nuitem)
+                    {
+                        //assume enabled means buyable
                         if (nuitem->isEnabled())
                         {
-                            break;
+                            index = building_upgrade_sidebar->getIndex(nuitem);
                         }
                     }
                 }
-                building_upgrade_sidebar->jumpToItem(index, Vec2::ONE, Vec2::ONE);
+                if (index != 123456)
+                {
+                    //dont bounce, but dont reenable bounce if it wasn't in the first place
+                    bool orig_bounce = building_upgrade_sidebar->isBounceEnabled();
+                    building_upgrade_sidebar->setBounceEnabled(false);
 
+                    building_upgrade_sidebar->jumpToItem(index, Vec2::ONE, Vec2::ONE);
+
+                    building_upgrade_sidebar->setBounceEnabled(orig_bounce);
+                }
             }
         };
 
