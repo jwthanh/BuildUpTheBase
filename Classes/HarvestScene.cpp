@@ -35,6 +35,7 @@
 #include "Recipe.h"
 #include "Technology.h"
 #include "magic_particles/_core/mp.h"
+#include "magic_particles/mp_cocos.h"
 
 USING_NS_CC;
 
@@ -126,22 +127,22 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         // this->popup_panel->animate_open();
-	MP_Manager& MP=MP_Manager::GetInstance();
+        MP_Manager& MP = MP_Manager::GetInstance();
 
-    MP.LoadAllEmitters();
+        MP.LoadAllEmitters();
 
-	
-	k_emitter=0;
-	HM_EMITTER hmEmitter=MP.GetFirstEmitter();
-	while (hmEmitter)
-	{
-		m_emitter[k_emitter]=hmEmitter;
-		k_emitter++;
-		hmEmitter=MP.GetNextEmitter(hmEmitter);
-	}
 
-	t_emitter=0;
-	SelectEmitter(t_emitter);
+        k_emitter = 0;
+        HM_EMITTER hmEmitter = MP.GetFirstEmitter();
+        while (hmEmitter)
+        {
+            m_emitter[k_emitter] = hmEmitter;
+            k_emitter++;
+            hmEmitter = MP.GetNextEmitter(hmEmitter);
+        }
+
+        t_emitter = 0;
+        SelectEmitter(t_emitter);
     }
 }
 
