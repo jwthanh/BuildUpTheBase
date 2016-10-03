@@ -15,6 +15,7 @@
 	#endif
 #endif
 
+#pragma warning( disable : 4244)
 // eng: loading from memory
 // rus: загрузка из памяти
 extern unsigned char* LoadTextureFromMemory(const unsigned char* buffer, int len, int* width, int* height);

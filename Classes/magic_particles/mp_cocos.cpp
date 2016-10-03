@@ -59,7 +59,10 @@ void MP_Emitter_Cocos::SetPosition(MP_POSITION& position)
 
 MP_Device_Cocos::MP_Device_Cocos(int width, int height) : MP_Device_WRAP(width, height)
 {
+    #ifdef MAGIC_3D
 	camera=NULL;
+    #endif
+
 }
 
 MP_Device_Cocos::~MP_Device_Cocos()

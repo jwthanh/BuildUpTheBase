@@ -5,12 +5,12 @@
 // Author: Sedov Alexey
 //-----------------------------------------------------------------------------
 
+#include "magic_particles\opengl\mp_wrap.h"
 
 #include <math.h>
 #include <errno.h>
-#include "magic.h"
-#include "magic_particles/platform_cocos.h"
-#include "magic_particles/opengl/mp_wrap.h"
+
+#pragma warning( disable : 4244)
 
 #if defined(_WINDOWS) || defined(WINAPI_FAMILY)
 #pragma warning ( disable : 4996)
