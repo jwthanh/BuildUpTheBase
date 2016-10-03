@@ -10,6 +10,15 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="magic_particles">
+      <UniqueIdentifier>{405f4032-fd7f-4d3d-9fae-850af12f93f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="magic_particles\_core">
+      <UniqueIdentifier>{958df401-3867-47cd-b9e9-4059cf68549f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="magic_particles\opengl">
+      <UniqueIdentifier>{68046623-7b48-43b9-af7f-2551f418d7b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,6 +62,30 @@
     <ClCompile Include="..\Classes\Modal.cpp" />
     <ClCompile Include="..\Classes\Logging.cpp" />
     <ClCompile Include="..\Classes\Item.cpp" />
+    <ClCompile Include="..\Classes\magic_particles\MagicEmitter.cpp">
+      <Filter>magic_particles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\magic_particles\MagicScene.cpp">
+      <Filter>magic_particles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\magic_particles\mp_cocos.cpp">
+      <Filter>magic_particles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\magic_particles\platform_cocos.cpp">
+      <Filter>magic_particles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\magic_particles\_core\mp.cpp">
+      <Filter>magic_particles\_core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\magic_particles\_core\platform_win_posix.cpp">
+      <Filter>magic_particles\_core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\magic_particles\opengl\image_loader.cpp">
+      <Filter>magic_particles\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\magic_particles\opengl\mp_wrap.cpp">
+      <Filter>magic_particles\opengl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -104,6 +137,48 @@
     <ClInclude Include="..\Classes\external\easylogging.h" />
     <ClInclude Include="..\Classes\Logging.h" />
     <ClInclude Include="..\Classes\Item.h" />
+    <ClInclude Include="..\Classes\magic_particles\MagicEmitter.h">
+      <Filter>magic_particles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\MagicScene.h">
+      <Filter>magic_particles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\mp_cocos.h">
+      <Filter>magic_particles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\platform_cocos.h">
+      <Filter>magic_particles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\_core\magic.h">
+      <Filter>magic_particles\_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\_core\mp.h">
+      <Filter>magic_particles\_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\_core\platform_win_posix.h">
+      <Filter>magic_particles\_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\opengl\mp_config.h">
+      <Filter>magic_particles\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\opengl\mp_wrap.h">
+      <Filter>magic_particles\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\opengl\stb_image.h">
+      <Filter>magic_particles\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\opengl\glcorearb.h">
+      <Filter>magic_particles\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\opengl\glext.h">
+      <Filter>magic_particles\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\opengl\glxext.h">
+      <Filter>magic_particles\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\magic_particles\opengl\wglext.h">
+      <Filter>magic_particles\opengl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
