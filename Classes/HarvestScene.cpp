@@ -253,11 +253,17 @@ void BaseScene::create_goal_loadingbar()
             auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
             if (harvestable)
             {
-                auto orig_percent = harvester_loading_bar->getPercent();
-                auto new_percent = this->harvestable->get_click_ratio()*100.0;
+                auto orig_percent = std::floor(harvester_loading_bar->getPercent());
+                auto new_percent = std::floor(this->harvestable->get_click_ratio()*100.0);
                 if (orig_percent != new_percent)
                 {
                     harvester_loading_bar->setPercent(new_percent);
+
+                    auto particle = MagicEmitter::create("Sparks");
+                    auto bar_size = dynamic_cast<ui::Scale9Sprite*>(harvester_loading_bar->getVirtualRenderer())->getSprite()->getContentSize();
+                    auto pos = harvester_progress_panel->convertToWorldSpace(harvester_loading_bar->getPosition());
+                    particle->setPosition(pos.x+bar_size.width, pos.y+bar_size.height/2);
+                    this->addChild(particle);
                 }
             }
         };
