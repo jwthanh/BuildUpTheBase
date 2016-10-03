@@ -129,9 +129,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // this->popup_panel->animate_open();
         MP_Manager& MP = MP_Manager::GetInstance();
 
-        MP.LoadAllEmitters();
-
-
         k_emitter = 0;
         HM_EMITTER hmEmitter = MP.GetFirstEmitter();
         while (hmEmitter)

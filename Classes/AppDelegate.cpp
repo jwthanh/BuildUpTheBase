@@ -17,10 +17,20 @@ INITIALIZE_EASYLOGGINGPP
 
 
 AppDelegate::AppDelegate() {
+    this->device = NULL;
 }
 
 AppDelegate::~AppDelegate()
 {
+	if (device)
+	{
+		device->Destroy();
+		delete device;
+		device=NULL;
+	}
+
+	MP_Manager& MP=MP_Manager::GetInstance();
+	MP.Destroy();
 }
 
 void AppDelegate::initGLContextAttrs()
