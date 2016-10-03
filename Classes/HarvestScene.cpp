@@ -34,6 +34,7 @@
 #include "Logging.h"
 #include "Recipe.h"
 #include "Technology.h"
+#include "magic_particles/_core/mp.h"
 
 USING_NS_CC;
 
@@ -124,7 +125,23 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        this->popup_panel->animate_open();
+        // this->popup_panel->animate_open();
+	MP_Manager& MP=MP_Manager::GetInstance();
+
+    MP.LoadAllEmitters();
+
+	
+	k_emitter=0;
+	HM_EMITTER hmEmitter=MP.GetFirstEmitter();
+	while (hmEmitter)
+	{
+		m_emitter[k_emitter]=hmEmitter;
+		k_emitter++;
+		hmEmitter=MP.GetNextEmitter(hmEmitter);
+	}
+
+	t_emitter=0;
+	SelectEmitter(t_emitter);
     }
 }
 
@@ -440,6 +457,28 @@ void BaseScene::create_popup_panel()
     this->popup_panel->set_visible(false);
     this->addChild(panel_node);
 };
+
+void BaseScene::SelectEmitter(int emitter)
+{
+	if (cur_node)
+		cur_node->removeFromParent();
+
+	HM_EMITTER hmEmitter=m_emitter[emitter];
+	cur_node=MagicEmitter::create(hmEmitter);
+
+	#ifdef MAGIC_3D
+	cur_node->setCameraMask((unsigned short) CameraFlag::USER1);
+	#endif
+
+    if (cur_node == NULL)
+    {
+        CCLOG("magic particle's cur_node is empty, potentially missing particle effect files");
+    }
+    else
+    {
+        addChild(cur_node);
+    }
+}
 
 Node* BaseScene::get_original_scene_from_editor()
 {
@@ -865,6 +904,8 @@ void BaseScene::create_shop_listview()
 bool HarvestScene::init()
 {
     BaseScene::init();
+
+	this->cur_node=NULL;
 
     this->target_recipe = NULL;
     this->create_recipe_lbl();
