@@ -471,38 +471,38 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="harvester_progress_panel" ActionTag="-1430244611" Tag="80" IconVisible="False" LeftMargin="400.9999" RightMargin="200.1855" TopMargin="143.0000" BottomMargin="458.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-            <Size X="358.8146" Y="39.0000" />
+          <AbstractNodeData Name="harvester_progress_panel" ActionTag="-1430244611" Tag="80" IconVisible="False" LeftMargin="399.9999" RightMargin="200.0001" TopMargin="143.0000" BottomMargin="458.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+            <Size X="360.0000" Y="39.0000" />
             <Children>
-              <AbstractNodeData Name="harvester_loadingbar" ActionTag="1083759761" Tag="81" IconVisible="False" LeftMargin="136.4400" RightMargin="6.3746" TopMargin="10.3520" BottomMargin="10.6480" ProgressInfo="100" ctype="LoadingBarObjectData">
+              <AbstractNodeData Name="harvester_loadingbar" ActionTag="1083759761" Tag="81" IconVisible="False" LeftMargin="136.4400" RightMargin="7.5600" TopMargin="10.3520" BottomMargin="10.6480" ProgressInfo="100" ctype="LoadingBarObjectData">
                 <Size X="216.0000" Y="18.0000" />
                 <AnchorPoint />
                 <Position X="136.4400" Y="10.6480" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.3803" Y="0.2730" />
-                <PreSize X="0.6020" Y="0.4615" />
+                <PrePosition X="0.3790" Y="0.2730" />
+                <PreSize X="0.6000" Y="0.4615" />
                 <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="harvester_progress_lbl" ActionTag="1421967100" Tag="82" IconVisible="False" LeftMargin="1.9588" RightMargin="206.8558" TopMargin="6.3925" BottomMargin="9.6075" IsCustomSize="True" FontSize="16" LabelText="Item find:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="harvester_progress_lbl" ActionTag="1421967100" Tag="82" IconVisible="False" LeftMargin="1.9588" RightMargin="208.0412" TopMargin="6.3925" BottomMargin="9.6075" IsCustomSize="True" FontSize="16" LabelText="Item find:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="150.0000" Y="23.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="1.9588" Y="21.1075" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0055" Y="0.5412" />
-                <PreSize X="0.4180" Y="0.5897" />
+                <PrePosition X="0.0054" Y="0.5412" />
+                <PreSize X="0.4167" Y="0.5897" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="10" G="10" B="10" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint />
-            <Position X="400.9999" Y="458.0000" />
+            <Position X="399.9999" Y="458.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4177" Y="0.7156" />
-            <PreSize X="0.3738" Y="0.0609" />
+            <PrePosition X="0.4167" Y="0.7156" />
+            <PreSize X="0.3750" Y="0.0609" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />

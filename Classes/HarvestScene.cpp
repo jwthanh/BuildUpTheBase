@@ -267,7 +267,6 @@ void BaseScene::create_goal_loadingbar()
                     auto converted_pos = harvester_progress_panel->convertToWorldSpace(pos);
                     auto x = converted_pos.x + bar_size.width*scale9_progbar_sprite->getScaleX();
                     auto y = converted_pos.y + bar_size.height / 2;
-                    CCLOG("x: %f", bar_size.width);
                     particle->setPosition(x, y);
 
                     this->addChild(particle);
