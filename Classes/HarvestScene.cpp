@@ -260,9 +260,16 @@ void BaseScene::create_goal_loadingbar()
                     harvester_loading_bar->setPercent(new_percent);
 
                     auto particle = MagicEmitter::create("Sparks");
-                    auto bar_size = dynamic_cast<ui::Scale9Sprite*>(harvester_loading_bar->getVirtualRenderer())->getSprite()->getContentSize();
-                    auto pos = harvester_progress_panel->convertToWorldSpace(harvester_loading_bar->getPosition());
-                    particle->setPosition(pos.x+bar_size.width, pos.y+bar_size.height/2);
+                    auto scale9_progbar_sprite = dynamic_cast<ui::Scale9Sprite*>(harvester_loading_bar->getVirtualRenderer());
+                    auto bar_size = scale9_progbar_sprite->getSprite()->getContentSize();
+
+                    auto pos = harvester_loading_bar->getPosition();
+                    auto converted_pos = harvester_progress_panel->convertToWorldSpace(pos);
+                    auto x = converted_pos.x + bar_size.width*scale9_progbar_sprite->getScaleX();
+                    auto y = converted_pos.y + bar_size.height / 2;
+                    CCLOG("x: %f", bar_size.width);
+                    particle->setPosition(x, y);
+
                     this->addChild(particle);
                 }
             }
