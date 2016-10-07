@@ -39,7 +39,8 @@ BaseModal::BaseModal(Node* parent)
     };
     close_panel->addTouchEventListener(cb);
 
-    parent->addChild(this->_node);
+    int modal_zindex = 9999;
+    parent->addChild(this->_node, modal_zindex);
 };
 
 void BaseModal::set_title(const std::string& title)
