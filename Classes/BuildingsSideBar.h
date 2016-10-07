@@ -38,6 +38,8 @@ class TabManager
     public:
         std::shared_ptr<Building> active_building;
 
+        //used for loading and saving last active tab, so dont change away from
+        //0, 1, 2, 3
         enum class TabTypes
         {
             ShopTab = 0,
