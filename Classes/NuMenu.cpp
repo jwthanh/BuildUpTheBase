@@ -514,9 +514,16 @@ void TargetRecipeNuItem::other_init(spRecipe recipe)
         if (harvest_scene)
         {
             harvest_scene->target_recipe = this->recipe;
-            CCLOG("target recipe changed to %s", this->recipe->name.c_str());
             harvest_scene->removeChildByName("harvestable");
 
+            auto arena_kill_panel = dynamic_cast<ui::Layout*>(harvest_scene->getChildByName("arena_kill_panel"));
+            auto particle = MagicEmitter::create("TargetRecipeChanged");
+
+            auto pos = arena_kill_panel->getPosition();
+            particle->setPosition(pos);
+
+            harvest_scene->addChild(particle);
+            // CCLOG("target recipe changed to %s", this->recipe->name.c_str());
         }
         else
         {
