@@ -541,9 +541,14 @@ void TargetRecipeNuItem::update_func(float dt)
     {
         //TODO change icon to disabled
         this->try_set_enable(false);
+        Color3B selected_color = {82, 148, 126}; //green
+        try_set_node_color(this->button, selected_color);
+
     }
     else {
         this->try_set_enable(true);
+        Color3B unselected_color = Color3B::WHITE;
+        try_set_node_color(this->button, unselected_color);
     }
 
     spRecipe recipe = this->recipe;
