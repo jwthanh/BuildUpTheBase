@@ -503,11 +503,11 @@ Node* BaseScene::get_original_scene_from_editor()
 
 struct cached_building_info_t
 {
-    res_count_t ing_count;
-    std::string ing_count_str;
+    res_count_t ing_count = -1.0;
+    std::string ing_count_str = "";
 
-    res_count_t storage_count;
-    std::string storage_str;
+    res_count_t storage_count = -1.0;
+    std::string storage_str = "";
 };
 
 void BaseScene::create_info_panel()
