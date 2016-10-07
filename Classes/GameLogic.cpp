@@ -13,6 +13,7 @@
 #include "HarvestScene.h"
 #include "Item.h"
 #include "StaticData.h"
+#include "BuildingsSideBar.h"
 
 USING_NS_CC;
 
@@ -286,8 +287,12 @@ void GameLogic::save_all()
     //save coins
     DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());
 
-    //save last targeted building
+    //save last targeted building and tab
     DataManager::set_string_from_data("target_building", BUILDUP->get_target_building()->name);
+    cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+    HarvestScene* harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+    auto sidebar = harvest_scene->sidebar;
+    DataManager::set_int_from_data("active_tab", (int)sidebar->tabs.active_tab);
 
     //set the last login time, set here and on load
     LOG(INFO) << "Marking last login";
@@ -313,10 +318,16 @@ void GameLogic::load_all()
     BEATUP->_total_coins = DataManager::get_double_from_data(Beatup::total_coin_key);
     BUILDUP->city->name = DataManager::get_string_from_data("city_name", "");
 
-    //save last targeted building
+    //load last targeted building and tab
     std::string target_building_name = DataManager::get_string_from_data("target_building", "The Farm");
     spBuilding building = BUILDUP->city->building_by_name(target_building_name);
     BUILDUP->set_target_building(building);
+
+    cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+    HarvestScene* harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+    auto sidebar = harvest_scene->sidebar;
+    TabManager::TabTypes tab_type = (TabManager::TabTypes)DataManager::get_int_from_data("active_tab", (int)TabManager::TabTypes::ShopTab);
+    sidebar->tabs.set_tab_active(tab_type, building);
 };
 
 void GameLogic::load_all_as_cheater()
