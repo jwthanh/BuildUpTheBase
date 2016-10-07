@@ -106,9 +106,6 @@ SideListView::SideListView(Node* parent, spBuilding current_target) : current_ta
 
     //prepress the shop button
     toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
-
-
-
 };
 
 ui::Button* SideListView::_create_button(std::string node_name)
@@ -147,6 +144,24 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
             ui::ListView* listview = listviews->at(target_building->name);
             listview->requestDoLayout();
             this->tabs.set_tab_active(tab_type, target_building);
+
+            std::map<std::string, std::string> name_map = {
+                {"The Farm", "Cook"},
+                {"The Arena", "Upgrade"},
+                {"The Underscape", "Blood Magic"},
+                {"The Marketplace", "Barter"},
+
+                {"The Dump", "Scavenge"},
+                {"The Workshop", "Craft"},
+                {"The Mine", "Tools"},
+                {"The Graveyard", "Necromancy"},
+                {"The Forest", "Explore"}
+            };
+
+            std::string default_str = "Detail";
+            std::string detail_str = map_get(name_map, target_building->name, default_str);
+            this->tab_detail_btn->setTitleText(detail_str);
+
 
             //jump to active building for this tab
             // FIXME because buttons aren't there the first time due to
