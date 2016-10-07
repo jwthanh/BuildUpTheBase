@@ -34,6 +34,8 @@
 #include "Logging.h"
 #include "Recipe.h"
 #include "Technology.h"
+#include "magic_particles/_core/mp.h"
+#include "magic_particles/mp_cocos.h"
 
 USING_NS_CC;
 
@@ -124,7 +126,20 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        this->popup_panel->animate_open();
+        // this->popup_panel->animate_open();
+        MP_Manager& MP = MP_Manager::GetInstance();
+
+        k_emitter = 0;
+        HM_EMITTER hmEmitter = MP.GetFirstEmitter();
+        while (hmEmitter)
+        {
+            m_emitter[k_emitter] = hmEmitter;
+            k_emitter++;
+            hmEmitter = MP.GetNextEmitter(hmEmitter);
+        }
+
+        t_emitter = 0;
+        SelectEmitter(t_emitter);
     }
 }
 
@@ -238,11 +253,23 @@ void BaseScene::create_goal_loadingbar()
             auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
             if (harvestable)
             {
-                auto orig_percent = harvester_loading_bar->getPercent();
-                auto new_percent = this->harvestable->get_click_ratio()*100.0;
+                auto orig_percent = std::floor(harvester_loading_bar->getPercent());
+                auto new_percent = std::floor(this->harvestable->get_click_ratio()*100.0);
                 if (orig_percent != new_percent)
                 {
                     harvester_loading_bar->setPercent(new_percent);
+
+                    auto particle = MagicEmitter::create("Sparks");
+                    auto scale9_progbar_sprite = dynamic_cast<ui::Scale9Sprite*>(harvester_loading_bar->getVirtualRenderer());
+                    auto bar_size = scale9_progbar_sprite->getSprite()->getContentSize();
+
+                    auto pos = harvester_loading_bar->getPosition();
+                    auto converted_pos = harvester_progress_panel->convertToWorldSpace(pos);
+                    auto x = converted_pos.x + bar_size.width*scale9_progbar_sprite->getScaleX();
+                    auto y = converted_pos.y + bar_size.height / 2;
+                    particle->setPosition(x, y);
+
+                    this->addChild(particle);
                 }
             }
         };
@@ -440,6 +467,28 @@ void BaseScene::create_popup_panel()
     this->popup_panel->set_visible(false);
     this->addChild(panel_node);
 };
+
+void BaseScene::SelectEmitter(int emitter)
+{
+	if (cur_node)
+		cur_node->removeFromParent();
+
+	HM_EMITTER hmEmitter=m_emitter[emitter];
+	cur_node=MagicEmitter::create(hmEmitter);
+
+	#ifdef MAGIC_3D
+	cur_node->setCameraMask((unsigned short) CameraFlag::USER1);
+	#endif
+
+    if (cur_node == NULL)
+    {
+        CCLOG("magic particle's cur_node is empty, potentially missing particle effect files");
+    }
+    else
+    {
+        addChild(cur_node);
+    }
+}
 
 Node* BaseScene::get_original_scene_from_editor()
 {
@@ -865,6 +914,8 @@ void BaseScene::create_shop_listview()
 bool HarvestScene::init()
 {
     BaseScene::init();
+
+	this->cur_node=NULL;
 
     this->target_recipe = NULL;
     this->create_recipe_lbl();

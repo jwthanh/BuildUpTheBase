@@ -77,7 +77,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>COCOS_2DX;WIN32;_DEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -93,13 +93,13 @@
       <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(EngineRoot)external\freetype2\prebuilt\win32\freetype.lib;$(EngineRoot)external\curl\prebuilt\win32\libcurl_imp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(EngineRoot)external\freetype2\prebuilt\win32\freetype.lib;$(EngineRoot)external\curl\prebuilt\win32\libcurl_imp.lib;magic.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories);;$(_COCOS_LIB_PATH_WIN32_BEGIN);$(_COCOS_LIB_PATH_WIN32_END)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <ShowProgress>LinkVerbose</ShowProgress>
+      <ShowProgress>NotSet</ShowProgress>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(OutDir)" mkdir "$(OutDir)"
@@ -174,6 +174,14 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\HarvestScene.cpp" />
     <ClCompile Include="..\Classes\Item.cpp" />
     <ClCompile Include="..\Classes\Logging.cpp" />
+    <ClCompile Include="..\Classes\magic_particles\MagicEmitter.cpp" />
+    <ClCompile Include="..\Classes\magic_particles\MagicScene.cpp" />
+    <ClCompile Include="..\Classes\magic_particles\mp_cocos.cpp" />
+    <ClCompile Include="..\Classes\magic_particles\opengl\image_loader.cpp" />
+    <ClCompile Include="..\Classes\magic_particles\opengl\mp_wrap.cpp" />
+    <ClCompile Include="..\Classes\magic_particles\platform_cocos.cpp" />
+    <ClCompile Include="..\Classes\magic_particles\_core\mp.cpp" />
+    <ClCompile Include="..\Classes\magic_particles\_core\platform_win_posix.cpp" />
     <ClCompile Include="..\Classes\MiscUI.cpp" />
     <ClCompile Include="..\Classes\Modal.cpp" />
     <ClCompile Include="..\Classes\Network.cpp" />
@@ -219,6 +227,20 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\HarvestScene.h" />
     <ClInclude Include="..\Classes\Item.h" />
     <ClInclude Include="..\Classes\Logging.h" />
+    <ClInclude Include="..\Classes\magic_particles\MagicEmitter.h" />
+    <ClInclude Include="..\Classes\magic_particles\MagicScene.h" />
+    <ClInclude Include="..\Classes\magic_particles\mp_cocos.h" />
+    <ClInclude Include="..\Classes\magic_particles\opengl\glcorearb.h" />
+    <ClInclude Include="..\Classes\magic_particles\opengl\glext.h" />
+    <ClInclude Include="..\Classes\magic_particles\opengl\glxext.h" />
+    <ClInclude Include="..\Classes\magic_particles\opengl\mp_config.h" />
+    <ClInclude Include="..\Classes\magic_particles\opengl\mp_wrap.h" />
+    <ClInclude Include="..\Classes\magic_particles\opengl\stb_image.h" />
+    <ClInclude Include="..\Classes\magic_particles\opengl\wglext.h" />
+    <ClInclude Include="..\Classes\magic_particles\platform_cocos.h" />
+    <ClInclude Include="..\Classes\magic_particles\_core\magic.h" />
+    <ClInclude Include="..\Classes\magic_particles\_core\mp.h" />
+    <ClInclude Include="..\Classes\magic_particles\_core\platform_win_posix.h" />
     <ClInclude Include="..\Classes\MiscUI.h" />
     <ClInclude Include="..\Classes\Modal.h" />
     <ClInclude Include="..\Classes\Nameable.h" />

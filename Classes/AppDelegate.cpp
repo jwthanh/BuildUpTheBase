@@ -3,6 +3,9 @@
 #include "GameLogic.h"
 #include "FileOperation.h"
 
+#include "magic_particles/mp_cocos.h"
+#include "magic_particles/platform_cocos.h"
+
 USING_NS_CC;
 
 /* easy logging stuff*/
@@ -14,10 +17,20 @@ INITIALIZE_EASYLOGGINGPP
 
 
 AppDelegate::AppDelegate() {
+    this->device = NULL;
 }
 
 AppDelegate::~AppDelegate()
 {
+	if (device)
+	{
+		device->Destroy();
+		delete device;
+		device=NULL;
+	}
+
+	MP_Manager& MP=MP_Manager::GetInstance();
+	MP.Destroy();
 }
 
 void AppDelegate::initGLContextAttrs()
@@ -142,6 +155,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     loading_scene->setOnEnterCallback(load_cb);
     director->pushScene(loading_scene);
 
+    this->init_magic_particles();
+
     return true;
 }
 
@@ -208,4 +223,63 @@ void AppDelegate::preload_sounds()
 
 void AppDelegate::preload_particles()
 {
+};
+
+void AppDelegate::init_magic_particles()
+{
+    cocos2d::Size winSize = Director::getInstance()->getWinSizeInPixels();
+
+    int client_wi=winSize.width;
+    int client_he=winSize.height;
+
+    device=new MP_Device_Cocos(client_wi, client_he);
+    device->Create();
+
+    MP_Manager& MP=MP_Manager::GetInstance();
+
+    MP_Platform* platform=new MP_Platform_COCOS;
+#ifdef MAGIC_3D
+    MAGIC_AXIS_ENUM axis=MAGIC_pXpYnZ;
+#else
+    MAGIC_AXIS_ENUM axis=MAGIC_pXnY;
+#endif
+
+#ifdef SHADER_WRAP
+    bool filters[MAGIC_RENDER_STATE__MAX];
+    for (int i=0;i<MAGIC_RENDER_STATE__MAX;i++)
+        filters[i]=false;
+    filters[MAGIC_RENDER_STATE_BLENDING]=true;
+    filters[MAGIC_RENDER_STATE_TEXTURE]=true;
+    filters[MAGIC_RENDER_STATE_ADDRESS_U]=true;
+    filters[MAGIC_RENDER_STATE_ADDRESS_V]=true;
+    filters[MAGIC_RENDER_STATE_ZENABLE]=true;
+    filters[MAGIC_RENDER_STATE_ZWRITE]=true;
+#ifndef SHADER_ALPHATEST_WRAP
+    filters[MAGIC_RENDER_STATE_ALPHATEST_INIT]=true;
+    filters[MAGIC_RENDER_STATE_ALPHATEST]=true;
+#endif
+#else
+    bool* filters=NULL;
+#endif
+
+    MP.Initialization(filters, true, axis, platform, MAGIC_INTERPOLATION_ENABLE, MAGIC_CHANGE_EMITTER_DEFAULT, 1024, 1024, 1, 1.f, 0.1f, true);
+
+    MP.LoadAllEmitters();
+
+    MP.RefreshAtlas();
+
+    MP.CloseFiles();
+
+    MP.Stop();
+
+#ifndef MAGIC_3D
+    // eng: locate emitters the same as editor
+    // rus: расставляем эмиттеры также, как они стояли в редакторе
+    HM_EMITTER hmEmitter=MP.GetFirstEmitter();
+    while (hmEmitter)
+    {
+        Magic_CorrectEmitterPosition(hmEmitter, client_wi, client_he);
+        hmEmitter=MP.GetNextEmitter(hmEmitter);
+    }
+#endif
 };

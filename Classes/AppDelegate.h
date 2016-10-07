@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 
 
+class MP_Device_WRAP;
 
 /**
 @brief    The cocos2d Application.
@@ -12,11 +13,16 @@ The reason for implement as private inheritance is to hide some interface call b
 */
 class  AppDelegate : private cocos2d::Application
 {
+
+protected:
+	MP_Device_WRAP* device;
 public:
     AppDelegate();
     virtual ~AppDelegate();
 
     virtual void initGLContextAttrs();
+
+    void init_magic_particles();
 
     /**
     @brief    Implement Director and Scene init code here.

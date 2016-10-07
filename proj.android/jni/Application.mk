@@ -15,3 +15,5 @@ endif
 
 APP_ABI := armeabi
 APP_PLATFORM := android-10
+
+APP_CPPFLAGS += -DCOCOS_2DX

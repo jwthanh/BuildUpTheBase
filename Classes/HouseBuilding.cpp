@@ -80,15 +80,14 @@ Buildup::Buildup()
 mistIngredient Buildup::get_all_ingredients() const
 {
 
+    res_count_t def = 0.0;
     mistIngredient result;
-    result[Ingredient::SubType::Grain];
     for (spBuilding building : this->city->buildings)
     {
-        mistIngredient ingredients = building->ingredients;
+        mistIngredient& ingredients = building->ingredients;
 
         for (std::pair<Ingredient::SubType, res_count_t> mist : ingredients)
         {
-            res_count_t def = 0.0;
             res_count_t existing_val = map_get(result, mist.first, def);
             result[mist.first] = existing_val + mist.second;
         }
@@ -414,10 +413,10 @@ std::string Building::get_specifics()
 res_count_t Building::count_ingredients()
 {
     res_count_t total = 0;
+    res_count_t def = 0;
     for (auto&& type_str : Ingredient::type_map)
     {
         Ingredient::SubType type = type_str.first;
-        res_count_t def = 0;
         res_count_t count = map_get(this->ingredients, type, def);
         total += count;
     };

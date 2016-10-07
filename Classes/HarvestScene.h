@@ -4,6 +4,8 @@
 
 #include "GameLayer.h"
 #include "Resources.h"
+#include "magic_particles/_core/magic.h"
+#include "magic_particles/MagicEmitter.h"
 //#include "Harvestable.h"
 
 class SideListView;
@@ -16,6 +18,13 @@ class BaseScene : public GameLayer
         static Node* _harvest_scene_from_editor;
 
     public:
+
+        MagicEmitter* cur_node;
+        int t_emitter;
+        int k_emitter;
+        HM_EMITTER m_emitter[1000];
+        void SelectEmitter(int emitter);
+
         CREATE_FUNC(BaseScene);
 
         Node* get_original_scene_from_editor();
@@ -33,8 +42,8 @@ class BaseScene : public GameLayer
 
         cocos2d::ui::Text* upgrade_lbl;
         spRecipe target_recipe;
-        void create_goal_loadingbar();
 
+        void create_goal_loadingbar();
         void create_info_panel();
         void create_username_input();
         void create_player_info_panel();
