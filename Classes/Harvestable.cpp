@@ -287,6 +287,11 @@ void Harvestable::animate_rotate()
 std::string Harvestable::get_shatter_text()
 {
     return "+1 Harvest";
+}
+
+cocos2d::Color4B Harvestable::get_shatter_text_color()
+{
+    return Color4B::WHITE;
 };
 
 void Harvestable::shatter()
@@ -306,8 +311,7 @@ void Harvestable::shatter()
     shatter_sprite->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
 
     //spawn label
-    //TODO fix hardcoded name
-    this->spawn_label_on_touch(NULL, 1, 1, this->get_shatter_text());
+    this->spawn_label_on_touch(NULL, 1, 1, this->get_shatter_text(), this->get_shatter_text_color());
 
     CallFunc* remove = CallFunc::create([this](){ this->removeFromParent(); });
 
@@ -699,6 +703,11 @@ bool CraftingHarvestable::should_shatter()
 std::string CraftingHarvestable::get_shatter_text()
 {
     return "Crafted!";
+}
+
+cocos2d::Color4B CraftingHarvestable::get_shatter_text_color()
+{
+    return Color4B::GREEN;
 };
 
 void CraftingHarvestable::shatter()

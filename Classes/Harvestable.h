@@ -63,6 +63,7 @@ class Harvestable : public cocos2d::ui::Widget
 
         virtual bool should_shatter();
         virtual std::string get_shatter_text();
+        virtual cocos2d::Color4B get_shatter_text_color();
         virtual void shatter();
 
         virtual float get_click_ratio() const;
@@ -140,6 +141,7 @@ class CraftingHarvestable : public Harvestable
 
         virtual bool should_shatter() override;
         virtual std::string get_shatter_text() override;
+        virtual cocos2d::Color4B get_shatter_text_color() override;
         virtual void shatter() override;
 };
 
