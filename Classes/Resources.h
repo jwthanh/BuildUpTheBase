@@ -1,12 +1,9 @@
 #pragma once
 #ifndef RESOURCES_H
 #define RESOURCES_H
-#include "Nameable.h"
 #include <map>
 
 #include "constants.h"
-
-#include <string>
 
 #include "SubTypes.h"
 
