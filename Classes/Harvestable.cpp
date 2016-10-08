@@ -706,6 +706,7 @@ void CraftingHarvestable::shatter()
     if (this->recipe != NULL) {
         this->recipe->callback();
         this->recipe->current_clicks = 0;
+        do_vibrate(32); //vibrate for two frames
     };
 
     Harvestable::shatter();

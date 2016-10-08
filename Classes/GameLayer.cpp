@@ -325,5 +325,5 @@ void do_vibrate(int milliseconds)
     };
 #else
 #endif
-
+    //CCLOG("in do_vibrate");
 };

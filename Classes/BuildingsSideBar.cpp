@@ -139,7 +139,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 
         spBuilding target_building = BUILDUP->get_target_building();
 
-        auto activate = [this, target_building](spListviewMap& listviews, TabManager::TabTypes tab_type)
+        auto activate_tab = [this, target_building](spListviewMap& listviews, TabManager::TabTypes tab_type)
         {
             ui::ListView* listview = listviews->at(target_building->name);
             listview->requestDoLayout();
@@ -197,7 +197,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
         };
 
         auto result = this->tabs.button_map[target_button];
-        activate(result.second, result.first);
+        activate_tab(result.second, result.first);
 
         do_vibrate(32);
 
