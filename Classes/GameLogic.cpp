@@ -125,9 +125,16 @@ void GameLogic::post_load()
         res_count_t minutes_since_login = minutes_since_last_login.count();
         gains_ss << "\nIt's been " << beautify_double(minutes_since_login) << " minutes since last login.";
     }
-    else
+    else if (hours_since_login < 48.0)
     {
         gains_ss << "\nIt's been " << beautify_double(hours_since_login) << " hours since last login.";
+    }
+    else
+    {
+        typedef std::chrono::duration<int, std::ratio<86400> > days;
+        auto days_since_last_login = std::chrono::duration_cast<days>(hours_since_last_login);
+        res_count_t days_since_login = days_since_last_login.count();
+        gains_ss << "\nIt's been " << beautify_double(days_since_login) << " days since last login.";
     }
 
     CCLOG("%s", gains_ss.str().c_str());
