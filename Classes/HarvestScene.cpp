@@ -546,12 +546,6 @@ void BaseScene::create_info_panel()
     ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("building_info_panel"));
     building_info_panel->removeFromParent();
 
-    auto create_count = [](std::string prefix, res_count_t count) {
-        char buffer[50];
-        sprintf(buffer,"%s: %s", prefix.c_str(), beautify_double(count).c_str());
-        return std::string(buffer);
-    };
-
     auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
     auto update_building_name = [building_name](float dt){
         building_name->setString(BUILDUP->get_target_building()->name);
@@ -563,7 +557,7 @@ void BaseScene::create_info_panel()
     cached_building_info_t* cached_building_info = new cached_building_info_t();
     ing_count->setUserData(static_cast<void*>(cached_building_info));
 
-    auto update_ing_count = [create_count, ing_count](float dt)
+    auto update_ing_count = [ing_count](float dt)
     {
         cached_building_info_t* cached = static_cast<cached_building_info_t*>(ing_count->getUserData()); //cant use dynamic_cast on void*
         if (cached == NULL)
@@ -589,9 +583,8 @@ void BaseScene::create_info_panel()
         std::string count;
         if (cached->ing_count != ing_count_val)
         {
-            count = create_count("ING", ing_count_val);
             cached->ing_count = ing_count_val;
-            cached->ing_count_str = count;
+            cached->ing_count_str = beautify_double(ing_count_val);
         }
         else
         {
@@ -730,12 +723,6 @@ void BaseScene::create_player_info_panel()
             }
         }
     });
-
-    auto create_count = [](std::string prefix, int count) {
-        std::stringstream ss;
-        ss << prefix << ": " << count;
-        return ss.str();
-    };
 
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
     set_aliasing(player_gold_lbl, true);

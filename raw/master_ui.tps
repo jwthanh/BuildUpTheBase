@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.2.3</string>
+        <string>4.2.2</string>
         <key>fileName</key>
         <string>C:/Users/Primary/workspace/basebuilder/raw/master_ui.tps</string>
         <key>autoSDSettings</key>
@@ -208,6 +208,7 @@
             <key type="filename">to_replace/farm.png</key>
             <key type="filename">to_replace/grave.png</key>
             <key type="filename">to_replace/harvester.png</key>
+            <key type="filename">to_replace/menu_icons/sell_all.png</key>
             <key type="filename">to_replace/necro_closed.png</key>
             <key type="filename">to_replace/necro_open.png</key>
             <key type="filename">to_replace/sword.png</key>
@@ -351,6 +352,7 @@
             <filename>to_replace/farm.png</filename>
             <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/locked.png</filename>
             <filename>kenny/Art/Onscreen controls (400 assets)/Sprites/lineDark/lineDark28.png</filename>
+            <filename>to_replace/menu_icons/sell_all.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
