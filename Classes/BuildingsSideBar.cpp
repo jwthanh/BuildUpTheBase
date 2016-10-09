@@ -595,7 +595,7 @@ void SideListView::setup_detail_listview_as_recipes()
             if (building->name == "The Workshop")
             {
                 //salesmen boost
-                spRecipe salesmen_boost = std::make_shared<Recipe>("Salesmen Boost", "Three bread make happy salesmen");
+                spRecipe salesmen_boost = std::make_shared<Recipe>("Salesmen Boost", "Requires three bread.");
                 salesmen_boost->components = mistIngredient{
                     { Ingredient::SubType::Bread, 3.0 }
                 };
@@ -620,7 +620,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     } });
 
                 //weaken flesh
-                spRecipe weaken_flesh = std::make_shared<Recipe>("Dead meat", "Triple fly, flesh, and loaf make monsters weak");
+                spRecipe weaken_flesh = std::make_shared<Recipe>("Dead meat", "Triple fly, flesh, and loaf make monsters weaker");
                 weaken_flesh->components = mistIngredient{
                     { Ingredient::SubType::Fly, 3.0 },   //TODO not use only three 
                     { Ingredient::SubType::Flesh, 3.0 }, // because we've got 3
