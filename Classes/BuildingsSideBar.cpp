@@ -736,7 +736,7 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item = BuildingNuItem::create(listview, building);
             menu_item->setName(child_name);
             menu_item->set_title("Sell all");
-            menu_item->set_description("Sells all resources instantly");
+            menu_item->set_description("Sells all basic resources instantly");
             menu_item->set_image("sell_all.png");
             menu_item->set_original_image("sell_all.png");
             menu_item->cooldown = GameLogic::getInstance()->power_sell_all_cooldown;
