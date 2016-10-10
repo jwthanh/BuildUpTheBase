@@ -1,12 +1,28 @@
 {
     "items": {
+        "stone": {
+            "name": "Stone",
+            "summary": "Dark, grey, and completely unremarkable.",
+            "description": "It weighs more than you think, like you could throw it pretty far.",
+            "img_path": "",
+            "scavenge_weight": 100.0,
+            "base_cost": 65.0
+        },
         "dagger": {
             "name": "Dagger",
             "summary": "This is a dagger.",
             "description": "This is a dagger, it's relatively average and otherwise non interesting.",
             "img_path": "items/dagger.png",
-            "scavenge_weight": 100.0,
+            "scavenge_weight": 135.0,
             "base_cost": 100.0
+        },
+        "primrose": {
+            "name": "Primrose",
+            "summary": "Golden flowers. Smells like lettuce.",
+            "description": "You stay far away from the things like this normally, but you're fine with this set of flowers. They look particularly good right now.",
+            "img_path": "",
+            "scavenge_weight": 135.0,
+            "base_cost": 170.0
         },
         "homunculus": {
             "name": "Homunculus",
@@ -16,37 +32,21 @@
             "scavenge_weight": 100.0,
             "base_cost": 250.0
         },
-        "ashen_mirror": {
-            "name": "Ashen Mirror",
-            "summary": "Can barely make out your reflection.",
-            "description": "Weighs almost nothing, despite being made of wrought iron.",
-            "img_path": "items/ashen_mirror.png",
-            "scavenge_weight": 100.0,
-            "base_cost": 765.0
-        },
-        "stone": {
-            "name": "Stone",
-            "summary": "Dark, grey, and completely unremarkable.",
-            "description": "It weighs more than you think, like you could throw it pretty far.",
-            "img_path": "",
-            "scavenge_weight": 100.0,
-            "base_cost": 65.0
-        },
         "tonic": {
             "name": "Bubbling Tonic",
             "summary": "Opaque liquid, bubbling endlessly.",
             "description": "You can't stop looking at it, wondering what would happen if you drank all of it. At once.",
             "img_path": "",
-            "scavenge_weight": 100.0,
+            "scavenge_weight": 30.0,
             "base_cost": 300.0
         },
-        "primrose": {
-            "name": "Primrose",
-            "summary": "Golden flowers. Smells like lettuce.",
-            "description": "You stay far away from the things like this normally, but you're fine with this set of flowers. They look particularly good right now.",
-            "img_path": "",
-            "scavenge_weight": 100.0,
-            "base_cost": 170.0
+        "ashen_mirror": {
+            "name": "Ashen Mirror",
+            "summary": "Can barely make out your reflection.",
+            "description": "Weighs almost nothing, despite being made of wrought iron.",
+            "img_path": "items/ashen_mirror.png",
+            "scavenge_weight": 10.0,
+            "base_cost": 765.0
         }
     }
 }

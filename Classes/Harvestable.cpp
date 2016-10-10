@@ -398,9 +398,11 @@ void DumpsterHarvestable::shatter()
     ItemData item_data = ItemData();
 
     RandomWeightMap<std::string> item_type_map;
-    item_type_map.add_item("dagger", 33);
-    item_type_map.add_item("homunculus", 33);
-    item_type_map.add_item("ashen_mirror", 33);
+    for (auto item : item_data.get_all_items())
+    {
+        //pull weight off item, from the item_data.json
+        item_type_map.add_item(item->type_name, item->scavenge_weight);
+    }
 
     RandomWeightMap<RarityType> item_rarity_map;
     item_rarity_map.add_item(RarityType::Poor, 40);

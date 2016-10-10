@@ -196,4 +196,19 @@ spItem ItemData::get_item(std::string item_id)
     auto item_info = &(*body)[item_id.c_str()];
 
     return this->build_item(item_id, item_info);
+}
+
+vsItem ItemData::get_all_items()
+{
+    vsItem result;
+
+    auto jsonDoc = FileIO::open_json(this->_filename, true);
+    auto&& items = jsonDoc["items"];
+
+    for (rjValue::MemberIterator it = items.MemberBegin(); it != items.MemberEnd(); ++it)
+    {
+        spItem item = this->build_item(it->name.GetString(), &it->value);
+        result.push_back(item);
+    }
+    return result;
 };

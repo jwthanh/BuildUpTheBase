@@ -74,6 +74,8 @@ class ItemData : public BaseData
         spItem build_item(std::string type_name, rjValue* recipe_data);
         spItem get_item(std::string item_id);
 
+        vsItem get_all_items();
+
 };
 
 #endif
