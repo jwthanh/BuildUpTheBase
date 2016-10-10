@@ -172,6 +172,7 @@ spItem ItemData::build_item(std::string type_name, rjValue* item_data)
     auto summary = item_ref["summary"].GetString();
     auto description = item_ref["description"].GetString();
     auto base_cost = item_ref["base_cost"].GetDouble();
+    auto scavenge_weight = item_ref["scavenge_weight"].GetDouble();
     auto img_path = item_ref["img_path"].GetString();
 
     //create item with default dynamic stats
@@ -181,6 +182,7 @@ spItem ItemData::build_item(std::string type_name, rjValue* item_data)
     item->summary = summary;
     item->description = description;
     item->_base_cost = base_cost;
+    item->scavenge_weight = scavenge_weight;
     item->img_path = img_path;
 
     return item;

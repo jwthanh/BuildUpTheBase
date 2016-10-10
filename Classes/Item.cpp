@@ -3,7 +3,7 @@
 
 
 Item::Item(std::string type_name,  RarityType rarity, res_count_t level)
-    : type_name(type_name), rarity(rarity), level(level), Nameable("Unnamed")
+    : type_name(type_name), rarity(rarity), level(level), Nameable("Unnamed"), scavenge_weight(0.0)
 {
 };
 

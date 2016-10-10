@@ -21,6 +21,7 @@ class Item : public Nameable
     public:
         RarityType rarity; //variation on item's base price
         res_count_t level; //affects base price
+        double scavenge_weight; //how often it'll drop in the dump
 
         std::string type_name; //a Dagger is dagger, Ashen Mirror is ashen_mirror. used to pull data from static and save file
 
