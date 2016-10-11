@@ -2,6 +2,7 @@
 
 #include "Util.h"
 #include "ui/CocosGUI.h"
+#include "GameLayer.h"
 
 USING_NS_CC;
 
@@ -82,6 +83,14 @@ void load_default_button_textures(cocos2d::ui::Button* button)
         "main_UI_export_10_x4_disabled.png",
         cocos2d::ui::TextureResType::PLIST
     );
+
+    button->addTouchEventListener([](Ref* target, ui::Widget::TouchEventType evt)
+    {
+        if (evt == ui::Widget::TouchEventType::ENDED)
+        {
+            do_vibrate(16);
+        }
+    });
 };
 
 void animate_flash_action(
