@@ -227,13 +227,6 @@ std::chrono::duration<double, std::ratio<3600>> Beatup::hours_since_last_login()
 
     typedef std::chrono::duration<double, std::ratio<3600>> hours_fp;
     auto hours = std::chrono::duration_cast<hours_fp>(diff);
-    //ss << "this is hours since last login " << hours.count() << std::endl;
-
-    //auto minutes = std::chrono::duration_cast<std::chrono::minutes>(diff);
-    //ss << "this is minutes since last login " << minutes.count() << std::endl;
-
-    //auto seconds = std::chrono::duration_cast<std::chrono::seconds>(diff);
-    //ss << "this is seconds since last login " << seconds.count();
 
     return hours;
 };

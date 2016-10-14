@@ -27,6 +27,8 @@ class GameLogic
 
         //handles last login and passive harvesting
         void post_load();
+        std::string new_player_load();
+        std::string existing_player_load();
 
         spClock coin_save_clock;
         spClock coin_rate_per_sec_clock;

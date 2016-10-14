@@ -54,6 +54,40 @@ void GameLogic::post_load()
     CCLOG("loading game on startup, this should only happen once");
     GameLogic::load_all();
 
+    std::string modal_content = "";
+    time_t from_file = static_cast<time_t>(DataManager::get_int_from_data(Beatup::last_login_key));
+    if (from_file == 0)
+    {
+        modal_content = this->new_player_load();
+    }
+    else
+    {
+        modal_content = this->existing_player_load();
+    }
+
+    auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+
+    //TODO clean up modal memory
+    TextBlobModal* modal = new TextBlobModal(scene);
+    modal->set_title("Welcome Back!");
+
+    modal->set_body(modal_content);
+
+
+    //set the last login time, set here and on save
+    BEATUP->set_last_login();
+    LOG(INFO) << "Game loaded!";
+
+    this->is_loaded = true;
+}
+
+std::string GameLogic::new_player_load()
+{
+    return "New player detected";
+}
+
+std::string GameLogic::existing_player_load()
+{
     std::stringstream gains_ss, at_capacity_ss;
     std::chrono::duration<double, std::ratio<3600>> hours_since_last_login = BEATUP->hours_since_last_login();
 
@@ -65,11 +99,7 @@ void GameLogic::post_load()
 
     //if the time is is over a day in the passed, assume that they're cheating
     // anything less than 24 hours could be a timezone thing
-    bool is_cheating = false;
-    if (hours_since_last_login.count() < -24.0)
-    {
-        is_cheating = true;
-    }
+    bool is_cheating = hours_since_last_login.count() < -24.0;
 
     if (is_cheating == false)
     {
@@ -139,26 +169,18 @@ void GameLogic::post_load()
 
     CCLOG("%s", gains_ss.str().c_str());
 
-    auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-
-    //TODO clean up modal memory
-    TextBlobModal* modal = new TextBlobModal(scene);
-    modal->set_title("Welcome Back!");
-
+    std::string result = "";
     if (at_capacity_ss.str() != "")
     {
-        modal->set_body(at_capacity_ss.str() + "\n---\n\n" + gains_ss.str());
+        result = at_capacity_ss.str() + "\n---\n\n" + gains_ss.str();
     }
     else
     {
-        modal->set_body(gains_ss.str());
+        result = gains_ss.str();
     }
 
-    //set the last login time, set here and on save
-    BEATUP->set_last_login();
-    LOG(INFO) << "Game loaded!";
+    return result;
 
-    this->is_loaded = true;
 }
 
 bool GameLogic::init()
