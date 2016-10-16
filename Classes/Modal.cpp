@@ -70,9 +70,14 @@ void TextBlobModal::set_body(const std::string& body)
 
     auto split_messages = split(raw_log_string, '\n'); //TODO fix stripping deliberate whitespace
     std::stringstream joined_ss;
+
+    this->_body_scroll->setItemsMargin(10.0f);
+
     for (auto s : split_messages)
     {
         auto line = ui::Text::create(s, "", 24.0f);
+        line->setTextAreaSize({700.0, 0});
+
         Label* renderer = (Label*)line->getVirtualRenderer();
         renderer->setTTFConfig(ttf_config);
         set_aliasing(renderer);

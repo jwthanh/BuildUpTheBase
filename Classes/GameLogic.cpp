@@ -54,22 +54,23 @@ void GameLogic::post_load()
     CCLOG("loading game on startup, this should only happen once");
     GameLogic::load_all();
 
+    auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+    TextBlobModal* modal = new TextBlobModal(scene);
+
     std::string modal_content = "";
     time_t from_file = static_cast<time_t>(DataManager::get_int_from_data(Beatup::last_login_key));
     if (from_file == 0)
     {
+        modal->set_title("Welcome to Build Up The Base!");
         modal_content = this->new_player_load();
     }
     else
     {
+        modal->set_title("Welcome Back!");
         modal_content = this->existing_player_load();
     }
 
-    auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-
     //TODO clean up modal memory
-    TextBlobModal* modal = new TextBlobModal(scene);
-    modal->set_title("Welcome Back!");
 
     modal->set_body(modal_content);
 
@@ -83,7 +84,12 @@ void GameLogic::post_load()
 
 std::string GameLogic::new_player_load()
 {
-    return "New player detected";
+    std::stringstream ss;
+    ss << "Tap the farm in the middle of the screen to harvest, then sell by tapping the grain icon along the bottom." << std::endl << std::endl;
+    ss << "Don't forget to enter a customized username so you can compete on the leaderboards at http://buildupthebase.com" << std::endl << std::endl;
+
+    return ss.str();
+
 }
 
 std::string GameLogic::existing_player_load()
@@ -608,23 +614,6 @@ You're able to sell them, and we're planning to have things like people who want
         item_listview_description->requestDoLayout();
     };
 
-    ItemData item_data = ItemData();
-    spItem dagger = item_data.get_item("dagger");
-    dagger->rarity = RarityType::Poor;
-    spItem homunc = item_data.get_item("homunculus");
-    homunc->rarity = RarityType::Rare;
-    spItem ashen_mirror = item_data.get_item("ashen_mirror");
-    spItem ashen_mirror_lv2 = item_data.get_item("ashen_mirror");
-    ashen_mirror_lv2->level = 2.0f;
-
-    vsItem items = {
-        dagger,
-        homunc,
-        ashen_mirror,
-        ashen_mirror_lv2
-    };
-
-    //for (spItem item : items) {
     for (spItem item : BUILDUP->items) {
         auto nuitem = NuItem::create(items_listview);
         nuitem->set_title(item->get_name());
