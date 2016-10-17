@@ -350,7 +350,14 @@ void GameLogic::load_all()
     auto item_serializer = ItemSerializer("alpha_items.json");
     item_serializer.load();
 
-    BEATUP->_total_coins = DataManager::get_double_from_data(Beatup::total_coin_key);
+    auto coins_from_data = DataManager::get_double_from_data(Beatup::total_coin_key);
+    if (coins_from_data < 0.0)
+    {
+        LOG(INFO) << "Coins from data was less than zero. Should not be possible.";
+        coins_from_data = 0.0;
+    }
+    BEATUP->_total_coins = coins_from_data;
+
     BUILDUP->city->name = DataManager::get_string_from_data("city_name", "");
 
     //load last targeted building and tab
