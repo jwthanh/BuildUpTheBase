@@ -413,6 +413,11 @@ void DumpsterHarvestable::shatter()
     spItem item = item_data.get_item(item_type_map.get_item());
     item->rarity = item_rarity_map.get_item();
 
+
+    auto game_logic = GameLogic::getInstance();
+    //item level goes up every 10 souls used to appease, plus 1
+    item->level = std::floor(((res_count_t)game_logic->get_appeasements()) / 10)+1;
+
     BUILDUP->items.push_back(item);
     auto popup_panel = GameLogic::get_popup_panel();
     popup_panel->set_string("You've found an item: "+item->get_name()+"!");
