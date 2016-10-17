@@ -620,7 +620,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     } });
 
                 //weaken flesh
-                spRecipe weaken_flesh = std::make_shared<Recipe>("Dead meat", "Triple fly, flesh, and loaf make monsters weaker");
+                spRecipe weaken_flesh = std::make_shared<Recipe>("Dead meat", "Three flies, flesh, and loaves make monsters weak");
                 weaken_flesh->components = mistIngredient{
                     { Ingredient::SubType::Fly, 3.0 },   //TODO not use only three 
                     { Ingredient::SubType::Flesh, 3.0 }, // because we've got 3
