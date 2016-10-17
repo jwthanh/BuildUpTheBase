@@ -455,6 +455,7 @@ void BaseScene::create_building_choicelist()
         {
             CCLOG("CITY BUTTON TOUCHED");
             GameDirector::switch_to_city_menu();
+            do_vibrate(16);
         }
     };
     panel->addTouchEventListener(touch_handler);

@@ -534,6 +534,7 @@ void GameDirector::switch_to_city_menu()
         {
             auto director = Director::getInstance();
             director->popScene();
+            do_vibrate(16);
         }
     });
     load_default_button_textures(back_btn);
@@ -546,6 +547,7 @@ void GameDirector::switch_to_city_menu()
     items_scene_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
+            do_vibrate(16);
             GameDirector::switch_to_items_menu();
         }
     });
@@ -655,6 +657,7 @@ You're able to sell them, and we're planning to have things like people who want
     back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
+            do_vibrate(16);
             auto director = Director::getInstance();
             director->popScene();
         }
