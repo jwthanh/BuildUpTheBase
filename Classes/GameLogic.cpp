@@ -47,7 +47,7 @@ void GameLogic::post_load()
     //add popup to message to fill out username
     if (username == "") {
         auto popup = GameLogic::get_popup_panel();
-        popup->set_string("Hey there! Don't forget to set a username along the right side of the screen, and check out how you stack up on the leaderboard");
+        popup->set_string("Hey there! Don't forget to set a username in green along the right side of the screen, and check out how you stack up on the leaderboard");
         popup->animate_open();
     };
 

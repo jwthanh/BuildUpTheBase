@@ -661,6 +661,8 @@ void BaseScene::create_username_input()
     cocos2d::Label* label = dynamic_cast<Label*>(renderer);
     set_aliasing(label);
 
+    username_input->setPlaceHolderColor(Color4B::GREEN);
+
     auto username = DataManager::get_string_from_data("username");
     username_input->setString(username);
 
