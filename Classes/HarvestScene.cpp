@@ -201,6 +201,10 @@ void BaseScene::create_goal_loadingbar()
     ui::LoadingBar* loading_bar = dynamic_cast<ui::LoadingBar*>(progress_panel->getChildByName("goal_loadingbar"));
     loading_bar->setPercent(0.0f);
 
+    this->upgrade_lbl = dynamic_cast<ui::Text*>(progress_panel->getChildByName("upgrade_lbl"));
+    this->upgrade_lbl->setString("");
+    set_aliasing(this->upgrade_lbl, true);
+
     progress_panel->addTouchEventListener([this](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
@@ -216,26 +220,23 @@ void BaseScene::create_goal_loadingbar()
 
     auto update_loading_bar = [this, loading_bar](float dt)
         {
-            //set progress to 1000 dollars
-            float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 10.5f);
+            spBuilding target_building = BUILDUP->get_target_building();
+            float coin_goal = scale_number(10.0f, (float)target_building->building_level, 10.5f);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             loading_bar->setPercent(percentage);
 
             if (percentage >= 100.0f) {
-                try_set_node_color(loading_bar, { 20, 92, 68 });
+                this->upgrade_lbl->setString("Upgrade available!");
             }
             else {
-                try_set_node_color(loading_bar, { 177, 212, 200 });
+                std::string short_name = target_building->short_name;
+                this->upgrade_lbl->setString(short_name + " upgrade:");
             };
 
         };
     loading_bar->schedule(update_loading_bar, AVERAGE_DELAY, "loadingbar_update");
     update_loading_bar(0);
 
-    this->upgrade_lbl = dynamic_cast<ui::Text*>(progress_panel->getChildByName("upgrade_lbl"));
-    this->upgrade_lbl->setString("");
-
-    set_aliasing(this->upgrade_lbl, true);
 
     //show progress panel
     auto harvester_progress_panel = harvest_scene_editor->getChildByName("harvester_progress_panel");
@@ -980,22 +981,13 @@ void HarvestScene::update(float dt)
 {
     BaseScene::update(dt);
 
-    //TODO get this percentage from a method or something so if building scale
-    //changes i dont need to adjust this
-    float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 10.5f);
-    float percentage = BEATUP->get_total_coins() / coin_goal * 100;
-    if (percentage >= 100.0f) {
-        ((HarvestScene*)this)->upgrade_lbl->setString("Upgrade available!");
-    }
-    else {
-        ((HarvestScene*)this)->upgrade_lbl->setString("Next upgrade:");
-    };
+    spBuilding target_building = BUILDUP->get_target_building();
 
     auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
     if (!harvestable) {
         this->add_harvestable();
     }
-    else if (BUILDUP->get_target_building() != harvestable->building) {
+    else if (target_building != harvestable->building) {
         harvestable->removeFromParent();
     };
 
