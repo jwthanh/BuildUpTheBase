@@ -621,6 +621,7 @@ You're able to sell them, and we're planning to have things like people who want
                 BEATUP->add_total_coin(item->get_effective_cost());
 
                 reset_item_detail_panel();
+                do_vibrate(16);
             }
         });
 
@@ -643,6 +644,7 @@ You're able to sell them, and we're planning to have things like people who want
         nuitem->button->addTouchEventListener([item, nuitem, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
+                do_vibrate(16);
                 update_detail_panel_on_touch(nuitem, item);
             }
         });
