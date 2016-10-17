@@ -84,13 +84,14 @@ void load_default_button_textures(cocos2d::ui::Button* button)
         cocos2d::ui::TextureResType::PLIST
     );
 
-    button->addTouchEventListener([](Ref* target, ui::Widget::TouchEventType evt)
-    {
-        if (evt == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(16);
-        }
-    });
+    ///NOTE only one button event listener, so this can't work like this
+    //button->addTouchEventListener([](Ref* target, ui::Widget::TouchEventType evt)
+    //{
+    //    if (evt == ui::Widget::TouchEventType::ENDED)
+    //    {
+    //        do_vibrate(16);
+    //    }
+    //});
 };
 
 void animate_flash_action(
