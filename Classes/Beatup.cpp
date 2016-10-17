@@ -196,8 +196,8 @@ double Beatup::get_total_coins()
 void Beatup::set_last_login()
 {
     //get current time
-    std::chrono::steady_clock::time_point time_is_now = std::chrono::steady_clock::now();
-    time_t rendered = std::chrono::steady_clock::to_time_t(time_is_now);
+    std::chrono::time_point<std::chrono::system_clock> time_is_now = std::chrono::system_clock::now();
+    time_t rendered = std::chrono::system_clock::to_time_t(time_is_now);
 
     struct tm* a_given_time = std::localtime(&rendered);
     time_t made_time = std::mktime(a_given_time);
@@ -211,19 +211,19 @@ std::chrono::duration<double, std::ratio<3600>> Beatup::hours_since_last_login()
 
     std::stringstream ss;
     ss << "The last login time was " << std::ctime(&from_file);
-    std::chrono::steady_clock::time_point now_time_point = std::chrono::steady_clock::now();
+    std::chrono::system_clock::time_point now_time_point = std::chrono::system_clock::now();
 
     if (from_file == 0)
     {
         CCLOG("last login not found, defaulting to now");
-        std::chrono::steady_clock::time_point time_is_now = std::chrono::steady_clock::now();
-        from_file = std::chrono::steady_clock::to_time_t(time_is_now);
+        std::chrono::time_point<std::chrono::system_clock> time_is_now = std::chrono::system_clock::now();
+        from_file = std::chrono::system_clock::to_time_t(time_is_now);
         auto local_tm = std::localtime(&from_file);
         from_file = std::mktime(local_tm);
     }
 
-    std::chrono::steady_clock::time_point last_login_time_point = std::chrono::steady_clock::from_time_t(from_file);
-    std::chrono::steady_clock::duration diff = now_time_point - last_login_time_point;
+    std::chrono::system_clock::time_point last_login_time_point = std::chrono::system_clock::from_time_t(from_file);
+    std::chrono::system_clock::duration diff = now_time_point - last_login_time_point;
 
     typedef std::chrono::duration<double, std::ratio<3600>> hours_fp;
     auto hours = std::chrono::duration_cast<hours_fp>(diff);
