@@ -33,6 +33,7 @@ BaseModal::BaseModal(Node* parent)
     auto cb = [this, layer_color](Ref* target, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
+            do_vibrate(16);
             this->_node->removeFromParent();
             layer_color->removeFromParent();
         };
@@ -88,7 +89,7 @@ void TextBlobModal::set_body(const std::string& body)
 
 
 PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
-_layout(panel)
+    _layout(panel)
 {
     this->initial_x = panel->getPositionX();
     this->initial_y = panel->getPositionY();
@@ -97,6 +98,7 @@ _layout(panel)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
+            do_vibrate(16);
             this->animate_close();
         }
     });
