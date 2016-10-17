@@ -737,7 +737,7 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item->setName(child_name);
             menu_item->set_title("Visit Leaderboard");
             menu_item->set_description("See who's better than you");
-            menu_item->set_image("lineDark28.png");
+            menu_item->set_image("leaderboard.png");
 
             menu_item->set_touch_ended_callback([]()
             {
