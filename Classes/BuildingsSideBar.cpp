@@ -711,6 +711,48 @@ void SideListView::setup_powers_listview_as_powers()
     {
         ui::ListView* listview = this->powers_listviews->at(building->name);
 
+        ///Open leaderboards
+        auto open_leaderboard = [this, listview, building, tab_type](float dt)
+        {
+            if (this->tabs.is_tab_active(tab_type, building) == false)
+            {
+                listview->setVisible(false);
+                return;
+            }
+            listview->setVisible(true);
+
+            //if the child already exists, put it at the back 
+            std::string child_name = "open_leaderboard";
+            auto existing_node = listview->getChildByName(child_name);
+            if (existing_node)
+            {
+                existing_node->removeFromParentAndCleanup(false);
+                listview->addChild(existing_node);
+                return;
+            }
+
+            //clone the new item
+            BuildingNuItem* menu_item;
+            menu_item = BuildingNuItem::create(listview, building);
+            menu_item->setName(child_name);
+            menu_item->set_title("Visit Leaderboard");
+            menu_item->set_description("See who's better than you");
+            menu_item->set_image("lineDark28.png");
+
+            menu_item->set_touch_ended_callback([]()
+            {
+                CCLOG("Pressed open open leaderboard");
+
+                //TODO use actual url
+                auto username = DataManager::get_string_from_data("username", "");
+                Application::getInstance()->openURL("http://tankorsmash.webfactional.com/leaderboard?username="+username);
+            });
+
+        };
+
+        listview->schedule(open_leaderboard, AVERAGE_DELAY, "open_leaderboard");
+        open_leaderboard(0);
+
         ///sell all power
         auto update_sellall = [this, listview, building, tab_type](float dt)
         {
@@ -888,47 +930,6 @@ void SideListView::setup_powers_listview_as_powers()
         listview->schedule(open_log, AVERAGE_DELAY, "open_log");
         open_log(0);
 
-        ///Open leaderboards
-        auto open_leaderboard = [this, listview, building, tab_type](float dt)
-        {
-            if (this->tabs.is_tab_active(tab_type, building) == false)
-            {
-                listview->setVisible(false);
-                return;
-            }
-            listview->setVisible(true);
-
-            //if the child already exists, put it at the back 
-            std::string child_name = "open_leaderboard";
-            auto existing_node = listview->getChildByName(child_name);
-            if (existing_node)
-            {
-                existing_node->removeFromParentAndCleanup(false);
-                listview->addChild(existing_node);
-                return;
-            }
-
-            //clone the new item
-            BuildingNuItem* menu_item;
-            menu_item = BuildingNuItem::create(listview, building);
-            menu_item->setName(child_name);
-            menu_item->set_title("Visit Leaderboard");
-            menu_item->set_description("See who's better than you");
-            menu_item->set_image("lineDark28.png");
-
-            menu_item->set_touch_ended_callback([]()
-            {
-                CCLOG("Pressed open open leaderboard");
-
-                //TODO use actual url
-                auto username = DataManager::get_string_from_data("username", "");
-                Application::getInstance()->openURL("http://tankorsmash.webfactional.com/leaderboard?username="+username);
-            });
-
-        };
-
-        listview->schedule(open_leaderboard, AVERAGE_DELAY, "open_leaderboard");
-        open_leaderboard(0);
     }
 };
 
