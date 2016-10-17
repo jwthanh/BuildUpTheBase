@@ -83,8 +83,10 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_A)
     {
     }
-    else if (keyCode == EventKeyboard::KeyCode::KEY_B)
+    else if (keyCode == EventKeyboard::KeyCode::KEY_F)
     {
+        auto director = Director::getInstance();
+        director->setDisplayStats(!director->isDisplayStats());
     }
     else if(keyCode == EventKeyboard::KeyCode::KEY_F1) 
     {
