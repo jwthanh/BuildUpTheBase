@@ -660,6 +660,7 @@ void BaseScene::create_username_input()
     ui::UICCTextField* renderer = dynamic_cast<ui::UICCTextField*>(username_input->getVirtualRenderer());
     cocos2d::Label* label = dynamic_cast<Label*>(renderer);
     set_aliasing(label);
+    label->setTTFConfig(NuItem::ttf_config);
 
     username_input->setPlaceHolderColor(Color4B::GREEN);
 

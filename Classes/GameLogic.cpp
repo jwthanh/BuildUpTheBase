@@ -410,6 +410,11 @@ void GameDirector::switch_to_city_menu()
     set_aliasing(city_name_input);
     city_name_input->setString(DataManager::get_string_from_data("city_name", ""));
 
+    //use outline from NuItems ttf_config
+    ui::UICCTextField* renderer = dynamic_cast<ui::UICCTextField*>(city_name_input->getVirtualRenderer());
+    cocos2d::Label* label = dynamic_cast<Label*>(renderer);
+    label->setTTFConfig(NuItem::ttf_config);
+
     auto is_bad_character = [](char character){
         return !(std::isalnum(character) || character == '_');
     };
@@ -453,8 +458,8 @@ void GameDirector::switch_to_city_menu()
     });
     load_default_button_textures(invest_button);
     cocos2d::TTFConfig ttf_config = TTFConfig("pixelmix.ttf", 24, GlyphCollection::ASCII, NULL, false, 2);
-    Label* renderer = invest_button->getTitleRenderer();
-    renderer->setTTFConfig(ttf_config);
+    Label* invest_renderer = invest_button->getTitleRenderer();
+    invest_renderer->setTTFConfig(ttf_config);
 
     auto invested_lbl = dynamic_cast<ui::Text*>(invest_panel->getChildByName("invested_lbl"));
     auto update_invested = [invested_lbl](float dt) {
