@@ -182,6 +182,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         Node* raw_ingredient_count = building_info_panel->getChildByName("ingredient_count");
         ui::Text* ingredient_count = dynamic_cast<ui::Text*>(raw_ingredient_count);
         animate_flash_action(ingredient_count, 0.2f, 1.15f);
+        do_vibrate(16);
         this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
     } 
     else 
@@ -600,6 +601,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
     {
         ss << "No recipe yet";
         std::string floating_msg = ss.str();
+        do_vibrate(16);
         this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
     }
     else 
@@ -623,6 +625,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
             }
 
             std::string floating_msg = ss.str();
+            do_vibrate(16);
             this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
         }
     }
