@@ -589,7 +589,7 @@ void GameDirector::switch_to_items_menu()
     item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
     set_aliasing(item_sell_btn);
 
-    auto reset_item_detail_panel = [panel, item_name, item_desc, item_sell_btn, item_listview_description](){
+    auto reset_item_detail_panel = [panel, item_name, item_desc, item_sell_btn, item_listview_description, items_listview](){
         item_name->setString("Item Details");
         const char* raw_description = R"foo(
 Collect Items at The Dump with the help of Undead scavengers
@@ -601,21 +601,23 @@ You're able to sell them, and we're planning to have things like people who want
         auto default_description = raw_description;
         item_desc->setString(default_description);
         item_sell_btn->setVisible(false);
+
+        items_listview->requestDoLayout();
     };
 
     reset_item_detail_panel();
 
 
-    auto update_detail_panel_on_touch = [panel, item_name, item_desc, item_sell_btn, item_listview_description, reset_item_detail_panel](NuItem* nuitem, spItem item) {
+    auto update_detail_panel_on_touch = [panel, item_name, item_desc, item_sell_btn, item_listview_description, reset_item_detail_panel, items_listview](NuItem* nuitem, spItem item) {
         item_name->setString(item->get_name());
         item_desc->setString(item->description);
 
         item_sell_btn->setVisible(true);
-        item_sell_btn->addTouchEventListener([reset_item_detail_panel, nuitem, item](Ref* sender, ui::Widget::TouchEventType type){
+        item_sell_btn->addTouchEventListener([reset_item_detail_panel, nuitem, item, items_listview](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                nuitem->removeFromParent();
-                nuitem->button->removeFromParent();
+                items_listview->removeChild(nuitem->button);
+                items_listview->removeChild(nuitem);
                 BUILDUP->items.erase(std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item), BUILDUP->items.end());
 
                 BEATUP->add_total_coin(item->get_effective_cost());
