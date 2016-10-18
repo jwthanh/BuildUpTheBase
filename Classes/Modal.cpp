@@ -121,8 +121,11 @@ void PopupPanel::animate_open()
         cocos2d::MoveTo::create(duration, Vec2(this->initial_x, this->initial_y))
         );
 
+    auto delay = cocos2d::DelayTime::create(10.0f);
+    auto remove = cocos2d::CallFunc::create([this]() { this->animate_close(); });
+
     this->_layout->runAction( cocos2d::Sequence::create(
-        show_action, NULL
+        show_action, delay, remove, NULL
         ));
 };
 
