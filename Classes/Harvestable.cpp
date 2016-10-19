@@ -431,8 +431,14 @@ void DumpsterHarvestable::generate_item()
     this->scavenge_item = item;
 
     auto game_logic = GameLogic::getInstance();
-    //item level goes up every 10 souls used to appease, plus 1
-    this->scavenge_item->level = std::floor(((res_count_t)game_logic->get_appeasements()) / 10)+1;
+    //max item level goes up every 10 souls used to appease, plus 1
+    res_count_t max_level = std::floor(((res_count_t)game_logic->get_appeasements()) / 10)+1;
+
+    //pick a level between 1 and max_level
+    std::mt19937 gen = std::mt19937(std::random_device{}());
+    std::uniform_real_distribution<res_count_t> distribution(1, max_level);
+    res_count_t item_level = std::floor(distribution(gen));
+    this->scavenge_item->level = item_level;
 };
 
 void MiningHarvestable::init_sprite()
