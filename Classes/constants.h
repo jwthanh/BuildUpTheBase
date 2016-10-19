@@ -64,19 +64,24 @@ inline std::string clean_path(std::string input) {
 
 class Clock;
 class Recipe;
+
 class Beatup;
 class Building;
 class Visitors;
+
 class Buildup;
 class Village;
+class BuildingData;
+
 class Fighter;
 class Battle;
+
 class Worker;
-class BuildingData;
 class Harvester;
 class Salesman;
 class ConsumerHarvester;
 class ResourceCondition;
+class Harvestable;
 
 class Resource;
 class Ingredient;
@@ -106,17 +111,22 @@ typedef std::function<void()> VoidFunc;
 #define MAKE_SP_VS_MI(Cls)_MAKE_SP(Cls);_MAKE_VS(Cls);_MAKE_MI(Cls)
 
 MAKE_SP_VS_MI(Clock);
+
 MAKE_SP_VS_MI(Building);
+MAKE_SP_VS_MI(BuildingData);
 MAKE_SP_VS_MI(Visitors);
+
 MAKE_SP_VS_MI(Battle);
 MAKE_SP_VS_MI(Fighter);
 MAKE_SP_VS_MI(Worker);
-MAKE_SP_VS_MI(BuildingData);
+
+
 MAKE_SP_VS_MI(Harvester);
 MAKE_SP_VS_MI(Salesman);
 MAKE_SP_VS_MI(ConsumerHarvester);
 MAKE_SP_VS_MI(ResourceCondition);
 MAKE_SP_VS_MI(Recipe);
+MAKE_SP_VS_MI(Harvestable);
 
 MAKE_SP_VS_MI(Resource);
 MAKE_SP_VS_MI(Product);

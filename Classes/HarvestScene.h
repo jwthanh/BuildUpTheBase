@@ -56,7 +56,7 @@ class BaseScene : public GameLayer
 
         void scroll_to_target_building();
 
-        Harvestable* harvestable;
+        Harvestable* harvestable; //cant be shared_ptr because its cocos2d::Node
 };
 
 class HarvestScene : public BaseScene
