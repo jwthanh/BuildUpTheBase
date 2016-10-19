@@ -24,6 +24,8 @@
 #include "Modal.h"
 #include "Logging.h"
 #include "DataManager.h"
+#include "HarvestScene.h"
+#include "Harvestable.h"
 
 
 USING_NS_CC;
@@ -591,9 +593,23 @@ void SideListView::setup_detail_listview_as_recipes()
                     bool can_fit_more_items = true; //TODO
                     if (can_fit_more_items)
                     {
-                        //add a bunch of clicks to the dumps harvestable
-                        //TODO implement this
-                        CCLOG("Def harvesting right now");
+                        //add a bunch of clicks to the harvestable (assuming
+                        // though that its the dumpster harvestable)
+                        cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+                        auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+                        if (harvest_scene)
+                        {
+                            Node* raw_harvestable = harvest_scene->getChildByName("harvestable");
+                            if (raw_harvestable)
+                            {
+                                Harvestable* harvestable = dynamic_cast<Harvestable*>(raw_harvestable);
+                                harvestable->current_clicks += 3;
+                            };
+                        }
+                        else
+                        {
+                            CCLOG("cant send scavenger because i can't find harvest_scene");
+                        };
                     }
                     else
                     {
