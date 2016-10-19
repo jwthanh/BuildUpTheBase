@@ -580,6 +580,35 @@ void SideListView::setup_detail_listview_as_recipes()
                     } });
             };
 
+            if (building->name == "The Dump")
+            {
+                spRecipe send_scavenger = std::make_shared<Recipe>("Undead scavenge", "Send 3 undead scavenging for you.");
+                send_scavenger->components = mistIngredient({
+                    { Ingredient::SubType::Undead, 3 }
+                });
+                send_scavenger->_callback = [building]()
+                {
+                    bool can_fit_more_items = true; //TODO
+                    if (can_fit_more_items)
+                    {
+                        //add a bunch of clicks to the dumps harvestable
+                        //TODO implement this
+                        CCLOG("Def harvesting right now");
+                    }
+                    else
+                    {
+                        //refund the cost
+                        building->create_ingredients(Ingredient::SubType::Undead, 3);
+                    };
+                };
+                nuitems_config.push_back({
+                    send_scavenger,
+                    DetailType::Recipe,
+                    {
+                        send_scavenger->name,
+                        send_scavenger->description
+                    } });
+            };
             if (building->name == "The Mine")
             {
                 spRecipe transmute_copper = std::make_shared<Recipe>("Transmute copper", "10 Copper to 2 Iron");
