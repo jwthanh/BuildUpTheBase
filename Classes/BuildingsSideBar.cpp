@@ -603,7 +603,11 @@ void SideListView::setup_detail_listview_as_recipes()
                             if (raw_harvestable)
                             {
                                 Harvestable* harvestable = dynamic_cast<Harvestable*>(raw_harvestable);
-                                harvestable->current_clicks += 3;
+                                if (harvestable)
+                                {
+                                    //adds 33% progress to harvestable
+                                    harvestable->current_clicks += harvestable->click_limit*.33f;
+                                };
                             };
                         }
                         else

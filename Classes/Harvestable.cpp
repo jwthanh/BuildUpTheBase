@@ -379,7 +379,12 @@ bool DumpsterHarvestable::init()
 
 void DumpsterHarvestable::init_clicks()
 {
-    this->click_limit = 15;
+
+    this->generate_item();
+
+    //takes item level * 15 clicks
+    this->click_limit = this->scavenge_item->level*15.0;
+
     this->current_clicks = 0;
 }
 
@@ -396,6 +401,16 @@ void DumpsterHarvestable::animate_clip()
 void DumpsterHarvestable::shatter()
 {
     Harvestable::shatter();
+
+
+    BUILDUP->items.push_back(scavenge_item);
+    auto popup_panel = GameLogic::get_popup_panel();
+    popup_panel->set_string("You've found an item: "+scavenge_item->get_name()+"!");
+    popup_panel->animate_open();
+};
+
+void DumpsterHarvestable::generate_item()
+{
     ItemData item_data = ItemData();
 
     RandomWeightMap<std::string> item_type_map;
@@ -413,15 +428,11 @@ void DumpsterHarvestable::shatter()
     spItem item = item_data.get_item(item_type_map.get_item());
     item->rarity = item_rarity_map.get_item();
 
+    this->scavenge_item = item;
 
     auto game_logic = GameLogic::getInstance();
     //item level goes up every 10 souls used to appease, plus 1
-    item->level = std::floor(((res_count_t)game_logic->get_appeasements()) / 10)+1;
-
-    BUILDUP->items.push_back(item);
-    auto popup_panel = GameLogic::get_popup_panel();
-    popup_panel->set_string("You've found an item: "+item->get_name()+"!");
-    popup_panel->animate_open();
+    this->scavenge_item->level = std::floor(((res_count_t)game_logic->get_appeasements()) / 10)+1;
 };
 
 void MiningHarvestable::init_sprite()

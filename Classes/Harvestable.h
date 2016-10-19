@@ -107,6 +107,9 @@ class DumpsterHarvestable : public Harvestable
         virtual void animate_clip() override;
 
         virtual void shatter() override;
+
+        spItem scavenge_item;
+        void generate_item(); //builds the item this'll give the player
 };
 
 class MiningHarvestable : public Harvestable
