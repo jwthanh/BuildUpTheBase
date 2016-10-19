@@ -580,6 +580,34 @@ void SideListView::setup_detail_listview_as_recipes()
                     } });
             };
 
+            if (building->name == "The Mine")
+            {
+                spRecipe transmute_copper = std::make_shared<Recipe>("Transmute copper", "10 Copper to 2 Iron");
+                transmute_copper->components = mistIngredient({
+                    { Ingredient::SubType::Copper, 10 }
+                });
+                transmute_copper->_callback = [building]()
+                {
+                    bool can_fit_more_iron = true; //TODO
+                    if (can_fit_more_iron)
+                    {
+                        building->create_ingredients(Ingredient::SubType::Iron, 2);
+                    }
+                    else
+                    {
+                        //refund the cost
+                        building->create_ingredients(Ingredient::SubType::Copper, 10);
+                    };
+                };
+                nuitems_config.push_back({
+                    transmute_copper,
+                    DetailType::Recipe,
+                    {
+                        transmute_copper->name,
+                        transmute_copper->description
+                    } });
+            };
+
             if (building->name == "The Marketplace")
             {
                 spTechnology double_click_pwr = std::make_shared<Technology>(Technology::SubType::ClickDoublePower);
