@@ -607,6 +607,9 @@ void SideListView::setup_detail_listview_as_recipes()
                                 {
                                     //adds 33% progress to harvestable
                                     harvestable->current_clicks += harvestable->click_limit*.33f;
+                                    if (harvestable->should_shatter()) {
+                                        harvestable->shatter();
+                                    };
                                 };
                             };
                         }
