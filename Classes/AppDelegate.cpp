@@ -164,7 +164,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
-    GameLogic::save_all();
+    // GameLogic::save_all(); //causes crash on android when saving from city or items scene. Dont know why
 
     // if you use SimpleAudioEngine, it must be pause
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
