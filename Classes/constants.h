@@ -171,12 +171,12 @@ typedef long double res_count_t;
 #define rjDocument rapidjson::GenericDocument<rapidjson::UTF8<>,rapidjson::CrtAllocator>
 #define rjValue rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>
 
-const float SECOND_DELAY = 1.0f;
-const float LONG_DELAY = 0.5f;
-const float AVERAGE_DELAY = 0.1f;
-const float HALF_DELAY = 0.05f;
-const float QUARTER_DELAY = 0.025f;
-const float SHORT_DELAY = 0.01f;
-const float REALTIME_DELAY = 0.001f;
+const float SECOND_DELAY = 1.0f; // 60 times per second
+const float LONG_DELAY = 0.5f; // 30 times per second
+const float AVERAGE_DELAY = 0.1f; // 6 times per second
+const float HALF_DELAY = 0.05f; // 3 times per second
+const float QUARTER_DELAY = 0.025f; // 1.5 times per second
+const float SHORT_DELAY = 0.016f; // 0.96 times per second
+const float REALTIME_DELAY = 0.001f; // 0.06 times per second
 
 #endif
