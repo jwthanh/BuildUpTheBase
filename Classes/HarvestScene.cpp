@@ -600,7 +600,7 @@ void BaseScene::create_info_panel()
 
         ing_count->setUserData(cached);
     };
-    this->schedule(update_ing_count, REALTIME_DELAY, "ing_count_update");
+    this->schedule(update_ing_count, SHORT_DELAY, "ing_count_update");
     update_ing_count(0);
 
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
