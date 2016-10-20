@@ -570,32 +570,24 @@ void BaseScene::create_info_panel()
         }
 
         spBuilding building = BUILDUP->get_target_building();
+
+        //whether to beautify storage and ing counts
         res_count_t storage_space = building->get_storage_space();
-        std::string storage;
         if (cached->storage_count != storage_space)
         {
-            storage = beautify_double(storage_space);
             cached->storage_count = storage_space;
-            cached->storage_str = storage;
+            cached->storage_str = beautify_double(storage_space);
         }
-        else
-        {
-            storage = cached->storage_str;
-        }
-        res_count_t ing_count_val = building->count_ingredients();
 
-        std::string count;
+        res_count_t ing_count_val = building->count_ingredients();
         if (cached->ing_count != ing_count_val)
         {
             cached->ing_count = ing_count_val;
             cached->ing_count_str = beautify_double(ing_count_val);
         }
-        else
-        {
-            count = cached->ing_count_str;
-        }
+
         char buffer[50];
-        sprintf(buffer, "%s/%s", count.c_str(), storage.c_str());
+        sprintf(buffer, "%s/%s", cached->ing_count_str.c_str(), cached->storage_str.c_str());
         ing_count->setString(buffer);
 
         ing_count->setUserData(cached);
