@@ -49,13 +49,13 @@ class GameLogic
         void add_total_harvests(int value);
         int get_total_harvests();
 
-        int city_investment;
+        double city_investment;
         void add_city_investment(double value);
-        int get_city_investment();
+        double get_city_investment();
 
-        int appeasements;
+        double appeasements;
         void add_appeasements(double value);
-        int get_appeasements();
+        double get_appeasements();
 
         void add_total_kills(int value);
         int get_total_kills();

@@ -282,9 +282,9 @@ void GameLogic::add_city_investment(double value)
     DataManager::incr_key("city_investment", value);
 };
 
-int GameLogic::get_city_investment()
+double GameLogic::get_city_investment()
 {
-    return DataManager::get_int_from_data("city_investment");
+    return DataManager::get_double_from_data("city_investment");
 };
 
 void GameLogic::add_appeasements(double value)
@@ -292,9 +292,9 @@ void GameLogic::add_appeasements(double value)
     DataManager::incr_key("appeasements", value);
 };
 
-int GameLogic::get_appeasements()
+double GameLogic::get_appeasements()
 {
-    return DataManager::get_int_from_data("appeasements");
+    return DataManager::get_double_from_data("appeasements");
 };
 
 void GameLogic::add_total_kills(int value)
