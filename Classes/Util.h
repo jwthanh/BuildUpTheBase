@@ -35,11 +35,15 @@ void log_vector(cocos2d::Vec2 vector, std::string message="");
 template<typename mapT>
 typename mapT::mapped_type map_get(mapT& input_map, typename mapT::key_type& key, typename mapT::mapped_type& default_result)
 {
-    if (input_map.count(key)){
-        return input_map[key];
-    } else {
+    auto it = input_map.find(key);
+    if (it != input_map.end())
+    {
+        return it->second;
+    }
+    else
+    {
         return default_result;
-    };
+    }
 };
 
 std::vector<std::string>& split(const std::string &s, char delim, std::vector<std::string> &elems);
