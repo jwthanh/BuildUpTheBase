@@ -77,55 +77,61 @@ Buildup::Buildup()
 };
 
 ///for building in buildings, sum up their ingredients and return the map
-mistIngredient Buildup::get_all_ingredients() const
+mistIngredient& Buildup::get_all_ingredients()
 {
-    res_count_t def = 0.0;
-    mistIngredient result;
-
-    for (auto type_str : Ingredient::type_map)
-    {
-        result[type_str.first] = 0.0;
-    }
-    for (spBuilding& building : this->city->buildings)
-    {
-        mistIngredient& ingredients = building->ingredients;
-
-        for (std::pair<Ingredient::SubType, res_count_t>&& mist : ingredients)
-        {
-            result[mist.first] += mist.second;
-        }
-    }
-
-    return result;
+    return this->_all_ingredients;
+//     res_count_t def = 0.0;
+//     mistIngredient result;
+// 
+//     for (auto type_str : Ingredient::type_map)
+//     {
+//         result[type_str.first] = 0.0;
+//     }
+//     for (spBuilding& building : this->city->buildings)
+//     {
+//         mistIngredient& ingredients = building->ingredients;
+// 
+//         for (std::pair<Ingredient::SubType, res_count_t>&& mist : ingredients)
+//         {
+//             result[mist.first] += mist.second;
+//         }
+//     }
+// 
+//     return result;
 }
 
-//for each building that has one of the ingredients, remove one at a time until there's no to sell left
-void Buildup::remove_shared_ingredients_from_all(Ingredient::SubType ing_type, res_count_t count) const
+//remove ing type count from list, making sure it doesnt result in less than 0
+void Buildup::remove_shared_ingredients_from_all(Ingredient::SubType ing_type, res_count_t removals)
 {
-
-    vsBuilding matching_buildings;
-
-    for (spBuilding building : this->city->buildings)
+    mistIngredient& all_ingredients = this->get_all_ingredients();
+    all_ingredients[ing_type] -= removals;
+    if (all_ingredients[ing_type] < 0.0)
     {
-        mistIngredient ingredients = building->ingredients;
+        all_ingredients[ing_type] = 0.0;
+    };
+    // vsBuilding matching_buildings;
 
-        res_count_t def = 0;
-        res_count_t existing_val = map_get(ingredients, ing_type, def);
-        if (existing_val != 0) {
-            matching_buildings.push_back(building);
-        };
-    }
+    // for (spBuilding building : this->city->buildings)
+    // {
+    //     mistIngredient ingredients = building->ingredients;
 
-    unsigned int matches = matching_buildings.size();
-    if (matches != 0) {
-        res_count_t individual_cost = count/matches;
+    //     res_count_t def = 0;
+    //     res_count_t existing_val = map_get(ingredients, ing_type, def);
+    //     if (existing_val != 0) {
+    //         matching_buildings.push_back(building);
+    //     };
+    // }
 
-        for (spBuilding building : matching_buildings)
-        {
-            mistIngredient& ingredients = building->ingredients;
-            ingredients.at(ing_type) -= individual_cost;
-        };
-    }
+    // unsigned int matches = matching_buildings.size();
+    // if (matches != 0) {
+    //     res_count_t individual_cost = count/matches;
+
+    //     for (spBuilding building : matching_buildings)
+    //     {
+    //         mistIngredient& ingredients = building->ingredients;
+    //         ingredients.at(ing_type) -= individual_cost;
+    //     };
+    // }
 };
 
 void Village::update(float dt)

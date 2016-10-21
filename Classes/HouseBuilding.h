@@ -151,8 +151,11 @@ class Buildup
 
         spClock server_clock;
 
-        mistIngredient get_all_ingredients() const;
-        void remove_shared_ingredients_from_all(Ingredient::SubType ing_type, res_count_t count) const;
+    private:
+        mistIngredient _all_ingredients;
+    public:
+        mistIngredient& get_all_ingredients();
+        void remove_shared_ingredients_from_all(Ingredient::SubType ing_type, res_count_t count);
 
         Buildup();
         void update(float dt);
