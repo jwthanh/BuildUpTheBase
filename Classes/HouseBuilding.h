@@ -32,7 +32,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         Ingredient::SubType punched_sub_type;
 
-        mistIngredient ingredients;
+        //mistIngredient ingredients;
         mistProduct products;
         mistWaste wastes;
 

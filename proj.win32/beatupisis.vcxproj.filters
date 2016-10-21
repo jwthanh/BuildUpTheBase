@@ -52,7 +52,6 @@
     <ClCompile Include="..\Classes\GameLogic.cpp" />
     <ClCompile Include="..\Classes\MiscUI.cpp" />
     <ClCompile Include="..\Classes\Network.cpp" />
-    <ClCompile Include="..\Classes\Animal.cpp" />
     <ClCompile Include="..\Classes\Updateable.cpp" />
     <ClCompile Include="..\Classes\Fighter.cpp" />
     <ClCompile Include="..\Classes\BuildingsSideBar.cpp" />
@@ -125,7 +124,6 @@
     <ClInclude Include="..\Classes\GameLogic.h" />
     <ClInclude Include="..\Classes\MiscUI.h" />
     <ClInclude Include="..\Classes\Network.h" />
-    <ClInclude Include="..\Classes\Animal.h" />
     <ClInclude Include="..\Classes\Updateable.h" />
     <ClInclude Include="..\Classes\Fighter.h" />
     <ClInclude Include="..\Classes\BuildingsSideBar.h" />
