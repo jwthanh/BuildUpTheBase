@@ -764,10 +764,6 @@ void BaseScene::create_inventory_listview()
     auto inst = CSLoader::getInstance();
     auto update_listview = [this, inst, inventory_listview](float dt)
     {
-        auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
-        auto orig_item_panel = dynamic_cast<ui::Button*>(raw_node->getChildByName("item_panel"));
-        orig_item_panel->removeFromParent();
-
         typedef std::pair<Ingredient::SubType, res_count_t> maptype;
         auto order_by_count = [](maptype left, maptype right)
         {
@@ -819,6 +815,12 @@ void BaseScene::create_inventory_listview()
             {
                 continue;
             }
+
+            //from the inv button take the panel, remove it from the button,
+            //clone it and use the clone
+            auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
+            auto orig_item_panel = dynamic_cast<ui::Button*>(raw_node->getChildByName("item_panel")); //TODO do we need to clone, why not use it
+            orig_item_panel->removeFromParent();
 
             auto new_item_panel = dynamic_cast<ui::Button*>(orig_item_panel->clone());
             load_default_button_textures(new_item_panel);
