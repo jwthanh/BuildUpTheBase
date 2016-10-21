@@ -98,7 +98,7 @@ std::string GameLogic::existing_player_load()
     std::chrono::duration<double, std::ratio<3600>> hours_since_last_login = BEATUP->hours_since_last_login();
 
 
-    auto original_ingredients = BUILDUP->get_all_ingredients();
+    auto original_ingredients = BUILDUP->get_all_ingredients(); //NOTE create a copy to reference later
     auto seconds = std::chrono::duration_cast<std::chrono::seconds>(hours_since_last_login);
     long long seconds_count = seconds.count();
 
@@ -481,7 +481,7 @@ void GameDirector::switch_to_city_menu()
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
             do_vibrate(32); //vibrate for two frames
-            mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+            mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
             res_count_t _def = 0;
             IngredientSubType ing_type = IngredientSubType::Soul;
             res_count_t appease_count = 1.0;
@@ -493,7 +493,7 @@ void GameDirector::switch_to_city_menu()
         }
     });
     auto appeasement_btn_update = [appeasement_button](float dt) {
-        mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+        mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
         res_count_t _def = 0;
         auto it = Ingredient::SubType::Soul;
         if (map_get(city_ingredients, it, _def) < 1.0)

@@ -559,7 +559,7 @@ bool CraftingHarvestable::can_satisfy_recipe_per_click()
 {
     if (this->recipe == NULL) { return false; }
 
-    auto all_ingredients = BUILDUP->get_all_ingredients();
+    auto& all_ingredients = BUILDUP->get_all_ingredients();
 
     //go through each component, for each ing, make sure we've got at least one
     // otherwise short circuit and fail fast
@@ -586,7 +586,7 @@ void CraftingHarvestable::on_harvest()
 {
     if (!this->recipe) { return; }
 
-    auto all_ingredients = BUILDUP->get_all_ingredients();
+    auto& all_ingredients = BUILDUP->get_all_ingredients();
 
     bool can_satisfy = this->can_satisfy_recipe_per_click();
 

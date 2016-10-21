@@ -363,7 +363,7 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
         Recipe heal_recipe = Recipe("HealingGrain");
         heal_recipe.components[Ingredient::SubType::Grain] = 5;
 
-        auto all_ingredients = BUILDUP->get_all_ingredients();
+        auto& all_ingredients = BUILDUP->get_all_ingredients();
 
         if (heal_recipe.is_satisfied(all_ingredients))
         {

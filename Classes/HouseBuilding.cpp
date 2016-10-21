@@ -321,7 +321,7 @@ void Building::create_wastes(Waste::SubType sub_type, res_count_t quantity)
 
 void Building::consume_recipe(Recipe* recipe)
 {
-    auto all_ingredients = BUILDUP->get_all_ingredients();
+    auto& all_ingredients = BUILDUP->get_all_ingredients();
     if (recipe->is_satisfied(all_ingredients))
     {
         recipe->consume();

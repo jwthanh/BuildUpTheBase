@@ -71,7 +71,7 @@ bool Recipe::is_satisfied(mistIngredient input)
 void Recipe::consume()
 {
     ComponentMap temp_map = ComponentMap(this->components);
-    auto all_ingredients = BUILDUP->get_all_ingredients();
+    auto& all_ingredients = BUILDUP->get_all_ingredients();
     if (this->is_satisfied(all_ingredients))
     {
         for (auto component_pair : temp_map)

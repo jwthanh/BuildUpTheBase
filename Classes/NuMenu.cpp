@@ -402,7 +402,7 @@ void RecipeNuItem::update_func(float dt)
         return;
     };
 
-    auto all_ingredients = BUILDUP->get_all_ingredients();
+    auto& all_ingredients = BUILDUP->get_all_ingredients();
     if (this->recipe->is_satisfied(all_ingredients)){
         this->try_set_enable(true);
     } else {
@@ -460,7 +460,7 @@ void TechNuItem::update_func(float dt)
     };
 
     auto ing_requirements = this->technology->get_ingredient_requirements(this->building);
-    auto all_ingredients = BUILDUP->get_all_ingredients();
+    auto& all_ingredients = BUILDUP->get_all_ingredients();
     bool tech_is_satisfied = ing_requirements->is_satisfied(all_ingredients);
     if (tech_is_satisfied)
     {

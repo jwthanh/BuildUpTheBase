@@ -771,7 +771,7 @@ void BaseScene::create_inventory_listview()
         };
 
         std::vector<maptype> type_vec;
-        mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+        mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
 
         res_count_t _def = -1;
         for (auto&& ts : Ingredient::type_map)
@@ -868,7 +868,7 @@ void BaseScene::create_inventory_listview()
                 char buffer[50];
 
                 res_count_t _def = -1;
-                mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+                mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
                 res_count_t count = map_get(city_ingredients, it, _def);
                 sprintf(buffer, "%s\n%s", beautify_double(count).c_str(), type_str.c_str());
                 auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
@@ -1035,7 +1035,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
     alert_panel->schedule([count_lbl, ing_type](float) {
         auto it = ing_type;
-        auto all_ing = BUILDUP->get_all_ingredients();
+        auto& all_ing = BUILDUP->get_all_ingredients();
         res_count_t _def = 0.0;
         res_count_t count = map_get(all_ing, it, _def);
         count_lbl->setString(beautify_double(count));
@@ -1050,7 +1050,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold](Ref* touch, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+                mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
 
                 res_count_t _def = 0;
                 auto it = ing_type;
@@ -1075,7 +1075,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         });
 
         sell_btn->schedule([sell_btn, this, ing_type, amount_sold](float){
-            mistIngredient city_ingredients = BUILDUP->get_all_ingredients();
+            mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
             res_count_t _def = 0;
             auto it = ing_type;
             if (map_get(city_ingredients, it, _def) < amount_sold)
