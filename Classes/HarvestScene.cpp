@@ -578,7 +578,7 @@ void BaseScene::create_info_panel()
             cached->storage_str = beautify_double(storage_space);
         }
 
-        res_count_t ing_count_val = building->count_ingredients();
+        res_count_t ing_count_val = BUILDUP->count_ingredients(building->punched_sub_type);
         if (cached->ing_count != ing_count_val)
         {
             cached->ing_count = ing_count_val;

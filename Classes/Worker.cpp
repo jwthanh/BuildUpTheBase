@@ -250,7 +250,7 @@ void ConsumerHarvester::on_update(float dt)
     res_count_t blood_cost = 5.0;
     res_count_t active_cost = blood_cost * this->active_count;
     mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
-    if (this->building->count_ingredients(Ingredient::SubType::Blood) >= active_cost) {
+    if (BUILDUP->count_ingredients(Ingredient::SubType::Blood) >= active_cost) {
         auto health = BUILDUP->fighter->attrs->health;
         if (health->is_full() == false)
         {

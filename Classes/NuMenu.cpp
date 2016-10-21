@@ -414,7 +414,7 @@ void RecipeNuItem::update_func(float dt)
     res_count_t result_count = 0;
     for (auto output_ing : this->recipe->outputs) {
         auto out_type = output_ing.first;
-        result_count += this->building->count_ingredients(out_type);
+        result_count += BUILDUP->count_ingredients(out_type);
     };
     this->set_count_lbl(result_count);
 }

@@ -71,8 +71,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         res_count_t get_total_harvester_output();
         res_count_t get_total_salesmen_output();
 
-        res_count_t count_ingredients();
-        res_count_t count_ingredients(Ingredient::SubType ing_type);
         res_count_t count_products();
         res_count_t count_products(Product::SubType pro_type);
         res_count_t count_wastes();
@@ -144,6 +142,8 @@ class Buildup
         Village* city;
 
         static Village* init_city(Buildup*);
+        res_count_t count_ingredients();
+        res_count_t count_ingredients(Ingredient::SubType ing_type);
 
         spClock server_clock;
 

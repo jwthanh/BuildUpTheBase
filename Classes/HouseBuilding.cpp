@@ -265,14 +265,6 @@ res_count_t Building::get_total_salesmen_output()
     return total;
 };
 
-res_count_t Building::count_ingredients(Ingredient::SubType ing_type)
-{
-    CCLOG("building count_ingredients is actually looking in all building's ingredients");
-    res_count_t def = 0;
-    mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
-    return map_get(all_ingredients, ing_type, def);
-};
-
 res_count_t Building::count_products(Product::SubType pro_type)
 {
     res_count_t def = 0;
@@ -301,9 +293,10 @@ void create(mistT& mist, res_count_t quantity, typename mistT::key_type sub_type
 
 void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t quantity)
 {
-    if (this->count_ingredients(sub_type) + quantity > this->get_storage_space())
+    //NOTE this compares this buildings limit against all the ingredients in the city. this might get weird
+    if (BUILDUP->count_ingredients(sub_type) + quantity > this->get_storage_space())
     {
-        quantity = this->get_storage_space() - this->count_ingredients(sub_type);
+        quantity = this->get_storage_space() - BUILDUP->count_ingredients(sub_type);
     };
 
     if (quantity > 0)
@@ -413,21 +406,6 @@ void Building::update(float dt)
     // }
 };
 
-res_count_t Building::count_ingredients()
-{
-    CCLOG("when is building::count_ingredients called?");
-    res_count_t total = 0;
-    res_count_t def = 0;
-    mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
-    for (auto&& type_str : Ingredient::type_map)
-    {
-        Ingredient::SubType type = type_str.first;
-        res_count_t count = map_get(all_ingredients, type, def);
-        total += count;
-    };
-    return total;
-};
-
 res_count_t Building::count_products()
 {
     res_count_t total = 0;
@@ -518,7 +496,8 @@ bool Building::is_storage_full_of_ingredients(Ingredient::SubType sub_type)
 
 bool Building::can_fit_more_ingredients(Ingredient::SubType sub_type, res_count_t quantity /*= 1*/)
 {
-    return this->count_ingredients(sub_type) + quantity <= this->get_storage_space();
+    //NOTE uses building storage but global ingredients, might get weird
+    return BUILDUP->count_ingredients(sub_type) + quantity <= this->get_storage_space();
 };
 
 void test_conditions()
@@ -741,6 +720,29 @@ void Buildup::set_target_building(spBuilding building)
 {
     this->_target_building = building;
 };
+
+res_count_t Buildup::count_ingredients()
+{
+    CCLOG("when is building::count_ingredients called?");
+    res_count_t total = 0;
+    res_count_t def = 0;
+    mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
+    for (auto&& type_str : Ingredient::type_map)
+    {
+        Ingredient::SubType type = type_str.first;
+        res_count_t count = map_get(all_ingredients, type, def);
+        total += count;
+    };
+    return total;
+};
+
+res_count_t Buildup::count_ingredients(Ingredient::SubType ing_type)
+{
+    res_count_t def = 0;
+    mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
+    return map_get(all_ingredients, ing_type, def);
+};
+
 void Player::update(float dt)
 {
     // printj("   The Player has "<< this->coins << "coins");
