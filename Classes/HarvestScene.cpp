@@ -1104,42 +1104,6 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     value_lbl->schedule(update_value_lbl, 0.2f, "update_value_lbl");
     update_value_lbl(0);
 
-
-
-    auto move_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName("move_btn"));
-    load_default_button_textures(move_btn);
-    move_btn->schedule([move_btn, this, ing_type](float){
-        spBuilding target_building = BUILDUP->get_target_building();
-        mistIngredient& ingredients = target_building->ingredients;
-        if (target_building == BUILDUP->city->building_by_name("The Workshop")){
-            move_btn->setVisible(false);
-        }
-        else if (target_building->count_ingredients(ing_type) < 10)
-        {
-            try_set_enabled(move_btn, false);
-        }
-        else
-        {
-            try_set_enabled(move_btn, true);
-        }
-    }, AVERAGE_DELAY, "move_btn_state_cb");
-
-    move_btn->addTouchEventListener([this, ing_type](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            mistIngredient& ingredients = BUILDUP->get_target_building()->ingredients;
-            if (ingredients.empty()){ return; }
-
-            Animal animal("WorkshopWagon");
-            animal.transfer_ingredients(
-                BUILDUP->get_target_building(),
-                BUILDUP->city->building_by_name("The Workshop"),
-                ing_type,
-                10);
-
-        }
-    });
-
     alert_panel->setPosition(this->get_center_pos());
 
     alert_panel->setName("inventory_detail_panel");
