@@ -15,7 +15,6 @@
 #include "attribute.h"
 #include "FShake.h"
 #include "MiscUI.h"
-#include "Animal.h"
 #include "Fighter.h"
 #include "attribute_container.h"
 

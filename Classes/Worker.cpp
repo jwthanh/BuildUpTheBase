@@ -17,10 +17,6 @@ Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     this->building = building;
 
     this->update_clock->set_threshold(1.0f); //unused
-
-    ResourceCondition* ingredient_condition = ResourceCondition::create_ingredient_condition(Ingredient::SubType::Berry, 1, "berry_name_huh");
-    ingredient_condition->is_satisfied(building);
-
 };
 
 void Worker::update(float dt)
@@ -42,21 +38,23 @@ void Worker::on_update(float dt)
 };
 
 bool ResourceCondition::is_satisfied(spBuilding building){
-    if (this->type_choice == Resource::Ingredient) {
-        return (int)building->ingredients.size() >= this->quantity;
-    }
-    else if (this->type_choice == Resource::Product) {
-        return (int)building->products.size() >= this->quantity;
-    }
-    else if (this->type_choice == Resource::Ingredient) {
-        return (int)building->wastes.size() >= this->quantity;
-    }
-    else {
-        unsigned int size = building->ingredients.size() +
-            building->products.size() +
-            building->wastes.size();
-        return (int)size >= this->quantity;
-    };
+    //if (this->type_choice == Resource::Ingredient) {
+    //    return (int)building->ingredients.size() >= this->quantity;
+    //}
+    //else if (this->type_choice == Resource::Product) {
+    //    return (int)building->products.size() >= this->quantity;
+    //}
+    //else if (this->type_choice == Resource::Ingredient) {
+    //    return (int)building->wastes.size() >= this->quantity;
+    //}
+    //else {
+    //    unsigned int size = building->ingredients.size() +
+    //        building->products.size() +
+    //        building->wastes.size();
+    //    return (int)size >= this->quantity;
+    //};
+    CCLOG("does this happen, resource condition check");
+    return false;
 };
 
 ResourceCondition* ResourceCondition::create_ingredient_condition(Ingredient::SubType ing_type, int quantity, std::string condition_name)
@@ -183,10 +181,12 @@ void Salesman::on_update(float dt)
     res_count_t base_sell_count = Salesman::get_to_sell_count(this->sub_type) * building->building_level;
     res_count_t active_sell_count = base_sell_count*this->active_count;
 
+    mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
+
     if (active_sell_count > 0)
     {
         res_count_t def = 0.0;
-        res_count_t max_can_sell = map_get(this->building->ingredients, ing_type, def);
+        res_count_t max_can_sell = map_get(all_ingredients, ing_type, def);
         if (max_can_sell != 0)
         {
             res_count_t to_sell = std::min(max_can_sell, active_sell_count);
@@ -197,7 +197,7 @@ void Salesman::on_update(float dt)
             {
                 std::string string_type = Ingredient::type_to_string(ing_type);
 
-                this->building->ingredients[ing_type] -= to_sell;
+                BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
                 res_count_t actual_value = (res_count_t)(to_sell*coins_gained);
                 BEATUP->add_total_coin(actual_value);
 
@@ -249,6 +249,7 @@ void ConsumerHarvester::on_update(float dt)
 {
     res_count_t blood_cost = 5.0;
     res_count_t active_cost = blood_cost * this->active_count;
+    mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
     if (this->building->count_ingredients(Ingredient::SubType::Blood) >= active_cost) {
         auto health = BUILDUP->fighter->attrs->health;
         if (health->is_full() == false)
@@ -257,7 +258,7 @@ void ConsumerHarvester::on_update(float dt)
             CCLOG("this building has enough blood, healing %f", healing);
 
             health->add_to_current_val((int)healing);
-            this->building->ingredients[Ingredient::SubType::Blood] -= active_cost;
+            all_ingredients[Ingredient::SubType::Blood] -= active_cost;
         }
 
     };

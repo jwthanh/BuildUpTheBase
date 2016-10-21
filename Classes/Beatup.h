@@ -63,12 +63,8 @@ class Beatup : public GameLayer
 
         cocos2d::NodeGrid* node_grid;
 
-        void print_inventory();
-        void hide_inventory();
-
         void set_target_building(spBuilding target);
         spBuilding get_target_building();
-
 
         cocos2d::Node* face_fight_node;
 

@@ -143,10 +143,7 @@ std::string GameLogic::existing_player_load()
         gains_ss << "Awfully suspicious..." << std::endl;
         LOG(WARNING) << "time jump cheat detected";
 
-        for (spBuilding building : BUILDUP->city->buildings)
-        {
-            building->ingredients = mistIngredient();
-        }
+        CCLOG("!!!todo load ingredients from file");
 
         BEATUP->_total_coins = 0;
 

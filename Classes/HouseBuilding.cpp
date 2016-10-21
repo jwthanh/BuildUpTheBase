@@ -25,7 +25,6 @@
 #include "FileOperation.h"
 #include "StaticData.h"
 
-#include "Animal.h"
 #include "Fighter.h"
 
 #include "attribute_container.h"
@@ -180,23 +179,24 @@ void move_if_sized(Resource::ResourceType res_type,
         unsigned int condition_size, unsigned int move_count,
         spBuilding from_bldg, spBuilding to_bldg, VoidFunc callback )
 {
-    unsigned int from_size;
-    if (res_type == Resource::Ingredient) from_size = from_bldg->ingredients.size();
-    else if (res_type == Resource::Product) from_size = from_bldg->products.size();
-    else if (res_type == Resource::Waste) from_size = from_bldg->wastes.size();
+    CCLOG("move if sized shouldnt be called");
+    //unsigned int from_size;
+    //if (res_type == Resource::Ingredient) from_size = from_bldg->ingredients.size();
+    //else if (res_type == Resource::Product) from_size = from_bldg->products.size();
+    //else if (res_type == Resource::Waste) from_size = from_bldg->wastes.size();
 
-    if (from_size >= condition_size)
-    {
-        if (move_count == 0) { move_count = condition_size; };
-        Animal animal = Animal("Horse");
-        animal.b2b_transfer(
-            from_bldg,
-            to_bldg,
-            res_type,
-            move_count
-            );
-        callback();
-    };
+    //if (from_size >= condition_size)
+    //{
+    //    if (move_count == 0) { move_count = condition_size; };
+    //    Animal animal = Animal("Horse");
+    //    animal.b2b_transfer(
+    //        from_bldg,
+    //        to_bldg,
+    //        res_type,
+    //        move_count
+    //        );
+    //    callback();
+    //};
 };
 
 Building::Building(Village* city, std::string name, std::string id_key) :
@@ -209,7 +209,7 @@ Building::Building(Village* city, std::string name, std::string id_key) :
     update_clock->set_threshold(1.0f);
     spawn_clock = new Clock(3);
 
-    ingredients = mistIngredient();
+    //ingredients = mistIngredient();
     products = mistProduct();
     wastes = mistWaste();
 
@@ -267,8 +267,10 @@ res_count_t Building::get_total_salesmen_output()
 
 res_count_t Building::count_ingredients(Ingredient::SubType ing_type)
 {
+    CCLOG("building count_ingredients is actually looking in all building's ingredients");
     res_count_t def = 0;
-    return map_get(this->ingredients, ing_type, def);
+    mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
+    return map_get(all_ingredients, ing_type, def);
 };
 
 res_count_t Building::count_products(Product::SubType pro_type)
@@ -306,7 +308,8 @@ void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t quan
 
     if (quantity > 0)
     {
-        create<mistIngredient>(this->ingredients, quantity, sub_type);
+        mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
+        create<mistIngredient>(all_ingredients, quantity, sub_type);
     } 
     else
     {
@@ -410,42 +413,19 @@ void Building::update(float dt)
     // }
 };
 
-std::string Building::get_specifics()
-{
-    return this->get_ingredients() + " " +
-    this->get_products() + " " +
-    this->get_wastes();
-    // this->get_fighters();
-
-};
-
 res_count_t Building::count_ingredients()
 {
+    CCLOG("when is building::count_ingredients called?");
     res_count_t total = 0;
     res_count_t def = 0;
+    mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
     for (auto&& type_str : Ingredient::type_map)
     {
         Ingredient::SubType type = type_str.first;
-        res_count_t count = map_get(this->ingredients, type, def);
+        res_count_t count = map_get(all_ingredients, type, def);
         total += count;
     };
     return total;
-};
-
-std::string Building::get_ingredients()
-{
-    std::stringstream ss;
-    for (auto type_str : Ingredient::type_map)
-    {
-        Ingredient::SubType type = type_str.first;
-        std::string str = type_str.second;
-        unsigned int count = this->ingredients[type];
-        if (count != 0)
-        {
-            ss << str << "(x" << count << ") ";
-        }
-    };
-    return ss.str();
 };
 
 res_count_t Building::count_products()
@@ -506,18 +486,6 @@ std::string Building::get_wastes()
     return ss.str();
 };
 
-std::string Building::get_inventory()
-{
-    std::stringstream ss;
-    ss << "ING: " << this->ingredients.size();
-    ss << " PDT: " << this->products.size();
-    ss << " WST: " << this->wastes.size();
-    ss << " FIT: " << this->fighters.size();
-    // ss << std::endl;
-
-    return ss.str();
-};
-
 std::map<int, res_count_t> level_output = {
     { 1, 25.0},
     { 2, 50.0},
@@ -555,35 +523,35 @@ bool Building::can_fit_more_ingredients(Ingredient::SubType sub_type, res_count_
 
 void test_conditions()
 {
-    mistIngredient inputs = {
-        { Ingredient::SubType::Grain , 2 },
-        { Ingredient::SubType::Iron, 1 }
-    };
+    //mistIngredient inputs = {
+    //    { Ingredient::SubType::Grain , 2 },
+    //    { Ingredient::SubType::Iron, 1 }
+    //};
 
-    auto city = new Village(NULL, "The Test City");
-    auto farm = std::make_shared<Building>(city, "The Test Farm", "test_farm");
-    farm->ingredients = inputs;
-    
-    ResourceCondition* rc = ResourceCondition::create_ingredient_condition(Ingredient::SubType::Grain, 2, "test condition");
-    // IngredientCondition rc = IngredientCondition(
-    //         IngredientCondition::TypeChoices::Ingredient,
-    //         Ingredient::SubType::Grain,
-    //         2,
-    //         "test condition");
+    //auto city = new Village(NULL, "The Test City");
+    //auto farm = std::make_shared<Building>(city, "The Test Farm", "test_farm");
+    //farm->ingredients = inputs;
+    //
+    //ResourceCondition* rc = ResourceCondition::create_ingredient_condition(Ingredient::SubType::Grain, 2, "test condition");
+    //// IngredientCondition rc = IngredientCondition(
+    ////         IngredientCondition::TypeChoices::Ingredient,
+    ////         Ingredient::SubType::Grain,
+    ////         2,
+    ////         "test condition");
 
-    assert(rc->is_satisfied(farm) == true);
+    //assert(rc->is_satisfied(farm) == true);
 
-    farm->ingredients = mistIngredient({
-        { Ingredient::SubType::Iron, 1 }
-    });
-    assert(rc->is_satisfied(farm) == false);
+    //farm->ingredients = mistIngredient({
+    //    { Ingredient::SubType::Iron, 1 }
+    //});
+    //assert(rc->is_satisfied(farm) == false);
 
-    rc->ing_type = Ingredient::SubType::Iron;
-    assert(rc->is_satisfied(farm) == false);
-    rc->quantity = 1;
-    assert(rc->is_satisfied(farm) == true);
+    //rc->ing_type = Ingredient::SubType::Iron;
+    //assert(rc->is_satisfied(farm) == false);
+    //rc->quantity = 1;
+    //assert(rc->is_satisfied(farm) == true);
 
-    delete rc;
+    //delete rc;
 
 };
 
@@ -760,11 +728,6 @@ Village* Buildup::init_city(Buildup* buildup)
     auto arena = city->building_by_name("The Arena");
     arena->fighters.push_back(buildup->fighter);
     arena->fighters.push_back(buildup->brawler);
-
-    Animal animal("ASD");
-    auto dump = city->building_by_name("The Dump");
-    animal.b2b_transfer(farm, dump, Resource::Ingredient, 10);
-
 
     return city;
 };

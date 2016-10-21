@@ -68,8 +68,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         void update(float dt);
 
-        std::string get_inventory();
-
         res_count_t get_total_harvester_output();
         res_count_t get_total_salesmen_output();
 
@@ -80,10 +78,8 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         res_count_t count_wastes();
         res_count_t count_wastes(Waste::SubType wst_type);
 
-        std::string get_ingredients();
         std::string get_products();
         std::string get_wastes();
-        std::string get_specifics();
 
 };
 

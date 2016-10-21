@@ -876,21 +876,20 @@ void SideListView::setup_powers_listview_as_powers()
             {
                 CCLOG("selling all by cb");
                 res_count_t sale_price = 10; //TODO use proper price
-                for (spBuilding building : BUILDUP->city->buildings)
+                mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
+                for (auto ingredient : all_ingredients)
                 {
-                    for (auto ingredient : building->ingredients)
+                    IngredientSubType ing_type = ingredient.first;
+                    //skip if in exclude
+                    if (std::find(excluded_ing_types.begin(), excluded_ing_types.end(), ing_type) != excluded_ing_types.end())
                     {
-                        IngredientSubType ing_type = ingredient.first;
-                        //skip if in exclude
-                        if (std::find(excluded_ing_types.begin(), excluded_ing_types.end(), ing_type) != excluded_ing_types.end())
-                        {
-                            continue;
-                        }
-                        res_count_t _def = 0;
-                        res_count_t ing_count = map_get(building->ingredients, ing_type, _def);
-                        BEATUP->add_total_coin(ing_count*sale_price);
-                        building->ingredients[ing_type] = 0;
+                        continue;
                     }
+                    res_count_t _def = 0;
+                    CCLOG("sell all doesnt use remove from shared all");
+                    res_count_t ing_count = map_get(all_ingredients, ing_type, _def);
+                    BEATUP->add_total_coin(ing_count*sale_price);
+                    all_ingredients[ing_type] = 0;
                 }
 
                 //start the countdown for the cooldown

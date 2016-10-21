@@ -24,7 +24,6 @@
 #include "Recipe.h"
 #include "attribute.h"
 #include "GameLogic.h"
-#include "Animal.h"
 #include "attribute_container.h"
 #include "combat.h"
 
@@ -76,8 +75,6 @@ bool Beatup::init()
     auto player = new Player("Jimothy");
     player->coins = 100;
     this->buildup->player = player; //this shouldn't set the other class right?
-
-    auto animal = std::make_shared<Animal>("Tank");
 
     this->buildup->city = Buildup::init_city(this->buildup);
     this->buildup->city->update_buildings(0);
@@ -287,85 +284,6 @@ spBuilding Beatup::get_target_building()
     return this->buildup->get_target_building();
 };
 
-void Beatup::print_inventory()
-{
-    this->hide_ui();
-
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    float y = visibleSize.height - sy(50);
-
-    auto make_label = [&](std::string name)
-    {
-        auto building = this->buildup->city->building_by_name("The " + name);
-        std::string lbl_string = (this->get_target_building() == building ? ">>" : "") + name + " " + building->get_inventory();
-        std::string spc_string = " " + building->get_specifics();
-
-        auto lbl = this->getChildByName(name);
-        auto specific = this->getChildByName(name + "_specific");
-        if (lbl)
-        {
-            ((Label*)lbl)->setString(lbl_string);
-            ((Label*)specific)->setString(spc_string);
-            lbl->setVisible(true);
-            specific->setVisible(true);
-        }
-        else
-        {
-            auto building_inv_lbl = Label::createWithTTF(lbl_string, DEFAULT_FONT, 24);
-            building_inv_lbl->setName(name);
-            building_inv_lbl->setAnchorPoint(Vec2(0, 0));
-            building_inv_lbl->setPosition(0, y);
-            this->addChild(building_inv_lbl);
-
-            y -= sy(25);
-            auto building_inv_spc_lbl = Label::createWithTTF(spc_string, DEFAULT_FONT, 24);
-            building_inv_spc_lbl->setName(name + "_specific");
-            building_inv_spc_lbl->setAnchorPoint(Vec2(0, 0));
-            building_inv_spc_lbl->setPosition(0, y);
-            this->addChild(building_inv_spc_lbl);
-        };
-
-        y -= sy(25);
-    };
-
-    make_label("Farm");
-    make_label("Dump");
-    make_label("Workshop");
-    make_label("Marketplace");
-    make_label("Arena");
-    make_label("Mine");
-    make_label("Graveyard");
-    make_label("Underscape");
-    make_label("Forest");
-
-}
-
-void Beatup::hide_inventory() 
-{
-    std::vector<std::string> building_names = {
-        "Farm",
-        "Dump",
-        "Workshop",
-        "Marketplace",
-        "Arena",
-        "Mine",
-        "Graveyard",
-        "Underscape",
-        "Forest"
-    };
-
-    for (auto name : building_names) {
-        auto lbl = this->getChildByName(name);
-        if (lbl) {
-            lbl->setVisible(false);
-        };
-
-        auto specific_lbl = this->getChildByName(name+"_specific");
-        if (specific_lbl) {
-            specific_lbl->setVisible(false);
-        };
-    };
-};
 
 void Beatup::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent)
 {
@@ -747,7 +665,8 @@ void Beatup::view_army()
     pKeybackListener->onKeyPressed = CC_CALLBACK_2(GameLayer::onKeyReleased, layer);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(pKeybackListener, layer);
 
-    for (unsigned int i = 0; i < this->buildup->city->building_by_name("The Farm")->ingredients.size(); i++) {
+    mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
+    for (unsigned int i = 0; i < all_ingredients.size(); i++) {
         Sprite* bad_mother = Sprite::createWithSpriteFrameName("townsmen8x8.png");
         bad_mother->setScale(8);
         bad_mother->setPosition(300 + CCRANDOM_0_1() * 400, 100 + CCRANDOM_0_1() * 400);
