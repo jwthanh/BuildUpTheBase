@@ -459,10 +459,14 @@ void IngredientSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& v
 
 rjValue& IngredientSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
 {
-    //UNUSED
-    CCLOG("IngredientSerializer::_get_member should be unused");
-    auto temp = new rjValue();
-    return *temp;
+    if (doc.HasMember(key) == false)
+    {
+        return doc; //null placeholder
+    }
+
+    //copy of Base::_get_memeber but because its protected I can't call it
+    rjValue& value = doc[key];
+    return value;
 };
 
 void IngredientSerializer::serialize()
@@ -501,7 +505,16 @@ void IngredientSerializer::load()
     //dont do work if there's nothing to do
     if (doc.IsObject() == false){ return; }
 
-    //TODO
+    auto& all_ingredients = BUILDUP->get_all_ingredients();
+    for (std::pair<Ingredient::SubType, std::string> type_str : Ingredient::type_map)
+    {
+        //TODO make this res_count_t instead
+        double saved_ing_count = this->get_double(doc, type_str.second, -1);
+        if (saved_ing_count != -1)
+        {
+            all_ingredients[type_str.first] = saved_ing_count;
+        }
+    }
 
 }
 

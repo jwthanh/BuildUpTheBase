@@ -349,6 +349,8 @@ void GameLogic::load_all()
 
     auto item_serializer = ItemSerializer("alpha_items.json");
     item_serializer.load();
+    auto ingredient_serializer = IngredientSerializer("alpha_ingredients.json");
+    ingredient_serializer.load();
 
     auto coins_from_data = DataManager::get_double_from_data(Beatup::total_coin_key);
     if (coins_from_data < 0.0)
