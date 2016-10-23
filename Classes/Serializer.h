@@ -6,6 +6,9 @@
 
 #include "constants.h"
 
+#include "SubTypes.h"
+
+
 
 namespace rj = rapidjson;
 
@@ -89,6 +92,20 @@ class ItemSerializer : public BaseSerializer
     private:
         virtual void _add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator) override;
         virtual rjValue& _get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator) override;
+};
+
+class IngredientSerializer : public BaseSerializer
+{
+    public:
+        IngredientSerializer(std::string filename);
+
+        void serialize() override;
+        void serialize_ing_type(rjDocument& doc, rapidjson::CrtAllocator& allocator, IngredientSubType ing_type, res_count_t count);
+        void load() override;
+
+    private:
+        virtual void _add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator) override;
+        virtual rjValue& _get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator);
 };
 
 #endif

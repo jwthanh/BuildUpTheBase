@@ -445,3 +445,63 @@ rjValue& ItemSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::
     auto temp = new rjValue();
     return *temp;
 }
+
+IngredientSerializer::IngredientSerializer(std::string filename)
+    : BaseSerializer(filename)
+{
+};
+
+void IngredientSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
+{
+    //UNUSED
+    CCLOG("IngredientSerializer::_add_member should be unused");
+};
+
+rjValue& IngredientSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
+{
+    //UNUSED
+    CCLOG("IngredientSerializer::_get_member should be unused");
+    auto temp = new rjValue();
+    return *temp;
+};
+
+void IngredientSerializer::serialize()
+{
+    rjDocument doc = rjDocument();
+    doc.SetObject();
+
+    rjDocument::AllocatorType& allocator = doc.GetAllocator();
+
+    for (std::pair<Ingredient::SubType, res_count_t> mist : BUILDUP->get_all_ingredients())
+    {
+        this->serialize_ing_type(doc, allocator, mist.first, mist.second);
+    };
+
+    this->save_document(doc);
+}
+
+void IngredientSerializer::serialize_ing_type(rjDocument& doc, rapidjson::CrtAllocator& allocator, IngredientSubType ing_type, res_count_t count)
+{
+    rjValue rj_key = rjValue();
+    std::string key = Ingredient::type_to_string(ing_type);
+    auto key_str = key.c_str();
+    auto key_len = key.length();
+    rj_key.SetString(key_str, key_len, allocator);
+
+    rjValue rj_value = rjValue();
+    rj_value.SetDouble(count);
+
+    doc.AddMember(rj_key.Move(), rj_value.Move(), allocator);
+
+};
+
+void IngredientSerializer::load()
+{
+    rjDocument doc = this->get_document();
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false){ return; }
+
+    //TODO
+
+}
+
