@@ -928,7 +928,7 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item = BuildingNuItem::create(listview, building);
             menu_item->setName(child_name);
             menu_item->set_title("Save Game");
-            menu_item->set_description("Autosaves on quit, but you never know.");
+            menu_item->set_description("Autosaves every 30s, but you never know.");
             menu_item->set_image("lineDark29.png");
 
             menu_item->set_touch_ended_callback([]()
@@ -1025,7 +1025,7 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item = BuildingNuItem::create(listview, building);
             menu_item->setName(child_name);
             menu_item->set_title("Open log");
-            menu_item->set_description("See what's been happening");
+            menu_item->set_description("See what's been happening behind the scenes.");
             menu_item->set_image("lineDark28.png");
 
             menu_item->set_touch_ended_callback([]()
