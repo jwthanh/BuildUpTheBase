@@ -20,7 +20,7 @@ USING_NS_CC;
 GameLogic* GameLogic::_instance = NULL;
 
 GameLogic::GameLogic()
-    : is_loaded(false)
+    : is_loaded(false), _can_vibrate(true)
 {
 
 };
@@ -329,6 +329,10 @@ void GameLogic::save_all()
     auto sidebar = harvest_scene->sidebar;
     DataManager::set_int_from_data("active_tab", (int)sidebar->tabs.active_tab);
 
+    //save vibration
+    std::string vibrate_key = "can_vibrate";
+    DataManager::set_bool_from_data(vibrate_key, GameLogic::getInstance()->get_can_vibrate());
+
     //set the last login time, set here and on load
     LOG(INFO) << "Marking last login";
     BEATUP->set_last_login();
@@ -341,6 +345,9 @@ void GameLogic::save_all()
 
 void GameLogic::load_all()
 {
+    std::string vibrate_key = "can_vibrate";
+    GameLogic::getInstance()->set_can_vibrate(DataManager::get_bool_from_data(vibrate_key, true));
+
     for (spBuilding building : BUILDUP->city->buildings)
     {
         auto bldg_serializer = BuildingSerializer("test_building.json", building);
@@ -372,6 +379,8 @@ void GameLogic::load_all()
     auto sidebar = harvest_scene->sidebar;
     TabManager::TabTypes tab_type = (TabManager::TabTypes)DataManager::get_int_from_data("active_tab", (int)TabManager::TabTypes::ShopTab);
     sidebar->tabs.set_tab_active(tab_type, building);
+
+
 };
 
 void GameLogic::load_all_as_cheater()
@@ -385,6 +394,15 @@ void GameLogic::load_all_as_cheater()
     BEATUP->_total_coins = 0.0;
 };
 
+void GameLogic::set_can_vibrate(bool can_vibrate)
+{
+    this->_can_vibrate = can_vibrate;
+};
+
+bool GameLogic::get_can_vibrate()
+{
+    return this->_can_vibrate;
+};
 
 void GameDirector::switch_to_building_menu()
 {

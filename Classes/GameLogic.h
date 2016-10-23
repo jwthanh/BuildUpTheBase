@@ -21,6 +21,8 @@ class GameLogic
         bool is_loaded;
         static GameLogic* _instance;
 
+        bool _can_vibrate;
+
     public:
         GameLogic();
         bool init();
@@ -59,6 +61,9 @@ class GameLogic
 
         void add_total_kills(int value);
         int get_total_kills();
+
+        void set_can_vibrate(bool can_vibrate);
+        bool get_can_vibrate();
 };
 
 class GameDirector

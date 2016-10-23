@@ -975,6 +975,12 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item->set_touch_ended_callback([]()
             {
                 CCLOG("Pressed toggle vibration");
+                auto game_logic = GameLogic::getInstance();
+                bool existing_vibration = game_logic->get_can_vibrate();
+                game_logic->set_can_vibrate(!existing_vibration);
+
+                //vibrate if now enabled
+                if (game_logic->get_can_vibrate()) { do_vibrate(16); };
 
             });
 

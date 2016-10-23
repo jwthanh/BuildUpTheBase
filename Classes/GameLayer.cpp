@@ -317,13 +317,16 @@ void GameLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
 void do_vibrate(int milliseconds)
 {
-#ifdef __ANDROID__
-    std::string vibrate_key = "vibration_enabled";
-    if (DataManager::get_bool_from_data(vibrate_key, true))
+    if (GameLogic::getInstance()->get_can_vibrate() == false)
     {
-        vibrate(milliseconds);
+        CCLOG("NOT vibrating");
+        return;
     };
+
+#ifdef __ANDROID__
+        vibrate(milliseconds);
 #else
+        CCLOG("vibrating");
 #endif
     //CCLOG("in do_vibrate");
 };
