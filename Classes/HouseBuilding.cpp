@@ -584,9 +584,9 @@ void Buildup::update(float dt)
 
 void Buildup::post_update()
 {
+    CCLOG("post_update to server");
     //Use username to auto update
     auto username = DataManager::get_string_from_data("username", "");
-    CCLOG("the existing username is '%s'", username.c_str());
 
     if (username == "") {
         CCLOG("blank username, not going to update");
@@ -638,7 +638,8 @@ void Buildup::post_update()
         buffer.GetString(),
         [server_url](std::string response)
     {
-        //CCLOG("response from %s:\n %s", server_url.c_str(), response.c_str());
+        CCLOG("done posting savefile to server...");
+        CCLOG("...server response: %s", response.c_str());
     });
 
 };
@@ -647,7 +648,7 @@ Village* Buildup::init_city(Buildup* buildup)
 {
 
 
-    buildup->server_clock = std::make_shared<Clock>(5.0f); //update server every 5 seconds
+    buildup->server_clock = std::make_shared<Clock>(30.0f); //update server every 30 seconds
 
     auto city = new Village(buildup, "Burlington");
 

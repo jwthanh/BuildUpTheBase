@@ -958,8 +958,8 @@ bool HarvestScene::init()
         GameLogic::getInstance()->post_load();
     });
 
-    //autosave every 15s
-    this->autosave_clock = new Clock(15.0f);
+    //autosave every 30s
+    this->autosave_clock = new Clock(30.0f);
 
 
     return true;
