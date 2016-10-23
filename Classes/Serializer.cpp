@@ -145,8 +145,6 @@ void BuildingSerializer::serialize()
     doc.SetObject();
 
     this->serialize_building_level(doc);
-    //TODO serialize ingreidnets
-    //this->serialize_ingredients(doc);
     this->serialize_workers(doc);
     this->serialize_tech(doc);
 
@@ -160,7 +158,7 @@ void BuildingSerializer::load()
     if (doc.IsObject() == false){ return; }
 
     this->load_building_level(doc);
-    this->load_ingredients(doc);
+    this->load_ingredients(doc); //TODO remove this after like halfway through november 2016 so everyone has all their resources still
     this->load_workers(doc);
     this->load_tech(doc);
 }
@@ -183,31 +181,23 @@ void BuildingSerializer::load_building_level(rjDocument& doc)
     }
 }
 
-void BuildingSerializer::serialize_ingredients(rjDocument& doc)
-{
-    //for (auto mist : this->building->ingredients)
-    //{
-    //    IngredientSubType sub_type = mist.first;
-    //    res_count_t count = mist.second;
-
-    //    this->set_double(doc, Ingredient::type_to_string(sub_type), count);
-    //}
-}
 
 void BuildingSerializer::load_ingredients(rjDocument& doc)
 {
     //dont do work if there's nothing to do
-    //if (doc.IsObject() == false){ return; }
+    if (doc.IsObject() == false){ return; }
 
-    //for (std::pair<Ingredient::SubType, std::string> pair : Ingredient::type_map)
-    //{
-    //    NOTE this isn't res_count_t aka long double, so we are going to lose data eventually!!!!
-    //    double ing_count = this->get_double(doc, pair.second, -1);
-    //    if (ing_count != -1)
-    //    {
-    //        this->building->ingredients[pair.first] = ing_count;
-    //    }
-    //}
+    for (std::pair<Ingredient::SubType, std::string> pair : Ingredient::type_map)
+    {
+       // TODO this isn't res_count_t aka long double, so we are going to lose data eventually!!!!
+       double ing_count = this->get_double(doc, pair.second, -1);
+       if (ing_count != -1)
+       {
+           //TODO this uses all buildings, but we should make it more explicit
+           //at some point
+           this->building->create_ingredients(pair.first, ing_count);
+       }
+    }
 }
 
 void BuildingSerializer::serialize_workers(rjDocument& doc)
