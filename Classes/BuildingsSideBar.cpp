@@ -969,18 +969,29 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item = BuildingNuItem::create(listview, building);
             menu_item->setName(child_name);
             menu_item->set_title("Toggle vibration");
-            menu_item->set_description("Tired of your phone vibrating? Press this");
             menu_item->set_image("lineDark28.png");
 
-            menu_item->set_touch_ended_callback([]()
+            auto game_logic = GameLogic::getInstance();
+            bool existing_vibration = game_logic->get_can_vibrate();
+            if (existing_vibration) { menu_item->set_description("Tired of your phone vibrating? Press this"); }
+            else if (!existing_vibration) { menu_item->set_description("Tired of your phone not vibrating? Press this"); }
+
+            menu_item->set_touch_ended_callback([menu_item]()
             {
-                CCLOG("Pressed toggle vibration");
                 auto game_logic = GameLogic::getInstance();
                 bool existing_vibration = game_logic->get_can_vibrate();
                 game_logic->set_can_vibrate(!existing_vibration);
 
                 //vibrate if now enabled
-                if (game_logic->get_can_vibrate()) { do_vibrate(16); };
+                if (game_logic->get_can_vibrate())
+                {
+                    do_vibrate(16);
+                    menu_item->set_description("Tired of your phone vibrating? Tap this.");
+                }
+                else
+                {
+                    menu_item->set_description("Tired of your phone not vibrating? Tap this.");
+                };
 
             });
 
