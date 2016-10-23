@@ -944,6 +944,45 @@ void SideListView::setup_powers_listview_as_powers()
         update_save(0);
 
 
+        ///toggle vibration alert
+        auto toggle_vibration = [this, listview, building, tab_type](float dt)
+        {
+            if (this->tabs.is_tab_active(tab_type, building) == false)
+            {
+                listview->setVisible(false);
+                return;
+            }
+            listview->setVisible(true);
+
+            //if the child already exists, put it at the back 
+            std::string child_name = "toggle_vibration";
+            auto existing_node = listview->getChildByName(child_name);
+            if (existing_node)
+            {
+                existing_node->removeFromParentAndCleanup(false);
+                listview->addChild(existing_node);
+                return;
+            }
+
+            //clone the new item
+            BuildingNuItem* menu_item;
+            menu_item = BuildingNuItem::create(listview, building);
+            menu_item->setName(child_name);
+            menu_item->set_title("Toggle vibration");
+            menu_item->set_description("Tired of your phone vibrating? Press this");
+            menu_item->set_image("lineDark28.png");
+
+            menu_item->set_touch_ended_callback([]()
+            {
+                CCLOG("Pressed toggle vibration");
+
+            });
+
+        };
+
+        listview->schedule(toggle_vibration, AVERAGE_DELAY, "toggle_vibration");
+        toggle_vibration(0);
+
         ///Open log alert
         auto open_log = [this, listview, building, tab_type](float dt)
         {
