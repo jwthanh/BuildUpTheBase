@@ -33,7 +33,7 @@ void DataManager::set_bool_from_data(std::string key, bool val)
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
     ud->setBoolForKey(key.c_str(), val);
-    CCLOG("setting bool %s for %b", key.c_str(), val);
+    CCLOG("setting bool %s for %i", key.c_str(), val);
 };
 
 int DataManager::get_int_from_data(std::string key, int _default)
