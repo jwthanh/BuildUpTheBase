@@ -243,6 +243,7 @@ void BaseScene::create_goal_loadingbar()
         if (BUILDUP->get_target_building()->name != "The Dump")
         {
             harvester_progress_panel->setVisible(false);
+            harvester_loading_bar->setPercent(0.0f);
         }
         else
         {
