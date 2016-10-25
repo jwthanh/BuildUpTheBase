@@ -601,7 +601,10 @@ void Buildup::post_update()
     std::stringstream coin_stream;
     coin_stream << coins;
     std::string coins_string = coin_stream.str();
-    coins_string = coins_string.substr(0, coins_string.find('.'));
+    if (coins_string.find("e") == std::string::npos)
+    {
+        coins_string = coins_string.substr(0, coins_string.find('.'));
+    }
 
     //create a json doc, set the { 'coins' : coins } json obj, along with the buildings json
     std::string savefile_path = "test_building.json";
