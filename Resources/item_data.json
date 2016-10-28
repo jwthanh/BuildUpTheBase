@@ -4,7 +4,7 @@
             "name": "Stone",
             "summary": "Dark, grey, and completely unremarkable.",
             "description": "It weighs more than you think, like you could throw it pretty far.",
-            "img_path": "",
+            "img_path": "items/stone.png",
             "scavenge_weight": 100.0,
             "base_cost": 65.0
         },
@@ -20,7 +20,7 @@
             "name": "Primrose",
             "summary": "Golden flowers. Smells like lettuce.",
             "description": "You stay far away from the things like this normally, but you're fine with this set of flowers. They look particularly good right now.",
-            "img_path": "",
+            "img_path": "items/primrose.png",
             "scavenge_weight": 135.0,
             "base_cost": 170.0
         },
