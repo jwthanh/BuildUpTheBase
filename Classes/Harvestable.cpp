@@ -153,17 +153,23 @@ void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, f
     floating_label->do_float();
 }
 
+std::string Harvestable::get_create_output_message()
+{
+    res_count_t output = this->get_per_touch_output();
+
+    std::stringstream ss;
+    ss << "+" << beautify_double(output) << " " << Ingredient::type_to_string(this->building->punched_sub_type);
+    return ss.str();
+}
+
 void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 {
     float end_scale = this->initial_scale*0.85f;
     float duration = 0.5f;
 
-    res_count_t output = this->get_per_touch_output();
+    std::string floating_msg = get_create_output_message();
+    Color4B floating_color = Color4B::WHITE;
 
-    std::stringstream ss;
-    ss << "+" << beautify_double(output) << " " << Ingredient::type_to_string(this->building->punched_sub_type);
-
-    std::string floating_msg = ss.str();
     if (this->building->can_fit_more_ingredients(this->building->punched_sub_type) == false)
     {
         std::vector<std::string> choices = {
@@ -183,12 +189,11 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         ui::Text* ingredient_count = dynamic_cast<ui::Text*>(raw_ingredient_count);
         animate_flash_action(ingredient_count, 0.2f, 1.15f);
         do_vibrate(16);
-        this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
+
+        floating_color = Color4B::RED;
     } 
-    else 
-    {
-        this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
-    };
+
+    this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, floating_color);
 }
 
 bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
