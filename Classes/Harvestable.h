@@ -92,6 +92,7 @@ class TreeHarvestable : public Harvestable
         CREATE_FUNC(TreeHarvestable);
         bool init();
         std::string get_sprite_path();
+        void on_harvest() override;
 };
 
 class DumpsterHarvestable : public Harvestable
@@ -188,5 +189,4 @@ class UndeadHarvestable : public Harvestable
         virtual void animate_clip() override;
         virtual void animate_rotate() override;
 };
-
 #endif
