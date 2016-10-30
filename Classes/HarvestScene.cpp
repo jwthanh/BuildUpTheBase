@@ -683,6 +683,11 @@ void BaseScene::create_username_input()
     username_input->addEventListener(textfield_listener);
 }
 
+struct player_hp_cache_t {
+    res_count_t last_cur_hp;
+    res_count_t last_max_hp;
+};
+
 void BaseScene::create_player_info_panel()
 {
     auto building = BUILDUP->get_target_building();
@@ -721,7 +726,14 @@ void BaseScene::create_player_info_panel()
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
     set_aliasing(player_gold_lbl, true);
     auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
-    auto update_player_info_lbls = [player_gold_lbl, player_hp_lbl](float dt){
+
+    //hp cache, used for animating changes
+    player_hp_cache_t* hp_cache = new player_hp_cache_t();
+    hp_cache->last_cur_hp = 0.0;
+    hp_cache->last_max_hp = 0.0;
+    player_hp_lbl->setUserData(hp_cache);
+
+    auto update_player_info_lbls = [player_gold_lbl, player_hp_lbl, hp_cache](float dt){
         //set gold
         std::stringstream coin_ss;
         res_count_t total_coins = BEATUP->get_total_coins();
@@ -733,14 +745,20 @@ void BaseScene::create_player_info_panel()
         //set hp
         std::stringstream hp_ss;
         auto hp = BUILDUP->fighter->attrs->health;
-        hp_ss << "HP: " << hp->current_val << "/" << hp->max_val;
-        player_hp_lbl->setString(hp_ss.str());
 
-        if (hp->is_empty()) {
-            try_set_text_color(player_hp_lbl, Color4B::RED);
-        } else {
-            try_set_text_color(player_hp_lbl, Color4B::WHITE);
-        }
+        if (hp->current_val != hp_cache->last_cur_hp)
+        {
+            hp_ss << "HP: " << hp->current_val << "/" << hp->max_val;
+            player_hp_lbl->setString(hp_ss.str());
+
+                if (hp->is_empty()) {
+                    try_set_text_color(player_hp_lbl, Color4B::RED);
+                } else {
+                    try_set_text_color(player_hp_lbl, Color4B::WHITE);
+                }
+
+            hp_cache->last_cur_hp = hp->current_val;
+        };
 
     };
     this->schedule(update_player_info_lbls, AVERAGE_DELAY, "update_player_info_lbls");
