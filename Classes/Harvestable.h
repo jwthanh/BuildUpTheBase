@@ -15,8 +15,6 @@ class Harvestable : public cocos2d::ui::Widget
 {
     private:
         IngredientSubType _current_output_ing_type;
-        IngredientSubType _default_output_ing_type; //Tree is berry
-        IngredientSubType _alternate_output_ing_type; //Tree is wood
 
 
     //needs to do something when harvested, animations

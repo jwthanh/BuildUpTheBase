@@ -85,8 +85,6 @@ bool Harvestable::init()
     this->setScale(this->initial_scale);
 
     this->_current_output_ing_type = this->building->punched_sub_type;
-    this->_default_output_ing_type = this->building->punched_sub_type;
-    this->_alternate_output_ing_type = this->building->punched_sub_type;
 
     return true;
 };
