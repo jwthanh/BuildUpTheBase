@@ -754,7 +754,8 @@ void BaseScene::create_player_info_panel()
                 if (hp->is_empty()) {
                     try_set_text_color(player_hp_lbl, Color4B::RED);
                 } else {
-                    try_set_text_color(player_hp_lbl, Color4B::WHITE);
+                    player_hp_lbl->stopAllActions();
+                    animate_flash_action(player_hp_lbl, 0.15f, 1.2f, Color3B::RED, Color3B::WHITE);
                 }
 
             hp_cache->last_cur_hp = hp->current_val;
