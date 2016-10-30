@@ -753,10 +753,8 @@ void BaseScene::create_player_info_panel()
             player_hp_lbl->setString(hp_ss.str());
 
                 if (hp->is_empty()) {
-                    try_set_text_color(player_hp_lbl, Color4B::RED);
+                    try_set_node_color(player_hp_lbl, Color3B::RED);
                 } else {
-                    player_hp_lbl->stopAllActions();
-
                     Color3B start_color = Color3B::RED;
                     if (hp->current_val > hp_cache->last_cur_hp)
                     {
