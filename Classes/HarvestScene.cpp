@@ -729,8 +729,9 @@ void BaseScene::create_player_info_panel()
 
     //hp cache, used for animating changes
     player_hp_cache_t* hp_cache = new player_hp_cache_t();
-    hp_cache->last_cur_hp = 0.0;
-    hp_cache->last_max_hp = 0.0;
+    auto hp = BUILDUP->fighter->attrs->health;
+    hp_cache->last_cur_hp = hp->current_val;
+    hp_cache->last_max_hp = hp->max_val;
     player_hp_lbl->setUserData(hp_cache);
 
     auto update_player_info_lbls = [player_gold_lbl, player_hp_lbl, hp_cache](float dt){
