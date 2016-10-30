@@ -103,7 +103,7 @@ class TreeHarvestable : public Harvestable
         CREATE_FUNC(TreeHarvestable);
         bool init();
         std::string get_sprite_path();
-        void on_harvest() override;
+        void animate_touch_start(cocos2d::Touch* touch);
 };
 
 class DumpsterHarvestable : public Harvestable

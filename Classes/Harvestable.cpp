@@ -388,24 +388,18 @@ std::string TreeHarvestable::get_sprite_path()
     return "tree.png";
 }
 
-void TreeHarvestable::on_harvest()
+
+void TreeHarvestable::animate_touch_start(cocos2d::Touch* touch)
 {
-    //this is on every click
     RandomWeightMap<Ingredient::SubType> item_rarity_map;
-    item_rarity_map.add_item(Ingredient::SubType::Berry, 80);
-    item_rarity_map.add_item(Ingredient::SubType::Wood, 20);
+    item_rarity_map.add_item(Ingredient::SubType::Berry, 95);
+    item_rarity_map.add_item(Ingredient::SubType::Wood, 5);
 
     Ingredient::SubType output = item_rarity_map.get_item();
-    this->building->create_ingredients(output, this->get_per_touch_output());
+    this->set_output_ing_type(output);
 
-    //this should be on shatter eventually, to line up with the floating label
-    GameLogic::getInstance()->add_total_harvests(1);
-}
-
-// void TreeHarvestable::animate_touch_start(cocos2d::Touch* touch)
-// {
-// 
-// };
+    Harvestable::animate_touch_start(touch); //super()
+};
 
 bool DumpsterHarvestable::init()
 {
