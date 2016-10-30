@@ -755,7 +755,13 @@ void BaseScene::create_player_info_panel()
                     try_set_text_color(player_hp_lbl, Color4B::RED);
                 } else {
                     player_hp_lbl->stopAllActions();
-                    animate_flash_action(player_hp_lbl, 0.15f, 1.2f, Color3B::RED, Color3B::WHITE);
+
+                    Color3B start_color = Color3B::RED;
+                    if (hp->current_val > hp_cache->last_cur_hp)
+                    {
+                        start_color = Color3B::GREEN;
+                    };
+                    animate_flash_action(player_hp_lbl, 0.15f, 1.2f, start_color, Color3B::WHITE);
                 }
 
             hp_cache->last_cur_hp = hp->current_val;
