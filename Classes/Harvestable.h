@@ -7,10 +7,16 @@
 
 #include "GameLayer.h"
 
+#include "SubTypes.h"
+
 class Beatup;
 
 class Harvestable : public cocos2d::ui::Widget
 {
+    private:
+        IngredientSubType _current_output_ing_type;
+        IngredientSubType _default_output_ing_type; //Tree is berry
+        IngredientSubType _alternate_output_ing_type; //Tree is wood
 
 
     //needs to do something when harvested, animations
@@ -42,6 +48,9 @@ class Harvestable : public cocos2d::ui::Widget
         virtual void animate_touch_start(cocos2d::Touch* touch);
         std::string get_create_output_message();
         virtual res_count_t get_per_touch_output();
+
+        IngredientSubType get_output_ing_type() const;
+        void set_output_ing_type(IngredientSubType ing_type);
 
         void spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, float duration, std::string floating_msg, cocos2d::Color4B text_color);
 

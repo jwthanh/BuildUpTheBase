@@ -84,6 +84,9 @@ bool Harvestable::init()
     this->initial_scale = 4;
     this->setScale(this->initial_scale);
 
+    this->_current_output_ing_type = this->building->punched_sub_type;
+    this->_default_output_ing_type = this->building->punched_sub_type;
+    this->_alternate_output_ing_type = this->building->punched_sub_type;
 
     return true;
 };
@@ -116,6 +119,15 @@ res_count_t Harvestable::get_per_touch_output()
 
     return base;
 }
+Ingredient::SubType Harvestable::get_output_ing_type() const
+{
+    return this->_current_output_ing_type;
+};
+
+void Harvestable::set_output_ing_type(Ingredient::SubType ing_type)
+{
+    this->_current_output_ing_type = ing_type;
+};
 
 void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, float duration, std::string floating_msg, Color4B text_color=Color4B::WHITE)
 {
