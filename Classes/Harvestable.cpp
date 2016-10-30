@@ -167,7 +167,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
     float end_scale = this->initial_scale*0.85f;
     float duration = 0.5f;
 
-    std::string floating_msg = get_create_output_message();
+    std::string floating_msg;
     Color4B floating_color = Color4B::WHITE;
 
     if (this->building->can_fit_more_ingredients(this->building->punched_sub_type) == false)
@@ -192,6 +192,10 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 
         floating_color = Color4B::RED;
     } 
+    else
+    {
+        floating_msg = get_create_output_message();
+    }
 
     this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, floating_color);
 }
