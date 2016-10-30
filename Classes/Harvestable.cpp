@@ -99,7 +99,7 @@ bool Harvestable::should_shatter()
 void Harvestable::on_harvest()
 {
     //this is on every click
-    this->building->create_ingredients(this->building->punched_sub_type, this->get_per_touch_output());
+    this->building->create_ingredients(this->get_output_ing_type(), this->get_per_touch_output());
 
     //this should be on shatter eventually, to line up with the floating label
     GameLogic::getInstance()->add_total_harvests(1);
@@ -170,7 +170,7 @@ std::string Harvestable::get_create_output_message()
     res_count_t output = this->get_per_touch_output();
 
     std::stringstream ss;
-    ss << "+" << beautify_double(output) << " " << Ingredient::type_to_string(this->building->punched_sub_type);
+    ss << "+" << beautify_double(output) << " " << Ingredient::type_to_string(this->get_output_ing_type());
     return ss.str();
 }
 
@@ -182,7 +182,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
     std::string floating_msg;
     Color4B floating_color = Color4B::WHITE;
 
-    if (this->building->can_fit_more_ingredients(this->building->punched_sub_type) == false)
+    if (this->building->can_fit_more_ingredients(this->get_output_ing_type()) == false)
     {
         std::vector<std::string> choices = {
             "Storage full",
@@ -241,7 +241,7 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
     animate_touch_end(touch);
 
     //FIXME remove hardcoded check for arena, otherwise the sword wont rotate
-    if (this->building->can_fit_more_ingredients(this->building->punched_sub_type) == false && this->building->name != "The Arena") 
+    if (this->building->can_fit_more_ingredients(this->get_output_ing_type()) == false && this->building->name != "The Arena") 
     {
         return;
     };
