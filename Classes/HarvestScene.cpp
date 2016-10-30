@@ -721,7 +721,7 @@ void BaseScene::create_player_info_panel()
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
     set_aliasing(player_gold_lbl, true);
     auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
-    auto update_gold_lbl = [player_gold_lbl, player_hp_lbl](float dt){
+    auto update_player_info_lbls = [player_gold_lbl, player_hp_lbl](float dt){
         //set gold
         std::stringstream coin_ss;
         res_count_t total_coins = BEATUP->get_total_coins();
@@ -743,8 +743,8 @@ void BaseScene::create_player_info_panel()
         }
 
     };
-    this->schedule(update_gold_lbl, AVERAGE_DELAY, "player_gold_lbl_update");
-    update_gold_lbl(0);
+    this->schedule(update_player_info_lbls, AVERAGE_DELAY, "update_player_info_lbls");
+    update_player_info_lbls(0);
 
     this->addChild(player_info_panel);
 };
