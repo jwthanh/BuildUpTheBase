@@ -36,7 +36,7 @@
             "name": "Bubbling Tonic",
             "summary": "Opaque liquid, bubbling endlessly.",
             "description": "You can't stop looking at it, wondering what would happen if you drank all of it. At once.",
-            "img_path": "",
+            "img_path": "items/tonic.png",
             "scavenge_weight": 30.0,
             "base_cost": 300.0
         },
