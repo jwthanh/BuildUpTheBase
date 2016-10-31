@@ -1048,6 +1048,10 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     std::string res_name = Ingredient::type_to_string(ing_type);
     resource_name->setString(res_name);
 
+    IngredientData ing_data = IngredientData(res_name);
+    auto resource_icon = dynamic_cast<ui::ImageView*>(alert_panel->getChildByName("resource_icon"));
+    resource_icon->loadTexture(ing_data.get_img_large());
+
     auto resource_description = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_description"));
     resource_description->setString(res_data.get_description());
 

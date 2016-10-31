@@ -33,7 +33,7 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="count_desc" ActionTag="682560615" Tag="29" IconVisible="False" LeftMargin="83.1363" RightMargin="183.1363" TopMargin="424.2040" BottomMargin="14.2040" IsCustomSize="True" FontSize="20" LabelText="You have:" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Bottom" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="count_desc" ActionTag="682560615" Tag="29" IconVisible="False" LeftMargin="83.1363" RightMargin="183.1363" TopMargin="424.2040" BottomMargin="14.2041" IsCustomSize="True" FontSize="20" LabelText="You have:" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Bottom" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="133.7275" Y="61.5919" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="150.0000" Y="45.0000" />
@@ -45,7 +45,7 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="count_lbl" ActionTag="-306751556" Tag="30" IconVisible="False" LeftMargin="217.4863" RightMargin="17.4863" TopMargin="424.4462" BottomMargin="14.4462" IsCustomSize="True" FontSize="20" LabelText="10000" VerticalAlignmentType="VT_Bottom" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="count_lbl" ActionTag="-306751556" Tag="30" IconVisible="False" LeftMargin="217.4864" RightMargin="17.4864" TopMargin="424.4462" BottomMargin="14.4461" IsCustomSize="True" FontSize="20" LabelText="10000" VerticalAlignmentType="VT_Bottom" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="165.0273" Y="61.1077" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="300.0000" Y="45.0000" />
@@ -187,6 +187,16 @@
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="resource_icon" ActionTag="40404423" Tag="161" IconVisible="False" LeftMargin="192.0000" RightMargin="192.0000" TopMargin="395.0000" BottomMargin="89.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+                <Size X="16.0000" Y="16.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="97.0000" />
+                <Scale ScaleX="7.0000" ScaleY="7.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.1940" />
+                <PreSize X="0.0400" Y="0.0320" />
+                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
