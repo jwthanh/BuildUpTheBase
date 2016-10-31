@@ -901,6 +901,7 @@ void BaseScene::create_inventory_listview()
             new_item_panel->schedule(update_lbl_cb, HALF_DELAY, "item_lbl_update");
 
             inventory_listview->addChild(new_item_panel);
+            inventory_listview->requestDoLayout();
         };
     };
 
