@@ -204,7 +204,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
     } 
     else
     {
-        floating_msg = get_create_output_message();
+        floating_msg = this->get_create_output_message();
     }
 
     this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, floating_color);
