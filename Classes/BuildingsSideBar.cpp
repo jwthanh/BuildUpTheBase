@@ -523,7 +523,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     {
                         blood_oath->name,
                         blood_oath->description,
-                        ""
+                        "menu_icons/bloodoath.png"
                     }});
             };
             if (building->name == "The Graveyard")
@@ -755,7 +755,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     {
                         "Bigger axes",
                         "",
-                        ""
+                        "menu_icons/wood_find_upgrade.png"
                     }});
             };
 
