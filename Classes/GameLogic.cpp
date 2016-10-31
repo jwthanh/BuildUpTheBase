@@ -125,14 +125,18 @@ std::string GameLogic::existing_player_load()
                 res_count_t gained = new_count - old_count;
                 gains_ss << "+Gained " << beautify_double(gained) << " " << Ingredient::type_to_string(ing_type);
 
-                for (spBuilding building : BUILDUP->city->buildings)
-                {
-                    if (building->is_storage_full_of_ingredients(ing_type))
-                    {
-                        at_capacity_ss << "- Upgrade " << building->name << " to fit more " << Ingredient::type_to_string(ing_type) << "!" << std::endl;
-                    }
+                ////FIXME since moving to shared ingredients,
+                //building->is_storage_full_of_ingredients checks global
+                //ingredients, so this needs to check only the appropriate
+                //building
+                // for (spBuilding building : BUILDUP->city->buildings)
+                // {
+                //     if (building->is_storage_full_of_ingredients(ing_type))
+                //     {
+                //         at_capacity_ss << "- Upgrade " << building->name << " to fit more " << Ingredient::type_to_string(ing_type) << "!" << std::endl;
+                //     }
 
-                }
+                // }
 
                 gains_ss << std::endl;
             }
