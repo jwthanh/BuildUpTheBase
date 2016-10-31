@@ -45,6 +45,7 @@ class Harvestable : public cocos2d::ui::Widget
 
         virtual void animate_touch_start(cocos2d::Touch* touch);
         std::string get_create_output_message();
+        virtual cocos2d::Color4B get_create_output_color();
         virtual res_count_t get_per_touch_output();
 
         IngredientSubType get_output_ing_type() const;
@@ -102,6 +103,8 @@ class TreeHarvestable : public Harvestable
         bool init();
         std::string get_sprite_path();
         void animate_touch_start(cocos2d::Touch* touch);
+
+        virtual cocos2d::Color4B get_create_output_color();
 };
 
 class DumpsterHarvestable : public Harvestable

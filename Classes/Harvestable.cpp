@@ -172,13 +172,19 @@ std::string Harvestable::get_create_output_message()
     return ss.str();
 }
 
+//default text floating color
+Color4B Harvestable::get_create_output_color()
+{
+    return Color4B::WHITE;
+};
+
 void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 {
     float end_scale = this->initial_scale*0.85f;
     float duration = 0.5f;
 
     std::string floating_msg;
-    Color4B floating_color = Color4B::WHITE;
+    Color4B floating_color;
 
     if (this->building->can_fit_more_ingredients(this->get_output_ing_type()) == false)
     {
@@ -205,6 +211,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
     else
     {
         floating_msg = this->get_create_output_message();
+        floating_color = this->get_create_output_color();
     }
 
     this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, floating_color);
@@ -397,6 +404,18 @@ void TreeHarvestable::animate_touch_start(cocos2d::Touch* touch)
     this->set_output_ing_type(output);
 
     Harvestable::animate_touch_start(touch); //super()
+};
+
+Color4B TreeHarvestable::get_create_output_color()
+{
+    if (this->get_output_ing_type() == Ingredient::SubType::Berry)
+    {
+        return Color4B::WHITE;
+    }
+    else
+    {
+        return Color4B::GREEN;
+    };
 };
 
 bool DumpsterHarvestable::init()
