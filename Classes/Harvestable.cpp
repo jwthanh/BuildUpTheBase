@@ -393,12 +393,20 @@ std::string TreeHarvestable::get_sprite_path()
     return "tree.png";
 }
 
-
 void TreeHarvestable::animate_touch_start(cocos2d::Touch* touch)
 {
     RandomWeightMap<Ingredient::SubType> item_rarity_map;
     item_rarity_map.add_item(Ingredient::SubType::Berry, 95);
-    item_rarity_map.add_item(Ingredient::SubType::Wood, 5);
+
+    int wood_weight = 5; //basic default
+    auto tech_map = this->building->techtree->get_tech_map();
+    TechSubType tech_type = Technology::SubType::BuyCabin;
+
+    res_count_t _def = 1L;
+    res_count_t times_doubled = map_get(tech_map, tech_type, _def);
+    wood_weight *= times_doubled+1;
+
+    item_rarity_map.add_item(Ingredient::SubType::Wood, wood_weight);
 
     Ingredient::SubType output = item_rarity_map.get_item();
     this->set_output_ing_type(output);
