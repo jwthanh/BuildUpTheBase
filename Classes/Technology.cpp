@@ -15,7 +15,7 @@ const std::map<Technology::SubType, std::string> Technology::type_map = {
     {Technology::SubType::CombatCritFactor, "combat_crit_factor"},
     {Technology::SubType::SalesmenBaseBoost, "salesmen_base_boost"},
     {Technology::SubType::CombatWeakenEnemy, "combat_weaken_enemy"},
-    {Technology::SubType::BuyCabin, "buy_cabin"}
+    {Technology::SubType::RaiseWoodFind, "raise_wood_find"}
 };
 
 
@@ -109,9 +109,9 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
 
         ss << "Doubles click output here\n-- costs " << beautify_double(paper_cost) << " paper";
     }
-    else if (this->sub_type == Technology::SubType::BuyCabin)
+    else if (this->sub_type == Technology::SubType::RaiseWoodFind)
     {
-        recipe = std::make_shared<Recipe>("buy_cabin", "no desc for tech recipe");
+        recipe = std::make_shared<Recipe>("raise_wood_find", "no desc for tech recipe");
 
         auto tech_map = building->techtree->tech_map;
         res_count_t _def = 0;

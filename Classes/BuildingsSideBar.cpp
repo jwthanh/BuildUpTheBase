@@ -687,9 +687,9 @@ void SideListView::setup_detail_listview_as_recipes()
 
             if (building->name == "The Forest")
             {
-                spTechnology buy_cabin = std::make_shared<Technology>(Technology::SubType::BuyCabin);
+                spTechnology raise_wood_find = std::make_shared<Technology>(Technology::SubType::RaiseWoodFind);
                 nuitems_config.push_back({
-                    buy_cabin,
+                    raise_wood_find,
                     DetailType::Tech,
                     {
                         "Bigger axes",

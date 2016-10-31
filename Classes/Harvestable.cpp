@@ -400,7 +400,7 @@ void TreeHarvestable::animate_touch_start(cocos2d::Touch* touch)
 
     int wood_weight = 5; //basic default
     auto tech_map = this->building->techtree->get_tech_map();
-    TechSubType tech_type = Technology::SubType::BuyCabin;
+    TechSubType tech_type = Technology::SubType::RaiseWoodFind;
 
     res_count_t _def = 1L;
     res_count_t times_doubled = map_get(tech_map, tech_type, _def);
