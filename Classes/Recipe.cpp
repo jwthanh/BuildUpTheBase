@@ -33,7 +33,7 @@ bool Recipe::is_satisfied(mistIngredient input)
 {
     ComponentMap input_components = ComponentMap();
 
-    for (auto ingredient : input)
+    for (auto& ingredient : input)
     {
         //if ingredient type's not in matches map, add it regardless of whether
         //its relevant or not
@@ -41,7 +41,7 @@ bool Recipe::is_satisfied(mistIngredient input)
         input_components[i_type] = input[i_type];
     };
 
-    for (auto pair : input_components)
+    for (auto& pair : input_components)
     {
         auto it = this->components.find(pair.first);
         //if the type isnt in the component map, ignore it
@@ -56,7 +56,7 @@ bool Recipe::is_satisfied(mistIngredient input)
 
     };
 
-    for (auto pair : this->components)
+    for (auto& pair : this->components)
     {
         auto it = input_components.find(pair.first);
         //if the type isnt in the inputs map, fail

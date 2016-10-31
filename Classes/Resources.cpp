@@ -61,7 +61,7 @@ ResType::SubType ResType::string_to_type(std::string string_type) \
 { \
     ResType::SubType result = ResType::SubType::None; \
     std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower); \
-    for (auto pair : ResType::type_map) \
+    for (auto& pair : ResType::type_map) \
     { \
         if (pair.second == string_type) \
         { \

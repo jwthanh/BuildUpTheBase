@@ -534,6 +534,9 @@ void BaseScene::create_info_panel()
             else {
                 arena_kill_lbl->setString("Choose a recipe");
             }
+        } else if (target_building->name == "The Mine") {
+            arena_kill_panel->setVisible(true);
+            arena_kill_lbl->setString("Depth: XXX");
         } else {
             arena_kill_panel->setVisible(false);
         }
