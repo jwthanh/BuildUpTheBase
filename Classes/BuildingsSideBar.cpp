@@ -466,6 +466,7 @@ void SideListView::setup_detail_listview_as_recipes()
             struct MenuItemConfig {
                 std::string name;
                 std::string description;
+                std::string local_img_path;
             };
 
             enum class DetailType
@@ -491,8 +492,10 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::Recipe,
                     {
                         recipe->name,
-                        recipe->description
-                    } });
+                        recipe->description,
+                        ""
+                    }
+                    });
             };
 
             if (building->name == "The Underscape")
@@ -519,8 +522,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::Recipe,
                     {
                         blood_oath->name,
-                        blood_oath->description
-                    } });
+                        blood_oath->description,
+                        ""
+                    }});
             };
             if (building->name == "The Graveyard")
             {
@@ -549,8 +553,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::Recipe,
                     {
                         blood_oath->name,
-                        blood_oath->description
-                    } });
+                        blood_oath->description,
+                        ""
+                    }});
             };
 
             if (building->name == "The Arena")
@@ -561,8 +566,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::Tech,
                     {
                         "Buy Sword",
+                        "",
                         ""
-                    } });
+                    }});
 
                 spTechnology crit_chance = std::make_shared<Technology>(Technology::SubType::CombatCritChance);
                 nuitems_config.push_back({
@@ -570,8 +576,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::Tech,
                     {
                         "Coat sword in oil",
+                        "",
                         ""
-                    } });
+                    }});
 
                 spTechnology crit_factor = std::make_shared<Technology>(Technology::SubType::CombatCritFactor);
                 nuitems_config.push_back({
@@ -579,8 +586,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::Tech,
                     {
                         "Sharpen blade",
+                        "",
                         ""
-                    } });
+                    }});
             };
 
             if (building->name == "The Dump")
@@ -630,8 +638,10 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::Recipe,
                     {
                         send_scavenger->name,
-                        send_scavenger->description
-                    } });
+                        send_scavenger->description,
+                        ""
+                    }
+                    });
             };
             if (building->name == "The Mine")
             {
@@ -657,8 +667,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::Recipe,
                     {
                         transmute_copper->name,
-                        transmute_copper->description
-                    } });
+                        transmute_copper->description,
+                        "ingredients/copper.png",
+                    }});
             };
 
             if (building->name == "The Marketplace")
@@ -669,8 +680,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::Tech,
                     {
                         "Double click power",
+                        "",
                         ""
-                    } });
+                    }});
             };
 
             if (building->name == "The Workshop")
@@ -697,8 +709,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::ChangeTargetRecipe,
                     {
                         salesmen_boost->name,
-                        salesmen_boost->description
-                    } });
+                        salesmen_boost->description,
+                        ""
+                    }});
 
                 //weaken flesh
                 spRecipe weaken_flesh = std::make_shared<Recipe>("Dead meat", "Three flies, flesh, and loaves make monsters weak");
@@ -724,8 +737,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::ChangeTargetRecipe,
                     {
                         weaken_flesh->name,
-                        weaken_flesh->description
-                    } });
+                        weaken_flesh->description,
+                        ""
+                    }});
             };
 
             int i = 0;
@@ -758,6 +772,10 @@ void SideListView::setup_detail_listview_as_recipes()
 
                 menu_item->set_title(config.config.name);
                 menu_item->set_description(config.config.description);
+                if (config.config.local_img_path != "")
+                {
+                    menu_item->set_image(config.config.local_img_path, ui::TextureResType::LOCAL);
+                };
 
                 //RecipeNuItem specifics
                 if (dynamic_cast<RecipeNuItem*>(menu_item))
