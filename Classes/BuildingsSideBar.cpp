@@ -961,7 +961,12 @@ void SideListView::setup_powers_listview_as_powers()
                 Ingredient::SubType::Soul,
                 Ingredient::SubType::Bread,
                 Ingredient::SubType::Loaf,
-                Ingredient::SubType::Undead
+                Ingredient::SubType::Undead,
+                Ingredient::SubType::Copper,
+                Ingredient::SubType::Iron,
+                Ingredient::SubType::Wood,
+                Ingredient::SubType::Minecart,
+                Ingredient::SubType::MineRails
             };
 
 
