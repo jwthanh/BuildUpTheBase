@@ -63,6 +63,14 @@
         "undead": {
             "description": "Minion, eager to labour for you.",
             "img_large": "ingredients/undead.png"
+        },
+        "minecart": {
+            "description": "Each one, bringing you deeper and deeper into the dark depths below.",
+            "img_large": "ingredients/minecart.png"
+        },
+        "minerails": {
+            "description": "Lay these down to allow minecarts to make their journey deeper.",
+            "img_large": "ingredients/minerails.png"
         }
     }
 }

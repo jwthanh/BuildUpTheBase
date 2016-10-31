@@ -645,6 +645,7 @@ void SideListView::setup_detail_listview_as_recipes()
             };
             if (building->name == "The Mine")
             {
+                //transmute copper
                 spRecipe transmute_copper = std::make_shared<Recipe>("Transmute: Iron", "10 Copper to 2 Iron");
                 transmute_copper->components = mistIngredient({
                     { Ingredient::SubType::Copper, 10 }
@@ -669,6 +670,66 @@ void SideListView::setup_detail_listview_as_recipes()
                         transmute_copper->name,
                         transmute_copper->description,
                         "ingredients/copper.png",
+                    }});
+
+                //build minecart
+                spRecipe build_minecart = std::make_shared<Recipe>("Build Minecart", "30 Wood, 8 Iron, 25 Copper");
+                build_minecart->components = mistIngredient({
+                    { Ingredient::SubType::Wood, 30 },
+                    { Ingredient::SubType::Iron, 8 },
+                    { Ingredient::SubType::Copper, 25 }
+                });
+                build_minecart->_callback = [building]()
+                {
+                    bool can_fit_more_carts = true; //TODO
+                    if (can_fit_more_carts)
+                    {
+                        building->create_ingredients(Ingredient::SubType::Minecart, 1);
+                    }
+                    else
+                    {
+                        //refund the cost
+                        building->create_ingredients(Ingredient::SubType::Wood, 30);
+                        building->create_ingredients(Ingredient::SubType::Iron, 8);
+                        building->create_ingredients(Ingredient::SubType::Copper, 25);
+                    };
+                };
+                nuitems_config.push_back({
+                    build_minecart,
+                    DetailType::Recipe,
+                    {
+                        build_minecart->name,
+                        build_minecart->description,
+                        "ingredients/minecart.png",
+                    }});
+
+                //build minerails
+                spRecipe build_minerails = std::make_shared<Recipe>("Build Rails", "10 Wood, 15 Copper");
+                build_minerails->components = mistIngredient({
+                    { Ingredient::SubType::Wood, 10 },
+                    { Ingredient::SubType::Copper, 15 }
+                });
+                build_minerails->_callback = [building]()
+                {
+                    bool can_fit_more_carts = true; //TODO
+                    if (can_fit_more_carts)
+                    {
+                        building->create_ingredients(Ingredient::SubType::MineRails, 1);
+                    }
+                    else
+                    {
+                        //refund the cost
+                        building->create_ingredients(Ingredient::SubType::Wood, 10);
+                        building->create_ingredients(Ingredient::SubType::Copper, 15);
+                    };
+                };
+                nuitems_config.push_back({
+                    build_minerails,
+                    DetailType::Recipe,
+                    {
+                        build_minerails->name,
+                        build_minerails->description,
+                        "ingredients/minerails.png",
                     }});
             };
 
