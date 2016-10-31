@@ -32,7 +32,8 @@ enum class TechSubType
     CombatCritChance = 3,
     CombatCritFactor = 4,
     SalesmenBaseBoost = 5,
-    CombatWeakenEnemy = 6
+    CombatWeakenEnemy = 6,
+    BuyCabin = 7
 };
 
 enum class WorkerSubType

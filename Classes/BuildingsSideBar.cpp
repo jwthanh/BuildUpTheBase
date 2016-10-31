@@ -554,7 +554,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     {
                         blood_oath->name,
                         blood_oath->description,
-                        ""
+                        "ingredients/undead.png"
                     }});
             };
 
@@ -639,7 +639,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     {
                         send_scavenger->name,
                         send_scavenger->description,
-                        ""
+                        "menu_icons/scavenge.png"
                     }
                     });
             };
@@ -680,6 +680,19 @@ void SideListView::setup_detail_listview_as_recipes()
                     DetailType::Tech,
                     {
                         "Double click power",
+                        "",
+                        ""
+                    }});
+            };
+
+            if (building->name == "The Forest")
+            {
+                spTechnology buy_cabin = std::make_shared<Technology>(Technology::SubType::BuyCabin);
+                nuitems_config.push_back({
+                    buy_cabin,
+                    DetailType::Tech,
+                    {
+                        "Bigger axes",
                         "",
                         ""
                     }});

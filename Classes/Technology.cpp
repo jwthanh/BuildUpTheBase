@@ -5,6 +5,7 @@
 #include "Recipe.h"
 #include "Util.h"
 
+//used for saving to file, and more
 const std::map<Technology::SubType, std::string> Technology::type_map = {
     {Technology::SubType::None, "none_tech_subtype"},
     {Technology::SubType::ClickDoublePower, "click_dbl_power"},
@@ -13,7 +14,8 @@ const std::map<Technology::SubType, std::string> Technology::type_map = {
     {Technology::SubType::CombatCritChance, "combat_crit_chance"},
     {Technology::SubType::CombatCritFactor, "combat_crit_factor"},
     {Technology::SubType::SalesmenBaseBoost, "salesmen_base_boost"},
-    {Technology::SubType::CombatWeakenEnemy, "combat_weaken_enemy"}
+    {Technology::SubType::CombatWeakenEnemy, "combat_weaken_enemy"},
+    {Technology::SubType::BuyCabin, "buy_cabin"}
 };
 
 
@@ -106,6 +108,17 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
         recipe->components = mistIngredient({{ Ingredient::SubType::Paper, paper_cost }});
 
         ss << "Doubles click output here\n-- costs " << beautify_double(paper_cost) << " paper";
+    }
+    else if (this->sub_type == Technology::SubType::BuyCabin)
+    {
+        recipe = std::make_shared<Recipe>("buy_cabin", "no desc for tech recipe");
+
+        auto tech_map = building->techtree->tech_map;
+        res_count_t _def = 0;
+        res_count_t wood_cost = std::floor(scale_number(20.0L, map_get(tech_map, this->sub_type, _def), 4.45L));
+        recipe->components = mistIngredient({{ Ingredient::SubType::Wood, wood_cost }});
+
+        ss << "More likely to find wood\n-- costs " << beautify_double(wood_cost) << " wood";
     }
     else
     {
