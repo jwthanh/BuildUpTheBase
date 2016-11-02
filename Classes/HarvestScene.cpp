@@ -127,6 +127,28 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
+        this->stopAllActions();
+        this->getScheduler()->unscheduleAll();
+        this->removeAllChildren();
+        auto map = TMXTiledMap::create("tilemaps/test_map.tmx");
+        this->addChild(map);
+        //auto layer = map->getLayer("background");
+        //if (!layer){ CCLOG("NO LAYER FOUND");  return; }
+        //Size map_size = map->getMapSize();
+        //for (float x = 0; x < map_size.width; x++)
+        //{
+        //    for (float y = 0; y < map_size.width; y++)
+        //    {
+        //        Vec2 pos = { x, y };
+        //        auto tile = layer->getTileAt(pos);
+        //        if (tile)
+        //        {
+        //            CCLOG("Found valid tile");
+        //        }
+        //    }
+        //}
+        map->setAnchorPoint( Vec2(0.5f, 0.5f) );
+        map->setPosition(this->get_center_pos());
     }
 }
 
