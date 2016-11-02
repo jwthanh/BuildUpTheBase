@@ -131,24 +131,51 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         this->getScheduler()->unscheduleAll();
         this->removeAllChildren();
         auto map = TMXTiledMap::create("tilemaps/test_map.tmx");
+        map->setScale(0.5f);
         this->addChild(map);
-        //auto layer = map->getLayer("background");
-        //if (!layer){ CCLOG("NO LAYER FOUND");  return; }
-        //Size map_size = map->getMapSize();
-        //for (float x = 0; x < map_size.width; x++)
-        //{
-        //    for (float y = 0; y < map_size.width; y++)
-        //    {
-        //        Vec2 pos = { x, y };
-        //        auto tile = layer->getTileAt(pos);
-        //        if (tile)
-        //        {
-        //            CCLOG("Found valid tile");
-        //        }
-        //    }
-        //}
+
         map->setAnchorPoint( Vec2(0.5f, 0.5f) );
         map->setPosition(this->get_center_pos());
+
+        auto layer = map->getLayer("background");
+        if (!layer){ CCLOG("NO LAYER FOUND");  return; }
+        Size map_size = map->getMapSize();
+        for (float x = 0; x < map_size.width; x++)
+        {
+           for (float y = 0; y < map_size.width; y++)
+           {
+               Vec2 pos = { x, y };
+               if (int(x) % 5 == 0)
+               {
+                   Sprite* tile = layer->getTileAt(pos);
+                   if (tile)
+                   {
+                       auto dispatcher = Director::getInstance()->getEventDispatcher();
+                       auto listener = EventListenerTouchOneByOne::create();
+                       listener->onTouchBegan = [layer, pos](Touch* touch, Event* event){
+                           auto sprite = event->getCurrentTarget();
+                           Point pt = touch->getLocation();
+                           Rect recTemp = sprite->getBoundingBox();
+                           recTemp.size.width*=sprite->getScaleX();
+                           recTemp.size.height*=sprite->getScaleX();
+                           if (recTemp.containsPoint(pt)) {
+                               //TOUCHED
+                               layer->setTileGID(2, pos);
+                               log_vector(pos, "touched");
+
+                           }
+                           else
+                           {
+                               //CCLOG("NOT TOUCHED");
+                           }
+                           //        log("not touched");
+                           return false;
+                       };
+                           dispatcher->addEventListenerWithSceneGraphPriority(listener, tile);
+                   }
+               };
+           }
+        }
     }
 }
 
