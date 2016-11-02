@@ -131,11 +131,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         this->getScheduler()->unscheduleAll();
         this->removeAllChildren();
         auto map = TMXTiledMap::create("tilemaps/test_map.tmx");
-        map->setScale(0.5f);
         this->addChild(map);
 
-        map->setAnchorPoint( Vec2(0.5f, 0.5f) );
-        map->setPosition(this->get_center_pos());
+        //map->setAnchorPoint( Vec2(0.5f, 0.5f) );
+        //map->setPosition(this->get_center_pos());
+        //map->setScale(0.5f);
 
         auto layer = map->getLayer("background");
         if (!layer){ CCLOG("NO LAYER FOUND");  return; }
@@ -145,19 +145,21 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
            for (float y = 0; y < map_size.width; y++)
            {
                Vec2 pos = { x, y };
-               if (int(x) % 5 == 0)
+               if (1)
                {
                    Sprite* tile = layer->getTileAt(pos);
                    if (tile)
                    {
                        auto dispatcher = Director::getInstance()->getEventDispatcher();
                        auto listener = EventListenerTouchOneByOne::create();
-                       listener->onTouchBegan = [layer, pos](Touch* touch, Event* event){
-                           auto sprite = event->getCurrentTarget();
+                       listener->onTouchBegan = [layer, pos, this, tile, map](Touch* touch, Event* event){
+                           auto sprite = tile;
                            Point pt = touch->getLocation();
                            Rect recTemp = sprite->getBoundingBox();
-                           recTemp.size.width*=sprite->getScaleX();
-                           recTemp.size.height*=sprite->getScaleX();
+                           recTemp.size.width*=map->getScaleX();
+                           recTemp.size.height*=map->getScaleY();
+                           recTemp.origin.x += map->getPositionX();
+                           recTemp.origin.y += map->getPositionY();
                            if (recTemp.containsPoint(pt)) {
                                //TOUCHED
                                layer->setTileGID(2, pos);
