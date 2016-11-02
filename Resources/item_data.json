@@ -47,6 +47,14 @@
             "img_path": "items/ashen_mirror.png",
             "scavenge_weight": 10.0,
             "base_cost": 765.0
+        },
+        "broadsword": {
+            "name": "Broadsword",
+            "summary": "A blade, long and shimmering.",
+            "description": "Amazing craftsmanship. Despite being heavier than you can carry, it's still something you drag around.",
+            "img_path": "items/broadsword.png",
+            "scavenge_weight": 100.0,
+            "base_cost": 125.0
         }
     }
 }

@@ -31,6 +31,9 @@
         </Folder>
         <Image Name="main_UI_export_10.png" />
         <TTF Name="pixelmix.ttf" />
+        <Folder Name="tilemaps">
+          <Project Name="Layer.csd" Type="Layer" />
+        </Folder>
       </RootFolder>
     </Group>
   </SolutionFolder>

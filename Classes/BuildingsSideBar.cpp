@@ -567,7 +567,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     {
                         "Buy Sword",
                         "",
-                        ""
+                        "menu_icons/combat_damage.png"
                     }});
 
                 spTechnology crit_chance = std::make_shared<Technology>(Technology::SubType::CombatCritChance);

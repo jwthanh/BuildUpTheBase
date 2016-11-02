@@ -127,20 +127,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        // this->popup_panel->animate_open();
-        MP_Manager& MP = MP_Manager::GetInstance();
-
-        k_emitter = 0;
-        HM_EMITTER hmEmitter = MP.GetFirstEmitter();
-        while (hmEmitter)
-        {
-            m_emitter[k_emitter] = hmEmitter;
-            k_emitter++;
-            hmEmitter = MP.GetNextEmitter(hmEmitter);
-        }
-
-        t_emitter = 0;
-        SelectEmitter(t_emitter);
     }
 }
 
@@ -872,7 +858,7 @@ void BaseScene::create_inventory_listview()
                     alert->setScale(0);
 
                     float duration = 0.25f;
-                    auto scale = ScaleTo::create(duration, 1.0f, 1.0f);
+                    auto scale = EaseOut::create(ScaleTo::create(duration, 1.0f, 1.0f), 1.5f);
 
                     Vec2 end_pos = this->get_center_pos();
                     auto move = MoveTo::create(duration, end_pos);
