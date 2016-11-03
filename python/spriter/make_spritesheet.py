@@ -21,9 +21,10 @@ for img_path in glob.glob("spritesheet_in/*png"):
     background = Image.new('RGBA', OUTPUT_SIZE, WHITE)
     bg_w, bg_h = background.size
 
-    offset = ((bg_w - img_w) / 2, (bg_h - img_h) / 2)
+    offset = ((bg_w - img_w) / 2, bg_w-img_h)
     background.paste(img, offset)
 
     out_path = "spritesheet_out\\"+img_path.name
-    print out_path
     background.save(out_path)
+
+print "Done"

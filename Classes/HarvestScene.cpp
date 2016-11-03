@@ -153,8 +153,8 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
                        auto dispatcher = Director::getInstance()->getEventDispatcher();
                        auto listener = EventListenerTouchOneByOne::create();
                        listener->onTouchBegan = [layer, pos, this, tile, map](Touch* touch, Event* event){
-                           auto sprite = tile;
-                           Point pt = touch->getLocation();
+                           auto sprite = event->getCurrentTarget();
+                           Point pt = this->convertToNodeSpace(touch->getLocation());
                            Rect recTemp = sprite->getBoundingBox();
                            recTemp.size.width*=map->getScaleX();
                            recTemp.size.height*=map->getScaleY();
@@ -162,7 +162,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
                            recTemp.origin.y += map->getPositionY();
                            if (recTemp.containsPoint(pt)) {
                                //TOUCHED
-                               layer->setTileGID(2, pos);
+                               layer->setTileGID(58, pos);
                                log_vector(pos, "touched");
 
                            }
