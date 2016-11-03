@@ -136,6 +136,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         //map->setAnchorPoint( Vec2(0.5f, 0.5f) );
         //map->setPosition(this->get_center_pos());
         //map->setScale(0.5f);
+        auto dispatcher = Director::getInstance()->getEventDispatcher();
 
         auto layer = map->getLayer("background");
         if (!layer){ CCLOG("NO LAYER FOUND");  return; }
@@ -145,37 +146,28 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
            for (float y = 0; y < map_size.width; y++)
            {
                Vec2 pos = { x, y };
-               if (1)
+               Sprite* tile = layer->getTileAt(pos);
+               if (tile)
                {
-                   Sprite* tile = layer->getTileAt(pos);
-                   if (tile)
-                   {
-                       auto dispatcher = Director::getInstance()->getEventDispatcher();
-                       auto listener = EventListenerTouchOneByOne::create();
-                       listener->onTouchBegan = [layer, pos, this, tile, map](Touch* touch, Event* event){
-                           auto sprite = event->getCurrentTarget();
-                           Point pt = this->convertToNodeSpace(touch->getLocation());
-                           Rect recTemp = sprite->getBoundingBox();
-                           recTemp.size.width*=map->getScaleX();
-                           recTemp.size.height*=map->getScaleY();
-                           recTemp.origin.x += map->getPositionX();
-                           recTemp.origin.y += map->getPositionY();
-                           if (recTemp.containsPoint(pt)) {
-                               //TOUCHED
-                               layer->setTileGID(58, pos);
-                               log_vector(pos, "touched");
+                   auto listener = EventListenerTouchOneByOne::create();
+                   listener->onTouchBegan = [layer, pos, this, tile, map](Touch* touch, Event* event){
+                       auto sprite = event->getCurrentTarget();
+                       Point pt = this->convertToNodeSpace(touch->getLocation());
+                       Rect recTemp = sprite->getBoundingBox();
+                       recTemp.size.width *= map->getScaleX();
+                       recTemp.size.height *= map->getScaleY();
+                       recTemp.origin.x += map->getPositionX();
+                       recTemp.origin.y += map->getPositionY();
+                       if (recTemp.containsPoint(pt)) {
+                           //TOUCHED
+                           layer->setTileGID(58, pos);
+                           log_vector(pos, "touched");
 
-                           }
-                           else
-                           {
-                               //CCLOG("NOT TOUCHED");
-                           }
-                           //        log("not touched");
-                           return false;
-                       };
-                           dispatcher->addEventListenerWithSceneGraphPriority(listener, tile);
-                   }
-               };
+                       }
+                       return false;
+                   };
+                   dispatcher->addEventListenerWithSceneGraphPriority(listener, tile);
+               }
            }
         }
     }
