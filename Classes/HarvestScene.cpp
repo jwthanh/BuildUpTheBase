@@ -74,7 +74,7 @@ void BaseScene::update(float dt)
 
 void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
-    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    if (keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
     {
         this->quit(NULL);
         event->stopPropagation();
@@ -87,13 +87,13 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         auto director = Director::getInstance();
         director->setDisplayStats(!director->isDisplayStats());
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_F1) 
+    else if (keyCode == EventKeyboard::KeyCode::KEY_F1)
     {
         auto glView = Director::getInstance()->getOpenGLView();
         glView->setFrameSize(1920, 1080);
         glView->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_F2) 
+    else if (keyCode == EventKeyboard::KeyCode::KEY_F2)
     {
         auto glView = Director::getInstance()->getOpenGLView();
         glView->setFrameSize(960, 640);
@@ -133,43 +133,53 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         auto map = TMXTiledMap::create("tilemaps/test_map.tmx");
         this->addChild(map);
 
-        //map->setAnchorPoint( Vec2(0.5f, 0.5f) );
-        //map->setPosition(this->get_center_pos());
-        //map->setScale(0.5f);
-        auto dispatcher = Director::getInstance()->getEventDispatcher();
 
         auto layer = map->getLayer("background");
         if (!layer){ CCLOG("NO LAYER FOUND");  return; }
         Size map_size = map->getMapSize();
-        for (float x = 0; x < map_size.width; x++)
-        {
-           for (float y = 0; y < map_size.width; y++)
-           {
-               Vec2 pos = { x, y };
-               Sprite* tile = layer->getTileAt(pos);
-               if (tile)
-               {
-                   auto listener = EventListenerTouchOneByOne::create();
-                   listener->onTouchBegan = [layer, pos, this, tile, map](Touch* touch, Event* event){
-                       auto sprite = event->getCurrentTarget();
-                       Point pt = this->convertToNodeSpace(touch->getLocation());
-                       Rect recTemp = sprite->getBoundingBox();
-                       recTemp.size.width *= map->getScaleX();
-                       recTemp.size.height *= map->getScaleY();
-                       recTemp.origin.x += map->getPositionX();
-                       recTemp.origin.y += map->getPositionY();
-                       if (recTemp.containsPoint(pt)) {
-                           //TOUCHED
-                           layer->setTileGID(58, pos);
-                           log_vector(pos, "touched");
+        auto listener = EventListenerTouchOneByOne::create();
+        listener->setSwallowTouches(true);
+        listener->onTouchBegan = [layer, this, map](Touch* touch, Event* event){
 
-                       }
-                       return false;
-                   };
-                   dispatcher->addEventListenerWithSceneGraphPriority(listener, tile);
-               }
-           }
-        }
+            // auto sprite = event->getCurrentTarget();
+            Vec2 world_pos = this->convertToNodeSpace(touch->getLocation());
+            auto pWorld = /*world_pos;*/ map->convertToNodeSpace(world_pos);
+
+            Vec2 tile_pos{};
+            // iso diamond
+            float wx = pWorld.x;
+            float wy = pWorld.y;
+            wx *= CC_CONTENT_SCALE_FACTOR();
+            wy *= CC_CONTENT_SCALE_FACTOR();
+
+            float tw = map->getTileSize().width;
+            float th = map->getTileSize().height;
+            float mw = layer->getLayerSize().width;
+            float mh = layer->getLayerSize().height;
+
+            float isox = floorf(mh - wy / th + wx / tw - mw / 2);
+            float isoy = floorf(mh - wy / th - wx / tw + mw / 2 - 1 / 2);
+
+            tile_pos = { isox, isoy };
+            log_vector(tile_pos, "tile pos");
+            if (isox < 0 || isox > mw-1)
+            {
+                return false;
+            }
+            if (isoy < 0 || isoy > mh-1)
+            {
+                return false;
+            }
+
+            CCLOG("valid tile");
+            log_vector(tile_pos, "tile pos");
+            layer->setTileGID(59, tile_pos);
+
+            return false;
+        };
+
+        auto dispatcher = Director::getInstance()->getEventDispatcher();
+        dispatcher->addEventListenerWithSceneGraphPriority(listener, map);
     }
 }
 
