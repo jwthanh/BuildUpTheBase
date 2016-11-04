@@ -159,10 +159,10 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
             float y_offset = world_y / tile_height;
             float x_offset = world_x / tile_width;
-            float half_layer = (layer_w / 2);
+            float half_layer = layer_w / 2;
 
             float tile_x = floorf(layer_h - y_offset + x_offset - half_layer);
-            float tile_y = floorf(layer_h - y_offset - x_offset + half_layer - (1 / 2));
+            float tile_y = floorf(layer_h - y_offset - x_offset + half_layer);
 
             int region_x = world_x / layer_w;
             int region_y = world_y / layer_h * 2;
@@ -170,9 +170,39 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
             int mouse_map_x = int(region_x) % int(layer_w);
             int mouse_map_y = int(region_y) % int(layer_h);
 
+            int L1_NORM = layer_w / 2; //half of width I guess.
+
+            auto norm_x = std::abs(mouse_map_x - L1_NORM);
+            auto norm_y = std::abs(mouse_map_y - L1_NORM);
+            if (norm_x + norm_y <= L1_NORM)
+            {
+                CCLOG("inside center of tile");
+            }
+            else
+            {
+                //CCLOG("not inside center");
+                //if (norm_x < L1_NORM)
+                //{
+                //    CCLOG("x--");
+                //    tile_x--;
+                //    
+                //}
+                //if (norm_y > L1_NORM)
+                //{
+                //    CCLOG("y--");
+                //    tile_y--;
+                //}
+                //else
+                //{
+                //    CCLOG("y++");
+                //    tile_y++;
+                //}
+            }
+
             tile_pos = { tile_x, tile_y };
 
             log_vector(tile_pos, "tile pos");
+            log_vector({ float(region_x), float(region_y) }, "region pos");
             log_vector({ float(mouse_map_x), float(mouse_map_y) }, "mouse map");
 
             if (tile_x < 0 || tile_x > layer_w-1)
@@ -184,7 +214,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
                 return false;
             }
 
-            CCLOG("valid tile");
             layer->setTileGID(59, tile_pos);
 
             return false;
