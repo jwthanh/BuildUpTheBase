@@ -577,7 +577,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     {
                         "Coat sword in oil",
                         "",
-                        ""
+                        "menu_icons/crit_chance.png"
                     }});
 
                 spTechnology crit_factor = std::make_shared<Technology>(Technology::SubType::CombatCritFactor);
@@ -587,7 +587,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     {
                         "Sharpen blade",
                         "",
-                        ""
+                        "menu_icons/crit_factor.png"
                     }});
             };
 
