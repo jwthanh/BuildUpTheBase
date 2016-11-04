@@ -147,35 +147,39 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
             Vec2 tile_pos{};
             // iso diamond
-            float wx = pWorld.x;
-            float wy = pWorld.y;
-            wx *= CC_CONTENT_SCALE_FACTOR();
-            wy *= CC_CONTENT_SCALE_FACTOR();
+            float world_x = pWorld.x;
+            float world_y = pWorld.y;
+            world_x *= CC_CONTENT_SCALE_FACTOR();
+            world_y *= CC_CONTENT_SCALE_FACTOR();
 
-            float tw = map->getTileSize().width;
-            float th = map->getTileSize().height;
-            float mw = layer->getLayerSize().width;
-            float mh = layer->getLayerSize().height;
+            float tile_width = map->getTileSize().width;
+            float tile_height = map->getTileSize().height;
+            float layer_w = layer->getLayerSize().width;
+            float layer_h = layer->getLayerSize().height;
 
-            float isox = floorf(mh - wy / th + wx / tw - mw / 2);
-            float isoy = floorf(mh - wy / th - wx / tw + mw / 2 - 1 / 2);
+            float y_offset = world_y / tile_height;
+            float x_offset = world_x / tile_width;
+            float half_layer = (layer_w / 2);
 
-            int region_x = wx / mw;
-            int region_y = wy / mh * 2;
+            float tile_x = floorf(layer_h - y_offset + x_offset - half_layer);
+            float tile_y = floorf(layer_h - y_offset - x_offset + half_layer - (1 / 2));
 
-            int mouse_map_x = int(wx) % int(mw);
-            int mouse_map_y = int(wy) % int(mh);
+            int region_x = world_x / layer_w;
+            int region_y = world_y / layer_h * 2;
 
-            tile_pos = { isox, isoy };
+            int mouse_map_x = int(region_x) % int(layer_w);
+            int mouse_map_y = int(region_y) % int(layer_h);
+
+            tile_pos = { tile_x, tile_y };
 
             log_vector(tile_pos, "tile pos");
             log_vector({ float(mouse_map_x), float(mouse_map_y) }, "mouse map");
 
-            if (isox < 0 || isox > mw-1)
+            if (tile_x < 0 || tile_x > layer_w-1)
             {
                 return false;
             }
-            if (isoy < 0 || isoy > mh-1)
+            if (tile_y < 0 || tile_y > layer_h-1)
             {
                 return false;
             }
