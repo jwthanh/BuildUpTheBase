@@ -160,8 +160,17 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
             float isox = floorf(mh - wy / th + wx / tw - mw / 2);
             float isoy = floorf(mh - wy / th - wx / tw + mw / 2 - 1 / 2);
 
+            int region_x = wx / mw;
+            int region_y = wy / mh * 2;
+
+            int mouse_map_x = int(wx) % int(mw);
+            int mouse_map_y = int(wy) % int(mh);
+
             tile_pos = { isox, isoy };
+
             log_vector(tile_pos, "tile pos");
+            log_vector({ float(mouse_map_x), float(mouse_map_y) }, "mouse map");
+
             if (isox < 0 || isox > mw-1)
             {
                 return false;
@@ -172,7 +181,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
             }
 
             CCLOG("valid tile");
-            log_vector(tile_pos, "tile pos");
             layer->setTileGID(59, tile_pos);
 
             return false;
