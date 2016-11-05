@@ -11,6 +11,17 @@ class Miner
     public:
         tile_gid_t resource_tile_id = 130;
 
+        //across
+        tile_gid_t tile_TL_BR = 131;
+        tile_gid_t tile_BL_TR = 69;
+
+        //corners
+        tile_gid_t tile_TL_TR = 72;
+        tile_gid_t tile_TR_BR = 54;
+        tile_gid_t tile_BL_BR = 36;
+        tile_gid_t tile_TL_BL = 62;
+
+
     public:
         cocos2d::TMXTiledMap* tilemap;
         cocos2d::Vec2 active_tile_pos;
@@ -19,6 +30,7 @@ class Miner
         int active_tile_id;
 
         Miner();
+
 
         bool resource_at_tile_pos(cocos2d::Vec2 pos);
         bool is_valid_pos(cocos2d::Vec2 pos);
