@@ -8,7 +8,7 @@ Miner::Miner()
     this->active_layer = this->tilemap->getLayer("background");
 
     //defaults to center of screen
-    this->active_tile_pos = {5, 5};
+    this->active_tile_pos = {4, 4};
     this->active_tile_id = 7;
 };
 
