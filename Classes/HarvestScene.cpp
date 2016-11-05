@@ -30,6 +30,7 @@
 #include "Modal.h"
 #include "magic_particles/_core/mp.h"
 #include "magic_particles/mp_cocos.h"
+#include "magic_particles/MagicEmitter.h"
 
 #include "Recipe.h"
 #include "Miner.h"

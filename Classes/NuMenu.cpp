@@ -17,6 +17,8 @@
 #include "Technology.h"
 #include "HarvestScene.h"
 
+#include "magic_particles/MagicEmitter.h"
+
 
 USING_NS_CC;
 

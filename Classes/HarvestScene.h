@@ -5,13 +5,14 @@
 #include "GameLayer.h"
 #include "Resources.h"
 #include "magic_particles/_core/magic.h"
-#include "magic_particles/MagicEmitter.h"
+//#include "magic_particles/MagicEmitter.h"
 //#include "Harvestable.h"
 
 class SideListView;
 class PopupPanel;
 class Harvestable;
 class Miner;
+class MagicEmitter;
 
 class BaseScene : public GameLayer
 {
