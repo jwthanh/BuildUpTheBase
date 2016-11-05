@@ -111,27 +111,19 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_I)
     {
-        auto layer = this->miner->tilemap->getLayer("background");
-        this->miner->active_tile_pos.y--;
-        layer->setTileGID(59, this->miner->active_tile_pos);
+        this->miner->move_active_up();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_K)
     {
-        auto layer = this->miner->tilemap->getLayer("background");
-        this->miner->active_tile_pos.y++;
-        layer->setTileGID(59, this->miner->active_tile_pos);
+        this->miner->move_active_down();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_J)
     {
-        auto layer = this->miner->tilemap->getLayer("background");
-        this->miner->active_tile_pos.x--;
-        layer->setTileGID(59, this->miner->active_tile_pos);
+        this->miner->move_active_left();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_L)
     {
-        auto layer = this->miner->tilemap->getLayer("background");
-        this->miner->active_tile_pos.x++;
-        layer->setTileGID(59, this->miner->active_tile_pos);
+        this->miner->move_active_right();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_C)
     {
