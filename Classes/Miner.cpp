@@ -23,34 +23,66 @@ bool Miner::resource_at_tile_pos(cocos2d::Vec2 pos)
     if (tile_gid == this->resource_tile_id)
     {
         CCLOG("tile is a resource");
+        return true;
     }
 
     return false;
 }
 
-void Miner::move_active_tile(cocos2d::Vec2 offset)
+bool Miner::is_valid_pos(cocos2d::Vec2 pos)
 {
     cocos2d::Size layer_size = this->active_layer->getLayerSize();
-    float new_x = this->active_tile_pos.x + offset.x;
-    float new_y = this->active_tile_pos.y + offset.y;
 
-    if (new_x >= layer_size.width || new_x < 0)
+    if (pos.x >= layer_size.width || pos.x < 0)
     {
         CCLOG("invalid tile X");
-        return;
+        return false;
     }
-    if (new_y >= layer_size.height || new_y < 0)
+    if (pos.y >= layer_size.height || pos.y < 0)
     {
         CCLOG("invalid tile Y");
-        return;
+        return false;
+    }
+    
+    return true;
+}
+
+tile_gid_t Miner::get_tile_gid_at_offset(cocos2d::Vec2 pos, cocos2d::Vec2 offset)
+{
+    float new_x = pos.x + offset.x;
+    float new_y = pos.y + offset.y;
+
+    if (this->is_valid_pos({ new_x, new_y }))
+    {
+        return this->active_layer->getTileGIDAt({ new_x, new_y });
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+void Miner::move_active_tile(cocos2d::Vec2 offset)
+{
+    auto offset_tile = this->get_tile_gid_at_offset(this->active_tile_pos, offset);
+    if (offset_tile != NULL)
+    {
+        float new_x = this->active_tile_pos.x + offset.x;
+        float new_y = this->active_tile_pos.y + offset.y;
+
+        if (this->resource_at_tile_pos({new_x, new_y}))
+        {
+            CCLOG("not moving active tile: resource is there");
+        }
+        else
+        {
+            this->active_tile_pos.x += offset.x;
+            this->active_tile_pos.y += offset.y;
+
+            this->active_layer->setTileGID(this->active_tile_id, this->active_tile_pos);
+        }
     }
 
-    this->resource_at_tile_pos({ new_x, new_y });
-
-    this->active_tile_pos.x = new_x;
-    this->active_tile_pos.y = new_y;
-
-    this->active_layer->setTileGID(this->active_tile_id, this->active_tile_pos);
 };
 
 void Miner::move_active_up()
