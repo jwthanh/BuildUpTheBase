@@ -85,6 +85,7 @@
     <ClCompile Include="..\Classes\magic_particles\opengl\mp_wrap.cpp">
       <Filter>magic_particles\opengl</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Miner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -177,6 +178,7 @@
     <ClInclude Include="..\Classes\magic_particles\opengl\wglext.h">
       <Filter>magic_particles\opengl</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Miner.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

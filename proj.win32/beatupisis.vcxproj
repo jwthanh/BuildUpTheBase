@@ -181,6 +181,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\magic_particles\platform_cocos.cpp" />
     <ClCompile Include="..\Classes\magic_particles\_core\mp.cpp" />
     <ClCompile Include="..\Classes\magic_particles\_core\platform_win_posix.cpp" />
+    <ClCompile Include="..\Classes\Miner.cpp" />
     <ClCompile Include="..\Classes\MiscUI.cpp" />
     <ClCompile Include="..\Classes\Modal.cpp" />
     <ClCompile Include="..\Classes\Network.cpp" />
@@ -239,6 +240,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\magic_particles\_core\magic.h" />
     <ClInclude Include="..\Classes\magic_particles\_core\mp.h" />
     <ClInclude Include="..\Classes\magic_particles\_core\platform_win_posix.h" />
+    <ClInclude Include="..\Classes\Miner.h" />
     <ClInclude Include="..\Classes\MiscUI.h" />
     <ClInclude Include="..\Classes\Modal.h" />
     <ClInclude Include="..\Classes\Nameable.h" />
