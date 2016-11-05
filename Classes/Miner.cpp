@@ -5,12 +5,12 @@ Miner::Miner()
     this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
     this->tilemap->setScale(0.75f);
 
+
     this->active_layer = this->tilemap->getLayer("background");
 
     //defaults to center of screen
     this->active_tile_pos = {5, 5};
     this->active_tile_id = 59;
-
 };
 
 void Miner::move_active_up()

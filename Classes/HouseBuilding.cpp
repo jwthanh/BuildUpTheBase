@@ -18,7 +18,6 @@
 
 #include "Recipe.h"
 #include "Worker.h"
-#include "RandomWeightMap.h"
 
 #include "Util.h"
 

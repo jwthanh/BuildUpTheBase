@@ -53,7 +53,6 @@ bool BaseScene::init()
     
     this->create_goal_loadingbar();
 
-
     this->create_building_choicelist();
 
     this->create_popup_panel();
