@@ -24,17 +24,13 @@
 #include "DataManager.h"
 #include "Network.h"
 
-#include "json/rapidjson.h"
 #include <json/stringbuffer.h>
-#include <json/writer.h>
-#include "Serializer.h"
 #include <regex>
 #include "Modal.h"
-#include "Logging.h"
-#include "Recipe.h"
-#include "Technology.h"
 #include "magic_particles/_core/mp.h"
 #include "magic_particles/mp_cocos.h"
+
+#include "Recipe.h"
 
 USING_NS_CC;
 
