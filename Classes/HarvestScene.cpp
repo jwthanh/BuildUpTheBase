@@ -4,6 +4,9 @@
 #include <numeric>
 #include <chrono>
 
+#include <json/stringbuffer.h>
+#include <regex>
+
 #include "cocostudio/ActionTimeline/CSLoader.h"
 
 #include "Harvestable.h"
@@ -24,13 +27,12 @@
 #include "DataManager.h"
 #include "Network.h"
 
-#include <json/stringbuffer.h>
-#include <regex>
 #include "Modal.h"
 #include "magic_particles/_core/mp.h"
 #include "magic_particles/mp_cocos.h"
 
 #include "Recipe.h"
+#include "Miner.h"
 
 USING_NS_CC;
 
@@ -109,27 +111,27 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_I)
     {
-        auto layer = this->tilemap->getLayer("background");
-        this->active_tile_pos.y--;
-        layer->setTileGID(59, this->active_tile_pos);
+        auto layer = this->miner->tilemap->getLayer("background");
+        this->miner->active_tile_pos.y--;
+        layer->setTileGID(59, this->miner->active_tile_pos);
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_K)
     {
-        auto layer = this->tilemap->getLayer("background");
-        this->active_tile_pos.y++;
-        layer->setTileGID(59, this->active_tile_pos);
+        auto layer = this->miner->tilemap->getLayer("background");
+        this->miner->active_tile_pos.y++;
+        layer->setTileGID(59, this->miner->active_tile_pos);
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_J)
     {
-        auto layer = this->tilemap->getLayer("background");
-        this->active_tile_pos.x--;
-        layer->setTileGID(59, this->active_tile_pos);
+        auto layer = this->miner->tilemap->getLayer("background");
+        this->miner->active_tile_pos.x--;
+        layer->setTileGID(59, this->miner->active_tile_pos);
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_L)
     {
-        auto layer = this->tilemap->getLayer("background");
-        this->active_tile_pos.x++;
-        layer->setTileGID(59, this->active_tile_pos);
+        auto layer = this->miner->tilemap->getLayer("background");
+        this->miner->active_tile_pos.x++;
+        layer->setTileGID(59, this->miner->active_tile_pos);
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_C)
     {
@@ -1085,10 +1087,9 @@ bool HarvestScene::init()
     //autosave every 30s
     this->autosave_clock = new Clock(30.0f);
 
-    this->tilemap = TMXTiledMap::create("tilemaps/test_map.tmx");
-    this->tilemap->setScale(0.75f);
-    this->addChild(this->tilemap);
-    this->active_tile_pos = {5, 5};
+    //add Miner's map to scene
+    this->miner = std::make_shared<Miner>();
+    this->addChild(this->miner->tilemap);
 
 
     return true;

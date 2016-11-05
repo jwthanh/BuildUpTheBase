@@ -11,6 +11,7 @@
 class SideListView;
 class PopupPanel;
 class Harvestable;
+class Miner;
 
 class BaseScene : public GameLayer
 {
@@ -43,8 +44,7 @@ class BaseScene : public GameLayer
         cocos2d::ui::Text* upgrade_lbl;
         spRecipe target_recipe;
 
-        cocos2d::TMXTiledMap* tilemap;
-        cocos2d::Vec2 active_tile_pos;
+        std::shared_ptr<Miner> miner;
 
         void create_goal_loadingbar();
         void create_info_panel();
