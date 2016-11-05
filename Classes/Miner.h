@@ -15,6 +15,7 @@ class Miner
 
         Miner();
 
+        void move_active_tile(cocos2d::Vec2 pos);
         void move_active_up();
         void move_active_down();
         void move_active_left();
