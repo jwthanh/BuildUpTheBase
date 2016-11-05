@@ -1,5 +1,6 @@
 #include "Item.h"
 #include "Util.h"
+#include <sstream>
 
 
 Item::Item(std::string type_name,  RarityType rarity, res_count_t level)

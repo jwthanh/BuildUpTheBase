@@ -1,6 +1,7 @@
 #include "Util.h"
 #include <iomanip>
 
+#include "cocos2d.h"
 #include "ui/CocosGUI.h"
 
 float sx (float x, bool do_scale)

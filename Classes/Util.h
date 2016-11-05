@@ -5,7 +5,15 @@
 #include <vector>
 #include <random>
 
-#include "cocos2d.h"
+#include "math/vec2.h"
+
+namespace cocos2d {
+    class Size;
+    namespace ui
+    {
+        class Widget;
+    }
+}
 
 float sx(float x, bool do_scale=false);
 float sy(float y, bool do_scale=false);
@@ -60,7 +68,7 @@ number_t scale_number(number_t base_number, number_t current_number, number_t ra
     number_t result = base_number * std::pow(rate, std::max(static_cast<number_t>(0), current_number));
     if (std::isinf(result))
     {
-        CCLOG("oh no!, %f * (%f ** %f)", base_number, rate, current_number);
+        //CCLOG("oh no!, %f * (%f ** %f)", base_number, rate, current_number);
         return std::numeric_limits<number_t>::max();
     }
     return result;
