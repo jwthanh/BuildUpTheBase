@@ -2,12 +2,22 @@
 #ifndef MISCUI_H
 #define MISCUI_H
 
-#include "cocos2d.h"
+#include "2d/CCLabel.h"
+
+namespace cocos2d {
+    class Sprite;
+    class Texture2D;
+    class Label;
+    struct Color4B;
+    class Node;
+    struct Color3B;
+}
 
 namespace cocos2d
 {
     namespace ui
     {
+        class Scale9Sprite;
         class ImageView;
         class Text;
         class TextField;
