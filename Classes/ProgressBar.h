@@ -2,7 +2,20 @@
 #ifndef PROGRESSBAR_H
 #define PROGRESSBAR_H
 
-#include "cocos2d.h"
+#include "math/Vec2.h"
+
+namespace cocos2d
+{
+        class Node;
+        class LayerColor;
+        class ProgressTimer;
+        class ProgressTimer;
+        class Sprite;
+        class Label;
+        class RenderTexture;
+        class Sequence;
+};
+
 
 class ProgressBar
 {
