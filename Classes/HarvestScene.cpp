@@ -39,6 +39,7 @@ USING_NS_CC;
 
 Node* BaseScene::_harvest_scene_from_editor = NULL;
 
+
 bool BaseScene::init()
 {
     FUNC_INIT(BaseScene);

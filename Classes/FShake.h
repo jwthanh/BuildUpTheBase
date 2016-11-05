@@ -1,7 +1,7 @@
 #ifndef __SHAKE_H__
 #define __SHAKE_H__
 
-#include "cocos2d.h"
+#include "2d/CCActionInterval.h"
 
 class FShake : public cocos2d::ActionInterval
 {

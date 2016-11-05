@@ -5,6 +5,10 @@
 #include "ProgressBar.h"
 #include "GameLogic.h"
 #include "FShake.h"
+#include "2d/CCSprite.h"
+#include "2d/CCProgressTimer.h"
+
+//#include "cocos2d.h"
 
 USING_NS_CC;
 
