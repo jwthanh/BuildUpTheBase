@@ -14,6 +14,20 @@ Miner::Miner()
     //CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
 }
 
+bool Miner::resource_at_tile_pos(cocos2d::Vec2 pos)
+{
+
+    auto tile_gid = this->active_layer->getTileGIDAt(pos);
+    auto tile_props = this->tilemap->getPropertiesForGID(tile_gid);
+
+    if (tile_gid == this->resource_tile_id)
+    {
+        CCLOG("tile is a resource");
+    }
+
+    return false;
+}
+
 void Miner::move_active_tile(cocos2d::Vec2 offset)
 {
     cocos2d::Size layer_size = this->active_layer->getLayerSize();
@@ -31,8 +45,11 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
         return;
     }
 
-    this->active_tile_pos.x += offset.x;
-    this->active_tile_pos.y += offset.y;
+    this->resource_at_tile_pos({ new_x, new_y });
+
+    this->active_tile_pos.x = new_x;
+    this->active_tile_pos.y = new_y;
+
     this->active_layer->setTileGID(this->active_tile_id, this->active_tile_pos);
 };
 
