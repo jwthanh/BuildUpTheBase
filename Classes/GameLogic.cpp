@@ -54,26 +54,31 @@ void GameLogic::post_load()
     CCLOG("loading game on startup, this should only happen once");
     GameLogic::load_all();
 
-    auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-    TextBlobModal* modal = new TextBlobModal(scene);
-
-    std::string modal_content = "";
-    time_t from_file = static_cast<time_t>(DataManager::get_int_from_data(Beatup::last_login_key));
-    if (from_file == 0)
+    //bool show_welcome_modal = true;
+    bool show_welcome_modal = false;
+    if (show_welcome_modal)
     {
-        modal->set_title("Welcome to Build Up The Base!");
-        modal_content = this->new_player_load();
+        auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+        TextBlobModal* modal = new TextBlobModal(scene);
+
+        std::string modal_content = "";
+        time_t from_file = static_cast<time_t>(DataManager::get_int_from_data(Beatup::last_login_key));
+        if (from_file == 0)
+        {
+            modal->set_title("Welcome to Build Up The Base!");
+            modal_content = this->new_player_load();
+        }
+        else
+        {
+            modal->set_title("Welcome Back!");
+            modal_content = this->existing_player_load();
+        }
+
+        //TODO clean up modal memory
+
+        modal->set_body(modal_content);
+        
     }
-    else
-    {
-        modal->set_title("Welcome Back!");
-        modal_content = this->existing_player_load();
-    }
-
-    //TODO clean up modal memory
-
-    modal->set_body(modal_content);
-
 
     //set the last login time, set here and on save
     BEATUP->set_last_login();
