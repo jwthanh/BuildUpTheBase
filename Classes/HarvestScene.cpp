@@ -189,13 +189,13 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
                 //}
                 //if (norm_y > L1_NORM)
                 //{
-                //    CCLOG("y--");
-                //    tile_y--;
+                //    CCLOG("y++");
+                //    tile_y++;
                 //}
                 //else
                 //{
-                //    CCLOG("y++");
-                //    tile_y++;
+                    //CCLOG("y--");
+                    //tile_y--;
                 //}
             }
 
