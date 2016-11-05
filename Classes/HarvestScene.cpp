@@ -1086,6 +1086,7 @@ bool HarvestScene::init()
     this->autosave_clock = new Clock(30.0f);
 
     this->tilemap = TMXTiledMap::create("tilemaps/test_map.tmx");
+    this->tilemap->setScale(0.75f);
     this->addChild(this->tilemap);
     this->active_tile_pos = {5, 5};
 
