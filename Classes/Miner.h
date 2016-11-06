@@ -19,7 +19,7 @@ class Miner
         tile_gid_t tile_TL_TR = 72;
         tile_gid_t tile_TR_BR = 54;
         tile_gid_t tile_BL_BR = 36;
-        tile_gid_t tile_TL_BL = 62;
+        tile_gid_t tile_TL_BL = 63;
 
 
     public:
