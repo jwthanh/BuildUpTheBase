@@ -258,7 +258,7 @@ std::vector<tile_gid_t> Miner::serialize_layer(cocos2d::TMXLayer* layer)
     cocos2d::Size layer_size = layer->getLayerSize();
 
     std::vector<tile_gid_t> tiles = std::vector<tile_gid_t>();
-    tiles.reserve(layer_size.height*layer_size.width);
+    tiles.reserve(int(layer_size.height*layer_size.width));
 
     for (tile_gid_t y = 0; y < layer_size.height; y++)
     {

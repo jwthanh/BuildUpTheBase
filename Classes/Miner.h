@@ -1,11 +1,13 @@
 #pragma once
 #ifndef MINER_H
 #define MINER_H
-#include <cstdint>
+
+#include <vector>
+
+#include "math/Vec2.h"
 
 using tile_gid_t = uint32_t;
 
-#include "math/Vec2.h"
 
 namespace cocos2d
 {
@@ -50,7 +52,7 @@ class Miner
         void move_active_bottom_right();
 
         void save();
-        void serialize_layer(cocos2d::TMXLayer* layer);
+        std::vector<tile_gid_t> serialize_layer(cocos2d::TMXLayer* layer);
 };
 
 #endif

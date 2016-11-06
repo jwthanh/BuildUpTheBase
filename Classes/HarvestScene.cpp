@@ -136,7 +136,8 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        this->miner->save();
+        GameDirector::switch_to_miner_menu();
+        // this->miner->save();
         //this->stopAllActions();
         //this->getScheduler()->unscheduleAll();
         //this->removeAllChildren();

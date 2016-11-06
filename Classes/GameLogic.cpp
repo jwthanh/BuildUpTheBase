@@ -597,6 +597,50 @@ void GameDirector::switch_to_city_menu()
     director->pushScene(scene);
 };
 
+void GameDirector::switch_to_miner_menu()
+{
+    auto inst = CSLoader::getInstance();
+    auto miner_scene = inst->CSLoader::createNode("editor/scenes/miner_scene.csb");
+    miner_scene->removeFromParent();
+
+    //auto header = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
+    // header->setTouchEnabled(true);
+    // header->addTouchEventListener([](Ref* ref, ui::Widget::TouchEventType type)
+    // {
+    //     if (type == ui::Widget::TouchEventType::ENDED)
+    //     {
+    //         auto director = Director::getInstance();
+    //         director->setDisplayStats(!director->isDisplayStats());
+    //     }
+    // });
+
+    auto scene = cocos2d::Scene::create();
+    scene->setName("city_wrapper_scene");
+    scene->addChild(miner_scene);
+
+    //title
+    //auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
+    //set_aliasing(title_lbl);
+
+    auto back_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("back_btn"));
+    Label* button_lbl = back_btn->getTitleRenderer();
+    button_lbl->setTextColor(Color4B::WHITE);
+    button_lbl->enableOutline(Color4B::BLACK, 2);
+
+    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            auto director = Director::getInstance();
+            director->popScene();
+            do_vibrate(16);
+        }
+    });
+    load_default_button_textures(back_btn);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
+
 void GameDirector::switch_to_items_menu()
 {
     auto inst = CSLoader::getInstance();
