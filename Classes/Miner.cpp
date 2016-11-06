@@ -15,7 +15,7 @@ Miner::Miner()
     //CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
 }
 
-bool Miner::resource_at_tile_pos(cocos2d::Vec2 pos)
+bool Miner::can_move_on_tile(cocos2d::Vec2 pos)
 {
 
     auto tile_gid = this->active_layer->getTileGIDAt(pos);
@@ -135,7 +135,7 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
         float new_x = this->active_tile_pos.x + offset.x;
         float new_y = this->active_tile_pos.y + offset.y;
 
-        if (this->resource_at_tile_pos({new_x, new_y}))
+        if (this->can_move_on_tile({new_x, new_y}))
         {
             CCLOG("not moving active tile: resource is there");
         }
