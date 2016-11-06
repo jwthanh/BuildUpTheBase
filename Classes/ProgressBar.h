@@ -43,7 +43,7 @@ class ProgressBar
 
         cocos2d::RenderTexture* rt;
 
-        ProgressBar(std::string front_sprite_frame_path="", std::string back_sprite_frame_path="");
+        ProgressBar(std::string front_sprite_frame_path, std::string back_sprite_frame_path);
 
         void fit_back_to_front();
         ~ProgressBar();

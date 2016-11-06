@@ -594,6 +594,20 @@ void GameDirector::switch_to_city_menu()
     });
     load_default_button_textures(items_scene_btn);
 
+    auto miner_scene_btn = dynamic_cast<ui::Button*>(panel->getChildByName("miner_scene_btn"));
+    Label* miner_scene_lbl = miner_scene_btn->getTitleRenderer();
+    miner_scene_lbl->setTextColor(Color4B::WHITE);
+    miner_scene_lbl->enableOutline(Color4B::BLACK, 2);
+
+    miner_scene_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            do_vibrate(16);
+            GameDirector::switch_to_miner_menu();
+        }
+    });
+    load_default_button_textures(miner_scene_btn);
+
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
 };
