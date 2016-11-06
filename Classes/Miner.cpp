@@ -141,21 +141,22 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
         }
         else
         {
-
+            //connection between previous and active tiles
             cocos2d::Vec2 difference = this->prev_active_tile_pos-this->active_tile_pos;
             DIRECTIONS last_connection = direction_map[difference];
 
-
-            //update new tile pos
+            //based on the new tile and the last connection, figure out how the old active
+            // tile should look
             DIRECTIONS new_tile_dir = direction_map.at(offset);
-
             std::array<DIRECTIONS, 2> old_tile_new_dir = {last_connection, new_tile_dir};
 
+            //go through the list of possible directions and pull out the matching tile for
+            //the two connection
             tile_gid_t new_old_tile_id = 7; //crisscross tile, for graceful fails
-            for (auto pair : tile_direction_map)
+            for (auto& pair : tile_direction_map)
             {
                 tile_gid_t gid = pair.first;
-                for (auto direction: pair.second)
+                for (auto& direction: pair.second)
                 {
                     if (direction == old_tile_new_dir)
                     {
@@ -163,18 +164,24 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
                     }
                 }
             }
+
             //set the old tile to the new image
             this->active_layer->setTileGID(new_old_tile_id, this->active_tile_pos);
-            // then 
-            this->prev_active_tile_pos = this->active_tile_pos;
 
+            //update prev_active and active tile pos
+            this->prev_active_tile_pos = this->active_tile_pos;
             this->active_tile_pos.x = new_x;
             this->active_tile_pos.y = new_y;
 
+            //the new tile direction will be an across tile
             if (new_tile_dir == DIRECTIONS::BottomLeft || new_tile_dir == DIRECTIONS::TopRight)
+            {
                 this->active_layer->setTileGID(this->tile_BL_TR, this->active_tile_pos);
+            }
             else
+            {
                 this->active_layer->setTileGID(this->tile_TL_BR, this->active_tile_pos);
+            }
 
         }
     }
