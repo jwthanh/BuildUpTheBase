@@ -11,7 +11,6 @@
 class SideListView;
 class PopupPanel;
 class Harvestable;
-class Miner;
 class MagicEmitter;
 
 class BaseScene : public GameLayer
@@ -44,8 +43,6 @@ class BaseScene : public GameLayer
 
         cocos2d::ui::Text* upgrade_lbl;
         spRecipe target_recipe;
-
-        std::shared_ptr<Miner> miner;
 
         void create_goal_loadingbar();
         void create_info_panel();

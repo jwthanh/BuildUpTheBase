@@ -14,6 +14,7 @@
 #include "Item.h"
 #include "StaticData.h"
 #include "BuildingsSideBar.h"
+#include "Miner.h"
 
 USING_NS_CC;
 
@@ -602,6 +603,60 @@ void GameDirector::switch_to_miner_menu()
     auto inst = CSLoader::getInstance();
     auto miner_scene = inst->CSLoader::createNode("editor/scenes/miner_scene.csb");
     miner_scene->removeFromParent();
+
+    auto miner = std::make_shared<Miner>();
+    miner_scene->addChild(miner->tilemap);
+
+    auto tilemap_nav = miner_scene->getChildByName("tilemap_nav");
+    for (cocos2d::Node* child : tilemap_nav->getChildren())
+    {
+        ui::Button* nav_button = dynamic_cast<ui::Button*>(child);
+        if (nav_button)
+        {
+            load_default_button_textures(nav_button);
+            cocos2d::TTFConfig ttf_config = TTFConfig("pixelmix.ttf", 24, GlyphCollection::ASCII, NULL, false, 2);
+            Label* invest_renderer = nav_button->getTitleRenderer();
+            invest_renderer->setTTFConfig(ttf_config);
+
+            VoidFuncNoArgs move_active_func;
+            const std::string button_name = nav_button->getName();
+            if (button_name == "move_top_right")
+            {
+                move_active_func = CC_CALLBACK_0(Miner::move_active_top_right, miner);
+            }
+            else if (button_name == "move_top_left")
+            {
+                move_active_func = CC_CALLBACK_0(Miner::move_active_top_left, miner);
+            }
+            else if (button_name == "move_bot_left")
+            {
+                move_active_func = CC_CALLBACK_0(Miner::move_active_bottom_left, miner);
+            }
+            else if (button_name == "move_bot_right")
+            {
+                move_active_func = CC_CALLBACK_0(Miner::move_active_bottom_right, miner);
+            }
+
+            nav_button->addTouchEventListener([move_active_func](Ref* sender, ui::Widget::TouchEventType type)
+            {
+                if (type == ui::Widget::TouchEventType::ENDED)
+                {
+                    //if there's at least 1 rail, build a rail and then remove it
+                    res_count_t num_rails = BUILDUP->count_ingredients(Ingredient::SubType::MineRails);
+                    if (num_rails > 0)
+                    {
+                        move_active_func();
+                        BUILDUP->remove_shared_ingredients_from_all(Ingredient::SubType::MineRails, 1);
+                    }
+                    else
+                    {
+                        CCLOG("need more rails");
+                    }
+                };
+            });
+
+        }
+    }
 
     //auto header = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
     // header->setTouchEnabled(true);
