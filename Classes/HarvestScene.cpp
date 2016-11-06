@@ -1099,28 +1099,41 @@ bool HarvestScene::init()
             Label* invest_renderer = nav_button->getTitleRenderer();
             invest_renderer->setTTFConfig(ttf_config);
 
-            VoidFuncNoArgs move_active;
+            VoidFuncNoArgs move_active_func;
             const std::string button_name = nav_button->getName();
             if (button_name == "move_top_right")
             {
-                move_active = CC_CALLBACK_0(Miner::move_active_top_right, this->miner);
+                move_active_func = CC_CALLBACK_0(Miner::move_active_top_right, this->miner);
             }
             else if (button_name == "move_top_left")
             {
-                move_active = CC_CALLBACK_0(Miner::move_active_top_left, this->miner);
+                move_active_func = CC_CALLBACK_0(Miner::move_active_top_left, this->miner);
             }
             else if (button_name == "move_bot_left")
             {
-                move_active = CC_CALLBACK_0(Miner::move_active_bottom_left, this->miner);
+                move_active_func = CC_CALLBACK_0(Miner::move_active_bottom_left, this->miner);
             }
             else if (button_name == "move_bot_right")
             {
-                move_active = CC_CALLBACK_0(Miner::move_active_bottom_right, this->miner);
+                move_active_func = CC_CALLBACK_0(Miner::move_active_bottom_right, this->miner);
             }
 
-            nav_button->addTouchEventListener([move_active](Ref* sender, ui::Widget::TouchEventType type)
+            nav_button->addTouchEventListener([move_active_func](Ref* sender, ui::Widget::TouchEventType type)
             {
-                if (type == ui::Widget::TouchEventType::ENDED) { move_active(); };
+                if (type == ui::Widget::TouchEventType::ENDED)
+                {
+                    //if there's at least 1 rail, build a rail and then remove it
+                    res_count_t num_rails = BUILDUP->count_ingredients(Ingredient::SubType::MineRails);
+                    if (num_rails > 0)
+                    {
+                        move_active_func();
+                        BUILDUP->remove_shared_ingredients_from_all(Ingredient::SubType::MineRails, 1);
+                    }
+                    else
+                    {
+                        CCLOG("need more rails");
+                    }
+                };
             });
 
         }
