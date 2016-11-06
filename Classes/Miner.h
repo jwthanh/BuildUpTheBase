@@ -24,10 +24,10 @@ class Miner
 
     public:
         cocos2d::TMXTiledMap* tilemap;
-        cocos2d::Vec2 active_tile_pos;
-
         cocos2d::TMXLayer* active_layer;
-        int active_tile_id;
+
+        cocos2d::Vec2 active_tile_pos;
+        cocos2d::Vec2 prev_active_tile_pos;
 
         Miner();
 

@@ -1,4 +1,5 @@
 #include "Miner.h"
+#include <array>
 
 Miner::Miner()
 {
@@ -8,8 +9,8 @@ Miner::Miner()
     this->active_layer = this->tilemap->getLayer("background");
 
     //defaults to center of screen
-    this->active_tile_pos = {4, 4};
-    this->active_tile_id = 7;
+    this->prev_active_tile_pos = {4, 4};
+    this->active_tile_pos = {3, 4};
 
     //CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
 }
@@ -71,11 +72,41 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
         BottomRight
     };
 
-    std::map<cocos2d::Vec2, DIRECTIONS> direction_map{
+    std::map<cocos2d::Vec2, DIRECTIONS> direction_map {
         {{-1, 0}, DIRECTIONS::TopLeft},
         {{0, -1}, DIRECTIONS::TopRight},
         {{0, 1}, DIRECTIONS::BottomLeft},
         {{1, 0}, DIRECTIONS::BottomRight},
+    };
+
+    std::map<tile_gid_t, std::array<DIRECTIONS, 2>> tile_direction_map{
+        //crosses
+        { this->tile_BL_TR, {DIRECTIONS::BottomLeft, DIRECTIONS::TopRight} },
+        { this->tile_BL_TR, {DIRECTIONS::TopRight, DIRECTIONS::BottomLeft} },
+
+        { this->tile_TL_BR, {DIRECTIONS::TopLeft, DIRECTIONS::BottomRight} },
+        { this->tile_TL_BR, {DIRECTIONS::BottomRight, DIRECTIONS::TopLeft} },
+
+        //corners
+        { this->tile_TL_TR, {DIRECTIONS::TopLeft, DIRECTIONS::TopRight} },
+        { this->tile_TL_TR, {DIRECTIONS::TopRight, DIRECTIONS::TopLeft} },
+
+        { this->tile_TR_BR, {DIRECTIONS::TopRight, DIRECTIONS::BottomRight} },
+        { this->tile_TR_BR, {DIRECTIONS::BottomRight, DIRECTIONS::TopRight} },
+
+        { this->tile_BL_BR, {DIRECTIONS::BottomLeft, DIRECTIONS::BottomRight} },
+        { this->tile_BL_BR, {DIRECTIONS::BottomRight, DIRECTIONS::BottomLeft} },
+
+        { this->tile_TL_BL, {DIRECTIONS::TopLeft, DIRECTIONS::BottomLeft} },
+        { this->tile_TL_BL, {DIRECTIONS::BottomLeft, DIRECTIONS::TopLeft} },
+    };
+
+    //which directions connect across tiles
+    std::map<DIRECTIONS, DIRECTIONS> connection_map {
+        {DIRECTIONS::TopLeft, DIRECTIONS::BottomRight},
+        {DIRECTIONS::BottomRight, DIRECTIONS::TopLeft},
+        {DIRECTIONS::TopRight, DIRECTIONS::BottomLeft},
+        {DIRECTIONS::BottomLeft, DIRECTIONS::TopRight},
     };
 
     auto offset_tile = this->get_tile_gid_at_offset(this->active_tile_pos, offset);
@@ -90,10 +121,42 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
         }
         else
         {
-            this->active_tile_pos.x += offset.x;
-            this->active_tile_pos.y += offset.y;
+            //get the previous directions
+            tile_gid_t prev_gid = this->active_layer->getTileGIDAt(this->prev_active_tile_pos);
+            std::array<DIRECTIONS, 2> prev_dirs = tile_direction_map[prev_gid];
 
+            //get the current (old) directions
+            tile_gid_t old_gid = this->active_layer->getTileGIDAt(this->active_tile_pos);
+            std::array<DIRECTIONS, 2> old_dirs = tile_direction_map[old_gid];
+
+            cocos2d::Vec2 difference = this->active_tile_pos - this->prev_active_tile_pos;
+            DIRECTIONS last_connection = direction_map[difference];
+
+
+            //update new tile pos
             DIRECTIONS new_tile_dir = direction_map.at(offset);
+
+            //use new dir in old_dir to see which one isnt there, so we use that static one and the new dir to replace
+            //the old srpite with a new one that matches the new direction (because the old one was only a straight one)
+            std::array<DIRECTIONS, 2> old_tile_new_dir = {last_connection, new_tile_dir};
+
+            tile_gid_t new_old_tile_id = 7; //crisscross tile, for graceful fails
+            for (auto pair : tile_direction_map)
+            {
+                tile_gid_t gid = pair.first;
+                std::array<DIRECTIONS, 2> directions = pair.second;
+
+                if (directions == old_tile_new_dir)
+                {
+                    new_old_tile_id = gid;
+                }
+            }
+            this->active_layer->setTileGID(new_old_tile_id, this->active_tile_pos);
+            this->prev_active_tile_pos = this->active_tile_pos;
+
+            this->active_tile_pos.x = prev_active_tile_pos.x + offset.x;
+            this->active_tile_pos.y = prev_active_tile_pos.y += offset.y;
+
             if (new_tile_dir == DIRECTIONS::BottomLeft || new_tile_dir == DIRECTIONS::TopRight)
                 this->active_layer->setTileGID(this->tile_BL_TR, this->active_tile_pos);
             else
