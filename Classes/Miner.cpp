@@ -64,6 +64,20 @@ tile_gid_t Miner::get_tile_gid_at_offset(cocos2d::Vec2 pos, cocos2d::Vec2 offset
 
 void Miner::move_active_tile(cocos2d::Vec2 offset)
 {
+    enum class DIRECTIONS {
+        TopLeft,
+        TopRight,
+        BottomLeft,
+        BottomRight
+    };
+
+    std::map<cocos2d::Vec2, DIRECTIONS> direction_map{
+        {{-1, 0}, DIRECTIONS::TopLeft},
+        {{0, -1}, DIRECTIONS::TopRight},
+        {{0, 1}, DIRECTIONS::BottomLeft},
+        {{1, 0}, DIRECTIONS::BottomRight},
+    };
+
     auto offset_tile = this->get_tile_gid_at_offset(this->active_tile_pos, offset);
     if (offset_tile != NULL)
     {
@@ -79,7 +93,12 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
             this->active_tile_pos.x += offset.x;
             this->active_tile_pos.y += offset.y;
 
-            this->active_layer->setTileGID(this->active_tile_id, this->active_tile_pos);
+            DIRECTIONS new_tile_dir = direction_map.at(offset);
+            if (new_tile_dir == DIRECTIONS::BottomLeft || new_tile_dir == DIRECTIONS::TopRight)
+                this->active_layer->setTileGID(this->tile_BL_TR, this->active_tile_pos);
+            else
+                this->active_layer->setTileGID(this->tile_TL_BR, this->active_tile_pos);
+
         }
     }
 
