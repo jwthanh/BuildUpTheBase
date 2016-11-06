@@ -1,6 +1,9 @@
 #include "Miner.h"
 #include <array>
 
+#include "FShake.h"
+#include "MiscUI.h"
+
 Miner::Miner()
 {
     this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
@@ -155,6 +158,15 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
         if (this->get_tile_is_blocked_pos({new_x, new_y}))
         {
             CCLOG("not moving active tile: tile is blocked");
+
+            cocos2d::Vec2 pos = { new_x, new_y };
+
+            //shake map
+            auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
+            cocos2d::Sprite* blocked_sprite = this->active_layer->getTileAt(pos);
+            //animate specific tile
+            animate_flash_action(blocked_sprite, 0.2f, 1.1f);
+            this->tilemap->runAction(shake);
         }
         else
         {
