@@ -4,6 +4,8 @@
 #include "FShake.h"
 #include "MiscUI.h"
 
+#include "cocos2d.h"
+
 Miner::Miner()
 {
     this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
@@ -235,4 +237,20 @@ void Miner::move_active_top_left()
 void Miner::move_active_bottom_right()
 {
     this->move_active_tile({1, 0});
+}
+
+void Miner::save()
+{
+    for (auto child : this->tilemap->getChildren())
+    {
+        auto layer = dynamic_cast<cocos2d::TMXLayer*>(child);
+        if (layer != NULL)
+        {
+            this->serialize_layer(layer);
+        }
+    }
+}
+
+void Miner::serialize_layer(cocos2d::TMXLayer* layer)
+{
 };

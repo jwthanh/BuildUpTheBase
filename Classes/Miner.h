@@ -1,10 +1,17 @@
 #pragma once
 #ifndef MINER_H
 #define MINER_H
-
-#include "cocos2d.h"
+#include <cstdint>
 
 using tile_gid_t = uint32_t;
+
+#include "math/Vec2.h"
+
+namespace cocos2d
+{
+    class TMXTiledMap;
+    class TMXLayer;
+}
 
 class Miner
 {
@@ -41,6 +48,9 @@ class Miner
         void move_active_bottom_left();
         void move_active_top_left();
         void move_active_bottom_right();
+
+        void save();
+        void serialize_layer(cocos2d::TMXLayer* layer);
 };
 
 #endif
