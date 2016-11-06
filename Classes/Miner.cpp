@@ -15,7 +15,7 @@ Miner::Miner()
     //CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
 }
 
-bool Miner::can_move_on_tile(cocos2d::Vec2 pos)
+bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
 {
 
     auto tile_gid = this->active_layer->getTileGIDAt(pos);
@@ -24,6 +24,23 @@ bool Miner::can_move_on_tile(cocos2d::Vec2 pos)
     if (tile_gid == this->resource_tile_id)
     {
         CCLOG("tile is a resource");
+        return true;
+    }
+
+    std::vector<tile_gid_t> rail_gids = {
+        this->tile_TL_BR,
+        this->tile_BL_TR,
+
+        this->tile_TL_TR,
+        this->tile_TR_BR,
+        this->tile_BL_BR,
+        this->tile_TL_BL,
+    };
+
+    auto match = std::find(rail_gids.begin(), rail_gids.end(), tile_gid);
+    if (match != rail_gids.end())
+    {
+        CCLOG("tile is a rail");
         return true;
     }
 
@@ -135,9 +152,9 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
         float new_x = this->active_tile_pos.x + offset.x;
         float new_y = this->active_tile_pos.y + offset.y;
 
-        if (this->can_move_on_tile({new_x, new_y}))
+        if (this->get_tile_is_blocked_pos({new_x, new_y}))
         {
-            CCLOG("not moving active tile: resource is there");
+            CCLOG("not moving active tile: tile is blocked");
         }
         else
         {

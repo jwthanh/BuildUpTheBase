@@ -32,7 +32,7 @@ class Miner
         Miner();
 
 
-        bool can_move_on_tile(cocos2d::Vec2 pos);
+        bool get_tile_is_blocked_pos(cocos2d::Vec2 pos);
         bool is_valid_pos(cocos2d::Vec2 pos);
         tile_gid_t get_tile_gid_at_offset(cocos2d::Vec2 pos, cocos2d::Vec2 offset);
 
