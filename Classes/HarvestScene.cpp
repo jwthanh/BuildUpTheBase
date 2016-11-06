@@ -1099,6 +1099,30 @@ bool HarvestScene::init()
             Label* invest_renderer = nav_button->getTitleRenderer();
             invest_renderer->setTTFConfig(ttf_config);
 
+            VoidFuncNoArgs move_active;
+            const std::string button_name = nav_button->getName();
+            if (button_name == "move_top_right")
+            {
+                move_active = CC_CALLBACK_0(Miner::move_active_top_right, this->miner);
+            }
+            else if (button_name == "move_top_left")
+            {
+                move_active = CC_CALLBACK_0(Miner::move_active_top_left, this->miner);
+            }
+            else if (button_name == "move_bot_left")
+            {
+                move_active = CC_CALLBACK_0(Miner::move_active_bottom_left, this->miner);
+            }
+            else if (button_name == "move_bot_right")
+            {
+                move_active = CC_CALLBACK_0(Miner::move_active_bottom_right, this->miner);
+            }
+
+            nav_button->addTouchEventListener([move_active](Ref* sender, ui::Widget::TouchEventType type)
+            {
+                if (type == ui::Widget::TouchEventType::ENDED) { move_active(); };
+            });
+
         }
     }
 
