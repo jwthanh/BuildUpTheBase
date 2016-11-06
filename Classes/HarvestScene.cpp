@@ -1084,6 +1084,24 @@ bool HarvestScene::init()
     this->miner = std::make_shared<Miner>();
     this->addChild(this->miner->tilemap);
 
+    auto inst = CSLoader::getInstance();
+    auto tilemap_nav = inst->createNode("editor/buttons/tilemap_nav.csb");
+    this->addChild(tilemap_nav);
+    tilemap_nav->setPosition(100, 500);
+
+    for (cocos2d::Node* child : tilemap_nav->getChildren())
+    {
+        ui::Button* nav_button = dynamic_cast<ui::Button*>(child);
+        if (nav_button)
+        {
+            load_default_button_textures(nav_button);
+            cocos2d::TTFConfig ttf_config = TTFConfig("pixelmix.ttf", 24, GlyphCollection::ASCII, NULL, false, 2);
+            Label* invest_renderer = nav_button->getTitleRenderer();
+            invest_renderer->setTTFConfig(ttf_config);
+
+        }
+    }
+
 
     return true;
 
