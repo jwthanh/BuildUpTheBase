@@ -241,16 +241,34 @@ void Miner::move_active_bottom_right()
 
 void Miner::save()
 {
+    std::vector<std::vector<tile_gid_t>> layers;
     for (auto child : this->tilemap->getChildren())
     {
         auto layer = dynamic_cast<cocos2d::TMXLayer*>(child);
         if (layer != NULL)
         {
-            this->serialize_layer(layer);
+            auto serialized_tiles = this->serialize_layer(layer);
+            layers.push_back(serialized_tiles);
         }
     }
 }
 
-void Miner::serialize_layer(cocos2d::TMXLayer* layer)
+std::vector<tile_gid_t> Miner::serialize_layer(cocos2d::TMXLayer* layer)
 {
+    cocos2d::Size layer_size = layer->getLayerSize();
+
+    std::vector<tile_gid_t> tiles = std::vector<tile_gid_t>();
+    tiles.reserve(layer_size.height*layer_size.width);
+
+    for (tile_gid_t y = 0; y < layer_size.height; y++)
+    {
+        for (tile_gid_t x = 0; x < layer_size.width; x++)
+        {
+            tile_gid_t pos = static_cast<int>(x + layer_size.width * y);
+            tile_gid_t gid = layer->getTiles()[pos];
+            tiles.push_back(gid);
+        }
+    }
+
+    return tiles;
 };
