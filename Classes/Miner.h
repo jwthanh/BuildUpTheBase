@@ -37,10 +37,10 @@ class Miner
         tile_gid_t get_tile_gid_at_offset(cocos2d::Vec2 pos, cocos2d::Vec2 offset);
 
         void move_active_tile(cocos2d::Vec2 pos);
-        void move_active_up();
-        void move_active_down();
-        void move_active_left();
-        void move_active_right();
+        void move_active_top_right();
+        void move_active_bottom_left();
+        void move_active_top_left();
+        void move_active_bottom_right();
 };
 
 #endif

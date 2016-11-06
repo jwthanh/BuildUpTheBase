@@ -112,19 +112,19 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_I)
     {
-        this->miner->move_active_up();
+        this->miner->move_active_top_right();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_K)
     {
-        this->miner->move_active_down();
+        this->miner->move_active_bottom_left();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_J)
     {
-        this->miner->move_active_left();
+        this->miner->move_active_top_left();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_L)
     {
-        this->miner->move_active_right();
+        this->miner->move_active_bottom_right();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_C)
     {
