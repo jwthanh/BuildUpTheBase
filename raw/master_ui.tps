@@ -208,6 +208,7 @@
             <key type="filename">to_replace/farm.png</key>
             <key type="filename">to_replace/grave.png</key>
             <key type="filename">to_replace/harvester.png</key>
+            <key type="filename">to_replace/marketplace.png</key>
             <key type="filename">to_replace/menu_icons/leaderboard.png</key>
             <key type="filename">to_replace/menu_icons/sell_all.png</key>
             <key type="filename">to_replace/necro_closed.png</key>
@@ -355,6 +356,7 @@
             <filename>kenny/Art/Onscreen controls (400 assets)/Sprites/lineDark/lineDark28.png</filename>
             <filename>to_replace/menu_icons/sell_all.png</filename>
             <filename>to_replace/menu_icons/leaderboard.png</filename>
+            <filename>to_replace/marketplace.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

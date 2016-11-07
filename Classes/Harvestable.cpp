@@ -1211,3 +1211,18 @@ void UndeadHarvestable::animate_rotate()
         this->runAction(FShake::actionWithDuration(0.075f, intensity));
     };
 }
+
+std::string MarketHarvestable::get_sprite_path()
+{
+    return "marketplace.png";
+};
+
+bool MarketHarvestable::init()
+{
+    bool val = Harvestable::init();
+
+    this->initial_scale = 2.75f;
+    this->setScale(this->initial_scale);
+
+    return val;
+};

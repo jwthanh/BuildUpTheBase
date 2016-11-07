@@ -1247,6 +1247,8 @@ void HarvestScene::add_harvestable()
         harvestable = GraveyardHarvestable::create();
     } else if (target_building->name == "The Underscape") {
         harvestable = UndeadHarvestable::create();
+    } else if (target_building->name == "The Marketplace") {
+        harvestable = MarketHarvestable::create();
     } else if (target_building->name == "The Farm") {
         harvestable = FarmingHarvestable::create();
     } else {

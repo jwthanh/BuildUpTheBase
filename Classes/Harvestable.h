@@ -201,4 +201,12 @@ class UndeadHarvestable : public Harvestable
         virtual void animate_clip() override;
         virtual void animate_rotate() override;
 };
+
+class MarketHarvestable : public Harvestable
+{
+    public:
+        CREATE_FUNC(MarketHarvestable);
+        virtual std::string get_sprite_path() override;
+        bool init() override;
+};
 #endif
