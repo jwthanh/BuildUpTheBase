@@ -672,6 +672,17 @@ void GameDirector::switch_to_miner_menu()
         }
     }
 
+    auto info_panel = dynamic_cast<ui::Layout*>(miner_scene->getChildByName("info_panel"));
+    auto rails_count_lbl = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_rails_count"));
+
+    auto update_rails_count_cb = [rails_count_lbl](float dt)
+    {
+        auto rails_count = BUILDUP->count_ingredients(Ingredient::SubType::MineRails);
+        std::string pretty_count = beautify_double(rails_count);
+        rails_count_lbl->setString(pretty_count);
+    };
+    update_rails_count_cb(0);
+    rails_count_lbl->schedule(update_rails_count_cb, AVERAGE_DELAY, "update_rails_count_cb");
     //auto header = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
     // header->setTouchEnabled(true);
     // header->addTouchEventListener([](Ref* ref, ui::Widget::TouchEventType type)
