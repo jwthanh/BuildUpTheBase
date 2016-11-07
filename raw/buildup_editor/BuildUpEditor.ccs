@@ -23,7 +23,6 @@
           <Project Name="items_scene.csd" Type="Scene" />
           <Project Name="miner_scene.csd" Type="Scene" />
         </Folder>
-        <Folder Name="tilemaps" />
         <Folder Name="unused">
           <Folder Name="details">
             <Project Name="character_detail.csd" Type="Node" />
