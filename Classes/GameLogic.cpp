@@ -621,6 +621,9 @@ void GameDirector::switch_to_miner_menu()
     auto miner = std::make_shared<Miner>();
     miner_scene->addChild(miner->tilemap);
 
+    auto info_panel = dynamic_cast<ui::Layout*>(miner_scene->getChildByName("info_panel"));
+    auto rails_count_lbl = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_rails_count"));
+
     auto tilemap_nav = miner_scene->getChildByName("tilemap_nav");
     for (cocos2d::Node* child : tilemap_nav->getChildren())
     {
@@ -651,7 +654,7 @@ void GameDirector::switch_to_miner_menu()
                 move_active_func = CC_CALLBACK_0(Miner::move_active_bottom_right, miner);
             }
 
-            nav_button->addTouchEventListener([move_active_func](Ref* sender, ui::Widget::TouchEventType type)
+            nav_button->addTouchEventListener([move_active_func, rails_count_lbl](Ref* sender, ui::Widget::TouchEventType type)
             {
                 if (type == ui::Widget::TouchEventType::ENDED)
                 {
@@ -665,15 +668,13 @@ void GameDirector::switch_to_miner_menu()
                     else
                     {
                         CCLOG("need more rails");
+                        animate_flash_action(rails_count_lbl, 0.1f, 1.5f);
                     }
                 };
             });
 
         }
     }
-
-    auto info_panel = dynamic_cast<ui::Layout*>(miner_scene->getChildByName("info_panel"));
-    auto rails_count_lbl = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_rails_count"));
 
     auto update_rails_count_cb = [rails_count_lbl](float dt)
     {
