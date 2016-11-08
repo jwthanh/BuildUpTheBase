@@ -20,6 +20,8 @@ class Miner
     public:
         tile_gid_t resource_tile_id = 130;
 
+        tile_gid_t tile_X = 7;
+
         //across
         tile_gid_t tile_TL_BR = 131;
         tile_gid_t tile_BL_TR = 69;

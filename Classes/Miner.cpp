@@ -17,7 +17,6 @@ Miner::Miner()
     this->prev_active_tile_pos = {4, 4};
     this->active_tile_pos = {3, 4};
 
-    //CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
 }
 
 bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
@@ -50,6 +49,8 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
         this->tile_TR_BR,
         this->tile_BL_BR,
         this->tile_TL_BL,
+
+        this->tile_X
     };
 
     auto match = std::find(rail_gids.begin(), rail_gids.end(), tile_gid);
@@ -206,8 +207,11 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
                 }
             }
 
-            //set the old tile to the new image
-            this->active_layer->setTileGID(new_old_tile_id, this->active_tile_pos);
+            //set the old tile to the new image, if its not the X tile
+            if (this->active_layer->getTileGIDAt(this->active_tile_pos) != this->tile_X)
+            {
+                this->active_layer->setTileGID(new_old_tile_id, this->active_tile_pos);
+            }
 
             //update prev_active and active tile pos
             this->prev_active_tile_pos = this->active_tile_pos;
