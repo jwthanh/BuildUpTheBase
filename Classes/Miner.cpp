@@ -33,8 +33,8 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
         auto sprite = this->active_layer->getTileAt(pos);
         auto fire_pos = sprite->getPosition();
         firework->setDuration(1.0f);
-        this->active_layer->convertToNodeSpace(fire_pos);
-        this->active_layer->addChild(firework);
+        this->tilemap->convertToNodeSpace(fire_pos);
+        this->tilemap->addChild(firework);
         return true;
     }
 
