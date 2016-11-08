@@ -39,7 +39,7 @@ public:
     static FloatingLabel* createWithTTF(const cocos2d::TTFConfig& ttfConfig, const std::string& text,
         cocos2d::TextHAlignment hAlignment = cocos2d::TextHAlignment::LEFT, int maxLineWidth = 0);
 
-    void do_float(float x=100.0f, float x_variation=1.0f, float y=100.0f, float y_variation=10.0f, float duration=1.0f);
+    void do_float(float x=100.0f, float x_variation=1.0f, float y=100.0f, float y_variation=10.0f, float duration=1.5f);
 };
 
 void load_default_button_textures(cocos2d::ui::Button* button);

@@ -57,15 +57,14 @@ void FloatingLabel::do_float(float x, float x_variation, float y, float y_variat
 
     duration += (CCRANDOM_MINUS1_1()*0.30f*duration);
 
-    this->runAction(TintTo::create(duration*3, Color3B::RED));
-    this->runAction(ScaleBy::create(duration*3, 0.35f));
+    auto move_action = EaseIn::create(BezierBy::create(duration, config), 2.3f);
+
+    this->runAction(TintTo::create(duration*6, Color3B::RED));
+    this->runAction(ScaleBy::create(duration*6, 0.35f));
     this->runAction(FadeOut::create(duration));
     this->runAction(
         Sequence::createWithTwoActions(
-            Repeat::create(
-                BezierBy::create(duration, config),
-                10
-            ),
+            move_action,
             RemoveSelf::create()
         )
     );
