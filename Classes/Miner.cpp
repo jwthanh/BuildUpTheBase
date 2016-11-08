@@ -30,10 +30,14 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
     {
         CCLOG("tile is a resource");
         auto firework = cocos2d::ParticleFireworks::create();
+        firework->setDuration(1.0f);
+
         auto sprite = this->active_layer->getTileAt(pos);
         auto fire_pos = sprite->getPosition();
-        firework->setDuration(1.0f);
-        this->tilemap->convertToNodeSpace(fire_pos);
+        fire_pos.x += 132.0f/2;
+        fire_pos.y += 132.0f/2;
+        firework->setPosition(fire_pos);
+
         this->tilemap->addChild(firework);
         return true;
     }
