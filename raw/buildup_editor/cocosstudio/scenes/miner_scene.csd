@@ -44,25 +44,25 @@
           <AbstractNodeData Name="info_panel" ActionTag="-621482901" Tag="20" IconVisible="False" LeftMargin="760.0000" BottomMargin="440.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
             <Size X="200.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="mine_rails_lbl" ActionTag="-1424291244" Tag="113" IconVisible="False" LeftMargin="-1.0594" RightMargin="1.0594" TopMargin="2.7187" BottomMargin="173.2813" IsCustomSize="True" FontSize="20" LabelText="Mine Rails" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="mine_rails_lbl" ActionTag="-1424291244" Tag="113" IconVisible="False" LeftMargin="-1.0597" RightMargin="1.0597" TopMargin="12.7188" BottomMargin="163.2812" IsCustomSize="True" FontSize="20" LabelText="Mine Rails" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="200.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="98.9406" Y="185.2813" />
+                <Position X="98.9403" Y="175.2812" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4947" Y="0.9264" />
+                <PrePosition X="0.4947" Y="0.8764" />
                 <PreSize X="1.0000" Y="0.1200" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="26" G="26" B="26" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="mine_rails_count" ActionTag="1431279639" Tag="114" IconVisible="False" LeftMargin="-0.0597" RightMargin="0.0597" TopMargin="31.7194" BottomMargin="144.2806" IsCustomSize="True" FontSize="20" LabelText="XXX,XXXQaD" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="mine_rails_count" ActionTag="1431279639" Tag="114" IconVisible="False" LeftMargin="-0.0600" RightMargin="0.0600" TopMargin="41.7194" BottomMargin="134.2806" IsCustomSize="True" FontSize="20" LabelText="XXX,XXXQaD" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="200.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="99.9403" Y="156.2806" />
+                <Position X="99.9400" Y="146.2806" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4997" Y="0.7814" />
+                <PrePosition X="0.4997" Y="0.7314" />
                 <PreSize X="1.0000" Y="0.1200" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="26" G="26" B="26" />

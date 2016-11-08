@@ -214,6 +214,10 @@
             <key type="filename">to_replace/necro_closed.png</key>
             <key type="filename">to_replace/necro_open.png</key>
             <key type="filename">to_replace/sword.png</key>
+            <key type="filename">to_replace/tilemap/downLeft.png</key>
+            <key type="filename">to_replace/tilemap/downRight.png</key>
+            <key type="filename">to_replace/tilemap/upLeft.png</key>
+            <key type="filename">to_replace/tilemap/upRight.png</key>
             <key type="filename">to_replace/tree.png</key>
             <key type="filename">../../beatupisis/raw/artist/UI/UI_game/back_banner.png</key>
             <key type="filename">../../beatupisis/raw/artist/UI/UI_game/back_button.png</key>
@@ -357,6 +361,10 @@
             <filename>to_replace/menu_icons/sell_all.png</filename>
             <filename>to_replace/menu_icons/leaderboard.png</filename>
             <filename>to_replace/marketplace.png</filename>
+            <filename>to_replace/tilemap/downRight.png</filename>
+            <filename>to_replace/tilemap/upLeft.png</filename>
+            <filename>to_replace/tilemap/upRight.png</filename>
+            <filename>to_replace/tilemap/downLeft.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

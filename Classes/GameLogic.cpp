@@ -636,23 +636,35 @@ void GameDirector::switch_to_miner_menu()
             invest_renderer->setTTFConfig(ttf_config);
 
             VoidFuncNoArgs move_active_func;
+            std::string arrow_sprite_path;
             const std::string button_name = nav_button->getName();
             if (button_name == "move_top_right")
             {
                 move_active_func = CC_CALLBACK_0(Miner::move_active_top_right, miner);
+                arrow_sprite_path = "upRight.png";
             }
             else if (button_name == "move_top_left")
             {
                 move_active_func = CC_CALLBACK_0(Miner::move_active_top_left, miner);
+                arrow_sprite_path = "upLeft.png";
             }
             else if (button_name == "move_bot_left")
             {
                 move_active_func = CC_CALLBACK_0(Miner::move_active_bottom_left, miner);
+                arrow_sprite_path = "downLeft.png";
             }
             else if (button_name == "move_bot_right")
             {
                 move_active_func = CC_CALLBACK_0(Miner::move_active_bottom_right, miner);
+                arrow_sprite_path = "downRight.png";
             }
+
+            Sprite* arrow_sprite = Sprite::createWithSpriteFrameName(arrow_sprite_path);
+            auto arrow_pos = nav_button->getChildByName("arrow_sprite")->getPosition();
+            arrow_sprite->setPosition(arrow_pos);
+            arrow_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+            nav_button->addChild(arrow_sprite);
+            nav_button->setTitleText(" "); //hide text
 
             nav_button->addTouchEventListener([move_active_func, rails_count_lbl](Ref* sender, ui::Widget::TouchEventType type)
             {
