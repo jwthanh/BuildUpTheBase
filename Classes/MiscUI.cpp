@@ -60,8 +60,15 @@ void FloatingLabel::do_float(float x, float x_variation, float y, float y_variat
     auto move_action = EaseIn::create(BezierBy::create(duration, config), 2.3f);
 
     this->runAction(TintTo::create(duration*6, Color3B::RED));
-    this->runAction(ScaleBy::create(duration*6, 0.35f));
+
+    this->setScale(0.10f);
+    this->runAction(Sequence::createWithTwoActions(
+        ScaleTo::create(0.1f, 1.0f),
+        ScaleBy::create(duration*6, 0.35f)
+    ));
+
     this->runAction(FadeOut::create(duration));
+
     this->runAction(
         Sequence::createWithTwoActions(
             move_action,
