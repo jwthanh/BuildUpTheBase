@@ -618,7 +618,7 @@ void GameDirector::switch_to_miner_menu()
     auto miner_scene = inst->CSLoader::createNode("editor/scenes/miner_scene.csb");
     miner_scene->removeFromParent();
 
-    auto miner = std::make_shared<Miner>();
+    std::shared_ptr<Miner> miner = std::make_shared<Miner>();
     miner_scene->addChild(miner->tilemap);
 
     auto info_panel = dynamic_cast<ui::Layout*>(miner_scene->getChildByName("info_panel"));
