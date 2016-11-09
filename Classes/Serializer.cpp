@@ -518,3 +518,47 @@ void IngredientSerializer::load()
 
 }
 
+MinerSerializer::MinerSerializer(std::string filename, cocos2d::TMXTiledMap* tilemap)
+    : BaseSerializer(filename)
+{
+};
+
+void MinerSerializer::serialize()
+{
+    rjDocument doc = rjDocument();
+    doc.SetObject();
+
+    rjDocument::AllocatorType& allocator = doc.GetAllocator();
+
+    //TODO serializing
+
+    this->save_document(doc);
+}
+
+void MinerSerializer::load()
+{
+    rjDocument doc = this->get_document();
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false){ return; }
+
+    //TODO loading
+
+}
+
+void MinerSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
+{
+    //UNUSED
+    CCLOG("MinerSerializer::_add_member should be unused");
+};
+
+rjValue& MinerSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
+{
+    if (doc.HasMember(key) == false)
+    {
+        return doc; //null placeholder
+    }
+
+    //copy of Base::_get_memeber but because its protected I can't call it
+    rjValue& value = doc[key];
+    return value;
+};

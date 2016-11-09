@@ -301,14 +301,14 @@ void Miner::move_active_bottom_right()
 
 void Miner::save()
 {
-    std::vector<std::vector<tile_gid_t>> layers;
+    std::vector<std::vector<tile_gid_t>> serialized_layers;
     for (auto child : this->tilemap->getChildren())
     {
         auto layer = dynamic_cast<cocos2d::TMXLayer*>(child);
         if (layer != NULL)
         {
             auto serialized_tiles = this->serialize_layer(layer);
-            layers.push_back(serialized_tiles);
+            serialized_layers.push_back(serialized_tiles);
         }
     }
 }

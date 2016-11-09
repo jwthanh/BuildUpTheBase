@@ -9,6 +9,11 @@
 #include "SubTypes.h"
 
 
+namespace cocos2d
+{
+    class TMXTiledMap;
+};
+
 
 namespace rj = rapidjson;
 
@@ -101,6 +106,20 @@ class IngredientSerializer : public BaseSerializer
 
         void serialize() override;
         void serialize_ing_type(rjDocument& doc, rapidjson::CrtAllocator& allocator, IngredientSubType ing_type, res_count_t count);
+        void load() override;
+
+    private:
+        virtual void _add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator) override;
+        virtual rjValue& _get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator);
+};
+
+class MinerSerializer : public BaseSerializer
+{
+    public:
+        MinerSerializer(std::string filename, cocos2d::TMXTiledMap* tilemap);
+        cocos2d::TMXTiledMap* tilemap;
+
+        void serialize() override;
         void load() override;
 
     private:
