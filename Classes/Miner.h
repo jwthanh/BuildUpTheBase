@@ -53,9 +53,6 @@ class Miner
         void move_active_bottom_left();
         void move_active_top_left();
         void move_active_bottom_right();
-
-        void save();
-        std::vector<tile_gid_t> serialize_layer(cocos2d::TMXLayer* layer);
 };
 
 #endif

@@ -12,7 +12,10 @@
 namespace cocos2d
 {
     class TMXTiledMap;
+    class TMXLayer;
 };
+
+using tile_gid_t = uint32_t; //copied from Miner.h
 
 
 namespace rj = rapidjson;
@@ -120,6 +123,7 @@ class MinerSerializer : public BaseSerializer
         cocos2d::TMXTiledMap* tilemap;
 
         void serialize() override;
+        std::vector<tile_gid_t> serialize_layer(cocos2d::TMXLayer* layer);
         void load() override;
 
     private:
