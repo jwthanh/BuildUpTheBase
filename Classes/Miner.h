@@ -11,6 +11,8 @@ using tile_gid_t = uint32_t;
 
 namespace cocos2d
 {
+    class Node;
+
     class TMXTiledMap;
     class TMXLayer;
 }
@@ -42,10 +44,16 @@ class Miner
         cocos2d::Vec2 active_tile_pos;
         cocos2d::Vec2 prev_active_tile_pos;
 
-        Miner();
+        cocos2d::Node* parent;
+        Miner(cocos2d::Node* parent);
+        void init(bool use_existing);
+        void init_start_pos(cocos2d::Vec2 new_start_pos);
+        void reset();
+
         cocos2d::Vec2 get_start_pos();
         cocos2d::Vec2 get_default_start_pos();
         cocos2d::Vec2 get_existing_start_pos();
+
 
 
         bool get_tile_is_blocked_pos(cocos2d::Vec2 pos);

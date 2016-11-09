@@ -618,8 +618,7 @@ void GameDirector::switch_to_miner_menu()
     auto miner_scene = inst->CSLoader::createNode("editor/scenes/miner_scene.csb");
     miner_scene->removeFromParent();
 
-    std::shared_ptr<Miner> miner = std::make_shared<Miner>();
-    miner_scene->addChild(miner->tilemap);
+    std::shared_ptr<Miner> miner = std::make_shared<Miner>(miner_scene);
 
     auto info_panel = dynamic_cast<ui::Layout*>(miner_scene->getChildByName("info_panel"));
     auto rails_count_lbl = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_rails_count"));
@@ -730,6 +729,20 @@ void GameDirector::switch_to_miner_menu()
         }
     });
     load_default_button_textures(back_btn);
+
+    auto dig_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("dig_btn"));
+    Label* dig_button_lbl = dig_btn->getTitleRenderer();
+    dig_button_lbl->setTextColor(Color4B::WHITE);
+    dig_button_lbl->enableOutline(Color4B::BLACK, 2);
+
+    dig_btn->addTouchEventListener([miner](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            miner->reset();
+            do_vibrate(16);
+        }
+    });
+    load_default_button_textures(dig_btn);
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);

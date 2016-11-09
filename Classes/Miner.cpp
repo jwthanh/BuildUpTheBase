@@ -7,24 +7,12 @@
 #include "cocos2d.h"
 #include "Serializer.h"
 
-Miner::Miner()
+Miner::Miner(cocos2d::Node* parent)
 {
-    this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
-    this->tilemap->setScale(0.75f);
+    this->init(true); //use_existing = true
 
-    this->active_layer = this->tilemap->getLayer("background");
-    cocos2d::Vec2 start_pos = this->get_start_pos();
-
-    //since we subtract 1 from it later, we need to make sure it's never out of bounds
-    // I dont think y will be problem
-    if (start_pos.x == 0)
-    {
-        start_pos.x += 1;
-    }
-
-    this->prev_active_tile_pos = start_pos - cocos2d::Vec2{-1, 0};
-    this->active_tile_pos = start_pos;
-    this->active_layer->setTileGID(this->tile_START, this->active_tile_pos);
+    this->parent = parent;
+    this->parent->addChild(this->tilemap);
 
 }
 
@@ -100,10 +88,58 @@ cocos2d::Vec2 Miner::get_start_pos()
     }
     else 
     {
-        //TODO placeholder
         return this->get_existing_start_pos();
     }
 }
+
+void Miner::init(bool use_existing)
+{
+
+    this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
+    this->tilemap->setScale(0.75f);
+
+    this->active_layer = this->tilemap->getLayer("background");
+
+    cocos2d::Vec2 start_pos;
+    if (use_existing == false)
+    {
+        start_pos = this->get_default_start_pos();
+    }
+    else
+    {
+        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this->tilemap);
+        serializer.load();
+        start_pos = this->get_existing_start_pos();
+    };
+
+    this->init_start_pos(start_pos);
+};
+
+void Miner::init_start_pos(cocos2d::Vec2 new_start_pos)
+{
+    //since we subtract 1 from it later, we need to make sure it's never out of bounds
+    // I dont think y will be problem
+    if (new_start_pos.x == 0)
+    {
+        new_start_pos.x += 1;
+    }
+
+    this->prev_active_tile_pos = new_start_pos - cocos2d::Vec2{-1, 0};
+    this->active_tile_pos = new_start_pos;
+    this->active_layer->setTileGID(this->tile_START, this->active_tile_pos);
+};
+
+void Miner::reset()
+{
+    // deletes the tilemap and rebuilds it from scratch
+    if (this->tilemap != NULL)
+    {
+        this->tilemap->removeFromParent();
+    }
+
+    this->init(false); //use_existing = false
+    this->parent->addChild(this->tilemap);
+};
 
 bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
 {
