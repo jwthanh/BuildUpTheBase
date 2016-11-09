@@ -96,22 +96,26 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
         return true;
     }
 
-    std::vector<tile_gid_t> rail_gids = {
+    std::vector<tile_gid_t> blocked_tiles = {
+        //across
         this->tile_TL_BR,
         this->tile_BL_TR,
 
+        //corners
         this->tile_TL_TR,
         this->tile_TR_BR,
         this->tile_BL_BR,
         this->tile_TL_BL,
 
-        this->tile_X
+        //misc
+        this->tile_X,
+        this->tile_START
     };
 
-    auto match = std::find(rail_gids.begin(), rail_gids.end(), tile_gid);
-    if (match != rail_gids.end())
+    auto match = std::find(blocked_tiles.begin(), blocked_tiles.end(), tile_gid);
+    if (match != blocked_tiles.end())
     {
-        CCLOG("tile is a rail");
+        CCLOG("tile is a rail or other special tile");
         return true;
     }
 
@@ -264,7 +268,7 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
             }
 
             //set the old tile to the new image, if its not the X tile
-            if (this->active_layer->getTileGIDAt(this->active_tile_pos) != this->tile_X)
+            if (this->active_layer->getTileGIDAt(this->active_tile_pos) != this->tile_START)
             {
                 this->active_layer->setTileGID(new_old_tile_id, this->active_tile_pos);
             }
