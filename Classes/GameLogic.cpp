@@ -696,6 +696,15 @@ void GameDirector::switch_to_miner_menu()
     };
     update_rails_count_cb(0);
     rails_count_lbl->schedule(update_rails_count_cb, AVERAGE_DELAY, "update_rails_count_cb");
+
+    info_panel->addTouchEventListener([miner](Ref* sender, ui::Widget::TouchEventType type){
+            if (type == ui::Widget::TouchEventType::ENDED) {
+                CCLOG("touched info");
+                MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner->tilemap);
+                serializer.serialize();
+                CCLOG("done serializing");
+            };
+    });
     //auto header = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
     // header->setTouchEnabled(true);
     // header->addTouchEventListener([](Ref* ref, ui::Widget::TouchEventType type)

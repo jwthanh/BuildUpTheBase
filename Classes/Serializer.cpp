@@ -526,19 +526,24 @@ MinerSerializer::MinerSerializer(std::string filename, cocos2d::TMXTiledMap* til
 void MinerSerializer::serialize()
 {
     rjDocument doc = rjDocument();
-    doc.SetObject();
+    doc.SetArray();
 
     rjDocument::AllocatorType& allocator = doc.GetAllocator();
 
-    //TODO serializing
-    std::vector<std::vector<tile_gid_t>> serialized_layers;
     for (auto child : this->tilemap->getChildren())
     {
         auto layer = dynamic_cast<cocos2d::TMXLayer*>(child);
         if (layer != NULL)
         {
             auto serialized_tiles = this->serialize_layer(layer);
-            serialized_layers.push_back(serialized_tiles);
+            rjValue layer_array = rjValue(rapidjson::kArrayType);
+            for (auto& tile_id : serialized_tiles)
+            {
+                rjValue tile_val = rjValue(rapidjson::kNumberType);
+                tile_val.SetInt(tile_id);
+                layer_array.PushBack(tile_val, allocator);
+            }
+            doc.PushBack(layer_array, allocator);
         }
     }
 
