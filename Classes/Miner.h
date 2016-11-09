@@ -20,7 +20,9 @@ class Miner
     public:
         tile_gid_t resource_tile_id = 130;
 
+        //special tiles
         tile_gid_t tile_X = 7;
+        tile_gid_t tile_START = 68;
 
         //across
         tile_gid_t tile_TL_BR = 131;
@@ -42,6 +44,7 @@ class Miner
 
         Miner();
         cocos2d::Vec2 get_start_pos();
+        cocos2d::Vec2 get_default_start_pos();
 
 
         bool get_tile_is_blocked_pos(cocos2d::Vec2 pos);

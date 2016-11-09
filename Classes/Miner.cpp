@@ -23,39 +23,55 @@ Miner::Miner()
 
     this->prev_active_tile_pos = start_pos - cocos2d::Vec2{-1, 0};
     this->active_tile_pos = start_pos;
-    this->active_layer->setTileGID(this->tile_X, this->active_tile_pos);
+    this->active_layer->setTileGID(this->tile_START, this->active_tile_pos);
 
 }
 
-cocos2d::Vec2 Miner::get_start_pos()
+cocos2d::Vec2 Miner::get_default_start_pos()
 {
     cocos2d::Size layer_size = this->active_layer->getLayerSize();
+    cocos2d::Vec2 start_pos = { -1, -1 };
     tile_gid_t num_tiles = static_cast<tile_gid_t>(layer_size.width * layer_size.height);
 
     std::mt19937 gen = std::mt19937(std::random_device{}());
     //guessing offsets so it cant be the last tile or the first tile TODO make
     //sure the prev tile is valid
-    std::uniform_int_distribution<tile_gid_t> distribution(1, num_tiles-2);
+    std::uniform_int_distribution<tile_gid_t> distribution(1, num_tiles - 2);
     tile_gid_t start_id = distribution(gen);
 
-    cocos2d::Vec2 start_pos = {-1, -1};
     tile_gid_t counter = 0;
     for (tile_gid_t y = 0; y < layer_size.height; y++)
     {
         for (tile_gid_t x = 0; x < layer_size.width; x++)
         {
             counter++;
-            if  (start_id == counter)
+            if (start_id == counter)
             {
                 float fx = float(x);
                 float fy = float(y);
-                start_pos = {fx, fy};
+                start_pos = { fx, fy };
                 return start_pos;
             };
 
         }
     };
     return start_pos;
+}
+
+cocos2d::Vec2 Miner::get_start_pos()
+{
+
+    bool use_existing_start = false;
+
+    if (use_existing_start == false)
+    {
+        return this->get_default_start_pos();
+    }
+    else 
+    {
+        //TODO placeholder
+        return this->get_default_start_pos();
+    }
 }
 
 bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
