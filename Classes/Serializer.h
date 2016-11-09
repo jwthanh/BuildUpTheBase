@@ -9,6 +9,8 @@
 #include "SubTypes.h"
 
 
+class Miner;
+
 namespace cocos2d
 {
     class TMXTiledMap;
@@ -119,8 +121,8 @@ class IngredientSerializer : public BaseSerializer
 class MinerSerializer : public BaseSerializer
 {
     public:
-        MinerSerializer(std::string filename, cocos2d::TMXTiledMap* tilemap);
-        cocos2d::TMXTiledMap* tilemap;
+        MinerSerializer(std::string filename, Miner* miner);
+        Miner* miner;
 
         bool existing_json_found;
 

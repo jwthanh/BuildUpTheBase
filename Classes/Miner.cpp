@@ -77,7 +77,7 @@ cocos2d::Vec2 Miner::get_existing_start_pos()
 cocos2d::Vec2 Miner::get_start_pos()
 {
 
-    MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this->tilemap);
+    MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this);
     serializer.load();
     bool use_existing_start = serializer.existing_json_found;
 
@@ -88,7 +88,7 @@ cocos2d::Vec2 Miner::get_start_pos()
     }
     else 
     {
-        return this->get_existing_start_pos();
+        return this->active_tile_pos; //serializer sets it
     }
 }
 
@@ -107,9 +107,9 @@ void Miner::init(bool use_existing)
     }
     else
     {
-        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this->tilemap);
+        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this);
         serializer.load();
-        start_pos = this->get_existing_start_pos();
+        start_pos = this->active_tile_pos; //serializer sets it
     };
 
     this->init_start_pos(start_pos);

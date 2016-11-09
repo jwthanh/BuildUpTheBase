@@ -699,7 +699,7 @@ void GameDirector::switch_to_miner_menu()
     info_panel->addTouchEventListener([miner](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED) {
                 CCLOG("touched info");
-                MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner->tilemap);
+                MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
                 serializer.load();
                 CCLOG("done loading");
             };
@@ -721,7 +721,7 @@ void GameDirector::switch_to_miner_menu()
     back_btn->addTouchEventListener([miner](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner->tilemap);
+            MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
             serializer.serialize();
             auto director = Director::getInstance();
             director->popScene();

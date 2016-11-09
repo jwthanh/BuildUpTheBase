@@ -16,6 +16,7 @@
 #include "Item.h"
 #include "StaticData.h"
 #include "Util.h"
+#include "Miner.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -519,19 +520,21 @@ void IngredientSerializer::load()
 
 }
 
-MinerSerializer::MinerSerializer(std::string filename, cocos2d::TMXTiledMap* tilemap)
-    : BaseSerializer(filename), tilemap(tilemap), existing_json_found(false)
+MinerSerializer::MinerSerializer(std::string filename, Miner* miner)
+    : BaseSerializer(filename), miner(miner), existing_json_found(false)
 {
 };
 
 void MinerSerializer::serialize()
 {
     rjDocument doc = rjDocument();
-    doc.SetArray();
+    doc.SetObject();
 
     rjDocument::AllocatorType& allocator = doc.GetAllocator();
 
-    for (auto child : this->tilemap->getChildren())
+    rjValue all_layers = rjValue(rj::kArrayType);
+
+    for (auto child : this->miner->tilemap->getChildren())
     {
         auto layer = dynamic_cast<cocos2d::TMXLayer*>(child);
         if (layer != NULL)
@@ -544,9 +547,20 @@ void MinerSerializer::serialize()
                 tile_val.SetInt(tile_id);
                 layer_array.PushBack(tile_val, allocator);
             }
-            doc.PushBack(layer_array, allocator);
+            all_layers.PushBack(layer_array, allocator);
         }
     }
+
+    rjValue layer_key = rjValue("all_layers");
+    doc.AddMember(layer_key, all_layers, allocator);
+
+    rjValue active_pos_x_key = rjValue("active_tile_pos_x");
+    rjValue active_pos_x_val = rjValue(this->miner->active_tile_pos.x);
+    doc.AddMember(active_pos_x_key, active_pos_x_val, allocator);
+
+    rjValue active_pos_y_key = rjValue("active_tile_pos_y");
+    rjValue active_pos_y_val = rjValue(this->miner->active_tile_pos.y);
+    doc.AddMember(active_pos_y_key, active_pos_y_val, allocator);
 
     this->save_document(doc);
 }
@@ -575,22 +589,33 @@ void MinerSerializer::load()
 {
     rjDocument doc = this->get_document();
     //dont do work if there's nothing to do
-    if (doc.IsArray() == false)
+    if (doc.IsObject() == false)
     {
-        CCLOG("NOT ARRAY");
+        CCLOG("NOT OBJECT");
         this->existing_json_found = false;
         return;
     }
 
+    if (doc.HasMember("all_layers") == false ||
+        doc.HasMember("active_tile_pos_x") == false ||
+            doc.HasMember("active_tile_pos_y") == false )
+    {
+        CCLOG("MISSING MEMBERS");
+        this->existing_json_found = false;
+        return;
+    }
+    rjValue& all_layers = doc["all_layers"];
 
     //through toplevel arrays, each one being a layer
     int layer_index = 0;
-    for (rjValue::ConstValueIterator layer_array_it = doc.Begin(); layer_array_it != doc.End(); ++layer_array_it)
+    for (rjValue::ConstValueIterator layer_array_it = all_layers.Begin(); layer_array_it != all_layers.End(); ++layer_array_it)
     {
-        cocos2d::TMXLayer* current_layer = dynamic_cast<cocos2d::TMXLayer*>(this->tilemap->getChildByTag(layer_index));
+        cocos2d::TMXLayer* current_layer = dynamic_cast<cocos2d::TMXLayer*>(this->miner->tilemap->getChildByTag(layer_index));
         if (!current_layer) 
         {
             CCLOG("invalid layer");
+            this->existing_json_found = false;
+            return;
         };
 
         std::vector<tile_gid_t> tiles;
@@ -621,6 +646,9 @@ void MinerSerializer::load()
         };
         layer_index++;
     }
+
+    this->miner->active_tile_pos.x = doc["active_tile_pos_x"].GetDouble();
+    this->miner->active_tile_pos.y = doc["active_tile_pos_y"].GetDouble();
 
     CCLOG("done loading");
     this->existing_json_found = true;
