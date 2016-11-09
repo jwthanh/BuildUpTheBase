@@ -355,6 +355,16 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
                 this->active_layer->setTileGID(this->tile_TL_BR, this->active_tile_pos);
             }
 
+            //animate tile moving
+            cocos2d::Sprite* tile_sprite = this->active_layer->getTileAt(this->active_tile_pos);
+
+            float move_by_offset = 200.0f;
+            tile_sprite->setPositionY(tile_sprite->getPositionY()+move_by_offset);
+            tile_sprite->runAction(cocos2d::Sequence::createWithTwoActions(
+                cocos2d::MoveBy::create(0.1f, {0, -move_by_offset}),
+                cocos2d::TargetedAction::create(this->tilemap, FShake::actionWithDuration(0.05f, 2.5f, 2.5f))
+            ));
+
         }
     }
     else if (offset_tile == NULL)
