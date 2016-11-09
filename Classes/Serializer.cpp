@@ -15,6 +15,7 @@
 #include "GameLogic.h"
 #include "Item.h"
 #include "StaticData.h"
+#include "Util.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -574,9 +575,52 @@ void MinerSerializer::load()
 {
     rjDocument doc = this->get_document();
     //dont do work if there's nothing to do
-    if (doc.IsObject() == false){ return; }
+    if (doc.IsArray() == false){ CCLOG("NOT ARRAY"); return; }
 
-    //TODO loading
+    //through toplevel arrays, each one being a layer
+    int layer_index = 0;
+    for (rjValue::ConstValueIterator layer_array_it = doc.Begin(); layer_array_it != doc.End(); ++layer_array_it)
+    {
+        CCLOG("in new layer");
+
+        cocos2d::TMXLayer* current_layer = dynamic_cast<cocos2d::TMXLayer*>(this->tilemap->getChildByTag(layer_index));
+        if (!current_layer) 
+        {
+            CCLOG("invalid layer");
+        };
+
+
+        std::vector<tile_gid_t> tiles;
+
+        //grab the tiles from the json array for the current layer
+        tile_gid_t tile_index = 0;
+        for (rjValue::ConstValueIterator tile_value_it = layer_array_it->Begin(); tile_value_it != layer_array_it->End(); ++tile_value_it)
+        {
+            tile_gid_t tile_value = tile_value_it->GetInt();
+            tiles.push_back(tile_value);
+
+            tile_index++;
+
+        }
+
+        //update current layers' tiles
+        tile_index = 0;
+        cocos2d::Size layer_size = current_layer->getLayerSize();
+        for (tile_gid_t y = 0; y < layer_size.height; y++)
+        {
+            for (tile_gid_t x = 0; x < layer_size.width; x++)
+            {
+                tile_gid_t new_val = tiles.at(tile_index);
+                cocos2d::Vec2 new_pos = { float(x), float(y) };
+                current_layer->setTileGID(new_val, new_pos);
+                tile_index++;
+            }
+        };
+
+        CCLOG("done loading layer");
+        layer_index++;
+        
+    }
 
 }
 

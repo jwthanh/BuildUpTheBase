@@ -701,8 +701,8 @@ void GameDirector::switch_to_miner_menu()
             if (type == ui::Widget::TouchEventType::ENDED) {
                 CCLOG("touched info");
                 MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner->tilemap);
-                serializer.serialize();
-                CCLOG("done serializing");
+                serializer.load();
+                CCLOG("done loading");
             };
     });
     //auto header = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
