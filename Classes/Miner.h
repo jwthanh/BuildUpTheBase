@@ -45,6 +45,7 @@ class Miner
         Miner();
         cocos2d::Vec2 get_start_pos();
         cocos2d::Vec2 get_default_start_pos();
+        cocos2d::Vec2 get_existing_start_pos();
 
 
         bool get_tile_is_blocked_pos(cocos2d::Vec2 pos);

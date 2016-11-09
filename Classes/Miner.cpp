@@ -29,6 +29,8 @@ Miner::Miner()
 
 cocos2d::Vec2 Miner::get_default_start_pos()
 {
+    ///randomly pick a starting position in the map
+
     cocos2d::Size layer_size = this->active_layer->getLayerSize();
     cocos2d::Vec2 start_pos = { -1, -1 };
     tile_gid_t num_tiles = static_cast<tile_gid_t>(layer_size.width * layer_size.height);
@@ -58,9 +60,33 @@ cocos2d::Vec2 Miner::get_default_start_pos()
     return start_pos;
 }
 
+cocos2d::Vec2 Miner::get_existing_start_pos()
+{
+    ///pick a starting position in the map based on the existing tiles
+
+    cocos2d::Size layer_size = this->active_layer->getLayerSize();
+    cocos2d::Vec2 start_pos = { -1, -1 };
+
+    for (tile_gid_t y = 0; y < layer_size.height; y++)
+    {
+        for (tile_gid_t x = 0; x < layer_size.width; x++)
+        {
+            float fx = float(x);
+            float fy = float(y);
+            start_pos = { fx, fy };
+            tile_gid_t existing_tile_id = this->active_layer->getTileGIDAt(start_pos);
+            if (existing_tile_id == this->tile_START)
+            {
+                return start_pos;
+            };
+
+        }
+    };
+    return start_pos;
+}
+
 cocos2d::Vec2 Miner::get_start_pos()
 {
-
     bool use_existing_start = false;
 
     if (use_existing_start == false)
@@ -70,7 +96,7 @@ cocos2d::Vec2 Miner::get_start_pos()
     else 
     {
         //TODO placeholder
-        return this->get_default_start_pos();
+        return this->get_existing_start_pos();
     }
 }
 
