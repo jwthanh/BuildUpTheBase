@@ -122,6 +122,8 @@ class MinerSerializer : public BaseSerializer
         MinerSerializer(std::string filename, cocos2d::TMXTiledMap* tilemap);
         cocos2d::TMXTiledMap* tilemap;
 
+        bool existing_json_found;
+
         void serialize() override;
         std::vector<tile_gid_t> serialize_layer(cocos2d::TMXLayer* layer);
         void load() override;

@@ -5,6 +5,7 @@
 #include "MiscUI.h"
 
 #include "cocos2d.h"
+#include "Serializer.h"
 
 Miner::Miner()
 {
@@ -87,8 +88,12 @@ cocos2d::Vec2 Miner::get_existing_start_pos()
 
 cocos2d::Vec2 Miner::get_start_pos()
 {
-    bool use_existing_start = false;
 
+    MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this->tilemap);
+    serializer.load();
+    bool use_existing_start = serializer.existing_json_found;
+
+    CCLOG("using existing json %i", use_existing_start);
     if (use_existing_start == false)
     {
         return this->get_default_start_pos();

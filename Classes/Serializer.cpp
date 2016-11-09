@@ -520,7 +520,7 @@ void IngredientSerializer::load()
 }
 
 MinerSerializer::MinerSerializer(std::string filename, cocos2d::TMXTiledMap* tilemap)
-    : BaseSerializer(filename), tilemap(tilemap)
+    : BaseSerializer(filename), tilemap(tilemap), existing_json_found(false)
 {
 };
 
@@ -575,14 +575,18 @@ void MinerSerializer::load()
 {
     rjDocument doc = this->get_document();
     //dont do work if there's nothing to do
-    if (doc.IsArray() == false){ CCLOG("NOT ARRAY"); return; }
+    if (doc.IsArray() == false)
+    {
+        CCLOG("NOT ARRAY");
+        this->existing_json_found = false;
+        return;
+    }
+
 
     //through toplevel arrays, each one being a layer
     int layer_index = 0;
     for (rjValue::ConstValueIterator layer_array_it = doc.Begin(); layer_array_it != doc.End(); ++layer_array_it)
     {
-        CCLOG("in new layer");
-
         cocos2d::TMXLayer* current_layer = dynamic_cast<cocos2d::TMXLayer*>(this->tilemap->getChildByTag(layer_index));
         if (!current_layer) 
         {
@@ -615,12 +619,11 @@ void MinerSerializer::load()
                 tile_index++;
             }
         };
-
-        CCLOG("done loading layer");
         layer_index++;
-        
     }
 
+    CCLOG("done loading");
+    this->existing_json_found = true;
 }
 
 void MinerSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
