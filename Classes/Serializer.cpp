@@ -465,7 +465,7 @@ rjValue& IngredientSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocu
         return doc; //null placeholder
     }
 
-    //copy of Base::_get_memeber but because its protected I can't call it
+    //copy of Base::_get_member but because its protected I can't call it
     rjValue& value = doc[key];
     return value;
 };
@@ -589,7 +589,6 @@ void MinerSerializer::load()
             CCLOG("invalid layer");
         };
 
-
         std::vector<tile_gid_t> tiles;
 
         //grab the tiles from the json array for the current layer
@@ -601,7 +600,7 @@ void MinerSerializer::load()
 
             tile_index++;
 
-        }
+        };
 
         //update current layers' tiles
         tile_index = 0;
@@ -632,12 +631,13 @@ void MinerSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value,
 
 rjValue& MinerSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
 {
+    CCLOG("MinerSerializer::_get_member should not be used");
     if (doc.HasMember(key) == false)
     {
         return doc; //null placeholder
     }
 
-    //copy of Base::_get_memeber but because its protected I can't call it
+    //copy of Base::_get_member but because its protected I can't call it
     rjValue& value = doc[key];
     return value;
 };

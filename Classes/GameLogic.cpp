@@ -705,16 +705,6 @@ void GameDirector::switch_to_miner_menu()
                 CCLOG("done loading");
             };
     });
-    //auto header = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
-    // header->setTouchEnabled(true);
-    // header->addTouchEventListener([](Ref* ref, ui::Widget::TouchEventType type)
-    // {
-    //     if (type == ui::Widget::TouchEventType::ENDED)
-    //     {
-    //         auto director = Director::getInstance();
-    //         director->setDisplayStats(!director->isDisplayStats());
-    //     }
-    // });
 
     auto scene = cocos2d::Scene::create();
     scene->setName("city_wrapper_scene");

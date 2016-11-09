@@ -6,6 +6,27 @@
 
 #include "cocos2d.h"
 
+Miner::Miner()
+{
+    this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
+    this->tilemap->setScale(0.75f);
+
+    this->active_layer = this->tilemap->getLayer("background");
+    cocos2d::Vec2 start_pos = this->get_start_pos();
+
+    //since we subtract 1 from it later, we need to make sure it's never out of bounds
+    // I dont think y will be problem
+    if (start_pos.x == 0)
+    {
+        start_pos.x += 1;
+    }
+
+    this->prev_active_tile_pos = start_pos - cocos2d::Vec2{-1, 0};
+    this->active_tile_pos = start_pos;
+    this->active_layer->setTileGID(this->tile_X, this->active_tile_pos);
+
+}
+
 cocos2d::Vec2 Miner::get_start_pos()
 {
     cocos2d::Size layer_size = this->active_layer->getLayerSize();
@@ -35,27 +56,6 @@ cocos2d::Vec2 Miner::get_start_pos()
         }
     };
     return start_pos;
-}
-
-Miner::Miner()
-{
-    this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
-    this->tilemap->setScale(0.75f);
-
-    this->active_layer = this->tilemap->getLayer("background");
-    cocos2d::Vec2 start_pos = this->get_start_pos();
-
-    //since we subtract 1 from it later, we need to make sure it's never out of bounds
-    // I dont think y will be problem
-    if (start_pos.x == 0)
-    {
-        start_pos.x += 1;
-    }
-
-    this->prev_active_tile_pos = start_pos - cocos2d::Vec2{-1, 0};
-    this->active_tile_pos = start_pos;
-    this->active_layer->setTileGID(this->tile_X, this->active_tile_pos);
-
 }
 
 bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
