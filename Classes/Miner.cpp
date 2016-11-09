@@ -215,10 +215,11 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
 
             //shake map
             auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
-            cocos2d::Sprite* blocked_sprite = this->active_layer->getTileAt(pos);
-            //animate specific tile
-            animate_flash_action(blocked_sprite, 0.2f, 1.1f);
             this->tilemap->runAction(shake);
+
+            //animate specific tile
+            cocos2d::Sprite* blocked_sprite = this->active_layer->getTileAt(pos);
+            animate_flash_action(blocked_sprite, 0.2f, 1.1f);
         }
         else
         {
@@ -269,6 +270,12 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
 
         }
     }
+    else if (offset_tile == NULL)
+    {
+        //shake map
+        auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
+        this->tilemap->runAction(shake);
+    };
 
 };
 
