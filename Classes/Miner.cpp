@@ -6,14 +6,10 @@
 
 #include "cocos2d.h"
 
-Miner::Miner()
+cocos2d::Vec2 Miner::get_start_pos()
 {
-    this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
-    this->tilemap->setScale(0.75f);
-
-    this->active_layer = this->tilemap->getLayer("background");
     cocos2d::Size layer_size = this->active_layer->getLayerSize();
-    tile_gid_t num_tiles = (tile_gid_t)(layer_size.width * layer_size.height);
+    tile_gid_t num_tiles = static_cast<tile_gid_t>(layer_size.width * layer_size.height);
 
     std::mt19937 gen = std::mt19937(std::random_device{}());
     //guessing offsets so it cant be the last tile or the first tile TODO make
@@ -21,9 +17,7 @@ Miner::Miner()
     std::uniform_int_distribution<tile_gid_t> distribution(1, num_tiles-2);
     tile_gid_t start_id = distribution(gen);
 
-    CCLOG("miner constructor");
-
-    cocos2d::Vec2 start_pos = {0, 0};
+    cocos2d::Vec2 start_pos = {-1, -1};
     tile_gid_t counter = 0;
     for (tile_gid_t y = 0; y < layer_size.height; y++)
     {
@@ -35,13 +29,29 @@ Miner::Miner()
                 float fx = float(x);
                 float fy = float(y);
                 start_pos = {fx, fy};
-                break;
+                return start_pos;
             };
 
         }
     };
+    return start_pos;
+}
 
-    //defaults to center of screen
+Miner::Miner()
+{
+    this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
+    this->tilemap->setScale(0.75f);
+
+    this->active_layer = this->tilemap->getLayer("background");
+    cocos2d::Vec2 start_pos = this->get_start_pos();
+
+    //since we subtract 1 from it later, we need to make sure it's never out of bounds
+    // I dont think y will be problem
+    if (start_pos.x == 0)
+    {
+        start_pos.x += 1;
+    }
+
     this->prev_active_tile_pos = start_pos - cocos2d::Vec2{-1, 0};
     this->active_tile_pos = start_pos;
     this->active_layer->setTileGID(this->tile_X, this->active_tile_pos);
