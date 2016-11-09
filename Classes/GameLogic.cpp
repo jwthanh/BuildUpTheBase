@@ -719,9 +719,11 @@ void GameDirector::switch_to_miner_menu()
     button_lbl->setTextColor(Color4B::WHITE);
     button_lbl->enableOutline(Color4B::BLACK, 2);
 
-    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+    back_btn->addTouchEventListener([miner](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
+            MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner->tilemap);
+            serializer.serialize();
             auto director = Director::getInstance();
             director->popScene();
             do_vibrate(16);
