@@ -16,22 +16,13 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="buttons/tilemap_nav.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="tilemap" ActionTag="1667513557" Tag="232" IconVisible="True" LeftMargin="643.8708" RightMargin="316.1292" TopMargin="303.9103" BottomMargin="336.0897" ctype="SingleNodeObjectData">
-            <Size X="0.0000" Y="0.0000" />
-            <AnchorPoint />
-            <Position X="643.8708" Y="336.0897" />
-            <Scale ScaleX="9.9000" ScaleY="9.9000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6707" Y="0.5251" />
-            <PreSize X="0.0000" Y="0.0000" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="back_btn" ActionTag="1232804101" Tag="233" IconVisible="False" LeftMargin="35.0000" RightMargin="795.0000" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="back_btn" ActionTag="1232804101" Tag="233" IconVisible="False" LeftMargin="35.0000" RightMargin="795.0000" TopMargin="516.9999" BottomMargin="23.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="130.0000" Y="100.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="100.0000" Y="90.0000" />
+            <Position X="100.0000" Y="73.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1042" Y="0.1406" />
+            <PrePosition X="0.1042" Y="0.1141" />
             <PreSize X="0.1354" Y="0.1563" />
             <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
@@ -104,13 +95,13 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="dig_btn" ActionTag="1624672489" Tag="19" IconVisible="False" LeftMargin="799.0000" RightMargin="31.0000" TopMargin="498.0000" BottomMargin="42.0000" TouchEnable="True" FontSize="24" ButtonText="Dig" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="dig_btn" ActionTag="1624672489" Tag="19" IconVisible="False" LeftMargin="798.9999" RightMargin="31.0001" TopMargin="515.0000" BottomMargin="25.0000" TouchEnable="True" FontSize="24" ButtonText="Dig" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="130.0000" Y="100.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="864.0000" Y="92.0000" />
+            <Position X="863.9999" Y="75.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.9000" Y="0.1437" />
+            <PrePosition X="0.9000" Y="0.1172" />
             <PreSize X="0.1354" Y="0.1563" />
             <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />

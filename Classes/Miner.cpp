@@ -106,6 +106,7 @@ void Miner::init(bool use_existing)
 
     this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
     this->tilemap->setScale(0.75f);
+    this->tilemap->setPositionY(this->tilemap->getPositionY()-25.0f);
 
     this->active_layer = this->tilemap->getLayer("background");
 
