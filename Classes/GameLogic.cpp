@@ -788,7 +788,7 @@ void GameDirector::switch_to_miner_menu()
 
     auto check_carts_cb = [dig_btn, cart_count_lbl, miner](float dt){
         res_count_t num_carts = BUILDUP->count_ingredients(Ingredient::SubType::Minecart);
-        dig_btn->setEnabled(num_carts > 0);
+        dig_btn->setBright(num_carts > 0); //setBright because we want to trigger the label animation
     };
     check_carts_cb(0);
     dig_btn->schedule(check_carts_cb, AVERAGE_DELAY, "check_carts_cb");
