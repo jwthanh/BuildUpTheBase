@@ -111,7 +111,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="explode_btn" ActionTag="1201039480" Tag="74" IconVisible="False" LeftMargin="393.3486" RightMargin="436.6514" TopMargin="23.4773" BottomMargin="516.5227" TouchEnable="True" FontSize="24" ButtonText="Explode" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="explode_btn" ActionTag="1201039480" Tag="74" IconVisible="False" LeftMargin="393.3486" RightMargin="436.6514" TopMargin="23.4773" BottomMargin="516.5227" TouchEnable="True" FontSize="24" ButtonText="Altar" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="130.0000" Y="100.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="458.3486" Y="566.5227" />
