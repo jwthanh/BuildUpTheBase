@@ -111,19 +111,31 @@ void Miner::init(bool use_existing)
     this->active_layer = this->tilemap->getLayer("background");
 
     cocos2d::Vec2 start_pos;
+
+    //if we want to use existing data, try to load it, otherwise fallback to default loading
+    if (use_existing)
+    {
+        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this);
+        serializer.load();
+        if (serializer.existing_json_found)
+        {
+            start_pos = this->active_tile_pos; //serializer sets it
+        }
+        else
+        {
+            use_existing = false;
+        }
+    }
+
     if (use_existing == false)
     {
         start_pos = this->get_default_start_pos();
         this->active_layer->setTileGID(this->tile_START, start_pos);
+
         //TODO fix hardcoded resource path
-        this->active_layer->setTileGID(this->resource_tile_id, {4, 4});
+        this->resource_tile_pos = {4, 4};
+        this->active_layer->setTileGID(this->resource_tile_id, this->resource_tile_pos);
     }
-    else
-    {
-        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this);
-        serializer.load();
-        start_pos = this->active_tile_pos; //serializer sets it
-    };
 
     this->init_start_pos(start_pos);
 };
