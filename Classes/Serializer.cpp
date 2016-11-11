@@ -596,14 +596,21 @@ void MinerSerializer::load()
         return;
     }
 
-    if (doc.HasMember("all_layers") == false ||
-        doc.HasMember("active_tile_pos_x") == false ||
-            doc.HasMember("active_tile_pos_y") == false )
+    std::vector<std::string> required_members = {
+        "all_layers",
+        "active_tile_pos_x",
+        "active_tile_pos_y"
+    };
+
+    for (auto& required_member : required_members)
     {
-        CCLOG("MISSING MEMBERS");
-        this->existing_json_found = false;
-        return;
-    }
+        if (doc.HasMember(required_member.c_str()) == false)
+        {
+            CCLOG("MISSING MEMBER %s", required_member);
+            this->existing_json_found = false;
+        };
+    };
+
     rjValue& all_layers = doc["all_layers"];
 
     //through toplevel arrays, each one being a layer
