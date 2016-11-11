@@ -65,6 +65,10 @@ class Miner
         void move_active_bottom_left();
         void move_active_top_left();
         void move_active_bottom_right();
+
+        //check if tiles around the resource tiles are rails
+        // TODO: use a param for the tile instead of looking for it
+        bool rails_connect_a_resource();
 };
 
 #endif

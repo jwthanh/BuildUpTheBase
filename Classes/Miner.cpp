@@ -407,3 +407,8 @@ void Miner::move_active_bottom_right()
 {
     this->move_active_tile({1, 0});
 }
+
+bool Miner::rails_connect_a_resource()
+{
+    return false;
+}

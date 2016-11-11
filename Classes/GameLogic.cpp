@@ -730,6 +730,28 @@ void GameDirector::switch_to_miner_menu()
     });
     load_default_button_textures(back_btn);
 
+    auto explode_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("explode_btn"));
+    Label* explode_button_lbl = explode_btn->getTitleRenderer();
+    explode_button_lbl->setTextColor(Color4B::WHITE);
+    explode_button_lbl->enableOutline(Color4B::BLACK, 2);
+
+    explode_btn->addTouchEventListener([miner](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            miner->reset();
+            do_vibrate(16);
+        }
+    });
+    load_default_button_textures(explode_btn);
+
+    auto check_tiles_cb = [explode_btn, miner](float dt){
+        bool rail_connected = miner->rails_connect_a_resource();
+        explode_btn->setEnabled(rail_connected);
+    };
+    check_tiles_cb(0);
+    explode_btn->schedule(check_tiles_cb, AVERAGE_DELAY, "check_tiles_cb");
+
+
     auto dig_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("dig_btn"));
     Label* dig_button_lbl = dig_btn->getTitleRenderer();
     dig_button_lbl->setTextColor(Color4B::WHITE);
