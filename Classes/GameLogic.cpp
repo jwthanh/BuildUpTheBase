@@ -622,6 +622,7 @@ void GameDirector::switch_to_miner_menu()
 
     auto info_panel = dynamic_cast<ui::Layout*>(miner_scene->getChildByName("info_panel"));
     auto rails_count_lbl = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_rails_count"));
+    auto cart_count_lbl = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_cart_count"));
 
     auto tilemap_nav = miner_scene->getChildByName("tilemap_nav");
     for (cocos2d::Node* child : tilemap_nav->getChildren())
@@ -696,6 +697,15 @@ void GameDirector::switch_to_miner_menu()
     update_rails_count_cb(0);
     rails_count_lbl->schedule(update_rails_count_cb, AVERAGE_DELAY, "update_rails_count_cb");
 
+    auto update_cart_count_cb = [cart_count_lbl](float dt)
+    {
+        auto cart_count = BUILDUP->count_ingredients(Ingredient::SubType::Minecart);
+        std::string pretty_count = beautify_double(cart_count);
+        cart_count_lbl->setString(pretty_count);
+    };
+    update_cart_count_cb(0);
+    cart_count_lbl->schedule(update_cart_count_cb, AVERAGE_DELAY, "update_cart_count_cb");
+
     info_panel->addTouchEventListener([miner](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED) {
                 CCLOG("touched info");
@@ -752,20 +762,37 @@ void GameDirector::switch_to_miner_menu()
     check_tiles_cb(0);
     explode_btn->schedule(check_tiles_cb, AVERAGE_DELAY, "check_tiles_cb");
 
-
     auto dig_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("dig_btn"));
     Label* dig_button_lbl = dig_btn->getTitleRenderer();
     dig_button_lbl->setTextColor(Color4B::WHITE);
     dig_button_lbl->enableOutline(Color4B::BLACK, 2);
 
-    dig_btn->addTouchEventListener([miner](Ref* touch, ui::Widget::TouchEventType type){
+    dig_btn->addTouchEventListener([miner, cart_count_lbl](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            miner->reset();
-            do_vibrate(16);
+            res_count_t num_carts = BUILDUP->count_ingredients(Ingredient::SubType::Minecart);
+            if (num_carts > 0)
+            {
+                BUILDUP->remove_shared_ingredients_from_all(Ingredient::SubType::Minecart, 1);
+                miner->reset();
+                do_vibrate(16);
+            }
+            else
+            {
+                CCLOG("need more carts");
+                animate_flash_action(cart_count_lbl, 0.1f, 1.5f);
+            }
         }
     });
     load_default_button_textures(dig_btn);
+
+    auto check_carts_cb = [dig_btn, cart_count_lbl, miner](float dt){
+        res_count_t num_carts = BUILDUP->count_ingredients(Ingredient::SubType::Minecart);
+        dig_btn->setEnabled(num_carts > 0);
+    };
+    check_carts_cb(0);
+    dig_btn->schedule(check_carts_cb, AVERAGE_DELAY, "check_carts_cb");
+
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
