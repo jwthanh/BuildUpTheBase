@@ -7,6 +7,21 @@
 #include "cocos2d.h"
 #include "Serializer.h"
 
+enum class Directions {
+    TopLeft,
+    TopRight,
+    BottomLeft,
+    BottomRight
+};
+
+std::map<cocos2d::Vec2, Directions> DIRECTION_MAP {
+    {{-1, 0}, Directions::TopLeft},
+    {{0, -1}, Directions::TopRight},
+    {{0, 1}, Directions::BottomLeft},
+    {{1, 0}, Directions::BottomRight},
+};
+
+
 Miner::Miner(cocos2d::Node* parent)
 {
     this->init(true); //use_existing = true
@@ -248,68 +263,54 @@ tile_gid_t Miner::get_tile_gid_at_offset(cocos2d::Vec2 pos, cocos2d::Vec2 offset
 
 void Miner::move_active_tile(cocos2d::Vec2 offset)
 {
-    enum class DIRECTIONS {
-        TopLeft,
-        TopRight,
-        BottomLeft,
-        BottomRight
-    };
-
-    std::map<cocos2d::Vec2, DIRECTIONS> direction_map {
-        {{-1, 0}, DIRECTIONS::TopLeft},
-        {{0, -1}, DIRECTIONS::TopRight},
-        {{0, 1}, DIRECTIONS::BottomLeft},
-        {{1, 0}, DIRECTIONS::BottomRight},
-    };
-
-    std::map<tile_gid_t, std::vector<std::array<DIRECTIONS, 2>>> tile_direction_map{
+    std::map<tile_gid_t, std::vector<std::array<Directions, 2>>> tile_direction_map{
         //crosses
         { 
             this->tile_BL_TR, {
-                { DIRECTIONS::BottomLeft, DIRECTIONS::TopRight},
-                { DIRECTIONS::TopRight, DIRECTIONS::BottomLeft}
+                { Directions::BottomLeft, Directions::TopRight},
+                { Directions::TopRight, Directions::BottomLeft}
             }
         },
 
         {
             this->tile_TL_BR, {
-                { DIRECTIONS::TopLeft, DIRECTIONS::BottomRight},
-                { DIRECTIONS::BottomRight, DIRECTIONS::TopLeft}
+                { Directions::TopLeft, Directions::BottomRight},
+                { Directions::BottomRight, Directions::TopLeft}
             }
         },
 
         //corners
         { this->tile_TL_TR, {
-                { DIRECTIONS::TopLeft, DIRECTIONS::TopRight},
-                { DIRECTIONS::TopRight, DIRECTIONS::TopLeft}
+                { Directions::TopLeft, Directions::TopRight},
+                { Directions::TopRight, Directions::TopLeft}
             }
         },
 
         { this->tile_TR_BR, {
-                { DIRECTIONS::TopRight, DIRECTIONS::BottomRight},
-                { DIRECTIONS::BottomRight, DIRECTIONS::TopRight}
+                { Directions::TopRight, Directions::BottomRight},
+                { Directions::BottomRight, Directions::TopRight}
             }
         },
 
         { this->tile_BL_BR, {
-                { DIRECTIONS::BottomLeft, DIRECTIONS::BottomRight},
-                { DIRECTIONS::BottomRight, DIRECTIONS::BottomLeft}
+                { Directions::BottomLeft, Directions::BottomRight},
+                { Directions::BottomRight, Directions::BottomLeft}
             }
         },
 
         { this->tile_TL_BL, {
-                { DIRECTIONS::TopLeft, DIRECTIONS::BottomLeft},
-                { DIRECTIONS::BottomLeft, DIRECTIONS::TopLeft}
+                { Directions::TopLeft, Directions::BottomLeft},
+                { Directions::BottomLeft, Directions::TopLeft}
             }
         },
     };
 
     //which directions connect across tiles
-    std::map<DIRECTIONS, DIRECTIONS> connection_map {
-        {DIRECTIONS::TopLeft, DIRECTIONS::BottomRight},
-        {DIRECTIONS::BottomRight, DIRECTIONS::TopLeft},
-        {DIRECTIONS::TopRight, DIRECTIONS::BottomLeft},
-        {DIRECTIONS::BottomLeft, DIRECTIONS::TopRight},
+    std::map<Directions, Directions> connection_map {
+        {Directions::TopLeft, Directions::BottomRight},
+        {Directions::BottomRight, Directions::TopLeft},
+        {Directions::TopRight, Directions::BottomLeft},
+        {Directions::BottomLeft, Directions::TopRight},
     };
 
     auto offset_tile = this->get_tile_gid_at_offset(this->active_tile_pos, offset);
@@ -336,12 +337,12 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
         {
             //connection between previous and active tiles
             cocos2d::Vec2 difference = this->prev_active_tile_pos-this->active_tile_pos;
-            DIRECTIONS last_connection = direction_map[difference];
+            Directions last_connection = DIRECTION_MAP[difference];
 
             //based on the new tile and the last connection, figure out how the old active
             // tile should look
-            DIRECTIONS new_tile_dir = direction_map.at(offset);
-            std::array<DIRECTIONS, 2> old_tile_new_dir = {last_connection, new_tile_dir};
+            Directions new_tile_dir = DIRECTION_MAP.at(offset);
+            std::array<Directions, 2> old_tile_new_dir = {last_connection, new_tile_dir};
 
             //go through the list of possible directions and pull out the matching tile for
             //the two connection
@@ -370,7 +371,7 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
             this->active_tile_pos.y = new_y;
 
             //the new tile direction will be an across tile
-            if (new_tile_dir == DIRECTIONS::BottomLeft || new_tile_dir == DIRECTIONS::TopRight)
+            if (new_tile_dir == Directions::BottomLeft || new_tile_dir == Directions::TopRight)
             {
                 this->active_layer->setTileGID(this->tile_BL_TR, this->active_tile_pos);
             }
