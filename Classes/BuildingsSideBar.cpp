@@ -703,9 +703,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     }});
 
                 //build minerails
-                spRecipe build_minerails = std::make_shared<Recipe>("Build Rails", "10 Wood, 15 Copper");
+                spRecipe build_minerails = std::make_shared<Recipe>("Build Rails", "5 Wood, 15 Copper");
                 build_minerails->components = mistIngredient({
-                    { Ingredient::SubType::Wood, 10 },
+                    { Ingredient::SubType::Wood, 5 },
                     { Ingredient::SubType::Copper, 15 }
                 });
                 build_minerails->_callback = [building]()
@@ -718,7 +718,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     else
                     {
                         //refund the cost
-                        building->create_ingredients(Ingredient::SubType::Wood, 10);
+                        building->create_ingredients(Ingredient::SubType::Wood, 5);
                         building->create_ingredients(Ingredient::SubType::Copper, 15);
                     };
                 };
