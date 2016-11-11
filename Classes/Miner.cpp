@@ -41,6 +41,15 @@ cocos2d::Vec2 Miner::get_default_start_pos()
                 float fx = float(x);
                 float fy = float(y);
                 start_pos = { fx, fy };
+
+                //go to next tile if 4,4 since that's the resource tile
+                //TODO fix hardcoded resource path
+                if (start_pos == cocos2d::Vec2{4, 4})
+                {
+                    start_id++;
+                    continue;
+                }
+
                 return start_pos;
             };
 
@@ -104,6 +113,9 @@ void Miner::init(bool use_existing)
     if (use_existing == false)
     {
         start_pos = this->get_default_start_pos();
+        this->active_layer->setTileGID(this->tile_START, start_pos);
+        //TODO fix hardcoded resource path
+        this->active_layer->setTileGID(this->resource_tile_id, {4, 4});
     }
     else
     {
@@ -126,7 +138,6 @@ void Miner::init_start_pos(cocos2d::Vec2 new_start_pos)
 
     this->prev_active_tile_pos = new_start_pos - cocos2d::Vec2{-1, 0};
     this->active_tile_pos = new_start_pos;
-    this->active_layer->setTileGID(this->tile_START, this->active_tile_pos);
 };
 
 void Miner::reset()
