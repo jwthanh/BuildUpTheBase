@@ -14,11 +14,56 @@ enum class Directions {
     BottomRight
 };
 
+const std::array<Directions, 4> DIRECTION_ARRAY {
+    Directions::TopLeft,
+    Directions::TopRight,
+    Directions::BottomLeft,
+    Directions::BottomRight
+};
+
 std::map<cocos2d::Vec2, Directions> DIRECTION_MAP {
     {{-1, 0}, Directions::TopLeft},
     {{0, -1}, Directions::TopRight},
     {{0, 1}, Directions::BottomLeft},
     {{1, 0}, Directions::BottomRight},
+};
+
+std::map<Directions, cocos2d::Vec2> DIRECTION_MAP_REV {
+    {Directions::TopLeft, {-1, 0}},
+    {Directions::TopRight, {0, -1}},
+    {Directions::BottomLeft, {0, 1}},
+    {Directions::BottomRight, {1, 0}}
+};
+
+tile_gid_t Miner::resource_tile_id = 130;
+
+//special tiles
+tile_gid_t Miner::tile_X = 7;
+tile_gid_t Miner::tile_START = 68;
+
+//across
+tile_gid_t Miner::tile_TL_BR = 131;
+tile_gid_t Miner::tile_BL_TR = 69;
+
+//corners
+tile_gid_t Miner::tile_TL_TR = 72;
+tile_gid_t Miner::tile_TR_BR = 54;
+tile_gid_t Miner::tile_BL_BR = 36;
+tile_gid_t Miner::tile_TL_BL = 63;
+
+std::vector<tile_gid_t> RAIL_IDS = {
+    //across
+    Miner::tile_TL_BR,
+    Miner::tile_BL_TR,
+
+    //corners
+    Miner::tile_TL_TR,
+    Miner::tile_TR_BR,
+    Miner::tile_BL_BR,
+    Miner::tile_TL_BL,
+
+    //misc
+    Miner::tile_X,
 };
 
 
@@ -202,6 +247,7 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
         return true;
     }
 
+    //TODO use RAIL_IDS + tile_START for this
     std::vector<tile_gid_t> blocked_tiles = {
         //across
         this->tile_TL_BR,
@@ -423,5 +469,25 @@ void Miner::move_active_bottom_right()
 
 bool Miner::rails_connect_a_resource()
 {
+    auto check_direction = [this](cocos2d::Vec2 offset){
+        cocos2d::Vec2 potential_rail_pos = this->resource_tile_pos+offset;
+        if (this->is_valid_pos(potential_rail_pos))
+        {
+            tile_gid_t potential_rail_id = this->active_layer->getTileGIDAt(potential_rail_pos);
+            return std::find(RAIL_IDS.begin(), RAIL_IDS.end(), potential_rail_id) != RAIL_IDS.end();
+        }
+        else
+        {
+            return false;
+        }
+    };
+
+    for (auto& dir : DIRECTION_ARRAY)
+    {
+        if (check_direction(DIRECTION_MAP_REV.at(dir)))
+        {
+            return true;
+        }
+    };
     return false;
 }

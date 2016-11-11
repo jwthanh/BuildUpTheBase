@@ -20,21 +20,21 @@ namespace cocos2d
 class Miner
 {
     public:
-        tile_gid_t resource_tile_id = 130;
+        static tile_gid_t resource_tile_id;
 
         //special tiles
-        tile_gid_t tile_X = 7;
-        tile_gid_t tile_START = 68;
+        static tile_gid_t tile_X;
+        static tile_gid_t tile_START;
 
         //across
-        tile_gid_t tile_TL_BR = 131;
-        tile_gid_t tile_BL_TR = 69;
+        static tile_gid_t tile_TL_BR;
+        static tile_gid_t tile_BL_TR;
 
         //corners
-        tile_gid_t tile_TL_TR = 72;
-        tile_gid_t tile_TR_BR = 54;
-        tile_gid_t tile_BL_BR = 36;
-        tile_gid_t tile_TL_BL = 63;
+        static tile_gid_t tile_TL_TR;
+        static tile_gid_t tile_TR_BR;
+        static tile_gid_t tile_BL_BR;
+        static tile_gid_t tile_TL_BL;
 
 
     public:
