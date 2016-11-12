@@ -15,6 +15,7 @@
 #include "StaticData.h"
 #include "BuildingsSideBar.h"
 #include "Miner.h"
+#include "FShake.h"
 
 USING_NS_CC;
 
@@ -666,7 +667,7 @@ void GameDirector::switch_to_miner_menu()
             nav_button->addChild(arrow_sprite);
             nav_button->setTitleText(" "); //hide text
 
-            nav_button->addTouchEventListener([move_active_func, rails_count_lbl](Ref* sender, ui::Widget::TouchEventType type)
+            nav_button->addTouchEventListener([miner, move_active_func, rails_count_lbl, info_panel](Ref* sender, ui::Widget::TouchEventType type)
             {
                 if (type == ui::Widget::TouchEventType::ENDED)
                 {
@@ -676,11 +677,15 @@ void GameDirector::switch_to_miner_menu()
                     {
                         move_active_func();
                         BUILDUP->remove_shared_ingredients_from_all(Ingredient::SubType::MineRails, 1);
+                        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
+                        serializer.serialize();
                     }
                     else
                     {
                         CCLOG("need more rails");
                         animate_flash_action(rails_count_lbl, 0.1f, 1.5f);
+                        auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
+                        info_panel->runAction(shake);
                     }
                 };
             });
@@ -748,6 +753,9 @@ void GameDirector::switch_to_miner_menu()
     explode_btn->addTouchEventListener([miner](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
+            MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
+            serializer.serialize();
+
             GameDirector::switch_to_item_altar_menu();
             miner->reset();
             do_vibrate(16);
@@ -767,7 +775,7 @@ void GameDirector::switch_to_miner_menu()
     dig_button_lbl->setTextColor(Color4B::WHITE);
     dig_button_lbl->enableOutline(Color4B::BLACK, 2);
 
-    dig_btn->addTouchEventListener([miner, cart_count_lbl](Ref* touch, ui::Widget::TouchEventType type){
+    dig_btn->addTouchEventListener([miner, cart_count_lbl, info_panel](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             res_count_t num_carts = BUILDUP->count_ingredients(Ingredient::SubType::Minecart);
@@ -776,11 +784,16 @@ void GameDirector::switch_to_miner_menu()
                 BUILDUP->remove_shared_ingredients_from_all(Ingredient::SubType::Minecart, 1);
                 miner->reset();
                 do_vibrate(16);
+
+                MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
+                serializer.serialize();
             }
             else
             {
                 CCLOG("need more carts");
                 animate_flash_action(cart_count_lbl, 0.1f, 1.5f);
+                auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
+                info_panel->runAction(shake);
             }
         }
     });
