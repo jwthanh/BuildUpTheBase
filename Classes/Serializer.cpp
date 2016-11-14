@@ -554,6 +554,14 @@ void MinerSerializer::serialize()
     rjValue layer_key = rjValue("all_layers");
     doc.AddMember(layer_key, all_layers, allocator);
 
+    rjValue prev_active_pos_x_key = rjValue("prev_active_tile_pos_x");
+    rjValue prev_active_pos_x_val = rjValue(this->miner->prev_active_tile_pos.x);
+    doc.AddMember(prev_active_pos_x_key, prev_active_pos_x_val, allocator);
+
+    rjValue prev_active_pos_y_key = rjValue("prev_active_tile_pos_y");
+    rjValue prev_active_pos_y_val = rjValue(this->miner->prev_active_tile_pos.y);
+    doc.AddMember(prev_active_pos_y_key, prev_active_pos_y_val, allocator);
+
     rjValue active_pos_x_key = rjValue("active_tile_pos_x");
     rjValue active_pos_x_val = rjValue(this->miner->active_tile_pos.x);
     doc.AddMember(active_pos_x_key, active_pos_x_val, allocator);
@@ -606,6 +614,8 @@ void MinerSerializer::load()
 
     std::vector<std::string> required_members = {
         "all_layers",
+        "prev_active_tile_pos_x",
+        "prev_active_tile_pos_y",
         "active_tile_pos_x",
         "active_tile_pos_y",
         "resource_tile_pos_x",
@@ -665,6 +675,8 @@ void MinerSerializer::load()
         layer_index++;
     }
 
+    this->miner->prev_active_tile_pos.x = doc["prev_active_tile_pos_x"].GetDouble();
+    this->miner->prev_active_tile_pos.y = doc["prev_active_tile_pos_y"].GetDouble();
     this->miner->active_tile_pos.x = doc["active_tile_pos_x"].GetDouble();
     this->miner->active_tile_pos.y = doc["active_tile_pos_y"].GetDouble();
     this->miner->resource_tile_pos.x = doc["resource_tile_pos_x"].GetDouble();

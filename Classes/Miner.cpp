@@ -179,7 +179,7 @@ void Miner::init(bool use_existing)
         serializer.load();
         if (serializer.existing_json_found)
         {
-            start_pos = this->active_tile_pos; //serializer sets it
+            // start_pos = this->active_tile_pos; //serializer sets it
         }
         else
         {
@@ -195,9 +195,11 @@ void Miner::init(bool use_existing)
         //TODO fix hardcoded resource path
         this->resource_tile_pos = {4, 4};
         this->active_layer->setTileGID(this->resource_tile_id, this->resource_tile_pos);
+
+        this->init_start_pos(start_pos);
+        this->prev_active_tile_pos = this->active_tile_pos - cocos2d::Vec2{-1, 0};
     }
 
-    this->init_start_pos(start_pos);
 };
 
 void Miner::init_start_pos(cocos2d::Vec2 new_start_pos)
@@ -209,7 +211,6 @@ void Miner::init_start_pos(cocos2d::Vec2 new_start_pos)
         new_start_pos.x += 1;
     }
 
-    this->prev_active_tile_pos = new_start_pos - cocos2d::Vec2{-1, 0};
     this->active_tile_pos = new_start_pos;
 };
 
