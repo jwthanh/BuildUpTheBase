@@ -114,19 +114,20 @@ cocos2d::Vec2 Miner::get_default_start_pos()
                 float move_by_offset = 25.0f;
                 tile_sprite->setPositionY(tile_sprite->getPositionY()+move_by_offset);
                 tile_sprite->setVisible(false);
-                //tile_sprite->runAction(
-                    //cocos2d::MoveBy::create(duration, {0, -move_by_offset})
-                        //);
+
                 float delay = float_distribution(float_gen);
-                auto action = cocos2d::TargetedAction::create(tile_sprite, 
+                auto tile_action = cocos2d::TargetedAction::create(tile_sprite,
                     cocos2d::Sequence::create(
-                        cocos2d::DelayTime::create(delay),
-                        cocos2d::Show::create(),
-                        cocos2d::MoveBy::create(duration, { 0, -move_by_offset }),
-                        NULL
+                    cocos2d::DelayTime::create(delay),
+                    cocos2d::Show::create(),
+                    cocos2d::MoveBy::create(duration, { 0, -move_by_offset }),
+                    NULL
                     )
-                );
-                land_actions.push_back(action);
+                    );
+                land_actions.push_back(cocos2d::Sequence::createWithTwoActions(
+                    tile_action,
+                    FShake::actionWithDuration(0.1f, 1.5f, 1.5f)
+                    ));
 
             counter++;
             if (start_id == counter)
@@ -140,9 +141,7 @@ cocos2d::Vec2 Miner::get_default_start_pos()
                 }
                 else
                 {
-
-                start_pos = looped_pos;
-                    
+                    start_pos = looped_pos;
                 }
             };
 
@@ -150,14 +149,15 @@ cocos2d::Vec2 Miner::get_default_start_pos()
     };
 
     cocos2d::Vector<cocos2d::FiniteTimeAction*> action_array = cocos2d::Vector<cocos2d::FiniteTimeAction*>();
-
     std::shuffle(land_actions.begin(), land_actions.end(), std::random_device());
+
     for (auto& action : land_actions)
     {
         action_array.pushBack(action);
     }
     cocos2d::Spawn* seq = cocos2d::Spawn::create(action_array);
     this->tilemap->runAction(seq);
+
     return start_pos;
 }
 
