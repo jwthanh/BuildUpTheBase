@@ -406,9 +406,16 @@ void TreeHarvestable::animate_touch_start(cocos2d::Touch* touch)
     res_count_t times_doubled = map_get(tech_map, tech_type, _def);
     wood_weight *= times_doubled+1;
 
+
     item_rarity_map.add_item(Ingredient::SubType::Wood, wood_weight);
 
     Ingredient::SubType output = item_rarity_map.get_item();
+
+    //vibrate if player gets wood
+    if (output == Ingredient::SubType::Wood){
+        do_vibrate(32);
+    };
+
     this->set_output_ing_type(output);
 
     Harvestable::animate_touch_start(touch); //super()
