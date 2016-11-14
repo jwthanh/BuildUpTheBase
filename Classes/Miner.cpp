@@ -6,6 +6,7 @@
 
 #include "cocos2d.h"
 #include "Serializer.h"
+#include "Util.h"
 
 enum class Directions {
     TopLeft,
@@ -90,31 +91,73 @@ cocos2d::Vec2 Miner::get_default_start_pos()
     std::uniform_int_distribution<tile_gid_t> distribution(1, num_tiles - 2);
     tile_gid_t start_id = distribution(gen);
 
+    float duration = 0.1f;
+    float max_delay = 0.5f;
+
+    std::vector<cocos2d::FiniteTimeAction*> land_actions;
+
+    std::mt19937 float_gen = std::mt19937(std::random_device{}());
+    std::uniform_real_distribution<float> float_distribution(0, max_delay);
+
     tile_gid_t counter = 0;
     for (tile_gid_t y = 0; y < layer_size.height; y++)
     {
         for (tile_gid_t x = 0; x < layer_size.width; x++)
         {
+                float fx = float(x);
+                float fy = float(y);
+                cocos2d::Vec2 looped_pos = { fx, fy };
+
+                cocos2d::Sprite* tile_sprite = this->active_layer->getTileAt(looped_pos);
+                log_vector(looped_pos);
+
+                float move_by_offset = 25.0f;
+                tile_sprite->setPositionY(tile_sprite->getPositionY()+move_by_offset);
+                tile_sprite->setVisible(false);
+                //tile_sprite->runAction(
+                    //cocos2d::MoveBy::create(duration, {0, -move_by_offset})
+                        //);
+                float delay = float_distribution(float_gen);
+                auto action = cocos2d::TargetedAction::create(tile_sprite, 
+                    cocos2d::Sequence::create(
+                        cocos2d::DelayTime::create(delay),
+                        cocos2d::Show::create(),
+                        cocos2d::MoveBy::create(duration, { 0, -move_by_offset }),
+                        NULL
+                    )
+                );
+                land_actions.push_back(action);
+
             counter++;
             if (start_id == counter)
             {
-                float fx = float(x);
-                float fy = float(y);
-                start_pos = { fx, fy };
 
                 //go to next tile if 4,4 since that's the resource tile
                 //TODO fix hardcoded resource path
-                if (start_pos == cocos2d::Vec2{4, 4})
+                if (looped_pos == cocos2d::Vec2{4, 4})
                 {
                     start_id++;
-                    continue;
                 }
+                else
+                {
 
-                return start_pos;
+                start_pos = looped_pos;
+                    
+                }
             };
 
         }
     };
+
+    cocos2d::Vector<cocos2d::FiniteTimeAction*> action_array = cocos2d::Vector<cocos2d::FiniteTimeAction*>();
+
+    std::shuffle(land_actions.begin(), land_actions.end(), std::random_device());
+    for (auto& action : land_actions)
+    {
+        action_array.pushBack(action);
+    }
+    cocos2d::Spawn* seq = cocos2d::Spawn::create(action_array);
+    this->tilemap->runAction(seq);
     return start_pos;
 }
 
