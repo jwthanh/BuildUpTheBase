@@ -109,7 +109,6 @@ cocos2d::Vec2 Miner::get_default_start_pos()
                 cocos2d::Vec2 looped_pos = { fx, fy };
 
                 cocos2d::Sprite* tile_sprite = this->active_layer->getTileAt(looped_pos);
-                log_vector(looped_pos);
 
                 float move_by_offset = 25.0f;
                 tile_sprite->setPositionY(tile_sprite->getPositionY()+move_by_offset);
