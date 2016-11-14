@@ -434,7 +434,7 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
             //animate tile moving
             cocos2d::Sprite* tile_sprite = this->active_layer->getTileAt(this->active_tile_pos);
 
-            float move_by_offset = 50.0f;
+            float move_by_offset = 25.0f;
             tile_sprite->setPositionY(tile_sprite->getPositionY()+move_by_offset);
             tile_sprite->runAction(cocos2d::Sequence::createWithTwoActions(
                 cocos2d::MoveBy::create(0.1f, {0, -move_by_offset}),
