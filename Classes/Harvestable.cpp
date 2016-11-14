@@ -204,6 +204,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         Node* raw_ingredient_count = building_info_panel->getChildByName("ingredient_count");
         ui::Text* ingredient_count = dynamic_cast<ui::Text*>(raw_ingredient_count);
         animate_flash_action(ingredient_count, 0.2f, 1.15f);
+        building_info_panel->runAction(FShake::actionWithDuration(0.1f, 1.5f, 1.5f));
         do_vibrate(16);
 
         floating_color = Color4B::RED;
