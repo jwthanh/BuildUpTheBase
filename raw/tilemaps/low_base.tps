@@ -115,7 +115,7 @@
             <key>basic</key>
             <struct type="AlgorithmBasicSettings">
                 <key>sortBy</key>
-                <enum type="AlgorithmBasicSettings::SortBy">Best</enum>
+                <enum type="AlgorithmBasicSettings::SortBy">Name</enum>
                 <key>order</key>
                 <enum type="AlgorithmBasicSettings::Order">Ascending</enum>
             </struct>
@@ -188,14 +188,16 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../python/spriter/tiny_landscape/BL_BR.png</key>
-            <key type="filename">../../python/spriter/tiny_landscape/BL_TR.png</key>
-            <key type="filename">../../python/spriter/tiny_landscape/TL_BL.png</key>
-            <key type="filename">../../python/spriter/tiny_landscape/TL_BR.png</key>
-            <key type="filename">../../python/spriter/tiny_landscape/TL_TR.png</key>
-            <key type="filename">../../python/spriter/tiny_landscape/TR_BR.png</key>
-            <key type="filename">../../python/spriter/tiny_landscape/X.png</key>
-            <key type="filename">../../python/spriter/tiny_landscape/base.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/aa_BL_BR.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/aa_BL_TR.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/aa_TL_BL.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/aa_TL_BR.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/aa_TL_TR.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/aa_TR_BR.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/aa_X.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/aa_base.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/aa_start.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/bb_altar.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -203,14 +205,16 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>../../python/spriter/tiny_landscape/base.png</filename>
-            <filename>../../python/spriter/tiny_landscape/BL_BR.png</filename>
-            <filename>../../python/spriter/tiny_landscape/BL_TR.png</filename>
-            <filename>../../python/spriter/tiny_landscape/TL_BL.png</filename>
-            <filename>../../python/spriter/tiny_landscape/TL_BR.png</filename>
-            <filename>../../python/spriter/tiny_landscape/TL_TR.png</filename>
-            <filename>../../python/spriter/tiny_landscape/TR_BR.png</filename>
-            <filename>../../python/spriter/tiny_landscape/X.png</filename>
+            <filename>../../python/spriter/tiny_landscape/aa_base.png</filename>
+            <filename>../../python/spriter/tiny_landscape/aa_BL_BR.png</filename>
+            <filename>../../python/spriter/tiny_landscape/aa_BL_TR.png</filename>
+            <filename>../../python/spriter/tiny_landscape/aa_TL_BL.png</filename>
+            <filename>../../python/spriter/tiny_landscape/aa_TL_BR.png</filename>
+            <filename>../../python/spriter/tiny_landscape/aa_TL_TR.png</filename>
+            <filename>../../python/spriter/tiny_landscape/aa_TR_BR.png</filename>
+            <filename>../../python/spriter/tiny_landscape/aa_X.png</filename>
+            <filename>../../python/spriter/tiny_landscape/bb_altar.png</filename>
+            <filename>../../python/spriter/tiny_landscape/aa_start.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

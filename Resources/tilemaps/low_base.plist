@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>BL_BR.png</key>
+            <key>aa_BL_BR.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>BL_TR.png</key>
+            <key>aa_BL_TR.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>TL_BL.png</key>
+            <key>aa_TL_BL.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -45,11 +45,11 @@
                 <key>spriteSourceSize</key>
                 <string>{32,32}</string>
                 <key>textureRect</key>
-                <string>{{1,35},{32,32}}</string>
+                <string>{{137,1},{32,32}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>TL_BR.png</key>
+            <key>aa_TL_BR.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -60,11 +60,11 @@
                 <key>spriteSourceSize</key>
                 <string>{32,32}</string>
                 <key>textureRect</key>
-                <string>{{35,35},{32,32}}</string>
+                <string>{{171,1},{32,32}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>TL_TR.png</key>
+            <key>aa_TL_TR.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -75,11 +75,11 @@
                 <key>spriteSourceSize</key>
                 <string>{32,32}</string>
                 <key>textureRect</key>
-                <string>{{69,35},{32,32}}</string>
+                <string>{{205,1},{32,32}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>TR_BR.png</key>
+            <key>aa_TR_BR.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -90,11 +90,11 @@
                 <key>spriteSourceSize</key>
                 <string>{32,32}</string>
                 <key>textureRect</key>
-                <string>{{1,69},{32,32}}</string>
+                <string>{{239,1},{32,32}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>X.png</key>
+            <key>aa_X.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -105,11 +105,11 @@
                 <key>spriteSourceSize</key>
                 <string>{32,32}</string>
                 <key>textureRect</key>
-                <string>{{35,69},{32,32}}</string>
+                <string>{{273,1},{32,32}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>base.png</key>
+            <key>aa_base.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -121,6 +121,36 @@
                 <string>{32,32}</string>
                 <key>textureRect</key>
                 <string>{{1,1},{32,32}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>aa_start.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{32,32}</string>
+                <key>spriteSourceSize</key>
+                <string>{32,32}</string>
+                <key>textureRect</key>
+                <string>{{103,1},{32,32}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>bb_altar.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{32,32}</string>
+                <key>spriteSourceSize</key>
+                <string>{32,32}</string>
+                <key>textureRect</key>
+                <string>{{307,1},{32,32}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -136,9 +166,9 @@
             <key>realTextureFileName</key>
             <string>low_base.png</string>
             <key>size</key>
-            <string>{102,102}</string>
+            <string>{340,34}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:f21855b1bea7576fcabcf3df660fbb4a:9f7b104af739187c4fb25a4ec3822249:7c64bf34f00fd80ae4152dcb27c9be3d$</string>
+            <string>$TexturePacker:SmartUpdate:56e9d5a647af30fc1f75480ae0495576:3dc45a8b4b774761faf618bdc170a23a:7c64bf34f00fd80ae4152dcb27c9be3d$</string>
             <key>textureFileName</key>
             <string>low_base.png</string>
         </dict>

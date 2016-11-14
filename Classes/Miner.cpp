@@ -35,21 +35,21 @@ std::map<Directions, cocos2d::Vec2> DIRECTION_MAP_REV {
     {Directions::BottomRight, {1, 0}}
 };
 
-tile_gid_t Miner::resource_tile_id = 130;
+tile_gid_t Miner::resource_tile_id = 10;
 
 //special tiles
-tile_gid_t Miner::tile_X = 7;
-tile_gid_t Miner::tile_START = 68;
+tile_gid_t Miner::tile_X = 9;
+tile_gid_t Miner::tile_START = 4;
 
 //across
-tile_gid_t Miner::tile_TL_BR = 131;
-tile_gid_t Miner::tile_BL_TR = 69;
+tile_gid_t Miner::tile_TL_BR = 6;
+tile_gid_t Miner::tile_BL_TR = 3;
 
 //corners
-tile_gid_t Miner::tile_TL_TR = 72;
-tile_gid_t Miner::tile_TR_BR = 54;
-tile_gid_t Miner::tile_BL_BR = 36;
-tile_gid_t Miner::tile_TL_BL = 63;
+tile_gid_t Miner::tile_TL_TR = 7;
+tile_gid_t Miner::tile_TR_BR = 8;
+tile_gid_t Miner::tile_BL_BR = 2;
+tile_gid_t Miner::tile_TL_BL = 5;
 
 std::vector<tile_gid_t> RAIL_IDS = {
     //across
@@ -164,8 +164,8 @@ cocos2d::Vec2 Miner::get_start_pos()
 void Miner::init(bool use_existing)
 {
 
-    this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/test_map.tmx");
-    this->tilemap->setScale(0.75f);
+    this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/low_map.tmx");
+    this->tilemap->setScale(3.0f);
     this->tilemap->setPositionY(this->tilemap->getPositionY()-25.0f);
 
     this->active_layer = this->tilemap->getLayer("background");
@@ -434,7 +434,7 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
             //animate tile moving
             cocos2d::Sprite* tile_sprite = this->active_layer->getTileAt(this->active_tile_pos);
 
-            float move_by_offset = 200.0f;
+            float move_by_offset = 50.0f;
             tile_sprite->setPositionY(tile_sprite->getPositionY()+move_by_offset);
             tile_sprite->runAction(cocos2d::Sequence::createWithTwoActions(
                 cocos2d::MoveBy::create(0.1f, {0, -move_by_offset}),
