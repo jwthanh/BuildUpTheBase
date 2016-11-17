@@ -12,8 +12,6 @@
 #include <tinyxml2/tinyxml2.h>
 #include <json/document.h>
 
-#include "cocos2d.h"
-
 #include "HouseBuilding.h"
 
 #include "Recipe.h"
@@ -39,6 +37,8 @@
 #include <json/stringbuffer.h>
 #include <json/writer.h>
 #include "Item.h"
+
+
 
 USING_NS_CC;
 

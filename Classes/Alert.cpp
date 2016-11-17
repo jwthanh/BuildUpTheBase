@@ -3,6 +3,12 @@
 
 #include "Util.h"
 
+#include "base/CCDirector.h"
+#include "base/CCEventListenerTouch.h"
+#include "base/CCEventDispatcher.h"
+#include "2d/CCActionInterval.h"
+#include "2d/CCActionInstant.h"
+
 USING_NS_CC;
 
 Alert* Alert::create()

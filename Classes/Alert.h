@@ -2,7 +2,6 @@
 #ifndef ALERT_H
 #define ALERT_H
 
-#include "cocos2d.h"
 #include "ui/CocosGUI.h"
 
 class Alert : public cocos2d::ui::Layout
