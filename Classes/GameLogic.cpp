@@ -6,7 +6,6 @@
 #include "NuMenu.h"
 #include "Serializer.h"
 #include "Util.h"
-#include "cocostudio/ActionTimeline/CSLoader.h"
 #include "MiscUI.h"
 #include "Modal.h"
 #include "external/easylogging.h"
@@ -16,6 +15,9 @@
 #include "BuildingsSideBar.h"
 #include "Miner.h"
 #include "FShake.h"
+#include "NodeBuilder.h"
+#include "base/CCDirector.h"
+#include "2d/CCSprite.h"
 
 USING_NS_CC;
 
@@ -429,8 +431,8 @@ void GameDirector::switch_to_building_menu()
 
 void GameDirector::switch_to_city_menu()
 {
-    auto inst = CSLoader::getInstance();
-    auto city_menu_scene_node = inst->CSLoader::createNode("editor/scenes/city_menu_scene.csb");
+    auto city_menu_scene_node = get_prebuilt_node_from_csb("editor/scenes/city_menu_scene.csb");
+
     city_menu_scene_node->removeFromParent();
     auto panel = city_menu_scene_node->getChildByName("panel");
 
@@ -615,8 +617,7 @@ void GameDirector::switch_to_city_menu()
 
 void GameDirector::switch_to_miner_menu()
 {
-    auto inst = CSLoader::getInstance();
-    auto miner_scene = inst->CSLoader::createNode("editor/scenes/miner_scene.csb");
+    auto miner_scene = get_prebuilt_node_from_csb("editor/scenes/miner_scene.csb");
     miner_scene->removeFromParent();
 
     std::shared_ptr<Miner> miner = std::make_shared<Miner>(miner_scene);
@@ -813,8 +814,7 @@ void GameDirector::switch_to_miner_menu()
 
 void GameDirector::switch_to_items_menu()
 {
-    auto inst = CSLoader::getInstance();
-    auto items_scene_node = inst->CSLoader::createNode("editor/scenes/items_scene.csb");
+    auto items_scene_node = get_prebuilt_node_from_csb("editor/scenes/items_scene.csb");
     items_scene_node->removeFromParent();
     auto panel = items_scene_node->getChildByName("panel");
 
@@ -928,8 +928,7 @@ You're able to sell them, and we're planning to have things like people who want
 
 void GameDirector::switch_to_item_altar_menu()
 {
-    auto inst = CSLoader::getInstance();
-    auto items_scene_node = inst->CSLoader::createNode("editor/scenes/items_scene.csb");
+    auto items_scene_node = get_prebuilt_node_from_csb("editor/scenes/items_scene.csb");
     items_scene_node->removeFromParent();
     auto panel = items_scene_node->getChildByName("panel");
 

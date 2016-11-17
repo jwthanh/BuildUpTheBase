@@ -7,8 +7,6 @@
 #include <json/stringbuffer.h>
 #include <regex>
 
-#include "cocostudio/ActionTimeline/CSLoader.h"
-
 #include "Harvestable.h"
 #include "GameLogic.h"
 #include "NuMenu.h"
@@ -34,6 +32,15 @@
 
 #include "Recipe.h"
 #include "Miner.h"
+#include "NodeBuilder.h"
+
+#include "base/CCDirector.h"
+#include "base/CCEventListenerKeyboard.h"
+#include "base/CCEventDispatcher.h"
+#include "base/CCEventTouch.h"
+#include "base/CCEventListenerTouch.h"
+#include <sstream>
+#include "2d/CCActionEase.h"
 
 USING_NS_CC;
 
@@ -580,8 +587,7 @@ Node* BaseScene::get_original_scene_from_editor()
 {
     if (BaseScene::_harvest_scene_from_editor == NULL)
     {
-        auto inst = CSLoader::getInstance();
-        BaseScene::_harvest_scene_from_editor = inst->CSLoader::createNode("editor/scenes/base_scene.csb");
+        BaseScene::_harvest_scene_from_editor = get_prebuilt_node_from_csb("editor/scenes/base_scene.csb");
     };
 
     return BaseScene::_harvest_scene_from_editor;
@@ -872,8 +878,7 @@ void BaseScene::create_inventory_listview()
     inventory_listview->removeFromParent();
     this->addChild(inventory_listview);
 
-    auto inst = CSLoader::getInstance();
-    auto update_listview = [this, inst, inventory_listview](float dt)
+    auto update_listview = [this, inventory_listview](float dt)
     {
         typedef std::pair<Ingredient::SubType, res_count_t> maptype;
         auto order_by_count = [](maptype left, maptype right)
@@ -929,7 +934,7 @@ void BaseScene::create_inventory_listview()
 
             //from the inv button take the panel, remove it from the button,
             //clone it and use the clone
-            auto raw_node = inst->createNode("editor/buttons/inventory_button.csb");
+            auto raw_node = get_prebuilt_node_from_csb("editor/buttons/inventory_button.csb");
             auto orig_item_panel = dynamic_cast<ui::Button*>(raw_node->getChildByName("item_panel")); //TODO do we need to clone, why not use it
             orig_item_panel->removeFromParent();
 
@@ -1117,8 +1122,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
     IngredientData res_data = IngredientData(Ingredient::type_to_string(ing_type));
 
-    auto inst = CSLoader::getInstance();
-    auto raw_node = inst->createNode("editor/details/inventory_detail.csb");
+    auto raw_node = get_prebuilt_node_from_csb("editor/details/inventory_detail.csb");
 
     auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
     alert_panel->removeFromParent();

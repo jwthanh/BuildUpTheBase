@@ -1,4 +1,7 @@
 #include "Harvestable.h"
+
+#include <numeric>
+
 #include "FShake.h"
 
 #include "HouseBuilding.h"
@@ -8,8 +11,6 @@
 #include "Util.h"
 #include "Recipe.h"
 #include "attribute.h"
-#include "cocostudio/ActionTimeline/CSLoader.h"
-#include <numeric>
 
 #include "Fighter.h"
 #include "attribute_container.h"
@@ -19,6 +20,7 @@
 #include "StaticData.h"
 #include "Item.h"
 #include "RandomWeightMap.h"
+#include "NodeBuilder.h"
 
 USING_NS_CC;
 
@@ -75,8 +77,7 @@ bool Harvestable::init()
 
     this->init_clicks();
 
-    auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    Node* harvest_scene_editor = get_prebuilt_node_from_csb("editor/scenes/base_scene.csb");
     Node* harvestable_pos = harvest_scene_editor->getChildByName("harvestable_pos");
     this->setPosition(harvestable_pos->getPosition()); 
     this->setName("harvestable");
