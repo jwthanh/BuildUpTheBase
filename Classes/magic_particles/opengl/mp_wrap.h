@@ -14,7 +14,6 @@
 #ifdef COCOS_2DX
 	#define OPENGL_SAVE_ATTRIBUTES
 	#define DIST_CAMERA_3D  -2520
-	#include "cocos2d.h"
 	#include "platform/CCPlatformConfig.h"
 	#include "platform/CCGL.h"
 	

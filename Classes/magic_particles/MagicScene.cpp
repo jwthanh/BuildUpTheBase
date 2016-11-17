@@ -2,6 +2,10 @@
 #include "MagicEmitter.h"
 
 #include "mp_cocos.h"
+#include "2d/CCScene.h"
+#include "2d/CCMenuItem.h"
+#include "2d/CCMenu.h"
+#include "base/CCDirector.h"
 
 USING_NS_CC;
 

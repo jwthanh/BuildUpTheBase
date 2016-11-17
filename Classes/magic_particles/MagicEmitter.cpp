@@ -1,6 +1,7 @@
 ﻿
 #include "MagicEmitter.h"
 #include "mp_cocos.h"
+#include "renderer/CCRenderer.h"
 
 using namespace cocos2d;
 

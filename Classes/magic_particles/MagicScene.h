@@ -1,8 +1,8 @@
 ﻿#ifndef __HELLOWORLD_SCENE_H__
 #define __HELLOWORLD_SCENE_H__
 
-#include "cocos2d.h"
 #include "_core/magic.h"
+#include "2d/CCLayer.h"
 
 class MagicEmitter;
 

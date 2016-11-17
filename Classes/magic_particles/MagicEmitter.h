@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "cocos2d.h"
 #include "_core/magic.h"
+#include "cocostudio/ActionTimeline/CCActionTimelineNode.h"
 
 class MP_Emitter_Cocos;
 

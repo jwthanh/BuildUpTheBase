@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------------
 
 #include "mp_wrap.h"
+#include "cocos2d.h"
 
 #ifdef COCOS_2DX
 	using namespace cocos2d;
