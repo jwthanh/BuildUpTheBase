@@ -5,8 +5,6 @@
 #include <json/stringbuffer.h>
 #include <json/writer.h>
 
-#include "cocos2d.h"
-
 #include "FileOperation.h"
 
 #include "HouseBuilding.h"
@@ -17,6 +15,9 @@
 #include "StaticData.h"
 #include "Util.h"
 #include "Miner.h"
+
+#include "2d/CCTMXTiledMap.h"
+#include "2d/CCTMXLayer.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)

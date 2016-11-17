@@ -1,7 +1,6 @@
 // Code by Francois Guibert
 // Contact: www.frozax.com - http://twitter.com/frozax - www.facebook.com/frozax
 #include "FShake.h"
-#include "cocos2d.h"
 
 USING_NS_CC;
 

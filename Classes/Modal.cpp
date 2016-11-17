@@ -1,12 +1,11 @@
 #include "Modal.h"
 
-#include "cocos2d.h"
-#include "cocostudio/ActionTimeline/CSLoader.h"
-
 #include "GameLayer.h"
 #include "MiscUI.h"
 #include "Util.h"
 #include "external/easylogging.h"
+
+#include "cocostudio/ActionTimeline/CSLoader.h"
 
 USING_NS_CC;
 
