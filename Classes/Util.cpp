@@ -1,8 +1,9 @@
 #include "Util.h"
 #include <iomanip>
+#include <sstream>
 
-#include "cocos2d.h"
-#include "ui/CocosGUI.h"
+#include "base/CCDirector.h"
+#include "ui/UIWidget.h"
 
 float sx (float x, bool do_scale)
 {
