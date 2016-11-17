@@ -5,6 +5,13 @@
 
 #include <chrono>
 
+namespace cocos2d
+{
+    class MotionStreak;
+    class NodeGrid;
+}
+
+
 class Beatup : public GameLayer
 {
 

@@ -11,6 +11,7 @@
 #include "attribute.h"
 #include "MiscUI.h"
 #include "Technology.h"
+#include "base/CCDirector.h"
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {

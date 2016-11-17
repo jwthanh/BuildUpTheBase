@@ -4,6 +4,9 @@
 #include "constants.h"
 #include "GameLogic.h"
 #include "Beatup.h" //used in BEATUP macro
+#include "2d/CCSprite.h"
+#include "2d/CCProgressTimer.h"
+#include "cocostudio/WidgetReader/UserCameraReader/UserCameraReader.h"
 
 USING_NS_CC;
 

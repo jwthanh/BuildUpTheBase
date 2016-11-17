@@ -1,11 +1,10 @@
 #ifndef GAMELAYER_H
 #define GAMELAYER_H
 
-#include "cocos2d.h"
 #include "ui/CocosGUI.h"
 
 #include "constants.h"
-
+#include "2d/CCLayer.h"
 
 
 class GameLayer : public cocos2d::Layer

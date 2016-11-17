@@ -2,12 +2,15 @@
 #ifndef HARVESTABLE_H
 #define HARVESTABLE_H
 
-#include "cocos2d.h"
-#include "ui/CocosGUI.h"
-
 #include "GameLayer.h"
 
 #include "SubTypes.h"
+
+namespace cocos2d
+{
+    class ClippingNode;
+    class NodeGrid;
+}
 
 class Beatup;
 
