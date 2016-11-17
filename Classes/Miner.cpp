@@ -7,9 +7,9 @@
 #include "Serializer.h"
 #include "Util.h"
 
-#include "cocos2d/cocos/2d/CCTMXTiledMap.h"
-#include "cocos2d/cocos/2d/CCTMXLayer.h"
-#include "cocos2d/cocos/2d/CCActionInstant.h"
+#include "2d/CCTMXTiledMap.h"
+#include "2d/CCTMXLayer.h"
+#include "2d/CCActionInstant.h"
 #include "2d/CCSprite.h"
 #include "2d/CCParticleExamples.h"
 
