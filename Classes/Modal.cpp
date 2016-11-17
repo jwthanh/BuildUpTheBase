@@ -4,8 +4,9 @@
 #include "MiscUI.h"
 #include "Util.h"
 #include "external/easylogging.h"
-
-#include "cocostudio/ActionTimeline/CSLoader.h"
+#include "NodeBuilder.h"
+#include "2d/CCActionInterval.h"
+#include "2d/CCActionInstant.h"
 
 USING_NS_CC;
 
@@ -15,9 +16,7 @@ BaseModal::BaseModal(Node* parent)
     auto layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
     parent->addChild(layer_color);
 
-    auto inst = cocos2d::CSLoader::getInstance();
-
-    cocos2d::Node* root_message_node = inst->CSLoader::createNode("editor/details/message_detail.csb");
+    cocos2d::Node* root_message_node = get_prebuilt_node_from_csb("editor/details/message_detail.csb");
     this->_node = root_message_node->getChildByName("message_panel");
     this->_node->removeFromParent();
     this->_node->setPosition(GameLayer::get_center_pos());

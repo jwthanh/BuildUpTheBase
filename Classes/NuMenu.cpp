@@ -1,8 +1,7 @@
 #include "NuMenu.h"
 #include <numeric>
+#include <sstream>
 #include <random>
-
-#include <editor-support/cocostudio/ActionTimeline/CSLoader.h>
 
 #include "Util.h"
 #include "MiscUI.h"
@@ -18,6 +17,13 @@
 #include "HarvestScene.h"
 
 #include "magic_particles/MagicEmitter.h"
+#include "NodeBuilder.h"
+#include "2d/CCParticleSystemQuad.h"
+#include "base/CCDirector.h"
+#include "2d/CCRenderTexture.h"
+#include "base/CCEventListenerTouch.h"
+#include "base/CCEventListenerKeyboard.h"
+#include "base/CCEventDispatcher.h"
 
 
 USING_NS_CC;
@@ -63,8 +69,7 @@ bool NuItem::init(cocos2d::Node* parent)
 
     if (NuItem::orig_button == NULL)
     {
-        auto inst = cocos2d::CSLoader::getInstance();
-        NuItem::orig_button = static_cast<cocos2d::ui::Button*>(inst->createNode("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
+        NuItem::orig_button = static_cast<cocos2d::ui::Button*>(get_prebuilt_node_from_csb("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
         load_default_button_textures(NuItem::orig_button);
         NuItem::orig_button->retain();
 
