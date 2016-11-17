@@ -21,6 +21,7 @@
 #include "Item.h"
 #include "RandomWeightMap.h"
 #include "NodeBuilder.h"
+
 #include "2d/CCClippingNode.h"
 #include "2d/CCActionEase.h"
 #include "base/CCDirector.h"
@@ -28,6 +29,9 @@
 #include "2d/CCRenderTexture.h"
 #include "2d/CCSpriteFrameCache.h"
 #include "2d/CCParticleSystemQuad.h"
+#include "ui/UIText.h"
+#include "ui/UIImageView.h"
+#include "ui/UIScale9Sprite.h"
 
 USING_NS_CC;
 

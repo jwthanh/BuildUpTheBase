@@ -5,8 +5,7 @@
 #include "constants.h"
 #include "Nameable.h"
 #include "Updateable.h"
-
-#include "ui/CocosGUI.h"
+#include "ui/UIWidget.h"
 
 class Experience;
 class AttributeContainer;
@@ -14,6 +13,14 @@ class Village;
 class Building;
 class Combat;
 class ProgressBar;
+
+namespace cocos2d
+{
+    namespace ui
+    {
+        class ImageView;
+    }
+}
 
 class Fighter : public Nameable, public Updateable
 {

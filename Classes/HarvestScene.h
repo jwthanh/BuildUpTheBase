@@ -13,6 +13,20 @@ class PopupPanel;
 class Harvestable;
 class MagicEmitter;
 
+namespace cocos2d
+{
+    class MotionStreak;
+    class NodeGrid;
+    class Sprite;
+
+    namespace ui
+    {
+        class Text;
+        class Widget;
+    }
+}
+
+
 class BaseScene : public GameLayer
 {
     private:

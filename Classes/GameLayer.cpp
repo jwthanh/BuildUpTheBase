@@ -6,6 +6,8 @@
 #include "SoundEngine.h"
 #include "Serializer.h"
 #include "base/CCDirector.h"
+#include "ui/UIScrollView.h"
+#include "ui/CocosGUI.h"
 USING_NS_CC;
 
 #include "GameLogic.h"
@@ -223,7 +225,7 @@ cocos2d::ui::Button* GameLayer::create_button(std::string text, BoolFuncNoArgs c
         button->setPressedActionEnabled(false);
     };
 
-    auto btn = ui::Button::create("main_UI_export_10_x4.png", "", "", ui::TextureResType::PLIST);
+    auto btn = ui::Button::create("main_UI_export_10_x4.png", "", "", ui::Widget::TextureResType::PLIST);
 
     btn->setTitleFontName(menu_font);
     btn->setTitleFontSize(menu_fontsize);

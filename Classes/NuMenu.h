@@ -7,11 +7,27 @@
 #include "SubTypes.h"
 #include "constants.h"
 
+#include "ui/UIWidget.h"
+#include "2d/CCLabel.h"
+
 class PlainShopItem;
 class Fist;
 class ShopItem;
 class Building;
 
+
+namespace cocos2d
+{
+    class MotionStreak;
+    class NodeGrid;
+    class Sprite;
+
+    namespace ui
+    {
+        class Text;
+        class Widget;
+    }
+}
 
 class NuItem : public cocos2d::ui::Widget
 {

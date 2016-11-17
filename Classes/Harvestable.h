@@ -5,12 +5,23 @@
 #include "GameLayer.h"
 
 #include "SubTypes.h"
+#include "ui/UIWidget.h"
 
 namespace cocos2d
 {
-    class ClippingNode;
+    class MotionStreak;
     class NodeGrid;
+    class Sprite;
+    class ClippingNode;
+    class DrawNode;
+
+    namespace ui
+    {
+        class Text;
+        class Widget;
+    }
 }
+
 
 class Beatup;
 

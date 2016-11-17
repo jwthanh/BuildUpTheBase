@@ -18,12 +18,21 @@
 
 #include "magic_particles/MagicEmitter.h"
 #include "NodeBuilder.h"
+
 #include "2d/CCParticleSystemQuad.h"
 #include "base/CCDirector.h"
 #include "2d/CCRenderTexture.h"
 #include "base/CCEventListenerTouch.h"
 #include "base/CCEventListenerKeyboard.h"
 #include "base/CCEventDispatcher.h"
+#include "ui/UIText.h"
+#include "ui/UIButton.h"
+#include "ui/UIImageView.h"
+#include "ui/UIScale9Sprite.h"
+#include <cocostudio/CocosStudioExtension.h>
+#include "ui/UILayout.h"
+#include "ui/UIListView.h"
+#include "ui/UIScrollView.h"
 
 
 USING_NS_CC;

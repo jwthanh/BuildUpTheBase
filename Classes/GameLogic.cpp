@@ -15,9 +15,15 @@
 #include "BuildingsSideBar.h"
 #include "Miner.h"
 #include "FShake.h"
+
 #include "NodeBuilder.h"
 #include "base/CCDirector.h"
 #include "2d/CCSprite.h"
+#include "ui/UIListView.h"
+#include "ui/UILayout.h"
+#include "ui/UIText.h"
+#include "ui/UIButton.h"
+#include "ui/UITextField.h"
 
 USING_NS_CC;
 
@@ -890,7 +896,7 @@ You're able to sell them, and we're planning to have things like people who want
         nuitem->set_title(item->get_name());
         nuitem->set_description(item->summary);
 
-        nuitem->set_image(item->img_path, ui::TextureResType::LOCAL);
+        nuitem->set_image(item->img_path, ui::Widget::TextureResType::LOCAL);
 
         res_count_t cost = item->get_effective_cost();
         std::string cost_str = beautify_double(cost);
@@ -998,7 +1004,7 @@ Place an item at the altar and the gods will see to that it gets strengthed.
         nuitem->set_title(item->get_name());
         nuitem->set_description(item->summary);
 
-        nuitem->set_image(item->img_path, ui::TextureResType::LOCAL);
+        nuitem->set_image(item->img_path, ui::Widget::TextureResType::LOCAL);
 
         res_count_t cost = item->get_effective_cost();
         std::string cost_str = beautify_double(cost);

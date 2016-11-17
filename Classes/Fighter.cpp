@@ -5,8 +5,11 @@
 #include "ProgressBar.h"
 #include "GameLogic.h"
 #include "FShake.h"
+
 #include "2d/CCSprite.h"
 #include "2d/CCProgressTimer.h"
+#include "ui/UIImageView.h"
+#include "ui/UIScale9Sprite.h"
 
 //#include "cocos2d.h"
 

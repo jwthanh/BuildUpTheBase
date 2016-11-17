@@ -9,6 +9,13 @@ namespace cocos2d
 {
     class MotionStreak;
     class NodeGrid;
+    class Sprite;
+
+    namespace ui
+    {
+        class Text;
+        class Widget;
+    }
 }
 
 

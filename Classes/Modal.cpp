@@ -4,9 +4,15 @@
 #include "MiscUI.h"
 #include "Util.h"
 #include "external/easylogging.h"
+
 #include "NodeBuilder.h"
 #include "2d/CCActionInterval.h"
 #include "2d/CCActionInstant.h"
+#include "ui/UIText.h"
+#include "ui/UILayout.h"
+#include "ui/UIImageView.h"
+#include "ui/UIListView.h"
+
 
 USING_NS_CC;
 

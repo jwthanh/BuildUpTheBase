@@ -34,6 +34,17 @@
 #include "base/CCEventDispatcher.h"
 #include "2d/CCMenu.h"
 #include "cocostudio/ActionTimeline/CCActionTimelineCache.h"
+#include "ui/UIPageView.h"
+#include "ui/UIListView.h"
+#include "ui/UILayout.h"
+#include "ui/UILoadingBar.h"
+#include "ui/UIText.h"
+#include "ui/UIButton.h"
+#include "ui/UIScale9Sprite.h"
+#include "ui/UIText.h"
+#include <cocostudio/CocosStudioExtension.h>
+#include "ui/UIImageView.h"
+#include "ui/UITextField.h"
 
 USING_NS_CC;
 
@@ -500,7 +511,7 @@ void Beatup::win_level()
 
 
     ui::Button* main_button = ui::Button::create();
-    main_button->loadTextureNormal("main_UI_export_10_scale9_x4.png", ui::TextureResType::PLIST);
+    main_button->loadTextureNormal("main_UI_export_10_scale9_x4.png", ui::Widget::TextureResType::PLIST);
 
     main_button->setTitleText("Continue");
     main_button->setScale9Enabled(true);

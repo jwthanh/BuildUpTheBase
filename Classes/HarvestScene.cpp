@@ -3,6 +3,7 @@
 #include <cctype>
 #include <numeric>
 #include <chrono>
+#include <sstream>
 
 #include <json/stringbuffer.h>
 #include <regex>
@@ -39,8 +40,18 @@
 #include "base/CCEventDispatcher.h"
 #include "base/CCEventTouch.h"
 #include "base/CCEventListenerTouch.h"
-#include <sstream>
 #include "2d/CCActionEase.h"
+#include "ui/UIPageView.h"
+#include "ui/UIListView.h"
+#include "ui/UILayout.h"
+#include "ui/UILoadingBar.h"
+#include "ui/UIText.h"
+#include "ui/UIButton.h"
+#include "ui/UIScale9Sprite.h"
+#include "ui/UIText.h"
+#include <cocostudio/CocosStudioExtension.h>
+#include "ui/UIImageView.h"
+#include "ui/UITextField.h"
 
 USING_NS_CC;
 
@@ -446,7 +457,7 @@ void BaseScene::create_building_choicelist()
         else {
             img_path = "weapon_ice.png";
         };
-        building_image->loadTexture(img_path, ui::TextureResType::PLIST);
+        building_image->loadTexture(img_path, ui::Widget::TextureResType::PLIST);
 
         load_default_button_textures(panel);
 
@@ -460,7 +471,7 @@ void BaseScene::create_building_choicelist()
             if (target_building == building)
             {
                 tex_name = "crosshair_red.png";
-                res_type = (int)ui::TextureResType::PLIST;
+                res_type = (int)ui::Widget::TextureResType::PLIST;
             }
             else
             {
@@ -513,7 +524,7 @@ void BaseScene::create_building_choicelist()
     //add building image
     ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
     std::string img_path = "buildingTiles_002.png";
-    building_image->loadTexture(img_path, ui::TextureResType::PLIST);
+    building_image->loadTexture(img_path, ui::Widget::TextureResType::PLIST);
 
     load_default_button_textures(panel);
 

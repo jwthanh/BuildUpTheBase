@@ -3,8 +3,9 @@
 #define BUILDINGSSIDEBAR_H
 #include <string>
 #include <memory>
-#include "ui/CocosGUI.h"
+
 #include "constants.h"
+#include "ui/UIWidget.h"
 
 namespace cocos2d
 {

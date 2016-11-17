@@ -2,10 +2,9 @@
 
 #include <memory>
 #include <sstream>
+#include <string>
 
 #include "constants.h"
-
-#include "ui/CocosGUI.h"
 
 #include "MiscUI.h"
 #include "Worker.h"
@@ -28,8 +27,15 @@
 #include "Harvestable.h"
 
 #include "NodeBuilder.h"
+
 #include "base/CCDirector.h"
 #include "CCApplication.h"
+#include "ui/UIButton.h"
+#include "ui/UIListView.h"
+#include "ui/UIText.h"
+#include "ui/UILayout.h"
+#include "ui/CocosGUI.h"
+
 
 USING_NS_CC;
 
@@ -850,7 +856,7 @@ void SideListView::setup_detail_listview_as_recipes()
                 menu_item->set_description(config.config.description);
                 if (config.config.local_img_path != "")
                 {
-                    menu_item->set_image(config.config.local_img_path, ui::TextureResType::LOCAL);
+                    menu_item->set_image(config.config.local_img_path, cocos2d::ui::Widget::TextureResType::LOCAL);
                 };
 
                 //RecipeNuItem specifics

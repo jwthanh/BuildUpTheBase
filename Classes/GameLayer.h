@@ -1,11 +1,19 @@
 #ifndef GAMELAYER_H
 #define GAMELAYER_H
 
-#include "ui/CocosGUI.h"
 
 #include "constants.h"
 #include "2d/CCLayer.h"
 
+namespace cocos2d
+{
+    namespace ui
+    {
+        class Button;
+        class ImageView;
+        class ScrollView;
+    }
+}
 
 class GameLayer : public cocos2d::Layer
 {
