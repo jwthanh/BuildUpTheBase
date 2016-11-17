@@ -55,7 +55,7 @@ class Miner
         cocos2d::Vec2 get_default_start_pos();
         cocos2d::Vec2 get_existing_start_pos();
 
-
+        void animate_falling_tiles();
 
         bool get_tile_is_blocked_pos(cocos2d::Vec2 pos);
         bool is_valid_pos(cocos2d::Vec2 pos);

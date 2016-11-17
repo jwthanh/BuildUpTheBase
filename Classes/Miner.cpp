@@ -77,19 +77,13 @@ Miner::Miner(cocos2d::Node* parent)
 
 }
 
-cocos2d::Vec2 Miner::get_default_start_pos()
+void Miner::animate_falling_tiles()
 {
     ///randomly pick a starting position in the map
 
     cocos2d::Size layer_size = this->active_layer->getLayerSize();
     cocos2d::Vec2 start_pos = { -1, -1 };
     tile_gid_t num_tiles = static_cast<tile_gid_t>(layer_size.width * layer_size.height);
-
-    std::mt19937 gen = std::mt19937(std::random_device{}());
-    //guessing offsets so it cant be the last tile or the first tile TODO make
-    //sure the prev tile is valid
-    std::uniform_int_distribution<tile_gid_t> distribution(1, num_tiles - 2);
-    tile_gid_t start_id = distribution(gen);
 
     float duration = 0.1f;
     float max_delay = 0.5f;
@@ -99,7 +93,6 @@ cocos2d::Vec2 Miner::get_default_start_pos()
     std::mt19937 float_gen = std::mt19937(std::random_device{}());
     std::uniform_real_distribution<float> float_distribution(0, max_delay);
 
-    tile_gid_t counter = 0;
     for (tile_gid_t y = 0; y < layer_size.height; y++)
     {
         for (tile_gid_t x = 0; x < layer_size.width; x++)
@@ -128,6 +121,48 @@ cocos2d::Vec2 Miner::get_default_start_pos()
                     FShake::actionWithDuration(0.1f, 1.5f, 1.5f)
                     ));
 
+        }
+    };
+
+    cocos2d::Vector<cocos2d::FiniteTimeAction*> action_array = cocos2d::Vector<cocos2d::FiniteTimeAction*>();
+    std::shuffle(land_actions.begin(), land_actions.end(), std::random_device());
+
+    for (auto& action : land_actions)
+    {
+        action_array.pushBack(action);
+    }
+    cocos2d::Spawn* seq = cocos2d::Spawn::create(action_array);
+    this->tilemap->runAction(seq);
+
+};
+
+cocos2d::Vec2 Miner::get_default_start_pos()
+{
+    ///randomly pick a starting position in the map
+
+    cocos2d::Size layer_size = this->active_layer->getLayerSize();
+    cocos2d::Vec2 start_pos = { -1, -1 };
+    tile_gid_t num_tiles = static_cast<tile_gid_t>(layer_size.width * layer_size.height);
+
+    std::mt19937 gen = std::mt19937(std::random_device{}());
+    //guessing offsets so it cant be the last tile or the first tile TODO make
+    //sure the prev tile is valid
+    std::uniform_int_distribution<tile_gid_t> distribution(1, num_tiles - 2);
+    tile_gid_t start_id = distribution(gen);
+
+    float duration = 0.1f;
+    float max_delay = 0.5f;
+
+
+    tile_gid_t counter = 0;
+    for (tile_gid_t y = 0; y < layer_size.height; y++)
+    {
+        for (tile_gid_t x = 0; x < layer_size.width; x++)
+        {
+            float fx = float(x);
+            float fy = float(y);
+            cocos2d::Vec2 looped_pos = { fx, fy };
+
             counter++;
             if (start_id == counter)
             {
@@ -146,16 +181,6 @@ cocos2d::Vec2 Miner::get_default_start_pos()
 
         }
     };
-
-    cocos2d::Vector<cocos2d::FiniteTimeAction*> action_array = cocos2d::Vector<cocos2d::FiniteTimeAction*>();
-    std::shuffle(land_actions.begin(), land_actions.end(), std::random_device());
-
-    for (auto& action : land_actions)
-    {
-        action_array.pushBack(action);
-    }
-    cocos2d::Spawn* seq = cocos2d::Spawn::create(action_array);
-    this->tilemap->runAction(seq);
 
     return start_pos;
 }
@@ -241,6 +266,8 @@ void Miner::init(bool use_existing)
         this->init_start_pos(start_pos);
         this->prev_active_tile_pos = this->active_tile_pos - cocos2d::Vec2{-1, 0};
     }
+
+    this->animate_falling_tiles();
 
 };
 
