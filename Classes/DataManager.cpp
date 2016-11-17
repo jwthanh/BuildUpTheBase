@@ -1,9 +1,9 @@
 #include "DataManager.h"
 #include <cassert>
 
-#include "CCPlatformMacros.h"
 #include "base/CCConsole.h"
 #include "base/CCUserDefault.h"
+
 
 void DataManager::validate_key(std::string key)
 {

@@ -10,7 +10,6 @@
 #include "Recipe.h"
 #include "Item.h"
 
-#include "CCPlatformMacros.h"
 
 std::string BaseData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)
 {
@@ -27,7 +26,7 @@ std::string BaseData::_get_data(std::string key_top, std::string key_child, std:
 
     rjDocument jsonDoc = FileIO::open_json(this->_filename, true);
 
-    CC_ASSERT(jsonDoc.HasMember(key_top.c_str()) && "this should be here");
+    assert(jsonDoc.HasMember(key_top.c_str()) && "this should be here");
     auto body = &jsonDoc[key_top.c_str()];
 
     if (key_child == "")
