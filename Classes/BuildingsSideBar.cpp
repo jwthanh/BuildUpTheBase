@@ -1,5 +1,8 @@
 #include "BuildingsSideBar.h"
 
+#include <memory>
+#include <sstream>
+
 #include "constants.h"
 
 #include "ui/CocosGUI.h"
@@ -24,7 +27,9 @@
 #include "HarvestScene.h"
 #include "Harvestable.h"
 
-#include "cocostudio/ActionTimeline/CSLoader.h"
+#include "NodeBuilder.h"
+#include "base/CCDirector.h"
+#include <CCApplication.h>
 
 USING_NS_CC;
 
@@ -110,8 +115,7 @@ SideListView::SideListView(Node* parent, spBuilding current_target) : current_ta
 
 ui::Button* SideListView::_create_button(std::string node_name)
 {
-    auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    Node* harvest_scene_editor = get_prebuilt_node_from_csb("editor/scenes/base_scene.csb");
 
     ui::Button* button = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName(node_name));
     load_default_button_textures(button);
@@ -852,17 +856,17 @@ void SideListView::setup_detail_listview_as_recipes()
                 //RecipeNuItem specifics
                 if (dynamic_cast<RecipeNuItem*>(menu_item))
                 {
-                    spRecipe recipe = static_pointer_cast<Recipe>(config.object);
+                    spRecipe recipe = std::static_pointer_cast<Recipe>(config.object);
                     dynamic_cast<RecipeNuItem*>(menu_item)->other_init(recipe);
                 }
                 else if (dynamic_cast<TechNuItem*>(menu_item))
                 {
-                    spTechnology tech = static_pointer_cast<Technology>(config.object);
+                    spTechnology tech = std::static_pointer_cast<Technology>(config.object);
                     dynamic_cast<TechNuItem*>(menu_item)->other_init(tech);
                 }
                 else if (dynamic_cast<TargetRecipeNuItem*>(menu_item))
                 {
-                    spRecipe recipe = static_pointer_cast<Recipe>(config.object);
+                    spRecipe recipe = std::static_pointer_cast<Recipe>(config.object);
                     dynamic_cast<TargetRecipeNuItem*>(menu_item)->other_init(recipe);
                 }
 
@@ -1166,8 +1170,7 @@ void SideListView::setup_powers_listview_as_powers()
 
 spListviewMap SideListView::_create_listview(std::string node_name)
 {
-    auto inst = CSLoader::getInstance();
-    Node* harvest_scene_editor = inst->createNode("editor/scenes/base_scene.csb");
+    Node* harvest_scene_editor = get_prebuilt_node_from_csb("editor/scenes/base_scene.csb");
 
     spListviewMap result = std::make_shared<listviewMap>();
     for (spBuilding building : BUILDUP->city->buildings)
