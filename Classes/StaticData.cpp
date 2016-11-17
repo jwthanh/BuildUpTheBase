@@ -10,6 +10,8 @@
 #include "Recipe.h"
 #include "Item.h"
 
+#include "CCPlatformMacros.h"
+
 std::string BaseData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)
 {
 

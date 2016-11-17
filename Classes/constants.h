@@ -9,8 +9,6 @@
 #include <string>
 #include <map>
 
-#include "CCPlatformMacros.h"
-
 #define TITLE_FONT  "fonts/airstrike.ttf"
 #define DEFAULT_FONT  "fonts/pixelmix.ttf"
 
