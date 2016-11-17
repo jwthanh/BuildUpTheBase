@@ -4,8 +4,6 @@
 
 #include <string>
 
-class Beatup;
-
 class Buyable 
 {
     public:

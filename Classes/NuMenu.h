@@ -2,7 +2,6 @@
 #ifndef NUMENU_H
 #define NUMENU_H
 
-#include "cocos2d.h"
 #include "GameLayer.h"
 #include "Buyable.h"
 #include "SubTypes.h"

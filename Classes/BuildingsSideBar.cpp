@@ -2,8 +2,6 @@
 
 #include "constants.h"
 
-#include "cocos2d.h"
-#include "cocostudio/ActionTimeline/CSLoader.h"
 #include "ui/CocosGUI.h"
 
 #include "MiscUI.h"
@@ -26,6 +24,7 @@
 #include "HarvestScene.h"
 #include "Harvestable.h"
 
+#include "cocostudio/ActionTimeline/CSLoader.h"
 
 USING_NS_CC;
 
