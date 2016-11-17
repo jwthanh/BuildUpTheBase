@@ -578,6 +578,11 @@ void MinerSerializer::serialize()
     rjValue resource_pos_y_val = rjValue(this->miner->resource_tile_pos.y);
     doc.AddMember(resource_pos_y_key, resource_pos_y_val, allocator);
 
+    rjValue depth_key = rjValue("depth");
+    rjValue depth_val = rjValue();
+    depth_val.SetDouble(this->miner->depth);
+    doc.AddMember(depth_key, depth_val, allocator);
+
     this->save_document(doc);
 }
 
@@ -619,7 +624,8 @@ void MinerSerializer::load()
         "active_tile_pos_x",
         "active_tile_pos_y",
         "resource_tile_pos_x",
-        "resource_tile_pos_y"
+        "resource_tile_pos_y",
+        "depth"
     };
 
     for (auto& required_member : required_members)
@@ -679,8 +685,11 @@ void MinerSerializer::load()
     this->miner->prev_active_tile_pos.y = doc["prev_active_tile_pos_y"].GetDouble();
     this->miner->active_tile_pos.x = doc["active_tile_pos_x"].GetDouble();
     this->miner->active_tile_pos.y = doc["active_tile_pos_y"].GetDouble();
+
     this->miner->resource_tile_pos.x = doc["resource_tile_pos_x"].GetDouble();
     this->miner->resource_tile_pos.y = doc["resource_tile_pos_y"].GetDouble();
+
+    this->miner->depth = doc["depth"].GetDouble();
 
     CCLOG("done loading");
     this->existing_json_found = true;

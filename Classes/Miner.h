@@ -7,6 +7,7 @@
 #include "math/Vec2.h"
 
 using tile_gid_t = uint32_t;
+using res_count_t = long double;
 
 
 namespace cocos2d
@@ -20,6 +21,7 @@ namespace cocos2d
 class Miner
 {
     public:
+        //resources
         static tile_gid_t resource_tile_id;
 
         //special tiles
@@ -36,6 +38,7 @@ class Miner
         static tile_gid_t tile_BL_BR;
         static tile_gid_t tile_TL_BL;
 
+        res_count_t depth;
 
     public:
         cocos2d::TMXTiledMap* tilemap;

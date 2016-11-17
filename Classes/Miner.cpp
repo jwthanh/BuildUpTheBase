@@ -70,6 +70,8 @@ std::vector<tile_gid_t> RAIL_IDS = {
 
 Miner::Miner(cocos2d::Node* parent)
 {
+    this->depth = 0.0;
+
     this->init(true); //use_existing = true
 
     this->parent = parent;
@@ -230,7 +232,6 @@ cocos2d::Vec2 Miner::get_start_pos()
 
 void Miner::init(bool use_existing)
 {
-
     this->tilemap = cocos2d::TMXTiledMap::create("tilemaps/low_map.tmx");
     this->tilemap->setScale(3.0f);
     this->tilemap->setPositionY(this->tilemap->getPositionY()-25.0f);
@@ -239,10 +240,10 @@ void Miner::init(bool use_existing)
 
     cocos2d::Vec2 start_pos;
 
+    MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this);
     //if we want to use existing data, try to load it, otherwise fallback to default loading
     if (use_existing)
     {
-        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this);
         serializer.load();
         if (serializer.existing_json_found)
         {
@@ -267,6 +268,8 @@ void Miner::init(bool use_existing)
         this->prev_active_tile_pos = this->active_tile_pos - cocos2d::Vec2{-1, 0};
     }
 
+    serializer.serialize(); //save on init, for when you go down a level and we want to save the new map
+
     this->animate_falling_tiles();
 
 };
@@ -285,6 +288,9 @@ void Miner::init_start_pos(cocos2d::Vec2 new_start_pos)
 
 void Miner::reset()
 {
+    CCLOG("Miner::reset incrementing depth");
+    this->depth += 1.0;
+
     // deletes the tilemap and rebuilds it from scratch
     if (this->tilemap != NULL)
     {
