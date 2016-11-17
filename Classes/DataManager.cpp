@@ -1,12 +1,15 @@
 #include "DataManager.h"
+#include <cassert>
 
-#include "cocos2d.h"
+#include "CCPlatformMacros.h"
+#include "base/CCConsole.h"
+#include "base/CCUserDefault.h"
 
 void DataManager::validate_key(std::string key)
 {
     if (key == "")
     {
-        cocos2d::log("found empty string: the key \"%s\"", key.c_str());
+        CCLOG("found empty string: the key \"%s\"", key.c_str());
         assert(false && "Cant have empty keys in userdefault keys");
     };
 
@@ -14,7 +17,7 @@ void DataManager::validate_key(std::string key)
     bool valid_string = pos == std::string::npos;
     if (!valid_string)
     {
-        cocos2d::log("found a space in the key \"%s\"", key.c_str());
+        CCLOG("found a space in the key \"%s\"", key.c_str());
         assert(valid_string && "Cant have spaces in userdefault keys");
     }
 }

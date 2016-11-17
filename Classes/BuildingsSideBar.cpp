@@ -29,7 +29,7 @@
 
 #include "NodeBuilder.h"
 #include "base/CCDirector.h"
-#include <CCApplication.h>
+#include "CCApplication.h"
 
 USING_NS_CC;
 
