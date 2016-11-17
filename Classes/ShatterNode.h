@@ -1,7 +1,8 @@
 #ifndef HelloWorld_ensShatterNode_h
 #define HelloWorld_ensShatterNode_h
+#include "2d/CCSprite.h"
+#include "2d/CCActionInterval.h"
 
-#include "cocos2d.h"
 using namespace cocos2d;
 
 class ShatterFrag : public Sprite

@@ -21,6 +21,13 @@
 #include "Item.h"
 #include "RandomWeightMap.h"
 #include "NodeBuilder.h"
+#include "2d/CCClippingNode.h"
+#include "2d/CCActionEase.h"
+#include "base/CCDirector.h"
+#include "2d/CCActionInstant.h"
+#include "2d/CCRenderTexture.h"
+#include "2d/CCSpriteFrameCache.h"
+#include "2d/CCParticleSystemQuad.h"
 
 USING_NS_CC;
 

@@ -1,4 +1,8 @@
 #include "ShatterNode.h"
+#include "2d/CCSpriteFrameCache.h"
+#include "base/CCDirector.h"
+#include "2d/CCSpriteBatchNode.h"
+#include "renderer/CCTextureCache.h"
 
 bool ShatterSprite::init(const std::string&texFileName){
     this->Sprite::initWithFile(texFileName.c_str());

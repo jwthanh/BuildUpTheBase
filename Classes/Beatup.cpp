@@ -17,15 +17,23 @@
 #include "Fighter.h"
 
 
-#pragma warning(default:4267)
-#pragma warning(default:4251)
-#pragma warning(default:4244)
+//#pragma warning(default:4267)
+//#pragma warning(default:4251)
+//#pragma warning(default:4244)
+
 #include "Util.h"
 #include "Recipe.h"
 #include "attribute.h"
 #include "GameLogic.h"
 #include "attribute_container.h"
-#include "combat.h"
+
+#include "2d/CCScene.h"
+#include "base/CCDirector.h"
+#include "base/CCEventListenerTouch.h"
+#include "base/CCEventListenerKeyboard.h"
+#include "base/CCEventDispatcher.h"
+#include "2d/CCMenu.h"
+#include "cocostudio/ActionTimeline/CCActionTimelineCache.h"
 
 USING_NS_CC;
 
