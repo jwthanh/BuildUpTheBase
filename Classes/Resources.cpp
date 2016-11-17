@@ -2,10 +2,9 @@
 
 #include <algorithm>
 #include <cassert>
+#include <sstream>
 
 #include "constants.h"
-
-#include "cocos2d.h"
 
 const std::map<Ingredient::SubType, std::string> Ingredient::type_map = {
     {Ingredient::SubType::Grain, "grain"},
@@ -74,9 +73,30 @@ ResType::SubType ResType::string_to_type(std::string string_type) \
     return result; \
 };
 
-type_stuff(Ingredient);
-type_stuff(Product);
-type_stuff(Waste);
+std::string Ingredient::type_to_string(Ingredient::SubType type)
+{
+    std::string result = "none";
+    for (auto pair : Ingredient::type_map)
+    {
+        if (type == pair.first) { return pair.second; }
+    }
+    return result;
+};
+
+Ingredient::SubType Ingredient::string_to_type(std::string string_type)
+{
+    Ingredient::SubType result = Ingredient::SubType::None;
+    std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower);
+    for (auto& pair : Ingredient::type_map)
+    {
+        if (pair.second == string_type)
+        {
+            return pair.first;
+        }
+    }
+
+    assert(false && "unknown type"); return result;
+};
 
 std::string Resource::type_str(ResourceType type)
 {
