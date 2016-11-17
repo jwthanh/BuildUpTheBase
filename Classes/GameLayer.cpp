@@ -5,6 +5,7 @@
 #include "Util.h"
 #include "SoundEngine.h"
 #include "Serializer.h"
+#include "base/CCDirector.h"
 USING_NS_CC;
 
 #include "GameLogic.h"

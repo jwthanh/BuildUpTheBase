@@ -1,8 +1,7 @@
 #pragma once
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
-
-#include "cocos2d.h"
+#include <string>
 
 class SoundEngine
 {

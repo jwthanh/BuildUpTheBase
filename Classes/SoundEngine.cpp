@@ -7,6 +7,7 @@
 #include "SimpleAudioEngine.h"
 #endif
 #include "constants.h"
+#include "base/CCUserDefault.h"
 
 
 USING_NS_CC;
