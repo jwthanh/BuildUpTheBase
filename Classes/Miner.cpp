@@ -4,9 +4,15 @@
 #include "FShake.h"
 #include "MiscUI.h"
 
-#include "cocos2d.h"
 #include "Serializer.h"
 #include "Util.h"
+
+#include "cocos2d/cocos/2d/CCTMXTiledMap.h"
+#include "cocos2d/cocos/2d/CCTMXLayer.h"
+#include "cocos2d/cocos/2d/CCActionInstant.h"
+#include "2d/CCSprite.h"
+#include "2d/CCParticleExamples.h"
+
 
 enum class Directions {
     TopLeft,
@@ -526,6 +532,7 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
     };
 
 };
+
 
 void Miner::move_active_top_right()
 {
