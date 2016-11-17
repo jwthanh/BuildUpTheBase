@@ -31,14 +31,12 @@
 #include "magic_particles/mp_cocos.h"
 #include "magic_particles/MagicEmitter.h"
 
-#include "Recipe.h"
-#include "Miner.h"
+#include "Recipe.h" //spRecipe is used in target_recipe
 #include "NodeBuilder.h"
 
 #include "base/CCDirector.h"
 #include "base/CCEventListenerKeyboard.h"
 #include "base/CCEventDispatcher.h"
-#include "base/CCEventTouch.h"
 #include "base/CCEventListenerTouch.h"
 #include "2d/CCActionEase.h"
 #include "ui/UIPageView.h"
@@ -48,7 +46,6 @@
 #include "ui/UIText.h"
 #include "ui/UIButton.h"
 #include "ui/UIScale9Sprite.h"
-#include "ui/UIText.h"
 #include <cocostudio/CocosStudioExtension.h>
 #include "ui/UIImageView.h"
 #include "ui/UITextField.h"
