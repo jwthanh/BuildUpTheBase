@@ -458,7 +458,7 @@ void BaseScene::create_building_choicelist()
 
         load_default_button_textures(panel);
 
-        auto update_func = [panel, building, building_image, img_path](float dt)
+        auto update_func = [panel, building, building_image, building_name, img_path](float dt)
         {
             auto target_building = BUILDUP->get_target_building();
 
@@ -486,10 +486,12 @@ void BaseScene::create_building_choicelist()
             {
                 Color3B reddish = { 243, 162, 173 };
                 try_set_node_color(panel, reddish);
+                building_name->setString("FULL!");
             }
             else
             {
                 try_set_node_color(panel, Color3B::WHITE);
+                building_name->setString(building->short_name);
             }
         };
         building_node->schedule(update_func, AVERAGE_DELAY, "update_func");
