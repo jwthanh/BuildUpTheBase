@@ -632,6 +632,7 @@ void GameDirector::switch_to_miner_menu()
     auto info_panel = dynamic_cast<ui::Layout*>(miner_scene->getChildByName("info_panel"));
     auto rails_count_lbl = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_rails_count"));
     auto cart_count_lbl = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_cart_count"));
+    auto depth_display = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_depth_count"));
 
     auto tilemap_nav = miner_scene->getChildByName("tilemap_nav");
     for (cocos2d::Node* child : tilemap_nav->getChildren())
@@ -718,6 +719,15 @@ void GameDirector::switch_to_miner_menu()
     };
     update_cart_count_cb(0);
     cart_count_lbl->schedule(update_cart_count_cb, AVERAGE_DELAY, "update_cart_count_cb");
+
+    auto update_depth_display_cb = [miner, depth_display](float dt)
+    {
+        auto cart_count = miner->depth;
+        std::string pretty_count = beautify_double(cart_count);
+        depth_display->setString(pretty_count);
+    };
+    update_depth_display_cb(0);
+    depth_display->schedule(update_depth_display_cb, AVERAGE_DELAY, "update_depth_display_cb");
 
     info_panel->addTouchEventListener([miner](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED) {
