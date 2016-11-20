@@ -60,7 +60,7 @@
             "img_large": "buildingTiles_018.png"
         },
         "The Graveyard" : {
-            "short_name": "GRVY",
+            "short_name": "GRYD",
             "task_name":"Dead silence (nothing)",
             "description": "A dark shadow on the hill looms silently, as if watching and waiting. The dead lay here.",
             "gold_cost": "100",
