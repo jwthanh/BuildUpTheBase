@@ -515,7 +515,7 @@ void BaseScene::create_building_choicelist()
 
     //set building name
     ui::Text* building_name = (ui::Text*)panel->getChildByName("building_name");
-    building_name->setString("CITY");
+    building_name->setString("MGMT");
     set_aliasing(building_name, true);
 
     //add building image
