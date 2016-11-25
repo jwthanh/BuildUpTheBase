@@ -705,11 +705,17 @@ void GameDirector::switch_to_miner_menu()
             });
 
             auto update_nav_button = [nav_button, button_name, miner, tile_offset](float dt){
-                if (miner->get_tile_is_blocked_pos(tile_offset+miner->active_tile_pos) == false){
-                        try_set_enabled(nav_button, true);
-                } else {
-                        try_set_enabled(nav_button, false);
-                };
+                if (!nav_button->isHighlighted()) //if its highlighted it means its being pressed
+                {
+                    if (miner->get_tile_is_blocked_pos(tile_offset + miner->active_tile_pos) == false){
+                        nav_button->setBright(true);
+                    }
+                    else {
+                        //dont actually disable the buttons, just set brightness so it
+                        //can still be clicked
+                        nav_button->setBright(false);
+                    };
+                }
             };
             nav_button->schedule(update_nav_button, AVERAGE_DELAY, "update_nav_button");
 
