@@ -311,6 +311,8 @@ void Miner::reset()
 bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
 {
 
+    if (this->is_valid_pos(pos) == false) { return true; };
+
     auto tile_gid = this->active_layer->getTileGIDAt(pos);
     auto tile_props = this->tilemap->getPropertiesForGID(tile_gid);
 

@@ -648,25 +648,30 @@ void GameDirector::switch_to_miner_menu()
             VoidFuncNoArgs move_active_func;
             std::string arrow_sprite_path;
             const std::string button_name = nav_button->getName();
+            Vec2 tile_offset;
             if (button_name == "move_top_right")
             {
                 move_active_func = CC_CALLBACK_0(Miner::move_active_top_right, miner);
                 arrow_sprite_path = "upRight.png";
+                tile_offset = {0.0f, -1.0f};
             }
             else if (button_name == "move_top_left")
             {
                 move_active_func = CC_CALLBACK_0(Miner::move_active_top_left, miner);
                 arrow_sprite_path = "upLeft.png";
+                tile_offset = {-1.0f, 0.0f};
             }
             else if (button_name == "move_bot_left")
             {
                 move_active_func = CC_CALLBACK_0(Miner::move_active_bottom_left, miner);
                 arrow_sprite_path = "downLeft.png";
+                tile_offset = {0.0f, 1.0f};
             }
             else if (button_name == "move_bot_right")
             {
                 move_active_func = CC_CALLBACK_0(Miner::move_active_bottom_right, miner);
                 arrow_sprite_path = "downRight.png";
+                tile_offset = {1.0f, 0.0f};
             }
 
             Sprite* arrow_sprite = Sprite::createWithSpriteFrameName(arrow_sprite_path);
@@ -699,7 +704,18 @@ void GameDirector::switch_to_miner_menu()
                 };
             });
 
-        }
+            auto update_nav_button = [nav_button, button_name, miner, tile_offset](float dt){
+                if (miner->get_tile_is_blocked_pos(tile_offset+miner->active_tile_pos) == false){
+                        try_set_enabled(nav_button, true);
+                } else {
+                        try_set_enabled(nav_button, false);
+                };
+            };
+            nav_button->schedule(update_nav_button, AVERAGE_DELAY, "update_nav_button");
+
+        } else {
+            CCLOG("No nav button");
+        };
     }
 
     auto update_rails_count_cb = [rails_count_lbl](float dt)
