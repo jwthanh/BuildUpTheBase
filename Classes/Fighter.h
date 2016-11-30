@@ -22,7 +22,7 @@ namespace cocos2d
     }
 }
 
-class Fighter : public Nameable, public Updateable
+class Fighter : public Nameable, public Updateable, public std::enable_shared_from_this<Fighter>
 {
     public:
         enum TeamsType {

@@ -7,21 +7,12 @@
 
 #include "Fighter.h"
 
-void Combat::printout()
-{
-
-    std::cout << "\nCombat PRINTOUT" << std::endl;
-    //cout << "NAME: " << name << endl;
-    std::cout << "MAX HP: " << this->master->attrs->health->max_val << std::endl;
-
-};
-
-void Combat::assign_to_master(Fighter* master)
+void Combat::assign_to_master(spFighter master)
 {
     this->master = master;
 };
 
-Combat::Combat(std::string name, Fighter* master)
+Combat::Combat(std::string name, spFighter master)
 {
     this->master = master;
     this->_is_dead = false;

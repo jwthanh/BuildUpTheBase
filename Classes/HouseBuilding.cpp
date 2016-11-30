@@ -23,6 +23,7 @@
 #include "StaticData.h"
 
 #include "Fighter.h"
+#include "Combat.h"
 
 #include "attribute_container.h"
 #include "attribute.h"
@@ -48,8 +49,9 @@ Buildup::Buildup()
     this->city = NULL;
     this->set_target_building(NULL);
 
-    //TODO change this to player_avatar or something. I don't want to wait for a recompile atm
-    this->fighter = std::make_shared<Fighter>("Jimothy2");
+    this->fighter = std::make_shared<Fighter>("PlayerAvatar");
+	auto fighter_combat = std::make_shared<Combat>("playeravatar combat", this->fighter);
+	this->fighter->combat = fighter_combat;
     this->fighter->attrs->health->set_vals(100);
 
     // this->items = {};
@@ -697,6 +699,7 @@ Village* Buildup::init_city(Buildup* buildup)
     buildup->set_target_building(farm);
 
     buildup->fighter = std::make_shared<Fighter>("PC");
+	buildup->fighter->combat = std::make_shared<Combat>("PC combat", buildup->fighter);
     buildup->fighter->sprite_name = "townsmen8x8.png";
     buildup->fighter->team = Fighter::TeamOne;
     buildup->fighter->attrs->health->set_vals(100);

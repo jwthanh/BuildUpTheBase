@@ -5,6 +5,7 @@
 #include <vector>
 // #include <actors/actor.h>
 // #include <actors\Person.h>
+#include "constants.h"
 
 class Person; 
 class Fighter; 
@@ -17,14 +18,14 @@ class Combat
         std::string default_name;
     public:
         // std::string name;
-        Fighter* master;
+        spFighter master;
 
         bool _is_dead;
         bool was_attacked;
-        Fighter* last_victim;
+        spFighter last_victim;
         std::vector<Combat*> * attackers;
 
-        Combat(std::string name, Fighter* master);
+        Combat(std::string name, spFighter master);
 
         void attack(Combat* Combat_target, Damage* dmg);
         void take_damage(Combat* Combat_attacker, Damage* dmg);
@@ -36,15 +37,13 @@ class Combat
         bool is_dead();
         void die();
 
-        void assign_to_master(Fighter* master);
+        void assign_to_master(spFighter master);
 
         void give_exp(int exp_to_gain);
 
         void level_up(int levels = 1);
         void level_up_stats(int levels);
         void level_up_skills(int levels);
-
-        void printout();
 };
 
 class Damage 

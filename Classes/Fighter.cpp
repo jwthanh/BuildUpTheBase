@@ -18,7 +18,9 @@ USING_NS_CC;
 Fighter::Fighter(std::string name) : Nameable(name), Updateable() {
     this->attrs = std::make_shared<AttributeContainer>();
     this->xp = std::make_shared<Experience>();
-    this->combat = std::make_shared<Combat>("unnamed combat", this);
+	//TODO FIXME need to init combat after ctor because shared_from_this doesnt work in ctr
+    //this->combat = std::make_shared<Combat>("unnamed combat", this->shared_from_this());
+	this->combat = NULL;
     this->team = TeamTwo; //default 2 for enemy
 };
 

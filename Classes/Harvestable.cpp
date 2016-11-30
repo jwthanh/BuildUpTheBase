@@ -32,6 +32,7 @@
 #include "ui/UIText.h"
 #include "ui/UIImageView.h"
 #include "ui/UIScale9Sprite.h"
+#include "combat.h"
 
 USING_NS_CC;
 
@@ -838,6 +839,8 @@ bool FightingHarvestable::init()
 
     //setup enemy node
     this->enemy = std::make_shared<Fighter>("temp");
+	this->enemy->combat = std::make_shared<Combat>("enemy combat", this->enemy);
+
     FighterNode* fighter_node = FighterNode::create(this->enemy);
     fighter_node->setScale(0.25f);
     fighter_node->setPosition(Vec2(50, 0));
@@ -959,6 +962,7 @@ void FightingHarvestable::spawn_enemy()
 	GameLogic* game_logic = GameLogic::getInstance();
 
     this->enemy = std::make_shared<Fighter>("Challenger");
+	this->enemy->combat = std::make_shared<Combat>("challengers's combat", this->enemy);
     this->enemy->team = Fighter::TeamTwo;
     this->enemy->sprite_name = "harvester.png";
 
