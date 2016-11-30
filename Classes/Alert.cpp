@@ -91,7 +91,7 @@ Alert* Alert::create()
                 );
             alert->shrink_close(pos);
         };
-        
+
     });
 
     close_btn->setTitleText("X");
@@ -122,7 +122,7 @@ Alert* Alert::create()
                 );
             alert->shrink_close(pos);
         };
-        
+
     });
 
     done_btn->setScale9Enabled(true);
@@ -207,7 +207,7 @@ void Alert::set_body_str(std::string msg)
     Size body_size = this->body_txt->getAutoRenderSize();
     this->body_txt->setTextAreaSize(Size( //for wordwrap, i think it takes 80%
         body_size.width,
-        body_size.height 
+        body_size.height
     ));
 };
 

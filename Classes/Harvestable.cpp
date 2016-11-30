@@ -956,7 +956,7 @@ bool FightingHarvestable::should_shatter()
 
 void FightingHarvestable::spawn_enemy()
 {
-    auto game_logic = GameLogic::getInstance();
+	GameLogic* game_logic = GameLogic::getInstance();
 
     this->enemy = std::make_shared<Fighter>("Challenger");
     this->enemy->team = Fighter::TeamTwo;
@@ -965,8 +965,8 @@ void FightingHarvestable::spawn_enemy()
     res_count_t base_hp = 20.0;
     res_count_t base_slow_rate = 3.0;
 
-    auto workshop = BUILDUP->city->building_by_name("The Workshop");
-    auto tech_map = workshop->techtree->get_tech_map();
+	spBuilding workshop = BUILDUP->city->building_by_name("The Workshop");
+	TechMap tech_map = workshop->techtree->get_tech_map();
 
     auto tech_type = Technology::SubType::CombatWeakenEnemy;
     res_count_t _def = 0L;
@@ -997,9 +997,9 @@ void FightingHarvestable::spawn_enemy()
         return  output;
     };
 
-    auto base_node = Node::create();
+	Node* base_node = Node::create();
 
-    auto sprites = {
+    std::vector<std::string> sprites = {
         pick_one(gen_paths("set", 4)),
         pick_one(gen_paths("body", 49)),
         pick_one(gen_paths("headwear", 49)),
@@ -1008,7 +1008,7 @@ void FightingHarvestable::spawn_enemy()
         pick_one(gen_paths("weapon", 49))
     };
 
-    for (auto path : sprites)
+    for (std::string& path : sprites)
     {
         base_node->addChild(Sprite::createWithSpriteFrameName(path));
     }
@@ -1016,15 +1016,14 @@ void FightingHarvestable::spawn_enemy()
     base_node->setPosition(8,8);
     base_node->setScaleY(-1.0f);
 
-    auto rt = RenderTexture::create(16, 16);
-    rt->retain();
+	RenderTexture* rt = RenderTexture::create(16, 16);
     rt->begin();
     base_node->visit();
     rt->end();
 
     //use the texture from RenderTexture and replace the ImageView's Scale9
     //texture
-    auto img_view = fighter_node->sprite;
+	cocos2d::ui::ImageView* img_view = fighter_node->sprite;
     ui::Scale9Sprite* scale9_sprite = dynamic_cast<ui::Scale9Sprite*>(img_view->getVirtualRenderer());
     Sprite* tex_sprite = dynamic_cast<Sprite*>(rt->getSprite());
     scale9_sprite->setSpriteFrame(tex_sprite->getSpriteFrame());
