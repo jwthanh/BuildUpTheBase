@@ -22,6 +22,11 @@ Fighter::Fighter(std::string name) : Nameable(name), Updateable() {
     //this->combat = std::make_shared<Combat>("unnamed combat", this->shared_from_this());
 	this->combat = NULL;
     this->team = TeamTwo; //default 2 for enemy
+}
+
+Fighter::~Fighter()
+{
+	CCLOG("inside dtor of Fighter");
 };
 
 void Fighter::update(float dt)
@@ -156,6 +161,7 @@ void FighterNode::load_new_sprite(std::string name)
 
 void FighterNode::set_fighter(spFighter fighter)
 {
+	this->fighter = NULL;
     this->fighter = fighter;
 
 

@@ -961,6 +961,7 @@ void FightingHarvestable::spawn_enemy()
 {
 	GameLogic* game_logic = GameLogic::getInstance();
 
+	this->enemy = NULL;
     this->enemy = std::make_shared<Fighter>("Challenger");
 	this->enemy->combat = std::make_shared<Combat>("challengers's combat", this->enemy);
     this->enemy->team = Fighter::TeamTwo;

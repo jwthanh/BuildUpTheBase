@@ -17,7 +17,7 @@ Combat::Combat(std::string name, spFighter master)
     this->master = master;
     this->_is_dead = false;
 
-    this->attackers = new std::vector<Combat*>;
+    this->attackers = std::vector<spCombat>();
     this->was_attacked = false;
 
     this->last_victim = NULL;
@@ -115,7 +115,7 @@ void Combat::attack(Combat* combat_target, Damage* dmg)
     //ss << " for " << dmg->get_raw_total() << ".";
 
     //new Message(Ui::msg_handler_main, message_types_t::DAMAGE_GIVEN_MSG, ss.str().c_str());
-    combat_target->take_damage(this, dmg);
+    combat_target->take_damage(this->shared_from_this(), dmg);
     this->last_victim = combat_target->master;
 
     bool is_target_dead = combat_target->is_dead();
@@ -128,7 +128,7 @@ void Combat::attack(Combat* combat_target, Damage* dmg)
     };
 };
 
-void Combat::remember_attacker(Combat* combat_attacker, bool mark_the_attk=true)
+void Combat::remember_attacker(spCombat combat_attacker, bool mark_the_attk=true)
 {
     if (mark_the_attk == true) 
     {
@@ -139,13 +139,13 @@ void Combat::remember_attacker(Combat* combat_attacker, bool mark_the_attk=true)
         //}
     };
 
-    if(std::find(attackers->begin(), attackers->end(), combat_attacker) != attackers->end()) 
+    if(std::find(attackers.begin(), attackers.end(), combat_attacker) != attackers.end()) 
     {
         // printf("I've already been attacked by you.\n");
     }
     else 
     {
-        attackers->push_back(combat_attacker);
+        attackers.push_back(combat_attacker);
         // printf("Oh hi, you're new.\n");
     }
 
@@ -167,12 +167,12 @@ void Combat::die()
 
 };
 
-Combat* Combat::get_last_attacker()
+spCombat Combat::get_last_attacker()
 {
     // std::cout << "*** Retaliation ***" << std::endl;
-    Combat * assailant;
-    if (attackers->empty()) { return NULL; }
-    assailant = attackers->back();
+    spCombat assailant;
+    if (attackers.empty()) { return NULL; }
+    assailant = attackers.back();
     // cout << "attacker: " << assailant->name << endl;
 
     return assailant;
@@ -201,7 +201,7 @@ int Combat::adjust_damage_to_armor(Damage* dmg)
     return total_damage;
 };
 
-void Combat::take_damage(Combat* combat_attacker, Damage* dmg)
+void Combat::take_damage(spCombat combat_attacker, Damage* dmg)
 {
     if (dmg >= 0 ) 
     {
