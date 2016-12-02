@@ -9,22 +9,17 @@
 
 void Combat::assign_to_master(spFighter master)
 {
-    this->master = master;
+    this->master = master.get();
 };
 
 Combat::Combat(std::string name, spFighter master)
 {
-    this->master = master;
+    this->master = master.get();
     this->_is_dead = false;
 
     this->was_attacked = false;
 
 }
-
-Combat::~Combat()
-{
-	CCLOG("Combat dtor");
-};
 
 void Combat::level_up(int levels)
 {

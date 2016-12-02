@@ -18,13 +18,12 @@ class Combat : public std::enable_shared_from_this<Combat>
         std::string default_name;
     public:
         // std::string name;
-        spFighter master;
+        Fighter* master;
 
         bool _is_dead;
         bool was_attacked;
 
         Combat(std::string name, spFighter master);
-		~Combat();
 
         void attack(Combat* Combat_target, Damage* dmg);
         void take_damage(spCombat Combat_attacker, Damage* dmg);

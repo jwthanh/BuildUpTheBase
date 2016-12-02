@@ -44,7 +44,6 @@ class Fighter : public Nameable, public Updateable, public std::enable_shared_fr
         std::string sprite_name = "weapon_gauntlet.png";
 
         Fighter(std::string name);
-		~Fighter();
         void update(float dt);
 
         std::string get_stats();

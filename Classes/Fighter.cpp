@@ -24,11 +24,6 @@ Fighter::Fighter(std::string name) : Nameable(name), Updateable() {
     this->team = TeamTwo; //default 2 for enemy
 }
 
-Fighter::~Fighter()
-{
-	CCLOG("inside dtor of Fighter");
-};
-
 void Fighter::update(float dt)
 {
     Updateable::update(dt);
