@@ -22,16 +22,13 @@ class Combat : public std::enable_shared_from_this<Combat>
 
         bool _is_dead;
         bool was_attacked;
-        spFighter last_victim;
-        vsCombat attackers;
 
         Combat(std::string name, spFighter master);
+		~Combat();
 
         void attack(Combat* Combat_target, Damage* dmg);
         void take_damage(spCombat Combat_attacker, Damage* dmg);
-	spCombat get_last_attacker();
         int adjust_damage_to_armor(Damage* dmg);
-        void remember_attacker(spCombat Combat_attacker, bool mark_the_attk);
 
         void try_to_die();
         bool is_dead();

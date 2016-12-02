@@ -214,7 +214,6 @@ Building::Building(Village* city, std::string name, std::string id_key) :
     products = mistProduct();
     wastes = mistWaste();
 
-    fighters = vsFighter();
     workers = vsWorker();
 
     harvesters = mistHarvester();
@@ -703,16 +702,6 @@ Village* Buildup::init_city(Buildup* buildup)
     buildup->fighter->sprite_name = "townsmen8x8.png";
     buildup->fighter->team = Fighter::TeamOne;
     buildup->fighter->attrs->health->set_vals(100);
-
-    buildup->brawler = std::make_shared<Fighter>("BRAWLER");
-    buildup->brawler->team = Fighter::TeamOne;
-    buildup->brawler->sprite_name = "ogre10x10.png";
-    buildup->brawler->attrs->health->set_vals(200);
-
-
-    auto arena = city->building_by_name("The Arena");
-    arena->fighters.push_back(buildup->fighter);
-    arena->fighters.push_back(buildup->brawler);
 
     return city;
 };

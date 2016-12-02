@@ -135,14 +135,6 @@ bool Beatup::init()
 void Beatup::update_buildup(float dt)
 {
     this->buildup->update(dt);
-
-    //for fighter and not my dudes, update the fighter nodes
-    auto arena = this->buildup->city->building_by_name("The Arena");
-    for (auto fighter : arena->fighters) {
-        if (fighter != this->buildup->fighter) {
-
-        };
-    };
 }
 
 void Beatup::setup_commands()
@@ -370,20 +362,6 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_H)
     {
-        auto farm = this->buildup->city->building_by_name("The Farm");
-        Recipe heal_recipe = Recipe("HealingGrain");
-        heal_recipe.components[Ingredient::SubType::Grain] = 5;
-
-        auto& all_ingredients = BUILDUP->get_all_ingredients();
-
-        if (heal_recipe.is_satisfied(all_ingredients))
-        {
-            auto arena = this->buildup->city->building_by_name("The Arena");
-            auto fighter = arena->fighters.front();
-            fighter->attrs->health->current_val += 50;
-            heal_recipe.consume();
-            printj("healed first fighter");
-        }
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_Z)
     {

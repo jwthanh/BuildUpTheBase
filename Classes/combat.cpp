@@ -17,10 +17,13 @@ Combat::Combat(std::string name, spFighter master)
     this->master = master;
     this->_is_dead = false;
 
-    this->attackers = std::vector<spCombat>();
     this->was_attacked = false;
 
-    this->last_victim = NULL;
+}
+
+Combat::~Combat()
+{
+	CCLOG("Combat dtor");
 };
 
 void Combat::level_up(int levels)
@@ -116,7 +119,6 @@ void Combat::attack(Combat* combat_target, Damage* dmg)
 
     //new Message(Ui::msg_handler_main, message_types_t::DAMAGE_GIVEN_MSG, ss.str().c_str());
     combat_target->take_damage(this->shared_from_this(), dmg);
-    this->last_victim = combat_target->master;
 
     bool is_target_dead = combat_target->is_dead();
     if (is_target_dead)
@@ -126,29 +128,6 @@ void Combat::attack(Combat* combat_target, Damage* dmg)
         //add it to the master's exp
         this->give_exp(exp_to_gain);
     };
-};
-
-void Combat::remember_attacker(spCombat combat_attacker, bool mark_the_attk=true)
-{
-    if (mark_the_attk == true) 
-    {
-        was_attacked = true;
-        //if (this->master != Game::player)
-        //{
-        //    this->master->thinker->target = combat_attacker->master;
-        //}
-    };
-
-    if(std::find(attackers.begin(), attackers.end(), combat_attacker) != attackers.end()) 
-    {
-        // printf("I've already been attacked by you.\n");
-    }
-    else 
-    {
-        attackers.push_back(combat_attacker);
-        // printf("Oh hi, you're new.\n");
-    }
-
 };
 
 void Combat::die()
@@ -165,17 +144,6 @@ void Combat::die()
         printj("I've no master so he's not going to die, is he?\n");
     };
 
-};
-
-spCombat Combat::get_last_attacker()
-{
-    // std::cout << "*** Retaliation ***" << std::endl;
-    spCombat assailant;
-    if (attackers.empty()) { return NULL; }
-    assailant = attackers.back();
-    // cout << "attacker: " << assailant->name << endl;
-
-    return assailant;
 };
 
 void Combat::try_to_die()
@@ -258,9 +226,6 @@ void Combat::take_damage(spCombat combat_attacker, Damage* dmg)
         std::cout << " took " << adjusted_dmg << " damage! ";
         std::cout << "leaving " << this->master->attrs->health->current_val << "hp left.";
         std::cout << std::endl;
-
-        //save attacker in history
-        this->remember_attacker(combat_attacker);
 
         if (dmg != 0)
         {

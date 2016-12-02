@@ -36,7 +36,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         mistProduct products;
         mistWaste wastes;
 
-        vsFighter fighters;
         vsWorker workers;
 
         spVisitors visitors;
