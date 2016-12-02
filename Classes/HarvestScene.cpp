@@ -67,7 +67,7 @@ bool BaseScene::init()
 
     this->create_inventory_listview();
     this->create_shop_listview();
-    
+
     this->create_goal_loadingbar();
 
     this->create_building_choicelist();
@@ -207,7 +207,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         //        //{
         //        //    CCLOG("x--");
         //        //    tile_x--;
-        //        //    
+        //        //
         //        //}
         //        //if (norm_y > L1_NORM)
         //        //{
@@ -264,7 +264,7 @@ void BaseScene::scroll_to_target_building()
             CCLOG("no building found, not moving building pageview");
         } else
         {
-            
+
             building_pageview->ListView::scrollToItem(index, { 0, 0 }, { 0, 0 }, 0.5f);
         }
     }
@@ -774,7 +774,7 @@ void BaseScene::create_username_input()
 
     auto textfield_listener = [username_input, clean_username](Ref* target, ui::TextField::EventType evt)
         {
-            if (evt == ui::TextField::EventType::ATTACH_WITH_IME || 
+            if (evt == ui::TextField::EventType::ATTACH_WITH_IME ||
                 evt == ui::TextField::EventType::DETACH_WITH_IME)
             {
                 std::string text = username_input->getString();
@@ -920,24 +920,24 @@ void BaseScene::create_inventory_listview()
 
             auto zero_ingredients = map_get(city_ingredients, ing_type, _def) < 0;
 
-            //if the child already exists, put it at the back 
+            //if the child already exists, put it at the back
             ui::Button* existing_node = dynamic_cast<ui::Button*>(inventory_listview->getChildByName(str_type));
             if (existing_node)
             {
                 //last frame, there was probably ingredients, so cleaup the
                 //leftover button
-                if (zero_ingredients) 
+                if (zero_ingredients)
                 {
                     // inventory_listview->removeChild(existing_node, false);
                 }
-                else 
+                else
                 {
                     continue;
                 };
             }
 
             //dont build the ingredient button if for zero ingredients
-            if (zero_ingredients) 
+            if (zero_ingredients)
             {
                 continue;
             }
@@ -989,7 +989,7 @@ void BaseScene::create_inventory_listview()
 
             auto update_lbl_cb = [new_item_panel, ing_type](float)
             {
-                auto it = ing_type; 
+                auto it = ing_type;
                 auto type_str = Ingredient::type_to_string(it);
                 char buffer[50];
 

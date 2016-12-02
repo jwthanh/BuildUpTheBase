@@ -93,7 +93,7 @@ bool Harvestable::init()
 
     Node* harvest_scene_editor = get_prebuilt_node_from_csb("editor/scenes/base_scene.csb");
     Node* harvestable_pos = harvest_scene_editor->getChildByName("harvestable_pos");
-    this->setPosition(harvestable_pos->getPosition()); 
+    this->setPosition(harvestable_pos->getPosition());
     this->setName("harvestable");
 
     this->initial_scale = 4;
@@ -159,7 +159,7 @@ void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, f
     {
         pos = touch->getLocation();
     }
-    else 
+    else
     {
         auto sprite_size = this->get_sprite_size();
         pos = this->getPosition() + Vec2(sprite_size);
@@ -223,7 +223,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         do_vibrate(16);
 
         floating_color = Color4B::RED;
-    } 
+    }
     else
     {
         floating_msg = this->get_create_output_message();
@@ -256,13 +256,13 @@ void Harvestable::animate_touch_end(cocos2d::Touch* touch)
 
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-    //Widget::onTouchEnded(touch, event); //this shouldnt be called because releaseUpEvent hasnt been set I guess. 
+    //Widget::onTouchEnded(touch, event); //this shouldnt be called because releaseUpEvent hasnt been set I guess.
 
 
     animate_touch_end(touch);
 
     //FIXME remove hardcoded check for arena, otherwise the sword wont rotate
-    if (this->building->can_fit_more_ingredients(this->get_output_ing_type()) == false && this->building->name != "The Arena") 
+    if (this->building->can_fit_more_ingredients(this->get_output_ing_type()) == false && this->building->name != "The Arena")
     {
         return;
     };
@@ -565,7 +565,7 @@ void MiningHarvestable::init_sprite()
     this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     this->sprite->setPosition(get_relative(this->getContentSize()));
     this->clip->addChild(this->sprite);
-    
+
 };
 
 
@@ -708,7 +708,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
         do_vibrate(16);
         this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
     }
-    else 
+    else
     {
         if (this->can_satisfy_recipe_per_click() && !this->should_shatter())
         {
@@ -883,7 +883,7 @@ bool FightingHarvestable::init()
     });
 
     //adjust position because the enemy and sword are both offset from the center
-    this->setPosition(Vec2(this->getPosition().x-110, this->getPosition().y)); 
+    this->setPosition(Vec2(this->getPosition().x-110, this->getPosition().y));
 
 
     this->is_critical_hit = false;
@@ -1082,7 +1082,7 @@ void FightingHarvestable::on_harvest()
     std::uniform_int_distribution<int> distribution(0, 100);
     int crit_result = distribution(gen);
 
-    int crit_chance = this->get_combat_crit_chance(); 
+    int crit_chance = this->get_combat_crit_chance();
 
     if (crit_result <= crit_chance)
     {
