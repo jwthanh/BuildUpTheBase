@@ -834,7 +834,7 @@ void BaseScene::create_player_info_panel()
     auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
 
     //hp cache, used for animating changes
-    player_hp_cache_t* hp_cache = new player_hp_cache_t();
+    player_hp_cache_t* hp_cache = new player_hp_cache_t(); //TODO make sure this gets deleted at some point
     auto hp = BUILDUP->fighter->attrs->health;
     hp_cache->last_cur_hp = hp->current_val;
     hp_cache->last_max_hp = hp->max_val;

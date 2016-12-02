@@ -1,5 +1,10 @@
 #include "Clock.h"
 
+Clock::Clock()
+{
+	Clock(5.0f);
+}
+
 Clock::Clock(float threshold)
 {
     this->threshold = threshold;

@@ -13,6 +13,8 @@
 #include "constants.h"
 #include "Nameable.h"
 
+#include "Clock.h"
+
 //it would be nice to not need this, but mistHarvesters uses it
 #include "Worker.h"
 #include "Updateable.h"
@@ -49,7 +51,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         mistHarvester consumers;
         ConsumerCache _consumer_cache;
 
-        Clock* spawn_clock;
+        Clock spawn_clock;
 
         int building_level; //affects only resource limits for now
         res_count_t get_storage_space();
@@ -144,7 +146,7 @@ class Buildup
         res_count_t count_ingredients();
         res_count_t count_ingredients(Ingredient::SubType ing_type);
 
-        spClock server_clock;
+        Clock server_clock;
 
     private:
         mistIngredient _all_ingredients;

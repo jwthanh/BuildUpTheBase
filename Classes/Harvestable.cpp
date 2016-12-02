@@ -34,6 +34,8 @@
 #include "ui/UIScale9Sprite.h"
 #include "combat.h"
 
+#include "vld.h"
+
 USING_NS_CC;
 
 Size Harvestable::get_sprite_size()
@@ -848,7 +850,7 @@ bool FightingHarvestable::init()
     this->addChild(fighter_node);
 
     this->spawn_enemy();
-    
+
     fighter_node->sprite->addTouchEventListener([this](Ref* target, ui::Widget::TouchEventType type)
     {
         if (type == TouchEventType::BEGAN)

@@ -207,8 +207,8 @@ Building::Building(Village* city, std::string name, std::string id_key) :
 
     building_level = 1;
 
-    update_clock->set_threshold(1.0f);
-    spawn_clock = new Clock(3);
+    update_clock.set_threshold(1.0f);
+    spawn_clock = Clock(3);
 
     //ingredients = mistIngredient();
     products = mistProduct();
@@ -371,9 +371,9 @@ void Building::update(float dt)
         harvester->update(dt);
     };
 
-    if (update_clock->passed_threshold())
+    if (update_clock.passed_threshold())
     {
-        update_clock->reset();
+        update_clock.reset();
 
         for (auto mist : this->salesmen) {
             std::pair<WorkerSubType, Ingredient::SubType> sub_type = mist.first;
@@ -572,9 +572,9 @@ void Buildup::update(float dt)
     this->city->update(dt);
     this->player->update(dt);
 
-    this->server_clock->update(dt);
-    if (this->server_clock->passed_threshold()){
-        this->server_clock->reset();
+    this->server_clock.update(dt);
+    if (this->server_clock.passed_threshold()){
+        this->server_clock.reset();
 
         //try to update remote server
         this->post_update();
@@ -651,7 +651,7 @@ Village* Buildup::init_city(Buildup* buildup)
 {
 
 
-    buildup->server_clock = std::make_shared<Clock>(30.0f); //update server every 30 seconds
+    buildup->server_clock = Clock(30.0f); //update server every 30 seconds
 
     auto city = new Village(buildup, "Burlington");
 

@@ -5,6 +5,7 @@
 class Clock
 {
     public:
+        Clock();
         Clock(float threshold);
 
         float start_time;

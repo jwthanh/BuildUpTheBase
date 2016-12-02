@@ -17,7 +17,7 @@ Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
     this->building = building;
 
-    this->update_clock->set_threshold(1.0f); //unused
+    this->update_clock.set_threshold(1.0f); //unused
 };
 
 void Worker::update(float dt)
@@ -30,7 +30,7 @@ void Worker::update(float dt)
     //used to use update_timer, but this only gets called when a building gets
     //updated so it doesnt need to be regulated anyway
     this->on_update(dt);
-    this->update_clock->reset();
+    this->update_clock.reset();
 };
 
 void Worker::on_update(float dt)

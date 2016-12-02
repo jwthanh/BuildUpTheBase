@@ -179,6 +179,7 @@ class FightingHarvestable : public Harvestable
 {
     public:
         CREATE_FUNC(FightingHarvestable);
+
         bool init() override;
 
         spFighter enemy;
