@@ -34,7 +34,9 @@
 #include "ui/UIScale9Sprite.h"
 #include "combat.h"
 
+#ifdef _WIN32
 #include "vld.h"
+#endif
 
 USING_NS_CC;
 

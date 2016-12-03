@@ -14,7 +14,6 @@
 #include "2d/CCParticleExamples.h"
 
 
-
 enum class Directions {
     TopLeft,
     TopRight,
