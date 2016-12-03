@@ -147,7 +147,10 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        GameDirector::switch_to_miner_menu();
+        //GameDirector::switch_to_miner_menu();
+
+		((FightingHarvestable*)this->harvestable)->spawn_enemy();
+
         // this->miner->save();
         //this->stopAllActions();
         //this->getScheduler()->unscheduleAll();
@@ -1248,28 +1251,28 @@ void HarvestScene::add_harvestable()
 
 
     if (target_building->name == "The Mine") {
-        harvestable = MiningHarvestable::create();
+        this->harvestable = MiningHarvestable::create();
     } else if (target_building->name == "The Forest") {
-        harvestable = TreeHarvestable::create();
+        this->harvestable = TreeHarvestable::create();
     } else if (target_building->name == "The Dump") {
-        harvestable = DumpsterHarvestable::create();
+        this->harvestable = DumpsterHarvestable::create();
     } else if (target_building->name == "The Workshop") {
-        harvestable = CraftingHarvestable::create(this->target_recipe);
+        this->harvestable = CraftingHarvestable::create(this->target_recipe);
     } else if (target_building->name == "The Arena") {
-        harvestable = FightingHarvestable::create();
+        this->harvestable = FightingHarvestable::create();
     } else if (target_building->name == "The Graveyard") {
-        harvestable = GraveyardHarvestable::create();
+        this->harvestable = GraveyardHarvestable::create();
     } else if (target_building->name == "The Underscape") {
-        harvestable = UndeadHarvestable::create();
+        this->harvestable = UndeadHarvestable::create();
     } else if (target_building->name == "The Marketplace") {
-        harvestable = MarketHarvestable::create();
+        this->harvestable = MarketHarvestable::create();
     } else if (target_building->name == "The Farm") {
-        harvestable = FarmingHarvestable::create();
+        this->harvestable = FarmingHarvestable::create();
     } else {
-        harvestable = Harvestable::create();
+        this->harvestable = Harvestable::create();
     };
 
-    this->addChild(harvestable);
+    this->addChild(this->harvestable);
 };
 
 void HarvestScene::create_recipe_lbl()

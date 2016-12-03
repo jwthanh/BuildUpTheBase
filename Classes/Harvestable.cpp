@@ -851,36 +851,36 @@ bool FightingHarvestable::init()
 
     this->spawn_enemy();
 
-    fighter_node->sprite->addTouchEventListener([this](Ref* target, ui::Widget::TouchEventType type)
-    {
-        if (type == TouchEventType::BEGAN)
-        {
-            //// this nearly worked, the coords werent right, so this->_hitted
-            ////was always false, otherwise worked to sim a click
-            // EventTouch evt = cocos2d::EventTouch();
-            // evt.setEventCode(EventTouch::EventCode::BEGAN);
-            // Touch touch = Touch();
-            // Vec2 vec = { 1, 1 };
-            // vec = this->sprite->convertToWorldSpace(vec);
-
-            // touch.setTouchInfo(-1, vec.x, vec.y);
-            // std::vector<Touch*> touches ={  &touch  };
-            // evt.setTouches(touches);
-            // this->sprite->getEventDispatcher()->dispatchEvent(&evt);
-
-
-            //copy and pasted from Harvester::onTouchEnded
-            this->current_clicks += 1;
-
-            this->animate_harvest();
-            this->on_harvest();
-
-            if (this->should_shatter()) {
-                this->shatter();
-            };
-
-        }
-    });
+    // fighter_node->img_view->addTouchEventListener([this](Ref* target, ui::Widget::TouchEventType type)
+    // {
+    //     if (type == TouchEventType::BEGAN)
+    //     {
+    //         //// this nearly worked, the coords werent right, so this->_hitted
+    //         ////was always false, otherwise worked to sim a click
+    //         // EventTouch evt = cocos2d::EventTouch();
+    //         // evt.setEventCode(EventTouch::EventCode::BEGAN);
+    //         // Touch touch = Touch();
+    //         // Vec2 vec = { 1, 1 };
+    //         // vec = this->sprite->convertToWorldSpace(vec);
+    //
+    //         // touch.setTouchInfo(-1, vec.x, vec.y);
+    //         // std::vector<Touch*> touches ={  &touch  };
+    //         // evt.setTouches(touches);
+    //         // this->sprite->getEventDispatcher()->dispatchEvent(&evt);
+    //
+    //
+    //         //copy and pasted from Harvester::onTouchEnded
+    //         this->current_clicks += 1;
+    //
+    //         this->animate_harvest();
+    //         this->on_harvest();
+    //
+    //         if (this->should_shatter()) {
+    //             this->shatter();
+    //         };
+    //
+    //     }
+    // });
 
     //adjust position because the enemy and sword are both offset from the center
     this->setPosition(Vec2(this->getPosition().x-110, this->getPosition().y));
@@ -1024,16 +1024,17 @@ void FightingHarvestable::spawn_enemy()
     base_node->setScaleY(-1.0f);
 
 	RenderTexture* rt = RenderTexture::create(16, 16);
-    rt->begin();
-    base_node->visit();
-    rt->end();
+	rt->begin();
+	base_node->visit();
+	rt->end();
 
-    //use the texture from RenderTexture and replace the ImageView's Scale9
-    //texture
-	cocos2d::ui::ImageView* img_view = fighter_node->sprite;
-    ui::Scale9Sprite* scale9_sprite = dynamic_cast<ui::Scale9Sprite*>(img_view->getVirtualRenderer());
+    //use the texture from RenderTexture and replace the ImageView's Scale9 texture
+	cocos2d::ui::ImageView* fighter_node_img_view = fighter_node->img_view;
+    ui::Scale9Sprite* scale9_sprite = dynamic_cast<ui::Scale9Sprite*>(fighter_node_img_view->getVirtualRenderer());
+
     Sprite* tex_sprite = dynamic_cast<Sprite*>(rt->getSprite());
     scale9_sprite->setSpriteFrame(tex_sprite->getSpriteFrame());
+	scale9_sprite->setScale9Enabled(false); //NOTE!! scale9 must be disabled on the sprite, otherwise there's a memory crash
 
 };
 

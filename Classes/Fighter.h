@@ -62,7 +62,7 @@ class FighterNode : public cocos2d::ui::Widget
 
         spFighter fighter;
 
-        cocos2d::ui::ImageView* sprite;
+        cocos2d::ui::ImageView* img_view;
         void load_new_sprite(std::string name);
 
         spProgressBar hp_bar;

@@ -53,15 +53,15 @@ FighterNode* FighterNode::create(spFighter fighter)
 
     node->fighter = fighter;
 
-    node->sprite = ui::ImageView::create(fighter ? fighter->sprite_name : "townsmen8x8.png", TextureResType::PLIST);
-    node->sprite->setScale(8);
-    node->sprite->setPosition(Vec2(0, 100));
-    dynamic_cast<cocos2d::ui::Scale9Sprite*>(node->sprite->getVirtualRenderer())->getSprite()->getTexture()->setAliasTexParameters();
-    node->addChild(node->sprite);
+    node->img_view = ui::ImageView::create(fighter ? fighter->sprite_name : "townsmen8x8.png", TextureResType::PLIST);
+    node->img_view->setScale(8);
+    node->img_view->setPosition(Vec2(0, 100));
+    dynamic_cast<cocos2d::ui::Scale9Sprite*>(node->img_view->getVirtualRenderer())->getSprite()->getTexture()->setAliasTexParameters();
+    node->addChild(node->img_view);
 
-    node->sprite->setTouchEnabled(true);
-    node->sprite->setSwallowTouches(false);
-    node->sprite->addTouchEventListener([node](Ref*, TouchEventType type)
+    node->img_view->setTouchEnabled(true);
+    node->img_view->setSwallowTouches(false);
+    node->img_view->addTouchEventListener([node](Ref*, TouchEventType type)
     {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
@@ -146,11 +146,11 @@ void FighterNode::update(float dt)
 void FighterNode::load_new_sprite(std::string name)
 {
 
-    this->sprite->loadTexture(name, TextureResType::PLIST);
+    this->img_view->loadTexture(name, TextureResType::PLIST);
 
     //set aliasing on the new texture
-    auto scale9_sprite = dynamic_cast<cocos2d::ui::Scale9Sprite*>(this->sprite->getVirtualRenderer());
-    auto sprite = scale9_sprite->getSprite();
+	cocos2d::ui::Scale9Sprite* scale9_sprite = dynamic_cast<cocos2d::ui::Scale9Sprite*>(this->img_view->getVirtualRenderer());
+	Sprite* sprite = scale9_sprite->getSprite();
     sprite->getTexture()->setAliasTexParameters();
 };
 
