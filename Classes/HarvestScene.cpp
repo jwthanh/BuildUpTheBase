@@ -320,9 +320,17 @@ void BaseScene::create_goal_loadingbar()
     auto update_loading_bar = [this, loading_bar](float dt)
         {
             spBuilding target_building = BUILDUP->get_target_building();
+			if (target_building->building_level == 15)
+			{
+				this->upgrade_lbl->setString("Max level!");
+				loading_bar->setVisible(false);
+				return;
+			}
+
             float coin_goal = scale_number(10.0f, (float)target_building->building_level, 10.5f);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             loading_bar->setPercent(percentage);
+			loading_bar->setVisible(true);
 
             if (percentage >= 100.0f) {
                 this->upgrade_lbl->setString("Upgrade available!");
