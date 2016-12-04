@@ -16,7 +16,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="buttons/tilemap_nav.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="back_btn" ActionTag="1232804101" Tag="233" IconVisible="False" LeftMargin="35.0000" RightMargin="795.0000" TopMargin="516.9999" BottomMargin="23.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="back_btn" ActionTag="1232804101" Tag="233" IconVisible="False" LeftMargin="35.0000" RightMargin="795.0000" TopMargin="517.0000" BottomMargin="23.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="130.0000" Y="100.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="100.0000" Y="73.0000" />
@@ -119,7 +119,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="dig_btn" ActionTag="1624672489" Tag="19" IconVisible="False" LeftMargin="798.9999" RightMargin="31.0001" TopMargin="515.0000" BottomMargin="25.0000" TouchEnable="True" FontSize="24" ButtonText="Dig" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="dig_btn" ActionTag="1624672489" Tag="19" IconVisible="False" LeftMargin="798.9999" RightMargin="31.0001" TopMargin="515.0000" BottomMargin="25.0000" TouchEnable="True" FontSize="24" ButtonText="Deeper" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="130.0000" Y="100.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="863.9999" Y="75.0000" />
