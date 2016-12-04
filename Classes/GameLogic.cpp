@@ -401,7 +401,6 @@ void GameLogic::load_all()
     TabManager::TabTypes tab_type = (TabManager::TabTypes)DataManager::get_int_from_data("active_tab", (int)TabManager::TabTypes::ShopTab);
     sidebar->tabs.set_tab_active(tab_type, building);
 
-
 };
 
 void GameLogic::load_all_as_cheater()

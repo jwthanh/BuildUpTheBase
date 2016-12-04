@@ -80,6 +80,7 @@ void DataManager::set_double_from_data(std::string key, double val)
 {
     validate_key(key);
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
+	if (val > 1.0e+42){ val = 1.0e+42; };
     CCLOG("setting double %s for %f", key.c_str(), val);
     ud->setDoubleForKey(key.c_str(), val);
 };
