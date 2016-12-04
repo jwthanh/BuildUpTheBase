@@ -256,6 +256,23 @@ void Harvestable::animate_touch_end(cocos2d::Touch* touch)
     this->runAction(ease);
 }
 
+bool Harvestable::is_harvestable()
+{
+	return this->building->can_fit_more_ingredients(this->get_output_ing_type()) == true && this->building->name == "The Arena";
+}
+
+void Harvestable::handle_harvest()
+{
+	this->current_clicks += 1;
+
+	this->animate_harvest();
+	this->on_harvest();
+
+	if (this->should_shatter()) {
+		this->shatter();
+	};
+}
+
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
     //Widget::onTouchEnded(touch, event); //this shouldnt be called because releaseUpEvent hasnt been set I guess.
@@ -264,19 +281,12 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
     animate_touch_end(touch);
 
     //FIXME remove hardcoded check for arena, otherwise the sword wont rotate
-    if (this->building->can_fit_more_ingredients(this->get_output_ing_type()) == false && this->building->name != "The Arena")
+    if (this->is_harvestable() == false)
     {
         return;
     };
 
-    this->current_clicks += 1;
-
-    this->animate_harvest();
-    this->on_harvest();
-
-    if (this->should_shatter()) {
-        this->shatter();
-    };
+    this->handle_harvest();
 
 };
 
@@ -871,15 +881,7 @@ bool FightingHarvestable::init()
             // this->sprite->getEventDispatcher()->dispatchEvent(&evt);
 
 
-            //copy and pasted from Harvester::onTouchEnded
-            this->current_clicks += 1;
-
-            this->animate_harvest();
-            this->on_harvest();
-
-            if (this->should_shatter()) {
-                this->shatter();
-            };
+			this->handle_harvest();
 
         }
     });

@@ -67,7 +67,8 @@ class Harvestable : public cocos2d::ui::Widget
 
         void spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, float duration, std::string floating_msg, cocos2d::Color4B text_color);
 
-    /* onTouchBegan -> animate_touch_start
+		// rough outline of call order
+		/* onTouchBegan -> animate_touch_start
          * [animate_touch_start] -> get_per_touch_output
          * [animate_touch_start] -> animate_flash_action
          [animate_touch_start] -> spawn_label_on_touch
@@ -80,7 +81,12 @@ class Harvestable : public cocos2d::ui::Widget
 
         void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
         virtual void animate_touch_end(cocos2d::Touch* touch);
-        virtual void animate_harvest();
+
+		bool is_harvestable();
+		void handle_harvest();
+		bool harvest_handle();
+		virtual void animate_harvest();
+
         virtual void on_harvest();
         virtual void animate_clip();
         virtual void animate_rotate();
