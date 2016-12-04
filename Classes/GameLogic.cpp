@@ -386,6 +386,7 @@ void GameLogic::load_all()
         coins_from_data = 0.0;
     }
     BEATUP->_total_coins = coins_from_data;
+	// BEATUP->_total_coins = 500000000000000000000000000000000000000000000000000.0; //NOTE use to test Infinity in android xml double parsing
 
     BUILDUP->city->name = DataManager::get_string_from_data("city_name", "");
 

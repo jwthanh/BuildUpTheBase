@@ -3,6 +3,7 @@
 
 #include "base/CCConsole.h"
 #include "base/CCUserDefault.h"
+#include "external/easylogging.h"
 
 
 void DataManager::validate_key(std::string key)
@@ -59,8 +60,20 @@ double DataManager::get_double_from_data(std::string key, double _default)
 {
     validate_key(key);
     CCLOG("getting double %s", key.c_str());
+
     cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
-    return ud->getDoubleForKey(key.c_str(), _default);
+
+	std::string potential_double = ud->getStringForKey(key.c_str(), "empty");
+	if (potential_double == "Infinity")
+	{
+		LOG(WARNING) << "attempted double from data: " << potential_double;
+		LOG(WARNING) << "used 123456789.0 instead";
+		return 123456789.0;
+	}
+	else
+	{
+		return ud->getDoubleForKey(key.c_str(), _default);
+	}
 }
 
 void DataManager::set_double_from_data(std::string key, double val)
