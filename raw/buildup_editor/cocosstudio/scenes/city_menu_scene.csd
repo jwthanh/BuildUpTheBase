@@ -6,7 +6,7 @@
       <ObjectData Name="Scene" Tag="581" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="panel" ActionTag="-1524675579" Tag="632" IconVisible="False" LeftMargin="-1.7450" RightMargin="1.7450" TopMargin="0.0001" BottomMargin="-0.0001" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="panel" ActionTag="-1524675579" Tag="632" IconVisible="False" TopMargin="0.0001" BottomMargin="-0.0001" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="960.0000" Y="640.0000" />
             <Children>
               <AbstractNodeData Name="city_name_panel" ActionTag="1593445582" Tag="633" IconVisible="False" LeftMargin="145.6230" RightMargin="151.8969" TopMargin="100.8611" BottomMargin="468.2032" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
@@ -228,10 +228,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleY="1.0000" />
-            <Position X="-1.7450" Y="639.9999" />
+            <Position Y="639.9999" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="-0.0018" Y="1.0000" />
+            <PrePosition Y="1.0000" />
             <PreSize X="1.0000" Y="1.0000" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />

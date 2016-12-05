@@ -22,6 +22,7 @@
           <Project Name="city_menu_scene.csd" Type="Scene" />
           <Project Name="items_scene.csd" Type="Scene" />
           <Project Name="miner_scene.csd" Type="Scene" />
+          <Project Name="equipment_scene.csd" Type="Scene" />
         </Folder>
         <Folder Name="unused">
           <Folder Name="details">
