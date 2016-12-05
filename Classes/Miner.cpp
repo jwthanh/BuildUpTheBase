@@ -277,8 +277,7 @@ void Miner::init(bool use_existing)
         start_pos = this->get_default_start_pos();
         this->active_layer->setTileGID(this->tile_START, start_pos);
 
-        //TODO fix hardcoded resource path
-        this->resource_tile_pos = {4, 4};
+        this->resource_tile_pos = this->generate_free_tile_pos({});
         this->active_layer->setTileGID(this->resource_tile_id, this->resource_tile_pos);
 
         this->init_start_pos(start_pos);
