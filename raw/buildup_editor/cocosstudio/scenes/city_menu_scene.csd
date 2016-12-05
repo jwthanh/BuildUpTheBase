@@ -24,7 +24,7 @@
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="city_name_textfield" ActionTag="-1399427436" Tag="635" IconVisible="False" LeftMargin="292.3124" RightMargin="11.1187" TopMargin="24.7782" BottomMargin="23.1575" TouchEnable="True" FontSize="20" IsCustomSize="True" LabelText="" PlaceHolderText="Johnny's First Base" MaxLengthEnable="True" MaxLengthText="50" ctype="TextFieldObjectData">
+                  <AbstractNodeData Name="city_name_textfield" ActionTag="-1399427436" Tag="635" IconVisible="False" LeftMargin="292.3124" RightMargin="11.1187" TopMargin="24.7782" BottomMargin="23.1575" TouchEnable="True" FontSize="20" IsCustomSize="True" LabelText="" PlaceHolderText="Name your base" MaxLengthEnable="True" MaxLengthText="50" ctype="TextFieldObjectData">
                     <Size X="359.0490" Y="23.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
                     <Position X="651.3614" Y="34.6575" />
