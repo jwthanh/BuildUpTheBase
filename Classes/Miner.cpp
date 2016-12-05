@@ -230,7 +230,7 @@ cocos2d::Vec2 Miner::get_start_pos()
     {
         return this->get_default_start_pos();
     }
-    else 
+    else
     {
         return this->active_tile_pos; //serializer sets it
     }
@@ -376,7 +376,7 @@ bool Miner::is_valid_pos(cocos2d::Vec2 pos)
         CCLOG("invalid tile Y");
         return false;
     }
-    
+
     return true;
 }
 
@@ -399,7 +399,7 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
 {
     std::map<tile_gid_t, std::vector<std::array<Directions, 2>>> tile_direction_map{
         //crosses
-        { 
+        {
             this->tile_BL_TR, {
                 { Directions::BottomLeft, Directions::TopRight},
                 { Directions::TopRight, Directions::BottomLeft}
