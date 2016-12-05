@@ -9,7 +9,7 @@
           <AbstractNodeData Name="panel" ActionTag="-1524675579" Tag="632" IconVisible="False" TopMargin="0.0001" BottomMargin="-0.0001" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="960.0000" Y="640.0000" />
             <Children>
-              <AbstractNodeData Name="city_name_panel" ActionTag="1593445582" Tag="633" IconVisible="False" LeftMargin="145.6230" RightMargin="151.8969" TopMargin="100.8611" BottomMargin="468.2032" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="city_name_panel" ActionTag="1593445582" Tag="633" IconVisible="False" LeftMargin="148.7599" RightMargin="148.7599" TopMargin="100.8611" BottomMargin="468.2032" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="662.4801" Y="70.9357" />
                 <Children>
                   <AbstractNodeData Name="city_name_lbl" ActionTag="-1770781464" Tag="634" IconVisible="False" LeftMargin="11.7858" RightMargin="382.7933" TopMargin="19.6371" BottomMargin="21.4711" IsCustomSize="True" FontSize="16" LabelText="Your city's name:" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -35,46 +35,18 @@
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint />
-                <Position X="145.6230" Y="468.2032" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="480.0000" Y="503.6710" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1517" Y="0.7316" />
+                <PrePosition X="0.5000" Y="0.7870" />
                 <PreSize X="0.6901" Y="0.1108" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="back_btn" ActionTag="624855446" Tag="630" IconVisible="False" LeftMargin="35.0000" RightMargin="795.0000" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="130.0000" Y="100.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="90.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1042" Y="0.1406" />
-                <PreSize X="0.1354" Y="0.1563" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-                <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
-                <OutlineColor A="255" R="255" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="title_lbl" ActionTag="1132339320" Tag="631" IconVisible="False" LeftMargin="52.3923" RightMargin="52.3925" TopMargin="3.2147" BottomMargin="550.6392" IsCustomSize="True" FontSize="36" LabelText="City Management" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="855.2153" Y="86.1461" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="479.9999" Y="593.7123" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.9277" />
-                <PreSize X="0.8908" Y="0.1346" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="26" G="26" B="26" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="invest_panel" ActionTag="1062837639" Tag="654" IconVisible="False" LeftMargin="145.6230" RightMargin="151.8969" TopMargin="191.8619" BottomMargin="377.2024" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="invest_panel" ActionTag="1062837639" Tag="654" IconVisible="False" LeftMargin="148.7599" RightMargin="148.7599" TopMargin="191.8619" BottomMargin="377.2024" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="662.4801" Y="70.9357" />
                 <Children>
                   <AbstractNodeData Name="invest_lbl" ActionTag="176670848" Tag="655" IconVisible="False" LeftMargin="9.7857" RightMargin="532.7934" TopMargin="7.6371" BottomMargin="9.4711" IsCustomSize="True" FontSize="16" LabelText="Invest:" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -117,18 +89,18 @@
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint />
-                <Position X="145.6230" Y="377.2024" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="480.0000" Y="412.6702" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1517" Y="0.5894" />
+                <PrePosition X="0.5000" Y="0.6448" />
                 <PreSize X="0.6901" Y="0.1108" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="appeasement_panel" ActionTag="-1686059654" Tag="23" IconVisible="False" LeftMargin="146.6245" RightMargin="150.8954" TopMargin="285.8617" BottomMargin="204.6712" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="appeasement_panel" ActionTag="-1686059654" Tag="23" IconVisible="False" LeftMargin="148.7599" RightMargin="148.7599" TopMargin="285.8617" BottomMargin="204.6712" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="662.4801" Y="149.4671" />
                 <Children>
                   <AbstractNodeData Name="appeasement_lbl" ActionTag="-713331910" Tag="24" IconVisible="False" LeftMargin="11.7859" RightMargin="528.7932" TopMargin="12.1675" BottomMargin="83.4721" IsCustomSize="True" FontSize="16" LabelText="Appease gods:" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -170,7 +142,7 @@
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="appeasement_desc_lbl" ActionTag="37638646" Tag="210" IconVisible="False" LeftMargin="22.8094" RightMargin="23.5613" TopMargin="80.7698" BottomMargin="3.3239" IsCustomSize="True" FontSize="16" LabelText="With every ten soul gathered from The Arena comes increased favour from those watching. Items will increase in level and value." HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="appeasement_desc_lbl" ActionTag="37638646" Tag="210" IconVisible="False" LeftMargin="22.8094" RightMargin="23.5613" TopMargin="80.7698" BottomMargin="3.3239" IsCustomSize="True" FontSize="16" LabelText="With every ten souls gathered from The Arena comes increased favour from those watching. Items scavenged from The Dump will increase in level and value." HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="616.1093" Y="65.3735" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="330.8641" Y="36.0106" />
@@ -183,16 +155,44 @@
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
                 </Children>
-                <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
-                <Position X="477.8645" Y="354.1383" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="480.0000" Y="279.4048" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4978" Y="0.5533" />
+                <PrePosition X="0.5000" Y="0.4366" />
                 <PreSize X="0.6901" Y="0.2335" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="back_btn" ActionTag="624855446" Tag="630" IconVisible="False" LeftMargin="35.0000" RightMargin="795.0000" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Back" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="130.0000" Y="100.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="100.0000" Y="90.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.1042" Y="0.1406" />
+                <PreSize X="0.1354" Y="0.1563" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                <TextColor A="255" R="65" G="65" B="70" />
+                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="title_lbl" ActionTag="1132339320" Tag="631" IconVisible="False" LeftMargin="52.3923" RightMargin="52.3925" TopMargin="3.2147" BottomMargin="550.6392" IsCustomSize="True" FontSize="36" LabelText="City Management" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="855.2153" Y="86.1461" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="479.9999" Y="593.7123" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.9277" />
+                <PreSize X="0.8908" Y="0.1346" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                <OutlineColor A="255" R="26" G="26" B="26" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
               <AbstractNodeData Name="items_scene_btn" ActionTag="-1449102005" Tag="451" IconVisible="False" LeftMargin="800.0000" RightMargin="30.0000" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Items" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="130.0000" Y="100.0000" />
