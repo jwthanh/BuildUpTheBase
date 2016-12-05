@@ -16,4 +16,13 @@ Features
 
 * dont pause application on background, maybe do the post load on return
 
-* items have passives, limited slots
+* items have passives, limited slots for total item inventory
+
+* equipment screen for items, slots for combat stuff, harvest stuff.
+* equipment is limited by character level
+* character level is boosted in combat, (or by doing other things?)
+
+* find things in the mine that aren't the altar, but are little pickups along the way
+
+* can recruit specialized harvesters to live in your city. they either live a certain amount of time
+  or require a certain resource before leaving or reducing output
