@@ -197,10 +197,8 @@ cocos2d::Vec2 Miner::generate_free_tile_pos(std::vector<cocos2d::Vec2> reserved_
 
 cocos2d::Vec2 Miner::get_default_start_pos()
 {
-    ///randomly pick a starting position in the map
-
+    //randomly pick a starting position in the map that isnt the resource tile
 	cocos2d::Vec2 start_pos = this->generate_free_tile_pos({this->resource_tile_pos});
-
     return start_pos;
 }
 
