@@ -258,7 +258,7 @@ void Harvestable::animate_touch_end(cocos2d::Touch* touch)
 
 bool Harvestable::is_harvestable()
 {
-	return this->building->can_fit_more_ingredients(this->get_output_ing_type()) == true && this->building->name == "The Arena";
+	return this->building->can_fit_more_ingredients(this->get_output_ing_type()) == true || this->building->name == "The Arena";
 }
 
 void Harvestable::handle_harvest()
