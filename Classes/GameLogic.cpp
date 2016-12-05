@@ -24,6 +24,8 @@
 #include "ui/UIText.h"
 #include "ui/UIButton.h"
 #include "ui/UITextField.h"
+#include "magic_particles/MagicEmitter.h"
+#include "magic_particles/mp_cocos.h"
 
 USING_NS_CC;
 
@@ -790,6 +792,12 @@ void GameDirector::switch_to_miner_menu()
     explode_button_lbl->setTextColor(Color4B::WHITE);
     explode_button_lbl->enableOutline(Color4B::BLACK, 2);
 
+	auto button_highlight_particle = MagicEmitter::create("Square");
+	button_highlight_particle->setPosition(explode_btn->getPosition());
+	MP_Emitter_Cocos* emitter = button_highlight_particle->GetEmitter();
+	emitter->SetScale(0.5f);
+	miner_scene->addChild(button_highlight_particle);
+
     explode_btn->addTouchEventListener([miner](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
@@ -797,16 +805,26 @@ void GameDirector::switch_to_miner_menu()
             serializer.serialize();
 
             GameDirector::switch_to_item_altar_menu();
-            miner->reset();
+            miner->reset(); //TODO reenable this after testing
             do_vibrate(16);
         }
     });
     load_default_button_textures(explode_btn);
 
-    auto check_tiles_cb = [explode_btn, miner](float dt){
-        bool rail_connected = miner->rails_connect_a_resource();
-        explode_btn->setEnabled(rail_connected);
-    };
+	auto check_tiles_cb = [explode_btn, miner, emitter](float dt){
+		bool rail_connected = miner->rails_connect_a_resource();
+		if (rail_connected)
+		{
+			explode_btn->setEnabled(true);
+			emitter->SetState(MAGIC_STATE_UPDATE);
+		}
+		else
+		{
+
+			emitter->SetState(MAGIC_STATE_STOP);
+			explode_btn->setEnabled(false);
+		}
+	};
     check_tiles_cb(0);
     explode_btn->schedule(check_tiles_cb, AVERAGE_DELAY, "check_tiles_cb");
 
