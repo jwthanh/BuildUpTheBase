@@ -144,10 +144,13 @@ void Miner::animate_falling_tiles()
 
 };
 
-cocos2d::Vec2 Miner::get_default_start_pos()
+cocos2d::Vec2 Miner::generate_free_tile_pos()
 {
-    ///randomly pick a starting position in the map
+	return this->generate_free_tile_pos({});
+};
 
+cocos2d::Vec2 Miner::generate_free_tile_pos(std::vector<cocos2d::Vec2> reserved_tiles)
+{
     cocos2d::Size layer_size = this->active_layer->getLayerSize();
     cocos2d::Vec2 start_pos = { -1, -1 };
     tile_gid_t num_tiles = static_cast<tile_gid_t>(layer_size.width * layer_size.height);
@@ -175,9 +178,8 @@ cocos2d::Vec2 Miner::get_default_start_pos()
             if (start_id == counter)
             {
 
-                //go to next tile if 4,4 since that's the resource tile
-                //TODO fix hardcoded resource path
-                if (looped_pos == cocos2d::Vec2{4, 4})
+				//skip tile pos if its in the reserved tiles
+				if (std::find(reserved_tiles.begin(), reserved_tiles.end(), looped_pos) != reserved_tiles.end())
                 {
                     start_id++;
                 }
@@ -189,6 +191,15 @@ cocos2d::Vec2 Miner::get_default_start_pos()
 
         }
     };
+
+	return start_pos;
+};
+
+cocos2d::Vec2 Miner::get_default_start_pos()
+{
+    ///randomly pick a starting position in the map
+
+	cocos2d::Vec2 start_pos = this->generate_free_tile_pos({this->resource_tile_pos});
 
     return start_pos;
 }

@@ -233,10 +233,12 @@ void SideListView::setup_tab_buttons()
 
 void SideListView::setup_listviews()
 {
+	CCLOG("start creating listviews");
     this->shop_listviews = this->_create_listview("shop_listview");
     this->detail_listviews = this->_create_listview("detail_listview");
     this->building_listviews = this->_create_listview("building_listview");
     this->powers_listviews = this->_create_listview("powers_listview");
+	CCLOG("done creating listviews");
 
     auto clean_children_on_target_change = [this](float dt)
     {
@@ -1177,11 +1179,11 @@ void SideListView::setup_powers_listview_as_powers()
 spListviewMap SideListView::_create_listview(std::string node_name)
 {
     Node* harvest_scene_editor = get_prebuilt_node_from_csb("editor/scenes/base_scene.csb");
+	auto orig_listview = static_cast<ui::ListView*>(harvest_scene_editor->getChildByName(node_name));
 
     spListviewMap result = std::make_shared<listviewMap>();
     for (spBuilding building : BUILDUP->city->buildings)
     {
-        auto orig_listview = static_cast<ui::ListView*>(harvest_scene_editor->getChildByName(node_name));
         auto listview = dynamic_cast<ui::ListView*>(orig_listview->clone());
         listview->removeFromParent();
 

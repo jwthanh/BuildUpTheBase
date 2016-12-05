@@ -147,9 +147,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        //GameDirector::switch_to_miner_menu();
+        GameDirector::switch_to_miner_menu();
 
-		((FightingHarvestable*)this->harvestable)->spawn_enemy();
+		// ((FightingHarvestable*)this->harvestable)->spawn_enemy();
 
         // this->miner->save();
         //this->stopAllActions();

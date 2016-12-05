@@ -54,6 +54,9 @@ class Miner
         void init_start_pos(cocos2d::Vec2 new_start_pos);
         void reset();
 
+		cocos2d::Vec2 generate_free_tile_pos();
+		cocos2d::Vec2 generate_free_tile_pos(std::vector<cocos2d::Vec2> reserved_tiles);
+
         cocos2d::Vec2 get_start_pos();
         cocos2d::Vec2 get_default_start_pos();
         cocos2d::Vec2 get_existing_start_pos();
