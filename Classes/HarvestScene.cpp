@@ -927,7 +927,6 @@ void BaseScene::create_inventory_listview()
             Ingredient::SubType ing_type = type_to_count.first;
             auto str_type = Ingredient::type_to_string(ing_type);
 
-            IngredientData res_data = IngredientData(str_type);
 
             auto zero_ingredients = map_get(city_ingredients, ing_type, _def) < 0;
 
@@ -969,6 +968,7 @@ void BaseScene::create_inventory_listview()
 
             //add ingredient image
             ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
+            IngredientData res_data(str_type);
             item_img->loadTexture(res_data.get_img_large());
             set_aliasing(item_img, true);
 

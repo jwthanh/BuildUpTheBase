@@ -15,22 +15,27 @@ std::string get_##attr_name()\
     return this->getter(#attr_name);\
 }\
 
-class BaseData
+/// Read only data, do not write, since there's so much caching 
+class BaseStaticData
 {
     private:
         std::map<std::string, std::string> _cache;
+
     protected:
         std::string _filename;
         std::string _get_data(std::string key_top, std::string key_child="", std::string key_grandchild="");
+
     public:
+		rjDocument jsonDoc; //should be cached on contruction
+		BaseStaticData(std::string filename);
+		BaseStaticData(const BaseStaticData&);
 
         virtual std::string getter(std::string key) = 0;
 };
 
-class BuildingData : public BaseData
+class BuildingData : public BaseStaticData
 {
     private:
-        rjDocument recipe_doc;
 
     public:
         std::string building_name;
@@ -50,7 +55,7 @@ class BuildingData : public BaseData
         spRecipe get_recipe(std::string recipe_key);
 };
 
-class IngredientData : public BaseData
+class IngredientData : public BaseStaticData
 {
     public:
         std::string resource_id;
@@ -63,7 +68,7 @@ class IngredientData : public BaseData
 
 };
 
-class ItemData : public BaseData
+class ItemData : public BaseStaticData
 {
     public:
         std::string item_id;

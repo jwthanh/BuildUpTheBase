@@ -10,8 +10,18 @@
 #include "Recipe.h"
 #include "Item.h"
 
+BaseStaticData::BaseStaticData(std::string filename)
+{
+	this->_filename = filename;
+	this->jsonDoc = FileIO::open_json(this->_filename, true);
+}
 
-std::string BaseData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)
+BaseStaticData::BaseStaticData(const BaseStaticData&)
+{
+	auto a = 1 + 1;
+};
+
+std::string BaseStaticData::_get_data(std::string key_top, std::string key_child, std::string key_grandchild)
 {
 
     std::stringstream ss;
@@ -23,8 +33,6 @@ std::string BaseData::_get_data(std::string key_top, std::string key_child, std:
         return this->_cache.at(cache_key);
     }
 
-
-    rjDocument jsonDoc = FileIO::open_json(this->_filename, true);
 
     assert(jsonDoc.HasMember(key_top.c_str()) && "this should be here");
     auto body = &jsonDoc[key_top.c_str()];
@@ -49,9 +57,9 @@ std::string BaseData::_get_data(std::string key_top, std::string key_child, std:
 }
 
 BuildingData::BuildingData(std::string building_name)
+	: BaseStaticData("buildings_data.json")
 {
     this->building_name = building_name;
-    this->_filename = "buildings_data.json";
 }
 
 std::string BuildingData::getter(std::string key)
@@ -61,13 +69,14 @@ std::string BuildingData::getter(std::string key)
 
 vsRecipe BuildingData::get_all_recipes()
 {
-    //assume if its not an object, its null
-    if (this->recipe_doc.IsObject() == false)
-    {
-        this->recipe_doc = FileIO::open_json(this->_filename, true);
-    }
+	// TODO remove after we're sure this isn't needed
+    // //assume if its not an object, its null
+    // if (this->recipe_doc.IsObject() == false)
+    // {
+    //     this->recipe_doc = FileIO::open_json(this->_filename, true);
+    // }
 
-    auto& body = this->recipe_doc["buildings"];
+    auto& body = this->jsonDoc["buildings"];
     auto& building_info = body[this->building_name.c_str()];
 
     if (!building_info.HasMember("recipes"))
@@ -133,7 +142,6 @@ spRecipe BuildingData::build_recipe(rjValue* raw_data)
 spRecipe BuildingData::get_recipe(std::string recipe_key)
 {
 
-    auto jsonDoc = FileIO::open_json(this->_filename, true);
     auto& body = jsonDoc["buildings"];
     auto& building_info = body[this->building_name.c_str()];
     auto& recipe_info = building_info["recipes"];
@@ -145,9 +153,9 @@ spRecipe BuildingData::get_recipe(std::string recipe_key)
 
 
 IngredientData::IngredientData(std::string resource_id)
+	: BaseStaticData("resources_data.json")
 {
     this->resource_id = resource_id;
-    this->_filename = "resources_data.json";
 }
 
 std::string IngredientData::getter(std::string key)
@@ -156,8 +164,8 @@ std::string IngredientData::getter(std::string key)
 };
 
 ItemData::ItemData()
+	: BaseStaticData("item_data.json")
 {
-    this->_filename = "item_data.json";
 }
 
 std::string ItemData::getter(std::string key)
@@ -192,7 +200,6 @@ spItem ItemData::build_item(std::string type_name, rjValue* item_data)
 spItem ItemData::get_item(std::string item_id)
 {
 
-    auto jsonDoc = FileIO::open_json(this->_filename, true);
     auto body = &jsonDoc["items"];
     auto item_info = &(*body)[item_id.c_str()];
 
@@ -203,7 +210,6 @@ vsItem ItemData::get_all_items()
 {
     vsItem result;
 
-    auto jsonDoc = FileIO::open_json(this->_filename, true);
     auto&& items = jsonDoc["items"];
 
     for (rjValue::MemberIterator it = items.MemberBegin(); it != items.MemberEnd(); ++it)
