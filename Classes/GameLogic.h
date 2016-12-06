@@ -74,6 +74,7 @@ class GameDirector
         static void switch_to_miner_menu();
         static void switch_to_items_menu();
         static void switch_to_item_altar_menu();
+        static void switch_to_item_equip_menu();
 };
 
 #endif
