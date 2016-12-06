@@ -49,6 +49,7 @@
 #include <cocostudio/CocosStudioExtension.h>
 #include "ui/UIImageView.h"
 #include "ui/UITextField.h"
+#include "2d/CCRenderTexture.h"
 
 USING_NS_CC;
 
@@ -147,105 +148,65 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        GameDirector::switch_to_miner_menu();
+        // GameDirector::switch_to_miner_menu();
 
-		// ((FightingHarvestable*)this->harvestable)->spawn_enemy();
+		auto anvil_sprite = cocos2d::Sprite::createWithSpriteFrameName("anvil.png");
+		anvil_sprite->setAnchorPoint(Vec2::ZERO);
+		anvil_sprite->setPosition(0,0);
+		//auto anvil_texture = anvil_sprite->getTexture();
 
-        // this->miner->save();
-        //this->stopAllActions();
-        //this->getScheduler()->unscheduleAll();
-        //this->removeAllChildren();
+		RenderTexture* rt = RenderTexture::create(anvil_sprite->getContentSize().width, anvil_sprite->getContentSize().height);
+		//rt->setAutoDraw(true);
+		// rt->retain();
+		rt->begin();
+		anvil_sprite->visit();
+		rt->end();
 
-        //this->addChild(this->tilemap);
+		rt->saveToFile("test_FILE.png");
 
+		Image* output_image = new Image;
+		//output_image->initWithImageFile("test_FILE_IN_RESOURCES.png");
+		 output_image = rt->newImage();
 
-        //auto layer = map->getLayer("background");
-        //if (!layer){ CCLOG("NO LAYER FOUND");  return; }
-        //Size map_size = map->getMapSize();
-        //auto listener = EventListenerTouchOneByOne::create();
-        //listener->setSwallowTouches(true);
-        //listener->onTouchBegan = [layer, this, map](Touch* touch, Event* event){
+		//output_image->autorelease();
 
-        //    // auto sprite = event->getCurrentTarget();
-        //    Vec2 world_pos = this->convertToNodeSpace(touch->getLocation());
-        //    auto pWorld = /*world_pos;*/ map->convertToNodeSpace(world_pos);
+		// auto img_data = output_image->getData();
+		// auto data_len = output_image->getDataLen();
+		// CCLOG("total %i and len %i", output_image->getWidth() * output_image->getHeight(), data_len);
+        //
+		// int pixel_width = 3;
+		// if (output_image->hasAlpha())
+		// {
+		// 	pixel_width = 4;
+		// }
+        //
+		// for (int i = 0; i < output_image->getWidth(); i++)
+		// {
+		// 	for (int j = 0; j < output_image->getHeight(); j++)
+		// 	{
+		// 		unsigned char *pixel = img_data + (j + i * output_image->getWidth()) * pixel_width;
+        //
+		// 		// You can see/change pixels' RGBA value(0-255) here !
+		// 		unsigned char r = *pixel;
+		// 		unsigned char g = *(pixel + 1);
+		// 		unsigned char b = *(pixel + 2);
+		// 		unsigned char a = *(pixel + 3);
+        //
+		// 		CCLOG("%i %i %i %i", r, g, b, a);
+		// 	}
+		// };
+		//auto anvil_image = new cocos2d::Image;
 
-        //    Vec2 tile_pos{};
-        //    // iso diamond
-        //    float world_x = pWorld.x;
-        //    float world_y = pWorld.y;
-        //    world_x *= CC_CONTENT_SCALE_FACTOR();
-        //    world_y *= CC_CONTENT_SCALE_FACTOR();
+		
+		auto output_texture = new Texture2D;
+		output_texture->initWithImage(output_image);
+		// Size sz = { (float)output_image->getWidth(), (float)output_image->getHeight() };
+		// output_texture->initWithData(img_data, data_len, output_image->getRenderFormat(), output_image->getWidth(), output_image->getHeight(), sz);
 
-        //    float tile_width = map->getTileSize().width;
-        //    float tile_height = map->getTileSize().height;
-        //    float layer_w = layer->getLayerSize().width;
-        //    float layer_h = layer->getLayerSize().height;
+	    Sprite* output_sprite = cocos2d::Sprite::createWithTexture(output_texture);
+		output_sprite->setPosition(100.0f, 100.0f);
+		this->addChild(output_sprite);
 
-        //    float y_offset = world_y / tile_height;
-        //    float x_offset = world_x / tile_width;
-        //    float half_layer = layer_w / 2;
-
-        //    float tile_x = floorf(layer_h - y_offset + x_offset - half_layer);
-        //    float tile_y = floorf(layer_h - y_offset - x_offset + half_layer);
-
-        //    int region_x = world_x / layer_w;
-        //    int region_y = world_y / layer_h * 2;
-
-        //    int mouse_map_x = int(region_x) % int(layer_w);
-        //    int mouse_map_y = int(region_y) % int(layer_h);
-
-        //    int L1_NORM = layer_w / 2; //half of width I guess.
-
-        //    auto norm_x = std::abs(mouse_map_x - L1_NORM);
-        //    auto norm_y = std::abs(mouse_map_y - L1_NORM);
-        //    if (norm_x + norm_y <= L1_NORM)
-        //    {
-        //        CCLOG("inside center of tile");
-        //    }
-        //    else
-        //    {
-        //        //CCLOG("not inside center");
-        //        //if (norm_x < L1_NORM)
-        //        //{
-        //        //    CCLOG("x--");
-        //        //    tile_x--;
-        //        //
-        //        //}
-        //        //if (norm_y > L1_NORM)
-        //        //{
-        //        //    CCLOG("y++");
-        //        //    tile_y++;
-        //        //}
-        //        //else
-        //        //{
-        //            //CCLOG("y--");
-        //            //tile_y--;
-        //        //}
-        //    }
-
-        //    tile_pos = { tile_x, tile_y };
-
-        //    log_vector(tile_pos, "tile pos");
-        //    log_vector({ float(region_x), float(region_y) }, "region pos");
-        //    log_vector({ float(mouse_map_x), float(mouse_map_y) }, "mouse map");
-
-        //    if (tile_x < 0 || tile_x > layer_w-1)
-        //    {
-        //        return false;
-        //    }
-        //    if (tile_y < 0 || tile_y > layer_h-1)
-        //    {
-        //        return false;
-        //    }
-
-        //    layer->setTileGID(59, tile_pos);
-
-        //    return false;
-        //};
-
-        //auto dispatcher = Director::getInstance()->getEventDispatcher();
-        //dispatcher->addEventListenerWithSceneGraphPriority(listener, map);
     }
 }
 
