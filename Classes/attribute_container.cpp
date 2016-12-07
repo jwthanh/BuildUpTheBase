@@ -78,44 +78,6 @@ void AttributeContainer::RegenerateSpeed()
     this->speed->regenerate();
 };
 
-//std::vector<std::string> AttributeContainer::PrettyVectorColored()
-//{
-//    std::string result = "";
-//    std::vector<std::string> string_vec;
-//
-//    TCODColor health_color = HealthAttribute::attribute_color;
-//    TCODColor mana_color = ManaAttribute::attribute_color;
-//    TCODColor armor_color = ArmorAttribute::attribute_color;
-//    TCODColor damage_color = DamageAttribute::attribute_color;
-//    TCODColor speed_color = SpeedAttribute::attribute_color;
-//
-//    string_vec.push_back(buffer_color("HCV", this->attrs->current_val, health_color));
-//    string_vec.push_back(buffer_color("HMV", this->attrs->max_val, health_color));
-//    string_vec.push_back(buffer_color("HRR", this->attrs->regen_rate, health_color));
-//    string_vec.push_back(buffer_color("HRI", this->attrs->regen_interval, health_color));
-//
-//    string_vec.push_back(buffer_color("MCV", this->mana->current_val, mana_color));
-//    string_vec.push_back(buffer_color("MMV", this->mana->max_val, mana_color));
-//    string_vec.push_back(buffer_color("MRR", this->mana->regen_rate, mana_color));
-//    string_vec.push_back(buffer_color("MRI", this->mana->regen_interval, mana_color));
-//
-//    string_vec.push_back(buffer_color("ACV", this->armor->current_val, armor_color));
-//    string_vec.push_back(buffer_color("AMV", this->armor->max_val, armor_color));
-//    string_vec.push_back(buffer_color("ARR", this->armor->regen_rate, armor_color));
-//    string_vec.push_back(buffer_color("ARI", this->armor->regen_interval, armor_color));
-//
-//    string_vec.push_back(buffer_color("DCV", this->get_effective_damage()->get_raw_total(), damage_color));
-//    string_vec.push_back(buffer_color("DMV", this->damage->max_val, damage_color));
-//    string_vec.push_back(buffer_color("DRR", this->damage->regen_rate, damage_color));
-//    string_vec.push_back(buffer_color("DRI", this->damage->regen_interval, damage_color));
-//
-//    string_vec.push_back(buffer_color("SCV", this->speed->current_val, speed_color));
-//    string_vec.push_back(buffer_color("SMV", this->speed->max_val, speed_color));
-//    string_vec.push_back(buffer_color("SRR", this->speed->regen_rate, speed_color));
-//    string_vec.push_back(buffer_color("SRI", this->speed->regen_interval, speed_color));
-//
-//    return string_vec;
-//};
 
 template<typename AttrClass>
 std::string format_verbose(AttrClass* attr)
