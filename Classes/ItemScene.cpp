@@ -107,7 +107,7 @@ bool ItemScene::init()
 
 	cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
 
-    auto reset_item_detail_panel = [this, panel, item_name, item_desc, item_sell_btn, item_listview_description, items_listview](){
+	auto reset_item_detail_panel = [this, item_name, item_desc, item_sell_btn, items_listview](){
         item_name->setString(this->get_default_detail_panel_title());
         item_desc->setString(this->get_default_detail_panel_description());
         item_sell_btn->setVisible(false);
@@ -122,12 +122,16 @@ bool ItemScene::init()
         item_desc->setString(item->description);
 
         item_sell_btn->setVisible(true);
-        item_sell_btn->addTouchEventListener([reset_item_detail_panel, nuitem, item, items_listview](Ref* sender, ui::Widget::TouchEventType type){
+        item_sell_btn->addTouchEventListener([items_listview, nuitem, item, reset_item_detail_panel](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 items_listview->removeChild(nuitem->button);
                 items_listview->removeChild(nuitem);
-                BUILDUP->items.erase(std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item), BUILDUP->items.end());
+
+                BUILDUP->items.erase(
+                    std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item),
+                    BUILDUP->items.end()
+                );
 
                 BEATUP->add_total_coin(item->get_effective_cost());
 
@@ -210,7 +214,7 @@ bool AltarItemScene::init()
 
 	cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
 
-    auto reset_item_detail_panel = [this, panel, item_name, item_desc, item_sell_btn, item_listview_description, items_listview](){
+    auto reset_item_detail_panel = [this, item_name, item_desc, item_sell_btn, items_listview](){
 		item_name->setString(this->get_default_detail_panel_title());
 		item_desc->setString(this->get_default_detail_panel_description());
 
@@ -218,7 +222,6 @@ bool AltarItemScene::init()
 
         items_listview->requestDoLayout();
     };
-
     reset_item_detail_panel();
 
 
@@ -314,7 +317,7 @@ bool EquipItemScene::init()
 	cocos2d::ui::Button* item_equip_btn = this->init_sell_btn(item_detail_panel);
     item_equip_btn->setTitleText("Equip");
 
-    auto reset_item_detail_panel = [this, panel, item_name, item_desc, item_equip_btn, item_listview_description, items_listview](){
+	auto reset_item_detail_panel = [this, item_name, item_desc, item_equip_btn, items_listview](){
 		item_name->setString(this->get_default_detail_panel_title());
 		item_desc->setString(this->get_default_detail_panel_description());
         item_equip_btn->setVisible(false);
@@ -330,13 +333,12 @@ bool EquipItemScene::init()
         item_desc->setString(item->description);
 
         item_equip_btn->setVisible(true);
-        item_equip_btn->addTouchEventListener([reset_item_detail_panel, nuitem, item, items_listview](Ref* sender, ui::Widget::TouchEventType type){
+        item_equip_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 //item->level += 3;
 				CCLOG("TODO equip item");
 
-                //cocos2d::Director::getInstance()->popScene();
                 do_vibrate(16);
             }
         });
@@ -357,7 +359,7 @@ bool EquipItemScene::init()
         CCLOG("cost %f, beauty cost %s", cost, cost_str.c_str());
         nuitem->set_cost_lbl(cost_str);
 
-        nuitem->button->addTouchEventListener([item, nuitem, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
+        nuitem->button->addTouchEventListener([update_detail_panel_on_touch, item, nuitem](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 do_vibrate(16);
