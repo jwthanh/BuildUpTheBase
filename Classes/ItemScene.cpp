@@ -40,6 +40,25 @@ void ItemScene::init_title_lbl(cocos2d::Node* panel, std::string title)
 
 };
 
+void ItemScene::init_back_btn(cocos2d::Node* panel)
+{
+    //back button
+    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
+    Label* button_lbl = back_btn->getTitleRenderer();
+    button_lbl->setTextColor(Color4B::WHITE);
+    button_lbl->enableOutline(Color4B::BLACK, 2);
+
+    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            do_vibrate(16);
+            auto director = Director::getInstance();
+            director->popScene();
+        }
+    });
+    load_default_button_textures(back_btn);
+};
+
 bool ItemScene::init()
 {
 
@@ -133,21 +152,7 @@ You're able to sell them, and we're planning to have things like people who want
         });
     };
 
-    //back button
-    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
-    Label* button_lbl = back_btn->getTitleRenderer();
-    button_lbl->setTextColor(Color4B::WHITE);
-    button_lbl->enableOutline(Color4B::BLACK, 2);
-
-    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(16);
-            auto director = Director::getInstance();
-            director->popScene();
-        }
-    });
-    load_default_button_textures(back_btn);
+	this->init_back_btn(panel);
 
 	return true;
 };
@@ -245,21 +250,7 @@ Place an item at the altar and the gods will see to that it gets strengthed.
         });
     };
 
-    //back button
-    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
-    Label* button_lbl = back_btn->getTitleRenderer();
-    button_lbl->setTextColor(Color4B::WHITE);
-    button_lbl->enableOutline(Color4B::BLACK, 2);
-
-    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(16);
-            auto director = Director::getInstance();
-            director->popScene();
-        }
-    });
-    load_default_button_textures(back_btn);
+	this->init_back_btn(panel);
 
 	return true;
 };
@@ -359,21 +350,7 @@ Equip and item and harness its power.
         });
     };
 
-    //back button
-    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
-    Label* button_lbl = back_btn->getTitleRenderer();
-    button_lbl->setTextColor(Color4B::WHITE);
-    button_lbl->enableOutline(Color4B::BLACK, 2);
-
-    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(16);
-            auto director = Director::getInstance();
-            director->popScene();
-        }
-    });
-    load_default_button_textures(back_btn);
+	this->init_back_btn(panel);
 
 	return true;
 };
