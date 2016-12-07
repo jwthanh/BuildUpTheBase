@@ -5,7 +5,9 @@
 
 class ItemScene : public GameLayer
 {
-	CREATE_FUNC(ItemScene);
+	public:
+		CREATE_FUNC(ItemScene);
+		bool init();
+		static cocos2d::Scene* ItemScene::createScene();
 };
-
 #endif
