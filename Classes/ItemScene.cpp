@@ -39,26 +39,19 @@ void ItemScene::init_children()
     this->item_sell_btn = this->init_sell_btn(item_detail_panel);
 
     this->init_back_btn(this->panel);
+
+    this->reset_detail_panel();
+
 };
 
 void ItemScene::init_callbacks()
 {
-    auto reset_item_detail_panel = [this](){
-        this->item_name->setString(this->get_default_detail_panel_title());
-        this->item_desc->setString(this->get_default_detail_panel_description());
-        this->item_sell_btn->setVisible(false);
-
-        this->items_listview->requestDoLayout();
-    };
-    reset_item_detail_panel();
-
-
-    auto update_detail_panel_on_touch = [this, reset_item_detail_panel](NuItem* nuitem, spItem item) {
+    auto update_detail_panel_on_touch = [this](NuItem* nuitem, spItem item) {
         this->item_name->setString(item->get_name());
         this->item_desc->setString(item->description);
 
         this->item_sell_btn->setVisible(true);
-        this->item_sell_btn->addTouchEventListener([this, nuitem, item, reset_item_detail_panel](Ref* sender, ui::Widget::TouchEventType type){
+        this->item_sell_btn->addTouchEventListener([this, nuitem, item](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 this->items_listview->removeChild(nuitem->button);
@@ -71,7 +64,7 @@ void ItemScene::init_callbacks()
 
                 BEATUP->add_total_coin(item->get_effective_cost());
 
-                reset_item_detail_panel();
+                this->reset_detail_panel();
                 do_vibrate(16);
             }
         });
@@ -100,6 +93,17 @@ void ItemScene::init_callbacks()
         });
     };
 
+};
+
+void ItemScene::reset_detail_panel()
+{
+    this->item_name->setString(this->get_default_detail_panel_title());
+    this->item_desc->setString(this->get_default_detail_panel_description());
+    this->item_sell_btn->setVisible(false);
+
+    this->items_listview->requestDoLayout();
+
+    //TODO fix the detail panel not being scrollable after resetting
 };
 
 cocos2d::ui::Layout* ItemScene::init_panel()
@@ -319,16 +323,6 @@ const std::string& EquipItemScene::get_sell_btn_text()
 
 void EquipItemScene::init_callbacks()
 {
-
-    auto reset_item_detail_panel = [this](){
-        this->item_name->setString(this->get_default_detail_panel_title());
-        this->item_desc->setString(this->get_default_detail_panel_description());
-        this->item_sell_btn->setVisible(false);
-
-        items_listview->requestDoLayout();
-    };
-
-    reset_item_detail_panel();
 
     auto update_detail_panel_on_touch = [this](NuItem* nuitem, spItem item) {
         this->item_name->setString(item->get_name());

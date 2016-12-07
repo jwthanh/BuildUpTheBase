@@ -35,6 +35,7 @@ class ItemScene : public GameLayer
         cocos2d::ui::Button* init_sell_btn(cocos2d::Node* panel);
 
         virtual void init_callbacks(); //these should be changed in the child classes
+        void reset_detail_panel();
 
         //nodes along the right side
         cocos2d::ui::Layout* panel;
