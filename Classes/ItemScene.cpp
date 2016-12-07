@@ -20,6 +20,26 @@
 
 using namespace cocos2d;
 
+cocos2d::ui::Layout* ItemScene::init_panel()
+{
+    auto items_scene_node = get_prebuilt_node_from_csb("editor/scenes/items_scene.csb");
+    items_scene_node->removeFromParent();
+    auto panel = dynamic_cast<cocos2d::ui::Layout*>(items_scene_node->getChildByName("panel"));
+	panel->removeFromParent();
+	this->addChild(panel);
+
+	return panel;
+};
+
+void ItemScene::init_title_lbl(cocos2d::Node* panel, std::string title)
+{
+    //title
+    auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
+    set_aliasing(title_lbl);
+    title_lbl->setString(title);
+
+};
+
 bool ItemScene::init()
 {
 
@@ -29,15 +49,9 @@ bool ItemScene::init()
     FUNC_INIT(ItemScene);
 #endif
 
-    auto items_scene_node = get_prebuilt_node_from_csb("editor/scenes/items_scene.csb");
-    items_scene_node->removeFromParent();
-    auto panel = items_scene_node->getChildByName("panel");
-	panel->removeFromParent();
-	this->addChild(panel);
+	auto panel = this->init_panel();
 
-    //title
-    auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
-    set_aliasing(title_lbl);
+	this->init_title_lbl(panel, "Item Management");
 
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
@@ -155,16 +169,8 @@ bool AltarItemScene::init()
     FUNC_INIT(AltarItemScene);
 #endif
 
-    auto items_scene_node = get_prebuilt_node_from_csb("editor/scenes/items_scene.csb");
-    items_scene_node->removeFromParent();
-    auto panel = items_scene_node->getChildByName("panel");
-	panel->removeFromParent();
-	this->addChild(panel);
-
-    //title
-    auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
-    set_aliasing(title_lbl);
-    title_lbl->setString("Item Altar");
+	auto panel = this->init_panel();
+	this->init_title_lbl(panel, "Item Altar");
 
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
@@ -275,16 +281,9 @@ bool EquipItemScene::init()
     FUNC_INIT(EquipItemScene);
 #endif
 
-    auto items_scene_node = get_prebuilt_node_from_csb("editor/scenes/items_scene.csb");
-    items_scene_node->removeFromParent();
-    auto panel = items_scene_node->getChildByName("panel");
-	panel->removeFromParent();
-	this->addChild(panel);
+	auto panel = this->init_panel();
 
-    //title
-    auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
-    set_aliasing(title_lbl);
-    title_lbl->setString("Equip Item");
+	this->init_title_lbl(panel, "Equip Item");
 
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
