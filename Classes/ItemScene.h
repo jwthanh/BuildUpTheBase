@@ -20,8 +20,9 @@ class ItemScene : public GameLayer
 		const std::string& get_scene_title();
 		const std::string& get_default_detail_panel_title();
 		const std::string& get_default_detail_panel_description();
+        const std::string& get_sell_btn_text();
 
-	public:
+    public:
 		CREATE_FUNC(ItemScene);
 		static cocos2d::Scene* ItemScene::createScene();
 
@@ -50,24 +51,30 @@ class ItemScene : public GameLayer
 class AltarItemScene : public ItemScene
 {
 	private:
+		const std::string& get_scene_title();
 		const std::string& get_default_detail_panel_title();
 		const std::string& get_default_detail_panel_description();
+        const std::string& get_sell_btn_text();
 
-	public:
+    public:
 		CREATE_FUNC(AltarItemScene);
 		bool init() override;
+        void init_callbacks() override;
 		static cocos2d::Scene* AltarItemScene::createScene();
 };
 
 class EquipItemScene : public ItemScene
 {
 	private:
+		const std::string& get_scene_title();
 		const std::string& get_default_detail_panel_title();
 		const std::string& get_default_detail_panel_description();
+        const std::string& get_sell_btn_text();
 
-	public:
+    public:
 		CREATE_FUNC(EquipItemScene);
 		bool init() override;
+        void init_callbacks() override;
 		static cocos2d::Scene* EquipItemScene::createScene();
 };
 
