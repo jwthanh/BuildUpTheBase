@@ -25,10 +25,10 @@ cocos2d::ui::Layout* ItemScene::init_panel()
     auto items_scene_node = get_prebuilt_node_from_csb("editor/scenes/items_scene.csb");
     items_scene_node->removeFromParent();
     auto panel = dynamic_cast<cocos2d::ui::Layout*>(items_scene_node->getChildByName("panel"));
-	panel->removeFromParent();
-	this->addChild(panel);
+    panel->removeFromParent();
+    this->addChild(panel);
 
-	return panel;
+    return panel;
 };
 
 void ItemScene::init_title_lbl(cocos2d::Node* panel, std::string title)
@@ -67,19 +67,19 @@ cocos2d::ui::Button* ItemScene::init_sell_btn(cocos2d::Node* item_detail_panel)
     item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
     set_aliasing(item_sell_btn);
 
-	return item_sell_btn;
+    return item_sell_btn;
 };
 
 const std::string& ItemScene::get_default_detail_panel_title()
 {
-	static std::string default_title = "Item Detail";
-	return default_title;
+    static std::string default_title = "Item Detail";
+    return default_title;
 };
 
 const std::string& ItemScene::get_default_detail_panel_description()
 {
-	static std::string default_desc = "Collect Items at The Dump with the help of Undead scavengers\n\nThis screen will show you more information about them.\n\nYou're able to sell them, and we're planning to have things like people who want items, appeasing gods, improving chances of getting better loot, and even equipping items in slots for new abilities.";
-	return default_desc;
+    static std::string default_desc = "Collect Items at The Dump with the help of Undead scavengers\n\nThis screen will show you more information about them.\n\nYou're able to sell them, and we're planning to have things like people who want items, appeasing gods, improving chances of getting better loot, and even equipping items in slots for new abilities.";
+    return default_desc;
 };
 
 bool ItemScene::init()
@@ -91,9 +91,9 @@ bool ItemScene::init()
     FUNC_INIT(ItemScene);
 #endif
 
-	auto panel = this->init_panel();
+    auto panel = this->init_panel();
 
-	this->init_title_lbl(panel, "Item Management");
+    this->init_title_lbl(panel, "Item Management");
 
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
@@ -105,9 +105,9 @@ bool ItemScene::init()
     auto item_desc = dynamic_cast<ui::Text*>(item_listview_description->getChildByName("item_description"));
     item_desc->setTextAreaSize({ 375, 0 }); //hardcode width of textarea so that it wraps properly
 
-	cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
+    cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
 
-	auto reset_item_detail_panel = [this, item_name, item_desc, item_sell_btn, items_listview](){
+    auto reset_item_detail_panel = [this, item_name, item_desc, item_sell_btn, items_listview](){
         item_name->setString(this->get_default_detail_panel_title());
         item_desc->setString(this->get_default_detail_panel_description());
         item_sell_btn->setVisible(false);
@@ -165,29 +165,29 @@ bool ItemScene::init()
         });
     };
 
-	this->init_back_btn(panel);
+    this->init_back_btn(panel);
 
-	return true;
+    return true;
 };
 
 cocos2d::Scene* ItemScene::createScene()
 {
-	auto scene = cocos2d::Scene::create();
-	auto* layer = ItemScene::create();
-	scene->addChild(layer);
-	return scene;
+    auto scene = cocos2d::Scene::create();
+    auto* layer = ItemScene::create();
+    scene->addChild(layer);
+    return scene;
 };
 
 const std::string& AltarItemScene::get_default_detail_panel_title()
 {
-	static std::string default_title = "Item";
-	return default_title;
+    static std::string default_title = "Item";
+    return default_title;
 };
 
 const std::string& AltarItemScene::get_default_detail_panel_description()
 {
-	static std::string default_desc = "Place an item at the altar and the gods will see to that it gets strengthed.";
-	return default_desc;
+    static std::string default_desc = "Place an item at the altar and the gods will see to that it gets strengthed.";
+    return default_desc;
 };
 
 bool AltarItemScene::init()
@@ -199,8 +199,8 @@ bool AltarItemScene::init()
     FUNC_INIT(AltarItemScene);
 #endif
 
-	auto panel = this->init_panel();
-	this->init_title_lbl(panel, "Item Altar");
+    auto panel = this->init_panel();
+    this->init_title_lbl(panel, "Item Altar");
 
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
@@ -212,11 +212,11 @@ bool AltarItemScene::init()
     auto item_desc = dynamic_cast<ui::Text*>(item_listview_description->getChildByName("item_description"));
     item_desc->setTextAreaSize({ 375, 0 }); //hardcode width of textarea so that it wraps properly
 
-	cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
+    cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
 
     auto reset_item_detail_panel = [this, item_name, item_desc, item_sell_btn, items_listview](){
-		item_name->setString(this->get_default_detail_panel_title());
-		item_desc->setString(this->get_default_detail_panel_description());
+        item_name->setString(this->get_default_detail_panel_title());
+        item_desc->setString(this->get_default_detail_panel_description());
 
         item_sell_btn->setVisible(false);
 
@@ -265,29 +265,29 @@ bool AltarItemScene::init()
         });
     };
 
-	this->init_back_btn(panel);
+    this->init_back_btn(panel);
 
-	return true;
+    return true;
 };
 
 cocos2d::Scene* AltarItemScene::createScene()
 {
-	auto scene = cocos2d::Scene::create();
-	auto* layer = AltarItemScene::create();
-	scene->addChild(layer);
-	return scene;
+    auto scene = cocos2d::Scene::create();
+    auto* layer = AltarItemScene::create();
+    scene->addChild(layer);
+    return scene;
 };
 
 const std::string& EquipItemScene::get_default_detail_panel_title()
 {
-	static std::string default_title = "Item";
-	return default_title;
+    static std::string default_title = "Item";
+    return default_title;
 };
 
 const std::string& EquipItemScene::get_default_detail_panel_description()
 {
-	static std::string default_desc = "Equip and item and harness its power.";
-	return default_desc;
+    static std::string default_desc = "Equip and item and harness its power.";
+    return default_desc;
 };
 
 
@@ -300,9 +300,9 @@ bool EquipItemScene::init()
     FUNC_INIT(EquipItemScene);
 #endif
 
-	auto panel = this->init_panel();
+    auto panel = this->init_panel();
 
-	this->init_title_lbl(panel, "Equip Item");
+    this->init_title_lbl(panel, "Equip Item");
 
     //items listview
     auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
@@ -314,12 +314,12 @@ bool EquipItemScene::init()
     auto item_desc = dynamic_cast<ui::Text*>(item_listview_description->getChildByName("item_description"));
     item_desc->setTextAreaSize({ 375, 0 }); //hardcode width of textarea so that it wraps properly
 
-	cocos2d::ui::Button* item_equip_btn = this->init_sell_btn(item_detail_panel);
+    cocos2d::ui::Button* item_equip_btn = this->init_sell_btn(item_detail_panel);
     item_equip_btn->setTitleText("Equip");
 
-	auto reset_item_detail_panel = [this, item_name, item_desc, item_equip_btn, items_listview](){
-		item_name->setString(this->get_default_detail_panel_title());
-		item_desc->setString(this->get_default_detail_panel_description());
+    auto reset_item_detail_panel = [this, item_name, item_desc, item_equip_btn, items_listview](){
+        item_name->setString(this->get_default_detail_panel_title());
+        item_desc->setString(this->get_default_detail_panel_description());
         item_equip_btn->setVisible(false);
 
         items_listview->requestDoLayout();
@@ -337,7 +337,7 @@ bool EquipItemScene::init()
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 //item->level += 3;
-				CCLOG("TODO equip item");
+                CCLOG("TODO equip item");
 
                 do_vibrate(16);
             }
@@ -368,15 +368,15 @@ bool EquipItemScene::init()
         });
     };
 
-	this->init_back_btn(panel);
+    this->init_back_btn(panel);
 
-	return true;
+    return true;
 };
 
 cocos2d::Scene* EquipItemScene::createScene()
 {
-	auto scene = cocos2d::Scene::create();
-	auto* layer = EquipItemScene::create();
-	scene->addChild(layer);
-	return scene;
+    auto scene = cocos2d::Scene::create();
+    auto* layer = EquipItemScene::create();
+    scene->addChild(layer);
+    return scene;
 };
