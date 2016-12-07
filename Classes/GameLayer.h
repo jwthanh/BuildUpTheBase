@@ -86,13 +86,13 @@ void vibrate(int milliseconds);
 GameLayer::init(); \
 \
 \
-auto pKeybackListener = EventListenerKeyboard::create(); \
+auto pKeybackListener = cocos2d::EventListenerKeyboard::create(); \
 pKeybackListener->onKeyReleased = CC_CALLBACK_2(__TYPE__::onKeyReleased, this); \
 \
 _eventDispatcher->addEventListenerWithSceneGraphPriority(pKeybackListener, this); \
 \
 \
-auto listener = EventListenerTouchOneByOne::create(); \
+auto listener = cocos2d::EventListenerTouchOneByOne::create(); \
 listener->setSwallowTouches(true); \
 \
 listener->onTouchBegan = CC_CALLBACK_2(__TYPE__::onTouchBegan, this); \
@@ -100,7 +100,7 @@ listener->onTouchMoved = CC_CALLBACK_2(__TYPE__::onTouchMoved, this); \
 listener->onTouchEnded = CC_CALLBACK_2(__TYPE__::onTouchEnded, this); \
 listener->onTouchCancelled = CC_CALLBACK_2(__TYPE__::onTouchCancelled, this); \
 \
-Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this); \
+cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this); \
 \
 \
 this->schedule(schedule_selector(__TYPE__::update)); \
@@ -114,14 +114,14 @@ this->schedule(schedule_selector(__TYPE__::update)); \
 GameLayer::init(); \
 \
 \
-auto pKeybackListener = EventListenerKeyboard::create(); \
+auto pKeybackListener = cocos2d::EventListenerKeyboard::create(); \
 pKeybackListener->onKeyPressed = CC_CALLBACK_2(__TYPE__::onKeyPressed, this); \
 pKeybackListener->onKeyReleased = CC_CALLBACK_2(__TYPE__::onKeyReleased, this); \
 \
 _eventDispatcher->addEventListenerWithSceneGraphPriority(pKeybackListener, this); \
 \
 \
-auto listener = EventListenerTouchOneByOne::create(); \
+auto listener = cocos2d::EventListenerTouchOneByOne::create(); \
 listener->setSwallowTouches(true); \
 \
 listener->onTouchBegan = CC_CALLBACK_2(__TYPE__::onTouchBegan, this); \
@@ -129,16 +129,16 @@ listener->onTouchMoved = CC_CALLBACK_2(__TYPE__::onTouchMoved, this); \
 listener->onTouchEnded = CC_CALLBACK_2(__TYPE__::onTouchEnded, this); \
 listener->onTouchCancelled = CC_CALLBACK_2(__TYPE__::onTouchCancelled, this); \
 \
-Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this); \
+cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this); \
 \
 \
 this->schedule(schedule_selector(__TYPE__::update)); \
 
 
 #define FUNC_CREATESCENE(__TYPE__) \
-    Scene* __TYPE__::createScene() \
+    cocos2d::Scene* __TYPE__::createScene() \
 { \
-    auto scene = Scene::create(); \
+    auto scene = cocos2d::Scene::create(); \
     \
     auto* layer = __TYPE__::create(); \
     \
