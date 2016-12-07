@@ -17,10 +17,10 @@ namespace cocos2d
 class ItemScene : public GameLayer
 {
     private:
-        const std::string& get_scene_title();
-        const std::string& get_default_detail_panel_title();
-        const std::string& get_default_detail_panel_description();
-        const std::string& get_sell_btn_text();
+        virtual const std::string& get_scene_title();
+        virtual const std::string& get_default_detail_panel_title();
+        virtual const std::string& get_default_detail_panel_description();
+        virtual const std::string& get_sell_btn_text();
 
     public:
         CREATE_FUNC(ItemScene);
@@ -28,14 +28,14 @@ class ItemScene : public GameLayer
 
         bool init() override;
 
-        void init_children();
-        cocos2d::ui::Layout* init_panel();
-        void init_title_lbl(cocos2d::Node* panel, std::string title);
-        void init_back_btn(cocos2d::Node* panel);
+        virtual void init_children();
+        virtual cocos2d::ui::Layout* init_panel();
+        virtual void init_title_lbl(cocos2d::Node* panel, std::string title);
+        virtual void init_back_btn(cocos2d::Node* panel);
         cocos2d::ui::Button* init_sell_btn(cocos2d::Node* panel);
 
         virtual void init_callbacks(); //these should be changed in the child classes
-        void reset_detail_panel();
+        virtual void reset_detail_panel();
 
         //nodes along the right side
         cocos2d::ui::Layout* panel;
@@ -52,10 +52,10 @@ class ItemScene : public GameLayer
 class AltarItemScene : public ItemScene
 {
     private:
-        const std::string& get_scene_title();
-        const std::string& get_default_detail_panel_title();
-        const std::string& get_default_detail_panel_description();
-        const std::string& get_sell_btn_text();
+        const std::string& get_scene_title() override;
+        const std::string& get_default_detail_panel_title() override;
+        const std::string& get_default_detail_panel_description() override;
+        const std::string& get_sell_btn_text() override;
 
     public:
         CREATE_FUNC(AltarItemScene);
@@ -67,10 +67,10 @@ class AltarItemScene : public ItemScene
 class EquipItemScene : public ItemScene
 {
     private:
-        const std::string& get_scene_title();
-        const std::string& get_default_detail_panel_title();
-        const std::string& get_default_detail_panel_description();
-        const std::string& get_sell_btn_text();
+        const std::string& get_scene_title() override;
+        const std::string& get_default_detail_panel_title() override;
+        const std::string& get_default_detail_panel_description() override;
+        const std::string& get_sell_btn_text() override;
 
     public:
         CREATE_FUNC(EquipItemScene);

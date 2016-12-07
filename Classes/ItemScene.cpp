@@ -235,7 +235,6 @@ void AltarItemScene::init_callbacks()
 
         res_count_t cost = item->get_effective_cost();
         std::string cost_str = beautify_double(cost);
-        CCLOG("cost %f, beauty cost %s", cost, cost_str.c_str());
         nuitem->set_cost_lbl(cost_str);
 
         nuitem->button->addTouchEventListener([item, nuitem, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
@@ -307,7 +306,6 @@ const std::string& EquipItemScene::get_default_detail_panel_title()
     static std::string default_title = "Item";
     return default_title;
 };
-
 
 const std::string& EquipItemScene::get_default_detail_panel_description()
 {
