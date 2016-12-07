@@ -16,6 +16,10 @@ namespace cocos2d
 
 class ItemScene : public GameLayer
 {
+	private:
+		const std::string& get_default_detail_panel_title();
+		const std::string& get_default_detail_panel_description();
+
 	public:
 		CREATE_FUNC(ItemScene);
 		static cocos2d::Scene* ItemScene::createScene();
@@ -30,6 +34,10 @@ class ItemScene : public GameLayer
 
 class AltarItemScene : public ItemScene
 {
+	private:
+		const std::string& get_default_detail_panel_title();
+		const std::string& get_default_detail_panel_description();
+
 	public:
 		CREATE_FUNC(AltarItemScene);
 		bool init() override;
@@ -38,6 +46,10 @@ class AltarItemScene : public ItemScene
 
 class EquipItemScene : public ItemScene
 {
+	private:
+		const std::string& get_default_detail_panel_title();
+		const std::string& get_default_detail_panel_description();
+
 	public:
 		CREATE_FUNC(EquipItemScene);
 		bool init() override;

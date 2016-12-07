@@ -70,6 +70,18 @@ cocos2d::ui::Button* ItemScene::init_sell_btn(cocos2d::Node* item_detail_panel)
 	return item_sell_btn;
 };
 
+const std::string& ItemScene::get_default_detail_panel_title()
+{
+	static std::string default_title = "Item Detail";
+	return default_title;
+};
+
+const std::string& ItemScene::get_default_detail_panel_description()
+{
+	static std::string default_desc = "Collect Items at The Dump with the help of Undead scavengers\n\nThis screen will show you more information about them.\n\nYou're able to sell them, and we're planning to have things like people who want items, appeasing gods, improving chances of getting better loot, and even equipping items in slots for new abilities.";
+	return default_desc;
+};
+
 bool ItemScene::init()
 {
 
@@ -95,22 +107,13 @@ bool ItemScene::init()
 
 	cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
 
-    auto reset_item_detail_panel = [panel, item_name, item_desc, item_sell_btn, item_listview_description, items_listview](){
-        item_name->setString("Item Details");
-        const char* raw_description = R"foo(
-Collect Items at The Dump with the help of Undead scavengers
-
-This screen will show you more information about them.
-
-You're able to sell them, and we're planning to have things like people who want items, appeasing gods, improving chances of getting better loot, and even equipping items in slots for new abilities.
-)foo";
-        auto default_description = raw_description;
-        item_desc->setString(default_description);
+    auto reset_item_detail_panel = [this, panel, item_name, item_desc, item_sell_btn, item_listview_description, items_listview](){
+        item_name->setString(this->get_default_detail_panel_title());
+        item_desc->setString(this->get_default_detail_panel_description());
         item_sell_btn->setVisible(false);
 
         items_listview->requestDoLayout();
     };
-
     reset_item_detail_panel();
 
 
@@ -171,6 +174,18 @@ cocos2d::Scene* ItemScene::createScene()
 	return scene;
 };
 
+const std::string& AltarItemScene::get_default_detail_panel_title()
+{
+	static std::string default_title = "Item";
+	return default_title;
+};
+
+const std::string& AltarItemScene::get_default_detail_panel_description()
+{
+	static std::string default_desc = "Place an item at the altar and the gods will see to that it gets strengthed.";
+	return default_desc;
+};
+
 bool AltarItemScene::init()
 {
 
@@ -195,13 +210,10 @@ bool AltarItemScene::init()
 
 	cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
 
-    auto reset_item_detail_panel = [panel, item_name, item_desc, item_sell_btn, item_listview_description, items_listview](){
-        item_name->setString("Item");
-        const char* raw_description = R"foo(
-Place an item at the altar and the gods will see to that it gets strengthed.
-)foo";
-        auto default_description = raw_description;
-        item_desc->setString(default_description);
+    auto reset_item_detail_panel = [this, panel, item_name, item_desc, item_sell_btn, item_listview_description, items_listview](){
+		item_name->setString(this->get_default_detail_panel_title());
+		item_desc->setString(this->get_default_detail_panel_description());
+
         item_sell_btn->setVisible(false);
 
         items_listview->requestDoLayout();
@@ -263,6 +275,19 @@ cocos2d::Scene* AltarItemScene::createScene()
 	return scene;
 };
 
+const std::string& EquipItemScene::get_default_detail_panel_title()
+{
+	static std::string default_title = "Item";
+	return default_title;
+};
+
+const std::string& EquipItemScene::get_default_detail_panel_description()
+{
+	static std::string default_desc = "Equip and item and harness its power.";
+	return default_desc;
+};
+
+
 bool EquipItemScene::init()
 {
 
@@ -289,13 +314,9 @@ bool EquipItemScene::init()
 	cocos2d::ui::Button* item_equip_btn = this->init_sell_btn(item_detail_panel);
     item_equip_btn->setTitleText("Equip");
 
-    auto reset_item_detail_panel = [panel, item_name, item_desc, item_equip_btn, item_listview_description, items_listview](){
-        item_name->setString("Item");
-        const char* raw_description = R"foo(
-Equip and item and harness its power.
-)foo";
-        auto default_description = raw_description;
-        item_desc->setString(default_description);
+    auto reset_item_detail_panel = [this, panel, item_name, item_desc, item_equip_btn, item_listview_description, items_listview](){
+		item_name->setString(this->get_default_detail_panel_title());
+		item_desc->setString(this->get_default_detail_panel_description());
         item_equip_btn->setVisible(false);
 
         items_listview->requestDoLayout();
