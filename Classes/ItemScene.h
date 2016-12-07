@@ -24,6 +24,8 @@ class ItemScene : public GameLayer
 		cocos2d::ui::Layout* init_panel();
 		void init_title_lbl(cocos2d::Node* panel, std::string title);
 		void init_back_btn(cocos2d::Node* panel);
+
+		cocos2d::ui::Button* init_sell_btn(cocos2d::Node* panel);
 };
 
 class AltarItemScene : public ItemScene

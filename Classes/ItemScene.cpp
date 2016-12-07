@@ -37,7 +37,6 @@ void ItemScene::init_title_lbl(cocos2d::Node* panel, std::string title)
     auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
     set_aliasing(title_lbl);
     title_lbl->setString(title);
-
 };
 
 void ItemScene::init_back_btn(cocos2d::Node* panel)
@@ -57,6 +56,18 @@ void ItemScene::init_back_btn(cocos2d::Node* panel)
         }
     });
     load_default_button_textures(back_btn);
+};
+
+cocos2d::ui::Button* ItemScene::init_sell_btn(cocos2d::Node* item_detail_panel)
+{
+    auto item_sell_btn = dynamic_cast<ui::Button*>(item_detail_panel->getChildByName("item_sell"));
+    item_sell_btn->setVisible(false);
+    load_default_button_textures(item_sell_btn);
+    item_sell_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
+    item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
+    set_aliasing(item_sell_btn);
+
+	return item_sell_btn;
 };
 
 bool ItemScene::init()
@@ -82,12 +93,7 @@ bool ItemScene::init()
     auto item_desc = dynamic_cast<ui::Text*>(item_listview_description->getChildByName("item_description"));
     item_desc->setTextAreaSize({ 375, 0 }); //hardcode width of textarea so that it wraps properly
 
-    auto item_sell_btn = dynamic_cast<ui::Button*>(item_detail_panel->getChildByName("item_sell"));
-    item_sell_btn->setVisible(false);
-    load_default_button_textures(item_sell_btn);
-    item_sell_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
-    item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
-    set_aliasing(item_sell_btn);
+	cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
 
     auto reset_item_detail_panel = [panel, item_name, item_desc, item_sell_btn, item_listview_description, items_listview](){
         item_name->setString("Item Details");
@@ -187,13 +193,7 @@ bool AltarItemScene::init()
     auto item_desc = dynamic_cast<ui::Text*>(item_listview_description->getChildByName("item_description"));
     item_desc->setTextAreaSize({ 375, 0 }); //hardcode width of textarea so that it wraps properly
 
-    auto item_sell_btn = dynamic_cast<ui::Button*>(item_detail_panel->getChildByName("item_sell"));
-    item_sell_btn->setVisible(false);
-    load_default_button_textures(item_sell_btn);
-    item_sell_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
-    item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
-    set_aliasing(item_sell_btn);
-    item_sell_btn->setTitleText("Place");
+	cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
 
     auto reset_item_detail_panel = [panel, item_name, item_desc, item_sell_btn, item_listview_description, items_listview](){
         item_name->setString("Item");
@@ -286,12 +286,7 @@ bool EquipItemScene::init()
     auto item_desc = dynamic_cast<ui::Text*>(item_listview_description->getChildByName("item_description"));
     item_desc->setTextAreaSize({ 375, 0 }); //hardcode width of textarea so that it wraps properly
 
-    auto item_equip_btn = dynamic_cast<ui::Button*>(item_detail_panel->getChildByName("item_sell"));
-    item_equip_btn->setVisible(false);
-    load_default_button_textures(item_equip_btn);
-    item_equip_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
-    item_equip_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
-    set_aliasing(item_equip_btn);
+	cocos2d::ui::Button* item_equip_btn = this->init_sell_btn(item_detail_panel);
     item_equip_btn->setTitleText("Equip");
 
     auto reset_item_detail_panel = [panel, item_name, item_desc, item_equip_btn, item_listview_description, items_listview](){
