@@ -20,80 +20,11 @@
 
 using namespace cocos2d;
 
-cocos2d::ui::Layout* ItemScene::init_panel()
+void ItemScene::init_children()
 {
-    auto items_scene_node = get_prebuilt_node_from_csb("editor/scenes/items_scene.csb");
-    items_scene_node->removeFromParent();
-    auto panel = dynamic_cast<cocos2d::ui::Layout*>(items_scene_node->getChildByName("panel"));
-    panel->removeFromParent();
-    this->addChild(panel);
-
-    return panel;
-};
-
-void ItemScene::init_title_lbl(cocos2d::Node* panel, std::string title)
-{
-    //title
-    auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
-    set_aliasing(title_lbl);
-    title_lbl->setString(title);
-};
-
-void ItemScene::init_back_btn(cocos2d::Node* panel)
-{
-    //back button
-    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
-    Label* button_lbl = back_btn->getTitleRenderer();
-    button_lbl->setTextColor(Color4B::WHITE);
-    button_lbl->enableOutline(Color4B::BLACK, 2);
-
-    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(16);
-            auto director = Director::getInstance();
-            director->popScene();
-        }
-    });
-    load_default_button_textures(back_btn);
-};
-
-cocos2d::ui::Button* ItemScene::init_sell_btn(cocos2d::Node* item_detail_panel)
-{
-    auto item_sell_btn = dynamic_cast<ui::Button*>(item_detail_panel->getChildByName("item_sell"));
-    item_sell_btn->setVisible(false);
-    load_default_button_textures(item_sell_btn);
-    item_sell_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
-    item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
-    set_aliasing(item_sell_btn);
-
-    return item_sell_btn;
-};
-
-const std::string& ItemScene::get_default_detail_panel_title()
-{
-    static std::string default_title = "Item Detail";
-    return default_title;
-};
-
-const std::string& ItemScene::get_default_detail_panel_description()
-{
-    static std::string default_desc = "Collect Items at The Dump with the help of Undead scavengers\n\nThis screen will show you more information about them.\n\nYou're able to sell them, and we're planning to have things like people who want items, appeasing gods, improving chances of getting better loot, and even equipping items in slots for new abilities.";
-    return default_desc;
-};
-
-bool ItemScene::init()
-{
-
-#ifdef _WIN32
-    FUNC_INIT_WIN32(ItemScene);
-#else
-    FUNC_INIT(ItemScene);
-#endif
-
     this->panel = this->init_panel();
 
-    this->init_title_lbl(panel, "Item Management");
+    this->init_title_lbl(panel, this->get_scene_title());
 
     //items listview
     this->items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
@@ -107,6 +38,11 @@ bool ItemScene::init()
 
     this->item_sell_btn = this->init_sell_btn(item_detail_panel);
 
+    this->init_back_btn(this->panel);
+};
+
+void ItemScene::init_callbacks()
+{
     auto reset_item_detail_panel = [this](){
         this->item_name->setString(this->get_default_detail_panel_title());
         this->item_desc->setString(this->get_default_detail_panel_description());
@@ -164,7 +100,87 @@ bool ItemScene::init()
         });
     };
 
-    this->init_back_btn(this->panel);
+};
+
+cocos2d::ui::Layout* ItemScene::init_panel()
+{
+    auto items_scene_node = get_prebuilt_node_from_csb("editor/scenes/items_scene.csb");
+    items_scene_node->removeFromParent();
+    auto panel = dynamic_cast<cocos2d::ui::Layout*>(items_scene_node->getChildByName("panel"));
+    panel->removeFromParent();
+    this->addChild(panel);
+
+    return panel;
+};
+
+void ItemScene::init_title_lbl(cocos2d::Node* panel, std::string title)
+{
+    //title
+    auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
+    set_aliasing(title_lbl);
+    title_lbl->setString(title);
+};
+
+void ItemScene::init_back_btn(cocos2d::Node* panel)
+{
+    //back button
+    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
+    Label* button_lbl = back_btn->getTitleRenderer();
+    button_lbl->setTextColor(Color4B::WHITE);
+    button_lbl->enableOutline(Color4B::BLACK, 2);
+
+    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            do_vibrate(16);
+            auto director = Director::getInstance();
+            director->popScene();
+        }
+    });
+    load_default_button_textures(back_btn);
+};
+
+cocos2d::ui::Button* ItemScene::init_sell_btn(cocos2d::Node* item_detail_panel)
+{
+    auto item_sell_btn = dynamic_cast<ui::Button*>(item_detail_panel->getChildByName("item_sell"));
+    item_sell_btn->setVisible(false);
+    load_default_button_textures(item_sell_btn);
+    item_sell_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
+    item_sell_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
+    set_aliasing(item_sell_btn);
+
+    return item_sell_btn;
+};
+
+const std::string& ItemScene::get_scene_title()
+{
+    static std::string scene_title = "Item Management";
+    return scene_title;
+};
+
+const std::string& ItemScene::get_default_detail_panel_title()
+{
+    static std::string default_title = "Item Detail";
+    return default_title;
+};
+
+const std::string& ItemScene::get_default_detail_panel_description()
+{
+    static std::string default_desc = "Collect Items at The Dump with the help of Undead scavengers\n\nThis screen will show you more information about them.\n\nYou're able to sell them, and we're planning to have things like people who want items, appeasing gods, improving chances of getting better loot, and even equipping items in slots for new abilities.";
+    return default_desc;
+};
+
+bool ItemScene::init()
+{
+
+#ifdef _WIN32
+    FUNC_INIT_WIN32(ItemScene);
+#else
+    FUNC_INIT(ItemScene);
+#endif
+
+    this->init_children();
+    this->init_callbacks();
 
     return true;
 };

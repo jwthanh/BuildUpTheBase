@@ -17,6 +17,7 @@ namespace cocos2d
 class ItemScene : public GameLayer
 {
 	private:
+		const std::string& get_scene_title();
 		const std::string& get_default_detail_panel_title();
 		const std::string& get_default_detail_panel_description();
 
@@ -25,10 +26,14 @@ class ItemScene : public GameLayer
 		static cocos2d::Scene* ItemScene::createScene();
 
 		bool init() override;
+
+		void init_children();
 		cocos2d::ui::Layout* init_panel();
 		void init_title_lbl(cocos2d::Node* panel, std::string title);
 		void init_back_btn(cocos2d::Node* panel);
 		cocos2d::ui::Button* init_sell_btn(cocos2d::Node* panel);
+
+		virtual void init_callbacks(); //these should be changed in the child classes
 
 		//nodes along the right side
 		cocos2d::ui::Layout* panel;
