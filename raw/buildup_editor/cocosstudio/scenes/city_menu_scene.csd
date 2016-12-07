@@ -194,13 +194,13 @@
                 <OutlineColor A="255" R="26" G="26" B="26" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="items_scene_btn" ActionTag="-1449102005" Tag="451" IconVisible="False" LeftMargin="800.0000" RightMargin="30.0000" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Items" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="items_scene_btn" ActionTag="-1449102005" Tag="451" IconVisible="False" LeftMargin="795.0000" RightMargin="35.0000" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Items" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="130.0000" Y="100.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="865.0000" Y="90.0000" />
+                <Position X="860.0000" Y="90.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.9010" Y="0.1406" />
+                <PrePosition X="0.8958" Y="0.1406" />
                 <PreSize X="0.1354" Y="0.1563" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
@@ -210,13 +210,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="miner_scene_btn" ActionTag="498885377" Tag="18" IconVisible="False" LeftMargin="304.9998" RightMargin="525.0001" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Dig" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="miner_scene_btn" ActionTag="498885377" Tag="18" IconVisible="False" LeftMargin="274.9999" RightMargin="555.0001" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Dig" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="130.0000" Y="100.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="369.9998" Y="90.0000" />
+                <Position X="339.9999" Y="90.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.3854" Y="0.1406" />
+                <PrePosition X="0.3542" Y="0.1406" />
                 <PreSize X="0.1354" Y="0.1563" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
@@ -226,13 +226,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="item_equip_scene_btn" ActionTag="1814486638" Tag="341" IconVisible="False" LeftMargin="567.0302" RightMargin="262.9698" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Equip" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="item_equip_scene_btn" ActionTag="1814486638" Tag="341" IconVisible="False" LeftMargin="534.9998" RightMargin="295.0002" TopMargin="500.0000" BottomMargin="40.0000" TouchEnable="True" FontSize="24" ButtonText="Equip" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="130.0000" Y="100.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="632.0302" Y="90.0000" />
+                <Position X="599.9998" Y="90.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.6584" Y="0.1406" />
+                <PrePosition X="0.6250" Y="0.1406" />
                 <PreSize X="0.1354" Y="0.1563" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
