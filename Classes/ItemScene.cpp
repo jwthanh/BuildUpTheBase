@@ -91,42 +91,42 @@ bool ItemScene::init()
     FUNC_INIT(ItemScene);
 #endif
 
-    auto panel = this->init_panel();
+    this->panel = this->init_panel();
 
     this->init_title_lbl(panel, "Item Management");
 
     //items listview
-    auto items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
+    this->items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
 
-    auto item_detail_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("item_detail"));
-    auto item_name = dynamic_cast<ui::Text*>(item_detail_panel->getChildByName("item_name"));
-    auto item_listview_description = dynamic_cast<ui::ListView*>(item_detail_panel->getChildByName("item_listview_description"));
+    this->item_detail_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("item_detail"));
+    this->item_name = dynamic_cast<ui::Text*>(item_detail_panel->getChildByName("item_name"));
+    this->item_listview_description = dynamic_cast<ui::ListView*>(item_detail_panel->getChildByName("item_listview_description"));
 
-    auto item_desc = dynamic_cast<ui::Text*>(item_listview_description->getChildByName("item_description"));
+    this->item_desc = dynamic_cast<ui::Text*>(item_listview_description->getChildByName("item_description"));
     item_desc->setTextAreaSize({ 375, 0 }); //hardcode width of textarea so that it wraps properly
 
-    cocos2d::ui::Button* item_sell_btn = this->init_sell_btn(item_detail_panel);
+    this->item_sell_btn = this->init_sell_btn(item_detail_panel);
 
-    auto reset_item_detail_panel = [this, item_name, item_desc, item_sell_btn, items_listview](){
-        item_name->setString(this->get_default_detail_panel_title());
-        item_desc->setString(this->get_default_detail_panel_description());
-        item_sell_btn->setVisible(false);
+    auto reset_item_detail_panel = [this](){
+        this->item_name->setString(this->get_default_detail_panel_title());
+        this->item_desc->setString(this->get_default_detail_panel_description());
+        this->item_sell_btn->setVisible(false);
 
-        items_listview->requestDoLayout();
+        this->items_listview->requestDoLayout();
     };
     reset_item_detail_panel();
 
 
-    auto update_detail_panel_on_touch = [panel, item_name, item_desc, item_sell_btn, item_listview_description, reset_item_detail_panel, items_listview](NuItem* nuitem, spItem item) {
-        item_name->setString(item->get_name());
-        item_desc->setString(item->description);
+    auto update_detail_panel_on_touch = [this, reset_item_detail_panel](NuItem* nuitem, spItem item) {
+        this->item_name->setString(item->get_name());
+        this->item_desc->setString(item->description);
 
-        item_sell_btn->setVisible(true);
-        item_sell_btn->addTouchEventListener([items_listview, nuitem, item, reset_item_detail_panel](Ref* sender, ui::Widget::TouchEventType type){
+        this->item_sell_btn->setVisible(true);
+        this->item_sell_btn->addTouchEventListener([this, nuitem, item, reset_item_detail_panel](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                items_listview->removeChild(nuitem->button);
-                items_listview->removeChild(nuitem);
+                this->items_listview->removeChild(nuitem->button);
+                this->items_listview->removeChild(nuitem);
 
                 BUILDUP->items.erase(
                     std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item),
@@ -141,11 +141,11 @@ bool ItemScene::init()
         });
 
         //update listviews layout to account for different content height
-        item_listview_description->requestDoLayout();
+        this->item_listview_description->requestDoLayout();
     };
 
     for (spItem item : BUILDUP->items) {
-        auto nuitem = NuItem::create(items_listview);
+        NuItem* nuitem = NuItem::create(this->items_listview);
         nuitem->set_title(item->get_name());
         nuitem->set_description(item->summary);
 
@@ -153,7 +153,6 @@ bool ItemScene::init()
 
         res_count_t cost = item->get_effective_cost();
         std::string cost_str = beautify_double(cost);
-        CCLOG("cost %f, beauty cost %s", cost, cost_str.c_str());
         nuitem->set_cost_lbl(cost_str);
 
         nuitem->button->addTouchEventListener([item, nuitem, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
@@ -165,7 +164,7 @@ bool ItemScene::init()
         });
     };
 
-    this->init_back_btn(panel);
+    this->init_back_btn(this->panel);
 
     return true;
 };
