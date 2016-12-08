@@ -148,65 +148,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        // GameDirector::switch_to_miner_menu();
-
-		auto anvil_sprite = cocos2d::Sprite::createWithSpriteFrameName("anvil.png");
-		anvil_sprite->setAnchorPoint(Vec2::ZERO);
-		anvil_sprite->setPosition(0,0);
-		//auto anvil_texture = anvil_sprite->getTexture();
-
-		RenderTexture* rt = RenderTexture::create(anvil_sprite->getContentSize().width, anvil_sprite->getContentSize().height);
-		//rt->setAutoDraw(true);
-		// rt->retain();
-		rt->begin();
-		anvil_sprite->visit();
-		rt->end();
-
-		rt->saveToFile("test_FILE.png");
-
-		Image* output_image = new Image;
-		//output_image->initWithImageFile("test_FILE_IN_RESOURCES.png");
-		 output_image = rt->newImage();
-
-		//output_image->autorelease();
-
-		// auto img_data = output_image->getData();
-		// auto data_len = output_image->getDataLen();
-		// CCLOG("total %i and len %i", output_image->getWidth() * output_image->getHeight(), data_len);
-        //
-		// int pixel_width = 3;
-		// if (output_image->hasAlpha())
-		// {
-		// 	pixel_width = 4;
-		// }
-        //
-		// for (int i = 0; i < output_image->getWidth(); i++)
-		// {
-		// 	for (int j = 0; j < output_image->getHeight(); j++)
-		// 	{
-		// 		unsigned char *pixel = img_data + (j + i * output_image->getWidth()) * pixel_width;
-        //
-		// 		// You can see/change pixels' RGBA value(0-255) here !
-		// 		unsigned char r = *pixel;
-		// 		unsigned char g = *(pixel + 1);
-		// 		unsigned char b = *(pixel + 2);
-		// 		unsigned char a = *(pixel + 3);
-        //
-		// 		CCLOG("%i %i %i %i", r, g, b, a);
-		// 	}
-		// };
-		//auto anvil_image = new cocos2d::Image;
-
-		
-		auto output_texture = new Texture2D;
-		output_texture->initWithImage(output_image);
-		// Size sz = { (float)output_image->getWidth(), (float)output_image->getHeight() };
-		// output_texture->initWithData(img_data, data_len, output_image->getRenderFormat(), output_image->getWidth(), output_image->getHeight(), sz);
-
-	    Sprite* output_sprite = cocos2d::Sprite::createWithTexture(output_texture);
-		output_sprite->setPosition(100.0f, 100.0f);
-		this->addChild(output_sprite);
-
+        GameDirector::switch_to_equipment_menu();
     }
 }
 

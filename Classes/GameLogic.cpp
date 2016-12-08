@@ -915,3 +915,17 @@ void GameDirector::switch_to_item_equip_menu()
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
 };
+
+void GameDirector::switch_to_equipment_menu()
+{
+    auto scene = cocos2d::Scene::create();
+    scene->setName("equipment_scene");
+
+    auto equipment_scene = get_prebuilt_node_from_csb("editor/scenes/equipment_scene.csb");
+    auto panel = dynamic_cast<cocos2d::ui::Layout*>(equipment_scene->getChildByName("panel"));
+    panel->removeFromParent();
+    scene->addChild(panel);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
