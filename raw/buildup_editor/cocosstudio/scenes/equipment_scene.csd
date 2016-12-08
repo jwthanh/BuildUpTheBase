@@ -52,7 +52,7 @@
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="combat_button" ActionTag="704617748" Tag="233" IconVisible="False" LeftMargin="344.3549" RightMargin="-48.6057" TopMargin="6.3658" BottomMargin="4.1664" TouchEnable="True" FontSize="14" ButtonText="Choose a weapon" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="combat_btn" ActionTag="704617748" Tag="233" IconVisible="False" LeftMargin="344.3549" RightMargin="-48.6057" TopMargin="6.3658" BottomMargin="4.1664" TouchEnable="True" FontSize="14" ButtonText="Choose a weapon" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="366.7309" Y="60.4035" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="527.7204" Y="34.3682" />

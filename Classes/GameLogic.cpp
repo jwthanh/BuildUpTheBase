@@ -926,6 +926,15 @@ void GameDirector::switch_to_equipment_menu()
     panel->removeFromParent();
     scene->addChild(panel);
 
+    auto weapon_panel = panel->getChildByName("combat_panel");
+    ui::Button* equip_weapon_btn = dynamic_cast<ui::Button*>(weapon_panel->getChildByName("combat_btn"));
+    equip_weapon_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            GameDirector::switch_to_item_equip_menu();
+        }
+    });
+
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
 };
