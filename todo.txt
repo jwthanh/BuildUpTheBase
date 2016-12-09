@@ -26,3 +26,7 @@ Features
 
 * can recruit specialized harvesters to live in your city. they either live a certain amount of time
   or require a certain resource before leaving or reducing output
+
+* special harvesters require resources per second (to make use of generators)
+
+* limited slots, so you can have one dagger type, but you can replace it for a better one
