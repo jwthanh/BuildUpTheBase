@@ -928,10 +928,7 @@ void GameDirector::switch_to_equipment_menu()
 
     auto weapon_panel = panel->getChildByName("combat_panel");
     ui::Button* equip_weapon_btn = dynamic_cast<ui::Button*>(weapon_panel->getChildByName("combat_btn"));
-    load_default_button_textures(equip_weapon_btn);
-    equip_weapon_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
-    equip_weapon_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
-    set_aliasing(equip_weapon_btn);
+    prep_button(equip_weapon_btn);
     equip_weapon_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
@@ -940,18 +937,7 @@ void GameDirector::switch_to_equipment_menu()
     });
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
-    load_default_button_textures(back_btn);
-    back_btn->getTitleRenderer()->setTextColor(Color4B::WHITE);
-    back_btn->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
-    set_aliasing(back_btn);
-    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(16);
-            auto director = Director::getInstance();
-            director->popScene();
-        }
-    });
+    prep_back_button(back_btn);
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);

@@ -3,6 +3,7 @@
 #define GAMELOGIC_H
 
 #include "constants.h"
+#include "ui/UIButton.h"
 class Beatup;
 class Buildup;
 
@@ -75,7 +76,6 @@ class GameDirector
         static void switch_to_items_menu();
         static void switch_to_item_altar_menu();
         static void switch_to_item_equip_menu();
-
         static void switch_to_equipment_menu();
 };
 

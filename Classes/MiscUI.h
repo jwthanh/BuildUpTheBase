@@ -62,4 +62,9 @@ void set_aliasing(cocos2d::ui::ImageView* img_view, bool val=true);
 void set_aliasing(cocos2d::ui::Button* button, bool val=true);
 void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val=true);
 
+//inits texture and outline and aliasing
+void prep_button(cocos2d::ui::Button* button);
+// this one binds a popScene along with the above
+void prep_back_button(cocos2d::ui::Button* back_button);
+
 #endif

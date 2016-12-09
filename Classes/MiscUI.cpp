@@ -7,6 +7,7 @@
 #include "2d/CCActionEase.h"
 #include "2d/CCActionInstant.h"
 #include "2d/CCSprite.h"
+#include "base/CCDirector.h"
 
 USING_NS_CC;
 
@@ -207,3 +208,25 @@ void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val)
     cocos2d::Sprite* sprite = scale9->getSprite();
     set_aliasing(sprite, val);
 };
+
+void prep_button(ui::Button* button)
+{
+    load_default_button_textures(button);
+    button->getTitleRenderer()->setTextColor(Color4B::WHITE);
+    button->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
+    set_aliasing(button);
+}
+
+void prep_back_button(ui::Button* back_button)
+{
+    prep_button(back_button);
+
+    back_button->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            do_vibrate(16);
+            auto director = Director::getInstance();
+            director->popScene();
+        }
+    });
+}
