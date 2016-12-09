@@ -631,7 +631,7 @@ void GameDirector::switch_to_city_menu()
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             do_vibrate(16);
-            GameDirector::switch_to_item_equip_menu();
+            GameDirector::switch_to_equipment_menu();
         }
     });
     load_default_button_textures(item_equip_scene_btn);
