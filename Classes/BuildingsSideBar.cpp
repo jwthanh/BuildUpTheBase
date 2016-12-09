@@ -1081,8 +1081,8 @@ void SideListView::setup_powers_listview_as_powers()
 
             auto game_logic = GameLogic::getInstance();
             bool existing_vibration = game_logic->get_can_vibrate();
-            if (existing_vibration) { menu_item->set_description("Tired of your phone vibrating? Press this"); }
-            else if (!existing_vibration) { menu_item->set_description("Tired of your phone not vibrating? Press this"); }
+            if (existing_vibration) { menu_item->set_description("Tired of your phone vibrating? Tap this"); }
+            else if (!existing_vibration) { menu_item->set_description("Tired of your phone not vibrating? Tap this"); }
 
             menu_item->set_touch_ended_callback([menu_item]()
             {
