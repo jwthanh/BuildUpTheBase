@@ -146,6 +146,19 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     {
         GameDirector::switch_to_items_menu();
     }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_P)
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            auto label = Label::createWithTTF("Pock Pock", DEFAULT_FONT, 16);
+            label->setTTFConfig(NuItem::ttf_config);
+            this->addChild(label, 9999999);
+
+            auto anim = JumpBy::create(5, Vec2(900 * CCRANDOM_0_1(), 600 * CCRANDOM_0_1()), 10, 10);
+            //auto anim = JumpBy::create(10, Vec2(100, 600), 10, 10);
+            label->runAction(anim);
+        }
+    }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         GameDirector::switch_to_equipment_menu();
