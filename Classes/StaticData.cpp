@@ -18,6 +18,10 @@ BaseStaticData::BaseStaticData(std::string filename)
 
 BaseStaticData::BaseStaticData(const BaseStaticData&)
 {
+    //this copy ctor shouldn't be called
+    // otherwise TODO figure out a good way to copy this, maybe
+    // read a new copy into memory
+    assert(false && "dont copy this, write a proper copy constructor");
 	auto a = 1 + 1;
 };
 
