@@ -58,6 +58,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Miner.cpp \
                    ../../Classes/NodeBuilder.cpp \
                    ../../Classes/ItemScene.cpp \
+                   ../../Classes/Equipment.cpp \
                    ../../Classes/magic_particles/MagicScene.cpp \
                    ../../Classes/magic_particles/MagicEmitter.cpp \
                    ../../Classes/magic_particles/mp_cocos.cpp \

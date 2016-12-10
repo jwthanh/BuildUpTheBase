@@ -88,6 +88,7 @@
     <ClCompile Include="..\Classes\Miner.cpp" />
     <ClCompile Include="..\Classes\NodeBuilder.cpp" />
     <ClCompile Include="..\Classes\ItemScene.cpp" />
+    <ClCompile Include="..\Classes\Equipment.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -183,6 +184,7 @@
     <ClInclude Include="..\Classes\Miner.h" />
     <ClInclude Include="..\Classes\NodeBuilder.h" />
     <ClInclude Include="..\Classes\ItemScene.h" />
+    <ClInclude Include="..\Classes\Equipment.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
