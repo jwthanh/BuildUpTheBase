@@ -6,6 +6,7 @@
 #include "ui/UIButton.h"
 class Beatup;
 class Buildup;
+class Equipment;
 
 class PopupPanel;
 
@@ -42,6 +43,7 @@ class GameLogic
 
         Beatup* beatup;
         Buildup* buildup;
+        std::unique_ptr<Equipment> equipment;
 
         static void save_all();
         static void load_all();

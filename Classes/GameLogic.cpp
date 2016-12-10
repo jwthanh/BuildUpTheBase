@@ -1,5 +1,17 @@
 #include "GameLogic.h"
 
+#include "NodeBuilder.h"
+#include "base/CCDirector.h"
+#include "2d/CCSprite.h"
+
+#include "ui/UIListView.h"
+#include "ui/UILayout.h"
+#include "ui/UIText.h"
+#include "ui/UIButton.h"
+#include "ui/UITextField.h"
+#include "magic_particles/MagicEmitter.h"
+#include "magic_particles/mp_cocos.h"
+
 #include "Beatup.h"
 #include "HouseBuilding.h"
 #include "DataManager.h"
@@ -15,19 +27,10 @@
 #include "BuildingsSideBar.h"
 #include "Miner.h"
 #include "FShake.h"
-
-#include "NodeBuilder.h"
-#include "base/CCDirector.h"
-#include "2d/CCSprite.h"
-#include "ui/UIListView.h"
-#include "ui/UILayout.h"
-#include "ui/UIText.h"
-#include "ui/UIButton.h"
-#include "ui/UITextField.h"
-#include "magic_particles/MagicEmitter.h"
-#include "magic_particles/mp_cocos.h"
-
 #include "ItemScene.h"
+#include "Equipment.h"
+
+
 
 USING_NS_CC;
 
@@ -217,6 +220,7 @@ bool GameLogic::init()
     instance->beatup->setName("beatup");
     instance->beatup->retain();
     instance->buildup = instance->beatup->buildup;
+    instance->equipment = std::make_unique<Equipment>();
 
     this->coin_save_clock = std::make_shared<Clock>(15.0f);
     this->coin_rate_per_sec_clock = std::make_shared<Clock>(1.0f);
