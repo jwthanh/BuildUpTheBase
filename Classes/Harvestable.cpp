@@ -1129,7 +1129,7 @@ res_count_t FightingHarvestable::get_per_touch_output()
     if (GameLogic::getInstance()->equipment->combat_slot->has_item())
     {
         spItem item = GameLogic::getInstance()->equipment->combat_slot->get_item();
-        base = scale_number_flat(base, item->level, (res_count_t)2*ITEM_RARITY_MODIFIER.at(item->rarity));
+        base = scale_number_flat(base, item->level, static_cast<res_count_t>(2) * ITEM_RARITY_MODIFIER.at(item->rarity));
     }
 
     auto tech_map = this->building->techtree->get_tech_map();
