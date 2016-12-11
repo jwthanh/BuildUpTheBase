@@ -13,6 +13,14 @@ enum class ItemRarityType
     Rare = 2
 };
 
+enum class ItemSlotType
+{
+    Unset = -1,
+    Combat = 0,
+    Mining = 1,
+    Recipe = 2,
+};
+
 class Item : public Nameable
 {
     private:
@@ -20,6 +28,8 @@ class Item : public Nameable
 
     public:
         ItemRarityType rarity; //variation on item's base price
+        ItemSlotType slot_type; //where the item will apply when equipped
+
         res_count_t level; //affects base price
         double scavenge_weight; //how often it'll drop in the dump
 

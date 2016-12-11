@@ -188,6 +188,14 @@ spItem ItemData::build_item(std::string type_name, rjValue* item_data)
     auto scavenge_weight = item_ref["scavenge_weight"].GetDouble();
     auto img_path = item_ref["img_path"].GetString();
 
+    std::string slot_type_raw = item_ref["slot_type"].GetString();
+    ItemSlotType slot_type = ItemSlotType::Unset;
+
+    //TODO create a type_to_str for this
+    if (slot_type_raw == "combat") {
+        slot_type = ItemSlotType::Combat;
+    };
+
     //create item with default dynamic stats
     auto item = std::make_shared<Item>(type_name, ItemRarityType::Normal, 1);
 
@@ -197,6 +205,7 @@ spItem ItemData::build_item(std::string type_name, rjValue* item_data)
     item->_base_cost = base_cost;
     item->scavenge_weight = scavenge_weight;
     item->img_path = img_path;
+    item->slot_type = slot_type;
 
     return item;
 };
