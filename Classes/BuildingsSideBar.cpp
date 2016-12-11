@@ -928,7 +928,7 @@ void SideListView::setup_powers_listview_as_powers()
             {
 				do_vibrate(16);
 				// std::string url = "mailto:tankorsmash@tankorsmash.com";
-				std::string url = "mailto:tankorsmash@tankorsmash.com&subject=Build Up The Base Feedback";
+				std::string url = "mailto:tankorsmash@tankorsmash.com?subject=Build Up The Base Feedback&body=Hey there, I've got a feature, bug, quality of life, or enhancement I'd love to see, check it out:";
                 Application::getInstance()->openURL(url);
             });
 
