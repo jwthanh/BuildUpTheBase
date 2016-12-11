@@ -932,7 +932,7 @@ void GameDirector::switch_to_equipment_menu()
 
     auto weapon_panel = panel->getChildByName("combat_panel");
 
-	ui::Text* weapon_label = dynamic_cast<ui::Text*>(weapon_panel->getChildByName("weapon_lbl"));
+	ui::Text* weapon_label = dynamic_cast<ui::Text*>(weapon_panel->getChildByName("name_lbl"));
 	auto update_equipped_weapon = [weapon_label](float dt){
 		if (GameLogic::getInstance()->equipment->combat_slot->has_item())
 		{
@@ -947,7 +947,7 @@ void GameDirector::switch_to_equipment_menu()
     update_equipped_weapon(0);
     weapon_label->schedule(update_equipped_weapon, SHORT_DELAY, "update_equipped_weapon");
 
-    ui::Button* equip_weapon_btn = dynamic_cast<ui::Button*>(weapon_panel->getChildByName("combat_btn"));
+    ui::Button* equip_weapon_btn = dynamic_cast<ui::Button*>(weapon_panel->getChildByName("item_btn"));
     prep_button(equip_weapon_btn);
     equip_weapon_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
