@@ -33,6 +33,7 @@
 #include "ui/UIImageView.h"
 #include "ui/UIScale9Sprite.h"
 #include "combat.h"
+#include "Equipment.h"
 
 #ifdef _WIN32
 #include "vld.h"
@@ -1125,6 +1126,11 @@ void FightingHarvestable::animate_touch_end(cocos2d::Touch* touch)
 res_count_t FightingHarvestable::get_per_touch_output()
 {
     res_count_t base = 5.0L;
+    if (GameLogic::getInstance()->equipment->combat_slot->has_item())
+    {
+        spItem item = GameLogic::getInstance()->equipment->combat_slot->get_item();
+        base = scale_number_flat(base, item->level, (res_count_t)2*ITEM_RARITY_MODIFIER.at(item->rarity));
+    }
 
     auto tech_map = this->building->techtree->get_tech_map();
 
