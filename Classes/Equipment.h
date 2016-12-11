@@ -20,12 +20,11 @@ class EquipmentSlot
 /// Tracks the equipped items
 class Equipment
 {
-    private:
+    public:
         std::unique_ptr<EquipmentSlot> combat_slot;
         std::unique_ptr<EquipmentSlot> mining_slot;
         std::unique_ptr<EquipmentSlot> recipe_slot;
 
-    public:
         Equipment();
 
 };

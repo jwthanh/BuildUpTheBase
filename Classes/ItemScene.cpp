@@ -17,6 +17,7 @@
 #include "HouseBuilding.h"
 #include "Beatup.h"
 #include "Util.h"
+#include "Equipment.h"
 
 using namespace cocos2d;
 
@@ -327,12 +328,12 @@ void EquipItemScene::init_callbacks()
         this->item_desc->setString(item->description);
 
         this->item_sell_btn->setVisible(true);
-        this->item_sell_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
+        this->item_sell_btn->addTouchEventListener([item](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                CCLOG("TODO equip item");
-
                 do_vibrate(16);
+                GameLogic::getInstance()->equipment->combat_slot->set_item(item);
+                cocos2d::Director::getInstance()->popScene();
             }
         });
 
