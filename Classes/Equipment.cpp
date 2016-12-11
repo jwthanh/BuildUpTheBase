@@ -23,7 +23,7 @@ void EquipmentSlot::set_item(spItem item)
 
 Equipment::Equipment()
 {
-    this->combat_slot = std::make_unique<EquipmentSlot>();
-    this->mining_slot = std::make_unique<EquipmentSlot>();
-    this->recipe_slot = std::make_unique<EquipmentSlot>();
+    this->combat_slot = std::unique_ptr<EquipmentSlot>(new EquipmentSlot());
+    this->mining_slot = std::unique_ptr<EquipmentSlot>(new EquipmentSlot());
+    this->recipe_slot = std::unique_ptr<EquipmentSlot>(new EquipmentSlot());
 };

@@ -220,7 +220,7 @@ bool GameLogic::init()
     instance->beatup->setName("beatup");
     instance->beatup->retain();
     instance->buildup = instance->beatup->buildup;
-    instance->equipment = std::make_unique<Equipment>();
+    instance->equipment = std::unique_ptr<Equipment>(new Equipment());
 
     this->coin_save_clock = std::make_shared<Clock>(15.0f);
     this->coin_rate_per_sec_clock = std::make_shared<Clock>(1.0f);

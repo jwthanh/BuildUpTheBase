@@ -919,7 +919,7 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item = BuildingNuItem::create(listview, building);
             menu_item->setName(child_name);
             menu_item->set_title("Send feedback");
-            menu_item->set_image("lineDark28.png");
+            menu_item->set_image("lineDark16.png");
 
             auto game_logic = GameLogic::getInstance();
 			menu_item->set_description("Send us feedback!\nAnything goes, bugs, ideas!");
@@ -927,6 +927,9 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item->set_touch_ended_callback([menu_item]()
             {
 				do_vibrate(16);
+				// std::string url = "mailto:tankorsmash@tankorsmash.com";
+				std::string url = "mailto:tankorsmash@tankorsmash.com&subject=Build Up The Base Feedback";
+                Application::getInstance()->openURL(url);
             });
 
         };

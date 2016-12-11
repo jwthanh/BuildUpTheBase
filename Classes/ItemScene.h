@@ -24,7 +24,7 @@ class ItemScene : public GameLayer
 
     public:
         CREATE_FUNC(ItemScene);
-        static cocos2d::Scene* ItemScene::createScene();
+        static cocos2d::Scene* createScene();
 
         bool init() override;
 
@@ -61,7 +61,7 @@ class AltarItemScene : public ItemScene
         CREATE_FUNC(AltarItemScene);
         bool init() override;
         void init_callbacks() override;
-        static cocos2d::Scene* AltarItemScene::createScene();
+        static cocos2d::Scene* createScene();
 };
 
 class EquipItemScene : public ItemScene
@@ -76,7 +76,7 @@ class EquipItemScene : public ItemScene
         CREATE_FUNC(EquipItemScene);
         bool init() override;
         void init_callbacks() override;
-        static cocos2d::Scene* EquipItemScene::createScene();
+        static cocos2d::Scene* createScene();
 };
 
 #endif
