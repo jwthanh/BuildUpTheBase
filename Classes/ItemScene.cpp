@@ -74,7 +74,7 @@ void ItemScene::init_callbacks()
         this->item_listview_description->requestDoLayout();
     };
 
-    for (spItem item : BUILDUP->items) {
+    for (spItem item : this->get_items()) {
         NuItem* nuitem = NuItem::create(this->items_listview);
         nuitem->set_title(item->get_name());
         nuitem->set_description(item->summary);
@@ -105,6 +105,11 @@ void ItemScene::reset_detail_panel()
     this->items_listview->requestDoLayout();
 
     //TODO fix the detail panel not being scrollable after resetting
+};
+
+vsItem ItemScene::get_items()
+{
+    return BUILDUP->items;
 };
 
 cocos2d::ui::Layout* ItemScene::init_panel()
@@ -227,7 +232,7 @@ void AltarItemScene::init_callbacks()
         this->item_listview_description->requestDoLayout();
     };
 
-    for (spItem item : BUILDUP->items) {
+    for (spItem item : this->get_items()) {
         auto nuitem = NuItem::create(items_listview);
         nuitem->set_title(item->get_name());
         nuitem->set_description(item->summary);
@@ -341,7 +346,7 @@ void EquipItemScene::init_callbacks()
         this->item_listview_description->requestDoLayout();
     };
 
-    for (spItem item : BUILDUP->items) {
+    for (spItem item : this->get_items()) {
         auto nuitem = NuItem::create(items_listview);
         nuitem->set_title(item->get_name());
         nuitem->set_description(item->summary);

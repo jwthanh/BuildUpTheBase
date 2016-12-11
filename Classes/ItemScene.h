@@ -37,6 +37,8 @@ class ItemScene : public GameLayer
         virtual void init_callbacks(); //these should be changed in the child classes
         virtual void reset_detail_panel();
 
+        virtual vsItem get_items();
+
         //nodes along the right side
         cocos2d::ui::Layout* panel;
         cocos2d::ui::ListView* items_listview;
