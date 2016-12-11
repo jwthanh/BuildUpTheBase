@@ -927,8 +927,13 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item->set_touch_ended_callback([menu_item]()
             {
 				do_vibrate(16);
-				// std::string url = "mailto:tankorsmash@tankorsmash.com";
-				std::string url = "mailto:tankorsmash@tankorsmash.com?subject=Build Up The Base Feedback&body=Hey there, I've got a feature, bug, quality of life, or enhancement I'd love to see, check it out:";
+                std::stringstream url_ss;
+                url_ss << "mailto:tankorsmash@tankorsmash.com?";
+				url_ss << "subject=Build Up The Base Feedback&";
+				url_ss << "body=Hey there, I've got a feature, bug, quality of life, or enhancement I'd love to see, check it out:";
+                std::string url = url_ss.str();
+
+                CCLOG("prepping email: %s", url.c_str());
                 Application::getInstance()->openURL(url);
             });
 
