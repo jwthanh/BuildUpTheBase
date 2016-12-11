@@ -894,6 +894,47 @@ void SideListView::setup_powers_listview_as_powers()
     {
         ui::ListView* listview = this->powers_listviews->at(building->name);
 
+        ///send feedback
+        auto send_feeback = [this, listview, building, tab_type](float dt)
+        {
+            if (this->tabs.is_tab_active(tab_type, building) == false)
+            {
+                listview->setVisible(false);
+                return;
+            }
+            listview->setVisible(true);
+
+            //if the child already exists, put it at the back 
+            std::string child_name = "send_feeback";
+            auto existing_node = listview->getChildByName(child_name);
+            if (existing_node)
+            {
+                existing_node->removeFromParentAndCleanup(false);
+                listview->addChild(existing_node);
+                return;
+            }
+
+            //clone the new item
+            BuildingNuItem* menu_item;
+            menu_item = BuildingNuItem::create(listview, building);
+            menu_item->setName(child_name);
+            menu_item->set_title("Send feedback");
+            menu_item->set_image("lineDark28.png");
+
+            auto game_logic = GameLogic::getInstance();
+			menu_item->set_description("Send us feedback!\nAnything goes, bugs, ideas!");
+
+            menu_item->set_touch_ended_callback([menu_item]()
+            {
+				do_vibrate(16);
+            });
+
+        };
+
+        listview->schedule(send_feeback, AVERAGE_DELAY, "send_feeback");
+        send_feeback(0);
+
+
         ///Open leaderboards
         auto open_leaderboard = [this, listview, building, tab_type](float dt)
         {
