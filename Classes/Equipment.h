@@ -12,6 +12,7 @@ class EquipmentSlot
         EquipmentSlot();
         EquipmentSlot(spItem item);
 
+        bool has_item();
         spItem get_item();
         void set_item(spItem item);
 

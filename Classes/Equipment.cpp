@@ -11,6 +11,11 @@ EquipmentSlot::EquipmentSlot(spItem item)
     this->set_item(item);
 };
 
+bool EquipmentSlot::has_item()
+{
+    return this->_item != NULL;
+};
+
 spItem EquipmentSlot::get_item()
 {
     return this->_item;
