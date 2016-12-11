@@ -190,6 +190,7 @@ const std::string& ItemScene::get_sell_btn_text()
 
 bool ItemScene::init()
 {
+    this->filtered_slot_type = ItemSlotType::Unset;
 
 #ifdef _WIN32
     FUNC_INIT_WIN32(ItemScene);
@@ -280,6 +281,7 @@ const std::string& AltarItemScene::get_sell_btn_text()
 
 bool AltarItemScene::init()
 {
+    this->filtered_slot_type = ItemSlotType::Unset;
 
 #ifdef _WIN32
     FUNC_INIT_WIN32(AltarItemScene);
@@ -370,6 +372,7 @@ void EquipItemScene::init_callbacks()
 
 bool EquipItemScene::init()
 {
+    this->filtered_slot_type = ItemSlotType::Unset;
 
 #ifdef _WIN32
     FUNC_INIT_WIN32(EquipItemScene);

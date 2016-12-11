@@ -3,6 +3,8 @@
 
 #include "GameLayer.h"
 
+#include "Item.h"
+
 namespace cocos2d
 {
     namespace ui
@@ -38,6 +40,7 @@ class ItemScene : public GameLayer
         virtual void reset_detail_panel();
 
         virtual vsItem get_items();
+        ItemSlotType filtered_slot_type;
 
         //nodes along the right side
         cocos2d::ui::Layout* panel;
