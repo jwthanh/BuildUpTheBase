@@ -58,9 +58,9 @@ Buildup::Buildup()
 
     ItemData item_data = ItemData();
     spItem dagger = item_data.get_item("dagger");
-    dagger->rarity = RarityType::Poor;
+    dagger->rarity = ItemRarityType::Poor;
     spItem homunc = item_data.get_item("homunculus");
-    homunc->rarity = RarityType::Rare;
+    homunc->rarity = ItemRarityType::Rare;
     spItem ashen_mirror = item_data.get_item("ashen_mirror");
     spItem ashen_mirror_lv2 = item_data.get_item("ashen_mirror");
     ashen_mirror_lv2->level = 2.0f;

@@ -189,7 +189,7 @@ spItem ItemData::build_item(std::string type_name, rjValue* item_data)
     auto img_path = item_ref["img_path"].GetString();
 
     //create item with default dynamic stats
-    auto item = std::make_shared<Item>(type_name, RarityType::Normal, 1);
+    auto item = std::make_shared<Item>(type_name, ItemRarityType::Normal, 1);
 
     item->name = name;
     item->summary = summary;

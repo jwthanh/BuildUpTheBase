@@ -409,8 +409,8 @@ void ItemSerializer::load()
             std::string rarity_str = data["rarity"].GetString();
             res_count_t item_level = data["level"].GetDouble();
 
-            auto result_it = std::find_if(ITEM_RARITY_STRINGS.begin(), ITEM_RARITY_STRINGS.end(), [rarity_str](std::pair<RarityType, std::string> pair){return pair.second == rarity_str; });
-            RarityType rarity = RarityType::Unset;
+            auto result_it = std::find_if(ITEM_RARITY_STRINGS.begin(), ITEM_RARITY_STRINGS.end(), [rarity_str](std::pair<ItemRarityType, std::string> pair){return pair.second == rarity_str; });
+            ItemRarityType rarity = ItemRarityType::Unset;
             if (result_it != ITEM_RARITY_STRINGS.end())
             {
                 rarity = (*result_it).first;

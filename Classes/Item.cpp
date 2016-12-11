@@ -3,7 +3,7 @@
 #include <sstream>
 
 
-Item::Item(std::string type_name,  RarityType rarity, res_count_t level)
+Item::Item(std::string type_name,  ItemRarityType rarity, res_count_t level)
     : type_name(type_name), rarity(rarity), level(level), Nameable("Unnamed"), scavenge_weight(0.0)
 {
 };
@@ -21,7 +21,7 @@ std::string Item::get_name()
 {
     std::stringstream name;
     //Normal
-    if (this->rarity != RarityType::Normal)
+    if (this->rarity != ItemRarityType::Normal)
         name << ITEM_RARITY_STRINGS.at(this->rarity) << " ";
     //Dagger
     name << this->name << " ";

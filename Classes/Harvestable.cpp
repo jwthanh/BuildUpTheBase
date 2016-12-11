@@ -515,10 +515,10 @@ void DumpsterHarvestable::generate_item()
         item_type_map.add_item(item->type_name, item->scavenge_weight);
     }
 
-    RandomWeightMap<RarityType> item_rarity_map;
-    item_rarity_map.add_item(RarityType::Poor, 40);
-    item_rarity_map.add_item(RarityType::Normal, 50);
-    item_rarity_map.add_item(RarityType::Rare, 10);
+    RandomWeightMap<ItemRarityType> item_rarity_map;
+    item_rarity_map.add_item(ItemRarityType::Poor, 40);
+    item_rarity_map.add_item(ItemRarityType::Normal, 50);
+    item_rarity_map.add_item(ItemRarityType::Rare, 10);
 
     spItem item = item_data.get_item(item_type_map.get_item());
     item->rarity = item_rarity_map.get_item();
