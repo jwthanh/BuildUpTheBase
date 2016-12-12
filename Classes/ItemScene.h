@@ -25,7 +25,7 @@ class ItemScene : public GameLayer
         virtual const std::string& get_sell_btn_text();
 
     public:
-        CREATE_FUNC(ItemScene);
+        static ItemScene* create();
         static cocos2d::Scene* createScene();
 
         bool init() override;
@@ -63,7 +63,7 @@ class AltarItemScene : public ItemScene
         const std::string& get_sell_btn_text() override;
 
     public:
-        CREATE_FUNC(AltarItemScene);
+        static AltarItemScene* create();
         bool init() override;
         void init_callbacks() override;
         static cocos2d::Scene* createScene();
@@ -78,7 +78,7 @@ class EquipItemScene : public ItemScene
         const std::string& get_sell_btn_text() override;
 
     public:
-        CREATE_FUNC(EquipItemScene);
+        static EquipItemScene* create();
         bool init() override;
         void init_callbacks() override;
         static cocos2d::Scene* createScene();

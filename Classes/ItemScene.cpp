@@ -186,6 +186,22 @@ const std::string& ItemScene::get_sell_btn_text()
 {
     static std::string default_desc = "Sell";
     return default_desc;
+}
+
+ItemScene* ItemScene::create()
+{
+    ItemScene* pRet = new(std::nothrow) ItemScene();
+    if (pRet && pRet->init())
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
 };
 
 bool ItemScene::init()
@@ -277,6 +293,22 @@ const std::string& AltarItemScene::get_sell_btn_text()
 {
     static std::string default_desc = "Place";
     return default_desc;
+}
+
+AltarItemScene* AltarItemScene::create()
+{
+    AltarItemScene* pRet = new(std::nothrow) AltarItemScene();
+    if (pRet && pRet->init())
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
 };
 
 bool AltarItemScene::init()
@@ -325,6 +357,22 @@ const std::string& EquipItemScene::get_sell_btn_text()
 {
     static std::string default_desc = "Equip";
     return default_desc;
+}
+
+EquipItemScene* EquipItemScene::create()
+{
+    EquipItemScene* pRet = new(std::nothrow) EquipItemScene();
+    if (pRet && pRet->init())
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
 };
 
 void EquipItemScene::init_callbacks()
