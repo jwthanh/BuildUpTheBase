@@ -930,7 +930,10 @@ void GameDirector::switch_to_equipment_menu()
     panel->removeFromParent();
     scene->addChild(panel);
 
+	/// combat slot
     auto weapon_panel = panel->getChildByName("combat_panel");
+    auto mining_panel = panel->getChildByName("mining_panel");
+    auto recipe_panel = panel->getChildByName("recipe_panel");
 
 	ui::Text* weapon_label = dynamic_cast<ui::Text*>(weapon_panel->getChildByName("name_lbl"));
 	auto update_equipped_weapon = [weapon_label](float dt){
@@ -953,6 +956,57 @@ void GameDirector::switch_to_equipment_menu()
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             GameDirector::switch_to_item_equip_menu(ItemSlotType::Combat);
+        }
+    });
+
+	/// mining
+	ui::Text* mining_label = dynamic_cast<ui::Text*>(mining_panel->getChildByName("name_lbl"));
+	auto update_equipped_mining = [mining_label](float dt){
+		if (GameLogic::getInstance()->equipment->mining_slot->has_item())
+		{
+			spItem item = GameLogic::getInstance()->equipment->mining_slot->get_item();
+			mining_label->setString(item->get_name());
+		}
+		else
+		{
+			mining_label->setString("Equip a mining");
+		};
+	};
+    update_equipped_mining(0);
+    mining_label->schedule(update_equipped_mining, SHORT_DELAY, "update_equipped_mining");
+
+
+    ui::Button* equip_mining_btn = dynamic_cast<ui::Button*>(mining_panel->getChildByName("item_btn"));
+    prep_button(equip_mining_btn);
+    equip_mining_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            GameDirector::switch_to_item_equip_menu(ItemSlotType::Mining);
+        }
+    });
+
+	///recipe
+	ui::Text* recipe_label = dynamic_cast<ui::Text*>(recipe_panel->getChildByName("name_lbl"));
+	auto update_equipped_recipe = [recipe_label](float dt){
+		if (GameLogic::getInstance()->equipment->recipe_slot->has_item())
+		{
+			spItem item = GameLogic::getInstance()->equipment->recipe_slot->get_item();
+			recipe_label->setString(item->get_name());
+		}
+		else
+		{
+			recipe_label->setString("Equip a crafting tool");
+		};
+	};
+    update_equipped_recipe(0);
+    recipe_label->schedule(update_equipped_recipe, SHORT_DELAY, "update_equipped_recipe");
+
+    ui::Button* equip_recipe_btn = dynamic_cast<ui::Button*>(recipe_panel->getChildByName("item_btn"));
+    prep_button(equip_recipe_btn);
+    equip_recipe_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
+        if (type == ui::Widget::TouchEventType::ENDED)
+        {
+            GameDirector::switch_to_item_equip_menu(ItemSlotType::Recipe);
         }
     });
 
