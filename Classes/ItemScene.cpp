@@ -109,6 +109,11 @@ void ItemScene::reset_detail_panel()
 
 vsItem ItemScene::get_items()
 {
+    if (this->filtered_slot_type == ItemSlotType::Unset)
+    {
+        return BUILDUP->items;
+    };
+
     vsItem filtered_items;
     for (auto& item : BUILDUP->items)
     {
