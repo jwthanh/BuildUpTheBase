@@ -386,7 +386,7 @@ void RecipeNuItem::other_init(spRecipe recipe)
     if (recipe->outputs.empty() == false)
     {
         std::string ing_str = Ingredient::type_to_string((*this->recipe->outputs.begin()).first);
-        auto res_data = IngredientData(ing_str);
+        IngredientData res_data(ing_str);
         this->item_icon->loadTexture(res_data.get_img_large());
         ((cocos2d::ui::Scale9Sprite*)(this->item_icon->getVirtualRenderer()))->getSprite()->getTexture()->setAliasTexParameters();
     };
