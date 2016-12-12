@@ -344,6 +344,9 @@ void GameLogic::save_all()
     auto item_serializer = ItemSerializer("alpha_items.json");
     item_serializer.serialize();
 
+    auto equipment_serializer = EquipmentSerializer("alpha_equipment.json");
+    equipment_serializer.serialize();
+
     auto ingredient_serializer = IngredientSerializer("alpha_ingredients.json");
     ingredient_serializer.serialize();
 

@@ -18,6 +18,7 @@
 
 #include "2d/CCTMXTiledMap.h"
 #include "2d/CCTMXLayer.h"
+#include "Equipment.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -520,7 +521,6 @@ void IngredientSerializer::load()
     }
 
 }
-
 MinerSerializer::MinerSerializer(std::string filename, Miner* miner)
     : BaseSerializer(filename), miner(miner), existing_json_found(false)
 {
@@ -714,3 +714,77 @@ rjValue& MinerSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument:
     rjValue& value = doc[key];
     return value;
 };
+
+EquipmentSerializer::EquipmentSerializer(std::string filename)
+    : BaseSerializer(filename)
+{
+};
+
+void EquipmentSerializer::serialize()
+{
+    rjDocument doc = rjDocument();
+    doc.SetObject();
+
+    rjDocument::AllocatorType& allocator = doc.GetAllocator();
+
+    //finds the item in BUILDUP->items and returns its index
+    auto get_index_of_item = [](std::unique_ptr<EquipmentSlot>& slot) {
+        if (slot->has_item())
+        {
+            auto items = BUILDUP->items;
+            auto itr = std::find(items.begin(), items.end(), slot->get_item());
+
+            return std::distance(items.begin(), itr);
+        }
+        return -1;
+    };
+
+    //TODO use some sort of id, index is weak
+    rjValue combat_slot_key = rjValue("combat_slot");
+    rjValue combat_slot_val = rjValue(get_index_of_item(GameLogic::getInstance()->equipment->combat_slot));
+    doc.AddMember(combat_slot_key, combat_slot_val, allocator);
+
+    rjValue mining_slot_key = rjValue("mining_slot");
+    rjValue mining_slot_val = rjValue(get_index_of_item(GameLogic::getInstance()->equipment->mining_slot));
+    doc.AddMember(mining_slot_key, mining_slot_val, allocator);
+
+    rjValue recipe_slot_key = rjValue("recipe_slot");
+    rjValue recipe_slot_val = rjValue(get_index_of_item(GameLogic::getInstance()->equipment->recipe_slot));
+    doc.AddMember(recipe_slot_key, recipe_slot_val, allocator);
+
+    this->save_document(doc);
+}
+
+void EquipmentSerializer::load()
+{
+    rjDocument doc = this->get_document();
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false)
+    {
+        CCLOG("NOT OBJECT");
+        return;
+    }
+
+
+    CCLOG("done loading");
+}
+
+void EquipmentSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
+{
+    //UNUSED
+    CCLOG("EquipmentSerializer::_add_member should be unused");
+};
+
+rjValue& EquipmentSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
+{
+    CCLOG("EquipmentSerializer::_get_member should not be used");
+    if (doc.HasMember(key) == false)
+    {
+        return doc; //null placeholder
+    }
+
+    //copy of Base::_get_member but because its protected I can't call it
+    rjValue& value = doc[key];
+    return value;
+};
+
