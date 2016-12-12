@@ -231,7 +231,7 @@ bool ItemScene::init(ItemSlotType slot_type)
 cocos2d::Scene* ItemScene::createScene(ItemSlotType slot_type)
 {
     auto scene = cocos2d::Scene::create();
-    auto* layer = ItemScene::create();
+    auto* layer = ItemScene::create(slot_type);
     scene->addChild(layer);
     return scene;
 };
@@ -338,7 +338,7 @@ bool AltarItemScene::init(ItemSlotType slot_type)
 cocos2d::Scene* AltarItemScene::createScene(ItemSlotType slot_type)
 {
     auto scene = cocos2d::Scene::create();
-    auto* layer = AltarItemScene::create();
+    auto* layer = AltarItemScene::create(slot_type);
     scene->addChild(layer);
     return scene;
 };
@@ -446,7 +446,7 @@ bool EquipItemScene::init(ItemSlotType slot_type)
 cocos2d::Scene* EquipItemScene::createScene(ItemSlotType slot_type)
 {
     auto scene = cocos2d::Scene::create();
-    auto* layer = EquipItemScene::create();
+    auto* layer = EquipItemScene::create(slot_type);
     scene->addChild(layer);
     return scene;
 };
