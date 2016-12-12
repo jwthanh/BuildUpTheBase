@@ -25,10 +25,10 @@ class ItemScene : public GameLayer
         virtual const std::string& get_sell_btn_text();
 
     public:
-        static ItemScene* create();
+        static ItemScene* create(ItemSlotType slot_type=ItemSlotType::Unset);
         static cocos2d::Scene* createScene();
 
-        bool init() override;
+        virtual bool init(ItemSlotType slot_type=ItemSlotType::Unset);
 
         virtual void init_children();
         virtual cocos2d::ui::Layout* init_panel();
@@ -63,8 +63,8 @@ class AltarItemScene : public ItemScene
         const std::string& get_sell_btn_text() override;
 
     public:
-        static AltarItemScene* create();
-        bool init() override;
+        static AltarItemScene* create(ItemSlotType slot_type=ItemSlotType::Unset);
+        virtual bool init(ItemSlotType slot_type=ItemSlotType::Unset) override;
         void init_callbacks() override;
         static cocos2d::Scene* createScene();
 };
@@ -78,8 +78,8 @@ class EquipItemScene : public ItemScene
         const std::string& get_sell_btn_text() override;
 
     public:
-        static EquipItemScene* create();
-        bool init() override;
+        static EquipItemScene* create(ItemSlotType slot_type=ItemSlotType::Unset);
+        virtual bool init(ItemSlotType slot_type=ItemSlotType::Unset) override;
         void init_callbacks() override;
         static cocos2d::Scene* createScene();
 };

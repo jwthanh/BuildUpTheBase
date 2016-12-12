@@ -188,10 +188,10 @@ const std::string& ItemScene::get_sell_btn_text()
     return default_desc;
 }
 
-ItemScene* ItemScene::create()
+ItemScene* ItemScene::create(ItemSlotType slot_type)
 {
     ItemScene* pRet = new(std::nothrow) ItemScene();
-    if (pRet && pRet->init())
+    if (pRet && pRet->init(slot_type))
     {
         pRet->autorelease();
         return pRet;
@@ -204,9 +204,9 @@ ItemScene* ItemScene::create()
     }
 };
 
-bool ItemScene::init()
+bool ItemScene::init(ItemSlotType slot_type)
 {
-    this->filtered_slot_type = ItemSlotType::Unset;
+    this->filtered_slot_type = slot_type;
 
 #ifdef _WIN32
     FUNC_INIT_WIN32(ItemScene);
@@ -295,10 +295,10 @@ const std::string& AltarItemScene::get_sell_btn_text()
     return default_desc;
 }
 
-AltarItemScene* AltarItemScene::create()
+AltarItemScene* AltarItemScene::create(ItemSlotType slot_type)
 {
     AltarItemScene* pRet = new(std::nothrow) AltarItemScene();
-    if (pRet && pRet->init())
+    if (pRet && pRet->init(slot_type))
     {
         pRet->autorelease();
         return pRet;
@@ -311,9 +311,9 @@ AltarItemScene* AltarItemScene::create()
     }
 };
 
-bool AltarItemScene::init()
+bool AltarItemScene::init(ItemSlotType slot_type)
 {
-    this->filtered_slot_type = ItemSlotType::Unset;
+    this->filtered_slot_type = slot_type;
 
 #ifdef _WIN32
     FUNC_INIT_WIN32(AltarItemScene);
@@ -359,10 +359,10 @@ const std::string& EquipItemScene::get_sell_btn_text()
     return default_desc;
 }
 
-EquipItemScene* EquipItemScene::create()
+EquipItemScene* EquipItemScene::create(ItemSlotType slot_type)
 {
     EquipItemScene* pRet = new(std::nothrow) EquipItemScene();
-    if (pRet && pRet->init())
+    if (pRet && pRet->init(slot_type))
     {
         pRet->autorelease();
         return pRet;
@@ -418,9 +418,9 @@ void EquipItemScene::init_callbacks()
     };
 };
 
-bool EquipItemScene::init()
+bool EquipItemScene::init(ItemSlotType slot_type)
 {
-    this->filtered_slot_type = ItemSlotType::Unset;
+    this->filtered_slot_type = slot_type;
 
 #ifdef _WIN32
     FUNC_INIT_WIN32(EquipItemScene);
