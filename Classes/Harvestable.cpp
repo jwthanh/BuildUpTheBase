@@ -868,9 +868,47 @@ cocos2d::Color4B CraftingHarvestable::get_shatter_text_color()
 void CraftingHarvestable::shatter()
 {
     if (this->recipe != NULL) {
-        this->recipe->callback();
+        enum class Output {
+            Single = 1,
+            Double = 2,
+            Triple = 3
+        };
+
+        RandomWeightMap<Output> boosted_output;
+        boosted_output.add_item(Output::Single, 100);
+        Output result = boosted_output.get_item();
+
+        if (GameLogic::getInstance()->equipment->recipe_slot->has_item())
+        {
+            spItem item = GameLogic::getInstance()->equipment->recipe_slot->get_item();
+
+            boosted_output.add_item(Output::Double, 15 + (item->level+1)*0.05);
+            boosted_output.add_item(Output::Triple, 1 + (item->level+1)*0.025);
+        }
+        else
+        {
+            boosted_output.add_item(Output::Double, 15);
+            boosted_output.add_item(Output::Triple, 1);
+        };
+
+        //FIXME reduce hardcoding maybe?
+        if (result == Output::Single) {
+            this->recipe->callback();
+            do_vibrate(32); //vibrate for two frames
+
+        } else if (result == Output::Double) {
+            this->recipe->callback();
+            this->recipe->callback();
+            do_vibrate(32+16); //vibrate for three frames
+
+        } else if (result == Output::Triple) {
+            this->recipe->callback();
+            this->recipe->callback();
+            this->recipe->callback();
+            do_vibrate(32+32); //vibrate for four frames
+        }
+
         this->recipe->current_clicks = 0;
-        do_vibrate(32); //vibrate for two frames
     };
 
     Harvestable::shatter();
