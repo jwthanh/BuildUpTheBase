@@ -387,6 +387,7 @@ void GameLogic::load_all()
 
     auto item_serializer = ItemSerializer("alpha_items.json");
     item_serializer.load();
+
     auto ingredient_serializer = IngredientSerializer("alpha_ingredients.json");
     ingredient_serializer.load();
 

@@ -777,16 +777,25 @@ void EquipmentSerializer::load()
 
     auto& equipment = GameLogic::getInstance()->equipment;
     rjValue combat_slot_key = rjValue("combat_slot");
-    auto raw_combat_slot = doc[combat_slot_key].GetInt();
-    equipment->combat_slot->set_item(get_item_by_index(raw_combat_slot));
+    if (doc.HasMember(combat_slot_key))
+    {
+        auto raw_combat_slot = doc[combat_slot_key].GetInt();
+        equipment->combat_slot->set_item(get_item_by_index(raw_combat_slot));
+    };
 
     rjValue mining_slot_key = rjValue("mining_slot");
-    auto raw_mining_slot = doc[mining_slot_key].GetInt();
-    equipment->mining_slot->set_item(get_item_by_index(raw_mining_slot));
+    if (doc.HasMember(mining_slot_key))
+    {
+        auto raw_mining_slot = doc[mining_slot_key].GetInt();
+        equipment->mining_slot->set_item(get_item_by_index(raw_mining_slot));
+    };
 
     rjValue recipe_slot_key = rjValue("recipe_slot");
-    auto raw_recipe_slot = doc[recipe_slot_key].GetInt();
-    equipment->recipe_slot->set_item(get_item_by_index(raw_recipe_slot));
+    if (doc.HasMember(recipe_slot_key))
+    {
+        auto raw_recipe_slot = doc[recipe_slot_key].GetInt();
+        equipment->recipe_slot->set_item(get_item_by_index(raw_recipe_slot));
+    };
 
 
     CCLOG("done loading");
