@@ -13,13 +13,11 @@ Items
 Features
 * Stats screen
     * Dynamic class ala Dungeon Siege
-* Fighters take names off leaderboards
 * Info panel for building with misc stats, how many fighters killed, their
   damage etc
 
 * sell more than 1000 at a time
 * buy more than one harvester at a time
-* reorganize the building upgrades so the next ones are along the top
 
 * trade resources in for others, catan style
 * sell workers back
@@ -40,3 +38,7 @@ Features
 * special harvesters require resources per second (to make use of generators)
 
 * limited slots, so you can have one dagger type, but you can replace it for a better one
+
+* new welcome-back prompt so it "doesn't look like a programmers console"
+
+* limit the amount of levels you can upgrade technologies by. its too high and salesmen are out of control
