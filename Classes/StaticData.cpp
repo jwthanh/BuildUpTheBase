@@ -194,6 +194,12 @@ spItem ItemData::build_item(std::string type_name, rjValue* item_data)
     //TODO create a type_to_str for this
     if (slot_type_raw == "combat") {
         slot_type = ItemSlotType::Combat;
+    }
+    else if (slot_type_raw == "mining") {
+        slot_type = ItemSlotType::Mining;
+    }
+    else if (slot_type_raw == "recipe") {
+        slot_type = ItemSlotType::Recipe;
     };
 
     //create item with default dynamic stats

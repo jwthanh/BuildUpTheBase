@@ -6,7 +6,7 @@
             "description": "It weighs more than you think, like you could throw it pretty far.",
             "img_path": "items/stone.png",
             "scavenge_weight": 100.0,
-            "slot_type": "",
+            "slot_type": "mining",
             "base_cost": 65.0
         },
         "dagger": {
@@ -33,7 +33,7 @@
             "description": "Tiny unsightly creature, its eyes dart around quickly.",
             "img_path": "items/homunculus.png",
             "scavenge_weight": 100.0,
-            "slot_type": "",
+            "slot_type": "recipe",
             "base_cost": 250.0
         },
         "tonic": {
@@ -42,7 +42,7 @@
             "description": "You can't stop looking at it, wondering what would happen if you drank all of it. At once.",
             "img_path": "items/tonic.png",
             "scavenge_weight": 30.0,
-            "slot_type": "",
+            "slot_type": "mining",
             "base_cost": 300.0
         },
         "ashen_mirror": {
