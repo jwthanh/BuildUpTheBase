@@ -1,4 +1,7 @@
 #include "Equipment.h"
+#include <assert.h>
+
+#include "Item.h"
 
 EquipmentSlot::EquipmentSlot()
 {
@@ -31,4 +34,14 @@ Equipment::Equipment()
     this->combat_slot = std::unique_ptr<EquipmentSlot>(new EquipmentSlot());
     this->mining_slot = std::unique_ptr<EquipmentSlot>(new EquipmentSlot());
     this->recipe_slot = std::unique_ptr<EquipmentSlot>(new EquipmentSlot());
+};
+
+const std::unique_ptr<EquipmentSlot>& Equipment::get_slot_by_type(ItemSlotType slot_type)
+{
+    if (slot_type == ItemSlotType::Combat) return this->combat_slot;
+    else if (slot_type == ItemSlotType::Mining) return this->mining_slot;
+    else if (slot_type == ItemSlotType::Recipe) return this->recipe_slot;
+
+    assert(false && "slot type unrecognized");
+    return this->combat_slot;
 };

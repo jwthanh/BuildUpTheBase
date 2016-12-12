@@ -391,11 +391,11 @@ void EquipItemScene::init_callbacks()
         this->item_desc->setString(item->description);
 
         this->item_sell_btn->setVisible(true);
-        this->item_sell_btn->addTouchEventListener([item](Ref* sender, ui::Widget::TouchEventType type){
+        this->item_sell_btn->addTouchEventListener([this, item](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 do_vibrate(16);
-                GameLogic::getInstance()->equipment->combat_slot->set_item(item);
+                GameLogic::getInstance()->equipment->get_slot_by_type(this->filtered_slot_type)->set_item(item);
                 cocos2d::Director::getInstance()->popScene();
             }
         });

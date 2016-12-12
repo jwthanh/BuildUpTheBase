@@ -3,6 +3,8 @@
 
 #include "constants.h"
 
+enum class ItemSlotType;
+
 class EquipmentSlot
 {
     private:
@@ -27,6 +29,8 @@ class Equipment
         std::unique_ptr<EquipmentSlot> recipe_slot;
 
         Equipment();
+
+        const std::unique_ptr<EquipmentSlot>& get_slot_by_type(ItemSlotType slot_type);
 
 };
 #endif
