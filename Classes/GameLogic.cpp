@@ -969,7 +969,7 @@ void GameDirector::switch_to_equipment_menu()
 		}
 		else
 		{
-			mining_label->setString("Equip a mining");
+			mining_label->setString("Equip a mining tool");
 		};
 	};
     update_equipped_mining(0);
