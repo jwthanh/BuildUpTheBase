@@ -1,5 +1,15 @@
 * everything costs the same
 
+Items
+* Canary
+* Map
+* Light lamp
+* Spellbook
+* Pickaxe
+* Magic Staff
+* Woodsman (lumberjack)
+* Artisan (item type 'crafting')
+
 Features
 * Stats screen
     * Dynamic class ala Dungeon Siege
