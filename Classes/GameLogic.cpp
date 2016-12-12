@@ -910,10 +910,10 @@ void GameDirector::switch_to_item_altar_menu()
     director->pushScene(scene);
 };
 
-void GameDirector::switch_to_item_equip_menu()
+void GameDirector::switch_to_item_equip_menu(ItemSlotType slot_type)
 {
 
-    auto scene = EquipItemScene::createScene();
+    auto scene = EquipItemScene::createScene(slot_type);
     scene->setName("equip_item_scene");
 
     auto director = cocos2d::Director::getInstance();
@@ -952,7 +952,7 @@ void GameDirector::switch_to_equipment_menu()
     equip_weapon_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            GameDirector::switch_to_item_equip_menu();
+            GameDirector::switch_to_item_equip_menu(ItemSlotType::Combat);
         }
     });
 

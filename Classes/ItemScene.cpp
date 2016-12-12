@@ -228,7 +228,7 @@ bool ItemScene::init(ItemSlotType slot_type)
     return true;
 };
 
-cocos2d::Scene* ItemScene::createScene()
+cocos2d::Scene* ItemScene::createScene(ItemSlotType slot_type)
 {
     auto scene = cocos2d::Scene::create();
     auto* layer = ItemScene::create();
@@ -335,7 +335,7 @@ bool AltarItemScene::init(ItemSlotType slot_type)
     return true;
 };
 
-cocos2d::Scene* AltarItemScene::createScene()
+cocos2d::Scene* AltarItemScene::createScene(ItemSlotType slot_type)
 {
     auto scene = cocos2d::Scene::create();
     auto* layer = AltarItemScene::create();
@@ -443,7 +443,7 @@ bool EquipItemScene::init(ItemSlotType slot_type)
     return true;
 };
 
-cocos2d::Scene* EquipItemScene::createScene()
+cocos2d::Scene* EquipItemScene::createScene(ItemSlotType slot_type)
 {
     auto scene = cocos2d::Scene::create();
     auto* layer = EquipItemScene::create();

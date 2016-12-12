@@ -2,8 +2,12 @@
 #ifndef GAMELOGIC_H
 #define GAMELOGIC_H
 
-#include "constants.h"
 #include "ui/UIButton.h"
+
+#include "constants.h"
+
+enum class ItemSlotType;
+
 class Beatup;
 class Buildup;
 class Equipment;
@@ -77,7 +81,7 @@ class GameDirector
         static void switch_to_miner_menu();
         static void switch_to_items_menu();
         static void switch_to_item_altar_menu();
-        static void switch_to_item_equip_menu();
+        static void switch_to_item_equip_menu(ItemSlotType slot_type);
         static void switch_to_equipment_menu();
 };
 

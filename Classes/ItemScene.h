@@ -26,7 +26,7 @@ class ItemScene : public GameLayer
 
     public:
         static ItemScene* create(ItemSlotType slot_type=ItemSlotType::Unset);
-        static cocos2d::Scene* createScene();
+        static cocos2d::Scene* createScene(ItemSlotType slot_type=ItemSlotType::Unset);
 
         virtual bool init(ItemSlotType slot_type=ItemSlotType::Unset);
 
@@ -66,7 +66,7 @@ class AltarItemScene : public ItemScene
         static AltarItemScene* create(ItemSlotType slot_type=ItemSlotType::Unset);
         virtual bool init(ItemSlotType slot_type=ItemSlotType::Unset) override;
         void init_callbacks() override;
-        static cocos2d::Scene* createScene();
+        static cocos2d::Scene* createScene(ItemSlotType slot_type=ItemSlotType::Unset);
 };
 
 class EquipItemScene : public ItemScene
@@ -81,7 +81,7 @@ class EquipItemScene : public ItemScene
         static EquipItemScene* create(ItemSlotType slot_type=ItemSlotType::Unset);
         virtual bool init(ItemSlotType slot_type=ItemSlotType::Unset) override;
         void init_callbacks() override;
-        static cocos2d::Scene* createScene();
+        static cocos2d::Scene* createScene(ItemSlotType slot_type=ItemSlotType::Unset);
 };
 
 #endif
