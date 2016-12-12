@@ -109,7 +109,15 @@ void ItemScene::reset_detail_panel()
 
 vsItem ItemScene::get_items()
 {
-    return BUILDUP->items;
+    vsItem filtered_items;
+    for (auto& item : BUILDUP->items)
+    {
+        if (item->slot_type == this->filtered_slot_type)
+        {
+            filtered_items.push_back(item);
+        }
+    }
+    return filtered_items;
 };
 
 cocos2d::ui::Layout* ItemScene::init_panel()
