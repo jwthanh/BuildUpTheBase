@@ -600,12 +600,12 @@ void MiningHarvestable::animate_touch_start(cocos2d::Touch* touch)
         iron_weight += (0.05 * item->level)* ITEM_RARITY_MODIFIER.at(item->rarity);
     };
 
-    item_rarity_map.add_item(Ingredient::SubType::Wood, iron_weight);
+    item_rarity_map.add_item(Ingredient::SubType::Iron, iron_weight);
 
     Ingredient::SubType output = item_rarity_map.get_item();
 
     //vibrate if player gets wood
-    if (output == Ingredient::SubType::Wood){
+    if (output == Ingredient::SubType::Iron){
         do_vibrate(32);
     };
 
