@@ -13,11 +13,9 @@
 #include "constants.h"
 #include "Nameable.h"
 
-#include "Clock.h"
-
-//it would be nice to not need this, but mistHarvesters uses it
-#include "Worker.h"
 #include "Updateable.h"
+
+#include "Worker.h" //it would be nice to not need this, but mistHarvesters uses it
 
 
 using HarvesterCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Harvester>>>;
