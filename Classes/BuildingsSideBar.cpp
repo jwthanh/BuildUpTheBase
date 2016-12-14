@@ -1034,20 +1034,25 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item->set_touch_ended_callback([excluded_ing_types]()
             {
                 CCLOG("selling all by cb");
-                res_count_t sale_price = 10; //TODO use proper price
                 mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
                 for (auto ingredient : all_ingredients)
                 {
                     IngredientSubType ing_type = ingredient.first;
-                    //skip if in exclude
+                    //
+                    //skip if in exclude list
                     if (std::find(excluded_ing_types.begin(), excluded_ing_types.end(), ing_type) != excluded_ing_types.end())
                     {
                         continue;
                     }
+
+                    CCLOG("WARNING: sell all doesnt use remove from shared all");
+
                     res_count_t _def = 0;
-                    CCLOG("sell all doesnt use remove from shared all");
                     res_count_t ing_count = map_get(all_ingredients, ing_type, _def);
+                    res_count_t sale_price = Ingredient::type_to_value.at(ing_type);
+
                     BEATUP->add_total_coin(ing_count*sale_price);
+
                     all_ingredients[ing_type] = 0;
                 }
 

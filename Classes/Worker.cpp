@@ -175,9 +175,7 @@ void Salesman::on_update(float dt)
         if (max_can_sell != 0)
         {
             res_count_t to_sell = std::min(max_can_sell, active_sell_count);
-            res_count_t coins_gained = 3; //TODO use actual resource price instead of hardcoded FIXME
-
-            std::string string_type = Ingredient::type_to_string(ing_type);
+            res_count_t coins_gained = Ingredient::type_to_value.at(this->ing_type); //TODO use actual resource price instead of hardcoded FIXME
 
             //remove the ingredients
             BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
@@ -194,6 +192,8 @@ void Salesman::on_update(float dt)
                 auto inventory_listview = harvest_scene->getChildByName("inventory_listview");
                 if (inventory_listview)
                 {
+                    std::string string_type = Ingredient::type_to_string(ing_type);
+
                     auto ing_panel = inventory_listview->getChildByName(string_type);
                     if (ing_panel)
                     {

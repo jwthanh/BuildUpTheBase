@@ -678,7 +678,7 @@ float CraftingHarvestable::get_click_ratio() const
     }
     else
     {
-        //TODO fix harcoded 3
+        //TODO fix hardcoded 3
         return static_cast<float>(this->recipe->current_clicks) / 3;
     };
 }

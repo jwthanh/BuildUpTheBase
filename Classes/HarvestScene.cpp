@@ -1098,7 +1098,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         count_lbl->setString(beautify_double(count));
     }, AVERAGE_DELAY, "alert_count_update");
 
-    res_count_t coins_gained = 3;
+    res_count_t coins_gained = Ingredient::type_to_value.at(ing_type);
     auto create_sell_button = [this, alert_panel, ing_type, coins_gained](std::string name, int amount_sold)
     {
         auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
