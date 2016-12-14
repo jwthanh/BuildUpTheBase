@@ -10,7 +10,7 @@
 #include "SubTypes.h"
 
 
-#include "Resources.h"
+#include "Ingredients.h"
 
 class ResourceCondition : public Nameable
 {

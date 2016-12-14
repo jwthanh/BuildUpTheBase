@@ -26,7 +26,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Harvestable.cpp \
                    ../../Classes/Visitors.cpp \
                    ../../Classes/Technology.cpp \
-                   ../../Classes/Resources.cpp \
+                   ../../Classes/Ingredients.cpp \
                    ../../Classes/GameLogic.cpp \
                    ../../Classes/GameLayer.cpp \
                    ../../Classes/MiscUI.cpp \

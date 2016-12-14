@@ -3,7 +3,7 @@
 #define HARVESTSCENE_H
 
 #include "GameLayer.h"
-#include "Resources.h"
+#include "Ingredients.h"
 #include "magic_particles/_core/magic.h"
 //#include "magic_particles/MagicEmitter.h"
 //#include "Harvestable.h"

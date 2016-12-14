@@ -6,7 +6,7 @@
 #include <map>
 
 #include "Clock.h"
-#include "Resources.h"
+#include "Ingredients.h"
 
 #include "Buyable.h"
 

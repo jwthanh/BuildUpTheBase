@@ -5,7 +5,7 @@
 #include <map>
 
 #include "constants.h"
-#include "Resources.h"
+#include "Ingredients.h"
 #include "Nameable.h"
 
 typedef mistIngredient ComponentMap;
