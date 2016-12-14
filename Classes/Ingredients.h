@@ -2,6 +2,7 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
 #include <map>
+#include <unordered_map>
 
 #include "constants.h"
 
@@ -34,7 +35,10 @@ class Ingredient : public Resource
     public:
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
 
+
         using SubType = IngredientSubType;
+
+        static const std::unordered_map<SubType, res_count_t> type_to_value;
 
 
         TYPE_MAP_CONVERSION(Ingredient, ingredient);
