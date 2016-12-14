@@ -10,7 +10,6 @@
 
 typedef mistIngredient ComponentMap;
 typedef mistIngredient OutputMap;
-typedef mistProduct ProductMap;
 
 class Recipe : public Nameable
 {

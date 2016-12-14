@@ -49,47 +49,8 @@ class Ingredient : public Resource
 
 };
 
-class Product : public Resource
-{
-    public:
-        static const ResourceType resource_type = Resource::ResourceType::Product;
-
-        using SubType = ProductSubType;
-
-        TYPE_MAP_CONVERSION(Product, product);
-
-        Product(Product::SubType sub_type) : Resource() {
-            this->sub_type = sub_type;
-        };
-
-        Product(const Product& other) : Resource(other) {
-            this->sub_type = other.sub_type;
-        };
-};
-
-class Waste : public Resource
-{
-    public:
-        static const ResourceType resource_type = Resource::ResourceType::Waste;
-
-        using SubType = WasteSubType;
-
-        TYPE_MAP_CONVERSION(Waste, waste);
-
-
-        Waste(Waste::SubType sub_type) : Resource() {
-            this->sub_type = sub_type;
-        };
-
-        Waste(const Waste& other) : Resource(other) {
-            this->sub_type = other.sub_type;
-        };
-};
-
 #define MAKE_MI_SUBTYPE(Cls)typedef std::map<Cls::SubType, res_count_t> mist##Cls
 MAKE_MI_SUBTYPE(Ingredient);
-MAKE_MI_SUBTYPE(Product);
-MAKE_MI_SUBTYPE(Waste);
 #undef  MAKE_MI_SUBTYPE
 
 #endif

@@ -27,21 +27,6 @@ const std::map<Ingredient::SubType, std::string> Ingredient::type_map = {
     {Ingredient::SubType::MineRails, "minerails"}
 };
 
-const std::map<Product::SubType, std::string> Product::type_map = {
-    {Product::SubType::Veggies, "veggies"},
-    {Product::SubType::Meat, "meat"},
-    {Product::SubType::Dairy, "dairy"},
-    {Product::SubType::Cereals, "cereals"},
-    {Product::SubType::Sword, "sword"},
-    {Product::SubType::Shield, "shield"},
-    {Product::SubType::Meat, "meat"},
-};
-
-const std::map<Waste::SubType, std::string> Waste::type_map = {
-    {Waste::SubType::Corpse, "corpse"},
-    {Waste::SubType::Wasted_Iron, "wasted_iron"},
-};
-
 #define type_stuff(ResType)std::string ResType::type_to_string(ResType::SubType type) \
 { \
     std::string result = "none"; \
@@ -102,8 +87,6 @@ std::string Resource::type_str(ResourceType type)
 {
     auto mapping = std::map<ResourceType, std::string>();
     mapping[Ingredient] = "Ingredient";
-    mapping[ResourceType::Product] = "Product";
-    mapping[ResourceType::Waste] = "Waste";
 
     return mapping[type];
 }

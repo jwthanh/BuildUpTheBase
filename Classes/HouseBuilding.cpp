@@ -170,9 +170,6 @@ Building::Building(Village* city, std::string name, std::string id_key) :
     update_clock.set_threshold(1.0f);
     spawn_clock = Clock(3);
 
-    products = mistProduct();
-    wastes = mistWaste();
-
     workers = vsWorker();
 
     harvesters = mistHarvester();
@@ -224,18 +221,6 @@ res_count_t Building::get_total_salesmen_output()
     return total;
 };
 
-res_count_t Building::count_products(Product::SubType pro_type)
-{
-    res_count_t def = 0;
-    return map_get(this->products, pro_type, def);
-};
-
-res_count_t Building::count_wastes(Waste::SubType wst_type)
-{
-    res_count_t def = 0;
-    return map_get(this->wastes, wst_type, def);
-};
-
 template<typename T>
 std::shared_ptr<T> create_one(typename T::SubType sub_type)
 {
@@ -266,16 +251,6 @@ void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t quan
     else
     {
     };
-};
-
-void Building::create_products(Product::SubType sub_type, res_count_t quantity)
-{
-    create<mistProduct>(this->products, quantity, sub_type);
-};
-
-void Building::create_wastes(Waste::SubType sub_type, res_count_t quantity)
-{
-    create<mistWaste>(this->wastes, quantity, sub_type);
 };
 
 void Building::consume_recipe(Recipe* recipe)
@@ -360,64 +335,6 @@ void Building::update(float dt)
 
 
     }
-};
-
-res_count_t Building::count_products()
-{
-    res_count_t total = 0;
-    for (auto type_str : Product::type_map)
-    {
-        Product::SubType type = type_str.first;
-        res_count_t _def = 0;
-        res_count_t count = map_get(this->products, type, _def);
-        total += count;
-    };
-    return total;
-};
-
-std::string Building::get_products()
-{
-    std::stringstream ss;
-    for (auto type_str : Product::type_map)
-    {
-        Product::SubType type = type_str.first;
-        std::string str = type_str.second;
-        unsigned int count = this->products[type];
-        if (count != 0)
-        {
-            ss << str << "(x" << count << ") ";
-        }
-    };
-    return ss.str();
-};
-
-res_count_t Building::count_wastes()
-{
-    res_count_t total = 0;
-    for (auto type_str : Waste::type_map)
-    {
-        Waste::SubType type = type_str.first;
-        res_count_t _def = 0;
-        res_count_t count = map_get(this->wastes, type, _def);
-        total += count;
-    };
-    return total;
-};
-
-std::string Building::get_wastes()
-{
-    std::stringstream ss;
-    for (auto type_str : Waste::type_map)
-    {
-        Waste::SubType type = type_str.first;
-        std::string str = type_str.second;
-        unsigned int count = this->wastes[type];
-        if (count != 0)
-        {
-            ss << str << "(x" << count << ") ";
-        }
-    };
-    return ss.str();
 };
 
 std::map<int, res_count_t> level_output = {

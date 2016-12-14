@@ -34,10 +34,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         Ingredient::SubType punched_sub_type;
 
-        //mistIngredient ingredients;
-        mistProduct products;
-        mistWaste wastes;
-
         vsWorker workers;
 
         spVisitors visitors;
@@ -62,8 +58,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         Building(Village* city, std::string name, std::string id_key);
         void create_ingredients(Ingredient::SubType sub_type, res_count_t quantity);
-        void create_products(Product::SubType sub_type, res_count_t quantity);
-        void create_wastes(Waste::SubType sub_type, res_count_t quantity);
     
         void consume_recipe(Recipe* recipe);
 
@@ -72,13 +66,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         res_count_t get_total_harvester_output();
         res_count_t get_total_salesmen_output();
 
-        res_count_t count_products();
-        res_count_t count_products(Product::SubType pro_type);
-        res_count_t count_wastes();
-        res_count_t count_wastes(Waste::SubType wst_type);
-
-        std::string get_products();
-        std::string get_wastes();
 
 };
 
