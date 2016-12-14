@@ -26,7 +26,7 @@ void Worker::update(float dt)
     if (this->active_count < 1){
         return;
     };
-    
+
     //used to use update_timer, but this only gets called when a building gets
     //updated so it doesnt need to be regulated anyway
     this->on_update(dt);
@@ -84,7 +84,7 @@ void Harvester::on_update(float dt)
 res_count_t Harvester::get_base_shop_cost(SubType harv_type)
 {
     res_count_t base_cost = 25;
-    
+
     if (harv_type == SubType::One)        { base_cost = 25; }
     else if (harv_type == SubType::Two)   { base_cost = 200; }
     else if (harv_type == SubType::Three) { base_cost = 1000; }
@@ -104,7 +104,7 @@ res_count_t Harvester::get_base_shop_cost(SubType harv_type)
 res_count_t Harvester::get_to_harvest_count(SubType harv_type)
 {
     res_count_t harvested_count = 1;
-    
+
     if (harv_type == SubType::One)         { harvested_count = 0.1; }
     else if (harv_type == SubType::Two)    { harvested_count = 1; }
     else if (harv_type == SubType::Three)  { harvested_count = 8; }
@@ -177,48 +177,43 @@ void Salesman::on_update(float dt)
             res_count_t to_sell = std::min(max_can_sell, active_sell_count);
             res_count_t coins_gained = 3; //TODO use actual resource price instead of hardcoded FIXME
 
-            // if (to_sell >= active_sell_count)
-            if (true) //sell even if you've got less than required
+            std::string string_type = Ingredient::type_to_string(ing_type);
+
+            //remove the ingredients
+            BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
+
+            //add the value of amount sold
+            res_count_t actual_value = (res_count_t)(to_sell*coins_gained);
+            BEATUP->add_total_coin(actual_value);
+
+            //create floating label for the amount sold over the correct ing panel
+            cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();
+            auto harvest_scene = root_scene->getChildByName("HarvestScene");
+            if (harvest_scene)
             {
-                std::string string_type = Ingredient::type_to_string(ing_type);
-
-                BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
-                res_count_t actual_value = (res_count_t)(to_sell*coins_gained);
-                BEATUP->add_total_coin(actual_value);
-
-                //create floating label for the amount sold over the correct
-                //ing panel
-                cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();
-                auto harvest_scene = root_scene->getChildByName("HarvestScene");
-                if (harvest_scene)
+                auto inventory_listview = harvest_scene->getChildByName("inventory_listview");
+                if (inventory_listview)
                 {
-                    auto inventory_listview = harvest_scene->getChildByName("inventory_listview");
-                    if (inventory_listview)
+                    auto ing_panel = inventory_listview->getChildByName(string_type);
+                    if (ing_panel)
                     {
-                        auto ing_panel = inventory_listview->getChildByName(string_type);
-                        if (ing_panel)
-                        {
-                            auto floating_label = FloatingLabel::createWithTTF("+$" + beautify_double(actual_value), "pixelmix.ttf", 25);
-                            floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
-                            harvest_scene->addChild(floating_label);
-                            floating_label->do_float(50, 1, 50, 10, 1);
+                        auto floating_label = FloatingLabel::createWithTTF("+$" + beautify_double(actual_value), "pixelmix.ttf", 25);
+                        floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
+                        harvest_scene->addChild(floating_label);
+                        floating_label->do_float(50, 1, 50, 10, 1);
 
-                            cocos2d::Vec2 pos = {
-                                ing_panel->getContentSize().width / 2,
-                                ing_panel->getContentSize().height
-                            };
-                            floating_label->setPosition(ing_panel->convertToWorldSpace(pos));
-                        }
+                        cocos2d::Vec2 pos = {
+                            ing_panel->getContentSize().width / 2,
+                            ing_panel->getContentSize().height
+                        };
+                        floating_label->setPosition(ing_panel->convertToWorldSpace(pos));
                     }
+                }
 
-                }
-                else
-                {
-                    CCLOG("warn no harvest scene found, probably due to this being on startup, so we're not going to make any floating labels");
-                }
             }
             else
             {
+                CCLOG("warn no harvest scene found, probably due to this being on startup, so we're not going to make any floating labels");
             }
         }
     }
@@ -227,7 +222,7 @@ void Salesman::on_update(float dt)
 ConsumerHarvester::ConsumerHarvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type)
     : Harvester(building, name, ing_type, sub_type)
 {
-    
+
 }
 
 void ConsumerHarvester::on_update(float dt)
