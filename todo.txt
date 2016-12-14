@@ -34,6 +34,8 @@ Features
 
 * can recruit specialized harvesters to live in your city. they either live a certain amount of time
   or require a certain resource before leaving or reducing output
+* when you find these special ones, you can either use them right away, or put them in a training are for a X time 
+  and then name them on the way out and they get special bonuses
 
 * special harvesters require resources per second (to make use of generators)
 
