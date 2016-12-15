@@ -27,7 +27,7 @@ const std::map<Ingredient::SubType, std::string> Ingredient::type_map = {
     {Ingredient::SubType::MineRails, "minerails"}
 };
 
-const std::unordered_map<Ingredient::SubType, res_count_t> Ingredient::type_to_value = {
+const std::map<Ingredient::SubType, res_count_t> Ingredient::type_to_value = {
     {Ingredient::SubType::Grain,         3.0},
     {Ingredient::SubType::PileOfGrain,  30.0},
     {Ingredient::SubType::Bread,        45.0},
@@ -48,7 +48,7 @@ const std::unordered_map<Ingredient::SubType, res_count_t> Ingredient::type_to_v
     {Ingredient::SubType::MineRails,    50.0}
 };
 
-const std::unordered_map<Ingredient::SubType, res_count_t> Ingredient::type_to_harvest_ratio = {
+const std::map<Ingredient::SubType, res_count_t> Ingredient::type_to_harvest_ratio = {
     //no harvesters for these
     {Ingredient::SubType::PileOfGrain,  1.0},
     {Ingredient::SubType::Bread,        1.0},
