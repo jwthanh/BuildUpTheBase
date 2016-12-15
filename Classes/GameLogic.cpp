@@ -72,8 +72,8 @@ void GameLogic::post_load()
     CCLOG("loading game on startup, this should only happen once");
     GameLogic::load_all();
 
-    //bool show_welcome_modal = true;
-    bool show_welcome_modal = false;
+    bool show_welcome_modal = true;
+    // bool show_welcome_modal = false;
     if (show_welcome_modal)
     {
         auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
