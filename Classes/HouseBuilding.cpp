@@ -200,7 +200,7 @@ res_count_t Building::get_total_harvester_output()
         WorkerSubType harv_type = h_mist.first.first;
         Ingredient::SubType ing_type = h_mist.first.second;
         res_count_t active_count = h_mist.second;
-        total += Harvester::get_to_harvest_count(harv_type)*active_count;
+        total += Harvester::get_to_harvest_count(harv_type, ing_type)*active_count;
     };
 
     return total;

@@ -48,6 +48,30 @@ const std::unordered_map<Ingredient::SubType, res_count_t> Ingredient::type_to_v
     {Ingredient::SubType::MineRails,    50.0}
 };
 
+const std::unordered_map<Ingredient::SubType, res_count_t> Ingredient::type_to_harvest_ratio = {
+    //no harvesters for these
+    {Ingredient::SubType::PileOfGrain,  1.0},
+    {Ingredient::SubType::Bread,        1.0},
+    {Ingredient::SubType::Loaf,         1.0},
+    {Ingredient::SubType::Iron,         1.0},
+    {Ingredient::SubType::Soul,         1.0},
+    {Ingredient::SubType::Undead,       1.0},
+    {Ingredient::SubType::Minecart,     1.0},
+    {Ingredient::SubType::MineRails,    1.0},
+    {Ingredient::SubType::Wood,         1.0},
+
+    //only ingredients with auto harvesters
+    {Ingredient::SubType::Grain,         2.0},
+    {Ingredient::SubType::Sand,          0.6},
+    {Ingredient::SubType::Blood,         0.5},
+    {Ingredient::SubType::Paper,         1.1},
+    {Ingredient::SubType::Fly,           1.0},
+    {Ingredient::SubType::Seed,          1.0},
+    {Ingredient::SubType::Copper,        0.7},
+    {Ingredient::SubType::Flesh,         0.3},
+    {Ingredient::SubType::Berry,         1.0},
+};
+
 #define type_stuff(ResType)std::string ResType::type_to_string(ResType::SubType type) \
 { \
     std::string result = "none"; \

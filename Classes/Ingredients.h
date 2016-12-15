@@ -39,6 +39,7 @@ class Ingredient : public Resource
         using SubType = IngredientSubType;
 
         static const std::unordered_map<SubType, res_count_t> type_to_value;
+        static const std::unordered_map<Ingredient::SubType, res_count_t> type_to_harvest_ratio;
 
 
         TYPE_MAP_CONVERSION(Ingredient, ingredient);

@@ -843,7 +843,7 @@ void HarvesterShopNuItem::my_init_update_callback()
         this->_shop_cost = scale_number_slow(Harvester::get_base_shop_cost(this->harv_type), harvesters_owned, 1.15L, 3.0L);
 
         std::stringstream ss;
-        auto harvested_count = Harvester::get_to_harvest_count(this->harv_type);
+        auto harvested_count = Harvester::get_to_harvest_count(this->harv_type, this->ing_type);
         ss << "Adds " << harvested_count << " " << Ingredient::type_to_string(building->punched_sub_type) << "\nper sec";
         this->set_description(ss.str());
     };

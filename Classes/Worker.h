@@ -76,7 +76,7 @@ class Harvester : public Worker
         virtual void on_update(float dt) override;
 
         static res_count_t get_base_shop_cost(SubType harv_type);
-        static res_count_t get_to_harvest_count(SubType harv_type);
+        static res_count_t get_to_harvest_count(SubType harv_type, IngredientSubType ing_type);
 };
 
 class Salesman : public Harvester

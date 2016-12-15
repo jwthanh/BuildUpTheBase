@@ -73,7 +73,7 @@ Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType 
 
 void Harvester::on_update(float dt)
 {
-    auto harvested_count = Harvester::get_to_harvest_count(this->sub_type);
+    auto harvested_count = Harvester::get_to_harvest_count(this->sub_type, this->ing_type);
     res_count_t to_create = harvested_count*this->active_count;
     if (to_create > 0)
     {
@@ -101,7 +101,7 @@ res_count_t Harvester::get_base_shop_cost(SubType harv_type)
     return base_cost;
 };
 
-res_count_t Harvester::get_to_harvest_count(SubType harv_type)
+res_count_t Harvester::get_to_harvest_count(WorkerSubType harv_type, IngredientSubType ing_type)
 {
     res_count_t harvested_count = 1;
 
@@ -118,7 +118,7 @@ res_count_t Harvester::get_to_harvest_count(SubType harv_type)
     else if (harv_type == SubType::Eleven) { harvested_count = 55000; }
     else { harvested_count = 9999;}
 
-    return harvested_count;
+    return harvested_count * Ingredient::type_to_harvest_ratio.at(ing_type);
 }
 
 Salesman::Salesman(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type)
@@ -175,7 +175,7 @@ void Salesman::on_update(float dt)
         if (max_can_sell != 0)
         {
             res_count_t to_sell = std::min(max_can_sell, active_sell_count);
-            res_count_t coins_gained = Ingredient::type_to_value.at(this->ing_type); //TODO use actual resource price instead of hardcoded FIXME
+            res_count_t coins_gained = Ingredient::type_to_value.at(this->ing_type);
 
             //remove the ingredients
             BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
