@@ -66,8 +66,8 @@ const std::unordered_map<Ingredient::SubType, res_count_t> Ingredient::type_to_h
     {Ingredient::SubType::Blood,         0.5},
     {Ingredient::SubType::Paper,         1.1},
     {Ingredient::SubType::Fly,           1.0},
-    {Ingredient::SubType::Seed,          1.0},
-    {Ingredient::SubType::Copper,        0.7},
+    {Ingredient::SubType::Seed,          0.7},
+    {Ingredient::SubType::Copper,        0.4},
     {Ingredient::SubType::Flesh,         0.3},
     {Ingredient::SubType::Berry,         1.0},
 };
