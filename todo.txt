@@ -44,3 +44,6 @@ Features
 * new welcome-back prompt so it "doesn't look like a programmers console"
 
 * limit the amount of levels you can upgrade technologies by. its too high and salesmen are out of control
+
+* since we've got items now, lets turn sword sharpening into a timer and have it degrade all the time
+* Need a progress bar that shows the sword sharpness
