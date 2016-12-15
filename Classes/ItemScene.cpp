@@ -58,10 +58,28 @@ void ItemScene::init_callbacks()
                 this->items_listview->removeChild(nuitem->button);
                 this->items_listview->removeChild(nuitem);
 
+                //remove from items list
                 BUILDUP->items.erase(
                     std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item),
                     BUILDUP->items.end()
                 );
+
+                //TODO clear equipment slots nicely, this is ugly
+                auto& equipment = GameLogic::getInstance()->equipment;
+
+                if (equipment->combat_slot->get_item() == item)
+                {
+                    equipment->combat_slot->set_item(NULL);
+                }
+                else if (equipment->mining_slot->get_item() == item)
+                {
+                    equipment->mining_slot->set_item(NULL);
+                }
+                else if (equipment->recipe_slot->get_item() == item)
+                {
+                    equipment->recipe_slot->set_item(NULL);
+                }
+
 
                 BEATUP->add_total_coin(item->get_effective_cost());
 
