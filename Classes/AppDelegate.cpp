@@ -198,7 +198,8 @@ void AppDelegate::preload_sprites()
         "master_harvesters_50.plist"
     };
 
-    for (auto path : sheet_paths) {
+    for (auto& path : sheet_paths) {
+        CCLOG("  loading %s", path);
         cache->addSpriteFramesWithFile(path);
     };
 

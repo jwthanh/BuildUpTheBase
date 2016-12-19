@@ -2,11 +2,11 @@
 <data version="1.0">
     <struct type="Settings">
         <key>fileFormatVersion</key>
-        <int>3</int>
+        <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.0.1</string>
+        <string>4.3.1</string>
         <key>fileName</key>
-        <string>C:/Users/Primary/workspace/basebuilder/raw/kenny_iso_buildings.tps</string>
+        <string>C:/Users/Josh/Documents/cocos_projects/basebuilder/raw/kenny_iso_buildings.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -29,8 +29,6 @@
         </array>
         <key>allowRotation</key>
         <true/>
-        <key>premultiplyAlpha</key>
-        <false/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
@@ -49,6 +47,8 @@
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
         <enum type="SettingsBase::Etc1CompressionQuality">ETC1_QUALITY_LOW_PERCEPTUAL</enum>
+        <key>etc2CompressionQuality</key>
+        <enum type="SettingsBase::Etc2CompressionQuality">ETC2_QUALITY_LOW_PERCEPTUAL</enum>
         <key>dxtCompressionMode</key>
         <enum type="SettingsBase::DxtCompressionMode">DXT_PERCEPTUAL</enum>
         <key>jxrColorFormat</key>
@@ -81,6 +81,8 @@
         <uint>101</uint>
         <key>textureSubPath</key>
         <string></string>
+        <key>atfFormats</key>
+        <string></string>
         <key>textureFormat</key>
         <enum type="SettingsBase::TextureFormat">png</enum>
         <key>borderPadding</key>
@@ -99,8 +101,6 @@
             <key>height</key>
             <int>-1</int>
         </QSize>
-        <key>reduceBorderArtifacts</key>
-        <false/>
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
@@ -108,11 +108,9 @@
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
-            <enum type="AlgorithmSettings::SizeConstraints">AnySize</enum>
+            <enum type="AlgorithmSettings::SizeConstraints">WordAligned</enum>
             <key>forceSquared</key>
             <false/>
-            <key>forceWordAligned</key>
-            <true/>
             <key>maxRects</key>
             <struct type="AlgorithmMaxRectsSettings">
                 <key>heuristic</key>
@@ -124,6 +122,11 @@
                 <enum type="AlgorithmBasicSettings::SortBy">Best</enum>
                 <key>order</key>
                 <enum type="AlgorithmBasicSettings::Order">Ascending</enum>
+            </struct>
+            <key>polygon</key>
+            <struct type="AlgorithmPolygonSettings">
+                <key>alignToGrid</key>
+                <uint>1</uint>
             </struct>
         </struct>
         <key>andEngine</key>
@@ -156,6 +159,8 @@
         <false/>
         <key>outputFormat</key>
         <enum type="SettingsBase::OutputFormat">RGBA8888</enum>
+        <key>alphaHandling</key>
+        <enum type="SettingsBase::AlphaHandling">ClearTransparentPixels</enum>
         <key>contentProtection</key>
         <struct type="ContentProtection">
             <key>key</key>
@@ -167,8 +172,6 @@
         <false/>
         <key>prependSmartFolderName</key>
         <false/>
-        <key>cleanTransparentPixels</key>
-        <true/>
         <key>globalSpriteSettings</key>
         <struct type="SpriteSettings">
             <key>scale</key>
@@ -187,55 +190,189 @@
             <int>200</int>
             <key>heuristicMask</key>
             <false/>
-            <key>pivotPoint</key>
-            <enum type="SpriteSettings::PivotPoint">Center</enum>
+            <key>defaultPivotPoint</key>
+            <point_f>0.5,0.5</point_f>
+            <key>writePivotPoints</key>
+            <false/>
         </struct>
+        <key>individualSpriteSettings</key>
+        <map type="IndividualSpriteSettingsMap">
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_000.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_007.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_008.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_015.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_016.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_023.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_024.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_031.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_032.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_038.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_039.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_043.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_044.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_045.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_047.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_048.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_049.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_050.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_051.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_052.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_053.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_054.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_055.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,21,50,43</rect>
+                <key>scale9Paddings</key>
+                <rect>25,21,50,43</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_001.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_022.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_030.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_036.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_037.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_042.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_085.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_092.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_099.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_100.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_106.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_107.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_114.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_115.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_122.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>33,32,67,64</rect>
+                <key>scale9Paddings</key>
+                <rect>33,32,67,64</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_002.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_003.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_004.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_009.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_010.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_011.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_012.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_014.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_017.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_018.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_019.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_020.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_021.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_025.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_026.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_028.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_029.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_033.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_034.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_041.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_093.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_101.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_108.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_109.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_113.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_116.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_117.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_123.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_124.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_125.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>33,32,66,64</rect>
+                <key>scale9Paddings</key>
+                <rect>33,32,66,64</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_027.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_035.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_040.png</key>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_046.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>33,33,66,65</rect>
+                <key>scale9Paddings</key>
+                <rect>33,33,66,65</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_078.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,6,7,12</rect>
+                <key>scale9Paddings</key>
+                <rect>3,6,7,12</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_086.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,14,50,28</rect>
+                <key>scale9Paddings</key>
+                <rect>25,14,50,28</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+        </map>
         <key>fileList</key>
         <array>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_099.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_100.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_101.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_102.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_103.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_104.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_105.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_106.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_107.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_108.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_109.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_110.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_111.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_112.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_113.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_114.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_115.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_116.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_117.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_118.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_119.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_120.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_121.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_122.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_123.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_124.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_125.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_126.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_127.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_128.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_000.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_001.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_002.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_003.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_004.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_005.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_006.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_007.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_008.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_009.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_010.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_011.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_012.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_013.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_014.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_015.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_016.png</filename>
@@ -278,49 +415,11 @@
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_053.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_054.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_055.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_056.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_057.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_058.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_059.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_060.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_061.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_062.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_063.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_064.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_065.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_066.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_067.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_068.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_069.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_070.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_071.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_072.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_073.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_074.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_075.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_076.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_077.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_078.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_079.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_080.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_081.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_082.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_083.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_084.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_085.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_086.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_087.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_088.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_089.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_090.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_091.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_092.png</filename>
             <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_093.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_094.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_095.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_096.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_097.png</filename>
-            <filename>kenny/Art/Isometric tiles - Buildings (128 assets)/PNG/buildingTiles_098.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
@@ -342,5 +441,7 @@
         <string></string>
         <key>normalMapSheetFileName</key>
         <filename></filename>
+        <key>exporterProperties</key>
+        <map type="ExporterProperties"/>
     </struct>
 </data>
