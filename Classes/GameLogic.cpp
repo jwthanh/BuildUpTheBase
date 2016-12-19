@@ -4,7 +4,6 @@
 #include "base/CCDirector.h"
 #include "2d/CCSprite.h"
 
-#include "ui/UIListView.h"
 #include "ui/UILayout.h"
 #include "ui/UIText.h"
 #include "ui/UIButton.h"

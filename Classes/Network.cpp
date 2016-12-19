@@ -14,10 +14,10 @@
 
 using namespace cocos2d;
 
-Request::Request() 
+Request::Request()
     : type(Type::GET), _url(""), _response(NULL)
 {
-    
+
 };
 
 bool Request::init(Type request_type, std::string url, std::string data)
@@ -70,20 +70,20 @@ void Request::send()
     this->_request->release();
 };
 
-Request* Request::create(Type request_type, std::string url, std::string data) 
-{ 
-    Request *pRet = new(std::nothrow) Request(); 
-    if (pRet && pRet->init(request_type, url, data)) 
-    { 
-        pRet->autorelease(); 
-        return pRet; 
-    } 
-    else 
-    { 
-        delete pRet; 
-        pRet = nullptr; 
-        return nullptr; 
-    } 
+Request* Request::create(Type request_type, std::string url, std::string data)
+{
+    Request *pRet = new(std::nothrow) Request();
+    if (pRet && pRet->init(request_type, url, data))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
 };
 
 Request* Request::create_get(std::string url)

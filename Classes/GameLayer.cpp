@@ -11,8 +11,6 @@
 USING_NS_CC;
 
 #include "GameLogic.h"
-#include "Beatup.h"
-#include "HouseBuilding.h"
 
 std::string GameLayer::menu_font = DEFAULT_FONT;
 float GameLayer::menu_fontsize = 0;

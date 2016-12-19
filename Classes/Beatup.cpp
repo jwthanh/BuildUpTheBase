@@ -14,8 +14,6 @@
 #include "ShatterNode.h" //is used on android
 
 #include "HouseBuilding.h"
-#include "Fighter.h"
-
 
 //#pragma warning(default:4267)
 //#pragma warning(default:4251)
@@ -23,9 +21,7 @@
 
 #include "Util.h"
 #include "Recipe.h"
-#include "attribute.h"
 #include "GameLogic.h"
-#include "attribute_container.h"
 
 #include "2d/CCScene.h"
 #include "base/CCDirector.h"

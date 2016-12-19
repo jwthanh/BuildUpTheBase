@@ -1,6 +1,5 @@
 #include "AppDelegate.h"
 #include "HarvestScene.h"
-#include "GameLogic.h"
 #include "FileOperation.h"
 
 #include "magic_particles/mp_cocos.h"

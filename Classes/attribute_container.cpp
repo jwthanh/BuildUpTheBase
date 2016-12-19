@@ -1,4 +1,5 @@
 
+#include  <sstream>
 #include "attribute_container.h"
 #include "attribute.h"
 #include "combat.h"

@@ -1,10 +1,6 @@
 #pragma once
 #ifndef COMBAT_H
 #define COMBAT_H
-#include <sstream>
-#include <vector>
-// #include <actors/actor.h>
-// #include <actors\Person.h>
 #include "constants.h"
 
 class Person; 
