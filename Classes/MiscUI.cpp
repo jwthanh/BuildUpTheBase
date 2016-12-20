@@ -138,9 +138,9 @@ void try_set_node_color(cocos2d::Node* node, const cocos2d::Color3B color)
     }
 };
 
-void set_aliasing(cocos2d::Label* label, bool val)
+void set_aliasing(cocos2d::Label* label, bool set_aliasing)
 {
-    if (val)
+    if (set_aliasing)
     {
         label->getFontAtlas()->setAliasTexParameters();
     }
