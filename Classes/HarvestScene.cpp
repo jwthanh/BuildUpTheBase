@@ -1101,8 +1101,9 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     res_count_t coins_gained = Ingredient::type_to_value.at(ing_type);
     auto create_sell_button = [this, alert_panel, ing_type, coins_gained](std::string name, int amount_sold, float percent_sold)
     {
-        auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
-        load_default_button_textures(sell_btn);
+        ui::Button* sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
+        prep_button(sell_btn);
+        sell_btn->getTitleRenderer()->enableOutline({ 0x0a, 0x0a, 0x0a, 255 }, 3);
 
         sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold, percent_sold](Ref* touch, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
