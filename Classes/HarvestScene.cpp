@@ -1099,12 +1099,12 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     }, AVERAGE_DELAY, "alert_count_update");
 
     res_count_t coins_gained = Ingredient::type_to_value.at(ing_type);
-    auto create_sell_button = [this, alert_panel, ing_type, coins_gained](std::string name, int amount_sold)
+    auto create_sell_button = [this, alert_panel, ing_type, coins_gained](std::string name, int amount_sold, float percent_sold)
     {
         auto sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
         load_default_button_textures(sell_btn);
 
-        sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold](Ref* touch, ui::Widget::TouchEventType type){
+        sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold, percent_sold](Ref* touch, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
@@ -1114,8 +1114,20 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 int num_sellable = map_get(city_ingredients, it, _def);
                 if (num_sellable != 0)
                 {
-                    int to_sell = std::min(num_sellable, amount_sold);
+
+                    int USE_ABSOLUTE = -1;
+                    int to_sell;
+                    //if amount sold is not -1, use absolute values instead
+                    if (amount_sold != USE_ABSOLUTE)
+                    {
+                        to_sell = std::min(num_sellable, amount_sold);
+                    }
+                    else
+                    {
+                        to_sell = (int)(std::min((float)num_sellable, ((float)(num_sellable))*percent_sold));
+                    }
                     CCLOG("selling %i of %s", to_sell, Ingredient::type_to_string(ing_type).c_str());
+
                     BEATUP->add_total_coin(to_sell*coins_gained);
 
                     //for each building that has one of the ingredients, remove one at a time until there's no to sell left
@@ -1147,10 +1159,10 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         }, AVERAGE_DELAY, "sell_btn_state_cb");
     };
 
-    create_sell_button("sell_1_btn", 1);
-    create_sell_button("sell_10_btn", 10);
-    create_sell_button("sell_100_btn", 100);
-    create_sell_button("sell_1000_btn", 1000);
+    create_sell_button("sell_1_btn", 1, 0.0f);
+    create_sell_button("sell_10_btn", 10, 0.0f);
+    create_sell_button("sell_100_btn", -1, 0.25f);
+    create_sell_button("sell_1000_btn", -1, 0.50f);
 
     auto value_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("value_lbl"));
     auto update_value_lbl = [coins_gained, alert_panel, value_lbl](float dt){

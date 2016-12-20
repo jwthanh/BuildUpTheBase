@@ -33,7 +33,7 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="count_desc" ActionTag="682560615" Tag="29" IconVisible="False" LeftMargin="79.1364" RightMargin="187.1361" TopMargin="247.2036" BottomMargin="191.2046" IsCustomSize="True" FontSize="20" LabelText="You have:" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Bottom" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="count_desc" ActionTag="682560615" Tag="29" IconVisible="False" LeftMargin="79.1365" RightMargin="187.1360" TopMargin="247.2036" BottomMargin="191.2046" IsCustomSize="True" FontSize="20" LabelText="You have:" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Bottom" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="133.7275" Y="61.5919" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="146.0002" Y="222.0005" />
@@ -45,7 +45,7 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="count_lbl" ActionTag="-306751556" Tag="30" IconVisible="False" LeftMargin="217.4865" RightMargin="17.4863" TopMargin="247.4459" BottomMargin="191.4464" IsCustomSize="True" FontSize="20" LabelText="10000" VerticalAlignmentType="VT_Bottom" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="count_lbl" ActionTag="-306751556" Tag="30" IconVisible="False" LeftMargin="217.4865" RightMargin="17.4863" TopMargin="247.4460" BottomMargin="191.4464" IsCustomSize="True" FontSize="20" LabelText="10000" VerticalAlignmentType="VT_Bottom" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="165.0273" Y="61.1077" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="300.0001" Y="222.0002" />
@@ -105,7 +105,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sell_100_btn" ActionTag="678923868" Tag="29" IconVisible="False" LeftMargin="199.0067" RightMargin="100.9933" TopMargin="344.3845" BottomMargin="35.6155" TouchEnable="True" FontSize="36" ButtonText="100" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="sell_100_btn" ActionTag="678923868" Tag="29" IconVisible="False" LeftMargin="199.0067" RightMargin="100.9933" TopMargin="344.3845" BottomMargin="35.6155" TouchEnable="True" FontSize="36" ButtonText="25%" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="100.0000" Y="120.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="249.0067" Y="95.6155" />
@@ -121,7 +121,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sell_1000_btn" ActionTag="1155198791" Tag="30" IconVisible="False" LeftMargin="299.0085" RightMargin="0.9915" TopMargin="344.3845" BottomMargin="35.6155" TouchEnable="True" FontSize="36" ButtonText="1000" Scale9Enable="True" LeftEage="11" RightEage="11" TopEage="11" BottomEage="11" Scale9OriginX="11" Scale9OriginY="11" Scale9Width="24" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="sell_1000_btn" ActionTag="1155198791" Tag="30" IconVisible="False" LeftMargin="299.0085" RightMargin="0.9915" TopMargin="344.3845" BottomMargin="35.6155" TouchEnable="True" FontSize="36" ButtonText="50%" Scale9Enable="True" LeftEage="11" RightEage="11" TopEage="11" BottomEage="11" Scale9OriginX="11" Scale9OriginY="11" Scale9Width="24" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="100.0000" Y="120.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="349.0085" Y="95.6155" />
@@ -176,7 +176,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="value_lbl" ActionTag="1397573822" Tag="30" IconVisible="False" LeftMargin="0.0002" RightMargin="-0.0002" TopMargin="468.4991" BottomMargin="8.5008" IsCustomSize="True" FontSize="20" LabelText="for XXX each" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="value_lbl" ActionTag="1397573822" Tag="30" IconVisible="False" LeftMargin="0.0002" RightMargin="-0.0002" TopMargin="468.4992" BottomMargin="8.5008" IsCustomSize="True" FontSize="20" LabelText="for XXX each" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="400.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="200.0002" Y="20.0008" />
