@@ -47,3 +47,12 @@ Features
 
 * since we've got items now, lets turn sword sharpening into a timer and have it degrade all the time
 * Need a progress bar that shows the sword sharpness
+
+# ideas
+you start off as garbage out of a spaceships ejection chute and then grow into your own lifeform then end by taking over the world
+ what if instead, it was a black hole and every time you get to the core (temple)  you went to another universe or something 
+ Then the people you fight could be kings and warriors from other galaxies,
+ you slowly are collecting rare items that will help you take over
+ it'd give you sections to work through. different planets would have
+  different types to it. you could switch between planets to focus on different
+  strategies and weaknesses or something. I'll write the idea down
