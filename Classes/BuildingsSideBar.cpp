@@ -35,6 +35,8 @@
 #include "ui/UIText.h"
 #include "ui/UILayout.h"
 #include "ui/CocosGUI.h"
+#include <2d/CCActionInterval.h>
+#include <2d/CCActionEase.h>
 
 
 USING_NS_CC;
@@ -69,7 +71,27 @@ bool TabManager::is_tab_active(const TabTypes& tab_type, const std::shared_ptr<B
 void TabManager::set_tab_active(TabTypes tab_type, const spBuilding& building)
 {
     this->active_tab = tab_type;
+    spBuilding old_building = this->active_building;
     this->active_building = building;
+
+    float distance = 400.0f;
+    auto move_by = MoveBy::create(0.5f, { 0, -distance });
+    auto eased_action = EaseBackOut::create(move_by);
+
+    //move the given listview upwards, then downwards by the same amount
+    auto listview = this->get_active_listview();
+    listview->setPosition({listview->getPositionX(), listview->getPositionY() + distance });
+    listview->runAction(eased_action);
+
+    //move all the tab buttons
+    if (building != old_building)
+    {
+        for (auto& btn : this->button_map)
+        {
+            btn.first->setPosition({ btn.first->getPositionX(), btn.first->getPositionY() + distance });
+            btn.first->runAction(eased_action->clone());
+        }
+    }
 }
 
 cocos2d::ui::ListView* TabManager::get_active_listview()

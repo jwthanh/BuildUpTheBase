@@ -161,7 +161,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        GameDirector::switch_to_equipment_menu();
+        //GameDirector::switch_to_equipment_menu();
     }
 }
 
