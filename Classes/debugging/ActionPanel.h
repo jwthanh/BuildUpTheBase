@@ -11,10 +11,10 @@ class ActionPanel : public cocos2d::ui::Layout
         cocos2d::Node* _target;
         cocos2d::ui::Layout* _panel;
 
-        float _duration;
-        float _target_x;
-        float _target_y;
-        float _rate;
+        // float _duration;
+        // float _target_x;
+        // float _target_y;
+        // float _rate;
 
     public:
         CREATE_FUNC(ActionPanel);
@@ -25,6 +25,12 @@ class ActionPanel : public cocos2d::ui::Layout
         void set_target(cocos2d::Node* target);
 
         void init_action_buttons();
+
+        float get_duration();
+        cocos2d::Vec2 get_target_pos();
+        float get_target_pos_x();
+        float get_target_pos_y();
+        float get_rate();
 };
 
 #endif

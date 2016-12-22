@@ -20,10 +20,10 @@ bool ActionPanel::init()
     this->addChild(this->_panel);
 
     this->_target = NULL;
-    this->_duration = 1.0f;
-    this->_target_x = 500.0f;
-    this->_target_y = 500.0f;
-    this->_rate = 10.0f;
+    // this->_duration = 1.0f;
+    // this->_target_x = 500.0f;
+    // this->_target_y = 500.0f;
+    // this->_rate = 10.0f;
 
     return true;
 };
@@ -69,14 +69,42 @@ void ActionPanel::init_action_buttons()
     };
 
     auto move_by = [this](){
-        return cocos2d::MoveBy::create(this->_duration, { this->_target_x, this->_target_y });
+        return cocos2d::MoveBy::create(this->get_duration(), this->get_target_pos());
     };
 
     auto move_to = [this](){
-        return cocos2d::MoveTo::create(this->_duration, { this->_target_x, this->_target_y });
+        return cocos2d::MoveTo::create(this->get_duration(), this->get_target_pos());
     };
 
     create_button("move by", move_by);
     create_button("move to", move_to);
 
+}
+
+float ActionPanel::get_duration()
+{
+    return 1.0f; //TODO use slider
+}
+
+cocos2d::Vec2 ActionPanel::get_target_pos()
+{
+    return {this->get_target_pos_x(), this->get_target_pos_y()};
+}
+
+float ActionPanel::get_target_pos_x()
+{
+    auto text_input = dynamic_cast<cocos2d::ui::TextField*>(this->_panel->getChildByName("buttons_panel")->getChildByName("x_pos_text"));
+    return std::stof(text_input->getString());
+
+}
+
+float ActionPanel::get_target_pos_y()
+{
+    auto text_input = dynamic_cast<cocos2d::ui::TextField*>(this->_panel->getChildByName("buttons_panel")->getChildByName("y_pos_text"));
+    return std::stof(text_input->getString());
+}
+
+float ActionPanel::get_rate()
+{
+    return 10.0f; //TODO use slider
 };
