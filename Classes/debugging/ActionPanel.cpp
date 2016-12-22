@@ -17,6 +17,11 @@ bool ActionPanel::init()
     this->_panel->removeFromParent();
     this->_panel->setPosition({ 460, 320 });
 
+    auto reset_btn = dynamic_cast<cocos2d::ui::Button*>(this->_panel->getChildByName("buttons_panel")->getChildByName("reset_btn"));
+    reset_btn->addTouchEventListener([this](TOUCH_CALLBACK_PARAMS){
+        this->reset_target();
+    });
+
     this->addChild(this->_panel);
 
     this->_target = NULL;
@@ -59,7 +64,7 @@ void ActionPanel::init_action_buttons()
         menu_btn->setTitleText(text);
         listview->addChild(menu_btn);
 
-        menu_btn->addTouchEventListener([build_action, this](cocos2d::Ref* target, TouchEventType evt)
+        menu_btn->addTouchEventListener([build_action, this](TOUCH_CALLBACK_PARAMS)
         {
             if (evt == TouchEventType::ENDED)
             {

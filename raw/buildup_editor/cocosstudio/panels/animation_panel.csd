@@ -12,13 +12,13 @@
               <AbstractNodeData Name="buttons_panel" ActionTag="520901145" Tag="305" IconVisible="False" LeftMargin="177.7593" RightMargin="16.6803" TopMargin="14.4111" BottomMargin="8.7742" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
                 <Size X="125.5604" Y="189.8147" />
                 <Children>
-                  <AbstractNodeData Name="start_btn" ActionTag="491252810" Tag="304" IconVisible="False" LeftMargin="9.8793" RightMargin="7.4397" TopMargin="3.2521" BottomMargin="150.5626" TouchEnable="True" FontSize="14" ButtonText="Start" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="reset_btn" ActionTag="-1235094621" Tag="306" IconVisible="False" LeftMargin="9.8793" RightMargin="7.4397" TopMargin="3.6482" BottomMargin="150.1665" TouchEnable="True" FontSize="14" ButtonText="Reset" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="108.2415" Y="36.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="64.0000" Y="168.5626" />
+                    <Position X="64.0000" Y="168.1665" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5097" Y="0.8880" />
+                    <PrePosition X="0.5097" Y="0.8860" />
                     <PreSize X="0.8621" Y="0.1897" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <TextColor A="255" R="65" G="65" B="70" />
@@ -28,29 +28,13 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="reset_btn" ActionTag="-1235094621" Tag="306" IconVisible="False" LeftMargin="9.8793" RightMargin="7.4397" TopMargin="43.6483" BottomMargin="110.1664" TouchEnable="True" FontSize="14" ButtonText="Reset" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                    <Size X="108.2415" Y="36.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="64.0000" Y="128.1664" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5097" Y="0.6752" />
-                    <PreSize X="0.8621" Y="0.1897" />
-                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                    <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                    <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-                    <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
-                    <OutlineColor A="255" R="255" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="duration_slider" ActionTag="676061599" Tag="308" IconVisible="False" LeftMargin="5.9586" RightMargin="6.9173" TopMargin="127.9230" BottomMargin="47.8917" TouchEnable="True" PercentInfo="39" ctype="SliderObjectData">
+                  <AbstractNodeData Name="duration_slider" ActionTag="676061599" Tag="308" IconVisible="False" LeftMargin="5.9585" RightMargin="6.9173" TopMargin="107.9230" BottomMargin="67.8917" TouchEnable="True" PercentInfo="39" ctype="SliderObjectData">
                     <Size X="112.6845" Y="14.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="62.3008" Y="54.8917" />
+                    <Position X="62.3008" Y="74.8917" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.4962" Y="0.2892" />
+                    <PrePosition X="0.4962" Y="0.3946" />
                     <PreSize X="0.8975" Y="0.0738" />
                     <BackGroundData Type="Default" Path="Default/Slider_Back.png" Plist="" />
                     <ProgressBarData Type="Default" Path="Default/Slider_PressBar.png" Plist="" />
@@ -72,13 +56,13 @@
                     <BallPressedData Type="Default" Path="Default/SliderNode_Press.png" Plist="" />
                     <BallDisabledData Type="Default" Path="Default/SliderNode_Disable.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="duration_lbl" ActionTag="1879854553" Tag="310" IconVisible="False" LeftMargin="15.1234" RightMargin="17.4370" TopMargin="103.6642" BottomMargin="70.1505" FontSize="16" LabelText="Duration" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="duration_lbl" ActionTag="1879854553" Tag="310" IconVisible="False" LeftMargin="15.1233" RightMargin="17.4371" TopMargin="83.6642" BottomMargin="90.1505" FontSize="16" LabelText="Duration" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="93.0000" Y="16.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="61.6234" Y="78.1505" />
+                    <Position X="61.6233" Y="98.1505" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.4908" Y="0.4117" />
+                    <PrePosition X="0.4908" Y="0.5171" />
                     <PreSize X="0.7407" Y="0.0843" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
@@ -96,23 +80,23 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="x_pos_text" ActionTag="2001770733" Tag="313" IconVisible="False" LeftMargin="4.5809" RightMargin="65.2761" TopMargin="83.5904" BottomMargin="88.8836" TouchEnable="True" FontSize="14" IsCustomSize="True" LabelText="480" PlaceHolderText="X 960" MaxLengthText="10" ctype="TextFieldObjectData">
+                  <AbstractNodeData Name="x_pos_text" ActionTag="2001770733" Tag="313" IconVisible="False" LeftMargin="4.5809" RightMargin="65.2762" TopMargin="53.5904" BottomMargin="118.8836" TouchEnable="True" FontSize="14" IsCustomSize="True" LabelText="480" PlaceHolderText="X 960" MaxLengthText="10" ctype="TextFieldObjectData">
                     <Size X="55.7033" Y="17.3407" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="32.4326" Y="97.5539" />
+                    <Position X="32.4326" Y="127.5539" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.2583" Y="0.5139" />
+                    <PrePosition X="0.2583" Y="0.6720" />
                     <PreSize X="0.4436" Y="0.0914" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="y_pos_text" ActionTag="-1424838401" Tag="315" IconVisible="False" LeftMargin="64.5810" RightMargin="4.4676" TopMargin="83.1862" BottomMargin="90.0963" TouchEnable="True" FontSize="14" IsCustomSize="True" LabelText="320" PlaceHolderText="Y 960" MaxLengthText="10" ctype="TextFieldObjectData">
+                  <AbstractNodeData Name="y_pos_text" ActionTag="-1424838401" Tag="315" IconVisible="False" LeftMargin="64.5810" RightMargin="4.4676" TopMargin="53.1862" BottomMargin="120.0963" TouchEnable="True" FontSize="14" IsCustomSize="True" LabelText="320" PlaceHolderText="Y 960" MaxLengthText="10" ctype="TextFieldObjectData">
                     <Size X="56.5118" Y="16.5322" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="92.8369" Y="98.3624" />
+                    <Position X="92.8369" Y="128.3624" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.7394" Y="0.5182" />
+                    <PrePosition X="0.7394" Y="0.6763" />
                     <PreSize X="0.4501" Y="0.0871" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                   </AbstractNodeData>
