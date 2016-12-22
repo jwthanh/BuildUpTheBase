@@ -11,6 +11,9 @@ class ActionPanel : public cocos2d::ui::Layout
         cocos2d::Node* _target;
         cocos2d::ui::Layout* _panel;
 
+        float _default_x;
+        float _default_y;
+
         // float _duration;
         // float _target_x;
         // float _target_y;
@@ -23,6 +26,7 @@ class ActionPanel : public cocos2d::ui::Layout
 
         //sets the target node to run the action on
         void set_target(cocos2d::Node* target);
+        void reset_target();
 
         void init_action_buttons();
 

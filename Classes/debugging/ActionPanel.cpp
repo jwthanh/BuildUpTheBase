@@ -32,6 +32,9 @@ void ActionPanel::set_target(cocos2d::Node* target)
 {
     this->_target = target;
 
+    this->_default_x = target->getPositionX();
+    this->_default_y = target->getPositionY();
+
     this->init_action_buttons();
 };
 
@@ -60,6 +63,7 @@ void ActionPanel::init_action_buttons()
         {
             if (evt == TouchEventType::ENDED)
             {
+                this->reset_target();
                 auto action = build_action();
                 this->_target->runAction(action);
             }
@@ -80,6 +84,12 @@ void ActionPanel::init_action_buttons()
     create_button("move to", move_to);
 
 }
+
+void ActionPanel::reset_target()
+{
+    this->_target->stopAllActions();
+    this->_target->setPosition({this->_default_x, this->_default_y});
+};
 
 float ActionPanel::get_duration()
 {
