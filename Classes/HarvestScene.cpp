@@ -166,6 +166,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         auto action_panel = ActionPanel::create();
         this->addChild(action_panel);
         action_panel->set_target(this->sidebar->tab_building_btn);
+
     //     //GameDirector::switch_to_equipment_menu();
     //     auto parts = ParticleSun::create();
     //     parts->setPosition(this->get_center_pos());
