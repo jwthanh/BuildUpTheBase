@@ -163,6 +163,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Clock.cpp" />
     <ClCompile Include="..\Classes\combat.cpp" />
     <ClCompile Include="..\Classes\DataManager.cpp" />
+    <ClCompile Include="..\Classes\debugging\ActionPanel.cpp" />
     <ClCompile Include="..\Classes\Equipment.cpp" />
     <ClCompile Include="..\Classes\Fighter.cpp" />
     <ClCompile Include="..\Classes\FileOperation.cpp" />
@@ -217,6 +218,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\combat.h" />
     <ClInclude Include="..\Classes\constants.h" />
     <ClInclude Include="..\Classes\DataManager.h" />
+    <ClInclude Include="..\Classes\debugging\ActionPanel.h" />
     <ClInclude Include="..\Classes\elements_t.h" />
     <ClInclude Include="..\Classes\Equipment.h" />
     <ClInclude Include="..\Classes\external\easylogging.h" />
