@@ -57,7 +57,6 @@ void ActionPanel::init_action_buttons()
     //sets the current action for the panel, and rebuilds the modifiers to use the new current action
     auto create_action_button = [this](std::string btn_name, std::function<cocos2d::ActionInterval*()> build_action)
     {
-
         //customize button for the panel
         auto menu_btn = dynamic_cast<cocos2d::ui::Button*>(this->_panel->getChildByName(btn_name));
         prep_button(menu_btn);
@@ -70,8 +69,6 @@ void ActionPanel::init_action_buttons()
                 this->init_modifier_buttons();
             }
         });
-
-        return menu_btn;
     };
 
     auto move_by = [this](){
@@ -129,8 +126,6 @@ void ActionPanel::init_modifier_buttons()
                 this->_target->runAction(action);
             }
         });
-
-        return menu_btn;
     };
 
 
