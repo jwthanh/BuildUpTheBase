@@ -59,11 +59,14 @@ void ActionPanel::init_action_buttons()
     {
         auto menu_btn = cocos2d::ui::Button::create();
         prep_button(menu_btn);
+
+        //customize button for the panel
         menu_btn->setScale9Enabled(true);
         menu_btn->setContentSize({ 150.0f, 20.0f });
         menu_btn->setTitleText(text);
         listview->addChild(menu_btn);
 
+        //on touching ending on the menu button, call the build_action and run its Action on the target
         menu_btn->addTouchEventListener([build_action, this, text](TOUCH_CALLBACK_PARAMS)
         {
             if (evt == TouchEventType::ENDED)
