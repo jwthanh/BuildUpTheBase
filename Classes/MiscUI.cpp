@@ -212,6 +212,7 @@ void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val)
 void prep_button(ui::Button* button)
 {
     load_default_button_textures(button);
+    button->setTitleFontName("fonts/pixelmix.ttf"); //required
     button->getTitleRenderer()->setTextColor(Color4B::WHITE);
     button->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
     set_aliasing(button);

@@ -19,6 +19,9 @@
     <Filter Include="magic_particles\opengl">
       <UniqueIdentifier>{68046623-7b48-43b9-af7f-2551f418d7b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="debugging">
+      <UniqueIdentifier>{d1b6699f-dd60-4ceb-88d5-2cffead87f64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,7 +92,9 @@
     <ClCompile Include="..\Classes\ItemScene.cpp" />
     <ClCompile Include="..\Classes\Equipment.cpp" />
     <ClCompile Include="..\Classes\Ingredients.cpp" />
-    <ClCompile Include="..\Classes\debugging\ActionPanel.cpp" />
+    <ClCompile Include="..\Classes\debugging\ActionPanel.cpp">
+      <Filter>debugging</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -186,7 +191,9 @@
     <ClInclude Include="..\Classes\ItemScene.h" />
     <ClInclude Include="..\Classes\Equipment.h" />
     <ClInclude Include="..\Classes\Ingredients.h" />
-    <ClInclude Include="..\Classes\debugging\ActionPanel.h" />
+    <ClInclude Include="..\Classes\debugging\ActionPanel.h">
+      <Filter>debugging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

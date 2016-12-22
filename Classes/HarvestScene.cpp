@@ -51,6 +51,7 @@
 #include "ui/UITextField.h"
 #include "2d/CCRenderTexture.h"
 #include <2d/CCParticleExamples.h>
+#include "debugging/ActionPanel.h"
 
 USING_NS_CC;
 
@@ -162,15 +163,18 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        //GameDirector::switch_to_equipment_menu();
-        auto parts = ParticleSun::create();
-        parts->setPosition(this->get_center_pos());
-        float duration = 0.25f;
-        parts->setDuration(duration);
-        this->addChild(parts);
-
-        auto move_to = MoveTo::create(duration, { 900, 600 });
-        parts->runAction(move_to);
+        auto action_panel = ActionPanel::create();
+        this->addChild(action_panel);
+        action_panel->set_target(this->sidebar->tab_building_btn);
+    //     //GameDirector::switch_to_equipment_menu();
+    //     auto parts = ParticleSun::create();
+    //     parts->setPosition(this->get_center_pos());
+    //     float duration = 0.25f;
+    //     parts->setDuration(duration);
+    //     this->addChild(parts);
+    //
+    //     auto move_to = MoveTo::create(duration, { 900, 600 });
+    //     parts->runAction(move_to);
     }
 }
 
