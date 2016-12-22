@@ -1,9 +1,14 @@
 #include "ActionPanel.h"
 
+#include <typeindex>
+#include <typeinfo>
+
 #include "2d/CCMenuItem.h"
 
 #include "NodeBuilder.h"
 #include "MiscUI.h"
+#include "2d/CCActionInterval.h"
+#include "GameLogic.h"
 
 bool ActionPanel::init()
 {
@@ -32,15 +37,41 @@ void ActionPanel::set_target(cocos2d::Node* target)
 
 void ActionPanel::init_action_buttons()
 {
+    if (this->_target == NULL)
+    {
+        CCASSERT(false, "needs a target");
+    }
     auto listview = dynamic_cast<cocos2d::ui::ListView*>(this->_panel->getChildByName("actions_listview"));
 
-    for (int i = 0; i < 25; i++)
+    //typedef std::unordered_map<std::type_index, int> type_map;
+    //auto tmap = type_map();
+    //tmap[typeid(cocos2d::MoveBy)] = 1
+
+    auto create_button = [listview, this](std::string text, VoidFuncNoArgs run_action_cb)
     {
         auto menu_btn = cocos2d::ui::Button::create();
         prep_button(menu_btn);
         menu_btn->setScale9Enabled(true);
         menu_btn->setContentSize({ 150.0f, 20.0f });
-        menu_btn->setTitleText("first item");
+        menu_btn->setTitleText(text);
         listview->addChild(menu_btn);
-    }
+
+        menu_btn->addTouchEventListener([run_action_cb, this](cocos2d::Ref* target, TouchEventType evt)
+        {
+            if (evt == TouchEventType::ENDED)
+            {
+                run_action_cb();
+            }
+        });
+
+        return menu_btn;
+    };
+
+    auto move_by = [this](){
+        auto action = cocos2d::MoveBy::create(this->_duration, { this->_target_x, this->_target_y });
+        this->_target->runAction(action);
+    };
+
+    create_button("move", move_by);
+
 };
