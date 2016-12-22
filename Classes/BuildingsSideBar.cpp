@@ -74,8 +74,10 @@ void TabManager::set_tab_active(TabTypes tab_type, const spBuilding& building)
     spBuilding old_building = this->active_building;
     this->active_building = building;
 
+    return; //disable sidebar scrolling for nausea reasons
+
     float distance = 400.0f;
-    auto move_by = MoveBy::create(0.5f, { 0, -distance });
+    auto move_by = MoveBy::create(0.75f, { 0, -distance });
     auto eased_action = EaseBackOut::create(move_by);
 
     //move the given listview upwards, then downwards by the same amount
