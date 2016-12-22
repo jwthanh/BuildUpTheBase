@@ -10,6 +10,7 @@
 #include "2d/CCActionInterval.h"
 #include "GameLogic.h"
 #include <sstream>
+#include "2d/CCActionEase.h"
 
 bool ActionPanel::init()
 {
@@ -53,9 +54,59 @@ void ActionPanel::init_action_buttons()
         CCASSERT(false, "needs a target");
     }
 
-    auto listview = dynamic_cast<cocos2d::ui::ListView*>(this->_panel->getChildByName("actions_listview"));
+    //sets the current action for the panel, and rebuilds the modifiers to use the new current action
+    auto create_action_button = [this](std::string btn_name, std::function<cocos2d::ActionInterval*()> build_action)
+    {
 
-    auto create_button = [listview, this](std::string text, std::function<cocos2d::Action*()> build_action)
+        //customize button for the panel
+        auto menu_btn = dynamic_cast<cocos2d::ui::Button*>(this->_panel->getChildByName(btn_name));
+        prep_button(menu_btn);
+
+        menu_btn->addTouchEventListener([build_action, this](TOUCH_CALLBACK_PARAMS)
+        {
+            if (evt == TouchEventType::ENDED)
+            {
+                this->current_action = build_action;
+                this->init_modifier_buttons();
+            }
+        });
+
+        return menu_btn;
+    };
+
+    auto move_by = [this](){
+        return cocos2d::MoveBy::create(this->get_duration(), this->get_target_pos());
+    };
+    create_action_button("move_by_btn", move_by);
+
+    auto move_to = [this](){
+        return cocos2d::MoveTo::create(this->get_duration(), this->get_target_pos());
+    };
+    create_action_button("move_to_btn", move_to);
+
+    auto scale_by = [this](){
+        return cocos2d::ScaleBy::create(this->get_duration(), this->get_target_pos_x(), this->get_target_pos_y());
+    };
+    create_action_button("scale_by_btn", scale_by);
+
+    auto scale_to = [this](){
+        return cocos2d::ScaleTo::create(this->get_duration(), this->get_target_pos_x(), this->get_target_pos_y());
+    };
+    create_action_button("scale_to_btn", scale_to);
+
+};
+
+void ActionPanel::init_modifier_buttons()
+{
+    if (this->_target == NULL)
+    {
+        CCASSERT(false, "needs a target");
+    }
+
+    auto listview = dynamic_cast<cocos2d::ui::ListView*>(this->_panel->getChildByName("actions_listview"));
+    listview->removeAllChildren();
+
+    auto create_button = [listview, this](std::string text, std::function<cocos2d::ActionInterval*(cocos2d::ActionInterval*)> build_modifier)
     {
         auto menu_btn = cocos2d::ui::Button::create();
         prep_button(menu_btn);
@@ -67,12 +118,13 @@ void ActionPanel::init_action_buttons()
         listview->addChild(menu_btn);
 
         //on touching ending on the menu button, call the build_action and run its Action on the target
-        menu_btn->addTouchEventListener([build_action, this, text](TOUCH_CALLBACK_PARAMS)
+        menu_btn->addTouchEventListener([build_modifier, this, text](TOUCH_CALLBACK_PARAMS)
         {
             if (evt == TouchEventType::ENDED)
             {
                 this->reset_target();
-                auto action = build_action();
+                auto action = this->current_action();
+                action = build_modifier(action);
                 this->output_parameters(text);
                 this->_target->runAction(action);
             }
@@ -81,26 +133,12 @@ void ActionPanel::init_action_buttons()
         return menu_btn;
     };
 
-    auto move_by = [this](){
-        return cocos2d::MoveBy::create(this->get_duration(), this->get_target_pos());
-    };
 
-    auto move_to = [this](){
-        return cocos2d::MoveTo::create(this->get_duration(), this->get_target_pos());
-    };
-
-    auto scale_by = [this](){
-        return cocos2d::ScaleBy::create(this->get_duration(), this->get_target_pos_x(), this->get_target_pos_y());
-    };
-
-    auto scale_to = [this](){
-        return cocos2d::ScaleTo::create(this->get_duration(), this->get_target_pos_x(), this->get_target_pos_y());
-    };
-
-    create_button("move by", move_by);
-    create_button("move to", move_to);
-    create_button("scale to", scale_to);
-    create_button("scale by", scale_by);
+    auto ease_in = [this](cocos2d::ActionInterval* action){ return cocos2d::EaseIn::create(action, this->get_rate()); };
+    create_button("ease in", ease_in);
+    //create_button("move to", move_to, default_modifier);
+    //create_button("scale to", scale_to, default_modifier);
+    //create_button("scale by", scale_by, default_modifier);
 
 }
 

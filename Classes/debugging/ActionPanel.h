@@ -2,6 +2,7 @@
 #define ACTIONPANEL_H
 
 #include "ui/CocosGUI.h"
+#include "2d/CCActionInterval.h"
 
 ///debugging class for playing with an action, like MoveTo or ScaleBy without
 ///needing to recompile between each and every test
@@ -25,7 +26,9 @@ class ActionPanel : public cocos2d::ui::Layout
         void set_target(cocos2d::Node* target);
         void reset_target();
 
+        std::function<cocos2d::ActionInterval*()> current_action;
         void init_action_buttons();
+        void init_modifier_buttons();
 
         float get_duration();
         cocos2d::Vec2 get_target_pos();
