@@ -9,6 +9,7 @@
 #include "MiscUI.h"
 #include "2d/CCActionInterval.h"
 #include "GameLogic.h"
+#include <sstream>
 
 bool ActionPanel::init()
 {
@@ -49,11 +50,8 @@ void ActionPanel::init_action_buttons()
     {
         CCASSERT(false, "needs a target");
     }
-    auto listview = dynamic_cast<cocos2d::ui::ListView*>(this->_panel->getChildByName("actions_listview"));
 
-    //typedef std::unordered_map<std::type_index, int> type_map;
-    //auto tmap = type_map();
-    //tmap[typeid(cocos2d::MoveBy)] = 1
+    auto listview = dynamic_cast<cocos2d::ui::ListView*>(this->_panel->getChildByName("actions_listview"));
 
     auto create_button = [listview, this](std::string text, std::function<cocos2d::Action*()> build_action)
     {
@@ -64,12 +62,13 @@ void ActionPanel::init_action_buttons()
         menu_btn->setTitleText(text);
         listview->addChild(menu_btn);
 
-        menu_btn->addTouchEventListener([build_action, this](TOUCH_CALLBACK_PARAMS)
+        menu_btn->addTouchEventListener([build_action, this, text](TOUCH_CALLBACK_PARAMS)
         {
             if (evt == TouchEventType::ENDED)
             {
                 this->reset_target();
                 auto action = build_action();
+                this->output_parameters(text);
                 this->_target->runAction(action);
             }
         });
@@ -122,4 +121,16 @@ float ActionPanel::get_target_pos_y()
 float ActionPanel::get_rate()
 {
     return 10.0f; //TODO use slider
+};
+
+void ActionPanel::output_parameters(std::string func_name)
+{
+    std::stringstream ss;
+    ss << func_name << std::endl;
+    ss << "  target x: " << this->get_target_pos_x() << std::endl;
+    ss << "  target y: " << this->get_target_pos_y() << std::endl;
+    ss << "  duration: " << this->get_duration() << std::endl;
+    ss << "  rate: " << this->get_rate() << std::endl;
+
+    CCLOG("%s", ss.str().c_str());
 };

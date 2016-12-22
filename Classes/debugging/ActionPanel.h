@@ -35,6 +35,9 @@ class ActionPanel : public cocos2d::ui::Layout
         float get_target_pos_x();
         float get_target_pos_y();
         float get_rate();
+
+        //outputs the params to screen to allow for 'saving' //TODO save to file
+        void output_parameters(std::string text);
 };
 
 #endif
