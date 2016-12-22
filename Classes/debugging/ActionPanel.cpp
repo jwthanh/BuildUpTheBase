@@ -26,10 +26,10 @@ bool ActionPanel::init()
     this->addChild(this->_panel);
 
     this->_target = NULL;
-    // this->_duration = 1.0f;
-    // this->_target_x = 500.0f;
-    // this->_target_y = 500.0f;
-    // this->_rate = 10.0f;
+    this->_default_pos_x = 0.0f;
+    this->_default_pos_y = 0.0f;
+    this->_default_scale_x = 0.0f;
+    this->_default_scale_y = 0.0f;
 
     return true;
 };
@@ -38,8 +38,10 @@ void ActionPanel::set_target(cocos2d::Node* target)
 {
     this->_target = target;
 
-    this->_default_x = target->getPositionX();
-    this->_default_y = target->getPositionY();
+    this->_default_pos_x = target->getPositionX();
+    this->_default_pos_y = target->getPositionY();
+    this->_default_scale_x = target->getScaleX();
+    this->_default_scale_y = target->getScaleY();
 
     this->init_action_buttons();
 };
@@ -84,15 +86,26 @@ void ActionPanel::init_action_buttons()
         return cocos2d::MoveTo::create(this->get_duration(), this->get_target_pos());
     };
 
+    auto scale_by = [this](){
+        return cocos2d::ScaleBy::create(this->get_duration(), this->get_target_pos_x(), this->get_target_pos_y());
+    };
+
+    auto scale_to = [this](){
+        return cocos2d::ScaleTo::create(this->get_duration(), this->get_target_pos_x(), this->get_target_pos_y());
+    };
+
     create_button("move by", move_by);
     create_button("move to", move_to);
+    create_button("scale to", scale_to);
+    create_button("scale by", scale_by);
 
 }
 
 void ActionPanel::reset_target()
 {
     this->_target->stopAllActions();
-    this->_target->setPosition({this->_default_x, this->_default_y});
+    this->_target->setPosition({this->_default_pos_x, this->_default_pos_y});
+    this->_target->setScale(this->_default_scale_x, this->_default_scale_y);
 };
 
 float ActionPanel::get_duration()
@@ -111,7 +124,6 @@ float ActionPanel::get_target_pos_x()
 {
     auto text_input = dynamic_cast<cocos2d::ui::TextField*>(this->_panel->getChildByName("buttons_panel")->getChildByName("x_pos_text"));
     return std::stof(text_input->getString());
-
 }
 
 float ActionPanel::get_target_pos_y()

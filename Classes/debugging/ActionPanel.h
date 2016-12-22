@@ -11,13 +11,10 @@ class ActionPanel : public cocos2d::ui::Layout
         cocos2d::Node* _target;
         cocos2d::ui::Layout* _panel;
 
-        float _default_x;
-        float _default_y;
-
-        // float _duration;
-        // float _target_x;
-        // float _target_y;
-        // float _rate;
+        float _default_pos_x;
+        float _default_pos_y;
+        float _default_scale_x;
+        float _default_scale_y;
 
     public:
         CREATE_FUNC(ActionPanel);
