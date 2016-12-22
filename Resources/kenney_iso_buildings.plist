@@ -1124,13 +1124,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>kenney_iso_buildings.png</string>
+            <string>kenney_iso_buildings.pvr.ccz</string>
             <key>size</key>
             <string>{964,1163}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:e34d9cb79c89bfca3d4928efc395fa9b:31aa273ed07085ef6313f99d77af4a34:0ec5ae0f3fad826b8c77f68702e0da17$</string>
+            <string>$TexturePacker:SmartUpdate:c454aeef146ad6dfac7760a27169bc53:31aa273ed07085ef6313f99d77af4a34:f2039e46c39b5fd0ac67ae9fba889363$</string>
             <key>textureFileName</key>
-            <string>kenney_iso_buildings.png</string>
+            <string>kenney_iso_buildings.pvr.ccz</string>
         </dict>
     </dict>
 </plist>

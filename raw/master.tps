@@ -2,11 +2,11 @@
 <data version="1.0">
     <struct type="Settings">
         <key>fileFormatVersion</key>
-        <int>3</int>
+        <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.0.1</string>
+        <string>4.3.1</string>
         <key>fileName</key>
-        <string>C:/Users/Primary/workspace/basebuilder/raw/master.tps</string>
+        <string>C:/Users/Josh/Documents/cocos_projects/basebuilder/raw/master.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -29,8 +29,6 @@
         </array>
         <key>allowRotation</key>
         <true/>
-        <key>premultiplyAlpha</key>
-        <false/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
@@ -38,7 +36,7 @@
         <key>dataFormat</key>
         <string>cocos2d</string>
         <key>textureFileName</key>
-        <filename>../Resources/master.png</filename>
+        <filename>../Resources/master.pvr.ccz</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -49,6 +47,8 @@
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
         <enum type="SettingsBase::Etc1CompressionQuality">ETC1_QUALITY_LOW_PERCEPTUAL</enum>
+        <key>etc2CompressionQuality</key>
+        <enum type="SettingsBase::Etc2CompressionQuality">ETC2_QUALITY_LOW_PERCEPTUAL</enum>
         <key>dxtCompressionMode</key>
         <enum type="SettingsBase::DxtCompressionMode">DXT_PERCEPTUAL</enum>
         <key>jxrColorFormat</key>
@@ -81,8 +81,10 @@
         <uint>101</uint>
         <key>textureSubPath</key>
         <string></string>
+        <key>atfFormats</key>
+        <string></string>
         <key>textureFormat</key>
-        <enum type="SettingsBase::TextureFormat">png</enum>
+        <enum type="SettingsBase::TextureFormat">pvr3ccz</enum>
         <key>borderPadding</key>
         <uint>2</uint>
         <key>maxTextureSize</key>
@@ -99,8 +101,6 @@
             <key>height</key>
             <int>-1</int>
         </QSize>
-        <key>reduceBorderArtifacts</key>
-        <false/>
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
@@ -108,11 +108,9 @@
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
-            <enum type="AlgorithmSettings::SizeConstraints">AnySize</enum>
+            <enum type="AlgorithmSettings::SizeConstraints">WordAligned</enum>
             <key>forceSquared</key>
             <false/>
-            <key>forceWordAligned</key>
-            <true/>
             <key>maxRects</key>
             <struct type="AlgorithmMaxRectsSettings">
                 <key>heuristic</key>
@@ -124,6 +122,11 @@
                 <enum type="AlgorithmBasicSettings::SortBy">Best</enum>
                 <key>order</key>
                 <enum type="AlgorithmBasicSettings::Order">Ascending</enum>
+            </struct>
+            <key>polygon</key>
+            <struct type="AlgorithmPolygonSettings">
+                <key>alignToGrid</key>
+                <uint>1</uint>
             </struct>
         </struct>
         <key>andEngine</key>
@@ -156,6 +159,8 @@
         <false/>
         <key>outputFormat</key>
         <enum type="SettingsBase::OutputFormat">RGBA8888</enum>
+        <key>alphaHandling</key>
+        <enum type="SettingsBase::AlphaHandling">ClearTransparentPixels</enum>
         <key>contentProtection</key>
         <struct type="ContentProtection">
             <key>key</key>
@@ -167,8 +172,6 @@
         <false/>
         <key>prependSmartFolderName</key>
         <false/>
-        <key>cleanTransparentPixels</key>
-        <true/>
         <key>globalSpriteSettings</key>
         <struct type="SpriteSettings">
             <key>scale</key>
@@ -187,18 +190,414 @@
             <int>200</int>
             <key>heuristicMask</key>
             <false/>
-            <key>pivotPoint</key>
-            <enum type="SpriteSettings::PivotPoint">Center</enum>
+            <key>defaultPivotPoint</key>
+            <point_f>0.5,0.5</point_f>
+            <key>writePivotPoints</key>
+            <false/>
         </struct>
+        <key>individualSpriteSettings</key>
+        <map type="IndividualSpriteSettingsMap">
+            <key type="filename">biochrl/fixed/Troll_Icon_01.png</key>
+            <key type="filename">biochrl/fixed/Troll_Icon_02.png</key>
+            <key type="filename">biochrl/fixed/Troll_Icon_03.png</key>
+            <key type="filename">biochrl/fixed/Troll_Icon_Running_01.png</key>
+            <key type="filename">biochrl/fixed/dark_elf8x8.png</key>
+            <key type="filename">biochrl/fixed/hero8x8.png</key>
+            <key type="filename">biochrl/fixed/imp8x8.png</key>
+            <key type="filename">biochrl/fixed/jumper8x8.png</key>
+            <key type="filename">biochrl/fixed/mutantfish8x8.png</key>
+            <key type="filename">biochrl/fixed/skeleton8x8.png</key>
+            <key type="filename">biochrl/fixed/sludge8x8.png</key>
+            <key type="filename">biochrl/fixed/thief8x8.png</key>
+            <key type="filename">biochrl/fixed/townsmen8x8.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>2,2,4,4</rect>
+                <key>scale9Paddings</key>
+                <rect>2,2,4,4</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">biochrl/fixed/badmother20x20.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,5,10,10</rect>
+                <key>scale9Paddings</key>
+                <rect>5,5,10,10</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">biochrl/fixed/crazedcook10x10.png</key>
+            <key type="filename">biochrl/fixed/ogre10x10.png</key>
+            <key type="filename">../../beatupisis/raw/artist/gore9.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,3,5,5</rect>
+                <key>scale9Paddings</key>
+                <rect>3,3,5,5</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">biochrl/fixed/hulkingmantis8x10.png</key>
+            <key type="filename">biochrl/fixed/idol8x10.png</key>
+            <key type="filename">biochrl/fixed/jackal8x10.png</key>
+            <key type="filename">biochrl/fixed/skeleton8x10.png</key>
+            <key type="filename">biochrl/fixed/wildling8x10.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>2,3,4,5</rect>
+                <key>scale9Paddings</key>
+                <rect>2,3,4,5</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">biochrl/fixed/jumper9x8.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>2,2,5,4</rect>
+                <key>scale9Paddings</key>
+                <rect>2,2,5,4</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">shop.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,27,50,54</rect>
+                <key>scale9Paddings</key>
+                <rect>25,27,50,54</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/Resources/brickwall.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>13,13,25,25</rect>
+                <key>scale9Paddings</key>
+                <rect>13,13,25,25</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/coin_flat.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,4,8,8</rect>
+                <key>scale9Paddings</key>
+                <rect>4,4,8,8</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/coin_left.png</key>
+            <key type="filename">../../beatupisis/raw/artist/coin_right.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,4,6,8</rect>
+                <key>scale9Paddings</key>
+                <rect>3,4,6,8</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/coin_side.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>1,4,3,8</rect>
+                <key>scale9Paddings</key>
+                <rect>1,4,3,8</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/ff_beard.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,2,10,4</rect>
+                <key>scale9Paddings</key>
+                <rect>5,2,10,4</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/ff_beard2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,1,10,3</rect>
+                <key>scale9Paddings</key>
+                <rect>5,1,10,3</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/ff_glasses.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>7,2,14,4</rect>
+                <key>scale9Paddings</key>
+                <rect>7,2,14,4</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/ff_hat.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>9,5,17,10</rect>
+                <key>scale9Paddings</key>
+                <rect>9,5,17,10</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/ff_monocle.png</key>
+            <key type="filename">../../beatupisis/raw/artist/gore4.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,3,6,6</rect>
+                <key>scale9Paddings</key>
+                <rect>3,3,6,6</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/ff_moustache.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,1,9,3</rect>
+                <key>scale9Paddings</key>
+                <rect>4,1,9,3</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/fist_hit.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>13,13,26,25</rect>
+                <key>scale9Paddings</key>
+                <rect>13,13,26,25</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/fist_moving.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,12,25,23</rect>
+                <key>scale9Paddings</key>
+                <rect>12,12,25,23</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/fist_neutral.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>9,12,18,23</rect>
+                <key>scale9Paddings</key>
+                <rect>9,12,18,23</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/gore1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,4,8,7</rect>
+                <key>scale9Paddings</key>
+                <rect>4,4,8,7</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/gore2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,3,7,6</rect>
+                <key>scale9Paddings</key>
+                <rect>3,3,7,6</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/gore3.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>2,2,4,5</rect>
+                <key>scale9Paddings</key>
+                <rect>2,2,4,5</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/gore5.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,4,5,8</rect>
+                <key>scale9Paddings</key>
+                <rect>3,4,5,8</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/gore6.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>2,2,3,4</rect>
+                <key>scale9Paddings</key>
+                <rect>2,2,3,4</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/gore7.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,3,5,7</rect>
+                <key>scale9Paddings</key>
+                <rect>3,3,5,7</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/gore8.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,4,7,8</rect>
+                <key>scale9Paddings</key>
+                <rect>4,4,7,8</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/artist/s_baby.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>9,16,18,33</rect>
+                <key>scale9Paddings</key>
+                <rect>9,16,18,33</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/logo_topfixed.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,9,64,18</rect>
+                <key>scale9Paddings</key>
+                <rect>32,9,64,18</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../beatupisis/raw/lose_face.png</key>
+            <key type="filename">../../beatupisis/raw/win_face.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,14,24,28</rect>
+                <key>scale9Paddings</key>
+                <rect>12,14,24,28</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+        </map>
         <key>fileList</key>
         <array>
-            <filename>../../cocosstudio/Cocos/CocosProjects/testanim/cocosstudio/f_face_neutral.png</filename>
-            <filename>../../cocosstudio/Cocos/CocosProjects/testanim/cocosstudio/f_look_left.png</filename>
-            <filename>../../cocosstudio/Cocos/CocosProjects/testanim/cocosstudio/f_look_right.png</filename>
-            <filename>../../beatupisis/raw/artist/f_eyes_open.png</filename>
-            <filename>../../beatupisis/raw/artist/f_flinch.png</filename>
-            <filename>../../beatupisis/raw/artist/f_gritted_teeth.png</filename>
-            <filename>../../beatupisis/raw/artist/f_side_closed.png</filename>
             <filename>../../beatupisis/raw/artist/coin_flat.png</filename>
             <filename>../../beatupisis/raw/artist/coin_left.png</filename>
             <filename>../../beatupisis/raw/artist/coin_right.png</filename>
@@ -221,20 +620,7 @@
             <filename>../../beatupisis/raw/artist/ff_monocle.png</filename>
             <filename>../../beatupisis/raw/artist/ff_moustache.png</filename>
             <filename>../../beatupisis/raw/artist/ff_glasses.png</filename>
-            <filename>../../beatupisis/raw/artist/f_face_neutral_eye.png</filename>
-            <filename>../../beatupisis/raw/artist/f_gritted_teeth_one.png</filename>
-            <filename>../../beatupisis/raw/artist/f_teeth.png</filename>
-            <filename>../../beatupisis/raw/artist/f_teeth_one.png</filename>
-            <filename>../../beatupisis/raw/artist/f_teeth_side.png</filename>
-            <filename>../../beatupisis/raw/artist/f_teeth_side_one.png</filename>
             <filename>../../beatupisis/raw/artist/s_baby.png</filename>
-            <filename>../../beatupisis/raw/artist/f_look_left_teeth.png</filename>
-            <filename>../../beatupisis/raw/artist/f_look_left_eye.png</filename>
-            <filename>../../beatupisis/raw/artist/f_look_right_eye.png</filename>
-            <filename>../../beatupisis/raw/artist/f_look_left_2eye.png</filename>
-            <filename>../../beatupisis/raw/artist/f_look_right_2eye.png</filename>
-            <filename>../../beatupisis/raw/artist/f_look_right_teeth.png</filename>
-            <filename>../../beatupisis/raw/artist/f_face_neutral_2eye.png</filename>
             <filename>../../beatupisis/Resources/brickwall.png</filename>
             <filename>biochrl/fixed/mutantfish8x8.png</filename>
             <filename>biochrl/fixed/ogre10x10.png</filename>
@@ -283,5 +669,7 @@
         <string></string>
         <key>normalMapSheetFileName</key>
         <filename></filename>
+        <key>exporterProperties</key>
+        <map type="ExporterProperties"/>
     </struct>
 </data>

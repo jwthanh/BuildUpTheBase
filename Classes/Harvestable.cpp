@@ -35,10 +35,6 @@
 #include "combat.h"
 #include "Equipment.h"
 
-#ifdef _WIN32
-#include "vld.h"
-#endif
-
 USING_NS_CC;
 
 Size Harvestable::get_sprite_size()

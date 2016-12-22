@@ -36,7 +36,7 @@
         <key>dataFormat</key>
         <string>cocos2d</string>
         <key>textureFileName</key>
-        <filename>../Resources/kenney_iso_buildings.png</filename>
+        <filename>../Resources/kenney_iso_buildings.pvr.ccz</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -84,7 +84,7 @@
         <key>atfFormats</key>
         <string></string>
         <key>textureFormat</key>
-        <enum type="SettingsBase::TextureFormat">png</enum>
+        <enum type="SettingsBase::TextureFormat">pvr3ccz</enum>
         <key>borderPadding</key>
         <uint>0</uint>
         <key>maxTextureSize</key>
