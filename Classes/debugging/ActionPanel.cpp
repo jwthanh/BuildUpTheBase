@@ -134,12 +134,29 @@ void ActionPanel::init_modifier_buttons()
     };
 
 
+    //vanilla ease
     auto ease_in = [this](cocos2d::ActionInterval* action){ return cocos2d::EaseIn::create(action, this->get_rate()); };
     create_button("ease in", ease_in);
-    //create_button("move to", move_to, default_modifier);
-    //create_button("scale to", scale_to, default_modifier);
-    //create_button("scale by", scale_by, default_modifier);
+    auto ease_out = [this](cocos2d::ActionInterval* action){ return cocos2d::EaseOut::create(action, this->get_rate()); };
+    create_button("ease out", ease_out);
+    auto ease_in_out = [this](cocos2d::ActionInterval* action){ return cocos2d::EaseInOut::create(action, this->get_rate()); };
+    create_button("ease in out", ease_in_out);
 
+    //ease back
+    auto ease_back_in = [this](cocos2d::ActionInterval* action){ return cocos2d::EaseBackIn::create(action); };
+    create_button("ease back in", ease_back_in);
+    auto ease_back_out = [this](cocos2d::ActionInterval* action){ return cocos2d::EaseBackOut::create(action); };
+    create_button("ease back out", ease_back_out);
+    auto ease_back_in_out = [this](cocos2d::ActionInterval* action){ return cocos2d::EaseBackInOut::create(action); };
+    create_button("ease back in out", ease_back_in_out);
+
+    //ease bounce
+    auto ease_bounce_in = [this](cocos2d::ActionInterval* action){ return cocos2d::EaseBounceIn::create(action); };
+    create_button("ease bounce in", ease_bounce_in);
+    auto ease_bounce_out = [this](cocos2d::ActionInterval* action){ return cocos2d::EaseBounceOut::create(action); };
+    create_button("ease bounce out", ease_bounce_out);
+    auto ease_bounce_in_out = [this](cocos2d::ActionInterval* action){ return cocos2d::EaseBounceInOut::create(action); };
+    create_button("ease bounce in out", ease_bounce_in_out);
 }
 
 void ActionPanel::reset_target()
