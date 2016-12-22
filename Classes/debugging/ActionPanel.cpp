@@ -97,7 +97,9 @@ void ActionPanel::reset_target()
 
 float ActionPanel::get_duration()
 {
-    return 1.0f; //TODO use slider
+    auto slider = dynamic_cast<cocos2d::ui::Slider*>(this->_panel->getChildByName("buttons_panel")->getChildByName("duration_slider"));
+    float max = 2.0f;
+    return (float)slider->getPercent() / 100.0f * max;
 }
 
 cocos2d::Vec2 ActionPanel::get_target_pos()
@@ -120,7 +122,9 @@ float ActionPanel::get_target_pos_y()
 
 float ActionPanel::get_rate()
 {
-    return 10.0f; //TODO use slider
+    auto slider = dynamic_cast<cocos2d::ui::Slider*>(this->_panel->getChildByName("buttons_panel")->getChildByName("rate_slider"));
+    float max = 100.0f;
+    return (float)slider->getPercent() / 100.0f * max;
 };
 
 void ActionPanel::output_parameters(std::string func_name)

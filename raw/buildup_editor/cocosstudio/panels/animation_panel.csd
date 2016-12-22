@@ -28,7 +28,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="duration_slider" ActionTag="676061599" Tag="308" IconVisible="False" LeftMargin="5.9585" RightMargin="6.9173" TopMargin="107.9230" BottomMargin="67.8917" TouchEnable="True" PercentInfo="39" ctype="SliderObjectData">
+                  <AbstractNodeData Name="duration_slider" ActionTag="676061599" Tag="308" IconVisible="False" LeftMargin="5.9585" RightMargin="6.9173" TopMargin="107.9230" BottomMargin="67.8917" TouchEnable="True" PercentInfo="25" ctype="SliderObjectData">
                     <Size X="112.6845" Y="14.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="62.3008" Y="74.8917" />
@@ -42,7 +42,7 @@
                     <BallPressedData Type="Default" Path="Default/SliderNode_Press.png" Plist="" />
                     <BallDisabledData Type="Default" Path="Default/SliderNode_Disable.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="rate_slider" ActionTag="774003050" Tag="309" IconVisible="False" LeftMargin="6.2569" RightMargin="6.6190" TopMargin="168.0915" BottomMargin="7.7232" TouchEnable="True" PercentInfo="39" ctype="SliderObjectData">
+                  <AbstractNodeData Name="rate_slider" ActionTag="774003050" Tag="309" IconVisible="False" LeftMargin="6.2569" RightMargin="6.6190" TopMargin="168.0915" BottomMargin="7.7232" TouchEnable="True" PercentInfo="10" ctype="SliderObjectData">
                     <Size X="112.6845" Y="14.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="62.5991" Y="14.7232" />
