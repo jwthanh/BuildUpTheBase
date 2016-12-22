@@ -12,7 +12,9 @@
 #define TITLE_FONT  "fonts/airstrike.ttf"
 #define DEFAULT_FONT  "fonts/pixelmix.ttf"
 
-enum FistHands 
+#define TOUCH_CALLBACK_PARAMS cocos2d::Ref* target, TouchEventType evt
+
+enum FistHands
 {
     None = -1,
     Left = 0,
