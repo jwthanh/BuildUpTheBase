@@ -2,7 +2,11 @@
 #define ACTIONPANEL_H
 
 #include "ui/CocosGUI.h"
-#include "2d/CCActionInterval.h"
+
+namespace cocos2d
+{
+    class ActionInterval;
+}
 
 ///debugging class for playing with an action, like MoveTo or ScaleBy without
 ///needing to recompile between each and every test

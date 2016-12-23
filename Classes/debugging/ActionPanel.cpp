@@ -1,16 +1,14 @@
 #include "ActionPanel.h"
 
-#include <typeindex>
-#include <typeinfo>
+#include <sstream>
 
 #include "2d/CCMenuItem.h"
-
-#include "NodeBuilder.h"
-#include "MiscUI.h"
 #include "2d/CCActionInterval.h"
-#include "GameLogic.h"
-#include <sstream>
 #include "2d/CCActionEase.h"
+
+#include "constants.h"
+#include "MiscUI.h"
+#include "NodeBuilder.h"
 
 bool ActionPanel::init()
 {
