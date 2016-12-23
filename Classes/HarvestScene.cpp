@@ -165,7 +165,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     {
         auto action_panel = ActionPanel::create();
         this->addChild(action_panel);
-        action_panel->set_target(this->sidebar->tab_building_btn);
+        action_panel->set_target(this->sidebar->tabs.get_active_listview());
 
     //     //GameDirector::switch_to_equipment_menu();
     //     auto parts = ParticleSun::create();
@@ -348,6 +348,9 @@ void BaseScene::create_building_choicelist()
     };
 
     Node* harvest_scene_editor = this->get_original_scene_from_editor();
+    auto listview_background = harvest_scene_editor->getChildByName("listview_background");
+    listview_background->removeFromParent();
+    this->addChild(listview_background, -999999);
 
     for (auto conf : configs)
     {

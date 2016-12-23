@@ -6,6 +6,19 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
+          <AbstractNodeData Name="listview_background" ActionTag="1057746912" Tag="104" IconVisible="False" LeftMargin="-1.5964" RightMargin="565.0823" TopMargin="0.1970" BottomMargin="100.6577" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+            <Size X="396.5140" Y="539.1453" />
+            <AnchorPoint ScaleY="1.0000" />
+            <Position X="-1.5964" Y="639.8030" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="-0.0017" Y="0.9997" />
+            <PreSize X="0.4130" Y="0.8424" />
+            <SingleColor A="255" R="150" G="200" B="255" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
           <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" LeftMargin="759.9955" RightMargin="0.0045" TopMargin="0.0004" BottomMargin="439.9996" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="200.0000" />
             <Children>
