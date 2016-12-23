@@ -16,7 +16,7 @@ Features
 * Info panel for building with misc stats, how many fighters killed, their
   damage etc
 
-* sell more than 1000 at a time
+* sell more than 1000 at a time #DONE
 * buy more than one harvester at a time
 
 * trade resources in for others, catan style
@@ -24,7 +24,8 @@ Features
 
 * dont pause application on background, maybe do the post load on return
 
-* items have passives, limited slots for total item inventory
+* items have passives #DONE
+* limited slots for total item inventory
 
 * equipment screen for items, slots for combat stuff, harvest stuff.
 * equipment is limited by character level
@@ -34,7 +35,7 @@ Features
 
 * can recruit specialized harvesters to live in your city. they either live a certain amount of time
   or require a certain resource before leaving or reducing output
-* when you find these special ones, you can either use them right away, or put them in a training are for a X time 
+* when you find these special ones, you can either use them right away, or put them in a training are for a X time
   and then name them on the way out and they get special bonuses
 
 * special harvesters require resources per second (to make use of generators)
@@ -48,9 +49,15 @@ Features
 * since we've got items now, lets turn sword sharpening into a timer and have it degrade all the time
 * Need a progress bar that shows the sword sharpness
 
+* Better user messaging
+* Changelog in app
+* tips on how to play
+
+* daily quests
+
 # ideas
 you start off as garbage out of a spaceships ejection chute and then grow into your own lifeform then end by taking over the world
- what if instead, it was a black hole and every time you get to the core (temple)  you went to another universe or something 
+ what if instead, it was a black hole and every time you get to the core (temple)  you went to another universe or something
  Then the people you fight could be kings and warriors from other galaxies,
  you slowly are collecting rare items that will help you take over
  it'd give you sections to work through. different planets would have
