@@ -348,19 +348,22 @@ void BaseScene::create_building_choicelist()
     };
 
     Node* harvest_scene_editor = this->get_original_scene_from_editor();
+
     auto listview_background = harvest_scene_editor->getChildByName("listview_background");
     listview_background->removeFromParent();
     this->addChild(listview_background, -999999);
+
+    Node* building_buttons = harvest_scene_editor->getChildByName("building_buttons");
+    building_buttons->removeFromParent();
+    this->addChild(building_buttons);
 
     for (auto conf : configs)
     {
         spBuilding building = BUILDUP->city->building_by_name(conf.building_name);
 
         //get initial node from the prebuilt scene
-        Node* building_node = harvest_scene_editor->getChildByName(conf.node_name);
+        Node* building_node = building_buttons->getChildByName(conf.node_name);
         ui::Button* panel = (ui::Button*)building_node->getChildByName("building_panel");
-        building_node->removeFromParent();
-        this->addChild(building_node);
 
 
         //set building name
@@ -453,10 +456,8 @@ void BaseScene::create_building_choicelist()
 
     /// Build city button separately from the rest of the buildings
     //get initial node from the prebuilt scene
-    Node* city_node = harvest_scene_editor->getChildByName("city_node");
+    Node* city_node = building_buttons->getChildByName("city_node");
     ui::Button* panel = (ui::Button*)city_node->getChildByName("building_panel");
-    city_node->removeFromParent();
-    this->addChild(city_node);
 
 
     //set building name
