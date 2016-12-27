@@ -146,8 +146,9 @@ SideListView::SideListView(Node* parent, spBuilding current_target) : current_ta
 ui::Button* SideListView::_create_button(std::string node_name)
 {
     Node* harvest_scene_editor = get_prebuilt_node_from_csb("editor/scenes/base_scene.csb");
+    Node* sidebar_panel = harvest_scene_editor->getChildByName("sidebar_panel");
 
-    ui::Button* button = dynamic_cast<ui::Button*>(harvest_scene_editor->getChildByName(node_name));
+    ui::Button* button = dynamic_cast<ui::Button*>(sidebar_panel->getChildByName(node_name));
     load_default_button_textures(button);
     button->removeFromParent();
     Label* button_lbl = (Label*)button->getTitleRenderer();
@@ -1259,7 +1260,9 @@ void SideListView::setup_powers_listview_as_powers()
 spListviewMap SideListView::_create_listview(std::string node_name)
 {
     Node* harvest_scene_editor = get_prebuilt_node_from_csb("editor/scenes/base_scene.csb");
-	auto orig_listview = static_cast<ui::ListView*>(harvest_scene_editor->getChildByName(node_name));
+    Node* sidebar_panel = harvest_scene_editor->getChildByName("sidebar_panel");
+
+	auto orig_listview = static_cast<ui::ListView*>(sidebar_panel->getChildByName(node_name));
 
     spListviewMap result = std::make_shared<listviewMap>();
     for (spBuilding building : BUILDUP->city->buildings)

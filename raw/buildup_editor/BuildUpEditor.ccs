@@ -17,6 +17,9 @@
           <Image Name="cat.png" />
           <Image Name="forest.png" />
         </Folder>
+        <Folder Name="panels">
+          <Project Name="animation_panel.csd" Type="Node" />
+        </Folder>
         <Folder Name="scenes">
           <Project Name="base_scene.csd" Type="Scene" />
           <Project Name="city_menu_scene.csd" Type="Scene" />
@@ -35,9 +38,6 @@
         <Image Name="main_UI_export_10.png" />
         <TTF Name="pixelmix.ttf" />
         <TmxFile Name="test_map.tmx" />
-        <Folder Name="panels">
-          <Project Name="animation_panel.csd" Type="Node" />
-        </Folder>
       </RootFolder>
     </Group>
   </SolutionFolder>
