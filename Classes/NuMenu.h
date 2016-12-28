@@ -8,7 +8,6 @@
 #include "constants.h"
 
 #include "ui/UIWidget.h"
-#include "2d/CCLabel.h"
 
 class PlainShopItem;
 class Fist;
@@ -21,6 +20,9 @@ namespace cocos2d
     class MotionStreak;
     class NodeGrid;
     class Sprite;
+
+    struct _ttfConfig;
+    typedef _ttfConfig TTFConfig;
 
     namespace ui
     {
