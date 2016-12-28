@@ -26,6 +26,7 @@ class HarvestableManager
         //dumpster harvestable
         std::shared_ptr<Item> stored_item;
 
+
     public:
         HarvestableManager();
         ~HarvestableManager();
@@ -39,8 +40,9 @@ class HarvestableManager
 
         //dumpster harvestable
         bool is_item_stored;
+        int stored_dumpster_clicks; //TODO use doubles for clicks
         void store_item(std::shared_ptr<Item> item);
-        void load_item(std::shared_ptr<Item> item);
+        void load_item(std::shared_ptr<Item>& item);
         void reset_item();
 };
 #endif

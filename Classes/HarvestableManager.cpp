@@ -11,6 +11,7 @@ HarvestableManager::HarvestableManager()
 
     this->is_item_stored = false;
     this->stored_item = NULL;
+    this->stored_dumpster_clicks = 0;
 };
 
 HarvestableManager::~HarvestableManager()
@@ -52,15 +53,16 @@ void HarvestableManager::store_item(std::shared_ptr<Item> item)
     this->is_item_stored = true;
 };
 
-void HarvestableManager::load_item(std::shared_ptr<Item> item)
+void HarvestableManager::load_item(std::shared_ptr<Item>& item)
 {
-    CCLOG("can't load item: nothing to load");
+    item = this->stored_item;
 };
 
 void HarvestableManager::reset_item()
 {
     this->is_item_stored = false;
     this->stored_item = NULL;
+    this->stored_dumpster_clicks = 0;
 
     CCLOG("reset item");
 };

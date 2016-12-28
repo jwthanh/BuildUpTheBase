@@ -472,18 +472,37 @@ bool DumpsterHarvestable::init()
 void DumpsterHarvestable::init_clicks()
 {
 
-    this->generate_item();
+    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+
+    if (harvestable_manager->is_item_stored == false)
+    {
+        this->generate_item();
+        harvestable_manager->store_item(this->scavenge_item);
+
+        this->current_clicks = 0;
+    }
+    else
+    {
+        harvestable_manager->load_item(this->scavenge_item); //NOTE this replaces scavenge_item with the stored item
+        this->current_clicks = harvestable_manager->stored_dumpster_clicks;
+    };
 
     //item level * 15 clicks
     this->click_limit = this->scavenge_item->level*15.0;
-
-    this->current_clicks = 0;
 }
 
 std::string DumpsterHarvestable::get_sprite_path()
 {
     return "dump_darker.png";
 }
+
+void DumpsterHarvestable::on_harvest()
+{
+    Harvestable::on_harvest();
+
+    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    harvestable_manager->stored_dumpster_clicks = this->current_clicks;
+};
 
 void DumpsterHarvestable::animate_clip()
 {
@@ -494,6 +513,8 @@ void DumpsterHarvestable::shatter()
 {
     Harvestable::shatter();
 
+    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    harvestable_manager->reset_item();
 
     BUILDUP->items.push_back(scavenge_item);
     auto popup_panel = GameLogic::get_popup_panel();

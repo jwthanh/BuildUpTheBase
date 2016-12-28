@@ -137,6 +137,7 @@ class DumpsterHarvestable : public Harvestable
 
         std::string get_sprite_path();
 
+        virtual void on_harvest();
         virtual void animate_clip() override;
 
         virtual void shatter() override;
