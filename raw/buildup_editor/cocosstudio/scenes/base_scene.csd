@@ -490,17 +490,27 @@
           <AbstractNodeData Name="popup_panel" ActionTag="-1343836221" Tag="121" IconVisible="False" LeftMargin="30.8600" RightMargin="29.1400" TopMargin="552.5000" BottomMargin="12.5000" TouchEnable="True" ClipAble="False" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="900.0000" Y="75.0000" />
             <Children>
-              <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="15.2886" RightMargin="14.1543" TopMargin="3.2629" BottomMargin="3.1497" IsCustomSize="True" FontSize="20" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="870.5571" Y="68.5874" />
+              <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="87.4620" RightMargin="11.7079" TopMargin="3.2630" BottomMargin="3.1496" IsCustomSize="True" FontSize="20" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="800.8301" Y="68.5874" />
                 <AnchorPoint />
-                <Position X="15.2886" Y="3.1497" />
+                <Position X="87.4620" Y="3.1496" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0170" Y="0.0420" />
-                <PreSize X="0.9673" Y="0.9145" />
+                <PrePosition X="0.0972" Y="0.0420" />
+                <PreSize X="0.8898" Y="0.9145" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="26" G="26" B="26" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="popup_img" ActionTag="-2114726292" Tag="729" IconVisible="False" LeftMargin="14.0901" RightMargin="821.9099" TopMargin="5.8989" BottomMargin="5.1011" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+                <Size X="64.0000" Y="64.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="46.0901" Y="37.1011" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0512" Y="0.4947" />
+                <PreSize X="0.0711" Y="0.8533" />
+                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5046" ScaleY="0.5000" />

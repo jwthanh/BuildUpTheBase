@@ -175,6 +175,13 @@ void PopupPanel::set_string(std::string message)
     label->setString(message);
 }
 
+void PopupPanel::set_image(std::string path)
+{
+    auto image_view = dynamic_cast<cocos2d::ui::ImageView*>(this->_layout->getChildByName("popup_img"));
+    image_view->loadTexture(path);
+    set_aliasing(image_view); //needs to get reapplied after you load a new texture
+}
+
 void PopupPanel::set_visible(bool is_visible)
 {
     this->_layout->setVisible(is_visible);

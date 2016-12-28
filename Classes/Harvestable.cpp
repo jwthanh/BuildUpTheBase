@@ -519,6 +519,7 @@ void DumpsterHarvestable::shatter()
     BUILDUP->items.push_back(scavenge_item);
     auto popup_panel = GameLogic::get_popup_panel();
     popup_panel->set_string("You've found an item: "+scavenge_item->get_name()+"!");
+    popup_panel->set_image(scavenge_item->img_path);
     popup_panel->animate_open();
 };
 
