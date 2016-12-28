@@ -146,8 +146,7 @@ SideListView::SideListView(Node* parent, spBuilding current_target)
 
 ui::Button* SideListView::_create_button(std::string node_name)
 {
-    Node* harvest_scene_editor = get_prebuilt_node_from_csb("editor/scenes/base_scene.csb");
-    Node* sidebar_panel = harvest_scene_editor->getChildByName("sidebar_panel");
+    Node* sidebar_panel = this->parent->getChildByName("sidebar_panel");
 
     ui::Button* button = dynamic_cast<ui::Button*>(sidebar_panel->getChildByName(node_name));
     load_default_button_textures(button);
@@ -1261,8 +1260,7 @@ void SideListView::setup_powers_listview_as_powers()
 
 spListviewMap SideListView::_create_listview(std::string node_name)
 {
-    Node* harvest_scene_editor = get_prebuilt_node_from_csb("editor/scenes/base_scene.csb");
-    Node* sidebar_panel = harvest_scene_editor->getChildByName("sidebar_panel");
+    Node* sidebar_panel = this->parent->getChildByName("sidebar_panel");
 
 	auto orig_listview = static_cast<ui::ListView*>(sidebar_panel->getChildByName(node_name));
 
@@ -1270,7 +1268,7 @@ spListviewMap SideListView::_create_listview(std::string node_name)
     for (spBuilding building : BUILDUP->city->buildings)
     {
         auto listview = dynamic_cast<ui::ListView*>(orig_listview->clone());
-        listview->removeFromParent();
+        sidebar_panel->addChild(listview);
 
         listview->setScrollBarAutoHideEnabled(false);
         listview->setScrollBarPositionFromCorner(Vec2(10, 20));
@@ -1284,7 +1282,6 @@ spListviewMap SideListView::_create_listview(std::string node_name)
         listview->setMagneticType(ui::ListView::MagneticType::TOP); //scrolls to TOP of current item, if needed; not sure why but this helps the jumping around as you add new items
         listview->setMagneticAllowedOutOfBoundary(false); //true is default, doesnt allow overscrolling sort of. if you go out of bounds, it'll scroll it back
 
-        this->parent->addChild(listview);
 
         (*result)[building->name] = listview;
 
