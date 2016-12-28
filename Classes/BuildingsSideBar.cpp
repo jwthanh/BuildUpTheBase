@@ -124,7 +124,8 @@ cocos2d::ui::Button* TabManager::get_active_button()
     return NULL;
 }
 
-SideListView::SideListView(Node* parent, spBuilding current_target) : current_target(current_target), parent(parent)
+SideListView::SideListView(Node* parent, spBuilding current_target)
+    : current_target(current_target), parent(parent)
 {
     this->tabs = TabManager();
 
@@ -151,6 +152,7 @@ ui::Button* SideListView::_create_button(std::string node_name)
     ui::Button* button = dynamic_cast<ui::Button*>(sidebar_panel->getChildByName(node_name));
     load_default_button_textures(button);
     button->removeFromParent();
+
     Label* button_lbl = (Label*)button->getTitleRenderer();
     button_lbl->setTextColor(Color4B::WHITE);
     button_lbl->enableOutline(Color4B::BLACK, 2);

@@ -166,22 +166,22 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
 
-        auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
-        harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
+        // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+        // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
 
         // auto action_panel = ActionPanel::create();
         // this->addChild(action_panel);
         // action_panel->set_target(this->sidebar->tabs.get_active_listview());
 
-    //     //GameDirector::switch_to_equipment_menu();
-    //     auto parts = ParticleSun::create();
-    //     parts->setPosition(this->get_center_pos());
-    //     float duration = 0.25f;
-    //     parts->setDuration(duration);
-    //     this->addChild(parts);
-    //
-    //     auto move_to = MoveTo::create(duration, { 900, 600 });
-    //     parts->runAction(move_to);
+        //     //GameDirector::switch_to_equipment_menu();
+        //     auto parts = ParticleSun::create();
+        //     parts->setPosition(this->get_center_pos());
+        //     float duration = 0.25f;
+        //     parts->setDuration(duration);
+        //     this->addChild(parts);
+        //
+        //     auto move_to = MoveTo::create(duration, { 900, 600 });
+        //     parts->runAction(move_to);
     }
 }
 

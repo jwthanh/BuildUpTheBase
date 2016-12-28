@@ -22,7 +22,7 @@ namespace cocos2d
 class Building;
 
 ///Base ListView for sidebar
-/// 
+///
 ///It creates a ui::ListView specific to each building
 
 using str_listview_t = std::pair<std::string, cocos2d::ui::ListView*>;
@@ -30,7 +30,7 @@ using listviewMap = std::map<std::string, cocos2d::ui::ListView*>;
 using spListviewMap = std::shared_ptr<listviewMap>;
 
 ///for managing which tab and building is active
-/// ideally only the visible tab would need to get loaded in 
+/// ideally only the visible tab would need to get loaded in
 /// and maybe the rest would get loaded in overtime
 ///
 /// if a tab wasn't active, it wouldnt do its processing
