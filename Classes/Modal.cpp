@@ -113,6 +113,7 @@ PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
 void PopupPanel::animate_open()
 {
     this->set_visible(true); //because it starts off visible false, should be fixed some other way though
+    this->_layout->stopAllActions(); //prevents previous animate_closes from affecting this one
 
     LOG(INFO) << "[Popup] " << this->get_string();
 
