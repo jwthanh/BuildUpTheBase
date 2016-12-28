@@ -24,6 +24,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/HarvestScene.cpp \
                    ../../Classes/BuildingsSideBar.cpp \
                    ../../Classes/Harvestable.cpp \
+                   ../../Classes/HarvestableManager.cpp \
                    ../../Classes/Visitors.cpp \
                    ../../Classes/Technology.cpp \
                    ../../Classes/Ingredients.cpp \

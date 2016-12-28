@@ -223,7 +223,7 @@ bool GameLogic::init()
     instance->buildup = instance->beatup->buildup;
     instance->equipment = std::unique_ptr<Equipment>(new Equipment());
 
-    instance->harvestable_manager = std::make_unique<HarvestableManager>();
+    instance->harvestable_manager = std::unique_ptr<HarvestableManager>(new HarvestableManager());
 
     this->coin_save_clock = std::make_shared<Clock>(15.0f);
     this->coin_rate_per_sec_clock = std::make_shared<Clock>(1.0f);
