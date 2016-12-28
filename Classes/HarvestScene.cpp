@@ -68,16 +68,11 @@ bool BaseScene::init()
     Node* harvest_scene_editor = this->get_original_scene_from_editor();
 
     auto children = harvest_scene_editor->getChildren();
-    auto children_count = harvest_scene_editor->getChildrenCount();
-    for (int i = 0; i < children_count; i++)
-    //for (Node* child : harvest_scene_editor->getChildren())
+    for (Node* child : children)
     {
-        Node* child = children.at(i);
-        CCLOG("adding %s", child->getName().c_str());
         child->removeFromParent();
         this->addChild(child);
     }
-    auto harvest_scene = this->getParent();
 
     this->create_info_panel();
     this->create_player_info_panel();
