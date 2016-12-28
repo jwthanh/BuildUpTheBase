@@ -771,7 +771,6 @@ void EquipmentSerializer::load()
             return item;
         };
 
-        CCLOG("index out of error for loading an item slot");
         return spItem();
     };
 
