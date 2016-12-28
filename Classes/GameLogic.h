@@ -11,6 +11,7 @@ enum class ItemSlotType;
 class Beatup;
 class Buildup;
 class Equipment;
+class HarvestableManager;
 
 class PopupPanel;
 
@@ -48,6 +49,7 @@ class GameLogic
         Beatup* beatup;
         Buildup* buildup;
         std::unique_ptr<Equipment> equipment;
+        std::unique_ptr<HarvestableManager> harvestable_manager;
 
         static void save_all();
         static void load_all();

@@ -9,6 +9,8 @@
 #include <regex>
 
 #include "Harvestable.h"
+#include "HarvestableManager.h"
+
 #include "GameLogic.h"
 #include "NuMenu.h"
 #include "Beatup.h"
@@ -25,8 +27,8 @@
 #include "HouseBuilding.h"
 #include "DataManager.h"
 #include "Network.h"
-
 #include "Modal.h"
+
 #include "magic_particles/_core/mp.h"
 #include "magic_particles/mp_cocos.h"
 #include "magic_particles/MagicEmitter.h"
@@ -979,6 +981,7 @@ bool HarvestScene::init()
     this->target_recipe = NULL;
     this->create_recipe_lbl();
 
+    this->harvestable_manager = std::make_shared<HarvestableManager>();
     this->add_harvestable();
 
     //color layer based on building level

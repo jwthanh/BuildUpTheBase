@@ -1,6 +1,5 @@
 #include "GameLogic.h"
 
-#include "NodeBuilder.h"
 #include "base/CCDirector.h"
 #include "2d/CCSprite.h"
 
@@ -8,9 +7,11 @@
 #include "ui/UIText.h"
 #include "ui/UIButton.h"
 #include "ui/UITextField.h"
+
 #include "magic_particles/MagicEmitter.h"
 #include "magic_particles/mp_cocos.h"
 
+#include "NodeBuilder.h"
 #include "Beatup.h"
 #include "HouseBuilding.h"
 #include "DataManager.h"
@@ -28,6 +29,7 @@
 #include "FShake.h"
 #include "ItemScene.h"
 #include "Equipment.h"
+#include "HarvestableManager.h"
 
 
 
@@ -220,6 +222,8 @@ bool GameLogic::init()
     instance->beatup->retain();
     instance->buildup = instance->beatup->buildup;
     instance->equipment = std::unique_ptr<Equipment>(new Equipment());
+
+    instance->harvestable_manager = std::make_unique<HarvestableManager>();
 
     this->coin_save_clock = std::make_shared<Clock>(15.0f);
     this->coin_rate_per_sec_clock = std::make_shared<Clock>(1.0f);

@@ -15,9 +15,10 @@
 #include "Recipe.h"
 #include "Technology.h"
 #include "HarvestScene.h"
+#include "NodeBuilder.h"
+#include "HarvestableManager.h"
 
 #include "magic_particles/MagicEmitter.h"
-#include "NodeBuilder.h"
 
 #include "2d/CCParticleSystemQuad.h"
 #include "base/CCDirector.h"

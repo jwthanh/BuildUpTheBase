@@ -11,6 +11,7 @@
 class SideListView;
 class PopupPanel;
 class Harvestable;
+class HarvestableManager;
 class MagicEmitter;
 
 namespace cocos2d
@@ -72,6 +73,7 @@ class BaseScene : public GameLayer
         void scroll_to_target_building();
 
         Harvestable* harvestable; //cant be shared_ptr because its cocos2d::Node
+        std::shared_ptr<HarvestableManager> harvestable_manager; //cant be shared_ptr because its cocos2d::Node
 };
 
 class HarvestScene : public BaseScene

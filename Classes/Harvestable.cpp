@@ -34,6 +34,7 @@
 #include "ui/UIScale9Sprite.h"
 #include "combat.h"
 #include "Equipment.h"
+#include "HarvestableManager.h"
 
 USING_NS_CC;
 
@@ -1056,8 +1057,18 @@ void FightingHarvestable::spawn_enemy()
     enemy_hp = std::max(base_hp, enemy_hp); //make sure the enemy has at least 20 hp
 
     double enemy_dmg = 3;
-    this->enemy->attrs->health->set_vals((int)enemy_hp);
-    this->enemy->attrs->damage->set_vals((int)enemy_dmg);
+
+    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    if (harvestable_manager->fighter_exists == false)
+    {
+        this->enemy->attrs->health->set_vals((int)enemy_hp);
+        this->enemy->attrs->damage->set_vals((int)enemy_dmg);
+        harvestable_manager->store_fighter(this->enemy);
+    }
+    else
+    {
+        harvestable_manager->load_fighter(this->enemy);
+    };
 
     FighterNode* fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
     fighter_node->set_fighter(this->enemy);
