@@ -1059,7 +1059,7 @@ void FightingHarvestable::spawn_enemy()
     double enemy_dmg = 3;
 
     auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
-    if (harvestable_manager->fighter_stored == false)
+    if (harvestable_manager->is_fighter_stored == false)
     {
         this->enemy->attrs->health->set_vals((int)enemy_hp);
         this->enemy->attrs->damage->set_vals((int)enemy_dmg);

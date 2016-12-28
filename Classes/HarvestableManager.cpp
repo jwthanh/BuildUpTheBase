@@ -5,9 +5,12 @@
 
 HarvestableManager::HarvestableManager()
 {
-    this->fighter_stored = false;
+    this->is_fighter_stored = false;
     this->enemy_cur_hp = 0;
     this->enemy_max_hp = 0;
+
+    this->is_item_stored = false;
+    this->stored_item = NULL;
 };
 
 HarvestableManager::~HarvestableManager()
@@ -19,9 +22,9 @@ void HarvestableManager::reset_fighter()
     this->enemy_cur_hp = 0;
     this->enemy_max_hp = 0;
     this->enemy_damage = 0;
-    this->fighter_stored = false;
+    this->is_fighter_stored = false;
 
-    CCLOG("stored fighter");
+    CCLOG("reset fighter");
 };
 
 void HarvestableManager::store_fighter(spFighter fighter)
@@ -29,7 +32,7 @@ void HarvestableManager::store_fighter(spFighter fighter)
     this->enemy_cur_hp = (int)fighter->attrs->health->current_val;
     this->enemy_max_hp = (int)fighter->attrs->health->max_val;
     this->enemy_damage = (int)fighter->attrs->damage->current_val;
-    this->fighter_stored = true;
+    this->is_fighter_stored = true;
 
     CCLOG("stored fighter");
 };
@@ -41,4 +44,23 @@ void HarvestableManager::load_fighter(spFighter fighter)
     fighter->attrs->damage->current_val = (double)this->enemy_damage;
 
     CCLOG("loaded fighter");
+};
+
+void HarvestableManager::store_item(std::shared_ptr<Item> item)
+{
+    this->stored_item = item;
+    this->is_item_stored = true;
+};
+
+void HarvestableManager::load_item(std::shared_ptr<Item> item)
+{
+    CCLOG("can't load item: nothing to load");
+};
+
+void HarvestableManager::reset_item()
+{
+    this->is_item_stored = false;
+    this->stored_item = NULL;
+
+    CCLOG("reset item");
 };
