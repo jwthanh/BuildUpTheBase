@@ -474,7 +474,7 @@ void DumpsterHarvestable::init_clicks()
 
     this->generate_item();
 
-    //takes item level * 15 clicks
+    //item level * 15 clicks
     this->click_limit = this->scavenge_item->level*15.0;
 
     this->current_clicks = 0;
@@ -1181,7 +1181,6 @@ void FightingHarvestable::on_harvest()
     {
         this->is_critical_hit = false;
     }
-
 
     player->attrs->damage->set_vals(damage);
 
