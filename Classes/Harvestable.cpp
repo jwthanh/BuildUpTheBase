@@ -1059,7 +1059,7 @@ void FightingHarvestable::spawn_enemy()
     double enemy_dmg = 3;
 
     auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
-    if (harvestable_manager->fighter_exists == false)
+    if (harvestable_manager->fighter_stored == false)
     {
         this->enemy->attrs->health->set_vals((int)enemy_hp);
         this->enemy->attrs->damage->set_vals((int)enemy_dmg);
@@ -1151,6 +1151,8 @@ void FightingHarvestable::shatter()
         popup_panel->animate_open();
     }
 
+    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    harvestable_manager->reset_fighter();
     this->spawn_enemy();
 
     this->building->create_ingredients(Ingredient::SubType::Soul, 1);
@@ -1189,6 +1191,9 @@ void FightingHarvestable::on_harvest()
     battle->combatants.push_back(this->enemy);
 
     battle->do_battle();
+
+    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    harvestable_manager->store_fighter(this->enemy);
 };
 
 void FightingHarvestable::animate_touch_start(cocos2d::Touch* touch)

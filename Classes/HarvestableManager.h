@@ -21,9 +21,10 @@ class HarvestableManager
         ~HarvestableManager();
 
         //fighter harvestable
-        bool fighter_exists; // true if we want to load an existing fighter
+        bool fighter_stored; // true if we want to load an existing fighter
         void store_fighter(std::shared_ptr<Fighter> fighter);
         void load_fighter(std::shared_ptr<Fighter> fighter);
+        void reset_fighter();
 
         int enemy_cur_hp;//TODO make doubles, so we can get higher than 32 000 hp
         int enemy_max_hp;//TODO make doubles, so we can get higher than 32 000 hp
