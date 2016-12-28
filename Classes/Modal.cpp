@@ -106,6 +106,8 @@ PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
             this->animate_close();
         }
     });
+
+    this->set_image("exclamation.png", true);
 };
 
 void PopupPanel::animate_open()
@@ -175,10 +177,17 @@ void PopupPanel::set_string(std::string message)
     label->setString(message);
 }
 
-void PopupPanel::set_image(std::string path)
+void PopupPanel::set_image(std::string path, bool is_plist)
 {
     auto image_view = dynamic_cast<cocos2d::ui::ImageView*>(this->_layout->getChildByName("popup_img"));
-    image_view->loadTexture(path);
+    if (is_plist)
+    {
+        image_view->loadTexture(path, ui::Widget::TextureResType::PLIST);
+    }
+    else
+    {
+        image_view->loadTexture(path, ui::Widget::TextureResType::LOCAL);
+    };
     set_aliasing(image_view); //needs to get reapplied after you load a new texture
 }
 

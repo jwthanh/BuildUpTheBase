@@ -68,7 +68,7 @@ class PopupPanel
 
         std::string get_string();
         void set_string(std::string message);
-        void set_image(std::string path);
+        void set_image(std::string path, bool is_plist = false);
 
         void set_visible(bool is_visible);
 };
