@@ -355,11 +355,6 @@ void BaseScene::create_building_choicelist()
         }
     };
 
-    Node* harvest_scene_editor = this->get_original_scene_from_editor();
-
-    auto listview_background = this->getChildByName("listview_background");
-    listview_background->removeFromParent();
-    this->addChild(listview_background, -999999);
 
     Node* building_buttons = this->getChildByName("building_buttons");
 
