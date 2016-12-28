@@ -65,6 +65,19 @@ bool BaseScene::init()
     FUNC_INIT(BaseScene);
 
     BaseScene::_harvest_scene_from_editor = NULL; //reset this because after it gets GCed, it points to garbage
+    Node* harvest_scene_editor = this->get_original_scene_from_editor();
+
+    auto children = harvest_scene_editor->getChildren();
+    auto children_count = harvest_scene_editor->getChildrenCount();
+    for (int i = 0; i < children_count; i++)
+    //for (Node* child : harvest_scene_editor->getChildren())
+    {
+        Node* child = children.at(i);
+        CCLOG("adding %s", child->getName().c_str());
+        child->removeFromParent();
+        this->addChild(child);
+    }
+    auto harvest_scene = this->getParent();
 
     this->create_info_panel();
     this->create_player_info_panel();
@@ -227,11 +240,7 @@ void BaseScene::onSwipeRight(float dt)
 
 void BaseScene::create_goal_loadingbar()
 {
-    Node* harvest_scene_editor = this->get_original_scene_from_editor();
-
-    auto progress_panel = (ui::Layout*)harvest_scene_editor->getChildByName("progress_panel");
-    progress_panel->removeFromParent();
-    this->addChild(progress_panel);
+    auto progress_panel = (ui::Layout*)this->getChildByName("progress_panel");
 
     ui::LoadingBar* loading_bar = dynamic_cast<ui::LoadingBar*>(progress_panel->getChildByName("goal_loadingbar"));
     loading_bar->setPercent(0.0f);
@@ -282,9 +291,7 @@ void BaseScene::create_goal_loadingbar()
 
 
     //show progress panel
-    auto harvester_progress_panel = harvest_scene_editor->getChildByName("harvester_progress_panel");
-    harvester_progress_panel->removeFromParent();
-    this->addChild(harvester_progress_panel);
+    auto harvester_progress_panel = this->getChildByName("harvester_progress_panel");
 
     harvester_progress_panel->setVisible(false);
     ui::LoadingBar* harvester_loading_bar = dynamic_cast<ui::LoadingBar*>(harvester_progress_panel->getChildByName("harvester_loadingbar"));
@@ -355,13 +362,11 @@ void BaseScene::create_building_choicelist()
 
     Node* harvest_scene_editor = this->get_original_scene_from_editor();
 
-    auto listview_background = harvest_scene_editor->getChildByName("listview_background");
+    auto listview_background = this->getChildByName("listview_background");
     listview_background->removeFromParent();
     this->addChild(listview_background, -999999);
 
-    Node* building_buttons = harvest_scene_editor->getChildByName("building_buttons");
-    building_buttons->removeFromParent();
-    this->addChild(building_buttons);
+    Node* building_buttons = this->getChildByName("building_buttons");
 
     for (auto conf : configs)
     {
@@ -513,13 +518,9 @@ void BaseScene::create_building_choicelist()
 
 void BaseScene::create_popup_panel()
 {
-    auto harvest_scene = this->get_original_scene_from_editor();
-
-    auto panel_node = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("popup_panel"));
-    panel_node->removeFromParent();
+    auto panel_node = dynamic_cast<cocos2d::ui::Layout*>(this->getChildByName("popup_panel"));
     this->popup_panel = std::make_shared<PopupPanel>(panel_node);
     this->popup_panel->set_visible(false);
-    this->addChild(panel_node);
 };
 
 void BaseScene::SelectEmitter(int emitter)
@@ -567,11 +568,7 @@ void BaseScene::create_info_panel()
 {
     auto building = BUILDUP->get_target_building();
 
-    Node* harvest_scene_editor = this->get_original_scene_from_editor();
-
-    ui::Layout* arena_kill_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("arena_kill_panel"));
-    arena_kill_panel->removeFromParent();
-    this->addChild(arena_kill_panel);
+    ui::Layout* arena_kill_panel = dynamic_cast<ui::Layout*>(this->getChildByName("arena_kill_panel"));
     ui::Text* arena_kill_lbl = dynamic_cast<ui::Text*>(arena_kill_panel->getChildByName("arena_kill_lbl"));
 
     auto update_info_display = [this, arena_kill_panel, arena_kill_lbl](float dt){
@@ -599,8 +596,7 @@ void BaseScene::create_info_panel()
     update_info_display(0);
 
 
-    ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("building_info_panel"));
-    building_info_panel->removeFromParent();
+    ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(this->getChildByName("building_info_panel"));
 
     auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
     auto update_building_name = [building_name](float dt){
@@ -695,8 +691,6 @@ void BaseScene::create_info_panel()
     };
     this->schedule(update_salesmen_count, AVERAGE_DELAY, "salesmen_count_update");
     update_salesmen_count(0);
-
-    this->addChild(building_info_panel);
 };
 
 void BaseScene::create_username_input()
@@ -749,10 +743,7 @@ void BaseScene::create_player_info_panel()
 {
     auto building = BUILDUP->get_target_building();
 
-    Node* harvest_scene_editor = this->get_original_scene_from_editor();
-
-    ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(harvest_scene_editor->getChildByName("player_info_panel"));
-    player_info_panel->removeFromParent();
+    ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(this->getChildByName("player_info_panel"));
 
     ui::Text* player_info_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_info_lbl"));
     set_aliasing(player_info_lbl, true);
@@ -828,16 +819,12 @@ void BaseScene::create_player_info_panel()
     this->schedule(update_player_info_lbls, AVERAGE_DELAY, "update_player_info_lbls");
     update_player_info_lbls(0);
 
-    this->addChild(player_info_panel);
 };
 
 void BaseScene::create_inventory_listview()
 {
-    Node* harvest_scene_editor = this->get_original_scene_from_editor();
-    ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(harvest_scene_editor->getChildByName("inventory_listview"));
+    ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
 
-    inventory_listview->removeFromParent();
-    this->addChild(inventory_listview);
 
     auto update_listview = [this, inventory_listview](float dt)
     {
