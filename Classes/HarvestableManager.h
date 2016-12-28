@@ -29,8 +29,6 @@ class HarvestableManager
 
     public:
         HarvestableManager();
-        ~HarvestableManager();
-
 
         //fighter harvestable
         bool is_fighter_stored; // true if we want to load an existing fighter

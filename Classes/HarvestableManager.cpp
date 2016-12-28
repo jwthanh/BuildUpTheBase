@@ -14,10 +14,6 @@ HarvestableManager::HarvestableManager()
     this->stored_dumpster_clicks = 0;
 };
 
-HarvestableManager::~HarvestableManager()
-{
-};
-
 void HarvestableManager::reset_fighter()
 {
     this->enemy_cur_hp = 0;
