@@ -6,7 +6,7 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" LeftMargin="759.9955" RightMargin="0.0045" TopMargin="0.0004" BottomMargin="439.9996" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" LeftMargin="759.9955" RightMargin="0.0045" TopMargin="0.0004" BottomMargin="439.9996" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="200.0000" />
             <Children>
               <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" TopMargin="66.9059" BottomMargin="112.2260" IsCustomSize="True" FontSize="16" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -64,12 +64,12 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.8958" Y="1.0000" />
             <PreSize X="0.2083" Y="0.3125" />
-            <SingleColor A="255" R="150" G="200" B="255" />
+            <SingleColor A="255" R="60" G="80" B="102" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="inventory_listview" ActionTag="1072656337" Tag="220" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="-960.0000" TopMargin="490.0000" BottomMargin="-50.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="ListViewObjectData">
+          <AbstractNodeData Name="inventory_listview" ActionTag="1072656337" Tag="220" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="-960.0000" TopMargin="490.0000" BottomMargin="-50.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="ListViewObjectData">
             <Size X="1920.0000" Y="200.0000" />
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
             <Position X="960.0000" Y="50.0000" />
@@ -77,12 +77,12 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="1.0000" Y="0.0781" />
             <PreSize X="2.0000" Y="0.3125" />
-            <SingleColor A="255" R="150" G="200" B="255" />
+            <SingleColor A="255" R="60" G="80" B="102" />
             <FirstColor A="255" R="150" G="150" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="760.0001" RightMargin="-0.0001" TopMargin="275.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="760.0001" RightMargin="-0.0001" TopMargin="275.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="265.0000" />
             <Children>
               <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="4.2148" RightMargin="5.7852" TopMargin="13.7148" BottomMargin="225.1450" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -150,15 +150,15 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7917" Y="0.1563" />
             <PreSize X="0.2083" Y="0.4141" />
-            <SingleColor A="255" R="150" G="200" B="255" />
+            <SingleColor A="255" R="60" G="80" B="102" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="sidebar_panel" ActionTag="-679798338" Tag="271" IconVisible="False" LeftMargin="-1.3282" RightMargin="561.3282" TopMargin="3.1651" BottomMargin="100.1431" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="sidebar_panel" ActionTag="-679798338" Tag="271" IconVisible="False" LeftMargin="-1.3282" RightMargin="561.3282" TopMargin="3.1651" BottomMargin="100.1431" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
             <Size X="400.0000" Y="536.6918" />
             <Children>
-              <AbstractNodeData Name="shop_listview" ActionTag="-890238903" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-273.3082" BottomMargin="0.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+              <AbstractNodeData Name="shop_listview" ActionTag="-890238903" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-273.3082" BottomMargin="0.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
                 <Size X="800.0000" Y="810.0000" />
                 <AnchorPoint />
                 <Position X="0.0004" Y="0.0000" />
@@ -166,12 +166,12 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.0000" Y="0.0000" />
                 <PreSize X="2.0000" Y="1.5092" />
-                <SingleColor A="255" R="150" G="200" B="255" />
+                <SingleColor A="255" R="60" G="80" B="102" />
                 <FirstColor A="255" R="150" G="150" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="detail_listview" ActionTag="-840505419" VisibleForFrame="False" Tag="162" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-273.3082" BottomMargin="0.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+              <AbstractNodeData Name="detail_listview" ActionTag="-840505419" Tag="162" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-273.3082" BottomMargin="0.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
                 <Size X="800.0000" Y="810.0000" />
                 <AnchorPoint />
                 <Position X="0.0004" Y="0.0000" />
@@ -179,12 +179,12 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.0000" Y="0.0000" />
                 <PreSize X="2.0000" Y="1.5092" />
-                <SingleColor A="255" R="150" G="200" B="255" />
+                <SingleColor A="255" R="60" G="80" B="102" />
                 <FirstColor A="255" R="150" G="150" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="building_listview" ActionTag="51939430" Tag="79" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-273.3082" BottomMargin="0.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+              <AbstractNodeData Name="building_listview" ActionTag="51939430" Tag="79" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-273.3082" BottomMargin="0.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
                 <Size X="800.0000" Y="810.0000" />
                 <AnchorPoint />
                 <Position X="0.0004" Y="0.0000" />
@@ -192,12 +192,12 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.0000" Y="0.0000" />
                 <PreSize X="2.0000" Y="1.5092" />
-                <SingleColor A="255" R="150" G="200" B="255" />
+                <SingleColor A="255" R="60" G="80" B="102" />
                 <FirstColor A="255" R="150" G="150" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="powers_listview" ActionTag="1504007663" Tag="169" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-273.3082" BottomMargin="0.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+              <AbstractNodeData Name="powers_listview" ActionTag="1504007663" Tag="169" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-273.3082" BottomMargin="0.0000" TouchEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
                 <Size X="800.0000" Y="810.0000" />
                 <AnchorPoint />
                 <Position X="0.0004" Y="0.0000" />
@@ -205,7 +205,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.0000" Y="0.0000" />
                 <PreSize X="2.0000" Y="1.5092" />
-                <SingleColor A="255" R="150" G="200" B="255" />
+                <SingleColor A="255" R="60" G="80" B="102" />
                 <FirstColor A="255" R="150" G="150" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
@@ -281,7 +281,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0014" Y="0.1565" />
             <PreSize X="0.4167" Y="0.8386" />
-            <SingleColor A="255" R="150" G="200" B="255" />
+            <SingleColor A="255" R="60" G="80" B="102" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
@@ -295,7 +295,7 @@
             <PrePosition X="0.6033" Y="0.4719" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="progress_panel" ActionTag="150151942" Tag="27" IconVisible="False" LeftMargin="759.9989" RightMargin="0.0011" TopMargin="200.0000" BottomMargin="365.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="progress_panel" ActionTag="150151942" Tag="27" IconVisible="False" LeftMargin="759.9989" RightMargin="0.0011" TopMargin="200.0000" BottomMargin="365.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="75.0000" />
             <Children>
               <AbstractNodeData Name="goal_loadingbar" ActionTag="497495460" Tag="23" IconVisible="False" LeftMargin="18.4350" RightMargin="13.5650" TopMargin="40.3520" BottomMargin="16.6480" ProgressInfo="100" ctype="LoadingBarObjectData">
@@ -327,7 +327,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7917" Y="0.5703" />
             <PreSize X="0.2083" Y="0.1172" />
-            <SingleColor A="255" R="150" G="200" B="255" />
+            <SingleColor A="255" R="60" G="80" B="102" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
@@ -511,7 +511,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="harvester_progress_panel" ActionTag="-1430244611" Tag="80" IconVisible="False" LeftMargin="399.9999" RightMargin="200.0001" TopMargin="145.0000" BottomMargin="455.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="harvester_progress_panel" ActionTag="-1430244611" Tag="80" IconVisible="False" LeftMargin="399.9999" RightMargin="200.0001" TopMargin="145.0000" BottomMargin="455.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="360.0000" Y="40.0000" />
             <Children>
               <AbstractNodeData Name="harvester_loadingbar" ActionTag="1083759761" Tag="81" IconVisible="False" LeftMargin="136.4400" RightMargin="7.5600" TopMargin="11.3520" BottomMargin="10.6480" ProgressInfo="100" ctype="LoadingBarObjectData">
@@ -543,7 +543,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4167" Y="0.7109" />
             <PreSize X="0.3750" Y="0.0625" />
-            <SingleColor A="255" R="150" G="200" B="255" />
+            <SingleColor A="255" R="60" G="80" B="102" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
