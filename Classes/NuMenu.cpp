@@ -41,7 +41,7 @@ USING_NS_CC;
 cocos2d::ui::Button* NuItem::orig_button = NULL;
 cocos2d::TTFConfig NuItem::ttf_config = TTFConfig("pixelmix.ttf", 16, GlyphCollection::CUSTOM, "\"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþ \n", false, 2);
 
-NuItem* NuItem::create(cocos2d::Node* parent)
+NuItem* NuItem::create(cocos2d::ui::Widget* parent)
 {
 
     NuItem* pRet = new(std::nothrow) NuItem();
@@ -320,7 +320,7 @@ void ShopNuItem::update_func(float dt)
 
 }
 
-BuildingShopNuItem* BuildingShopNuItem::create(cocos2d::Node* parent, spBuilding building)
+BuildingShopNuItem* BuildingShopNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
 {
     BuildingShopNuItem* pRet = new(std::nothrow) BuildingShopNuItem();
     if (pRet && pRet->init(parent, building))
@@ -336,7 +336,7 @@ BuildingShopNuItem* BuildingShopNuItem::create(cocos2d::Node* parent, spBuilding
     }
 };
 
-BuildingNuItem* BuildingNuItem::create(Node* parent, std::shared_ptr<Building> building)
+BuildingNuItem* BuildingNuItem::create(cocos2d::ui::Widget* parent, std::shared_ptr<Building> building)
 {
     BuildingNuItem* pRet = new(std::nothrow) BuildingNuItem();
     if (pRet && pRet->init(parent, building))
@@ -360,7 +360,7 @@ bool BuildingNuItem::init(Node* parent, std::shared_ptr<Building> building)
     return true;
 }
 
-RecipeNuItem* RecipeNuItem::create(Node* parent, spBuilding building)
+RecipeNuItem* RecipeNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
 {
     RecipeNuItem* pRet = new(std::nothrow) RecipeNuItem();
     if (pRet && pRet->init(parent, building))
@@ -436,7 +436,7 @@ void RecipeNuItem::update_func(float dt)
     this->set_count_lbl(result_count);
 }
 
-TechNuItem* TechNuItem::create(Node* parent, spBuilding building)
+TechNuItem* TechNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
 {
     TechNuItem* pRet = new(std::nothrow) TechNuItem();
     if (pRet && pRet->init(parent, building))
@@ -506,7 +506,7 @@ void TechNuItem::update_func(float dt)
     this->set_description(recipe->description);
 }
 
-TargetRecipeNuItem* TargetRecipeNuItem::create(Node* parent, spBuilding building)
+TargetRecipeNuItem* TargetRecipeNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
 {
     TargetRecipeNuItem* pRet = new(std::nothrow) TargetRecipeNuItem();
     if (pRet && pRet->init(parent, building))
@@ -582,7 +582,7 @@ void TargetRecipeNuItem::update_func(float dt)
     this->set_description(recipe->description);
 }
 
-ShopNuItem* ShopNuItem::create(cocos2d::Node* parent)
+ShopNuItem* ShopNuItem::create(cocos2d::ui::Widget* parent)
 {
     ShopNuItem* pRet = new(std::nothrow) ShopNuItem();
     if (pRet && pRet->init(parent))
@@ -625,7 +625,7 @@ void BuildingShopNuItem::set_been_bought(bool val)
     this->_been_bought = val;
 }
 
-UpgradeBuildingShopNuItem* UpgradeBuildingShopNuItem::create(cocos2d::Node* parent, spBuilding building)
+UpgradeBuildingShopNuItem* UpgradeBuildingShopNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
 {
     UpgradeBuildingShopNuItem* pRet = new(std::nothrow) UpgradeBuildingShopNuItem();
     if (pRet && pRet->init(parent, building))
@@ -693,7 +693,7 @@ bool UpgradeBuildingShopNuItem::custom_status_check(float dt)
     return this->building->building_level == this->building_level - 1;
 };
 
-HarvesterShopNuItem* HarvesterShopNuItem::create(Node* parent, spBuilding building)
+HarvesterShopNuItem* HarvesterShopNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
 {
     HarvesterShopNuItem* pRet = new(std::nothrow) HarvesterShopNuItem();
     if (pRet && pRet->init(parent, building))
@@ -914,7 +914,7 @@ bool SalesmanShopNuItem::custom_status_check(float dt)
     return is_enabled;
 };
 
-SalesmanShopNuItem* SalesmanShopNuItem::create(Node* parent, spBuilding building)
+SalesmanShopNuItem* SalesmanShopNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
 {
     SalesmanShopNuItem* pRet = new(std::nothrow) SalesmanShopNuItem();
     if (pRet && pRet->init(parent, building))
@@ -1049,7 +1049,7 @@ bool ConsumerShopNuItem::custom_status_check(float dt)
     return is_enabled;
 };
 
-ConsumerShopNuItem* ConsumerShopNuItem::create(Node* parent, spBuilding building, IngredientSubType consumed_type)
+ConsumerShopNuItem* ConsumerShopNuItem::create(cocos2d::ui::Widget* parent, spBuilding building, IngredientSubType consumed_type)
 {
     ConsumerShopNuItem* pRet = new(std::nothrow) ConsumerShopNuItem();
     pRet->consumed_type = consumed_type;
@@ -1166,7 +1166,7 @@ bool CombatShopNuItem::custom_status_check(float dt)
     return is_enabled;
 };
 
-CombatShopNuItem* CombatShopNuItem::create(Node* parent, spBuilding building)
+CombatShopNuItem* CombatShopNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
 {
     CombatShopNuItem* pRet = new(std::nothrow) CombatShopNuItem();
     if (pRet && pRet->init(parent, building))

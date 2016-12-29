@@ -35,7 +35,7 @@ class NuItem : public cocos2d::ui::Widget
 {
     public:
 
-    static NuItem* create(cocos2d::Node* parent);
+    static NuItem* create(cocos2d::ui::Widget* parent);
 
         NuItem(){};
         virtual bool init(cocos2d::Node* parent);
@@ -74,14 +74,14 @@ class BuildingNuItem : public NuItem
         spBuilding building;
 
         static BuildingNuItem* create();
-        static BuildingNuItem* create(Node* parent, std::shared_ptr<Building> building);
+        static BuildingNuItem* create(cocos2d::ui::Widget* parent, std::shared_ptr<Building> building);
         virtual bool init(Node* parent, std::shared_ptr<Building> building);
 };
 
 class RecipeNuItem : public BuildingNuItem
 {
     public:
-        static RecipeNuItem* create(cocos2d::Node* parent, spBuilding building);
+        static RecipeNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
 
         spRecipe recipe;
 
@@ -92,7 +92,7 @@ class RecipeNuItem : public BuildingNuItem
 class TechNuItem : public BuildingNuItem
 {
     public:
-        static TechNuItem* create(cocos2d::Node* parent, spBuilding building);
+        static TechNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
 
         spTechnology technology;
 
@@ -103,7 +103,7 @@ class TechNuItem : public BuildingNuItem
 class TargetRecipeNuItem : public BuildingNuItem
 {
     public:
-        static TargetRecipeNuItem* create(cocos2d::Node* parent, spBuilding building);
+        static TargetRecipeNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
 
         spRecipe recipe;
 
@@ -114,7 +114,7 @@ class TargetRecipeNuItem : public BuildingNuItem
 class ShopNuItem : public Buyable, public NuItem
 {
     public:
-        static ShopNuItem* create(cocos2d::Node* parent);
+        static ShopNuItem* create(cocos2d::ui::Widget* parent);
         ShopNuItem() : Buyable("unset_in_shopnuitem"), resource_cost(NULL) {};
 
         ResourceCondition* resource_cost;
@@ -131,7 +131,7 @@ class BuildingShopNuItem : public ShopNuItem
         bool _been_bought;
 
     public:
-    static BuildingShopNuItem* create(cocos2d::Node* parent, spBuilding building);;
+    static BuildingShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);;
         BuildingShopNuItem(){};
 
         std::shared_ptr<Building> building;
@@ -145,7 +145,7 @@ class UpgradeBuildingShopNuItem : public BuildingShopNuItem
 {
 
     public:
-        static UpgradeBuildingShopNuItem* create(cocos2d::Node* parent, spBuilding building);;
+        static UpgradeBuildingShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);;
         UpgradeBuildingShopNuItem(){};
 
         int building_level;
@@ -158,7 +158,7 @@ class UpgradeBuildingShopNuItem : public BuildingShopNuItem
 class HarvesterShopNuItem : public BuildingShopNuItem
 {
     public:
-    static HarvesterShopNuItem* create(Node* parent, spBuilding building);
+    static HarvesterShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
 
     std::mt19937 get_generator();
 
@@ -176,7 +176,7 @@ class HarvesterShopNuItem : public BuildingShopNuItem
 class SalesmanShopNuItem : public HarvesterShopNuItem
 {
     public:
-        static SalesmanShopNuItem* create(Node* parent, spBuilding building);
+        static SalesmanShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
 
         virtual void my_init_title() override;
         virtual void my_init_sprite() override;
@@ -189,7 +189,7 @@ class SalesmanShopNuItem : public HarvesterShopNuItem
 class ConsumerShopNuItem : public HarvesterShopNuItem
 {
     public:
-        static ConsumerShopNuItem* create(Node* parent, spBuilding building, IngredientSubType consumed_type);
+        static ConsumerShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building, IngredientSubType consumed_type);
 
         virtual void my_init_title() override;
         virtual void my_init_sprite() override;
@@ -205,7 +205,7 @@ class ConsumerShopNuItem : public HarvesterShopNuItem
 class CombatShopNuItem : public BuildingShopNuItem
 {
     public:
-        static CombatShopNuItem* create(Node* parent, spBuilding building);
+        static CombatShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
 
         //NOTE these dont override anything, HarvesterShopNuItem introduced these. TODO make them part of the base stuff
         virtual void my_init_title();
