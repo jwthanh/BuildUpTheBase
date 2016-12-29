@@ -147,7 +147,7 @@ class UpgradeBuildingShopNuItem : public BuildingShopNuItem
     public:
         static UpgradeBuildingShopNuItem* create(cocos2d::Node* parent, spBuilding building);;
         UpgradeBuildingShopNuItem(){};
-        
+
         int building_level;
         virtual bool custom_status_check(float dt) override;
 

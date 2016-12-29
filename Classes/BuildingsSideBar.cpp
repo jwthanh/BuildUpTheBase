@@ -203,7 +203,9 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
             // time it happens, it requires a built tab
             if (tab_type == TabManager::TabTypes::BuildingTab)
             {
-                ssize_t index = 123456; //sentinel
+                int sentinel = 123456;
+                int index = sentinel;
+
                 auto building_upgrade_sidebar = this->building_listviews->at(target_building->name);
                 for (Node* item : building_upgrade_sidebar->getChildren())
                 {
@@ -217,7 +219,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
                         }
                     }
                 }
-                if (index != 123456)
+                if (index != sentinel)
                 {
                     //dont bounce, but dont reenable bounce if it wasn't in the first place
                     bool orig_bounce = building_upgrade_sidebar->isBounceEnabled();
@@ -328,9 +330,9 @@ void SideListView::setup_shop_listview_as_harvesters()
             int i = 0;
             for (auto config : nuitems_config)
             {
-                //if the child already exists, put it at the back 
-                std::string child_name = config.node_name;
+                //if the child already exists, put it at the back
                 int tag = i++;
+
                 auto existing_node = try_push_back(tag, shop_listview);
                 if (existing_node)
                 {
@@ -376,6 +378,7 @@ void SideListView::setup_shop_listview_as_harvesters()
                     menu_item = ConsumerShopNuItem::create(shop_listview, building, Ingredient::SubType::Blood);
                 }
                 menu_item->my_init(config.harv_type, building->punched_sub_type);
+                std::string child_name = config.node_name;
                 menu_item->setName(child_name);
                 menu_item->setTag(tag);
 
@@ -824,7 +827,7 @@ void SideListView::setup_detail_listview_as_recipes()
                 //weaken flesh
                 spRecipe weaken_flesh = std::make_shared<Recipe>("Dead meat", "Three flies, flesh, and loaves make monsters weak");
                 weaken_flesh->components = mistIngredient{
-                    { Ingredient::SubType::Fly, 3.0 },   //TODO not use only three 
+                    { Ingredient::SubType::Fly, 3.0 },   //TODO not use only three
                     { Ingredient::SubType::Flesh, 3.0 }, // because we've got 3
                     { Ingredient::SubType::Loaf, 3.0 }   // hardcoded
                 };
@@ -928,7 +931,7 @@ void SideListView::setup_powers_listview_as_powers()
             }
             listview->setVisible(true);
 
-            //if the child already exists, put it at the back 
+            //if the child already exists, put it at the back
             std::string child_name = "send_feeback";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
@@ -979,7 +982,7 @@ void SideListView::setup_powers_listview_as_powers()
             }
             listview->setVisible(true);
 
-            //if the child already exists, put it at the back 
+            //if the child already exists, put it at the back
             std::string child_name = "open_leaderboard";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
@@ -1021,7 +1024,7 @@ void SideListView::setup_powers_listview_as_powers()
             }
             listview->setVisible(true);
 
-            //if the child already exists, put it at the back 
+            //if the child already exists, put it at the back
             std::string child_name = "sell_all";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
@@ -1101,7 +1104,7 @@ void SideListView::setup_powers_listview_as_powers()
             }
             listview->setVisible(true);
 
-            //if the child already exists, put it at the back 
+            //if the child already exists, put it at the back
             std::string child_name = "save";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
@@ -1142,7 +1145,7 @@ void SideListView::setup_powers_listview_as_powers()
             }
             listview->setVisible(true);
 
-            //if the child already exists, put it at the back 
+            //if the child already exists, put it at the back
             std::string child_name = "toggle_vibration";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
@@ -1198,7 +1201,7 @@ void SideListView::setup_powers_listview_as_powers()
             }
             listview->setVisible(true);
 
-            //if the child already exists, put it at the back 
+            //if the child already exists, put it at the back
             std::string child_name = "open_log";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
