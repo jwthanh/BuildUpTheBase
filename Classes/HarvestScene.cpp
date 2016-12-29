@@ -1147,7 +1147,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                     Vec2 pos = sell_btn->getTouchEndPosition();
 
                     std::stringstream ss;
-                    ss << "+" << beautify_double(income);
+                    ss << "+$" << beautify_double(income);
                     auto floating_label = FloatingLabel::createWithTTF(ss.str(), DEFAULT_FONT, 30);
                     floating_label->setTextColor(Color4B::GREEN);
 
