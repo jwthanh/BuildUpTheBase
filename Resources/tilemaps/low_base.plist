@@ -164,13 +164,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>low_base.pvr.ccz</string>
+            <string>low_base.png</string>
             <key>size</key>
             <string>{340,34}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:f7a01ae5b16d2519f8b1eeca41b25a5e:ce35f8e0160953227251f21728466953:8c275f877c4ad1a7b04dd7f4b9d27df8$</string>
+            <string>$TexturePacker:SmartUpdate:bb10f90609459d5dd49666f094e256d8:ce35f8e0160953227251f21728466953:7c64bf34f00fd80ae4152dcb27c9be3d$</string>
             <key>textureFileName</key>
-            <string>low_base.pvr.ccz</string>
+            <string>low_base.png</string>
         </dict>
     </dict>
 </plist>
