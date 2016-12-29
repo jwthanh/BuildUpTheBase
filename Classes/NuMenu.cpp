@@ -104,7 +104,16 @@ bool NuItem::init(cocos2d::Node* parent)
 
 
     parent->addChild(this); //FIXME hack to get the selector to run. ideally the button would be a child of this but then button doesnt go on the right spot
-    parent->addChild(button);
+    ui::ListView* scrollview_parent = dynamic_cast<ui::ListView*>(parent);
+    if (scrollview_parent)
+    {
+        scrollview_parent->pushBackCustomItem(button);
+    }
+    else
+    {
+        CCLOG("!!!!\n\nadding NuItem to not a listview\n\n\n");
+        parent->addChild(button);
+    }
 
     this->_original_image_path = "";
 
