@@ -177,8 +177,10 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
 
-        // auto action_panel = ActionPanel::create();
-        // this->addChild(action_panel);
+        auto action_panel = ActionPanel::create();
+        this->addChild(action_panel);
+        ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
+        action_panel->set_target((inventory_listview->getChildren()).at(0));
         // action_panel->set_target(this->sidebar->tabs.get_active_listview());
 
         //     //GameDirector::switch_to_equipment_menu();
@@ -878,6 +880,11 @@ void BaseScene::create_inventory_listview()
             auto new_item_panel = dynamic_cast<ui::Button*>(orig_item_panel->clone());
             load_default_button_textures(new_item_panel);
             new_item_panel->setName(str_type);
+
+            float orig_scale = new_item_panel->getScale();
+            auto scale_to = ScaleTo::create(0.15f, orig_scale);
+            new_item_panel->setScale(0.0f);
+            new_item_panel->runAction(EaseBackOut::create(scale_to));
 
             //set aliasing on font
             auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
