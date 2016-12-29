@@ -240,20 +240,11 @@ void BuildingSerializer::load_workers(rjDocument& doc)
     auto load_worker = [&](std::string prefix, mistHarvester& workers, std::string& type_str, int& i, IngredientSubType& ing_type) {
         std::stringstream ss;
         ss << prefix << "_" << type_str << "_" << i;
-        double harv_count;
 
-        //hardcode a default 1 salesmen for Farm on new game
-        if (ss.str() == "salesmen_grain_1" && this->building->name == "The Farm")
-        {
-            harv_count = this->get_double(doc, ss.str(), 1);
-        }
-        //load workers defaulting to -1
-        else
-        {
-            harv_count = this->get_double(doc, ss.str(), -1);
-        }
+        double default_unset = -1;
+        double harv_count = this->get_double(doc, ss.str(), default_unset);
 
-        if (harv_count != -1)
+        if (harv_count != default_unset)
         {
             std::pair<WorkerSubType, Ingredient::SubType> type_pair = { static_cast<WorkerSubType>(i), ing_type };
             workers[type_pair] = harv_count;
