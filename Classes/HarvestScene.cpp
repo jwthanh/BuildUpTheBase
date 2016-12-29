@@ -1145,11 +1145,14 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
                     ///TODO make this a function in MiscUI.h eventually
                     Vec2 pos = sell_btn->getTouchEndPosition();
-                    log_vector(pos);
+
                     std::stringstream ss;
                     ss << "+" << beautify_double(income);
                     auto floating_label = FloatingLabel::createWithTTF(ss.str(), DEFAULT_FONT, 30);
                     floating_label->setTextColor(Color4B::GREEN);
+
+                    auto player_gold_lbl = this->getChildByName("player_info_panel")->getChildByName("player_gold_lbl");
+                    animate_flash_action(player_gold_lbl, 0.1f, 1.2f, Color3B::GREEN);
 
                     pos.x += cocos2d::rand_minus1_1()*20.0f;
                     pos.y += cocos2d::rand_minus1_1()*20.0f;
