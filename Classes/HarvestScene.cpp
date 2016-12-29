@@ -1108,7 +1108,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     }, AVERAGE_DELAY, "alert_count_update");
 
     res_count_t coins_gained = Ingredient::type_to_value.at(ing_type);
-    auto create_sell_button = [this, alert_panel, ing_type, coins_gained](std::string name, int amount_sold, float percent_sold)
+    auto create_sell_button = [this, alert_panel, ing_type, coins_gained](std::string name, res_count_t amount_sold, float percent_sold)
     {
         ui::Button* sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
         prep_button(sell_btn);
@@ -1121,26 +1121,25 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
                 res_count_t _def = 0;
                 auto it = ing_type;
-                int num_sellable = map_get(city_ingredients, it, _def);
+                res_count_t num_sellable = map_get(city_ingredients, it, _def);
                 if (num_sellable != 0)
                 {
+                    res_count_t USE_ABSOLUTE = -1;
 
-                    int USE_ABSOLUTE = -1;
-                    int to_sell;
-                    //if amount sold is not -1, use absolute values instead
-                    if (amount_sold != USE_ABSOLUTE)
+                    res_count_t to_sell;
+                    if (amount_sold != USE_ABSOLUTE) //if amount sold is not -1, use absolute values instead
                     {
                         to_sell = std::min(num_sellable, amount_sold);
                     }
                     else
                     {
-                        to_sell = (int)(std::min((float)num_sellable, ((float)(num_sellable))*percent_sold));
+                        to_sell = std::min(num_sellable, num_sellable*percent_sold);
                     }
-                    CCLOG("selling %i of %s", to_sell, Ingredient::type_to_string(ing_type).c_str());
+
+                    CCLOG("selling %f of %s", to_sell, Ingredient::type_to_string(ing_type).c_str());
 
                     BEATUP->add_total_coin(to_sell*coins_gained);
 
-                    //for each building that has one of the ingredients, remove one at a time until there's no to sell left
                     BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
 
                     do_vibrate(32);

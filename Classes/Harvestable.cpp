@@ -145,7 +145,7 @@ void Harvestable::set_output_ing_type(Ingredient::SubType ing_type)
 void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, float duration, std::string floating_msg, Color4B text_color=Color4B::WHITE)
 {
     /*
-     * if touch is null, it uses center of sprite
+     * if touch is null (in ::shatter() for instance), it uses center of sprite
      */
 
     auto scale_to = ScaleTo::create(duration, end_scale);
