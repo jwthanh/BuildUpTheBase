@@ -6,7 +6,7 @@
       <ObjectData Name="Node" Tag="21" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="item_panel" ActionTag="988707064" Tag="204" IconVisible="False" RightMargin="-120.0000" TopMargin="-200.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="item_panel" ActionTag="988707064" Tag="204" IconVisible="False" LeftMargin="0.0002" RightMargin="-120.0002" TopMargin="-200.0011" BottomMargin="0.0011" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="120.0000" Y="200.0000" />
             <Children>
               <AbstractNodeData Name="item_img" ActionTag="818745422" Tag="28" IconVisible="False" PercentWidthEnable="True" PercentWidthEnabled="True" LeftMargin="49.4300" RightMargin="51.3700" TopMargin="127.7700" BottomMargin="56.2300" LeftEage="12" RightEage="12" TopEage="16" BottomEage="16" Scale9OriginX="12" Scale9OriginY="16" Scale9Width="15" Scale9Height="18" ctype="ImageViewObjectData">
@@ -19,7 +19,7 @@
                 <PreSize X="0.1600" Y="0.0800" />
                 <FileData Type="Normal" Path="images/cat.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="item_lbl" ActionTag="1258482361" Tag="160" IconVisible="False" LeftMargin="4.3942" RightMargin="4.3929" TopMargin="5.7199" BottomMargin="85.7203" IsCustomSize="True" FontSize="36" LabelText="5&#xA;Berry" HorizontalAlignmentType="HT_Center" OutlineSize="4" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="item_lbl" ActionTag="1258482361" Tag="160" IconVisible="False" LeftMargin="4.3943" RightMargin="4.3929" TopMargin="5.7199" BottomMargin="85.7203" IsCustomSize="True" FontSize="36" LabelText="5&#xA;Berry" HorizontalAlignmentType="HT_Center" OutlineSize="4" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="111.2129" Y="108.5598" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="60.0007" Y="140.0002" />
@@ -32,8 +32,8 @@
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
-            <AnchorPoint />
-            <Position />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="60.0002" Y="100.0011" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
