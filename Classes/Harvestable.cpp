@@ -148,6 +148,7 @@ void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, f
      * if touch is null (in ::shatter() for instance), it uses center of sprite
      */
 
+    //FIXME this is scaling the harvestable, this should be somewhere else
     auto scale_to = ScaleTo::create(duration, end_scale);
     auto ease = EaseElasticOut::create(scale_to, duration);
     this->runAction(ease);

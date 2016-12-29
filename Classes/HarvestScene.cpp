@@ -1114,7 +1114,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         prep_button(sell_btn);
         sell_btn->getTitleRenderer()->enableOutline({ 0x0a, 0x0a, 0x0a, 255 }, 3);
 
-        sell_btn->addTouchEventListener([this, ing_type, coins_gained, amount_sold, percent_sold](Ref* touch, ui::Widget::TouchEventType type){
+        sell_btn->addTouchEventListener([this, alert_panel, sell_btn, ing_type, coins_gained, amount_sold, percent_sold](cocos2d::Ref* touch, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
@@ -1138,9 +1138,30 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
                     CCLOG("selling %f of %s", to_sell, Ingredient::type_to_string(ing_type).c_str());
 
-                    BEATUP->add_total_coin(to_sell*coins_gained);
+                    res_count_t income = to_sell*coins_gained;
+                    BEATUP->add_total_coin(income);
 
                     BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
+
+                    ///TODO make this a function in MiscUI.h eventually
+                    Vec2 pos = sell_btn->getTouchEndPosition();
+                    log_vector(pos);
+                    std::stringstream ss;
+                    ss << "+" << beautify_double(income);
+                    auto floating_label = FloatingLabel::createWithTTF(ss.str(), DEFAULT_FONT, 30);
+                    floating_label->setTextColor(Color4B::GREEN);
+
+                    pos.x += cocos2d::rand_minus1_1()*20.0f;
+                    pos.y += cocos2d::rand_minus1_1()*20.0f;
+
+#ifdef __ANDROID__
+                    pos.y += 75.0f; //dont get hidden by finger
+#endif
+
+                    floating_label->setPosition(sell_btn->getParent()->convertToNodeSpace(pos));
+                    floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+                    sell_btn->getParent()->addChild(floating_label);
+                    floating_label->do_float();
 
                     do_vibrate(32);
                 }
