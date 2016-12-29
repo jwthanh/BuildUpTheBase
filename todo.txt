@@ -60,6 +60,8 @@ Features
   memory and then saving that state to disk every so often instead, sort of
   like coins
 
+* Analytics and user tracking
+
 # theme ideas
 you start off as garbage out of a spaceships ejection chute and then grow into your own lifeform then end by taking over the world
  what if instead, it was a black hole and every time you get to the core (temple)  you went to another universe or something
