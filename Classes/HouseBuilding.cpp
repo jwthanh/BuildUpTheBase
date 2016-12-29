@@ -247,7 +247,7 @@ void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t quan
     {
         mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
         create<mistIngredient>(all_ingredients, quantity, sub_type);
-    } 
+    }
     else
     {
     };
@@ -299,7 +299,7 @@ void Building::update(float dt)
         std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
         harvester = get_or_create_from_cache(shared_this, this->_harvester_cache, key);
 
-        
+
 
         harvester->active_count = count;
         harvester->update(dt);

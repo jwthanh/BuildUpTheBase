@@ -81,7 +81,7 @@ void BaseSerializer::set_string(rjDocument & doc, std::string key, std::string v
     rjDocument::AllocatorType& allocator = doc.GetAllocator();
     rjValue doc_value = rjValue();
     doc_value.SetString(value.c_str(), value.size(), allocator);
-    
+
     this->add_member(doc, key, doc_value);
 
 };
@@ -90,7 +90,7 @@ void BaseSerializer::set_double(rjDocument & doc, std::string key, double value)
 {
     rjValue doc_value = rjValue();
     doc_value.SetDouble(value);
-    
+
     this->add_member(doc, key, doc_value);
 
 };
@@ -106,7 +106,7 @@ void BaseSerializer::set_int(rjDocument & doc, std::string key, int value)
 std::string BaseSerializer::get_string(rjDocument & doc, std::string key, std::string fallback)
 {
     rjValue& doc_value = this->get_member(doc, key);
-    if (doc_value.IsObject()) 
+    if (doc_value.IsObject())
     {
         //assume its returned a Document, since I don't know how to return a null reference
         return fallback;
@@ -118,7 +118,7 @@ std::string BaseSerializer::get_string(rjDocument & doc, std::string key, std::s
 double BaseSerializer::get_double(rjDocument & doc, std::string key, double fallback)
 {
     auto& doc_value = this->get_member(doc, key);
-    if (doc_value.IsObject()) 
+    if (doc_value.IsObject())
     {
         //assume its returned a Document, since I don't know how to return a null reference
         return fallback;
@@ -130,7 +130,7 @@ double BaseSerializer::get_double(rjDocument & doc, std::string key, double fall
 int BaseSerializer::get_int(rjDocument & doc, std::string key, int fallback)
 {
     rjValue& doc_value = this->get_member(doc, key);
-    if (doc_value.IsObject()) 
+    if (doc_value.IsObject())
     {
         //assume its returned a Document, since I don't know how to return a null reference
         return fallback;
@@ -248,7 +248,7 @@ void BuildingSerializer::load_workers(rjDocument& doc)
             harv_count = this->get_double(doc, ss.str(), 1);
         }
         //load workers defaulting to -1
-        else 
+        else
         {
             harv_count = this->get_double(doc, ss.str(), -1);
         }
@@ -385,7 +385,7 @@ void ItemSerializer::serialize()
     {
         rjValue row = rjValue();
         row.SetObject();
-        
+
         build_str_member(row, "type_name", item->type_name);
         build_str_member(row, "rarity", ITEM_RARITY_STRINGS.at(item->rarity));
         build_dbl_member(row, "level", item->level);
@@ -646,7 +646,7 @@ void MinerSerializer::load()
     for (rjValue::ConstValueIterator layer_array_it = all_layers.Begin(); layer_array_it != all_layers.End(); ++layer_array_it)
     {
         cocos2d::TMXLayer* current_layer = dynamic_cast<cocos2d::TMXLayer*>(this->miner->tilemap->getChildByTag(layer_index));
-        if (!current_layer) 
+        if (!current_layer)
         {
             CCLOG("invalid layer");
             this->existing_json_found = false;
