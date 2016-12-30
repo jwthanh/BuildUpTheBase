@@ -29,5 +29,7 @@ class Tutorial
 
         bool get_show_building_info();
         void set_show_building_info(bool is_visible);
+
+        bool has_celebrated;
 };
 #endif

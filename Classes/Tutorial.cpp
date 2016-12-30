@@ -9,6 +9,8 @@ Tutorial::Tutorial()
     this->_show_building_buttons = true;
     this->_show_player_info = true;
     this->_show_building_info = true;
+
+    this->has_celebrated = false;
 };
 
 Tutorial* Tutorial::getInstance()
