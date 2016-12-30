@@ -157,6 +157,30 @@
           </AbstractNodeData>
           <AbstractNodeData Name="tutorial_sidebar_panel" ActionTag="-1907301243" Tag="1282" IconVisible="False" RightMargin="560.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
             <Size X="400.0000" Y="540.0000" />
+            <Children>
+              <AbstractNodeData Name="tutorial_lbl" ActionTag="-439876512" Tag="1523" IconVisible="False" LeftMargin="19.6094" RightMargin="20.7421" TopMargin="14.1968" BottomMargin="126.1108" IsCustomSize="True" FontSize="20" LabelText="Some example tutorial text" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="359.6485" Y="399.6924" />
+                <AnchorPoint ScaleY="1.0000" />
+                <Position X="19.6094" Y="525.8032" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0490" Y="0.9737" />
+                <PreSize X="0.8991" Y="0.7402" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                <OutlineColor A="255" R="10" G="10" B="10" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="tutorial_loadingbar" ActionTag="685670397" Tag="1765" IconVisible="False" LeftMargin="48.4776" RightMargin="35.2133" TopMargin="477.8756" BottomMargin="44.1244" ProgressInfo="100" ctype="LoadingBarObjectData">
+                <Size X="316.3091" Y="18.0000" />
+                <AnchorPoint />
+                <Position X="48.4776" Y="44.1244" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.1212" Y="0.0817" />
+                <PreSize X="0.7908" Y="0.0333" />
+                <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
+              </AbstractNodeData>
+            </Children>
             <AnchorPoint />
             <Position Y="100.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -168,7 +192,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="sidebar_panel" ActionTag="-679798338" Tag="271" IconVisible="False" RightMargin="560.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="sidebar_panel" Visible="False" ActionTag="-679798338" Tag="271" IconVisible="False" RightMargin="560.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
             <Size X="400.0000" Y="540.0000" />
             <Children>
               <AbstractNodeData Name="shop_listview" ActionTag="-890238903" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-274.9929" BottomMargin="0.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">

@@ -180,6 +180,12 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         auto tutorial_sidebar_panel = this->getChildByName("tutorial_sidebar_panel");
         tutorial_sidebar_panel->setVisible(true);
 
+        ui::Text* tutorial_lbl = dynamic_cast<ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
+        tutorial_lbl->setString("Welcome to Build Up The Base!\n\nYou're going to want to gather some resources.\nTap the farm and gather a few grains.");
+
+        ui::LoadingBar* tutorial_loadingbar = dynamic_cast<ui::LoadingBar*>(tutorial_sidebar_panel->getChildByName("tutorial_loadingbar"));
+        tutorial_loadingbar->setPercent(3.0f / 25.0f * 100);
+
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
 
