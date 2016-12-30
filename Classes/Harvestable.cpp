@@ -65,7 +65,7 @@ std::string Harvestable::get_sprite_path()
 void Harvestable::init_clicks()
 {
     this->click_limit = 150;
-    this->current_clicks = 0;
+    this->reset_current_clicks();
 }
 
 bool Harvestable::init()
@@ -106,7 +106,7 @@ bool Harvestable::init()
 
 bool Harvestable::should_shatter()
 {
-    return this->current_clicks >= this->click_limit;
+    return this->get_current_clicks() >= this->click_limit;
 }
 
 void Harvestable::on_harvest()
@@ -262,7 +262,7 @@ bool Harvestable::is_harvestable()
 
 void Harvestable::handle_harvest()
 {
-	this->current_clicks += 1;
+    this->add_current_clicks(1);
 
 	this->animate_harvest();
 	this->on_harvest();
@@ -303,7 +303,7 @@ void Harvestable::animate_clip()
 
 float Harvestable::get_click_ratio() const
 {
-    return static_cast<float>(this->current_clicks) / this->click_limit;
+    return static_cast<float>(this->get_current_clicks()) / this->click_limit;
 }
 
 void Harvestable::animate_harvest()
@@ -346,6 +346,25 @@ std::string Harvestable::get_shatter_text()
 cocos2d::Color4B Harvestable::get_shatter_text_color()
 {
     return Color4B::WHITE;
+};
+
+res_count_t Harvestable::get_current_clicks() const
+{
+    return this->_current_clicks;
+};
+
+void Harvestable::reset_current_clicks()
+{
+    this->set_current_clicks(0);
+};
+void Harvestable::set_current_clicks(res_count_t count)
+{
+    this->_current_clicks = count;
+};
+
+void Harvestable::add_current_clicks(res_count_t new_clicks)
+{
+    this->_current_clicks += new_clicks;
 };
 
 void Harvestable::shatter()
@@ -480,12 +499,12 @@ void DumpsterHarvestable::init_clicks()
         this->generate_item();
         harvestable_manager->store_item(this->scavenge_item);
 
-        this->current_clicks = 0;
+        this->reset_current_clicks();
     }
     else
     {
         harvestable_manager->load_item(this->scavenge_item); //NOTE this replaces scavenge_item with the stored item
-        this->current_clicks = harvestable_manager->stored_dumpster_clicks;
+        this->set_current_clicks(harvestable_manager->stored_dumpster_clicks);
     };
 
     //item level * 15 clicks
@@ -502,7 +521,7 @@ void DumpsterHarvestable::on_harvest()
     Harvestable::on_harvest();
 
     auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
-    harvestable_manager->stored_dumpster_clicks = this->current_clicks;
+    harvestable_manager->stored_dumpster_clicks = this->get_current_clicks();
 };
 
 void DumpsterHarvestable::animate_clip()
@@ -814,7 +833,7 @@ void CraftingHarvestable::init_clicks()
         return;
     };
 
-    this->current_clicks = 0;
+    this->reset_current_clicks();
     this->click_limit = this->recipe->clicks_required;
 };
 
@@ -824,7 +843,7 @@ void CraftingHarvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* ev
 
     animate_touch_end(touch);
 
-    this->current_clicks += 1;
+    this->add_current_clicks(1);
 
     this->animate_harvest();
     this->on_harvest();

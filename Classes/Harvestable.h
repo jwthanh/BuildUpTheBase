@@ -29,6 +29,7 @@ class Harvestable : public cocos2d::ui::Widget
 {
     private:
         IngredientSubType _current_output_ing_type;
+        res_count_t _current_clicks;
 
 
     //needs to do something when harvested, animations
@@ -53,7 +54,10 @@ class Harvestable : public cocos2d::ui::Widget
         cocos2d::Sprite* sprite;
 
         int click_limit;
-        int current_clicks;
+        res_count_t get_current_clicks() const;
+        void reset_current_clicks();
+        void set_current_clicks(res_count_t new_clicks);
+        void add_current_clicks(res_count_t new_clicks);
 
         bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) override;
 

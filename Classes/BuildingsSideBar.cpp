@@ -25,6 +25,7 @@
 #include "DataManager.h"
 #include "HarvestScene.h"
 #include "Harvestable.h"
+#include "HarvestableManager.h"
 
 #include "NodeBuilder.h"
 
@@ -652,7 +653,9 @@ void SideListView::setup_detail_listview_as_recipes()
                                 if (harvestable)
                                 {
                                     //adds 33% progress to harvestable
-                                    harvestable->current_clicks += harvestable->click_limit*.33f;
+                                    harvestable->add_current_clicks(harvestable->click_limit*.33f);
+                                    std::unique_ptr<HarvestableManager>& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+                                    harvestable_manager->stored_dumpster_clicks = harvestable->get_current_clicks();
                                     if (harvestable->should_shatter()) {
                                         harvestable->shatter();
                                     };
