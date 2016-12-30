@@ -1148,11 +1148,11 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
                     std::stringstream ss;
                     ss << "+$" << beautify_double(income);
-                    auto floating_label = FloatingLabel::createWithTTF(ss.str(), DEFAULT_FONT, 30);
-                    floating_label->setTextColor(Color4B::GREEN);
+                    std::string message = ss.str();
+                    cocos2d::Vec2 floating_start_pos = sell_btn->getParent()->convertToNodeSpace(pos);
 
-                    auto player_gold_lbl = this->getChildByName("player_info_panel")->getChildByName("player_gold_lbl");
-                    animate_flash_action(player_gold_lbl, 0.1f, 1.2f, Color3B::GREEN);
+                    auto floating_label = FloatingLabel::createWithTTF(message, DEFAULT_FONT, 30);
+                    floating_label->setTextColor(Color4B::GREEN);
 
                     pos.x += cocos2d::rand_minus1_1()*20.0f;
                     pos.y += cocos2d::rand_minus1_1()*20.0f;
@@ -1161,10 +1161,14 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                     pos.y += 75.0f; //dont get hidden by finger
 #endif
 
-                    floating_label->setPosition(sell_btn->getParent()->convertToNodeSpace(pos));
+                    floating_label->setPosition(floating_start_pos);
                     floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
-                    sell_btn->getParent()->addChild(floating_label);
                     floating_label->do_float();
+
+                    sell_btn->getParent()->addChild(floating_label);
+
+                    auto player_gold_lbl = this->getChildByName("player_info_panel")->getChildByName("player_gold_lbl");
+                    animate_flash_action(player_gold_lbl, 0.1f, 1.2f, Color3B::GREEN);
 
                     do_vibrate(32);
                 }
