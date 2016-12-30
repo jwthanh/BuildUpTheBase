@@ -38,6 +38,7 @@
 #include "ui/CocosGUI.h"
 #include <2d/CCActionInterval.h>
 #include <2d/CCActionEase.h>
+#include "Tutorial.h"
 
 
 USING_NS_CC;
@@ -132,6 +133,14 @@ SideListView::SideListView(Node* parent, spBuilding current_target)
 
     this->setup_listviews();
     this->setup_tab_buttons();
+
+    auto check_visible = [parent](float dt){
+        Tutorial* tutorial = Tutorial::getInstance();
+        Node* sidebar_panel = parent->getChildByName("sidebar_panel");
+        sidebar_panel->setVisible(tutorial->get_show_sidebar());
+    };
+    parent->schedule(check_visible, SHORT_DELAY, "check_visible");
+    check_visible(0.0f);
 
 
     this->tabs.button_map = std::map<ui::Button*, std::pair<TabManager::TabTypes, spListviewMap>>{
