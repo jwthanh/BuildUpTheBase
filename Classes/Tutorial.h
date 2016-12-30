@@ -19,8 +19,15 @@ class Tutorial
         static Tutorial* getInstance();
 
         bool get_show_sidebar();
+        void set_show_sidebar(bool is_visible);
+
         bool get_show_building_buttons();
+        void set_show_building_buttons(bool is_visible);
+
         bool get_show_player_info();
+        void set_show_player_info(bool is_visible);
+
         bool get_show_building_info();
+        void set_show_building_info(bool is_visible);
 };
 #endif

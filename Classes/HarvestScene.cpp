@@ -175,6 +175,10 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         Tutorial* tutorial = Tutorial::getInstance();
+        tutorial->set_show_sidebar(false);
+
+        auto tutorial_sidebar_panel = this->getChildByName("tutorial_sidebar_panel");
+        tutorial_sidebar_panel->setVisible(true);
 
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
