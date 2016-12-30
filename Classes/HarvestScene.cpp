@@ -1028,7 +1028,7 @@ bool HarvestScene::init()
 
     this->setOnEnterCallback([]()
     {
-        GameLogic::getInstance()->post_load();
+        GameLogic::getInstance()->load_game();
     });
 
     //autosave every 30s

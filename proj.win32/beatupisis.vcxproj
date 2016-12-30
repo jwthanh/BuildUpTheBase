@@ -198,6 +198,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\SoundEngine.cpp" />
     <ClCompile Include="..\Classes\StaticData.cpp" />
     <ClCompile Include="..\Classes\Technology.cpp" />
+    <ClCompile Include="..\Classes\Tutorial.cpp" />
     <ClCompile Include="..\Classes\Updateable.cpp" />
     <ClCompile Include="..\Classes\Util.cpp" />
     <ClCompile Include="..\Classes\HouseBuilding.cpp" />
@@ -265,6 +266,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\StaticData.h" />
     <ClInclude Include="..\Classes\SubTypes.h" />
     <ClInclude Include="..\Classes\Technology.h" />
+    <ClInclude Include="..\Classes\Tutorial.h" />
     <ClInclude Include="..\Classes\Updateable.h" />
     <ClInclude Include="..\Classes\Util.h" />
     <ClInclude Include="..\Classes\HouseBuilding.h" />

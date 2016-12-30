@@ -44,10 +44,10 @@ GameLogic::GameLogic()
 {
 };
 
-void GameLogic::post_load()
+void GameLogic::load_game()
 {
 
-    //dont re-load if done once already. this is because post_load gets called
+    //dont re-load if done once already. this is because load_game gets called
     //onEnter, originally only from initializing game, but now we're using
     //different scenes
     if (is_loaded == true)

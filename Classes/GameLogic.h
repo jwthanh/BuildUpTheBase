@@ -35,7 +35,7 @@ class GameLogic
         bool init();
 
         //handles last login and passive harvesting
-        void post_load();
+        void load_game();
         std::string new_player_load();
         std::string existing_player_load();
 

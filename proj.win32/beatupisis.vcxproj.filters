@@ -96,6 +96,7 @@
       <Filter>debugging</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\HarvestableManager.cpp" />
+    <ClCompile Include="..\Classes\Tutorial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -196,6 +197,7 @@
       <Filter>debugging</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HarvestableManager.h" />
+    <ClInclude Include="..\Classes\Tutorial.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
