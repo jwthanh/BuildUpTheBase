@@ -4,7 +4,11 @@ Tutorial* Tutorial::_instance = nullptr;
 
 Tutorial::Tutorial()
 {
-
+    //TODO serialize this
+    this->_show_sidebar = true;
+    this->_show_building_buttons = true;
+    this->_show_player_info = true;
+    this->_show_building_info = true;
 };
 
 Tutorial* Tutorial::getInstance()
@@ -19,20 +23,20 @@ Tutorial* Tutorial::getInstance()
 
 bool Tutorial::get_show_sidebar()
 {
-    return true;
+    return this->_show_sidebar;
 };
 
 bool Tutorial::get_show_building_buttons()
 {
-    return true;
+    return this->_show_building_buttons;
 };
 
 bool Tutorial::get_show_player_info()
 {
-    return true;
+    return this->_show_player_info;
 };
 
 bool Tutorial::get_show_building_info()
 {
-    return true;
+    return this->_show_building_info;
 };

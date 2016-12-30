@@ -9,6 +9,10 @@ class Tutorial
 {
     private:
         static Tutorial* _instance;
+        bool _show_sidebar;
+        bool _show_building_buttons;
+        bool _show_player_info;
+        bool _show_building_info;
 
     public:
         Tutorial();
