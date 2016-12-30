@@ -174,12 +174,8 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
+        Tutorial* tutorial = Tutorial::getInstance();
 
-        this->getChildByName("building_buttons")->setVisible(false);
-        this->getChildByName("sidebar_panel")->setVisible(false);
-        this->getChildByName("building_info_panel")->setVisible(false);
-        this->getChildByName("player_info_panel")->setVisible(false);
-        this->getChildByName("progress_panel")->setVisible(false);
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
 
