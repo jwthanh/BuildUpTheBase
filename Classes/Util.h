@@ -25,7 +25,7 @@ template<typename T>
 T pick_one(std::vector<T> vec, std::mt19937* generator=NULL)
 {
     //create the generator if it doesnt exist
-    if (!generator) { 
+    if (!generator) {
         auto temp_gen = std::mt19937(std::random_device{}());
          generator = &temp_gen;
     };

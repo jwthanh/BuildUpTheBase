@@ -43,7 +43,7 @@ void Combat::level_up(int levels)
         // log(x^x)*(x*100)+200
         double result = std::log(std::pow(level, level)) * (level*100) + 200;
         this->master->xp->required_to_lvlup = (unsigned int)std::floor(result);
-        this->master->xp->this_level = (unsigned int)std::max((double)this->master->xp->this_level - this->master->xp->required_to_lvlup, 0.0); 
+        this->master->xp->this_level = (unsigned int)std::max((double)this->master->xp->this_level - this->master->xp->required_to_lvlup, 0.0);
 
         this->level_up_stats(1);
         this->level_up_skills(1);
@@ -166,7 +166,7 @@ int Combat::adjust_damage_to_armor(Damage* dmg)
 
 void Combat::take_damage(spCombat combat_attacker, Damage* dmg)
 {
-    if (dmg >= 0 ) 
+    if (dmg >= 0 )
     {
         // if (this->master->thinker != NULL && this->master->thinker->is_ally) { return; }; //ally invincible
 
@@ -175,7 +175,7 @@ void Combat::take_damage(spCombat combat_attacker, Damage* dmg)
         //int dodge_result = rng->get(0, 100);
 
 
-        //if (dodge_result < dodge_chance) 
+        //if (dodge_result < dodge_chance)
         //{
         //    new Message(Ui::msg_handler_main, DAMAGE_TAKEN_MSG, colfg(TCODColor::lightAmber, this->master->name+" dodged the attack!."));
         //    return;

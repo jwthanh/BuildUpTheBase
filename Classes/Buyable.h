@@ -4,7 +4,7 @@
 
 #include <string>
 
-class Buyable 
+class Buyable
 {
     public:
     std::string id_key;

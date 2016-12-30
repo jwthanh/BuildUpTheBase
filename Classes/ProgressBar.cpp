@@ -55,7 +55,7 @@ ProgressBar::ProgressBar(
     ));
     this->lbl->setTextColor(Color4B::BLACK);
     this->front_timer->addChild(this->lbl);
-    
+
     this->background->setLocalZOrder(99);
     this->back_timer->setLocalZOrder(100); //prog bars on top of everything
     this->front_timer->setLocalZOrder(101);
@@ -108,7 +108,7 @@ ProgressBar::~ProgressBar()
 void ProgressBar::update_string(std::string msg)
 {
     float font_size = 20.0f;
-    
+
     if (msg == "Knuckle Avalanche") msg = "Knuckle AVs";
     else if (msg == "Impressive Hook") msg = "Impr. Hook";
 

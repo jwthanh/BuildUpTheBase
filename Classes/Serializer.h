@@ -84,7 +84,7 @@ class BuildingSerializer : public BaseSerializer
 };
 
 /*
- * since Items are unique, like you can't have 1000+ copies 
+ * since Items are unique, like you can't have 1000+ copies
  * of an Item, we serialize each one and then write it to file
  * in a list, instead of pulling it out by key like the Buildings
  */

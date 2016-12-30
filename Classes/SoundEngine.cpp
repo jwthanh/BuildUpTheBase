@@ -95,7 +95,7 @@ void SoundEngine::play_music(std::string music_path)
 
 bool SoundEngine::get_playing_music()
 {
-    
+
 #ifdef _WIN32
     if (SoundEngine::bg_music_id != -1)
     {

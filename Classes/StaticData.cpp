@@ -55,7 +55,7 @@ std::string BaseStaticData::_get_data(std::string key_top, std::string key_child
     };
 
     auto grand_child = &(*child)[key_grandchild.c_str()];
-    
+
     this->_cache[cache_key] = grand_child->GetString();
     return grand_child->GetString();
 }

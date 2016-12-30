@@ -60,7 +60,7 @@ class GameLayer : public cocos2d::Layer
         struct ButtonState
         {
             bool current; //the current state
-            VoidFuncBtnBool swap_state; //do something to the button 
+            VoidFuncBtnBool swap_state; //do something to the button
         };
 
         cocos2d::ui::ScrollView* create_center_scrollview();

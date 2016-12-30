@@ -15,7 +15,7 @@ std::string get_##attr_name()\
     return this->getter(#attr_name);\
 }\
 
-/// Read only data, do not write, since there's so much caching 
+/// Read only data, do not write, since there's so much caching
 class BaseStaticData
 {
     private:

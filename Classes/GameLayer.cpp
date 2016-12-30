@@ -36,7 +36,7 @@ bool GameLayer::touch_in_node(Node* target, cocos2d::Touch* touch, float scale)
             new_rect.size.height
         );
     }
-    if (bbox.containsPoint(this->convertTouchToNodeSpace(touch))) 
+    if (bbox.containsPoint(this->convertTouchToNodeSpace(touch)))
     {
         return true;
     }
@@ -46,7 +46,7 @@ bool GameLayer::touch_in_node(Node* target, cocos2d::Touch* touch, float scale)
 bool GameLayer::vec2_in_node(Node* target, cocos2d::Vec2 pos)
 {
     auto bbox = target->getBoundingBox();
-    if (bbox.containsPoint(pos)) 
+    if (bbox.containsPoint(pos))
     {
         return true;
     }
@@ -242,7 +242,7 @@ cocos2d::ui::Button* GameLayer::create_button(std::string text, BoolFuncNoArgs c
     btn->setTouchEnabled(true);
     btn->setPressedActionEnabled(true);
 
-    if (start_disabled) 
+    if (start_disabled)
     {
         disable_button(btn);
     };
@@ -306,7 +306,7 @@ void GameLayer::onEnter()
 
 void GameLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
-    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
     {
         CCLOG("GameLayer::onKeyReleased: popScene");
         Director::getInstance()->popScene();

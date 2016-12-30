@@ -13,32 +13,32 @@ AttrEffect::AttrEffect()
     this->health_current_val = 100;
     this->health_max_val = 0;
     this->health_regen_rate = 0;
-    this->health_regen_interval = 0; 
+    this->health_regen_interval = 0;
 
     this->mana_current_val = 0;
     this->mana_max_val = 0;
     this->mana_regen_rate = 0;
-    this->mana_regen_interval = 0; 
+    this->mana_regen_interval = 0;
 
     this->armor_current_val = 0;
     this->armor_max_val = 0;
     this->armor_regen_rate = 0;
-    this->armor_regen_interval = 0; 
+    this->armor_regen_interval = 0;
     this->armor = NULL;
 
     this->damage_regen_rate = 0;
-    this->damage_regen_interval = 0; 
+    this->damage_regen_interval = 0;
     this->damage = NULL;
 
     this->hunger_current_val = 0;
     this->hunger_max_val = 0;
     this->hunger_regen_rate = 0;
-    this->hunger_regen_interval = 0; 
+    this->hunger_regen_interval = 0;
 
     this->speed_current_val = 0;
     this->speed_max_val = 0;
     this->speed_regen_rate = 0;
-    this->speed_regen_interval = 0; 
+    this->speed_regen_interval = 0;
 
 
     this->duration = -1;
@@ -63,7 +63,7 @@ void AttrEffect::set_health_vals_to(int new_val)
     this->health_current_val = new_val;
     this->health_max_val = new_val;
     this->health_regen_rate = new_val;
-    this->health_regen_interval = new_val; 
+    this->health_regen_interval = new_val;
 };
 
 void AttrEffect::set_mana_vals_to(int new_val)
@@ -71,7 +71,7 @@ void AttrEffect::set_mana_vals_to(int new_val)
     this->mana_current_val = new_val;
     this->mana_max_val = new_val;
     this->mana_regen_rate = new_val;
-    this->mana_regen_interval = new_val; 
+    this->mana_regen_interval = new_val;
 };
 
 void AttrEffect::set_armor_vals_to(int new_val)
@@ -79,14 +79,14 @@ void AttrEffect::set_armor_vals_to(int new_val)
     this->armor_current_val = new_val;
     this->armor_max_val = new_val;
     this->armor_regen_rate = new_val;
-    this->armor_regen_interval = new_val; 
+    this->armor_regen_interval = new_val;
 };
 
 void AttrEffect::set_damage_vals_to(int new_val)
 {
     this->damage->normal = new_val;
     this->damage_regen_rate = new_val;
-    this->damage_regen_interval = new_val; 
+    this->damage_regen_interval = new_val;
 };
 
 void AttrEffect::set_hunger_vals_to(int new_val)
@@ -94,7 +94,7 @@ void AttrEffect::set_hunger_vals_to(int new_val)
     this->hunger_current_val = new_val;
     this->hunger_max_val = new_val;
     this->hunger_regen_rate = new_val;
-    this->hunger_regen_interval = new_val; 
+    this->hunger_regen_interval = new_val;
 };
 
 void AttrEffect::set_speed_vals_to(int new_val)
@@ -102,7 +102,7 @@ void AttrEffect::set_speed_vals_to(int new_val)
     this->speed_current_val = new_val;
     this->speed_max_val = new_val;
     this->speed_regen_rate = new_val;
-    this->speed_regen_interval = new_val; 
+    this->speed_regen_interval = new_val;
 };
 
 bool AttrEffect::already_applied_health(Actor* actor)

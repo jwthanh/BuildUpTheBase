@@ -13,7 +13,7 @@ int read_counts = 0;
 
 std::string FileIO::get_correct_path(const std::string& path, bool builtin_path)
 {
-    
+
     std::string corrected_path = path;
     auto file_utils = cocos2d::FileUtils::getInstance();
     if (builtin_path == false)
@@ -119,7 +119,7 @@ void FileIO::save_json(std::string& json_path, rapidjson::GenericDocument<rapidj
             for (auto itr = existing.Begin(); itr != existing.End(); ++itr)
             {
                 document.PushBack(*itr, allocator);
-                
+
             }
         }
     }

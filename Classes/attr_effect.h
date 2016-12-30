@@ -20,7 +20,7 @@ class Attribute;
 class Damage;
 class Armor;
 
-struct type_applied_s 
+struct type_applied_s
 {
     bool current_val;
     bool max_val;
@@ -29,7 +29,7 @@ struct type_applied_s
     bool all;
 };
 
-struct applied_to_s 
+struct applied_to_s
 {
     type_applied_s health;
     type_applied_s mana;
@@ -61,32 +61,32 @@ class AttrEffect
         int health_current_val;
         int health_max_val;
         int health_regen_rate;
-        int health_regen_interval; 
+        int health_regen_interval;
 
         int mana_current_val;
         int mana_max_val;
         int mana_regen_rate;
-        int mana_regen_interval; 
+        int mana_regen_interval;
 
         Armor* armor;
         int armor_current_val;
         int armor_max_val;
         int armor_regen_rate;
-        int armor_regen_interval; 
+        int armor_regen_interval;
 
         Damage* damage;
         int damage_regen_rate;
-        int damage_regen_interval; 
+        int damage_regen_interval;
 
         int hunger_current_val;
         int hunger_max_val;
         int hunger_regen_rate;
-        int hunger_regen_interval; 
+        int hunger_regen_interval;
 
         int speed_current_val;
         int speed_max_val;
         int speed_regen_rate;
-        int speed_regen_interval; 
+        int speed_regen_interval;
 
         applied_to_s  applied_to;
         std::vector<applied_to_s*>* actors_applied_to;

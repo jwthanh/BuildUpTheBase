@@ -9,7 +9,7 @@ class Item;
 class Inventory;
 class Tile;
 
-class Attribute 
+class Attribute
 {
     private:
         int tick;
@@ -20,7 +20,7 @@ class Attribute
         double max_val;
 
         double regen_rate; //per turn
-        double regen_interval; //per x turns? 
+        double regen_interval; //per x turns?
 
         Attribute();
         Attribute(Attribute& other);
@@ -38,7 +38,7 @@ class Attribute
 
         // bool CanRegenerate();
         void regenerate();
-        
+
         float get_val_percentage();
 
         virtual void add_to_current_val(int difference);

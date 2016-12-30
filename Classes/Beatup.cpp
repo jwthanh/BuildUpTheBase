@@ -288,7 +288,7 @@ void Beatup::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Eve
 {
     this->key_state[keyCode] = false;
 
-    if(keyCode == EventKeyboard::KeyCode::KEY_BACK ) 
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK )
     {
         Beatup::back_to_menu();
         printj("esc/back key released");
@@ -300,25 +300,25 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
 {
     this->key_state[keyCode] = true;
 
-    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) 
+    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
     {
         //dont want this because it'll give a keyReleased event to whatever it would popScene to
         //Beatup::back_to_menu();
         //printj("esc/back key pressed");
         //evt->stopPropagation();
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_F) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F)
     {
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_W) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_W)
     {
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_C) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_C)
     {
         double new_val = this->get_total_coins()*10;
         DataManager::set_double_from_data(Beatup::total_coin_key, new_val);
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_TAB) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_TAB)
     {
         // this->get_target_face()->recovering_sprite->getGLProgramState()->setUniformFloat("u_amount", 1.0f);
         bool shift_pressed;
@@ -330,30 +330,30 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
         }
         this->cycle_next_building(shift_pressed);
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_F1) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F1)
     {
             auto glView = Director::getInstance()->getOpenGLView();
             glView->setFrameSize(1920, 1080);
             glView->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_F2) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F2)
     {
             auto glView = Director::getInstance()->getOpenGLView();
             glView->setFrameSize(960, 640);
             glView->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_F3) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F3)
     {
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_F4) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F4)
     {
         this->_visible_inventory = !this->_visible_inventory;
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_F5) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_F5)
     {
         this->reload_resources();
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_H)
@@ -363,67 +363,67 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     {
 
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_X) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_X)
     {
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_GRAVE) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_GRAVE)
     {
         this->reload_resources();
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_V) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_V)
     {
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_S) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_S)
     {
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_B) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_B)
     {
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_N) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_N)
     {
     }
-    else if(keyCode == EventKeyboard::KeyCode::KEY_M) 
-    {
-    }
-
-    else if(keyCode == EventKeyboard::KeyCode::KEY_1) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_M)
     {
     }
 
-    else if(keyCode == EventKeyboard::KeyCode::KEY_2) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_1)
+    {
+    }
+
+    else if(keyCode == EventKeyboard::KeyCode::KEY_2)
     {
         GameDirector::switch_to_building_menu();
     }
 
-    else if(keyCode == EventKeyboard::KeyCode::KEY_3) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_3)
     {
     }
 
-    else if(keyCode == EventKeyboard::KeyCode::KEY_4) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_4)
     {
     }
 
-    else if(keyCode == EventKeyboard::KeyCode::KEY_5) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_5)
     {
     }
 
-    else if(keyCode == EventKeyboard::KeyCode::KEY_6) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_6)
     {
     }
 
-    else if(keyCode == EventKeyboard::KeyCode::KEY_7) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_7)
     {
     }
 
-    else if(keyCode == EventKeyboard::KeyCode::KEY_8) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_8)
     {
     }
 
-    else if(keyCode == EventKeyboard::KeyCode::KEY_9) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_9)
     {
     }
 
-    else if(keyCode == EventKeyboard::KeyCode::KEY_0) 
+    else if(keyCode == EventKeyboard::KeyCode::KEY_0)
     {
     }
 }
@@ -661,4 +661,4 @@ void Beatup::view_army()
     army_scene->addChild(layer);
 
     Director::getInstance()->pushScene(army_scene);
-}; 
+};

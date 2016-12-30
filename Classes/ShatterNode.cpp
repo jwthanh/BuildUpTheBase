@@ -145,7 +145,7 @@ void ShatterSprite::createShatter(){
             frag_grid[i][j] = frag;
             //add to batchNode
             frag_batch_node->addChild(frag);
-            //random 
+            //random
             frag->random_number = rand();
         }
     }

@@ -28,7 +28,7 @@ class Resource
     static const std::map<SubType, std::string> type_map; \
 SubType sub_type; \
 static std::string type_to_string(Rtype::SubType type); \
-static Rtype::SubType string_to_type(std::string string_type); 
+static Rtype::SubType string_to_type(std::string string_type);
 
 class Ingredient : public Resource
 {

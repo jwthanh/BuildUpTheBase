@@ -163,7 +163,7 @@ std::string beautify_double(long double& value)
 
     if (value < 1000 && std::floor(value) != value) //check for decimal
     {
-         _beautify_double_ss.str(""); 
+         _beautify_double_ss.str("");
         _beautify_double_ss << std::fixed << std::setprecision(2) << value;
         std::string fixed_value = _beautify_double_ss.str();
         fixed_value.erase(fixed_value.find_last_not_of('0') + 1, std::string::npos);

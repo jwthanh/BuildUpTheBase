@@ -274,7 +274,7 @@ bool ShopNuItem::custom_status_check(float dt)
 void ShopNuItem::update_func(float dt)
 {
     //anytime the disk is checked, this slows down
-    if (this->get_been_bought()) 
+    if (this->get_been_bought())
     {
         //Check if image has been updated
         ResourceData data = this->item_icon->getRenderFile();
@@ -297,7 +297,7 @@ void ShopNuItem::update_func(float dt)
         try_set_enable(false);
         try_set_text_color(this->cost_lbl, Color4B::GRAY);
         try_set_node_color(this->button, Color3B::WHITE);
-    } 
+    }
     else if (total_coins < cost || !this->custom_status_check(dt))
     {
         try_set_enable(false);
@@ -732,7 +732,7 @@ void HarvesterShopNuItem::my_init_title()
     std::vector<std::string> names = {
         "Jamal", "Josh", "James", "Jimmy", "Jonathan", "Javert", "John",
         "Jackson", "Jax", "Jimothy", "Jasper", "Joe", "Jenson", "Jack",
-        "Justin", "Jaleel", "Jamar", "Jesse", "Jaromir", "Jebediah", 
+        "Justin", "Jaleel", "Jamar", "Jesse", "Jaromir", "Jebediah",
         "Johan", "Jericho"
     };
 
@@ -944,7 +944,7 @@ void SalesmanShopNuItem::my_init_title()
     std::vector<std::string> names = {
         "Samson", "Sonny", "Smokey", "Sinead", "Sebastian", "Saul", "Stan",
         "Scott", "Spencer", "Sam", "Seth", "Stefan", "Jenson", "Shiloh",
-        "Sequoia", "Sergeo", "Seren", "Seamus", "Spartacus", "Spike", 
+        "Sequoia", "Sergeo", "Seren", "Seamus", "Spartacus", "Spike",
         "Siegfried", "Sylvain"
     };
 

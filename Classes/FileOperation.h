@@ -5,7 +5,7 @@
 #include <json/document.h>
 #include "constants.h"
 
-class FileIO 
+class FileIO
 {
     public:
         //builtin paths are in Resources, otherwise its in UserDefaults folder

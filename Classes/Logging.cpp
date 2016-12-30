@@ -1,6 +1,6 @@
 #include "Logging.h"
 
-#include "CCFileUtils.h" //if any cocos file is after easylogging.h there's an error 
+#include "CCFileUtils.h" //if any cocos file is after easylogging.h there's an error
 #include "external/easylogging.h"
 
 

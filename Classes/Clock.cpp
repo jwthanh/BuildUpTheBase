@@ -60,7 +60,7 @@ bool Clock::is_active()
 
 void Clock::start()
 {
-    this->start_time = 0.001f; //ideally this'd be like a bool or something 
+    this->start_time = 0.001f; //ideally this'd be like a bool or something
 };
 
 void Clock::start_for_thres(float val)

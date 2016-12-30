@@ -3,8 +3,8 @@
 #define COMBAT_H
 #include "constants.h"
 
-class Person; 
-class Fighter; 
+class Person;
+class Fighter;
 class Game;
 class Damage;
 
@@ -38,7 +38,7 @@ class Combat : public std::enable_shared_from_this<Combat>
         void level_up_skills(int levels);
 };
 
-class Damage 
+class Damage
 {
     public:
         int normal;
@@ -76,17 +76,17 @@ class Armor
 class Experience
 {
     public:
-        /* if you're level 9 with 960 total experience and it'd take 1000 for level 
+        /* if you're level 9 with 960 total experience and it'd take 1000 for level
          * 10, total would be 960, this_level would be 60, required_to_lvlup would be
          * 100 */
         unsigned int lvl;
-        unsigned int total; 
+        unsigned int total;
         unsigned int this_level;
         unsigned int required_to_lvlup;
 
         unsigned int value;
 
-        Experience(): 
+        Experience():
             total(0),
             this_level(0),
             required_to_lvlup(100),

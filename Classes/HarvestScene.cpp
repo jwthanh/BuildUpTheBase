@@ -174,13 +174,18 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
 
+        this->getChildByName("building_buttons")->setVisible(false);
+        this->getChildByName("sidebar_panel")->setVisible(false);
+        this->getChildByName("building_info_panel")->setVisible(false);
+        this->getChildByName("player_info_panel")->setVisible(false);
+        this->getChildByName("progress_panel")->setVisible(false);
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
 
-        auto action_panel = ActionPanel::create();
-        this->addChild(action_panel);
-        ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
-        action_panel->set_target((inventory_listview->getChildren()).at(0));
+        // auto action_panel = ActionPanel::create();
+        // this->addChild(action_panel);
+        // ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
+        // action_panel->set_target((inventory_listview->getChildren()).at(0));
         // action_panel->set_target(this->sidebar->tabs.get_active_listview());
 
         //     //GameDirector::switch_to_equipment_menu();

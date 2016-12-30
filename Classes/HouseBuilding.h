@@ -56,7 +56,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         Building(Village* city, std::string name, std::string id_key);
         void create_ingredients(Ingredient::SubType sub_type, res_count_t quantity);
-    
+
         void consume_recipe(Recipe* recipe);
 
         void update(float dt);

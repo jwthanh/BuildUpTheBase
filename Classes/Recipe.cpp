@@ -36,7 +36,7 @@ bool Recipe::is_satisfied(mistIngredient input)
     {
         //if ingredient type's not in matches map, add it regardless of whether
         //its relevant or not
-        Ingredient::SubType i_type = ingredient.first; 
+        Ingredient::SubType i_type = ingredient.first;
         input_components[i_type] = input[i_type];
     };
 

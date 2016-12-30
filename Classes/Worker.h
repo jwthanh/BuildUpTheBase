@@ -58,7 +58,7 @@ class Worker : public Nameable, Updateable
 
         //amount of workers of this type, ie if this unlocks 1 grain per update,
         //and there's 10 active, it'll get you 10 grain
-        res_count_t active_count = 0; 
+        res_count_t active_count = 0;
 
         Worker(spBuilding building, std::string name, SubType sub_type);
 

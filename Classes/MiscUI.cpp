@@ -14,7 +14,7 @@ USING_NS_CC;
 FloatingLabel::FloatingLabel(TextHAlignment hAlignment, TextVAlignment vAlignment)
     : Label(hAlignment, vAlignment)
 {
-    
+
 };
 
 FloatingLabel* FloatingLabel::createWithTTF(const std::string& text, const std::string& fontFile, float fontSize, const Size& dimensions /* = Size::ZERO */, TextHAlignment hAlignment /* = TextHAlignment::LEFT */, TextVAlignment vAlignment /* = TextVAlignment::TOP */)

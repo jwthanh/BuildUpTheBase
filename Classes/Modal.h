@@ -4,11 +4,11 @@
 #include <string>
 
 
-namespace cocos2d 
+namespace cocos2d
 {
     class Node;
 
-    namespace ui 
+    namespace ui
     {
         class Layout;
         class Text;
@@ -18,7 +18,7 @@ namespace cocos2d
 };
 
 //a box with a title and a close button
-class BaseModal 
+class BaseModal
 {
     protected:
         //base node for all children

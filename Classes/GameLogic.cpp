@@ -96,7 +96,7 @@ void GameLogic::post_load()
         //TODO clean up modal memory
 
         modal->set_body(modal_content);
-        
+
     }
 
     //set the last login time, set here and on save
@@ -500,7 +500,7 @@ void GameDirector::switch_to_city_menu()
     };
     auto textfield_listener = [city_name_input, clean_city_name](Ref* target, ui::TextField::EventType evt)
     {
-        if (evt == ui::TextField::EventType::ATTACH_WITH_IME || 
+        if (evt == ui::TextField::EventType::ATTACH_WITH_IME ||
                 evt == ui::TextField::EventType::DETACH_WITH_IME)
         {
             std::string text = city_name_input->getString();
