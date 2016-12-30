@@ -54,6 +54,7 @@
 #include "2d/CCRenderTexture.h"
 #include <2d/CCParticleExamples.h>
 #include "debugging/ActionPanel.h"
+#include "Tutorial.h"
 
 USING_NS_CC;
 
@@ -467,6 +468,15 @@ void BaseScene::create_building_choicelist()
     Node* city_node = building_buttons->getChildByName("city_node");
     ui::Button* panel = (ui::Button*)city_node->getChildByName("building_panel");
 
+    //check visibilty for tutorials
+    auto check_visible = [building_buttons](float dt){
+        Tutorial* tutorial = Tutorial::getInstance();
+        building_buttons->setVisible(tutorial->get_show_building_buttons());
+    };
+    building_buttons->schedule(check_visible, SHORT_DELAY, "check_visible");
+    check_visible(0.0f);
+
+
 
     //set building name
     ui::Text* building_name = (ui::Text*)panel->getChildByName("building_name");
@@ -594,6 +604,13 @@ void BaseScene::create_info_panel()
 
 
     ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(this->getChildByName("building_info_panel"));
+    //check visibilty for tutorials
+    auto check_visible = [building_info_panel](float dt){
+        Tutorial* tutorial = Tutorial::getInstance();
+        building_info_panel->setVisible(tutorial->get_show_building_info());
+    };
+    building_info_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
+    check_visible(0.0f);
 
     auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
     auto update_building_name = [building_name](float dt){
@@ -693,6 +710,7 @@ void BaseScene::create_info_panel()
 void BaseScene::create_username_input()
 {
     auto building_panel = this->getChildByName("player_info_panel");
+
     ui::TextField* username_input = dynamic_cast<ui::TextField*>(building_panel->getChildByName("username_input"));
 
     username_input->setTextHorizontalAlignment(TextHAlignment::CENTER);
@@ -741,6 +759,14 @@ void BaseScene::create_player_info_panel()
     auto building = BUILDUP->get_target_building();
 
     ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(this->getChildByName("player_info_panel"));
+
+    //check visibilty for tutorials
+    auto check_visible = [player_info_panel](float dt){
+        Tutorial* tutorial = Tutorial::getInstance();
+        player_info_panel->setVisible(tutorial->get_show_player_info());
+    };
+    player_info_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
+    check_visible(0.0f);
 
     ui::Text* player_info_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_info_lbl"));
     set_aliasing(player_info_lbl, true);
