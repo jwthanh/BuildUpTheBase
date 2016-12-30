@@ -121,13 +121,13 @@ std::string GameLogic::existing_player_load()
     std::stringstream gains_ss, at_capacity_ss;
     std::chrono::duration<double, std::ratio<3600>> hours_since_last_login = BEATUP->hours_since_last_login();
 
-
     auto original_ingredients = BUILDUP->get_all_ingredients(); //NOTE create a copy to reference later
+
     auto seconds = std::chrono::duration_cast<std::chrono::seconds>(hours_since_last_login);
     long long seconds_count = seconds.count();
 
 
-    //if the time is is over a day in the passed, assume that they're cheating
+    //if the time is over a day in the passed, assume that they're cheating
     // anything less than 24 hours could be a timezone thing
     bool is_cheating = hours_since_last_login.count() < -24.0;
 
@@ -149,24 +149,13 @@ std::string GameLogic::existing_player_load()
                 res_count_t gained = new_count - old_count;
                 gains_ss << "+Gained " << beautify_double(gained) << " " << Ingredient::type_to_string(ing_type);
 
-                ////FIXME since moving to shared ingredients,
-                //building->is_storage_full_of_ingredients checks global
-                //ingredients, so this needs to check only the appropriate
-                //building
-                // for (spBuilding building : BUILDUP->city->buildings)
-                // {
-                //     if (building->is_storage_full_of_ingredients(ing_type))
-                //     {
-                //         at_capacity_ss << "- Upgrade " << building->name << " to fit more " << Ingredient::type_to_string(ing_type) << "!" << std::endl;
-                //     }
-
-                // }
+                //TODO reimplement a per-building storage full message (since its all shared now)
 
                 gains_ss << std::endl;
             }
         }
     }
-    else
+    else //cheating detected
     {
         gains_ss << "Awfully suspicious..." << std::endl;
         LOG(WARNING) << "time jump cheat detected";
@@ -179,26 +168,29 @@ std::string GameLogic::existing_player_load()
     }
 
 
+    std::stringstream since_last_login_ss;
     res_count_t hours_since_login = hours_since_last_login.count();
     if (hours_since_login < 1.0)
     {
         auto minutes_since_last_login = std::chrono::duration_cast<std::chrono::minutes>(hours_since_last_login);
         res_count_t minutes_since_login = minutes_since_last_login.count();
-        gains_ss << "\nIt's been " << beautify_double(minutes_since_login) << " minutes since last login.";
+        since_last_login_ss << "\nIt's been " << beautify_double(minutes_since_login) << " minutes since last login.";
     }
     else if (hours_since_login < 48.0)
     {
-        gains_ss << "\nIt's been " << beautify_double(hours_since_login) << " hours since last login.";
+        since_last_login_ss << "\nIt's been " << beautify_double(hours_since_login) << " hours since last login.";
     }
     else
     {
         typedef std::chrono::duration<int, std::ratio<86400> > days;
         auto days_since_last_login = std::chrono::duration_cast<days>(hours_since_last_login);
         res_count_t days_since_login = days_since_last_login.count();
-        gains_ss << "\nIt's been " << beautify_double(days_since_login) << " days since last login.";
+        since_last_login_ss << "\nIt's been " << beautify_double(days_since_login) << " days since last login.";
     }
 
-    CCLOG("%s", gains_ss.str().c_str());
+    CCLOG("%s", since_last_login_ss.str().c_str());
+
+    gains_ss << since_last_login_ss.str();
 
     std::string result = "";
     if (at_capacity_ss.str() != "")
