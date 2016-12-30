@@ -138,15 +138,17 @@ int BaseSerializer::get_int(rjDocument & doc, std::string key, int fallback)
     return doc_value.GetInt();
 };
 
-BuildingSerializer::BuildingSerializer(std::string filename, spBuilding building)
-    : BaseSerializer(filename), building(building)
+BuildingSerializer::BuildingSerializer(std::string filename)
+    : BaseSerializer(filename), building(NULL)
 {
 }
 
-void BuildingSerializer::serialize()
+void BuildingSerializer::serialize(spBuilding building)
 {
     rjDocument doc = rjDocument();
     doc.SetObject();
+
+    this->building = building;
 
     this->serialize_building_level(doc);
     this->serialize_workers(doc);
@@ -155,11 +157,13 @@ void BuildingSerializer::serialize()
     this->save_document(doc);
 }
 
-void BuildingSerializer::load()
+void BuildingSerializer::load(spBuilding building)
 {
     rjDocument doc = this->get_document();
     //dont do work if there's nothing to do
     if (doc.IsObject() == false){ return; }
+
+    this->building = building;
 
     this->load_building_level(doc);
     this->load_ingredients(doc); //TODO remove this after like halfway through november 2016 so everyone has all their resources still
@@ -391,6 +395,8 @@ void ItemSerializer::load()
 {
     BUILDUP->items = {};
     auto doc = this->get_document();
+
+    ItemData item_data;
     if (doc.IsArray())
     {
         for (auto it = doc.Begin(); it != doc.End(); it++)
@@ -408,7 +414,7 @@ void ItemSerializer::load()
                 rarity = (*result_it).first;
             }
 
-            spItem item = ItemData().get_item(type_name);
+            spItem item = item_data.get_item(type_name);
             item->rarity = rarity;
             item->level = item_level;
             BUILDUP->items.push_back(item);

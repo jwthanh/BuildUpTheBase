@@ -61,10 +61,10 @@ class BuildingSerializer : public BaseSerializer
 {
     public:
         spBuilding building;
-        BuildingSerializer(std::string filename, spBuilding building);
+        BuildingSerializer(std::string filename);
 
-        void serialize() override;
-        void load() override;
+        void serialize(spBuilding building);
+        void load(spBuilding building);
 
         void serialize_building_level(rjDocument& doc);
         void load_building_level(rjDocument& doc);

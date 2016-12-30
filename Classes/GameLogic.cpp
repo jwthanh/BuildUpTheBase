@@ -330,10 +330,10 @@ int GameLogic::get_total_kills()
 void GameLogic::save_all()
 {
     LOG(INFO) << "Starting save";
+    auto bldg_serializer = BuildingSerializer("test_building.json");
     for (spBuilding building : BUILDUP->city->buildings)
     {
-        auto bldg_serializer = BuildingSerializer("test_building.json", building);
-        bldg_serializer.serialize();
+        bldg_serializer.serialize(building);
     };
 
     auto item_serializer = ItemSerializer("alpha_items.json");
@@ -374,10 +374,10 @@ void GameLogic::load_all()
     std::string vibrate_key = "can_vibrate";
     GameLogic::getInstance()->set_can_vibrate(DataManager::get_bool_from_data(vibrate_key, true));
 
+    auto bldg_serializer = BuildingSerializer("test_building.json");
     for (spBuilding building : BUILDUP->city->buildings)
     {
-        auto bldg_serializer = BuildingSerializer("test_building.json", building);
-        bldg_serializer.load();
+        bldg_serializer.load(building);
     };
 
     auto item_serializer = ItemSerializer("alpha_items.json");
@@ -415,10 +415,10 @@ void GameLogic::load_all()
 
 void GameLogic::load_all_as_cheater()
 {
+    auto bldg_serializer = BuildingSerializer("cheat_building.json");
     for (spBuilding building : BUILDUP->city->buildings)
     {
-        auto bldg_serializer = BuildingSerializer("cheat_building.json", building);
-        bldg_serializer.load();
+        bldg_serializer.load(building);
     };
 
     BEATUP->_total_coins = 0.0;
