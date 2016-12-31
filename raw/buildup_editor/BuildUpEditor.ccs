@@ -38,6 +38,9 @@
         <Image Name="main_UI_export_10.png" />
         <TTF Name="pixelmix.ttf" />
         <TmxFile Name="test_map.tmx" />
+        <Folder Name="tutorial">
+          <Project Name="tutorial_sidebar_panel.csd" Type="Node" />
+        </Folder>
       </RootFolder>
     </Group>
   </SolutionFolder>

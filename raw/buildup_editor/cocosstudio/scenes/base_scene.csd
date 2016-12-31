@@ -6,6 +6,16 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
+          <AbstractNodeData Name="tutorial_sidebar_panel" ActionTag="-2013916583" Tag="2052" IconVisible="True" RightMargin="960.0000" TopMargin="540.0000" BottomMargin="100.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position Y="100.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition Y="0.1563" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="tutorial/tutorial_sidebar_panel.csd" Plist="" />
+          </AbstractNodeData>
           <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" LeftMargin="759.9955" RightMargin="0.0045" TopMargin="0.0004" BottomMargin="439.9996" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="200.0000" />
             <Children>
@@ -150,55 +160,6 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7917" Y="0.1563" />
             <PreSize X="0.2083" Y="0.4141" />
-            <SingleColor A="255" R="60" G="80" B="102" />
-            <FirstColor A="255" R="150" G="200" B="255" />
-            <EndColor A="255" R="255" G="255" B="255" />
-            <ColorVector ScaleY="1.0000" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="tutorial_sidebar_panel" ActionTag="-1907301243" Tag="1282" IconVisible="False" RightMargin="560.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
-            <Size X="400.0000" Y="540.0000" />
-            <Children>
-              <AbstractNodeData Name="tutorial_lbl" ActionTag="-439876512" Tag="1523" IconVisible="False" LeftMargin="19.6094" RightMargin="20.7421" TopMargin="14.1968" BottomMargin="126.1108" IsCustomSize="True" FontSize="20" LabelText="Some example tutorial text" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="359.6485" Y="399.6924" />
-                <AnchorPoint ScaleY="1.0000" />
-                <Position X="19.6094" Y="525.8032" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0490" Y="0.9737" />
-                <PreSize X="0.8991" Y="0.7402" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="10" G="10" B="10" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="tutorial_loadingbar" ActionTag="685670397" Tag="1765" IconVisible="False" LeftMargin="48.4776" RightMargin="35.2133" TopMargin="477.8756" BottomMargin="44.1244" ProgressInfo="100" ctype="LoadingBarObjectData">
-                <Size X="316.3091" Y="18.0000" />
-                <AnchorPoint />
-                <Position X="48.4776" Y="44.1244" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1212" Y="0.0817" />
-                <PreSize X="0.7908" Y="0.0333" />
-                <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="tutorial_progress_lbl" ActionTag="-457408850" Tag="1886" IconVisible="False" LeftMargin="19.6093" RightMargin="20.7422" TopMargin="446.0742" BottomMargin="66.1109" IsCustomSize="True" FontSize="20" LabelText="25.00 grain to harvest" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="359.6485" Y="27.8148" />
-                <AnchorPoint />
-                <Position X="19.6093" Y="66.1109" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0490" Y="0.1224" />
-                <PreSize X="0.8991" Y="0.0515" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="10" G="10" B="10" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-            </Children>
-            <AnchorPoint />
-            <Position Y="100.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition Y="0.1563" />
-            <PreSize X="0.4167" Y="0.8438" />
             <SingleColor A="255" R="60" G="80" B="102" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />

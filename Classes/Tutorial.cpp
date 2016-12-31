@@ -46,7 +46,8 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
     BUILDUP->set_target_building(BUILDUP->city->building_by_name("The Farm"));
 
-    auto tutorial_sidebar_panel = parent->getChildByName("tutorial_sidebar_panel");
+    //FIXME i wish there was a way to name these better
+    auto tutorial_sidebar_panel = parent->getChildByName("tutorial_sidebar_panel")->getChildByName("tutorial_sidebar_panel");
     tutorial_sidebar_panel->setVisible(true);
 
     cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
