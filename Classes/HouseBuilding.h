@@ -22,6 +22,26 @@ using HarvesterCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Harv
 using SalesmenCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Salesman>>>;
 using ConsumerCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<ConsumerHarvester>>>;
 
+static const std::map<int, res_count_t> building_storage_limit = {
+    { 1, 25.0},
+    { 2, 50.0},
+    { 3, 250.0},
+    { 4, 1000.0},
+    { 5, 5000.0},
+    { 6, 150000.0},
+    { 7, 500000.0},
+    { 8, 1000000.0},
+    { 9, 6500000.0},
+    {10, 12000000.0},
+    {11, 500000000.0},
+    {12, 800000000.0},
+    {13, 1000000000.0},
+    {14, 50000000000.0},
+    {15, 1000000000000.0},
+    {16, 5000000000000.0}
+};
+
+
 class Building : public Nameable, public Updateable, public Buyable, public std::enable_shared_from_this<Building>
 {
     public:

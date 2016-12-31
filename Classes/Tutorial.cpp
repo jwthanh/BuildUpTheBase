@@ -59,7 +59,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
     cocos2d::ProgressTo* progress_to = cocos2d::ProgressTo::create(0.25f, 50.0f);
     tutorial_loadingbar->runAction(cocos2d::EaseBackOut::create(progress_to));
 
-    res_count_t target_total_grain = 25;
+    res_count_t target_total_grain = building_storage_limit.at(1);
 
     auto celebrate = [this](cocos2d::Node* parent){
         if (this->has_celebrated == false){
