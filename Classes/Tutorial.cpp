@@ -50,7 +50,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
     tutorial_sidebar_panel->setVisible(true);
 
     cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
-    tutorial_lbl->setString("Welcome to Build Up The Base!\n\nYou're going to want to gather some resources.\nTap the farm and gather a few grains.");
+    tutorial_lbl->setString("Welcome to\n  Build Up The Base!\n\n\nYou're going to want to gather some resources.\nTap the farm and gather a few grains.");
 
     cocos2d::ui::LoadingBar* tutorial_loadingbar = dynamic_cast<cocos2d::ui::LoadingBar*>(tutorial_sidebar_panel->getChildByName("tutorial_loadingbar"));
     cocos2d::ui::Text* tutorial_progress_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_progress_lbl"));
@@ -85,6 +85,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
         if (remaining_grain < 1) {
             celebrate(tutorial_sidebar_panel);
+            tutorial_progress_lbl->setString("Complete!");
         }
     };
     tutorial_loadingbar->schedule(check_grain, SHORT_DELAY, "check_grain");
