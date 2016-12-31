@@ -53,6 +53,16 @@ void Tutorial::set_show_player_info(bool is_visible)
     this->_show_player_info = is_visible;
 };
 
+bool Tutorial::get_show_progress_panel()
+{
+    return this->_show_progress_panel;
+};
+
+void Tutorial::set_show_progress_panel(bool is_visible)
+{
+    this->_show_progress_panel = is_visible;
+};
+
 bool Tutorial::get_show_building_info()
 {
     return this->_show_building_info;

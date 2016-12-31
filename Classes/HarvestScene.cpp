@@ -180,6 +180,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         tutorial->set_show_building_buttons(false);
         tutorial->set_show_player_info(false);
         tutorial->set_show_building_info(false);
+        tutorial->set_show_progress_panel(false);
 
         BUILDUP->set_target_building(BUILDUP->city->building_by_name("The Farm"));
 
@@ -293,6 +294,14 @@ void BaseScene::onSwipeRight(float dt)
 void BaseScene::create_goal_loadingbar()
 {
     auto progress_panel = (ui::Layout*)this->getChildByName("progress_panel");
+
+    //check visibilty for tutorials
+    auto check_visible = [progress_panel](float dt){
+        Tutorial* tutorial = Tutorial::getInstance();
+        progress_panel->setVisible(tutorial->get_show_progress_panel());
+    };
+    progress_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
+    check_visible(0.0f);
 
     ui::LoadingBar* loading_bar = dynamic_cast<ui::LoadingBar*>(progress_panel->getChildByName("goal_loadingbar"));
     loading_bar->setPercent(0.0f);

@@ -12,6 +12,7 @@ class Tutorial
         bool _show_sidebar;
         bool _show_building_buttons;
         bool _show_player_info;
+        bool _show_progress_panel;
         bool _show_building_info;
 
     public:
@@ -29,6 +30,9 @@ class Tutorial
 
         bool get_show_building_info();
         void set_show_building_info(bool is_visible);
+
+        bool get_show_progress_panel();
+        void set_show_progress_panel(bool is_visible);
 
         bool has_celebrated;
 };
