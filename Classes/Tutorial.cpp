@@ -41,26 +41,19 @@ Tutorial* Tutorial::getInstance()
 
 void Tutorial::first_start(cocos2d::Node* parent)
 {
-
     this->hide_game_ui();
 
     //default to The Farm, just in case
     BUILDUP->set_target_building(BUILDUP->city->building_by_name("The Farm"));
 
     auto tutorial_sidebar_panel = parent->getChildByName("tutorial_sidebar_panel")->getChildByName("tutorial_sidebar_panel"); //FIXME i wish there was a way to name these better to reduce repetition
-    //make tutorial panel visible
-    tutorial_sidebar_panel->setVisible(true);
 
+    //handles prepping this steps ui
     this->current_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
         "Welcome to\n Build Up The Base",
         "You're going to want to gather some resources.\nTap the farm and gather a few grains."
     );
-
-    //body label
-
-    cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(tutorial_sidebar_panel->getChildByName("next_tutorial_step_btn"));
-    prep_button(next_tutorial_step_btn);
 
     //progress panel
     cocos2d::ui::Layout* tutorial_progress_panel = dynamic_cast<cocos2d::ui::Layout*>(tutorial_sidebar_panel->getChildByName("progress_panel"));
@@ -81,7 +74,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
         tutorial_progress_lbl->setString(progress_ss.str());
 
         if (remaining_grain < 1) {
-            //launch fireworks particle
+            //add fireworks, change text to complete, show next button etc
             this->current_step->celebrate();
 
         }
@@ -161,11 +154,21 @@ void TutorialStep::init_sidebar_panel()
 {
     auto tutorial_sidebar_panel = this->parent;
 
+    //make tutorial panel visible
+    tutorial_sidebar_panel->setVisible(true);
+
+    //setup title
     cocos2d::ui::Text* tutorial_title_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_title_lbl"));
     tutorial_title_lbl->setString(this->title);
 
+    //setup body
     cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
     tutorial_lbl->setString(this->body);
+
+    //setup buttons
+    cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(tutorial_sidebar_panel->getChildByName("next_tutorial_step_btn"));
+    prep_button(next_tutorial_step_btn);
+    next_tutorial_step_btn->setVisible(false);
 };
 
 void TutorialStep::celebrate()
@@ -180,6 +183,7 @@ void TutorialStep::celebrate()
         cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(this->parent->getChildByName("tutorial_lbl"));
         tutorial_lbl->setString("    Complete!");
 
+        //animate showing button
         cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(this->parent->getChildByName("next_tutorial_step_btn"));
         next_tutorial_step_btn->setVisible(true);
         auto scale_to = cocos2d::ScaleTo::create(0.15f, 1.0f);
