@@ -1,6 +1,8 @@
 #ifndef TUTORIAL_H
 #define TUTORIAL_H
+
 #include <string>
+#include <memory>
 
 class Tutorial;
 class TutorialStep;
@@ -28,6 +30,9 @@ class Tutorial
         Tutorial();
         static Tutorial* getInstance();
 
+        std::shared_ptr<TutorialStep> current_step;
+        std::shared_ptr<TutorialStep> next_step;
+
         //preps the game's ui for the first time
         void first_start(cocos2d::Node* parent);
 
@@ -46,8 +51,6 @@ class Tutorial
         bool get_show_progress_panel();
         void set_show_progress_panel(bool is_visible);
 
-        bool has_celebrated;
-
         void hide_game_ui();
 };
 
@@ -63,8 +66,13 @@ class TutorialStep
 
         void init_sidebar_panel();
 
+
+
     public:
+        bool _has_celebrated; //TODO make getter/setters
         TutorialStep(cocos2d::Node* parent, std::string title, std::string body);
+
+        void celebrate();
 };
 
 #endif

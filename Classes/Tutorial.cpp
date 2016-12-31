@@ -24,7 +24,9 @@ Tutorial::Tutorial()
     this->_show_player_info = true;
     this->_show_building_info = true;
 
-    this->has_celebrated = false;
+    this->current_step = NULL;
+    this->next_step = NULL;
+
 };
 
 Tutorial* Tutorial::getInstance()
@@ -49,8 +51,8 @@ void Tutorial::first_start(cocos2d::Node* parent)
     //make tutorial panel visible
     tutorial_sidebar_panel->setVisible(true);
 
-    TutorialStep first_step(
-        parent,
+    this->current_step = std::make_shared<TutorialStep>(
+        tutorial_sidebar_panel,
         "Welcome to\n Build Up The Base",
         "You're going to want to gather some resources.\nTap the farm and gather a few grains."
     );
@@ -65,16 +67,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
     cocos2d::ui::LoadingBar* tutorial_loadingbar = dynamic_cast<cocos2d::ui::LoadingBar*>(tutorial_progress_panel->getChildByName("loading_bar"));
     cocos2d::ui::Text* tutorial_progress_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_progress_panel->getChildByName("label"));
 
-    auto celebrate = [this](cocos2d::Node* parent){
-        if (this->has_celebrated == false){
-            auto parts = cocos2d::ParticleFireworks::create();
-            parts->setPosition(200, 100); //TODO fix hardcoded pos
-            parent->addChild(parts);
-            this->has_celebrated = true;
-        };
-    };
-
-    auto check_grain = [this, tutorial_sidebar_panel, celebrate, tutorial_loadingbar, tutorial_progress_lbl, next_tutorial_step_btn](float dt){
+    auto check_grain = [this, tutorial_loadingbar, tutorial_progress_lbl](float dt){
         //update progress bar
         res_count_t target_total_grain = building_storage_limit.at(1);
         res_count_t grain_count = BUILDUP->count_ingredients(Ingredient::SubType::Grain);
@@ -88,21 +81,9 @@ void Tutorial::first_start(cocos2d::Node* parent)
         tutorial_progress_lbl->setString(progress_ss.str());
 
         if (remaining_grain < 1) {
-            bool has_celebrated = this->has_celebrated;
             //launch fireworks particle
-            celebrate(tutorial_sidebar_panel);
+            this->current_step->celebrate();
 
-            if (has_celebrated == false)
-            {
-                //change text to complete
-                cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
-                tutorial_lbl->setString("    Complete!");
-
-                next_tutorial_step_btn->setVisible(true);
-                auto scale_to = cocos2d::ScaleTo::create(0.15f, 1.0f);
-                next_tutorial_step_btn->setScale(0.0f);
-                next_tutorial_step_btn->runAction(cocos2d::EaseBackOut::create(scale_to));
-            };
         }
     };
     tutorial_loadingbar->schedule(check_grain, SHORT_DELAY, "check_grain");
@@ -171,18 +152,40 @@ void Tutorial::hide_game_ui()
 
 TutorialStep::TutorialStep(
         cocos2d::Node* parent, std::string title, std::string body
-    ) : parent(parent), title(title), body(body)
+    ) : parent(parent), title(title), body(body), _has_celebrated(false)
 {
     this->init_sidebar_panel();
 };
 
 void TutorialStep::init_sidebar_panel()
 {
-    auto tutorial_sidebar_panel = this->parent->getChildByName("tutorial_sidebar_panel")->getChildByName("tutorial_sidebar_panel"); //FIXME i wish there was a way to name these better to reduce repetition
+    auto tutorial_sidebar_panel = this->parent;
 
     cocos2d::ui::Text* tutorial_title_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_title_lbl"));
     tutorial_title_lbl->setString(this->title);
 
     cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
     tutorial_lbl->setString(this->body);
+};
+
+void TutorialStep::celebrate()
+{
+    if (this->_has_celebrated == false)
+    {
+        auto parts = cocos2d::ParticleFireworks::create();
+        parts->setPosition(200, 100); //TODO fix hardcoded pos
+        this->parent->addChild(parts);
+
+        //change text to complete
+        cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(this->parent->getChildByName("tutorial_lbl"));
+        tutorial_lbl->setString("    Complete!");
+
+        cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(this->parent->getChildByName("next_tutorial_step_btn"));
+        next_tutorial_step_btn->setVisible(true);
+        auto scale_to = cocos2d::ScaleTo::create(0.15f, 1.0f);
+        next_tutorial_step_btn->setScale(0.0f);
+        next_tutorial_step_btn->runAction(cocos2d::EaseBackOut::create(scale_to));
+
+        this->_has_celebrated = true;
+    };
 };
