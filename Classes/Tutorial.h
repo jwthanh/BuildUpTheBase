@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <functional>
 
 class Tutorial;
 class TutorialStep;
@@ -64,11 +65,15 @@ class TutorialStep
         std::string title;
         std::string body;
 
+        std::function<void(float)> _scheduled_func;
+
         void init_sidebar_panel();
 
     public:
         bool _has_celebrated; //TODO make getter/setters
         TutorialStep(cocos2d::Node* parent, std::string title, std::string body);
+
+        void set_scheduled_func(std::function<void(float)> scheduled_func);
 
         void celebrate();
         void reset();

@@ -80,8 +80,9 @@ void Tutorial::first_start(cocos2d::Node* parent)
             this->current_step->reset();
         };
     };
-    tutorial_loadingbar->schedule(check_grain, SHORT_DELAY, "check_grain");
-    check_grain(0);
+    this->current_step->set_scheduled_func(check_grain);
+
+    //TODO setup next_step
 };
 
 bool Tutorial::get_show_sidebar()
@@ -185,6 +186,16 @@ void TutorialStep::celebrate()
     };
 };
 
+void TutorialStep::set_scheduled_func(std::function<void(float)> scheduled_func)
+{
+
+    this->parent->unschedule("scheduled_func");
+
+    this->_scheduled_func = scheduled_func;
+    this->parent->schedule(scheduled_func, SHORT_DELAY, "scheduled_func ");
+    scheduled_func(0);
+};
+
 void TutorialStep::reset()
 {
 
@@ -193,15 +204,18 @@ void TutorialStep::reset()
     //setup title
     cocos2d::ui::Text* tutorial_title_lbl = dynamic_cast<cocos2d::ui::Text*>(this->parent->getChildByName("tutorial_title_lbl"));
     tutorial_title_lbl->setString(this->title);
+    tutorial_title_lbl->unscheduleAllCallbacks();
 
     //setup body
     cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(this->parent->getChildByName("tutorial_lbl"));
     tutorial_lbl->setString(this->body);
+    tutorial_lbl->unscheduleAllCallbacks();
 
     //setup buttons
     cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(this->parent->getChildByName("next_tutorial_step_btn"));
     prep_button(next_tutorial_step_btn);
     next_tutorial_step_btn->setVisible(false);
+    next_tutorial_step_btn->unscheduleAllCallbacks();
 
     auto parts = this->parent->getChildByName("celebration_particles");
     if (parts) parts->removeFromParent();
