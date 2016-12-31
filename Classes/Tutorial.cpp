@@ -12,6 +12,7 @@
 #include <sstream>
 #include "Util.h"
 #include "ui/UILayout.h"
+#include "MiscUI.h"
 
 Tutorial* Tutorial::_instance = nullptr;
 
@@ -45,14 +46,20 @@ void Tutorial::first_start(cocos2d::Node* parent)
     this->set_show_building_info(false);
     this->set_show_progress_panel(false);
 
+
+    //default to The Farm, just in case
     BUILDUP->set_target_building(BUILDUP->city->building_by_name("The Farm"));
 
-    //FIXME i wish there was a way to name these better
-    auto tutorial_sidebar_panel = parent->getChildByName("tutorial_sidebar_panel")->getChildByName("tutorial_sidebar_panel");
+    auto tutorial_sidebar_panel = parent->getChildByName("tutorial_sidebar_panel")->getChildByName("tutorial_sidebar_panel"); //FIXME i wish there was a way to name these better to reduce repetition
+    //make tutorial panel visible
     tutorial_sidebar_panel->setVisible(true);
 
+    //body label
     cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
     tutorial_lbl->setString("You're going to want to gather some resources.\nTap the farm and gather a few grains.");
+
+    cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(tutorial_sidebar_panel->getChildByName("next_tutorial_step_btn"));
+    prep_button(next_tutorial_step_btn);
 
     //progress panel
     cocos2d::ui::Layout* tutorial_progress_panel = dynamic_cast<cocos2d::ui::Layout*>(tutorial_sidebar_panel->getChildByName("progress_panel"));
@@ -68,7 +75,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
         };
     };
 
-    auto check_grain = [tutorial_sidebar_panel, celebrate, tutorial_loadingbar, tutorial_progress_lbl, tutorial_lbl](float dt){
+    auto check_grain = [this, tutorial_sidebar_panel, celebrate, tutorial_loadingbar, tutorial_progress_lbl, tutorial_lbl, next_tutorial_step_btn](float dt){
         //update progress bar
         res_count_t target_total_grain = building_storage_limit.at(1);
         res_count_t grain_count = BUILDUP->count_ingredients(Ingredient::SubType::Grain);
@@ -82,11 +89,20 @@ void Tutorial::first_start(cocos2d::Node* parent)
         tutorial_progress_lbl->setString(progress_ss.str());
 
         if (remaining_grain < 1) {
+            bool has_celebrated = this->has_celebrated;
             //launch fireworks particle
             celebrate(tutorial_sidebar_panel);
 
             //change text to complete
-            tutorial_lbl->setString("Complete!");
+            tutorial_lbl->setString("    Complete!");
+
+            if (has_celebrated == false)
+            {
+                next_tutorial_step_btn->setVisible(true);
+                auto scale_to = cocos2d::ScaleTo::create(0.15f, 1.0f);
+                next_tutorial_step_btn->setScale(0.0f);
+                next_tutorial_step_btn->runAction(cocos2d::EaseBackOut::create(scale_to));
+            };
         }
     };
     tutorial_loadingbar->schedule(check_grain, SHORT_DELAY, "check_grain");
