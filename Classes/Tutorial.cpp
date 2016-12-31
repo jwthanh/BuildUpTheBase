@@ -76,8 +76,9 @@ void Tutorial::first_start(cocos2d::Node* parent)
         if (remaining_grain < 1) {
             //add fireworks, change text to complete, show next button etc
             this->current_step->celebrate();
-
-        }
+        } else {
+            this->current_step->reset();
+        };
     };
     tutorial_loadingbar->schedule(check_grain, SHORT_DELAY, "check_grain");
     check_grain(0);
@@ -157,18 +158,7 @@ void TutorialStep::init_sidebar_panel()
     //make tutorial panel visible
     tutorial_sidebar_panel->setVisible(true);
 
-    //setup title
-    cocos2d::ui::Text* tutorial_title_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_title_lbl"));
-    tutorial_title_lbl->setString(this->title);
-
-    //setup body
-    cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
-    tutorial_lbl->setString(this->body);
-
-    //setup buttons
-    cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(tutorial_sidebar_panel->getChildByName("next_tutorial_step_btn"));
-    prep_button(next_tutorial_step_btn);
-    next_tutorial_step_btn->setVisible(false);
+    this->reset();
 };
 
 void TutorialStep::celebrate()
@@ -176,6 +166,7 @@ void TutorialStep::celebrate()
     if (this->_has_celebrated == false)
     {
         auto parts = cocos2d::ParticleFireworks::create();
+        parts->setName("celebration_particles");
         parts->setPosition(200, 100); //TODO fix hardcoded pos
         this->parent->addChild(parts);
 
@@ -192,4 +183,26 @@ void TutorialStep::celebrate()
 
         this->_has_celebrated = true;
     };
+};
+
+void TutorialStep::reset()
+{
+
+    this->_has_celebrated = false;
+
+    //setup title
+    cocos2d::ui::Text* tutorial_title_lbl = dynamic_cast<cocos2d::ui::Text*>(this->parent->getChildByName("tutorial_title_lbl"));
+    tutorial_title_lbl->setString(this->title);
+
+    //setup body
+    cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(this->parent->getChildByName("tutorial_lbl"));
+    tutorial_lbl->setString(this->body);
+
+    //setup buttons
+    cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(this->parent->getChildByName("next_tutorial_step_btn"));
+    prep_button(next_tutorial_step_btn);
+    next_tutorial_step_btn->setVisible(false);
+
+    auto parts = this->parent->getChildByName("celebration_particles");
+    if (parts) parts->removeFromParent();
 };

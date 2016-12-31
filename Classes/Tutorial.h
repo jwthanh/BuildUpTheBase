@@ -66,13 +66,12 @@ class TutorialStep
 
         void init_sidebar_panel();
 
-
-
     public:
         bool _has_celebrated; //TODO make getter/setters
         TutorialStep(cocos2d::Node* parent, std::string title, std::string body);
 
         void celebrate();
+        void reset();
 };
 
 #endif
