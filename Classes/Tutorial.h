@@ -1,5 +1,9 @@
 #ifndef TUTORIAL_H
 #define TUTORIAL_H
+#include <string>
+
+class Tutorial;
+class TutorialStep;
 
 namespace cocos2d
 {
@@ -43,5 +47,24 @@ class Tutorial
         void set_show_progress_panel(bool is_visible);
 
         bool has_celebrated;
+
+        void hide_game_ui();
 };
+
+///represents a step in the tutorial, what state the UI will be in
+/// ideally it'd contain the next tutorial step to load
+class TutorialStep
+{
+    private:
+        cocos2d::Node* parent;
+
+        std::string title;
+        std::string body;
+
+        void init_sidebar_panel();
+
+    public:
+        TutorialStep(cocos2d::Node* parent, std::string title, std::string body);
+};
+
 #endif
