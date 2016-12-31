@@ -170,7 +170,7 @@
                 <OutlineColor A="255" R="10" G="10" B="10" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="tutorial_loadingbar" ActionTag="685670397" Tag="1765" IconVisible="False" LeftMargin="48.4776" RightMargin="35.2133" TopMargin="477.8756" BottomMargin="44.1244" ProgressInfo="0" ctype="LoadingBarObjectData">
+              <AbstractNodeData Name="tutorial_loadingbar" ActionTag="685670397" Tag="1765" IconVisible="False" LeftMargin="48.4776" RightMargin="35.2133" TopMargin="477.8756" BottomMargin="44.1244" ProgressInfo="100" ctype="LoadingBarObjectData">
                 <Size X="316.3091" Y="18.0000" />
                 <AnchorPoint />
                 <Position X="48.4776" Y="44.1244" />
@@ -180,7 +180,7 @@
                 <PreSize X="0.7908" Y="0.0333" />
                 <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="tutorial_progress_lbl" ActionTag="-457408850" Tag="1886" IconVisible="False" LeftMargin="19.6093" RightMargin="20.7422" TopMargin="446.0742" BottomMargin="66.1109" IsCustomSize="True" FontSize="20" LabelText="25 grains to go" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="tutorial_progress_lbl" ActionTag="-457408850" Tag="1886" IconVisible="False" LeftMargin="19.6093" RightMargin="20.7422" TopMargin="446.0742" BottomMargin="66.1109" IsCustomSize="True" FontSize="20" LabelText="25.00 grain to harvest" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="359.6485" Y="27.8148" />
                 <AnchorPoint />
                 <Position X="19.6093" Y="66.1109" />

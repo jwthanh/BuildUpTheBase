@@ -181,6 +181,8 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         tutorial->set_show_player_info(false);
         tutorial->set_show_building_info(false);
 
+        BUILDUP->set_target_building(BUILDUP->city->building_by_name("The Farm"));
+
         auto tutorial_sidebar_panel = this->getChildByName("tutorial_sidebar_panel");
         tutorial_sidebar_panel->setVisible(true);
 
@@ -217,7 +219,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
             //update progress label
             res_count_t remaining_grain = target_total_grain - ing_count_val;
-            progress_ss << beautify_double(remaining_grain) << " grain left to harvest";
+            progress_ss << beautify_double(remaining_grain) << " grain to harvest";
             tutorial_progress_lbl->setString(progress_ss.str());
 
             if (remaining_grain < 1) {
