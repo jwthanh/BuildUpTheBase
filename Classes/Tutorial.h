@@ -1,6 +1,11 @@
 #ifndef TUTORIAL_H
 #define TUTORIAL_H
 
+namespace cocos2d
+{
+    class Node;
+};
+
 ///class to track
 /// the players progress
 //  through the game and reveal
@@ -18,6 +23,9 @@ class Tutorial
     public:
         Tutorial();
         static Tutorial* getInstance();
+
+        //preps the game's ui for the first time
+        void first_start(cocos2d::Node* parent);
 
         bool get_show_sidebar();
         void set_show_sidebar(bool is_visible);
