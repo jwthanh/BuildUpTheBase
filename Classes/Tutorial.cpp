@@ -11,6 +11,7 @@
 #include "2d/CCParticleExamples.h"
 #include <sstream>
 #include "Util.h"
+#include "ui/UILayout.h"
 
 Tutorial* Tutorial::_instance = nullptr;
 
@@ -51,16 +52,12 @@ void Tutorial::first_start(cocos2d::Node* parent)
     tutorial_sidebar_panel->setVisible(true);
 
     cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
-    tutorial_lbl->setString("Welcome to\n  Build Up The Base!\n\n\nYou're going to want to gather some resources.\nTap the farm and gather a few grains.");
+    tutorial_lbl->setString("You're going to want to gather some resources.\nTap the farm and gather a few grains.");
 
-    cocos2d::ui::LoadingBar* tutorial_loadingbar = dynamic_cast<cocos2d::ui::LoadingBar*>(tutorial_sidebar_panel->getChildByName("tutorial_loadingbar"));
-    cocos2d::ui::Text* tutorial_progress_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_progress_lbl"));
-    //tutorial_loadingbar->setPercent(3.0f / 25.0f * 100);
-
-    cocos2d::ProgressTo* progress_to = cocos2d::ProgressTo::create(0.25f, 50.0f);
-    tutorial_loadingbar->runAction(cocos2d::EaseBackOut::create(progress_to));
-
-    res_count_t target_total_grain = building_storage_limit.at(1);
+    //progress panel
+    cocos2d::ui::Layout* tutorial_progress_panel = dynamic_cast<cocos2d::ui::Layout*>(tutorial_sidebar_panel->getChildByName("progress_panel"));
+    cocos2d::ui::LoadingBar* tutorial_loadingbar = dynamic_cast<cocos2d::ui::LoadingBar*>(tutorial_progress_panel->getChildByName("loading_bar"));
+    cocos2d::ui::Text* tutorial_progress_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_progress_panel->getChildByName("label"));
 
     auto celebrate = [this](cocos2d::Node* parent){
         if (this->has_celebrated == false){
@@ -71,22 +68,25 @@ void Tutorial::first_start(cocos2d::Node* parent)
         };
     };
 
-    auto check_grain = [tutorial_sidebar_panel, celebrate, tutorial_loadingbar, target_total_grain, tutorial_progress_lbl](float dt){
-        res_count_t ing_count_val = BUILDUP->count_ingredients(Ingredient::SubType::Grain);
-        std::stringstream progress_ss;
-
+    auto check_grain = [tutorial_sidebar_panel, celebrate, tutorial_loadingbar, tutorial_progress_lbl, tutorial_lbl](float dt){
         //update progress bar
-        res_count_t satisfied_percentage = ing_count_val/target_total_grain*100;
+        res_count_t target_total_grain = building_storage_limit.at(1);
+        res_count_t grain_count = BUILDUP->count_ingredients(Ingredient::SubType::Grain);
+        res_count_t satisfied_percentage = grain_count/target_total_grain*100;
         tutorial_loadingbar->setPercent((float)satisfied_percentage);
 
         //update progress label
-        res_count_t remaining_grain = target_total_grain - ing_count_val;
+        res_count_t remaining_grain = target_total_grain - grain_count;
+        std::stringstream progress_ss;
         progress_ss << beautify_double(remaining_grain) << " grain to harvest";
         tutorial_progress_lbl->setString(progress_ss.str());
 
         if (remaining_grain < 1) {
+            //launch fireworks particle
             celebrate(tutorial_sidebar_panel);
-            tutorial_progress_lbl->setString("Complete!");
+
+            //change text to complete
+            tutorial_lbl->setString("Complete!");
         }
     };
     tutorial_loadingbar->schedule(check_grain, SHORT_DELAY, "check_grain");
