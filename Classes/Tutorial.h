@@ -1,6 +1,7 @@
 #ifndef TUTORIAL_H
 #define TUTORIAL_H
 
+#include <vector>
 #include <string>
 #include <memory>
 #include <functional>
@@ -33,6 +34,8 @@ class Tutorial
 
         std::shared_ptr<TutorialStep> current_step;
         std::shared_ptr<TutorialStep> next_step;
+
+        std::vector<std::shared_ptr<TutorialStep>> steps;
 
         //preps the game's ui for the first time
         void first_start(cocos2d::Node* parent);
@@ -73,6 +76,7 @@ class TutorialStep
         bool _has_celebrated; //TODO make getter/setters
         TutorialStep(cocos2d::Node* parent, std::string title, std::string body);
 
+        int step_index;
         void set_scheduled_func(std::function<void(float)> scheduled_func);
 
         void celebrate();

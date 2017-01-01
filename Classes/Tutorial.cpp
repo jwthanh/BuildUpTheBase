@@ -1,17 +1,18 @@
 #include "Tutorial.h"
 
+#include <sstream>
+
 #include "ui/UIText.h"
 #include "ui/UILoadingBar.h"
+#include "ui/UILayout.h"
 #include "2d/CCActionProgressTimer.h"
 #include "2d/CCActionEase.h"
+#include "2d/CCParticleExamples.h"
 
 #include "constants.h"
 #include "GameLogic.h"
 #include "HouseBuilding.h"
-#include "2d/CCParticleExamples.h"
-#include <sstream>
 #include "Util.h"
-#include "ui/UILayout.h"
 #include "MiscUI.h"
 
 Tutorial* Tutorial::_instance = nullptr;
@@ -49,11 +50,15 @@ void Tutorial::first_start(cocos2d::Node* parent)
     auto tutorial_sidebar_panel = parent->getChildByName("tutorial_sidebar_panel")->getChildByName("tutorial_sidebar_panel"); //FIXME i wish there was a way to name these better to reduce repetition
 
     //handles prepping this steps ui
-    this->current_step = std::make_shared<TutorialStep>(
+    auto first_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
         "Welcome to\n Build Up The Base",
         "You're going to want to gather some resources.\nTap the farm and gather a few grains."
     );
+    first_step->step_index = 0;
+    this->steps.push_back(first_step);
+
+    this->current_step = first_step;
 
     //progress panel
     cocos2d::ui::Layout* tutorial_progress_panel = dynamic_cast<cocos2d::ui::Layout*>(tutorial_sidebar_panel->getChildByName("progress_panel"));
@@ -147,7 +152,8 @@ void Tutorial::hide_game_ui()
 
 TutorialStep::TutorialStep(
         cocos2d::Node* parent, std::string title, std::string body
-    ) : parent(parent), title(title), body(body), _has_celebrated(false)
+    ) : parent(parent), title(title), body(body), _has_celebrated(false),
+        step_index(-1)
 {
     this->init_sidebar_panel();
 };
@@ -173,7 +179,7 @@ void TutorialStep::celebrate()
 
         //change text to complete
         cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(this->parent->getChildByName("tutorial_lbl"));
-        tutorial_lbl->setString("    Complete!");
+        tutorial_lbl->setString("    Step Complete!");
 
         //animate showing button
         cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(this->parent->getChildByName("next_tutorial_step_btn"));
