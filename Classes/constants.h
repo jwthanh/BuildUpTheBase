@@ -102,6 +102,9 @@ class Technology;
 
 class Item;
 
+class Tutorial;
+class TutorialStep;
+
 typedef std::function<void()> VoidFunc;
 
 #define _MAKE_SP(Cls)typedef std::shared_ptr<Cls> sp##Cls
@@ -147,6 +150,9 @@ MAKE_SP_VS_MI(TechTree);
 MAKE_SP_VS_MI(Technology);
 
 MAKE_SP_VS_MI(Item);
+
+MAKE_SP_VS_MI(Tutorial);
+MAKE_SP_VS_MI(TutorialStep);
 
 
 #undef MAKE_SP_VS
