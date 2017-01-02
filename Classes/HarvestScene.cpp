@@ -1067,9 +1067,16 @@ bool HarvestScene::init()
     this->schedule(update_layer_color, 0.0f, "update_layer_color");
     update_layer_color(0.0f);
 
-    this->setOnEnterCallback([]()
+    this->setOnEnterCallback([this]()
     {
+        //load the game from json
         GameLogic::getInstance()->load_game();
+
+        //animate the interface loading up
+        float orig_scale = this->getScale();
+        auto scale_to = ScaleTo::create(0.3f, orig_scale);
+        this->setScale(0.0f);
+        this->runAction(EaseBackOut::create(scale_to));
     });
 
     //autosave every 30s
