@@ -1070,30 +1070,32 @@ bool HarvestScene::init()
 
     this->setOnEnterCallback([this]()
     {
-        //load the game from json
-        GameLogic::getInstance()->load_game();
+        if (GameLogic::getInstance()->is_loaded == false)
+        {
+            //animate the interface loading up
+            float orig_scale = this->getScale();
+            auto scale_to = ScaleTo::create(0.3f, orig_scale);
 
-        this->setVisible(false);
+            this->setVisible(false);
+            this->setScale(0.0f);
 
-        //animate the interface loading up
-        float orig_scale = this->getScale();
-        auto scale_to = ScaleTo::create(0.3f, orig_scale);
+            this->runAction(Sequence::create(
+                DelayTime::create(0.25f),
+                Show::create(),
+                EaseBackOut::create(scale_to),
+                cocos2d::CallFunc::create([this]()
+                {
+                    auto loading_bg = this->getParent()->getChildByName("loading_bg");
+                    if (loading_bg) {
+                        loading_bg->removeFromParent();
+                    }
+                }),
+                NULL
+                ));
 
-        this->setScale(0.0f);
-        this->runAction(Sequence::create(
-            DelayTime::create(0.25f),
-            Show::create(),
-            EaseBackOut::create(scale_to),
-            cocos2d::CallFunc::create([this]()
-            {
-                auto loading_bg = this->getParent()->getChildByName("loading_bg");
-                if (loading_bg) {
-                    loading_bg->removeFromParent();
-                }
-            }),
-            NULL
-        ));
-
+            //load the game from json
+            GameLogic::getInstance()->load_game();
+        }
     });
 
     //autosave every 30s

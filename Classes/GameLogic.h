@@ -25,7 +25,6 @@ class PopupPanel;
 class GameLogic
 {
     protected:
-        bool is_loaded;
         static GameLogic* _instance;
 
         bool _can_vibrate;
@@ -35,6 +34,7 @@ class GameLogic
         bool init();
 
         //handles last login and passive harvesting
+        bool is_loaded;
         void load_game();
         std::string new_player_load();
         std::string existing_player_load();
