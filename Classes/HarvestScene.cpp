@@ -961,7 +961,7 @@ void BaseScene::create_inventory_listview()
                     Vec2 end_pos = this->get_center_pos();
                     auto move = MoveTo::create(duration, end_pos);
 
-                    Sequence* seq = Sequence::create(Spawn::createWithTwoActions(move, scale), NULL);
+                    Sequence* seq = Sequence::create(EaseBackOut::create(Spawn::createWithTwoActions(move, scale)), NULL);
                     alert->runAction(seq);
 
                     do_vibrate(32);
