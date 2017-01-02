@@ -162,6 +162,15 @@ void TutorialStep::init_sidebar_panel()
 {
     auto tutorial_sidebar_panel = this->parent;
 
+    this->tutorial_title_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_title_lbl"));
+    this->tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
+    this->next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(tutorial_sidebar_panel->getChildByName("next_tutorial_step_btn"));
+
+    this->tutorial_progress_panel = dynamic_cast<cocos2d::ui::Layout*>(tutorial_sidebar_panel->getChildByName("progress_panel"));
+    this->tutorial_progress_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_progress_panel->getChildByName("label"));
+    this->tutorial_loadingbar = dynamic_cast<cocos2d::ui::LoadingBar*>(tutorial_progress_panel->getChildByName("loading_bar"));
+
+
     //make tutorial panel visible
     tutorial_sidebar_panel->setVisible(true);
 
@@ -208,17 +217,14 @@ void TutorialStep::reset()
     this->_has_celebrated = false;
 
     //setup title
-    cocos2d::ui::Text* tutorial_title_lbl = dynamic_cast<cocos2d::ui::Text*>(this->parent->getChildByName("tutorial_title_lbl"));
-    tutorial_title_lbl->setString(this->title);
-    tutorial_title_lbl->unscheduleAllCallbacks();
+    this->tutorial_title_lbl->setString(this->title);
+    this->tutorial_title_lbl->unscheduleAllCallbacks();
 
     //setup body
-    cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(this->parent->getChildByName("tutorial_lbl"));
     tutorial_lbl->setString(this->body);
     tutorial_lbl->unscheduleAllCallbacks();
 
     //setup buttons
-    cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(this->parent->getChildByName("next_tutorial_step_btn"));
     prep_button(next_tutorial_step_btn);
     next_tutorial_step_btn->setVisible(false);
     next_tutorial_step_btn->unscheduleAllCallbacks();

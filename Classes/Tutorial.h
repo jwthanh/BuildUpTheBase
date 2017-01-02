@@ -12,6 +12,14 @@ class TutorialStep;
 namespace cocos2d
 {
     class Node;
+
+    namespace ui
+    {
+        class Button;
+        class Layout;
+        class LoadingBar;
+        class Text;
+    };
 };
 
 ///class to track
@@ -71,6 +79,14 @@ class TutorialStep
         std::function<void(float)> _scheduled_func;
 
         void init_sidebar_panel();
+
+        cocos2d::ui::Layout* tutorial_progress_panel;
+        cocos2d::ui::Text* tutorial_progress_lbl;
+        cocos2d::ui::LoadingBar* tutorial_loadingbar;
+
+        cocos2d::ui::Text* tutorial_title_lbl;
+        cocos2d::ui::Text* tutorial_lbl;
+        cocos2d::ui::Button* next_tutorial_step_btn;
 
     public:
         bool _has_celebrated; //TODO make getter/setters
