@@ -4,6 +4,7 @@
 
 #include "base/CCDirector.h"
 #include "ui/UIWidget.h"
+#include "ui/UIButton.h"
 
 float sx (float x, bool do_scale)
 {
@@ -237,4 +238,16 @@ void try_set_enabled(cocos2d::ui::Widget* widget, bool new_value)
     {
         widget->setEnabled(new_value);
     }
+};
+
+void bind_button_touch_ended(cocos2d::ui::Button* button, std::function<void(void)> callback)
+{
+    auto touch_handler = [callback](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType evt)
+    {
+        if (evt == cocos2d::ui::Widget::TouchEventType::ENDED)
+        {
+            callback();
+        }
+    };
+    button->addTouchEventListener(touch_handler);
 };

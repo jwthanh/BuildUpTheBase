@@ -11,6 +11,7 @@ namespace cocos2d {
     class Size;
     namespace ui
     {
+        class Button;
         class Widget;
     }
 }
@@ -99,5 +100,7 @@ number_t scale_number_slow(number_t base_number, number_t current_number, number
     }
     return result;
 };
+
+void bind_button_touch_ended(cocos2d::ui::Button* button, std::function<void(void)> callback);
 
 #endif
