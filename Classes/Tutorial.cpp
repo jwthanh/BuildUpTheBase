@@ -72,7 +72,8 @@ void Tutorial::first_start(cocos2d::Node* parent)
     auto first_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
         "Welcome to\n Build Up The Base",
-        "You're going to want to gather some resources.\nTap the farm and gather a few grains."
+        "You're going to want to gather some resources.\nTap the farm and gather a few grains.",
+        "  Grain Harvested!"
     );
     first_step->step_index = 0;
     this->steps.push_back(first_step);
@@ -90,7 +91,8 @@ void Tutorial::first_start(cocos2d::Node* parent)
         //update progress label
         res_count_t remaining_grain = target_total_grain - grain_count;
         std::stringstream progress_ss;
-        progress_ss << beautify_double(remaining_grain) << " grain to harvest";
+        res_count_t adjusted_remaining = std::max(remaining_grain, 0.0L);
+        progress_ss << beautify_double(adjusted_remaining) << " grain to harvest";
         first_step->tutorial_progress_lbl->setString(progress_ss.str());
 
         if (remaining_grain < 1) {
@@ -106,7 +108,8 @@ void Tutorial::first_start(cocos2d::Node* parent)
     auto second_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
         "Makin' some money",
-        "Now you've gathered some resources, it's time to spend it. Gather and sell enough grain to make 75$.\n\nTap the grain icon along the bottom and choose a quantity to sell."
+        "Now you've gathered some resources, it's time to spend it. Gather and sell enough grain to make 75$.\n\nTap the grain icon along the bottom and choose a quantity to sell.",
+        " Coins Earned!"
     );
     second_step->step_index = 1;
     this->steps.push_back(second_step);
@@ -121,7 +124,8 @@ void Tutorial::first_start(cocos2d::Node* parent)
         //update progress label
         res_count_t remaining_coins = target_coins - total_coins;
         std::stringstream progress_ss;
-        progress_ss << beautify_double(remaining_coins) << " to make.";
+        res_count_t adjusted_remaining = std::max(remaining_coins, 0.0L);
+        progress_ss << beautify_double(adjusted_remaining) << " coins to earn";
         second_step->tutorial_progress_lbl->setString(progress_ss.str());
 
         if (remaining_coins < 1) {
@@ -197,11 +201,11 @@ void Tutorial::hide_game_ui()
 
 
 TutorialStep::TutorialStep(
-        cocos2d::Node* parent, std::string title, std::string body
-    ) : parent(parent), title(title), body(body), _has_celebrated(false),
-        step_index(-1), _scheduled_func([](float dt){})
+        cocos2d::Node* parent, std::string title, std::string body, std::string completion_message
+    ) : parent(parent), title(title), body(body),
+    completion_message(completion_message), _has_celebrated(false),
+    step_index(-1), _scheduled_func([](float dt){})
 {
-    // this->load_step();
 };
 
 void TutorialStep::load_step()
@@ -234,7 +238,7 @@ void TutorialStep::celebrate()
         this->parent->addChild(parts);
 
         //change text to complete
-        this->tutorial_lbl->setString("    Step Complete!");
+        this->tutorial_lbl->setString(this->completion_message);
 
         //animate showing button
         this->next_tutorial_step_btn->setVisible(true);

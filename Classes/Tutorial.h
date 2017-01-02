@@ -77,11 +77,13 @@ class TutorialStep
 
         std::string title;
         std::string body;
+        std::string completion_message;
 
         std::function<void(float)> _scheduled_func;
 
     public:
 
+        //these need to be public so the lambdas can use them
         cocos2d::ui::Layout* tutorial_progress_panel;
         cocos2d::ui::Text* tutorial_progress_lbl;
         cocos2d::ui::LoadingBar* tutorial_loadingbar;
@@ -91,7 +93,9 @@ class TutorialStep
         cocos2d::ui::Button* next_tutorial_step_btn;
 
         bool _has_celebrated; //TODO make getter/setters
-        TutorialStep(cocos2d::Node* parent, std::string title, std::string body);
+        TutorialStep(cocos2d::Node* parent,
+                std::string title, std::string body,
+                std::string completion_message="    Step Complete!");
         //loads up nodes in the parent
         void load_step();
 
