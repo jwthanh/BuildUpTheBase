@@ -10,6 +10,7 @@
 #include "2d/CCParticleExamples.h"
 
 #include "constants.h"
+#include "Beatup.h"
 #include "GameLogic.h"
 #include "HouseBuilding.h"
 #include "Util.h"
@@ -48,6 +49,10 @@ void Tutorial::first_start(cocos2d::Node* parent)
     BUILDUP->set_target_building(BUILDUP->city->building_by_name("The Farm"));
 
     auto tutorial_sidebar_panel = parent->getChildByName("tutorial_sidebar_panel")->getChildByName("tutorial_sidebar_panel"); //FIXME i wish there was a way to name these better to reduce repetition
+    //progress panel
+    cocos2d::ui::Layout* tutorial_progress_panel = dynamic_cast<cocos2d::ui::Layout*>(tutorial_sidebar_panel->getChildByName("progress_panel"));
+    cocos2d::ui::LoadingBar* tutorial_loadingbar = dynamic_cast<cocos2d::ui::LoadingBar*>(tutorial_progress_panel->getChildByName("loading_bar"));
+    cocos2d::ui::Text* tutorial_progress_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_progress_panel->getChildByName("label"));
 
     //handles prepping this steps ui
     auto first_step = std::make_shared<TutorialStep>(
@@ -60,12 +65,8 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
     this->current_step = first_step;
 
-    //progress panel
-    cocos2d::ui::Layout* tutorial_progress_panel = dynamic_cast<cocos2d::ui::Layout*>(tutorial_sidebar_panel->getChildByName("progress_panel"));
-    cocos2d::ui::LoadingBar* tutorial_loadingbar = dynamic_cast<cocos2d::ui::LoadingBar*>(tutorial_progress_panel->getChildByName("loading_bar"));
-    cocos2d::ui::Text* tutorial_progress_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_progress_panel->getChildByName("label"));
 
-    auto check_grain = [this, tutorial_loadingbar, tutorial_progress_lbl](float dt){
+    auto check_grain = [this, first_step, tutorial_loadingbar, tutorial_progress_lbl](float dt){
         //update progress bar
         res_count_t target_total_grain = building_storage_limit.at(1);
         res_count_t grain_count = BUILDUP->count_ingredients(Ingredient::SubType::Grain);
@@ -80,14 +81,43 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
         if (remaining_grain < 1) {
             //add fireworks, change text to complete, show next button etc
-            this->current_step->celebrate();
+            first_step->celebrate();
         } else {
-            this->current_step->reset();
+            first_step->reset();
         };
     };
-    this->current_step->set_scheduled_func(check_grain);
+    first_step->set_scheduled_func(check_grain);
 
-    //TODO setup next_step
+    //setup next_step
+    auto second_step = std::make_shared<TutorialStep>(
+        tutorial_sidebar_panel,
+        "Makin' some money",
+        "Now you've gathered some resources, it's time to spend it. Gather and sell enough grain to make 75$.\n\nTap the grain icon along the bottom and choose a quantity to sell."
+    );
+    second_step->step_index = 1;
+    this->steps.push_back(second_step);
+
+    auto check_money = [this, second_step, tutorial_loadingbar, tutorial_progress_lbl](float dt){
+        //update progress bar
+        res_count_t target_coins = 75.0;
+        res_count_t total_coins = BEATUP->get_total_coins();
+        res_count_t satisfied_percentage = total_coins/target_coins*100;
+        tutorial_loadingbar->setPercent((float)satisfied_percentage);
+
+        //update progress label
+        res_count_t remaining_coins = target_coins - total_coins;
+        std::stringstream progress_ss;
+        progress_ss << beautify_double(remaining_coins) << " to make.";
+        tutorial_progress_lbl->setString(progress_ss.str());
+
+        if (remaining_coins < 1) {
+            //add fireworks, change text to complete, show next button etc
+            second_step->celebrate();
+        } else {
+            second_step->reset();
+        };
+    };
+    second_step->set_scheduled_func(check_money);
 };
 
 bool Tutorial::get_show_sidebar()
@@ -170,7 +200,6 @@ void TutorialStep::init_sidebar_panel()
     this->tutorial_progress_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_progress_panel->getChildByName("label"));
     this->tutorial_loadingbar = dynamic_cast<cocos2d::ui::LoadingBar*>(tutorial_progress_panel->getChildByName("loading_bar"));
 
-
     //make tutorial panel visible
     tutorial_sidebar_panel->setVisible(true);
 
@@ -187,15 +216,13 @@ void TutorialStep::celebrate()
         this->parent->addChild(parts);
 
         //change text to complete
-        cocos2d::ui::Text* tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(this->parent->getChildByName("tutorial_lbl"));
-        tutorial_lbl->setString("    Step Complete!");
+        this->tutorial_lbl->setString("    Step Complete!");
 
         //animate showing button
-        cocos2d::ui::Button* next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(this->parent->getChildByName("next_tutorial_step_btn"));
-        next_tutorial_step_btn->setVisible(true);
+        this->next_tutorial_step_btn->setVisible(true);
         auto scale_to = cocos2d::ScaleTo::create(0.15f, 1.0f);
-        next_tutorial_step_btn->setScale(0.0f);
-        next_tutorial_step_btn->runAction(cocos2d::EaseBackOut::create(scale_to));
+        this->next_tutorial_step_btn->setScale(0.0f);
+        this->next_tutorial_step_btn->runAction(cocos2d::EaseBackOut::create(scale_to));
 
         this->_has_celebrated = true;
     };
