@@ -34,6 +34,7 @@ class Tutorial
         bool _show_sidebar;
         bool _show_building_buttons;
         bool _show_player_info;
+        bool _show_player_hp_lbl;
         bool _show_progress_panel;
         bool _show_building_info;
 
@@ -59,6 +60,9 @@ class Tutorial
 
         bool get_show_player_info();
         void set_show_player_info(bool is_visible);
+
+        bool get_show_player_hp_lbl();
+        void set_show_player_hp_lbl(bool is_visible);
 
         bool get_show_building_info();
         void set_show_building_info(bool is_visible);

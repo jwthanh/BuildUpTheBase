@@ -771,6 +771,7 @@ void BaseScene::create_player_info_panel()
         Tutorial* tutorial = Tutorial::getInstance();
         player_info_panel->setVisible(tutorial->get_show_player_info());
     };
+
     player_info_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
     check_visible(0.0f);
 
@@ -810,6 +811,14 @@ void BaseScene::create_player_info_panel()
     hp_cache->last_cur_hp = hp->current_val;
     hp_cache->last_max_hp = hp->max_val;
     player_hp_lbl->setUserData(hp_cache);
+
+    //check visibilty for tutorials
+    auto check_hp_visible = [player_hp_lbl](float dt){
+        Tutorial* tutorial = Tutorial::getInstance();
+        player_hp_lbl->setVisible(tutorial->get_show_player_hp_lbl());
+    };
+    player_hp_lbl->schedule(check_hp_visible, SHORT_DELAY, "check_hp_visible");
+    check_visible(0.0f);
 
     auto update_player_info_lbls = [player_gold_lbl, player_hp_lbl, hp_cache](float dt){
         //set gold

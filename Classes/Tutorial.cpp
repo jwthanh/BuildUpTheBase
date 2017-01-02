@@ -108,15 +108,15 @@ void Tutorial::first_start(cocos2d::Node* parent)
     auto second_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
         "Makin' some money",
-        "Now you've gathered some resources, it's time to spend it. Gather and sell enough grain to make 75$.\n\nTap the grain icon along the bottom and choose a quantity to sell.",
-        " Coins Earned!"
+        "Now you've gathered some resources, it's time to spend it. Gather and sell enough grain to make 300$.\n\nTap the grain icon along the bottom and choose a quantity to sell.",
+        "   You're loaded."
     );
     second_step->step_index = 1;
     this->steps.push_back(second_step);
 
     auto check_money = [this, second_step](float dt){
         //update progress bar
-        res_count_t target_coins = 75.0;
+        res_count_t target_coins = 300.0;
         res_count_t total_coins = BEATUP->get_total_coins();
         res_count_t satisfied_percentage = total_coins/target_coins*100;
         second_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
@@ -139,7 +139,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
     std::vector<std::pair<bool Tutorial::*, bool>> switch_map;
     switch_map.push_back(
-    std::make_pair<bool Tutorial::*, bool>(&Tutorial::_show_player_info, true)
+        std::make_pair<bool Tutorial::*, bool>(&Tutorial::_show_player_info, true)
     );
     second_step->set_switch_map(switch_map);
 
@@ -176,6 +176,16 @@ void Tutorial::set_show_player_info(bool is_visible)
     this->_show_player_info = is_visible;
 };
 
+bool Tutorial::get_show_player_hp_lbl()
+{
+    return this->_show_player_hp_lbl;
+};
+
+void Tutorial::set_show_player_hp_lbl(bool is_visible)
+{
+    this->_show_player_hp_lbl = is_visible;
+};
+
 bool Tutorial::get_show_progress_panel()
 {
     return this->_show_progress_panel;
@@ -201,6 +211,7 @@ void Tutorial::hide_game_ui()
     this->set_show_sidebar(false);
     this->set_show_building_buttons(false);
     this->set_show_player_info(false);
+    this->set_show_player_hp_lbl(false);
     this->set_show_building_info(false);
     this->set_show_progress_panel(false);
 };
