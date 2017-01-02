@@ -230,17 +230,15 @@ void TutorialStep::celebrate()
 
 void TutorialStep::set_scheduled_func(std::function<void(float)> scheduled_func)
 {
-
     this->parent->unschedule("scheduled_func");
 
     this->_scheduled_func = scheduled_func;
-    this->parent->schedule(scheduled_func, SHORT_DELAY, "scheduled_func ");
+    this->parent->schedule(scheduled_func, SHORT_DELAY, "scheduled_func");
     scheduled_func(0);
 };
 
 void TutorialStep::reset()
 {
-
     this->_has_celebrated = false;
 
     //setup title
@@ -248,14 +246,19 @@ void TutorialStep::reset()
     this->tutorial_title_lbl->unscheduleAllCallbacks();
 
     //setup body
-    tutorial_lbl->setString(this->body);
-    tutorial_lbl->unscheduleAllCallbacks();
+    this->tutorial_lbl->setString(this->body);
+    this->tutorial_lbl->unscheduleAllCallbacks();
 
     //setup buttons
     prep_button(next_tutorial_step_btn);
-    next_tutorial_step_btn->setVisible(false);
-    next_tutorial_step_btn->unscheduleAllCallbacks();
+    this->next_tutorial_step_btn->setVisible(false);
+    this->next_tutorial_step_btn->unscheduleAllCallbacks();
 
     auto parts = this->parent->getChildByName("celebration_particles");
     if (parts) parts->removeFromParent();
+
+
+    this->tutorial_progress_lbl->unscheduleAllCallbacks();
+    this->tutorial_progress_panel->unscheduleAllCallbacks();
+    this->tutorial_loadingbar->unscheduleAllCallbacks();
 };
