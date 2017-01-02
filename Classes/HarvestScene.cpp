@@ -1074,7 +1074,7 @@ bool HarvestScene::init()
         GameLogic::getInstance()->load_game();
 
         this->setVisible(false);
-        
+
         //animate the interface loading up
         float orig_scale = this->getScale();
         auto scale_to = ScaleTo::create(0.3f, orig_scale);
@@ -1086,7 +1086,10 @@ bool HarvestScene::init()
             EaseBackOut::create(scale_to),
             cocos2d::CallFunc::create([this]()
             {
-                this->getParent()->getChildByName("loading_bg")->removeFromParent();
+                auto loading_bg = this->getParent()->getChildByName("loading_bg");
+                if (loading_bg) {
+                    loading_bg->removeFromParent();
+                }
             }),
             NULL
         ));
