@@ -25,6 +25,7 @@ Tutorial::Tutorial()
     this->_show_building_buttons = true;
     this->_show_player_info = true;
     this->_show_building_info = true;
+    this->_show_progress_panel = true;
 
     this->current_step = NULL;
     this->next_step = NULL;
