@@ -41,6 +41,24 @@ Tutorial* Tutorial::getInstance()
     return Tutorial::_instance;
 }
 
+void Tutorial::load_step(int step_index)
+{
+    std::function<bool(std::shared_ptr<TutorialStep>)> matches_step_index = [step_index](std::shared_ptr<TutorialStep> step)-> bool
+    {
+        return step->step_index == step_index;
+    };
+    auto step_it = std::find_if(this->steps.begin(), this->steps.end(), matches_step_index);
+
+    if (step_it != this->steps.end())
+    {
+        (*step_it)->load_step();
+    }
+    else
+    {
+        CCLOG("couldn't find matching step for %i", step_index);
+    }
+};
+
 void Tutorial::first_start(cocos2d::Node* parent)
 {
     this->hide_game_ui();
@@ -49,10 +67,6 @@ void Tutorial::first_start(cocos2d::Node* parent)
     BUILDUP->set_target_building(BUILDUP->city->building_by_name("The Farm"));
 
     auto tutorial_sidebar_panel = parent->getChildByName("tutorial_sidebar_panel")->getChildByName("tutorial_sidebar_panel"); //FIXME i wish there was a way to name these better to reduce repetition
-    //progress panel
-    cocos2d::ui::Layout* tutorial_progress_panel = dynamic_cast<cocos2d::ui::Layout*>(tutorial_sidebar_panel->getChildByName("progress_panel"));
-    cocos2d::ui::LoadingBar* tutorial_loadingbar = dynamic_cast<cocos2d::ui::LoadingBar*>(tutorial_progress_panel->getChildByName("loading_bar"));
-    cocos2d::ui::Text* tutorial_progress_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_progress_panel->getChildByName("label"));
 
     //handles prepping this steps ui
     auto first_step = std::make_shared<TutorialStep>(
@@ -66,18 +80,18 @@ void Tutorial::first_start(cocos2d::Node* parent)
     this->current_step = first_step;
 
 
-    auto check_grain = [this, first_step, tutorial_loadingbar, tutorial_progress_lbl](float dt){
+    auto check_grain = [first_step](float dt){
         //update progress bar
         res_count_t target_total_grain = building_storage_limit.at(1);
         res_count_t grain_count = BUILDUP->count_ingredients(Ingredient::SubType::Grain);
         res_count_t satisfied_percentage = grain_count/target_total_grain*100;
-        tutorial_loadingbar->setPercent((float)satisfied_percentage);
+        first_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
 
         //update progress label
         res_count_t remaining_grain = target_total_grain - grain_count;
         std::stringstream progress_ss;
         progress_ss << beautify_double(remaining_grain) << " grain to harvest";
-        tutorial_progress_lbl->setString(progress_ss.str());
+        first_step->tutorial_progress_lbl->setString(progress_ss.str());
 
         if (remaining_grain < 1) {
             //add fireworks, change text to complete, show next button etc
@@ -97,18 +111,18 @@ void Tutorial::first_start(cocos2d::Node* parent)
     second_step->step_index = 1;
     this->steps.push_back(second_step);
 
-    auto check_money = [this, second_step, tutorial_loadingbar, tutorial_progress_lbl](float dt){
+    auto check_money = [this, second_step](float dt){
         //update progress bar
         res_count_t target_coins = 75.0;
         res_count_t total_coins = BEATUP->get_total_coins();
         res_count_t satisfied_percentage = total_coins/target_coins*100;
-        tutorial_loadingbar->setPercent((float)satisfied_percentage);
+        second_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
 
         //update progress label
         res_count_t remaining_coins = target_coins - total_coins;
         std::stringstream progress_ss;
         progress_ss << beautify_double(remaining_coins) << " to make.";
-        tutorial_progress_lbl->setString(progress_ss.str());
+        second_step->tutorial_progress_lbl->setString(progress_ss.str());
 
         if (remaining_coins < 1) {
             //add fireworks, change text to complete, show next button etc
@@ -118,6 +132,8 @@ void Tutorial::first_start(cocos2d::Node* parent)
         };
     };
     second_step->set_scheduled_func(check_money);
+
+    this->load_step(0);
 };
 
 bool Tutorial::get_show_sidebar()
@@ -183,12 +199,12 @@ void Tutorial::hide_game_ui()
 TutorialStep::TutorialStep(
         cocos2d::Node* parent, std::string title, std::string body
     ) : parent(parent), title(title), body(body), _has_celebrated(false),
-        step_index(-1)
+        step_index(-1), _scheduled_func([](float dt){})
 {
-    this->init_sidebar_panel();
+    // this->load_step();
 };
 
-void TutorialStep::init_sidebar_panel()
+void TutorialStep::load_step()
 {
     auto tutorial_sidebar_panel = this->parent;
 
@@ -204,6 +220,8 @@ void TutorialStep::init_sidebar_panel()
     tutorial_sidebar_panel->setVisible(true);
 
     this->reset();
+
+    this->run_scheduled_func();
 };
 
 void TutorialStep::celebrate()
@@ -224,17 +242,32 @@ void TutorialStep::celebrate()
         this->next_tutorial_step_btn->setScale(0.0f);
         this->next_tutorial_step_btn->runAction(cocos2d::EaseBackOut::create(scale_to));
 
+        bind_button_touch_ended(this->next_tutorial_step_btn, [this](){
+            auto tutorial = Tutorial::getInstance();
+            tutorial->load_step(this->step_index+1);
+        });
+
         this->_has_celebrated = true;
     };
 };
 
 void TutorialStep::set_scheduled_func(std::function<void(float)> scheduled_func)
 {
+    this->_scheduled_func = scheduled_func;
+};
+
+void TutorialStep::run_scheduled_func()
+{
     this->parent->unschedule("scheduled_func");
 
-    this->_scheduled_func = scheduled_func;
-    this->parent->schedule(scheduled_func, SHORT_DELAY, "scheduled_func");
-    scheduled_func(0);
+    if (!this->_scheduled_func)
+    {
+        CCLOG("this step %i, needs an scheduled func", this->step_index);
+        return;
+    };
+
+    this->parent->schedule(this->_scheduled_func, SHORT_DELAY, "scheduled_func");
+    this->_scheduled_func(0);
 };
 
 void TutorialStep::reset()

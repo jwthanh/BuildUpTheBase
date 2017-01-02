@@ -45,6 +45,8 @@ class Tutorial
 
         std::vector<std::shared_ptr<TutorialStep>> steps;
 
+        void load_step(int step_index);
+
         //preps the game's ui for the first time
         void first_start(cocos2d::Node* parent);
 
@@ -78,7 +80,7 @@ class TutorialStep
 
         std::function<void(float)> _scheduled_func;
 
-        void init_sidebar_panel();
+    public:
 
         cocos2d::ui::Layout* tutorial_progress_panel;
         cocos2d::ui::Text* tutorial_progress_lbl;
@@ -88,12 +90,14 @@ class TutorialStep
         cocos2d::ui::Text* tutorial_lbl;
         cocos2d::ui::Button* next_tutorial_step_btn;
 
-    public:
         bool _has_celebrated; //TODO make getter/setters
         TutorialStep(cocos2d::Node* parent, std::string title, std::string body);
+        //loads up nodes in the parent
+        void load_step();
 
         int step_index;
         void set_scheduled_func(std::function<void(float)> scheduled_func);
+        void run_scheduled_func();
 
         void celebrate();
         void reset();
