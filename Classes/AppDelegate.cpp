@@ -141,7 +141,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
             Scene* scene = Scene::create();
             scene->setName("root_scene");
 
+            Sprite* loading_bg = Sprite::create("loading/loading.png");
+            loading_bg->setName("loading_bg");
+            scene->addChild(loading_bg);
+
             HarvestScene* harvest_scene = HarvestScene::create();
+
+            loading_bg->setPosition(harvest_scene->get_center_pos());
+            loading_bg->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+            loading_bg->getTexture()->setAliasTexParameters();
+            loading_bg->setScale(16.0f);
+
             harvest_scene->setName("HarvestScene");
 
             scene->addChild(harvest_scene);

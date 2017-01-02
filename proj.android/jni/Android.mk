@@ -60,6 +60,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/NodeBuilder.cpp \
                    ../../Classes/ItemScene.cpp \
                    ../../Classes/Equipment.cpp \
+                   ../../Classes/Tutorial.cpp \
                    ../../Classes/debugging/ActionPanel.cpp \
 \
 \

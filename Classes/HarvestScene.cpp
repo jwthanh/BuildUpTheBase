@@ -56,6 +56,7 @@
 #include "debugging/ActionPanel.h"
 #include "Tutorial.h"
 #include "2d/CCActionProgressTimer.h"
+#include "2d/CCActionInstant.h"
 
 USING_NS_CC;
 
@@ -1072,11 +1073,24 @@ bool HarvestScene::init()
         //load the game from json
         GameLogic::getInstance()->load_game();
 
+        this->setVisible(false);
+        
         //animate the interface loading up
         float orig_scale = this->getScale();
         auto scale_to = ScaleTo::create(0.3f, orig_scale);
+
         this->setScale(0.0f);
-        this->runAction(EaseBackOut::create(scale_to));
+        this->runAction(Sequence::create(
+            DelayTime::create(0.25f),
+            Show::create(),
+            EaseBackOut::create(scale_to),
+            cocos2d::CallFunc::create([this]()
+            {
+                this->getParent()->getChildByName("loading_bg")->removeFromParent();
+            }),
+            NULL
+        ));
+
     });
 
     //autosave every 30s
