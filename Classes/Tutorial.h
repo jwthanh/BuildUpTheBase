@@ -5,6 +5,7 @@
 #include <string>
 #include <memory>
 #include <functional>
+#include <unordered_map>
 
 class Tutorial;
 class TutorialStep;
@@ -81,6 +82,8 @@ class TutorialStep
 
         std::function<void(float)> _scheduled_func;
 
+        std::vector<std::pair<bool Tutorial::* , bool>> _switch_map;
+
     public:
 
         //these need to be public so the lambdas can use them
@@ -98,6 +101,7 @@ class TutorialStep
                 std::string completion_message="    Step Complete!");
         //loads up nodes in the parent
         void load_step();
+        void set_switch_map(std::vector<std::pair<bool Tutorial::* , bool>> switch_map);
 
         int step_index;
         void set_scheduled_func(std::function<void(float)> scheduled_func);

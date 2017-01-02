@@ -137,6 +137,12 @@ void Tutorial::first_start(cocos2d::Node* parent)
     };
     second_step->set_scheduled_func(check_money);
 
+    std::vector<std::pair<bool Tutorial::*, bool>> switch_map;
+    switch_map.push_back(
+    std::make_pair<bool Tutorial::*, bool>(&Tutorial::_show_player_info, true)
+    );
+    second_step->set_switch_map(switch_map);
+
     this->load_step(0);
 };
 
@@ -255,6 +261,11 @@ void TutorialStep::celebrate()
     };
 };
 
+void TutorialStep::set_switch_map(std::vector<std::pair<bool Tutorial::* , bool>> switch_map)
+{
+    this->_switch_map = switch_map;
+};
+
 void TutorialStep::set_scheduled_func(std::function<void(float)> scheduled_func)
 {
     this->_scheduled_func = scheduled_func;
@@ -298,4 +309,14 @@ void TutorialStep::reset()
     this->tutorial_progress_lbl->unscheduleAllCallbacks();
     this->tutorial_progress_panel->unscheduleAllCallbacks();
     this->tutorial_loadingbar->unscheduleAllCallbacks();
+
+    //for each of the bool members of tutorial (ideally _show_player_info etc),
+    // set it to the bool that matches the switch
+    Tutorial* tutorial = Tutorial::getInstance();
+    for (std::vector<std::pair<bool Tutorial::*, bool>>::iterator tutorial_member = this->_switch_map.begin(); tutorial_member != this->_switch_map.end(); tutorial_member++)
+    {
+        //bool data member on tutorial
+        bool Tutorial::* tutorial_flag = tutorial_member->first;
+        tutorial->*tutorial_flag = tutorial_member->second;
+    };
 };
