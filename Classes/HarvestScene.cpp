@@ -1319,6 +1319,11 @@ void HarvestScene::add_harvestable()
         this->harvestable = Harvestable::create();
     };
 
+    float orig_scale = this->harvestable->getScale();
+    this->harvestable->setScale(0);
+    auto scale_to = ScaleTo::create(0.2f, orig_scale);
+    this->harvestable->runAction(cocos2d::EaseBackOut::create(scale_to));
+
     this->addChild(this->harvestable);
 };
 

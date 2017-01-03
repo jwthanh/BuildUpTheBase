@@ -54,6 +54,7 @@ Features
 * tips on how to play
 
 * daily quests
+* daily chest to open where you can find something special and maybe limit the other ways you can do stuff
 
 * UserProfile proxy. a lot of the time I'm hitting the disk to check for a
   single flag. might be worth looking into a nice way to pull all that out into
