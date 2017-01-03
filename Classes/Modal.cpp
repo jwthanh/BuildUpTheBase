@@ -13,6 +13,7 @@
 #include "ui/UIImageView.h"
 #include "ui/UIListView.h"
 #include "2d/CCLayer.h"
+#include "2d/CCActionEase.h"
 
 
 USING_NS_CC;
@@ -126,7 +127,7 @@ void PopupPanel::animate_open()
     float duration = 0.3f;
     cocos2d::ActionInterval* show_action = cocos2d::Spawn::createWithTwoActions(
         cocos2d::FadeIn::create(duration),
-        cocos2d::MoveTo::create(duration, Vec2(this->initial_x, this->initial_y))
+        cocos2d::EaseBackOut::create(cocos2d::MoveTo::create(duration, Vec2(this->initial_x, this->initial_y)))
         );
 
     auto delay = cocos2d::DelayTime::create(10.0f);
@@ -159,7 +160,7 @@ void PopupPanel::animate_close()
 
     cocos2d::ActionInterval* hide_action = cocos2d::Spawn::createWithTwoActions(
         cocos2d::FadeOut::create(duration),
-        cocos2d::MoveTo::create(duration, Vec2(this->initial_x, -this->initial_y))
+        cocos2d::EaseBackIn::create(cocos2d::MoveTo::create(duration, Vec2(this->initial_x, -this->initial_y)))
         );
 
     this->_layout->runAction( cocos2d::Sequence::create(
