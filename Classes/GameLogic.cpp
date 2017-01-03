@@ -30,7 +30,7 @@
 #include "ItemScene.h"
 #include "Equipment.h"
 #include "HarvestableManager.h"
-
+#include "Tutorial.h"
 
 
 USING_NS_CC;
@@ -54,6 +54,11 @@ void GameLogic::load_game()
     {
         return;
     };
+
+    //TODO save/load whether its been completed or not
+    // Tutorial* tutorial = Tutorial::getInstance();
+    // auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+    // tutorial->first_start(scene);
 
     //cheat to reset data to blank on load
     auto username = DataManager::get_string_from_data("username");
@@ -108,6 +113,7 @@ void GameLogic::load_game()
 
 std::string GameLogic::new_player_load()
 {
+
     std::stringstream ss;
     ss << "Tap the farm in the middle of the screen to harvest, then sell by tapping the grain icon along the bottom." << std::endl << std::endl;
     ss << "Don't forget to enter a customized username so you can compete on the leaderboards at http://buildupthebase.com" << std::endl << std::endl;

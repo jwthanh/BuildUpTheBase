@@ -264,10 +264,13 @@ void TutorialStep::celebrate()
         this->next_tutorial_step_btn->setScale(0.0f);
         this->next_tutorial_step_btn->runAction(cocos2d::EaseBackOut::create(scale_to));
 
-        bind_button_touch_ended(this->next_tutorial_step_btn, [this](){
-            auto tutorial = Tutorial::getInstance();
-            tutorial->load_step(this->step_index+1);
-        });
+        bind_touch_ended(
+            this->next_tutorial_step_btn,
+            [this](){
+                auto tutorial = Tutorial::getInstance();
+                tutorial->load_step(this->step_index+1);
+            }
+        );
 
         this->_has_celebrated = true;
     };

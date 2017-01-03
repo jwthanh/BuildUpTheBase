@@ -52,7 +52,7 @@ void Harvestable::init_sprite()
     this->setContentSize(this->get_sprite_size());
 
     this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    this->sprite->setPosition(get_relative(this->getContentSize()));
+    this->sprite->setPosition(get_relative_middle(this->getContentSize()));
 
     this->clip->addChild(this->sprite);
 };
@@ -378,7 +378,7 @@ void Harvestable::shatter()
     auto shatter_sprite = ShatterSprite::createWithSpriteFrame(this->sprite->getSpriteFrame());
     shatter_sprite->setScale(sprite_scale);
     shatter_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    shatter_sprite->setPosition(get_relative(this->getContentSize()));
+    shatter_sprite->setPosition(get_relative_middle(this->getContentSize()));
     this->addChild(shatter_sprite);
 
     shatter_sprite->setOpacity(0); //hide this so it shatters it doesnt leave anything behind
@@ -615,7 +615,7 @@ void MiningHarvestable::init_sprite()
     this->sprite = Sprite::createWithTexture(rt->getSprite()->getTexture());
 
     this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    this->sprite->setPosition(get_relative(this->getContentSize()));
+    this->sprite->setPosition(get_relative_middle(this->getContentSize()));
     this->clip->addChild(this->sprite);
 
 };

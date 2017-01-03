@@ -4,11 +4,14 @@
 
 #include <vector>
 #include <random>
+#include <functional>
 
-#include "math/vec2.h"
+//#include "math/vec2.h"
 
 namespace cocos2d {
     class Size;
+    class Vec2;
+
     namespace ui
     {
         class Button;
@@ -20,7 +23,8 @@ float sx(float x, bool do_scale=false);
 float sy(float y, bool do_scale=false);
 cocos2d::Vec2 sv(cocos2d::Vec2 input); //note do_scale is true
 
-cocos2d::Vec2 get_relative(cocos2d::Size input, cocos2d::Vec2 relative_pos=cocos2d::Vec2::ANCHOR_MIDDLE);
+cocos2d::Vec2 get_relative(cocos2d::Size input, cocos2d::Vec2 relative_pos);
+cocos2d::Vec2 get_relative_middle(cocos2d::Size input);
 
 template<typename T>
 T pick_one(std::vector<T> vec, std::mt19937* generator=NULL)
@@ -101,6 +105,6 @@ number_t scale_number_slow(number_t base_number, number_t current_number, number
     return result;
 };
 
-void bind_button_touch_ended(cocos2d::ui::Button* button, std::function<void(void)> callback);
+void bind_touch_ended(cocos2d::ui::Widget* widget, std::function<void(void)> callback);
 
 #endif
