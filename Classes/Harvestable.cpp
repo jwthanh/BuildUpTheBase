@@ -35,6 +35,7 @@
 #include "combat.h"
 #include "Equipment.h"
 #include "HarvestableManager.h"
+#include "utilities/vibration.h"
 
 USING_NS_CC;
 

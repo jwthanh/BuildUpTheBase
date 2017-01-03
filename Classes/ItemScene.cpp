@@ -18,6 +18,7 @@
 #include "Beatup.h"
 #include "Util.h"
 #include "Equipment.h"
+#include "utilities/vibration.h"
 
 using namespace cocos2d;
 

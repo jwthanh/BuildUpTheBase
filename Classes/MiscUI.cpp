@@ -1,13 +1,15 @@
 #include "MiscUI.h"
 
 #include "Util.h"
+
 #include "ui/CocosGUI.h"
-#include "GameLayer.h"
 #include "base/CCConfiguration.h"
 #include "2d/CCActionEase.h"
 #include "2d/CCActionInstant.h"
 #include "2d/CCSprite.h"
 #include "base/CCDirector.h"
+
+#include "utilities/vibration.h"
 
 USING_NS_CC;
 

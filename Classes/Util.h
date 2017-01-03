@@ -25,6 +25,8 @@ cocos2d::Vec2 sv(cocos2d::Vec2 input); //note do_scale is true
 
 cocos2d::Vec2 get_relative(cocos2d::Size input, cocos2d::Vec2 relative_pos);
 cocos2d::Vec2 get_relative_middle(cocos2d::Size input);
+cocos2d::Vec2 get_center_pos(float offset_x = 0, float offset_y = 0);
+
 
 template<typename T>
 T pick_one(std::vector<T> vec, std::mt19937* generator=NULL)

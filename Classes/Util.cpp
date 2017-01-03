@@ -4,8 +4,8 @@
 
 #include "base/CCDirector.h"
 #include "ui/UIWidget.h"
-#include "ui/UIButton.h"
-#include "GameLayer.h"
+
+#include "utilities/vibration.h"
 
 float sx (float x, bool do_scale)
 {
@@ -47,6 +47,22 @@ cocos2d::Vec2 get_relative_middle(cocos2d::Size input)
         input.height * 0.5f
     );
 };
+
+cocos2d::Vec2 get_center_pos(float offset_x, float offset_y)
+{
+    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+    cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+    cocos2d::Vec2 center_pos = cocos2d::Vec2(
+        origin.x + visibleSize.width / 2.0f,
+        origin.y + visibleSize.height / 2.0f
+    );
+
+    center_pos.x += offset_x;
+    center_pos.y += offset_y;
+
+    return center_pos;
+}
+
 
 void log_vector(cocos2d::Vec2 vector, std::string message)
 {

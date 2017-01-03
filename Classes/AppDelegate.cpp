@@ -5,6 +5,7 @@
 #include "magic_particles/mp_cocos.h"
 #include "magic_particles/platform_cocos.h"
 #include "cocos2d.h"
+#include "Util.h"
 
 USING_NS_CC;
 
@@ -147,7 +148,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
             HarvestScene* harvest_scene = HarvestScene::create();
 
-            loading_bg->setPosition(harvest_scene->get_center_pos());
+            loading_bg->setPosition(get_center_pos());
             loading_bg->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
             loading_bg->getTexture()->setAliasTexParameters();
             loading_bg->setScale(16.0f);

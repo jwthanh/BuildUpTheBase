@@ -1,9 +1,9 @@
 #include "Modal.h"
 
-#include "GameLayer.h"
 #include "MiscUI.h"
 #include "Util.h"
 #include "external/easylogging.h"
+#include "utilities/vibration.h"
 
 #include "NodeBuilder.h"
 #include "2d/CCActionInterval.h"
@@ -12,6 +12,7 @@
 #include "ui/UILayout.h"
 #include "ui/UIImageView.h"
 #include "ui/UIListView.h"
+#include "2d/CCLayer.h"
 
 
 USING_NS_CC;
@@ -25,7 +26,7 @@ BaseModal::BaseModal(Node* parent)
     cocos2d::Node* root_message_node = get_prebuilt_node_from_csb("editor/details/message_detail.csb");
     this->_node = root_message_node->getChildByName("message_panel");
     this->_node->removeFromParent();
-    this->_node->setPosition(GameLayer::get_center_pos());
+    this->_node->setPosition(cocos2d::Vec2{960, 640}/ 2);
 
     //title
     this->_title_lbl = dynamic_cast<cocos2d::ui::Text*>(this->_node->getChildByName("title_lbl"));

@@ -195,7 +195,7 @@ ui::ScrollView* GameLayer::create_center_scrollview()
     scroll->setContentSize(scroll_size);
 
     scroll->setAnchorPoint(Vec2(0.5, 0.5));
-    scroll->setPosition( this->get_center_pos(0, -sy(50) ));
+    scroll->setPosition( get_center_pos(0, -sy(50) ));
     scroll->setDirection(ui::ScrollView::Direction::VERTICAL);
 
     this->addChild(scroll);
@@ -276,21 +276,6 @@ cocos2d::ui::Button* GameLayer::create_button(std::string text, BoolFuncNoArgs c
 
 };
 
-cocos2d::Vec2 GameLayer::get_center_pos(float offset_x, float offset_y)
-{
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    Vec2 center_pos = Vec2(
-        origin.x + visibleSize.width / 2.0f,
-        origin.y + visibleSize.height / 2.0f
-    );
-
-    center_pos.x += offset_x;
-    center_pos.y += offset_y;
-
-    return center_pos;
-}
-
 void GameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent)
 {
 };
@@ -312,20 +297,4 @@ void GameLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         Director::getInstance()->popScene();
         event->stopPropagation();
     }
-};
-
-void do_vibrate(int milliseconds)
-{
-    if (GameLogic::getInstance()->get_can_vibrate() == false)
-    {
-        CCLOG("NOT vibrating");
-        return;
-    };
-
-#ifdef __ANDROID__
-        vibrate(milliseconds);
-#else
-        CCLOG("vibrating");
-#endif
-    //CCLOG("in do_vibrate");
 };

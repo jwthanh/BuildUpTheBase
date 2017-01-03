@@ -31,6 +31,7 @@
 #include "Equipment.h"
 #include "HarvestableManager.h"
 #include "Tutorial.h"
+#include "utilities/vibration.h"
 
 
 USING_NS_CC;

@@ -22,6 +22,9 @@
     <Filter Include="debugging">
       <UniqueIdentifier>{d1b6699f-dd60-4ceb-88d5-2cffead87f64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utilities">
+      <UniqueIdentifier>{aaa63dd2-44da-458f-933c-0822f588eafc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -97,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\HarvestableManager.cpp" />
     <ClCompile Include="..\Classes\Tutorial.cpp" />
+    <ClCompile Include="..\Classes\utilities\vibration.cpp">
+      <Filter>utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -198,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HarvestableManager.h" />
     <ClInclude Include="..\Classes\Tutorial.h" />
+    <ClInclude Include="..\Classes\utilities\vibration.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

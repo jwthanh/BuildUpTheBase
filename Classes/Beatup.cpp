@@ -76,7 +76,7 @@ bool Beatup::init()
     this->buildup = new Buildup();
 
     this->face_fight_node = Node::create();
-    this->face_fight_node->setPositionY(this->get_center_pos().y/2);
+    this->face_fight_node->setPositionY(get_center_pos().y/2);
     this->addChild(face_fight_node);
 
     auto player = new Player("Jimothy");
@@ -444,7 +444,7 @@ void Beatup::win_level()
     };
 
     Sprite* win_sprite = Sprite::createWithSpriteFrameName("win.png");
-    win_sprite->setPosition(this->get_center_pos());
+    win_sprite->setPosition(get_center_pos());
     win_sprite->setScale(sx(4));
     win_sprite->getTexture()->setAliasTexParameters();
     Sprite* win_face = Sprite::createWithSpriteFrameName("win_face.png");
@@ -490,8 +490,8 @@ void Beatup::win_level()
     this->addChild(main_button);
     Size win_size = win_sprite->getContentSize();
     main_button->setPosition(Vec2(
-                this->get_center_pos().x,
-                this->get_center_pos().y-sy(275)
+                get_center_pos().x,
+                get_center_pos().y-sy(275)
     ));
     main_button->setAnchorPoint(Vec2(0.5f, 0.5f));
 

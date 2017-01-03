@@ -51,12 +51,11 @@
 #include <cocostudio/CocosStudioExtension.h>
 #include "ui/UIImageView.h"
 #include "ui/UITextField.h"
-#include "2d/CCRenderTexture.h"
 #include <2d/CCParticleExamples.h>
 #include "debugging/ActionPanel.h"
 #include "Tutorial.h"
-#include "2d/CCActionProgressTimer.h"
 #include "2d/CCActionInstant.h"
+#include "utilities/vibration.h"
 
 USING_NS_CC;
 
@@ -192,7 +191,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
         //     //GameDirector::switch_to_equipment_menu();
         //     auto parts = ParticleSun::create();
-        //     parts->setPosition(this->get_center_pos());
+        //     parts->setPosition(get_center_pos());
         //     float duration = 0.25f;
         //     parts->setDuration(duration);
         //     this->addChild(parts);
@@ -960,7 +959,7 @@ void BaseScene::create_inventory_listview()
                     float duration = 0.25f;
                     auto scale = EaseOut::create(ScaleTo::create(duration, 1.0f, 1.0f), 1.5f);
 
-                    Vec2 end_pos = this->get_center_pos();
+                    Vec2 end_pos = get_center_pos();
                     auto move = MoveTo::create(duration, end_pos);
 
                     Sequence* seq = Sequence::create(EaseBackOut::create(Spawn::createWithTwoActions(move, scale)), NULL);
@@ -1285,7 +1284,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     value_lbl->schedule(update_value_lbl, 0.2f, "update_value_lbl");
     update_value_lbl(0);
 
-    alert_panel->setPosition(this->get_center_pos());
+    alert_panel->setPosition(get_center_pos());
 
     alert_panel->setName("inventory_detail_panel");
 

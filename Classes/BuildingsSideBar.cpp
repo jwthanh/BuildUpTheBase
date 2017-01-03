@@ -27,18 +27,16 @@
 #include "Harvestable.h"
 #include "HarvestableManager.h"
 
-#include "NodeBuilder.h"
-
 #include "base/CCDirector.h"
 #include "CCApplication.h"
 #include "ui/UIButton.h"
 #include "ui/UIListView.h"
 #include "ui/UIText.h"
-#include "ui/UILayout.h"
 #include "ui/CocosGUI.h"
 #include <2d/CCActionInterval.h>
 #include <2d/CCActionEase.h>
 #include "Tutorial.h"
+#include "utilities/vibration.h"
 
 
 USING_NS_CC;

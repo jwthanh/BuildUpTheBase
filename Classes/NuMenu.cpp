@@ -35,6 +35,8 @@
 #include "ui/UIListView.h"
 #include "ui/UIScrollView.h"
 
+#include "utilities/vibration.h"
+
 
 USING_NS_CC;
 
