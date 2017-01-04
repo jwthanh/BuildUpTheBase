@@ -126,7 +126,7 @@ void PopupPanel::animate_open()
 
     float duration = 0.3f;
     cocos2d::ActionInterval* show_action = cocos2d::Spawn::createWithTwoActions(
-        cocos2d::FadeIn::create(duration),
+        cocos2d::FadeIn::create(duration/2.0f),
         cocos2d::EaseBackOut::create(cocos2d::MoveTo::create(duration, Vec2(this->initial_x, this->initial_y)))
         );
 
