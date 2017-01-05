@@ -15,6 +15,7 @@
 #include "HouseBuilding.h"
 #include "Util.h"
 #include "MiscUI.h"
+#include "NuMenu.h"
 
 Tutorial* Tutorial::_instance = nullptr;
 
@@ -53,6 +54,7 @@ void Tutorial::load_step(int step_index)
     if (step_it != this->steps.end())
     {
         (*step_it)->load_step();
+        this->current_step = *step_it;
     }
     else
     {
@@ -143,6 +145,66 @@ void Tutorial::first_start(cocos2d::Node* parent)
         std::make_pair<bool Tutorial::*, bool>(&Tutorial::_show_player_info, true)
     );
     second_step->set_switch_map(switch_map);
+
+    //setup third step
+    auto third_step = std::make_shared<TutorialStep>(
+        tutorial_sidebar_panel,
+        "Spendin' that money",
+        "You're a resourceful person, better ask a friend to help you out.\n\nBuy 5 grain harvesters to harvest a little bit of grain while you wait.",
+        "   You're a supervisor now."
+    );
+    third_step->step_index = 2;
+    this->steps.push_back(third_step);
+
+    auto check_harvesters = [this, third_step](float dt){
+        //update progress bar
+        res_count_t target_coins = 300.0;
+        res_count_t total_coins = BEATUP->get_total_coins();
+        res_count_t satisfied_percentage = total_coins/target_coins*100;
+        third_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
+
+        //update progress label
+        res_count_t remaining_coins = target_coins - total_coins;
+        std::stringstream progress_ss;
+        res_count_t adjusted_remaining = std::max(remaining_coins, 0.0L);
+        progress_ss << beautify_double(adjusted_remaining) << " coins to earn";
+        third_step->tutorial_progress_lbl->setString(progress_ss.str());
+
+        if (remaining_coins < 1) {
+            //add fireworks, change text to complete, show next button etc
+            third_step->celebrate();
+        } else {
+            third_step->reset();
+        };
+    };
+    third_step->set_scheduled_func(check_harvesters);
+
+    auto target_building = BUILDUP->get_target_building();
+
+    auto panel = cocos2d::ui::Layout::create();
+    panel->setScale(0.5f);
+    tutorial_sidebar_panel->addChild(panel);
+    panel->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
+    auto harvester_nuitem = HarvesterShopNuItem::create(panel, target_building);
+    panel->setPosition({ 200, 270 });
+
+    auto check_third_step = [panel, third_step](float dt)
+    {
+        auto tutorial = Tutorial::getInstance();
+        panel->setVisible(tutorial->current_step->step_index == third_step->step_index);
+    };
+    panel->schedule(check_third_step, AVERAGE_DELAY, "check_third_step");
+    check_third_step(0);
+
+    harvester_nuitem->my_init(Worker::SubType::One, target_building->punched_sub_type);
+
+
+    //empty the switch map and fill it up again
+    switch_map.erase(switch_map.begin(), switch_map.end());
+    switch_map.push_back(
+        std::make_pair<bool Tutorial::*, bool>(&Tutorial::_show_player_info, true)
+    );
+    third_step->set_switch_map(switch_map);
 
     this->load_step(0);
 };
