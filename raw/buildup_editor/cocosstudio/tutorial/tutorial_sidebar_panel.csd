@@ -86,13 +86,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="nuitem_pos" ActionTag="-1016707347" Tag="2197" IconVisible="True" LeftMargin="200.0000" RightMargin="200.0000" TopMargin="270.0000" BottomMargin="270.0000" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="nuitem_pos" ActionTag="-1016707347" Tag="2197" IconVisible="True" LeftMargin="200.0000" RightMargin="200.0000" TopMargin="389.9998" BottomMargin="150.0002" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
-                <Position X="200.0000" Y="270.0000" />
+                <Position X="200.0000" Y="150.0002" />
                 <Scale ScaleX="7.3987" ScaleY="1.3293" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.5000" />
+                <PrePosition X="0.5000" Y="0.2778" />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
             </Children>

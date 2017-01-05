@@ -156,18 +156,20 @@ void Tutorial::first_start(cocos2d::Node* parent)
     third_step->step_index = 2;
     this->steps.push_back(third_step);
 
-    auto check_harvesters = [this, third_step](float dt){
+    auto target_building = BUILDUP->get_target_building();
+
+    auto check_harvesters = [this, third_step, target_building](float dt){
         //update progress bar
-        res_count_t target_coins = 300.0;
-        res_count_t total_coins = BEATUP->get_total_coins();
-        res_count_t satisfied_percentage = total_coins/target_coins*100;
+        res_count_t target_count = 5.0;
+        res_count_t current_count = target_building->harvesters.at({Worker::SubType::One, target_building->punched_sub_type});
+        res_count_t satisfied_percentage = current_count/target_count*100;
         third_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
 
         //update progress label
-        res_count_t remaining_coins = target_coins - total_coins;
+        res_count_t remaining_coins = target_count - current_count;
         std::stringstream progress_ss;
         res_count_t adjusted_remaining = std::max(remaining_coins, 0.0L);
-        progress_ss << beautify_double(adjusted_remaining) << " coins to earn";
+        progress_ss << beautify_double(adjusted_remaining) << " harvesters to hire";
         third_step->tutorial_progress_lbl->setString(progress_ss.str());
 
         if (remaining_coins < 1) {
@@ -179,19 +181,27 @@ void Tutorial::first_start(cocos2d::Node* parent)
     };
     third_step->set_scheduled_func(check_harvesters);
 
-    auto target_building = BUILDUP->get_target_building();
 
     auto panel = cocos2d::ui::Layout::create();
     panel->setScale(0.5f);
     tutorial_sidebar_panel->addChild(panel);
     panel->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
     auto harvester_nuitem = HarvesterShopNuItem::create(panel, target_building);
-    panel->setPosition({ 200, 270 });
+    panel->setPosition(tutorial_sidebar_panel->getChildByName("nuitem_pos")->getPosition());
 
     auto check_third_step = [panel, third_step](float dt)
     {
         auto tutorial = Tutorial::getInstance();
-        panel->setVisible(tutorial->current_step->step_index == third_step->step_index);
+        bool is_third_step = tutorial->current_step->step_index == third_step->step_index;
+        bool has_celebrated = third_step->_has_celebrated;
+        if (is_third_step && panel->isVisible() == false && has_celebrated == false)
+        {
+            float orig_scale = panel->getScale();
+            auto scale_to = cocos2d::ScaleTo::create(0.15f, orig_scale);
+            panel->setScale(0.0f);
+            panel->runAction(cocos2d::EaseBackOut::create(scale_to));
+        };
+        panel->setVisible(is_third_step && has_celebrated == false);
     };
     panel->schedule(check_third_step, AVERAGE_DELAY, "check_third_step");
     check_third_step(0);
