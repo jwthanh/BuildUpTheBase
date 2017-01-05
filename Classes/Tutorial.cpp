@@ -158,10 +158,15 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
     auto target_building = BUILDUP->get_target_building();
 
+
+    //typedef std::pair<Worker::SubType, Ingredient::SubType> work_ing_t;
+
     auto check_harvesters = [this, third_step, target_building](float dt){
         //update progress bar
         res_count_t target_count = 5.0;
-        res_count_t current_count = target_building->harvesters.at({Worker::SubType::One, target_building->punched_sub_type});
+        res_count_t _def = 0;
+        work_ing_t one_grain_key = {Worker::SubType::One, target_building->punched_sub_type};
+        res_count_t current_count = map_get(target_building->harvesters, one_grain_key, _def);
         res_count_t satisfied_percentage = current_count/target_count*100;
         third_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
 
@@ -183,27 +188,29 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
 
     auto panel = cocos2d::ui::Layout::create();
-    panel->setScale(0.5f);
     tutorial_sidebar_panel->addChild(panel);
+    panel->setScale(0.5f);
     panel->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
-    auto harvester_nuitem = HarvesterShopNuItem::create(panel, target_building);
     panel->setPosition(tutorial_sidebar_panel->getChildByName("nuitem_pos")->getPosition());
 
-    auto check_third_step = [panel, third_step](float dt)
+    auto harvester_nuitem = HarvesterShopNuItem::create(panel, target_building);
+    harvester_nuitem->button->setVisible(false);
+
+    auto check_third_step = [harvester_nuitem, third_step](float dt)
     {
         auto tutorial = Tutorial::getInstance();
         bool is_third_step = tutorial->current_step->step_index == third_step->step_index;
         bool has_celebrated = third_step->_has_celebrated;
-        if (is_third_step && panel->isVisible() == false && has_celebrated == false)
+        if (is_third_step && harvester_nuitem->button->isVisible() == false && has_celebrated == false)
         {
-            float orig_scale = panel->getScale();
+            float orig_scale = harvester_nuitem->button->getScale();
             auto scale_to = cocos2d::ScaleTo::create(0.15f, orig_scale);
-            panel->setScale(0.0f);
-            panel->runAction(cocos2d::EaseBackOut::create(scale_to));
+            harvester_nuitem->button->setScale(0.0f);
+            harvester_nuitem->button->runAction(cocos2d::EaseBackOut::create(scale_to));
         };
-        panel->setVisible(is_third_step && has_celebrated == false);
+        harvester_nuitem->button->setVisible(is_third_step && has_celebrated == false);
     };
-    panel->schedule(check_third_step, AVERAGE_DELAY, "check_third_step");
+    harvester_nuitem->button->schedule(check_third_step, AVERAGE_DELAY, "check_third_step");
     check_third_step(0);
 
     harvester_nuitem->my_init(Worker::SubType::One, target_building->punched_sub_type);
@@ -215,6 +222,72 @@ void Tutorial::first_start(cocos2d::Node* parent)
         std::make_pair<bool Tutorial::*, bool>(&Tutorial::_show_player_info, true)
     );
     third_step->set_switch_map(switch_map);
+
+    //setup fourth step
+    auto fourth_step = std::make_shared<TutorialStep>(
+        tutorial_sidebar_panel,
+        "Spendin' that money",
+        "You're a resourceful person, better ask a friend to help you out.\n\nBuy 5 grain harvesters to harvest a little bit of grain while you wait.",
+        "   You're a supervisor now."
+    );
+    fourth_step->step_index = 3;
+    this->steps.push_back(fourth_step);
+
+
+    auto check_salesmen = [this, fourth_step, target_building](float dt){
+        //update progress bar
+        res_count_t target_count = 5.0;
+        res_count_t _def = 0;
+        work_ing_t one_grain_key = {Worker::SubType::One, target_building->punched_sub_type};
+        res_count_t current_count = map_get(target_building->salesmen, one_grain_key, _def);
+        res_count_t satisfied_percentage = current_count/target_count*100;
+        fourth_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
+
+        //update progress label
+        res_count_t remaining_coins = target_count - current_count;
+        std::stringstream progress_ss;
+        res_count_t adjusted_remaining = std::max(remaining_coins, 0.0L);
+        progress_ss << beautify_double(adjusted_remaining) << " salesmen to hire";
+        fourth_step->tutorial_progress_lbl->setString(progress_ss.str());
+
+        if (remaining_coins < 1) {
+            //add fireworks, change text to complete, show next button etc
+            fourth_step->celebrate();
+        } else {
+            fourth_step->reset();
+        };
+    };
+    fourth_step->set_scheduled_func(check_salesmen);
+
+
+    auto salesmen_nuitem = SalesmanShopNuItem::create(panel, target_building);
+    salesmen_nuitem->button->setVisible(false);
+    auto check_fourth_step = [salesmen_nuitem, fourth_step](float dt)
+    {
+        auto tutorial = Tutorial::getInstance();
+        bool is_fourth_step = tutorial->current_step->step_index == fourth_step->step_index;
+        bool has_celebrated = fourth_step->_has_celebrated;
+        if (is_fourth_step && salesmen_nuitem->button->isVisible() == false && has_celebrated == false)
+        {
+            float orig_scale = salesmen_nuitem->button->getScale();
+            auto scale_to = cocos2d::ScaleTo::create(0.15f, orig_scale);
+            salesmen_nuitem->button->setScale(0.0f);
+            salesmen_nuitem->button->runAction(cocos2d::EaseBackOut::create(scale_to));
+        };
+        salesmen_nuitem->button->setVisible(is_fourth_step && has_celebrated == false);
+    };
+    salesmen_nuitem->schedule(check_fourth_step, AVERAGE_DELAY, "check_fourth_step");
+    check_fourth_step(0);
+
+    salesmen_nuitem->my_init(Worker::SubType::One, target_building->punched_sub_type);
+
+
+    //empty the switch map and fill it up again
+    switch_map.erase(switch_map.begin(), switch_map.end());
+    switch_map.push_back(
+        std::make_pair<bool Tutorial::*, bool>(&Tutorial::_show_player_info, true)
+    );
+    fourth_step->set_switch_map(switch_map);
 
     this->load_step(0);
 };
