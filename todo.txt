@@ -11,6 +11,7 @@ Items
 * Artisan (item type 'crafting')
 
 Bugs and stuff
+* borders to ui panels
 * Popup panel closing
 * digging altar and start pos overlaps
 * checkout advanced and basic bottom ingredient listviews along bottom
