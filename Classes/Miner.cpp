@@ -311,7 +311,11 @@ void Miner::reset()
         this->tilemap->removeFromParent();
     }
 
-    this->init(false); //use_existing = false
+    //Hack to get around active_tile_pos sometimes being resource_tile_pos
+    do {
+        this->init(false); //use_existing = false
+    } while (this->active_tile_pos == this->resource_tile_pos);
+
     this->parent->addChild(this->tilemap);
 };
 
