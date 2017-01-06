@@ -12,6 +12,7 @@
 #include "MiscUI.h"
 #include "Technology.h"
 #include "base/CCDirector.h"
+#include "HarvestScene.h"
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
@@ -186,30 +187,11 @@ void Salesman::on_update(float dt)
 
             //create floating label for the amount sold over the correct ing panel
             cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();
-            auto harvest_scene = root_scene->getChildByName("HarvestScene");
+            auto harvest_scene = dynamic_cast<HarvestScene*>(root_scene->getChildByName("HarvestScene"));
             if (harvest_scene)
             {
-                auto inventory_listview = harvest_scene->getChildByName("inventory_listview");
-                if (inventory_listview)
-                {
-                    std::string string_type = Ingredient::type_to_string(ing_type);
-
-                    auto ing_panel = inventory_listview->getChildByName(string_type);
-                    if (ing_panel)
-                    {
-                        auto floating_label = FloatingLabel::createWithTTF("+$" + beautify_double(actual_value), "pixelmix.ttf", 25);
-                        floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
-                        harvest_scene->addChild(floating_label);
-                        floating_label->do_float(50, 1, 50, 10, 1);
-
-                        cocos2d::Vec2 pos = {
-                            ing_panel->getContentSize().width / 2,
-                            ing_panel->getContentSize().height
-                        };
-                        floating_label->setPosition(ing_panel->convertToWorldSpace(pos));
-                    }
-                }
-
+                std::string message = "+$" + beautify_double(actual_value);
+                harvest_scene->spawn_floating_label_for_ing_type(ing_type, message);
             }
             else
             {

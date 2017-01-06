@@ -91,6 +91,8 @@ class HarvestScene : public BaseScene
         void create_recipe_lbl();
 
         void add_harvestable();
+
+        void spawn_floating_label_for_ing_type(Ingredient::SubType ing_type, std::string message);
 };
 
 #endif

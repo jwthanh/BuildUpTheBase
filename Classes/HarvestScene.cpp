@@ -1328,6 +1328,31 @@ void HarvestScene::add_harvestable()
     this->addChild(this->harvestable);
 };
 
+void HarvestScene::spawn_floating_label_for_ing_type(Ingredient::SubType ing_type, std::string message)
+{
+    auto inventory_listview = this->getChildByName("inventory_listview");
+    if (inventory_listview)
+    {
+        std::string string_type = Ingredient::type_to_string(ing_type);
+
+        auto ing_panel = inventory_listview->getChildByName(string_type);
+        if (ing_panel)
+        {
+            auto floating_label = FloatingLabel::createWithTTF(message, "pixelmix.ttf", 25);
+            floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
+            this->addChild(floating_label);
+            floating_label->do_float(50, 1, 50, 10, 1);
+
+            cocos2d::Vec2 pos = {
+                ing_panel->getContentSize().width / 2,
+                ing_panel->getContentSize().height
+            };
+            floating_label->setPosition(ing_panel->convertToWorldSpace(pos));
+        }
+    }
+
+};
+
 void HarvestScene::create_recipe_lbl()
 {
 }
