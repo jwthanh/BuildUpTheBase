@@ -584,6 +584,12 @@ void SideListView::setup_detail_listview_as_recipes()
                     if (can_fit_more_dead)
                     {
                         building->create_ingredients(Ingredient::SubType::Undead, 1);
+                        cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+                        auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+                        if (harvest_scene)
+                        {
+                            harvest_scene->spawn_floating_label_for_ing_type(Ingredient::SubType::Undead, "+1");
+                        }
                     }
                     else
                     {
@@ -703,6 +709,12 @@ void SideListView::setup_detail_listview_as_recipes()
                     if (can_fit_more_iron)
                     {
                         building->create_ingredients(Ingredient::SubType::Iron, 2);
+                        cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+                        auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+                        if (harvest_scene)
+                        {
+                            harvest_scene->spawn_floating_label_for_ing_type(Ingredient::SubType::Iron, "+2");
+                        }
                     }
                     else
                     {
@@ -732,6 +744,12 @@ void SideListView::setup_detail_listview_as_recipes()
                     if (can_fit_more_carts)
                     {
                         building->create_ingredients(Ingredient::SubType::Minecart, 1);
+                        cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+                        auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+                        if (harvest_scene)
+                        {
+                            harvest_scene->spawn_floating_label_for_ing_type(Ingredient::SubType::Minecart, "+1");
+                        }
                     }
                     else
                     {
@@ -762,6 +780,12 @@ void SideListView::setup_detail_listview_as_recipes()
                     if (can_fit_more_carts)
                     {
                         building->create_ingredients(Ingredient::SubType::MineRails, 1);
+                        cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+                        auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+                        if (harvest_scene)
+                        {
+                            harvest_scene->spawn_floating_label_for_ing_type(Ingredient::SubType::MineRails, "+1");
+                        }
                     }
                     else
                     {
