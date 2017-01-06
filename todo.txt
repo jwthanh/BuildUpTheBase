@@ -10,6 +10,14 @@ Items
 * Woodsman (lumberjack)
 * Artisan (item type 'crafting')
 
+Bugs and stuff
+* borders to ui panels
+* Popup panel closing
+* digging altar and start pos overlaps
+* checkout advanced and basic bottom ingredient listviews along bottom
+* animate adding a new resource from the sidebar, like minecarts or healing
+* make sure vibration isnt overused
+
 Features
 * Stats screen
     * Dynamic class ala Dungeon Siege
