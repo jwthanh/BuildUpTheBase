@@ -1152,6 +1152,8 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     auto cb = [alert_panel, this](Ref* target, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
+            do_vibrate(16);
+
             auto end_pos = static_cast<ui::Widget*>(target)->getTouchEndPosition();
             auto move = MoveTo::create(0.25f, end_pos);
 
