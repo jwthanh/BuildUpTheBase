@@ -6,7 +6,7 @@
       <ObjectData Name="Node" Tag="25" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="Panel_1" ActionTag="-960689000" Tag="26" IconVisible="False" LeftMargin="-200.0000" RightMargin="-200.0000" TopMargin="-249.9999" BottomMargin="-250.0001" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_1" ActionTag="-960689000" Tag="26" IconVisible="False" LeftMargin="-200.0000" RightMargin="-200.0000" TopMargin="-249.9999" BottomMargin="-250.0001" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="400.0000" Y="500.0000" />
             <Children>
               <AbstractNodeData Name="resource_name" ActionTag="-1958392294" Tag="27" IconVisible="False" LeftMargin="38.6559" RightMargin="13.3441" TopMargin="12.3800" BottomMargin="447.6200" FontSize="36" LabelText="Resource Name" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -205,7 +205,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <SingleColor A="255" R="150" G="200" B="255" />
+            <SingleColor A="255" R="60" G="80" B="102" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />

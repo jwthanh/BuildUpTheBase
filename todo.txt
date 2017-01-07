@@ -13,9 +13,9 @@ Items
 Bugs and stuff
 * borders to ui panels
 * Popup panel closing
-* digging altar and start pos overlaps
+* digging altar and start pos overlaps DONE but write a better fix
 * checkout advanced and basic bottom ingredient listviews along bottom
-* animate adding a new resource from the sidebar, like minecarts or healing
+* animate adding a new resource from the sidebar, like minecarts or healing DONE but improve it later
 * make sure vibration isnt overused
 
 Features
