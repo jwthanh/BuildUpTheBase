@@ -111,7 +111,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
     auto second_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
         "Makin' some money",
-        "Now you've gathered some resources, it's time to spend it. Gather and sell enough grain to make 300$.\n\nTap the grain icon along the bottom and choose a quantity to sell.",
+        "Now you've gathered some resources, it's time to spend it. Gather and sell enough grain to make 150$.\n\nTap the grain icon along the bottom and choose a quantity to sell.",
         "   You're loaded."
     );
     second_step->step_index = 1;
@@ -119,7 +119,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
     auto check_money = [this, second_step](float dt){
         //update progress bar
-        res_count_t target_coins = 300.0;
+        res_count_t target_coins = 150.0;
         res_count_t total_coins = BEATUP->get_total_coins();
         res_count_t satisfied_percentage = total_coins/target_coins*100;
         second_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
