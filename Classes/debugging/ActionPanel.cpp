@@ -15,7 +15,7 @@ bool ActionPanel::init()
     auto node = get_prebuilt_node_from_csb("panels/animation_panel.csb");
     this->_panel = dynamic_cast<cocos2d::ui::Layout*>(node->getChildByName("animation_panel"));
     this->_panel->removeFromParent();
-    this->_panel->setPosition({ 460, 320 });
+    this->_panel->setPosition({ 660, 320 });
 
     auto reset_btn = dynamic_cast<cocos2d::ui::Button*>(this->_panel->getChildByName("buttons_panel")->getChildByName("reset_btn"));
     reset_btn->addTouchEventListener([this](TOUCH_CALLBACK_PARAMS){

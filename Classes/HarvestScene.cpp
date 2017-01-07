@@ -175,16 +175,16 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        Tutorial* tutorial = Tutorial::getInstance();
-        tutorial->first_start(this);
+        // Tutorial* tutorial = Tutorial::getInstance();
+        // tutorial->first_start(this);
 
 
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
 
-        // auto action_panel = ActionPanel::create();
-        // this->addChild(action_panel);
-        // action_panel->set_target(this->harvestable);
+        auto action_panel = ActionPanel::create();
+        this->addChild(action_panel);
+        action_panel->set_target(this->getChildByName("inventory_detail_panel"));
         //
         // ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
         // action_panel->set_target((inventory_listview->getChildren()).at(0));
@@ -1149,19 +1149,22 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     alert_panel->removeFromParent();
 
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(alert_panel->getChildByName("close_panel"));
-    auto cb = [alert_panel](Ref* target, ui::Widget::TouchEventType type) {
+    auto cb = [alert_panel, this](Ref* target, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            // alert_panel->removeFromParent();
+            auto end_pos = static_cast<ui::Widget*>(target)->getTouchEndPosition();
+            auto move = MoveTo::create(0.25f, end_pos);
+
             auto scale_to = ScaleTo::create(0.25f, 0);
             auto fade_out = FadeOut::create(0.1f);
-            auto seq  = Sequence::create(
-                EaseBackIn::create(scale_to),
+            auto spawn = Spawn::create(
+                scale_to,
                 fade_out,
-                RemoveSelf::create(),
+                move,
                 NULL
             );
 
+            Sequence* seq = Sequence::create(spawn, RemoveSelf::create(), NULL);
             alert_panel->runAction(seq);
         };
     };
