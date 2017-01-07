@@ -1147,8 +1147,6 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
     auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
     alert_panel->removeFromParent();
-    alert_panel->setBackGroundColor(Color3B(85, 114, 145));
-    alert_panel->setBackGroundColorOpacity(255);
 
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(alert_panel->getChildByName("close_panel"));
     auto cb = [alert_panel](Ref* target, ui::Widget::TouchEventType type) {
