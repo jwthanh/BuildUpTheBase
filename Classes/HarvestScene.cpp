@@ -1152,7 +1152,11 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     auto cb = [alert_panel](Ref* target, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            alert_panel->removeFromParent();
+            // alert_panel->removeFromParent();
+            auto scale_to = ScaleTo::create(0.25f, 0);
+            auto fade_out = FadeOut::create(0.1f);
+            alert_panel->runAction(EaseBackOut::create(scale_to));
+            alert_panel->runAction(fade_out);
         };
     };
     close_panel->addTouchEventListener(cb);

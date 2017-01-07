@@ -86,13 +86,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sell_1_btn" ActionTag="-214602728" Tag="207" IconVisible="False" LeftMargin="3.0045" RightMargin="306.9955" TopMargin="354.3846" BottomMargin="35.6154" TouchEnable="True" FontSize="36" ButtonText="1" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="sell_1_btn" ActionTag="-214602728" Tag="207" IconVisible="False" LeftMargin="6.0044" RightMargin="303.9956" TopMargin="354.3846" BottomMargin="35.6154" TouchEnable="True" FontSize="36" ButtonText="1" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="100.0000" Y="120.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="53.0045" Y="95.6154" />
+                <Position X="56.0044" Y="95.6154" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1293" Y="0.1875" />
+                <PrePosition X="0.1366" Y="0.1875" />
                 <PreSize X="0.2439" Y="0.2353" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
@@ -102,13 +102,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sell_10_btn" ActionTag="-426305712" Tag="28" IconVisible="False" LeftMargin="103.0054" RightMargin="206.9946" TopMargin="354.3846" BottomMargin="35.6154" TouchEnable="True" FontSize="36" ButtonText="10" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="sell_10_btn" ActionTag="-426305712" Tag="28" IconVisible="False" LeftMargin="106.0053" RightMargin="203.9947" TopMargin="354.3846" BottomMargin="35.6154" TouchEnable="True" FontSize="36" ButtonText="10" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="100.0000" Y="120.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="153.0054" Y="95.6154" />
+                <Position X="156.0053" Y="95.6154" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.3732" Y="0.1875" />
+                <PrePosition X="0.3805" Y="0.1875" />
                 <PreSize X="0.2439" Y="0.2353" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
@@ -118,13 +118,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sell_100_btn" ActionTag="678923868" Tag="29" IconVisible="False" LeftMargin="203.0064" RightMargin="106.9936" TopMargin="354.3846" BottomMargin="35.6154" TouchEnable="True" FontSize="36" ButtonText="25%" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="sell_100_btn" ActionTag="678923868" Tag="29" IconVisible="False" LeftMargin="206.0063" RightMargin="103.9937" TopMargin="354.3846" BottomMargin="35.6154" TouchEnable="True" FontSize="36" ButtonText="25%" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="100.0000" Y="120.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="253.0064" Y="95.6154" />
+                <Position X="256.0063" Y="95.6154" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.6171" Y="0.1875" />
+                <PrePosition X="0.6244" Y="0.1875" />
                 <PreSize X="0.2439" Y="0.2353" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
@@ -134,13 +134,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sell_1000_btn" ActionTag="1155198791" Tag="30" IconVisible="False" LeftMargin="303.0083" RightMargin="6.9917" TopMargin="354.3846" BottomMargin="35.6154" TouchEnable="True" FontSize="36" ButtonText="50%" Scale9Enable="True" LeftEage="11" RightEage="11" TopEage="11" BottomEage="11" Scale9OriginX="11" Scale9OriginY="11" Scale9Width="24" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="sell_1000_btn" ActionTag="1155198791" Tag="30" IconVisible="False" LeftMargin="306.0083" RightMargin="3.9917" TopMargin="354.3846" BottomMargin="35.6154" TouchEnable="True" FontSize="36" ButtonText="50%" Scale9Enable="True" LeftEage="11" RightEage="11" TopEage="11" BottomEage="11" Scale9OriginX="11" Scale9OriginY="11" Scale9Width="24" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="100.0000" Y="120.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="353.0083" Y="95.6154" />
+                <Position X="356.0083" Y="95.6154" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.8610" Y="0.1875" />
+                <PrePosition X="0.8683" Y="0.1875" />
                 <PreSize X="0.2439" Y="0.2353" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
