@@ -1,6 +1,6 @@
 * everything costs the same
 
-Items
+#Items icons
 * Canary
 * Map
 * Light lamp
@@ -10,7 +10,7 @@ Items
 * Woodsman (lumberjack)
 * Artisan (item type 'crafting')
 
-Bugs and stuff
+#Bugs and stuff
 * borders to ui panels
 * Popup panel closing
 * digging altar and start pos overlaps DONE but write a better fix
@@ -18,37 +18,42 @@ Bugs and stuff
 * animate adding a new resource from the sidebar, like minecarts or healing DONE but improve it later
 * make sure vibration isnt overused
 
-Features
+#Features
 * Stats screen
     * Dynamic class ala Dungeon Siege
 * Info panel for building with misc stats, how many fighters killed, their
   damage etc
 
+#Workers
 * sell more than 1000 at a time #DONE
 * buy more than one harvester at a time
 
 * trade resources in for others, catan style
 * sell workers back
 
+* toggle all workers  on or off
+* can recruit specialized harvesters to live in your city. they either live a certain amount of time
+  or require a certain resource before leaving or reducing output
+* when you find these special ones, you can either use them right away, or put them in a training are for a X time
+  and then name them on the way out and they get special bonuses
+
 * dont pause application on background, maybe do the post load on return
 
-* items have passives #DONE
-* limited slots for total item inventory
 
+#Equipment
 * equipment screen for items, slots for combat stuff, harvest stuff.
 * equipment is limited by character level
 * character level is boosted in combat, (or by doing other things?)
 
 * find things in the mine that aren't the altar, but are little pickups along the way
 
-* can recruit specialized harvesters to live in your city. they either live a certain amount of time
-  or require a certain resource before leaving or reducing output
-* when you find these special ones, you can either use them right away, or put them in a training are for a X time
-  and then name them on the way out and they get special bonuses
 
 * special harvesters require resources per second (to make use of generators)
 
+#Items
 * limited slots, so you can have one dagger type, but you can replace it for a better one
+* items have passives #DONE
+* limited slots for total item inventory
 
 * new welcome-back prompt so it "doesn't look like a programmers console"
 
@@ -57,10 +62,12 @@ Features
 * since we've got items now, lets turn sword sharpening into a timer and have it degrade all the time
 * Need a progress bar that shows the sword sharpness
 
+#Misc UI
 * Better user messaging
 * Changelog in app
 * tips on how to play
 
+#Questing
 * daily quests
 * daily chest to open where you can find something special and maybe limit the other ways you can do stuff
 
