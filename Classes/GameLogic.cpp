@@ -416,7 +416,16 @@ void GameLogic::load_all()
     HarvestScene* harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
     auto sidebar = harvest_scene->sidebar;
     TabManager::TabTypes tab_type = (TabManager::TabTypes)DataManager::get_int_from_data("active_tab", (int)TabManager::TabTypes::ShopTab);
-    sidebar->tabs.set_tab_active(tab_type, building);
+
+    //TODO make add a toggle_buttons based on TabType to avoid this set of if statments
+    if (tab_type == TabManager::TabTypes::ShopTab)
+        sidebar->toggle_buttons(sidebar->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
+    else if (tab_type == TabManager::TabTypes::BuildingTab)
+        sidebar->toggle_buttons(sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
+    else if (tab_type == TabManager::TabTypes::DetailTab)
+        sidebar->toggle_buttons(sidebar->tab_detail_btn, ui::Widget::TouchEventType::ENDED);
+    else if (tab_type == TabManager::TabTypes::PowersTab)
+        sidebar->toggle_buttons(sidebar->tab_powers_btn, ui::Widget::TouchEventType::ENDED);
 
 };
 
