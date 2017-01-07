@@ -1155,8 +1155,14 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
             // alert_panel->removeFromParent();
             auto scale_to = ScaleTo::create(0.25f, 0);
             auto fade_out = FadeOut::create(0.1f);
-            alert_panel->runAction(EaseBackOut::create(scale_to));
-            alert_panel->runAction(fade_out);
+            auto seq  = Sequence::create(
+                EaseBackIn::create(scale_to),
+                fade_out,
+                RemoveSelf::create(),
+                NULL
+            );
+
+            alert_panel->runAction(seq);
         };
     };
     close_panel->addTouchEventListener(cb);
