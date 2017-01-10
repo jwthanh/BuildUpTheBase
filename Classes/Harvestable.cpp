@@ -1056,7 +1056,10 @@ void FightingHarvestable::animate_harvest()
         //shake hp panel if dead
         auto harvest_scene = this->getParent();
         auto player_info_panel = harvest_scene->getChildByName("player_info_panel");
-        player_info_panel->runAction(FShake::actionWithDuration(0.075f, 10));
+        auto player_hp_gold = player_info_panel->getChildByName("player_hp_lbl");
+        float duration = 0.075f;
+        animate_flash_action(player_hp_gold, duration, 1.5f);
+        player_info_panel->runAction(FShake::actionWithDuration(duration, 10));
     }
 }
 
