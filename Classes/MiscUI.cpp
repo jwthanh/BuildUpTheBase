@@ -110,13 +110,14 @@ void animate_flash_action(
     )
 {
     auto tint = TintTo::create(duration, to_color.r, to_color.g, to_color.b);
-    auto tint_rev = TintTo::create(duration/2.0f, end_color.r, end_color.g, end_color.b);
+    auto tint_rev = TintTo::create(duration, end_color.r, end_color.g, end_color.b);
 
     auto scale_to = ScaleTo::create(duration, scale);
-    auto scale_rev = ScaleTo::create(duration/2.0f, 1.0f);
+    auto scale_rev = ScaleTo::create(duration, 1.0f);
     target->runAction(
         Sequence::create(
-            Spawn::createWithTwoActions(tint, scale_to),
+            Spawn::createWithTwoActions(tint, EaseBackOut::create(scale_to)),
+            DelayTime::create(duration*2),
             Spawn::createWithTwoActions(tint_rev, scale_rev),
             NULL
         )
