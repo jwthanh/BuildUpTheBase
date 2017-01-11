@@ -36,6 +36,7 @@
 #include "ui/UIScrollView.h"
 
 #include "utilities/vibration.h"
+#include "external/easylogging.h"
 
 
 USING_NS_CC;
@@ -676,7 +677,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
 
         if (cost <= total_coins)
         {
-            BEATUP->add_total_coin(-((double)(cost)));
+            BEATUP->add_total_coin(-static_cast<double>(cost));
 
             auto building = BUILDUP->get_target_building();
             building->building_level = this->building_level;
@@ -684,11 +685,18 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
             auto explosion_parts = ParticleSystemQuad::create("particles/upgrade.plist");
             explosion_parts->setPosition({570, 300});
             Scene* scene = Director::getInstance()->getRunningScene();
-            scene->runAction(FShake::actionWithDuration(0.25f, 2.5f));
-            scene->addChild(explosion_parts);
+            Node* harvest_scene = scene->getChildByName("HarvestScene");
+            if (harvest_scene)
+            {
+                harvest_scene->runAction(FShake::actionWithDuration(0.25f, 2.5f));
+                harvest_scene->addChild(explosion_parts);
 
-            do_vibrate(175);
-
+                do_vibrate(175);
+            }
+            else
+            {
+                LOG(WARNING) << "no proper scene, potential crash?";
+            }
             this->update_func(0);
         }
     };
