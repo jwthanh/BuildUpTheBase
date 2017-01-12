@@ -228,7 +228,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
         tutorial_sidebar_panel,
         "Spendin' that money",
         "You're a resourceful person, better ask a friend to help you out.\n\nBuy 5 grain harvesters to harvest a little bit of grain while you wait.",
-        "   You're a supervisor now."
+        "   You're a sales lead now."
     );
     fourth_step->step_index = 3;
     this->steps.push_back(fourth_step);
@@ -289,7 +289,74 @@ void Tutorial::first_start(cocos2d::Node* parent)
     );
     fourth_step->set_switch_map(switch_map);
 
-    this->load_step(0);
+
+    //setup fifth step
+    auto fifth_step = std::make_shared<TutorialStep>(
+        tutorial_sidebar_panel,
+        "Upgradin' the building",
+        "Frustrated with the 25 resource limit?.\n\nUpgrade The Farm so you can fit more grain in its storage \n\nBuy 5 grain harvesters to harvest a little bit of grain while you wait.",
+        "   You're building an empire."
+    );
+    fifth_step->step_index = 4;
+    this->steps.push_back(fifth_step);
+
+
+    auto check_building_level = [this, fifth_step, target_building](float dt){
+        //update progress bar for coins required for level
+        res_count_t target_level = 2.0;
+        res_count_t target_coins = scale_number(10.0L, ((res_count_t)target_level)-1.0L, 10.5L);
+
+        res_count_t total_coins = BEATUP->get_total_coins();
+        res_count_t satisfied_percentage = total_coins/target_coins*100;
+        fifth_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
+
+        //update progress label
+        res_count_t remaining_coins = target_coins - total_coins;
+        std::stringstream progress_ss;
+        res_count_t adjusted_remaining = std::max(remaining_coins, 0.0L);
+        progress_ss << beautify_double(adjusted_remaining) << " coins to afford upgrade";
+        fifth_step->tutorial_progress_lbl->setString(progress_ss.str());
+
+        if (remaining_coins < 1 && target_building->building_level == target_level) {
+            //add fireworks, change text to complete, show next button etc
+            fifth_step->celebrate();
+        } else {
+            fifth_step->reset();
+        };
+    };
+    fifth_step->set_scheduled_func(check_building_level);
+
+
+    auto upgrade_building_nuitem = UpgradeBuildingShopNuItem::create(panel, target_building);
+    upgrade_building_nuitem->button->setVisible(false);
+    auto check_fifth_step = [upgrade_building_nuitem, fifth_step](float dt)
+    {
+        auto tutorial = Tutorial::getInstance();
+        bool is_fifth_step = tutorial->current_step->step_index == fifth_step->step_index;
+        bool has_celebrated = fifth_step->_has_celebrated;
+        if (is_fifth_step && upgrade_building_nuitem->button->isVisible() == false && has_celebrated == false)
+        {
+            float orig_scale = upgrade_building_nuitem->button->getScale();
+            auto scale_to = cocos2d::ScaleTo::create(0.15f, orig_scale);
+            upgrade_building_nuitem->button->setScale(0.0f);
+            upgrade_building_nuitem->button->runAction(cocos2d::EaseBackOut::create(scale_to));
+        };
+        upgrade_building_nuitem->button->setVisible(is_fifth_step && has_celebrated == false);
+    };
+    upgrade_building_nuitem->schedule(check_fifth_step, AVERAGE_DELAY, "check_fifth_step");
+    check_fifth_step(0);
+
+    upgrade_building_nuitem->my_init(2);
+
+
+    //empty the switch map and fill it up again
+    switch_map.erase(switch_map.begin(), switch_map.end());
+    switch_map.push_back(
+        std::make_pair<bool Tutorial::*, bool>(&Tutorial::_show_player_info, true)
+    );
+    fifth_step->set_switch_map(switch_map);
+
+    this->load_step(4);
 };
 
 bool Tutorial::get_show_sidebar()
