@@ -66,7 +66,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 \
 \
 \
-                   ../../Classes/magic_particles/MagicScene.cpp \
                    ../../Classes/magic_particles/MagicEmitter.cpp \
                    ../../Classes/magic_particles/mp_cocos.cpp \
                    ../../Classes/magic_particles/platform_cocos.cpp \
