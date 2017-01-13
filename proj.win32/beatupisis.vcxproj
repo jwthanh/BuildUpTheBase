@@ -178,7 +178,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\ItemScene.cpp" />
     <ClCompile Include="..\Classes\Logging.cpp" />
     <ClCompile Include="..\Classes\magic_particles\MagicEmitter.cpp" />
-    <ClCompile Include="..\Classes\magic_particles\MagicScene.cpp" />
     <ClCompile Include="..\Classes\magic_particles\mp_cocos.cpp" />
     <ClCompile Include="..\Classes\magic_particles\opengl\image_loader.cpp" />
     <ClCompile Include="..\Classes\magic_particles\opengl\mp_wrap.cpp" />
@@ -238,7 +237,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\ItemScene.h" />
     <ClInclude Include="..\Classes\Logging.h" />
     <ClInclude Include="..\Classes\magic_particles\MagicEmitter.h" />
-    <ClInclude Include="..\Classes\magic_particles\MagicScene.h" />
     <ClInclude Include="..\Classes\magic_particles\mp_cocos.h" />
     <ClInclude Include="..\Classes\magic_particles\opengl\glcorearb.h" />
     <ClInclude Include="..\Classes\magic_particles\opengl\glext.h" />

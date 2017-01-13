@@ -69,9 +69,6 @@
     <ClCompile Include="..\Classes\magic_particles\MagicEmitter.cpp">
       <Filter>magic_particles</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\magic_particles\MagicScene.cpp">
-      <Filter>magic_particles</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\magic_particles\mp_cocos.cpp">
       <Filter>magic_particles</Filter>
     </ClCompile>
@@ -153,9 +150,6 @@
     <ClInclude Include="..\Classes\Logging.h" />
     <ClInclude Include="..\Classes\Item.h" />
     <ClInclude Include="..\Classes\magic_particles\MagicEmitter.h">
-      <Filter>magic_particles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\magic_particles\MagicScene.h">
       <Filter>magic_particles</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\magic_particles\mp_cocos.h">
