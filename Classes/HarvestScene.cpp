@@ -872,6 +872,11 @@ void BaseScene::create_inventory_listview()
     ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
     ui::ListView* inventory_advanced_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_advanced_listview"));
 
+    //add padding because they bleed together otherwise
+    float margin = 5.0f;
+    inventory_basic_listview->setItemsMargin(margin);
+    inventory_advanced_listview->setItemsMargin(margin);
+
     auto update_listview = [this, inventory_basic_listview, inventory_advanced_listview](float dt)
     {
         typedef std::pair<Ingredient::SubType, res_count_t> type_count_pair;
