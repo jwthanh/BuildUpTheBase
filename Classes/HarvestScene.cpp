@@ -874,7 +874,7 @@ void BaseScene::create_inventory_listview()
             return left.second > right.second;
         };
 
-        std::vector<maptype> type_vec;
+        std::vector<maptype> ingredient_counts;
         mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
 
         res_count_t _def = -1;
@@ -882,20 +882,21 @@ void BaseScene::create_inventory_listview()
         {
             Ingredient::SubType ing_type = ts.first;
             auto count = map_get(city_ingredients, ing_type, _def);
-            type_vec.push_back({ ts.first, count });
+            ingredient_counts.push_back({ ts.first, count });
         }
 
-        auto begin = type_vec.begin();
-        auto end = type_vec.end();
-        std::sort(begin, end, order_by_count);
+        std::sort(
+            ingredient_counts.begin(),
+            ingredient_counts.end(),
+            order_by_count
+        );
 
-        for (auto&& type_to_count : type_vec)
+        for (auto&& type_and_count : ingredient_counts)
         {
-            Ingredient::SubType ing_type = type_to_count.first;
-            res_count_t& ing_count = type_to_count.second;
+            Ingredient::SubType ing_type = type_and_count.first;
+            res_count_t& ing_count = type_and_count.second;
 
-            auto str_type = Ingredient::type_to_string(ing_type);
-
+            std::string str_type = Ingredient::type_to_string(ing_type);
 
             auto zero_ingredients = ing_count < 0;
 
