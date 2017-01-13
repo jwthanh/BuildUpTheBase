@@ -178,8 +178,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // Tutorial* tutorial = Tutorial::getInstance();
         // tutorial->first_start(this);
 
-        ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_advanced_listview"));
-        inventory_listview->setVisible(!inventory_listview->isVisible());
+        ui::ListView* inventory_advanced_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_advanced_listview"));
+        inventory_advanced_listview->setVisible(!inventory_advanced_listview->isVisible());
+
+        ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
+        inventory_basic_listview->setVisible(!inventory_basic_listview->isVisible());
 
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
@@ -1359,12 +1362,14 @@ void HarvestScene::add_harvestable()
 
 void HarvestScene::spawn_floating_label_for_ing_type(Ingredient::SubType ing_type, std::string message)
 {
-    auto inventory_listview = this->getChildByName("inventory_listview");
-    if (inventory_listview)
+    auto basic_listview = this->getChildByName("inventory_basic_listview");
+    auto advanced_listview = this->getChildByName("inventory_advanced_listview");
+    auto visible_listview = basic_listview->isVisible() ? basic_listview : advanced_listview;
+    if (visible_listview)
     {
         std::string string_type = Ingredient::type_to_string(ing_type);
 
-        auto ing_panel = inventory_listview->getChildByName(string_type);
+        auto ing_panel = visible_listview->getChildByName(string_type);
         if (ing_panel)
         {
             auto floating_label = FloatingLabel::createWithTTF(message, "pixelmix.ttf", 25);
