@@ -1137,9 +1137,12 @@ bool HarvestScene::init()
         ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
         inventory_basic_listview->setVisible(!inventory_basic_listview->isVisible());
 
+        //also clear items out so that they can animate basic in #TODO figure out if this causes lag
         if (inventory_basic_listview->isVisible()) {
+            inventory_basic_listview->removeAllItems();
             toggle_visible_listviews_btn->setTitleText("Basic");
         } else {
+            inventory_advanced_listview->removeAllItems();
             toggle_visible_listviews_btn->setTitleText("Advanced");
         };
     });
