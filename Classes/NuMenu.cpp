@@ -682,14 +682,17 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
             auto building = BUILDUP->get_target_building();
             building->building_level = this->building_level;
 
-            auto explosion_parts = ParticleSystemQuad::create("particles/upgrade.plist");
-            explosion_parts->setPosition({570, 300});
             Scene* scene = Director::getInstance()->getRunningScene();
             Node* harvest_scene = scene->getChildByName("HarvestScene");
             if (harvest_scene)
             {
-                harvest_scene->runAction(FShake::actionWithDuration(0.25f, 2.5f));
+                auto explosion_parts = ParticleSystemQuad::create("particles/upgrade.plist");
+                explosion_parts->setPosition({570, 300});
+                explosion_parts->setAutoRemoveOnFinish(true);
+
                 harvest_scene->addChild(explosion_parts);
+
+                harvest_scene->runAction(FShake::actionWithDuration(0.25f, 2.5f));
 
                 do_vibrate(175);
             }
