@@ -39,25 +39,25 @@ std::string BaseStaticData::_get_data(std::string key_top, std::string key_child
 
 
     assert(jsonDoc.HasMember(key_top.c_str()) && "this should be here");
-    auto body = &jsonDoc[key_top.c_str()];
+    rjValue& body = jsonDoc[key_top.c_str()];
 
     if (key_child == "")
     {
-        this->_cache[cache_key] = body->GetString();
-        return body->GetString();
+        this->_cache[cache_key] = body.GetString();
+        return body.GetString();
     };
 
-    auto child = &(*body)[key_child.c_str()];
+    rjValue& child = body[key_child.c_str()];
     if (key_grandchild == "")
     {
-        this->_cache[cache_key] = child->GetString();
-        return child->GetString();
+        this->_cache[cache_key] = child.GetString();
+        return child.GetString();
     };
 
-    auto grand_child = &(*child)[key_grandchild.c_str()];
+    rjValue& grand_child = child[key_grandchild.c_str()];
 
-    this->_cache[cache_key] = grand_child->GetString();
-    return grand_child->GetString();
+    this->_cache[cache_key] = grand_child.GetString();
+    return grand_child.GetString();
 }
 
 BuildingData::BuildingData(std::string building_name)
@@ -80,14 +80,14 @@ vsRecipe BuildingData::get_all_recipes()
     //     this->recipe_doc = FileIO::open_json(this->_filename, true);
     // }
 
-    auto& body = this->jsonDoc["buildings"];
-    auto& building_info = body[this->building_name.c_str()];
+    rjValue& body = this->jsonDoc["buildings"];
+    rjValue& building_info = body[this->building_name.c_str()];
 
     if (!building_info.HasMember("recipes"))
     {
         return vsRecipe();
     }
-    auto& recipe_info = building_info["recipes"];
+    rjValue& recipe_info = building_info["recipes"];
 
     vsRecipe recipes;
 
