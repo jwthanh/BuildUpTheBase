@@ -900,24 +900,17 @@ void BaseScene::create_inventory_listview()
 
             auto zero_ingredients = ing_count < 0;
 
-            //if the child already exists, put it at the back
+            //if the child already exists, and has 0 or more ingredients, move to next ing type
             ui::Button* existing_node = dynamic_cast<ui::Button*>(inventory_listview->getChildByName(str_type));
             if (existing_node)
             {
-                //last frame, there was probably ingredients, so cleaup the
-                //leftover button
-                if (zero_ingredients)
-                {
-                    // inventory_listview->removeChild(existing_node, false);
-                }
-                else
+                if (zero_ingredients == false)
                 {
                     continue;
-                };
+                }
             }
-
-            //dont build the ingredient button if for zero ingredients
-            if (zero_ingredients)
+            //dont build the ingredient button if for no ingredients
+            else if (existing_node == NULL && zero_ingredients)
             {
                 continue;
             }
