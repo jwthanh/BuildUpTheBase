@@ -175,9 +175,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        Tutorial* tutorial = Tutorial::getInstance();
-        tutorial->first_start(this);
+        // Tutorial* tutorial = Tutorial::getInstance();
+        // tutorial->first_start(this);
 
+        ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_advanced_listview"));
+        inventory_listview->setVisible(!inventory_listview->isVisible());
 
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
@@ -864,25 +866,32 @@ void BaseScene::create_player_info_panel()
 
 void BaseScene::create_inventory_listview()
 {
-    ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
+    ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
+    ui::ListView* inventory_advanced_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_advanced_listview"));
 
-    auto update_listview = [this, inventory_listview](float dt)
+    auto update_listview = [this, inventory_basic_listview, inventory_advanced_listview](float dt)
     {
-        typedef std::pair<Ingredient::SubType, res_count_t> maptype;
-        auto order_by_count = [](maptype left, maptype right)
+        typedef std::pair<Ingredient::SubType, res_count_t> type_count_pair;
+        auto order_by_count = [](type_count_pair left, type_count_pair right)
         {
             return left.second > right.second;
         };
 
-        std::vector<maptype> ingredient_counts;
+        std::vector<type_count_pair> ingredient_counts;
         mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
 
         res_count_t _def = -1;
-        for (auto&& ts : Ingredient::type_map)
+        for (auto&& ts : Ingredient::basic_ingredients)
         {
-            Ingredient::SubType ing_type = ts.first;
+            Ingredient::SubType ing_type = ts;
             auto count = map_get(city_ingredients, ing_type, _def);
-            ingredient_counts.push_back({ ts.first, count });
+            ingredient_counts.push_back({ ts, count });
+        }
+        for (auto&& ts : Ingredient::advanced_ingredients)
+        {
+            Ingredient::SubType ing_type = ts;
+            auto count = map_get(city_ingredients, ing_type, _def);
+            ingredient_counts.push_back({ ts, count });
         }
 
         std::sort(
@@ -901,7 +910,9 @@ void BaseScene::create_inventory_listview()
             auto zero_ingredients = ing_count < 0;
 
             //if the child already exists, and has 0 or more ingredients, move to next ing type
-            ui::Button* existing_node = dynamic_cast<ui::Button*>(inventory_listview->getChildByName(str_type));
+            ui::Button* existing_basic_node = dynamic_cast<ui::Button*>(inventory_basic_listview->getChildByName(str_type));
+            ui::Button* existing_advanced_node = dynamic_cast<ui::Button*>(inventory_advanced_listview->getChildByName(str_type));
+            bool existing_node = existing_basic_node || existing_advanced_node;
             if (existing_node)
             {
                 if (zero_ingredients == false)
@@ -984,13 +995,23 @@ void BaseScene::create_inventory_listview()
             update_lbl_cb(0); //fire once immediately
             new_item_panel->schedule(update_lbl_cb, HALF_DELAY, "item_lbl_update");
 
-            inventory_listview->addChild(new_item_panel);
-            inventory_listview->requestDoLayout();
+            auto&& advanced_ingredients = Ingredient::advanced_ingredients;
+            bool in_advanced = std::find(advanced_ingredients.begin(), advanced_ingredients.end(), ing_type) != advanced_ingredients.end();
+            if (!in_advanced)
+            {
+                inventory_basic_listview->addChild(new_item_panel);
+                inventory_basic_listview->requestDoLayout();
+            }
+            else
+            {
+                inventory_advanced_listview->addChild(new_item_panel);
+                inventory_advanced_listview->requestDoLayout();
+            }
         };
     };
 
     update_listview(0.0f); //why doesnt this do anything
-    inventory_listview->schedule(update_listview, AVERAGE_DELAY, "update_listview");
+    inventory_basic_listview->schedule(update_listview, AVERAGE_DELAY, "update_listview");
 };
 
 void BaseScene::create_shop_listview()
