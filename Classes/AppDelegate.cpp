@@ -280,7 +280,7 @@ void AppDelegate::init_magic_particles()
 
     MP.RefreshAtlas();
 
-    MP.CloseFiles();
+    //MP.CloseFiles(); //FIXME figure out why there wasnt any apparent MP.OpenFiles happening. commenting out this line stops a heap error (maybe because its not trying to close an unopened file? not sure)
 
     MP.Stop();
 

@@ -120,14 +120,14 @@ bool NuItem::init(cocos2d::Node* parent)
 
     this->_original_image_path = "";
 
-    this->item_icon = static_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
-    this->title_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
+    this->item_icon = dynamic_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
+    this->title_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
     setup_text_node(this->title_lbl);
-    this->desc_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
+    this->desc_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
     setup_text_node(this->desc_lbl);
-    this->cost_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
+    this->cost_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
     setup_text_node(this->cost_lbl);
-    this->count_lbl = static_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
+    this->count_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
     setup_text_node(this->count_lbl);
 
     this->schedule(CC_SCHEDULE_SELECTOR(NuItem::update_func));
@@ -206,6 +206,8 @@ void NuItem::set_image(std::string path, ui::Widget::TextureResType texture_type
         return;
     };
 
+    this->item_icon->setScale9Enabled(!this->item_icon->isScale9Enabled()); //FIXME (by upgrading cocos probably) this resets ImageView somehow so loadTexture doesn't crash
+    this->item_icon->setScale9Enabled(!this->item_icon->isScale9Enabled()); // so we toggle it once to change it, then toggle it again to reset to default
     this->item_icon->loadTexture(path, texture_type);
 
     ui::Scale9Sprite* sprite = dynamic_cast<ui::Scale9Sprite*>(this->item_icon->getVirtualRenderer());
