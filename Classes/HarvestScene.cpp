@@ -1122,6 +1122,16 @@ bool HarvestScene::init()
     //autosave every 30s
     this->autosave_clock = new Clock(30.0f);
 
+    auto toggle_visible_listviews_btn = dynamic_cast<ui::Button*>(this->getChildByName("toggle_visible_listviews_btn"));
+    prep_button(toggle_visible_listviews_btn);
+    bind_touch_ended(toggle_visible_listviews_btn, [this](){
+        ui::ListView* inventory_advanced_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_advanced_listview"));
+        inventory_advanced_listview->setVisible(!inventory_advanced_listview->isVisible());
+
+        ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
+        inventory_basic_listview->setVisible(!inventory_basic_listview->isVisible());
+    });
+
     return true;
 
 }
