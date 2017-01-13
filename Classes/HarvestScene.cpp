@@ -1124,12 +1124,18 @@ bool HarvestScene::init()
 
     auto toggle_visible_listviews_btn = dynamic_cast<ui::Button*>(this->getChildByName("toggle_visible_listviews_btn"));
     prep_button(toggle_visible_listviews_btn);
-    bind_touch_ended(toggle_visible_listviews_btn, [this](){
+    bind_touch_ended(toggle_visible_listviews_btn, [this, toggle_visible_listviews_btn](){
         ui::ListView* inventory_advanced_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_advanced_listview"));
         inventory_advanced_listview->setVisible(!inventory_advanced_listview->isVisible());
 
         ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
         inventory_basic_listview->setVisible(!inventory_basic_listview->isVisible());
+
+        if (inventory_basic_listview->isVisible()) {
+            toggle_visible_listviews_btn->setTitleText("Basic");
+        } else {
+            toggle_visible_listviews_btn->setTitleText("Advanced");
+        };
     });
 
     return true;
