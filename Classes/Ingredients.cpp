@@ -72,6 +72,19 @@ const std::map<Ingredient::SubType, res_count_t> Ingredient::type_to_harvest_rat
     {Ingredient::SubType::Berry,         1.0},
 };
 
+const std::vector<Ingredient::SubType> Ingredient::basic_ingredients = {
+    IngredientSubType::Grain, IngredientSubType::Seed, IngredientSubType::Tree,
+    IngredientSubType::Fly, IngredientSubType::Sand, IngredientSubType::Flesh,
+    IngredientSubType::Berry, IngredientSubType::Blood, IngredientSubType::Paper
+};
+
+const std::vector<Ingredient::SubType> Ingredient::advanced_ingredients = {
+    IngredientSubType::PileOfGrain, IngredientSubType::Bread, IngredientSubType::Loaf,
+    IngredientSubType::Iron, IngredientSubType::Copper, IngredientSubType::Wood,
+    IngredientSubType::Soul, IngredientSubType::Undead, IngredientSubType::Minecart,
+    IngredientSubType::MineRails
+};
+
 #define type_stuff(ResType)std::string ResType::type_to_string(ResType::SubType type) \
 { \
     std::string result = "none"; \

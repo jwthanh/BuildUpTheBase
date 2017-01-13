@@ -35,11 +35,13 @@ class Ingredient : public Resource
     public:
         static const ResourceType resource_type = Resource::ResourceType::Ingredient;
 
-
         using SubType = IngredientSubType;
 
         static const std::map<SubType, res_count_t> type_to_value;
         static const std::map<Ingredient::SubType, res_count_t> type_to_harvest_ratio;
+
+        static const std::vector<SubType> basic_ingredients;
+        static const std::vector<SubType> advanced_ingredients;
 
 
         TYPE_MAP_CONVERSION(Ingredient, ingredient);

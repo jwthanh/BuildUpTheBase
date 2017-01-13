@@ -1078,29 +1078,16 @@ void SideListView::setup_powers_listview_as_powers()
             menu_item->set_original_image("sell_all.png");
             menu_item->cooldown = GameLogic::getInstance()->power_sell_all_cooldown;
 
-            //exclude types of ingredients for selling all
-            auto excluded_ing_types = std::vector<Ingredient::SubType> {
-                Ingredient::SubType::Soul,
-                Ingredient::SubType::Bread,
-                Ingredient::SubType::Loaf,
-                Ingredient::SubType::Undead,
-                Ingredient::SubType::Copper,
-                Ingredient::SubType::Iron,
-                Ingredient::SubType::Wood,
-                Ingredient::SubType::Minecart,
-                Ingredient::SubType::MineRails
-            };
-
-
-            menu_item->set_touch_ended_callback([excluded_ing_types]()
+            menu_item->set_touch_ended_callback([]()
             {
                 CCLOG("selling all by cb");
                 mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
                 for (auto ingredient : all_ingredients)
                 {
                     IngredientSubType ing_type = ingredient.first;
-                    //
-                    //skip if in exclude list
+
+                    //dont sell advanced ingredients
+                    auto& excluded_ing_types = Ingredient::advanced_ingredients;
                     if (std::find(excluded_ing_types.begin(), excluded_ing_types.end(), ing_type) != excluded_ing_types.end())
                     {
                         continue;
