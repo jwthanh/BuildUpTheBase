@@ -866,7 +866,6 @@ void BaseScene::create_inventory_listview()
 {
     ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
 
-
     auto update_listview = [this, inventory_listview](float dt)
     {
         typedef std::pair<Ingredient::SubType, res_count_t> maptype;
@@ -893,10 +892,12 @@ void BaseScene::create_inventory_listview()
         for (auto&& type_to_count : type_vec)
         {
             Ingredient::SubType ing_type = type_to_count.first;
+            res_count_t& ing_count = type_to_count.second;
+
             auto str_type = Ingredient::type_to_string(ing_type);
 
 
-            auto zero_ingredients = map_get(city_ingredients, ing_type, _def) < 0;
+            auto zero_ingredients = ing_count < 0;
 
             //if the child already exists, put it at the back
             ui::Button* existing_node = dynamic_cast<ui::Button*>(inventory_listview->getChildByName(str_type));
