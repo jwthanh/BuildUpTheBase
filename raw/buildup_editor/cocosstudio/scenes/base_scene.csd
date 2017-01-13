@@ -79,7 +79,20 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="inventory_listview" ActionTag="1072656337" Tag="220" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="-960.0000" TopMargin="490.0000" BottomMargin="-50.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="ListViewObjectData">
+          <AbstractNodeData Name="inventory_basic_listview" ActionTag="-1581686443" Tag="96" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="-960.0000" TopMargin="490.0000" BottomMargin="-50.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="ListViewObjectData">
+            <Size X="1920.0000" Y="200.0000" />
+            <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+            <Position X="960.0000" Y="50.0000" />
+            <Scale ScaleX="0.5000" ScaleY="0.5000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="1.0000" Y="0.0781" />
+            <PreSize X="2.0000" Y="0.3125" />
+            <SingleColor A="255" R="60" G="80" B="102" />
+            <FirstColor A="255" R="150" G="150" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="inventory_advanced_listview" ActionTag="1072656337" VisibleForFrame="False" Tag="220" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="-960.0000" TopMargin="490.0000" BottomMargin="-50.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" ctype="ListViewObjectData">
             <Size X="1920.0000" Y="200.0000" />
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
             <Position X="960.0000" Y="50.0000" />

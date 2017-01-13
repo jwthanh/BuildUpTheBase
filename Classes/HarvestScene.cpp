@@ -864,7 +864,7 @@ void BaseScene::create_player_info_panel()
 
 void BaseScene::create_inventory_listview()
 {
-    ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
+    ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
 
 
     auto update_listview = [this, inventory_listview](float dt)
