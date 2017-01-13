@@ -1008,6 +1008,7 @@ void BaseScene::create_inventory_listview()
             else
             {
                 inventory_advanced_listview->addChild(new_item_panel);
+                new_item_panel->setColor({ 200, 200, 200 });
                 inventory_advanced_listview->requestDoLayout();
             }
         };
