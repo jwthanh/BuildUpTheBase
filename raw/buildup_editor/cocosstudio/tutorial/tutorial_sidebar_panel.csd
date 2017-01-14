@@ -9,7 +9,7 @@
           <AbstractNodeData Name="tutorial_sidebar_panel" ActionTag="1736699008" Tag="2007" IconVisible="False" RightMargin="-400.0000" TopMargin="-540.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="400.0000" Y="540.0000" />
             <Children>
-              <AbstractNodeData Name="tutorial_lbl" ActionTag="-913018913" Tag="2008" IconVisible="False" LeftMargin="19.6094" RightMargin="20.7421" TopMargin="103.4964" BottomMargin="126.1106" IsCustomSize="True" FontSize="20" LabelText="Some example tutorial text" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="tutorial_lbl" ActionTag="-913018913" Tag="2008" IconVisible="False" LeftMargin="19.6094" RightMargin="20.7421" TopMargin="103.4965" BottomMargin="126.1106" IsCustomSize="True" FontSize="20" LabelText="Some example tutorial text" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="359.6485" Y="310.3929" />
                 <AnchorPoint />
                 <Position X="19.6094" Y="126.1106" />
@@ -33,7 +33,7 @@
                 <OutlineColor A="255" R="10" G="10" B="10" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="progress_panel" ActionTag="824940807" Tag="2080" IconVisible="False" TopMargin="465.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" ctype="PanelObjectData">
+              <AbstractNodeData Name="progress_panel" ActionTag="824940807" Tag="2080" IconVisible="False" TopMargin="465.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="400.0000" Y="75.0000" />
                 <Children>
                   <AbstractNodeData Name="loading_bar" ActionTag="-1250498288" Tag="2009" IconVisible="False" LeftMargin="44.8026" RightMargin="38.8883" TopMargin="42.2358" BottomMargin="14.7642" ProgressInfo="100" ctype="LoadingBarObjectData">
@@ -86,13 +86,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="nuitem_pos" ActionTag="-1016707347" Tag="2197" IconVisible="True" LeftMargin="200.0000" RightMargin="200.0000" TopMargin="389.9998" BottomMargin="150.0002" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="nuitem_pos" ActionTag="-1016707347" Tag="2197" IconVisible="True" LeftMargin="200.0002" RightMargin="199.9998" TopMargin="412.0002" BottomMargin="127.9998" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
-                <Position X="200.0000" Y="150.0002" />
+                <Position X="200.0002" Y="127.9998" />
                 <Scale ScaleX="7.3987" ScaleY="1.3293" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.2778" />
+                <PrePosition X="0.5000" Y="0.2370" />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
             </Children>
