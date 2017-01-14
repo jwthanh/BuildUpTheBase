@@ -295,7 +295,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
         tutorial_sidebar_panel,
         "Upgradin' the building",
         "Frustrated with the 25 resource limit?.\n\nUpgrade The Farm so you can fit more grain in its storage \n\nBuy 5 grain harvesters to harvest a little bit of grain while you wait.",
-        "   You're building an empire."
+        "   You're building an empire now."
     );
     fifth_step->step_index = 4;
     this->steps.push_back(fifth_step);
@@ -314,7 +314,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
         res_count_t remaining_coins = target_coins - total_coins;
         std::stringstream progress_ss;
         res_count_t adjusted_remaining = std::max(remaining_coins, 0.0L);
-        progress_ss << beautify_double(adjusted_remaining) << " coins to afford upgrade";
+        progress_ss << beautify_double(adjusted_remaining) << " coins to go";
         fifth_step->tutorial_progress_lbl->setString(progress_ss.str());
 
         if (remaining_coins < 1 && target_building->building_level == target_level) {
