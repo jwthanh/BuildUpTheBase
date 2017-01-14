@@ -110,6 +110,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_A)
     {
+        auto action_panel = ActionPanel::create();
+        this->addChild(action_panel);
+        action_panel->set_target(this->getChildByName("inventory_detail_panel"));
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_F)
     {
@@ -175,25 +178,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        // Tutorial* tutorial = Tutorial::getInstance();
-        // tutorial->first_start(this);
-
-        ui::ListView* inventory_advanced_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_advanced_listview"));
-        inventory_advanced_listview->setVisible(!inventory_advanced_listview->isVisible());
-
-        ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
-        inventory_basic_listview->setVisible(!inventory_basic_listview->isVisible());
+        Tutorial* tutorial = Tutorial::getInstance();
+        tutorial->first_start(this);
 
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
-
-        // auto action_panel = ActionPanel::create();
-        // this->addChild(action_panel);
-        // action_panel->set_target(this->getChildByName("inventory_detail_panel"));
-        //
-        // ui::ListView* inventory_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_listview"));
-        // action_panel->set_target((inventory_listview->getChildren()).at(0));
-        // action_panel->set_target(this->sidebar->tabs.get_active_listview());
 
         //     //GameDirector::switch_to_equipment_menu();
         //     auto parts = ParticleSun::create();
