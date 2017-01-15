@@ -939,8 +939,10 @@ void BaseScene::create_inventory_listview()
             new_item_panel->runAction(EaseBackOut::create(scale_to));
 
             //set aliasing on font
-            auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
-            set_aliasing(item_lbl, true);
+            auto item_name_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_name_lbl"));
+            set_aliasing(item_name_lbl, true);
+            auto item_count_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_count_lbl"));
+            set_aliasing(item_count_lbl, true);
 
             //add ingredient image
             ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
@@ -974,23 +976,22 @@ void BaseScene::create_inventory_listview()
             };
             new_item_panel->addTouchEventListener(on_touch_cb);
 
+            auto type_str = Ingredient::type_to_string(ing_type);
+            item_name_lbl->setString(type_str);
+
             auto update_lbl_cb = [new_item_panel, ing_type](float)
             {
-                auto it = ing_type;
-                auto type_str = Ingredient::type_to_string(it);
-                char buffer[50];
-
                 res_count_t _def = -1;
                 mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
-                res_count_t count = map_get(city_ingredients, it, _def);
-                sprintf(buffer, "%s\n%s", beautify_double(count).c_str(), type_str.c_str());
-                auto item_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_lbl"));
-                item_lbl->setString(buffer);
+                auto ing_t = ing_type;
+                res_count_t count = map_get(city_ingredients, ing_t, _def);
+                auto item_count_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_count_lbl"));
+                item_count_lbl->setString(beautify_double(count));
 
             };
 
             update_lbl_cb(0); //fire once immediately
-            new_item_panel->schedule(update_lbl_cb, HALF_DELAY, "item_lbl_update");
+            new_item_panel->schedule(update_lbl_cb, HALF_DELAY, "item_name_lbl_update");
 
             auto&& advanced_ingredients = Ingredient::advanced_ingredients;
             bool in_advanced = std::find(advanced_ingredients.begin(), advanced_ingredients.end(), ing_type) != advanced_ingredients.end();
