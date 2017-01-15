@@ -23,6 +23,10 @@
     * Dynamic class ala Dungeon Siege
 * Info panel for building with misc stats, how many fighters killed, their
   damage etc
+* Item shop, put up an item, maybe in a few hours someone would come and buy it
+    * Can upgrade shop to:
+        * have more slots
+        * have better idea of customers
 
 #Workers
 * sell more than 1000 at a time #DONE
