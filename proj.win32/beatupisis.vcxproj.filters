@@ -25,6 +25,9 @@
     <Filter Include="utilities">
       <UniqueIdentifier>{aaa63dd2-44da-458f-933c-0822f588eafc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="goals">
+      <UniqueIdentifier>{5bd6c7a2-ac4e-4128-92a3-bbfaa2a77a76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -99,6 +102,9 @@
     <ClCompile Include="..\Classes\Tutorial.cpp" />
     <ClCompile Include="..\Classes\utilities\vibration.cpp">
       <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\goals\Achievement.cpp">
+      <Filter>goals</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +206,9 @@
     <ClInclude Include="..\Classes\Tutorial.h" />
     <ClInclude Include="..\Classes\utilities\vibration.h">
       <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\goals\Achievement.h">
+      <Filter>goals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

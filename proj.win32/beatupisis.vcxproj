@@ -171,6 +171,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\GameLayer.cpp" />
     <ClCompile Include="..\Classes\Beatup.cpp" />
     <ClCompile Include="..\Classes\GameLogic.cpp" />
+    <ClCompile Include="..\Classes\goals\Achievement.cpp" />
     <ClCompile Include="..\Classes\Harvestable.cpp" />
     <ClCompile Include="..\Classes\HarvestableManager.cpp" />
     <ClCompile Include="..\Classes\HarvestScene.cpp" />
@@ -230,6 +231,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\GameLayer.h" />
     <ClInclude Include="..\Classes\Beatup.h" />
     <ClInclude Include="..\Classes\GameLogic.h" />
+    <ClInclude Include="..\Classes\goals\Achievement.h" />
     <ClInclude Include="..\Classes\Harvestable.h" />
     <ClInclude Include="..\Classes\HarvestableManager.h" />
     <ClInclude Include="..\Classes\HarvestScene.h" />
