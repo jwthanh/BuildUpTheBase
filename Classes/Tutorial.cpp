@@ -356,7 +356,31 @@ void Tutorial::first_start(cocos2d::Node* parent)
     );
     fifth_step->set_switch_map(switch_map);
 
-    this->load_step(4);
+    //setup last step
+    auto last_step = std::make_shared<TutorialStep>(
+        tutorial_sidebar_panel,
+        "Build Up the Base",
+        "From here, you can add your username to compete in the Leaderboards.\n\nScavenge for Items at The Dump.\n\nDig deep into the tunnels.\n\nFight in The Arena.\n\nAnd much more!",
+        "   It's all up to you."
+    );
+    last_step->step_index = 5;
+
+    last_step->set_scheduled_func([last_step](float dt){
+        last_step->tutorial_progress_panel->setVisible(false);
+        last_step->next_tutorial_step_btn->setVisible(true);
+        last_step->next_tutorial_step_btn->setTitleText("Start Game!");
+    });
+
+    //empty the switch map and fill it up again
+    switch_map.erase(switch_map.begin(), switch_map.end());
+    switch_map.push_back(
+        std::make_pair<bool Tutorial::*, bool>(&Tutorial::_show_player_info, true)
+    );
+    last_step->set_switch_map(switch_map);
+
+    this->steps.push_back(last_step);
+
+    this->load_step(5);
 };
 
 bool Tutorial::get_show_sidebar()
