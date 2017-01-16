@@ -22,7 +22,7 @@ USING_NS_CC;
 BaseModal::BaseModal(Node* parent)
 {
     //background color
-    auto layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
+    LayerColor* layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
     parent->addChild(layer_color);
 
     cocos2d::Node* root_message_node = get_prebuilt_node_from_csb("editor/details/message_detail.csb");
@@ -35,19 +35,25 @@ BaseModal::BaseModal(Node* parent)
     this->set_title("TEST");
     set_aliasing(this->_title_lbl, true);
 
+    //invisible layout to tap to close
+    ui::Layout* exit_layout = ui::Layout::create();
+    exit_layout->setAnchorPoint(Vec2::ZERO);
+    exit_layout->setContentSize({ 1000, 1000 });
+    exit_layout->setTouchEnabled(true);
 
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(this->_node->getChildByName("close_panel"));
-    auto cb = [this, layer_color](Ref* target, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
+    auto close_modal = [this, layer_color, exit_layout]() {
             do_vibrate(16);
             this->_node->removeFromParent();
             layer_color->removeFromParent();
-        };
+            exit_layout->removeFromParent();
     };
-    close_panel->addTouchEventListener(cb);
+
+    bind_touch_ended(close_panel, close_modal);
+    bind_touch_ended(exit_layout, close_modal);
 
     int modal_zindex = 9999;
+    parent->addChild(exit_layout, modal_zindex-1);
     parent->addChild(this->_node, modal_zindex);
 };
 
