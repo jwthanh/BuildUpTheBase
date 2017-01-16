@@ -22,6 +22,19 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
+              <AbstractNodeData Name="icon_panel_bg" ActionTag="1289088283" Tag="785" IconVisible="False" LeftMargin="191.0000" RightMargin="201.0000" TopMargin="131.0001" BottomMargin="360.9999" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+                <Size X="18.0000" Y="18.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="369.9999" />
+                <Scale ScaleX="7.0000" ScaleY="7.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4878" Y="0.7255" />
+                <PreSize X="0.0439" Y="0.0353" />
+                <SingleColor A="255" R="9" G="134" B="255" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
               <AbstractNodeData Name="resource_name" ActionTag="-1958392294" Tag="27" IconVisible="False" LeftMargin="38.6559" RightMargin="23.3441" TopMargin="22.3800" BottomMargin="447.6200" FontSize="36" LabelText="Resource Name" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="348.0000" Y="40.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -201,13 +214,13 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="resource_icon" ActionTag="40404423" Tag="161" IconVisible="False" LeftMargin="192.0002" RightMargin="201.9998" TopMargin="133.9995" BottomMargin="360.0005" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="resource_icon" ActionTag="40404423" Tag="161" IconVisible="False" LeftMargin="192.0002" RightMargin="201.9998" TopMargin="131.9996" BottomMargin="362.0004" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
                 <Size X="16.0000" Y="16.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="200.0002" Y="368.0005" />
+                <Position X="200.0002" Y="370.0004" />
                 <Scale ScaleX="7.0000" ScaleY="7.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4878" Y="0.7216" />
+                <PrePosition X="0.4878" Y="0.7255" />
                 <PreSize X="0.0390" Y="0.0314" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
