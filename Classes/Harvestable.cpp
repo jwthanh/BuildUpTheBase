@@ -628,15 +628,9 @@ void MiningHarvestable::animate_touch_start(cocos2d::Touch* touch)
 
     int iron_weight = 5; //standard default
 
-    // auto tech_map = this->building->techtree->get_tech_map();
-    // TechSubType tech_type = Technology::SubType::RaiseWoodFind;
-
     if (GameLogic::getInstance()->equipment->mining_slot->has_item())
     {
         spItem item = GameLogic::getInstance()->equipment->mining_slot->get_item();
-        //res_count_t _def = 1L;
-        // res_count_t times_doubled = map_get(tech_map, tech_type, _def);
-        // iron_weight *= times_doubled+1;
         iron_weight += (0.05 * item->level)* ITEM_RARITY_MODIFIER.at(item->rarity);
     };
 
