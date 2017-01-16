@@ -1093,8 +1093,6 @@ void SideListView::setup_powers_listview_as_powers()
                         continue;
                     }
 
-                    CCLOG("WARNING: sell all doesnt use remove from shared all");
-
                     res_count_t _def = 0;
                     res_count_t ing_count = map_get(all_ingredients, ing_type, _def);
                     res_count_t sale_price = Ingredient::type_to_value.at(ing_type);
@@ -1112,6 +1110,69 @@ void SideListView::setup_powers_listview_as_powers()
 
         listview->schedule(update_sellall, AVERAGE_DELAY, "update_sellall");
         update_sellall(0);
+
+        ///sell all advanced
+        auto update_sellall_advanced = [this, listview, building, tab_type](float dt)
+        {
+            if (this->tabs.is_tab_active(tab_type, building) == false)
+            {
+                listview->setVisible(false);
+                return;
+            }
+            listview->setVisible(true);
+
+            //if the child already exists, put it at the back
+            std::string child_name = "sell_all_advanced";
+            auto existing_node = listview->getChildByName(child_name);
+            if (existing_node)
+            {
+                existing_node->removeFromParentAndCleanup(false);
+                listview->addChild(existing_node);
+                return;
+            }
+
+            //clone the new item
+            BuildingNuItem* menu_item;
+            menu_item = BuildingNuItem::create(listview, building);
+            menu_item->setName(child_name);
+            menu_item->set_title("Sell all advanced");
+            menu_item->set_description("Sells all advanced resources instantly");
+            menu_item->set_image("sell_all.png");
+            menu_item->set_original_image("sell_all.png");
+            menu_item->cooldown = GameLogic::getInstance()->power_sell_all_cooldown;
+
+            menu_item->set_touch_ended_callback([]()
+            {
+                CCLOG("selling all by cb");
+                mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
+                for (auto ingredient : all_ingredients)
+                {
+                    IngredientSubType ing_type = ingredient.first;
+
+                    //dont sell advanced ingredients
+                    auto& excluded_ing_types = Ingredient::basic_ingredients;
+                    if (std::find(excluded_ing_types.begin(), excluded_ing_types.end(), ing_type) != excluded_ing_types.end())
+                    {
+                        continue;
+                    }
+
+                    res_count_t _def = 0;
+                    res_count_t ing_count = map_get(all_ingredients, ing_type, _def);
+                    res_count_t sale_price = Ingredient::type_to_value.at(ing_type);
+
+                    BEATUP->add_total_coin(ing_count*sale_price);
+
+                    all_ingredients[ing_type] = 0;
+                }
+
+                //start the countdown for the cooldown
+                GameLogic::getInstance()->power_sell_all_cooldown->reset();
+            });
+
+        };
+
+        listview->schedule(update_sellall_advanced, AVERAGE_DELAY, "update_sellall_advanced");
+        update_sellall_advanced(0);
 
 
 
