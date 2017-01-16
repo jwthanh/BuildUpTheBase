@@ -45,10 +45,11 @@ Tutorial* Tutorial::getInstance()
 
 void Tutorial::load_step(int step_index)
 {
-    std::function<bool(std::shared_ptr<TutorialStep>)> matches_step_index = [step_index](std::shared_ptr<TutorialStep> step)-> bool
+    std::function<bool(std::shared_ptr<TutorialStep>)> matches_step_index = [this, step_index](std::shared_ptr<TutorialStep> step)-> bool
     {
-        return step->step_index == step_index;
+        return step->step_index == step_index && this->current_step->step_index != step_index;
     };
+
     auto step_it = std::find_if(this->steps.begin(), this->steps.end(), matches_step_index);
 
     if (step_it != this->steps.end())
@@ -468,7 +469,16 @@ void TutorialStep::load_step()
 
     this->tutorial_title_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_title_lbl"));
     this->tutorial_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_sidebar_panel->getChildByName("tutorial_lbl"));
+
     this->next_tutorial_step_btn = dynamic_cast<cocos2d::ui::Button*>(tutorial_sidebar_panel->getChildByName("next_tutorial_step_btn"));
+    bind_touch_ended(
+        this->next_tutorial_step_btn,
+        [this](){
+            auto tutorial = Tutorial::getInstance();
+            tutorial->load_step(this->step_index+1);
+        }
+    );
+
 
     this->tutorial_progress_panel = dynamic_cast<cocos2d::ui::Layout*>(tutorial_sidebar_panel->getChildByName("progress_panel"));
     this->tutorial_progress_lbl = dynamic_cast<cocos2d::ui::Text*>(tutorial_progress_panel->getChildByName("label"));
@@ -499,14 +509,6 @@ void TutorialStep::celebrate()
         auto scale_to = cocos2d::ScaleTo::create(0.15f, 1.0f);
         this->next_tutorial_step_btn->setScale(0.0f);
         this->next_tutorial_step_btn->runAction(cocos2d::EaseBackOut::create(scale_to));
-
-        bind_touch_ended(
-            this->next_tutorial_step_btn,
-            [this](){
-                auto tutorial = Tutorial::getInstance();
-                tutorial->load_step(this->step_index+1);
-            }
-        );
 
         this->_has_celebrated = true;
     };
