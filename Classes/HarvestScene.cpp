@@ -1184,6 +1184,8 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
     //background color
     LayerColor* layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
+    layer_color->setOpacity(0);
+    layer_color->runAction(cocos2d::FadeTo::create(0.15f, 85));
     this->addChild(layer_color);
 
     //invisible layout to tap to close
@@ -1215,7 +1217,10 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
             alert_panel->runAction(seq);
 
             exit_layout->removeFromParent();
-            layer_color->removeFromParent();
+            layer_color->runAction(cocos2d::Sequence::createWithTwoActions(
+                FadeOut::create(0.1f),
+                RemoveSelf::create()
+            ));
         };
     };
     close_panel->addTouchEventListener(cb);
