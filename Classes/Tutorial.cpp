@@ -324,7 +324,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
         progress_ss << beautify_double(adjusted_remaining) << " coins to go";
         fifth_step->tutorial_progress_lbl->setString(progress_ss.str());
 
-        if (target_building->building_level == target_level) {
+        if (target_building->building_level >= target_level) {
             //add fireworks, change text to complete, show next button etc
             fifth_step->celebrate();
         } else {
