@@ -382,6 +382,18 @@ const std::string& EquipItemScene::get_default_detail_panel_title()
 const std::string& EquipItemScene::get_default_detail_panel_description()
 {
     static std::string default_desc = "Equip and item and harness its power.";
+    static std::string combat_desc = "Equip and item and harness its power in combat.\n\nRaises your damage dealt in combat in The Arena.";
+    static std::string mining_desc = "Equip and item and harness its power in mining.\n\nRaises likelihood of finding iron at The Mine.";
+    static std::string recipe_desc = "Equip and item and harness its power in crafting.\n\nRaises chance to earn double or triple crafting output at The Workshop.";
+    if (this->filtered_slot_type == ItemSlotType::Combat) {
+        return combat_desc;
+    };
+    if (this->filtered_slot_type == ItemSlotType::Mining) {
+        return mining_desc;
+    };
+    if (this->filtered_slot_type == ItemSlotType::Recipe) {
+        return recipe_desc;
+    };
     return default_desc;
 };
 
