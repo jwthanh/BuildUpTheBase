@@ -370,7 +370,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="building_buttons" ActionTag="-1717247066" Tag="392" IconVisible="False" LeftMargin="400.0000" RightMargin="200.0000" BottomMargin="495.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="building_buttons" ActionTag="-1717247066" Tag="392" IconVisible="False" LeftMargin="400.0000" RightMargin="200.0000" BottomMargin="495.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="360.0000" Y="145.0000" />
             <Children>
               <AbstractNodeData Name="dump_node" ActionTag="-1570892639" Tag="29" IconVisible="True" LeftMargin="37.8483" RightMargin="322.1517" TopMargin="110.8269" BottomMargin="34.1731" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
@@ -480,7 +480,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4167" Y="0.7734" />
             <PreSize X="0.3750" Y="0.2266" />
-            <SingleColor A="255" R="150" G="200" B="255" />
+            <SingleColor A="255" R="60" G="80" B="102" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
