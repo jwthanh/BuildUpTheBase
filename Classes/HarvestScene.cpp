@@ -1182,8 +1182,19 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
     alert_panel->removeFromParent();
 
+    //background color
+    LayerColor* layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
+    this->addChild(layer_color);
+
+    //invisible layout to tap to close
+    ui::Layout* exit_layout = ui::Layout::create();
+    exit_layout->setAnchorPoint(Vec2::ZERO);
+    exit_layout->setContentSize({ 1000, 1000 });
+    exit_layout->setTouchEnabled(true);
+    this->addChild(exit_layout, 9); //9 because alert_panel is added as 10 elsewhere
+
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(alert_panel->getChildByName("close_panel"));
-    auto cb = [alert_panel, this](Ref* target, ui::Widget::TouchEventType type) {
+    auto cb = [alert_panel, this, exit_layout, layer_color](Ref* target, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
             do_vibrate(16);
@@ -1202,9 +1213,13 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
             Sequence* seq = Sequence::create(spawn, RemoveSelf::create(), NULL);
             alert_panel->runAction(seq);
+
+            exit_layout->removeFromParent();
+            layer_color->removeFromParent();
         };
     };
     close_panel->addTouchEventListener(cb);
+    exit_layout->addTouchEventListener(cb);
 
     auto resource_name = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_name"));
     std::string res_name = Ingredient::type_to_string(ing_type);

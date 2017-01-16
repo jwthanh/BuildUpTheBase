@@ -35,6 +35,7 @@ bool ActionPanel::init()
 
 void ActionPanel::set_target(cocos2d::Node* target)
 {
+    if (target == 0){ return; }
     this->_target = target;
 
     this->_default_pos_x = target->getPositionX();
