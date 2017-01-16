@@ -48,7 +48,7 @@ void Tutorial::load_step(int step_index)
 {
     std::function<bool(std::shared_ptr<TutorialStep>)> matches_step_index = [this, step_index](std::shared_ptr<TutorialStep> step)-> bool
     {
-        return step->step_index == step_index && this->current_step->step_index != step_index;
+        return step->step_index == step_index;
     };
 
     auto step_it = std::find_if(this->steps.begin(), this->steps.end(), matches_step_index);
@@ -81,8 +81,8 @@ void Tutorial::first_start(cocos2d::Node* parent)
     //handles prepping this steps ui
     auto first_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
-        "Welcome to\n Build Up The Base",
-        "You're going to want to gather some resources.\nTap the farm and gather a few grains.",
+        "Welcome to\n Build Up The Base!",
+        "Time to gather some resources.\n\nTap the farm and gather a some grain.",
         "  Grain Harvested!"
     );
     first_step->step_index = 0;
@@ -233,8 +233,8 @@ void Tutorial::first_start(cocos2d::Node* parent)
     //setup fourth step
     auto fourth_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
-        "Spendin' that money",
-        "You're a resourceful person, better ask a friend to help you out.\n\nBuy 5 grain harvesters to harvest a little bit of grain while you wait.",
+        "Buildin' a network",
+        "Let's hire someone else to sell the grain now.\n\nBuy 5 grain salesmen to sell some grain while you wait.\n\nWhen you level up your buildings, they'll sell more for you too.",
         "   You're a sales lead now."
     );
     fourth_step->step_index = 3;
@@ -301,7 +301,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
     auto fifth_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
         "Upgradin' the building",
-        "Frustrated with the 25 resource limit?.\n\nUpgrade The Farm so you can fit more grain in its storage \n\nBuy 5 grain harvesters to harvest a little bit of grain while you wait.",
+        "Frustrated with the 25 resource limit?\n\nUpgrade The Farm so you can fit more grain in its storage \n\nBuy 5 grain harvesters to harvest a little bit of grain while you wait.",
         "   You're building an empire now."
     );
     fifth_step->step_index = 4;
@@ -324,7 +324,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
         progress_ss << beautify_double(adjusted_remaining) << " coins to go";
         fifth_step->tutorial_progress_lbl->setString(progress_ss.str());
 
-        if (remaining_coins < 1 && target_building->building_level == target_level) {
+        if (target_building->building_level == target_level) {
             //add fireworks, change text to complete, show next button etc
             fifth_step->celebrate();
         } else {
@@ -387,7 +387,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
     this->steps.push_back(last_step);
 
-    this->load_step(1);
+    this->load_step(0);
 };
 
 bool Tutorial::get_show_sidebar()
