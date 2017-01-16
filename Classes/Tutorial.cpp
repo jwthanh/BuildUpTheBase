@@ -16,6 +16,7 @@
 #include "Util.h"
 #include "MiscUI.h"
 #include "NuMenu.h"
+#include "DataManager.h"
 
 Tutorial* Tutorial::_instance = nullptr;
 
@@ -60,6 +61,9 @@ void Tutorial::load_step(int step_index)
     else
     {
         //assume the tutorial is over
+        std::string tutorial_key = "tutorial_v1_complete";
+        DataManager::set_bool_from_data(tutorial_key, true);
+
         CCLOG("couldn't find matching step for %i", step_index);
         this->show_game_ui();
     }
@@ -383,7 +387,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
     this->steps.push_back(last_step);
 
-    this->load_step(5);
+    this->load_step(1);
 };
 
 bool Tutorial::get_show_sidebar()

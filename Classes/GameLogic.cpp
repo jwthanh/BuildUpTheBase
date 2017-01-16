@@ -110,6 +110,12 @@ void GameLogic::load_game()
     LOG(INFO) << "Game loaded!";
 
     this->is_loaded = true;
+
+    std::string tutorial_key = "tutorial_v1_complete";
+    bool tutorial_complete = DataManager::get_bool_from_data(tutorial_key);
+    Tutorial* tutorial = Tutorial::getInstance();
+    auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+    tutorial->first_start(scene);
 }
 
 std::string GameLogic::new_player_load()
