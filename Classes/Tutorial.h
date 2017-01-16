@@ -70,6 +70,7 @@ class Tutorial
         bool get_show_progress_panel();
         void set_show_progress_panel(bool is_visible);
 
+        void show_game_ui();
         void hide_game_ui();
 };
 

@@ -59,7 +59,9 @@ void Tutorial::load_step(int step_index)
     }
     else
     {
+        //assume the tutorial is over
         CCLOG("couldn't find matching step for %i", step_index);
+        this->show_game_ui();
     }
 };
 
@@ -360,9 +362,9 @@ void Tutorial::first_start(cocos2d::Node* parent)
     //setup last step
     auto last_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
-        "Build Up the Base",
+        "Build Up Your Base",
         "From here, you can add your username to compete in the Leaderboards.\n\nScavenge for Items at The Dump.\n\nDig deep into the tunnels.\n\nFight in The Arena.\n\nAnd much more!",
-        "   It's all up to you."
+        "Unused"
     );
     last_step->step_index = 5;
 
@@ -442,6 +444,16 @@ bool Tutorial::get_show_building_info()
 void Tutorial::set_show_building_info(bool is_visible)
 {
     this->_show_building_info = is_visible;
+};
+
+void Tutorial::show_game_ui()
+{
+    this->set_show_sidebar(true);
+    this->set_show_building_buttons(true);
+    this->set_show_player_info(true);
+    this->set_show_player_hp_lbl(true);
+    this->set_show_building_info(true);
+    this->set_show_progress_panel(true);
 };
 
 void Tutorial::hide_game_ui()
