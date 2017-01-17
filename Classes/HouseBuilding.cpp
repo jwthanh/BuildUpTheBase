@@ -555,7 +555,7 @@ Village* Buildup::init_city(Buildup* buildup)
 	buildup->fighter->combat = std::make_shared<Combat>("PC combat", buildup->fighter);
     buildup->fighter->sprite_name = "townsmen8x8.png";
     buildup->fighter->team = Fighter::TeamOne;
-    buildup->fighter->attrs->health->set_vals(10);
+    buildup->fighter->attrs->health->set_vals(100);
 
     return city;
 };
