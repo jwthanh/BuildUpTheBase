@@ -505,6 +505,9 @@ Village* Buildup::init_city(Buildup* buildup)
 {
 
 
+    test_beautify_double();
+
+
     buildup->server_clock = Clock(30.0f); //update server every 30 seconds
 
     auto city = new Village(buildup, "Burlington");

@@ -226,35 +226,42 @@ std::string beautify_double(long double& value)
     return output;
 }
 
-std::string test_double(float input)
+std::string test_double(float input, std::string expected)
 {
     long double dbl_input = (long double)input;
-    auto s = beautify_double(dbl_input);
-    CCLOG("%s\n", s.c_str());
+    std::string output = beautify_double(dbl_input);
+    if (output != expected){
+        CCLOG("FAILURE\ninput:\n%f\noutput:\n%s\nexpected:\n%s", input, output.c_str(), expected.c_str());
+    }
 
-    return s;
+    return output;
 }
 
 void test_beautify_double()
 {
-    CCLOG("first should be 1, 10, 100\n");
-    test_double(1.0f);
-    test_double(10.0f);
-    test_double(100.0f);
-    test_double(1000.0f);
-    test_double(10000.0f);
-    test_double(100000.0f);
-    test_double(1000000.0f);
+    CCLOG("starting test_beautify_double");
 
-    CCLOG("\nfloats, first should be like 5.55f\n");
-    test_double(5.55f);
-    test_double(5.777f);
-    test_double(1234.5678f);
-    CCLOG("\na bunch of millions, first should be 1.222b\n");
-    test_double(1222333444.0f);
-    test_double(523411111111.0f);
-    test_double(12312317653411111111.0f);
-    test_double(-123.04f);
+    //first should be 1, 10, 100
+    test_double(1.0f, "1");
+    test_double(10.0f, "10");
+    test_double(100.0f, "100");
+    test_double(1000.0f, "1,000");
+    test_double(10000.0f, "10,000");
+    test_double(100000.0f, "100,000");
+    test_double(1000000.0f, "1M");
+
+    //floats, first should be like 5.55f
+    test_double(5.55f, "5.55");
+    test_double(5.777f, "5.78");
+    test_double(1234.5678f, "1,234");
+
+    //a bunch of millions, first should be 1.222b
+    test_double(1222333444.0f, "1.22B");
+    test_double(523411111111.0f, "523.41B");
+    test_double(12312317653411111111.0f, "12.31Qi");
+    test_double(-123.04f, "-123.04");
+
+    CCLOG("completed test_beautify_double");
 }
 
 void try_set_enabled(cocos2d::ui::Widget* widget, bool new_value)
