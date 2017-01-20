@@ -109,8 +109,8 @@ void animate_flash_action(
         cocos2d::Color3B to_color /* RED */, cocos2d::Color3B end_color /* WHITE */
     )
 {
-    auto tint = TintTo::create(duration, to_color.r, to_color.g, to_color.b);
-    auto tint_rev = TintTo::create(duration, end_color.r, end_color.g, end_color.b);
+    auto tint = TintTo::create(duration, to_color);
+    auto tint_rev = TintTo::create(duration, end_color);
 
     auto scale_to = ScaleTo::create(duration, scale);
     auto scale_rev = ScaleTo::create(duration, 1.0f);
