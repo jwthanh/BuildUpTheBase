@@ -811,7 +811,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     double_click_pwr,
                     DetailType::Tech,
                     {
-                        "Double click power",
+                        "Boost ouput",
                         "",
                         ""
                     }});
