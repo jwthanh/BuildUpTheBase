@@ -105,8 +105,8 @@ void load_default_button_textures(cocos2d::ui::Button* button)
 };
 
 void animate_flash_action(
-    cocos2d::Node* target, float duration, float scale,
-    cocos2d::Color3B to_color /* RED */, cocos2d::Color3B end_color /* WHITE */
+        cocos2d::Node* target, float duration, float scale,
+        cocos2d::Color3B to_color /* RED */, cocos2d::Color3B end_color /* WHITE */
     )
 {
     auto tint = TintTo::create(duration, to_color.r, to_color.g, to_color.b);

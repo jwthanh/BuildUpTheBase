@@ -31,6 +31,7 @@
 #include "2d/CCParticleSystemQuad.h"
 #include "ui/UIText.h"
 #include "ui/UIImageView.h"
+#include "ui/UIListView.h"
 #include "ui/UIScale9Sprite.h"
 #include "combat.h"
 #include "Equipment.h"
@@ -205,6 +206,8 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 
     if (this->building->can_fit_more_ingredients(this->get_output_ing_type()) == false)
     {
+        do_vibrate(16);
+
         std::vector<std::string> choices = {
             "Storage full",
             "Upgrade building",
@@ -216,15 +219,18 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         end_scale = this->initial_scale*0.95f;
         duration = 0.15f;
 
-        Node* running_scene = Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-        Node* building_info_panel = running_scene->getChildByName("building_info_panel");
+        Node* harvest_scene = Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+        Node* building_info_panel = harvest_scene->getChildByName("building_info_panel");
         Node* raw_ingredient_count = building_info_panel->getChildByName("ingredient_count");
+
         ui::Text* ingredient_count = dynamic_cast<ui::Text*>(raw_ingredient_count);
         animate_flash_action(ingredient_count, 0.2f, 1.15f);
         building_info_panel->runAction(FShake::actionWithDuration(0.1f, 1.5f, 1.5f));
-        do_vibrate(16);
+
+        ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(harvest_scene->getChildByName("inventory_basic_listview"));
 
         floating_color = Color4B::RED;
+
     }
     else
     {
