@@ -92,7 +92,15 @@ class HarvestScene : public BaseScene
 
         void add_harvestable();
 
-        void spawn_floating_label_for_ing_type(Ingredient::SubType ing_type, std::string message);
+        //return NULL if panel containing ing type is invisible
+        Node* get_visible_ing_panel(
+            Ingredient::SubType ing_type
+        );
+
+        void spawn_floating_label_for_ing_type(
+            Ingredient::SubType ing_type,
+            std::string message
+        );
 };
 
 #endif
