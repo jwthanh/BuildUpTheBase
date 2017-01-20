@@ -1120,21 +1120,8 @@ bool HarvestScene::init()
 
     auto toggle_visible_listviews_btn = dynamic_cast<ui::Button*>(this->getChildByName("toggle_visible_listviews_btn"));
     prep_button(toggle_visible_listviews_btn);
-    bind_touch_ended(toggle_visible_listviews_btn, [this, toggle_visible_listviews_btn](){
-        ui::ListView* inventory_advanced_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_advanced_listview"));
-        inventory_advanced_listview->setVisible(!inventory_advanced_listview->isVisible());
-
-        ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
-        inventory_basic_listview->setVisible(!inventory_basic_listview->isVisible());
-
-        //also clear items out so that they can animate basic in #TODO figure out if this causes lag
-        if (inventory_basic_listview->isVisible()) {
-            inventory_basic_listview->removeAllItems();
-            toggle_visible_listviews_btn->setTitleText("Basic");
-        } else {
-            inventory_advanced_listview->removeAllItems();
-            toggle_visible_listviews_btn->setTitleText("Advanced");
-        };
+    bind_touch_ended(toggle_visible_listviews_btn, [this](){
+        this->toggle_ingredient_listviews();
     });
 
     return true;
@@ -1393,6 +1380,25 @@ void HarvestScene::add_harvestable()
     this->harvestable->runAction(cocos2d::EaseBackOut::create(scale_to));
 
     this->addChild(this->harvestable);
+};
+
+void HarvestScene::toggle_ingredient_listviews(bool remove_children)
+{
+    auto toggle_visible_listviews_btn = dynamic_cast<ui::Button*>(this->getChildByName("toggle_visible_listviews_btn"));
+    ui::ListView* inventory_advanced_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_advanced_listview"));
+    inventory_advanced_listview->setVisible(!inventory_advanced_listview->isVisible());
+
+    ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(this->getChildByName("inventory_basic_listview"));
+    inventory_basic_listview->setVisible(!inventory_basic_listview->isVisible());
+
+    //also clear items out so that they can animate basic in #TODO figure out if this causes lag
+    if (inventory_basic_listview->isVisible()) {
+        if (remove_children) inventory_basic_listview->removeAllItems();
+        toggle_visible_listviews_btn->setTitleText("Basic");
+    } else {
+        if (remove_children) inventory_advanced_listview->removeAllItems();
+        toggle_visible_listviews_btn->setTitleText("Advanced");
+    };
 };
 
 Node* HarvestScene::get_visible_ing_panel(

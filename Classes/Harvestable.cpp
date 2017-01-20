@@ -37,6 +37,7 @@
 #include "Equipment.h"
 #include "HarvestableManager.h"
 #include "utilities/vibration.h"
+#include "HarvestScene.h"
 
 USING_NS_CC;
 
@@ -204,7 +205,8 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
     std::string floating_msg;
     Color4B floating_color;
 
-    if (this->building->can_fit_more_ingredients(this->get_output_ing_type()) == false)
+    Ingredient::SubType ing_type = this->get_output_ing_type();
+    if (this->building->can_fit_more_ingredients(ing_type) == false)
     {
         do_vibrate(16);
 
@@ -219,7 +221,8 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         end_scale = this->initial_scale*0.95f;
         duration = 0.15f;
 
-        Node* harvest_scene = Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+        Node* raw_harvest_scene = Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+        HarvestScene* harvest_scene = dynamic_cast<HarvestScene*>(raw_harvest_scene);
         Node* building_info_panel = harvest_scene->getChildByName("building_info_panel");
         Node* raw_ingredient_count = building_info_panel->getChildByName("ingredient_count");
 
@@ -228,6 +231,24 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         building_info_panel->runAction(FShake::actionWithDuration(0.1f, 1.5f, 1.5f));
 
         ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(harvest_scene->getChildByName("inventory_basic_listview"));
+
+        Node* ing_panel = harvest_scene->get_visible_ing_panel(ing_type);
+        if (ing_panel == NULL)
+        {
+            harvest_scene->toggle_ingredient_listviews(false);
+            ing_panel = harvest_scene->get_visible_ing_panel(ing_type);
+
+            //if we can't find it anyway, reset to default visibility
+            if (ing_panel == NULL)
+            {
+                harvest_scene->toggle_ingredient_listviews(false);
+            }
+        }
+
+        if (ing_panel)
+        {
+            animate_flash_action(ing_panel, 0.2f, 1.15f);
+        }
 
         floating_color = Color4B::RED;
 

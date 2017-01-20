@@ -92,6 +92,7 @@ class HarvestScene : public BaseScene
 
         void add_harvestable();
 
+        void toggle_ingredient_listviews(bool remove_children=true);
         //return NULL if panel containing ing type is invisible
         Node* get_visible_ing_panel(
             Ingredient::SubType ing_type
