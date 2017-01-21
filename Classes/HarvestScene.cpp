@@ -178,13 +178,14 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        Tutorial* tutorial = Tutorial::getInstance();
-        tutorial->first_start(this);
+        // Tutorial* tutorial = Tutorial::getInstance();
+        // tutorial->first_start(this);
 
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
 
-        //     //GameDirector::switch_to_equipment_menu();
+        GameDirector::switch_to_equipment_menu();
+
         //     auto parts = ParticleSun::create();
         //     parts->setPosition(get_center_pos());
         //     float duration = 0.25f;

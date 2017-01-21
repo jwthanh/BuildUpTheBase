@@ -68,17 +68,27 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="name_lbl" ActionTag="1044951126" Tag="234" IconVisible="False" LeftMargin="127.9346" RightMargin="274.6266" TopMargin="7.2361" BottomMargin="7.2361" IsCustomSize="True" FontSize="16" LabelText="Name of weapon here" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="257.4388" Y="55.5279" />
+                  <AbstractNodeData Name="name_lbl" ActionTag="1044951126" Tag="234" IconVisible="False" LeftMargin="189.6540" RightMargin="270.3460" TopMargin="6.2360" BottomMargin="8.2360" IsCustomSize="True" FontSize="16" LabelText="Name of weapon here" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="200.0000" Y="55.5279" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="256.6540" Y="35.0000" />
+                    <Position X="289.6540" Y="36.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.3889" Y="0.5000" />
-                    <PreSize X="0.3901" Y="0.7933" />
+                    <PrePosition X="0.4389" Y="0.5143" />
+                    <PreSize X="0.3030" Y="0.7933" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="item_img" ActionTag="-1343045874" Tag="18" IconVisible="False" LeftMargin="127.0000" RightMargin="487.0000" TopMargin="12.0000" BottomMargin="12.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+                    <Size X="46.0000" Y="46.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="150.0000" Y="35.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2273" Y="0.5000" />
+                    <PreSize X="0.0697" Y="0.6571" />
+                    <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -123,17 +133,27 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="name_lbl" ActionTag="1018725245" Tag="349" IconVisible="False" LeftMargin="127.9346" RightMargin="274.6266" TopMargin="7.2361" BottomMargin="7.2361" IsCustomSize="True" FontSize="16" LabelText="Name of tool here" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="257.4388" Y="55.5279" />
+                  <AbstractNodeData Name="name_lbl" ActionTag="1018725245" Tag="349" IconVisible="False" LeftMargin="189.6540" RightMargin="270.3460" TopMargin="6.2360" BottomMargin="8.2360" IsCustomSize="True" FontSize="16" LabelText="Name of tool here" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="200.0000" Y="55.5279" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="256.6540" Y="35.0000" />
+                    <Position X="289.6540" Y="36.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.3889" Y="0.5000" />
-                    <PreSize X="0.3901" Y="0.7933" />
+                    <PrePosition X="0.4389" Y="0.5143" />
+                    <PreSize X="0.3030" Y="0.7933" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="item_img" ActionTag="-172233894" Tag="19" IconVisible="False" LeftMargin="127.0000" RightMargin="487.0000" TopMargin="12.0000" BottomMargin="12.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+                    <Size X="46.0000" Y="46.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="150.0000" Y="35.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2273" Y="0.5000" />
+                    <PreSize X="0.0697" Y="0.6571" />
+                    <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -178,17 +198,27 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="name_lbl" ActionTag="1050046179" Tag="345" IconVisible="False" LeftMargin="127.9346" RightMargin="274.6266" TopMargin="7.2361" BottomMargin="7.2361" IsCustomSize="True" FontSize="16" LabelText="Name of tool here" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="257.4388" Y="55.5279" />
+                  <AbstractNodeData Name="name_lbl" ActionTag="1050046179" Tag="345" IconVisible="False" LeftMargin="189.6540" RightMargin="270.3460" TopMargin="6.2360" BottomMargin="8.2360" IsCustomSize="True" FontSize="16" LabelText="Name of tool here" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="200.0000" Y="55.5279" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="256.6540" Y="35.0000" />
+                    <Position X="289.6540" Y="36.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.3889" Y="0.5000" />
-                    <PreSize X="0.3901" Y="0.7933" />
+                    <PrePosition X="0.4389" Y="0.5143" />
+                    <PreSize X="0.3030" Y="0.7933" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="item_img" ActionTag="-1157636149" Tag="20" IconVisible="False" LeftMargin="127.0000" RightMargin="487.0000" TopMargin="12.0000" BottomMargin="12.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+                    <Size X="46.0000" Y="46.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="150.0000" Y="35.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2273" Y="0.5000" />
+                    <PreSize X="0.0697" Y="0.6571" />
+                    <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
