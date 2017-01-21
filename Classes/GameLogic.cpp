@@ -977,22 +977,21 @@ void GameDirector::switch_to_equipment_menu()
                 item_img->setVisible(false);
             }
         };
+        update_equipped_item(0);
+        panel->schedule(update_equipped_item, SHORT_DELAY, "update_equipped_item");
         return update_equipped_item;
     };
 
-
-	/// combat slot
     auto weapon_panel = panel->getChildByName("combat_panel");
     auto mining_panel = panel->getChildByName("mining_panel");
     auto recipe_panel = panel->getChildByName("recipe_panel");
 
     auto& equipment = GameLogic::getInstance()->equipment;
-    std::function<void(float)> update_equipped_weapon = build_update_equipped_item(
-        weapon_panel, equipment->combat_slot.get(), "Equip a weapon"
-    );
-    update_equipped_weapon(0);
-    weapon_panel->schedule(update_equipped_weapon, SHORT_DELAY, "update_equipped_weapon");
+    build_update_equipped_item(weapon_panel, equipment->combat_slot.get(), "Equip a weapon");
+    build_update_equipped_item(mining_panel, equipment->mining_slot.get(), "Equip a mining tool");
+    build_update_equipped_item(recipe_panel, equipment->recipe_slot.get(), "Equip a crafting tool");
 
+    /// combat
     ui::Button* equip_weapon_btn = dynamic_cast<ui::Button*>(weapon_panel->getChildByName("item_btn"));
     prep_button(equip_weapon_btn);
     bind_touch_ended(equip_weapon_btn, [](){
@@ -1000,22 +999,6 @@ void GameDirector::switch_to_equipment_menu()
     });
 
 	/// mining
-	ui::Text* mining_label = dynamic_cast<ui::Text*>(mining_panel->getChildByName("name_lbl"));
-	auto update_equipped_mining = [mining_label](float dt){
-		if (GameLogic::getInstance()->equipment->mining_slot->has_item())
-		{
-			spItem item = GameLogic::getInstance()->equipment->mining_slot->get_item();
-			mining_label->setString(item->get_name());
-		}
-		else
-		{
-			mining_label->setString("Equip a mining tool");
-		};
-	};
-    update_equipped_mining(0);
-    mining_label->schedule(update_equipped_mining, SHORT_DELAY, "update_equipped_mining");
-
-
     ui::Button* equip_mining_btn = dynamic_cast<ui::Button*>(mining_panel->getChildByName("item_btn"));
     prep_button(equip_mining_btn);
     bind_touch_ended(equip_mining_btn,[](){
@@ -1023,25 +1006,10 @@ void GameDirector::switch_to_equipment_menu()
     });
 
 	///recipe
-	ui::Text* recipe_label = dynamic_cast<ui::Text*>(recipe_panel->getChildByName("name_lbl"));
-	auto update_equipped_recipe = [recipe_label](float dt){
-		if (GameLogic::getInstance()->equipment->recipe_slot->has_item())
-		{
-			spItem item = GameLogic::getInstance()->equipment->recipe_slot->get_item();
-			recipe_label->setString(item->get_name());
-		}
-		else
-		{
-			recipe_label->setString("Equip a crafting tool");
-		};
-	};
-    update_equipped_recipe(0);
-    recipe_label->schedule(update_equipped_recipe, SHORT_DELAY, "update_equipped_recipe");
-
     ui::Button* equip_recipe_btn = dynamic_cast<ui::Button*>(recipe_panel->getChildByName("item_btn"));
     prep_button(equip_recipe_btn);
     bind_touch_ended(equip_recipe_btn, [](){
-            GameDirector::switch_to_item_equip_menu(ItemSlotType::Recipe);
+        GameDirector::switch_to_item_equip_menu(ItemSlotType::Recipe);
     });
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
