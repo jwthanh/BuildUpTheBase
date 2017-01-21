@@ -206,8 +206,7 @@ void NuItem::set_image(std::string path, ui::Widget::TextureResType texture_type
         return;
     };
 
-    this->item_icon->setScale9Enabled(!this->item_icon->isScale9Enabled()); //FIXME (by upgrading cocos probably) this resets ImageView somehow so loadTexture doesn't crash
-    this->item_icon->setScale9Enabled(!this->item_icon->isScale9Enabled()); // so we toggle it once to change it, then toggle it again to reset to default
+    image_view_scale9_hack(this->item_icon);
     this->item_icon->loadTexture(path, texture_type);
 
     ui::Scale9Sprite* sprite = dynamic_cast<ui::Scale9Sprite*>(this->item_icon->getVirtualRenderer());

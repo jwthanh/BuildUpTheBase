@@ -62,6 +62,10 @@ void set_aliasing(cocos2d::ui::ImageView* img_view, bool val=true);
 void set_aliasing(cocos2d::ui::Button* button, bool val=true);
 void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val=true);
 
+//FIXME (by upgrading cocos probably) this resets ImageView somehow so loadTexture doesn't crash
+// so we toggle it once to change it, then toggle it again to reset to default
+void image_view_scale9_hack(cocos2d::ui::ImageView* img_view);
+
 //inits texture and outline and aliasing
 void prep_button(cocos2d::ui::Button* button);
 // this one binds a popScene along with the above

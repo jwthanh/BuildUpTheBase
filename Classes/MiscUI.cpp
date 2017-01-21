@@ -212,6 +212,12 @@ void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val)
     set_aliasing(sprite, val);
 };
 
+void image_view_scale9_hack(cocos2d::ui::ImageView* img_view)
+{
+    img_view->setScale9Enabled(!img_view->isScale9Enabled());
+    img_view->setScale9Enabled(!img_view->isScale9Enabled());
+};
+
 void prep_button(ui::Button* button)
 {
     load_default_button_textures(button);
