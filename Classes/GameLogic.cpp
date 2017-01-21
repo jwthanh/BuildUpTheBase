@@ -966,12 +966,16 @@ void GameDirector::switch_to_equipment_menu()
 
         ui::Text* name_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("name_lbl"));
         ui::ImageView* item_img = dynamic_cast<ui::ImageView*>(panel->getChildByName("item_img"));
+        item_img->setScale9Enabled(!item_img->isScale9Enabled()); //FIXME (by upgrading cocos probably) this resets ImageView somehow so loadTexture doesn't crash
+        item_img->setScale9Enabled(!item_img->isScale9Enabled()); // so we toggle it once to change it, then toggle it again to reset to default
 
         std::function<void(float)> update_equipped_item = [name_lbl, item_img, slot, default_message](float dt){
             if (slot->has_item()) {
                 spItem item = slot->get_item();
                 name_lbl->setString(item->get_name());
                 item_img->setVisible(true);
+                item_img->loadTexture(item->img_path);
+                set_aliasing(item_img);
             } else {
                 name_lbl->setString(default_message);
                 item_img->setVisible(false);
