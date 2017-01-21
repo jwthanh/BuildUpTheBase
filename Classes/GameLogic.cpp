@@ -32,6 +32,7 @@
 #include "HarvestableManager.h"
 #include "Tutorial.h"
 #include "utilities/vibration.h"
+#include "ui/UIImageView.h"
 
 
 USING_NS_CC;
@@ -957,25 +958,40 @@ void GameDirector::switch_to_equipment_menu()
     panel->removeFromParent();
     scene->addChild(panel);
 
+    //builds the callback for the Equip Combat/Crafting/Mining button
+    auto build_update_equipped_item = [](
+            cocos2d::Node* panel,
+            EquipmentSlot* slot, std::string default_message
+        ){
+
+        ui::Text* name_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("name_lbl"));
+        ui::ImageView* item_img = dynamic_cast<ui::ImageView*>(panel->getChildByName("item_img"));
+
+        std::function<void(float)> update_equipped_item = [name_lbl, item_img, slot, default_message](float dt){
+            if (slot->has_item()) {
+                spItem item = slot->get_item();
+                name_lbl->setString(item->get_name());
+                item_img->setVisible(true);
+            } else {
+                name_lbl->setString(default_message);
+                item_img->setVisible(false);
+            }
+        };
+        return update_equipped_item;
+    };
+
+
 	/// combat slot
     auto weapon_panel = panel->getChildByName("combat_panel");
     auto mining_panel = panel->getChildByName("mining_panel");
     auto recipe_panel = panel->getChildByName("recipe_panel");
 
-	ui::Text* weapon_label = dynamic_cast<ui::Text*>(weapon_panel->getChildByName("name_lbl"));
-	auto update_equipped_weapon = [weapon_label](float dt){
-		if (GameLogic::getInstance()->equipment->combat_slot->has_item())
-		{
-			spItem item = GameLogic::getInstance()->equipment->combat_slot->get_item();
-			weapon_label->setString(item->get_name());
-		}
-		else
-		{
-			weapon_label->setString("Equip a weapon");
-		};
-	};
+    auto& equipment = GameLogic::getInstance()->equipment;
+    std::function<void(float)> update_equipped_weapon = build_update_equipped_item(
+        weapon_panel, equipment->combat_slot.get(), "Equip a weapon"
+    );
     update_equipped_weapon(0);
-    weapon_label->schedule(update_equipped_weapon, SHORT_DELAY, "update_equipped_weapon");
+    weapon_panel->schedule(update_equipped_weapon, SHORT_DELAY, "update_equipped_weapon");
 
     ui::Button* equip_weapon_btn = dynamic_cast<ui::Button*>(weapon_panel->getChildByName("item_btn"));
     prep_button(equip_weapon_btn);
