@@ -1031,7 +1031,6 @@ bool HarvestScene::init()
 	this->cur_node=NULL;
 
     this->target_recipe = NULL;
-    this->create_recipe_lbl();
 
     this->harvestable_manager = std::make_shared<HarvestableManager>();
     this->add_harvestable();
@@ -1442,7 +1441,3 @@ void HarvestScene::spawn_floating_label_for_ing_type(
         floating_label->setPosition(ing_panel->convertToWorldSpace(pos));
     }
 };
-
-void HarvestScene::create_recipe_lbl()
-{
-}

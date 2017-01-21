@@ -73,12 +73,13 @@ class BaseScene : public GameLayer
         void scroll_to_target_building();
 
         Harvestable* harvestable; //cant be shared_ptr because its cocos2d::Node
-        std::shared_ptr<HarvestableManager> harvestable_manager; //cant be shared_ptr because its cocos2d::Node
+        std::shared_ptr<HarvestableManager> harvestable_manager;
 };
 
 class HarvestScene : public BaseScene
 {
     private:
+        //level of the target building, for coloring backgrounds
         int _layer_building_level;
 
     public:
@@ -88,12 +89,10 @@ class HarvestScene : public BaseScene
 
         Clock* autosave_clock;
 
-        void create_recipe_lbl();
-
         void add_harvestable();
 
         void toggle_ingredient_listviews(bool remove_children=true);
-        //return NULL if panel containing ing type is invisible
+        ///return NULL if panel containing ing type is invisible
         Node* get_visible_ing_panel(
             Ingredient::SubType ing_type
         );
