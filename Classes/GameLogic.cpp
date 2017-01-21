@@ -979,11 +979,8 @@ void GameDirector::switch_to_equipment_menu()
 
     ui::Button* equip_weapon_btn = dynamic_cast<ui::Button*>(weapon_panel->getChildByName("item_btn"));
     prep_button(equip_weapon_btn);
-    equip_weapon_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            GameDirector::switch_to_item_equip_menu(ItemSlotType::Combat);
-        }
+    bind_touch_ended(equip_weapon_btn, [](){
+        GameDirector::switch_to_item_equip_menu(ItemSlotType::Combat);
     });
 
 	/// mining
@@ -1005,11 +1002,8 @@ void GameDirector::switch_to_equipment_menu()
 
     ui::Button* equip_mining_btn = dynamic_cast<ui::Button*>(mining_panel->getChildByName("item_btn"));
     prep_button(equip_mining_btn);
-    equip_mining_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            GameDirector::switch_to_item_equip_menu(ItemSlotType::Mining);
-        }
+    bind_touch_ended(equip_mining_btn,[](){
+        GameDirector::switch_to_item_equip_menu(ItemSlotType::Mining);
     });
 
 	///recipe
@@ -1030,11 +1024,8 @@ void GameDirector::switch_to_equipment_menu()
 
     ui::Button* equip_recipe_btn = dynamic_cast<ui::Button*>(recipe_panel->getChildByName("item_btn"));
     prep_button(equip_recipe_btn);
-    equip_recipe_btn->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
+    bind_touch_ended(equip_recipe_btn, [](){
             GameDirector::switch_to_item_equip_menu(ItemSlotType::Recipe);
-        }
     });
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
