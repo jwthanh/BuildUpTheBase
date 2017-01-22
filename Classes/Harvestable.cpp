@@ -11,7 +11,6 @@
 #include "Util.h"
 #include "Recipe.h"
 #include "attribute.h"
-
 #include "Fighter.h"
 #include "attribute_container.h"
 #include "ProgressBar.h"
@@ -21,6 +20,7 @@
 #include "Item.h"
 #include "RandomWeightMap.h"
 #include "NodeBuilder.h"
+#include "BuildingsSideBar.h"
 
 #include "2d/CCClippingNode.h"
 #include "2d/CCActionEase.h"
@@ -814,6 +814,13 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
         std::string floating_msg = ss.str();
         do_vibrate(16);
         this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
+
+        //move to Craft tab and shake it
+        HarvestScene* harvest_scene = dynamic_cast<HarvestScene*>(this->getParent());
+        if (harvest_scene){
+            harvest_scene->sidebar->toggle_buttons(harvest_scene->sidebar->tab_detail_btn, TouchEventType::ENDED);
+            animate_flash_action(harvest_scene->sidebar->tabs.get_active_listview(), 0.1f, 0.505f, 0.5f);
+        };
     }
     else
     {

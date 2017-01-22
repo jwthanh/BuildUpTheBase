@@ -45,10 +45,10 @@ public:
 void load_default_button_textures(cocos2d::ui::Button* button);
 
 void animate_flash_action(
-    cocos2d::Node* target, float duration, float scale,
-    cocos2d::Color3B to_color = cocos2d::Color3B::RED,
-    cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
-    );
+    cocos2d::Node* target, float duration = 0.1f,
+    float scale = 1.2f, float original_scale = 1.0f,
+    cocos2d::Color3B to_color = cocos2d::Color3B::RED, cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
+);
 
 void try_set_text_color(cocos2d::ui::Text* text_node, const cocos2d::Color4B color);
 void try_set_node_color(cocos2d::Node* node, const cocos2d::Color3B color);

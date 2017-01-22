@@ -104,24 +104,29 @@ void load_default_button_textures(cocos2d::ui::Button* button)
     //});
 };
 
+int FLASH_ACTION_TAG = 10; //arbitrarily 10
 void animate_flash_action(
-        cocos2d::Node* target, float duration, float scale,
-        cocos2d::Color3B to_color /* RED */, cocos2d::Color3B end_color /* WHITE */
-    )
+    cocos2d::Node* target, float duration, float scale,
+    float original_scale, cocos2d::Color3B to_color /* RED */
+    , cocos2d::Color3B end_color /* WHITE */
+)
 {
+    //clear previous flash animation
+    target->stopActionByTag(FLASH_ACTION_TAG);
+
     auto tint = TintTo::create(duration, to_color);
     auto tint_rev = TintTo::create(duration, end_color);
 
     auto scale_to = ScaleTo::create(duration, scale);
-    auto scale_rev = ScaleTo::create(duration, 1.0f);
-    target->runAction(
-        Sequence::create(
-            Spawn::createWithTwoActions(tint, EaseBackOut::create(scale_to)),
-            DelayTime::create(duration*2),
-            Spawn::createWithTwoActions(tint_rev, scale_rev),
-            NULL
-        )
-    );
+    auto scale_rev = ScaleTo::create(duration, original_scale);
+    auto flash_sequence = Sequence::create(
+        Spawn::createWithTwoActions(tint, EaseBackOut::create(scale_to)),
+        DelayTime::create(duration * 2),
+        Spawn::createWithTwoActions(tint_rev, scale_rev),
+        NULL
+        );
+    flash_sequence->setTag(FLASH_ACTION_TAG);
+    target->runAction(flash_sequence);
 
 };
 
