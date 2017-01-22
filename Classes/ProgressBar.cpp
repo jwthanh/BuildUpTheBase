@@ -7,13 +7,15 @@
 #include "2d/CCSprite.h"
 #include "2d/CCProgressTimer.h"
 #include "cocostudio/WidgetReader/UserCameraReader/UserCameraReader.h"
+#include "NuMenu.h"
 
 USING_NS_CC;
 
 
 ProgressBar::ProgressBar(
-        std::string front_sprite_frame_path="", std::string back_sprite_frame_path=""
-        )
+    std::string front_sprite_frame_path="",
+    std::string back_sprite_frame_path=""
+    )
 {
     this->target_percentage = 100.0f;
 
@@ -45,15 +47,16 @@ ProgressBar::ProgressBar(
     this->base_node->addChild(this->background);
 
     this->lbl = Label::createWithTTF("", DEFAULT_FONT, 40);
-    this->lbl->setScale(0.25f);
-    this->lbl->setAnchorPoint(Vec2(0.5f, 0.5f));
+    this->lbl->setTTFConfig(NuItem::ttf_config);
+    this->lbl->setScale(0.5f);
+    this->lbl->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
     this->lbl->getFontAtlas()->setAliasTexParameters();
+
     auto front_size = this->front_timer->getContentSize();
     this->lbl->setPosition(Vec2(
         front_size.width/2.0f,
         front_size.height/2.0f
     ));
-    this->lbl->setTextColor(Color4B::BLACK);
     this->front_timer->addChild(this->lbl);
 
     this->background->setLocalZOrder(99);

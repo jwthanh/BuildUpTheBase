@@ -10,6 +10,7 @@
 #include "ui/UIImageView.h"
 #include "ui/UIScale9Sprite.h"
 #include <sstream>
+#include "2d/CCLabel.h"
 
 //#include "cocos2d.h"
 
@@ -101,11 +102,16 @@ FighterNode* FighterNode::create(spFighter fighter)
     return node;
 };
 
+std::stringstream hp_ss;
 void FighterNode::update(float dt)
 {
     if (this->fighter == NULL) return;
 
     auto hp_percentage = this->fighter->attrs->health->get_val_percentage();
+
+    hp_ss.str("");
+    hp_ss << this->fighter->attrs->health->current_val;
+    this->hp_bar->lbl->setString(hp_ss.str());
 
     if (this->hp_bar->target_percentage != hp_percentage)
     {
