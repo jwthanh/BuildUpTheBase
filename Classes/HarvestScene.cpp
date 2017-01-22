@@ -43,6 +43,7 @@
 #include "2d/CCActionEase.h"
 #include "ui/UIPageView.h"
 #include "ui/UIListView.h"
+#include "extensions/GUI/CCScrollView/CCTableView.h"
 #include "ui/UILayout.h"
 #include "ui/UILoadingBar.h"
 #include "ui/UIText.h"
@@ -100,6 +101,78 @@ void BaseScene::update(float dt)
     GameLogic::getInstance()->update(dt);
 
 };
+
+/**
+ * An instance of TestList is a means for displaying hierarchical lists of TestSuite.
+ */
+class MyTableDatasource : public cocos2d::extension::TableViewDataSource, public cocos2d::extension::TableViewDelegate
+{
+public:
+    MyTableDatasource();
+
+    virtual void tableCellTouched(cocos2d::extension::TableView* table, cocos2d::extension::TableViewCell* cell) override;
+    virtual cocos2d::extension::TableViewCell* tableCellAtIndex(cocos2d::extension::TableView *table, ssize_t idx) override;
+    virtual cocos2d::Size tableCellSizeForIndex(cocos2d::extension::TableView *table, ssize_t idx) override;
+    virtual ssize_t numberOfCellsInTableView(cocos2d::extension::TableView *table) override;
+
+    virtual void scrollViewDidScroll(cocos2d::extension::ScrollView* view) override{}
+    virtual void scrollViewDidZoom(cocos2d::extension::ScrollView* view) override{}
+
+private:
+    std::vector<std::string> _names;
+};
+MyTableDatasource::MyTableDatasource()
+{
+    this->_names = {"josh", "jim", "james", "jeffrey", "jolene"};
+}
+
+
+void MyTableDatasource::tableCellTouched(extension::TableView* table, extension::TableViewCell* cell)
+{
+}
+
+extension::TableViewCell* MyTableDatasource::tableCellAtIndex(extension::TableView *table, ssize_t idx)
+{
+    auto cell = table->dequeueCell();
+    auto TABLE_LABEL_TAG = 10;
+    if (!cell)
+    {
+        cell = extension::TableViewCell::create();
+        auto label = Label::createWithTTF(this->_names[idx], DEFAULT_FONT, 20.0f);
+        label->setTTFConfig(NuItem::ttf_config);
+        label->setTag(TABLE_LABEL_TAG);
+        label->setAnchorPoint(Vec2::ZERO);
+        label->setPosition(Vec2::ZERO);
+        cell->addChild(label);
+    }
+    else
+    {
+        auto label = (Label*)cell->getChildByTag(TABLE_LABEL_TAG);
+        label->setString(this->_names[idx]);
+    }
+
+    return cell;
+}
+
+Size MyTableDatasource::tableCellSizeForIndex(extension::TableView *table, ssize_t idx)
+{
+    return Size(50, 20);
+}
+
+ssize_t MyTableDatasource::numberOfCellsInTableView(extension::TableView *table)
+{
+    return this->_names.size();
+}
+
+void test_table(Node* scene)
+{
+    Scene* new_scene = Scene::create();
+    MyTableDatasource* data = new MyTableDatasource();
+    cocos2d::extension::TableView* table = cocos2d::extension::TableView::create(data, {100, 300});
+    table->setPosition(get_center_pos());
+    new_scene->addChild(table, 1000000);
+    Director::getInstance()->pushScene(new_scene);
+}
 
 void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
@@ -184,7 +257,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
 
-        GameDirector::switch_to_equipment_menu();
+        // GameDirector::switch_to_equipment_menu();
+
+        test_table(this);
+
+        //* table = TableView::create();
 
         //     auto parts = ParticleSun::create();
         //     parts->setPosition(get_center_pos());
