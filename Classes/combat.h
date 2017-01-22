@@ -23,7 +23,7 @@ class Combat : public std::enable_shared_from_this<Combat>
 
         void attack(Combat* Combat_target, Damage* dmg);
         void take_damage(spCombat Combat_attacker, Damage* dmg);
-        int adjust_damage_to_armor(Damage* dmg);
+        res_count_t adjust_damage_to_armor(Damage* dmg);
 
         void try_to_die();
         bool is_dead();
@@ -31,45 +31,45 @@ class Combat : public std::enable_shared_from_this<Combat>
 
         void assign_to_master(spFighter master);
 
-        void give_exp(int exp_to_gain);
+        void give_exp(res_count_t exp_to_gain);
 
-        void level_up(int levels = 1);
-        void level_up_stats(int levels);
-        void level_up_skills(int levels);
+        void level_up(res_count_t levels = 1);
+        void level_up_stats(res_count_t levels);
+        void level_up_skills(res_count_t levels);
 };
 
 class Damage
 {
     public:
-        int normal;
-        int fire;
-        int water;
-        int death;
-        int life;
-        int crystal;
-        int spectre;
+        res_count_t normal;
+        res_count_t fire;
+        res_count_t water;
+        res_count_t death;
+        res_count_t life;
+        res_count_t crystal;
+        res_count_t spectre;
 
         Damage();
 
         Damage operator+(const Damage& other);
 
-        int get_raw_total();
+        res_count_t get_raw_total();
 
 };
 
 class Armor
 {
     public:
-        int normal;
-        int fire;
-        int water;
-        int death;
-        int life;
-        int crystal;
-        int spectre;
+        res_count_t normal;
+        res_count_t fire;
+        res_count_t water;
+        res_count_t death;
+        res_count_t life;
+        res_count_t crystal;
+        res_count_t spectre;
 
         Armor();
-        int get_raw_total();
+        res_count_t get_raw_total();
 
 };
 
@@ -79,12 +79,12 @@ class Experience
         /* if you're level 9 with 960 total experience and it'd take 1000 for level
          * 10, total would be 960, this_level would be 60, required_to_lvlup would be
          * 100 */
-        unsigned int lvl;
-        unsigned int total;
-        unsigned int this_level;
-        unsigned int required_to_lvlup;
+        res_count_t lvl;
+        res_count_t total;
+        res_count_t this_level;
+        res_count_t required_to_lvlup;
 
-        unsigned int value;
+        res_count_t value;
 
         Experience():
             total(0),

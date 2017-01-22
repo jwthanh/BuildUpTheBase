@@ -21,10 +21,10 @@ Combat::Combat(std::string name, spFighter master)
 
 }
 
-void Combat::level_up(int levels)
+void Combat::level_up(res_count_t levels)
 {
     //reset, accounting for left over exp
-    int i = 0;
+    res_count_t i = 0;
     while (i < levels)
     {
         this->master->xp->lvl+=1;
@@ -32,18 +32,20 @@ void Combat::level_up(int levels)
         //log(lvl * 10) * 100
         // this->master->xp_required_to_lvlup = std::floor(std::log(this->master->xp->lvl *10.0f) * 100.0f);
 
-        double level = this->master->xp->lvl;
-        double lvl10 = level*10;
+        res_count_t level = this->master->xp->lvl;
+        res_count_t lvl10 = level*10;
         // //((x*10)^(x*10)/200))*100
-        // double result = std::pow((lvl10),(lvl10)/200)*100;
+        // res_count_t result = std::pow((lvl10),(lvl10)/200)*100;
 
         //regen to max health
         this->master->attrs->health->current_val = this->master->attrs->health->current_val;
 
         // log(x^x)*(x*100)+200
-        double result = std::log(std::pow(level, level)) * (level*100) + 200;
-        this->master->xp->required_to_lvlup = (unsigned int)std::floor(result);
-        this->master->xp->this_level = (unsigned int)std::max((double)this->master->xp->this_level - this->master->xp->required_to_lvlup, 0.0);
+        res_count_t result = std::log(std::pow(level, level)) * (level*100) + 200;
+        this->master->xp->required_to_lvlup = std::floor(result);
+        res_count_t left = this->master->xp->this_level - this->master->xp->required_to_lvlup;
+        res_count_t right = 0.0L;
+        this->master->xp->this_level = std::max(left, right);
 
         this->level_up_stats(1);
         this->level_up_skills(1);
@@ -60,7 +62,7 @@ void Combat::level_up(int levels)
     // std::cout << "just exploded with color for a frame" << std::endl;
 };
 
-void Combat::level_up_skills(int levels)
+void Combat::level_up_skills(res_count_t levels)
 {
     // if (this->master->actor_class == NULL)
     // {
@@ -71,7 +73,7 @@ void Combat::level_up_skills(int levels)
     // }
 };
 
-void Combat::level_up_stats(int levels)
+void Combat::level_up_stats(res_count_t levels)
 {
     // if (this->master->actor_class == NULL)
     // {
@@ -85,7 +87,7 @@ void Combat::level_up_stats(int levels)
     // }
 };
 
-void Combat::give_exp(int exp_to_gain)
+void Combat::give_exp(res_count_t exp_to_gain)
 {
     this->master->xp->total += exp_to_gain;
     this->master->xp->this_level += exp_to_gain;
@@ -119,7 +121,7 @@ void Combat::attack(Combat* combat_target, Damage* dmg)
     if (is_target_dead)
     {
         //get opponents exp value
-        int exp_to_gain = combat_target->master->xp->value;
+        res_count_t exp_to_gain = combat_target->master->xp->value;
         //add it to the master's exp
         this->give_exp(exp_to_gain);
     };
@@ -149,10 +151,10 @@ void Combat::try_to_die()
     };
 }
 
-int Combat::adjust_damage_to_armor(Damage* dmg)
+res_count_t Combat::adjust_damage_to_armor(Damage* dmg)
 {
-    int total_damage = 0;
-    total_damage += (int)(dmg->normal - this->master->attrs->armor->current_val);
+    res_count_t total_damage = 0;
+    total_damage += (res_count_t)(dmg->normal - this->master->attrs->armor->current_val);
     //TODO handle other armor types, need to find a place to store them on the
     //combat or actor
     total_damage += dmg->fire;
@@ -168,54 +170,10 @@ void Combat::take_damage(spCombat combat_attacker, Damage* dmg)
 {
     if (dmg >= 0 )
     {
-        // if (this->master->thinker != NULL && this->master->thinker->is_ally) { return; }; //ally invincible
+        res_count_t adjusted_dmg = this->adjust_damage_to_armor(dmg);
 
-        //TCODRandom* rng = Game::stat_rolls_rng;
-        //int dodge_chance = 15;
-        //int dodge_result = rng->get(0, 100);
-
-
-        //if (dodge_result < dodge_chance)
-        //{
-        //    new Message(Ui::msg_handler_main, DAMAGE_TAKEN_MSG, colfg(TCODColor::lightAmber, this->master->name+" dodged the attack!."));
-        //    return;
-        //};
-
-        int adjusted_dmg = this->adjust_damage_to_armor(dmg);
-        //if (combat_attacker->master == Game::player) { Game::stats->damage_dealt += adjusted_dmg; };
-        //if (this->master == Game::player) { Game::stats->damage_taken += adjusted_dmg; };
-
-        //if (this->master->is_sneaking)
-        //{
-        //    adjusted_dmg *= 1.6;
-        //};
-
-        //if (this->master->is_defending)
-        //{
-        //    adjusted_dmg = adjusted_dmg - this->master->attrs->armor->current_val; // effectively double armor
-        //    new Message(Ui::msg_handler_main, DAMAGE_TAKEN_MSG, colfg(TCODColor::lightAmber, this->master->name+" deflected some damage!."));
-        //};
-
-        adjusted_dmg = std::max(adjusted_dmg, 1);
-        //if (this->master->soullinked_to != NULL)
-        //{
-        //    Actor* poor_soul = this->master->soullinked_to;
-        //    //poor_soul->combat->take_damage(combat_attacker, adjusted_dmg/2); //TODO: figure out how to multiply/divide Damage
-        //    this->master->attrs->health->current_val -= adjusted_dmg/2;
-        //    poor_soul->attrs->health->current_val -= adjusted_dmg/2;
-        //    std::cout << poor_soul->name << " burned from soullink to " << this->master->name << std::endl;
-        //}
-        //else
-        //{
-            this->master->attrs->health->current_val -= adjusted_dmg;
-        //}
-        //if (this->master == Game::player)
-        //{
-        //    if (adjusted_dmg > 15)
-        //    {
-        //        printf("what the f?\n");
-        //    };
-        //};
+        adjusted_dmg = std::max(adjusted_dmg, 1.0L);
+        this->master->attrs->health->current_val -= adjusted_dmg;
 
         std::cout << this->master->name;
         std::cout << " took " << adjusted_dmg << " damage! ";
@@ -273,7 +231,7 @@ Damage Damage::operator+(const Damage& other)
     return result;
 };
 
-int Damage::get_raw_total()
+res_count_t Damage::get_raw_total()
 {
     return this->normal +
         this->fire +
@@ -296,7 +254,7 @@ Armor::Armor()
     this->spectre = 0;
 };
 
-int Armor::get_raw_total()
+res_count_t Armor::get_raw_total()
 {
     return this->normal +
         this->fire +

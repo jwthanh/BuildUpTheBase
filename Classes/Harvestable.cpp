@@ -1131,15 +1131,16 @@ void FightingHarvestable::spawn_enemy()
     res_count_t final_slow_rate = std::max(0.01L, base_slow_rate + (0.005*decrease_count));
 
     res_count_t enemy_hp = scale_number_slow(base_hp, (res_count_t)game_logic->get_total_kills(), 1.05L, final_slow_rate);
-    enemy_hp = std::max(base_hp, enemy_hp); //make sure the enemy has at least 20 hp
+    res_count_t max_possible_hp = 9999999999999999999.0;
+    enemy_hp = std::min(std::max(base_hp, enemy_hp), max_possible_hp); //make sure the enemy has at least 20 hp, but never more than max_possible_hp
 
-    double enemy_dmg = 3;
+    res_count_t enemy_dmg = 3;
 
     auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
     if (harvestable_manager->is_fighter_stored == false)
     {
-        this->enemy->attrs->health->set_vals((int)enemy_hp);
-        this->enemy->attrs->damage->set_vals((int)enemy_dmg);
+        this->enemy->attrs->health->set_vals(enemy_hp);
+        this->enemy->attrs->damage->set_vals(enemy_dmg);
         harvestable_manager->store_fighter(this->enemy);
     }
     else
