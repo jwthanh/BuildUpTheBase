@@ -247,7 +247,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 
         if (ing_panel)
         {
-            animate_flash_action(ing_panel, 0.2f, 1.15f);
+            animate_flash_action(ing_panel, 0.1f, 1.15f);
         }
 
         floating_color = Color4B::RED;
