@@ -810,7 +810,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
     std::stringstream ss;
     if (this->recipe == NULL)
     {
-        ss << "No recipe yet";
+        ss << "Choose a recipe!";
         std::string floating_msg = ss.str();
         do_vibrate(16);
         this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
@@ -819,7 +819,10 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
         HarvestScene* harvest_scene = dynamic_cast<HarvestScene*>(this->getParent());
         if (harvest_scene){
             harvest_scene->sidebar->toggle_buttons(harvest_scene->sidebar->tab_detail_btn, TouchEventType::ENDED);
-            animate_flash_action(harvest_scene->sidebar->tabs.get_active_listview(), 0.1f, 0.505f, 0.5f);
+            auto detail_listview = harvest_scene->sidebar->tabs.get_active_listview();
+            for (auto& child : detail_listview->getChildren()){
+                animate_flash_action(child, 0.1f, 1.05f);
+            };
         };
     }
     else
