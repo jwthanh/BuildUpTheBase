@@ -490,7 +490,9 @@
             </struct>
             <key type="filename">../../beatupisis/raw/artist/UI/UI_game/enemy_healthbar.png</key>
             <key type="filename">../../beatupisis/raw/artist/UI/UI_game/enemy_healthbar_bar.png</key>
+            <key type="filename">../../beatupisis/raw/artist/UI/UI_game/enemy_healthbar_bar_centered.png</key>
             <key type="filename">../../beatupisis/raw/artist/UI/UI_game/enemy_healthbar_bar_white.png</key>
+            <key type="filename">../../beatupisis/raw/artist/UI/UI_game/enemy_healthbar_bar_white_centered.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -960,6 +962,8 @@
             <filename>to_replace/tilemap/upRight.png</filename>
             <filename>to_replace/tilemap/downLeft.png</filename>
             <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/exclamation.png</filename>
+            <filename>../../beatupisis/raw/artist/UI/UI_game/enemy_healthbar_bar_centered.png</filename>
+            <filename>../../beatupisis/raw/artist/UI/UI_game/enemy_healthbar_bar_white_centered.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

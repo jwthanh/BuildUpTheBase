@@ -71,7 +71,9 @@ FighterNode* FighterNode::create(spFighter fighter)
     });
 
     //hp bar
-    node->hp_bar = std::make_shared<ProgressBar>("enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
+    std::string frontbar_path = "enemy_healthbar_bar_centered.png";
+    std::string backbar_path = "enemy_healthbar_bar_white_centered.png";
+    node->hp_bar = std::make_shared<ProgressBar>(frontbar_path, backbar_path);
     node->hp_bar->back_timer->setVisible(false);
     node->hp_bar->setPosition(Vec2(0, 0));
     node->hp_bar->setAnchorPoint(Vec2(0.5, 0.5));
@@ -83,7 +85,7 @@ FighterNode* FighterNode::create(spFighter fighter)
     node->addChild(node->hp_bar->base_node);
 
     //xp bar
-    node->xp_bar = std::make_shared<ProgressBar>("enemy_healthbar_bar.png", "enemy_healthbar_bar_white.png");
+    node->xp_bar = std::make_shared<ProgressBar>(frontbar_path, backbar_path);
     node->xp_bar->back_timer->setVisible(false);
     node->xp_bar->setPosition(Vec2(0, -25));
     node->xp_bar->setAnchorPoint(Vec2(0.5, 0.5));
