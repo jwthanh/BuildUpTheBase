@@ -4,10 +4,13 @@
 #include "constants.h"
 #include "GameLogic.h"
 #include "Beatup.h" //used in BEATUP macro
+#include "NuMenu.h"
+
 #include "2d/CCSprite.h"
 #include "2d/CCProgressTimer.h"
-#include "cocostudio/WidgetReader/UserCameraReader/UserCameraReader.h"
-#include "NuMenu.h"
+#include "2d/CCLabel.h"
+#include "2d/CCActionProgressTimer.h"
+#include "2d/CCActionInstant.h"
 
 USING_NS_CC;
 
@@ -76,7 +79,7 @@ ProgressBar::ProgressBar(
 
     for (ProgressTimer* timer : {this->front_timer, this->back_timer})
     {
-        timer->setType(ProgressTimerType::BAR);
+        timer->setType(ProgressTimer::Type::BAR);
         timer->setBarChangeRate(Vec2(1, 0));
         timer->setAnchorPoint(Vec2(0.5, 0.5));
         timer->setPosition(0, 0);
