@@ -10,7 +10,7 @@ Item::Item(std::string type_name,  ItemRarityType rarity, res_count_t level)
 
 res_count_t Item::get_effective_cost()
 {
-    res_count_t total_cost = scale_number_slow(this->_base_cost, this->level, 3.3L);
+    res_count_t total_cost = scale_number_slow(this->_base_cost, this->level, 1.35L);
 
     total_cost *= ITEM_RARITY_MODIFIER.at(this->rarity);
 
