@@ -9,18 +9,20 @@ class Item;
 class Inventory;
 class Tile;
 
+using res_count_t = long double;
+
 class Attribute
 {
     private:
-        int tick;
+        res_count_t tick;
         bool is_ready;
 
     public:
-        double current_val;
-        double max_val;
+        res_count_t current_val;
+        res_count_t max_val;
 
-        double regen_rate; //per turn
-        double regen_interval; //per x turns?
+        res_count_t regen_rate; //per turn
+        res_count_t regen_interval; //per x turns?
 
         Attribute();
         Attribute(Attribute& other);
@@ -31,25 +33,25 @@ class Attribute
         virtual void do_tick();
         virtual bool check_is_ready();
 
-        void set_vals(int both);
-        void set_vals(int current_val, int max_val);
-        void alter_vals(int both);
-        void alter_vals(int diff_current, int diff_max);
+        void set_vals(res_count_t both);
+        void set_vals(res_count_t current_val, res_count_t max_val);
+        void alter_vals(res_count_t both);
+        void alter_vals(res_count_t diff_current, res_count_t diff_max);
 
         // bool CanRegenerate();
         void regenerate();
 
         float get_val_percentage();
 
-        virtual void add_to_current_val(int difference);
-        virtual void add_to_max_val(int difference);
-        virtual void add_to_regen_rate(int difference);
-        virtual void add_to_regen_interval(int difference);
+        virtual void add_to_current_val(res_count_t difference);
+        virtual void add_to_max_val(res_count_t difference);
+        virtual void add_to_regen_rate(res_count_t difference);
+        virtual void add_to_regen_interval(res_count_t difference);
 
-        virtual void remove_from_current_val(int difference);
-        virtual void remove_from_max_val(int difference);
-        virtual void remove_from_regen_rate(int difference);
-        virtual void remove_from_regen_interval(int difference);
+        virtual void remove_from_current_val(res_count_t difference);
+        virtual void remove_from_max_val(res_count_t difference);
+        virtual void remove_from_regen_rate(res_count_t difference);
+        virtual void remove_from_regen_interval(res_count_t difference);
 
         bool is_empty();
         bool is_full();

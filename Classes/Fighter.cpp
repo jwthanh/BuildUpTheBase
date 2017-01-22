@@ -35,7 +35,7 @@ std::string Fighter::get_stats()
 {
     std::stringstream ss;
     ss << this->name << " ";
-    double effective_dmg = this->attrs->damage->current_val;
+    res_count_t effective_dmg = this->attrs->damage->current_val;
     ss << this->attrs->health->current_val << "/" << this->attrs->health->max_val << "/" << effective_dmg;
     // for (std::string attr : this->attrs->PrettyVector())
     // {
@@ -212,8 +212,8 @@ void Battle::fight(spFighter left, spFighter right)
     ss << "\tA fight! ";
     ss << left->name << " vs " << right->name;
 
-    double& health = right->attrs->health->current_val;
-    double dmg = left->attrs->damage->current_val;
+    res_count_t& health = right->attrs->health->current_val;
+    res_count_t dmg = left->attrs->damage->current_val;
 
     health -= dmg;
 

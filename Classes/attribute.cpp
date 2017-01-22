@@ -40,23 +40,23 @@ void Attribute::update()
 
 };
 
-void Attribute::set_vals(int both)
+void Attribute::set_vals(res_count_t both)
 {
     this->set_vals(both, both);
 };
 
-void Attribute::set_vals(int current_val, int max_val)
+void Attribute::set_vals(res_count_t current_val, res_count_t max_val)
 {
     this->current_val = current_val;
     this->max_val = max_val;
 };
 
-void Attribute::alter_vals(int both)
+void Attribute::alter_vals(res_count_t both)
 {
     this->alter_vals(both, both);
 };
 
-void Attribute::alter_vals(int diff_current, int diff_max)
+void Attribute::alter_vals(res_count_t diff_current, res_count_t diff_max)
 {
     this->current_val += diff_current;
     this->max_val += diff_max;
@@ -86,7 +86,7 @@ void Attribute::do_tick()
 
 };
 
-void Attribute::add_to_current_val(int difference)
+void Attribute::add_to_current_val(res_count_t difference)
 {
     if (difference != 0)
     {
@@ -99,7 +99,7 @@ void Attribute::add_to_current_val(int difference)
 
 };
 
-void Attribute::add_to_max_val(int difference)
+void Attribute::add_to_max_val(res_count_t difference)
 {
     if (difference != 0)
     {
@@ -108,7 +108,7 @@ void Attribute::add_to_max_val(int difference)
 
 };
 
-void Attribute::add_to_regen_rate(int difference)
+void Attribute::add_to_regen_rate(res_count_t difference)
 {
     if (difference != 0)
     {
@@ -117,7 +117,7 @@ void Attribute::add_to_regen_rate(int difference)
 
 };
 
-void Attribute::add_to_regen_interval(int difference)
+void Attribute::add_to_regen_interval(res_count_t difference)
 {
     if (difference != 0)
     {
@@ -126,7 +126,7 @@ void Attribute::add_to_regen_interval(int difference)
 
 };
 
-void Attribute::remove_from_current_val(int difference)
+void Attribute::remove_from_current_val(res_count_t difference)
 {
     if (difference != 0)
     {
@@ -135,7 +135,7 @@ void Attribute::remove_from_current_val(int difference)
 
 };
 
-void Attribute::remove_from_max_val(int difference)
+void Attribute::remove_from_max_val(res_count_t difference)
 {
     if (difference != 0)
     {
@@ -144,7 +144,7 @@ void Attribute::remove_from_max_val(int difference)
 
 };
 
-void Attribute::remove_from_regen_rate(int difference)
+void Attribute::remove_from_regen_rate(res_count_t difference)
 {
     if (difference != 0)
     {
@@ -153,7 +153,7 @@ void Attribute::remove_from_regen_rate(int difference)
 
 };
 
-void Attribute::remove_from_regen_interval(int difference)
+void Attribute::remove_from_regen_interval(res_count_t difference)
 {
     if (difference != 0)
     {
