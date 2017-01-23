@@ -1089,6 +1089,8 @@ void FightingHarvestable::animate_harvest()
         float duration = 0.075f;
         animate_flash_action(player_hp_gold, duration, 1.5f);
         player_info_panel->runAction(FShake::actionWithDuration(duration, 10));
+
+        this->spawn_label_on_touch(NULL, this->initial_scale, 0, "Consume blood\nto regenerate!", Color4B::RED);
     }
 }
 
