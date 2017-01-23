@@ -512,43 +512,6 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="popup_panel" ActionTag="-1343836221" Tag="121" IconVisible="False" LeftMargin="30.8600" RightMargin="29.1400" TopMargin="552.5000" BottomMargin="12.5000" TouchEnable="True" ClipAble="False" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-            <Size X="900.0000" Y="75.0000" />
-            <Children>
-              <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="87.4620" RightMargin="11.7079" TopMargin="3.2630" BottomMargin="3.1496" IsCustomSize="True" FontSize="20" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="800.8301" Y="68.5874" />
-                <AnchorPoint />
-                <Position X="87.4620" Y="3.1496" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0972" Y="0.0420" />
-                <PreSize X="0.8898" Y="0.9145" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="26" G="26" B="26" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="popup_img" ActionTag="-2114726292" Tag="729" IconVisible="False" LeftMargin="14.0901" RightMargin="821.9099" TopMargin="5.8989" BottomMargin="5.1011" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
-                <Size X="64.0000" Y="64.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="46.0901" Y="37.1011" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0512" Y="0.4947" />
-                <PreSize X="0.0711" Y="0.8533" />
-                <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
-              </AbstractNodeData>
-            </Children>
-            <AnchorPoint ScaleX="0.5046" ScaleY="0.5000" />
-            <Position X="485.0000" Y="50.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5052" Y="0.0781" />
-            <PreSize X="0.9375" Y="0.1172" />
-            <SingleColor A="255" R="139" G="105" B="20" />
-            <FirstColor A="255" R="150" G="200" B="255" />
-            <EndColor A="255" R="255" G="255" B="255" />
-            <ColorVector ScaleY="1.0000" />
-          </AbstractNodeData>
           <AbstractNodeData Name="harvester_progress_panel" ActionTag="-1430244611" Tag="80" IconVisible="False" LeftMargin="399.9999" RightMargin="200.0001" TopMargin="145.0000" BottomMargin="455.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="360.0000" Y="40.0000" />
             <Children>
@@ -582,6 +545,58 @@
             <PrePosition X="0.4167" Y="0.7109" />
             <PreSize X="0.3750" Y="0.0625" />
             <SingleColor A="255" R="60" G="80" B="102" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="popup_panel" ActionTag="1507287959" Tag="98" IconVisible="False" TopMargin="540.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+            <Size X="960.0000" Y="100.0000" />
+            <Children>
+              <AbstractNodeData Name="popup_panel_inner" ActionTag="-1343836221" Tag="121" IconVisible="False" LeftMargin="25.8600" RightMargin="34.1400" TopMargin="12.5000" BottomMargin="12.5000" ClipAble="False" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="900.0000" Y="75.0000" />
+                <Children>
+                  <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="87.4620" RightMargin="11.7079" TopMargin="3.2630" BottomMargin="3.1496" IsCustomSize="True" FontSize="20" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="800.8301" Y="68.5874" />
+                    <AnchorPoint />
+                    <Position X="87.4620" Y="3.1496" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.0972" Y="0.0420" />
+                    <PreSize X="0.8898" Y="0.9145" />
+                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                    <OutlineColor A="255" R="26" G="26" B="26" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="popup_img" ActionTag="-2114726292" Tag="729" IconVisible="False" LeftMargin="14.0901" RightMargin="821.9099" TopMargin="5.8989" BottomMargin="5.1011" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+                    <Size X="64.0000" Y="64.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="46.0901" Y="37.1011" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.0512" Y="0.4947" />
+                    <PreSize X="0.0711" Y="0.8533" />
+                    <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint ScaleX="0.5046" ScaleY="0.5000" />
+                <Position X="480.0000" Y="50.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.5000" />
+                <PreSize X="0.9375" Y="0.7500" />
+                <SingleColor A="255" R="139" G="105" B="20" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="1.0000" Y="0.1563" />
+            <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />

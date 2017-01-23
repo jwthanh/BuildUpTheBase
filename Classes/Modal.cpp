@@ -128,21 +128,26 @@ void PopupPanel::animate_open()
 
     this->_layout->setPosition(Vec2(
         this->initial_x,
-        -this->initial_y
-        ));
+        -100.0f
+    ));
 
     float duration = 0.3f;
     cocos2d::ActionInterval* show_action = cocos2d::Spawn::createWithTwoActions(
         cocos2d::FadeIn::create(duration/2.0f),
-        cocos2d::EaseBackOut::create(cocos2d::MoveTo::create(duration, Vec2(this->initial_x, this->initial_y)))
-        );
+        cocos2d::EaseBackOut::create(
+            cocos2d::MoveTo::create(
+                duration,
+                Vec2(this->initial_x, this->initial_y)
+            )
+        )
+    );
 
     auto delay = cocos2d::DelayTime::create(10.0f);
     auto remove = cocos2d::CallFunc::create([this]() { this->animate_close(); });
 
-    this->_layout->runAction( cocos2d::Sequence::create(
+    this->_layout->runAction(cocos2d::Sequence::create(
         show_action, delay, remove, NULL
-        ));
+    ));
 };
 
 void PopupPanel::animate_close()
@@ -154,7 +159,7 @@ void PopupPanel::animate_close()
     this->_layout->setPosition(Vec2(
         this->initial_x,
         this->initial_y
-        ));
+    ));
 
     cocos2d::CallFunc* disable_touch = cocos2d::CallFunc::create([this]()
     {
@@ -167,29 +172,34 @@ void PopupPanel::animate_close()
 
     cocos2d::ActionInterval* hide_action = cocos2d::Spawn::createWithTwoActions(
         cocos2d::FadeOut::create(duration),
-        cocos2d::EaseBackIn::create(cocos2d::MoveTo::create(duration, Vec2(this->initial_x, -this->initial_y)))
-        );
+        cocos2d::EaseBackIn::create(
+            cocos2d::MoveTo::create(
+                duration,
+                Vec2(this->initial_x, -this->initial_y)
+            )
+        )
+    );
 
-    this->_layout->runAction( cocos2d::Sequence::create(
+    this->_layout->runAction(cocos2d::Sequence::create(
         disable_touch, hide_action, enable_touch, NULL
-        ));
+    ));
 };
 
 std::string PopupPanel::get_string()
 {
-    auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_lbl"));
+    auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
     return label->getString();
 }
 
 void PopupPanel::set_string(std::string message)
 {
-    auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_lbl"));
+    auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
     label->setString(message);
 }
 
 void PopupPanel::set_image(std::string path, bool is_plist)
 {
-    auto image_view = dynamic_cast<cocos2d::ui::ImageView*>(this->_layout->getChildByName("popup_img"));
+    auto image_view = dynamic_cast<cocos2d::ui::ImageView*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_img"));
     if (is_plist)
     {
         image_view->loadTexture(path, ui::Widget::TextureResType::PLIST);
