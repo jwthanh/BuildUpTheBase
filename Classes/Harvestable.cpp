@@ -211,9 +211,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         do_vibrate(16);
 
         std::vector<std::string> choices = {
-            "Storage full",
             "Upgrade building",
-            "Too many ingredients",
             "Sell some ingredients"
         };
         floating_msg = pick_one(choices);
