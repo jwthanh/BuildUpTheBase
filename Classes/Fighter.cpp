@@ -203,7 +203,7 @@ vsFighter Battle::combatants_by_team(Fighter::TeamsType team)
 
 void Battle::fight(spFighter left, spFighter right)
 {
-    if (left->attrs->health->current_val < 1 || right->attrs->health->current_val < 1) {
+    if (left->attrs->health->current_val <= 0 || right->attrs->health->current_val <= 0) {
         printj("someone is dead, skipping");
         return;
     };
