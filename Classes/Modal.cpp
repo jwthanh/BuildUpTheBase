@@ -175,7 +175,7 @@ void PopupPanel::animate_close()
         cocos2d::EaseBackIn::create(
             cocos2d::MoveTo::create(
                 duration,
-                Vec2(this->initial_x, -this->initial_y)
+                Vec2(this->initial_x, -100)
             )
         )
     );
