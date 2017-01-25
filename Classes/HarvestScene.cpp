@@ -1168,26 +1168,29 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
     auto raw_node = get_prebuilt_node_from_csb("editor/details/inventory_detail.csb");
 
-    auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("Panel_1"));
+    auto alert_panel = dynamic_cast<ui::Layout*>(raw_node->getChildByName("inventory_detail_panel"));
     alert_panel->removeFromParent();
 
     //background color
     LayerColor* layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
+    layer_color->setName("alert_panel_bg");
     layer_color->setOpacity(0);
     layer_color->runAction(cocos2d::FadeTo::create(0.15f, 85));
     this->addChild(layer_color);
 
     //invisible layout to tap to close
     ui::Layout* exit_layout = ui::Layout::create();
+    exit_layout->setName("alert_panel_exit_layout");
     exit_layout->setAnchorPoint(Vec2::ZERO);
     exit_layout->setContentSize({ 1000, 1000 });
     exit_layout->setTouchEnabled(true);
     this->addChild(exit_layout, 9); //9 because alert_panel is added as 10 elsewhere
 
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(alert_panel->getChildByName("close_panel"));
-    auto cb = [alert_panel, this, exit_layout, layer_color](Ref* target, ui::Widget::TouchEventType type) {
+    auto cb = [this](Ref* target, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED)
         {
+
             do_vibrate(16);
 
             auto end_pos = static_cast<ui::Widget*>(target)->getTouchEndPosition();
@@ -1202,10 +1205,17 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 NULL
             );
 
+            auto alert_panel = this->getChildByName("inventory_detail_panel");
+            if (!alert_panel) return;
             Sequence* seq = Sequence::create(spawn, RemoveSelf::create(), NULL);
             alert_panel->runAction(seq);
 
+            auto exit_layout = this->getChildByName("alert_panel_exit_layout");
+            if (!exit_layout) return;
             exit_layout->removeFromParent();
+
+            auto layer_color = this->getChildByName("alert_panel_bg");
+            if (!layer_color) return;
             layer_color->runAction(cocos2d::Sequence::createWithTwoActions(
                 FadeOut::create(0.1f),
                 RemoveSelf::create()

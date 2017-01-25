@@ -6,7 +6,7 @@
       <ObjectData Name="Node" Tag="25" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="Panel_1" ActionTag="-960689000" Tag="26" IconVisible="False" LeftMargin="-205.0000" RightMargin="-205.0000" TopMargin="-255.0000" BottomMargin="-255.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="195" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="inventory_detail_panel" ActionTag="-960689000" Tag="26" IconVisible="False" LeftMargin="-205.0000" RightMargin="-205.0000" TopMargin="-255.0000" BottomMargin="-255.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="195" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="410.0000" Y="510.0000" />
             <Children>
               <AbstractNodeData Name="background_bg" ActionTag="-169141112" Tag="2617" IconVisible="False" LeftMargin="5.0000" RightMargin="5.0000" TopMargin="5.0000" BottomMargin="5.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
@@ -22,7 +22,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="icon_panel_bg" ActionTag="1289088283" Tag="785" IconVisible="False" LeftMargin="191.0000" RightMargin="201.0000" TopMargin="131.0001" BottomMargin="360.9999" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+              <AbstractNodeData Name="icon_panel_bg" ActionTag="1289088283" Tag="785" IconVisible="False" LeftMargin="191.0000" RightMargin="201.0000" TopMargin="131.0001" BottomMargin="360.9999" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="18.0000" Y="18.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="200.0000" Y="369.9999" />
