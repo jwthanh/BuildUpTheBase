@@ -1252,7 +1252,8 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 res_count_t _def = 0;
                 auto it = ing_type;
                 res_count_t num_sellable = map_get(city_ingredients, it, _def);
-                if (num_sellable != 0)
+
+                if (num_sellable >= 1)
                 {
                     res_count_t USE_ABSOLUTE = -1;
 
