@@ -70,8 +70,11 @@ void GameLogic::load_game()
         return;
     };
 
+    std::string tutorial_key = "tutorial_v1_complete";
+    bool tutorial_complete = DataManager::get_bool_from_data(tutorial_key);
+
     //add popup to message to fill out username
-    if (username == "") {
+    if (username == "" && tutorial_complete) {
         auto popup = GameLogic::get_popup_panel();
         popup->set_string("Hey there! Don't forget to set a username in green along the right side of the screen, and check out how you stack up on the leaderboard");
         popup->animate_open();
@@ -80,7 +83,8 @@ void GameLogic::load_game()
     CCLOG("loading game on startup, this should only happen once");
     GameLogic::load_all();
 
-    bool show_welcome_modal = true;
+
+    bool show_welcome_modal = tutorial_complete == true;
     // bool show_welcome_modal = false;
     if (show_welcome_modal)
     {
@@ -112,8 +116,6 @@ void GameLogic::load_game()
 
     this->is_loaded = true;
 
-    std::string tutorial_key = "tutorial_v1_complete";
-    bool tutorial_complete = DataManager::get_bool_from_data(tutorial_key);
     if (tutorial_complete == false)
     {
         Tutorial* tutorial = Tutorial::getInstance();
