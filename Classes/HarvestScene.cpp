@@ -1325,7 +1325,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
             mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
             res_count_t _def = 0;
             auto it = ing_type;
-            if (map_get(city_ingredients, it, _def) < amount_sold)
+            if (map_get(city_ingredients, it, _def) < std::max(amount_sold, 1.0L))
             {
                 //this doesnt let the button accept touches, so we need to subclass widget or something to fix it
                 try_set_enabled(sell_btn, false);
