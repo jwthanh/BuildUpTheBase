@@ -107,6 +107,9 @@ PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
     this->initial_x = panel->getPositionX();
     this->initial_y = panel->getPositionY();
 
+    auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
+    set_aliasing(label);
+
     this->_layout->addTouchEventListener([this](cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
