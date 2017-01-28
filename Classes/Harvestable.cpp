@@ -21,6 +21,7 @@
 #include "RandomWeightMap.h"
 #include "NodeBuilder.h"
 #include "BuildingsSideBar.h"
+#include "goals/Achievement.h"
 
 #include "2d/CCClippingNode.h"
 #include "2d/CCActionEase.h"
@@ -266,6 +267,7 @@ bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 
     if (this->_hitted)
     {
+        auto achievement_manager = AchievementManager::getInstance();
         this->animate_touch_start(touch);
     }
 
