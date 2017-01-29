@@ -588,6 +588,7 @@ void SideListView::setup_detail_listview_as_recipes()
                         auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
                         if (harvest_scene)
                         {
+                            harvest_scene->show_ingredient_listview_for_ing_type(Ingredient::SubType::Iron);
                             harvest_scene->spawn_floating_label_for_ing_type(Ingredient::SubType::Undead, "+1");
                         }
                     }
@@ -713,6 +714,7 @@ void SideListView::setup_detail_listview_as_recipes()
                         auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
                         if (harvest_scene)
                         {
+                            harvest_scene->show_ingredient_listview_for_ing_type(Ingredient::SubType::Iron);
                             harvest_scene->spawn_floating_label_for_ing_type(Ingredient::SubType::Iron, "+2");
                         }
                     }
@@ -748,6 +750,7 @@ void SideListView::setup_detail_listview_as_recipes()
                         auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
                         if (harvest_scene)
                         {
+                            harvest_scene->show_ingredient_listview_for_ing_type(Ingredient::SubType::Iron);
                             harvest_scene->spawn_floating_label_for_ing_type(Ingredient::SubType::Minecart, "+1");
                         }
                     }
@@ -784,6 +787,7 @@ void SideListView::setup_detail_listview_as_recipes()
                         auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
                         if (harvest_scene)
                         {
+                            harvest_scene->show_ingredient_listview_for_ing_type(Ingredient::SubType::Iron);
                             harvest_scene->spawn_floating_label_for_ing_type(Ingredient::SubType::MineRails, "+1");
                         }
                     }

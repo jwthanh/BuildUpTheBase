@@ -1415,12 +1415,44 @@ void HarvestScene::toggle_ingredient_listviews(bool remove_children)
     };
 };
 
-Node* HarvestScene::get_visible_ing_panel(
-        Ingredient::SubType ing_type
-    )
+Node* HarvestScene::show_ingredient_listview_for_ing_type(Ingredient::SubType ing_type)
 {
     auto basic_listview = this->getChildByName("inventory_basic_listview");
     auto advanced_listview = this->getChildByName("inventory_advanced_listview");
+
+    //get visible listview
+    auto visible_listview = basic_listview->isVisible() ? basic_listview : advanced_listview;
+    auto hidden_listview = advanced_listview->isVisible() ? advanced_listview : basic_listview;
+
+    if (visible_listview)
+    {
+        std::string type_str = Ingredient::type_to_string(ing_type);
+
+        //find matching ing_panel in listview
+        auto ing_panel = visible_listview->getChildByName(type_str);
+
+        //if found a panel its the current visible listview
+        if (ing_panel)
+        {
+            return visible_listview;
+        }
+        //if not found the panel is on the invisible one, make it visible and return that
+        else
+        {
+            this->toggle_ingredient_listviews(false); //needs to not destroy children, so the panel'll exist after
+            return hidden_listview;
+        };
+    }
+
+    return NULL;
+};
+
+Node* HarvestScene::get_visible_ing_panel(Ingredient::SubType ing_type)
+{
+    auto basic_listview = this->getChildByName("inventory_basic_listview");
+    auto advanced_listview = this->getChildByName("inventory_advanced_listview");
+
+    //get visible listview
     auto visible_listview = basic_listview->isVisible() ? basic_listview : advanced_listview;
     if (visible_listview)
     {
