@@ -1030,3 +1030,20 @@ void GameDirector::switch_to_equipment_menu()
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
 };
+
+void GameDirector::switch_to_reset_menu()
+{
+    auto scene = cocos2d::Scene::create();
+    scene->setName("reset_scene");
+
+    auto equipment_scene = get_prebuilt_node_from_csb("editor/scenes/reset_scene.csb");
+    auto panel = dynamic_cast<cocos2d::ui::Layout*>(equipment_scene->getChildByName("panel"));
+    panel->removeFromParent();
+    scene->addChild(panel);
+
+    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
+    prep_back_button(back_btn);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};

@@ -26,6 +26,10 @@
           <Project Name="equipment_scene.csd" Type="Scene" />
           <Project Name="items_scene.csd" Type="Scene" />
           <Project Name="miner_scene.csd" Type="Scene" />
+          <Project Name="reset_scene.csd" Type="Scene" />
+        </Folder>
+        <Folder Name="tutorial">
+          <Project Name="tutorial_sidebar_panel.csd" Type="Node" />
         </Folder>
         <Folder Name="unused">
           <Folder Name="details">
@@ -38,9 +42,6 @@
         <Image Name="main_UI_export_10.png" />
         <TTF Name="pixelmix.ttf" />
         <TmxFile Name="test_map.tmx" />
-        <Folder Name="tutorial">
-          <Project Name="tutorial_sidebar_panel.csd" Type="Node" />
-        </Folder>
       </RootFolder>
     </Group>
   </SolutionFolder>
