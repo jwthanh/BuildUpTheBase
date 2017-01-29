@@ -1075,27 +1075,41 @@ void GameDirector::switch_to_reset_menu()
 
     cocos2d::ui::ListView* reset_pageview = dynamic_cast<cocos2d::ui::ListView*>(panel->getChildByName("reset_listview"));
 
-    for (int i = 0; i < 25; i++)
+    struct reset_config {
+        std::string title;
+        std::string description;
+        std::function<void()> reset_callback;
+    };
+
+    std::vector<reset_config> configs {
+        {
+            "Total kills",
+            "Resets total kills",
+            [](){ DataManager::set_int_from_data("total_kills", 0); }
+        },
+        {
+            "Total Coins",
+            "Resets total coins",
+            [](){ BEATUP->_total_coins = 0.0; }
+        }
+    };
+
+    for (auto& config : configs)
     {
         auto nuitem = NuItem::create(reset_pageview);
-        nuitem->set_title("RESET STAT");
-        nuitem->set_description("DESCRIPTION OF STAT BEING RESET");
+        nuitem->set_title(config.title);
+        nuitem->set_description(config.description);
 
         //reset size to width of container
         nuitem->button->setContentSize({ reset_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
 
-        // nuitem->set_image(item->img_path, ui::Widget::TextureResType::LOCAL);
-
-        nuitem->set_cost_lbl("");
-
-        nuitem->button->addTouchEventListener([nuitem](Ref* sender, ui::Widget::TouchEventType type){
+        nuitem->button->addTouchEventListener([config](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 do_vibrate(16);
-                CCLOG("OH NO YOU RESET SOMETHING");
+                config.reset_callback();
             }
         });
-
     }
 
     auto director = cocos2d::Director::getInstance();
