@@ -26,6 +26,14 @@ std::shared_ptr<BaseAchievement> AchievementManager::getAchievement(AchievementT
     {
         new_achievement = std::make_shared<CountAchievement>(0.0, 15.0);
     }
+    else if (achv_type == AchievementType::TotalKills)
+    {
+        new_achievement = std::make_shared<CountAchievement>(0.0, 2.0);
+    }
+    else if (achv_type == AchievementType::TotalCoins)
+    {
+        new_achievement = std::make_shared<CountAchievement>(0.0, 1.0);
+    }
     else
     {
         CCLOG("failed trying to getAchievement: unrecognized achievement type");
@@ -65,7 +73,12 @@ CountAchievement::CountAchievement(res_count_t current, res_count_t target)
 
 void CountAchievement::do_increment()
 {
-    this->_current_count += 1.0;
+    this->do_increment_by_n(1.0);
+};
+
+void CountAchievement::do_increment_by_n(long double n)
+{
+    this->_current_count += n;
 };
 
 void CountAchievement::validate_completion()

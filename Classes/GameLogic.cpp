@@ -33,6 +33,7 @@
 #include "Tutorial.h"
 #include "utilities/vibration.h"
 #include "ui/UIImageView.h"
+#include "goals/Achievement.h"
 
 
 USING_NS_CC;
@@ -338,6 +339,12 @@ double GameLogic::get_appeasements()
 
 void GameLogic::add_total_kills(int value)
 {
+    if (value > 0) {
+        auto achievement_manager = AchievementManager::getInstance();
+        std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalKills);
+        achievement->increment_by_n((res_count_t)value);
+    };
+
     DataManager::incr_key("total_kills", value);
 };
 

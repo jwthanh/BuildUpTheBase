@@ -11,7 +11,9 @@ class AchievementManager;
 
 
 enum class AchievementType {
-    TotalTaps = 0
+    TotalTaps = 0,
+    TotalCoins = 1,
+    TotalKills = 2,
 };
 
 
@@ -42,6 +44,7 @@ class BaseAchievement
 
         //actual incrementing function called by ::increment
         virtual void do_increment() = 0;
+        virtual void do_increment_by_n(res_count_t n) = 0;
 
     public:
         BaseAchievement();
@@ -55,6 +58,7 @@ class BaseAchievement
 
         std::string get_icon_path();
         void increment() { this->do_increment(); this->validate_completion(); };
+        void increment_by_n(res_count_t n) { this->do_increment_by_n(n); this->validate_completion(); };
 };
 
 ///CountAchievement checks a simple int type, like count of ingredient
@@ -66,6 +70,7 @@ class CountAchievement : public BaseAchievement
         res_count_t _target_count;
 
         virtual void do_increment() override;
+        virtual void do_increment_by_n(res_count_t n) override;
 
     public:
         CountAchievement(res_count_t current, res_count_t target);

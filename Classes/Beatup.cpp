@@ -33,6 +33,7 @@
 #include "ui/UILoadingBar.h"
 #include "ui/UIText.h"
 #include "ui/UIButton.h"
+#include "goals/Achievement.h"
 
 USING_NS_CC;
 
@@ -178,6 +179,11 @@ int Beatup::get_total_hits()
 
 void Beatup::add_total_coin(res_count_t x)
 {
+    if (x > 0.1) {
+        auto achievement_manager = AchievementManager::getInstance();
+        std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalCoins);
+        achievement->increment_by_n(x);
+    };
     this->_total_coins += x;
     //DataManager::incr_key("total_coin_key", x);
 };
