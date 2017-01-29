@@ -24,7 +24,7 @@ std::shared_ptr<BaseAchievement> AchievementManager::getAchievement(AchievementT
     std::shared_ptr<BaseAchievement> new_achievement = NULL;
     if (achv_type == AchievementType::TotalTaps)
     {
-        new_achievement = std::make_shared<CountAchievement>();
+        new_achievement = std::make_shared<CountAchievement>(0.0, 15.0);
     }
     else
     {
@@ -56,13 +56,19 @@ std::string BaseAchievement::get_icon_path()
     return this->_icon_path;
 };
 
-CountAchievement::CountAchievement()
+CountAchievement::CountAchievement(res_count_t current, res_count_t target)
 {
     //TODO load from file
-    this->_count = 0.0;
+    this->_current_count = current;
+    this->_target_count = target;
 };
 
-void CountAchievement::increment()
+void CountAchievement::do_increment()
 {
-    this->_count += 1.0;
+    this->_current_count += 1.0;
+};
+
+void CountAchievement::validate_completion()
+{
+    this->set_completed(this->_current_count >= this->_target_count);
 };

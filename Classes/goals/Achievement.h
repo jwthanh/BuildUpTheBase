@@ -40,16 +40,21 @@ class BaseAchievement
         bool _completed;
         std::string _icon_path;
 
+        //actual incrementing function called by ::increment
+        virtual void do_increment() = 0;
+
     public:
         BaseAchievement();
 
+        //boolean properties
         bool get_completed();
         void set_completed(bool completed);
 
-        // virtual void save() = 0;
+        ///check and update _completed
+        virtual void validate_completion() = 0;
 
         std::string get_icon_path();
-        virtual void increment() = 0;
+        void increment() { this->do_increment(); this->validate_completion(); };
 };
 
 ///CountAchievement checks a simple int type, like count of ingredient
@@ -57,11 +62,14 @@ class BaseAchievement
 class CountAchievement : public BaseAchievement
 {
     private:
-        res_count_t _count;
+        res_count_t _current_count;
+        res_count_t _target_count;
+
+        virtual void do_increment() override;
 
     public:
-        CountAchievement();
+        CountAchievement(res_count_t current, res_count_t target);
+        virtual void validate_completion() override;
 
-        virtual void increment() override;
 };
 #endif
