@@ -6,6 +6,7 @@
 #include "ui/UILayout.h"
 #include "ui/UIText.h"
 #include "ui/UIButton.h"
+#include "ui/UIPageView.h"
 #include "ui/UITextField.h"
 
 #include "magic_particles/MagicEmitter.h"
@@ -1064,13 +1065,38 @@ void GameDirector::switch_to_reset_menu()
     scene->setName("reset_scene");
     set_default_key_handler(scene);
 
-    auto equipment_scene = get_prebuilt_node_from_csb("editor/scenes/reset_scene.csb");
-    auto panel = dynamic_cast<cocos2d::ui::Layout*>(equipment_scene->getChildByName("panel"));
+    auto reset_scene = get_prebuilt_node_from_csb("editor/scenes/reset_scene.csb");
+    auto panel = dynamic_cast<cocos2d::ui::Layout*>(reset_scene->getChildByName("panel"));
     panel->removeFromParent();
     scene->addChild(panel);
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
     prep_back_button(back_btn);
+
+    cocos2d::ui::ListView* reset_pageview = dynamic_cast<cocos2d::ui::ListView*>(panel->getChildByName("reset_listview"));
+
+    for (int i = 0; i < 25; i++)
+    {
+        auto nuitem = NuItem::create(reset_pageview);
+        nuitem->set_title("RESET STAT");
+        nuitem->set_description("DESCRIPTION OF STAT BEING RESET");
+
+        //reset size to width of container
+        nuitem->button->setContentSize({ reset_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
+
+        // nuitem->set_image(item->img_path, ui::Widget::TextureResType::LOCAL);
+
+        nuitem->set_cost_lbl("");
+
+        nuitem->button->addTouchEventListener([nuitem](Ref* sender, ui::Widget::TouchEventType type){
+            if (type == ui::Widget::TouchEventType::ENDED)
+            {
+                do_vibrate(16);
+                CCLOG("OH NO YOU RESET SOMETHING");
+            }
+        });
+
+    }
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);

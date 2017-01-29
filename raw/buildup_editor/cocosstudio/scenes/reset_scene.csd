@@ -37,7 +37,7 @@
                 <OutlineColor A="255" R="26" G="26" B="26" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="desc_lbl" ActionTag="-2123619382" Tag="237" IconVisible="False" LeftMargin="52.3922" RightMargin="52.3925" TopMargin="81.7877" BottomMargin="523.2123" IsCustomSize="True" FontSize="20" LabelText="WARNING. Permanently resets progress!" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="desc_lbl" ActionTag="-2123619382" Tag="237" IconVisible="False" LeftMargin="52.3922" RightMargin="52.3925" TopMargin="81.7877" BottomMargin="523.2123" IsCustomSize="True" FontSize="20" LabelText="WARNING: Permanently resets progress!" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="855.2153" Y="35.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="479.9999" Y="540.7123" />
@@ -49,14 +49,14 @@
                 <OutlineColor A="255" R="26" G="26" B="26" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="reset_pageview" ActionTag="-1493930862" Tag="238" IconVisible="False" LeftMargin="183.0000" RightMargin="94.0000" TopMargin="136.9997" BottomMargin="45.0003" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
-                <Size X="683.0000" Y="458.0000" />
+              <AbstractNodeData Name="reset_listview" ActionTag="-1493930862" Tag="238" IconVisible="False" LeftMargin="182.9997" RightMargin="-622.9998" TopMargin="137.0004" BottomMargin="-422.0004" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+                <Size X="1400.0000" Y="925.0000" />
                 <AnchorPoint ScaleY="1.0000" />
-                <Position X="183.0000" Y="503.0003" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <Position X="182.9997" Y="502.9996" />
+                <Scale ScaleX="0.5000" ScaleY="0.5000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.1906" Y="0.7859" />
-                <PreSize X="0.7115" Y="0.7156" />
+                <PreSize X="1.4583" Y="1.4453" />
                 <SingleColor A="255" R="150" G="150" B="255" />
                 <FirstColor A="255" R="150" G="150" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
