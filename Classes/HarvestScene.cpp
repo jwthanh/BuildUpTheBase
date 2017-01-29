@@ -185,7 +185,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
 
         // GameDirector::switch_to_equipment_menu();
-        GameDirector::switch_to_reset_menu();
+        // GameDirector::switch_to_reset_menu();
+        GameDirector::switch_to_achievement_menu();
+
+
+
         // auto popup_panel = GameLogic::get_popup_panel();
         // popup_panel->animate_open();
 

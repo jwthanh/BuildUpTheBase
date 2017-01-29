@@ -1115,3 +1115,56 @@ void GameDirector::switch_to_reset_menu()
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
 };
+
+void GameDirector::switch_to_achievement_menu()
+{
+    auto scene = cocos2d::Scene::create();
+    scene->setName("achievement_scene");
+    set_default_key_handler(scene);
+
+    auto achievement_scene = get_prebuilt_node_from_csb("editor/scenes/achievement_scene.csb");
+    auto panel = dynamic_cast<cocos2d::ui::Layout*>(achievement_scene->getChildByName("panel"));
+    panel->removeFromParent();
+    scene->addChild(panel);
+
+    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
+    prep_back_button(back_btn);
+
+    cocos2d::ui::ListView* achievement_pageview = dynamic_cast<cocos2d::ui::ListView*>(panel->getChildByName("achievement_listview"));
+
+    struct achievement_config {
+        std::string title;
+        std::string description;
+    };
+
+    std::vector<achievement_config> configs {
+        {
+            "Achievement 1",
+            "Some description",
+        },
+        {
+            "Achievement 2",
+            "Another description",
+        }
+    };
+
+    for (auto& config : configs)
+    {
+        auto nuitem = NuItem::create(achievement_pageview);
+        nuitem->set_title(config.title);
+        nuitem->set_description(config.description);
+
+        //reset size to width of container
+        nuitem->button->setContentSize({ achievement_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
+
+        nuitem->button->addTouchEventListener([config](Ref* sender, ui::Widget::TouchEventType type){
+            if (type == ui::Widget::TouchEventType::ENDED)
+            {
+                do_vibrate(16);
+            }
+        });
+    }
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
