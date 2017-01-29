@@ -34,6 +34,8 @@
 #include "utilities/vibration.h"
 #include "ui/UIImageView.h"
 #include "goals/Achievement.h"
+#include "base/CCEventListenerKeyboard.h"
+#include "base/CCEventDispatcher.h"
 
 
 USING_NS_CC;
@@ -1035,6 +1037,19 @@ void GameDirector::switch_to_reset_menu()
 {
     auto scene = cocos2d::Scene::create();
     scene->setName("reset_scene");
+
+    auto go_back_func = [](EventKeyboard::KeyCode keyCode, Event* event){
+        if (keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
+        {
+            do_vibrate(16);
+            auto director = Director::getInstance();
+            director->popScene();
+            event->stopPropagation();
+        }
+    };
+    auto pKeybackListener = cocos2d::EventListenerKeyboard::create();
+    pKeybackListener->onKeyReleased = go_back_func;
+    scene->getEventDispatcher()->addEventListenerWithSceneGraphPriority(pKeybackListener, scene);
 
     auto equipment_scene = get_prebuilt_node_from_csb("editor/scenes/reset_scene.csb");
     auto panel = dynamic_cast<cocos2d::ui::Layout*>(equipment_scene->getChildByName("panel"));
