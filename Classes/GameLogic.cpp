@@ -471,6 +471,23 @@ bool GameLogic::get_can_vibrate()
     return this->_can_vibrate;
 };
 
+void set_default_key_handler(Scene* scene)
+{
+    auto go_back_func = [](EventKeyboard::KeyCode keyCode, Event* event){
+        if (keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
+        {
+            do_vibrate(16);
+            auto director = Director::getInstance();
+            director->popScene();
+            event->stopPropagation();
+        }
+    };
+    auto pKeybackListener = cocos2d::EventListenerKeyboard::create();
+    pKeybackListener->onKeyReleased = go_back_func;
+    scene->getEventDispatcher()->addEventListenerWithSceneGraphPriority(pKeybackListener, scene);
+
+};
+
 void GameDirector::switch_to_building_menu()
 {
     auto scene = cocos2d::Scene::create();
@@ -504,6 +521,8 @@ void GameDirector::switch_to_city_menu()
     auto scene = cocos2d::Scene::create();
     scene->setName("city_wrapper_scene");
     scene->addChild(city_menu_scene_node);
+
+    set_default_key_handler(scene);
 
     //title
     auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
@@ -825,6 +844,8 @@ void GameDirector::switch_to_miner_menu()
     scene->setName("city_wrapper_scene");
     scene->addChild(miner_scene);
 
+    set_default_key_handler(scene);
+
     //title
     //auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
     //set_aliasing(title_lbl);
@@ -933,6 +954,7 @@ void GameDirector::switch_to_items_menu()
 
 	auto scene = ItemScene::createScene();
 	scene->setName("item_scene");
+    set_default_key_handler(scene);
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
@@ -943,6 +965,7 @@ void GameDirector::switch_to_item_altar_menu()
 
     auto scene = AltarItemScene::createScene();
     scene->setName("altar_item_scene");
+    set_default_key_handler(scene);
 
 
     auto director = cocos2d::Director::getInstance();
@@ -954,6 +977,7 @@ void GameDirector::switch_to_item_equip_menu(ItemSlotType slot_type)
 
     auto scene = EquipItemScene::createScene(slot_type);
     scene->setName("equip_item_scene");
+    set_default_key_handler(scene);
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
@@ -963,6 +987,7 @@ void GameDirector::switch_to_equipment_menu()
 {
     auto scene = cocos2d::Scene::create();
     scene->setName("equipment_scene");
+    set_default_key_handler(scene);
 
     auto equipment_scene = get_prebuilt_node_from_csb("editor/scenes/equipment_scene.csb");
     auto panel = dynamic_cast<cocos2d::ui::Layout*>(equipment_scene->getChildByName("panel"));
@@ -1037,19 +1062,7 @@ void GameDirector::switch_to_reset_menu()
 {
     auto scene = cocos2d::Scene::create();
     scene->setName("reset_scene");
-
-    auto go_back_func = [](EventKeyboard::KeyCode keyCode, Event* event){
-        if (keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
-        {
-            do_vibrate(16);
-            auto director = Director::getInstance();
-            director->popScene();
-            event->stopPropagation();
-        }
-    };
-    auto pKeybackListener = cocos2d::EventListenerKeyboard::create();
-    pKeybackListener->onKeyReleased = go_back_func;
-    scene->getEventDispatcher()->addEventListenerWithSceneGraphPriority(pKeybackListener, scene);
+    set_default_key_handler(scene);
 
     auto equipment_scene = get_prebuilt_node_from_csb("editor/scenes/reset_scene.csb");
     auto panel = dynamic_cast<cocos2d::ui::Layout*>(equipment_scene->getChildByName("panel"));
