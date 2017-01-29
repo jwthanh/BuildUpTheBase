@@ -268,6 +268,8 @@ bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
     if (this->_hitted)
     {
         auto achievement_manager = AchievementManager::getInstance();
+        std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalTaps);
+        achievement->increment();
         this->animate_touch_start(touch);
     }
 

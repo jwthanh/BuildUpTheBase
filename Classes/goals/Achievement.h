@@ -2,8 +2,11 @@
 #define ACHIEVEMENT_H
 
 #include <string>
+#include <memory>
 
-class Achievement;
+#include "constants.h"
+
+class BaseAchievement;
 class AchievementManager;
 
 
@@ -20,8 +23,12 @@ class AchievementManager
     protected:
         static AchievementManager* _instance;
 
+        using cache_map_t = std::map<AchievementType, std::shared_ptr<BaseAchievement>>;
+        cache_map_t cached_achievements;
+
     public:
         static AchievementManager* getInstance();
+        std::shared_ptr<BaseAchievement> getAchievement(AchievementType achv_type);
 };
 
 ///Represents something the user does
@@ -42,13 +49,19 @@ class BaseAchievement
         // virtual void save() = 0;
 
         std::string get_icon_path();
+        virtual void increment() = 0;
 };
-//
-// ///IntAchievement checks a simple int type, like count of ingredient
-// /// and saves it
-// class IntAchievement : public BaseAchievement
-// {
-//     public:
-//         void save() override;
-// };
+
+///CountAchievement checks a simple int type, like count of ingredient
+/// and saves it
+class CountAchievement : public BaseAchievement
+{
+    private:
+        res_count_t _count;
+
+    public:
+        CountAchievement();
+
+        virtual void increment() override;
+};
 #endif
