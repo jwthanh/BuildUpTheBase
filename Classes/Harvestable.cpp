@@ -566,6 +566,10 @@ void DumpsterHarvestable::shatter()
     auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
     harvestable_manager->reset_item();
 
+    auto achievement_manager = AchievementManager::getInstance();
+    std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItems);
+    achievement->increment();
+
     BUILDUP->items.push_back(scavenge_item);
     auto popup_panel = GameLogic::get_popup_panel();
     popup_panel->set_string("You've found an item: "+scavenge_item->get_name()+"!");

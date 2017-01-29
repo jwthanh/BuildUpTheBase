@@ -12,6 +12,7 @@
 #include "2d/CCActionInstant.h"
 #include "2d/CCSprite.h"
 #include "2d/CCParticleExamples.h"
+#include "goals/Achievement.h"
 
 
 enum class Directions {
@@ -302,7 +303,10 @@ void Miner::init_start_pos(cocos2d::Vec2 new_start_pos)
 
 void Miner::reset()
 {
-    CCLOG("Miner::reset incrementing depth");
+    auto achievement_manager = AchievementManager::getInstance();
+    std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalDepth);
+    achievement->increment();
+
     this->depth += 1.0;
 
     // deletes the tilemap and rebuilds it from scratch

@@ -19,6 +19,7 @@
 #include "Util.h"
 #include "Equipment.h"
 #include "utilities/vibration.h"
+#include "goals/Achievement.h"
 
 using namespace cocos2d;
 
@@ -271,6 +272,10 @@ void AltarItemScene::init_callbacks()
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 item->level += 3;
+
+                auto achievement_manager = AchievementManager::getInstance();
+                std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItems);
+                achievement->increment();
 
                 cocos2d::Director::getInstance()->popScene();
                 do_vibrate(16);

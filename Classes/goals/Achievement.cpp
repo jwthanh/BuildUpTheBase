@@ -34,6 +34,18 @@ std::shared_ptr<BaseAchievement> AchievementManager::getAchievement(AchievementT
     {
         new_achievement = std::make_shared<CountAchievement>(0.0, 1.0);
     }
+    else if (achv_type == AchievementType::TotalDepth)
+    {
+        new_achievement = std::make_shared<CountAchievement>(0.0, 5.0);
+    }
+    else if (achv_type == AchievementType::TotalItems)
+    {
+        new_achievement = std::make_shared<CountAchievement>(0.0, 5.0);
+    }
+    else if (achv_type == AchievementType::TotalItemsPlaced)
+    {
+        new_achievement = std::make_shared<CountAchievement>(0.0, 5.0);
+    }
     else
     {
         CCLOG("failed trying to getAchievement: unrecognized achievement type");

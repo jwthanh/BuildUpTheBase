@@ -14,6 +14,9 @@ enum class AchievementType {
     TotalTaps = 0,
     TotalCoins = 1,
     TotalKills = 2,
+    TotalDepth = 3,
+    TotalItems = 4,
+    TotalItemsPlaced = 5,
 };
 
 
