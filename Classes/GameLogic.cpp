@@ -1137,15 +1137,13 @@ void GameDirector::switch_to_achievement_menu()
         std::string description;
     };
 
-    std::vector<achievement_config> configs {
-        {
-            "Achievement 1",
-            "Some description",
-        },
-        {
-            "Achievement 2",
-            "Another description",
-        }
+    std::vector<achievement_config> configs;
+    for (auto& achievement : AchievementManager::getInstance()->getAchievements())
+    {
+        configs.push_back({
+            achievement->get_name(),
+            "Some description"
+        });
     };
 
     for (auto& config : configs)

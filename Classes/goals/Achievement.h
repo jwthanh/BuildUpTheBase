@@ -34,6 +34,7 @@ class AchievementManager
     public:
         static AchievementManager* getInstance();
         std::shared_ptr<BaseAchievement> getAchievement(AchievementType achv_type);
+        std::vector<std::shared_ptr<BaseAchievement>> getAchievements();
 };
 
 ///Represents something the user does
@@ -50,11 +51,14 @@ class BaseAchievement
         virtual void do_increment_by_n(res_count_t n) = 0;
 
     public:
-        BaseAchievement();
+        const AchievementType achievement_type;
+        BaseAchievement(AchievementType achievement_type);
 
         //boolean properties
         bool get_completed();
         void set_completed(bool completed);
+
+        std::string get_name();
 
         ///check and update _completed
         virtual void validate_completion() = 0;
@@ -76,7 +80,7 @@ class CountAchievement : public BaseAchievement
         virtual void do_increment_by_n(res_count_t n) override;
 
     public:
-        CountAchievement(res_count_t current, res_count_t target);
+        CountAchievement(AchievementType achievement_type, res_count_t current, res_count_t target);
         virtual void validate_completion() override;
 
 };
