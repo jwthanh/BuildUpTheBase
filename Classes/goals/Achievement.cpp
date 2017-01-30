@@ -4,6 +4,14 @@
 
 
 AchievementManager* AchievementManager::_instance = NULL;
+const std::map<AchievementType, std::pair<std::string, std::string>> AchievementManager::info_map = {
+    { AchievementType::TotalTaps, {"Total Taps", "Times tapped the harvestables" }},
+    { AchievementType::TotalCoins, {"Total Coins", "Total coins gathered" }},
+    { AchievementType::TotalKills, {"Total Kills", "Total kills in The Arena" }},
+    { AchievementType::TotalDepth, {"Total Depth", "Total depth reached digging" }},
+    { AchievementType::TotalItems, {"Total Items Scavenged", "Total Items found by scavenging The Dump" }},
+    { AchievementType::TotalItemsPlaced, {"Total Items Upgraded", "Total Items placed on the altar" }}
+};
 
 AchievementManager* AchievementManager::getInstance()
 {
@@ -74,7 +82,12 @@ BaseAchievement::BaseAchievement(AchievementType achievement_type)
 
 std::string BaseAchievement::get_name()
 {
-    return std::to_string((int)this->achievement_type);
+    return AchievementManager::info_map.at(this->achievement_type).first;
+};
+
+std::string BaseAchievement::get_description()
+{
+    return AchievementManager::info_map.at(this->achievement_type).second;
 };
 
 bool BaseAchievement::get_completed()

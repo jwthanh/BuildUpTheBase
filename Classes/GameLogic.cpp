@@ -1142,7 +1142,7 @@ void GameDirector::switch_to_achievement_menu()
     {
         configs.push_back({
             achievement->get_name(),
-            "Some description"
+            achievement->get_description()
         });
     };
 

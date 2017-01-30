@@ -32,6 +32,7 @@ class AchievementManager
         cache_map_t cached_achievements;
 
     public:
+        static const std::map<AchievementType, std::pair<std::string, std::string>> info_map;
         static AchievementManager* getInstance();
         std::shared_ptr<BaseAchievement> getAchievement(AchievementType achv_type);
         std::vector<std::shared_ptr<BaseAchievement>> getAchievements();
@@ -59,6 +60,7 @@ class BaseAchievement
         void set_completed(bool completed);
 
         std::string get_name();
+        std::string get_description();
 
         ///check and update _completed
         virtual void validate_completion() = 0;
