@@ -88,7 +88,7 @@
                 </Children>
                 <AnchorPoint />
                 <Position X="185.1844" Y="118.9135" />
-                <Scale ScaleX="1.9981" ScaleY="1.8664" />
+                <Scale ScaleX="2.0000" ScaleY="2.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2315" Y="0.5946" />
                 <PreSize X="0.3125" Y="0.1500" />
@@ -115,7 +115,7 @@
                 </Children>
                 <AnchorPoint />
                 <Position X="185.1844" Y="25.5952" />
-                <Scale ScaleX="1.9981" ScaleY="1.8664" />
+                <Scale ScaleX="2.0000" ScaleY="2.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2315" Y="0.1280" />
                 <PreSize X="0.3750" Y="0.2250" />
