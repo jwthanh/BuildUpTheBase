@@ -1132,30 +1132,24 @@ void GameDirector::switch_to_achievement_menu()
 
     cocos2d::ui::ListView* achievement_pageview = dynamic_cast<cocos2d::ui::ListView*>(panel->getChildByName("achievement_listview"));
 
-    struct achievement_config {
-        std::string title;
-        std::string description;
-    };
-
-    std::vector<achievement_config> configs;
-    for (auto& achievement : AchievementManager::getInstance()->getAchievements())
-    {
-        configs.push_back({
-            achievement->get_name(),
-            achievement->get_description()
-        });
-    };
-
-    for (auto& config : configs)
+    for (std::shared_ptr<BaseAchievement>& achievement : AchievementManager::getInstance()->getAchievements())
     {
         auto nuitem = NuItem::create(achievement_pageview);
-        nuitem->set_title(config.title);
-        nuitem->set_description(config.description);
+        nuitem->set_title(achievement->get_name());
+        nuitem->set_description(achievement->get_description());
 
         //reset size to width of container
         nuitem->button->setContentSize({ achievement_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
+        nuitem->set_progress_panel_visible(true);
+        auto counted_achievement = dynamic_cast<CountAchievement*>(achievement.get());
+        if (counted_achievement != NULL) {
+            auto current = counted_achievement->get_current_count();
+            nuitem->current_lbl->setString(beautify_double(current));
+            auto target = counted_achievement->get_target_count();
+            nuitem->total_lbl->setString(beautify_double(target));
+        };
 
-        nuitem->button->addTouchEventListener([config](Ref* sender, ui::Widget::TouchEventType type){
+        nuitem->button->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 do_vibrate(16);

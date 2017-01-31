@@ -50,6 +50,11 @@ class NuItem : public cocos2d::ui::Widget
         cocos2d::ui::Text* cost_lbl;
         cocos2d::ui::Text* count_lbl;
 
+        //progress panel for achievements
+        cocos2d::ui::Text* current_lbl;
+        cocos2d::ui::Text* middle_lbl;
+        cocos2d::ui::Text* total_lbl;
+
         std::string _original_image_path;
 
         void set_image(std::string path, Widget::TextureResType texture_type = Widget::TextureResType::PLIST);
@@ -66,6 +71,9 @@ class NuItem : public cocos2d::ui::Widget
         //handle stuff like been bought, can be pressed etc
         spClock cooldown;
         virtual void update_func(float dt);
+
+        //only the children not actually the panel
+        void set_progress_panel_visible(bool visible);
 };
 
 class BuildingNuItem : public NuItem

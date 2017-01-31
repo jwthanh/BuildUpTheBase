@@ -5,7 +5,7 @@
 
 AchievementManager* AchievementManager::_instance = NULL;
 const std::map<AchievementType, std::pair<std::string, std::string>> AchievementManager::info_map = {
-    { AchievementType::TotalTaps, {"Total Taps", "Times tapped the harvestables" }},
+    { AchievementType::TotalTaps, {"Total Taps", "Total harvestables tapped" }},
     { AchievementType::TotalCoins, {"Total Coins", "Total coins gathered" }},
     { AchievementType::TotalKills, {"Total Kills", "Total kills in The Arena" }},
     { AchievementType::TotalDepth, {"Total Depth", "Total depth reached digging" }},

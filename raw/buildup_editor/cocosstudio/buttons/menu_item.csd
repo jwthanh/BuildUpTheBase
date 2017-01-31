@@ -9,6 +9,57 @@
           <AbstractNodeData Name="menu_item_btn" ActionTag="-490875392" Tag="21" IconVisible="False" LeftMargin="-400.0000" RightMargin="-400.0000" TopMargin="-100.0000" BottomMargin="-100.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="800.0000" Y="200.0000" />
             <Children>
+              <AbstractNodeData Name="progress_panel" ActionTag="-1327047022" Tag="258" IconVisible="False" RightMargin="-600.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" ctype="PanelObjectData">
+                <Size X="1400.0000" Y="200.0000" />
+                <Children>
+                  <AbstractNodeData Name="current_lbl" ActionTag="-714968081" Tag="279" IconVisible="False" LeftMargin="963.9390" RightMargin="187.0610" TopMargin="32.0118" BottomMargin="127.9882" FontSize="36" LabelText="123,456QuX" HorizontalAlignmentType="HT_Right" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="250.0000" Y="42.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="1088.4390" Y="147.9882" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.7775" Y="0.7399" />
+                    <PreSize X="0.1779" Y="0.2000" />
+                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                    <OutlineColor A="255" R="0" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="middle_lbl" ActionTag="1925416452" Tag="280" IconVisible="False" LeftMargin="1008.9388" RightMargin="232.0612" TopMargin="72.0115" BottomMargin="87.9885" FontSize="36" LabelText="of out" HorizontalAlignmentType="HT_Right" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="160.0000" Y="42.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="1088.4388" Y="107.9885" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.7775" Y="0.5399" />
+                    <PreSize X="0.1136" Y="0.2000" />
+                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                    <OutlineColor A="255" R="0" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="total_lbl" ActionTag="-1774625865" Tag="281" IconVisible="False" LeftMargin="889.4390" RightMargin="112.5610" TopMargin="112.0114" BottomMargin="47.9886" FontSize="36" LabelText="123,456QuX total" HorizontalAlignmentType="HT_Right" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="399.0000" Y="42.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="1088.4390" Y="67.9886" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.7775" Y="0.3399" />
+                    <PreSize X="0.2843" Y="0.2000" />
+                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                    <OutlineColor A="255" R="0" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="1.7500" Y="1.0000" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
               <AbstractNodeData Name="item_icon" ActionTag="647280568" Tag="14" IconVisible="False" LeftMargin="46.9999" RightMargin="689.0001" TopMargin="68.0000" BottomMargin="68.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
                 <Size X="64.0000" Y="64.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

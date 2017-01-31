@@ -85,5 +85,8 @@ class CountAchievement : public BaseAchievement
         CountAchievement(AchievementType achievement_type, res_count_t current, res_count_t target);
         virtual void validate_completion() override;
 
+        res_count_t get_current_count() { return _current_count; };
+        res_count_t get_target_count() { return _target_count; };
+
 };
 #endif
