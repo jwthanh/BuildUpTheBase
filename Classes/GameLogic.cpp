@@ -1149,6 +1149,12 @@ void GameDirector::switch_to_achievement_menu()
             nuitem->total_lbl->setString(beautify_double(target));
         };
 
+        if (achievement->get_completed()){
+            nuitem->set_image("grey_boxCheckmark.png");
+            Color3B selected_color = {82, 148, 126}; //green
+            try_set_node_color(nuitem->button, selected_color);
+        }
+
         nuitem->button->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
