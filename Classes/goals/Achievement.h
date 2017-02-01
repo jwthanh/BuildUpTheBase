@@ -11,6 +11,7 @@ class AchievementManager;
 
 
 enum class AchievementType {
+    None = -1,
     TotalTaps = 0,
     TotalCoins = 1,
     TotalKills = 2,
@@ -52,6 +53,11 @@ class BaseAchievement
         virtual void do_increment_by_n(res_count_t n) = 0;
 
     public:
+        using SubType = AchievementType;
+        static const std::map<SubType, std::string> type_map;
+        static std::string type_to_string(BaseAchievement::SubType type);
+        static BaseAchievement::SubType string_to_type(std::string string_type);
+
         const AchievementType achievement_type;
         BaseAchievement(AchievementType achievement_type);
 

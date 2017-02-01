@@ -13,6 +13,15 @@ const std::map<AchievementType, std::pair<std::string, std::string>> Achievement
     { AchievementType::TotalItemsPlaced, {"Total Items Upgraded", "Total Items placed on the altar" }}
 };
 
+const std::map<BaseAchievement::SubType, std::string> BaseAchievement::type_map = {
+    { AchievementType::TotalTaps, "total_taps"},
+    { AchievementType::TotalCoins, "total_coins"},
+    { AchievementType::TotalKills, "total_kills"},
+    { AchievementType::TotalDepth, "total_depths"},
+    { AchievementType::TotalItems, "total_items_scavenged"},
+    { AchievementType::TotalItemsPlaced, "total_items_upgraded"}
+};
+
 AchievementManager* AchievementManager::getInstance()
 {
     if (AchievementManager::_instance == NULL){
@@ -62,6 +71,31 @@ std::shared_ptr<BaseAchievement> AchievementManager::getAchievement(AchievementT
     this->cached_achievements[achv_type] = new_achievement;
 
     return new_achievement;
+};
+
+std::string BaseAchievement::type_to_string(BaseAchievement::SubType type)
+{
+    std::string result = "none";
+    for (auto pair : BaseAchievement::type_map)
+    {
+        if (type == pair.first) { return pair.second; }
+    }
+    return result;
+};
+
+BaseAchievement::SubType BaseAchievement::string_to_type(std::string string_type)
+{
+    BaseAchievement::SubType result = BaseAchievement::SubType::None;
+    std::transform(string_type.begin(), string_type.end(), string_type.begin(), ::tolower);
+    for (auto& pair : BaseAchievement::type_map)
+    {
+        if (pair.second == string_type)
+        {
+            return pair.first;
+        }
+    }
+
+    assert(false && "unknown type"); return result;
 };
 
 std::vector<std::shared_ptr<BaseAchievement>> AchievementManager::getAchievements()
