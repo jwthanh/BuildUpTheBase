@@ -971,18 +971,18 @@ void CraftingHarvestable::shatter()
         //FIXME reduce hardcoding maybe?
         if (result == Output::Single) {
             this->recipe->callback();
-            do_vibrate(10); //vibrate for two frames
+            do_vibrate(10); //vibrate normally
 
         } else if (result == Output::Double) {
             this->recipe->callback();
             this->recipe->callback();
-            do_vibrate(32+16); //vibrate for three frames
+            do_vibrate(20); //vibrate stronger
 
         } else if (result == Output::Triple) {
             this->recipe->callback();
             this->recipe->callback();
             this->recipe->callback();
-            do_vibrate(32+32); //vibrate for four frames
+            do_vibrate(30); //vibrate even stronger
         }
 
         this->recipe->current_clicks = 0;
