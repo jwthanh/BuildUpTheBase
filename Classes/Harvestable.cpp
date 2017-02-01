@@ -953,7 +953,6 @@ void CraftingHarvestable::shatter()
 
         RandomWeightMap<Output> boosted_output;
         boosted_output.add_item(Output::Single, 100);
-        Output result = boosted_output.get_item();
 
         if (GameLogic::getInstance()->equipment->recipe_slot->has_item())
         {
@@ -967,6 +966,8 @@ void CraftingHarvestable::shatter()
             boosted_output.add_item(Output::Double, 15);
             boosted_output.add_item(Output::Triple, 1);
         };
+
+        Output result = boosted_output.get_item();
 
         auto achievement_manager = AchievementManager::getInstance();
         std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalRecipesCrafted);
