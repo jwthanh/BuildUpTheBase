@@ -1,6 +1,8 @@
 #include "GameLogic.h"
 
 #include "base/CCDirector.h"
+#include "base/CCEventListenerKeyboard.h"
+#include "base/CCEventDispatcher.h"
 #include "2d/CCSprite.h"
 
 #include "ui/UILayout.h"
@@ -8,6 +10,9 @@
 #include "ui/UIButton.h"
 #include "ui/UIPageView.h"
 #include "ui/UITextField.h"
+#include "ui/UIImageView.h"
+
+#include "external/easylogging.h"
 
 #include "magic_particles/MagicEmitter.h"
 #include "magic_particles/mp_cocos.h"
@@ -21,7 +26,6 @@
 #include "Util.h"
 #include "MiscUI.h"
 #include "Modal.h"
-#include "external/easylogging.h"
 #include "HarvestScene.h"
 #include "Item.h"
 #include "StaticData.h"
@@ -33,10 +37,7 @@
 #include "HarvestableManager.h"
 #include "Tutorial.h"
 #include "utilities/vibration.h"
-#include "ui/UIImageView.h"
 #include "goals/Achievement.h"
-#include "base/CCEventListenerKeyboard.h"
-#include "base/CCEventDispatcher.h"
 
 
 USING_NS_CC;
