@@ -13,7 +13,7 @@ void do_vibrate(int milliseconds)
 #ifdef __ANDROID__
         vibrate(milliseconds);
 #else
-        CCLOG("vibrating");
+        CCLOG("vibrating for %ims", milliseconds);
 #endif
-    //CCLOG("in do_vibrate");
+
 };
