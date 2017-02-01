@@ -528,7 +528,7 @@ void BaseScene::create_building_choicelist()
         {
             CCLOG("CITY BUTTON TOUCHED");
             GameDirector::switch_to_city_menu();
-            do_vibrate(16);
+            do_vibrate(5);
         }
     };
     panel->addTouchEventListener(touch_handler);
@@ -979,7 +979,7 @@ void BaseScene::create_inventory_listview()
                     Sequence* seq = Sequence::create(EaseBackOut::create(Spawn::createWithTwoActions(move, scale)), NULL);
                     alert->runAction(seq);
 
-                    do_vibrate(32);
+                    do_vibrate(10);
                 };
             };
             new_item_panel->addTouchEventListener(on_touch_cb);
@@ -1196,7 +1196,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         if (type == ui::Widget::TouchEventType::ENDED)
         {
 
-            do_vibrate(16);
+            do_vibrate(5);
 
             auto end_pos = static_cast<ui::Widget*>(target)->getTouchEndPosition();
             auto move = MoveTo::create(0.25f, end_pos);
@@ -1316,12 +1316,12 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                     auto player_gold_lbl = this->getChildByName("player_info_panel")->getChildByName("player_gold_lbl");
                     animate_flash_action(player_gold_lbl, 0.1f, 1.2f, 1.0f, Color3B::GREEN);
 
-                    do_vibrate(32);
+                    do_vibrate(10);
                 }
                 else
                 {
                     //smaller vibrate if you can't sell any
-                    do_vibrate(16);
+                    do_vibrate(5);
                 };
             }
         });

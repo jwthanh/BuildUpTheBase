@@ -209,7 +209,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
     Ingredient::SubType ing_type = this->get_output_ing_type();
     if (this->building->can_fit_more_ingredients(ing_type) == false)
     {
-        do_vibrate(16);
+        do_vibrate(5);
 
         std::vector<std::string> choices = {
             "Upgrade building",
@@ -489,7 +489,7 @@ void TreeHarvestable::animate_touch_start(cocos2d::Touch* touch)
 
     //vibrate if player gets wood
     if (output == Ingredient::SubType::Wood){
-        do_vibrate(32);
+        do_vibrate(10);
     };
 
     this->set_output_ing_type(output);
@@ -673,7 +673,7 @@ void MiningHarvestable::animate_touch_start(cocos2d::Touch* touch)
 
     //vibrate if player gets wood
     if (output == Ingredient::SubType::Iron){
-        do_vibrate(32);
+        do_vibrate(10);
     };
 
     this->set_output_ing_type(output);
@@ -818,7 +818,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
     {
         ss << "Choose a recipe!";
         std::string floating_msg = ss.str();
-        do_vibrate(16);
+        do_vibrate(5);
         this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
 
         //move to Craft tab and shake it
@@ -852,7 +852,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
             }
 
             std::string floating_msg = ss.str();
-            do_vibrate(16);
+            do_vibrate(5);
             this->spawn_label_on_touch(touch, end_scale, duration, floating_msg, Color4B::RED);
         }
     }
@@ -971,7 +971,7 @@ void CraftingHarvestable::shatter()
         //FIXME reduce hardcoding maybe?
         if (result == Output::Single) {
             this->recipe->callback();
-            do_vibrate(32); //vibrate for two frames
+            do_vibrate(10); //vibrate for two frames
 
         } else if (result == Output::Double) {
             this->recipe->callback();
@@ -1262,7 +1262,7 @@ void FightingHarvestable::on_harvest()
         this->is_critical_hit = true;
         res_count_t crit_factor = this->get_combat_crit_factor();
         damage *= crit_factor;
-        do_vibrate(16);
+        do_vibrate(5);
     }
     else
     {

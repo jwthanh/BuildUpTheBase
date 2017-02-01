@@ -43,7 +43,7 @@ BaseModal::BaseModal(Node* parent)
 
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(this->_node->getChildByName("close_panel"));
     auto close_modal = [this, layer_color, exit_layout]() {
-            do_vibrate(16);
+            do_vibrate(5);
             this->_node->removeFromParent();
             layer_color->removeFromParent();
             exit_layout->removeFromParent();
@@ -114,7 +114,7 @@ PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(16);
+            do_vibrate(5);
             this->animate_close();
         }
     });

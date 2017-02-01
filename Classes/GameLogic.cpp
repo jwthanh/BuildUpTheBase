@@ -477,7 +477,7 @@ void set_default_key_handler(Scene* scene)
     auto go_back_func = [](EventKeyboard::KeyCode keyCode, Event* event){
         if (keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
         {
-            do_vibrate(16);
+            do_vibrate(5);
             auto director = Director::getInstance();
             director->popScene();
             event->stopPropagation();
@@ -571,7 +571,7 @@ void GameDirector::switch_to_city_menu()
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(32); //vibrate for two frames
+            do_vibrate(10); //vibrate for two frames
             CCLOG("Add money");
             double coins = BEATUP->get_total_coins();
             if (coins > 10)
@@ -601,7 +601,7 @@ void GameDirector::switch_to_city_menu()
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(32); //vibrate for two frames
+            do_vibrate(10); //vibrate for two frames
             mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
             res_count_t _def = 0;
             IngredientSubType ing_type = IngredientSubType::Soul;
@@ -652,7 +652,7 @@ void GameDirector::switch_to_city_menu()
         {
             auto director = Director::getInstance();
             director->popScene();
-            do_vibrate(16);
+            do_vibrate(5);
         }
     });
     load_default_button_textures(back_btn);
@@ -665,7 +665,7 @@ void GameDirector::switch_to_city_menu()
     items_scene_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(16);
+            do_vibrate(5);
             GameDirector::switch_to_items_menu();
         }
     });
@@ -679,7 +679,7 @@ void GameDirector::switch_to_city_menu()
     miner_scene_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(16);
+            do_vibrate(5);
             GameDirector::switch_to_miner_menu();
         }
     });
@@ -693,7 +693,7 @@ void GameDirector::switch_to_city_menu()
     item_equip_scene_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(16);
+            do_vibrate(5);
             GameDirector::switch_to_equipment_menu();
         }
     });
@@ -863,7 +863,7 @@ void GameDirector::switch_to_miner_menu()
             serializer.serialize();
             auto director = Director::getInstance();
             director->popScene();
-            do_vibrate(16);
+            do_vibrate(5);
         }
     });
     load_default_button_textures(back_btn);
@@ -887,7 +887,7 @@ void GameDirector::switch_to_miner_menu()
 
             GameDirector::switch_to_item_altar_menu();
             miner->reset(); //TODO reenable this after testing
-            do_vibrate(16);
+            do_vibrate(5);
         }
     });
     load_default_button_textures(explode_btn);
@@ -922,7 +922,7 @@ void GameDirector::switch_to_miner_menu()
             {
                 BUILDUP->remove_shared_ingredients_from_all(Ingredient::SubType::Minecart, 1);
                 miner->reset();
-                do_vibrate(16);
+                do_vibrate(5);
 
                 MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
                 serializer.serialize();
@@ -1106,7 +1106,7 @@ void GameDirector::switch_to_reset_menu()
         nuitem->button->addTouchEventListener([config](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                do_vibrate(16);
+                do_vibrate(5);
                 config.reset_callback();
             }
         });
@@ -1152,7 +1152,7 @@ void GameDirector::switch_to_achievement_menu()
         nuitem->button->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                do_vibrate(16);
+                do_vibrate(5);
             }
         });
     }

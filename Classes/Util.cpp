@@ -278,7 +278,7 @@ void bind_touch_ended(cocos2d::ui::Widget* widget, std::function<void(void)> cal
     {
         if (evt == cocos2d::ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(16);
+            do_vibrate(5);
             callback();
         }
     };

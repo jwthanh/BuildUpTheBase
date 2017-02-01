@@ -86,7 +86,7 @@ void ItemScene::init_callbacks()
                 BEATUP->add_total_coin(item->get_effective_cost());
 
                 this->reset_detail_panel();
-                do_vibrate(16);
+                do_vibrate(5);
             }
         });
 
@@ -108,7 +108,7 @@ void ItemScene::init_callbacks()
         nuitem->button->addTouchEventListener([item, nuitem, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                do_vibrate(16);
+                do_vibrate(5);
                 update_detail_panel_on_touch(nuitem, item);
             }
         });
@@ -175,7 +175,7 @@ void ItemScene::init_back_btn(cocos2d::Node* panel)
     back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(16);
+            do_vibrate(5);
             auto director = Director::getInstance();
             director->popScene();
         }
@@ -278,7 +278,7 @@ void AltarItemScene::init_callbacks()
                 achievement->increment();
 
                 cocos2d::Director::getInstance()->popScene();
-                do_vibrate(16);
+                do_vibrate(5);
             }
         });
 
@@ -300,7 +300,7 @@ void AltarItemScene::init_callbacks()
         nuitem->button->addTouchEventListener([item, nuitem, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                do_vibrate(16);
+                do_vibrate(5);
                 update_detail_panel_on_touch(nuitem, item);
             }
         });
@@ -435,7 +435,7 @@ void EquipItemScene::init_callbacks()
         this->item_sell_btn->addTouchEventListener([this, item](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                do_vibrate(16);
+                do_vibrate(5);
                 GameLogic::getInstance()->equipment->get_slot_by_type(this->filtered_slot_type)->set_item(item);
                 cocos2d::Director::getInstance()->popScene();
             }
@@ -460,7 +460,7 @@ void EquipItemScene::init_callbacks()
         nuitem->button->addTouchEventListener([update_detail_panel_on_touch, item, nuitem](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
-                do_vibrate(16);
+                do_vibrate(5);
                 update_detail_panel_on_touch(nuitem, item);
             }
         });

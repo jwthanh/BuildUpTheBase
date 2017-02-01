@@ -99,7 +99,7 @@ void load_default_button_textures(cocos2d::ui::Button* button)
     //{
     //    if (evt == ui::Widget::TouchEventType::ENDED)
     //    {
-    //        do_vibrate(16);
+    //        do_vibrate(5);
     //    }
     //});
 };
@@ -239,7 +239,7 @@ void prep_back_button(ui::Button* back_button)
     back_button->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
         if (type == ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(16);
+            do_vibrate(5);
             auto director = Director::getInstance();
             director->popScene();
         }

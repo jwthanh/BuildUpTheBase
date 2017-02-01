@@ -192,7 +192,7 @@ void NuItem::set_touch_ended_callback(std::function<void(void)> callback)
         {
             callback();
 
-            do_vibrate(32); //vibrate for two frames
+            do_vibrate(10); //vibrate for two frames
             this->button->runAction(FShake::actionWithDuration(0.1f, 5.0f));
         }
     });

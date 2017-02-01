@@ -243,7 +243,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
         auto result = this->tabs.button_map[target_button];
         activate_tab(result.second, result.first);
 
-        do_vibrate(32);
+        do_vibrate(10);
 
     };
 };
@@ -991,7 +991,7 @@ void SideListView::setup_powers_listview_as_powers()
 
             menu_item->set_touch_ended_callback([menu_item]()
             {
-                do_vibrate(16);
+                do_vibrate(5);
                 std::stringstream url_ss;
                 url_ss << "mailto:tankorsmash@tankorsmash.com?";
                 url_ss << "subject=";
@@ -1262,7 +1262,7 @@ void SideListView::setup_powers_listview_as_powers()
                 //vibrate if now enabled
                 if (game_logic->get_can_vibrate())
                 {
-                    do_vibrate(16);
+                    do_vibrate(5);
                     menu_item->set_description("Tired of your phone vibrating? Tap this.");
                 }
                 else
