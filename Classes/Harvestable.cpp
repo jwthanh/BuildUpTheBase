@@ -836,12 +836,13 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
         if (this->can_satisfy_recipe_per_click() && !this->should_shatter())
         {
             //TODO doesn't make sure it needs at least one of any given ing type
+            ss << "Used ";
             for (auto component : this->recipe->components)
             {
-                ss << "Used a " << Ingredient::type_to_string(component.first);
-                std::string floating_msg = ss.str();
-                this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
+                ss << "a " << Ingredient::type_to_string(component.first) << " ";
             }
+            std::string floating_msg = ss.str();
+            this->spawn_label_on_touch(touch, end_scale, duration, floating_msg);
         }
         else
         {
