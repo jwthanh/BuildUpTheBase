@@ -10,7 +10,8 @@ const std::map<AchievementType, std::pair<std::string, std::string>> Achievement
     { AchievementType::TotalKills, {"Total Kills", "Total kills in The Arena" }},
     { AchievementType::TotalDepth, {"Total Depth", "Total depth reached digging" }},
     { AchievementType::TotalItems, {"Total Items Scavenged", "Total Items found by scavenging The Dump" }},
-    { AchievementType::TotalItemsPlaced, {"Total Items Upgraded", "Total Items placed on the altar" }}
+    { AchievementType::TotalItemsPlaced, {"Total Items Upgraded", "Total Items placed on the altar" }},
+    { AchievementType::TotalRecipesCrafted, {"Total Recipes Crafted", "Total recipes crafted at The Workshop"}}
 };
 
 const std::map<BaseAchievement::SubType, std::string> BaseAchievement::type_map = {
@@ -19,7 +20,8 @@ const std::map<BaseAchievement::SubType, std::string> BaseAchievement::type_map 
     { AchievementType::TotalKills, "total_kills"},
     { AchievementType::TotalDepth, "total_depths"},
     { AchievementType::TotalItems, "total_items_scavenged"},
-    { AchievementType::TotalItemsPlaced, "total_items_upgraded"}
+    { AchievementType::TotalItemsPlaced, "total_items_upgraded"},
+    { AchievementType::TotalRecipesCrafted, "total_recipes_crafted"}
 };
 
 AchievementManager* AchievementManager::getInstance()
@@ -41,15 +43,15 @@ std::shared_ptr<BaseAchievement> AchievementManager::getAchievement(AchievementT
     std::shared_ptr<BaseAchievement> new_achievement = NULL;
     if (achv_type == AchievementType::TotalTaps)
     {
-        new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 15.0);
+        new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 150.0);
     }
     else if (achv_type == AchievementType::TotalKills)
     {
-        new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 2.0);
+        new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 10.0);
     }
     else if (achv_type == AchievementType::TotalCoins)
     {
-        new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 1.0);
+        new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 100.0);
     }
     else if (achv_type == AchievementType::TotalDepth)
     {

@@ -968,23 +968,31 @@ void CraftingHarvestable::shatter()
             boosted_output.add_item(Output::Triple, 1);
         };
 
+        auto achievement_manager = AchievementManager::getInstance();
+        std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalRecipesCrafted);
+
         //FIXME reduce hardcoding maybe?
         if (result == Output::Single) {
             this->recipe->callback();
+            achievement->increment();
             do_vibrate(10); //vibrate normally
 
         } else if (result == Output::Double) {
             this->recipe->callback();
             this->recipe->callback();
+            achievement->increment();
+            achievement->increment();
             do_vibrate(20); //vibrate stronger
 
         } else if (result == Output::Triple) {
             this->recipe->callback();
             this->recipe->callback();
             this->recipe->callback();
+            achievement->increment();
+            achievement->increment();
+            achievement->increment();
             do_vibrate(30); //vibrate even stronger
         }
-
         this->recipe->current_clicks = 0;
     };
 
