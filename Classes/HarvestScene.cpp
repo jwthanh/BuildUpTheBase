@@ -810,6 +810,10 @@ void BaseScene::create_player_info_panel()
     set_aliasing(player_gold_lbl, true);
     auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
 
+    ui::Button* achievement_btn = dynamic_cast<ui::Button*>(player_info_panel->getChildByName("achievement_btn"));
+    prep_button(achievement_btn);
+    bind_touch_ended(achievement_btn, [](){ GameDirector::switch_to_achievement_menu(); });
+
     //hp cache, used for animating changes
     player_hp_cache_t* hp_cache = new player_hp_cache_t(); //TODO make sure this gets deleted at some point
     auto hp = BUILDUP->fighter->attrs->health;
