@@ -170,6 +170,7 @@ bool NuItem::init(cocos2d::Node* parent)
 
 void NuItem::update_func(float dt)
 {
+    if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return; } //dont do anything if not visible
     //either cooldown doesnt exist or the cooldown is over
     bool cooldown_satisfied = this->cooldown == NULL || this->cooldown->passed_threshold();
     if (cooldown_satisfied)
@@ -289,6 +290,7 @@ bool ShopNuItem::custom_status_check(float dt)
 
 void ShopNuItem::update_func(float dt)
 {
+    if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return; } //dont do anything if not visible
     //anytime the disk is checked, this slows down
     if (this->get_been_bought())
     {
@@ -437,6 +439,7 @@ void RecipeNuItem::other_init(spRecipe recipe)
 
 void RecipeNuItem::update_func(float dt)
 {
+    if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return; } //dont do anything if not visible
     //FIXME, this lets someone press a button early i think
     // and avoid having the button disabled. Not sure.
     if (this->button->isHighlighted())
@@ -494,6 +497,7 @@ void TechNuItem::other_init(spTechnology technology)
 
 void TechNuItem::update_func(float dt)
 {
+    if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return; } //dont do anything if not visible
     //FIXME, this lets someone press a button early i think
     // and avoid having the button disabled. Not sure.
     if (this->button->isHighlighted())
@@ -577,6 +581,7 @@ void TargetRecipeNuItem::other_init(spRecipe recipe)
 
 void TargetRecipeNuItem::update_func(float dt)
 {
+    if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return; } //dont do anything if not visible
     //FIXME, this lets someone press a button early i think
     // and avoid having the button disabled. Not sure.
     if (this->button->isHighlighted())

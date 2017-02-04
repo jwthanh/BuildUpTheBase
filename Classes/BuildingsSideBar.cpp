@@ -300,6 +300,7 @@ void SideListView::setup_shop_listview_as_harvesters()
                 shop_listview->setVisible(false);
                 return;
             }
+
             shop_listview->setVisible(true);
             enum class WorkerType
             {
@@ -506,6 +507,7 @@ void SideListView::setup_detail_listview_as_recipes()
                 listview->setVisible(false);
                 return;
             }
+
             listview->setVisible(true);
 
             struct MenuItemConfig {
@@ -967,6 +969,7 @@ void SideListView::setup_powers_listview_as_powers()
                 listview->setVisible(false);
                 return;
             }
+
             listview->setVisible(true);
 
             //if the child already exists, put it at the back

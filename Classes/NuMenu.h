@@ -35,7 +35,7 @@ class NuItem : public cocos2d::ui::Widget
 {
     public:
 
-    static NuItem* create(cocos2d::ui::Widget* parent);
+        static NuItem* create(cocos2d::ui::Widget* parent);
 
         NuItem(){};
         virtual bool init(cocos2d::Node* parent);
