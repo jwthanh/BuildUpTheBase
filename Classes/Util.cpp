@@ -121,6 +121,9 @@ std::string _humanize_number(long double& value)
     unsigned int base = 0;
     std::string suffix = suffixes[base];
 
+    std::string out_str;
+    out_str.reserve(16); //dont know if this helps
+
     if (value >= 1000000)
     {
         value /= 1000;
@@ -147,7 +150,8 @@ std::string _humanize_number(long double& value)
 
     _humanize_number_spss.str("");
     _humanize_number_spss << std::fixed << std::setprecision(2) << embiggened / 1000.0;
-    std::string out_str = _humanize_number_spss.str();
+
+    out_str = _humanize_number_spss.str();
     out_str.erase( out_str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
 
     std::string split_string = out_str;
