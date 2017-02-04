@@ -112,13 +112,14 @@ const std::vector<const std::string> suffixes = {
     "NoD",
     "Vin"
 };
+unsigned int suffixes_size = suffixes.size();
 
 std::stringstream _humanize_number_spss = std::stringstream();
 std::stringstream _humanize_number_ss = std::stringstream();
 std::string _humanize_number(long double& value)
 {
-    float base = 0;
-    std::string suffix = suffixes.at(0);
+    unsigned int base = 0;
+    std::string suffix = suffixes[base];
 
     if (value >= 1000000)
     {
@@ -129,13 +130,13 @@ std::string _humanize_number(long double& value)
             base++;
         }
 
-        if (base >= suffixes.size())
+        if (base >= suffixes_size)
         {
             return "Too Damn High";
         }
         else
         {
-            suffix = suffixes.at((unsigned int)base);
+            suffix = suffixes[base];
         }
     }
 
@@ -146,12 +147,12 @@ std::string _humanize_number(long double& value)
 
     _humanize_number_spss.str("");
     _humanize_number_spss << std::fixed << std::setprecision(2) << embiggened / 1000.0;
-    std::string str = _humanize_number_spss.str();
-    str.erase( str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
+    std::string out_str = _humanize_number_spss.str();
+    out_str.erase( out_str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
 
-    std::string split_string = str;
-    auto start = 0U;
-    auto end = split_string.find('.');
+    std::string split_string = out_str;
+    unsigned int start = 0U;
+    std::string::size_type end = split_string.find('.');
     std::string post_period = "";
     if (end != std::string::npos)
     {
@@ -170,15 +171,15 @@ std::string _humanize_number(long double& value)
     _humanize_number_ss << split_string;
     _humanize_number_ss << post_period;
 
-    str = _humanize_number_ss.str();
+    out_str = _humanize_number_ss.str();
 
     //remove trailing period
-    if (str.back() == '.')
+    if (out_str.back() == '.')
     {
-        str.pop_back();
+        out_str.pop_back();
     }
 
-    return str.append(suffix);
+    return out_str.append(suffix);
 }
 
 std::stringstream _beautify_double_ss;
