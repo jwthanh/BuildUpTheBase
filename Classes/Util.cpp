@@ -137,11 +137,9 @@ std::string _humanize_number(long double& value)
         {
             return "Too Damn High";
         }
-        else
-        {
-            suffix = suffixes[base];
-        }
     }
+
+    suffix = suffixes[base];
 
     //for 1 567 890, we've got 1.5678 so we go to 1 568 then...
     int embiggened = (int)std::round(value * 1000.0);
