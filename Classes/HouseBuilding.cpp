@@ -235,22 +235,23 @@ void create(mistT& mist, res_count_t quantity, typename mistT::key_type sub_type
     mist[sub_type] = exisiting_count + quantity;
 };
 
-void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t quantity)
+void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t to_create)
 {
     //NOTE this compares this buildings limit against all the ingredients in the city. this might get weird
-    if (BUILDUP->count_ingredients(sub_type) + quantity > this->get_storage_space())
+    auto counted_ingredients = BUILDUP->count_ingredients(sub_type);
+    auto storage_space = this->get_storage_space();
+
+    //if its more than storage can fit, only create what can fit
+    if ((counted_ingredients + to_create) > storage_space)
     {
-        quantity = this->get_storage_space() - BUILDUP->count_ingredients(sub_type);
+        to_create = storage_space - counted_ingredients;
     };
 
-    if (quantity > 0)
+    if (to_create > 0)
     {
         mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
-        create<mistIngredient>(all_ingredients, quantity, sub_type);
+        create<mistIngredient>(all_ingredients, to_create, sub_type);
     }
-    else
-    {
-    };
 };
 
 void Building::consume_recipe(Recipe* recipe)
