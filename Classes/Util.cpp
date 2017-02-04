@@ -191,20 +191,20 @@ std::string beautify_double(long double& value)
     bool is_negative = value < 0;
     std::string decimal = "";
 
+    //special case for below 1000
     if (value < 1000 && std::floor(value) != value) //check for decimal
     {
-         _beautify_double_ss.str("");
+        _beautify_double_ss.str("");
         _beautify_double_ss << std::fixed << std::setprecision(2) << value;
         std::string fixed_value = _beautify_double_ss.str();
         fixed_value.erase(fixed_value.find_last_not_of('0') + 1, std::string::npos);
 
-        auto start = 0U;
         auto period_pos = fixed_value.find('.');
         std::string post_period = ".0";
         if (period_pos != std::string::npos)
         {
             post_period = fixed_value.substr(period_pos, std::string::npos);
-            fixed_value = fixed_value.substr(start, period_pos - start);
+            fixed_value = fixed_value.substr(0, period_pos);
         }
 
         if (post_period != ".") //dont include only a period for a decimal
