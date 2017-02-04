@@ -145,12 +145,12 @@ std::string _humanize_number(long double& value)
 
     //for 1 567 890, we've got 1.5678 so we go to 1 568 then...
     int embiggened = (int)std::round(value * 1000.0);
-    //... we divide by 1000 to get the nice 1.568 number and add the suffix
-    // the problem is that if we've got 1.0f, it turns into 1.000 instead of 1, so I need to clear the empty 0s
 
+    //... we divide by 1000 to get the nice 1.568 number and add the suffix ...
     _humanize_number_spss.str("");
     _humanize_number_spss << std::fixed << std::setprecision(2) << embiggened / 1000.0;
 
+    //... if we've got 1.0f, it turns into 1.000 instead of 1, so clear the empty 0s
     out_str = _humanize_number_spss.str();
     out_str.erase( out_str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
 
