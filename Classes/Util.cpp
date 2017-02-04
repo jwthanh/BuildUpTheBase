@@ -155,13 +155,12 @@ std::string _humanize_number(long double& value)
     out_str.erase( out_str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
 
     std::string split_string = out_str;
-    unsigned int start = 0U;
     std::string::size_type end = split_string.find('.');
     std::string post_period = "";
     if (end != std::string::npos)
     {
         post_period = split_string.substr(end, std::string::npos);
-        split_string = split_string.substr(start, end - start);
+        split_string = split_string.substr(0, end);
     }
 
     //add a comma every 3rd digit (on the left of a period)
