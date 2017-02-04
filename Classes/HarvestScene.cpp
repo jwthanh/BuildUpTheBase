@@ -993,17 +993,19 @@ void BaseScene::create_inventory_listview()
 
             auto update_lbl_cb = [new_item_panel, ing_type](float)
             {
-                res_count_t _def = -1;
                 mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
-                auto ing_t = ing_type;
+
+                res_count_t _def = -1;
+                Ingredient::SubType ing_t = ing_type;
                 res_count_t count = map_get(city_ingredients, ing_t, _def);
-                auto item_count_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_count_lbl"));
+
+                ui::Text* item_count_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_count_lbl"));
                 item_count_lbl->setString(beautify_double(count));
 
             };
 
             update_lbl_cb(0); //fire once immediately
-            new_item_panel->schedule(update_lbl_cb, HALF_DELAY, "item_name_lbl_update");
+            new_item_panel->schedule(update_lbl_cb, AVERAGE_DELAY, "item_name_lbl_update");
 
             auto&& advanced_ingredients = Ingredient::advanced_ingredients;
             bool in_advanced = std::find(advanced_ingredients.begin(), advanced_ingredients.end(), ing_type) != advanced_ingredients.end();
