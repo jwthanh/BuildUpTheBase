@@ -151,7 +151,7 @@ std::string _humanize_number(long double& value)
     _humanize_number_spss << std::fixed << std::setprecision(2) << embiggened / 1000.0;
 
     //... if we've got 1.0f, it turns into 1.000 instead of 1, so clear the empty 0s
-    out_str = _humanize_number_spss.str();
+    out_str.assign(_humanize_number_spss.str() );
     out_str.erase( out_str.find_last_not_of('0') + 1, std::string::npos ); //rstrip zeroes
 
     std::string split_string = out_str;
@@ -174,7 +174,7 @@ std::string _humanize_number(long double& value)
     _humanize_number_ss << split_string;
     _humanize_number_ss << post_period;
 
-    out_str = _humanize_number_ss.str();
+    out_str.assign(_humanize_number_ss.str());
 
     //remove trailing period
     if (out_str.back() == '.')
