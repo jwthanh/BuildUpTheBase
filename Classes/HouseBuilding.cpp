@@ -592,8 +592,7 @@ res_count_t Buildup::count_ingredients()
 res_count_t Buildup::count_ingredients(Ingredient::SubType ing_type)
 {
     res_count_t def = 0;
-    mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();
-    return map_get(all_ingredients, ing_type, def);
+    return map_get(BUILDUP->get_all_ingredients(), ing_type, def);
 };
 
 void Player::update(float dt)
