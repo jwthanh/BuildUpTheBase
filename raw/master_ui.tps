@@ -213,6 +213,8 @@
             <key type="filename">kenny/Art/Game icons (100 assets)/PNG/Black/2x/arrowLeft.png</key>
             <key type="filename">kenny/Art/Game icons (100 assets)/PNG/Black/2x/exclamation.png</key>
             <key type="filename">kenny/Art/Game icons (100 assets)/PNG/Black/2x/locked.png</key>
+            <key type="filename">kenny/Art/Game icons (100 assets)/PNG/Black/2x/medal1.png</key>
+            <key type="filename">kenny/Art/Game icons (100 assets)/PNG/Black/2x/medal2.png</key>
             <key type="filename">kenny/Art/Game icons fighter expansion (50 assets)/PNG/Black/2x/fightJoy_47.png</key>
             <key type="filename">to_replace/tilemap/downLeft.png</key>
             <key type="filename">to_replace/tilemap/downRight.png</key>
@@ -964,6 +966,8 @@
             <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/exclamation.png</filename>
             <filename>../../beatupisis/raw/artist/UI/UI_game/enemy_healthbar_bar_centered.png</filename>
             <filename>../../beatupisis/raw/artist/UI/UI_game/enemy_healthbar_bar_white_centered.png</filename>
+            <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/medal2.png</filename>
+            <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/medal1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -1153,6 +1153,7 @@ void GameDirector::switch_to_achievement_menu()
         if (achievement->get_completed()){
             nuitem->set_image("grey_boxCheckmark.png");
         } else {
+            nuitem->set_image("medal2.png");
         };
 
         nuitem->button->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
