@@ -186,19 +186,19 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
         // GameDirector::switch_to_equipment_menu();
         // GameDirector::switch_to_reset_menu();
-        GameDirector::switch_to_achievement_menu();
+        // GameDirector::switch_to_achievement_menu();
 
 
 
         // auto popup_panel = GameLogic::get_popup_panel();
         // popup_panel->animate_open();
 
-        //     auto parts = ParticleSun::create();
-        //     parts->setPosition(get_center_pos());
-        //     float duration = 0.25f;
-        //     parts->setDuration(duration);
-        //     this->addChild(parts);
-        //
+        auto parts = ParticleGalaxy::create();
+        parts->setPosition(get_center_pos());
+        float duration = 0.25f;
+        parts->setDuration(duration);
+        this->addChild(parts);
+
         //     auto move_to = MoveTo::create(duration, { 900, 600 });
         //     parts->runAction(move_to);
     }
@@ -1187,7 +1187,6 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     layer_color->setName("alert_panel_bg");
     layer_color->setOpacity(0);
     layer_color->runAction(cocos2d::FadeTo::create(0.15f, 85));
-    this->addChild(layer_color);
 
     //invisible layout to tap to close
     ui::Layout* exit_layout = ui::Layout::create();
@@ -1196,6 +1195,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     exit_layout->setContentSize({ 1000, 1000 });
     exit_layout->setTouchEnabled(true);
     this->addChild(exit_layout, 9); //9 because alert_panel is added as 10 elsewhere
+    exit_layout->addChild(layer_color);
 
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(alert_panel->getChildByName("close_panel"));
     auto cb = [this](Ref* target, ui::Widget::TouchEventType type) {
@@ -1215,22 +1215,25 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 move,
                 NULL
             );
+            auto layer_color = this->getChildByName("alert_panel_bg");
+            if (layer_color){
+                layer_color->runAction(cocos2d::Sequence::createWithTwoActions(
+                    FadeOut::create(0.1f),
+                    RemoveSelf::create()
+                ));
+            };
 
             auto alert_panel = this->getChildByName("inventory_detail_panel");
-            if (!alert_panel) return;
-            Sequence* seq = Sequence::create(spawn, RemoveSelf::create(), NULL);
-            alert_panel->runAction(seq);
+            if (alert_panel){
+                Sequence* seq = Sequence::create(spawn, RemoveSelf::create(), NULL);
+                alert_panel->runAction(seq);
+            };
 
             auto exit_layout = this->getChildByName("alert_panel_exit_layout");
-            if (!exit_layout) return;
-            exit_layout->removeFromParent();
+            if (exit_layout){
+                exit_layout->removeFromParent();
+            };
 
-            auto layer_color = this->getChildByName("alert_panel_bg");
-            if (!layer_color) return;
-            layer_color->runAction(cocos2d::Sequence::createWithTwoActions(
-                FadeOut::create(0.1f),
-                RemoveSelf::create()
-            ));
         };
     };
     close_panel->addTouchEventListener(cb);
