@@ -33,9 +33,14 @@ class AchievementManager
         using cache_map_t = std::map<AchievementType, std::shared_ptr<BaseAchievement>>;
         cache_map_t cached_achievements;
 
+        //iterates over infomap and creates the achievement instances
+        void fill_achievement_cache();
+
     public:
         static const std::map<AchievementType, std::pair<std::string, std::string>> info_map;
+        AchievementManager();
         static AchievementManager* getInstance();
+
         std::shared_ptr<BaseAchievement> getAchievement(AchievementType achv_type);
         std::vector<std::shared_ptr<BaseAchievement>> getAchievements();
 };

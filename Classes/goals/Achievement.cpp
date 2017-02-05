@@ -24,6 +24,19 @@ const std::map<BaseAchievement::SubType, std::string> BaseAchievement::type_map 
     { AchievementType::TotalRecipesCrafted, "total_recipes_crafted"}
 };
 
+void AchievementManager::fill_achievement_cache()
+{
+    for (auto& type_pair : BaseAchievement::type_map)
+    {
+        this->getAchievement(type_pair.first);
+    };
+};
+
+AchievementManager::AchievementManager()
+{
+    this->fill_achievement_cache();
+};
+
 AchievementManager* AchievementManager::getInstance()
 {
     if (AchievementManager::_instance == NULL){
