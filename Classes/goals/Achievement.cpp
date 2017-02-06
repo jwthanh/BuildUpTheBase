@@ -125,7 +125,8 @@ std::vector<std::shared_ptr<BaseAchievement>> AchievementManager::getAchievement
 };
 
 BaseAchievement::BaseAchievement(AchievementType achievement_type)
-    : achievement_type(achievement_type), _completed(false), _icon_path("")
+    : achievement_type(achievement_type),
+    _completed(false), _celebrated(false), _icon_path("")
 {
 };
 
@@ -147,6 +148,23 @@ bool BaseAchievement::get_completed()
 void BaseAchievement::set_completed(bool completed)
 {
     this->_completed = completed;
+};
+
+void BaseAchievement::validate_completion()
+{
+    this->set_completed(this->satisfied_completion());
+
+    if (this->_celebrated == false){
+        if (this->_completed == true){
+            this->celebrate();
+        };
+    };
+};
+
+void BaseAchievement::celebrate()
+{
+    this->_celebrated = true;
+    CCLOG("YAY COMPLETED ACHIEVEMENT!");
 };
 
 std::string BaseAchievement::get_icon_path()
@@ -172,7 +190,7 @@ void CountAchievement::do_increment_by_n(long double n)
     this->_current_count += n;
 };
 
-void CountAchievement::validate_completion()
+bool CountAchievement::satisfied_completion()
 {
-    this->set_completed(this->_current_count >= this->_target_count);
+    return this->_current_count >= this->_target_count;
 };

@@ -50,8 +50,9 @@ class AchievementManager
 /// * potentially unlocks something
 class BaseAchievement
 {
-    private:
+    protected:
         bool _completed;
+        bool _celebrated;
         std::string _icon_path;
 
         //actual incrementing function called by ::increment
@@ -68,14 +69,16 @@ class BaseAchievement
         BaseAchievement(AchievementType achievement_type);
 
         //boolean properties
+        virtual bool satisfied_completion() = 0;
         bool get_completed();
         void set_completed(bool completed);
+        void celebrate();
 
         std::string get_name();
         std::string get_description();
 
         ///check and update _completed
-        virtual void validate_completion() = 0;
+        virtual void validate_completion();
 
         std::string get_icon_path();
         void increment() { this->do_increment(); this->validate_completion(); };
@@ -86,7 +89,7 @@ class BaseAchievement
 /// and saves it
 class CountAchievement : public BaseAchievement
 {
-    private:
+    protected:
         res_count_t _current_count;
         res_count_t _target_count;
 
@@ -95,7 +98,7 @@ class CountAchievement : public BaseAchievement
 
     public:
         CountAchievement(AchievementType achievement_type, res_count_t current, res_count_t target);
-        virtual void validate_completion() override;
+        virtual bool satisfied_completion() override;
 
         res_count_t get_current_count() { return _current_count; };
         res_count_t get_target_count() { return _target_count; };
