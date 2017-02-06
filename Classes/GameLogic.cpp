@@ -375,6 +375,9 @@ void GameLogic::save_all()
     auto ingredient_serializer = IngredientSerializer("alpha_ingredients.json");
     ingredient_serializer.serialize();
 
+    auto achievement_serializer = AchievementSerializer("alpha_achievements.json");
+    achievement_serializer.serialize();
+
     //save coins
     DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());
 
@@ -418,6 +421,9 @@ void GameLogic::load_all()
 
     auto equipment_serializer = EquipmentSerializer("alpha_equipment.json");
     equipment_serializer.load();
+
+    auto achievement_serializer = AchievementSerializer("alpha_achievements.json");
+    achievement_serializer.load();
 
     auto coins_from_data = DataManager::get_double_from_data(Beatup::total_coin_key);
     if (coins_from_data < 0.0)

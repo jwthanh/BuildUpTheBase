@@ -100,5 +100,7 @@ class CountAchievement : public BaseAchievement
         res_count_t get_current_count() { return _current_count; };
         res_count_t get_target_count() { return _target_count; };
 
+        friend class AchievementSerializer;
+
 };
 #endif

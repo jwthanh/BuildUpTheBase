@@ -191,6 +191,8 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // TextBlobModal* modal = new TextBlobModal(this);
         // modal->set_body("test");
 
+        // auto achievement_serializer = AchievementSerializer("alpha_achievements.json");
+        // achievement_serializer.serialize();
 
         //auto popup_panel = GameLogic::get_popup_panel();
         //popup_panel->animate_open();

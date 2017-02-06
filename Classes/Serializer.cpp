@@ -19,6 +19,7 @@
 #include "2d/CCTMXTiledMap.h"
 #include "2d/CCTMXLayer.h"
 #include "Equipment.h"
+#include "goals/Achievement.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -829,10 +830,19 @@ void AchievementSerializer::serialize()
 
     rjDocument::AllocatorType& allocator = doc.GetAllocator();
 
-    //TODO use some sort of id, index is weak
-    rjValue combat_slot_key = rjValue("combat_slot");
-    rjValue combat_slot_val = rjValue(123);
-    doc.AddMember(combat_slot_key, combat_slot_val, allocator);
+    auto achievement_manager = AchievementManager::getInstance();
+    for (auto& achv : achievement_manager->getAchievements()){
+        std::string type_str = achv->type_to_string(achv->achievement_type);
+        CountAchievement* count_achievement = dynamic_cast<CountAchievement*>(achv.get());
+        if (count_achievement != NULL)
+        {
+            this->set_double(doc, type_str, count_achievement->_current_count);
+        }
+        else
+        {
+            CCLOG("Achievement '%s' skipped serializing, not count type", type_str);
+        }
+    }
 
     this->save_document(doc);
 }
@@ -847,14 +857,21 @@ void AchievementSerializer::load()
         return;
     }
 
-    rjValue recipe_slot_key = rjValue("recipe_slot");
-    if (doc.HasMember(recipe_slot_key))
-    {
-        auto raw_recipe_slot = doc[recipe_slot_key].GetDouble();
-    };
+    auto achievement_manager = AchievementManager::getInstance();
+    for (auto& achv : achievement_manager->getAchievements()){
+        std::string type_str = achv->type_to_string(achv->achievement_type);
+        CountAchievement* count_achievement = dynamic_cast<CountAchievement*>(achv.get());
+        if (count_achievement != NULL)
+        {
+            double stored_count = this->get_double(doc, type_str);
+            count_achievement->_current_count = stored_count;
+        }
+        else
+        {
+            CCLOG("Achievement '%s' skipped loading, not count type", type_str);
+        }
+    }
 
-
-    CCLOG("done loading");
 }
 
 // void AchievementSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
