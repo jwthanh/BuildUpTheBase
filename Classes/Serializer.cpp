@@ -816,3 +816,63 @@ rjValue& EquipmentSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocum
     return value;
 };
 
+
+AchievementSerializer::AchievementSerializer(std::string filename)
+    : BaseSerializer(filename)
+{
+};
+
+void AchievementSerializer::serialize()
+{
+    rjDocument doc = rjDocument();
+    doc.SetObject();
+
+    rjDocument::AllocatorType& allocator = doc.GetAllocator();
+
+    //TODO use some sort of id, index is weak
+    rjValue combat_slot_key = rjValue("combat_slot");
+    rjValue combat_slot_val = rjValue(123);
+    doc.AddMember(combat_slot_key, combat_slot_val, allocator);
+
+    this->save_document(doc);
+}
+
+void AchievementSerializer::load()
+{
+    rjDocument doc = this->get_document();
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false)
+    {
+        CCLOG("NOT OBJECT");
+        return;
+    }
+
+    rjValue recipe_slot_key = rjValue("recipe_slot");
+    if (doc.HasMember(recipe_slot_key))
+    {
+        auto raw_recipe_slot = doc[recipe_slot_key].GetDouble();
+    };
+
+
+    CCLOG("done loading");
+}
+
+// void AchievementSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
+// {
+//     //UNUSED
+//     CCLOG("AchievementSerializer::_add_member should be unused");
+// };
+//
+// rjValue& AchievementSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
+// {
+//     CCLOG("AchievementSerializer::_get_member should not be used");
+//     if (doc.HasMember(key) == false)
+//     {
+//         return doc; //null placeholder
+//     }
+//
+//     //copy of Base::_get_member but because its protected I can't call it
+//     rjValue& value = doc[key];
+//     return value;
+// };
+
