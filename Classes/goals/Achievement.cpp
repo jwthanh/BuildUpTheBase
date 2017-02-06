@@ -9,13 +9,13 @@
 
 AchievementManager* AchievementManager::_instance = NULL;
 const std::map<AchievementType, std::pair<std::string, std::string>> AchievementManager::info_map = {
-    { AchievementType::TotalTaps, {"Total Taps", "Total harvestables tapped" }},
-    { AchievementType::TotalCoins, {"Total Coins", "Total coins gathered" }},
-    { AchievementType::TotalKills, {"Total Kills", "Total kills in The Arena" }},
-    { AchievementType::TotalDepth, {"Total Depth", "Total depth reached digging" }},
-    { AchievementType::TotalItems, {"Total Items Scavenged", "Total Items found by scavenging The Dump" }},
-    { AchievementType::TotalItemsPlaced, {"Total Items Upgraded", "Total Items placed on the altar" }},
-    { AchievementType::TotalRecipesCrafted, {"Total Recipes Crafted", "Total recipes crafted at The Workshop"}}
+    { AchievementType::TotalTaps, {"Tapping titan", "Total harvestables tapped" }},
+    { AchievementType::TotalCoins, {"Miserly", "Total coins gathered" }},
+    { AchievementType::TotalKills, {"Murderous", "Total kills in The Arena" }},
+    { AchievementType::TotalDepth, {"Dig deep", "Total depth reached digging" }},
+    { AchievementType::TotalItems, {"Raccoon", "Total Items found by scavenging The Dump" }},
+    { AchievementType::TotalItemsPlaced, {"Blacksmith", "Total Items placed on the altar" }},
+    { AchievementType::TotalRecipesCrafted, {"Cook", "Total recipes crafted at The Workshop"}}
 };
 
 const std::map<BaseAchievement::SubType, std::string> BaseAchievement::type_map = {
