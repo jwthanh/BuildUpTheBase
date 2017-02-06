@@ -7,6 +7,7 @@
 namespace cocos2d
 {
     class Node;
+    class ParticleSystemQuad;
 
     namespace ui
     {
@@ -71,6 +72,8 @@ class PopupPanel
         void set_image(std::string path, bool is_plist = false);
 
         void set_visible(bool is_visible);
+
+        void play_particle(cocos2d::ParticleSystemQuad* parts);
 };
 
 #endif

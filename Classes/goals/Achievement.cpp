@@ -1,6 +1,10 @@
 #include "Achievement.h"
 
 #include "base/CCConsole.h"
+#include "base/CCDirector.h"
+#include "GameLogic.h"
+#include "2d/CCParticleExamples.h"
+#include "Modal.h"
 
 
 AchievementManager* AchievementManager::_instance = NULL;
@@ -164,6 +168,20 @@ void BaseAchievement::validate_completion()
 void BaseAchievement::celebrate()
 {
     this->_celebrated = true;
+
+    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+    float duration = 0.25f;
+
+    auto popup_panel = GameLogic::get_popup_panel();
+    for (float x = 0; x < visibleSize.width; x+=50){
+        auto parts = cocos2d::ParticleGalaxy::create();
+        parts->setPosition({ x, 100});
+        parts->setDuration(duration);
+        popup_panel->play_particle(parts);
+    };
+    popup_panel->animate_open();
+    popup_panel->set_string("Achievement unlocked: "+this->get_name()+"!");
+
     CCLOG("YAY COMPLETED ACHIEVEMENT!");
 };
 

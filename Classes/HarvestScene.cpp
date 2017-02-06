@@ -198,11 +198,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         //popup_panel->animate_open();
         //popup_panel->set_string("Achievement unlocked!");
 
-        // auto parts = ParticleGalaxy::create();
-        // parts->setPosition(get_center_pos());
-        // float duration = 0.25f;
-        // parts->setDuration(duration);
-        // this->addChild(parts);
 
         //     auto move_to = MoveTo::create(duration, { 900, 600 });
         //     parts->runAction(move_to);

@@ -15,6 +15,7 @@
 #include "ui/UIListView.h"
 #include "2d/CCLayer.h"
 #include "2d/CCActionEase.h"
+#include "2d/CCParticleSystemQuad.h"
 
 
 USING_NS_CC;
@@ -217,4 +218,9 @@ void PopupPanel::set_image(std::string path, bool is_plist)
 void PopupPanel::set_visible(bool is_visible)
 {
     this->_layout->setVisible(is_visible);
+};
+
+void PopupPanel::play_particle(cocos2d::ParticleSystemQuad* parts)
+{
+    this->_layout->addChild(parts, -1);
 };

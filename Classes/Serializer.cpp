@@ -73,6 +73,10 @@ void BaseSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, 
 
 rjValue& BaseSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
 {
+    if (doc.HasMember(key) == false)
+    {
+        return doc; //null placeholder
+    }
     rjValue& value = doc[key];
     return value;
 };
