@@ -1139,7 +1139,15 @@ void GameDirector::switch_to_achievement_menu()
 
     cocos2d::ui::ListView* achievement_pageview = dynamic_cast<cocos2d::ui::ListView*>(panel->getChildByName("achievement_listview"));
 
-    for (std::shared_ptr<BaseAchievement>& achievement : AchievementManager::getInstance()->getAchievements())
+    auto achievements = AchievementManager::getInstance()->getAchievements();
+    auto order_by_completed = [](std::shared_ptr<BaseAchievement> left, std::shared_ptr<BaseAchievement> right)
+    {
+        //incomplete first
+        return left->get_completed() < right->get_completed();
+    };
+    std::sort(achievements.begin(), achievements.end(), order_by_completed);
+
+    for (std::shared_ptr<BaseAchievement>& achievement : achievements)
     {
         auto nuitem = NuItem::create(achievement_pageview);
         nuitem->set_title(achievement->get_name());
