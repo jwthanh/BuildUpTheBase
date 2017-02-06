@@ -863,8 +863,15 @@ void AchievementSerializer::load()
         CountAchievement* count_achievement = dynamic_cast<CountAchievement*>(achv.get());
         if (count_achievement != NULL)
         {
+            //load the achievement progress
             double stored_count = this->get_double(doc, type_str);
             count_achievement->_current_count = stored_count;
+
+            //if satisfied dont celebrate again
+            if (count_achievement->satisfied_completion()){
+                count_achievement->_celebrated = true;
+                count_achievement->_completed = true;
+            };
         }
         else
         {
