@@ -5,6 +5,7 @@
 #include "GameLogic.h"
 #include "2d/CCParticleExamples.h"
 #include "Modal.h"
+#include "utilities/vibration.h"
 
 
 AchievementManager* AchievementManager::_instance = NULL;
