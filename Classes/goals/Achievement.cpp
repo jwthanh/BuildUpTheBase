@@ -174,7 +174,9 @@ void BaseAchievement::celebrate()
 
     auto popup_panel = GameLogic::get_popup_panel();
     for (float x = 0; x < visibleSize.width; x+=50){
-        auto parts = cocos2d::ParticleGalaxy::create();
+        auto parts = cocos2d::ParticleFlower::create();
+        parts->setTotalParticles(1000);
+        parts->setLife(0.5f);
         parts->setPosition({ x, 100});
         parts->setDuration(duration);
         popup_panel->play_particle(parts);

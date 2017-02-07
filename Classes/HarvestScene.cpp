@@ -198,6 +198,22 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         //popup_panel->animate_open();
         //popup_panel->set_string("Achievement unlocked!");
 
+        cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+        float duration = 0.25f;
+        auto popup_panel = GameLogic::get_popup_panel();
+        for (float x = 0; x < visibleSize.width; x+=50){
+            auto parts = cocos2d::ParticleFlower::create();
+            parts->setTotalParticles(1000);
+            parts->setLife(0.5f);
+            parts->setPosition({ x, 100});
+            parts->setDuration(duration);
+            popup_panel->play_particle(parts);
+        };
+        popup_panel->animate_open();
+        popup_panel->set_string("Achievement unlocked: +this->get_name()+!");
+        popup_panel->set_image("medal2.png", true);
+
+
 
         //     auto move_to = MoveTo::create(duration, { 900, 600 });
         //     parts->runAction(move_to);
