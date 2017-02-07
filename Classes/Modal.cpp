@@ -128,6 +128,8 @@ void PopupPanel::animate_open()
     this->set_visible(true); //because it starts off visible false, should be fixed some other way though
     this->_layout->stopAllActions(); //prevents previous animate_closes from affecting this one
 
+    this->set_image("exclamation.png", true); //reset image
+
     LOG(INFO) << "[Popup] " << this->get_string();
 
     this->_layout->setPosition(Vec2(

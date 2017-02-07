@@ -181,6 +181,7 @@ void BaseAchievement::celebrate()
     };
     popup_panel->animate_open();
     popup_panel->set_string("Achievement unlocked: "+this->get_name()+"!");
+    popup_panel->set_image("medal2.png", true);
 
     CCLOG("YAY COMPLETED ACHIEVEMENT!");
 };
