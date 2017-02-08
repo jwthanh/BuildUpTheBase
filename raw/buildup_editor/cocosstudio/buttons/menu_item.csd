@@ -12,37 +12,37 @@
               <AbstractNodeData Name="progress_panel" ActionTag="-1327047022" Tag="258" IconVisible="False" RightMargin="-600.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="1400.0000" Y="200.0000" />
                 <Children>
-                  <AbstractNodeData Name="current_lbl" ActionTag="-714968081" Tag="279" IconVisible="False" LeftMargin="963.4390" RightMargin="186.5610" TopMargin="31.0118" BottomMargin="126.9882" FontSize="36" LabelText="123,456QuX" HorizontalAlignmentType="HT_Right" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="current_lbl" ActionTag="-714968081" Tag="279" IconVisible="False" LeftMargin="963.4390" RightMargin="186.5610" TopMargin="29.0000" BottomMargin="129.0000" FontSize="36" LabelText="123,456QuX" HorizontalAlignmentType="HT_Right" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="250.0000" Y="42.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1088.4390" Y="147.9882" />
+                    <Position X="1088.4390" Y="150.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.7775" Y="0.7399" />
+                    <PrePosition X="0.7775" Y="0.7500" />
                     <PreSize X="0.1786" Y="0.2100" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="middle_lbl" ActionTag="1925416452" Tag="280" IconVisible="False" LeftMargin="1073.9388" RightMargin="297.0612" TopMargin="71.0115" BottomMargin="86.9885" FontSize="36" LabelText="-" HorizontalAlignmentType="HT_Right" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="29.0000" Y="42.0000" />
+                  <AbstractNodeData Name="middle_lbl" ActionTag="1925416452" Tag="280" IconVisible="False" LeftMargin="1060.4388" RightMargin="283.5612" TopMargin="71.0115" BottomMargin="86.9885" FontSize="36" LabelText="of" HorizontalAlignmentType="HT_Right" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="56.0000" Y="42.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="1088.4388" Y="107.9885" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.7775" Y="0.5399" />
-                    <PreSize X="0.0207" Y="0.2100" />
+                    <PreSize X="0.0400" Y="0.2100" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="total_lbl" ActionTag="-1774625865" Tag="281" IconVisible="False" LeftMargin="888.9390" RightMargin="112.0610" TopMargin="111.0114" BottomMargin="46.9886" FontSize="36" LabelText="123,456QuX total" HorizontalAlignmentType="HT_Right" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="total_lbl" ActionTag="-1774625865" Tag="281" IconVisible="False" LeftMargin="888.9390" RightMargin="112.0610" TopMargin="114.0000" BottomMargin="44.0000" FontSize="36" LabelText="123,456QuX total" HorizontalAlignmentType="HT_Right" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="399.0000" Y="42.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1088.4390" Y="67.9886" />
+                    <Position X="1088.4390" Y="65.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.7775" Y="0.3399" />
+                    <PrePosition X="0.7775" Y="0.3250" />
                     <PreSize X="0.2850" Y="0.2100" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
