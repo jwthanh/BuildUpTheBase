@@ -37,6 +37,7 @@
 #include <2d/CCActionEase.h>
 #include "Tutorial.h"
 #include "utilities/vibration.h"
+#include "goals/Achievement.h"
 
 
 USING_NS_CC;
@@ -556,7 +557,11 @@ void SideListView::setup_detail_listview_as_recipes()
                     auto health = BUILDUP->fighter->attrs->health;
                     if (health->is_full() == false)
                     {
-                        health->add_to_current_val(5);
+                        res_count_t healing = 5;
+                        health->add_to_current_val(healing);
+                        auto achievement_manager = AchievementManager::getInstance();
+                        std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalHealthRegenerated);
+                        achievement->increment_by_n(healing);
                     }
                     else
                     {

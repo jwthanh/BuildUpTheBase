@@ -13,6 +13,7 @@
 #include "Technology.h"
 #include "base/CCDirector.h"
 #include "HarvestScene.h"
+#include "goals/Achievement.h"
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
@@ -221,6 +222,10 @@ void ConsumerHarvester::on_update(float dt)
 
             health->add_to_current_val((int)healing);
             all_ingredients[Ingredient::SubType::Blood] -= active_cost;
+
+            auto achievement_manager = AchievementManager::getInstance();
+            std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalHealthRegenerated);
+            achievement->increment_by_n(healing);
         }
 
     };

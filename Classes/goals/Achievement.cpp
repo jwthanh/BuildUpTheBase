@@ -16,6 +16,7 @@ const std::map<AchievementType, std::pair<std::string, std::string>> Achievement
     { AchievementType::TotalDepth, {"Dig deep", "Total depth reached digging" }},
     { AchievementType::TotalItems, {"Raccoon", "Total Items found by scavenging The Dump" }},
     { AchievementType::TotalItemsPlaced, {"Blacksmith", "Total Items placed on the altar" }},
+    { AchievementType::TotalHealthRegenerated, {"Bloodmage", "Total health healed in The Underscape" }},
     { AchievementType::TotalRecipesCrafted, {"Cook", "Total recipes crafted at The Workshop"}}
 };
 
@@ -26,6 +27,7 @@ const std::map<BaseAchievement::SubType, std::string> BaseAchievement::type_map 
     { AchievementType::TotalDepth, "total_depths"},
     { AchievementType::TotalItems, "total_items_scavenged"},
     { AchievementType::TotalItemsPlaced, "total_items_upgraded"},
+    { AchievementType::TotalHealthRegenerated, "total_health_regenerated"},
     { AchievementType::TotalRecipesCrafted, "total_recipes_crafted"}
 };
 
@@ -82,6 +84,14 @@ std::shared_ptr<BaseAchievement> AchievementManager::getAchievement(AchievementT
     else if (achv_type == AchievementType::TotalItemsPlaced)
     {
         new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 5.0);
+    }
+    else if (achv_type == AchievementType::TotalHealthRegenerated)
+    {
+        new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 500.0);
+    }
+    else if (achv_type == AchievementType::TotalRecipesCrafted)
+    {
+        new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 25.0);
     }
     else
     {
