@@ -215,7 +215,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         popup_panel->set_image("medal2.png", true);
 
 
-
         //     auto move_to = MoveTo::create(duration, { 900, 600 });
         //     parts->runAction(move_to);
     }
