@@ -179,6 +179,7 @@ typedef long double res_count_t;
 
 const float SECOND_DELAY = 1.0f; // 60 times per second
 const float LONG_DELAY = 0.5f; // 30 times per second
+const float MID_DELAY = 0.25f; // 30 times per second
 const float AVERAGE_DELAY = 0.1f; // 6 times per second
 const float HALF_DELAY = 0.05f; // 3 times per second
 const float QUARTER_DELAY = 0.025f; // 1.5 times per second

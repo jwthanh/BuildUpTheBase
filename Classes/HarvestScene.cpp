@@ -1021,7 +1021,7 @@ void BaseScene::create_inventory_listview()
             };
 
             update_lbl_cb(0); //fire once immediately
-            new_item_panel->schedule(update_lbl_cb, AVERAGE_DELAY, "item_name_lbl_update");
+            new_item_panel->schedule(update_lbl_cb, MID_DELAY, "item_name_lbl_update");
 
             auto&& advanced_ingredients = Ingredient::advanced_ingredients;
             bool in_advanced = std::find(advanced_ingredients.begin(), advanced_ingredients.end(), ing_type) != advanced_ingredients.end();
