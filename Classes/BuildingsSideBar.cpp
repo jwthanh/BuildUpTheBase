@@ -590,7 +590,9 @@ void SideListView::setup_detail_listview_as_recipes()
                     bool can_fit_more_dead = true;
                     if (can_fit_more_dead)
                     {
-                        building->create_ingredients(Ingredient::SubType::Undead, 1);
+                        res_count_t raise_count = 1;
+                        building->create_ingredients(Ingredient::SubType::Undead, raise_count);
+
                         cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
                         auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
                         if (harvest_scene)
@@ -673,6 +675,11 @@ void SideListView::setup_detail_listview_as_recipes()
                                 Harvestable* harvestable = dynamic_cast<Harvestable*>(raw_harvestable);
                                 if (harvestable)
                                 {
+                                    res_count_t send_scavenger = 1;
+                                    auto achievement_manager = AchievementManager::getInstance();
+                                    std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalUndeadScavenging);
+                                    achievement->increment_by_n(send_scavenger);
+
                                     //adds 33% progress to harvestable
                                     harvestable->add_current_clicks(harvestable->click_limit*.33f);
                                     std::unique_ptr<HarvestableManager>& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
