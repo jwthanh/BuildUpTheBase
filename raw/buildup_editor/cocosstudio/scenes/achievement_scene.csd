@@ -37,7 +37,7 @@
                 <OutlineColor A="255" R="26" G="26" B="26" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="desc_lbl" ActionTag="536310315" Tag="245" IconVisible="False" LeftMargin="52.3922" RightMargin="52.3925" TopMargin="81.7877" BottomMargin="523.2123" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="desc_lbl" ActionTag="536310315" Tag="245" IconVisible="False" LeftMargin="52.3923" RightMargin="52.3925" TopMargin="81.7877" BottomMargin="523.2123" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="855.2153" Y="35.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="479.9999" Y="540.7123" />
@@ -61,6 +61,30 @@
                 <FirstColor A="255" R="150" G="150" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="unlocked_lbl" ActionTag="-918996730" Tag="375" IconVisible="False" LeftMargin="12.5000" RightMargin="782.5000" TopMargin="226.2500" BottomMargin="313.7500" IsCustomSize="True" FontSize="24" LabelText="Unlocked:&#xA;123,456QuD" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="165.0000" Y="100.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="95.0000" Y="363.7500" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0990" Y="0.5684" />
+                <PreSize X="0.1719" Y="0.1563" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                <OutlineColor A="255" R="26" G="26" B="26" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="remaining_lbl" ActionTag="-1171744398" Tag="376" IconVisible="False" LeftMargin="12.4999" RightMargin="782.5001" TopMargin="323.7500" BottomMargin="216.2500" IsCustomSize="True" FontSize="24" LabelText="Remaining:&#xA;123,456QuD" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="165.0000" Y="100.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="94.9999" Y="266.2500" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0990" Y="0.4160" />
+                <PreSize X="0.1719" Y="0.1563" />
+                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                <OutlineColor A="255" R="26" G="26" B="26" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleY="1.0000" />

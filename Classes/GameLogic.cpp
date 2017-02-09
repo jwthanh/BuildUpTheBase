@@ -1123,6 +1123,8 @@ void GameDirector::switch_to_reset_menu()
     director->pushScene(scene);
 };
 
+bool is_completed2(const std::shared_ptr<BaseAchievement>& achievement) { return achievement->get_completed(); };
+
 void GameDirector::switch_to_achievement_menu()
 {
     auto scene = cocos2d::Scene::create();
@@ -1146,6 +1148,18 @@ void GameDirector::switch_to_achievement_menu()
         return left->get_completed() < right->get_completed();
     };
     std::sort(achievements.begin(), achievements.end(), order_by_completed);
+
+    auto is_completed = [](const std::shared_ptr<BaseAchievement>& achievement) { return achievement->get_completed(); };
+    int completed = std::count_if(achievements.begin(), achievements.end(), is_completed);
+    std::stringstream completed_ss;
+    completed_ss << "Completed:\n" << completed;
+    ((ui::Text*)panel->getChildByName("unlocked_lbl"))->setString(completed_ss.str());
+
+    auto is_not_completed = [](const std::shared_ptr<BaseAchievement>& achievement) { return !achievement->get_completed(); };
+    int remaining = std::count_if(achievements.begin(), achievements.end(), is_not_completed);
+    std::stringstream not_completed_ss;
+    not_completed_ss << "Remaining:\n" << remaining;
+    ((ui::Text*)panel->getChildByName("remaining_lbl"))->setString(not_completed_ss.str());
 
     for (std::shared_ptr<BaseAchievement>& achievement : achievements)
     {
