@@ -496,8 +496,8 @@ void BaseScene::create_building_choicelist()
     ui::Button* panel = (ui::Button*)city_node->getChildByName("building_panel");
 
     //check visibilty for tutorials
-    auto check_visible = [building_buttons](float dt){
-        Tutorial* tutorial = Tutorial::getInstance();
+    Tutorial* tutorial = Tutorial::getInstance();
+    auto check_visible = [building_buttons, tutorial](float dt){
         building_buttons->setVisible(tutorial->get_show_building_buttons());
     };
     building_buttons->schedule(check_visible, SHORT_DELAY, "check_visible");
@@ -632,8 +632,8 @@ void BaseScene::create_info_panel()
 
     ui::Layout* building_info_panel = dynamic_cast<ui::Layout*>(this->getChildByName("building_info_panel"));
     //check visibilty for tutorials
-    auto check_visible = [building_info_panel](float dt){
-        Tutorial* tutorial = Tutorial::getInstance();
+    Tutorial* tutorial = Tutorial::getInstance();
+    auto check_visible = [building_info_panel, tutorial](float dt){
         building_info_panel->setVisible(tutorial->get_show_building_info());
     };
     building_info_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
@@ -788,8 +788,8 @@ void BaseScene::create_player_info_panel()
     ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(this->getChildByName("player_info_panel"));
 
     //check visibilty for tutorials
-    auto check_visible = [player_info_panel](float dt){
-        Tutorial* tutorial = Tutorial::getInstance();
+    Tutorial* tutorial = Tutorial::getInstance();
+    auto check_visible = [player_info_panel, tutorial](float dt){
         player_info_panel->setVisible(tutorial->get_show_player_info());
     };
 
@@ -838,8 +838,7 @@ void BaseScene::create_player_info_panel()
     player_hp_lbl->setUserData(hp_cache);
 
     //check visibilty for tutorials
-    auto check_hp_visible = [player_hp_lbl](float dt){
-        Tutorial* tutorial = Tutorial::getInstance();
+    auto check_hp_visible = [player_hp_lbl, tutorial](float dt){
         player_hp_lbl->setVisible(tutorial->get_show_player_hp_lbl());
     };
     player_hp_lbl->schedule(check_hp_visible, SHORT_DELAY, "check_hp_visible");
