@@ -156,7 +156,7 @@ class UpgradeWalletNuItem : public BuildingShopNuItem
         static UpgradeWalletNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
 
         virtual void other_init();
-        virtual void update_func(float dt) override;
+        virtual bool custom_status_check(float dt) override;
 };
 
 

@@ -634,7 +634,8 @@ void UpgradeWalletNuItem::other_init()
     technology.set_been_unlocked(true);
 
     this->set_touch_ended_callback([this]() {
-        CCLOG("Upgraded wallet size!");
+        BEATUP->add_total_coin(-this->_shop_cost);
+
         Technology technology = Technology(TechSubType::RaiseWalletCap);
         auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
         res_count_t def = 0.0;
@@ -644,14 +645,14 @@ void UpgradeWalletNuItem::other_init()
 
 }
 
-void UpgradeWalletNuItem::update_func(float dt)
+bool UpgradeWalletNuItem::custom_status_check(float dt)
 {
-    if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return; } //dont do anything if not visible
+    if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return true; } //dont do anything if not visible
     //FIXME, this lets someone press a button early i think
     // and avoid having the button disabled. Not sure.
     if (this->button->isHighlighted())
     {
-        return;
+        return true;
     };
     auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
     std::stringstream ss;
@@ -669,7 +670,10 @@ void UpgradeWalletNuItem::update_func(float dt)
     this->set_cost_lbl(beautify_double(this->_shop_cost));
 
     ss << "Raises size of wallet,\nadds coin capacity";
+
     this->set_description(ss.str());
+
+    return true;
 }
 
 ShopNuItem* ShopNuItem::create(cocos2d::ui::Widget* parent)
