@@ -186,16 +186,11 @@ void Beatup::add_total_coin(res_count_t x)
         achievement->increment_by_n(x);
     };
 
-    Technology technology = Technology(TechSubType::RaiseWalletCap);
-
 
     this->_total_coins += x;
 
-    res_count_t def = 0.0;
-    auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
-    res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
+    auto max_storage = this->get_max_coin_storage();
 
-    res_count_t max_storage = scale_number_flat_pow(1000.0L, num_researched, 11.3L);
     this->_total_coins = std::min(max_storage, this->_total_coins);
 };
 
@@ -204,6 +199,17 @@ double Beatup::get_total_coins()
 {
     return this->_total_coins;
 }
+
+res_count_t Beatup::get_max_coin_storage()
+{
+    Technology technology = Technology(TechSubType::RaiseWalletCap);
+    res_count_t def = 0.0;
+    auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
+    res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
+
+    return scale_number_flat_pow(1000.0L, num_researched, 11.3L);
+
+};
 
 void Beatup::set_last_login()
 {

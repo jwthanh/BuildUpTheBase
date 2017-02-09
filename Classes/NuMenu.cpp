@@ -656,10 +656,10 @@ bool UpgradeWalletNuItem::custom_status_check(float dt)
     {
         return true;
     };
-    auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
     std::stringstream ss;
 
     Technology technology = Technology(TechSubType::RaiseWalletCap);
+    auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
 
     res_count_t def = 0.0;
     res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
@@ -668,7 +668,7 @@ bool UpgradeWalletNuItem::custom_status_check(float dt)
     this->count_lbl->setString(ss.str());
     ss.str("");
 
-    this->_shop_cost = scale_number_flat_pow(1000.0L, num_researched, 11.3L);
+    this->_shop_cost = BEATUP->get_max_coin_storage();
     this->set_cost_lbl(beautify_double(this->_shop_cost));
 
     ss << "Raises size of wallet,\nadds coin capacity";

@@ -279,13 +279,7 @@ void GameLogic::update(float dt)
                 prefix = "";
             }
 
-            Technology technology = Technology(TechSubType::RaiseWalletCap);
-
-            res_count_t def = 0.0;
-            auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
-            res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
-
-            res_count_t max_storage = scale_number_flat_pow(1000.0L, num_researched, 11.3L);
+            res_count_t max_storage = BEATUP->get_max_coin_storage();
             if (total_coins == max_storage ) {
                 player_gold_per_sec_lbl->setString("Upgrade Wallet!");
             } else {
