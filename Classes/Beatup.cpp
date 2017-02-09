@@ -34,6 +34,7 @@
 #include "ui/UIText.h"
 #include "ui/UIButton.h"
 #include "goals/Achievement.h"
+#include "Technology.h"
 
 USING_NS_CC;
 
@@ -184,7 +185,18 @@ void Beatup::add_total_coin(res_count_t x)
         std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalCoins);
         achievement->increment_by_n(x);
     };
+
+    Technology technology = Technology(TechSubType::RaiseWalletCap);
+
+
     this->_total_coins += x;
+
+    res_count_t def = 0.0;
+    auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
+    res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
+
+    res_count_t max_storage = scale_number_flat_pow(100.0L, num_researched, 11.3L);
+    this->_total_coins = std::min(max_storage, this->_total_coins);
     //DataManager::incr_key("total_coin_key", x);
 };
 

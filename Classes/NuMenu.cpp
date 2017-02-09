@@ -633,6 +633,8 @@ void UpgradeWalletNuItem::other_init()
     Technology technology = Technology(TechSubType::RaiseWalletCap);
     technology.set_been_unlocked(true);
 
+    this->set_image("sell_all.png");
+
     this->set_touch_ended_callback([this]() {
         BEATUP->add_total_coin(-this->_shop_cost);
 
@@ -666,7 +668,7 @@ bool UpgradeWalletNuItem::custom_status_check(float dt)
     this->count_lbl->setString(ss.str());
     ss.str("");
 
-    this->_shop_cost = scale_number_flat_pow(10.0L, num_researched, 11.3L);
+    this->_shop_cost = scale_number_flat_pow(100.0L, num_researched, 11.3L);
     this->set_cost_lbl(beautify_double(this->_shop_cost));
 
     ss << "Raises size of wallet,\nadds coin capacity";
