@@ -34,7 +34,8 @@ enum class TechSubType
     CombatCritFactor = 4,
     SalesmenBaseBoost = 5,
     CombatWeakenEnemy = 6,
-    RaiseWoodFind = 7
+    RaiseWoodFind = 7,
+    RaiseWalletCap = 8
 };
 
 enum class WorkerSubType

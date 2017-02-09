@@ -15,7 +15,8 @@ const std::map<Technology::SubType, std::string> Technology::type_map = {
     {Technology::SubType::CombatCritFactor, "combat_crit_factor"},
     {Technology::SubType::SalesmenBaseBoost, "salesmen_base_boost"},
     {Technology::SubType::CombatWeakenEnemy, "combat_weaken_enemy"},
-    {Technology::SubType::RaiseWoodFind, "raise_wood_find"}
+    {Technology::SubType::RaiseWoodFind, "raise_wood_find"},
+    {Technology::SubType::RaiseWalletCap, "raise_wallet_cap"}
 };
 
 
@@ -117,6 +118,10 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
         recipe->components = mistIngredient({{ Ingredient::SubType::Wood, wood_cost }});
 
         ss << "More likely to find wood\n-- costs " << beautify_double(wood_cost) << " wood";
+    }
+    else if (this->sub_type == Technology::SubType::RaiseWalletCap)
+    {
+        CCLOG("RaiseWalletCap has no recipe requirements, supposed to use gold instead");
     }
     else
     {

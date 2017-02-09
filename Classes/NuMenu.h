@@ -119,6 +119,15 @@ class TargetRecipeNuItem : public BuildingNuItem
         virtual void update_func(float dt) override;
 };
 
+class UpgradeWalletNuItem : public BuildingNuItem
+{
+    public:
+        static UpgradeWalletNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
+
+        virtual void other_init();
+        virtual void update_func(float dt) override;
+};
+
 class ShopNuItem : public Buyable, public NuItem
 {
     public:

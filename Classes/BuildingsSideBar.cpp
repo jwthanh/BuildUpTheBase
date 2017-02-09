@@ -523,7 +523,8 @@ void SideListView::setup_detail_listview_as_recipes()
                 Recipe = 0,
                 Misc = 1,
                 Tech = 2,
-                ChangeTargetRecipe = 3
+                ChangeTargetRecipe = 3,
+                UpgradeWalletCapTech = 4
             };
 
             struct DetailConfig {
@@ -834,6 +835,16 @@ void SideListView::setup_detail_listview_as_recipes()
                         "",
                         ""
                     }});
+
+                spTechnology update_wallet_cap = std::make_shared<Technology>(Technology::SubType::RaiseWalletCap);
+                nuitems_config.push_back({
+                    update_wallet_cap,
+                    DetailType::UpgradeWalletCapTech,
+                    {
+                        "Increase Wallet Size",
+                        "",
+                        ""
+                    }});
             };
 
             if (building->name == "The Forest")
@@ -931,6 +942,9 @@ void SideListView::setup_detail_listview_as_recipes()
                 else if (config.type == DetailType::ChangeTargetRecipe) {
                     menu_item = TargetRecipeNuItem::create(listview, building);
                 }
+                else if (config.type == DetailType::UpgradeWalletCapTech) {
+                    menu_item = UpgradeWalletNuItem::create(listview, building);
+                }
 
                 menu_item->setTag(child_tag);
 
@@ -956,6 +970,10 @@ void SideListView::setup_detail_listview_as_recipes()
                 {
                     spRecipe recipe = std::static_pointer_cast<Recipe>(config.object);
                     dynamic_cast<TargetRecipeNuItem*>(menu_item)->other_init(recipe);
+                }
+                else if (dynamic_cast<UpgradeWalletNuItem*>(menu_item))
+                {
+                    dynamic_cast<UpgradeWalletNuItem*>(menu_item)->other_init();
                 }
 
             };

@@ -612,6 +612,41 @@ void TargetRecipeNuItem::update_func(float dt)
     this->set_description(recipe->description);
 }
 
+UpgradeWalletNuItem* UpgradeWalletNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
+{
+    UpgradeWalletNuItem* pRet = new(std::nothrow) UpgradeWalletNuItem();
+    if (pRet && pRet->init(parent, building))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+};
+
+void UpgradeWalletNuItem::other_init()
+{
+    this->set_touch_ended_callback([this]() {
+        CCLOG("Upgraded wallet size!");
+    });
+
+}
+
+void UpgradeWalletNuItem::update_func(float dt)
+{
+    if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return; } //dont do anything if not visible
+    //FIXME, this lets someone press a button early i think
+    // and avoid having the button disabled. Not sure.
+    if (this->button->isHighlighted())
+    {
+        return;
+    };
+}
+
 ShopNuItem* ShopNuItem::create(cocos2d::ui::Widget* parent)
 {
     ShopNuItem* pRet = new(std::nothrow) ShopNuItem();
