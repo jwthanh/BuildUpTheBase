@@ -195,16 +195,14 @@ void Beatup::add_total_coin(res_count_t x)
     auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
     res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
 
-    res_count_t max_storage = scale_number_flat_pow(100.0L, num_researched, 11.3L);
+    res_count_t max_storage = scale_number_flat_pow(1000.0L, num_researched, 11.3L);
     this->_total_coins = std::min(max_storage, this->_total_coins);
-    //DataManager::incr_key("total_coin_key", x);
 };
 
 
 double Beatup::get_total_coins()
 {
     return this->_total_coins;
-    //return DataManager::get_double_from_data(Beatup::total_coin_key);
 }
 
 void Beatup::set_last_login()

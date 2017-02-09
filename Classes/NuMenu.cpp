@@ -668,7 +668,7 @@ bool UpgradeWalletNuItem::custom_status_check(float dt)
     this->count_lbl->setString(ss.str());
     ss.str("");
 
-    this->_shop_cost = scale_number_flat_pow(100.0L, num_researched, 11.3L);
+    this->_shop_cost = scale_number_flat_pow(1000.0L, num_researched, 11.3L);
     this->set_cost_lbl(beautify_double(this->_shop_cost));
 
     ss << "Raises size of wallet,\nadds coin capacity";
