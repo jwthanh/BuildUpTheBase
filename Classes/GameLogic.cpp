@@ -38,6 +38,7 @@
 #include "Tutorial.h"
 #include "utilities/vibration.h"
 #include "goals/Achievement.h"
+#include "Technology.h"
 
 
 USING_NS_CC;
@@ -271,14 +272,26 @@ void GameLogic::update(float dt)
             ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(scene->getChildByName("player_info_panel"));
             auto player_gold_per_sec_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
 
-            res_count_t coin_diff = BEATUP->get_total_coins() - BEATUP->_last_total_coins;
+            const auto& total_coins = BEATUP->get_total_coins();
+            res_count_t coin_diff = total_coins - BEATUP->_last_total_coins;
             std::string prefix = "+";
             if (coin_diff < 0.0) {
                 prefix = "";
-            };
+            }
 
-            std::string beautified_diff = prefix+beautify_double(coin_diff)+"/sec";
-            player_gold_per_sec_lbl->setString(beautified_diff);
+            Technology technology = Technology(TechSubType::RaiseWalletCap);
+
+            res_count_t def = 0.0;
+            auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
+            res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
+
+            res_count_t max_storage = scale_number_flat_pow(1000.0L, num_researched, 11.3L);
+            if (total_coins == max_storage ) {
+                player_gold_per_sec_lbl->setString("Upgrade Wallet!");
+            } else {
+                std::string beautified_diff = prefix+beautify_double(coin_diff)+"/sec";
+                player_gold_per_sec_lbl->setString(beautified_diff);
+            };
 
             BEATUP->_last_total_coins = BEATUP->get_total_coins();
 
