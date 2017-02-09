@@ -13,6 +13,7 @@ class PlainShopItem;
 class Fist;
 class ShopItem;
 class Building;
+class BuildingShopNuItem;
 
 
 namespace cocos2d
@@ -119,15 +120,6 @@ class TargetRecipeNuItem : public BuildingNuItem
         virtual void update_func(float dt) override;
 };
 
-class UpgradeWalletNuItem : public BuildingNuItem
-{
-    public:
-        static UpgradeWalletNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
-
-        virtual void other_init();
-        virtual void update_func(float dt) override;
-};
-
 class ShopNuItem : public Buyable, public NuItem
 {
     public:
@@ -157,6 +149,16 @@ class BuildingShopNuItem : public ShopNuItem
         bool get_been_bought() override;
         void set_been_bought(bool val) override;
 };
+
+class UpgradeWalletNuItem : public BuildingShopNuItem
+{
+    public:
+        static UpgradeWalletNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
+
+        virtual void other_init();
+        virtual void update_func(float dt) override;
+};
+
 
 class UpgradeBuildingShopNuItem : public BuildingShopNuItem
 {

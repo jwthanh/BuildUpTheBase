@@ -653,22 +653,23 @@ void UpgradeWalletNuItem::update_func(float dt)
     {
         return;
     };
-        auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
-        std::stringstream ss;
+    auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
+    std::stringstream ss;
 
-        Technology technology = Technology(TechSubType::RaiseWalletCap);
+    Technology technology = Technology(TechSubType::RaiseWalletCap);
 
-        res_count_t def = 0.0;
-        res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
+    res_count_t def = 0.0;
+    res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
 
-        ss << "lvl " << num_researched;
-        this->count_lbl->setString(ss.str());
-        ss.str("");
+    ss << "lvl " << num_researched;
+    this->count_lbl->setString(ss.str());
+    ss.str("");
 
-        //this->_shop_cost = scale_number_slow(10, num_researched, 1.15L, 3.0L);
+    this->_shop_cost = scale_number_flat_pow(10.0L, num_researched, 11.3L);
+    this->set_cost_lbl(beautify_double(this->_shop_cost));
 
-        ss << "Raises size of wallet, increasing coin storage capacity";
-        this->set_description(ss.str());
+    ss << "Raises size of wallet,\nadds coin capacity";
+    this->set_description(ss.str());
 }
 
 ShopNuItem* ShopNuItem::create(cocos2d::ui::Widget* parent)

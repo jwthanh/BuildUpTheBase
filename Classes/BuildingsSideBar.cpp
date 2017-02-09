@@ -929,7 +929,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     continue;
                 };
 
-                BuildingNuItem* menu_item;
+                NuItem* menu_item;
                 if (config.type == DetailType::Recipe) {
                     menu_item = RecipeNuItem::create(listview, building);
                 }
