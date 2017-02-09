@@ -645,37 +645,36 @@ void UpgradeWalletNuItem::other_init()
         marketplace->techtree->tech_map[technology.sub_type] = num_researched + 1;
     });
 
-}
+    auto update_callback = [this](float dt) {
+        if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return ; } //dont do anything if not visible
+        //FIXME, this lets someone press a button early i think
+        // and avoid having the button disabled. Not sure.
+        if (this->button->isHighlighted())
+        {
+            return ;
+        };
+        std::stringstream ss;
 
-bool UpgradeWalletNuItem::custom_status_check(float dt)
-{
-    if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return true; } //dont do anything if not visible
-    //FIXME, this lets someone press a button early i think
-    // and avoid having the button disabled. Not sure.
-    if (this->button->isHighlighted())
-    {
-        return true;
+        Technology technology = Technology(TechSubType::RaiseWalletCap);
+        auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
+
+        res_count_t def = 0.0;
+        res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
+
+        ss << "lvl " << num_researched;
+        this->count_lbl->setString(ss.str());
+        ss.str("");
+
+        this->_shop_cost = BEATUP->get_max_coin_storage();
+        this->set_cost_lbl(beautify_double(this->_shop_cost));
+
+        ss << "Adds to coin storage";
+
+        this->set_description(ss.str());
     };
-    std::stringstream ss;
+    this->schedule(update_callback, AVERAGE_DELAY, "update_wallet_callback");
+    update_callback(0);
 
-    Technology technology = Technology(TechSubType::RaiseWalletCap);
-    auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
-
-    res_count_t def = 0.0;
-    res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
-
-    ss << "lvl " << num_researched;
-    this->count_lbl->setString(ss.str());
-    ss.str("");
-
-    this->_shop_cost = BEATUP->get_max_coin_storage();
-    this->set_cost_lbl(beautify_double(this->_shop_cost));
-
-    ss << "Raises size of wallet,\nadds coin capacity";
-
-    this->set_description(ss.str());
-
-    return true;
 }
 
 ShopNuItem* ShopNuItem::create(cocos2d::ui::Widget* parent)
