@@ -82,6 +82,21 @@
 
 * Analytics and user tracking
 
+#WALLET
+To increase wallet size you need to sell items to the marketplace, accumulating value as you sell
+* items sell their value
+* stored value resets after item purchas
+* potential for upgrades for keeping leftover money
+
+#DARK SALESMEN
+Can fuse two items together with scrolls that contain blueprints
+
+# grave robbing
+* can curse you, combat gets harder, or you take damage
+* can find better items or treasure
+* potential for upgrades
+
+
 # theme ideas
 you start off as garbage out of a spaceships ejection chute and then grow into your own lifeform then end by taking over the world
  what if instead, it was a black hole and every time you get to the core (temple)  you went to another universe or something
