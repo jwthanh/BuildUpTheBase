@@ -506,7 +506,7 @@ const std::string& ScrapItemScene::get_default_detail_panel_title()
 
 const std::string& ScrapItemScene::get_default_detail_panel_description()
 {
-    static std::string default_desc = "Scrap an item, convert it to currency.\n\nUse the currency to increase wallet size.";
+    static std::string default_desc = "Scrap an item, converting it to city investment.\n\nAt The Marketplace, use the invested currency to increase wallet size.\n\nPlace items on Altars in the tunnels, or sacrifice souls to the gods for better items.";
     return default_desc;
 };
 
