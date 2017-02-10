@@ -540,11 +540,42 @@ void ScrapItemScene::init_callbacks()
         this->item_desc->setString(item->description);
 
         this->item_sell_btn->setVisible(true);
-        this->item_sell_btn->addTouchEventListener([this, item](Ref* sender, ui::Widget::TouchEventType type){
+        this->item_sell_btn->addTouchEventListener([this, nuitem, item](Ref* sender, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 do_vibrate(5);
                 CCLOG("scrapped item!");
+
+                this->items_listview->removeChild(nuitem->button);
+                this->items_listview->removeChild(nuitem);
+
+                GameLogic::getInstance()->add_city_investment((double)item->get_effective_cost());
+
+                //remove from items list
+                BUILDUP->items.erase(
+                    std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item),
+                    BUILDUP->items.end()
+                );
+
+                //TODO clear equipment slots nicely, this is ugly
+                auto& equipment = GameLogic::getInstance()->equipment;
+
+                if (equipment->combat_slot->get_item() == item)
+                {
+                    equipment->combat_slot->set_item(NULL);
+                }
+                else if (equipment->mining_slot->get_item() == item)
+                {
+                    equipment->mining_slot->set_item(NULL);
+                }
+                else if (equipment->recipe_slot->get_item() == item)
+                {
+                    equipment->recipe_slot->set_item(NULL);
+                }
+
+
+                this->reset_detail_panel();
+                do_vibrate(5);
             }
         });
 
