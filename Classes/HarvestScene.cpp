@@ -187,6 +187,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // GameDirector::switch_to_equipment_menu();
         // GameDirector::switch_to_reset_menu();
         // GameDirector::switch_to_achievement_menu();
+        GameDirector::switch_to_scrap_item_menu();
 
         // TextBlobModal* modal = new TextBlobModal(this);
         // modal->set_body("test");

@@ -491,3 +491,109 @@ cocos2d::Scene* EquipItemScene::createScene(ItemSlotType slot_type)
     scene->addChild(layer);
     return scene;
 };
+
+const std::string& ScrapItemScene::get_scene_title()
+{
+    static std::string scene_title = "Scrap Item";
+    return scene_title;
+};
+
+const std::string& ScrapItemScene::get_default_detail_panel_title()
+{
+    static std::string default_title = "Item";
+    return default_title;
+};
+
+const std::string& ScrapItemScene::get_default_detail_panel_description()
+{
+    static std::string default_desc = "Scrap an item, convert it to currency.\n\nUse the currency to increase wallet size.";
+    return default_desc;
+};
+
+const std::string& ScrapItemScene::get_sell_btn_text()
+{
+    static std::string default_desc = "Scrap";
+    return default_desc;
+}
+
+ScrapItemScene* ScrapItemScene::create()
+{
+    ScrapItemScene* pRet = new(std::nothrow) ScrapItemScene();
+    if (pRet && pRet->init())
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+};
+
+void ScrapItemScene::init_callbacks()
+{
+
+    auto update_detail_panel_on_touch = [this](NuItem* nuitem, spItem item) {
+        this->item_name->setString(item->get_name());
+        this->item_desc->setString(item->description);
+
+        this->item_sell_btn->setVisible(true);
+        this->item_sell_btn->addTouchEventListener([this, item](Ref* sender, ui::Widget::TouchEventType type){
+            if (type == ui::Widget::TouchEventType::ENDED)
+            {
+                do_vibrate(5);
+                CCLOG("scrapped item!");
+            }
+        });
+
+        //update listviews layout to account for different content height
+        this->item_listview_description->requestDoLayout();
+    };
+
+    for (spItem item : this->get_items()) {
+        auto nuitem = NuItem::create(items_listview);
+        nuitem->set_title(item->get_name());
+        nuitem->set_description(item->summary);
+
+        nuitem->set_image(item->img_path, ui::Widget::TextureResType::LOCAL);
+
+        res_count_t cost = item->get_effective_cost();
+        std::string cost_str = beautify_double(cost);
+        nuitem->set_cost_lbl(cost_str);
+
+        nuitem->button->addTouchEventListener([update_detail_panel_on_touch, item, nuitem](Ref* sender, ui::Widget::TouchEventType type){
+            if (type == ui::Widget::TouchEventType::ENDED)
+            {
+                do_vibrate(5);
+                update_detail_panel_on_touch(nuitem, item);
+            }
+        });
+    };
+};
+
+bool ScrapItemScene::init()
+{
+    this->filtered_slot_type = ItemSlotType::Unset;
+
+#ifdef _WIN32
+    FUNC_INIT_WIN32(ScrapItemScene);
+#else
+    FUNC_INIT(ScrapItemScene);
+#endif
+
+    this->init_children();
+    this->init_callbacks();
+
+
+    return true;
+};
+
+cocos2d::Scene* ScrapItemScene::createScene()
+{
+    auto scene = cocos2d::Scene::create();
+    auto* layer = ScrapItemScene::create();
+    scene->addChild(layer);
+    return scene;
+};

@@ -966,7 +966,6 @@ void GameDirector::switch_to_miner_menu()
 
 void GameDirector::switch_to_items_menu()
 {
-
 	auto scene = ItemScene::createScene();
 	scene->setName("item_scene");
     set_default_key_handler(scene);
@@ -992,6 +991,16 @@ void GameDirector::switch_to_item_equip_menu(ItemSlotType slot_type)
 
     auto scene = EquipItemScene::createScene(slot_type);
     scene->setName("equip_item_scene");
+    set_default_key_handler(scene);
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
+
+void GameDirector::switch_to_scrap_item_menu()
+{
+    auto scene = ScrapItemScene::createScene();
+    scene->setName("scrap_item_scene");
     set_default_key_handler(scene);
 
     auto director = cocos2d::Director::getInstance();
