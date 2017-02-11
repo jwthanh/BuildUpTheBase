@@ -195,7 +195,7 @@ void Beatup::add_total_coin(res_count_t x)
 };
 
 
-double Beatup::get_total_coins()
+res_count_t Beatup::get_total_coins()
 {
     return this->_total_coins;
 }

@@ -128,6 +128,10 @@ class ShopNuItem : public Buyable, public NuItem
 
         res_count_t _last_shop_cost;
 
+        ///wraps BEATUP->get_total_coins
+        virtual res_count_t get_available_coins();
+        virtual void add_available_coins(res_count_t);
+
         virtual bool init(Node* parent, std::string id_key = "");
         virtual bool custom_status_check(float dt);
         virtual void update_func(float dt);

@@ -272,6 +272,16 @@ void NuItem::set_progress_panel_visible(bool visible)
     this->total_lbl->setVisible(visible);
 };
 
+void ShopNuItem::add_available_coins(res_count_t new_coins)
+{
+    BEATUP->add_total_coin(new_coins);
+};
+
+res_count_t ShopNuItem::get_available_coins()
+{
+    return BEATUP->get_total_coins();
+};
+
 bool ShopNuItem::init(Node* parent, std::string id_key)
 {
     NuItem::init(parent);
@@ -304,7 +314,7 @@ void ShopNuItem::update_func(float dt)
     };
 
     res_count_t cost = this->get_cost();
-    res_count_t total_coins = BEATUP->get_total_coins();
+    res_count_t total_coins = this->get_available_coins();
 
     this->cost_lbl->setTextColor(Color4B::WHITE);
     res_count_t rounded_cost = std::round(this->get_cost());
@@ -636,7 +646,7 @@ void UpgradeWalletNuItem::other_init()
     this->set_image("sell_all.png");
 
     this->set_touch_ended_callback([this]() {
-        BEATUP->add_total_coin(-this->_shop_cost);
+        this->add_available_coins(-this->_shop_cost);
 
         Technology technology = Technology(TechSubType::RaiseWalletCap);
         auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
@@ -756,11 +766,11 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
 
     auto touch_ended_cb = [this](){
         res_count_t cost = this->get_cost();
-        double total_coins = BEATUP->get_total_coins();
+        res_count_t total_coins = this->get_available_coins();
 
         if (cost <= total_coins)
         {
-            BEATUP->add_total_coin(-static_cast<double>(cost));
+            this->add_available_coins(-cost);
 
             auto building = BUILDUP->get_target_building();
             building->building_level = this->building_level;
@@ -920,11 +930,11 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
     this->set_touch_ended_callback([this]()
     {
         res_count_t cost = this->get_cost();
-        double total_coins = BEATUP->get_total_coins();
+        res_count_t total_coins = this->get_available_coins();
 
         if (cost <= total_coins)
         {
-            BEATUP->add_total_coin(-((double)(cost)));
+            this->add_available_coins(-cost);
             auto building = BUILDUP->get_target_building();
 
             res_count_t def = 0.0;
@@ -963,11 +973,11 @@ void SalesmanShopNuItem::my_init_touch_ended_callback()
     this->set_touch_ended_callback([this]()
     {
         res_count_t cost = this->get_cost();
-        double total_coins = BEATUP->get_total_coins();
+        res_count_t total_coins = this->get_available_coins();
 
         if (cost <= total_coins)
         {
-            BEATUP->add_total_coin(-((double)(cost)));
+            this->add_available_coins(-cost);
             auto building = BUILDUP->get_target_building();
 
             res_count_t def = 0.0;
@@ -1098,11 +1108,11 @@ void ConsumerShopNuItem::my_init_touch_ended_callback()
     this->set_touch_ended_callback([this]()
     {
         res_count_t cost = this->get_cost();
-        double total_coins = BEATUP->get_total_coins();
+        res_count_t total_coins = this->get_available_coins();
 
         if (cost <= total_coins)
         {
-            BEATUP->add_total_coin(-((double)(cost)));
+            this->add_available_coins(-cost);
             auto building = BUILDUP->get_target_building();
 
             res_count_t def = 0.0;
@@ -1232,7 +1242,7 @@ void CombatShopNuItem::my_init_touch_ended_callback()
     this->set_touch_ended_callback([this]()
     {
         res_count_t cost = this->get_cost();
-        double total_coins = BEATUP->get_total_coins();
+        res_count_t total_coins = this->get_available_coins();
 
         if (cost <= total_coins)
         {
