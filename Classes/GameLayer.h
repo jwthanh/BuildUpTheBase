@@ -63,9 +63,9 @@ class GameLayer : public cocos2d::Layer
 
         cocos2d::ui::ScrollView* create_center_scrollview();
         cocos2d::ui::Button* create_button(
-            std::string text, BoolFuncNoArgs cb, bool start_disabled = false,
-            ButtonState* btn_state = NULL
-        );
+                std::string text, BoolFuncNoArgs cb, bool start_disabled = false,
+                ButtonState* btn_state = NULL
+                );
 
 };
 

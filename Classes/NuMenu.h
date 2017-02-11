@@ -140,7 +140,8 @@ class BuildingShopNuItem : public ShopNuItem
         bool _been_bought;
 
     public:
-    static BuildingShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);;
+        static BuildingShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);;
+
         BuildingShopNuItem(){};
 
         std::shared_ptr<Building> building;
@@ -176,19 +177,19 @@ class UpgradeBuildingShopNuItem : public BuildingShopNuItem
 class HarvesterShopNuItem : public BuildingShopNuItem
 {
     public:
-    static HarvesterShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
+        static HarvesterShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
 
-    std::mt19937 get_generator();
+        std::mt19937 get_generator();
 
-    bool init(Node* parent, spBuilding building);
-    virtual void my_init(WorkerSubType harv_type, IngredientSubType ing_type);
-    virtual void my_init_title();
-    virtual void my_init_sprite();
-    virtual void my_init_touch_ended_callback();
-    virtual void my_init_update_callback();
+        bool init(Node* parent, spBuilding building);
+        virtual void my_init(WorkerSubType harv_type, IngredientSubType ing_type);
+        virtual void my_init_title();
+        virtual void my_init_sprite();
+        virtual void my_init_touch_ended_callback();
+        virtual void my_init_update_callback();
 
-    WorkerSubType harv_type;
-    IngredientSubType ing_type;
+        WorkerSubType harv_type;
+        IngredientSubType ing_type;
 };
 
 class SalesmanShopNuItem : public HarvesterShopNuItem
