@@ -176,14 +176,24 @@ void Salesman::on_update(float dt)
         res_count_t max_can_sell = map_get(all_ingredients, ing_type, def);
         if (max_can_sell != 0)
         {
-            res_count_t to_sell = std::min(max_can_sell, active_sell_count);
-            res_count_t coins_gained = Ingredient::type_to_value.at(this->ing_type);
+            res_count_t num_to_sell = std::min(max_can_sell, active_sell_count);
+            res_count_t coins_gained_per = Ingredient::type_to_value.at(this->ing_type);
+
+            //make sure enough coin space for sale, otherwise limit num_to_sell until
+            // it's below the space left
+            res_count_t coin_storage_left = BEATUP->get_coin_storage_left();
+            res_count_t actual_value = num_to_sell * coins_gained_per;
+            while (actual_value > coin_storage_left && num_to_sell > 0.0)
+            {
+                num_to_sell--;
+                actual_value = num_to_sell * coins_gained_per;
+            };
+
 
             //remove the ingredients
-            BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
+            BUILDUP->remove_shared_ingredients_from_all(ing_type, num_to_sell);
 
             //add the value of amount sold
-            res_count_t actual_value = to_sell * coins_gained;
             BEATUP->add_total_coin(actual_value);
 
             //create floating label for the amount sold over the correct ing panel

@@ -211,6 +211,11 @@ res_count_t Beatup::get_max_coin_storage()
 
 };
 
+res_count_t Beatup::get_coin_storage_left()
+{
+    return this->get_max_coin_storage() - this->get_total_coins();
+};
+
 void Beatup::set_last_login()
 {
     //get current time

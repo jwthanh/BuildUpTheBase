@@ -105,6 +105,7 @@ class Beatup : public GameLayer
         void add_total_coin(res_count_t x);
         res_count_t get_total_coins();
         res_count_t get_max_coin_storage();
+        res_count_t get_coin_storage_left();
 
         static std::string last_login_key;
         void set_last_login();
