@@ -24,13 +24,16 @@ class EquipmentSlot
 class Equipment
 {
     public:
-        std::unique_ptr<EquipmentSlot> combat_slot;
-        std::unique_ptr<EquipmentSlot> mining_slot;
-        std::unique_ptr<EquipmentSlot> recipe_slot;
-
         Equipment();
 
-        const std::unique_ptr<EquipmentSlot>& get_slot_by_type(ItemSlotType slot_type);
+        std::shared_ptr<EquipmentSlot> combat_slot;
+        std::shared_ptr<EquipmentSlot> mining_slot;
+        std::shared_ptr<EquipmentSlot> recipe_slot;
+
+        std::vector<const std::shared_ptr<EquipmentSlot>> get_slots();
+
+
+        const std::shared_ptr<EquipmentSlot>& get_slot_by_type(ItemSlotType slot_type);
 
 };
 #endif

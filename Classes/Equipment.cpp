@@ -31,12 +31,20 @@ void EquipmentSlot::set_item(spItem item)
 
 Equipment::Equipment()
 {
-    this->combat_slot = std::unique_ptr<EquipmentSlot>(new EquipmentSlot());
-    this->mining_slot = std::unique_ptr<EquipmentSlot>(new EquipmentSlot());
-    this->recipe_slot = std::unique_ptr<EquipmentSlot>(new EquipmentSlot());
+    this->combat_slot = std::shared_ptr<EquipmentSlot>(new EquipmentSlot());
+    this->mining_slot = std::shared_ptr<EquipmentSlot>(new EquipmentSlot());
+    this->recipe_slot = std::shared_ptr<EquipmentSlot>(new EquipmentSlot());
 };
 
-const std::unique_ptr<EquipmentSlot>& Equipment::get_slot_by_type(ItemSlotType slot_type)
+std::vector<const std::shared_ptr<EquipmentSlot>> Equipment::get_slots()
+{
+    std::vector<const std::shared_ptr<EquipmentSlot>> slots;
+    slots.push_back(this->combat_slot);
+    //const std::vector<std::shared_ptr<EquipmentSlot>&> slots =  { &this->combat_slot, this->mining_slot, this->recipe_slot };
+    return slots;
+};
+
+const std::shared_ptr<EquipmentSlot>& Equipment::get_slot_by_type(ItemSlotType slot_type)
 {
     if (slot_type == ItemSlotType::Combat) return this->combat_slot;
     else if (slot_type == ItemSlotType::Mining) return this->mining_slot;

@@ -730,7 +730,7 @@ void EquipmentSerializer::serialize()
     rjDocument::AllocatorType& allocator = doc.GetAllocator();
 
     //finds the item in BUILDUP->items and returns its index
-    auto get_index_of_item = [](std::unique_ptr<EquipmentSlot>& slot) {
+    auto get_index_of_item = [](std::shared_ptr<EquipmentSlot>& slot) {
         if (slot->has_item())
         {
             auto items = BUILDUP->items;

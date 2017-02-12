@@ -147,6 +147,9 @@ vsItem ItemScene::get_items()
         }
     };
 
+    //dont show equipped items
+    auto& equipment = GameLogic::getInstance()->equipment;
+
     return items;
 };
 
