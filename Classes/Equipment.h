@@ -32,7 +32,6 @@ class Equipment
 
         std::vector<const std::shared_ptr<EquipmentSlot>> get_slots();
 
-
         const std::shared_ptr<EquipmentSlot>& get_slot_by_type(ItemSlotType slot_type);
 
 };
