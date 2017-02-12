@@ -187,6 +187,7 @@ void Salesman::on_update(float dt)
             while (actual_value > coin_storage_left && num_to_sell > 0.0)
             {
                 num_to_sell--;
+                num_to_sell = std::max(0.0L, num_to_sell);
                 actual_value = num_to_sell * coins_gained_per;
             };
 

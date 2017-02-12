@@ -1259,14 +1259,14 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         count_lbl->setString(beautify_double(count));
     }, AVERAGE_DELAY, "alert_count_update");
 
-    res_count_t coins_gained = Ingredient::type_to_value.at(ing_type);
-    auto create_sell_button = [this, alert_panel, ing_type, coins_gained](std::string name, res_count_t amount_sold, float percent_sold)
+    res_count_t coins_gained_per = Ingredient::type_to_value.at(ing_type);
+    auto create_sell_button = [this, alert_panel, ing_type, coins_gained_per](std::string name, res_count_t amount_sold, float percent_sold)
     {
         ui::Button* sell_btn = dynamic_cast<ui::Button*>(alert_panel->getChildByName(name));
         prep_button(sell_btn);
         sell_btn->getTitleRenderer()->enableOutline({ 0x0a, 0x0a, 0x0a, 255 }, 3);
 
-        sell_btn->addTouchEventListener([this, alert_panel, sell_btn, ing_type, coins_gained, amount_sold, percent_sold](cocos2d::Ref* touch, ui::Widget::TouchEventType type){
+        sell_btn->addTouchEventListener([this, alert_panel, sell_btn, ing_type, coins_gained_per, amount_sold, percent_sold](cocos2d::Ref* touch, ui::Widget::TouchEventType type){
             if (type == ui::Widget::TouchEventType::ENDED)
             {
                 mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
@@ -1279,28 +1279,36 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 {
                     res_count_t USE_ABSOLUTE = -1;
 
-                    res_count_t to_sell;
+                    res_count_t num_to_sell;
                     if (amount_sold != USE_ABSOLUTE) //if amount sold is not -1, use absolute values instead
                     {
-                        to_sell = std::min(num_sellable, amount_sold);
+                        num_to_sell = std::min(num_sellable, amount_sold);
                     }
                     else
                     {
-                        to_sell = std::min(num_sellable, num_sellable*percent_sold);
+                        num_to_sell = std::min(num_sellable, num_sellable*percent_sold);
                     }
 
-                    CCLOG("selling %f of %s", to_sell, Ingredient::type_to_string(ing_type).c_str());
+                    //make sure enough coin space for sale, otherwise limit num_to_sell until
+                    // it's below the space left
+                    res_count_t coin_storage_left = BEATUP->get_coin_storage_left();
+                    res_count_t actual_value = num_to_sell * coins_gained_per;
+                    while (actual_value > coin_storage_left && num_to_sell > 0.0)
+                    {
+                        num_to_sell--;
+                        num_to_sell = std::max(0.0L, num_to_sell);
+                        actual_value = num_to_sell * coins_gained_per;
+                    };
 
-                    res_count_t income = to_sell*coins_gained;
-                    BEATUP->add_total_coin(income);
+                    BEATUP->add_total_coin(actual_value);
 
-                    BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
+                    BUILDUP->remove_shared_ingredients_from_all(ing_type, num_to_sell);
 
                     ///TODO make this a function in MiscUI.h eventually
                     Vec2 pos = sell_btn->getTouchEndPosition();
 
                     std::stringstream ss;
-                    ss << "+$" << beautify_double(income);
+                    ss << "+$" << beautify_double(actual_value);
                     std::string message = ss.str();
                     cocos2d::Vec2 floating_start_pos = sell_btn->getParent()->convertToNodeSpace(pos);
 
@@ -1355,8 +1363,8 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     create_sell_button("sell_1000_btn", -1, 0.50f);
 
     auto value_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("value_lbl"));
-    auto update_value_lbl = [coins_gained, alert_panel, value_lbl](float dt){
-        auto cg = coins_gained;
+    auto update_value_lbl = [coins_gained_per, alert_panel, value_lbl](float dt){
+        auto cg = coins_gained_per;
         std::stringstream value_ss;
         value_ss << "for " << beautify_double(cg) << "$ each";
         value_lbl->setString(value_ss.str().c_str());
