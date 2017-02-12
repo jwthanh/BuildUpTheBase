@@ -147,8 +147,21 @@ vsItem ItemScene::get_items()
         }
     };
 
-    //dont show equipped items
+    //remove equipped items
     auto& equipment = GameLogic::getInstance()->equipment;
+    auto slots = equipment->get_slots();
+    auto remove_if_equipped = [slots](std::shared_ptr<Item>& item){
+        for (auto& slot : slots){
+            if (slot->get_item() == item){
+                return true;
+            };
+        };
+
+        return false;
+    };
+
+    auto it = std::remove_if(items.begin(), items.end(), remove_if_equipped);
+    if (it != items.end()) items.erase(it);
 
     return items;
 };
