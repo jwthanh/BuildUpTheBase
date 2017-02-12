@@ -689,7 +689,7 @@ void UpgradeWalletNuItem::other_init()
         this->_shop_cost = BEATUP->get_max_coin_storage();
         this->set_cost_lbl(beautify_double(this->_shop_cost));
 
-        ss << "Adds to coin storage";
+        ss << "Spend investments to increase.";
 
         this->set_description(ss.str());
     };

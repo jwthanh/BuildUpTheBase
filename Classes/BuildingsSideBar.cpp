@@ -841,7 +841,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     update_wallet_cap,
                     DetailType::UpgradeWalletCapTech,
                     {
-                        "Bigger Wallet",
+                        "Coin Storage +",
                         "",
                         ""
                     }});
