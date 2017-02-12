@@ -158,6 +158,8 @@ class UpgradeWalletNuItem : public BuildingShopNuItem
 {
     public:
         static UpgradeWalletNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
+        virtual res_count_t get_available_coins();
+        virtual void add_available_coins(res_count_t);
 
         virtual void other_init();
 };

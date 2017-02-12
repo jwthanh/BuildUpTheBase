@@ -638,6 +638,17 @@ UpgradeWalletNuItem* UpgradeWalletNuItem::create(cocos2d::ui::Widget* parent, sp
     }
 };
 
+void UpgradeWalletNuItem::add_available_coins(res_count_t new_coins)
+{
+    GameLogic::getInstance()->add_city_investment(new_coins);
+};
+
+res_count_t UpgradeWalletNuItem::get_available_coins()
+{
+    return GameLogic::getInstance()->get_city_investment();
+};
+
+
 void UpgradeWalletNuItem::other_init()
 {
     Technology technology = Technology(TechSubType::RaiseWalletCap);
