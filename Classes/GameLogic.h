@@ -2,8 +2,6 @@
 #ifndef GAMELOGIC_H
 #define GAMELOGIC_H
 
-#include "ui/UIButton.h"
-
 #include "constants.h"
 
 enum class ItemSlotType;
@@ -26,6 +24,8 @@ class GameLogic
 {
     protected:
         static GameLogic* _instance;
+
+       res_count_t  _city_investment;
 
         bool _can_vibrate;
 
@@ -60,7 +60,6 @@ class GameLogic
         void add_total_harvests(int value);
         int get_total_harvests();
 
-        double city_investment;
         void add_city_investment(double value);
         double get_city_investment();
 

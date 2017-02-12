@@ -5,6 +5,7 @@
 #include "ui/UIText.h"
 #include "ui/UILoadingBar.h"
 #include "ui/UILayout.h"
+#include "ui/UIButton.h"
 #include "2d/CCActionProgressTimer.h"
 #include "2d/CCActionEase.h"
 #include "2d/CCParticleExamples.h"

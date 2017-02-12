@@ -1,6 +1,7 @@
 #include "vibration.h"
 
 #include "GameLogic.h"
+#include "base/CCConsole.h"
 
 void do_vibrate(int milliseconds)
 {

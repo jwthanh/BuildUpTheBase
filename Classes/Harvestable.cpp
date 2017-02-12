@@ -32,6 +32,7 @@
 #include "2d/CCParticleSystemQuad.h"
 #include "ui/UIText.h"
 #include "ui/UIImageView.h"
+#include "ui/UIButton.h"
 #include "ui/UIListView.h"
 #include "ui/UIScale9Sprite.h"
 #include "combat.h"

@@ -48,7 +48,7 @@ GameLogic* GameLogic::_instance = NULL;
 GameLogic::GameLogic()
     : is_loaded(false), _can_vibrate(true),
         beatup(nullptr), buildup(nullptr),
-        city_investment(0), appeasements(0)
+        _city_investment(0), appeasements(0)
 {
 };
 
