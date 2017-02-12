@@ -29,16 +29,20 @@ void ItemScene::init_children()
 
     this->init_title_lbl(panel, this->get_scene_title());
 
+    this->item_misc_info_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("item_misc_info"));
+    this->item_misc_info_panel->setVisible(false);
+    this->item_misc_info_header_lbl = dynamic_cast<ui::Text*>(this->item_misc_info_panel->getChildByName("header_lbl"));
+    this->item_misc_info_body_lbl = dynamic_cast<ui::Text*>(this->item_misc_info_panel->getChildByName("body_lbl"));
+
     //items listview
     this->items_listview = dynamic_cast<ui::ListView*>(panel->getChildByName("items_listview"));
 
+    //detail panel
     this->item_detail_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("item_detail"));
     this->item_name = dynamic_cast<ui::Text*>(item_detail_panel->getChildByName("item_name"));
     this->item_listview_description = dynamic_cast<ui::ListView*>(item_detail_panel->getChildByName("item_listview_description"));
-
     this->item_desc = dynamic_cast<ui::Text*>(item_listview_description->getChildByName("item_description"));
     item_desc->setTextAreaSize({ 375, 0 }); //hardcode width of textarea so that it wraps properly
-
     this->item_sell_btn = this->init_sell_btn(item_detail_panel);
 
     this->init_back_btn(this->panel);
@@ -637,6 +641,9 @@ bool ScrapItemScene::init()
 
     this->init_children();
     this->init_callbacks();
+
+    this->item_misc_info_panel->setVisible(true);
+    this->item_misc_info_header_lbl->setString("City Investment");
 
 
     return true;

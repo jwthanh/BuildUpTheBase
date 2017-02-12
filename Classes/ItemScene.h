@@ -48,6 +48,11 @@ class ItemScene : public GameLayer
 
         //nodes inside the detail panel
         cocos2d::ui::Layout* item_detail_panel;
+
+        cocos2d::ui::Layout* item_misc_info_panel;
+        cocos2d::ui::Text* item_misc_info_header_lbl;
+        cocos2d::ui::Text* item_misc_info_body_lbl;
+
         cocos2d::ui::ListView* item_listview_description;
         cocos2d::ui::Text* item_name;
         cocos2d::ui::Text* item_desc;

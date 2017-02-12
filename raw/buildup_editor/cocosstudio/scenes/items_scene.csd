@@ -50,6 +50,45 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
+              <AbstractNodeData Name="item_misc_info" ActionTag="1820203315" Tag="51" IconVisible="False" LeftMargin="193.5676" RightMargin="491.4324" TopMargin="509.1798" BottomMargin="40.8202" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" ctype="PanelObjectData">
+                <Size X="275.0000" Y="90.0000" />
+                <Children>
+                  <AbstractNodeData Name="header_lbl" ActionTag="-1880915906" ZOrder="1" Tag="50" IconVisible="False" TopMargin="-2.0000" BottomMargin="57.0000" IsCustomSize="True" FontSize="24" LabelText="City Investment" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Bottom" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="275.0000" Y="35.0000" />
+                    <AnchorPoint />
+                    <Position Y="57.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition Y="0.6333" />
+                    <PreSize X="1.0000" Y="0.3889" />
+                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                    <OutlineColor A="255" R="26" G="26" B="26" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="body_lbl" ActionTag="342729330" ZOrder="1" Tag="52" IconVisible="False" TopMargin="43.0001" BottomMargin="11.9999" IsCustomSize="True" FontSize="24" LabelText="123,456 Qux" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="275.0000" Y="35.0000" />
+                    <AnchorPoint />
+                    <Position Y="11.9999" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition Y="0.1333" />
+                    <PreSize X="1.0000" Y="0.3889" />
+                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
+                    <OutlineColor A="255" R="26" G="26" B="26" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint ScaleX="0.4961" ScaleY="0.4909" />
+                <Position X="330.0000" Y="85.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.3438" Y="0.1328" />
+                <PreSize X="0.2865" Y="0.1406" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
               <AbstractNodeData Name="item_detail" ActionTag="1199633565" Tag="7" IconVisible="False" LeftMargin="81.6365" RightMargin="469.3547" TopMargin="93.1692" BottomMargin="156.8223" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="409.0088" Y="390.0085" />
                 <Children>
