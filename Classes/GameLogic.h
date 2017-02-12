@@ -60,8 +60,9 @@ class GameLogic
         void add_total_harvests(int value);
         int get_total_harvests();
 
-        void add_city_investment(double value);
-        double get_city_investment();
+        void add_city_investment(res_count_t value);
+        //NOTE still only actually a double, not res_count_t
+        res_count_t get_city_investment();
 
         double appeasements;
         void add_appeasements(double value);

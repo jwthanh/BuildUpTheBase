@@ -328,14 +328,15 @@ int GameLogic::get_total_harvests()
     return DataManager::get_int_from_data("total_harvests");
 };
 
-void GameLogic::add_city_investment(double value)
+void GameLogic::add_city_investment(res_count_t value)
 {
-    DataManager::incr_key("city_investment", value);
+    this->_city_investment += value;
 };
 
-double GameLogic::get_city_investment()
+res_count_t GameLogic::get_city_investment()
 {
-    return DataManager::get_double_from_data("city_investment");
+    //NOTE returns actual double though
+    return this->_city_investment;
 };
 
 void GameLogic::add_appeasements(double value)
@@ -387,6 +388,7 @@ void GameLogic::save_all()
 
     //save coins
     DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());
+    DataManager::set_double_from_data("city_investment", GameLogic::getInstance()->get_city_investment());
 
     //save last targeted building and tab
     DataManager::set_string_from_data("target_building", BUILDUP->get_target_building()->name);
@@ -439,7 +441,7 @@ void GameLogic::load_all()
         coins_from_data = 0.0;
     }
     BEATUP->_total_coins = coins_from_data;
-	// BEATUP->_total_coins = 500000000000000000000000000000000000000000000000000.0; //NOTE use to test Infinity in android xml double parsing
+    GameLogic::getInstance()->_city_investment = DataManager::get_double_from_data("city_investment");
 
     BUILDUP->city->name = DataManager::get_string_from_data("city_name", "");
 
