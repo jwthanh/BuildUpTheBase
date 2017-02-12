@@ -446,25 +446,7 @@ void BaseScene::create_building_choicelist()
         {
             auto target_building = BUILDUP->get_target_building();
 
-            std::string tex_name;
-            ui::Widget::TextureResType res_type;
-
-            if (target_building == building)
-            {
-                tex_name = "crosshair_red.png";
-                res_type = ui::Widget::TextureResType::PLIST;
-            }
-            else
-            {
-                tex_name = img_path;
-                res_type = ui::Widget::TextureResType::PLIST;
-            }
-
-            ResourceData r_data = building_image->getRenderFile();
-            if (r_data.file != tex_name || r_data.type != (int)res_type)
-            {
-                building_image->loadTexture(tex_name, res_type);
-            }
+            try_set_enabled(panel, target_building != building);
 
             if (building->is_storage_full_of_ingredients(building->punched_sub_type))
             {

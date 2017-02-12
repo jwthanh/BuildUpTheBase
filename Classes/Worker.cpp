@@ -174,6 +174,7 @@ void Salesman::on_update(float dt)
     {
         res_count_t def = 0.0;
         res_count_t max_can_sell = map_get(all_ingredients, ing_type, def);
+
         if (max_can_sell != 0)
         {
             res_count_t num_to_sell = std::min(max_can_sell, active_sell_count);
