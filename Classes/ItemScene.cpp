@@ -129,20 +129,25 @@ void ItemScene::reset_detail_panel()
 
 vsItem ItemScene::get_items()
 {
+    vsItem items;
+    //if theres no filter, return all
     if (this->filtered_slot_type == ItemSlotType::Unset)
     {
-        return BUILDUP->items;
+        items = BUILDUP->items;
+    }
+    //otherwise return just the items matching the filter type
+    else
+    {
+        for (auto& item : BUILDUP->items)
+        {
+            if (item->slot_type == this->filtered_slot_type)
+            {
+                items.push_back(item);
+            }
+        }
     };
 
-    vsItem filtered_items;
-    for (auto& item : BUILDUP->items)
-    {
-        if (item->slot_type == this->filtered_slot_type)
-        {
-            filtered_items.push_back(item);
-        }
-    }
-    return filtered_items;
+    return items;
 };
 
 cocos2d::ui::Layout* ItemScene::init_panel()
