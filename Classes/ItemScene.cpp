@@ -608,6 +608,7 @@ void ScrapItemScene::init_callbacks()
         this->item_listview_description->requestDoLayout();
     };
 
+    //bind the item nuitems to the open detail
     for (spItem item : this->get_items()) {
         auto nuitem = NuItem::create(items_listview);
         nuitem->set_title(item->get_name());
@@ -627,6 +628,14 @@ void ScrapItemScene::init_callbacks()
             }
         });
     };
+
+    //update the city investment label
+    auto update_city_investment_lbl = [this](float dt){
+        res_count_t city_investment = GameLogic::getInstance()->get_city_investment();
+        this->item_misc_info_body_lbl->setString(beautify_double(city_investment));
+    };
+    update_city_investment_lbl(0);
+    this->item_misc_info_panel->schedule(update_city_investment_lbl, AVERAGE_DELAY, "update_city_investment_lbl");
 };
 
 bool ScrapItemScene::init()

@@ -604,7 +604,7 @@ void GameDirector::switch_to_city_menu()
 
     auto invested_lbl = dynamic_cast<ui::Text*>(invest_panel->getChildByName("invested_lbl"));
     auto update_invested = [invested_lbl](float dt) {
-        res_count_t invested = (res_count_t)GameLogic::getInstance()->get_city_investment();
+        res_count_t invested = GameLogic::getInstance()->get_city_investment();
         invested_lbl->setString(beautify_double(invested));
     };
     invested_lbl->schedule(update_invested, AVERAGE_DELAY, "update_invested");
