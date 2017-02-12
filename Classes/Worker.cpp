@@ -183,7 +183,7 @@ void Salesman::on_update(float dt)
             BUILDUP->remove_shared_ingredients_from_all(ing_type, to_sell);
 
             //add the value of amount sold
-            res_count_t actual_value = (res_count_t)(to_sell*coins_gained);
+            res_count_t actual_value = to_sell * coins_gained;
             BEATUP->add_total_coin(actual_value);
 
             //create floating label for the amount sold over the correct ing panel
