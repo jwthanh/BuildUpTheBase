@@ -1304,16 +1304,27 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
                     BUILDUP->remove_shared_ingredients_from_all(ing_type, num_to_sell);
 
-                    ///TODO make this a function in MiscUI.h eventually
                     Vec2 pos = sell_btn->getTouchEndPosition();
-
-                    std::stringstream ss;
-                    ss << "+$" << beautify_double(actual_value);
-                    std::string message = ss.str();
                     cocos2d::Vec2 floating_start_pos = sell_btn->getParent()->convertToNodeSpace(pos);
 
+                    Color3B text_color;
+                    std::stringstream ss;
+
+                    if (actual_value != 0)
+                    {
+                        text_color = Color3B::GREEN;
+                        ss << "+$" << beautify_double(actual_value);
+                    }
+                    else
+                    {
+                        text_color = Color3B::RED;
+                        ss << "Max coins stored\nIncrease coin storage\n (The Marketplace)";
+                    }
+
+                    std::string message = ss.str();
+
                     auto floating_label = FloatingLabel::createWithTTF(message, DEFAULT_FONT, 30);
-                    floating_label->setTextColor(Color4B::GREEN);
+                    floating_label->setTextColor(Color4B(text_color));
 
                     pos.x += cocos2d::rand_minus1_1()*20.0f;
                     pos.y += cocos2d::rand_minus1_1()*20.0f;
@@ -1329,7 +1340,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                     sell_btn->getParent()->addChild(floating_label);
 
                     auto player_gold_lbl = this->getChildByName("player_info_panel")->getChildByName("player_gold_lbl");
-                    animate_flash_action(player_gold_lbl, 0.1f, 1.2f, 1.0f, Color3B::GREEN);
+                    animate_flash_action(player_gold_lbl, 0.1f, 1.2f, 1.0f, text_color);
 
                     do_vibrate(10);
                 }
