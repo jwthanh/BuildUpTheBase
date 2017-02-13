@@ -97,24 +97,22 @@ void GameLogic::load_game()
     if (show_welcome_modal)
     {
         auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-        TextBlobModal* modal = new TextBlobModal(scene);
+        TextBlobModal modal(scene);
 
-        std::string modal_content = "";
+        std::string modal_content;
         time_t from_file = static_cast<time_t>(DataManager::get_int_from_data(Beatup::last_login_key));
         if (from_file == 0)
         {
-            modal->set_title("Welcome to Build Up The Base!");
+            modal.set_title("Welcome to Build Up The Base!");
             modal_content = this->new_player_load();
         }
         else
         {
-            modal->set_title("Welcome Back!");
+            modal.set_title("Welcome Back!");
             modal_content = this->existing_player_load();
         }
 
-        //TODO clean up modal memory
-
-        modal->set_body(modal_content);
+        modal.set_body(modal_content);
 
     }
 
@@ -286,12 +284,13 @@ void GameLogic::update(float dt)
             if (total_coins == max_storage ) {
                 player_gold_per_sec_lbl->setString("Max coins stored");
 
-                if (!this->has_learned_wallet_size){
+                if (!this->has_learned_wallet_size) {
                     this->has_learned_wallet_size = true;
-                    TextBlobModal* modal = new TextBlobModal(scene);
-                    modal->set_title("Upgrade coin storage!");
-                    modal->set_body("You've hit the coin limit!\n\nScrap some weapons at The Marketplace, then use that to upgrade the coin storage.\n\nAlternatively, deposit coins 10 at a time in the City Management screen.");
+                    TextBlobModal modal(scene);
+                    modal.set_title("Upgrade coin storage!");
+                    modal.set_body("You've hit the coin limit!\n\nScrap some weapons at The Marketplace, contributing to city investment. Then use that to upgrade the coin storage.\n\nAlternatively, deposit coins 10 at a time in the City Management screen.");
                 }
+
             } else {
                 std::string beautified_diff = prefix+beautify_double(coin_diff)+"/sec";
                 player_gold_per_sec_lbl->setString(beautified_diff);

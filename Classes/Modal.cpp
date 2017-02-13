@@ -42,14 +42,15 @@ BaseModal::BaseModal(Node* parent)
     exit_layout->setContentSize({ 1000, 1000 });
     exit_layout->setTouchEnabled(true);
 
-    ui::Layout* close_panel = dynamic_cast<ui::Layout*>(this->_node->getChildByName("close_panel"));
-    auto close_modal = [this, layer_color, exit_layout]() {
+    auto temp_node = this->_node; //need to pass it to lambda. Since `this` is temporary, the callback crashes if `this` gets cleaned up
+    auto close_modal = [temp_node, layer_color, exit_layout]() {
             do_vibrate(5);
-            this->_node->removeFromParent();
+            temp_node->removeFromParent();
             layer_color->removeFromParent();
             exit_layout->removeFromParent();
     };
 
+    ui::Layout* close_panel = dynamic_cast<ui::Layout*>(this->_node->getChildByName("close_panel"));
     bind_touch_ended(close_panel, close_modal);
     bind_touch_ended(exit_layout, close_modal);
 
