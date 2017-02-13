@@ -601,7 +601,7 @@ void GameDirector::switch_to_city_menu()
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(10); //vibrate for two frames
+            do_vibrate(5);
             CCLOG("Add money");
             double coins = BEATUP->get_total_coins();
             if (coins > 10)
@@ -631,7 +631,7 @@ void GameDirector::switch_to_city_menu()
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
-            do_vibrate(10); //vibrate for two frames
+            do_vibrate(5);
             mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
             res_count_t _def = 0;
             IngredientSubType ing_type = IngredientSubType::Soul;
