@@ -197,6 +197,24 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">calvin/trophy/trophy14.png</key>
+            <key type="filename">kenny/Art/Roguelike cave &amp; dungeon pack (520 assets)/ASUOutput/dirt_1.png</key>
+            <key type="filename">kenny/Art/Roguelike cave &amp; dungeon pack (520 assets)/ASUOutput/dirt_2.png</key>
+            <key type="filename">to_replace/menu_icons/leaderboard.png</key>
+            <key type="filename">to_replace/menu_icons/sell_all.png</key>
+            <key type="filename">../../beatupisis/raw/artist/UI/UI_shop/weapon_spiked_gauntlet.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,4,8,8</rect>
+                <key>scale9Paddings</key>
+                <rect>4,4,8,8</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">kenny/Art/Game icons (100 assets)/PNG/Black/1x/zoomIn.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -271,23 +289,6 @@
                 <rect>4,3,8,5</rect>
                 <key>scale9Paddings</key>
                 <rect>4,3,8,5</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">kenny/Art/Roguelike cave &amp; dungeon pack (520 assets)/ASUOutput/dirt_1.png</key>
-            <key type="filename">kenny/Art/Roguelike cave &amp; dungeon pack (520 assets)/ASUOutput/dirt_2.png</key>
-            <key type="filename">to_replace/menu_icons/leaderboard.png</key>
-            <key type="filename">to_replace/menu_icons/sell_all.png</key>
-            <key type="filename">../../beatupisis/raw/artist/UI/UI_shop/weapon_spiked_gauntlet.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>4,4,8,8</rect>
-                <key>scale9Paddings</key>
-                <rect>4,4,8,8</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -968,6 +969,7 @@
             <filename>../../beatupisis/raw/artist/UI/UI_game/enemy_healthbar_bar_white_centered.png</filename>
             <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/medal2.png</filename>
             <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/medal1.png</filename>
+            <filename>calvin/trophy/trophy14.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

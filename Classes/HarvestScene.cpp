@@ -189,16 +189,17 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // GameDirector::switch_to_achievement_menu();
         // GameDirector::switch_to_scrap_item_menu();
 
-        TextBlobModal modal(this);
-        modal.set_title("Upgrade coin storage!");
-        modal.set_body("You've hit the coin limit!\n\nScrap some weapons at The Marketplace, contributing to city investment. Then use that to upgrade the coin storage.\n\nAlternatively, deposit coins 10 at a time in the City Management screen.");
+        // TextBlobModal modal(this);
+        // modal.set_title("Upgrade coin storage!");
+        // modal.set_body("You've hit the coin limit!\n\nScrap some weapons at The Marketplace, contributing to city investment. Then use that to upgrade the coin storage.\n\nAlternatively, deposit coins 10 at a time in the City Management screen.");
 
         // auto achievement_serializer = AchievementSerializer("alpha_achievements.json");
         // achievement_serializer.serialize();
 
-        //auto popup_panel = GameLogic::get_popup_panel();
-        //popup_panel->animate_open();
-        //popup_panel->set_string("Achievement unlocked!");
+        auto popup_panel = GameLogic::get_popup_panel();
+        popup_panel->animate_open();
+        popup_panel->set_string("Achievement unlocked!");
+        popup_panel->set_image("trophy14.png", true);
 
         // cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
         // float duration = 0.25f;

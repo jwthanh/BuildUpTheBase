@@ -201,7 +201,7 @@ void BaseAchievement::celebrate()
     };
     popup_panel->animate_open();
     popup_panel->set_string("Achievement unlocked: "+this->get_name()+"!");
-    popup_panel->set_image("medal2.png", true);
+    popup_panel->set_image("trophy14.png", true);
 
     do_vibrate(16); //long vibrate
     CCLOG("YAY COMPLETED ACHIEVEMENT!");
