@@ -48,8 +48,10 @@ GameLogic* GameLogic::_instance = NULL;
 GameLogic::GameLogic()
     : is_loaded(false), _can_vibrate(true),
         beatup(nullptr), buildup(nullptr),
-        _city_investment(0), appeasements(0)
+        _city_investment(0), appeasements(0),
+        has_learned_wallet_size(false)
 {
+
 };
 
 void GameLogic::load_game()
@@ -128,6 +130,7 @@ void GameLogic::load_game()
         auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
         tutorial->first_start(scene);
     };
+
 }
 
 std::string GameLogic::new_player_load()
@@ -282,6 +285,13 @@ void GameLogic::update(float dt)
             res_count_t max_storage = BEATUP->get_max_coin_storage();
             if (total_coins == max_storage ) {
                 player_gold_per_sec_lbl->setString("Max coins stored");
+
+                if (!this->has_learned_wallet_size){
+                    this->has_learned_wallet_size = true;
+                    TextBlobModal* modal = new TextBlobModal(scene);
+                    modal->set_title("Upgrade coin storage!");
+                    modal->set_body("You've hit the coin limit!\n\nScrap some weapons at The Marketplace, then use that to upgrade the coin storage.\n\nAlternatively, deposit coins 10 at a time in the City Management screen.");
+                }
             } else {
                 std::string beautified_diff = prefix+beautify_double(coin_diff)+"/sec";
                 player_gold_per_sec_lbl->setString(beautified_diff);
@@ -401,6 +411,9 @@ void GameLogic::save_all()
     std::string vibrate_key = "can_vibrate";
     DataManager::set_bool_from_data(vibrate_key, GameLogic::getInstance()->get_can_vibrate());
 
+    //been taught about wallet size
+    DataManager::set_bool_from_data("has_learned_wallet_size", GameLogic::getInstance()->has_learned_wallet_size);
+
     //set the last login time, set here and on load
     LOG(INFO) << "Marking last login";
     BEATUP->set_last_login();
@@ -464,6 +477,8 @@ void GameLogic::load_all()
         sidebar->toggle_buttons(sidebar->tab_detail_btn, ui::Widget::TouchEventType::ENDED);
     else if (tab_type == TabManager::TabTypes::PowersTab)
         sidebar->toggle_buttons(sidebar->tab_powers_btn, ui::Widget::TouchEventType::ENDED);
+
+    GameLogic::getInstance()->has_learned_wallet_size = DataManager::get_bool_from_data("has_learned_wallet_size", false);
 
 };
 

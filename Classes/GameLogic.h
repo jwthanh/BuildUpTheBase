@@ -73,6 +73,8 @@ class GameLogic
 
         void set_can_vibrate(bool can_vibrate);
         bool get_can_vibrate();
+
+        bool has_learned_wallet_size;
 };
 
 class GameDirector
