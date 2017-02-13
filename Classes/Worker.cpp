@@ -183,17 +183,16 @@ void Salesman::on_update(float dt)
             //make sure enough coin space for sale, otherwise limit num_to_sell until
             // it's below the space left
             res_count_t coin_storage_left = BEATUP->get_coin_storage_left();
-            res_count_t actual_value = num_to_sell * coins_gained_per;
-            while (actual_value > coin_storage_left && num_to_sell > 0.0)
-            {
-                num_to_sell--;
-                num_to_sell = std::max(0.0L, num_to_sell);
-                actual_value = num_to_sell * coins_gained_per;
-            };
+
+
+            //max you can sell without going over
+            res_count_t max_to_sell = coin_storage_left/coins_gained_per;
+            res_count_t final_to_sell = std::min(num_to_sell, max_to_sell);
+            res_count_t actual_value = final_to_sell * coins_gained_per;
 
 
             //remove the ingredients
-            BUILDUP->remove_shared_ingredients_from_all(ing_type, num_to_sell);
+            BUILDUP->remove_shared_ingredients_from_all(ing_type, final_to_sell);
 
             //add the value of amount sold
             BEATUP->add_total_coin(actual_value);
