@@ -281,7 +281,7 @@ void GameLogic::update(float dt)
 
             res_count_t max_storage = BEATUP->get_max_coin_storage();
             if (total_coins == max_storage ) {
-                player_gold_per_sec_lbl->setString("Upgrade Wallet!");
+                player_gold_per_sec_lbl->setString("Max coins stored");
             } else {
                 std::string beautified_diff = prefix+beautify_double(coin_diff)+"/sec";
                 player_gold_per_sec_lbl->setString(beautified_diff);

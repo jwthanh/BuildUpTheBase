@@ -159,7 +159,7 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_per_sec_lbl" ActionTag="-768634115" Tag="172" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="6.6380" RightMargin="3.3620" TopMargin="84.2265" BottomMargin="157.2262" IsCustomSize="True" FontSize="16" LabelText="+100/s" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_gold_per_sec_lbl" ActionTag="-768634115" Tag="172" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="6.6380" RightMargin="3.3620" TopMargin="84.2265" BottomMargin="157.2262" IsCustomSize="True" FontSize="14" LabelText="+100/s" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="190.0000" Y="23.5473" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="101.6380" Y="168.9999" />
