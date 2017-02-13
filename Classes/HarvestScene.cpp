@@ -187,10 +187,11 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // GameDirector::switch_to_equipment_menu();
         // GameDirector::switch_to_reset_menu();
         // GameDirector::switch_to_achievement_menu();
-        GameDirector::switch_to_scrap_item_menu();
+        // GameDirector::switch_to_scrap_item_menu();
 
-        // TextBlobModal* modal = new TextBlobModal(this);
-        // modal->set_body("test");
+        TextBlobModal* modal = new TextBlobModal(this);
+        modal->set_title("Upgrade coin storage!");
+        modal->set_body("You've hit the coin limit!\n\nScrap some weapons at The Marketplace, then use that to upgrade the coin storage.\n\nAlternatively, deposit coins 10 at a time in the City Management screen.");
 
         // auto achievement_serializer = AchievementSerializer("alpha_achievements.json");
         // achievement_serializer.serialize();
