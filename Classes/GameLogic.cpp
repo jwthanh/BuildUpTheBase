@@ -323,6 +323,7 @@ std::shared_ptr<PopupPanel> GameLogic::get_popup_panel()
     if (scene == NULL)
     {
         CCLOG("ERROR: Tried to get_popup_panel and find HarvestScene but couldn't");
+        return NULL;
     }
     return scene->popup_panel;
 };

@@ -190,18 +190,22 @@ void BaseAchievement::celebrate()
     float duration = 0.25f;
 
     auto popup_panel = GameLogic::get_popup_panel();
-    for (float x = 0; x < visibleSize.width; x+=50){
-        auto parts = cocos2d::ParticleFlower::create();
-        parts->setTotalParticles(1000);
-        parts->setLife(0.5f);
-        parts->setPosition({ x, 100});
-        parts->setAutoRemoveOnFinish(true);
-        parts->setDuration(duration);
-        popup_panel->play_particle(parts);
-    };
-    popup_panel->animate_open();
-    popup_panel->set_string("Achievement unlocked: "+this->get_name()+"!");
-    popup_panel->set_image("trophy14.png", true);
+    if (popup_panel != NULL)
+    {
+        for (float x = 0; x < visibleSize.width; x += 50){
+            auto parts = cocos2d::ParticleFlower::create();
+            parts->setTotalParticles(1000);
+            parts->setLife(0.5f);
+            parts->setPosition({ x, 100 });
+            parts->setAutoRemoveOnFinish(true);
+            parts->setDuration(duration);
+            popup_panel->play_particle(parts);
+        };
+        popup_panel->animate_open();
+        popup_panel->set_string("Achievement unlocked: " + this->get_name() + "!");
+        popup_panel->set_image("trophy14.png", true);
+
+    }
 
     do_vibrate(16); //long vibrate
     CCLOG("YAY COMPLETED ACHIEVEMENT!");

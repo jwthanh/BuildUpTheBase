@@ -573,9 +573,12 @@ void DumpsterHarvestable::shatter()
 
     BUILDUP->items.push_back(scavenge_item);
     auto popup_panel = GameLogic::get_popup_panel();
-    popup_panel->set_string("Scavenged: "+scavenge_item->get_name()+"!");
-    popup_panel->animate_open();
-    popup_panel->set_image(scavenge_item->img_path);
+    if (popup_panel != NULL)
+    {
+        popup_panel->set_string("Scavenged: " + scavenge_item->get_name() + "!");
+        popup_panel->animate_open();
+        popup_panel->set_image(scavenge_item->img_path);
+    }
 };
 
 void DumpsterHarvestable::generate_item()
@@ -1239,14 +1242,17 @@ void FightingHarvestable::shatter()
     auto game_logic = GameLogic::getInstance();
     game_logic->add_total_kills(1);
 
-    auto popup_panel = GameLogic::get_popup_panel();
     //auto it = std::find(kill_messages.begin(), kill_messages.end(), game_logic->get_total_kills());
     auto it = kill_messages.find(game_logic->get_total_kills());
     if (it != kill_messages.end())
     {
-        std::string kill_message = (*it).second;
-        popup_panel->set_string(kill_message);
-        popup_panel->animate_open();
+        auto popup_panel = GameLogic::get_popup_panel();
+        if (popup_panel != NULL)
+        {
+            std::string kill_message = (*it).second;
+            popup_panel->set_string(kill_message);
+            popup_panel->animate_open();
+        }
     }
 
     auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;

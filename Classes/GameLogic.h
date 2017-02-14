@@ -55,6 +55,7 @@ class GameLogic
         static void load_all();
         static void load_all_as_cheater();
 
+        ///can return NULL if its not the HarvestScene running. FIXME
         static std::shared_ptr<PopupPanel> get_popup_panel();
 
         void add_total_harvests(int value);
