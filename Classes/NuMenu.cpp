@@ -686,7 +686,7 @@ void UpgradeWalletNuItem::other_init()
         this->count_lbl->setString(ss.str());
         ss.str("");
 
-        this->_shop_cost = BEATUP->get_max_coin_storage();
+        this->_shop_cost = BEATUP->get_max_coin_storage() / 100.0f;
         this->set_cost_lbl(beautify_double(this->_shop_cost));
 
         ss << "Spend investments to increase.";

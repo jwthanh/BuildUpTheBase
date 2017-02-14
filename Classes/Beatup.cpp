@@ -207,7 +207,7 @@ res_count_t Beatup::get_max_coin_storage()
     auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
     res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
 
-    return scale_number_flat_pow(1000.0L, num_researched, 11.3L);
+    return scale_number_flat_pow(100000.0L, num_researched, 11.3L);
 
 };
 
