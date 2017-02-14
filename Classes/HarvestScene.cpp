@@ -604,10 +604,21 @@ void BaseScene::create_info_panel()
             else {
                 arena_kill_lbl->setString("Choose a recipe");
             }
-        // } else if (target_building->name == "The Mine") { //TODO access miner depth from outside of minerscene
+        } else if (target_building->name == "The Marketplace") {
+            arena_kill_panel->setVisible(true);
+            if (time(0) % 10 > 5) {
+                res_count_t max_coin_storage = BEATUP->get_max_coin_storage();
+                arena_kill_lbl->setString("Max Gold: " + beautify_double(max_coin_storage));
+            } else
+            {
+                res_count_t city_investment = GameLogic::getInstance()->get_city_investment();
+                arena_kill_lbl->setString("Investments: " + beautify_double(city_investment));
+            }
+        }
+        // else if (target_building->name == "The Mine") { //TODO access miner depth from outside of minerscene
         //     arena_kill_panel->setVisible(true);
         //     arena_kill_lbl->setString("Depth: XXX");
-        } else {
+        else {
             arena_kill_panel->setVisible(false);
         }
     };
