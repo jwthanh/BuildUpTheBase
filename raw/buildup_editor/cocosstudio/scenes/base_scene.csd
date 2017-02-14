@@ -171,7 +171,7 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="5.5233" RightMargin="7.3183" TopMargin="179.1065" BottomMargin="67.0835" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="16" ctype="TextFieldObjectData">
+              <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="5.5233" RightMargin="7.3183" TopMargin="179.1065" BottomMargin="67.0835" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="15" ctype="TextFieldObjectData">
                 <Size X="187.1584" Y="18.8100" />
                 <AnchorPoint ScaleX="0.4956" ScaleY="0.5000" />
                 <Position X="98.2790" Y="76.4885" />

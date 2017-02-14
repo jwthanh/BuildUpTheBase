@@ -739,8 +739,15 @@ void BaseScene::create_username_input()
     auto is_bad_character = [](char character){
         return !(std::isalnum(character) || character == '_');
     };
-    auto clean_username = [is_bad_character](std::string username) {
+    auto clean_username = [is_bad_character, this](std::string username) {
         username.erase(std::remove_if(username.begin(), username.end(), is_bad_character), username.end());
+        if (username.length() > 16){
+            username.resize(16);
+
+            TextBlobModal modal(this);
+            modal.set_title("Name too long!");
+            modal.set_body("Names can only be up to 16 characters without special characters of any kind");
+        };
         return username;
     };
 
@@ -750,9 +757,7 @@ void BaseScene::create_username_input()
                 evt == ui::TextField::EventType::DETACH_WITH_IME)
             {
                 std::string text = username_input->getString();
-                CCLOG("Got raw username from username_input: %s", text.c_str());
                 std::string cleaned_username = clean_username(text);
-                CCLOG("is cleaned to %s", cleaned_username.c_str());
                 username_input->setString(cleaned_username);
 
                 DataManager::set_string_from_data("username", cleaned_username);
