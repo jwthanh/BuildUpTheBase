@@ -397,7 +397,11 @@ void SideListView::setup_shop_listview_as_harvesters()
                 //change to adapt for the building, so we cheat and do it here.
                 //this'll get moved to a json map or something between building and
                 //harvest sub types
-                auto update_target_and_prereq = [menu_item, building, tab_type](float dt){
+                auto update_target_and_prereq = [this, menu_item, building, tab_type](float dt){
+                    if (this->tabs.is_tab_active(tab_type, building) == false)
+                    {
+                        return;
+                    }
                     menu_item->ing_type = building->punched_sub_type;
 
                     if (menu_item->harv_type != Worker::SubType::One) {
@@ -408,7 +412,7 @@ void SideListView::setup_shop_listview_as_harvesters()
                         };
 
                         res_count_t _def = 0;
-                        auto prereq_harvester_found = map_get(building->harvesters, key, _def);
+                        res_count_t prereq_harvester_found = map_get(building->harvesters, key, _def);
 
                         if (prereq_harvester_found < 5) {
                             menu_item->button->setVisible(false);
