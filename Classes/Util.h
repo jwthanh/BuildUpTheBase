@@ -11,6 +11,7 @@
 namespace cocos2d {
     class Size;
     class Vec2;
+    class Node;
 
     namespace ui
     {
@@ -67,6 +68,7 @@ std::string beautify_double(long double& value);
 void test_beautify_double();
 
 void try_set_enabled(cocos2d::ui::Widget* widget, bool new_value);
+void try_set_visible(cocos2d::Node* node, bool new_value);
 
 template<typename number_t>
 number_t scale_number(number_t base_number, number_t current_number, number_t rate)

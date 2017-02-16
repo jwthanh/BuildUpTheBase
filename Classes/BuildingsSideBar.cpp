@@ -136,7 +136,7 @@ SideListView::SideListView(Node* parent, spBuilding current_target)
     Tutorial* tutorial = Tutorial::getInstance();
     Node* sidebar_panel = parent->getChildByName("sidebar_panel");
     auto check_visible = [sidebar_panel, tutorial](float dt){
-        sidebar_panel->setVisible(tutorial->get_show_sidebar());
+        try_set_visible(sidebar_panel, tutorial->get_show_sidebar());
     };
 
     parent->schedule(check_visible, SHORT_DELAY, "check_visible");
@@ -299,11 +299,11 @@ void SideListView::setup_shop_listview_as_harvesters()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
-                shop_listview->setVisible(false);
+                try_set_visible(shop_listview, false);
                 return;
             }
 
-            shop_listview->setVisible(true);
+            try_set_visible(shop_listview, true);
             enum class WorkerType
             {
                 Harvester,
@@ -415,10 +415,10 @@ void SideListView::setup_shop_listview_as_harvesters()
                         res_count_t prereq_harvester_found = map_get(building->harvesters, key, _def);
 
                         if (prereq_harvester_found < 5) {
-                            menu_item->button->setVisible(false);
+                            try_set_visible(menu_item->button, false);
                         }
                         else {
-                            menu_item->button->setVisible(true);
+                            try_set_visible(menu_item->button, true);
                         }
 
                     };
@@ -466,10 +466,10 @@ void SideListView::setup_building_listview_as_upgrades()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
-                listview->setVisible(false);
+                try_set_visible(listview, false);
                 return;
             }
-            listview->setVisible(true);
+            try_set_visible(listview, true);
 
             int i = 0;
             int max_level = 15;
@@ -510,11 +510,11 @@ void SideListView::setup_detail_listview_as_recipes()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
-                listview->setVisible(false);
+                try_set_visible(listview, false);
                 return;
             }
 
-            listview->setVisible(true);
+            try_set_visible(listview, true);
 
             struct MenuItemConfig {
                 std::string name;
@@ -1027,11 +1027,11 @@ void SideListView::setup_powers_listview_as_powers()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
-                listview->setVisible(false);
+                try_set_visible(listview, false);
                 return;
             }
 
-            listview->setVisible(true);
+            try_set_visible(listview, true);
 
             //if the child already exists, put it at the back
             std::string child_name = "send_feeback";
@@ -1079,10 +1079,10 @@ void SideListView::setup_powers_listview_as_powers()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
-                listview->setVisible(false);
+                try_set_visible(listview, false);
                 return;
             }
-            listview->setVisible(true);
+            try_set_visible(listview, true);
 
             //if the child already exists, put it at the back
             std::string child_name = "open_leaderboard";
@@ -1121,10 +1121,10 @@ void SideListView::setup_powers_listview_as_powers()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
-                listview->setVisible(false);
+                try_set_visible(listview, false);
                 return;
             }
-            listview->setVisible(true);
+            try_set_visible(listview, true);
 
             //if the child already exists, put it at the back
             std::string child_name = "sell_all";
@@ -1184,10 +1184,10 @@ void SideListView::setup_powers_listview_as_powers()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
-                listview->setVisible(false);
+                try_set_visible(listview, false);
                 return;
             }
-            listview->setVisible(true);
+            try_set_visible(listview, true);
 
             //if the child already exists, put it at the back
             std::string child_name = "sell_all_advanced";
@@ -1249,10 +1249,10 @@ void SideListView::setup_powers_listview_as_powers()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
-                listview->setVisible(false);
+                try_set_visible(listview, false);
                 return;
             }
-            listview->setVisible(true);
+            try_set_visible(listview, true);
 
             //if the child already exists, put it at the back
             std::string child_name = "save";
@@ -1290,10 +1290,10 @@ void SideListView::setup_powers_listview_as_powers()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
-                listview->setVisible(false);
+                try_set_visible(listview, false);
                 return;
             }
-            listview->setVisible(true);
+            try_set_visible(listview, true);
 
             //if the child already exists, put it at the back
             std::string child_name = "toggle_vibration";
@@ -1346,10 +1346,10 @@ void SideListView::setup_powers_listview_as_powers()
         {
             if (this->tabs.is_tab_active(tab_type, building) == false)
             {
-                listview->setVisible(false);
+                try_set_visible(listview, false);
                 return;
             }
-            listview->setVisible(true);
+            try_set_visible(listview, true);
 
             //if the child already exists, put it at the back
             std::string child_name = "open_log";

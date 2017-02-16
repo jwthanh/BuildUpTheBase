@@ -400,7 +400,7 @@ void Harvestable::add_current_clicks(res_count_t new_clicks)
 
 void Harvestable::shatter()
 {
-    this->sprite->setVisible(false);
+    try_set_visible(this->sprite, false);
     this->setTouchEnabled(false);
 
     float sprite_scale = this->sprite->getScale();
@@ -1021,7 +1021,8 @@ bool FightingHarvestable::init()
     FighterNode* fighter_node = FighterNode::create(this->enemy);
     fighter_node->setScale(0.25f);
     fighter_node->setPosition(Vec2(50, 0));
-    fighter_node->xp_bar->setVisible(false); //dont need to see this for an enemy
+    //try_set_visible(fighter_node->xp_bar->front_timer, false);
+    fighter_node->xp_bar->setVisible(false);
     this->addChild(fighter_node);
 
     this->spawn_enemy();

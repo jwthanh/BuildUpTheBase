@@ -274,6 +274,14 @@ void try_set_enabled(cocos2d::ui::Widget* widget, bool new_value)
     }
 };
 
+void try_set_visible(cocos2d::Node* node, bool new_value)
+{
+    if (node->isVisible() != new_value)
+    {
+        node->setVisible(new_value);
+    }
+};
+
 void bind_touch_ended(cocos2d::ui::Widget* widget, std::function<void(void)> callback)
 {
     auto touch_handler = [callback](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType evt)

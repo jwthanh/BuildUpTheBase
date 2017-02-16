@@ -270,7 +270,7 @@ void BaseScene::create_goal_loadingbar()
     //check visibilty for tutorials
     auto check_visible = [progress_panel](float dt){
         Tutorial* tutorial = Tutorial::getInstance();
-        progress_panel->setVisible(tutorial->get_show_progress_panel());
+        try_set_visible(progress_panel, tutorial->get_show_progress_panel());
     };
     progress_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
     check_visible(0.0f);
@@ -301,14 +301,14 @@ void BaseScene::create_goal_loadingbar()
 			if (target_building->building_level == 15)
 			{
 				this->upgrade_lbl->setString("Max level!");
-				loading_bar->setVisible(false);
+				try_set_visible(loading_bar, false);
 				return;
 			}
 
             float coin_goal = scale_number(10.0f, (float)target_building->building_level, 10.5f);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             loading_bar->setPercent(percentage);
-			loading_bar->setVisible(true);
+			try_set_visible(loading_bar, true);
 
             if (percentage >= 100.0f) {
                 this->upgrade_lbl->setString("Upgrade available!");
@@ -326,17 +326,17 @@ void BaseScene::create_goal_loadingbar()
     //show progress panel
     auto harvester_progress_panel = this->getChildByName("harvester_progress_panel");
 
-    harvester_progress_panel->setVisible(false);
+    try_set_visible(harvester_progress_panel, false);
     ui::LoadingBar* harvester_loading_bar = dynamic_cast<ui::LoadingBar*>(harvester_progress_panel->getChildByName("harvester_loadingbar"));
     auto update_harvester_loading_panel = [this, harvester_progress_panel, harvester_loading_bar](float dt) {
         if (BUILDUP->get_target_building()->name != "The Dump")
         {
-            harvester_progress_panel->setVisible(false);
+            try_set_visible(harvester_progress_panel, false);
             harvester_loading_bar->setPercent(0.0f);
         }
         else
         {
-            harvester_progress_panel->setVisible(true);
+            try_set_visible(harvester_progress_panel, true);
             auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
             if (harvestable)
             {
@@ -483,7 +483,7 @@ void BaseScene::create_building_choicelist()
     //check visibilty for tutorials
     Tutorial* tutorial = Tutorial::getInstance();
     auto check_visible = [building_buttons, tutorial](float dt){
-        building_buttons->setVisible(tutorial->get_show_building_buttons());
+        try_set_visible(building_buttons, tutorial->get_show_building_buttons());
     };
     building_buttons->schedule(check_visible, SHORT_DELAY, "check_visible");
     check_visible(0.0f);
@@ -593,11 +593,11 @@ void BaseScene::create_info_panel()
     auto update_info_display = [this, arena_kill_panel, arena_kill_lbl](float dt){
         auto target_building = BUILDUP->get_target_building();
         if (target_building->name == "The Arena") {
-            arena_kill_panel->setVisible(true);
+            try_set_visible(arena_kill_panel, true);
             res_count_t kills = (res_count_t)GameLogic::getInstance()->get_total_kills(); //comes through as int though
             arena_kill_lbl->setString("Kills: "+beautify_double(kills));
         } else if (target_building->name == "The Workshop") {
-            arena_kill_panel->setVisible(true);
+            try_set_visible(arena_kill_panel, true);
             if (this->target_recipe != NULL) {
                 arena_kill_lbl->setString(this->target_recipe->name);
             }
@@ -605,7 +605,7 @@ void BaseScene::create_info_panel()
                 arena_kill_lbl->setString("Choose a recipe");
             }
         } else if (target_building->name == "The Marketplace") {
-            arena_kill_panel->setVisible(true);
+            try_set_visible(arena_kill_panel, true);
             if (time(0) % 10 > 5) {
                 res_count_t max_coin_storage = BEATUP->get_max_coin_storage();
                 arena_kill_lbl->setString("Max Gold: " + beautify_double(max_coin_storage));
@@ -619,7 +619,7 @@ void BaseScene::create_info_panel()
         //     arena_kill_panel->setVisible(true);
         //     arena_kill_lbl->setString("Depth: XXX");
         else {
-            arena_kill_panel->setVisible(false);
+            try_set_visible(arena_kill_panel, false);
         }
     };
     arena_kill_panel->schedule(update_info_display, AVERAGE_DELAY, "update_info_display");
@@ -630,7 +630,7 @@ void BaseScene::create_info_panel()
     //check visibilty for tutorials
     Tutorial* tutorial = Tutorial::getInstance();
     auto check_visible = [building_info_panel, tutorial](float dt){
-        building_info_panel->setVisible(tutorial->get_show_building_info());
+        try_set_visible(building_info_panel, tutorial->get_show_building_info());
     };
     building_info_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
     check_visible(0.0f);
@@ -696,10 +696,10 @@ void BaseScene::create_info_panel()
             res_count_t harvester_output = building->get_total_harvester_output();
             ss << "Harvesters: " << beautify_double(total_active) << "\n " << beautify_double(harvester_output) << "/sec";
             harvester_count->setString(ss.str());
-            harvester_count->setVisible(true);
+            try_set_visible(harvester_count, true);
         }
         else {
-            harvester_count->setVisible(false);
+            try_set_visible(harvester_count, false);
         }
     };
     this->schedule(update_harvester_count, AVERAGE_DELAY, "harvester_count_update");
@@ -720,10 +720,10 @@ void BaseScene::create_info_panel()
             res_count_t salesmen_output = building->get_total_salesmen_output();
             ss << "Salesmen: " << beautify_double(total_active) << "\n " << beautify_double(salesmen_output) << "/sec";
             salesmen_count->setString(ss.str());
-            salesmen_count->setVisible(true);
+            try_set_visible(salesmen_count, true);
         }
         else {
-            salesmen_count->setVisible(false);
+            try_set_visible(salesmen_count, false);
         }
     };
     this->schedule(update_salesmen_count, AVERAGE_DELAY, "salesmen_count_update");
@@ -791,7 +791,7 @@ void BaseScene::create_player_info_panel()
     //check visibilty for tutorials
     Tutorial* tutorial = Tutorial::getInstance();
     auto check_visible = [player_info_panel, tutorial](float dt){
-        player_info_panel->setVisible(tutorial->get_show_player_info());
+        try_set_visible(player_info_panel, tutorial->get_show_player_info());
     };
 
     player_info_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
@@ -840,7 +840,7 @@ void BaseScene::create_player_info_panel()
 
     //check visibilty for tutorials
     auto check_hp_visible = [player_hp_lbl, tutorial](float dt){
-        player_hp_lbl->setVisible(tutorial->get_show_player_hp_lbl());
+        try_set_visible(player_hp_lbl, tutorial->get_show_player_hp_lbl());
     };
     player_hp_lbl->schedule(check_hp_visible, SHORT_DELAY, "check_hp_visible");
     check_visible(0.0f);
@@ -1122,7 +1122,7 @@ bool HarvestScene::init()
             float orig_scale = this->getScale();
             auto scale_to = ScaleTo::create(0.3f, orig_scale);
 
-            this->setVisible(false);
+            try_set_visible(this, false);
             this->setScale(0.0f);
 
             this->runAction(Sequence::create(

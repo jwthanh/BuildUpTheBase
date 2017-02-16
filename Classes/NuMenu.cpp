@@ -269,9 +269,9 @@ void NuItem::try_set_enable(bool is_enable)
 
 void NuItem::set_progress_panel_visible(bool visible)
 {
-    this->current_lbl->setVisible(visible);
-    this->middle_lbl->setVisible(visible);
-    this->total_lbl->setVisible(visible);
+    try_set_visible(this->current_lbl, visible);
+    try_set_visible(this->middle_lbl, visible);
+    try_set_visible(this->total_lbl, visible);
 };
 
 void ShopNuItem::add_available_coins(res_count_t new_coins)
