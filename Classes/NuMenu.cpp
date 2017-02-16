@@ -140,6 +140,8 @@ bool NuItem::init(cocos2d::Node* parent)
 
     auto reposition_labels = [this](float dt)
     {
+        if (this->getParent()->isVisible() == false || this->getParent()->getParent()->isVisible() == false) { return; } //dont do anything if not visible
+
         //defaults
         this->cost_lbl->setPosition(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl")->getPosition());
         this->count_lbl->setPosition(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl")->getPosition());
@@ -161,7 +163,7 @@ bool NuItem::init(cocos2d::Node* parent)
             this->desc_lbl->setContentSize({ 300.0f, 44.0f });
         }
     };
-    this->schedule(reposition_labels, 0.1f, "reposition_labels");
+    this->schedule(reposition_labels, MID_DELAY, "reposition_labels");
     reposition_labels(0);
 
     return true;
@@ -772,7 +774,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     auto update_been_bought = [this](float dt) {
         this->set_been_bought(this->building->building_level >= this->building_level);
     };
-    this->schedule(update_been_bought, 0.1f, "set_enabled");
+    this->schedule(update_been_bought, MID_DELAY, "set_enabled");
     update_been_bought(0);
 
     auto touch_ended_cb = [this](){
@@ -974,7 +976,7 @@ void HarvesterShopNuItem::my_init_update_callback()
         ss << "Adds " << harvested_count << " " << Ingredient::type_to_string(building->punched_sub_type) << "\nper sec";
         this->set_description(ss.str());
     };
-    this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
+    this->schedule(update_harvesters_cb, MID_DELAY, "harvester_count");
     update_harvesters_cb(0);
 
 };
@@ -1017,7 +1019,7 @@ void SalesmanShopNuItem::my_init_update_callback()
         ss << "Sells " << sold_count << " " << Ingredient::type_to_string(building->punched_sub_type) << "\nper sec";
         this->set_description(ss.str());
     };
-    this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
+    this->schedule(update_harvesters_cb, MID_DELAY, "harvester_count");
     update_harvesters_cb(0);
 
 }
@@ -1152,7 +1154,7 @@ void ConsumerShopNuItem::my_init_update_callback()
         ss << "Consumes " << sold_count << " " << Ingredient::type_to_string(this->consumed_type) << "\nper sec (if hurt)";
         this->set_description(ss.str());
     };
-    this->schedule(update_harvesters_cb, 0.1f, "harvester_count");
+    this->schedule(update_harvesters_cb, MID_DELAY, "harvester_count");
     update_harvesters_cb(0);
 
 }
@@ -1277,7 +1279,7 @@ void CombatShopNuItem::my_init_update_callback()
         ss << "Buffs your fighting skills";
         this->set_description(ss.str());
     };
-    this->schedule(update_harvesters_cb, 0.1f, "update_combat");
+    this->schedule(update_harvesters_cb, MID_DELAY, "update_combat");
     update_harvesters_cb(0);
 
 }

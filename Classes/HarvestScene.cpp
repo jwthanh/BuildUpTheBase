@@ -677,7 +677,7 @@ void BaseScene::create_info_panel()
 
         ing_count->setUserData(cached);
     };
-    this->schedule(update_ing_count, HALF_DELAY, "ing_count_update");
+    this->schedule(update_ing_count, AVERAGE_DELAY, "ing_count_update");
     update_ing_count(0);
 
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
@@ -1111,7 +1111,7 @@ bool HarvestScene::init()
 
 
     };
-    this->schedule(update_layer_color, 0.0f, "update_layer_color");
+    this->schedule(update_layer_color, AVERAGE_DELAY, "update_layer_color");
     update_layer_color(0.0f);
 
     this->setOnEnterCallback([this]()
@@ -1398,7 +1398,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         value_ss << "for " << beautify_double(cg) << "$ each";
         value_lbl->setString(value_ss.str().c_str());
     };
-    value_lbl->schedule(update_value_lbl, 0.2f, "update_value_lbl");
+    value_lbl->schedule(update_value_lbl, AVERAGE_DELAY, "update_value_lbl");
     update_value_lbl(0);
 
     alert_panel->setPosition(get_center_pos());
