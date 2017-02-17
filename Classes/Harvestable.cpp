@@ -1445,7 +1445,7 @@ bool MarketHarvestable::init()
 {
     bool val = Harvestable::init();
 
-    this->initial_scale = 2.75f;
+    this->initial_scale = 2.5f;
     this->setScale(this->initial_scale);
 
     return val;
