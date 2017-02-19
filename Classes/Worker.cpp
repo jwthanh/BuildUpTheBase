@@ -110,14 +110,14 @@ res_count_t Harvester::get_to_harvest_count(WorkerSubType harv_type, IngredientS
     if (harv_type == SubType::One)         { harvested_count = 0.1; }
     else if (harv_type == SubType::Two)    { harvested_count = 1; }
     else if (harv_type == SubType::Three)  { harvested_count = 8; }
-    else if (harv_type == SubType::Four)   { harvested_count = 25; }
-    else if (harv_type == SubType::Five)   { harvested_count = 100; }
-    else if (harv_type == SubType::Six)    { harvested_count = 350; }
-    else if (harv_type == SubType::Seven)  { harvested_count = 800; }
-    else if (harv_type == SubType::Eight)  { harvested_count = 1500; }
-    else if (harv_type == SubType::Nine)   { harvested_count = 4300; }
-    else if (harv_type == SubType::Ten)    { harvested_count = 11000; }
-    else if (harv_type == SubType::Eleven) { harvested_count = 55000; }
+    else if (harv_type == SubType::Four)   { harvested_count = 15; }
+    else if (harv_type == SubType::Five)   { harvested_count = 46; }
+    else if (harv_type == SubType::Six)    { harvested_count = 37; }
+    else if (harv_type == SubType::Seven)  { harvested_count = 50; }
+    else if (harv_type == SubType::Eight)  { harvested_count = 175; }
+    else if (harv_type == SubType::Nine)   { harvested_count = 519; }
+    else if (harv_type == SubType::Ten)    { harvested_count = 2750; }
+    else if (harv_type == SubType::Eleven) { harvested_count = 5240; }
     else { harvested_count = 9999;}
 
     return harvested_count * Ingredient::type_to_harvest_ratio.at(ing_type);
