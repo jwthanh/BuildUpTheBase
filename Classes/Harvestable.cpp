@@ -459,7 +459,7 @@ bool TreeHarvestable::init()
 {
     bool val = Harvestable::init();
 
-    this->initial_scale = 1.0f;
+    this->initial_scale = 0.9f;
     this->setScale(this->initial_scale);
 
     return val;

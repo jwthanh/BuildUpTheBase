@@ -197,6 +197,7 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">calvin/trophy/trophy1.png</key>
             <key type="filename">calvin/trophy/trophy14.png</key>
             <key type="filename">kenny/Art/Roguelike cave &amp; dungeon pack (520 assets)/ASUOutput/dirt_1.png</key>
             <key type="filename">kenny/Art/Roguelike cave &amp; dungeon pack (520 assets)/ASUOutput/dirt_2.png</key>
@@ -970,6 +971,7 @@
             <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/medal2.png</filename>
             <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/medal1.png</filename>
             <filename>calvin/trophy/trophy14.png</filename>
+            <filename>calvin/trophy/trophy1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

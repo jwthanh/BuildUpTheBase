@@ -1212,9 +1212,9 @@ void GameDirector::switch_to_achievement_menu()
         };
 
         if (achievement->get_completed()){
-            nuitem->set_image("grey_boxCheckmark.png");
+            nuitem->set_image("trophy14.png", ui::Widget::TextureResType::PLIST);
         } else {
-            nuitem->set_image("medal2.png");
+            nuitem->set_image("trophy1.png", ui::Widget::TextureResType::PLIST);
         };
 
         nuitem->button->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
