@@ -1,0 +1,74 @@
+digraph {
+    label="Build Up The Base (0.42.0)\n(Simplified techtree)";
+    labelloc="t";
+    fontsize=24;
+
+    subgraph {
+        graph [label="ASDAD"];
+        edge [labelfontname="Helvetica"];
+        //basics
+        TheFarm -> Grain;
+        TheArena -> Sand;
+        TheUnderscape -> Blood;
+        TheMarketplace -> Paper;
+        TheDump -> Fly;
+        TheWorkshop -> Seed;
+        TheMine -> Copper;
+        TheGraveyard -> Flesh;
+        TheForest -> Berry;
+
+        //advanced
+        edge [color=red, label="Advanced"];
+        TheFarm -> Bread;
+        TheFarm -> Loaf;
+        /* TheMine -> Minecart; */
+        /* TheMine -> Minerails; */
+        /* TheGraveyard -> Undead; */
+        TheDump -> Items;
+
+        edge [color=orange, label="Rare"];
+        TheForest -> Wood;
+        TheMine -> Iron;
+        TheArena -> Soul;
+
+        //crafting
+        edge [color=green, label="Craft"];
+        {Loaf} -> SalesmenBoost;
+        {Fly, Flesh, Loaf} -> Deadmeat;
+        TheUnderscape -> Bloodoath;
+
+        //upgrades
+        edge [color=blue, label="Upgrade"];
+        {Wood} -> BiggerAxes;
+        {Investment} -> RaiseCoinStorage;
+        {Paper} -> PaperOutput;
+        {Soul} -> BuySword;
+        {Blood} -> CoatSword;
+        {Fly} -> SharpenSword;
+
+
+        TheFarm[shape=rectangle];
+        TheMarketplace[shape=rectangle];
+        TheFarm[shape=rectangle];
+        TheArena[shape=rectangle];
+        TheUnderscape[shape=rectangle];
+        TheMarketplace[shape=rectangle];
+        TheDump[shape=rectangle];
+        TheWorkshop[shape=rectangle];
+        TheMine[shape=rectangle];
+        TheGraveyard[shape=rectangle];
+        TheForest[shape=rectangle];
+    }
+
+    subgraph cluster_dig_workflow {
+        label = "Dig";
+        {Wood, Iron, Copper} -> Minecart;
+        {Wood, Copper} -> Minerails;
+        {Iron, Minecart, Minerails} -> Dig -> Altar -> PlaceItem -> UpgradeItem;
+    };
+
+    subgraph cluster_scavenge {
+        label = "Scavenge";
+        {Soul, Flesh, Blood} -> Undead -> TheDump -> {SendScavenging};
+    };
+}
