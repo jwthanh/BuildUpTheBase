@@ -66,3 +66,5 @@ proj.win32/buildupthebase.v12.suo
 proj.win32/buildupthebase*.vsp
 
 *.pyc
+
+python/
