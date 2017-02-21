@@ -87,7 +87,7 @@ class SideListView
         void setup_tab_buttons();
 
         void setup_listviews();
-        bool try_push_back(int child_tag, cocos2d::ui::ListView* listview);
+        bool if_tag_exists_in_listview(int child_tag, cocos2d::ui::ListView* listview);
 
         void setup_shop_listview_as_harvesters();
         void setup_detail_listview_as_recipes();

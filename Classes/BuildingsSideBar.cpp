@@ -344,36 +344,31 @@ void SideListView::setup_shop_listview_as_harvesters()
                 //if the child already exists, put it at the back
                 int tag = i++;
 
-                auto existing_node = try_push_back(tag, shop_listview);
-                if (existing_node)
-                {
-                    continue;
-                }
-                else
-                {
-                    //check for prereqs before adding the next item to the menu
-                    if (config.harv_type != Worker::SubType::One) {
-                        Worker::SubType ZERO = Worker::SubType::ZERO;
-                        std::pair<Worker::SubType, Ingredient::SubType> key = {
-                            map_get(req_map, config.harv_type, ZERO),
-                            building->punched_sub_type
-                        };
+                auto existing_node = if_tag_exists_in_listview(tag, shop_listview);
+                if (existing_node) { continue; }
 
-                        res_count_t _def = 0;
-                        auto prereq_harvester_found = map_get(building->harvesters, key, _def);
-
-                        //if cant meet prereq, dont try to add the item
-                        if (prereq_harvester_found < 5) {
-                            continue;
-                        }
-                        else {
-                            //resize scroll bar on new additions to the listview
-                            shop_listview->requestDoLayout();
-
-                            //shop_listview->jumpToBottom(); //seems like this adds the next item to the wrong spot
-                        };
+                //check for prereqs before adding the next item to the menu
+                if (config.harv_type != Worker::SubType::One) {
+                    Worker::SubType ZERO = Worker::SubType::ZERO;
+                    std::pair<Worker::SubType, Ingredient::SubType> key = {
+                        map_get(req_map, config.harv_type, ZERO),
+                        building->punched_sub_type
                     };
-                }
+
+                    res_count_t _def = 0;
+                    auto prereq_harvester_found = map_get(building->harvesters, key, _def);
+
+                    //if cant meet prereq, dont try to add the item
+                    if (prereq_harvester_found < 5) {
+                        continue;
+                    }
+                    else {
+                        //resize scroll bar on new additions to the listview
+                        shop_listview->requestDoLayout();
+
+                        //shop_listview->jumpToBottom(); //seems like this adds the next item to the wrong spot
+                    };
+                };
 
                 //clone the new item
                 HarvesterShopNuItem* menu_item;
@@ -438,20 +433,11 @@ void SideListView::setup_shop_listview_as_harvesters()
 
 ///tries to push the node at child_tag to the back of the listview. if it didn't exist,
 /// it returns false
-bool SideListView::try_push_back(int child_tag, ui::ListView* listview)
+bool SideListView::if_tag_exists_in_listview(int child_tag, ui::ListView* listview)
 {
-    bool existed = false;
-
     auto existing_node = listview->getChildByTag(child_tag);
-    if (existing_node)
-    {
-        return true;
-        existing_node->removeFromParentAndCleanup(false); //dont remove the callbacks, just move it around
-        listview->addChild(existing_node);
-        existed = true;
-    }
 
-    return existed;
+    return existing_node != NULL;
 }
 
 void SideListView::setup_building_listview_as_upgrades()
@@ -480,7 +466,7 @@ void SideListView::setup_building_listview_as_upgrades()
 
 
                 //if the child already exists, put it at the end of the listview, maintaining order as config
-                bool existed = this->try_push_back(child_tag, listview);
+                bool existed = this->if_tag_exists_in_listview(child_tag, listview);
                 if (existed) { continue; };
 
                 UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create(listview, building);
@@ -952,12 +938,7 @@ void SideListView::setup_detail_listview_as_recipes()
             {
                 int child_tag = i++;
 
-                //if the child already exists, put it at the end of the listview, maintaining order as config
-                bool existed = this->try_push_back(child_tag, listview);
-                if (existed)
-                {
-                    continue;
-                };
+                if (this->if_tag_exists_in_listview(child_tag, listview)) { continue; }
 
                 NuItem* menu_item;
                 if (config.type == DetailType::Recipe) {
