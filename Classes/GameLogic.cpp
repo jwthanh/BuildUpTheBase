@@ -340,6 +340,9 @@ int GameLogic::get_total_harvests()
 
 void GameLogic::add_city_investment(res_count_t value)
 {
+    auto achievement_manager = AchievementManager::getInstance();
+    std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalCityInvestments);
+    achievement->increment_by_n((res_count_t)value);
     this->_city_investment += value;
 };
 

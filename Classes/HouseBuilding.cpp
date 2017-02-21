@@ -105,7 +105,7 @@ void Village::update(float dt)
 
 void Village::update_buildings(float dt)
 {
-    for (std::shared_ptr<Building> building : this->buildings)
+    for (std::shared_ptr<Building>& building : this->buildings)
     {
         building->update(dt);
     };

@@ -74,6 +74,9 @@ bool NuItem::init(cocos2d::Node* parent)
 
     auto setup_text_node = [set_renderer](ui::Text* text_node)
     {
+        if (!text_node) {
+            CCLOG("ASDADDASDADADAS");
+        }
         Label* renderer = (Label*)text_node->getVirtualRenderer();
         set_aliasing(text_node, true);
         renderer->setOverflow(Label::Overflow::SHRINK);
@@ -928,13 +931,13 @@ void HarvesterShopNuItem::my_init_sprite()
     base_node->setPosition(8,8);
     base_node->setScaleY(-1.0f);
 
-    auto rt = RenderTexture::create(16, 16);
+    RenderTexture* rt = RenderTexture::create(16, 16);
     rt->retain();
     rt->begin();
     base_node->visit();
     rt->end();
 
-    ui::Scale9Sprite* vr = (ui::Scale9Sprite*)this->item_icon->getVirtualRenderer();
+    ui::Scale9Sprite* vr = dynamic_cast<ui::Scale9Sprite*>(this->item_icon->getVirtualRenderer());
     vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
 };
 
