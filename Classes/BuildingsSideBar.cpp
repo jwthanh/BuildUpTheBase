@@ -1033,13 +1033,11 @@ void SideListView::setup_powers_listview_as_powers()
 
             try_set_visible(listview, true);
 
-            //if the child already exists, put it at the back
+            //if the child already exists, do nothing
             std::string child_name = "send_feeback";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
             {
-                existing_node->removeFromParentAndCleanup(false);
-                listview->addChild(existing_node);
                 return;
             }
 
@@ -1084,13 +1082,11 @@ void SideListView::setup_powers_listview_as_powers()
             }
             try_set_visible(listview, true);
 
-            //if the child already exists, put it at the back
+            //if the child already exists, do nothing
             std::string child_name = "open_leaderboard";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
             {
-                existing_node->removeFromParentAndCleanup(false);
-                listview->addChild(existing_node);
                 return;
             }
 
@@ -1126,13 +1122,11 @@ void SideListView::setup_powers_listview_as_powers()
             }
             try_set_visible(listview, true);
 
-            //if the child already exists, put it at the back
+            //if the child already exists, do nothing
             std::string child_name = "sell_all";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
             {
-                existing_node->removeFromParentAndCleanup(false);
-                listview->addChild(existing_node);
                 return;
             }
 
@@ -1189,13 +1183,11 @@ void SideListView::setup_powers_listview_as_powers()
             }
             try_set_visible(listview, true);
 
-            //if the child already exists, put it at the back
+            //if the child already exists do nothing
             std::string child_name = "sell_all_advanced";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
             {
-                existing_node->removeFromParentAndCleanup(false);
-                listview->addChild(existing_node);
                 return;
             }
 
@@ -1254,13 +1246,11 @@ void SideListView::setup_powers_listview_as_powers()
             }
             try_set_visible(listview, true);
 
-            //if the child already exists, put it at the back
+            //if the child already exists, do nothing
             std::string child_name = "save";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
             {
-                existing_node->removeFromParentAndCleanup(false);
-                listview->addChild(existing_node);
                 return;
             }
 
@@ -1295,13 +1285,11 @@ void SideListView::setup_powers_listview_as_powers()
             }
             try_set_visible(listview, true);
 
-            //if the child already exists, put it at the back
+            //if the child already exists, do nothing
             std::string child_name = "toggle_vibration";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
             {
-                existing_node->removeFromParentAndCleanup(false);
-                listview->addChild(existing_node);
                 return;
             }
 
@@ -1351,13 +1339,11 @@ void SideListView::setup_powers_listview_as_powers()
             }
             try_set_visible(listview, true);
 
-            //if the child already exists, put it at the back
+            //if the child already exists do nothing
             std::string child_name = "open_log";
             auto existing_node = listview->getChildByName(child_name);
             if (existing_node)
             {
-                existing_node->removeFromParentAndCleanup(false);
-                listview->addChild(existing_node);
                 return;
             }
 
