@@ -111,7 +111,7 @@ res_count_t Harvester::get_to_harvest_count(WorkerSubType harv_type, IngredientS
     else if (harv_type == SubType::Two)    { harvested_count = 1; }
     else if (harv_type == SubType::Three)  { harvested_count = 8; }
     else if (harv_type == SubType::Four)   { harvested_count = 15; }
-    else if (harv_type == SubType::Five)   { harvested_count = 46; }
+    else if (harv_type == SubType::Five)   { harvested_count = 26; }
     else if (harv_type == SubType::Six)    { harvested_count = 37; }
     else if (harv_type == SubType::Seven)  { harvested_count = 50; }
     else if (harv_type == SubType::Eight)  { harvested_count = 175; }
