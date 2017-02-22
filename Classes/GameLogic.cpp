@@ -272,6 +272,7 @@ void GameLogic::update(float dt)
 
             ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(scene->getChildByName("player_info_panel"));
             auto player_gold_per_sec_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
+            set_aliasing(player_gold_per_sec_lbl); //TODO move this somewhere where it's not called all the time
 
             const auto& total_coins = BEATUP->get_total_coins();
             res_count_t coin_diff = total_coins - BEATUP->_last_total_coins;

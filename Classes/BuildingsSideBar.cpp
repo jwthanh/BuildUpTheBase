@@ -159,6 +159,7 @@ ui::Button* SideListView::_create_button(std::string node_name)
     Node* sidebar_panel = this->parent->getChildByName("sidebar_panel");
 
     ui::Button* button = dynamic_cast<ui::Button*>(sidebar_panel->getChildByName(node_name));
+    set_aliasing(button);
     load_default_button_textures(button);
 
     Label* button_lbl = (Label*)button->getTitleRenderer();

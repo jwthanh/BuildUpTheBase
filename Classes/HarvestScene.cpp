@@ -589,6 +589,7 @@ void BaseScene::create_info_panel()
 
     ui::Layout* arena_kill_panel = dynamic_cast<ui::Layout*>(this->getChildByName("arena_kill_panel"));
     ui::Text* arena_kill_lbl = dynamic_cast<ui::Text*>(arena_kill_panel->getChildByName("arena_kill_lbl"));
+    set_aliasing(arena_kill_lbl);
 
     auto update_info_display = [this, arena_kill_panel, arena_kill_lbl](float dt){
         auto target_building = BUILDUP->get_target_building();
@@ -636,6 +637,7 @@ void BaseScene::create_info_panel()
     check_visible(0.0f);
 
     auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
+    set_aliasing(building_name);
     auto update_building_name = [building_name](float dt){
         building_name->setString(BUILDUP->get_target_building()->name);
     };
@@ -643,6 +645,7 @@ void BaseScene::create_info_panel()
     update_building_name(0);
 
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
+    set_aliasing(ing_count);
     cached_building_info_t* cached_building_info = new cached_building_info_t();
     ing_count->setUserData(static_cast<void*>(cached_building_info));
 
@@ -681,6 +684,7 @@ void BaseScene::create_info_panel()
     update_ing_count(0);
 
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
+    set_aliasing(harvester_count);
     auto update_harvester_count = [harvester_count](float dt)
     {
         spBuilding building = BUILDUP->get_target_building();
@@ -706,6 +710,7 @@ void BaseScene::create_info_panel()
     update_harvester_count(0);
 
     auto salesmen_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("salesmen_count"));
+    set_aliasing(salesmen_count);
     auto update_salesmen_count = [salesmen_count](float dt)
     {
         spBuilding building = BUILDUP->get_target_building();
@@ -826,6 +831,7 @@ void BaseScene::create_player_info_panel()
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
     set_aliasing(player_gold_lbl, true);
     auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
+    set_aliasing(player_hp_lbl, true);
 
     ui::Button* achievement_btn = dynamic_cast<ui::Button*>(player_info_panel->getChildByName("achievement_btn"));
     prep_button(achievement_btn);

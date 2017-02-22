@@ -65,18 +65,15 @@ bool NuItem::init(cocos2d::Node* parent)
 {
     ui::Widget::init();
 
-    //TTFConfig ttf_config = TTFConfig("pixelmix.ttf", 16, GlyphCollection::ASCII, nullptr, false, 2);
-    auto set_renderer = [/*ttf_config*/](ui::Text* text_node){
+    auto set_renderer = [](ui::Text* text_node){
         Label* renderer = (Label*)text_node->getVirtualRenderer();
         renderer->setTTFConfig(NuItem::ttf_config);
+        // renderer->setBMFontFilePath("fonts/pixelmix.fnt");
     };
 
 
     auto setup_text_node = [set_renderer](ui::Text* text_node)
     {
-        if (!text_node) {
-            CCLOG("ASDADDASDADADAS");
-        }
         Label* renderer = (Label*)text_node->getVirtualRenderer();
         set_aliasing(text_node, true);
         renderer->setOverflow(Label::Overflow::SHRINK);
@@ -98,6 +95,8 @@ bool NuItem::init(cocos2d::Node* parent)
 
     //clone orig button, background is still messed though
     this->button = (ui::Button*)NuItem::orig_button->clone();
+
+
     this->button->setCascadeColorEnabled(true);
     for (auto child : this->button->getChildren())
     {
@@ -107,7 +106,6 @@ bool NuItem::init(cocos2d::Node* parent)
     load_default_button_textures(this->button); //TODO figure out why this is still needed, why the clone doesnt do this for me
 
     this->button->removeFromParent();
-
 
     parent->addChild(this); //FIXME hack to get the selector to run. ideally the button would be a child of this but then button doesnt go on the right spot
     ui::ListView* scrollview_parent = dynamic_cast<ui::ListView*>(parent);
