@@ -66,6 +66,10 @@
 * since we've got items now, lets turn sword sharpening into a timer and have it degrade all the time
 * Need a progress bar that shows the sword sharpness
 
+#Item upgrading
+* Have a harvestable for upgrading items via a jeweller
+* Be able to make better jewellers, maybe find them in the dig?
+
 #Misc UI
 * Better user messaging
 * Changelog in app
