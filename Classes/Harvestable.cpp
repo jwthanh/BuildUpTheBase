@@ -167,8 +167,7 @@ void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, f
     }
     else
     {
-        auto sprite_size = this->get_sprite_size();
-        pos = this->getPosition() + Vec2(sprite_size);
+        pos = this->getPosition();
     }
 
     pos.x += cocos2d::rand_minus1_1()*20.0f;
@@ -371,7 +370,8 @@ void Harvestable::animate_rotate()
 
 std::string Harvestable::get_shatter_text()
 {
-    return "+1 Harvest";
+    //nothing anymore, only crafting
+    return "";
 }
 
 cocos2d::Color4B Harvestable::get_shatter_text_color()
@@ -508,6 +508,19 @@ Color4B TreeHarvestable::get_create_output_color()
     {
         return Color4B::GREEN;
     };
+};
+
+void TreeHarvestable::shatter()
+{
+    Harvestable::shatter();
+
+    res_count_t output_num = this->get_per_touch_output()*20;
+    this->building->create_ingredients(Ingredient::SubType::Wood, output_num);
+
+    std::stringstream ss;
+    ss << "+" << output_num << " bonus wood!";
+    this->spawn_label_on_touch(NULL, this->initial_scale, 1.0f, ss.str(), Color4B::GREEN);
+
 };
 
 bool DumpsterHarvestable::init()

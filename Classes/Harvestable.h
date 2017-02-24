@@ -128,6 +128,8 @@ class TreeHarvestable : public Harvestable
         std::string get_sprite_path();
         void animate_touch_start(cocos2d::Touch* touch);
 
+        virtual void shatter() override;
+
         virtual cocos2d::Color4B get_create_output_color();
 };
 
