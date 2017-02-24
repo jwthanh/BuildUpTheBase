@@ -299,7 +299,7 @@ void AltarItemScene::init_callbacks()
                 item->level += 3;
 
                 auto achievement_manager = AchievementManager::getInstance();
-                std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItems);
+                std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItemsPlaced);
                 achievement->increment();
 
                 cocos2d::Director::getInstance()->popScene();
