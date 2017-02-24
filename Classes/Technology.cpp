@@ -114,7 +114,7 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
 
         auto tech_map = building->techtree->tech_map;
         res_count_t _def = 0;
-        res_count_t wood_cost = std::floor(scale_number(20.0L, map_get(tech_map, this->sub_type, _def), 4.45L));
+        res_count_t wood_cost = std::floor(scale_number(20.0L, map_get(tech_map, this->sub_type, _def), 1.45L));
         recipe->components = mistIngredient({{ Ingredient::SubType::Wood, wood_cost }});
 
         ss << "More likely to find wood\n-- costs " << beautify_double(wood_cost) << " wood";
