@@ -602,21 +602,9 @@ void GameDirector::switch_to_city_menu()
     //invest panel
     auto invest_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("invest_panel"));
     auto invest_button = dynamic_cast<ui::Button*>(invest_panel->getChildByName("invest_button"));
-    invest_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
-    {
-        if (evt == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(5);
-            CCLOG("Add money");
-            double coins = BEATUP->get_total_coins();
-            if (coins > 10)
-            {
-                GameLogic::getInstance()->add_city_investment(10.0);
-                BEATUP->add_total_coin(-10);
-            }
-        }
-    });
+    bind_touch_ended(invest_button, [](){ GameDirector::switch_to_scrap_item_menu(); });
     load_default_button_textures(invest_button);
+
     cocos2d::TTFConfig ttf_config = TTFConfig("pixelmix.ttf", 24, GlyphCollection::ASCII, NULL, false, 2);
     Label* invest_renderer = invest_button->getTitleRenderer();
     invest_renderer->setTTFConfig(ttf_config);

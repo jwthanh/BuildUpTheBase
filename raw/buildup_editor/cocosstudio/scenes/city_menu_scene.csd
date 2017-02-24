@@ -61,7 +61,7 @@
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="invest_button" ActionTag="1405860098" Tag="657" IconVisible="False" LeftMargin="287.1984" RightMargin="6.0707" TopMargin="9.7982" BottomMargin="79.7982" TouchEnable="True" FontSize="14" ButtonText="10 coins" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="invest_button" ActionTag="1405860098" Tag="657" IconVisible="False" LeftMargin="287.1984" RightMargin="6.0707" TopMargin="9.7982" BottomMargin="79.7982" TouchEnable="True" FontSize="14" ButtonText="Scrap Items" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="366.7309" Y="60.4035" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="470.5638" Y="110.0000" />
@@ -88,7 +88,7 @@
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="invested_desc_lbl" ActionTag="884468073" Tag="39" IconVisible="False" LeftMargin="32.8095" RightMargin="11.0812" TopMargin="81.3027" BottomMargin="3.3238" IsCustomSize="True" FontSize="16" LabelText="Money invested into the city can be spent on increasing the coin storage capacity. Scrap Items at The Marketplace to kickstart your economy." HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="invested_desc_lbl" ActionTag="884468073" Tag="39" IconVisible="False" LeftMargin="32.8094" RightMargin="11.0812" TopMargin="81.3027" BottomMargin="3.3239" IsCustomSize="True" FontSize="16" LabelText="Money invested into the city can be spent on increasing the coin storage capacity. Scrap items to increase the value invested in the city." HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="616.1093" Y="65.3735" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="340.8641" Y="36.0106" />

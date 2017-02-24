@@ -148,6 +148,7 @@ void try_set_node_color(cocos2d::Node* node, const cocos2d::Color3B color)
 
 void set_aliasing(cocos2d::Label* label, bool set_aliasing)
 {
+    // label->setTTFConfig(NuItem::ttf_config); //force labels to also use the same fontsize and outline but it doesn't seem to affect the draw calls
     if (set_aliasing)
     {
         label->getFontAtlas()->setAliasTexParameters();

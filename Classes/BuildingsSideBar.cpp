@@ -837,30 +837,31 @@ void SideListView::setup_detail_listview_as_recipes()
                         ""
                     }});
 
-                //open scrap menu button
-                std::string child_name = "open_scrap_menu";
-                auto existing_node = listview->getChildByName(child_name);
-                if (existing_node)
-                {
-                    existing_node->removeFromParentAndCleanup(false);
-                    listview->addChild(existing_node);
-                    return;
-                }
-
-                //clone the new item
-                BuildingNuItem* menu_item;
-                menu_item = BuildingNuItem::create(listview, building);
-                menu_item->setName(child_name);
-                menu_item->set_title("Open Scrap Menu");
-                menu_item->set_image("lineDark28.png");
-
-                menu_item->set_description("Convert Items into scrap\nIncreases city investment.");
-
-                menu_item->set_touch_ended_callback([menu_item]()
-                {
-                    GameDirector::switch_to_scrap_item_menu();
-                    do_vibrate(5);
-                });
+                ///Moved to City Management
+                // //open scrap menu button
+                // std::string child_name = "open_scrap_menu";
+                // auto existing_node = listview->getChildByName(child_name);
+                // if (existing_node)
+                // {
+                //     existing_node->removeFromParentAndCleanup(false);
+                //     listview->addChild(existing_node);
+                //     return;
+                // }
+                //
+                // //clone the new item
+                // BuildingNuItem* menu_item;
+                // menu_item = BuildingNuItem::create(listview, building);
+                // menu_item->setName(child_name);
+                // menu_item->set_title("Open Scrap Menu");
+                // menu_item->set_image("lineDark28.png");
+                //
+                // menu_item->set_description("Convert Items into scrap\nIncreases city investment.");
+                //
+                // menu_item->set_touch_ended_callback([menu_item]()
+                // {
+                //     GameDirector::switch_to_scrap_item_menu();
+                //     do_vibrate(5);
+                // });
 
             };
 
