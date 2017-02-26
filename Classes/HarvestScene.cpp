@@ -952,31 +952,26 @@ void BaseScene::create_inventory_listview()
             item_img->loadTexture(res_data.get_img_large());
             set_aliasing(item_img, true);
 
-            auto on_touch_cb = [ing_type, this, new_item_panel](Ref* ref, ui::Widget::TouchEventType type) {
+            auto on_touch_cb = [ing_type, this, new_item_panel]() {
+                auto alert = this->create_ingredient_detail_alert(ing_type);
+                this->addChild(alert, 10);
 
-                if (type == ui::Widget::TouchEventType::ENDED) {
-                    auto alert = this->create_ingredient_detail_alert(ing_type);
-                    this->addChild(alert, 10);
+                //animate
+                Vec2 start_pos = new_item_panel->getTouchEndPosition();
+                alert->setPosition(start_pos);
 
-                    //animate
-                    Vec2 start_pos = new_item_panel->getTouchEndPosition();
-                    alert->setPosition(start_pos);
+                alert->setScale(0);
 
-                    alert->setScale(0);
+                float duration = 0.25f;
+                auto scale = EaseOut::create(ScaleTo::create(duration, 1.0f, 1.0f), 1.5f);
 
-                    float duration = 0.25f;
-                    auto scale = EaseOut::create(ScaleTo::create(duration, 1.0f, 1.0f), 1.5f);
+                Vec2 end_pos = get_center_pos();
+                auto move = MoveTo::create(duration, end_pos);
 
-                    Vec2 end_pos = get_center_pos();
-                    auto move = MoveTo::create(duration, end_pos);
-
-                    Sequence* seq = Sequence::create(EaseBackOut::create(Spawn::createWithTwoActions(move, scale)), NULL);
-                    alert->runAction(seq);
-
-                    do_vibrate(10);
-                };
+                Sequence* seq = Sequence::create(EaseBackOut::create(Spawn::createWithTwoActions(move, scale)), NULL);
+                alert->runAction(seq);
             };
-            new_item_panel->addTouchEventListener(on_touch_cb);
+            bind_touch_ended(new_item_panel, on_touch_cb);
 
             auto type_str = Ingredient::type_to_string(ing_type);
             item_name_lbl->setString(type_str);
@@ -1258,91 +1253,84 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         prep_button(sell_btn);
         sell_btn->getTitleRenderer()->enableOutline({ 0x0a, 0x0a, 0x0a, 255 }, 3);
 
-        sell_btn->addTouchEventListener([this, alert_panel, sell_btn, ing_type, coins_gained_per, amount_sold, percent_sold](cocos2d::Ref* touch, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
+        auto manual_sell = [this, alert_panel, sell_btn, ing_type, coins_gained_per, amount_sold, percent_sold](){
+            mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
+
+            res_count_t _def = 0;
+            auto it = ing_type;
+            res_count_t num_sellable = map_get(city_ingredients, it, _def);
+
+            if (num_sellable >= 1)
             {
-                mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
+                res_count_t USE_ABSOLUTE = -1;
 
-                res_count_t _def = 0;
-                auto it = ing_type;
-                res_count_t num_sellable = map_get(city_ingredients, it, _def);
-
-                if (num_sellable >= 1)
+                res_count_t num_to_sell;
+                if (amount_sold != USE_ABSOLUTE) //if amount sold is not -1, use absolute values instead
                 {
-                    res_count_t USE_ABSOLUTE = -1;
-
-                    res_count_t num_to_sell;
-                    if (amount_sold != USE_ABSOLUTE) //if amount sold is not -1, use absolute values instead
-                    {
-                        num_to_sell = std::min(num_sellable, amount_sold);
-                    }
-                    else
-                    {
-                        num_to_sell = std::min(num_sellable, num_sellable*percent_sold);
-                    }
-
-                    //make sure enough coin space for sale, otherwise limit num_to_sell until
-                    // it's below the space left
-                    res_count_t coin_storage_left = BEATUP->get_coin_storage_left();
-                    res_count_t actual_value = num_to_sell * coins_gained_per;
-                    while (actual_value > coin_storage_left && num_to_sell > 0.0)
-                    {
-                        num_to_sell--;
-                        num_to_sell = std::max(0.0L, num_to_sell);
-                        actual_value = num_to_sell * coins_gained_per;
-                    };
-
-                    BEATUP->add_total_coin(actual_value);
-
-                    BUILDUP->remove_shared_ingredients_from_all(ing_type, num_to_sell);
-
-                    Vec2 pos = sell_btn->getTouchEndPosition();
-                    cocos2d::Vec2 floating_start_pos = sell_btn->getParent()->convertToNodeSpace(pos);
-
-                    Color3B text_color;
-                    std::stringstream ss;
-
-                    if (actual_value != 0)
-                    {
-                        text_color = Color3B::GREEN;
-                        ss << "+$" << beautify_double(actual_value);
-                    }
-                    else
-                    {
-                        text_color = Color3B::RED;
-                        ss << "Max coins stored\nIncrease coin storage\n (The Marketplace)";
-                    }
-
-                    std::string message = ss.str();
-
-                    auto floating_label = FloatingLabel::createWithTTF(message, DEFAULT_FONT, 30);
-                    floating_label->setTextColor(Color4B(text_color));
-
-                    pos.x += cocos2d::rand_minus1_1()*20.0f;
-                    pos.y += cocos2d::rand_minus1_1()*20.0f;
-
-#ifdef __ANDROID__
-                    pos.y += 75.0f; //dont get hidden by finger
-#endif
-
-                    floating_label->setPosition(floating_start_pos);
-                    floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
-                    floating_label->do_float();
-
-                    sell_btn->getParent()->addChild(floating_label);
-
-                    auto player_gold_lbl = this->getChildByName("player_info_panel")->getChildByName("player_gold_lbl");
-                    animate_flash_action(player_gold_lbl, 0.1f, 1.2f, 1.0f, text_color);
-
-                    do_vibrate(10);
+                    num_to_sell = std::min(num_sellable, amount_sold);
                 }
                 else
                 {
-                    //smaller vibrate if you can't sell any
-                    do_vibrate(5);
+                    num_to_sell = std::min(num_sellable, num_sellable*percent_sold);
+                }
+
+                //make sure enough coin space for sale, otherwise limit num_to_sell until
+                // it's below the space left
+                res_count_t coin_storage_left = BEATUP->get_coin_storage_left();
+                res_count_t actual_value = num_to_sell * coins_gained_per;
+                while (actual_value > coin_storage_left && num_to_sell > 0.0)
+                {
+                    num_to_sell--;
+                    num_to_sell = std::max(0.0L, num_to_sell);
+                    actual_value = num_to_sell * coins_gained_per;
                 };
+
+                BEATUP->add_total_coin(actual_value);
+
+                BUILDUP->remove_shared_ingredients_from_all(ing_type, num_to_sell);
+
+                Vec2 pos = sell_btn->getTouchEndPosition();
+                cocos2d::Vec2 floating_start_pos = sell_btn->getParent()->convertToNodeSpace(pos);
+
+                Color3B text_color;
+                std::stringstream ss;
+
+                if (actual_value != 0)
+                {
+                    text_color = Color3B::GREEN;
+                    ss << "+$" << beautify_double(actual_value);
+                }
+                else
+                {
+                    text_color = Color3B::RED;
+                    ss << "Max coins stored\nIncrease coin storage\n (The Marketplace)";
+                }
+
+                std::string message = ss.str();
+
+                auto floating_label = FloatingLabel::createWithTTF(message, DEFAULT_FONT, 30);
+                floating_label->setTextColor(Color4B(text_color));
+
+                pos.x += cocos2d::rand_minus1_1()*20.0f;
+                pos.y += cocos2d::rand_minus1_1()*20.0f;
+
+#ifdef __ANDROID__
+                pos.y += 75.0f; //dont get hidden by finger
+#endif
+
+                floating_label->setPosition(floating_start_pos);
+                floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+                floating_label->do_float();
+
+                sell_btn->getParent()->addChild(floating_label);
+
+                auto player_gold_lbl = this->getChildByName("player_info_panel")->getChildByName("player_gold_lbl");
+                animate_flash_action(player_gold_lbl, 0.1f, 1.2f, 1.0f, text_color);
+
+                do_vibrate(10);
             }
-        });
+        };
+        bind_touch_ended(sell_btn, manual_sell);
 
         sell_btn->schedule([sell_btn, this, ing_type, amount_sold](float){
             mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
