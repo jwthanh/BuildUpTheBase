@@ -7,6 +7,7 @@
 #include "ui/UIWidget.h"
 
 #include "utilities/vibration.h"
+#include "SoundEngine.h"
 
 float sx (float x, bool do_scale)
 {
@@ -291,6 +292,7 @@ void bind_touch_ended(cocos2d::ui::Widget* widget, std::function<void(void)> cal
         {
             do_vibrate(5);
             callback();
+            SoundEngine::play_sound("sounds/hurt2_quiet.ogg");
         }
     };
     widget->addTouchEventListener(touch_handler);
