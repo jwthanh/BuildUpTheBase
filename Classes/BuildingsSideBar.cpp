@@ -573,7 +573,7 @@ void SideListView::setup_detail_listview_as_recipes()
             };
             if (building->name == "The Graveyard")
             {
-                spRecipe blood_oath = std::make_shared<Recipe>("Raise Dead", "One soul, 6 flesh, 9 blood.");
+                spRecipe blood_oath = std::make_shared<Recipe>("Raise Dead", "Scavenges at The Dump\n-- 1 soul, 6 flesh, 9 blood");
                 blood_oath->components = mistIngredient({
                     { Ingredient::SubType::Soul, 1 },
                     { Ingredient::SubType::Flesh, 6 },
