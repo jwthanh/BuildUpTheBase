@@ -190,16 +190,12 @@ void NuItem::update_func(float dt)
 
 void NuItem::set_touch_ended_callback(std::function<void(void)> callback)
 {
-    this->button->addTouchEventListener([this, callback](Ref* sender, ui::Widget::TouchEventType type)
+    auto wrapped_callback = [callback, this]()
     {
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            callback();
-
-            do_vibrate(10); //vibrate for two frames
-            this->button->runAction(FShake::actionWithDuration(0.1f, 5.0f));
-        }
-    });
+        callback();
+        this->button->runAction(FShake::actionWithDuration(0.1f, 5.0f));
+    };
+    bind_touch_ended(this->button, wrapped_callback);
 
 };
 
@@ -1354,20 +1350,9 @@ void NuMenu::create_back_item(cocos2d::Node* parent)
 {
 
     auto back_btn = ui::Button::create();
-    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            auto director = Director::getInstance();
-            director->popScene();
-        }
-    });
-    load_default_button_textures(back_btn);
+    prep_back_button(back_btn);
+
     back_btn->setPosition(Vec2(90, 540));
-    back_btn->ignoreContentAdaptWithSize(false);
-    back_btn->setContentSize(Size(150, 60));
-    back_btn->setTitleText("Back");
-    back_btn->setTitleFontSize(24);
-    back_btn->setTitleColor(Color3B::BLACK);
 
     this->addChild(back_btn);
 

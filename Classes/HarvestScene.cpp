@@ -267,18 +267,15 @@ void BaseScene::create_goal_loadingbar()
     this->upgrade_lbl->setString("");
     set_aliasing(this->upgrade_lbl, true);
 
-    progress_panel->addTouchEventListener([this](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType evt)
-    {
-        if (evt == ui::Widget::TouchEventType::ENDED)
-        {
+    auto progress_callback = [this]() {
             float coin_goal = scale_number(10.0f, (float)BUILDUP->get_target_building()->building_level, 10.5f);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             if (percentage >= 100.0f) {
                 this->sidebar->toggle_buttons(this->sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
             }
-        }
+    };
+    bind_touch_ended(progress_panel, progress_callback);
 
-    });
 
     auto update_loading_bar = [this, loading_bar](float dt)
         {
@@ -450,14 +447,10 @@ void BaseScene::create_building_choicelist()
         building_node->schedule(update_func, AVERAGE_DELAY, "update_func");
         update_func(0);
 
-        auto touch_handler = [panel, building](Ref*, ui::Widget::TouchEventType evt)
-        {
-            if (evt == ui::Widget::TouchEventType::ENDED)
-            {
-                BUILDUP->set_target_building(building);
-            }
+        auto set_target_building = [building]() {
+            BUILDUP->set_target_building(building);
         };
-        panel->addTouchEventListener(touch_handler);
+        bind_touch_ended(panel, set_target_building);
     };
 
     /// Build city button separately from the rest of the buildings
@@ -508,16 +501,8 @@ void BaseScene::create_building_choicelist()
     city_node->schedule(update_func, AVERAGE_DELAY, "update_func");
     update_func(0);
 
-    auto touch_handler = [panel](Ref*, ui::Widget::TouchEventType evt)
-    {
-        if (evt == ui::Widget::TouchEventType::ENDED)
-        {
-            CCLOG("CITY BUTTON TOUCHED");
-            GameDirector::switch_to_city_menu();
-            do_vibrate(5);
-        }
-    };
-    panel->addTouchEventListener(touch_handler);
+    auto touch_handler = [](){ GameDirector::switch_to_city_menu(); };
+    bind_touch_ended(panel, touch_handler);
 };
 
 void BaseScene::create_popup_panel()
@@ -790,28 +775,26 @@ void BaseScene::create_player_info_panel()
     ui::Text* player_info_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_info_lbl"));
     set_aliasing(player_info_lbl, true);
 
-    player_info_panel->addTouchEventListener([player_info_panel, this](Ref* target, ui::Widget::TouchEventType type)
+    auto manual_heal = [player_info_panel, this]()
     {
-        if (type == ui::Widget::TouchEventType::ENDED)
+        auto gold = BEATUP->get_total_coins();
+        int heal_cost = 10;
+        if (gold > heal_cost)
         {
-            auto gold = BEATUP->get_total_coins();
-            int heal_cost = 10;
-            if (gold > heal_cost)
+            auto health = BUILDUP->fighter->attrs->health;
+            if (health->is_full() == false)
             {
-                auto health = BUILDUP->fighter->attrs->health;
-                if (health->is_full() == false)
-                {
-                    health->add_to_current_val(5);
-                    BEATUP->add_total_coin(-heal_cost);
-                }
-            }
-            else
-            {
-                auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
-                player_gold_lbl->runAction(FShake::actionWithDuration(0.05f, 10));
+                health->add_to_current_val(5);
+                BEATUP->add_total_coin(-heal_cost);
             }
         }
-    });
+        else
+        {
+            auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
+            player_gold_lbl->runAction(FShake::actionWithDuration(0.05f, 10));
+        }
+    };
+    bind_touch_ended(player_info_panel, manual_heal);
 
     auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
     set_aliasing(player_gold_lbl, true);
