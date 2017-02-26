@@ -824,7 +824,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     {
                         "Boost ouput",
                         "",
-                        ""
+                        "ingredients/paper.png"
                     }});
 
                 spTechnology update_wallet_cap = std::make_shared<Technology>(Technology::SubType::RaiseWalletCap);
