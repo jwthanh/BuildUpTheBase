@@ -545,14 +545,11 @@ void GameDirector::switch_to_city_menu()
 
     auto header = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
     header->setTouchEnabled(true);
-    header->addTouchEventListener([](Ref* ref, ui::Widget::TouchEventType type)
-    {
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
+    auto toggle_display_stats = [](){
             auto director = Director::getInstance();
             director->setDisplayStats(!director->isDisplayStats());
-        }
-    });
+    };
+    bind_touch_ended(header, toggle_display_stats);
 
     auto scene = cocos2d::Scene::create();
     scene->setName("city_wrapper_scene");
@@ -740,28 +737,26 @@ void GameDirector::switch_to_miner_menu()
             nav_button->addChild(arrow_sprite);
             nav_button->setTitleText(" "); //hide text
 
-            nav_button->addTouchEventListener([miner, move_active_func, rails_count_lbl, info_panel](Ref* sender, ui::Widget::TouchEventType type)
+            auto lay_rails = [miner, move_active_func, rails_count_lbl, info_panel]()
             {
-                if (type == ui::Widget::TouchEventType::ENDED)
+                //if there's at least 1 rail, build a rail and then remove it
+                res_count_t num_rails = BUILDUP->count_ingredients(Ingredient::SubType::MineRails);
+                if (num_rails > 0)
                 {
-                    //if there's at least 1 rail, build a rail and then remove it
-                    res_count_t num_rails = BUILDUP->count_ingredients(Ingredient::SubType::MineRails);
-                    if (num_rails > 0)
-                    {
-                        move_active_func();
-                        BUILDUP->remove_shared_ingredients_from_all(Ingredient::SubType::MineRails, 1);
-                        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
-                        serializer.serialize();
-                    }
-                    else
-                    {
-                        CCLOG("need more rails");
-                        animate_flash_action(rails_count_lbl, 0.1f, 1.5f);
-                        auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
-                        info_panel->runAction(shake);
-                    }
-                };
-            });
+                    move_active_func();
+                    BUILDUP->remove_shared_ingredients_from_all(Ingredient::SubType::MineRails, 1);
+                    MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
+                    serializer.serialize();
+                }
+                else
+                {
+                    CCLOG("need more rails");
+                    animate_flash_action(rails_count_lbl, 0.1f, 1.5f);
+                    auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
+                    info_panel->runAction(shake);
+                }
+            };
+            bind_touch_ended(nav_button, lay_rails);
 
             auto update_nav_button = [nav_button, button_name, miner, tile_offset](float dt){
                 if (!nav_button->isHighlighted()) //if its highlighted it means its being pressed
@@ -810,15 +805,6 @@ void GameDirector::switch_to_miner_menu()
     update_depth_display_cb(0);
     depth_display->schedule(update_depth_display_cb, AVERAGE_DELAY, "update_depth_display_cb");
 
-    info_panel->addTouchEventListener([miner](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED) {
-                CCLOG("touched info");
-                MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
-                serializer.load();
-                CCLOG("done loading");
-            };
-    });
-
     auto scene = cocos2d::Scene::create();
     scene->setName("city_wrapper_scene");
     scene->addChild(miner_scene);
@@ -830,26 +816,19 @@ void GameDirector::switch_to_miner_menu()
     //set_aliasing(title_lbl);
 
     auto back_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("back_btn"));
-    Label* button_lbl = back_btn->getTitleRenderer();
-    button_lbl->setTextColor(Color4B::WHITE);
-    button_lbl->enableOutline(Color4B::BLACK, 2);
+    prep_button(back_btn); //dont prep_back_button because custom callback
 
-    back_btn->addTouchEventListener([miner](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
-            serializer.serialize();
-            auto director = Director::getInstance();
-            director->popScene();
-            do_vibrate(5);
-        }
-    });
-    load_default_button_textures(back_btn);
+    auto save_and_pop = [miner](){
+        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
+        serializer.serialize();
+
+        auto director = Director::getInstance();
+        director->popScene();
+    };
+    bind_touch_ended(back_btn, save_and_pop);
 
     auto explode_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("explode_btn"));
-    Label* explode_button_lbl = explode_btn->getTitleRenderer();
-    explode_button_lbl->setTextColor(Color4B::WHITE);
-    explode_button_lbl->enableOutline(Color4B::BLACK, 2);
+    prep_button(explode_btn);
 
 	auto button_highlight_particle = MagicEmitter::create("Square");
 	button_highlight_particle->setPosition(explode_btn->getPosition());
@@ -857,18 +836,14 @@ void GameDirector::switch_to_miner_menu()
 	emitter->SetScale(0.5f);
 	miner_scene->addChild(button_highlight_particle);
 
-    explode_btn->addTouchEventListener([miner](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
-            serializer.serialize();
+    auto open_altar = [miner](){
+        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
+        serializer.serialize();
 
-            GameDirector::switch_to_item_altar_menu();
-            miner->reset(); //TODO reenable this after testing
-            do_vibrate(5);
-        }
-    });
-    load_default_button_textures(explode_btn);
+        GameDirector::switch_to_item_altar_menu();
+        miner->reset(); //TODO reenable this after testing
+    };
+    bind_touch_ended(explode_btn, open_altar);
 
 	auto check_tiles_cb = [explode_btn, miner, emitter](float dt){
 		bool rail_connected = miner->rails_connect_a_resource();
@@ -888,19 +863,15 @@ void GameDirector::switch_to_miner_menu()
     explode_btn->schedule(check_tiles_cb, AVERAGE_DELAY, "check_tiles_cb");
 
     auto dig_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("dig_btn"));
-    Label* dig_button_lbl = dig_btn->getTitleRenderer();
-    dig_button_lbl->setTextColor(Color4B::WHITE);
-    dig_button_lbl->enableOutline(Color4B::BLACK, 2);
+    prep_button(dig_btn);
 
-    dig_btn->addTouchEventListener([miner, cart_count_lbl, info_panel](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
+    auto go_deeper = [miner, cart_count_lbl, info_panel](){
             res_count_t num_carts = BUILDUP->count_ingredients(Ingredient::SubType::Minecart);
             if (num_carts > 0)
             {
                 BUILDUP->remove_shared_ingredients_from_all(Ingredient::SubType::Minecart, 1);
                 miner->reset();
-                do_vibrate(5);
+                do_vibrate(10);
 
                 MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
                 serializer.serialize();
@@ -912,9 +883,8 @@ void GameDirector::switch_to_miner_menu()
                 auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
                 info_panel->runAction(shake);
             }
-        }
-    });
-    load_default_button_textures(dig_btn);
+    };
+    bind_touch_ended(dig_btn, go_deeper);
 
     auto check_carts_cb = [dig_btn, cart_count_lbl, miner](float dt){
         res_count_t num_carts = BUILDUP->count_ingredients(Ingredient::SubType::Minecart);
@@ -1090,13 +1060,11 @@ void GameDirector::switch_to_reset_menu()
         //reset size to width of container
         nuitem->button->setContentSize({ reset_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
 
-        nuitem->button->addTouchEventListener([config](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
-            {
+        auto do_reset = [config](){
                 do_vibrate(5);
                 config.reset_callback();
-            }
-        });
+        };
+        bind_touch_ended(nuitem->button, do_reset);
     }
 
     auto director = cocos2d::Director::getInstance();
@@ -1164,12 +1132,6 @@ void GameDirector::switch_to_achievement_menu()
             nuitem->set_image("trophy1.png", ui::Widget::TextureResType::PLIST);
         };
 
-        nuitem->button->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
-            {
-                do_vibrate(5);
-            }
-        });
     }
 
     auto director = cocos2d::Director::getInstance();
