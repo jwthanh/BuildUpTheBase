@@ -620,22 +620,19 @@ void GameDirector::switch_to_city_menu()
     //appeasement panel
     auto appeasement_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("appeasement_panel"));
     auto appeasement_button = dynamic_cast<ui::Button*>(appeasement_panel->getChildByName("appeasement_button"));
-    appeasement_button->addTouchEventListener([](Ref*, ui::Widget::TouchEventType evt)
+    auto add_appeasements_cb = []()
     {
-        if (evt == ui::Widget::TouchEventType::ENDED)
+        mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
+        res_count_t _def = 0;
+        IngredientSubType ing_type = IngredientSubType::Soul;
+        res_count_t appease_count = 1.0;
+        if (map_get(city_ingredients, ing_type, _def) >= appease_count)
         {
-            do_vibrate(5);
-            mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
-            res_count_t _def = 0;
-            IngredientSubType ing_type = IngredientSubType::Soul;
-            res_count_t appease_count = 1.0;
-            if (map_get(city_ingredients, ing_type, _def) >= appease_count)
-            {
-                 GameLogic::getInstance()->add_appeasements(appease_count);
-                 BUILDUP->remove_shared_ingredients_from_all(ing_type, appease_count);
-            }
+            GameLogic::getInstance()->add_appeasements(appease_count);
+            BUILDUP->remove_shared_ingredients_from_all(ing_type, appease_count);
         }
-    });
+    };
+    bind_touch_ended(appeasement_button, add_appeasements_cb);
     auto appeasement_btn_update = [appeasement_button](float dt) {
         mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
         res_count_t _def = 0;
@@ -666,61 +663,19 @@ void GameDirector::switch_to_city_menu()
 
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
-    Label* button_lbl = back_btn->getTitleRenderer();
-    button_lbl->setTextColor(Color4B::WHITE);
-    button_lbl->enableOutline(Color4B::BLACK, 2);
-
-    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            auto director = Director::getInstance();
-            director->popScene();
-            do_vibrate(5);
-        }
-    });
-    load_default_button_textures(back_btn);
+    prep_back_button(back_btn);
 
     auto items_scene_btn = dynamic_cast<ui::Button*>(panel->getChildByName("items_scene_btn"));
-    Label* items_scene_lbl = items_scene_btn->getTitleRenderer();
-    items_scene_lbl->setTextColor(Color4B::WHITE);
-    items_scene_lbl->enableOutline(Color4B::BLACK, 2);
-
-    items_scene_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(5);
-            GameDirector::switch_to_items_menu();
-        }
-    });
-    load_default_button_textures(items_scene_btn);
+    prep_button(items_scene_btn);
+    bind_touch_ended(items_scene_btn, [](){GameDirector::switch_to_items_menu();});
 
     auto miner_scene_btn = dynamic_cast<ui::Button*>(panel->getChildByName("miner_scene_btn"));
-    Label* miner_scene_lbl = miner_scene_btn->getTitleRenderer();
-    miner_scene_lbl->setTextColor(Color4B::WHITE);
-    miner_scene_lbl->enableOutline(Color4B::BLACK, 2);
-
-    miner_scene_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(5);
-            GameDirector::switch_to_miner_menu();
-        }
-    });
-    load_default_button_textures(miner_scene_btn);
+    prep_button(miner_scene_btn);
+    bind_touch_ended(miner_scene_btn, [](){GameDirector::switch_to_miner_menu();});
 
     auto item_equip_scene_btn = dynamic_cast<ui::Button*>(panel->getChildByName("item_equip_scene_btn"));
-    Label* item_equip_btn_lbl = item_equip_scene_btn->getTitleRenderer();
-    item_equip_btn_lbl->setTextColor(Color4B::WHITE);
-    item_equip_btn_lbl->enableOutline(Color4B::BLACK, 2);
-
-    item_equip_scene_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(5);
-            GameDirector::switch_to_equipment_menu();
-        }
-    });
-    load_default_button_textures(item_equip_scene_btn);
+    prep_button(item_equip_scene_btn);
+    bind_touch_ended(item_equip_scene_btn, [](){GameDirector::switch_to_equipment_menu();});
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
