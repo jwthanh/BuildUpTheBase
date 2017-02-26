@@ -58,41 +58,38 @@ void ItemScene::init_callbacks()
         this->item_desc->setString(item->description);
 
         this->item_sell_btn->setVisible(true);
-        this->item_sell_btn->addTouchEventListener([this, nuitem, item](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
+        auto sell_item_and_reset = [this, nuitem, item](){
+            this->items_listview->removeChild(nuitem->button);
+            this->items_listview->removeChild(nuitem);
+
+            //remove from items list
+            BUILDUP->items.erase(
+                std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item),
+                BUILDUP->items.end()
+            );
+
+            //TODO clear equipment slots nicely, this is ugly
+            auto& equipment = GameLogic::getInstance()->equipment;
+
+            if (equipment->combat_slot->get_item() == item)
             {
-                this->items_listview->removeChild(nuitem->button);
-                this->items_listview->removeChild(nuitem);
-
-                //remove from items list
-                BUILDUP->items.erase(
-                    std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item),
-                    BUILDUP->items.end()
-                );
-
-                //TODO clear equipment slots nicely, this is ugly
-                auto& equipment = GameLogic::getInstance()->equipment;
-
-                if (equipment->combat_slot->get_item() == item)
-                {
-                    equipment->combat_slot->set_item(NULL);
-                }
-                else if (equipment->mining_slot->get_item() == item)
-                {
-                    equipment->mining_slot->set_item(NULL);
-                }
-                else if (equipment->recipe_slot->get_item() == item)
-                {
-                    equipment->recipe_slot->set_item(NULL);
-                }
-
-
-                BEATUP->add_total_coin(item->get_effective_cost());
-
-                this->reset_detail_panel();
-                do_vibrate(5);
+                equipment->combat_slot->set_item(NULL);
             }
-        });
+            else if (equipment->mining_slot->get_item() == item)
+            {
+                equipment->mining_slot->set_item(NULL);
+            }
+            else if (equipment->recipe_slot->get_item() == item)
+            {
+                equipment->recipe_slot->set_item(NULL);
+            }
+
+
+            BEATUP->add_total_coin(item->get_effective_cost());
+
+            this->reset_detail_panel();
+        };
+        bind_touch_ended(this->item_sell_btn, sell_item_and_reset);
 
         //update listviews layout to account for different content height
         this->item_listview_description->requestDoLayout();
@@ -109,13 +106,10 @@ void ItemScene::init_callbacks()
         std::string cost_str = beautify_double(cost);
         nuitem->set_cost_lbl(cost_str);
 
-        nuitem->button->addTouchEventListener([item, nuitem, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
-            {
-                do_vibrate(5);
-                update_detail_panel_on_touch(nuitem, item);
-            }
-        });
+        auto update_panel = [update_detail_panel_on_touch, item, nuitem](){
+            update_detail_panel_on_touch(nuitem, item);
+        };
+        bind_touch_ended(nuitem->button, update_panel);
     };
 
 };
@@ -193,19 +187,7 @@ void ItemScene::init_back_btn(cocos2d::Node* panel)
 {
     //back button
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
-    Label* button_lbl = back_btn->getTitleRenderer();
-    button_lbl->setTextColor(Color4B::WHITE);
-    button_lbl->enableOutline(Color4B::BLACK, 2);
-
-    back_btn->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(5);
-            auto director = Director::getInstance();
-            director->popScene();
-        }
-    });
-    load_default_button_textures(back_btn);
+    prep_back_button(back_btn);
 };
 
 cocos2d::ui::Button* ItemScene::init_sell_btn(cocos2d::Node* item_detail_panel)
@@ -293,19 +275,16 @@ void AltarItemScene::init_callbacks()
         this->item_desc->setString(item->description);
 
         this->item_sell_btn->setVisible(true);
-        this->item_sell_btn->addTouchEventListener([item](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
-            {
-                item->level += 3;
+        auto upgrade_and_pop = [item](){
+            item->level += 3;
 
-                auto achievement_manager = AchievementManager::getInstance();
-                std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItemsPlaced);
-                achievement->increment();
+            auto achievement_manager = AchievementManager::getInstance();
+            std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItemsPlaced);
+            achievement->increment();
 
-                cocos2d::Director::getInstance()->popScene();
-                do_vibrate(5);
-            }
-        });
+            cocos2d::Director::getInstance()->popScene();
+        };
+        bind_touch_ended(nuitem->button, upgrade_and_pop);
 
         //update listviews layout to account for different content height
         this->item_listview_description->requestDoLayout();
@@ -322,13 +301,10 @@ void AltarItemScene::init_callbacks()
         std::string cost_str = beautify_double(cost);
         nuitem->set_cost_lbl(cost_str);
 
-        nuitem->button->addTouchEventListener([item, nuitem, update_detail_panel_on_touch](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
-            {
-                do_vibrate(5);
-                update_detail_panel_on_touch(nuitem, item);
-            }
-        });
+        auto update_panel = [item, nuitem, update_detail_panel_on_touch](){
+            update_detail_panel_on_touch(nuitem, item);
+        };
+        bind_touch_ended(nuitem->button, update_panel);
     };
 
     this->init_back_btn(panel);
@@ -457,14 +433,13 @@ void EquipItemScene::init_callbacks()
         this->item_desc->setString(item->description);
 
         this->item_sell_btn->setVisible(true);
-        this->item_sell_btn->addTouchEventListener([this, item](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
-            {
-                do_vibrate(5);
-                GameLogic::getInstance()->equipment->get_slot_by_type(this->filtered_slot_type)->set_item(item);
+        auto equip_and_pop = [this, item](){
+                GameLogic::getInstance()->equipment->get_slot_by_type(
+                        this->filtered_slot_type
+                )->set_item(item);
                 cocos2d::Director::getInstance()->popScene();
-            }
-        });
+        };
+        bind_touch_ended(this->item_sell_btn, equip_and_pop);
 
         //update listviews layout to account for different content height
         this->item_listview_description->requestDoLayout();
@@ -482,13 +457,10 @@ void EquipItemScene::init_callbacks()
         CCLOG("cost %f, beauty cost %s", cost, cost_str.c_str());
         nuitem->set_cost_lbl(cost_str);
 
-        nuitem->button->addTouchEventListener([update_detail_panel_on_touch, item, nuitem](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
-            {
-                do_vibrate(5);
-                update_detail_panel_on_touch(nuitem, item);
-            }
-        });
+        auto update_panel = [update_detail_panel_on_touch, item, nuitem](){
+            update_detail_panel_on_touch(nuitem, item);
+        };
+        bind_touch_ended(nuitem->button, update_panel);
     };
 };
 
@@ -565,10 +537,7 @@ void ScrapItemScene::init_callbacks()
         this->item_desc->setString(item->description);
 
         this->item_sell_btn->setVisible(true);
-        this->item_sell_btn->addTouchEventListener([this, nuitem, item](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
-            {
-                do_vibrate(5);
+        auto scrap_item = [this, nuitem, item](){
                 CCLOG("scrapped item!");
 
                 this->items_listview->removeChild(nuitem->button);
@@ -600,9 +569,8 @@ void ScrapItemScene::init_callbacks()
 
 
                 this->reset_detail_panel();
-                do_vibrate(5);
-            }
-        });
+        };
+        bind_touch_ended(this->item_sell_btn, scrap_item);
 
         //update listviews layout to account for different content height
         this->item_listview_description->requestDoLayout();
@@ -620,13 +588,10 @@ void ScrapItemScene::init_callbacks()
         std::string cost_str = beautify_double(cost);
         nuitem->set_cost_lbl(cost_str);
 
-        nuitem->button->addTouchEventListener([update_detail_panel_on_touch, item, nuitem](Ref* sender, ui::Widget::TouchEventType type){
-            if (type == ui::Widget::TouchEventType::ENDED)
-            {
-                do_vibrate(5);
-                update_detail_panel_on_touch(nuitem, item);
-            }
-        });
+        auto update_panel = [item, nuitem, update_detail_panel_on_touch](){
+            update_detail_panel_on_touch(nuitem, item);
+        };
+        bind_touch_ended(nuitem->button, update_panel);
     };
 
     //update the city investment label
