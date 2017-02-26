@@ -629,7 +629,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     crit_chance,
                     DetailType::Tech,
                     {
-                        "Coat sword in oil",
+                        "Oil coating",
                         "",
                         "menu_icons/crit_chance.png"
                     }});
