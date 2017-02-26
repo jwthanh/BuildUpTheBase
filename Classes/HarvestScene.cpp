@@ -56,6 +56,8 @@
 #include "Tutorial.h"
 #include "2d/CCActionInstant.h"
 #include "utilities/vibration.h"
+#include "SoundEngine.h"
+#include "RandomWeightMap.h"
 
 USING_NS_CC;
 
@@ -178,6 +180,12 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
+
+        RandomWeightMap<std::string> sound_map;
+        sound_map.add_item("sounds/coin3.ogg", 50);
+        sound_map.add_item("sounds/coin4.ogg", 50);
+        sound_map.add_item("sounds/coin5.ogg", 50);
+        SoundEngine::play_sound(sound_map.get_item());
         // Tutorial* tutorial = Tutorial::getInstance();
         // tutorial->first_start(this);
 
@@ -186,8 +194,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
         // GameDirector::switch_to_equipment_menu();
         // GameDirector::switch_to_reset_menu();
-        GameDirector::switch_to_item_altar_menu();
+        //GameDirector::switch_to_item_altar_menu();
         // GameDirector::switch_to_scrap_item_menu();
+
 
         // TextBlobModal modal(this);
         // modal.set_title("Upgrade coin storage!");
@@ -196,30 +205,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // auto achievement_serializer = AchievementSerializer("alpha_achievements.json");
         // achievement_serializer.serialize();
 
-        auto popup_panel = GameLogic::get_popup_panel();
-        popup_panel->animate_open();
-        popup_panel->set_string("Achievement unlocked!");
-        popup_panel->set_image("trophy14.png", true);
-
-        // cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-        // float duration = 0.25f;
-        // auto popup_panel = GameLogic::get_popup_panel();
-        // for (float x = 0; x < visibleSize.width; x+=50){
-        //     auto parts = cocos2d::ParticleFlower::create();
-        //     parts->setTotalParticles(1000);
-        //     parts->setLife(0.5f);
-        //     parts->setPosition({ x, 100});
-        //     parts->setAutoRemoveOnFinish(true);
-        //     parts->setDuration(duration);
-        //     popup_panel->play_particle(parts);
-        // };
-        // popup_panel->animate_open();
-        // popup_panel->set_string("Achievement unlocked: +this->get_name()+!");
-        // popup_panel->set_image("medal2.png", true);
-
-
-        //     auto move_to = MoveTo::create(duration, { 900, 600 });
-        //     parts->runAction(move_to);
     }
 }
 

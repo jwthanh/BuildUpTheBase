@@ -13,6 +13,7 @@
 #include "2d/CCSprite.h"
 #include "2d/CCParticleExamples.h"
 #include "goals/Achievement.h"
+#include "SoundEngine.h"
 
 
 enum class Directions {
@@ -88,8 +89,9 @@ Miner::Miner(cocos2d::Node* parent)
 
 void Miner::animate_falling_tiles()
 {
-    ///randomly pick a starting position in the map
+    SoundEngine::play_sound("sounds/explosion2.ogg");
 
+    ///randomly pick a starting position in the map
     cocos2d::Size layer_size = this->active_layer->getLayerSize();
     cocos2d::Vec2 start_pos = { -1, -1 };
     tile_gid_t num_tiles = static_cast<tile_gid_t>(layer_size.width * layer_size.height);
