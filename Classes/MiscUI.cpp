@@ -236,13 +236,5 @@ void prep_button(ui::Button* button)
 void prep_back_button(ui::Button* back_button)
 {
     prep_button(back_button);
-
-    back_button->addTouchEventListener([](Ref* touch, ui::Widget::TouchEventType type){
-        if (type == ui::Widget::TouchEventType::ENDED)
-        {
-            do_vibrate(5);
-            auto director = Director::getInstance();
-            director->popScene();
-        }
-    });
+    bind_touch_ended(back_button, [](){ Director::getInstance()->popScene();});
 }
