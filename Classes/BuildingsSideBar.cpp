@@ -151,7 +151,7 @@ SideListView::SideListView(Node* parent, spBuilding current_target)
     };
 
     //prepress the shop button
-    toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
+    this->toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
 };
 
 ui::Button* SideListView::_create_button(std::string node_name)
@@ -174,6 +174,7 @@ ui::Button* SideListView::_create_button(std::string node_name)
 void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 {
     if (evt == ui::Widget::TouchEventType::ENDED) {
+
         this->tab_shop_btn->setEnabled(true);
         this->tab_detail_btn->setEnabled(true);
         this->tab_building_btn->setEnabled(true);
@@ -255,16 +256,16 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 void SideListView::setup_tab_buttons()
 {
     this->tab_shop_btn = this->_create_button("tab_1_btn");
-    this->tab_shop_btn->addTouchEventListener(CC_CALLBACK_2(SideListView::toggle_buttons, this));
+    bind_touch_ended(this->tab_shop_btn, [this](){ this->toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED); });
 
     this->tab_detail_btn = this->_create_button("tab_2_btn");
-    this->tab_detail_btn->addTouchEventListener(CC_CALLBACK_2(SideListView::toggle_buttons, this));
+    bind_touch_ended(this->tab_detail_btn, [this](){ this->toggle_buttons(this->tab_detail_btn, ui::Widget::TouchEventType::ENDED); });
 
     this->tab_building_btn = this->_create_button("tab_3_btn");
-    this->tab_building_btn->addTouchEventListener(CC_CALLBACK_2(SideListView::toggle_buttons, this));
+    bind_touch_ended(this->tab_building_btn, [this](){ this->toggle_buttons(this->tab_building_btn, ui::Widget::TouchEventType::ENDED); });
 
     this->tab_powers_btn = this->_create_button("tab_4_btn");
-    this->tab_powers_btn->addTouchEventListener(CC_CALLBACK_2(SideListView::toggle_buttons, this));
+    bind_touch_ended(this->tab_powers_btn, [this](){ this->toggle_buttons(this->tab_powers_btn, ui::Widget::TouchEventType::ENDED); });
 
 }
 
