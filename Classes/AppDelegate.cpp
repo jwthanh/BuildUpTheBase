@@ -235,17 +235,13 @@ void AppDelegate::preload_sprites()
 
 void AppDelegate::preload_sounds()
 {
-    #if CK_PLATFORM_ANDROID
-    CkConfig config(env, activity);
-    #else
-    CkConfig config;
-    #endif
-
-    CkInit(&config);
 #ifdef _WIN32
+    CkConfig config;
+    CkInit(&config);
     CCLOG("on windows, skipping audio preload");
 #else
-    CCLOG("no sounds to load anymore");
+    // CCLOG("no sounds to load anymore");
+    /// proj.android/jni/hellocpp/main.cpp is where ck is being initialized
 #endif
 
     SoundLibrary::getInstance()->fill_sound_cache();

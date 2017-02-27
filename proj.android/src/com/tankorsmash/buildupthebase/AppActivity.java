@@ -16,6 +16,8 @@ public class AppActivity extends Cocos2dxActivity {
         mainActivity = activity;
     }
 
+    private static native void initCricket(Context context);
+
     public static Cocos2dxActivity getMainActivity()
     {
         if(mainActivity == null)
@@ -30,6 +32,7 @@ public class AppActivity extends Cocos2dxActivity {
 	{
 		super.onCreate(savedInstanceState);
     	AppActivity.setMainActivity(this);
+        AppActivity.initCricket(this.getApplicationContext());
 	}
 
     public static void vibrate(int milliseconds)

@@ -7,6 +7,12 @@ LOCAL_SRC_FILES := libamagic.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := ck
+LOCAL_SRC_FILES := libck.a
+
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
 $(call import-add-path,$(LOCAL_PATH)/../../cocos2d)
 $(call import-add-path,$(LOCAL_PATH)/../../cocos2d/external)
 $(call import-add-path,$(LOCAL_PATH)/../../cocos2d/cocos)
@@ -18,6 +24,7 @@ LOCAL_MODULE := cocos2dcpp_shared
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
+                   hellocpp/CricketAndroidJni.cpp\
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/Beatup.cpp \
                    ../../Classes/NuMenu.cpp \
@@ -75,10 +82,11 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/magic_particles/opengl/mp_wrap.cpp \
                    ../../Classes/magic_particles/opengl/image_loader.cpp
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes $(LOCAL_PATH)/../../../_core $(LOCAL_PATH)/../../../opengl
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes $(LOCAL_PATH)/../../../_core $(LOCAL_PATH)/../../../opengl $(LOCAL_PATH)/../../Classes/cricket_audio/inc
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
 LOCAL_STATIC_LIBRARIES += magic
+LOCAL_STATIC_LIBRARIES += ck
 
 include $(BUILD_SHARED_LIBRARY)
 
