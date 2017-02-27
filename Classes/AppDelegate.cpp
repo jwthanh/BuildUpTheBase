@@ -10,6 +10,8 @@
 #include "Util.h"
 #include "SoundEngine.h"
 
+#include "ck/ck.h"
+#include "ck/config.h"
 USING_NS_CC;
 
 /* easy logging stuff*/
@@ -35,6 +37,8 @@ AppDelegate::~AppDelegate()
 
 	MP_Manager& MP=MP_Manager::GetInstance();
 	MP.Destroy();
+
+    CkShutdown();
 }
 
 void AppDelegate::initGLContextAttrs()
@@ -199,7 +203,7 @@ void AppDelegate::applicationWillEnterForeground() {
 void AppDelegate::preload_all()
 {
     this->preload_sprites();
-    // this->preload_sounds(); //TODO enable this once audio gets put in
+    this->preload_sounds(); //TODO enable this once audio gets put in
     this->preload_particles();
 };
 
@@ -231,12 +235,19 @@ void AppDelegate::preload_sprites()
 
 void AppDelegate::preload_sounds()
 {
+    #if CK_PLATFORM_ANDROID
+    CkConfig config(env, activity);
+    #else
+    CkConfig config;
+    #endif
 
+    CkInit(&config);
 #ifdef _WIN32
     CCLOG("on windows, skipping audio preload");
 #else
     CCLOG("no sounds to load anymore");
 #endif
+
 
 };
 

@@ -38,7 +38,7 @@
 #include <json/stringbuffer.h>
 #include <json/writer.h>
 #include "Item.h"
-
+#include <ck/ck.h>
 
 
 USING_NS_CC;
@@ -424,6 +424,8 @@ void Buildup::update(float dt)
 {
     this->city->update(dt);
     this->player->update(dt);
+
+    CkUpdate();
 
     this->server_clock.update(dt);
     if (this->server_clock.passed_threshold()){

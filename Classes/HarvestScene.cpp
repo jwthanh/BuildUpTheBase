@@ -33,6 +33,9 @@
 #include "magic_particles/mp_cocos.h"
 #include "magic_particles/MagicEmitter.h"
 
+#include "ck/ck.h"
+#include "ck/sound.h"
+
 #include "Recipe.h" //spRecipe is used in target_recipe
 #include "NodeBuilder.h"
 
@@ -58,6 +61,8 @@
 #include "utilities/vibration.h"
 #include "SoundEngine.h"
 #include "RandomWeightMap.h"
+#include "FileOperation.h"
+#include "CCFileUtils.h"
 
 USING_NS_CC;
 
@@ -181,13 +186,21 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
 
-        RandomWeightMap<std::string> sound_map;
-        sound_map.add_item("sounds/coin3.ogg", 50);
-        sound_map.add_item("sounds/coin4.ogg", 50);
-        sound_map.add_item("sounds/coin5.ogg", 50);
-        SoundEngine::play_sound(sound_map.get_item());
+        //RandomWeightMap<std::string> sound_map;
+        //sound_map.add_item("sounds/coin3.ogg", 50);
+        //sound_map.add_item("sounds/coin4.ogg", 50);
+        //sound_map.add_item("sounds/coin5.ogg", 50);
+        //SoundEngine::play_sound(sound_map.get_item());
         // Tutorial* tutorial = Tutorial::getInstance();
         // tutorial->first_start(this);
+
+        std::string sound_path = "sounds/secret3.ogg";
+        auto file_utils = cocos2d::FileUtils::getInstance();
+        //sound_path = file_utils->fullPathForFilename(sound_path);
+        CkSound* sound = CkSound::newStreamSound(sound_path.c_str());
+        static int COUNT = 0;
+        sound->setPitchShift(COUNT++);
+        sound->play();
 
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
