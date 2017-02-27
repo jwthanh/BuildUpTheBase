@@ -8,6 +8,7 @@
 #endif
 #include "constants.h"
 #include "base/CCUserDefault.h"
+#include "RandomWeightMap.h"
 
 
 USING_NS_CC;
@@ -133,5 +134,16 @@ void SoundEngine::stop_all_sound_and_music()
 
 void SoundLibrary::play_general_widget_touched()
 {
-    SoundEngine::play_sound("sounds/hurt2_quiet.ogg");
+    SoundEngine::play_sound("sounds/hurt2.ogg");
+};
+
+void SoundLibrary::play_general_harvest_touched()
+{
+    // SoundEngine::play_sound("sounds/hurt1.ogg");
+
+    RandomWeightMap<std::string> sound_map;
+    sound_map.add_item("sounds/hit2.ogg", 50);
+    sound_map.add_item("sounds/error3.ogg", 50);
+    sound_map.add_item("sounds/hit4.ogg", 50);
+    SoundEngine::play_sound(sound_map.get_item());
 };

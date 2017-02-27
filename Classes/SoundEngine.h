@@ -39,6 +39,7 @@ class SoundLibrary
 {
     public:
         static void play_general_widget_touched();
+        static void play_general_harvest_touched();
 
 };
 

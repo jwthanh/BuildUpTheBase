@@ -22,6 +22,12 @@
 #include "NodeBuilder.h"
 #include "BuildingsSideBar.h"
 #include "goals/Achievement.h"
+#include "combat.h"
+#include "Equipment.h"
+#include "HarvestableManager.h"
+#include "utilities/vibration.h"
+#include "HarvestScene.h"
+#include "SoundEngine.h"
 
 #include "2d/CCClippingNode.h"
 #include "2d/CCActionEase.h"
@@ -35,11 +41,6 @@
 #include "ui/UIButton.h"
 #include "ui/UIListView.h"
 #include "ui/UIScale9Sprite.h"
-#include "combat.h"
-#include "Equipment.h"
-#include "HarvestableManager.h"
-#include "utilities/vibration.h"
-#include "HarvestScene.h"
 
 USING_NS_CC;
 
@@ -267,9 +268,12 @@ bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 
     if (this->_hitted)
     {
+        SoundLibrary::play_general_harvest_touched();
+
         auto achievement_manager = AchievementManager::getInstance();
         std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalTaps);
         achievement->increment();
+
         this->animate_touch_start(touch);
     }
 

@@ -4,8 +4,11 @@
 
 #include "magic_particles/mp_cocos.h"
 #include "magic_particles/platform_cocos.h"
+
 #include "cocos2d.h"
+
 #include "Util.h"
+#include "SoundEngine.h"
 
 USING_NS_CC;
 
@@ -137,6 +140,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto load_cb = [this, loading_scene]()
     {
 
+        // SoundEngine::play_sound("sounds/secret5.ogg");
         std::function<void(float)> load_func = [this, loading_scene](float){
             CCLOG("preloading...");
             this->preload_all();
