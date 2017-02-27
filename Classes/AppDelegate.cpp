@@ -248,6 +248,8 @@ void AppDelegate::preload_sounds()
     CCLOG("no sounds to load anymore");
 #endif
 
+    SoundLibrary::getInstance()->fill_sound_cache();
+
 
 };
 

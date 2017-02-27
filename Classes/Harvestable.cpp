@@ -268,7 +268,7 @@ bool Harvestable::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 
     if (this->_hitted)
     {
-        SoundLibrary::play_general_harvest_touched();
+        SoundLibrary::getInstance()->play_general_harvest_touched();
 
         auto achievement_manager = AchievementManager::getInstance();
         std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalTaps);

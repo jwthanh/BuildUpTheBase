@@ -1,7 +1,11 @@
 #pragma once
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
+
 #include <string>
+#include <unordered_map>
+
+class CkSound;
 
 class SoundEngine
 {
@@ -37,9 +41,18 @@ class SoundEngine
 
 class SoundLibrary
 {
+    private:
+        static SoundLibrary* _instance;
+
+        std::unordered_map<std::string, CkSound*> sound_cache;
+
     public:
-        static void play_general_widget_touched();
-        static void play_general_harvest_touched();
+        static SoundLibrary* getInstance();
+
+        void fill_sound_cache();
+
+        void play_general_widget_touched();
+        void play_general_harvest_touched();
 
 };
 

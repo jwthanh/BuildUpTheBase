@@ -194,13 +194,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // Tutorial* tutorial = Tutorial::getInstance();
         // tutorial->first_start(this);
 
-        std::string sound_path = "sounds/secret3.ogg";
-        auto file_utils = cocos2d::FileUtils::getInstance();
-        //sound_path = file_utils->fullPathForFilename(sound_path);
-        CkSound* sound = CkSound::newStreamSound(sound_path.c_str());
-        static int COUNT = 0;
-        sound->setPitchShift(COUNT++);
-        sound->play();
+        SoundLibrary::getInstance()->play_general_harvest_touched();
 
         // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
         // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
