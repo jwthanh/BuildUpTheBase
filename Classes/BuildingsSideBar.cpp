@@ -1078,7 +1078,7 @@ void SideListView::setup_powers_listview_as_powers()
             BuildingNuItem* menu_item;
             menu_item = BuildingNuItem::create(listview, building);
             menu_item->setName(child_name);
-            menu_item->set_title("Visit Leaderboard");
+            menu_item->set_title("Leaderboard");
             menu_item->set_description("See who's better than you");
             menu_item->set_image("leaderboard.png");
 
@@ -1179,7 +1179,7 @@ void SideListView::setup_powers_listview_as_powers()
             BuildingNuItem* menu_item;
             menu_item = BuildingNuItem::create(listview, building);
             menu_item->setName(child_name);
-            menu_item->set_title("Sell all advanced");
+            menu_item->set_title("Sell all (ADV)");
             menu_item->set_description("Sells all advanced resources instantly");
             menu_item->set_image("sell_all.png");
             menu_item->set_original_image("sell_all.png");
