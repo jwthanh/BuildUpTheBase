@@ -130,3 +130,8 @@ void SoundEngine::stop_all_sound_and_music()
 #endif
 
 };
+
+void SoundLibrary::play_general_widget_touched()
+{
+    SoundEngine::play_sound("sounds/hurt2_quiet.ogg");
+};

@@ -35,4 +35,11 @@ class SoundEngine
 
 };
 
+class SoundLibrary
+{
+    public:
+        static void play_general_widget_touched();
+
+};
+
 #endif

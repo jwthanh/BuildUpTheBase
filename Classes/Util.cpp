@@ -292,7 +292,7 @@ void bind_touch_ended(cocos2d::ui::Widget* widget, std::function<void(void)> cal
         {
             do_vibrate(5);
             callback();
-            SoundEngine::play_sound("sounds/hurt2_quiet.ogg");
+            SoundLibrary::play_general_widget_touched();
         }
     };
     widget->addTouchEventListener(touch_handler);
