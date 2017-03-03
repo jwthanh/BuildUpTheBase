@@ -708,7 +708,7 @@ void SideListView::setup_detail_listview_as_recipes()
             if (building->name == "The Mine")
             {
                 //transmute copper
-                spRecipe transmute_copper = std::make_shared<Recipe>("Transmute: Iron", "10 Copper to 2 Iron");
+                spRecipe transmute_copper = std::make_shared<Recipe>("Transmute: Iron", "Gain 10 Copper\n -- costs 2 Iron");
                 transmute_copper->components = mistIngredient({
                     { Ingredient::SubType::Copper, 10 }
                 });
@@ -742,7 +742,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     }});
 
                 //build minecart
-                spRecipe build_minecart = std::make_shared<Recipe>("Build Minecart", "30 Wood, 8 Iron, 25 Copper");
+                spRecipe build_minecart = std::make_shared<Recipe>("Build Minecart", "Dig deeper\n30 Wood, 8 Iron, 25 Copper");
                 build_minecart->components = mistIngredient({
                     { Ingredient::SubType::Wood, 30 },
                     { Ingredient::SubType::Iron, 8 },
@@ -780,7 +780,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     }});
 
                 //build minerails
-                spRecipe build_minerails = std::make_shared<Recipe>("Build Rails", "5 Wood, 15 Copper");
+                spRecipe build_minerails = std::make_shared<Recipe>("Build Rails", "Place & travel to altars\n-- costs 5 Wood, 15 Copper");
                 build_minerails->components = mistIngredient({
                     { Ingredient::SubType::Wood, 5 },
                     { Ingredient::SubType::Copper, 15 }
