@@ -163,11 +163,13 @@ void SoundLibrary::fill_sound_cache()
 
 void SoundLibrary::play_general_widget_touched()
 {
+    return;
     SoundEngine::play_sound("sounds/hurt2.ogg");
 };
 
 void SoundLibrary::play_general_harvest_touched()
 {
+    return;
     // SoundEngine::play_sound("sounds/hurt1.ogg");
 
     RandomWeightMap<std::string> sound_map;
