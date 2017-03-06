@@ -117,9 +117,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_A)
     {
-        auto action_panel = ActionPanel::create();
-        this->addChild(action_panel);
-        action_panel->set_target(this->getChildByName("inventory_detail_panel"));
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_F)
     {
@@ -144,7 +141,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_GRAVE)
     {
-        Director::getInstance()->popScene();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_S)
     {
@@ -172,46 +168,10 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_P)
     {
-        for (int i = 0; i < 100; i++)
-        {
-            auto label = Label::createWithTTF("Pock Pock", DEFAULT_FONT, 16);
-            label->setTTFConfig(NuItem::ttf_config);
-            this->addChild(label, 9999999);
-
-            auto anim = JumpBy::create(5, Vec2(900 * CCRANDOM_0_1(), 600 * CCRANDOM_0_1()), 10, 10);
-            //auto anim = JumpBy::create(10, Vec2(100, 600), 10, 10);
-            label->runAction(anim);
-        }
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-
-        //RandomWeightMap<std::string> sound_map;
-        //sound_map.add_item("sounds/coin3.ogg", 50);
-        //sound_map.add_item("sounds/coin4.ogg", 50);
-        //sound_map.add_item("sounds/coin5.ogg", 50);
-        //SoundEngine::play_sound(sound_map.get_item());
-        // Tutorial* tutorial = Tutorial::getInstance();
-        // tutorial->first_start(this);
-
         SoundLibrary::getInstance()->play_general_harvest_touched();
-
-        // auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
-        // harvestable_manager->store_fighter(((FightingHarvestable*)this->harvestable)->enemy);
-
-        // GameDirector::switch_to_equipment_menu();
-        // GameDirector::switch_to_reset_menu();
-        //GameDirector::switch_to_item_altar_menu();
-        // GameDirector::switch_to_scrap_item_menu();
-
-
-        // TextBlobModal modal(this);
-        // modal.set_title("Upgrade coin storage!");
-        // modal.set_body("You've hit the coin limit!\n\nScrap some weapons at The Marketplace, contributing to city investment. Then use that to upgrade the coin storage.\n\nAlternatively, deposit coins 10 at a time in the City Management screen.");
-
-        // auto achievement_serializer = AchievementSerializer("alpha_achievements.json");
-        // achievement_serializer.serialize();
-
     }
 }
 
