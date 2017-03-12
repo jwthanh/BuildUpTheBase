@@ -44,6 +44,8 @@ class NuItem : public cocos2d::ui::Widget
         static cocos2d::ui::Button* orig_button;
         static cocos2d::TTFConfig ttf_config;
 
+        virtual inline std::string get_currency_prefix() { return "$"; };
+
         cocos2d::ui::Button* button;
         cocos2d::ui::ImageView* item_icon;
         cocos2d::ui::Text* title_lbl;
@@ -161,6 +163,7 @@ class UpgradeWalletNuItem : public BuildingShopNuItem
         virtual res_count_t get_available_coins();
         virtual void add_available_coins(res_count_t);
 
+        inline std::string get_currency_prefix() override { return "CI "; };
         virtual void other_init();
 };
 

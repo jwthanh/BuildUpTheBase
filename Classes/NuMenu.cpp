@@ -238,7 +238,7 @@ void NuItem::set_description(std::string description)
 void NuItem::set_cost_lbl(std::string cost)
 {
     if (cost != ""){ //cost has content
-        this->cost_lbl->setString("$"+cost);
+        this->cost_lbl->setString(this->get_currency_prefix()+cost);
     } else { //cost is blank, widen description TODO use orig_buttons positions so this isnt hardcoded
         this->cost_lbl->setString("");
     }
