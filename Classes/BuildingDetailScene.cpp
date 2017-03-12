@@ -56,8 +56,18 @@ bool BuildingDetailScene::init(spBuilding building)
     FUNC_INIT(BuildingDetailScene);
 #endif
 
-    // this->init_children();
-    // this->init_callbacks();
+    this->init_children();
+    this->init_callbacks();
 
     return true;
+};
+
+void BuildingDetailScene::init_children()
+{
+
+};
+
+void BuildingDetailScene::init_callbacks()
+{
+
 };
