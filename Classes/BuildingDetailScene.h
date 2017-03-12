@@ -1,5 +1,5 @@
-#ifndef BUILDINGUPGRADESCENE_H
-#define BUILDINGUPGRADESCENE_H
+#ifndef BUILDINGDETAILSCENE_H
+#define BUILDINGDETAILSCENE_H
 
 #include "GameLayer.h"
 
@@ -17,13 +17,13 @@ namespace cocos2d
 class Building;
 
 
-class BuildingUpgradeScene : public GameLayer
+class BuildingDetailScene : public GameLayer
 {
     private:
         std::shared_ptr<Building> building;
 
     public:
-        static BuildingUpgradeScene* create(std::shared_ptr<Building> building);
+        static BuildingDetailScene* create(std::shared_ptr<Building> building);
         static cocos2d::Scene* createScene(std::shared_ptr<Building> building);
         virtual bool init(std::shared_ptr<Building> building);
 };

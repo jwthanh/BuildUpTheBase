@@ -1,4 +1,4 @@
-#include "BuildingUpgradeScene.h"
+#include "BuildingDetailScene.h"
 
 #include "constants.h"
 
@@ -13,9 +13,9 @@
 #include "base/CCDirector.h"
 #include "ui/UIButton.h"
 
-BuildingUpgradeScene* BuildingUpgradeScene::create(spBuilding building)
+BuildingDetailScene* BuildingDetailScene::create(spBuilding building)
 {
-    BuildingUpgradeScene* pRet = new(std::nothrow) BuildingUpgradeScene();
+    BuildingDetailScene* pRet = new(std::nothrow) BuildingDetailScene();
     if (pRet && pRet->init(building))
     {
         pRet->autorelease();
@@ -29,15 +29,15 @@ BuildingUpgradeScene* BuildingUpgradeScene::create(spBuilding building)
     }
 };
 
-cocos2d::Scene* BuildingUpgradeScene::createScene(spBuilding building)
+cocos2d::Scene* BuildingDetailScene::createScene(spBuilding building)
 {
     auto scene = cocos2d::Scene::create();
-    auto* layer = BuildingUpgradeScene::create(building);
+    auto* layer = BuildingDetailScene::create(building);
     scene->addChild(layer);
     return scene;
 };
 
-bool BuildingUpgradeScene::init(spBuilding building)
+bool BuildingDetailScene::init(spBuilding building)
 {
     this->building = building;
 
@@ -51,9 +51,9 @@ bool BuildingUpgradeScene::init(spBuilding building)
     prep_back_button(back_btn);
 
 #ifdef _WIN32
-    FUNC_INIT_WIN32(BuildingUpgradeScene);
+    FUNC_INIT_WIN32(BuildingDetailScene);
 #else
-    FUNC_INIT(BuildingUpgradeScene);
+    FUNC_INIT(BuildingDetailScene);
 #endif
 
     // this->init_children();

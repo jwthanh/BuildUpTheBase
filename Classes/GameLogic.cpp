@@ -39,7 +39,7 @@
 #include "utilities/vibration.h"
 #include "goals/Achievement.h"
 #include "Technology.h"
-#include "BuildingUpgradeScene.h"
+#include "BuildingDetailScene.h"
 
 
 USING_NS_CC;
@@ -903,8 +903,8 @@ void GameDirector::switch_to_building_detail_menu()
 {
     auto target_building = BUILDUP->get_target_building();
 
-	auto scene = BuildingUpgradeScene::createScene(target_building);
-	scene->setName("building_upgrade_scene");
+	auto scene = BuildingDetailScene::createScene(target_building);
+	scene->setName("building_detail_scene");
     set_default_key_handler(scene);
 
     auto director = cocos2d::Director::getInstance();
