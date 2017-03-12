@@ -171,7 +171,8 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        SoundLibrary::getInstance()->play_general_harvest_touched();
+        // SoundLibrary::getInstance()->play_general_harvest_touched();
+        GameDirector::switch_to_building_detail_menu();
     }
 }
 

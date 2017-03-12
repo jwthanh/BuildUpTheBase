@@ -82,6 +82,7 @@ class GameDirector
 {
     public:
         static void switch_to_building_menu();
+        static void switch_to_building_detail_menu();
         static void switch_to_city_menu();
         static void switch_to_miner_menu();
         static void switch_to_items_menu();

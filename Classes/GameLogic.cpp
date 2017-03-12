@@ -39,6 +39,7 @@
 #include "utilities/vibration.h"
 #include "goals/Achievement.h"
 #include "Technology.h"
+#include "BuildingUpgradeScene.h"
 
 
 USING_NS_CC;
@@ -609,7 +610,7 @@ void GameDirector::switch_to_city_menu()
     auto invested_lbl = dynamic_cast<ui::Text*>(invest_panel->getChildByName("invested_lbl"));
     auto update_invested = [invested_lbl](float dt) {
         res_count_t invested = GameLogic::getInstance()->get_city_investment();
-        invested_lbl->setString(beautify_double(invested));
+        invested_lbl->setString("CI "+beautify_double(invested));
     };
     invested_lbl->schedule(update_invested, AVERAGE_DELAY, "update_invested");
     update_invested(0);
@@ -653,7 +654,7 @@ void GameDirector::switch_to_city_menu()
     auto appeased_lbl = dynamic_cast<ui::Text*>(appeasement_panel->getChildByName("appeased_lbl"));
     auto update_appeasemented = [appeased_lbl](float dt) {
         res_count_t appeasemented = (res_count_t)GameLogic::getInstance()->get_appeasements();
-        appeased_lbl->setString(beautify_double(appeasemented));
+        appeased_lbl->setString("Souls "+beautify_double(appeasemented));
     };
     appeased_lbl->schedule(update_appeasemented, AVERAGE_DELAY, "update_appeasemented");
     update_appeasemented(0);
@@ -893,6 +894,18 @@ void GameDirector::switch_to_miner_menu()
     check_carts_cb(0);
     dig_btn->schedule(check_carts_cb, AVERAGE_DELAY, "check_carts_cb");
 
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
+
+void GameDirector::switch_to_building_detail_menu()
+{
+    auto target_building = BUILDUP->get_target_building();
+
+	auto scene = BuildingUpgradeScene::createScene(target_building);
+	scene->setName("building_upgrade_scene");
+    set_default_key_handler(scene);
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);

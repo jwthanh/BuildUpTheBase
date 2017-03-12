@@ -106,6 +106,7 @@
     <ClCompile Include="..\Classes\goals\Achievement.cpp">
       <Filter>goals</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BuildingUpgradeScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -210,6 +211,7 @@
     <ClInclude Include="..\Classes\goals\Achievement.h">
       <Filter>goals</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\BuildingUpgradeScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
