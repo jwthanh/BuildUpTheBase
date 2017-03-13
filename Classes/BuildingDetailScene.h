@@ -30,4 +30,11 @@ class BuildingDetailScene : public GameLayer
         virtual void init_children();
         virtual void init_callbacks(); //these should be changed in the child classes
 };
+
+///contains building upgrade details like level and salesmen levels etc
+class BuildingUpgrade
+{
+    public:
+};
+
 #endif
