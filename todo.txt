@@ -92,6 +92,12 @@ To increase wallet size you need to sell items to the marketplace, accumulating 
 * stored value resets after item purchas
 * potential for upgrades for keeping leftover money
 
+#Zombie scavengers
+* automate scavenging.
+* you need to place gravestones to attract zombies
+* make gravestones at graveyard, then place them in the dig scene
+* might need to keep them satisfied
+
 #DARK SALESMEN
 Can fuse two items together with scrolls that contain blueprints
 
