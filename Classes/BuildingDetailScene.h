@@ -22,6 +22,11 @@ class BuildingDetailScene : public GameLayer
     private:
         std::shared_ptr<Building> building;
 
+        cocos2d::Node* panel;
+
+        cocos2d::ui::Layout* level_panel;
+        cocos2d::ui::Button* level_button;
+
     public:
         static BuildingDetailScene* create(std::shared_ptr<Building> building);
         static cocos2d::Scene* createScene(std::shared_ptr<Building> building);

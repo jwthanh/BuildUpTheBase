@@ -52,7 +52,7 @@
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="level_button" ActionTag="-338439080" Tag="255" IconVisible="False" LeftMargin="287.1984" RightMargin="6.0707" TopMargin="9.7982" BottomMargin="79.7982" TouchEnable="True" FontSize="14" ButtonText="Level up" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="level_button" ActionTag="-338439080" Tag="255" IconVisible="False" LeftMargin="287.1984" RightMargin="6.0707" TopMargin="9.7982" BottomMargin="79.7982" TouchEnable="True" FontSize="28" ButtonText="Level up" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="366.7309" Y="60.4035" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="470.5638" Y="110.0000" />
