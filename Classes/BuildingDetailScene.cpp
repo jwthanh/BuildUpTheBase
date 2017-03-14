@@ -16,6 +16,10 @@
 #include "ui/UIButton.h"
 #include "ui/UIText.h"
 #include "ui/UILayout.h"
+#include "2d/CCParticleSystemQuad.h"
+#include "Beatup.h"
+#include "utilities/vibration.h"
+#include "FShake.h"
 
 BuildingDetailScene* BuildingDetailScene::create(spBuilding building)
 {
@@ -75,7 +79,28 @@ void BuildingDetailScene::init_children()
 
 void BuildingDetailScene::init_callbacks()
 {
-    bind_touch_ended(this->level_button, [](){ GameDirector::switch_to_scrap_item_menu(); });
+    auto touch_level_button = [this](){
+        res_count_t cost = scale_number(10.0L, ((res_count_t)this->building->building_level)-1.0L, 10.5L);
+        res_count_t total_coins = BEATUP->get_total_coins();
+
+        if (cost <= total_coins)
+        {
+            BEATUP->add_total_coin(-cost);
+
+            this->building->building_level += 1;
+
+            auto explosion_parts = cocos2d::ParticleSystemQuad::create("particles/upgrade.plist");
+            explosion_parts->setPosition({570, 300});
+            explosion_parts->setAutoRemoveOnFinish(true);
+
+            this->addChild(explosion_parts);
+
+            this->runAction(FShake::actionWithDuration(0.25f, 2.5f));
+
+            do_vibrate(175);
+        }
+    };
+    bind_touch_ended(this->level_button, touch_level_button);
 
     auto leveled_lbl = dynamic_cast<cocos2d::ui::Text*>(level_panel->getChildByName("current_level_lbl"));
     auto update_leveled = [this, leveled_lbl](float dt) {
