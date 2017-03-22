@@ -71,6 +71,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/debugging/ActionPanel.cpp \
                    ../../Classes/utilities/vibration.cpp \
                    ../../Classes/goals/Achievement.cpp \
+                   ../../Classes/BuildingDetailScene.cpp \
 \
 \
 \
