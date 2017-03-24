@@ -241,3 +241,13 @@ void ConsumerHarvester::on_update(float dt)
 
     };
 }
+
+ScavengerWorker::ScavengerWorker(SubType sub_type)
+    : Worker(NULL, "scavenger_worker", sub_type)
+{
+
+}
+
+void ScavengerWorker::on_update(float dt)
+{
+}

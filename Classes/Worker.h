@@ -97,6 +97,14 @@ class ConsumerHarvester : public Harvester
 
 };
 
+class ScavengerWorker : public Worker
+{
+    public:
+        ScavengerWorker(SubType sub_type);
+        virtual void on_update(float dt) override;
+
+};
+
 typedef std::pair<Worker::SubType, Ingredient::SubType> work_ing_t;
 typedef std::map<work_ing_t, res_count_t> mistHarvester;
 typedef std::map<Worker::SubType, res_count_t> mistWorkerSubType;
