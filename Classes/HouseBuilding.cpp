@@ -1,6 +1,3 @@
-// ConsoleApplication1.cpp : Defines the entry point for the console application.
-//
-
 #include <memory>
 #include <string>
 #include <vector>
@@ -8,9 +5,6 @@
 #include <ctime>
 #include <assert.h>
 #include <sstream>
-
-#include <tinyxml2/tinyxml2.h>
-#include <json/document.h>
 
 #include "HouseBuilding.h"
 
@@ -35,11 +29,14 @@
 #include "Beatup.h"
 #include "Network.h"
 #include "Clock.h"
+#include "Item.h"
+
+
+#include <tinyxml2/tinyxml2.h>
+#include <json/document.h>
 #include <json/stringbuffer.h>
 #include <json/writer.h>
-#include "Item.h"
 #include <ck/ck.h>
-
 
 USING_NS_CC;
 
@@ -54,24 +51,7 @@ Buildup::Buildup()
 	this->fighter->combat = fighter_combat;
     this->fighter->attrs->health->set_vals(100);
 
-    // this->items = {};
-
-    ItemData item_data = ItemData();
-    spItem dagger = item_data.get_item("dagger");
-    dagger->rarity = ItemRarityType::Poor;
-    spItem homunc = item_data.get_item("homunculus");
-    homunc->rarity = ItemRarityType::Rare;
-    spItem ashen_mirror = item_data.get_item("ashen_mirror");
-    spItem ashen_mirror_lv2 = item_data.get_item("ashen_mirror");
-    ashen_mirror_lv2->level = 2.0f;
-
-    this->items = {
-        dagger,
-        homunc,
-        ashen_mirror,
-        ashen_mirror_lv2
-    };
-
+    this->items = {};
 
     this->player = NULL;
 };
