@@ -96,10 +96,10 @@ class ConsumerHarvester : public Harvester
 
 };
 
-class ScavengerWorker : public Worker
+class ScavengerHarvester : public Harvester
 {
     public:
-        ScavengerWorker(SubType sub_type);
+        ScavengerHarvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
         virtual void on_update(float dt) override;
 
 };

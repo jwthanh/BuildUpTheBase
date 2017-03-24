@@ -19,6 +19,7 @@
 using HarvesterCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Harvester>>>;
 using SalesmenCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Salesman>>>;
 using ConsumerCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<ConsumerHarvester>>>;
+using ScavengerCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<ScavengerHarvester>>>;
 
 static const std::map<int, res_count_t> building_storage_limit = {
     { 1, 25.0},
@@ -57,11 +58,13 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         spTechTree techtree;
 
         mistHarvester harvesters;
-        HarvesterCache _harvester_cache;
         mistHarvester salesmen;
-        SalesmenCache _salesmen_cache;
         mistHarvester consumers;
+        mistHarvester scavengers;
+        HarvesterCache _harvester_cache;
+        SalesmenCache _salesmen_cache;
         ConsumerCache _consumer_cache;
+        ScavengerCache _scavenger_cache;
 
         Clock spawn_clock;
 

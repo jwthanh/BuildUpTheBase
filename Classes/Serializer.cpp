@@ -240,6 +240,11 @@ void BuildingSerializer::serialize_workers(rjDocument& doc)
     {
         save_worker("consumer", this->building->consumers, mist);
     }
+
+    for (auto mist : this->building->scavengers)
+    {
+        save_worker("scavenger", this->building->scavengers, mist);
+    }
 }
 
 void BuildingSerializer::load_workers(rjDocument& doc)
@@ -272,6 +277,7 @@ void BuildingSerializer::load_workers(rjDocument& doc)
             load_worker("harvester", this->building->harvesters, type_str, i, ing_type);
             load_worker("salesmen", this->building->salesmen, type_str, i, ing_type);
             load_worker("consumer", this->building->consumers, type_str, i, ing_type);
+            load_worker("scavenger", this->building->scavengers, type_str, i, ing_type);
         };
     }
 }

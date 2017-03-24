@@ -80,6 +80,7 @@ class Worker;
 class Harvester;
 class Salesman;
 class ConsumerHarvester;
+class ScavengerHarvester;
 class ResourceCondition;
 class Harvestable;
 
@@ -127,6 +128,7 @@ MAKE_SP_VS_MI(Worker);
 MAKE_SP_VS_MI(Harvester);
 MAKE_SP_VS_MI(Salesman);
 MAKE_SP_VS_MI(ConsumerHarvester);
+MAKE_SP_VS_MI(ScavengerHarvester);
 MAKE_SP_VS_MI(ResourceCondition);
 MAKE_SP_VS_MI(Recipe);
 MAKE_SP_VS_MI(Harvestable);

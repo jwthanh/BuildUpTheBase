@@ -242,12 +242,13 @@ void ConsumerHarvester::on_update(float dt)
     };
 }
 
-ScavengerWorker::ScavengerWorker(SubType sub_type)
-    : Worker(NULL, "scavenger_worker", sub_type)
+ScavengerHarvester::ScavengerHarvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type)
+    : Harvester(building, name, ing_type, sub_type)
 {
 
 }
 
-void ScavengerWorker::on_update(float dt)
+void ScavengerHarvester::on_update(float dt)
 {
+    CCLOG("on update in scavenger");
 }

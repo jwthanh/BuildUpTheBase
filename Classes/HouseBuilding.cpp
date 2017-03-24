@@ -152,14 +152,20 @@ Building::Building(Village* city, std::string name, std::string id_key) :
 
     workers = vsWorker();
 
-    harvesters = mistHarvester();
-    _harvester_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<Harvester>>>(); //cant just HarvesterCache(); this for some reason
+    this->harvesters = mistHarvester();
+    this->_harvester_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<Harvester>>>(); //cant just HarvesterCache(); this for some reason
 
-    salesmen = mistHarvester();
-    _salesmen_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<Salesman>>>();
+    this->salesmen = mistHarvester();
+    this->_salesmen_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<Salesman>>>();
 
-    consumers = mistHarvester();
-    _consumer_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<ConsumerHarvester>>>();
+    this->consumers = mistHarvester();
+    this->_consumer_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<ConsumerHarvester>>>();
+
+    // this->scavengers = mistHarvester();
+    this->scavengers = mistHarvester({
+        { { WorkerSubType::One, IngredientSubType::Undead }, 1 }
+    });
+    this->_scavenger_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<ScavengerHarvester>>>();
 
     this->data = std::make_shared<BuildingData>(name);
     this->_shop_cost = atoi(this->data->get_gold_cost().c_str());
@@ -282,6 +288,23 @@ void Building::update(float dt)
 
         harvester->active_count = count;
         harvester->update(dt);
+    };
+
+    for (auto& mist : this->scavengers) {
+        if (this->name == "The Dump") { break; }; //TODO remove this after debug
+
+        const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
+        const WorkerSubType& harv_type = sub_type.first;
+        const Ingredient::SubType& ing_type = sub_type.second;
+        const res_count_t& count = mist.second;
+
+        //find cache worker, otherwise create and add it to cache
+        std::shared_ptr<ScavengerHarvester> scavenger;
+        std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
+        scavenger = get_or_create_from_cache(shared_this, this->_scavenger_cache, key);
+
+        scavenger->active_count = count;
+        scavenger->update(dt);
     };
 
     if (update_clock.passed_threshold())
