@@ -15,8 +15,6 @@
 
 #include "Updateable.h"
 
-#include "Worker.h" //it would be nice to not need this, but mistHarvesters uses it
-
 
 using HarvesterCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Harvester>>>;
 using SalesmenCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Salesman>>>;

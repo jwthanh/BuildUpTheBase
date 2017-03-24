@@ -15,11 +15,12 @@
 #include "StaticData.h"
 #include "Util.h"
 #include "Miner.h"
+#include "Equipment.h"
+#include "goals/Achievement.h"
+#include "Worker.h"
 
 #include "2d/CCTMXTiledMap.h"
 #include "2d/CCTMXLayer.h"
-#include "Equipment.h"
-#include "goals/Achievement.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)

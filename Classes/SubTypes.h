@@ -45,4 +45,8 @@ enum class WorkerSubType
     Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen, Seventeen, Eighteen, Nineteen, Twenty
 };
 
+typedef std::pair<WorkerSubType, IngredientSubType> work_ing_t;
+typedef std::map<work_ing_t, res_count_t> mistHarvester;
+typedef std::map<WorkerSubType, res_count_t> mistWorkerSubType;
+
 #endif

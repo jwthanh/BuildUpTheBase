@@ -105,8 +105,5 @@ class ScavengerWorker : public Worker
 
 };
 
-typedef std::pair<Worker::SubType, Ingredient::SubType> work_ing_t;
-typedef std::map<work_ing_t, res_count_t> mistHarvester;
-typedef std::map<Worker::SubType, res_count_t> mistWorkerSubType;
 
 #endif

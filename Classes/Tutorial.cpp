@@ -17,6 +17,7 @@
 #include "MiscUI.h"
 #include "NuMenu.h"
 #include "DataManager.h"
+#include "Worker.h"
 
 Tutorial* Tutorial::_instance = nullptr;
 
