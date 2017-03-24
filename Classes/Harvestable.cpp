@@ -1383,36 +1383,17 @@ res_count_t FightingHarvestable::get_combat_crit_factor()
 
 std::string UndeadHarvestable::get_sprite_path()
 {
-    return "necro_open.png";
+    return "pink_monster.png";
 }
 
-void UndeadHarvestable::init_sprite()
+bool UndeadHarvestable::init()
 {
-    Harvestable::init_sprite();
+    Harvestable::init();
 
-    auto cache = SpriteFrameCache::getInstance();
-    Vector<SpriteFrame*> frames = Vector<SpriteFrame*>();
+    this->initial_scale = 1.0f;
+    this->setScale(this->initial_scale);
 
-
-    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_open.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
-    frames.pushBack(cache->getSpriteFrameByName("necro_closed.png"));
-    cocos2d::Animation* anim = cocos2d::Animation::createWithSpriteFrames(frames, 0.1f, 1);
-
-    cocos2d::Animate* anim_action = cocos2d::Animate::create(anim);
-    this->sprite->runAction(RepeatForever::create(anim_action));
+    return true;
 };
 
 void UndeadHarvestable::animate_clip()
@@ -1426,7 +1407,7 @@ void UndeadHarvestable::animate_clip()
 
     float click_ratio = this->get_click_ratio();
     auto spark_parts = ParticleSystemQuad::create("particles/blood.plist");
-    spark_parts->setScale(1.0 / 4.0f);
+    spark_parts->setScale(1.0 / 2.0f);
      spark_parts->setPosition(origin);
     int total_particles = spark_parts->getTotalParticles();
     int particle_count = (int)(total_particles * click_ratio);

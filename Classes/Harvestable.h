@@ -223,8 +223,8 @@ class UndeadHarvestable : public Harvestable
 {
     public:
         CREATE_FUNC(UndeadHarvestable);
+        virtual bool init() override;
         virtual std::string get_sprite_path() override;
-        virtual void init_sprite() override;
 
 
         virtual void animate_clip() override;

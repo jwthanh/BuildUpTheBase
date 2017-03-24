@@ -321,6 +321,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">knight_artist/pink_monster.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>27,18,55,36</rect>
+                <key>scale9Paddings</key>
+                <rect>27,18,55,36</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">to_replace/bones.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -972,6 +985,7 @@
             <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/medal1.png</filename>
             <filename>calvin/trophy/trophy14.png</filename>
             <filename>calvin/trophy/trophy1.png</filename>
+            <filename>knight_artist/pink_monster.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
