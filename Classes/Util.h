@@ -49,7 +49,7 @@ T pick_one(std::vector<T> vec, std::mt19937* generator=NULL)
 void log_vector(cocos2d::Vec2 vector, std::string message="");
 
 template<typename mapT>
-typename mapT::mapped_type map_get(const mapT& input_map, const typename mapT::key_type& key, typename const mapT::mapped_type& default_result)
+typename mapT::mapped_type map_get(const mapT& input_map, const typename mapT::key_type& key, const typename mapT::mapped_type& default_result)
 {
     auto it = input_map.find(key);
     if (it != input_map.end())
