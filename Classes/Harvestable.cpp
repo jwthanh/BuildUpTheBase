@@ -448,7 +448,7 @@ bool GraveyardHarvestable::init()
 {
     bool val = Harvestable::init();
 
-    this->initial_scale = 2.5f;
+    this->initial_scale = 0.9f;
     this->setScale(this->initial_scale);
 
     return val;
@@ -456,7 +456,7 @@ bool GraveyardHarvestable::init()
 
 std::string GraveyardHarvestable::get_sprite_path()
 {
-    return "grave.png";
+    return "gravestone.png";
 };
 
 bool TreeHarvestable::init()
