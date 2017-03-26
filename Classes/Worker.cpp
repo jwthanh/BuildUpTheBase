@@ -14,6 +14,7 @@
 #include "base/CCDirector.h"
 #include "HarvestScene.h"
 #include "goals/Achievement.h"
+#include "Harvestable.h"
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
@@ -250,5 +251,22 @@ ScavengerHarvester::ScavengerHarvester(spBuilding building, std::string name, In
 
 void ScavengerHarvester::on_update(float dt)
 {
-    CCLOG("on update in scavenger");
+    cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();
+    auto harvest_scene = dynamic_cast<HarvestScene*>(root_scene->getChildByName("HarvestScene"));
+    if (harvest_scene)
+    {
+        DumpsterHarvestable* dumpster_harvestable = dynamic_cast<DumpsterHarvestable*>(harvest_scene->harvestable);
+        if (dumpster_harvestable != NULL){
+            CCLOG("current clicks %f", dumpster_harvestable->get_current_clicks());
+            dumpster_harvestable->add_current_clicks(1.0);
+            CCLOG("now its current clicks %f", dumpster_harvestable->get_current_clicks());
+        } else {
+            CCLOG("dumpster harvestable is null");
+        };
+
+    }
+    else
+    {
+        CCLOG("INFO: ScavengerHarvester cant do anything if the HarvestScene isnt active.");
+    }
 }
