@@ -95,9 +95,11 @@ class Harvestable : public cocos2d::ui::Widget
         virtual void animate_clip();
         virtual void animate_rotate();
 
+        void try_to_shatter();
         virtual bool should_shatter();
         virtual std::string get_shatter_text();
         virtual cocos2d::Color4B get_shatter_text_color();
+        bool is_shattering;
         virtual void shatter();
 
         virtual float get_click_ratio() const;

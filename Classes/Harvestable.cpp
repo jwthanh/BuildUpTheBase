@@ -107,7 +107,16 @@ bool Harvestable::init()
 
     this->_current_output_ing_type = this->building->punched_sub_type;
 
+    this->is_shattering = false;
+
     return true;
+};
+
+void Harvestable::try_to_shatter()
+{
+    if (this->should_shatter()) {
+        this->shatter();
+    };
 };
 
 bool Harvestable::should_shatter()
@@ -404,6 +413,9 @@ void Harvestable::add_current_clicks(res_count_t new_clicks)
 
 void Harvestable::shatter()
 {
+    if (this->is_shattering) { return; };
+    this->is_shattering = true;
+
     try_set_visible(this->sprite, false);
     this->setTouchEnabled(false);
 
@@ -1259,6 +1271,10 @@ const std::map<res_count_t, std::string> kill_messages = {
 
 void FightingHarvestable::shatter()
 {
+    if (this->is_shattering) { return; };
+
+    this->is_shattering = true;
+
     auto game_logic = GameLogic::getInstance();
     game_logic->add_total_kills(1);
 

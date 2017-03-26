@@ -258,11 +258,8 @@ void ScavengerHarvester::on_update(float dt)
     {
         DumpsterHarvestable* dumpster_harvestable = dynamic_cast<DumpsterHarvestable*>(active_harvestable);
         if (dumpster_harvestable != NULL){
-            CCLOG("current clicks %f", dumpster_harvestable->get_current_clicks());
             dumpster_harvestable->add_current_clicks(1.0);
-            CCLOG("now its current clicks %f", dumpster_harvestable->get_current_clicks());
-        } else {
-            CCLOG("dumpster harvestable is null");
+            dumpster_harvestable->try_to_shatter();
         };
 
     }
