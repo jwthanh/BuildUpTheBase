@@ -5,6 +5,7 @@
 
 class Fighter;
 class Item;
+class Harvestable;
 
 enum class HarvestableTypes
 {
@@ -26,9 +27,14 @@ class HarvestableManager
         //dumpster harvestable
         std::shared_ptr<Item> stored_item;
 
+        Harvestable* _harvestable;
 
     public:
         HarvestableManager();
+
+        //generic harvestable
+        Harvestable* get_active_harvestable();
+        // void set_active_harvestable(Harvestable* harvestable);
 
         //fighter harvestable
         bool is_fighter_stored; // true if we want to load an existing fighter

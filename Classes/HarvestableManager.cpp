@@ -2,6 +2,10 @@
 #include "Fighter.h"
 #include "attribute_container.h"
 #include "attribute.h"
+#include "HarvestScene.h"
+#include "Harvestable.h"
+
+#include "base/CCDirector.h"
 
 HarvestableManager::HarvestableManager()
 {
@@ -13,6 +17,22 @@ HarvestableManager::HarvestableManager()
     this->stored_item = NULL;
     this->stored_dumpster_clicks = 0;
 };
+
+Harvestable* HarvestableManager::get_active_harvestable()
+{
+    Harvestable* active_harvestable = NULL;
+    cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();
+    auto harvest_scene = dynamic_cast<HarvestScene*>(root_scene->getChildByName("HarvestScene"));
+    if (harvest_scene) {
+        active_harvestable = dynamic_cast<Harvestable*>(harvest_scene->getChildByName("harvestable"));
+    };
+
+    return active_harvestable;
+};
+
+// void HarvestableManager::set_active_harvestable(Harvestable* harvestable)
+// {
+// };
 
 void HarvestableManager::reset_fighter()
 {

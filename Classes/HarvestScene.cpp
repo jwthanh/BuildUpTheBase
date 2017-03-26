@@ -1106,6 +1106,7 @@ void HarvestScene::update(float dt)
     }
     else if (target_building != harvestable->building) {
         harvestable->removeFromParent();
+        this->harvestable = NULL;
     };
 
     this->autosave_clock->update(dt);

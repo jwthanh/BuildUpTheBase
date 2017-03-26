@@ -421,7 +421,9 @@ void Harvestable::shatter()
     //spawn label
     this->spawn_label_on_touch(NULL, 1, 1, this->get_shatter_text(), this->get_shatter_text_color());
 
-    CallFunc* remove = CallFunc::create([this](){ this->removeFromParent(); });
+    CallFunc* remove = CallFunc::create([this](){
+        this->removeFromParent();
+    });
 
     auto shatter_action = ShatterAction::create(0.5f);
     //shatter_sprite->runAction(shatter_action);

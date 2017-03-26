@@ -5,8 +5,6 @@
 #include "GameLayer.h"
 #include "Ingredients.h"
 #include "magic_particles/_core/magic.h"
-//#include "magic_particles/MagicEmitter.h"
-//#include "Harvestable.h"
 
 class SideListView;
 class PopupPanel;
