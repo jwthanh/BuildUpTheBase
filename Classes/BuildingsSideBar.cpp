@@ -659,14 +659,7 @@ void SideListView::setup_detail_listview_as_recipes()
                     {
                         //add a bunch of clicks to the harvestable (assuming
                         // though that its the dumpster harvestable)
-                        cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
-                        auto harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
-                        if (harvest_scene)
-                        {
-                            Node* raw_harvestable = harvest_scene->getChildByName("harvestable");
-                            if (raw_harvestable)
-                            {
-                                Harvestable* harvestable = dynamic_cast<Harvestable*>(raw_harvestable);
+                        Harvestable* harvestable = HarvestableManager::getInstance()->get_active_harvestable();
                                 if (harvestable)
                                 {
                                     res_count_t send_scavenger = 1;
@@ -682,12 +675,6 @@ void SideListView::setup_detail_listview_as_recipes()
                                         harvestable->shatter();
                                     };
                                 };
-                            };
-                        }
-                        else
-                        {
-                            CCLOG("cant send scavenger because i can't find harvest_scene");
-                        };
                     }
                     else
                     {

@@ -28,12 +28,15 @@ class HarvestableManager
         std::shared_ptr<Item> stored_item;
 
         Harvestable* _harvestable;
+        static HarvestableManager* _instance;
 
     public:
+        static HarvestableManager* getInstance();
         HarvestableManager();
 
         //generic harvestable
         Harvestable* get_active_harvestable();
+        //not necessary so long as we've got a harvestscene active right?
         // void set_active_harvestable(Harvestable* harvestable);
 
         //fighter harvestable

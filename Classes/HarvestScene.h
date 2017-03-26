@@ -8,7 +8,6 @@
 
 class SideListView;
 class PopupPanel;
-class Harvestable;
 class HarvestableManager;
 class MagicEmitter;
 
@@ -69,9 +68,6 @@ class BaseScene : public GameLayer
         cocos2d::ui::Widget* create_ingredient_detail_alert(Ingredient::SubType ing_type);
 
         void scroll_to_target_building();
-
-        Harvestable* harvestable; //cant be shared_ptr because its cocos2d::Node
-        std::shared_ptr<HarvestableManager> harvestable_manager;
 };
 
 class HarvestScene : public BaseScene

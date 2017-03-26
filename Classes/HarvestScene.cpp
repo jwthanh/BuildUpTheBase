@@ -287,11 +287,11 @@ void BaseScene::create_goal_loadingbar()
         else
         {
             try_set_visible(harvester_progress_panel, true);
-            auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
+            auto harvestable = HarvestableManager::getInstance()->get_active_harvestable();
             if (harvestable)
             {
                 auto orig_percent = std::floor(harvester_loading_bar->getPercent());
-                auto new_percent = std::floor(this->harvestable->get_click_ratio()*100.0);
+                auto new_percent = std::floor(harvestable->get_click_ratio()*100.0);
                 if (orig_percent != new_percent)
                 {
                     harvester_loading_bar->setPercent(new_percent);
@@ -999,7 +999,6 @@ bool HarvestScene::init()
 
     this->target_recipe = NULL;
 
-    this->harvestable_manager = std::make_shared<HarvestableManager>();
     this->add_harvestable();
 
     //color layer based on building level
@@ -1100,13 +1099,12 @@ void HarvestScene::update(float dt)
 
     spBuilding target_building = BUILDUP->get_target_building();
 
-    auto harvestable = dynamic_cast<Harvestable*>(this->getChildByName("harvestable"));
+    Harvestable* harvestable = HarvestableManager::getInstance()->get_active_harvestable();
     if (!harvestable) {
         this->add_harvestable();
     }
     else if (target_building != harvestable->building) {
         harvestable->removeFromParent();
-        this->harvestable = NULL;
     };
 
     this->autosave_clock->update(dt);
@@ -1341,38 +1339,40 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
 void HarvestScene::add_harvestable()
 {
-    this->harvestable = NULL;
+    Harvestable* harvestable = NULL;
     auto target_building = BUILDUP->get_target_building();
 
-
     if (target_building->name == "The Mine") {
-        this->harvestable = MiningHarvestable::create();
+        harvestable = MiningHarvestable::create();
     } else if (target_building->name == "The Forest") {
-        this->harvestable = TreeHarvestable::create();
+        harvestable = TreeHarvestable::create();
     } else if (target_building->name == "The Dump") {
-        this->harvestable = DumpsterHarvestable::create();
+        harvestable = DumpsterHarvestable::create();
     } else if (target_building->name == "The Workshop") {
-        this->harvestable = CraftingHarvestable::create(this->target_recipe);
+        harvestable = CraftingHarvestable::create(target_recipe);
     } else if (target_building->name == "The Arena") {
-        this->harvestable = FightingHarvestable::create();
+        harvestable = FightingHarvestable::create();
     } else if (target_building->name == "The Graveyard") {
-        this->harvestable = GraveyardHarvestable::create();
+        harvestable = GraveyardHarvestable::create();
     } else if (target_building->name == "The Underscape") {
-        this->harvestable = UndeadHarvestable::create();
+        harvestable = UndeadHarvestable::create();
     } else if (target_building->name == "The Marketplace") {
-        this->harvestable = MarketHarvestable::create();
+        harvestable = MarketHarvestable::create();
     } else if (target_building->name == "The Farm") {
-        this->harvestable = FarmingHarvestable::create();
+        harvestable = FarmingHarvestable::create();
     } else {
-        this->harvestable = Harvestable::create();
+        harvestable = Harvestable::create();
     };
 
-    float orig_scale = this->harvestable->getScale();
-    this->harvestable->setScale(0);
+    float orig_scale = harvestable->getScale();
+    harvestable->setScale(0);
     auto scale_to = ScaleTo::create(0.2f, orig_scale);
-    this->harvestable->runAction(cocos2d::EaseBackOut::create(scale_to));
+    harvestable->runAction(cocos2d::EaseBackOut::create(scale_to));
 
-    this->addChild(this->harvestable);
+    //we use the object in the scene instead of tracking it like this
+    //this->harvestable_manager->set_active_harvestable(harvestable);
+
+    this->addChild(harvestable);
 };
 
 void HarvestScene::toggle_ingredient_listviews(bool remove_children)

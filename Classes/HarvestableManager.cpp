@@ -7,6 +7,8 @@
 
 #include "base/CCDirector.h"
 
+HarvestableManager* HarvestableManager::_instance = NULL;
+
 HarvestableManager::HarvestableManager()
 {
     this->is_fighter_stored = false;
@@ -17,6 +19,15 @@ HarvestableManager::HarvestableManager()
     this->stored_item = NULL;
     this->stored_dumpster_clicks = 0;
 };
+
+HarvestableManager* HarvestableManager::getInstance()
+{
+    if (HarvestableManager::_instance == NULL) {
+        HarvestableManager::_instance = new HarvestableManager();
+    };
+
+    return HarvestableManager::_instance;
+}
 
 Harvestable* HarvestableManager::get_active_harvestable()
 {
@@ -29,10 +40,6 @@ Harvestable* HarvestableManager::get_active_harvestable()
 
     return active_harvestable;
 };
-
-// void HarvestableManager::set_active_harvestable(Harvestable* harvestable)
-// {
-// };
 
 void HarvestableManager::reset_fighter()
 {

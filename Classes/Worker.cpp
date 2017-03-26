@@ -15,6 +15,7 @@
 #include "HarvestScene.h"
 #include "goals/Achievement.h"
 #include "Harvestable.h"
+#include "HarvestableManager.h"
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
@@ -251,11 +252,11 @@ ScavengerHarvester::ScavengerHarvester(spBuilding building, std::string name, In
 
 void ScavengerHarvester::on_update(float dt)
 {
-    cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();
-    auto harvest_scene = dynamic_cast<HarvestScene*>(root_scene->getChildByName("HarvestScene"));
-    if (harvest_scene)
+    HarvestableManager* harvestable_manager = HarvestableManager::getInstance();
+    Harvestable* active_harvestable = harvestable_manager->get_active_harvestable();
+    if (active_harvestable)
     {
-        DumpsterHarvestable* dumpster_harvestable = dynamic_cast<DumpsterHarvestable*>(harvest_scene->harvestable);
+        DumpsterHarvestable* dumpster_harvestable = dynamic_cast<DumpsterHarvestable*>(active_harvestable);
         if (dumpster_harvestable != NULL){
             CCLOG("current clicks %f", dumpster_harvestable->get_current_clicks());
             dumpster_harvestable->add_current_clicks(1.0);
