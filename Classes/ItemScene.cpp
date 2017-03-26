@@ -161,7 +161,11 @@ vsItem ItemScene::get_items()
     auto it = std::remove_if(items.begin(), items.end(), remove_if_equipped);
     if (it != items.end()) items.erase(it);
 
-    return items;
+    auto end = std::next(items.begin(), std::min(size_t(50), items.size()));
+    
+    vsItem limited_items(items.begin(), end);
+
+    return limited_items;
 };
 
 cocos2d::ui::Layout* ItemScene::init_panel()
