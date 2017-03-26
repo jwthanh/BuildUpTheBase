@@ -291,7 +291,7 @@ void Building::update(float dt)
     };
 
     for (auto& mist : this->scavengers) {
-        if (this->name == "The Dump") { break; }; //TODO remove this after debug
+        if (this->name != "The Dump") { break; }; //TODO remove this after debug
 
         const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
         const WorkerSubType& harv_type = sub_type.first;
