@@ -701,6 +701,10 @@ void SideListView::setup_detail_listview_as_recipes()
                 {
                     HarvestableManager* harvestable_manager = HarvestableManager::getInstance();
                     harvestable_manager->queued_scavengers += 1.0;
+
+                    auto achievement_manager = AchievementManager::getInstance();
+                    std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalScavengesQueued);
+                    achievement->increment_by_n(1.0);
                 };
                 nuitems_config.push_back({
                     queue_scavenger,

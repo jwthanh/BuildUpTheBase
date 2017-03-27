@@ -22,6 +22,7 @@ enum class AchievementType {
     TotalUndeadScavenging = 7,
     TotalCityInvestments = 8,
     TotalRecipesCrafted = 9,
+    TotalScavengesQueued = 10,
 };
 
 

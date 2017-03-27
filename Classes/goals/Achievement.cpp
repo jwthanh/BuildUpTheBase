@@ -19,7 +19,8 @@ const std::map<AchievementType, std::pair<std::string, std::string>> Achievement
     { AchievementType::TotalHealthRegenerated, {"Bloodmage", "Total health healed in The Underscape" }},
     { AchievementType::TotalUndeadScavenging, {"Necromancer", "Total undead sent scavenging in The Dump" }},
     { AchievementType::TotalCityInvestments, {"Investor", "Total value invested in the city" }},
-    { AchievementType::TotalRecipesCrafted, {"Cook", "Total recipes crafted at The Workshop"}}
+    { AchievementType::TotalRecipesCrafted, {"Cook", "Total recipes crafted at The Workshop"}},
+    { AchievementType::TotalScavengesQueued, {"Necronomicon", "Total undead queued for scavenging in The Dump"}}
 };
 
 const std::map<BaseAchievement::SubType, std::string> BaseAchievement::type_map = {
@@ -32,7 +33,8 @@ const std::map<BaseAchievement::SubType, std::string> BaseAchievement::type_map 
     { AchievementType::TotalHealthRegenerated, "total_health_regenerated"},
     { AchievementType::TotalUndeadScavenging, "total_undead_scavenging"},
     { AchievementType::TotalCityInvestments, "total_city_investments"},
-    { AchievementType::TotalRecipesCrafted, "total_recipes_crafted"}
+    { AchievementType::TotalRecipesCrafted, "total_recipes_crafted"},
+    { AchievementType::TotalScavengesQueued, "total_scavenges_queued"}
 };
 
 void AchievementManager::fill_achievement_cache()
@@ -104,6 +106,10 @@ std::shared_ptr<BaseAchievement> AchievementManager::getAchievement(AchievementT
     else if (achv_type == AchievementType::TotalRecipesCrafted)
     {
         new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 25.0);
+    }
+    else if (achv_type == AchievementType::TotalScavengesQueued)
+    {
+        new_achievement = std::make_shared<CountAchievement>(achv_type, 0.0, 250.0);
     }
     else
     {
