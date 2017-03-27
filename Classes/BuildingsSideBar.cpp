@@ -669,7 +669,8 @@ void SideListView::setup_detail_listview_as_recipes()
 
                             //adds 33% progress to harvestable
                             harvestable->add_current_clicks(harvestable->click_limit*.33f);
-                            std::unique_ptr<HarvestableManager>& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+
+                            auto harvestable_manager = HarvestableManager::getInstance();
                             harvestable_manager->stored_dumpster_clicks = harvestable->get_current_clicks();
                             if (harvestable->should_shatter()) {
                                 harvestable->shatter();

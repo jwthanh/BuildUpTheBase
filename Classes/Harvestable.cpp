@@ -554,7 +554,7 @@ bool DumpsterHarvestable::init()
 void DumpsterHarvestable::init_clicks()
 {
 
-    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    auto harvestable_manager = HarvestableManager::getInstance();
 
     if (harvestable_manager->is_item_stored == false)
     {
@@ -582,7 +582,7 @@ void DumpsterHarvestable::on_harvest()
 {
     Harvestable::on_harvest();
 
-    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    auto harvestable_manager = HarvestableManager::getInstance();
     harvestable_manager->stored_dumpster_clicks = this->get_current_clicks();
 };
 
@@ -593,10 +593,12 @@ void DumpsterHarvestable::animate_clip()
 
 void DumpsterHarvestable::shatter()
 {
+    if (this->is_shattering) { return; };
     Harvestable::shatter();
 
-    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    auto harvestable_manager = HarvestableManager::getInstance();
     harvestable_manager->reset_item();
+    harvestable_manager->stored_dumpster_clicks = 0;
 
     auto achievement_manager = AchievementManager::getInstance();
     std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItems);
@@ -1191,7 +1193,7 @@ void FightingHarvestable::spawn_enemy()
 
     res_count_t enemy_dmg = 3;
 
-    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    auto harvestable_manager = HarvestableManager::getInstance();
     if (harvestable_manager->is_fighter_stored == false)
     {
         this->enemy->attrs->health->set_vals(enemy_hp);
@@ -1291,7 +1293,7 @@ void FightingHarvestable::shatter()
         }
     }
 
-    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    auto harvestable_manager = HarvestableManager::getInstance();
     harvestable_manager->reset_fighter();
     this->spawn_enemy();
 
@@ -1331,7 +1333,7 @@ void FightingHarvestable::on_harvest()
 
     battle->do_battle();
 
-    auto& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+    auto harvestable_manager = HarvestableManager::getInstance();
     harvestable_manager->store_fighter(this->enemy);
 };
 

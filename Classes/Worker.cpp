@@ -254,27 +254,28 @@ void ScavengerHarvester::on_update(float dt)
 {
     HarvestableManager* harvestable_manager = HarvestableManager::getInstance();
     Harvestable* active_harvestable = harvestable_manager->get_active_harvestable();
-    if (active_harvestable)
-    {
-        DumpsterHarvestable* dumpster_harvestable = dynamic_cast<DumpsterHarvestable*>(active_harvestable);
+    DumpsterHarvestable* dumpster_harvestable = dynamic_cast<DumpsterHarvestable*>(active_harvestable);
+    if (harvestable_manager->queued_scavengers > 0){
         if (dumpster_harvestable != NULL){
-            if (harvestable_manager->queued_scavengers > 0){
-                dumpster_harvestable->add_current_clicks(1.0);
-                dumpster_harvestable->try_to_shatter();
-
+            dumpster_harvestable->add_current_clicks(1.0);
+            dumpster_harvestable->try_to_shatter();
+            if (dumpster_harvestable->is_shattering == false)
+            {
                 //add a use
                 harvestable_manager->current_scavenger_uses += 1.0;
 
                 //make sure its not over the limit
                 if (harvestable_manager->current_scavenger_uses >= harvestable_manager->max_uses_per_scavenger){
                     harvestable_manager->queued_scavengers -= 1.0;
+                    harvestable_manager->current_scavenger_uses = 0.0;
                 };
-            };
-        };
-
+            }
+        } else {
+            harvestable_manager->stored_dumpster_clicks += 1;
+        }
     }
     else
     {
-        CCLOG("INFO: ScavengerHarvester cant do anything if the HarvestScene isnt active.");
+        CCLOG("INFO: ScavengerHarvester cant do anything if no dumpster harvestable");
     }
 }

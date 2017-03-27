@@ -893,25 +893,6 @@ void AchievementSerializer::load()
 
 }
 
-// void AchievementSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
-// {
-//     //UNUSED
-//     CCLOG("AchievementSerializer::_add_member should be unused");
-// };
-//
-// rjValue& AchievementSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
-// {
-//     CCLOG("AchievementSerializer::_get_member should not be used");
-//     if (doc.HasMember(key) == false)
-//     {
-//         return doc; //null placeholder
-//     }
-//
-//     //copy of Base::_get_member but because its protected I can't call it
-//     rjValue& value = doc[key];
-//     return value;
-// };
-
 void HarvestableManagerSerializer::serialize()
 {
     rjDocument doc = rjDocument();
