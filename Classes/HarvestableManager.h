@@ -12,6 +12,8 @@ enum class HarvestableTypes
     //TODO list them out, and then implement them
 };
 
+using res_count_t = long double;
+
 ///manages metadata about the harvestables
 /// like current progress through the dump
 /// eventually I'd like to make it manage the
@@ -51,5 +53,12 @@ class HarvestableManager
         void store_item(std::shared_ptr<Item> item);
         void load_item(std::shared_ptr<Item>& item);
         void reset_item();
+
+        //reserve of scavengers
+        res_count_t queued_scavengers;
+        //uses against the scavenger being used
+        res_count_t current_scavenger_uses;
+        //max uses per queued scavenger
+        res_count_t max_uses_per_scavenger;
 };
 #endif

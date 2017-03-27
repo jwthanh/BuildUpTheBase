@@ -258,8 +258,18 @@ void ScavengerHarvester::on_update(float dt)
     {
         DumpsterHarvestable* dumpster_harvestable = dynamic_cast<DumpsterHarvestable*>(active_harvestable);
         if (dumpster_harvestable != NULL){
-            dumpster_harvestable->add_current_clicks(1.0);
-            dumpster_harvestable->try_to_shatter();
+            if (harvestable_manager->queued_scavengers > 0){
+                dumpster_harvestable->add_current_clicks(1.0);
+                dumpster_harvestable->try_to_shatter();
+
+                //add a use
+                harvestable_manager->current_scavenger_uses += 1.0;
+
+                //make sure its not over the limit
+                if (harvestable_manager->current_scavenger_uses >= harvestable_manager->max_uses_per_scavenger){
+                    harvestable_manager->queued_scavengers -= 1.0;
+                };
+            };
         };
 
     }
