@@ -19,7 +19,7 @@ HarvestableManager::HarvestableManager()
     this->stored_item = NULL;
     this->stored_dumpster_clicks = 0;
 
-    this->queued_scavengers = 10;
+    this->queued_scavengers = 0;
     this->current_scavenger_uses = 0;
     this->max_uses_per_scavenger = 50;
 };

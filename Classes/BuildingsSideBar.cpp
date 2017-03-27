@@ -691,6 +691,26 @@ void SideListView::setup_detail_listview_as_recipes()
                         "menu_icons/scavenge.png"
                     }
                     });
+
+
+                spRecipe queue_scavenger = std::make_shared<Recipe>("Queue scavenge", "Scavenge for you, slowly\n --costs 1 Undead");
+                queue_scavenger->components = mistIngredient({
+                    { Ingredient::SubType::Undead, 1 }
+                });
+                queue_scavenger->_callback = [building]()
+                {
+                    HarvestableManager* harvestable_manager = HarvestableManager::getInstance();
+                    harvestable_manager->queued_scavengers += 1.0;
+                };
+                nuitems_config.push_back({
+                    queue_scavenger,
+                    DetailType::Recipe,
+                    {
+                        queue_scavenger->name,
+                        queue_scavenger->description,
+                        "menu_icons/scavenge.png"
+                    }
+                    });
             };
             if (building->name == "The Mine")
             {
