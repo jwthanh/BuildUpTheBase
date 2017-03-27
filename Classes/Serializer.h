@@ -162,4 +162,13 @@ class AchievementSerializer : public BaseSerializer
         // virtual rjValue& _get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator);
 };
 
+class HarvestableManagerSerializer : public BaseSerializer
+{
+    public:
+        HarvestableManagerSerializer(std::string filename) : BaseSerializer(filename){};
+
+        void serialize() override;
+        void load() override;
+};
+
 #endif

@@ -21,6 +21,7 @@
 
 #include "2d/CCTMXTiledMap.h"
 #include "2d/CCTMXLayer.h"
+#include "HarvestableManager.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -911,3 +912,34 @@ void AchievementSerializer::load()
 //     return value;
 // };
 
+void HarvestableManagerSerializer::serialize()
+{
+    rjDocument doc = rjDocument();
+    doc.SetObject();
+
+    rjDocument::AllocatorType& allocator = doc.GetAllocator();
+
+    HarvestableManager* h_man = HarvestableManager::getInstance();
+    this->set_double(doc, "queued_scavengers", h_man->queued_scavengers);
+    this->set_double(doc, "current_scavenger_uses", h_man->current_scavenger_uses);
+    this->set_double(doc, "max_uses_per_scavenger", h_man->max_uses_per_scavenger);
+
+    this->save_document(doc);
+}
+
+void HarvestableManagerSerializer::load()
+{
+    rjDocument doc = this->get_document();
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false)
+    {
+        CCLOG("NOT OBJECT");
+        return;
+    }
+
+    HarvestableManager* h_man = HarvestableManager::getInstance();
+    h_man->queued_scavengers = this->get_double(doc, "queued_scavengers", 0);
+    h_man->current_scavenger_uses = this->get_double(doc, "current_scavenger_uses", 0);
+    h_man->max_uses_per_scavenger = this->get_double(doc, "max_uses_per_scavenger", 50);
+
+}

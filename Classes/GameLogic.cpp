@@ -401,6 +401,9 @@ void GameLogic::save_all()
     auto achievement_serializer = AchievementSerializer("alpha_achievements.json");
     achievement_serializer.serialize();
 
+    auto harvestable_manager_serializer = HarvestableManagerSerializer("alpha_harvestable_manager.json");
+    harvestable_manager_serializer.serialize();
+
     //save coins
     DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());
     DataManager::set_double_from_data("city_investment", GameLogic::getInstance()->get_city_investment());
@@ -451,6 +454,9 @@ void GameLogic::load_all()
 
     auto achievement_serializer = AchievementSerializer("alpha_achievements.json");
     achievement_serializer.load();
+
+    auto harvestable_manager_serializer = HarvestableManagerSerializer("alpha_harvestable_manager.json");
+    harvestable_manager_serializer.load();
 
     auto coins_from_data = DataManager::get_double_from_data(Beatup::total_coin_key);
     if (coins_from_data < 0.0)

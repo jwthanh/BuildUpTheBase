@@ -21,7 +21,7 @@ HarvestableManager::HarvestableManager()
 
     this->queued_scavengers = 0;
     this->current_scavenger_uses = 0;
-    this->max_uses_per_scavenger = 50;
+    this->max_uses_per_scavenger = 123; //actually set up in the HarvestableManagerSerializer::load
 };
 
 HarvestableManager* HarvestableManager::getInstance()
