@@ -660,21 +660,21 @@ void SideListView::setup_detail_listview_as_recipes()
                         //add a bunch of clicks to the harvestable (assuming
                         // though that its the dumpster harvestable)
                         Harvestable* harvestable = HarvestableManager::getInstance()->get_active_harvestable();
-                                if (harvestable)
-                                {
-                                    res_count_t send_scavenger = 1;
-                                    auto achievement_manager = AchievementManager::getInstance();
-                                    std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalUndeadScavenging);
-                                    achievement->increment_by_n(send_scavenger);
+                        if (harvestable)
+                        {
+                            res_count_t send_scavenger = 1;
+                            auto achievement_manager = AchievementManager::getInstance();
+                            std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalUndeadScavenging);
+                            achievement->increment_by_n(send_scavenger);
 
-                                    //adds 33% progress to harvestable
-                                    harvestable->add_current_clicks(harvestable->click_limit*.33f);
-                                    std::unique_ptr<HarvestableManager>& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
-                                    harvestable_manager->stored_dumpster_clicks = harvestable->get_current_clicks();
-                                    if (harvestable->should_shatter()) {
-                                        harvestable->shatter();
-                                    };
-                                };
+                            //adds 33% progress to harvestable
+                            harvestable->add_current_clicks(harvestable->click_limit*.33f);
+                            std::unique_ptr<HarvestableManager>& harvestable_manager = GameLogic::getInstance()->harvestable_manager;
+                            harvestable_manager->stored_dumpster_clicks = harvestable->get_current_clicks();
+                            if (harvestable->should_shatter()) {
+                                harvestable->shatter();
+                            };
+                        };
                     }
                     else
                     {
