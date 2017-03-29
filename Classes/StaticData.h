@@ -63,6 +63,7 @@ class IngredientData : public BaseStaticData
 
         std::string getter(std::string key) override;
 
+        GET_JSON_ATTR(name);
         GET_JSON_ATTR(description);
         GET_JSON_ATTR(img_large);
 

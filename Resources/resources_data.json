@@ -1,74 +1,92 @@
 {
     "resources": {
         "grain": {
+            "name": "Grain",
             "description": "Grain is good.",
             "img_large": "ingredients/grain.png"
         },
         "pileofgrain": {
+            "name": "Pile of Grain",
             "description": "More grain is better.",
             "img_large": "ingredients/pileofgrain.png"
         },
         "bread": {
+            "name": "Bread",
             "description": "Bread is a required for a loaf.",
             "img_large": "ingredients/bread.png"
         },
         "loaf": {
+            "name": "Loaf",
             "description": "Can't make a loaf without bread.",
             "img_large": "ingredients/loaf.png"
         },
         "seed": {
+            "name": "Seed",
             "description": "This is the seed of something huge.",
             "img_large": "ingredients/seed.png"
         },
         "wood": {
+            "name": "Wood",
             "description": "Wood off a giant tree.",
             "img_large": "ingredients/wood.png"
         },
         "iron": {
+            "name": "Iron",
             "description": "Shimmering in the darkness, you are alone.",
             "img_large": "ingredients/iron.png"
         },
         "copper": {
+            "name": "Copper",
             "description": "A rarity, even today.",
             "img_large": "ingredients/copper.png"
         },
         "fly": {
+            "name": "Fly",
             "description": "Tries to fly as near to your ear as possible.",
             "img_large": "ingredients/fly.png"
         },
         "sand": {
+            "name": "Sand",
             "description": "You hate sand, it's coarse and irritating and it gets everywhere.",
             "img_large": "ingredients/sand.png"
         },
         "flesh": {
+            "name": "Flesh",
             "description": "The flesh of the dead, why keep it?",
             "img_large": "ingredients/flesh.png"
         },
         "berry": {
+            "name": "Berry",
             "description": "A tasty treat.",
             "img_large": "ingredients/berry.png"
         },
         "soul": {
+            "name": "Soul",
             "description": "Perhaps used to bring the dead to life...",
             "img_large": "ingredients/soul.png"
         },
         "blood": {
+            "name": "Blood",
             "description": "Drink this and feel alive.",
             "img_large": "ingredients/blood.png"
         },
         "paper": {
+            "name": "Paper",
             "description": "Notes scribbled down, unreadable.",
             "img_large": "ingredients/paper.png"
         },
         "undead": {
+            "name": "Undead",
             "description": "Minion, eager to labour for you.",
             "img_large": "ingredients/undead.png"
         },
         "minecart": {
+            "name": "Minecart",
             "description": "Each one, bringing you deeper and deeper into the dark depths below.",
             "img_large": "ingredients/minecart.png"
         },
         "minerails": {
+            "name": "Minerails",
             "description": "Lay these down to allow minecarts to make their journey deeper.",
             "img_large": "ingredients/minerails.png"
         }
