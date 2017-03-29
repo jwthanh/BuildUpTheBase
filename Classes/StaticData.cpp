@@ -10,10 +10,22 @@
 #include "Recipe.h"
 #include "Item.h"
 
+std::map<std::string, rjDocument> BaseStaticData::_file_content_cache = {};
+
 BaseStaticData::BaseStaticData(std::string filename)
 {
 	this->_filename = filename;
-	this->jsonDoc = FileIO::open_json(this->_filename, true);
+
+    auto it = BaseStaticData::_file_content_cache.find(filename);
+    if (it == BaseStaticData::_file_content_cache.end())
+    {
+        //grab a document from filesystem, cache it
+        rjDocument doc = FileIO::open_json(this->_filename, true);
+        BaseStaticData::_file_content_cache[filename] = std::move(doc);
+    }
+
+    //copy the cached doc into the instance's doc
+    this->jsonDoc.CopyFrom(BaseStaticData::_file_content_cache[filename], this->jsonDoc.GetAllocator());
 }
 
 BaseStaticData::BaseStaticData(const BaseStaticData&)

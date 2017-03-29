@@ -22,6 +22,7 @@ class BaseStaticData
 {
     private:
         std::map<std::string, std::string> _cache;
+        static std::map<std::string, rjDocument> _file_content_cache;
 
     protected:
         std::string _filename;
