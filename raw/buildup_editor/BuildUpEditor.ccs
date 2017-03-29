@@ -12,6 +12,7 @@
         <Folder Name="details">
           <Project Name="inventory_detail.csd" Type="Node" />
           <Project Name="message_detail.csd" Type="Node" />
+          <Project Name="report_ing_detail.csd" Type="Node" />
         </Folder>
         <Folder Name="images">
           <Image Name="cat.png" />
@@ -23,12 +24,12 @@
         <Folder Name="scenes">
           <Project Name="achievement_scene.csd" Type="Scene" />
           <Project Name="base_scene.csd" Type="Scene" />
+          <Project Name="building_detail_scene.csd" Type="Scene" />
           <Project Name="city_menu_scene.csd" Type="Scene" />
           <Project Name="equipment_scene.csd" Type="Scene" />
           <Project Name="items_scene.csd" Type="Scene" />
           <Project Name="miner_scene.csd" Type="Scene" />
           <Project Name="reset_scene.csd" Type="Scene" />
-          <Project Name="building_detail_scene.csd" Type="Scene" />
         </Folder>
         <Folder Name="tutorial">
           <Project Name="tutorial_sidebar_panel.csd" Type="Node" />

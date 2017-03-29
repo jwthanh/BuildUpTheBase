@@ -4,9 +4,11 @@
 
 #include <string>
 
-#include "constants.h"
 #include <json/allocators.h>
 #include <json/document.h>
+
+#include "constants.h"
+#include "SubTypes.h"
 
 
 #define GET_JSON_ATTR(attr_name) \
@@ -60,6 +62,7 @@ class IngredientData : public BaseStaticData
     public:
         std::string resource_id;
         IngredientData(std::string resource_id);
+        IngredientData(IngredientSubType resource_type);
 
         std::string getter(std::string key) override;
 

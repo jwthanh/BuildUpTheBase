@@ -25,6 +25,11 @@
             "description": "This is the seed of something huge.",
             "img_large": "ingredients/seed.png"
         },
+        "tree": {
+            "name": "Tree",
+            "description": "A huge tree",
+            "img_large": "ingredients/seed.png"
+        },
         "wood": {
             "name": "Wood",
             "description": "Wood off a giant tree.",

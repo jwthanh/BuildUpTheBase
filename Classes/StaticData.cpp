@@ -162,6 +162,12 @@ IngredientData::IngredientData(std::string resource_id)
     this->resource_id = resource_id;
 }
 
+IngredientData::IngredientData(IngredientSubType resource_type)
+    : IngredientData(Ingredient::type_to_string(resource_type))
+{
+
+}
+
 std::string IngredientData::getter(std::string key)
 {
     return this->_get_data("resources", this->resource_id, key);
