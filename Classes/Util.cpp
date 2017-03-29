@@ -186,7 +186,7 @@ std::string _humanize_number(long double& value)
 }
 
 std::stringstream _beautify_double_ss;
-std::string beautify_double(long double& value)
+std::string beautify_double(const long double& value)
 {
     bool is_negative = value < 0;
     std::string decimal = "";

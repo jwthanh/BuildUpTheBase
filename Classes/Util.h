@@ -64,7 +64,7 @@ typename mapT::mapped_type map_get(const mapT& input_map, const typename mapT::k
 
 std::vector<std::string>& split(const std::string &s, char delim, std::vector<std::string> &elems);
 std::vector<std::string> split(const std::string &s, char delim);
-std::string beautify_double(long double& value);
+std::string beautify_double(const long double& value);
 void test_beautify_double();
 
 void try_set_enabled(cocos2d::ui::Widget* widget, bool new_value);
