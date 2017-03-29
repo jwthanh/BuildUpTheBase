@@ -175,9 +175,12 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         // SoundLibrary::getInstance()->play_general_harvest_touched();
         // GameDirector::switch_to_building_detail_menu();
 
+        //combine ingredient types into one vector
         std::vector<Ingredient::SubType> ing_types;
         ing_types.insert(ing_types.cend(), Ingredient::basic_ingredients.begin(), Ingredient::basic_ingredients.end());
         ing_types.insert(ing_types.cend(), Ingredient::advanced_ingredients.begin(), Ingredient::advanced_ingredients.end());
+
+        auto city_ingredients = BUILDUP->get_all_ingredients();
 
         int width = 5;
         float cell_width = 100.0f;
@@ -188,8 +191,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
         cocos2d::Vec2 initial_pos = get_center_pos(-300, 200);
         float x = initial_pos.x;
         float y = initial_pos.y;
-
-        auto city_ingredients = BUILDUP->get_all_ingredients();
 
         int i = 0;
         for (auto ing_type : ing_types)
@@ -211,13 +212,19 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
             IngredientData ingredient_data(ing_type);
             std::string img_path = ingredient_data.get_img_large();
 
+            //title
             auto ing_title = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
             ing_title->setString(ingredient_data.get_name());
+
+            //count
             auto count_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("count_lbl"));
             count_lbl->setString(beautify_double(map_get(city_ingredients, ing_type, 0)));
+
+            //ingredient icon
             auto ing_icon = dynamic_cast<ui::ImageView*>(panel->getChildByName("ing_icon"));
             image_view_scale9_hack(ing_icon);
             ing_icon->loadTexture(img_path);
+            set_aliasing(ing_icon);
 
         }
     }
