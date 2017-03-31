@@ -54,84 +54,7 @@ GameLogic::GameLogic()
 
 };
 
-void GameLogic::load_game()
-{
-
-    //dont re-load if done once already. this is because load_game gets called
-    //onEnter, originally only from initializing game, but now we're using
-    //different scenes
-    if (is_loaded == true)
-    {
-        return;
-    };
-
-    //TODO save/load whether its been completed or not
-    // Tutorial* tutorial = Tutorial::getInstance();
-    // auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-    // tutorial->first_start(scene);
-
-    //cheat to reset data to blank on load
-    auto username = DataManager::get_string_from_data("username");
-    if (username == "__resetdata")
-    {
-        DataManager::set_string_from_data("username", "");
-        return;
-    };
-
-    std::string tutorial_key = "tutorial_v1_complete";
-    bool tutorial_complete = DataManager::get_bool_from_data(tutorial_key);
-
-    //add popup to message to fill out username
-    if (username == "" && tutorial_complete) {
-        auto popup = GameLogic::get_popup_panel();
-        popup->set_string("Set a username, visible along the right side of the screen, and check out how you stack up on the leaderboard.");
-        popup->animate_open();
-    };
-
-    CCLOG("loading game on startup, this should only happen once");
-    GameLogic::load_all();
-
-
-    bool show_welcome_modal = tutorial_complete == true;
-    // bool show_welcome_modal = false;
-    if (show_welcome_modal)
-    {
-        auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-        TextBlobModal modal(scene);
-
-        std::string modal_content;
-        time_t from_file = static_cast<time_t>(DataManager::get_int_from_data(Beatup::last_login_key));
-        if (from_file == 0)
-        {
-            modal.set_title("Welcome to Build Up The Base!");
-            modal_content = this->new_player_load();
-        }
-        else
-        {
-            modal.set_title("Welcome Back!");
-            modal_content = this->existing_player_load();
-        }
-
-        modal.set_body(modal_content);
-
-    }
-
-    //set the last login time, set here and on save
-    BEATUP->set_last_login();
-    LOG(INFO) << "Game loaded!";
-
-    this->is_loaded = true;
-
-    if (tutorial_complete == false)
-    {
-        Tutorial* tutorial = Tutorial::getInstance();
-        auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-        tutorial->first_start(scene);
-    };
-
-}
-
-std::string GameLogic::new_player_load()
+std::string new_player_load()
 {
 
     std::stringstream ss;
@@ -142,7 +65,7 @@ std::string GameLogic::new_player_load()
 
 }
 
-std::string GameLogic::existing_player_load()
+std::string existing_player_load()
 {
     std::stringstream gains_ss, at_capacity_ss;
     std::chrono::duration<double, std::ratio<3600>> hours_since_last_login = BEATUP->hours_since_last_login();
@@ -227,6 +150,91 @@ std::string GameLogic::existing_player_load()
     }
 
     return result;
+
+}
+
+
+
+TextBlobModal build_welcome_modal()
+{
+    auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+    TextBlobModal modal(scene);
+
+    std::string modal_content;
+    time_t from_file = static_cast<time_t>(DataManager::get_int_from_data(Beatup::last_login_key));
+    if (from_file == 0)
+    {
+        modal.set_title("Welcome to Build Up The Base!");
+        modal_content = new_player_load();
+    }
+    else
+    {
+        modal.set_title("Welcome Back!");
+        modal_content = existing_player_load();
+    }
+
+    modal.set_body(modal_content);
+
+    return modal;
+};
+
+void GameLogic::load_game()
+{
+
+    //dont re-load if done once already. this is because load_game gets called
+    //onEnter, originally only from initializing game, but now we're using
+    //different scenes
+    if (is_loaded == true)
+    {
+        return;
+    };
+
+    //TODO save/load whether its been completed or not
+    // Tutorial* tutorial = Tutorial::getInstance();
+    // auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+    // tutorial->first_start(scene);
+
+    //cheat to reset data to blank on load
+    auto username = DataManager::get_string_from_data("username");
+    if (username == "__resetdata")
+    {
+        DataManager::set_string_from_data("username", "");
+        return;
+    };
+
+    std::string tutorial_key = "tutorial_v1_complete";
+    bool tutorial_complete = DataManager::get_bool_from_data(tutorial_key);
+
+    //add popup to message to fill out username
+    if (username == "" && tutorial_complete) {
+        auto popup = GameLogic::get_popup_panel();
+        popup->set_string("Set a username, visible along the right side of the screen, and check out how you stack up on the leaderboard.");
+        popup->animate_open();
+    };
+
+    CCLOG("loading game on startup, this should only happen once");
+    GameLogic::load_all();
+
+
+    bool show_welcome_modal = tutorial_complete == true;
+    // bool show_welcome_modal = false;
+    if (show_welcome_modal)
+    {
+        auto modal = build_welcome_modal();
+    }
+
+    //set the last login time, set here and on save
+    BEATUP->set_last_login();
+    LOG(INFO) << "Game loaded!";
+
+    this->is_loaded = true;
+
+    if (tutorial_complete == false)
+    {
+        Tutorial* tutorial = Tutorial::getInstance();
+        auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+        tutorial->first_start(scene);
+    };
 
 }
 
