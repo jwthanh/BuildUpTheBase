@@ -147,7 +147,7 @@ std::string GameLogic::existing_player_load()
     std::stringstream gains_ss, at_capacity_ss;
     std::chrono::duration<double, std::ratio<3600>> hours_since_last_login = BEATUP->hours_since_last_login();
 
-    auto original_ingredients = BUILDUP->get_all_ingredients(); //NOTE create a copy to reference later
+    auto original_ingredients = BUILDUP->get_all_ingredients();
 
     auto seconds = std::chrono::duration_cast<std::chrono::seconds>(hours_since_last_login);
     long long seconds_count = seconds.count();
@@ -161,8 +161,8 @@ std::string GameLogic::existing_player_load()
     {
         BUILDUP->city->update(seconds_count);
 
-        auto new_ingredients = BUILDUP->get_all_ingredients();
-        for (auto mist_ing : new_ingredients)
+        auto refreshed_ingredients = BUILDUP->get_all_ingredients();
+        for (auto mist_ing : refreshed_ingredients)
         {
             Ingredient::SubType ing_type = mist_ing.first;
             res_count_t new_count = mist_ing.second;
@@ -185,8 +185,6 @@ std::string GameLogic::existing_player_load()
     {
         gains_ss << "Awfully suspicious..." << std::endl;
         LOG(WARNING) << "time jump cheat detected";
-
-        CCLOG("!!!todo load ingredients from file");
 
         BEATUP->_total_coins = 0;
 
