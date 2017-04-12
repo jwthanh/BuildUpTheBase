@@ -1,3 +1,17 @@
+### NOTE about addr2line traceback
+
+make sure input file is utf8
+
+sort of works:
+
+    $ python stack.py --symbols-dir=../proj.android/obj/local/armeabi/ trace.log
+
+seems to work as well as it can.
+
+    PS C:\Users\Josh\Documents\cocos_projects\basebuilder\python> E:\Cocos\tools\android-ndk-r10c\ndk-stack.exe -sym C:\Users\Josh\Documents\cocos_projects\basebuilder\proj.android\obj\local\armeabi\  -dump C:\Users\Josh\Documents\cocos_projects\basebuilder\python\trace.log > C:\Users\Josh\Documents\cocos_projects\basebuilder\python\output.log
+
+
+
 * everything costs the same
 
 #Items icons
