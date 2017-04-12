@@ -344,8 +344,9 @@ void BaseScene::create_goal_loadingbar()
             auto harvestable = HarvestableManager::getInstance()->get_active_harvestable();
             if (harvestable)
             {
-                auto orig_percent = std::floor(harvester_loading_bar->getPercent());
-                auto new_percent = std::floor(harvestable->get_click_ratio()*100.0);
+                float orig_percent = std::min(100.0f, std::floor(harvester_loading_bar->getPercent()));
+                float new_percent = std::min(100.0f, std::floor(harvestable->get_click_ratio()*100.0f));
+
                 if (orig_percent != new_percent)
                 {
                     harvester_loading_bar->setPercent(new_percent);
