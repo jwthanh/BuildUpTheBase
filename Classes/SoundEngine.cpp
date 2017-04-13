@@ -26,6 +26,8 @@ SoundLibrary* SoundLibrary::_instance = NULL;
 
 bool SoundEngine::is_sound_enabled()
 {
+    return false; //TODO reenable sound at some point
+
     UserDefault* ud = UserDefault::getInstance();
     return ud->getBoolForKey(SoundEngine::id_string.c_str(), true);
 };
@@ -39,6 +41,8 @@ void SoundEngine::set_sound_enabled(bool enabled)
 
 bool SoundEngine::is_music_enabled()
 {
+    return false; //TODO reenable sound at some point
+
     UserDefault* ud = UserDefault::getInstance();
     return ud->getBoolForKey(SoundEngine::music_id_string.c_str(), true);
 };
