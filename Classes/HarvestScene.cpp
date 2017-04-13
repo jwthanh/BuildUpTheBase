@@ -182,9 +182,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 
         auto city_ingredients = BUILDUP->get_all_ingredients();
 
-        int width = 5;
-        float cell_width = 100.0f;
-        float cell_height = 100.0f;
+        int width = 4;
+        float cell_width = 150.0f;
+        float cell_height = 150.0f;
 
         float cell_margin = 5.0f;
 
