@@ -861,7 +861,10 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
         //move to Craft tab and shake it
         HarvestScene* harvest_scene = dynamic_cast<HarvestScene*>(this->getParent());
         if (harvest_scene){
-            harvest_scene->sidebar->toggle_buttons(harvest_scene->sidebar->tab_detail_btn, TouchEventType::ENDED);
+            if (harvest_scene->sidebar->tabs.active_tab != TabManager::TabTypes::DetailTab){
+                harvest_scene->sidebar->toggle_buttons(harvest_scene->sidebar->tab_detail_btn, TouchEventType::ENDED);
+            };
+
             auto detail_listview = harvest_scene->sidebar->tabs.get_active_listview();
             for (auto& child : detail_listview->getChildren()){
                 animate_flash_action(child, 0.1f, 1.05f);
