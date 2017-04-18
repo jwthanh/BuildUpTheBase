@@ -75,26 +75,30 @@ void TabManager::set_tab_active(TabTypes tab_type, const spBuilding& building)
     spBuilding old_building = this->active_building;
     this->active_building = building;
 
-    return; //disable sidebar scrolling for nausea reasons
+    //TODO TODO
+    // return; //disable sidebar scrolling for nausea reasons
 
     float distance = 400.0f;
-    auto move_by = MoveBy::create(0.75f, { 0, -distance });
-    auto eased_action = EaseBackOut::create(move_by);
+    auto move_by = MoveBy::create(0.25f, { 0, -distance });
+    auto eased_action = EaseOut::create(move_by, 5.0f);
 
     //move the given listview upwards, then downwards by the same amount
     auto listview = this->get_active_listview();
-    listview->setPosition({listview->getPositionX(), listview->getPositionY() + distance });
+    listview->setPosition({
+        listview->getPositionX(),
+        listview->getPositionY() + distance
+    });
     listview->runAction(eased_action);
 
-    //move all the tab buttons
-    if (building != old_building)
-    {
-        for (auto& btn : this->button_map)
-        {
-            btn.first->setPosition({ btn.first->getPositionX(), btn.first->getPositionY() + distance });
-            btn.first->runAction(eased_action->clone());
-        }
-    }
+    // //move all the tab buttons
+    // if (building != old_building)
+    // {
+    //     for (auto& btn : this->button_map)
+    //     {
+    //         btn.first->setPosition({ btn.first->getPositionX(), btn.first->getPositionY() + distance });
+    //         btn.first->runAction(eased_action->clone());
+    //     }
+    // }
 }
 
 cocos2d::ui::ListView* TabManager::get_active_listview()
@@ -158,9 +162,13 @@ ui::Button* SideListView::_create_button(std::string node_name)
 {
     Node* sidebar_panel = this->parent->getChildByName("sidebar_panel");
 
-    ui::Button* button = dynamic_cast<ui::Button*>(sidebar_panel->getChildByName(node_name));
+    ui::Button* button = dynamic_cast<ui::Button*>(
+        sidebar_panel->getChildByName(node_name)
+    );
     set_aliasing(button);
     load_default_button_textures(button);
+
+    button->setLocalZOrder(5); //needs to be above listviews for dropping animation
 
     Label* button_lbl = (Label*)button->getTitleRenderer();
     button_lbl->setTextColor(Color4B::WHITE);

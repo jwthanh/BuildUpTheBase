@@ -221,6 +221,9 @@ void GameLogic::load_game()
     if (show_welcome_modal)
     {
         auto modal = build_welcome_modal();
+        auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+        auto tutorial_sidebar_panel = scene->getChildByName("tutorial_sidebar_panel");
+        tutorial_sidebar_panel->setVisible(false);
     }
 
     //set the last login time, set here and on save
@@ -234,6 +237,8 @@ void GameLogic::load_game()
         Tutorial* tutorial = Tutorial::getInstance();
         auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
         tutorial->first_start(scene);
+        auto tutorial_sidebar_panel = scene->getChildByName("tutorial_sidebar_panel");
+        tutorial_sidebar_panel->setVisible(true);
     };
 
 }

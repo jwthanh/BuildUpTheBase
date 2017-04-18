@@ -212,58 +212,6 @@
           <AbstractNodeData Name="sidebar_panel" Visible="False" ActionTag="-679798338" Tag="271" IconVisible="False" RightMargin="560.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="400.0000" Y="540.0000" />
             <Children>
-              <AbstractNodeData Name="shop_listview" ActionTag="-890238903" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
-                <Size X="800.0000" Y="810.0000" />
-                <AnchorPoint />
-                <Position X="0.0004" />
-                <Scale ScaleX="0.5000" ScaleY="0.5000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0000" />
-                <PreSize X="2.0000" Y="1.5000" />
-                <SingleColor A="255" R="60" G="80" B="102" />
-                <FirstColor A="255" R="150" G="150" B="255" />
-                <EndColor A="255" R="255" G="255" B="255" />
-                <ColorVector ScaleY="1.0000" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="detail_listview" ActionTag="-840505419" Tag="162" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
-                <Size X="800.0000" Y="810.0000" />
-                <AnchorPoint />
-                <Position X="0.0004" />
-                <Scale ScaleX="0.5000" ScaleY="0.5000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0000" />
-                <PreSize X="2.0000" Y="1.5000" />
-                <SingleColor A="255" R="60" G="80" B="102" />
-                <FirstColor A="255" R="150" G="150" B="255" />
-                <EndColor A="255" R="255" G="255" B="255" />
-                <ColorVector ScaleY="1.0000" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="building_listview" ActionTag="51939430" Tag="79" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
-                <Size X="800.0000" Y="810.0000" />
-                <AnchorPoint />
-                <Position X="0.0004" />
-                <Scale ScaleX="0.5000" ScaleY="0.5000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0000" />
-                <PreSize X="2.0000" Y="1.5000" />
-                <SingleColor A="255" R="60" G="80" B="102" />
-                <FirstColor A="255" R="150" G="150" B="255" />
-                <EndColor A="255" R="255" G="255" B="255" />
-                <ColorVector ScaleY="1.0000" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="powers_listview" ActionTag="1504007663" Tag="169" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
-                <Size X="800.0000" Y="810.0000" />
-                <AnchorPoint />
-                <Position X="0.0004" />
-                <Scale ScaleX="0.5000" ScaleY="0.5000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0000" />
-                <PreSize X="2.0000" Y="1.5000" />
-                <SingleColor A="255" R="60" G="80" B="102" />
-                <FirstColor A="255" R="150" G="150" B="255" />
-                <EndColor A="255" R="255" G="255" B="255" />
-                <ColorVector ScaleY="1.0000" />
-              </AbstractNodeData>
               <AbstractNodeData Name="tab_1_btn" ActionTag="2032519568" Tag="160" IconVisible="False" LeftMargin="0.0009" RightMargin="199.9991" TopMargin="69.9991" BottomMargin="400.0009" TouchEnable="True" FontSize="18" ButtonText="Workers" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="200.0000" Y="70.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -327,6 +275,58 @@
                 <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="shop_listview" ActionTag="-890238903" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+                <Size X="800.0000" Y="810.0000" />
+                <AnchorPoint />
+                <Position X="0.0004" />
+                <Scale ScaleX="0.5000" ScaleY="0.5000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0000" />
+                <PreSize X="2.0000" Y="1.5000" />
+                <SingleColor A="255" R="60" G="80" B="102" />
+                <FirstColor A="255" R="150" G="150" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="detail_listview" ActionTag="-840505419" Tag="162" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+                <Size X="800.0000" Y="810.0000" />
+                <AnchorPoint />
+                <Position X="0.0004" />
+                <Scale ScaleX="0.5000" ScaleY="0.5000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0000" />
+                <PreSize X="2.0000" Y="1.5000" />
+                <SingleColor A="255" R="60" G="80" B="102" />
+                <FirstColor A="255" R="150" G="150" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="building_listview" ActionTag="51939430" Tag="79" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+                <Size X="800.0000" Y="810.0000" />
+                <AnchorPoint />
+                <Position X="0.0004" />
+                <Scale ScaleX="0.5000" ScaleY="0.5000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0000" />
+                <PreSize X="2.0000" Y="1.5000" />
+                <SingleColor A="255" R="60" G="80" B="102" />
+                <FirstColor A="255" R="150" G="150" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="powers_listview" ActionTag="1504007663" Tag="169" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+                <Size X="800.0000" Y="810.0000" />
+                <AnchorPoint />
+                <Position X="0.0004" />
+                <Scale ScaleX="0.5000" ScaleY="0.5000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0000" />
+                <PreSize X="2.0000" Y="1.5000" />
+                <SingleColor A="255" R="60" G="80" B="102" />
+                <FirstColor A="255" R="150" G="150" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint />

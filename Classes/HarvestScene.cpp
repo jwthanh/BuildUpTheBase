@@ -118,6 +118,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_A)
     {
+        ActionPanel* action_panel = ActionPanel::create();
+        action_panel->set_target(this->sidebar->shop_listviews->at("The Graveyard"));
+        this->addChild(action_panel);
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_F)
     {
@@ -1144,8 +1147,10 @@ bool HarvestScene::init()
         this->toggle_ingredient_listviews();
     });
 
-    return true;
+    auto tutorial_sidebar_panel = this->getChildByName("tutorial_sidebar_panel")->getChildByName("tutorial_sidebar_panel");
+    tutorial_sidebar_panel->setLocalZOrder(-100); //set tutorial panel behind everything
 
+    return true;
 }
 
 void HarvestScene::update(float dt)

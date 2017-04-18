@@ -187,7 +187,7 @@ float ActionPanel::get_target_pos_y()
 float ActionPanel::get_rate()
 {
     auto slider = dynamic_cast<cocos2d::ui::Slider*>(this->_panel->getChildByName("buttons_panel")->getChildByName("rate_slider"));
-    float max = 100.0f;
+    float max = 10.0f;
     return (float)slider->getPercent() / 100.0f * max;
 };
 
