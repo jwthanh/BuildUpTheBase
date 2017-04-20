@@ -26,6 +26,10 @@
 #include "HarvestScene.h"
 #include "Harvestable.h"
 #include "HarvestableManager.h"
+#include "FShake.h"
+#include "Tutorial.h"
+#include "utilities/vibration.h"
+#include "goals/Achievement.h"
 
 #include "base/CCDirector.h"
 #include "CCApplication.h"
@@ -35,9 +39,6 @@
 #include "ui/CocosGUI.h"
 #include <2d/CCActionInterval.h>
 #include <2d/CCActionEase.h>
-#include "Tutorial.h"
-#include "utilities/vibration.h"
-#include "goals/Achievement.h"
 
 
 USING_NS_CC;
@@ -75,11 +76,9 @@ void TabManager::set_tab_active(TabTypes tab_type, const spBuilding& building)
     spBuilding old_building = this->active_building;
     this->active_building = building;
 
-    //TODO TODO
-    // return; //disable sidebar scrolling for nausea reasons
-
     float distance = 400.0f;
-    auto move_by = MoveBy::create(0.25f, { 0, -distance });
+    float duration = 0.25f;
+    auto move_by = MoveBy::create(duration, { 0, -distance });
     auto eased_action = EaseOut::create(move_by, 5.0f);
 
     //move the given listview upwards, then downwards by the same amount
@@ -89,16 +88,7 @@ void TabManager::set_tab_active(TabTypes tab_type, const spBuilding& building)
         listview->getPositionY() + distance
     });
     listview->runAction(eased_action);
-
-    // //move all the tab buttons
-    // if (building != old_building)
-    // {
-    //     for (auto& btn : this->button_map)
-    //     {
-    //         btn.first->setPosition({ btn.first->getPositionX(), btn.first->getPositionY() + distance });
-    //         btn.first->runAction(eased_action->clone());
-    //     }
-    // }
+    listview->getParent()->runAction(FShake::actionWithDuration(duration, 1.0));
 }
 
 cocos2d::ui::ListView* TabManager::get_active_listview()
