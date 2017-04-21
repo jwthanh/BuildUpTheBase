@@ -281,7 +281,7 @@ void Miner::init(bool use_existing)
         this->active_layer->setTileGID(this->tile_START, start_pos);
 
         this->altar_tile_pos = this->generate_free_tile_pos({});
-        this->active_layer->setTileGID(this->resource_tile_id, this->altar_tile_pos);
+        this->active_layer->setTileGID(Miner::resource_tile_id, this->altar_tile_pos);
 
         this->init_start_pos(start_pos);
         this->prev_active_tile_pos = this->active_tile_pos - cocos2d::Vec2{-1, 0};
@@ -335,7 +335,7 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
     auto tile_gid = this->active_layer->getTileGIDAt(pos);
     auto tile_props = this->tilemap->getPropertiesForGID(tile_gid);
 
-    if (tile_gid == this->resource_tile_id)
+    if (tile_gid == Miner::resource_tile_id)
     {
         CCLOG("tile is a resource");
         bool run_fireworks = false; //renable some other time
