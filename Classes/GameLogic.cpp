@@ -828,10 +828,6 @@ void GameDirector::switch_to_miner_menu()
 
     set_default_key_handler(scene);
 
-    //title
-    //auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
-    //set_aliasing(title_lbl);
-
     auto back_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("back_btn"));
     prep_button(back_btn); //dont prep_back_button because custom callback
 
@@ -844,6 +840,8 @@ void GameDirector::switch_to_miner_menu()
     };
     bind_touch_ended(back_btn, save_and_pop);
 
+
+    //altar button
     auto explode_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("explode_btn"));
     prep_button(explode_btn);
 
@@ -858,12 +856,12 @@ void GameDirector::switch_to_miner_menu()
         serializer.serialize();
 
         GameDirector::switch_to_item_altar_menu();
-        miner->reset(); //TODO reenable this after testing
+        miner->reset();
     };
     bind_touch_ended(explode_btn, open_altar);
 
-	auto check_tiles_cb = [explode_btn, miner, emitter](float dt){
-		bool rail_connected = miner->rails_connect_a_resource();
+	auto check_altar_touching_cb = [explode_btn, miner, emitter](float dt){
+		bool rail_connected = miner->rails_connect_a_resource(miner->resource_tile_pos);
 		if (rail_connected)
 		{
 			explode_btn->setEnabled(true);
@@ -875,9 +873,39 @@ void GameDirector::switch_to_miner_menu()
 			explode_btn->setEnabled(false);
 		}
 	};
-    check_tiles_cb(0);
-    explode_btn->schedule(check_tiles_cb, AVERAGE_DELAY, "check_tiles_cb");
+    check_altar_touching_cb(0);
+    explode_btn->schedule(check_altar_touching_cb, AVERAGE_DELAY, "check_altar_touching_cb");
 
+    //chance button
+    auto chance_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("chance_btn"));
+    prep_button(chance_btn);
+
+    auto open_chance = [miner](){
+        MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
+        serializer.serialize();
+
+        GameDirector::switch_to_item_chance_menu();
+        miner->reset();
+    };
+    bind_touch_ended(chance_btn, open_chance);
+
+	auto check_chance_touching_cb = [chance_btn, miner, emitter](float dt){
+		bool rail_connected = miner->rails_connect_a_resource(miner->resource_tile_pos);
+		if (rail_connected)
+		{
+			chance_btn->setEnabled(true);
+			emitter->SetState(MAGIC_STATE_UPDATE);
+		}
+		else
+		{
+			emitter->SetState(MAGIC_STATE_STOP);
+			chance_btn->setEnabled(false);
+		}
+	};
+    check_chance_touching_cb(0);
+    chance_btn->schedule(check_chance_touching_cb, AVERAGE_DELAY, "check_chance_touching_cb");
+
+    //dig button
     auto dig_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("dig_btn"));
     prep_button(dig_btn);
 
@@ -943,6 +971,15 @@ void GameDirector::switch_to_item_altar_menu()
     scene->setName("altar_item_scene");
     set_default_key_handler(scene);
 
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+}
+
+void GameDirector::switch_to_item_chance_menu()
+{
+    auto scene = AltarItemScene::createScene();
+    scene->setName("chance_item_scene");
+    set_default_key_handler(scene);
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);

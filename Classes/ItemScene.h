@@ -74,6 +74,21 @@ class AltarItemScene : public ItemScene
         static cocos2d::Scene* createScene(ItemSlotType slot_type=ItemSlotType::Unset);
 };
 
+class ChanceItemScene : public ItemScene
+{
+    private:
+        const std::string& get_scene_title() override;
+        const std::string& get_default_detail_panel_title() override;
+        const std::string& get_default_detail_panel_description() override;
+        const std::string& get_sell_btn_text() override;
+
+    public:
+        static ChanceItemScene* create(ItemSlotType slot_type=ItemSlotType::Unset);
+        virtual bool init(ItemSlotType slot_type=ItemSlotType::Unset) override;
+        void init_callbacks() override;
+        static cocos2d::Scene* createScene(ItemSlotType slot_type=ItemSlotType::Unset);
+};
+
 class EquipItemScene : public ItemScene
 {
     private:

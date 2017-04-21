@@ -377,6 +377,112 @@ cocos2d::Scene* AltarItemScene::createScene(ItemSlotType slot_type)
     return scene;
 };
 
+
+void ChanceItemScene::init_callbacks()
+{
+    auto update_detail_panel_on_touch = [this](NuItem* nuitem, spItem item) {
+        this->item_name->setString(item->get_name());
+        this->item_desc->setString(item->description);
+
+        this->item_sell_btn->setVisible(true);
+        auto upgrade_and_pop = [item](){
+            item->level += 3;
+
+            auto achievement_manager = AchievementManager::getInstance();
+            std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItemsPlaced);
+            achievement->increment();
+
+            cocos2d::Director::getInstance()->popScene();
+        };
+        bind_touch_ended(nuitem->button, upgrade_and_pop);
+
+        //update listviews layout to account for different content height
+        this->item_listview_description->requestDoLayout();
+    };
+
+    for (spItem item : this->get_items()) {
+        auto nuitem = NuItem::create(items_listview);
+        nuitem->set_title(item->get_name());
+        nuitem->set_description(item->summary);
+
+        nuitem->set_image(item->img_path, ui::Widget::TextureResType::LOCAL);
+
+        res_count_t cost = item->get_effective_cost();
+        std::string cost_str = beautify_double(cost);
+        nuitem->set_cost_lbl(cost_str);
+
+        auto update_panel = [item, nuitem, update_detail_panel_on_touch](){
+            update_detail_panel_on_touch(nuitem, item);
+        };
+        bind_touch_ended(nuitem->button, update_panel);
+    };
+
+    this->init_back_btn(panel);
+};
+const std::string& ChanceItemScene::get_scene_title()
+{
+    static std::string scene_title = "Hallowed Crypt";
+    return scene_title;
+};
+
+const std::string& ChanceItemScene::get_default_detail_panel_title()
+{
+    static std::string default_title = "Item";
+    return default_title;
+};
+
+const std::string& ChanceItemScene::get_default_detail_panel_description()
+{
+    static std::string default_desc = "Place an item upon the crypt and chaos will take it.";
+    return default_desc;
+};
+
+const std::string& ChanceItemScene::get_sell_btn_text()
+{
+    static std::string default_desc = "Place";
+    return default_desc;
+}
+
+ChanceItemScene* ChanceItemScene::create(ItemSlotType slot_type)
+{
+    ChanceItemScene* pRet = new(std::nothrow) ChanceItemScene();
+    if (pRet && pRet->init(slot_type))
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = nullptr;
+        return nullptr;
+    }
+};
+
+bool ChanceItemScene::init(ItemSlotType slot_type)
+{
+    this->filtered_slot_type = slot_type;
+
+#ifdef _WIN32
+    FUNC_INIT_WIN32(ChanceItemScene);
+#else
+    FUNC_INIT(ChanceItemScene);
+#endif
+
+    this->init_children();
+    this->init_callbacks();
+
+    return true;
+};
+
+cocos2d::Scene* ChanceItemScene::createScene(ItemSlotType slot_type)
+{
+    auto scene = cocos2d::Scene::create();
+    auto* layer = ChanceItemScene::create(slot_type);
+    scene->addChild(layer);
+    return scene;
+};
+
 const std::string& EquipItemScene::get_scene_title()
 {
     static std::string scene_title = "Equip Item";

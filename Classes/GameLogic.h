@@ -84,6 +84,7 @@ class GameDirector
         static void switch_to_miner_menu();
         static void switch_to_items_menu();
         static void switch_to_item_altar_menu();
+        static void switch_to_item_chance_menu();
         static void switch_to_item_equip_menu(ItemSlotType slot_type);
         static void switch_to_scrap_item_menu();
         static void switch_to_equipment_menu();

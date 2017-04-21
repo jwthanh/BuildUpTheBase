@@ -76,7 +76,7 @@ class Miner
 
         //check if tiles around the resource tiles are rails
         // TODO: use a param for the tile instead of looking for it
-        bool rails_connect_a_resource();
+        bool rails_connect_a_resource(cocos2d::Vec2 the_resource_tile_pos);
 };
 
 #endif

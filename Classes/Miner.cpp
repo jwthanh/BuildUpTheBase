@@ -575,10 +575,10 @@ void Miner::move_active_bottom_right()
     this->move_active_tile({1, 0});
 }
 
-bool Miner::rails_connect_a_resource()
+bool Miner::rails_connect_a_resource(cocos2d::Vec2 the_resource_tile_pos)
 {
-    auto check_direction = [this](cocos2d::Vec2 offset){
-        cocos2d::Vec2 potential_rail_pos = this->resource_tile_pos+offset;
+    auto check_direction = [this, the_resource_tile_pos](cocos2d::Vec2 offset){
+        cocos2d::Vec2 potential_rail_pos = the_resource_tile_pos+offset;
         if (this->is_valid_pos(potential_rail_pos))
         {
             tile_gid_t potential_rail_id = this->active_layer->getTileGIDAt(potential_rail_pos);
