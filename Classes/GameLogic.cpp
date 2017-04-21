@@ -39,6 +39,8 @@
 #include "goals/Achievement.h"
 #include "Technology.h"
 #include "BuildingDetailScene.h"
+#include "2d/CCTransition.h"
+#include "cocos2d.h"
 
 
 USING_NS_CC;

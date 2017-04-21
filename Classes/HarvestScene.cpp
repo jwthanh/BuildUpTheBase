@@ -1161,7 +1161,14 @@ void HarvestScene::update(float dt)
 
     Harvestable* harvestable = HarvestableManager::getInstance()->get_active_harvestable();
     if (!harvestable) {
-        this->add_harvestable();
+        //FIXME hack when transitioning, the root scene is the transition scene instead of this,
+        // so get_active_harvestable is always null because it can't find HarvestScene
+        cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();
+        auto harvest_scene = dynamic_cast<HarvestScene*>(root_scene->getChildByName("HarvestScene"));
+        if (harvest_scene != NULL)
+        {
+            this->add_harvestable();
+        }
     }
     else if (target_building != harvestable->building) {
         harvestable->removeFromParent();

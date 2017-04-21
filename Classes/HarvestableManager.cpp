@@ -36,7 +36,8 @@ HarvestableManager* HarvestableManager::getInstance()
 Harvestable* HarvestableManager::get_active_harvestable()
 {
     Harvestable* active_harvestable = NULL;
-    cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();
+    auto director = cocos2d::Director::getInstance();
+    cocos2d::Scene* root_scene = director->getRunningScene();
     auto harvest_scene = dynamic_cast<HarvestScene*>(root_scene->getChildByName("HarvestScene"));
     if (harvest_scene) {
         active_harvestable = dynamic_cast<Harvestable*>(harvest_scene->getChildByName("harvestable"));
