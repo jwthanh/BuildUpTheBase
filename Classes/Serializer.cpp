@@ -565,34 +565,16 @@ void MinerSerializer::serialize()
     rjValue layer_key = rjValue("all_layers");
     doc.AddMember(layer_key, all_layers, allocator);
 
-    rjValue prev_active_pos_x_key = rjValue("prev_active_tile_pos_x");
-    rjValue prev_active_pos_x_val = rjValue(this->miner->prev_active_tile_pos.x);
-    doc.AddMember(prev_active_pos_x_key, prev_active_pos_x_val, allocator);
+    this->set_double(doc, "prev_active_tile_pos_x", this->miner->prev_active_tile_pos.x);
+    this->set_double(doc, "prev_active_tile_pos_y", this->miner->prev_active_tile_pos.y);
 
-    rjValue prev_active_pos_y_key = rjValue("prev_active_tile_pos_y");
-    rjValue prev_active_pos_y_val = rjValue(this->miner->prev_active_tile_pos.y);
-    doc.AddMember(prev_active_pos_y_key, prev_active_pos_y_val, allocator);
+    this->set_double(doc, "active_tile_pos_x", this->miner->active_tile_pos.x);
+    this->set_double(doc, "active_tile_pos_y", this->miner->active_tile_pos.y);
 
-    rjValue active_pos_x_key = rjValue("active_tile_pos_x");
-    rjValue active_pos_x_val = rjValue(this->miner->active_tile_pos.x);
-    doc.AddMember(active_pos_x_key, active_pos_x_val, allocator);
+    this->set_double(doc, "altar_tile_pos_x", this->miner->altar_tile_pos.x);
+    this->set_double(doc, "altar_tile_pos_y", this->miner->altar_tile_pos.y);
 
-    rjValue active_pos_y_key = rjValue("active_tile_pos_y");
-    rjValue active_pos_y_val = rjValue(this->miner->active_tile_pos.y);
-    doc.AddMember(active_pos_y_key, active_pos_y_val, allocator);
-
-    rjValue altar_pos_x_key = rjValue("altar_tile_pos_x");
-    rjValue altar_pos_x_val = rjValue(this->miner->altar_tile_pos.x);
-    doc.AddMember(altar_pos_x_key, altar_pos_x_val, allocator);
-
-    rjValue altar_pos_y_key = rjValue("altar_tile_pos_y");
-    rjValue altar_pos_y_val = rjValue(this->miner->altar_tile_pos.y);
-    doc.AddMember(altar_pos_y_key, altar_pos_y_val, allocator);
-
-    rjValue depth_key = rjValue("depth");
-    rjValue depth_val = rjValue();
-    depth_val.SetDouble(this->miner->depth);
-    doc.AddMember(depth_key, depth_val, allocator);
+    this->set_double(doc, "depth", this->miner->depth);
 
     this->save_document(doc);
 }
@@ -705,25 +687,6 @@ void MinerSerializer::load()
     CCLOG("done loading");
     this->existing_json_found = true;
 }
-
-void MinerSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
-{
-    //UNUSED
-    CCLOG("MinerSerializer::_add_member should be unused");
-};
-
-rjValue& MinerSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
-{
-    CCLOG("MinerSerializer::_get_member should not be used");
-    if (doc.HasMember(key) == false)
-    {
-        return doc; //null placeholder
-    }
-
-    //copy of Base::_get_member but because its protected I can't call it
-    rjValue& value = doc[key];
-    return value;
-};
 
 EquipmentSerializer::EquipmentSerializer(std::string filename)
     : BaseSerializer(filename)
