@@ -202,7 +202,7 @@ cocos2d::Vec2 Miner::generate_free_tile_pos(std::vector<cocos2d::Vec2> reserved_
 cocos2d::Vec2 Miner::get_default_start_pos()
 {
     //randomly pick a starting position in the map that isnt the resource tile
-	cocos2d::Vec2 start_pos = this->generate_free_tile_pos({this->resource_tile_pos});
+	cocos2d::Vec2 start_pos = this->generate_free_tile_pos({this->altar_tile_pos});
     return start_pos;
 }
 
@@ -279,8 +279,8 @@ void Miner::init(bool use_existing)
         start_pos = this->get_default_start_pos();
         this->active_layer->setTileGID(this->tile_START, start_pos);
 
-        this->resource_tile_pos = this->generate_free_tile_pos({});
-        this->active_layer->setTileGID(this->resource_tile_id, this->resource_tile_pos);
+        this->altar_tile_pos = this->generate_free_tile_pos({});
+        this->active_layer->setTileGID(this->resource_tile_id, this->altar_tile_pos);
 
         this->init_start_pos(start_pos);
         this->prev_active_tile_pos = this->active_tile_pos - cocos2d::Vec2{-1, 0};
@@ -318,10 +318,10 @@ void Miner::reset()
         this->tilemap->removeFromParent();
     }
 
-    //Hack to get around active_tile_pos sometimes being resource_tile_pos
+    //Hack to get around active_tile_pos sometimes being altar_tile_pos
     do {
         this->init(false); //use_existing = false
-    } while (this->active_tile_pos == this->resource_tile_pos);
+    } while (this->active_tile_pos == this->altar_tile_pos);
 
     this->parent->addChild(this->tilemap);
 };
@@ -577,11 +577,12 @@ void Miner::move_active_bottom_right()
 
 bool Miner::rails_connect_a_resource(cocos2d::Vec2 the_resource_tile_pos)
 {
-    auto check_direction = [this, the_resource_tile_pos](cocos2d::Vec2 offset){
+    auto check_direction_for_rail = [this, the_resource_tile_pos](cocos2d::Vec2 offset){
         cocos2d::Vec2 potential_rail_pos = the_resource_tile_pos+offset;
         if (this->is_valid_pos(potential_rail_pos))
         {
             tile_gid_t potential_rail_id = this->active_layer->getTileGIDAt(potential_rail_pos);
+            CCLOG("tid: %i", potential_rail_id);
 
             return std::find(RAIL_IDS.begin(), RAIL_IDS.end(), potential_rail_id) != RAIL_IDS.end();
         }
@@ -593,10 +594,13 @@ bool Miner::rails_connect_a_resource(cocos2d::Vec2 the_resource_tile_pos)
 
     for (auto& dir : DIRECTION_ARRAY)
     {
-        if (check_direction(DIRECTION_MAP_REV.at(dir)))
+        bool found_rail = check_direction_for_rail(DIRECTION_MAP_REV.at(dir));
+        if (found_rail)
         {
+            CCLOG("Found rail");
             return true;
         }
     };
+    CCLOG("Could not find rail");
     return false;
 }

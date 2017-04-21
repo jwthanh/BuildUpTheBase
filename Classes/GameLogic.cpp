@@ -861,7 +861,9 @@ void GameDirector::switch_to_miner_menu()
     bind_touch_ended(explode_btn, open_altar);
 
 	auto check_altar_touching_cb = [explode_btn, miner, emitter](float dt){
-		bool rail_connected = miner->rails_connect_a_resource(miner->resource_tile_pos);
+        CCLOG("altar start");
+		bool rail_connected = miner->rails_connect_a_resource(miner->altar_tile_pos);
+        CCLOG("altar end");
 		if (rail_connected)
 		{
 			explode_btn->setEnabled(true);
@@ -890,7 +892,7 @@ void GameDirector::switch_to_miner_menu()
     bind_touch_ended(chance_btn, open_chance);
 
 	auto check_chance_touching_cb = [chance_btn, miner, emitter](float dt){
-		bool rail_connected = miner->rails_connect_a_resource(miner->resource_tile_pos);
+		bool rail_connected = miner->rails_connect_a_resource(miner->altar_tile_pos);
 		if (rail_connected)
 		{
 			chance_btn->setEnabled(true);
@@ -902,8 +904,8 @@ void GameDirector::switch_to_miner_menu()
 			chance_btn->setEnabled(false);
 		}
 	};
-    check_chance_touching_cb(0);
-    chance_btn->schedule(check_chance_touching_cb, AVERAGE_DELAY, "check_chance_touching_cb");
+    //check_chance_touching_cb(0);
+    //chance_btn->schedule(check_chance_touching_cb, AVERAGE_DELAY, "check_chance_touching_cb");
 
     //dig button
     auto dig_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("dig_btn"));

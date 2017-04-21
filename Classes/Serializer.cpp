@@ -581,13 +581,13 @@ void MinerSerializer::serialize()
     rjValue active_pos_y_val = rjValue(this->miner->active_tile_pos.y);
     doc.AddMember(active_pos_y_key, active_pos_y_val, allocator);
 
-    rjValue resource_pos_x_key = rjValue("resource_tile_pos_x");
-    rjValue resource_pos_x_val = rjValue(this->miner->resource_tile_pos.x);
-    doc.AddMember(resource_pos_x_key, resource_pos_x_val, allocator);
+    rjValue altar_pos_x_key = rjValue("altar_tile_pos_x");
+    rjValue altar_pos_x_val = rjValue(this->miner->altar_tile_pos.x);
+    doc.AddMember(altar_pos_x_key, altar_pos_x_val, allocator);
 
-    rjValue resource_pos_y_key = rjValue("resource_tile_pos_y");
-    rjValue resource_pos_y_val = rjValue(this->miner->resource_tile_pos.y);
-    doc.AddMember(resource_pos_y_key, resource_pos_y_val, allocator);
+    rjValue altar_pos_y_key = rjValue("altar_tile_pos_y");
+    rjValue altar_pos_y_val = rjValue(this->miner->altar_tile_pos.y);
+    doc.AddMember(altar_pos_y_key, altar_pos_y_val, allocator);
 
     rjValue depth_key = rjValue("depth");
     rjValue depth_val = rjValue();
@@ -634,8 +634,8 @@ void MinerSerializer::load()
         "prev_active_tile_pos_y",
         "active_tile_pos_x",
         "active_tile_pos_y",
-        "resource_tile_pos_x",
-        "resource_tile_pos_y",
+        "altar_tile_pos_x",
+        "altar_tile_pos_y",
         "depth"
     };
 
@@ -697,8 +697,8 @@ void MinerSerializer::load()
     this->miner->active_tile_pos.x = doc["active_tile_pos_x"].GetDouble();
     this->miner->active_tile_pos.y = doc["active_tile_pos_y"].GetDouble();
 
-    this->miner->resource_tile_pos.x = doc["resource_tile_pos_x"].GetDouble();
-    this->miner->resource_tile_pos.y = doc["resource_tile_pos_y"].GetDouble();
+    this->miner->altar_tile_pos.x = doc["resource_tile_pos_x"].GetDouble();
+    this->miner->altar_tile_pos.y = doc["resource_tile_pos_y"].GetDouble();
 
     this->miner->depth = doc["depth"].GetDouble();
 
