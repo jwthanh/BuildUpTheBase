@@ -21,7 +21,7 @@ namespace cocos2d
 struct TileID
 {
     //resources
-    static const tile_gid_t resource_tile;
+    static const tile_gid_t altar_tile;
     static const tile_gid_t chance_tile;
 
     //special tiles
@@ -55,13 +55,12 @@ class Miner
         cocos2d::Node* parent;
         Miner(cocos2d::Node* parent);
         void init(bool use_existing);
-        void init_start_pos(cocos2d::Vec2 new_start_pos);
+        void init_active_tile_pos();
         void reset();
 
 		cocos2d::Vec2 generate_free_tile_pos();
 		cocos2d::Vec2 generate_free_tile_pos(std::vector<cocos2d::Vec2> reserved_tiles);
 
-        cocos2d::Vec2 get_default_start_pos();
         cocos2d::Vec2 get_existing_start_pos();
 
         void animate_falling_tiles();
@@ -78,7 +77,7 @@ class Miner
 
         //check if tiles around the resource tiles are rails
         // TODO: use a param for the tile instead of looking for it
-        bool rails_connect_a_resource(cocos2d::Vec2 the_resource_tile_pos);
+        bool rails_connect_a_resource(cocos2d::Vec2 resource_tile_pos);
 
         std::string get_pretty_printed_tiles();
 };

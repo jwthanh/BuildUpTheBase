@@ -45,7 +45,7 @@ std::map<Directions, cocos2d::Vec2> DIRECTION_MAP_REV {
     {Directions::BottomRight, {1, 0}}
 };
 
-const tile_gid_t TileID::resource_tile = 10;
+const tile_gid_t TileID::altar_tile = 10;
 const tile_gid_t TileID::chance_tile = 11;
 
 //special tiles
@@ -200,13 +200,6 @@ cocos2d::Vec2 Miner::generate_free_tile_pos(std::vector<cocos2d::Vec2> reserved_
 	return start_pos;
 };
 
-cocos2d::Vec2 Miner::get_default_start_pos()
-{
-    //randomly pick a starting position in the map that isnt the resource tile
-	cocos2d::Vec2 start_pos = this->generate_free_tile_pos({this->altar_tile_pos});
-    return start_pos;
-}
-
 cocos2d::Vec2 Miner::get_existing_start_pos()
 {
     ///pick a starting position in the map based on the existing tiles
@@ -238,8 +231,6 @@ void Miner::init(bool use_existing)
 
     this->active_layer = this->tilemap->getLayer("background");
 
-    cocos2d::Vec2 start_pos;
-
     MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this);
     //if we want to use existing data, try to load it, otherwise fallback to default loading
     if (use_existing)
@@ -257,14 +248,12 @@ void Miner::init(bool use_existing)
 
     if (use_existing == false)
     {
-        start_pos = this->get_default_start_pos();
-        this->active_layer->setTileGID(TileID::tile_START, start_pos);
-
-        this->altar_tile_pos = this->generate_free_tile_pos({});
-        this->active_layer->setTileGID(TileID::resource_tile, this->altar_tile_pos);
-
-        this->init_start_pos(start_pos);
+        this->init_active_tile_pos();
+        this->active_layer->setTileGID(TileID::tile_START, this->active_tile_pos);
         this->prev_active_tile_pos = this->active_tile_pos - cocos2d::Vec2{-1, 0};
+
+        this->altar_tile_pos = this->generate_free_tile_pos({this->active_tile_pos});
+        this->active_layer->setTileGID(TileID::altar_tile, this->altar_tile_pos);
     }
 
     serializer.serialize(); //save on init, for when you go down a level and we want to save the new map
@@ -273,16 +262,22 @@ void Miner::init(bool use_existing)
 
 };
 
-void Miner::init_start_pos(cocos2d::Vec2 new_start_pos)
+void Miner::init_active_tile_pos()
 {
-    //since we subtract 1 from it later, we need to make sure it's never out of bounds
-    // I dont think y will be problem
-    if (new_start_pos.x == 0)
+    //pick a random tile
+    cocos2d::Vec2 tile_pos = this->generate_free_tile_pos();
+
+    //since we subtract 1 from it to make the prev tile pos later, we need to make sure it's never out of bounds
+    if (tile_pos.x == 0)
     {
-        new_start_pos.x += 1;
+        tile_pos.x += 1;
+    }
+    if (tile_pos.y == 0)
+    {
+        tile_pos.y += 1;
     }
 
-    this->active_tile_pos = new_start_pos;
+    this->active_tile_pos = tile_pos;
 };
 
 void Miner::reset()
@@ -315,7 +310,7 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
     auto tile_gid = this->active_layer->getTileGIDAt(pos);
     auto tile_props = this->tilemap->getPropertiesForGID(tile_gid);
 
-    if (tile_gid == TileID::resource_tile)
+    if (tile_gid == TileID::altar_tile)
     {
         CCLOG("tile is a resource");
         bool run_fireworks = false; //renable some other time
@@ -556,11 +551,12 @@ void Miner::move_active_bottom_right()
     this->move_active_tile({1, 0});
 }
 
-bool Miner::rails_connect_a_resource(cocos2d::Vec2 the_resource_tile_pos)
+bool Miner::rails_connect_a_resource(cocos2d::Vec2 resource_tile_pos)
 {
-    log_vector(the_resource_tile_pos, "looking for the_resource_tile_pos");
-    auto check_direction_for_rail = [this, the_resource_tile_pos](cocos2d::Vec2 offset){
-        cocos2d::Vec2 potential_rail_pos = the_resource_tile_pos+offset;
+    log_vector(resource_tile_pos, "looking for resource_tile_pos");
+
+    auto check_direction_for_rail = [this, resource_tile_pos](cocos2d::Vec2 offset){
+        cocos2d::Vec2 potential_rail_pos = resource_tile_pos+offset;
         if (this->is_valid_pos(potential_rail_pos))
         {
             tile_gid_t potential_rail_id = this->active_layer->getTileGIDAt(potential_rail_pos);
