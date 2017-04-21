@@ -1,5 +1,6 @@
 #include "Miner.h"
 #include <array>
+#include <sstream>
 
 #include "FShake.h"
 #include "MiscUI.h"
@@ -577,6 +578,7 @@ void Miner::move_active_bottom_right()
 
 bool Miner::rails_connect_a_resource(cocos2d::Vec2 the_resource_tile_pos)
 {
+    log_vector(the_resource_tile_pos, "looking for the_resource_tile_pos");
     auto check_direction_for_rail = [this, the_resource_tile_pos](cocos2d::Vec2 offset){
         cocos2d::Vec2 potential_rail_pos = the_resource_tile_pos+offset;
         if (this->is_valid_pos(potential_rail_pos))
@@ -602,5 +604,23 @@ bool Miner::rails_connect_a_resource(cocos2d::Vec2 the_resource_tile_pos)
         }
     };
     CCLOG("Could not find rail");
+    CCLOG("%s", this->get_pretty_printed_tiles().c_str());
     return false;
 }
+
+std::string Miner::get_pretty_printed_tiles()
+{
+    cocos2d::Size layer_size = this->active_layer->getLayerSize();
+    std::stringstream ss;
+
+    for (int y = 0; y < layer_size.height; y++) {
+        for (int x = 0; x < layer_size.width; x++) {
+            tile_gid_t tid = this->active_layer->getTileGIDAt({float(x), float(y)});
+            ss << " " << tid;
+        };
+        ss << std::endl;
+    };
+    ss << std::endl;
+
+    return ss.str();
+};

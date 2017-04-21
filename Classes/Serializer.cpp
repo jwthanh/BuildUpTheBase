@@ -697,8 +697,8 @@ void MinerSerializer::load()
     this->miner->active_tile_pos.x = doc["active_tile_pos_x"].GetDouble();
     this->miner->active_tile_pos.y = doc["active_tile_pos_y"].GetDouble();
 
-    this->miner->altar_tile_pos.x = doc["resource_tile_pos_x"].GetDouble();
-    this->miner->altar_tile_pos.y = doc["resource_tile_pos_y"].GetDouble();
+    this->miner->altar_tile_pos.x = doc["altar_tile_pos_x"].GetDouble();
+    this->miner->altar_tile_pos.y = doc["altar_tile_pos_y"].GetDouble();
 
     this->miner->depth = doc["depth"].GetDouble();
 
