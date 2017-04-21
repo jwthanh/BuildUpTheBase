@@ -214,13 +214,11 @@ cocos2d::Vec2 Miner::get_existing_start_pos()
     cocos2d::Size layer_size = this->active_layer->getLayerSize();
     cocos2d::Vec2 start_pos = { -1, -1 };
 
-    for (tile_gid_t y = 0; y < layer_size.height; y++)
+    for (int y = 0; y < layer_size.height; y++)
     {
-        for (tile_gid_t x = 0; x < layer_size.width; x++)
+        for (int x = 0; x < layer_size.width; x++)
         {
-            float fx = float(x);
-            float fy = float(y);
-            start_pos = { fx, fy };
+            start_pos = { float(x), float(y) };
             tile_gid_t existing_tile_id = this->active_layer->getTileGIDAt(start_pos);
             if (existing_tile_id == TileID::tile_START)
             {
