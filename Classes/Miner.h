@@ -18,27 +18,30 @@ namespace cocos2d
     class TMXLayer;
 }
 
+struct TileID
+{
+    //resources
+    static const tile_gid_t resource_tile;
+    static const tile_gid_t chance_tile;
+
+    //special tiles
+    static const tile_gid_t tile_X;
+    static const tile_gid_t tile_START;
+
+    //across
+    static const tile_gid_t tile_TL_BR;
+    static const tile_gid_t tile_BL_TR;
+
+    //corners
+    static const tile_gid_t tile_TL_TR;
+    static const tile_gid_t tile_TR_BR;
+    static const tile_gid_t tile_BL_BR;
+    static const tile_gid_t tile_TL_BL;
+};
+
 class Miner
 {
     public:
-        //resources
-        static tile_gid_t resource_tile_id;
-        static tile_gid_t chance_tile_id;
-
-        //special tiles
-        static tile_gid_t tile_X;
-        static tile_gid_t tile_START;
-
-        //across
-        static tile_gid_t tile_TL_BR;
-        static tile_gid_t tile_BL_TR;
-
-        //corners
-        static tile_gid_t tile_TL_TR;
-        static tile_gid_t tile_TR_BR;
-        static tile_gid_t tile_BL_BR;
-        static tile_gid_t tile_TL_BL;
-
         res_count_t depth;
 
     public:
@@ -58,7 +61,6 @@ class Miner
 		cocos2d::Vec2 generate_free_tile_pos();
 		cocos2d::Vec2 generate_free_tile_pos(std::vector<cocos2d::Vec2> reserved_tiles);
 
-        cocos2d::Vec2 get_start_pos();
         cocos2d::Vec2 get_default_start_pos();
         cocos2d::Vec2 get_existing_start_pos();
 

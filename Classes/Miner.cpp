@@ -45,36 +45,36 @@ std::map<Directions, cocos2d::Vec2> DIRECTION_MAP_REV {
     {Directions::BottomRight, {1, 0}}
 };
 
-tile_gid_t Miner::resource_tile_id = 10;
-tile_gid_t Miner::chance_tile_id = 11;
+const tile_gid_t TileID::resource_tile = 10;
+const tile_gid_t TileID::chance_tile = 11;
 
 //special tiles
-tile_gid_t Miner::tile_X = 9;
-tile_gid_t Miner::tile_START = 4;
+const tile_gid_t TileID::tile_X = 9;
+const tile_gid_t TileID::tile_START = 4;
 
 //across
-tile_gid_t Miner::tile_TL_BR = 6;
-tile_gid_t Miner::tile_BL_TR = 3;
+const tile_gid_t TileID::tile_TL_BR = 6;
+const tile_gid_t TileID::tile_BL_TR = 3;
 
 //corners
-tile_gid_t Miner::tile_TL_TR = 7;
-tile_gid_t Miner::tile_TR_BR = 8;
-tile_gid_t Miner::tile_BL_BR = 2;
-tile_gid_t Miner::tile_TL_BL = 5;
+const tile_gid_t TileID::tile_TL_TR = 7;
+const tile_gid_t TileID::tile_TR_BR = 8;
+const tile_gid_t TileID::tile_BL_BR = 2;
+const tile_gid_t TileID::tile_TL_BL = 5;
 
-std::vector<tile_gid_t> RAIL_IDS = {
+std::vector<const tile_gid_t> RAIL_IDS = {
     //across
-    Miner::tile_TL_BR,
-    Miner::tile_BL_TR,
+    TileID::tile_TL_BR,
+    TileID::tile_BL_TR,
 
     //corners
-    Miner::tile_TL_TR,
-    Miner::tile_TR_BR,
-    Miner::tile_BL_BR,
-    Miner::tile_TL_BL,
+    TileID::tile_TL_TR,
+    TileID::tile_TR_BR,
+    TileID::tile_BL_BR,
+    TileID::tile_TL_BL,
 
     //misc
-    Miner::tile_X,
+    TileID::tile_X,
 };
 
 
@@ -222,7 +222,7 @@ cocos2d::Vec2 Miner::get_existing_start_pos()
             float fy = float(y);
             start_pos = { fx, fy };
             tile_gid_t existing_tile_id = this->active_layer->getTileGIDAt(start_pos);
-            if (existing_tile_id == this->tile_START)
+            if (existing_tile_id == TileID::tile_START)
             {
                 return start_pos;
             };
@@ -230,24 +230,6 @@ cocos2d::Vec2 Miner::get_existing_start_pos()
         }
     };
     return start_pos;
-}
-
-cocos2d::Vec2 Miner::get_start_pos()
-{
-
-    MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", this);
-    serializer.load();
-    bool use_existing_start = serializer.existing_json_found;
-
-    CCLOG("using existing json %i", use_existing_start);
-    if (use_existing_start == false)
-    {
-        return this->get_default_start_pos();
-    }
-    else
-    {
-        return this->active_tile_pos; //serializer sets it
-    }
 }
 
 void Miner::init(bool use_existing)
@@ -278,10 +260,10 @@ void Miner::init(bool use_existing)
     if (use_existing == false)
     {
         start_pos = this->get_default_start_pos();
-        this->active_layer->setTileGID(this->tile_START, start_pos);
+        this->active_layer->setTileGID(TileID::tile_START, start_pos);
 
         this->altar_tile_pos = this->generate_free_tile_pos({});
-        this->active_layer->setTileGID(Miner::resource_tile_id, this->altar_tile_pos);
+        this->active_layer->setTileGID(TileID::resource_tile, this->altar_tile_pos);
 
         this->init_start_pos(start_pos);
         this->prev_active_tile_pos = this->active_tile_pos - cocos2d::Vec2{-1, 0};
@@ -335,7 +317,7 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
     auto tile_gid = this->active_layer->getTileGIDAt(pos);
     auto tile_props = this->tilemap->getPropertiesForGID(tile_gid);
 
-    if (tile_gid == Miner::resource_tile_id)
+    if (tile_gid == TileID::resource_tile)
     {
         CCLOG("tile is a resource");
         bool run_fireworks = false; //renable some other time
@@ -358,18 +340,18 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
     //TODO use RAIL_IDS + tile_START for this
     std::vector<tile_gid_t> blocked_tiles = {
         //across
-        this->tile_TL_BR,
-        this->tile_BL_TR,
+        TileID::tile_TL_BR,
+        TileID::tile_BL_TR,
 
         //corners
-        this->tile_TL_TR,
-        this->tile_TR_BR,
-        this->tile_BL_BR,
-        this->tile_TL_BL,
+        TileID::tile_TL_TR,
+        TileID::tile_TR_BR,
+        TileID::tile_BL_BR,
+        TileID::tile_TL_BL,
 
         //misc
-        this->tile_X,
-        this->tile_START
+        TileID::tile_X,
+        TileID::tile_START
     };
 
     auto match = std::find(blocked_tiles.begin(), blocked_tiles.end(), tile_gid);
@@ -420,39 +402,39 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
     std::map<tile_gid_t, std::vector<std::array<Directions, 2>>> tile_direction_map{
         //crosses
         {
-            this->tile_BL_TR, {
+            TileID::tile_BL_TR, {
                 { Directions::BottomLeft, Directions::TopRight},
                 { Directions::TopRight, Directions::BottomLeft}
             }
         },
 
         {
-            this->tile_TL_BR, {
+            TileID::tile_TL_BR, {
                 { Directions::TopLeft, Directions::BottomRight},
                 { Directions::BottomRight, Directions::TopLeft}
             }
         },
 
         //corners
-        { this->tile_TL_TR, {
+        { TileID::tile_TL_TR, {
                 { Directions::TopLeft, Directions::TopRight},
                 { Directions::TopRight, Directions::TopLeft}
             }
         },
 
-        { this->tile_TR_BR, {
+        { TileID::tile_TR_BR, {
                 { Directions::TopRight, Directions::BottomRight},
                 { Directions::BottomRight, Directions::TopRight}
             }
         },
 
-        { this->tile_BL_BR, {
+        { TileID::tile_BL_BR, {
                 { Directions::BottomLeft, Directions::BottomRight},
                 { Directions::BottomRight, Directions::BottomLeft}
             }
         },
 
-        { this->tile_TL_BL, {
+        { TileID::tile_TL_BL, {
                 { Directions::TopLeft, Directions::BottomLeft},
                 { Directions::BottomLeft, Directions::TopLeft}
             }
@@ -514,7 +496,7 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
             }
 
             //set the old tile to the new image, if its not the X tile
-            if (this->active_layer->getTileGIDAt(this->active_tile_pos) != this->tile_START)
+            if (this->active_layer->getTileGIDAt(this->active_tile_pos) != TileID::tile_START)
             {
                 this->active_layer->setTileGID(new_old_tile_id, this->active_tile_pos);
             }
@@ -527,11 +509,11 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
             //the new tile direction will be an across tile
             if (new_tile_dir == Directions::BottomLeft || new_tile_dir == Directions::TopRight)
             {
-                this->active_layer->setTileGID(this->tile_BL_TR, this->active_tile_pos);
+                this->active_layer->setTileGID(TileID::tile_BL_TR, this->active_tile_pos);
             }
             else
             {
-                this->active_layer->setTileGID(this->tile_TL_BR, this->active_tile_pos);
+                this->active_layer->setTileGID(TileID::tile_TL_BR, this->active_tile_pos);
             }
 
             //animate tile moving
