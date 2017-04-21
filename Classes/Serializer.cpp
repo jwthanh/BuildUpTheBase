@@ -680,17 +680,9 @@ void EquipmentSerializer::serialize()
     };
 
     //TODO use some sort of id, index is weak
-    rjValue combat_slot_key = rjValue("combat_slot");
-    rjValue combat_slot_val = rjValue(get_index_of_item(GameLogic::getInstance()->equipment->combat_slot));
-    doc.AddMember(combat_slot_key, combat_slot_val, allocator);
-
-    rjValue mining_slot_key = rjValue("mining_slot");
-    rjValue mining_slot_val = rjValue(get_index_of_item(GameLogic::getInstance()->equipment->mining_slot));
-    doc.AddMember(mining_slot_key, mining_slot_val, allocator);
-
-    rjValue recipe_slot_key = rjValue("recipe_slot");
-    rjValue recipe_slot_val = rjValue(get_index_of_item(GameLogic::getInstance()->equipment->recipe_slot));
-    doc.AddMember(recipe_slot_key, recipe_slot_val, allocator);
+    this->set_int(doc, "combat_slot", get_index_of_item(GameLogic::getInstance()->equipment->combat_slot));
+    this->set_int(doc, "mining_slot", get_index_of_item(GameLogic::getInstance()->equipment->mining_slot));
+    this->set_int(doc, "recipe_slot", get_index_of_item(GameLogic::getInstance()->equipment->recipe_slot));
 
     this->save_document(doc);
 }
@@ -739,25 +731,6 @@ void EquipmentSerializer::load()
 
     CCLOG("done loading");
 }
-
-void EquipmentSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
-{
-    //UNUSED
-    CCLOG("EquipmentSerializer::_add_member should be unused");
-};
-
-rjValue& EquipmentSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
-{
-    CCLOG("EquipmentSerializer::_get_member should not be used");
-    if (doc.HasMember(key) == false)
-    {
-        return doc; //null placeholder
-    }
-
-    //copy of Base::_get_member but because its protected I can't call it
-    rjValue& value = doc[key];
-    return value;
-};
 
 
 AchievementSerializer::AchievementSerializer(std::string filename)

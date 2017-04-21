@@ -133,10 +133,6 @@ class EquipmentSerializer : public BaseSerializer
 
         void serialize() override;
         void load() override;
-
-    private:
-        virtual void _add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator) override;
-        virtual rjValue& _get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator);
 };
 
 ///goes through all the incremental achievements in the manager
