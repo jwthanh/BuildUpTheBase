@@ -871,7 +871,6 @@ void GameDirector::switch_to_miner_menu()
 		}
 		else
 		{
-
 			emitter->SetState(MAGIC_STATE_STOP);
 			explode_btn->setEnabled(false);
 		}

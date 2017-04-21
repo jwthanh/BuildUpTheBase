@@ -23,6 +23,7 @@ class Miner
     public:
         //resources
         static tile_gid_t resource_tile_id;
+        static tile_gid_t chance_tile_id;
 
         //special tiles
         static tile_gid_t tile_X;

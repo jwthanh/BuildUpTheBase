@@ -45,6 +45,7 @@ std::map<Directions, cocos2d::Vec2> DIRECTION_MAP_REV {
 };
 
 tile_gid_t Miner::resource_tile_id = 10;
+tile_gid_t Miner::chance_tile_id = 11;
 
 //special tiles
 tile_gid_t Miner::tile_X = 9;
@@ -581,6 +582,7 @@ bool Miner::rails_connect_a_resource()
         if (this->is_valid_pos(potential_rail_pos))
         {
             tile_gid_t potential_rail_id = this->active_layer->getTileGIDAt(potential_rail_pos);
+
             return std::find(RAIL_IDS.begin(), RAIL_IDS.end(), potential_rail_id) != RAIL_IDS.end();
         }
         else

@@ -154,6 +154,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>bc_chance.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{32,32}</string>
+                <key>spriteSourceSize</key>
+                <string>{32,32}</string>
+                <key>textureRect</key>
+                <string>{{341,1},{32,32}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -166,9 +181,9 @@
             <key>realTextureFileName</key>
             <string>low_base.png</string>
             <key>size</key>
-            <string>{340,34}</string>
+            <string>{374,34}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:bb10f90609459d5dd49666f094e256d8:ce35f8e0160953227251f21728466953:7c64bf34f00fd80ae4152dcb27c9be3d$</string>
+            <string>$TexturePacker:SmartUpdate:36546fef0bd5dd804a053a318e57d9f3:a036efb8df6058c8f1568bfdd0b81006:7c64bf34f00fd80ae4152dcb27c9be3d$</string>
             <key>textureFileName</key>
             <string>low_base.png</string>
         </dict>

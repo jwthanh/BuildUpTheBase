@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
 <map version="1.0" orientation="isometric" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="16" nextobjectid="1">
- <tileset firstgid="1" name="low_set" tilewidth="32" tileheight="32" spacing="2" tilecount="10" columns="10">
-  <image source="low_base.png" trans="ffffff" width="340" height="34"/>
+ <tileset firstgid="1" name="low_set" tilewidth="32" tileheight="32" spacing="2" tilecount="11" columns="11">
+  <image source="low_base.png" trans="ffffff" width="374" height="34"/>
  </tileset>
  <layer name="background" width="10" height="10">
   <data>

@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.1</string>
+        <string>4.4.0</string>
         <key>fileName</key>
         <string>C:/Users/Josh/Documents/cocos_projects/basebuilder/raw/tilemaps/low_base.tps</string>
         <key>autoSDSettings</key>
@@ -172,6 +172,8 @@
         <false/>
         <key>prependSmartFolderName</key>
         <false/>
+        <key>autodetectAnimations</key>
+        <true/>
         <key>globalSpriteSettings</key>
         <struct type="SpriteSettings">
             <key>scale</key>
@@ -207,6 +209,7 @@
             <key type="filename">../../python/spriter/tiny_landscape/aa_base.png</key>
             <key type="filename">../../python/spriter/tiny_landscape/aa_start.png</key>
             <key type="filename">../../python/spriter/tiny_landscape/bb_altar.png</key>
+            <key type="filename">../../python/spriter/tiny_landscape/bc_chance.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -232,6 +235,7 @@
             <filename>../../python/spriter/tiny_landscape/aa_X.png</filename>
             <filename>../../python/spriter/tiny_landscape/bb_altar.png</filename>
             <filename>../../python/spriter/tiny_landscape/aa_start.png</filename>
+            <filename>../../python/spriter/tiny_landscape/bc_chance.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
