@@ -110,12 +110,7 @@ class IngredientSerializer : public BaseSerializer
         IngredientSerializer(std::string filename);
 
         void serialize() override;
-        void serialize_ing_type(rjDocument& doc, rapidjson::CrtAllocator& allocator, IngredientSubType ing_type, res_count_t count);
         void load() override;
-
-    private:
-        virtual void _add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator) override;
-        virtual rjValue& _get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator);
 };
 
 class MinerSerializer : public BaseSerializer

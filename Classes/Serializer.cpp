@@ -465,24 +465,6 @@ IngredientSerializer::IngredientSerializer(std::string filename)
 {
 };
 
-void IngredientSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
-{
-    //UNUSED
-    CCLOG("IngredientSerializer::_add_member should be unused");
-};
-
-rjValue& IngredientSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::AllocatorType& allocator)
-{
-    if (doc.HasMember(key) == false)
-    {
-        return doc; //null placeholder
-    }
-
-    //copy of Base::_get_member but because its protected I can't call it
-    rjValue& value = doc[key];
-    return value;
-};
-
 void IngredientSerializer::serialize()
 {
     rjDocument doc = rjDocument();
@@ -492,26 +474,11 @@ void IngredientSerializer::serialize()
 
     for (std::pair<Ingredient::SubType, res_count_t> mist : BUILDUP->get_all_ingredients())
     {
-        this->serialize_ing_type(doc, allocator, mist.first, mist.second);
+        this->set_double(doc, Ingredient::type_to_string(mist.first), mist.second);
     };
 
     this->save_document(doc);
 }
-
-void IngredientSerializer::serialize_ing_type(rjDocument& doc, rapidjson::CrtAllocator& allocator, IngredientSubType ing_type, res_count_t count)
-{
-    rjValue rj_key = rjValue();
-    std::string key = Ingredient::type_to_string(ing_type);
-    auto key_str = key.c_str();
-    auto key_len = key.length();
-    rj_key.SetString(key_str, key_len, allocator);
-
-    rjValue rj_value = rjValue();
-    rj_value.SetDouble(count);
-
-    doc.AddMember(rj_key.Move(), rj_value.Move(), allocator);
-
-};
 
 void IngredientSerializer::load()
 {
