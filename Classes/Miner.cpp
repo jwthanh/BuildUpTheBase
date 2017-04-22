@@ -254,6 +254,9 @@ void Miner::init(bool use_existing)
 
         this->altar_tile_pos = this->generate_free_tile_pos({this->active_tile_pos});
         this->active_layer->setTileGID(TileID::altar_tile, this->altar_tile_pos);
+
+        this->chance_tile_pos = this->generate_free_tile_pos({this->active_tile_pos, this->altar_tile_pos});
+        this->active_layer->setTileGID(TileID::chance_tile, this->chance_tile_pos);
     }
 
     serializer.serialize(); //save on init, for when you go down a level and we want to save the new map
@@ -310,22 +313,8 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
     auto tile_gid = this->active_layer->getTileGIDAt(pos);
     auto tile_props = this->tilemap->getPropertiesForGID(tile_gid);
 
-    if (tile_gid == TileID::altar_tile)
+    if (tile_gid == TileID::altar_tile || tile_gid == TileID::chance_tile)
     {
-        bool run_fireworks = false; //renable some other time
-        if (run_fireworks)
-        {
-            auto firework = cocos2d::ParticleFireworks::create();
-            firework->setDuration(1.0f);
-
-            auto sprite = this->active_layer->getTileAt(pos);
-            auto fire_pos = sprite->getPosition();
-            fire_pos.x += 132.0f/2;
-            fire_pos.y += 132.0f/2;
-            firework->setPosition(fire_pos);
-
-            this->tilemap->addChild(firework);
-        };
         return true;
     }
 
@@ -547,8 +536,6 @@ void Miner::move_active_bottom_right()
 
 bool Miner::rails_connect_a_resource(cocos2d::Vec2 resource_tile_pos)
 {
-    log_vector(resource_tile_pos, "looking for resource_tile_pos");
-
     auto check_direction_for_rail = [this, resource_tile_pos](cocos2d::Vec2 offset){
         cocos2d::Vec2 potential_rail_pos = resource_tile_pos+offset;
         if (this->is_valid_pos(potential_rail_pos))

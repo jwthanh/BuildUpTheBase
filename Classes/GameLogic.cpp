@@ -841,11 +841,11 @@ void GameDirector::switch_to_miner_menu()
     auto explode_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("explode_btn"));
     prep_button(explode_btn);
 
-	auto button_highlight_particle = MagicEmitter::create("Square");
-	button_highlight_particle->setPosition(explode_btn->getPosition());
-	MP_Emitter_Cocos* emitter = button_highlight_particle->GetEmitter();
-	emitter->SetScale(0.5f);
-	miner_scene->addChild(button_highlight_particle);
+	auto altar_particle = MagicEmitter::create("Square");
+	altar_particle->setPosition(explode_btn->getPosition());
+	MP_Emitter_Cocos* altar_btn_emitter = altar_particle->GetEmitter();
+	altar_btn_emitter->SetScale(0.5f);
+	miner_scene->addChild(altar_particle);
 
     auto open_altar = [miner](){
         MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
@@ -856,16 +856,16 @@ void GameDirector::switch_to_miner_menu()
     };
     bind_touch_ended(explode_btn, open_altar);
 
-	auto check_altar_touching_cb = [explode_btn, miner, emitter](float dt){
+	auto check_altar_touching_cb = [explode_btn, miner, altar_btn_emitter](float dt){
 		bool rail_connected = miner->rails_connect_a_resource(miner->altar_tile_pos);
 		if (rail_connected)
 		{
 			explode_btn->setEnabled(true);
-			emitter->SetState(MAGIC_STATE_UPDATE);
+			altar_btn_emitter->SetState(MAGIC_STATE_UPDATE);
 		}
 		else
 		{
-			emitter->SetState(MAGIC_STATE_STOP);
+			altar_btn_emitter->SetState(MAGIC_STATE_STOP);
 			explode_btn->setEnabled(false);
 		}
 	};
@@ -876,6 +876,12 @@ void GameDirector::switch_to_miner_menu()
     auto chance_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("chance_btn"));
     prep_button(chance_btn);
 
+	auto chance_particle = MagicEmitter::create("Square");
+	chance_particle->setPosition(chance_btn->getPosition());
+	MP_Emitter_Cocos* chance_btn_emitter = chance_particle->GetEmitter();
+	chance_btn_emitter->SetScale(0.5f);
+	miner_scene->addChild(chance_particle);
+
     auto open_chance = [miner](){
         MinerSerializer serializer = MinerSerializer("alpha_tilemap.json", miner.get());
         serializer.serialize();
@@ -885,21 +891,21 @@ void GameDirector::switch_to_miner_menu()
     };
     bind_touch_ended(chance_btn, open_chance);
 
-	auto check_chance_touching_cb = [chance_btn, miner, emitter](float dt){
-		bool rail_connected = miner->rails_connect_a_resource(miner->altar_tile_pos);
+	auto check_chance_touching_cb = [chance_btn, miner, chance_btn_emitter](float dt){
+		bool rail_connected = miner->rails_connect_a_resource(miner->chance_tile_pos);
 		if (rail_connected)
 		{
 			chance_btn->setEnabled(true);
-			emitter->SetState(MAGIC_STATE_UPDATE);
+			chance_btn_emitter->SetState(MAGIC_STATE_UPDATE);
 		}
 		else
 		{
-			emitter->SetState(MAGIC_STATE_STOP);
+			chance_btn_emitter->SetState(MAGIC_STATE_STOP);
 			chance_btn->setEnabled(false);
 		}
 	};
-    //check_chance_touching_cb(0);
-    //chance_btn->schedule(check_chance_touching_cb, AVERAGE_DELAY, "check_chance_touching_cb");
+    check_chance_touching_cb(0);
+    chance_btn->schedule(check_chance_touching_cb, AVERAGE_DELAY, "check_chance_touching_cb");
 
     //dig button
     auto dig_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("dig_btn"));

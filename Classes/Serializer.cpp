@@ -541,6 +541,9 @@ void MinerSerializer::serialize()
     this->set_double(doc, "altar_tile_pos_x", this->miner->altar_tile_pos.x);
     this->set_double(doc, "altar_tile_pos_y", this->miner->altar_tile_pos.y);
 
+    this->set_double(doc, "chance_tile_pos_x", this->miner->chance_tile_pos.x);
+    this->set_double(doc, "chance_tile_pos_y", this->miner->chance_tile_pos.y);
+
     this->set_double(doc, "depth", this->miner->depth);
 
     this->save_document(doc);
@@ -585,6 +588,8 @@ void MinerSerializer::load()
         "active_tile_pos_y",
         "altar_tile_pos_x",
         "altar_tile_pos_y",
+        "chance_tile_pos_x",
+        "chance_tile_pos_y",
         "depth"
     };
 
@@ -648,6 +653,9 @@ void MinerSerializer::load()
 
     this->miner->altar_tile_pos.x = doc["altar_tile_pos_x"].GetDouble();
     this->miner->altar_tile_pos.y = doc["altar_tile_pos_y"].GetDouble();
+
+    this->miner->chance_tile_pos.x = doc["chance_tile_pos_x"].GetDouble();
+    this->miner->chance_tile_pos.y = doc["chance_tile_pos_y"].GetDouble();
 
     this->miner->depth = doc["depth"].GetDouble();
 

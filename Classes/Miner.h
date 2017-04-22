@@ -51,6 +51,7 @@ class Miner
         cocos2d::Vec2 active_tile_pos;
         cocos2d::Vec2 prev_active_tile_pos;
         cocos2d::Vec2 altar_tile_pos;
+        cocos2d::Vec2 chance_tile_pos;
 
         cocos2d::Node* parent;
         Miner(cocos2d::Node* parent);
