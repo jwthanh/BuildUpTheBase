@@ -312,7 +312,6 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
 
     if (tile_gid == TileID::altar_tile)
     {
-        CCLOG("tile is a resource");
         bool run_fireworks = false; //renable some other time
         if (run_fireworks)
         {
@@ -350,7 +349,6 @@ bool Miner::get_tile_is_blocked_pos(cocos2d::Vec2 pos)
     auto match = std::find(blocked_tiles.begin(), blocked_tiles.end(), tile_gid);
     if (match != blocked_tiles.end())
     {
-        CCLOG("tile is a rail or other special tile");
         return true;
     }
 
@@ -363,12 +361,10 @@ bool Miner::is_valid_pos(cocos2d::Vec2 pos)
 
     if (pos.x >= layer_size.width || pos.x < 0)
     {
-        CCLOG("invalid tile X");
         return false;
     }
     if (pos.y >= layer_size.height || pos.y < 0)
     {
-        CCLOG("invalid tile Y");
         return false;
     }
 
@@ -450,8 +446,6 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
 
         if (this->get_tile_is_blocked_pos({new_x, new_y}))
         {
-            CCLOG("not moving active tile: tile is blocked");
-
             cocos2d::Vec2 pos = { new_x, new_y };
 
             //shake map
@@ -560,7 +554,6 @@ bool Miner::rails_connect_a_resource(cocos2d::Vec2 resource_tile_pos)
         if (this->is_valid_pos(potential_rail_pos))
         {
             tile_gid_t potential_rail_id = this->active_layer->getTileGIDAt(potential_rail_pos);
-            CCLOG("tid: %i", potential_rail_id);
 
             return std::find(RAIL_IDS.begin(), RAIL_IDS.end(), potential_rail_id) != RAIL_IDS.end();
         }
@@ -575,12 +568,10 @@ bool Miner::rails_connect_a_resource(cocos2d::Vec2 resource_tile_pos)
         bool found_rail = check_direction_for_rail(DIRECTION_MAP_REV.at(dir));
         if (found_rail)
         {
-            CCLOG("Found rail");
             return true;
         }
     };
-    CCLOG("Could not find rail");
-    CCLOG("%s", this->get_pretty_printed_tiles().c_str());
+
     return false;
 }
 

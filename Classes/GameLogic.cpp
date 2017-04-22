@@ -137,8 +137,6 @@ std::string existing_player_load()
         since_last_login_ss << "\nIt's been " << beautify_double(days_since_login) << " days since last login.";
     }
 
-    CCLOG("%s", since_last_login_ss.str().c_str());
-
     gains_ss << since_last_login_ss.str();
 
     std::string result = "";
@@ -602,9 +600,8 @@ void GameDirector::switch_to_city_menu()
                 evt == ui::TextField::EventType::DETACH_WITH_IME)
         {
             std::string text = city_name_input->getString();
-            CCLOG("Got raw city_name from city_name_input: %s", text.c_str());
             std::string cleaned_city_name = clean_city_name(text);
-            CCLOG("is cleaned to %s", cleaned_city_name.c_str());
+
             city_name_input->setString(cleaned_city_name);
             BUILDUP->city->name = cleaned_city_name;
 
@@ -767,7 +764,6 @@ void GameDirector::switch_to_miner_menu()
                 }
                 else
                 {
-                    CCLOG("need more rails");
                     animate_flash_action(rails_count_lbl, 0.1f, 1.5f);
                     auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
                     info_panel->runAction(shake);
@@ -861,9 +857,7 @@ void GameDirector::switch_to_miner_menu()
     bind_touch_ended(explode_btn, open_altar);
 
 	auto check_altar_touching_cb = [explode_btn, miner, emitter](float dt){
-        CCLOG("altar start");
 		bool rail_connected = miner->rails_connect_a_resource(miner->altar_tile_pos);
-        CCLOG("altar end");
 		if (rail_connected)
 		{
 			explode_btn->setEnabled(true);
@@ -924,7 +918,6 @@ void GameDirector::switch_to_miner_menu()
             }
             else
             {
-                CCLOG("need more carts");
                 animate_flash_action(cart_count_lbl, 0.1f, 1.5f);
                 auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
                 info_panel->runAction(shake);
