@@ -162,7 +162,7 @@ vsItem ItemScene::get_items()
     if (it != items.end()) items.erase(it);
 
     //limit number of items
-    size_t limit = 50;
+    size_t limit = 10;
     auto end = std::next(items.begin(), std::min(limit, items.size()));
     vsItem limited_items(items.begin(), end);
 
