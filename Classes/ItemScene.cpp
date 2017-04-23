@@ -288,7 +288,7 @@ void AltarItemScene::init_callbacks()
 
             cocos2d::Director::getInstance()->popScene();
         };
-        bind_touch_ended(nuitem->button, upgrade_and_pop);
+        bind_touch_ended(this->item_sell_btn, upgrade_and_pop);
 
         //update listviews layout to account for different content height
         this->item_listview_description->requestDoLayout();
@@ -394,7 +394,7 @@ void ChanceItemScene::init_callbacks()
 
             cocos2d::Director::getInstance()->popScene();
         };
-        bind_touch_ended(nuitem->button, upgrade_and_pop);
+        bind_touch_ended(this->item_sell_btn, upgrade_and_pop);
 
         //update listviews layout to account for different content height
         this->item_listview_description->requestDoLayout();

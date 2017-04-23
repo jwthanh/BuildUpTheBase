@@ -162,6 +162,10 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_L)
     {
     }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_M)
+    {
+        GameDirector::switch_to_miner_menu();
+    }
     else if (keyCode == EventKeyboard::KeyCode::KEY_C)
     {
         GameDirector::switch_to_city_menu();
