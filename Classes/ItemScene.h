@@ -87,6 +87,8 @@ class ChanceItemScene : public ItemScene
         virtual bool init(ItemSlotType slot_type=ItemSlotType::Unset) override;
         void init_callbacks() override;
         static cocos2d::Scene* createScene(ItemSlotType slot_type=ItemSlotType::Unset);
+
+        virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent);
 };
 
 class EquipItemScene : public ItemScene

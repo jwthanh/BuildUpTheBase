@@ -9,6 +9,7 @@
 #include "ui/UIText.h"
 #include "ui/UIButton.h"
 
+#include "Modal.h"
 #include "NodeBuilder.h"
 #include "MiscUI.h"
 #include "NuMenu.h"
@@ -389,12 +390,6 @@ void ChanceItemScene::init_callbacks()
 
         this->item_sell_btn->setVisible(true);
         auto upgrade_and_pop = [item](){
-            item->level += 3;
-
-            auto achievement_manager = AchievementManager::getInstance();
-            std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItemsPlaced);
-            achievement->increment();
-
             cocos2d::Director::getInstance()->popScene();
         };
         bind_touch_ended(this->item_sell_btn, upgrade_and_pop);
@@ -484,6 +479,17 @@ cocos2d::Scene* ChanceItemScene::createScene(ItemSlotType slot_type)
     auto* layer = ChanceItemScene::create(slot_type);
     scene->addChild(layer);
     return scene;
+};
+
+void ChanceItemScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
+{
+    ItemScene::onKeyReleased(keyCode, event);
+    if (keyCode == EventKeyboard::KeyCode::KEY_SPACE) {
+        auto scene = cocos2d::Director::getInstance()->getRunningScene();
+        TextBlobModal modal(scene);
+        modal.set_title("Gods have spoken");
+        modal.set_body("You have been blessed");
+    }
 };
 
 const std::string& EquipItemScene::get_scene_title()
