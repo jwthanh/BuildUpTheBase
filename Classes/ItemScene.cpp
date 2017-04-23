@@ -161,8 +161,9 @@ vsItem ItemScene::get_items()
     auto it = std::remove_if(items.begin(), items.end(), remove_if_equipped);
     if (it != items.end()) items.erase(it);
 
-    auto end = std::next(items.begin(), std::min(size_t(50), items.size()));
-    
+    //limit number of items
+    size_t limit = 50;
+    auto end = std::next(items.begin(), std::min(limit, items.size()));
     vsItem limited_items(items.begin(), end);
 
     return limited_items;
@@ -172,8 +173,10 @@ cocos2d::ui::Layout* ItemScene::init_panel()
 {
     auto items_scene_node = get_prebuilt_node_from_csb("editor/scenes/items_scene.csb");
     items_scene_node->removeFromParent();
+
     auto panel = dynamic_cast<cocos2d::ui::Layout*>(items_scene_node->getChildByName("panel"));
     panel->removeFromParent();
+
     this->addChild(panel);
 
     return panel;
