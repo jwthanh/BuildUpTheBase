@@ -977,7 +977,7 @@ void GameDirector::switch_to_item_altar_menu()
 
 void GameDirector::switch_to_item_chance_menu()
 {
-    auto scene = AltarItemScene::createScene();
+    auto scene = ChanceItemScene::createScene();
     scene->setName("chance_item_scene");
     set_default_key_handler(scene);
 

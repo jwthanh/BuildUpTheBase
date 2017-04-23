@@ -146,6 +146,10 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_GRAVE)
     {
     }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_H)
+    {
+        GameDirector::switch_to_item_chance_menu();
+    }
     else if (keyCode == EventKeyboard::KeyCode::KEY_S)
     {
         GameLogic::save_all();
