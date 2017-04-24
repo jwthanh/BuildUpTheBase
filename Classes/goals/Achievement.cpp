@@ -4,7 +4,7 @@
 #include "base/CCDirector.h"
 #include "GameLogic.h"
 #include "2d/CCParticleExamples.h"
-#include "Modal.h"
+#include "PopupPanel.h"
 #include "utilities/vibration.h"
 
 

@@ -15,7 +15,7 @@
 #include "attribute_container.h"
 #include "ProgressBar.h"
 #include "Technology.h"
-#include "Modal.h"
+#include "PopupPanel.h"
 #include "StaticData.h"
 #include "Item.h"
 #include "RandomWeightMap.h"

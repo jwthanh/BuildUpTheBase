@@ -26,6 +26,7 @@
 #include "Util.h"
 #include "MiscUI.h"
 #include "Modal.h"
+#include "PopupPanel.h"
 #include "HarvestScene.h"
 #include "Item.h"
 #include "StaticData.h"

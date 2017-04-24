@@ -107,6 +107,7 @@
       <Filter>goals</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BuildingDetailScene.cpp" />
+    <ClCompile Include="..\Classes\PopupPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -212,6 +213,7 @@
       <Filter>goals</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BuildingDetailScene.h" />
+    <ClInclude Include="..\Classes\PopupPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
