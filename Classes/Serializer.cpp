@@ -389,7 +389,7 @@ void ItemSerializer::serialize()
         row.AddMember(rj_key.Move(), rj_value.Move(), allocator);
     };
 
-    for (spItem item : GameLogic::getInstance()->equipment->inventory)
+    for (spItem item : EQUIPMENT->inventory)
     {
         rjValue row = rjValue();
         row.SetObject();
@@ -406,7 +406,7 @@ void ItemSerializer::serialize()
 
 void ItemSerializer::load()
 {
-    GameLogic::getInstance()->equipment->inventory = {};
+    EQUIPMENT->inventory = {};
     auto doc = this->get_document();
 
     ItemData item_data;
@@ -430,7 +430,7 @@ void ItemSerializer::load()
             spItem item = item_data.get_item(type_name);
             item->rarity = rarity;
             item->level = item_level;
-            GameLogic::getInstance()->equipment->inventory.push_back(item);
+            EQUIPMENT->inventory.push_back(item);
         }
         CCLOG("found an array of items for Items, as expected");
     }
@@ -675,11 +675,11 @@ void EquipmentSerializer::serialize()
 
     rjDocument::AllocatorType& allocator = doc.GetAllocator();
 
-    //finds the item in GameLogic::getInstance()->equipment->inventory and returns its index
+    //finds the item in EQUIPMENT->inventory and returns its index
     auto get_index_of_item = [](std::shared_ptr<EquipmentSlot>& slot) {
         if (slot->has_item())
         {
-            auto items = GameLogic::getInstance()->equipment->inventory;
+            auto items = EQUIPMENT->inventory;
             auto itr = std::find(items.begin(), items.end(), slot->get_item());
 
             return std::distance(items.begin(), itr);
@@ -688,9 +688,9 @@ void EquipmentSerializer::serialize()
     };
 
     //TODO use some sort of id, index is weak
-    this->set_int(doc, "combat_slot", get_index_of_item(GameLogic::getInstance()->equipment->combat_slot));
-    this->set_int(doc, "mining_slot", get_index_of_item(GameLogic::getInstance()->equipment->mining_slot));
-    this->set_int(doc, "recipe_slot", get_index_of_item(GameLogic::getInstance()->equipment->recipe_slot));
+    this->set_int(doc, "combat_slot", get_index_of_item(EQUIPMENT->combat_slot));
+    this->set_int(doc, "mining_slot", get_index_of_item(EQUIPMENT->mining_slot));
+    this->set_int(doc, "recipe_slot", get_index_of_item(EQUIPMENT->recipe_slot));
 
     this->save_document(doc);
 }
@@ -707,14 +707,14 @@ void EquipmentSerializer::load()
 
     auto get_item_by_index = [](int index) {
         if (index != -1) {
-            spItem item = GameLogic::getInstance()->equipment->inventory.at(index);
+            spItem item = EQUIPMENT->inventory.at(index);
             return item;
         };
 
         return spItem();
     };
 
-    auto& equipment = GameLogic::getInstance()->equipment;
+    auto& equipment = EQUIPMENT;
     rjValue combat_slot_key = rjValue("combat_slot");
     if (doc.HasMember(combat_slot_key))
     {

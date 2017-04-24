@@ -604,7 +604,7 @@ void DumpsterHarvestable::shatter()
     std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItems);
     achievement->increment();
 
-    GameLogic::getInstance()->equipment->inventory.push_back(scavenge_item);
+    EQUIPMENT->inventory.push_back(scavenge_item);
     auto popup_panel = GameLogic::get_popup_panel();
     if (popup_panel != NULL)
     {
@@ -698,9 +698,9 @@ void MiningHarvestable::animate_touch_start(cocos2d::Touch* touch)
 
     int iron_weight = 5; //standard default
 
-    if (GameLogic::getInstance()->equipment->mining_slot->has_item())
+    if (EQUIPMENT->mining_slot->has_item())
     {
-        spItem item = GameLogic::getInstance()->equipment->mining_slot->get_item();
+        spItem item = EQUIPMENT->mining_slot->get_item();
         iron_weight += (0.05 * item->level)* ITEM_RARITY_MODIFIER.at(item->rarity);
     };
 
@@ -995,9 +995,9 @@ void CraftingHarvestable::shatter()
         RandomWeightMap<Output> boosted_output;
         boosted_output.add_item(Output::Single, 100);
 
-        if (GameLogic::getInstance()->equipment->recipe_slot->has_item())
+        if (EQUIPMENT->recipe_slot->has_item())
         {
-            spItem item = GameLogic::getInstance()->equipment->recipe_slot->get_item();
+            spItem item = EQUIPMENT->recipe_slot->get_item();
 
             boosted_output.add_item(Output::Double, 15 + (item->level+1)*0.05);
             boosted_output.add_item(Output::Triple, 1 + (item->level+1)*0.025);
@@ -1354,9 +1354,9 @@ void FightingHarvestable::animate_touch_end(cocos2d::Touch* touch)
 res_count_t FightingHarvestable::get_per_touch_output()
 {
     res_count_t base = 5.0L;
-    if (GameLogic::getInstance()->equipment->combat_slot->has_item())
+    if (EQUIPMENT->combat_slot->has_item())
     {
-        spItem item = GameLogic::getInstance()->equipment->combat_slot->get_item();
+        spItem item = EQUIPMENT->combat_slot->get_item();
         base = scale_number_flat(base, item->level, static_cast<res_count_t>(2) * ITEM_RARITY_MODIFIER.at(item->rarity));
     }
 

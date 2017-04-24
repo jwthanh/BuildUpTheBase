@@ -66,7 +66,7 @@ void ItemScene::init_callbacks()
             this->items_listview->removeChild(nuitem);
 
             //remove from items list
-            GameLogic::getInstance()->equipment->remove_item_from_inventory(item);
+            EQUIPMENT->remove_item_from_inventory(item);
 
             BEATUP->add_total_coin(item->get_effective_cost());
 
@@ -113,11 +113,11 @@ vsItem ItemScene::get_items()
     vsItem items;
     //if theres no filter, return all
     if (this->filtered_slot_type == ItemSlotType::Unset){
-        items = GameLogic::getInstance()->equipment->inventory;
+        items = EQUIPMENT->inventory;
     }
     //otherwise return just the items matching the filter type
     else {
-        for (auto& item : GameLogic::getInstance()->equipment->inventory){
+        for (auto& item : EQUIPMENT->inventory){
             if (item->slot_type == this->filtered_slot_type){
                 items.push_back(item);
             }
@@ -125,7 +125,7 @@ vsItem ItemScene::get_items()
     };
 
     //remove equipped items
-    auto& equipment = GameLogic::getInstance()->equipment;
+    auto& equipment = EQUIPMENT;
     auto slots = equipment->get_slots();
     auto remove_if_equipped = [slots](std::shared_ptr<Item>& item){
         for (auto& slot : slots){
@@ -468,7 +468,7 @@ void ChanceItemScene::convert_item_to_chance(spItem item)
     body << "You have been blessed with a bounty:";
     modal->set_body(body.str());
 
-    auto on_touch = [this, modal](){
+    auto on_touch = [this, item, modal](){
         CCLOG("TODO: Implement this");
         /*
          *Takes an item, and depending on its type, it generates
@@ -555,7 +555,7 @@ void EquipItemScene::init_callbacks()
 
         this->item_sell_btn->setVisible(true);
         auto equip_and_pop = [this, item](){
-                GameLogic::getInstance()->equipment->get_slot_by_type(
+                EQUIPMENT->get_slot_by_type(
                         this->filtered_slot_type
                 )->set_item(item);
                 cocos2d::Director::getInstance()->popScene();
@@ -667,7 +667,7 @@ void ScrapItemScene::init_callbacks()
                 GameLogic::getInstance()->add_city_investment((double)item->get_effective_cost());
 
                 //remove from items list
-                GameLogic::getInstance()->equipment->remove_item_from_inventory(item);
+                EQUIPMENT->remove_item_from_inventory(item);
 
                 this->reset_detail_panel();
         };

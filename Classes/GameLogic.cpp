@@ -1049,7 +1049,7 @@ void GameDirector::switch_to_equipment_menu()
     auto mining_panel = panel->getChildByName("mining_panel");
     auto recipe_panel = panel->getChildByName("recipe_panel");
 
-    auto& equipment = GameLogic::getInstance()->equipment;
+    auto& equipment = EQUIPMENT;
     build_update_equipped_item(weapon_panel, equipment->combat_slot.get(), "Equip a weapon");
     build_update_equipped_item(mining_panel, equipment->mining_slot.get(), "Equip a mining tool");
     build_update_equipped_item(recipe_panel, equipment->recipe_slot.get(), "Equip a crafting tool");
