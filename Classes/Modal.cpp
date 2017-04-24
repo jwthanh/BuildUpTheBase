@@ -43,7 +43,7 @@ bool BaseModal::init()
     this->_exit_layout->setAnchorPoint(Vec2::ZERO);
     this->_exit_layout->setContentSize({ 1000, 1000 });
     this->_exit_layout->setTouchEnabled(true);
-    this->addChild(this->_exit_layout);
+    this->addChild(this->_exit_layout, -1); //add it behind everything else in this.
 
     this->init_callbacks();
 
