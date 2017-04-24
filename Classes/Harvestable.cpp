@@ -300,19 +300,19 @@ void Harvestable::animate_touch_end(cocos2d::Touch* touch)
 
 bool Harvestable::is_harvestable()
 {
-	return this->building->can_fit_more_ingredients(this->get_output_ing_type()) == true || this->building->name == "The Arena";
+    return this->building->can_fit_more_ingredients(this->get_output_ing_type()) == true || this->building->name == "The Arena";
 }
 
 void Harvestable::handle_harvest()
 {
     this->add_current_clicks(1);
 
-	this->animate_harvest();
-	this->on_harvest();
+    this->animate_harvest();
+    this->on_harvest();
 
-	if (this->should_shatter()) {
-		this->shatter();
-	};
+    if (this->should_shatter()) {
+        this->shatter();
+    };
 }
 
 void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
@@ -336,9 +336,9 @@ void Harvestable::animate_clip()
 {
     auto size = 20.0f;
     Vec2 origin = Vec2(
-        this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
-        this->sprite->getContentSize().height*this->sprite->getScaleY()*CCRANDOM_0_1()
-    );
+            this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
+            this->sprite->getContentSize().height*this->sprite->getScaleY()*CCRANDOM_0_1()
+            );
 
     Vec2 destination = origin +Vec2(size, size);
     this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
@@ -434,8 +434,8 @@ void Harvestable::shatter()
     this->spawn_label_on_touch(NULL, 1, 1, this->get_shatter_text(), this->get_shatter_text_color());
 
     CallFunc* remove = CallFunc::create([this](){
-        this->removeFromParent();
-    });
+            this->removeFromParent();
+            });
 
     auto shatter_action = ShatterAction::create(0.5f);
     //shatter_sprite->runAction(shatter_action);
@@ -726,9 +726,9 @@ void MiningHarvestable::animate_clip()
     auto sprite_size = this->get_sprite_size();
     auto size = 20.0f;
     Vec2 origin = Vec2(
-        MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
-        sprite_size.height - (click_ratio*sprite_size.height) //from the top, go a percentage of the way down
-        );
+            MIN(sprite_size.width, sprite_size.width - size)*CCRANDOM_0_1(), //random along the width, dont go so far right
+            sprite_size.height - (click_ratio*sprite_size.height) //from the top, go a percentage of the way down
+            );
 
     Vec2 destination = origin + Vec2(size, size);
     this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
@@ -1052,7 +1052,7 @@ bool FightingHarvestable::init()
 
     //setup enemy node
     this->enemy = std::make_shared<Fighter>("temp");
-	this->enemy->combat = std::make_shared<Combat>("enemy combat", this->enemy);
+    this->enemy->combat = std::make_shared<Combat>("enemy combat", this->enemy);
 
     FighterNode* fighter_node = FighterNode::create(this->enemy);
     fighter_node->setScale(0.25f);
@@ -1064,9 +1064,9 @@ bool FightingHarvestable::init()
     this->spawn_enemy();
 
     fighter_node->img_view->addTouchEventListener([this](Ref* target, ui::Widget::TouchEventType type)
-    {
-        if (type == TouchEventType::BEGAN)
-        {
+            {
+            if (type == TouchEventType::BEGAN)
+            {
             //// this nearly worked, the coords werent right, so this->_hitted
             ////was always false, otherwise worked to sim a click
             // EventTouch evt = cocos2d::EventTouch();
@@ -1081,10 +1081,10 @@ bool FightingHarvestable::init()
             // this->sprite->getEventDispatcher()->dispatchEvent(&evt);
 
 
-			this->handle_harvest();
+            this->handle_harvest();
 
-        }
-    });
+            }
+            });
 
     //adjust position because the enemy and sword are both offset from the center
     this->setPosition(Vec2(this->getPosition().x-110, this->getPosition().y));
@@ -1171,19 +1171,19 @@ bool FightingHarvestable::should_shatter()
 void FightingHarvestable::spawn_enemy()
 {
     this->is_shattering = false;
-	GameLogic* game_logic = GameLogic::getInstance();
+    GameLogic* game_logic = GameLogic::getInstance();
 
-	this->enemy = NULL;
+    this->enemy = NULL;
     this->enemy = std::make_shared<Fighter>("Challenger");
-	this->enemy->combat = std::make_shared<Combat>("challengers's combat", this->enemy);
+    this->enemy->combat = std::make_shared<Combat>("challengers's combat", this->enemy);
     this->enemy->team = Fighter::TeamTwo;
     this->enemy->sprite_name = "harvester.png";
 
     res_count_t base_hp = 20.0;
     res_count_t base_slow_rate = 3.0;
 
-	spBuilding workshop = BUILDUP->city->building_by_name("The Workshop");
-	TechMap tech_map = workshop->techtree->get_tech_map();
+    spBuilding workshop = BUILDUP->city->building_by_name("The Workshop");
+    TechMap tech_map = workshop->techtree->get_tech_map();
 
     auto tech_type = Technology::SubType::CombatWeakenEnemy;
     res_count_t _def = 0L;
@@ -1226,7 +1226,7 @@ void FightingHarvestable::spawn_enemy()
         return  output;
     };
 
-	Node* base_node = Node::create();
+    Node* base_node = Node::create();
 
     std::vector<std::string> sprites = {
         pick_one(gen_paths("set", 4)),
@@ -1245,18 +1245,18 @@ void FightingHarvestable::spawn_enemy()
     base_node->setPosition(8,8);
     base_node->setScaleY(-1.0f);
 
-	RenderTexture* rt = RenderTexture::create(16, 16);
-	rt->begin();
-	base_node->visit();
-	rt->end();
+    RenderTexture* rt = RenderTexture::create(16, 16);
+    rt->begin();
+    base_node->visit();
+    rt->end();
 
     //use the texture from RenderTexture and replace the ImageView's Scale9 texture
-	cocos2d::ui::ImageView* fighter_node_img_view = fighter_node->img_view;
+    cocos2d::ui::ImageView* fighter_node_img_view = fighter_node->img_view;
     ui::Scale9Sprite* scale9_sprite = dynamic_cast<ui::Scale9Sprite*>(fighter_node_img_view->getVirtualRenderer());
 
     Sprite* tex_sprite = dynamic_cast<Sprite*>(rt->getSprite());
     scale9_sprite->setSpriteFrame(tex_sprite->getSpriteFrame());
-	scale9_sprite->setScale9Enabled(false); //NOTE!! scale9 must be disabled on the sprite, otherwise there's a memory crash
+    scale9_sprite->setScale9Enabled(false); //NOTE!! scale9 must be disabled on the sprite, otherwise there's a memory crash
 
 };
 
@@ -1432,7 +1432,7 @@ void UndeadHarvestable::animate_clip()
     float click_ratio = this->get_click_ratio();
     auto spark_parts = ParticleSystemQuad::create("particles/blood.plist");
     spark_parts->setScale(1.0 / 2.0f);
-     spark_parts->setPosition(origin);
+    spark_parts->setPosition(origin);
     int total_particles = spark_parts->getTotalParticles();
     int particle_count = (int)(total_particles * click_ratio);
     spark_parts->setTotalParticles(particle_count+10);
