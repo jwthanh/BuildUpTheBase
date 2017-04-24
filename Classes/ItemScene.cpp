@@ -66,27 +66,7 @@ void ItemScene::init_callbacks()
             this->items_listview->removeChild(nuitem);
 
             //remove from items list
-            GameLogic::getInstance()->equipment->inventory.erase(
-                std::remove(GameLogic::getInstance()->equipment->inventory.begin(), GameLogic::getInstance()->equipment->inventory.end(), item),
-                GameLogic::getInstance()->equipment->inventory.end()
-            );
-
-            //TODO clear equipment slots nicely, this is ugly
-            auto& equipment = GameLogic::getInstance()->equipment;
-
-            if (equipment->combat_slot->get_item() == item)
-            {
-                equipment->combat_slot->set_item(NULL);
-            }
-            else if (equipment->mining_slot->get_item() == item)
-            {
-                equipment->mining_slot->set_item(NULL);
-            }
-            else if (equipment->recipe_slot->get_item() == item)
-            {
-                equipment->recipe_slot->set_item(NULL);
-            }
-
+            GameLogic::getInstance()->equipment->remove_item_from_inventory(item);
 
             BEATUP->add_total_coin(item->get_effective_cost());
 
@@ -691,27 +671,7 @@ void ScrapItemScene::init_callbacks()
                 GameLogic::getInstance()->add_city_investment((double)item->get_effective_cost());
 
                 //remove from items list
-                GameLogic::getInstance()->equipment->inventory.erase(
-                    std::remove(GameLogic::getInstance()->equipment->inventory.begin(), GameLogic::getInstance()->equipment->inventory.end(), item),
-                    GameLogic::getInstance()->equipment->inventory.end()
-                );
-
-                //TODO clear equipment slots nicely, this is ugly
-                auto& equipment = GameLogic::getInstance()->equipment;
-
-                if (equipment->combat_slot->get_item() == item)
-                {
-                    equipment->combat_slot->set_item(NULL);
-                }
-                else if (equipment->mining_slot->get_item() == item)
-                {
-                    equipment->mining_slot->set_item(NULL);
-                }
-                else if (equipment->recipe_slot->get_item() == item)
-                {
-                    equipment->recipe_slot->set_item(NULL);
-                }
-
+                GameLogic::getInstance()->equipment->remove_item_from_inventory(item);
 
                 this->reset_detail_panel();
         };

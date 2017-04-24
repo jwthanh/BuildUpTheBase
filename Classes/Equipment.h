@@ -27,6 +27,7 @@ class Equipment
         Equipment();
 
         vsItem inventory;
+        void remove_item_from_inventory(spItem item);
 
         std::shared_ptr<EquipmentSlot> combat_slot;
         std::shared_ptr<EquipmentSlot> mining_slot;

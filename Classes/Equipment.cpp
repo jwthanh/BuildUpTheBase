@@ -39,6 +39,28 @@ Equipment::Equipment()
     this->recipe_slot = std::shared_ptr<EquipmentSlot>(new EquipmentSlot());
 };
 
+void Equipment::remove_item_from_inventory(spItem item)
+{
+    this->inventory.erase(
+        std::remove(this->inventory.begin(), this->inventory.end(), item),
+        this->inventory.end()
+    );
+
+    if (this->combat_slot->get_item() == item)
+    {
+        this->combat_slot->set_item(NULL);
+    }
+    else if (this->mining_slot->get_item() == item)
+    {
+        this->mining_slot->set_item(NULL);
+    }
+    else if (this->recipe_slot->get_item() == item)
+    {
+        this->recipe_slot->set_item(NULL);
+    }
+
+};
+
 std::vector<const std::shared_ptr<EquipmentSlot>> Equipment::get_slots()
 {
     std::vector<const std::shared_ptr<EquipmentSlot>> slots;
