@@ -112,17 +112,13 @@ vsItem ItemScene::get_items()
 {
     vsItem items;
     //if theres no filter, return all
-    if (this->filtered_slot_type == ItemSlotType::Unset)
-    {
+    if (this->filtered_slot_type == ItemSlotType::Unset){
         items = GameLogic::getInstance()->equipment->inventory;
     }
     //otherwise return just the items matching the filter type
-    else
-    {
-        for (auto& item : GameLogic::getInstance()->equipment->inventory)
-        {
-            if (item->slot_type == this->filtered_slot_type)
-            {
+    else {
+        for (auto& item : GameLogic::getInstance()->equipment->inventory){
+            if (item->slot_type == this->filtered_slot_type){
                 items.push_back(item);
             }
         }
