@@ -488,7 +488,15 @@ void ChanceItemScene::convert_item_to_chance(spItem item)
     modal->set_title("Gods have spoken");
     modal->set_body("You have been blessed");
     auto on_touch = [this, modal](){
-        CCLOG("HAHAHAHHAHAH");
+        CCLOG("TODO: Implement this");
+        /*
+         *Takes an item, and depending on its type, it generates
+         *a specific type of advanced resource.
+         *
+         *Potentially depends on the quality type of the item to determine
+         *the types of chances you get, so a Poor miner tool gets you copper
+         *while a rare miner tool gets you more iron
+         */
         modal->removeFromParent();
     };
     modal->on_layout_touched = on_touch;
