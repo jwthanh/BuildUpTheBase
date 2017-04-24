@@ -33,7 +33,6 @@ class BaseModal : public cocos2d::Node
         cocos2d::ui::Text* _title_lbl;
 
     public:
-        //TODO figure out how to clean this up properly, maybe subclass Ref*
         CREATE_FUNC(BaseModal);
         bool init();
         virtual void init_callbacks();
@@ -54,11 +53,6 @@ class TextBlobModal : public BaseModal
         virtual bool init();
 
         void set_body(const std::string& body_txt);
-};
-
-//modal with paginated items TODO
-class PageModal : public BaseModal
-{
 };
 
 #endif

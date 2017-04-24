@@ -1,6 +1,5 @@
 #include "Modal.h"
 
-
 #include "MiscUI.h"
 #include "Util.h"
 #include "external/easylogging.h"
@@ -11,11 +10,8 @@
 #include "2d/CCActionInstant.h"
 #include "ui/UIText.h"
 #include "ui/UILayout.h"
-#include "ui/UIImageView.h"
 #include "ui/UIListView.h"
 #include "2d/CCLayer.h"
-#include "2d/CCActionEase.h"
-#include "2d/CCParticleSystemQuad.h"
 
 
 USING_NS_CC;
