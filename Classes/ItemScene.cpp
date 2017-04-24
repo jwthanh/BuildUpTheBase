@@ -66,9 +66,9 @@ void ItemScene::init_callbacks()
             this->items_listview->removeChild(nuitem);
 
             //remove from items list
-            BUILDUP->items.erase(
-                std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item),
-                BUILDUP->items.end()
+            GameLogic::getInstance()->equipment->inventory.erase(
+                std::remove(GameLogic::getInstance()->equipment->inventory.begin(), GameLogic::getInstance()->equipment->inventory.end(), item),
+                GameLogic::getInstance()->equipment->inventory.end()
             );
 
             //TODO clear equipment slots nicely, this is ugly
@@ -134,12 +134,12 @@ vsItem ItemScene::get_items()
     //if theres no filter, return all
     if (this->filtered_slot_type == ItemSlotType::Unset)
     {
-        items = BUILDUP->items;
+        items = GameLogic::getInstance()->equipment->inventory;
     }
     //otherwise return just the items matching the filter type
     else
     {
-        for (auto& item : BUILDUP->items)
+        for (auto& item : GameLogic::getInstance()->equipment->inventory)
         {
             if (item->slot_type == this->filtered_slot_type)
             {
@@ -691,9 +691,9 @@ void ScrapItemScene::init_callbacks()
                 GameLogic::getInstance()->add_city_investment((double)item->get_effective_cost());
 
                 //remove from items list
-                BUILDUP->items.erase(
-                    std::remove(BUILDUP->items.begin(), BUILDUP->items.end(), item),
-                    BUILDUP->items.end()
+                GameLogic::getInstance()->equipment->inventory.erase(
+                    std::remove(GameLogic::getInstance()->equipment->inventory.begin(), GameLogic::getInstance()->equipment->inventory.end(), item),
+                    GameLogic::getInstance()->equipment->inventory.end()
                 );
 
                 //TODO clear equipment slots nicely, this is ugly

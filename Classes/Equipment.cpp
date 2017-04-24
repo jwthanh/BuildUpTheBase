@@ -6,6 +6,7 @@
 EquipmentSlot::EquipmentSlot()
 {
     this->_item = NULL;
+
 };
 
 EquipmentSlot::EquipmentSlot(spItem item)
@@ -31,6 +32,8 @@ void EquipmentSlot::set_item(spItem item)
 
 Equipment::Equipment()
 {
+    this->inventory = {};
+
     this->combat_slot = std::shared_ptr<EquipmentSlot>(new EquipmentSlot());
     this->mining_slot = std::shared_ptr<EquipmentSlot>(new EquipmentSlot());
     this->recipe_slot = std::shared_ptr<EquipmentSlot>(new EquipmentSlot());

@@ -20,11 +20,13 @@ class EquipmentSlot
 
 };
 
-/// Tracks the equipped items
+/// Tracks the all items
 class Equipment
 {
     public:
         Equipment();
+
+        vsItem inventory;
 
         std::shared_ptr<EquipmentSlot> combat_slot;
         std::shared_ptr<EquipmentSlot> mining_slot;

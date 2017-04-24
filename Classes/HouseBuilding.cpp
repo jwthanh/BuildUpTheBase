@@ -51,8 +51,6 @@ Buildup::Buildup()
 	this->fighter->combat = fighter_combat;
     this->fighter->attrs->health->set_vals(100);
 
-    this->items = {};
-
     this->player = NULL;
 };
 

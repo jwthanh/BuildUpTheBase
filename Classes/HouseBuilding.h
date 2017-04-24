@@ -141,8 +141,6 @@ class Buildup
         spFighter fighter;
         spFighter brawler;
 
-        vsItem items;
-
         spBuilding get_target_building();
         void set_target_building(spBuilding building);
 

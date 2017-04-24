@@ -389,7 +389,7 @@ void ItemSerializer::serialize()
         row.AddMember(rj_key.Move(), rj_value.Move(), allocator);
     };
 
-    for (spItem item : BUILDUP->items)
+    for (spItem item : GameLogic::getInstance()->equipment->inventory)
     {
         rjValue row = rjValue();
         row.SetObject();
@@ -406,7 +406,7 @@ void ItemSerializer::serialize()
 
 void ItemSerializer::load()
 {
-    BUILDUP->items = {};
+    GameLogic::getInstance()->equipment->inventory = {};
     auto doc = this->get_document();
 
     ItemData item_data;
@@ -430,7 +430,7 @@ void ItemSerializer::load()
             spItem item = item_data.get_item(type_name);
             item->rarity = rarity;
             item->level = item_level;
-            BUILDUP->items.push_back(item);
+            GameLogic::getInstance()->equipment->inventory.push_back(item);
         }
         CCLOG("found an array of items for Items, as expected");
     }
@@ -675,11 +675,11 @@ void EquipmentSerializer::serialize()
 
     rjDocument::AllocatorType& allocator = doc.GetAllocator();
 
-    //finds the item in BUILDUP->items and returns its index
+    //finds the item in GameLogic::getInstance()->equipment->inventory and returns its index
     auto get_index_of_item = [](std::shared_ptr<EquipmentSlot>& slot) {
         if (slot->has_item())
         {
-            auto items = BUILDUP->items;
+            auto items = GameLogic::getInstance()->equipment->inventory;
             auto itr = std::find(items.begin(), items.end(), slot->get_item());
 
             return std::distance(items.begin(), itr);
@@ -707,7 +707,7 @@ void EquipmentSerializer::load()
 
     auto get_item_by_index = [](int index) {
         if (index != -1) {
-            spItem item = BUILDUP->items.at(index);
+            spItem item = GameLogic::getInstance()->equipment->inventory.at(index);
             return item;
         };
 

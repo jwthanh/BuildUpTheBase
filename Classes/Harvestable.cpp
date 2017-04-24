@@ -604,7 +604,7 @@ void DumpsterHarvestable::shatter()
     std::shared_ptr<BaseAchievement> achievement = achievement_manager->getAchievement(AchievementType::TotalItems);
     achievement->increment();
 
-    BUILDUP->items.push_back(scavenge_item);
+    GameLogic::getInstance()->equipment->inventory.push_back(scavenge_item);
     auto popup_panel = GameLogic::get_popup_panel();
     if (popup_panel != NULL)
     {
