@@ -486,9 +486,10 @@ void ChanceItemScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event
     ItemScene::onKeyReleased(keyCode, event);
     if (keyCode == EventKeyboard::KeyCode::KEY_SPACE) {
         auto scene = cocos2d::Director::getInstance()->getRunningScene();
-        TextBlobModal modal(scene);
-        modal.set_title("Gods have spoken");
-        modal.set_body("You have been blessed");
+        TextBlobModal* modal = TextBlobModal::create();
+        modal->set_title("Gods have spoken");
+        modal->set_body("You have been blessed");
+        scene->addChild(modal);
     }
 };
 

@@ -1354,7 +1354,7 @@ void SideListView::setup_powers_listview_as_powers()
                 CCLOG("Pressed open log");
 
                 auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-                auto modal = new TextBlobModal(scene);
+                auto modal = TextBlobModal::create();
                 std::string version_string = Application::getInstance()->getVersion();
                 if (version_string.empty())
                 {
@@ -1363,6 +1363,7 @@ void SideListView::setup_powers_listview_as_powers()
                 std::stringstream version_ss;
                 version_ss << "Log (v" << version_string << ")";
                 modal->set_title(version_ss.str());
+                scene->addChild(modal);
 
                 std::string raw_log_string = Logger::get_log_contents();
 

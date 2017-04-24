@@ -1,13 +1,16 @@
 #pragma once
 #ifndef MODAL_H
 #define MODAL_H
-#include <string>
 
+#include <string>
+#include <functional>
+
+#include "2d/CCNode.h"
 
 namespace cocos2d
 {
-    class Node;
     class ParticleSystemQuad;
+    class Node;
 
     namespace ui
     {
@@ -19,7 +22,7 @@ namespace cocos2d
 };
 
 //a box with a title and a close button
-class BaseModal
+class BaseModal : public cocos2d::Node
 {
     protected:
         //base node for all children
@@ -29,7 +32,9 @@ class BaseModal
 
     public:
         //TODO figure out how to clean this up properly, maybe subclass Ref*
-        BaseModal(cocos2d::Node* parent);
+        CREATE_FUNC(BaseModal);
+        bool init();
+        virtual void init_callbacks();
 
         void set_title(const std::string& title);
 };
@@ -42,7 +47,8 @@ class TextBlobModal : public BaseModal
         cocos2d::ui::ListView* _body_scroll;
 
     public:
-        TextBlobModal(cocos2d::Node* parent);
+        CREATE_FUNC(TextBlobModal);
+        virtual bool init();
 
         void set_body(const std::string& body_txt);
 };
@@ -63,6 +69,8 @@ class PopupPanel
 
     public:
         PopupPanel(cocos2d::ui::Layout* panel);
+        virtual void init_layout_touch_handler();
+        std::function<void()> on_layout_touched;
 
         void animate_open();
         void animate_close();

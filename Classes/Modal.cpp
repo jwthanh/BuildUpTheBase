@@ -20,11 +20,11 @@
 
 USING_NS_CC;
 
-BaseModal::BaseModal(Node* parent)
+bool BaseModal::init()
 {
     //background color
     LayerColor* layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
-    parent->addChild(layer_color);
+    this->addChild(layer_color);
 
     cocos2d::Node* root_message_node = get_prebuilt_node_from_csb("editor/details/message_detail.csb");
     this->_node = root_message_node->getChildByName("message_panel");
@@ -33,7 +33,7 @@ BaseModal::BaseModal(Node* parent)
 
     //title
     this->_title_lbl = dynamic_cast<cocos2d::ui::Text*>(this->_node->getChildByName("title_lbl"));
-    this->set_title("TEST");
+    this->set_title("Unnamed Modal");
     set_aliasing(this->_title_lbl, true);
 
     //invisible layout to tap to close
@@ -42,12 +42,11 @@ BaseModal::BaseModal(Node* parent)
     exit_layout->setContentSize({ 1000, 1000 });
     exit_layout->setTouchEnabled(true);
 
-    auto temp_node = this->_node; //need to pass it to lambda. Since `this` is temporary, the callback crashes if `this` gets cleaned up
-    auto close_modal = [temp_node, layer_color, exit_layout]() {
-            do_vibrate(5);
-            temp_node->removeFromParent();
-            layer_color->removeFromParent();
-            exit_layout->removeFromParent();
+    this->init_callbacks();
+
+    auto close_modal = [this]() {
+       do_vibrate(5);
+       this->removeFromParent();
     };
 
     ui::Layout* close_panel = dynamic_cast<ui::Layout*>(this->_node->getChildByName("close_panel"));
@@ -55,8 +54,15 @@ BaseModal::BaseModal(Node* parent)
     bind_touch_ended(exit_layout, close_modal);
 
     int modal_zindex = 9999;
-    parent->addChild(exit_layout, modal_zindex-1);
-    parent->addChild(this->_node, modal_zindex);
+    this->setLocalZOrder(modal_zindex);
+    this->addChild(exit_layout);
+    this->addChild(this->_node);
+
+    return true;
+};
+
+void BaseModal::init_callbacks()
+{
 };
 
 void BaseModal::set_title(const std::string& title)
@@ -64,8 +70,9 @@ void BaseModal::set_title(const std::string& title)
     this->_title_lbl->setString(title);
 };
 
-TextBlobModal::TextBlobModal(cocos2d::Node* parent) : BaseModal(parent)
+bool TextBlobModal::init()
 {
+    BaseModal::init();
 
     //scrollable body
     this->_body_scroll = dynamic_cast<ui::ListView*>(this->_node->getChildByName("body_scroll"));
@@ -75,6 +82,8 @@ TextBlobModal::TextBlobModal(cocos2d::Node* parent) : BaseModal(parent)
 
     //fill message up
     this->set_body("No body yet");
+
+    return true;
 };
 
 void TextBlobModal::set_body(const std::string& body)
@@ -112,17 +121,28 @@ PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
     auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
     set_aliasing(label);
 
+    //default touch handler
+    this->on_layout_touched = [this](){
+        this->animate_close();
+    };
+    this->init_layout_touch_handler();
+
+    this->set_image("exclamation.png", true);
+};
+
+void PopupPanel::init_layout_touch_handler()
+{
+
     this->_layout->addTouchEventListener([this](cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType evt)
     {
         if (evt == ui::Widget::TouchEventType::ENDED)
         {
             do_vibrate(5);
-            this->animate_close();
+            this->on_layout_touched();
         }
     });
-
-    this->set_image("exclamation.png", true);
 };
+
 
 void PopupPanel::animate_open()
 {

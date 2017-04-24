@@ -764,9 +764,10 @@ void BaseScene::create_username_input()
         if (username.length() > 16){
             username.resize(16);
 
-            TextBlobModal modal(this);
-            modal.set_title("Name too long!");
-            modal.set_body("Names can only be up to 16 characters without special characters of any kind");
+            TextBlobModal* modal = TextBlobModal::create();
+            modal->set_title("Name too long!");
+            modal->set_body("Names can only be up to 16 characters without special characters of any kind");
+            this->addChild(modal);
         };
         return username;
     };

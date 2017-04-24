@@ -155,27 +155,26 @@ std::string existing_player_load()
 
 
 
-TextBlobModal build_welcome_modal()
+void build_welcome_modal()
 {
     auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-    TextBlobModal modal(scene);
+    TextBlobModal* modal = TextBlobModal::create();
+    scene->addChild(modal);
 
     std::string modal_content;
     time_t from_file = static_cast<time_t>(DataManager::get_int_from_data(Beatup::last_login_key));
     if (from_file == 0)
     {
-        modal.set_title("Welcome to Build Up The Base!");
+        modal->set_title("Welcome to Build Up The Base!");
         modal_content = new_player_load();
     }
     else
     {
-        modal.set_title("Welcome Back!");
+        modal->set_title("Welcome Back!");
         modal_content = existing_player_load();
     }
 
-    modal.set_body(modal_content);
-
-    return modal;
+    modal->set_body(modal_content);
 };
 
 void GameLogic::load_game()
@@ -220,7 +219,7 @@ void GameLogic::load_game()
     // bool show_welcome_modal = false;
     if (show_welcome_modal)
     {
-        auto modal = build_welcome_modal();
+        build_welcome_modal();
         auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
         auto tutorial_sidebar_panel = scene->getChildByName("tutorial_sidebar_panel");
         tutorial_sidebar_panel->setVisible(false);
@@ -296,9 +295,10 @@ void GameLogic::update(float dt)
 
                 if (!this->has_learned_wallet_size) {
                     this->has_learned_wallet_size = true;
-                    TextBlobModal modal(scene);
-                    modal.set_title("Upgrade coin storage!");
-                    modal.set_body("You've hit the coin limit!\n\nScrap some weapons at The Marketplace, contributing to city investment. Then use that to upgrade the coin storage.\n\nAlternatively, deposit coins 10 at a time in the City Management screen.");
+                    TextBlobModal* modal = TextBlobModal::create();
+                    scene->addChild(modal);
+                    modal->set_title("Upgrade coin storage!");
+                    modal->set_body("You've hit the coin limit!\n\nScrap some weapons at The Marketplace, contributing to city investment. Then use that to upgrade the coin storage.\n\nAlternatively, deposit coins 10 at a time in the City Management screen.");
                 }
 
             } else {
