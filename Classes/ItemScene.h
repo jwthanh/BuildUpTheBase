@@ -88,6 +88,8 @@ class ChanceItemScene : public ItemScene
         void init_callbacks() override;
         static cocos2d::Scene* createScene(ItemSlotType slot_type=ItemSlotType::Unset);
 
+        void convert_item_to_chance(spItem item);
+
         virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent);
 };
 

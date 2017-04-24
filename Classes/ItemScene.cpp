@@ -389,8 +389,8 @@ void ChanceItemScene::init_callbacks()
         this->item_desc->setString(item->description);
 
         this->item_sell_btn->setVisible(true);
-        auto upgrade_and_pop = [item](){
-            cocos2d::Director::getInstance()->popScene();
+        auto upgrade_and_pop = [this, item](){
+            this->convert_item_to_chance(item);
         };
         bind_touch_ended(this->item_sell_btn, upgrade_and_pop);
 
@@ -481,15 +481,27 @@ cocos2d::Scene* ChanceItemScene::createScene(ItemSlotType slot_type)
     return scene;
 };
 
+void ChanceItemScene::convert_item_to_chance(spItem item)
+{
+    auto scene = cocos2d::Director::getInstance()->getRunningScene();
+    TextBlobModal* modal = TextBlobModal::create();
+    modal->set_title("Gods have spoken");
+    modal->set_body("You have been blessed");
+    auto on_touch = [this, modal](){
+        CCLOG("HAHAHAHHAHAH");
+        modal->removeFromParent();
+    };
+    modal->on_layout_touched = on_touch;
+
+    scene->addChild(modal);
+};
+
 void ChanceItemScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
     ItemScene::onKeyReleased(keyCode, event);
     if (keyCode == EventKeyboard::KeyCode::KEY_SPACE) {
-        auto scene = cocos2d::Director::getInstance()->getRunningScene();
-        TextBlobModal* modal = TextBlobModal::create();
-        modal->set_title("Gods have spoken");
-        modal->set_body("You have been blessed");
-        scene->addChild(modal);
+        spItem item = {};
+        this->convert_item_to_chance(item);
     }
 };
 
