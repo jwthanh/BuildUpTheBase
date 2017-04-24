@@ -8,6 +8,7 @@
 
 #include "utilities/vibration.h"
 #include "SoundEngine.h"
+#include "constants.h"
 
 float sx (float x, bool do_scale)
 {
@@ -297,3 +298,9 @@ void bind_touch_ended(cocos2d::ui::Widget* widget, std::function<void(void)> cal
     };
     widget->addTouchEventListener(touch_handler);
 };
+
+std::string clean_path(std::string input) {
+    std::replace( input.begin(), input.end(), '\\', PATH_SEPARATOR); // replace all 'x' to 'y'
+    return input;
+}
+

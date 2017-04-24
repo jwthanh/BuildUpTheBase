@@ -30,7 +30,6 @@
 #include "base/CCEventDispatcher.h"
 #include "2d/CCMenu.h"
 #include "cocostudio/ActionTimeline/CCActionTimelineCache.h"
-#include "ui/UILoadingBar.h"
 #include "ui/UIText.h"
 #include "ui/UIButton.h"
 #include "goals/Achievement.h"

@@ -5,6 +5,7 @@
 #include <vector>
 #include <random>
 #include <functional>
+#include <string>
 
 //#include "math/vec2.h"
 
@@ -123,5 +124,7 @@ number_t scale_number_slow(number_t base_number, number_t current_number, number
 };
 
 void bind_touch_ended(cocos2d::ui::Widget* widget, std::function<void(void)> callback);
+
+std::string clean_path(std::string input);
 
 #endif

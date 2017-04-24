@@ -10,6 +10,8 @@
 #include "base/CCUserDefault.h"
 #include "RandomWeightMap.h"
 #include <ck/sound.h>
+#include <string>
+#include "Util.h"
 
 
 USING_NS_CC;

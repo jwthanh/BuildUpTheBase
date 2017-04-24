@@ -61,6 +61,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Fighter.cpp \
                    ../../Classes/Serializer.cpp \
                    ../../Classes/Modal.cpp \
+                   ../../Classes/PopupPanel.cpp \
                    ../../Classes/Item.cpp \
                    ../../Classes/Logging.cpp \
                    ../../Classes/Miner.cpp \

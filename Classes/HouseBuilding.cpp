@@ -23,13 +23,11 @@
 #include "attribute.h"
 #include "Technology.h"
 
-//this is all for the server stuff
 #include "DataManager.h"
 #include "GameLogic.h"
 #include "Beatup.h"
 #include "Network.h"
 #include "Clock.h"
-#include "Item.h"
 
 
 #include <tinyxml2/tinyxml2.h>

@@ -11,6 +11,7 @@
 #include "ui/UIPageView.h"
 #include "ui/UITextField.h"
 #include "ui/UIImageView.h"
+#include "2d/CCTransition.h"
 
 #include "external/easylogging.h"
 
@@ -29,7 +30,6 @@
 #include "PopupPanel.h"
 #include "HarvestScene.h"
 #include "Item.h"
-#include "StaticData.h"
 #include "BuildingsSideBar.h"
 #include "Miner.h"
 #include "FShake.h"
@@ -38,10 +38,7 @@
 #include "Tutorial.h"
 #include "utilities/vibration.h"
 #include "goals/Achievement.h"
-#include "Technology.h"
 #include "BuildingDetailScene.h"
-#include "2d/CCTransition.h"
-#include "cocos2d.h"
 
 
 USING_NS_CC;

@@ -9,8 +9,6 @@
 #include "2d/CCSprite.h"
 #include "base/CCDirector.h"
 
-#include "utilities/vibration.h"
-
 USING_NS_CC;
 
 FloatingLabel::FloatingLabel(TextHAlignment hAlignment, TextVAlignment vAlignment)
@@ -93,15 +91,6 @@ void load_default_button_textures(cocos2d::ui::Button* button)
         "main_UI_export_10_x4_disabled.png",
         cocos2d::ui::TextureResType::PLIST
     );
-
-    ///NOTE only one button event listener, so this can't work like this
-    //button->addTouchEventListener([](Ref* target, ui::Widget::TouchEventType evt)
-    //{
-    //    if (evt == ui::Widget::TouchEventType::ENDED)
-    //    {
-    //        do_vibrate(5);
-    //    }
-    //});
 };
 
 int FLASH_ACTION_TAG = 10; //arbitrarily 10

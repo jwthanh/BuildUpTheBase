@@ -16,7 +16,6 @@
 #include "Technology.h"
 #include "HarvestScene.h"
 #include "NodeBuilder.h"
-#include "HarvestableManager.h"
 
 #include "magic_particles/MagicEmitter.h"
 

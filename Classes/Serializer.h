@@ -2,6 +2,7 @@
 #ifndef SERIALIZER_H
 #define SERIALIZER_H
 
+#include <string>
 #include <json/document.h>
 
 #include "constants.h"

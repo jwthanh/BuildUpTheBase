@@ -21,7 +21,6 @@
 #include "Beatup.h"
 #include "Util.h"
 #include "Equipment.h"
-#include "utilities/vibration.h"
 #include "goals/Achievement.h"
 
 using namespace cocos2d;

@@ -6,7 +6,6 @@
 #include <functional>
 #include <vector>
 #include <memory>
-#include <string>
 #include <map>
 
 #define TITLE_FONT  "fonts/airstrike.ttf"
@@ -55,11 +54,6 @@ const char PATH_SEPARATOR =
 #else
                             '/';
 #endif
-
-inline std::string clean_path(std::string input) {
-    std::replace( input.begin(), input.end(), '\\', PATH_SEPARATOR); // replace all 'x' to 'y'
-    return input;
-}
 
 
 class Clock;

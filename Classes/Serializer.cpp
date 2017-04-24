@@ -1,9 +1,9 @@
 #include "Serializer.h"
+#include <string>
 #include <sstream>
 
 #include <json/document.h>
 #include <json/stringbuffer.h>
-#include <json/writer.h>
 
 #include "FileOperation.h"
 

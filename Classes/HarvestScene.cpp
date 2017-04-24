@@ -2,7 +2,6 @@
 
 #include <cctype>
 #include <numeric>
-#include <chrono>
 #include <sstream>
 
 #include <json/stringbuffer.h>
@@ -34,9 +33,6 @@
 #include "magic_particles/mp_cocos.h"
 #include "magic_particles/MagicEmitter.h"
 
-#include "ck/ck.h"
-#include "ck/sound.h"
-
 #include "Recipe.h" //spRecipe is used in target_recipe
 #include "NodeBuilder.h"
 
@@ -54,16 +50,13 @@
 #include "ui/UIButton.h"
 #include "ui/UIScale9Sprite.h"
 #include <cocostudio/CocosStudioExtension.h>
-#include "ui/UIImageView.h"
 #include "ui/UITextField.h"
 #include <2d/CCParticleExamples.h>
 #include "debugging/ActionPanel.h"
 #include "Tutorial.h"
 #include "2d/CCActionInstant.h"
 #include "utilities/vibration.h"
-#include "SoundEngine.h"
 #include "RandomWeightMap.h"
-#include "FileOperation.h"
 #include "CCFileUtils.h"
 
 USING_NS_CC;

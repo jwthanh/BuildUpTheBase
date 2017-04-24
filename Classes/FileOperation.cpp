@@ -4,7 +4,6 @@
 
 #include "cocos2d.h"
 #include <json/stringbuffer.h>
-#include <json/writer.h>
 #include <json/prettywriter.h>
 #include "constants.h"
 #include "external/easylogging.h"
