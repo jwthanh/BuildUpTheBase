@@ -1,5 +1,7 @@
 #include "ItemScene.h"
 
+#include <sstream>
+
 #include "base/CCEventDispatcher.h"
 #include "base/CCEventListenerKeyboard.h"
 #include "base/CCDirector.h"
@@ -431,13 +433,13 @@ const std::string& ChanceItemScene::get_default_detail_panel_title()
 
 const std::string& ChanceItemScene::get_default_detail_panel_description()
 {
-    static std::string default_desc = "Place an item upon the crypt and chaos will take it.";
+    static std::string default_desc = "Hide an item within the crypt and chaos will take it.";
     return default_desc;
 };
 
 const std::string& ChanceItemScene::get_sell_btn_text()
 {
-    static std::string default_desc = "Place";
+    static std::string default_desc = "Hide";
     return default_desc;
 }
 
@@ -485,8 +487,11 @@ void ChanceItemScene::convert_item_to_chance(spItem item)
 {
     auto scene = cocos2d::Director::getInstance()->getRunningScene();
     TextBlobModal* modal = TextBlobModal::create();
-    modal->set_title("Gods have spoken");
-    modal->set_body("You have been blessed");
+    modal->set_title("The Gods have seen it");
+    std::stringstream body;
+    body << "You have been blessed with a bounty:";
+    modal->set_body(body.str());
+
     auto on_touch = [this, modal](){
         CCLOG("TODO: Implement this");
         /*
