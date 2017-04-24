@@ -30,6 +30,8 @@ bool BaseModal::init()
     this->_node = root_message_node->getChildByName("message_panel");
     this->_node->removeFromParent();
     this->_node->setPosition(cocos2d::Vec2{960, 640}/ 2);
+    this->addChild(this->_node);
+    this->_close_panel = dynamic_cast<ui::Layout*>(this->_node->getChildByName("close_panel"));
 
     //title
     this->_title_lbl = dynamic_cast<cocos2d::ui::Text*>(this->_node->getChildByName("title_lbl"));
@@ -37,32 +39,34 @@ bool BaseModal::init()
     set_aliasing(this->_title_lbl, true);
 
     //invisible layout to tap to close
-    ui::Layout* exit_layout = ui::Layout::create();
-    exit_layout->setAnchorPoint(Vec2::ZERO);
-    exit_layout->setContentSize({ 1000, 1000 });
-    exit_layout->setTouchEnabled(true);
+    this->_exit_layout = ui::Layout::create();
+    this->_exit_layout->setAnchorPoint(Vec2::ZERO);
+    this->_exit_layout->setContentSize({ 1000, 1000 });
+    this->_exit_layout->setTouchEnabled(true);
+    this->addChild(this->_exit_layout);
 
     this->init_callbacks();
 
-    auto close_modal = [this]() {
-       do_vibrate(5);
-       this->removeFromParent();
-    };
-
-    ui::Layout* close_panel = dynamic_cast<ui::Layout*>(this->_node->getChildByName("close_panel"));
-    bind_touch_ended(close_panel, close_modal);
-    bind_touch_ended(exit_layout, close_modal);
-
     int modal_zindex = 9999;
     this->setLocalZOrder(modal_zindex);
-    this->addChild(exit_layout);
-    this->addChild(this->_node);
 
     return true;
 };
 
 void BaseModal::init_callbacks()
 {
+    this->on_layout_touched = [this]() {
+       do_vibrate(5);
+       this->removeFromParent();
+    };
+
+    auto touch_handler = [this]()
+    {
+        this->on_layout_touched();
+    };
+
+    bind_touch_ended(this->_close_panel, touch_handler);
+    bind_touch_ended(this->_exit_layout, touch_handler);
 };
 
 void BaseModal::set_title(const std::string& title)

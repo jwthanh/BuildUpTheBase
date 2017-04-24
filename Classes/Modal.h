@@ -27,6 +27,8 @@ class BaseModal : public cocos2d::Node
     protected:
         //base node for all children
         cocos2d::Node* _node;
+        cocos2d::ui::Layout* _exit_layout;
+        cocos2d::ui::Layout* _close_panel;
 
         cocos2d::ui::Text* _title_lbl;
 
@@ -35,6 +37,7 @@ class BaseModal : public cocos2d::Node
         CREATE_FUNC(BaseModal);
         bool init();
         virtual void init_callbacks();
+        std::function<void()> on_layout_touched;
 
         void set_title(const std::string& title);
 };
