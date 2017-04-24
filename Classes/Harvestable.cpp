@@ -1170,6 +1170,7 @@ bool FightingHarvestable::should_shatter()
 
 void FightingHarvestable::spawn_enemy()
 {
+    this->is_shattering = false;
 	GameLogic* game_logic = GameLogic::getInstance();
 
 	this->enemy = NULL;
