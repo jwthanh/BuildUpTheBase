@@ -47,7 +47,7 @@ cocos2d::TTFConfig NuItem::ttf_config = TTFConfig(
     GlyphCollection::CUSTOM,
     "\"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~΅Ά£¤¥¦§¨©ª«¬­®―°±²³΄µ¶·ΈΉΊ»Ό½ΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡÒΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώ \n",
     false,
-    0
+    2
 );
 
 NuItem* NuItem::create(cocos2d::ui::Widget* parent)
