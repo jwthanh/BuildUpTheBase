@@ -440,6 +440,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">valery_artist/dump.png</key>
+            <key type="filename">valery_artist/forest.png</key>
+            <key type="filename">valery_artist/marketplace.png</key>
+            <key type="filename">valery_artist/workshop.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>20,25,40,50</rect>
+                <key>scale9Paddings</key>
+                <rect>20,25,40,50</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">valery_artist/farm.png</key>
             <key type="filename">valery_artist/mine.png</key>
             <struct type="IndividualSpriteSettings">
@@ -451,20 +467,6 @@
                 <rect>25,20,50,40</rect>
                 <key>scale9Paddings</key>
                 <rect>25,20,50,40</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">valery_artist/forest.png</key>
-            <key type="filename">valery_artist/marketplace.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>20,25,40,50</rect>
-                <key>scale9Paddings</key>
-                <rect>20,25,40,50</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -1004,6 +1006,8 @@
             <filename>knight_artist/gravestone.png</filename>
             <filename>valery_artist/marketplace.png</filename>
             <filename>valery_artist/forest.png</filename>
+            <filename>valery_artist/dump.png</filename>
+            <filename>valery_artist/workshop.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

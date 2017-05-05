@@ -102,7 +102,7 @@ bool Harvestable::init()
     this->setPosition(harvestable_pos->getPosition());
     this->setName("harvestable");
 
-    this->initial_scale = 4;
+    this->initial_scale = 0.9f;
     this->setScale(this->initial_scale);
 
     this->_current_output_ing_type = this->building->punched_sub_type;
@@ -541,16 +541,6 @@ void TreeHarvestable::shatter()
 
 };
 
-bool DumpsterHarvestable::init()
-{
-    bool val = Harvestable::init();
-
-    this->initial_scale = 0.70f;
-    this->setScale(this->initial_scale);
-
-    return val;
-}
-
 void DumpsterHarvestable::init_clicks()
 {
 
@@ -575,7 +565,7 @@ void DumpsterHarvestable::init_clicks()
 
 std::string DumpsterHarvestable::get_sprite_path()
 {
-    return "dump_darker.png";
+    return "dump.png";
 }
 
 void DumpsterHarvestable::on_harvest()
@@ -740,7 +730,7 @@ CraftingHarvestable* CraftingHarvestable::create(spRecipe recipe)
 
 std::string CraftingHarvestable::get_sprite_path()
 {
-    return "anvil.png";
+    return "workshop.png";
 };
 
 float CraftingHarvestable::get_click_ratio() const

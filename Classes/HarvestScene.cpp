@@ -433,16 +433,16 @@ void BaseScene::create_building_choicelist()
             img_path = "forest.png";
         }
         else if (building->name == "The Dump") {
-            img_path = "dump_darker.png";
+            img_path = "dump.png";
         }
         else if (building->name == "The Workshop") {
-            img_path = "anvil.png";
+            img_path = "workshop.png";
         }
         else if (building->name == "The Arena") {
             img_path = "sword.png";
         }
         else if (building->name == "The Graveyard") {
-            img_path = "grave.png";
+            img_path = "gravestone.png";
         }
         else if (building->name == "The Underscape") {
             img_path = "pink_monster.png";

@@ -140,7 +140,6 @@ class DumpsterHarvestable : public Harvestable
 
     public:
         CREATE_FUNC(DumpsterHarvestable);
-        bool init();
         virtual void init_clicks() override;
 
         std::string get_sprite_path();
