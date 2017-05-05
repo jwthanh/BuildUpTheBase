@@ -158,7 +158,8 @@ class MiningHarvestable : public Harvestable
 {
     public:
         CREATE_FUNC(MiningHarvestable);
-        void init_sprite() override;
+        virtual bool init();
+        virtual std::string get_sprite_path();
 
         virtual void animate_touch_start(cocos2d::Touch* touch);
         virtual void animate_clip() override;

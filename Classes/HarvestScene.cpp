@@ -424,10 +424,13 @@ void BaseScene::create_building_choicelist()
         ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
         std::string img_path = "";
         if (building->name == "The Mine") {
-            img_path = "dirt_1.png";
+            img_path = "mine.png";
+        }
+        else if (building->name == "The Marketplace") {
+            img_path = "marketplace.png";
         }
         else if (building->name == "The Forest") {
-            img_path = "tree.png";
+            img_path = "forest.png";
         }
         else if (building->name == "The Dump") {
             img_path = "dump_darker.png";
@@ -442,7 +445,7 @@ void BaseScene::create_building_choicelist()
             img_path = "grave.png";
         }
         else if (building->name == "The Underscape") {
-            img_path = "necro_open.png";
+            img_path = "pink_monster.png";
         }
         else if (building->name == "The Farm") {
             img_path = "farm.png";

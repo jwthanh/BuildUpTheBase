@@ -447,7 +447,7 @@ bool FarmingHarvestable::init()
 {
     bool val = Harvestable::init();
 
-    this->initial_scale = 0.8f;
+    this->initial_scale = 0.9f;
     this->setScale(this->initial_scale);
 
     return val;
@@ -485,7 +485,7 @@ bool TreeHarvestable::init()
 
 std::string TreeHarvestable::get_sprite_path()
 {
-    return "tree.png";
+    return "forest.png";
 }
 
 void TreeHarvestable::animate_touch_start(cocos2d::Touch* touch)
@@ -646,49 +646,18 @@ void DumpsterHarvestable::generate_item()
     this->scavenge_item->level = item_level;
 };
 
-void MiningHarvestable::init_sprite()
+bool MiningHarvestable::init()
 {
+    Harvestable::init();
 
-    float scale = 2.75f;
-    auto create_sprite = [this,scale](std::string sprite_path, Vec2 relative_pos)
-    {
-        auto sprite = Sprite::createWithSpriteFrameName(sprite_path);
-        sprite->setScale(scale);
-        sprite->setAnchorPoint(relative_pos);
+    this->initial_scale = 0.9f;
+    this->setScale(this->initial_scale);
+    return true;
+};
 
-        auto pos = get_relative(this->getContentSize(), relative_pos);
-        sprite->setPosition(pos);
-
-        return sprite;
-
-    };
-
-    auto sprite_size = Size(15, 16);
-    sprite_size.width *= scale * 2;
-    sprite_size.height *= scale * 2;
-    this->setContentSize(sprite_size);
-
-    std::vector<std::string> choices = {"dirt_1.png", "dirt_2.png"};
-    auto top_left_sprite = create_sprite(pick_one(choices), Vec2::ANCHOR_TOP_LEFT);
-    auto top_right_sprite = create_sprite(pick_one(choices), Vec2::ANCHOR_TOP_RIGHT);
-    auto bot_left_sprite = create_sprite(pick_one(choices), Vec2::ANCHOR_BOTTOM_LEFT);
-    auto bot_right_sprite = create_sprite(pick_one(choices), Vec2::ANCHOR_BOTTOM_RIGHT);
-
-    auto rt = RenderTexture::create((int)this->getContentSize().width, (int)this->getContentSize().height);
-    rt->retain();
-    rt->begin();
-    top_left_sprite->visit();
-    top_right_sprite->visit();
-    bot_left_sprite->visit();
-    bot_right_sprite->visit();
-    rt->end();
-
-    this->sprite = Sprite::createWithTexture(rt->getSprite()->getTexture());
-
-    this->sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    this->sprite->setPosition(get_relative_middle(this->getContentSize()));
-    this->clip->addChild(this->sprite);
-
+std::string MiningHarvestable::get_sprite_path()
+{
+    return "mine.png";
 };
 
 void MiningHarvestable::animate_touch_start(cocos2d::Touch* touch)
@@ -1467,7 +1436,7 @@ bool MarketHarvestable::init()
 {
     bool val = Harvestable::init();
 
-    this->initial_scale = 2.5f;
+    this->initial_scale = 0.9f;
     this->setScale(this->initial_scale);
 
     return val;

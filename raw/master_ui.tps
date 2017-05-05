@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.1</string>
+        <string>4.4.0</string>
         <key>fileName</key>
         <string>C:/Users/Josh/Documents/cocos_projects/basebuilder/raw/master_ui.tps</string>
         <key>autoSDSettings</key>
@@ -172,6 +172,8 @@
         <false/>
         <key>prependSmartFolderName</key>
         <false/>
+        <key>autodetectAnimations</key>
+        <true/>
         <key>globalSpriteSettings</key>
         <struct type="SpriteSettings">
             <key>scale</key>
@@ -308,7 +310,6 @@
             </struct>
             <key type="filename">kenny/Art/UI pack (300 assets)/Space pack (80 assets)/PNG/crosshair_black.png</key>
             <key type="filename">kenny/Art/UI pack (300 assets)/Space pack (80 assets)/PNG/crosshair_red.png</key>
-            <key type="filename">to_replace/marketplace.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -318,6 +319,19 @@
                 <rect>8,8,16,16</rect>
                 <key>scale9Paddings</key>
                 <rect>8,8,16,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">knight_artist/gravestone.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>22,23,45,47</rect>
+                <key>scale9Paddings</key>
+                <rect>22,23,45,47</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -370,19 +384,6 @@
                 <rect>30,24,60,47</rect>
                 <key>scale9Paddings</key>
                 <rect>30,24,60,47</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">to_replace/farm.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>24,22,48,43</rect>
-                <key>scale9Paddings</key>
-                <rect>24,22,48,43</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -439,16 +440,31 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">to_replace/tree.png</key>
+            <key type="filename">valery_artist/farm.png</key>
+            <key type="filename">valery_artist/mine.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>21,25,41,49</rect>
+                <rect>25,20,50,40</rect>
                 <key>scale9Paddings</key>
-                <rect>21,25,41,49</rect>
+                <rect>25,20,50,40</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">valery_artist/forest.png</key>
+            <key type="filename">valery_artist/marketplace.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>20,25,40,50</rect>
+                <key>scale9Paddings</key>
+                <rect>20,25,40,50</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -960,7 +976,6 @@
             <filename>to_replace/necro_open.png</filename>
             <filename>to_replace/necro_closed.png</filename>
             <filename>to_replace/bush.png</filename>
-            <filename>to_replace/tree.png</filename>
             <filename>to_replace/dump_darker.png</filename>
             <filename>kenny/Art/UI pack (300 assets)/Space pack (80 assets)/PNG/crosshair_red.png</filename>
             <filename>kenny/Art/UI pack (300 assets)/Space pack (80 assets)/PNG/crosshair_black.png</filename>
@@ -968,12 +983,10 @@
             <filename>kenny/Art/Onscreen controls (400 assets)/Sprites/lineDark/lineDark16.png</filename>
             <filename>kenny/Art/Game icons fighter expansion (50 assets)/PNG/Black/2x/fightJoy_47.png</filename>
             <filename>to_replace/grave.png</filename>
-            <filename>to_replace/farm.png</filename>
             <filename>kenny/Art/Game icons (100 assets)/PNG/Black/2x/locked.png</filename>
             <filename>kenny/Art/Onscreen controls (400 assets)/Sprites/lineDark/lineDark28.png</filename>
             <filename>to_replace/menu_icons/sell_all.png</filename>
             <filename>to_replace/menu_icons/leaderboard.png</filename>
-            <filename>to_replace/marketplace.png</filename>
             <filename>to_replace/tilemap/downRight.png</filename>
             <filename>to_replace/tilemap/upLeft.png</filename>
             <filename>to_replace/tilemap/upRight.png</filename>
@@ -986,6 +999,11 @@
             <filename>calvin/trophy/trophy14.png</filename>
             <filename>calvin/trophy/trophy1.png</filename>
             <filename>knight_artist/pink_monster.png</filename>
+            <filename>valery_artist/farm.png</filename>
+            <filename>valery_artist/mine.png</filename>
+            <filename>knight_artist/gravestone.png</filename>
+            <filename>valery_artist/marketplace.png</filename>
+            <filename>valery_artist/forest.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
