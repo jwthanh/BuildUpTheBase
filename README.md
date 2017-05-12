@@ -1,5 +1,5 @@
 # BaseBuilder
-An upcoming incremental game about building up a base. Signup for the Alpha on [Google Play](https://play.google.com/apps/testing/com.tankorsmash.buildupthebase)
+An upcoming incremental game about building up a base. Signup for the Alpha on [Google Play](https://play.google.com/apps/testing/com.tankorsmash.buildupthebase) and help shape release!
 
 ![Latest image](http://i.imgur.com/TMrhZYE.png)
 
@@ -17,7 +17,7 @@ Check out an older devblog video: https://www.youtube.com/watch?v=t5YXjfZRVlE
 
 ## Technical considerations and tools
 * Native 960*640@60fps is targeted on Windows and Android, no hard plans for iOS but should be fine after a few tweaks
-* Cocos2dx for most 
+* Cocos2dx for rendering and display
 * easylogging for error handling
 * rapidjson for save files
 * Magic Particles for a souped up particle system
@@ -25,6 +25,4 @@ Check out an older devblog video: https://www.youtube.com/watch?v=t5YXjfZRVlE
 
 ## Release Date
 
-Hoping to release at the end of 2016
-
-smth
+Aiming Summer 2017
