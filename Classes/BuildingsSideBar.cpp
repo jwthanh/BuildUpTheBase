@@ -76,18 +76,19 @@ void TabManager::set_tab_active(TabTypes tab_type, const spBuilding& building)
     spBuilding old_building = this->active_building;
     this->active_building = building;
 
-    float distance = 400.0f;
+
+    // float distance = 400.0f;
     float duration = 0.25f;
-    auto move_by = MoveBy::create(duration, { 0, -distance });
-    auto eased_action = EaseOut::create(move_by, 5.0f);
+    // auto move_by = MoveBy::create(duration, { 0, -distance });
+    // auto eased_action = EaseOut::create(move_by, 5.0f);
 
     //move the given listview upwards, then downwards by the same amount
     auto listview = this->get_active_listview();
-    listview->setPosition({
-        listview->getPositionX(),
-        listview->getPositionY() + distance
-    });
-    listview->runAction(eased_action);
+    // listview->setPosition({
+    //     listview->getPositionX(),
+    //     listview->getPositionY() + distance
+    // });
+    // listview->runAction(eased_action);
     listview->getParent()->runAction(FShake::actionWithDuration(duration, 1.0));
 }
 
