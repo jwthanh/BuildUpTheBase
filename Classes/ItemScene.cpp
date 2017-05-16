@@ -463,6 +463,7 @@ void ChanceItemScene::convert_item_to_chance(spItem item)
     auto scene = cocos2d::Director::getInstance()->getRunningScene();
     TextBlobModal* modal = TextBlobModal::create();
     modal->set_title("The Gods have seen it");
+
     std::stringstream body;
     body << "You have been blessed with a bounty:";
     modal->set_body(body.str());

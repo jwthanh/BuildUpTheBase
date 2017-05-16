@@ -68,6 +68,7 @@ class BaseScene : public GameLayer
         cocos2d::ui::Widget* create_ingredient_detail_alert(Ingredient::SubType ing_type);
 
         void scroll_to_target_building();
+        void generate_WIP_welcome_message(); //only exists to keep it somewhere for later
 };
 
 class HarvestScene : public BaseScene
