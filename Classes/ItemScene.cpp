@@ -461,7 +461,7 @@ cocos2d::Scene* ChanceItemScene::createScene(ItemSlotType slot_type)
 
 void ChanceItemScene::convert_item_upgrade(std::stringstream& body_ss, const spItem& item)
 {
-    body_ss << "A more powerful item!" << std::endl;
+    body_ss << "You've received more powerful item!" << std::endl;
     body_ss << std::endl;
     body_ss << std::endl;
 
@@ -500,6 +500,7 @@ void ChanceItemScene::convert_item_resource(std::stringstream& body_ss, const sp
     building->create_ingredients(ing_type, quantity);
 
     body_ss << beautify_double(quantity) << " " << Ingredient::type_to_string(ing_type) << " added to your resources" << std::endl;
+    EQUIPMENT->remove_item_from_inventory(item);
 
 };
 
@@ -512,6 +513,8 @@ void ChanceItemScene::convert_item_coins(std::stringstream& body_ss, const spIte
     res_count_t quantity = item->get_effective_cost() * 3.0;
     body_ss << beautify_double(quantity) << " coins gained." << std::endl;
     BEATUP->add_total_coin(quantity);
+
+    EQUIPMENT->remove_item_from_inventory(item);
 
 };
 
@@ -561,8 +564,8 @@ void ChanceItemScene::convert_item_to_chance(spItem item)
     modal->set_body(body.str());
 
     auto on_touch = [this, item, modal](){
-        CCLOG("TODO: Implement this");
         modal->removeFromParent();
+        cocos2d::Director::getInstance()->popScene();
     };
     modal->on_layout_touched = on_touch;
 

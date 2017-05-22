@@ -885,6 +885,7 @@ void GameDirector::switch_to_miner_menu()
         serializer.serialize();
 
         GameDirector::switch_to_item_chance_menu();
+        miner->reset();
     };
     bind_touch_ended(chance_btn, open_chance);
 
