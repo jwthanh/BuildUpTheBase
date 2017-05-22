@@ -509,6 +509,10 @@ void ChanceItemScene::convert_item_coins(std::stringstream& body_ss, const spIte
     body_ss << std::endl;
     body_ss << std::endl;
 
+    res_count_t quantity = item->get_effective_cost() * 3.0;
+    body_ss << beautify_double(quantity) << " coins gained." << std::endl;
+    BEATUP->add_total_coin(quantity);
+
 };
 
 void ChanceItemScene::convert_item_to_chance(spItem item)
