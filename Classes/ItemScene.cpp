@@ -22,6 +22,7 @@
 #include "Util.h"
 #include "Equipment.h"
 #include "goals/Achievement.h"
+#include "RandomWeightMap.h"
 
 using namespace cocos2d;
 
@@ -458,6 +459,34 @@ cocos2d::Scene* ChanceItemScene::createScene(ItemSlotType slot_type)
     return scene;
 };
 
+void ChanceItemScene::convert_item_upgrade(std::stringstream& body_ss, const spItem& item)
+{
+    body_ss << "A more powerful item!" << std::endl;
+    body_ss << std::endl;
+    body_ss << std::endl;
+
+    body_ss << item->get_name() << "is now:" << std::endl;
+    item->level++;
+    body_ss << item->get_name() << std::endl;
+
+};
+
+void ChanceItemScene::convert_item_resource(std::stringstream& body_ss, const spItem& item)
+{
+    body_ss << "A bundle of resources!" << std::endl;
+    body_ss << std::endl;
+    body_ss << std::endl;
+
+};
+
+void ChanceItemScene::convert_item_coins(std::stringstream& body_ss, const spItem& item)
+{
+    body_ss << "A pouch of coins!" << std::endl;
+    body_ss << std::endl;
+    body_ss << std::endl;
+
+};
+
 void ChanceItemScene::convert_item_to_chance(spItem item)
 {
     auto scene = cocos2d::Director::getInstance()->getRunningScene();
@@ -465,7 +494,33 @@ void ChanceItemScene::convert_item_to_chance(spItem item)
     modal->set_title("The Gods have seen it");
 
     std::stringstream body;
-    body << "You have been blessed with a bounty:";
+    body << "In exchange for your item, you have been blessed with a bounty:" << std::endl;
+    enum class WallChanceChoice
+    {
+        Upgrade = 0,
+        Resource = 1,
+        Coins = 2
+    };
+
+    RandomWeightMap<WallChanceChoice> weight_map({
+        { WallChanceChoice::Upgrade, 15 },
+        { WallChanceChoice::Resource, 50 },
+        { WallChanceChoice::Coins, 50 }
+    });
+
+    WallChanceChoice result = weight_map.get_item();
+    if (result == WallChanceChoice::Upgrade) {
+        this->convert_item_upgrade(body, item);
+    }
+    else if (result == WallChanceChoice::Resource) {
+        this->convert_item_resource(body, item);
+    }
+    else if (result == WallChanceChoice::Coins) {
+        this->convert_item_coins(body, item);
+    } else {
+        body << "UNKNOWN REWARD" << std::endl;
+    };
+
     modal->set_body(body.str());
 
     auto on_touch = [this, item, modal](){

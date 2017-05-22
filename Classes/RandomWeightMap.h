@@ -18,11 +18,18 @@ class RandomWeightMap
 
         int get_total_weight();
         RandomWeightMap();
+        RandomWeightMap(const std::map<T, int>& new_map);
 };
     template<typename T>
 RandomWeightMap<T>::RandomWeightMap()
 {
     this->_map = std::map<T, int>();
+}
+
+template <typename T>
+RandomWeightMap<T>::RandomWeightMap(const std::map<T, int>& new_map)
+{
+    this->_map.insert(new_map.begin(), new_map.end());
 };
 
     template<typename T>
@@ -36,7 +43,6 @@ void RandomWeightMap<T>::add_item(T item, int weight)
 T RandomWeightMap<T>::get_item()
 {
     int total_weight = this->get_total_weight();
-    // printf("total weight %d\n", total_weight);
     int score = rand() % total_weight;
     return this->get_item(score);
 };
@@ -46,7 +52,6 @@ T RandomWeightMap<T>::get_item(int score)
 {
     int total_weight = this->get_total_weight();
     int cumulative_weight = 0;
-    // std::cout << " " << score << " score" << std::endl;
     for (auto it = this->_map.begin(); it != this->_map.end(); it++)
     {
         cumulative_weight+=it->second;

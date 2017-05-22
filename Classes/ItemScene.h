@@ -82,6 +82,10 @@ class ChanceItemScene : public ItemScene
         const std::string& get_default_detail_panel_description() override;
         const std::string& get_sell_btn_text() override;
 
+        void convert_item_upgrade(std::stringstream& body_ss, const spItem& item);
+        void convert_item_resource(std::stringstream& body_ss, const spItem& item);
+        void convert_item_coins(std::stringstream& body_ss, const spItem& item);
+
     public:
         static ChanceItemScene* create(ItemSlotType slot_type=ItemSlotType::Unset);
         virtual bool init(ItemSlotType slot_type=ItemSlotType::Unset) override;
