@@ -205,6 +205,7 @@
             <key type="filename">kenny/Art/Roguelike cave &amp; dungeon pack (520 assets)/ASUOutput/dirt_2.png</key>
             <key type="filename">to_replace/menu_icons/leaderboard.png</key>
             <key type="filename">to_replace/menu_icons/sell_all.png</key>
+            <key type="filename">valery_artist/marketplace_icon.png</key>
             <key type="filename">../../beatupisis/raw/artist/UI/UI_shop/weapon_spiked_gauntlet.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -269,6 +270,7 @@
                 <false/>
             </struct>
             <key type="filename">kenny/Art/Roguelike cave &amp; dungeon pack (520 assets)/ASUOutput/anvil.png</key>
+            <key type="filename">knight_artist/pink_monster_icon.png</key>
             <key type="filename">../../beatupisis/raw/artist/UI/UI_game/weapon_grenade.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -332,6 +334,20 @@
                 <rect>22,23,45,47</rect>
                 <key>scale9Paddings</key>
                 <rect>22,23,45,47</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">knight_artist/gravestone_icon.png</key>
+            <key type="filename">valery_artist/workshop_icon.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,4,8,9</rect>
+                <key>scale9Paddings</key>
+                <rect>4,4,8,9</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -456,6 +472,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">valery_artist/dump_icon.png</key>
+            <key type="filename">valery_artist/farm_icon.png</key>
+            <key type="filename">valery_artist/mine_icon.png</key>
+            <key type="filename">../../beatupisis/raw/artist/UI/UI_game/weapon_ice.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,3,8,7</rect>
+                <key>scale9Paddings</key>
+                <rect>4,3,8,7</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">valery_artist/farm.png</key>
             <key type="filename">valery_artist/mine.png</key>
             <struct type="IndividualSpriteSettings">
@@ -467,6 +499,19 @@
                 <rect>25,20,50,40</rect>
                 <key>scale9Paddings</key>
                 <rect>25,20,50,40</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">valery_artist/forest_icon.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,5,8,10</rect>
+                <key>scale9Paddings</key>
+                <rect>4,5,8,10</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -627,19 +672,6 @@
                 <rect>6,4,11,8</rect>
                 <key>scale9Paddings</key>
                 <rect>6,4,11,8</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../beatupisis/raw/artist/UI/UI_game/weapon_ice.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>4,3,8,7</rect>
-                <key>scale9Paddings</key>
-                <rect>4,3,8,7</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -1008,6 +1040,14 @@
             <filename>valery_artist/forest.png</filename>
             <filename>valery_artist/dump.png</filename>
             <filename>valery_artist/workshop.png</filename>
+            <filename>valery_artist/mine_icon.png</filename>
+            <filename>valery_artist/workshop_icon.png</filename>
+            <filename>valery_artist/dump_icon.png</filename>
+            <filename>valery_artist/farm_icon.png</filename>
+            <filename>valery_artist/forest_icon.png</filename>
+            <filename>valery_artist/marketplace_icon.png</filename>
+            <filename>knight_artist/gravestone_icon.png</filename>
+            <filename>knight_artist/pink_monster_icon.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
