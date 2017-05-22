@@ -409,13 +409,13 @@ const std::string& ChanceItemScene::get_default_detail_panel_title()
 
 const std::string& ChanceItemScene::get_default_detail_panel_description()
 {
-    static std::string default_desc = "Hide an item within the crypt and chaos will take it.";
+    static std::string default_desc = "Conceal an item within the crypt and chaos will take it.";
     return default_desc;
 };
 
 const std::string& ChanceItemScene::get_sell_btn_text()
 {
-    static std::string default_desc = "Hide";
+    static std::string default_desc = "Conceal";
     return default_desc;
 }
 
@@ -499,7 +499,7 @@ void ChanceItemScene::convert_item_resource(std::stringstream& body_ss, const sp
 
     building->create_ingredients(ing_type, quantity);
 
-    body_ss << beautify_double(quantity) << " " << Ingredient::type_to_string(ing_type) << " has been added to your resources" << std::endl;
+    body_ss << beautify_double(quantity) << " " << Ingredient::type_to_string(ing_type) << " added to your resources" << std::endl;
 
 };
 
@@ -513,6 +513,15 @@ void ChanceItemScene::convert_item_coins(std::stringstream& body_ss, const spIte
 
 void ChanceItemScene::convert_item_to_chance(spItem item)
 {
+    /*
+     *Takes an item, and depending on its type, it generates
+     *a specific type of advanced resource.
+     *
+     *Potentially depends on the quality type of the item to determine
+     *the types of chances you get, so a Poor miner tool gets you copper
+     *while a rare miner tool gets you more iron
+     */
+
     auto scene = cocos2d::Director::getInstance()->getRunningScene();
     TextBlobModal* modal = TextBlobModal::create();
     modal->set_title("The Gods have seen it");
@@ -549,14 +558,6 @@ void ChanceItemScene::convert_item_to_chance(spItem item)
 
     auto on_touch = [this, item, modal](){
         CCLOG("TODO: Implement this");
-        /*
-         *Takes an item, and depending on its type, it generates
-         *a specific type of advanced resource.
-         *
-         *Potentially depends on the quality type of the item to determine
-         *the types of chances you get, so a Poor miner tool gets you copper
-         *while a rare miner tool gets you more iron
-         */
         modal->removeFromParent();
     };
     modal->on_layout_touched = on_touch;
