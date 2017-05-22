@@ -477,6 +477,30 @@ void ChanceItemScene::convert_item_resource(std::stringstream& body_ss, const sp
     body_ss << std::endl;
     body_ss << std::endl;
 
+    spBuilding building;
+    Ingredient::SubType ing_type;
+    ItemSlotType slot_type = item->slot_type;
+    res_count_t quantity = item->level * ITEM_RARITY_MODIFIER.at(item->rarity);
+
+    if (slot_type == ItemSlotType::Combat) {
+        building = BUILDUP->city->building_by_name("The Arena");
+        ing_type = Ingredient::SubType::Soul;
+    }
+    else if (slot_type == ItemSlotType::Mining) {
+        building = BUILDUP->city->building_by_name("The Mine");
+        ing_type = Ingredient::SubType::Copper;
+    }
+    else if (slot_type == ItemSlotType::Recipe) {
+        building = BUILDUP->city->building_by_name("The Workshop");
+        ing_type = Ingredient::SubType::Bread;
+    } else {
+        assert(false && "what slot type");
+    }
+
+    building->create_ingredients(ing_type, quantity);
+
+    body_ss << beautify_double(quantity) << " " << Ingredient::type_to_string(ing_type) << " has been added to your resources" << std::endl;
+
 };
 
 void ChanceItemScene::convert_item_coins(std::stringstream& body_ss, const spItem& item)

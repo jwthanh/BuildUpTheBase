@@ -24,7 +24,7 @@
             "description": "You stay far away from the things like this normally, but you're fine with this set of flowers. They look particularly good right now.",
             "img_path": "items/primrose.png",
             "scavenge_weight": 135.0,
-            "slot_type": "",
+            "slot_type": "recipe",
             "base_cost": 170.0
         },
         "homunculus": {
@@ -51,7 +51,7 @@
             "description": "Weighs almost nothing, despite being made of wrought iron.",
             "img_path": "items/ashen_mirror.png",
             "scavenge_weight": 10.0,
-            "slot_type": "",
+            "slot_type": "recipe",
             "base_cost": 765.0
         },
         "broadsword": {
