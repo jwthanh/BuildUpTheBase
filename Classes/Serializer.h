@@ -159,4 +159,13 @@ class HarvestableManagerSerializer : public BaseSerializer
         void load() override;
 };
 
+class BankSerializer : public BaseSerializer
+{
+    public:
+        BankSerializer(std::string filename) : BaseSerializer(filename){};
+
+        void serialize() override;
+        void load() override;
+};
+
 #endif

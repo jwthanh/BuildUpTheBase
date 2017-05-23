@@ -22,6 +22,7 @@
 #include "2d/CCTMXTiledMap.h"
 #include "2d/CCTMXLayer.h"
 #include "HarvestableManager.h"
+#include "banking/bank.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -833,5 +834,33 @@ void HarvestableManagerSerializer::load()
     h_man->queued_scavengers = this->get_double(doc, "queued_scavengers", 0);
     h_man->current_scavenger_uses = this->get_double(doc, "current_scavenger_uses", 0);
     h_man->max_uses_per_scavenger = this->get_double(doc, "max_uses_per_scavenger", 50);
+
+}
+
+void BankSerializer::serialize()
+{
+    rjDocument doc = rjDocument();
+    doc.SetObject();
+
+    rjDocument::AllocatorType& allocator = doc.GetAllocator();
+
+    Bank* bank = Bank::getInstance();
+    this->set_double(doc, "total_coins_banked", bank->_total_coins_banked);
+
+    this->save_document(doc);
+}
+
+void BankSerializer::load()
+{
+    rjDocument doc = this->get_document();
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false)
+    {
+        CCLOG("NOT OBJECT");
+        return;
+    }
+
+    Bank* bank = Bank::getInstance();
+    bank->_total_coins_banked = this->get_double(doc, "total_coins_banked", 0);
 
 }
