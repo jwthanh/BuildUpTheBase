@@ -158,6 +158,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\attribute.cpp" />
     <ClCompile Include="..\Classes\attribute_container.cpp" />
     <ClCompile Include="..\Classes\attr_effect.cpp" />
+    <ClCompile Include="..\Classes\banking\bank.cpp" />
     <ClCompile Include="..\Classes\BuildingDetailScene.cpp" />
     <ClCompile Include="..\Classes\BuildingsSideBar.cpp" />
     <ClCompile Include="..\Classes\Buyable.cpp" />
@@ -217,6 +218,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\attributes_t.h" />
     <ClInclude Include="..\Classes\attribute_container.h" />
     <ClInclude Include="..\Classes\attr_effect.h" />
+    <ClInclude Include="..\Classes\banking\bank.h" />
     <ClInclude Include="..\Classes\BuildingDetailScene.h" />
     <ClInclude Include="..\Classes\BuildingsSideBar.h" />
     <ClInclude Include="..\Classes\Buyable.h" />

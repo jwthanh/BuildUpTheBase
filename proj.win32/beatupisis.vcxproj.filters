@@ -28,6 +28,9 @@
     <Filter Include="goals">
       <UniqueIdentifier>{5bd6c7a2-ac4e-4128-92a3-bbfaa2a77a76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="banking">
+      <UniqueIdentifier>{178913b6-5efb-4360-a2d1-9d7c6a04c3aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -108,6 +111,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\BuildingDetailScene.cpp" />
     <ClCompile Include="..\Classes\PopupPanel.cpp" />
+    <ClCompile Include="..\Classes\banking\bank.cpp">
+      <Filter>banking</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -214,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BuildingDetailScene.h" />
     <ClInclude Include="..\Classes\PopupPanel.h" />
+    <ClInclude Include="..\Classes\banking\bank.h">
+      <Filter>banking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
