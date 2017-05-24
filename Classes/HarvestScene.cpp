@@ -1111,8 +1111,8 @@ bool HarvestScene::init()
         };
 
         Color3B _def = Color3B::BLACK;
-        auto color = map_get(color_map, this->_layer_building_level, _def);
-        try_set_node_color(layer_color, color);
+        // auto color = map_get(color_map, this->_layer_building_level, _def);
+        try_set_node_color(layer_color, _def);
 
 
     };
