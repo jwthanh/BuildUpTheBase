@@ -68,7 +68,7 @@ void ItemScene::init_callbacks()
             //remove from items list
             EQUIPMENT->remove_item_from_inventory(item);
 
-            BEATUP->add_total_coin(item->get_effective_cost());
+            BEATUP->add_total_coins(item->get_effective_cost());
 
             this->reset_detail_panel();
         };
@@ -512,7 +512,7 @@ void ChanceItemScene::convert_item_coins(std::stringstream& body_ss, const spIte
 
     res_count_t quantity = item->get_effective_cost() * 3.0;
     body_ss << beautify_double(quantity) << " coins gained." << std::endl;
-    BEATUP->add_total_coin(quantity);
+    BEATUP->add_total_coins(quantity);
 
     EQUIPMENT->remove_item_from_inventory(item);
 

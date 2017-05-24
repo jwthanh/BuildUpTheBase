@@ -197,7 +197,7 @@ void Salesman::on_update(float dt)
             BUILDUP->remove_shared_ingredients_from_all(ing_type, final_to_sell);
 
             //add the value of amount sold
-            BEATUP->add_total_coin(actual_value);
+            BEATUP->add_total_coins(actual_value);
 
             //create floating label for the amount sold over the correct ing panel
             cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();

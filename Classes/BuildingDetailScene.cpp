@@ -85,7 +85,7 @@ void BuildingDetailScene::init_callbacks()
 
         if (cost <= total_coins)
         {
-            BEATUP->add_total_coin(-cost);
+            BEATUP->add_total_coins(-cost);
 
             this->building->building_level += 1;
 

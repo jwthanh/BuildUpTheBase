@@ -177,7 +177,7 @@ int Beatup::get_total_hits()
     return DataManager::get_int_from_data(Beatup::total_hit_key);
 };
 
-void Beatup::add_total_coin(res_count_t x)
+void Beatup::add_total_coins(res_count_t x)
 {
     if (x > 0.1) {
         auto achievement_manager = AchievementManager::getInstance();

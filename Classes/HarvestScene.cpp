@@ -822,7 +822,7 @@ void BaseScene::create_player_info_panel()
             if (health->is_full() == false)
             {
                 health->add_to_current_val(5);
-                BEATUP->add_total_coin(-heal_cost);
+                BEATUP->add_total_coins(-heal_cost);
             }
         }
         else
@@ -1324,7 +1324,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 num_to_sell = std::min(std::floor(coin_storage_left / coins_gained_per), num_to_sell);
                 res_count_t actual_value = num_to_sell * coins_gained_per;
 
-                BEATUP->add_total_coin(actual_value);
+                BEATUP->add_total_coins(actual_value);
 
                 BUILDUP->remove_shared_ingredients_from_all(ing_type, num_to_sell);
 

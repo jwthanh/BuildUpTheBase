@@ -1154,7 +1154,7 @@ void SideListView::setup_powers_listview_as_powers()
                     res_count_t ing_count = map_get(all_ingredients, ing_type, _def);
                     res_count_t sale_price = Ingredient::type_to_value.at(ing_type);
 
-                    BEATUP->add_total_coin(ing_count*sale_price);
+                    BEATUP->add_total_coins(ing_count*sale_price);
 
                     all_ingredients[ing_type] = 0;
                 }
@@ -1215,7 +1215,7 @@ void SideListView::setup_powers_listview_as_powers()
                     res_count_t ing_count = map_get(all_ingredients, ing_type, _def);
                     res_count_t sale_price = Ingredient::type_to_value.at(ing_type);
 
-                    BEATUP->add_total_coin(ing_count*sale_price);
+                    BEATUP->add_total_coins(ing_count*sale_price);
 
                     all_ingredients[ing_type] = 0;
                 }

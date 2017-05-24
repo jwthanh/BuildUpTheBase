@@ -279,7 +279,7 @@ void NuItem::set_progress_panel_visible(bool visible)
 
 void ShopNuItem::add_available_coins(res_count_t new_coins)
 {
-    BEATUP->add_total_coin(new_coins);
+    BEATUP->add_total_coins(new_coins);
 };
 
 res_count_t ShopNuItem::get_available_coins()
