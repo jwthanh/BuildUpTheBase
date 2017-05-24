@@ -1319,16 +1319,10 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                     num_to_sell = std::min(num_sellable, num_sellable*percent_sold);
                 }
 
-                //make sure enough coin space for sale, otherwise limit num_to_sell until
-                // it's below the space left
+                //make sure enough coin space for sale
                 res_count_t coin_storage_left = BEATUP->get_coin_storage_left();
+                num_to_sell = std::min(std::floor(coin_storage_left / coins_gained_per), num_to_sell);
                 res_count_t actual_value = num_to_sell * coins_gained_per;
-                while (actual_value > coin_storage_left && num_to_sell > 0.0)
-                {
-                    num_to_sell--;
-                    num_to_sell = std::max(0.0L, num_to_sell);
-                    actual_value = num_to_sell * coins_gained_per;
-                };
 
                 BEATUP->add_total_coin(actual_value);
 
