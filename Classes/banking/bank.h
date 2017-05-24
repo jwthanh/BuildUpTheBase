@@ -18,10 +18,8 @@ class Bank
 
         res_count_t get_total_coins_banked() const;
         void add_total_coins_banked(res_count_t added_value);
-        void set_total_coins_banked(res_count_t added_value);
+        void set_total_coins_banked(res_count_t new_total);
 
         friend class BankSerializer;
-
-
 };
 #endif
