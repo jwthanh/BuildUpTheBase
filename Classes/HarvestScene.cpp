@@ -1309,24 +1309,24 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
             {
                 res_count_t USE_ABSOLUTE = -1;
 
-                res_count_t num_to_sell;
+                res_count_t original_num_to_sell;
                 if (amount_sold != USE_ABSOLUTE) //if amount sold is not -1, use absolute values instead
                 {
-                    num_to_sell = std::min(num_sellable, amount_sold);
+                    original_num_to_sell = std::min(num_sellable, amount_sold);
                 }
                 else
                 {
-                    num_to_sell = std::min(num_sellable, num_sellable*percent_sold);
+                    original_num_to_sell = std::min(num_sellable, num_sellable*percent_sold);
                 }
 
                 //make sure enough coin space for sale
                 res_count_t coin_storage_left = BEATUP->get_coin_storage_left();
-                num_to_sell = std::min(std::floor(coin_storage_left / coins_gained_per), num_to_sell);
-                res_count_t actual_value = num_to_sell * coins_gained_per;
+                res_count_t adjusted_num_to_sell = std::min(std::floor(coin_storage_left / coins_gained_per), original_num_to_sell);
+                res_count_t final_coins_gained = adjusted_num_to_sell * coins_gained_per;
 
-                BEATUP->add_total_coins(actual_value);
+                BEATUP->add_total_coins(final_coins_gained);
 
-                BUILDUP->remove_shared_ingredients_from_all(ing_type, num_to_sell);
+                BUILDUP->remove_shared_ingredients_from_all(ing_type, adjusted_num_to_sell);
 
                 Vec2 pos = sell_btn->getTouchEndPosition();
                 cocos2d::Vec2 floating_start_pos = sell_btn->getParent()->convertToNodeSpace(pos);
@@ -1334,10 +1334,10 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 Color3B text_color;
                 std::stringstream ss;
 
-                if (actual_value != 0)
+                if (final_coins_gained != 0)
                 {
                     text_color = Color3B::GREEN;
-                    ss << "+$" << beautify_double(actual_value);
+                    ss << "+$" << beautify_double(final_coins_gained);
                 }
                 else
                 {
