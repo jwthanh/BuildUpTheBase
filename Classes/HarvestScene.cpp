@@ -59,7 +59,7 @@
 #include "Tutorial.h"
 #include "utilities/vibration.h"
 #include "RandomWeightMap.h"
-#include "banking/bank.h"
+#include "banking/Bank.h"
 
 USING_NS_CC;
 
@@ -615,13 +615,17 @@ void BaseScene::create_info_panel()
             }
         } else if (target_building->name == "The Marketplace") {
             try_set_visible(arena_kill_panel, true);
-            if (time(0) % 10 > 5) {
+            if (time(0) % 9 > 3) {
                 res_count_t max_coin_storage = BEATUP->get_max_coin_storage();
-                arena_kill_lbl->setString("Max Gold: " + beautify_double(max_coin_storage));
-            } else
+                arena_kill_lbl->setString("Coin Limit: " + beautify_double(max_coin_storage));
+            } else if (time(0) % 9 > 6 )
             {
                 res_count_t city_investment = GameLogic::getInstance()->get_city_investment();
                 arena_kill_lbl->setString("Investments: " + beautify_double(city_investment));
+            } else
+            {
+                res_count_t coins_banked = BANK->get_total_coins_banked();
+                arena_kill_lbl->setString("Banked: " + beautify_double(coins_banked));
             }
         }
         // else if (target_building->name == "The Mine") { //TODO access miner depth from outside of minerscene

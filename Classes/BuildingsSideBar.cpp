@@ -30,7 +30,7 @@
 #include "Tutorial.h"
 #include "utilities/vibration.h"
 #include "goals/Achievement.h"
-#include "banking/bank.h"
+#include "banking/Bank.h"
 
 #include "base/CCDirector.h"
 #include "CCApplication.h"

@@ -36,7 +36,7 @@
 
 #include "utilities/vibration.h"
 #include "external/easylogging.h"
-#include "banking/bank.h"
+#include "banking/Bank.h"
 
 
 USING_NS_CC;

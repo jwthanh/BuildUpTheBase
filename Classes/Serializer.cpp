@@ -22,7 +22,7 @@
 #include "2d/CCTMXTiledMap.h"
 #include "2d/CCTMXLayer.h"
 #include "HarvestableManager.h"
-#include "banking/bank.h"
+#include "banking/Bank.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)

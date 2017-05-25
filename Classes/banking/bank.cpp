@@ -1,4 +1,4 @@
-#include "bank.h"
+#include "Bank.h"
 #include  "GameLogic.h"
 #include  "Beatup.h"
 

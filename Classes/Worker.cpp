@@ -16,7 +16,7 @@
 #include "goals/Achievement.h"
 #include "Harvestable.h"
 #include "HarvestableManager.h"
-#include "banking/bank.h"
+#include "banking/Bank.h"
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
