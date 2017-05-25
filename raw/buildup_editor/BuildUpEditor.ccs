@@ -30,6 +30,7 @@
           <Project Name="items_scene.csd" Type="Scene" />
           <Project Name="miner_scene.csd" Type="Scene" />
           <Project Name="reset_scene.csd" Type="Scene" />
+          <Project Name="bank_scene.csd" Type="Scene" />
         </Folder>
         <Folder Name="tutorial">
           <Project Name="tutorial_sidebar_panel.csd" Type="Node" />

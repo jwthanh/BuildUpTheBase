@@ -203,6 +203,7 @@
             <key type="filename">calvin/trophy/trophy14.png</key>
             <key type="filename">kenny/Art/Roguelike cave &amp; dungeon pack (520 assets)/ASUOutput/dirt_1.png</key>
             <key type="filename">kenny/Art/Roguelike cave &amp; dungeon pack (520 assets)/ASUOutput/dirt_2.png</key>
+            <key type="filename">to_replace/back_icon_josh.png</key>
             <key type="filename">to_replace/menu_icons/leaderboard.png</key>
             <key type="filename">to_replace/menu_icons/sell_all.png</key>
             <key type="filename">valery_artist/marketplace_icon.png</key>
@@ -1048,6 +1049,7 @@
             <filename>valery_artist/marketplace_icon.png</filename>
             <filename>knight_artist/gravestone_icon.png</filename>
             <filename>knight_artist/pink_monster_icon.png</filename>
+            <filename>to_replace/back_icon_josh.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

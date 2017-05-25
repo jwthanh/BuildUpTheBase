@@ -628,9 +628,6 @@ void BaseScene::create_info_panel()
                 arena_kill_lbl->setString("Banked: " + beautify_double(coins_banked));
             }
         }
-        // else if (target_building->name == "The Mine") { //TODO access miner depth from outside of minerscene
-        //     arena_kill_panel->setVisible(true);
-        //     arena_kill_lbl->setString("Depth: XXX");
         else {
             try_set_visible(arena_kill_panel, false);
         }
