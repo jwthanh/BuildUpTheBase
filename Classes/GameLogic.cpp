@@ -1141,6 +1141,62 @@ void GameDirector::switch_to_reset_menu()
     director->pushScene(scene);
 };
 
+
+void GameDirector::switch_to_bank_menu()
+{
+    auto scene = cocos2d::Scene::create();
+    scene->setName("bank_scene");
+    set_default_key_handler(scene);
+
+    auto bank_scene = get_prebuilt_node_from_csb("editor/scenes/bank_scene.csb");
+    auto panel = dynamic_cast<cocos2d::ui::Layout*>(bank_scene->getChildByName("panel"));
+    panel->removeFromParent();
+    scene->addChild(panel);
+
+    auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
+    prep_back_button(back_btn);
+
+    cocos2d::ui::ListView* bank_pageview = dynamic_cast<cocos2d::ui::ListView*>(panel->getChildByName("bank_listview"));
+
+    struct bank_config {
+        std::string title;
+        std::string description;
+        std::function<void()> bank_callback;
+    };
+
+    std::vector<bank_config> configs {
+        {
+            "Withdraw 10",
+            "Deposit 10 coins in the bank.",
+            [](){}
+        },
+        {
+            "Deposit 10",
+            "Withdraw 10 coins from the bank.",
+            [](){}
+        }
+    };
+
+    for (auto& config : configs)
+    {
+        auto nuitem = NuItem::create(bank_pageview);
+        nuitem->set_title(config.title);
+        nuitem->set_description(config.description);
+
+        //bank size to width of container
+        nuitem->button->setContentSize({ bank_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
+
+        auto do_bank = [config](){
+                do_vibrate(5);
+                config.bank_callback();
+        };
+        bind_touch_ended(nuitem->button, do_bank);
+    }
+
+    auto director = cocos2d::Director::getInstance();
+    director->pushScene(scene);
+};
+
 void GameDirector::switch_to_achievement_menu()
 {
     auto scene = cocos2d::Scene::create();

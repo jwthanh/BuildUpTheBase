@@ -89,6 +89,7 @@ class GameDirector
         static void switch_to_scrap_item_menu();
         static void switch_to_equipment_menu();
         static void switch_to_reset_menu();
+        static void switch_to_bank_menu();
         static void switch_to_achievement_menu();
 };
 

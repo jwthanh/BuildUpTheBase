@@ -150,8 +150,9 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     {
         GameLogic::save_all();
     }
-    else if (keyCode == EventKeyboard::KeyCode::KEY_I)
+    else if (keyCode == EventKeyboard::KeyCode::KEY_B)
     {
+        GameDirector::switch_to_bank_menu();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_K)
     {
