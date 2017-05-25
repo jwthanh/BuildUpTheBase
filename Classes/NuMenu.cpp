@@ -36,6 +36,7 @@
 
 #include "utilities/vibration.h"
 #include "external/easylogging.h"
+#include "banking/bank.h"
 
 
 USING_NS_CC;
@@ -279,7 +280,7 @@ void NuItem::set_progress_panel_visible(bool visible)
 
 void ShopNuItem::add_available_coins(res_count_t new_coins)
 {
-    BEATUP->add_total_coins(new_coins);
+    BANK->pocket_or_bank_coins(new_coins);
 };
 
 res_count_t ShopNuItem::get_available_coins()

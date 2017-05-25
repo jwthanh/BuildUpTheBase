@@ -16,6 +16,7 @@
 #include "goals/Achievement.h"
 #include "Harvestable.h"
 #include "HarvestableManager.h"
+#include "banking/bank.h"
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {
@@ -184,20 +185,11 @@ void Salesman::on_update(float dt)
 
             //make sure enough coin space for sale, otherwise limit num_to_sell until
             // it's below the space left
-            res_count_t coin_storage_left = BEATUP->get_coin_storage_left();
-
-
-            //max you can sell without going over
-            res_count_t max_to_sell = coin_storage_left/coins_gained_per;
-            res_count_t final_to_sell = std::min(num_to_sell, max_to_sell);
-            res_count_t actual_value = final_to_sell * coins_gained_per;
-
+            res_count_t actual_value = num_to_sell * coins_gained_per;
+            BANK->pocket_or_bank_coins(actual_value);
 
             //remove the ingredients
-            BUILDUP->remove_shared_ingredients_from_all(ing_type, final_to_sell);
-
-            //add the value of amount sold
-            BEATUP->add_total_coins(actual_value);
+            BUILDUP->remove_shared_ingredients_from_all(ing_type, num_to_sell);
 
             //create floating label for the amount sold over the correct ing panel
             cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();

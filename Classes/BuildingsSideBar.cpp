@@ -30,6 +30,7 @@
 #include "Tutorial.h"
 #include "utilities/vibration.h"
 #include "goals/Achievement.h"
+#include "banking/bank.h"
 
 #include "base/CCDirector.h"
 #include "CCApplication.h"
@@ -1154,7 +1155,8 @@ void SideListView::setup_powers_listview_as_powers()
                     res_count_t ing_count = map_get(all_ingredients, ing_type, _def);
                     res_count_t sale_price = Ingredient::type_to_value.at(ing_type);
 
-                    BEATUP->add_total_coins(ing_count*sale_price);
+                    res_count_t original_value = ing_count*sale_price;
+                    BANK->pocket_or_bank_coins(original_value);
 
                     all_ingredients[ing_type] = 0;
                 }
@@ -1215,7 +1217,8 @@ void SideListView::setup_powers_listview_as_powers()
                     res_count_t ing_count = map_get(all_ingredients, ing_type, _def);
                     res_count_t sale_price = Ingredient::type_to_value.at(ing_type);
 
-                    BEATUP->add_total_coins(ing_count*sale_price);
+                    res_count_t original_value = ing_count*sale_price;
+                    BANK->pocket_or_bank_coins(original_value);
 
                     all_ingredients[ing_type] = 0;
                 }
