@@ -1141,8 +1141,6 @@ void GameDirector::switch_to_reset_menu()
     director->pushScene(scene);
 };
 
-bool is_completed2(const std::shared_ptr<BaseAchievement>& achievement) { return achievement->get_completed(); };
-
 void GameDirector::switch_to_achievement_menu()
 {
     auto scene = cocos2d::Scene::create();
