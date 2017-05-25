@@ -52,12 +52,13 @@
 #include <cocostudio/CocosStudioExtension.h>
 #include "ui/UITextField.h"
 #include <2d/CCParticleExamples.h>
+#include "2d/CCActionInstant.h"
+#include "CCFileUtils.h"
+
 #include "debugging/ActionPanel.h"
 #include "Tutorial.h"
-#include "2d/CCActionInstant.h"
 #include "utilities/vibration.h"
 #include "RandomWeightMap.h"
-#include "CCFileUtils.h"
 #include "banking/bank.h"
 
 USING_NS_CC;
