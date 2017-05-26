@@ -172,7 +172,7 @@ class UpgradeBuildingShopNuItem : public BuildingShopNuItem
 {
 
     public:
-        static UpgradeBuildingShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);;
+        static UpgradeBuildingShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
         UpgradeBuildingShopNuItem(){};
 
         int building_level;
