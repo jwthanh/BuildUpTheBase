@@ -763,23 +763,43 @@ UpgradeBuildingShopNuItem* UpgradeBuildingShopNuItem::create(cocos2d::ui::Widget
     }
 }
 
+const int MAX_BUILDING_LEVEL = 15;
+
 bool UpgradeBuildingShopNuItem::my_init(int building_level)
 {
     this->building_level = building_level;
 
-    std::stringstream ss;
-    ss << "Level " << building_level;
-    this->set_title(ss.str());
-    this->set_description("Upgrade building\nincreasing its storage");
+    auto update_title_and_desc = [this](float dt) {
+        std::stringstream ss;
+
+        if (this->building_level <= MAX_BUILDING_LEVEL) {
+            ss << "Level " << this->building_level;
+            this->set_title(ss.str());
+            this->set_description("Upgrade building\nincreasing its storage");
+        } else {
+            ss << "Max level (lv " << this->building->building_level << ")";
+            this->set_title(ss.str());
+            this->set_description("Upgraded to the max!");
+        };
+    };
+    update_title_and_desc(0.0f);
+    this->schedule(update_title_and_desc, SHORT_DELAY, "update_title_and_desc");
 
     long double shop_cost = scale_number(10.0L, ((res_count_t)this->building_level)-1.0L, 10.5L);
     this->_shop_cost = shop_cost;
 
-    auto update_been_bought = [this](float dt) {
-        this->set_been_bought(this->building->building_level >= this->building_level);
+    auto custom_update_func = [this](float dt) {
+        if (this->building->building_level == this->building_level) {
+            this->building_level++;
+        };
+
+        if (this->building_level > 15) {
+            this->set_been_bought(true);
+        };
     };
-    this->schedule(update_been_bought, MID_DELAY, "set_enabled");
-    update_been_bought(0);
+
+    this->schedule(custom_update_func, MID_DELAY, "set_enabled");
+    custom_update_func(0);
 
     auto touch_ended_cb = [this](){
         res_count_t cost = this->get_cost();

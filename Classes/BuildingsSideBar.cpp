@@ -459,24 +459,18 @@ void SideListView::setup_building_listview_as_upgrades()
             }
             try_set_visible(listview, true);
 
-            int i = 0;
-            int max_level = 15;
-            for (int level = 2; level <= max_level; level++)
-            {
-                int child_tag = i;
-                i++;
+            int child_tag = 0;
 
 
-                //if the child already exists, put it at the end of the listview, maintaining order as config
-                bool existed = this->if_tag_exists_in_listview(child_tag, listview);
-                if (existed) { continue; };
+            //if the child already exists, dont keep trying to re-add it
+            bool node_exists = this->if_tag_exists_in_listview(child_tag, listview);
+            if (node_exists) { return; };
 
-                UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create(listview, building);
-                menu_item->my_init(level);
+            UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create(listview, building);
+            menu_item->my_init(building->building_level+1);
 
-                menu_item->setTag(child_tag);
+            menu_item->setTag(child_tag);
 
-            };
         };
 
         listview->schedule(update_listview, AVERAGE_DELAY, "update_listview");
