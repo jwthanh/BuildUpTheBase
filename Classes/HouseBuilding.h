@@ -47,7 +47,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         spBuildingData data;
 
-        Village* city;
+        City* city;
 
         Ingredient::SubType punched_sub_type;
 
@@ -75,7 +75,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         unsigned int num_workers; //people who work here, help make things faster
 
-        Building(Village* city, std::string name, std::string id_key);
+        Building(City* city, std::string name, std::string id_key);
         void create_ingredients(Ingredient::SubType sub_type, res_count_t quantity);
 
         void consume_recipe(Recipe* recipe);
@@ -88,7 +88,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
 };
 
-class Village : public Nameable, public Updateable
+class City : public Nameable, public Updateable
 {
     public:
 
@@ -96,7 +96,7 @@ class Village : public Nameable, public Updateable
 
         vsBuilding buildings;
 
-        Village(Buildup* buildup, std::string name)
+        City(Buildup* buildup, std::string name)
             : Nameable(name), Updateable(), buildup(buildup)
         {
             buildings = {};

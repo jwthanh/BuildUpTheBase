@@ -5,7 +5,7 @@
 #include "constants.h"
 #include "Ingredients.h"
 
-class Village;
+class City;
 class Player;
 
 #include "SubTypes.h"
@@ -23,9 +23,9 @@ class Buildup
         spBuilding get_target_building();
         void set_target_building(spBuilding building);
 
-        Village* city;
+        City* city;
 
-        static Village* init_city(Buildup*);
+        static City* init_city(Buildup*);
         res_count_t count_ingredients();
         res_count_t count_ingredients(IngredientSubType ing_type);
 

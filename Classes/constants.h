@@ -64,7 +64,7 @@ class Building;
 class Visitors;
 
 class Buildup;
-class Village;
+class City;
 class BuildingData;
 
 class Fighter;
@@ -140,7 +140,7 @@ MAKE_SP_VS_MI(Combat);
 MAKE_SP_VS_MI(ProgressBar);
 MAKE_SP_VS_MI(Buildup);
 MAKE_SP_VS_MI(Experience);
-MAKE_SP_VS_MI(Village);
+MAKE_SP_VS_MI(City);
 
 MAKE_SP_VS_MI(TechTree);
 MAKE_SP_VS_MI(Technology);

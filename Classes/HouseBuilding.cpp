@@ -40,7 +40,7 @@
 USING_NS_CC;
 
 
-void Village::update(float dt)
+void City::update(float dt)
 {
     Updateable::update(dt);
 
@@ -48,7 +48,7 @@ void Village::update(float dt)
 };
 
 
-void Village::update_buildings(float dt)
+void City::update_buildings(float dt)
 {
     for (std::shared_ptr<Building>& building : this->buildings)
     {
@@ -57,7 +57,7 @@ void Village::update_buildings(float dt)
 
 };
 
-spBuilding Village::building_by_name(std::string name)
+spBuilding City::building_by_name(std::string name)
 {
     for (auto bldg : this->buildings)
     {
@@ -105,7 +105,7 @@ void move_if_sized(Resource::ResourceType res_type,
     //};
 };
 
-Building::Building(Village* city, std::string name, std::string id_key) :
+Building::Building(City* city, std::string name, std::string id_key) :
              Nameable(name), Buyable(id_key), Updateable(), city(city)
 {
     num_workers = 1;
@@ -327,7 +327,7 @@ void test_conditions()
     //    { Ingredient::SubType::Iron, 1 }
     //};
 
-    //auto city = new Village(NULL, "The Test City");
+    //auto city = new City(NULL, "The Test City");
     //auto farm = std::make_shared<Building>(city, "The Test Farm", "test_farm");
     //farm->ingredients = inputs;
     //
@@ -468,7 +468,7 @@ void Buildup::post_update()
 
 };
 
-Village* Buildup::init_city(Buildup* buildup)
+City* Buildup::init_city(Buildup* buildup)
 {
 
 
@@ -477,7 +477,7 @@ Village* Buildup::init_city(Buildup* buildup)
 
     buildup->server_clock = Clock(30.0f); //update server every 30 seconds
 
-    auto city = new Village(buildup, "Burlington");
+    auto city = new City(buildup, "Burlington");
 
     struct BuildingConfig {
         std::string name;

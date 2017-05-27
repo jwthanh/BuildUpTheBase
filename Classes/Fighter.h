@@ -10,7 +10,7 @@
 
 class Experience;
 class AttributeContainer;
-class Village;
+class City;
 class Building;
 class Combat;
 class ProgressBar;
@@ -39,7 +39,7 @@ class Fighter : public Nameable, public Updateable, public std::enable_shared_fr
 
         spExperience xp;
         spAttributeContainer attrs;
-        spVillage city;
+        spCity city;
         spCombat combat;
 
         std::string sprite_name = "weapon_gauntlet.png";
