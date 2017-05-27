@@ -11,43 +11,6 @@
 #define TITLE_FONT  "fonts/airstrike.ttf"
 #define DEFAULT_FONT  "fonts/pixelmix.ttf"
 
-#define TOUCH_CALLBACK_PARAMS cocos2d::Ref* target, TouchEventType evt
-
-enum FistHands
-{
-    None = -1,
-    Left = 0,
-    Right = 1,
-    LCharge = 2,
-    RCharge = 3
-};
-
-enum FistWeaponTypes
-{
-    Flames,
-    Psionic,
-    Frost,
-};
-
-enum ShieldTypes
-{
-    Human,
-    Brick
-};
-
-enum BackgroundTypes
-{
-    Forest,
-    Volcano,
-    Western
-};
-
-class Beatup;
-
-typedef std::function<bool()> BoolFuncNoArgs;
-typedef std::function<void()> VoidFuncNoArgs;
-typedef std::function<void(Beatup*)> VoidFuncBeatupNoArgs;
-
 const char PATH_SEPARATOR =
 #ifdef _WIN32
                             '\\';
@@ -175,6 +138,13 @@ typedef long double res_count_t;
 
 #define rjDocument rapidjson::GenericDocument<rapidjson::UTF8<>,rapidjson::CrtAllocator>
 #define rjValue rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>
+
+#define TOUCH_CALLBACK_PARAMS cocos2d::Ref* target, TouchEventType evt
+
+typedef std::function<bool()> BoolFuncNoArgs;
+typedef std::function<void()> VoidFuncNoArgs;
+typedef std::function<void(Beatup*)> VoidFuncBeatupNoArgs;
+
 
 const float SECOND_DELAY = 1.0f; // 60 times per second
 const float LONG_DELAY = 0.5f; // 30 times per second
