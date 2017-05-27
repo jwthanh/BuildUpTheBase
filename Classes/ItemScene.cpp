@@ -18,6 +18,7 @@
 #include "Item.h"
 #include "GameLogic.h"
 #include "HouseBuilding.h"
+#include "Buildup.h"
 #include "Beatup.h"
 #include "Util.h"
 #include "Equipment.h"

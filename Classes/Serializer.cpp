@@ -8,6 +8,7 @@
 #include "FileOperation.h"
 
 #include "HouseBuilding.h"
+#include "Buildup.h"
 
 #include "Technology.h"
 #include "GameLogic.h"

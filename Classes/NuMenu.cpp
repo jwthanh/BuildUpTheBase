@@ -8,6 +8,7 @@
 #include "FShake.h"
 
 #include "HouseBuilding.h"
+#include "Buildup.h"
 #include "Beatup.h"
 #include "StaticData.h"
 #include "Worker.h"

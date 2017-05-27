@@ -3,6 +3,7 @@
 #include "Clock.h"
 
 #include "HouseBuilding.h"
+#include "Buildup.h"
 #include "Util.h"
 #include "GameLogic.h"
 #include "Beatup.h"

@@ -24,6 +24,7 @@
 #include "BuildingsSideBar.h"
 
 #include "HouseBuilding.h"
+#include "Buildup.h"
 #include "DataManager.h"
 #include "Network.h"
 #include "Modal.h"

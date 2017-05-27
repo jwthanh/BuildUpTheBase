@@ -11,6 +11,7 @@
 #include "NuMenu.h"
 #include "GameLogic.h"
 #include "HouseBuilding.h"
+#include "Buildup.h"
 #include "StaticData.h"
 #include "Recipe.h"
 #include "Fighter.h"

@@ -131,39 +131,6 @@ class Enemy : public Person
         Enemy(std::string name) : Person(name) {};
 };
 
-class Buildup
-{
-    private:
-        spBuilding _target_building;
-
-    public:
-        Player* player;
-        spFighter fighter;
-        spFighter brawler;
-
-        spBuilding get_target_building();
-        void set_target_building(spBuilding building);
-
-        Village* city;
-
-        static Village* init_city(Buildup*);
-        res_count_t count_ingredients();
-        res_count_t count_ingredients(Ingredient::SubType ing_type);
-
-        Clock server_clock;
-
-    private:
-        mistIngredient _all_ingredients;
-    public:
-        mistIngredient& get_all_ingredients();
-        void remove_shared_ingredients_from_all(Ingredient::SubType ing_type, res_count_t count);
-
-        Buildup();
-        void update(float dt);
-
-        void post_update();
-};
-
 template<typename from_V>
 void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int remove_count, VoidFunc callback );
 

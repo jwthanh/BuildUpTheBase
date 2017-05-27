@@ -14,6 +14,7 @@
 #include "ShatterNode.h" //is used on android
 
 #include "HouseBuilding.h"
+#include "Buildup.h"
 
 //#pragma warning(default:4267)
 //#pragma warning(default:4251)

@@ -13,6 +13,7 @@
 #include "Beatup.h"
 #include "GameLogic.h"
 #include "HouseBuilding.h"
+#include "Buildup.h"
 #include "Util.h"
 #include "MiscUI.h"
 #include "NuMenu.h"

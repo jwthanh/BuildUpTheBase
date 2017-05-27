@@ -21,6 +21,7 @@
 #include "NodeBuilder.h"
 #include "Beatup.h"
 #include "HouseBuilding.h"
+#include "Buildup.h"
 #include "DataManager.h"
 #include "NuMenu.h"
 #include "Serializer.h"

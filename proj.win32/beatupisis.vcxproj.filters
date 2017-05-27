@@ -114,6 +114,7 @@
     <ClCompile Include="..\Classes\banking\bank.cpp">
       <Filter>banking</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Buildup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -223,6 +224,7 @@
     <ClInclude Include="..\Classes\banking\bank.h">
       <Filter>banking</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Buildup.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

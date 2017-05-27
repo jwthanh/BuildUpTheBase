@@ -5,6 +5,7 @@
 #include "FShake.h"
 
 #include "HouseBuilding.h"
+#include "Buildup.h"
 #include "ShatterNode.h"
 #include "MiscUI.h"
 #include "GameLogic.h"

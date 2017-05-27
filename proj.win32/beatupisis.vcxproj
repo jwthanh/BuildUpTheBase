@@ -161,6 +161,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\banking\bank.cpp" />
     <ClCompile Include="..\Classes\BuildingDetailScene.cpp" />
     <ClCompile Include="..\Classes\BuildingsSideBar.cpp" />
+    <ClCompile Include="..\Classes\Buildup.cpp" />
     <ClCompile Include="..\Classes\Buyable.cpp" />
     <ClCompile Include="..\Classes\Clock.cpp" />
     <ClCompile Include="..\Classes\combat.cpp" />
@@ -221,6 +222,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\banking\bank.h" />
     <ClInclude Include="..\Classes\BuildingDetailScene.h" />
     <ClInclude Include="..\Classes\BuildingsSideBar.h" />
+    <ClInclude Include="..\Classes\Buildup.h" />
     <ClInclude Include="..\Classes\Buyable.h" />
     <ClInclude Include="..\Classes\Clock.h" />
     <ClInclude Include="..\Classes\combat.h" />

@@ -51,6 +51,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Util.cpp \
                    ../../Classes/FShake.cpp \
                    ../../Classes/HouseBuilding.cpp \
+                   ../../Classes/Buildup.cpp \
                    ../../Classes/Recipe.cpp \
                    ../../Classes/Combat.cpp \
                    ../../Classes/attribute.cpp \
