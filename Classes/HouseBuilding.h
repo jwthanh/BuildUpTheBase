@@ -16,10 +16,17 @@
 #include "Updateable.h"
 
 
-using HarvesterCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Harvester>>>;
-using SalesmenCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Salesman>>>;
-using ConsumerCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<ConsumerHarvester>>>;
-using ScavengerCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<ScavengerHarvester>>>;
+using HarvesterCache = std::map<work_ing_t, std::shared_ptr<Harvester>>;
+using spHarvesterCache = std::shared_ptr<HarvesterCache>;
+
+using SalesmenCache = std::map<work_ing_t, std::shared_ptr<Salesman>>;
+using spSalesmenCache = std::shared_ptr<SalesmenCache>;
+
+using ConsumerCache = std::map<work_ing_t, std::shared_ptr<ConsumerHarvester>>;
+using spConsumerCache = std::shared_ptr<ConsumerCache>;
+
+using ScavengerCache = std::map<work_ing_t, std::shared_ptr<ScavengerHarvester>>;
+using spScavengerCache = std::shared_ptr<ScavengerCache>;
 
 static const std::map<int, res_count_t> BUILDING_LEVEL_STORAGE_LIMIT = {
     { 1, 25.0},
@@ -61,10 +68,10 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         mistHarvester salesmen;
         mistHarvester consumers;
         mistHarvester scavengers;
-        HarvesterCache _harvester_cache;
-        SalesmenCache _salesmen_cache;
-        ConsumerCache _consumer_cache;
-        ScavengerCache _scavenger_cache;
+        spHarvesterCache _harvester_cache;
+        spSalesmenCache _salesmen_cache;
+        spConsumerCache _consumer_cache;
+        spScavengerCache _scavenger_cache;
 
         int building_level; //affects only resource limits for now
         res_count_t get_storage_space();

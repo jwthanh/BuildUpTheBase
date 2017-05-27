@@ -80,13 +80,13 @@ Building::Building(City* city, std::string name, std::string id_key) :
     workers = vsWorker();
 
     this->harvesters = mistHarvester();
-    this->_harvester_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<Harvester>>>(); //cant just HarvesterCache(); this for some reason
+    this->_harvester_cache = std::make_shared<HarvesterCache>();
 
     this->salesmen = mistHarvester();
-    this->_salesmen_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<Salesman>>>();
+    this->_salesmen_cache = std::make_shared<SalesmenCache>();
 
     this->consumers = mistHarvester();
-    this->_consumer_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<ConsumerHarvester>>>();
+    this->_consumer_cache = std::make_shared<ConsumerCache>();
 
     // this->scavengers = mistHarvester();
     this->scavengers = mistHarvester({
