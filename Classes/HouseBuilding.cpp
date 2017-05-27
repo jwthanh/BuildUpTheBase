@@ -92,7 +92,7 @@ Building::Building(City* city, std::string name, std::string id_key) :
     this->scavengers = mistHarvester({
         { { WorkerSubType::One, IngredientSubType::Undead }, 1 }
     });
-    this->_scavenger_cache = std::make_shared<std::map<work_ing_t, std::shared_ptr<ScavengerHarvester>>>();
+    this->_scavenger_cache = std::make_shared<ScavengerCache>();
 
     this->data = std::make_shared<BuildingData>(name);
     this->_shop_cost = atoi(this->data->get_gold_cost().c_str());
