@@ -21,7 +21,7 @@ using SalesmenCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<Sales
 using ConsumerCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<ConsumerHarvester>>>;
 using ScavengerCache = std::shared_ptr<std::map<work_ing_t, std::shared_ptr<ScavengerHarvester>>>;
 
-static const std::map<int, res_count_t> building_storage_limit = {
+static const std::map<int, res_count_t> BUILDING_LEVEL_STORAGE_LIMIT = {
     { 1, 25.0},
     { 2, 50.0},
     { 3, 250.0},

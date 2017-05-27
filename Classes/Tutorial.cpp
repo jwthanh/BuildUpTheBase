@@ -94,7 +94,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
 
     auto check_grain = [first_step](float dt){
         //update progress bar
-        res_count_t target_total_grain = building_storage_limit.at(1);
+        res_count_t target_total_grain = BUILDING_LEVEL_STORAGE_LIMIT.at(1);
         res_count_t grain_count = BUILDUP->count_ingredients(Ingredient::SubType::Grain);
         res_count_t satisfied_percentage = grain_count/target_total_grain*100;
         first_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
