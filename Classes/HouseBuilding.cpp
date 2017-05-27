@@ -390,7 +390,6 @@ void test_conditions()
 void Buildup::update(float dt)
 {
     this->city->update(dt);
-    this->player->update(dt);
 
     CkUpdate();
 
@@ -561,8 +560,3 @@ res_count_t Buildup::count_ingredients(Ingredient::SubType ing_type)
     res_count_t def = 0;
     return map_get(BUILDUP->get_all_ingredients(), ing_type, def);
 };
-
-void Player::update(float dt)
-{
-};
-

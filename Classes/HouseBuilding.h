@@ -108,29 +108,6 @@ class Village : public Nameable, public Updateable
         spBuilding building_by_name(std::string name);
 };
 
-
-class Person : public Nameable, public Updateable
-{
-    public:
-        Person(std::string name) : Nameable(name), Updateable() {
-        };
-};
-
-class Player : public Person
-{
-    public:
-        unsigned int coins;
-        Player(std::string name) : Person(name) {};
-
-        void update(float dt);
-};
-
-class Enemy : public Person
-{
-    public:
-        Enemy(std::string name) : Person(name) {};
-};
-
 template<typename from_V>
 void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int remove_count, VoidFunc callback );
 

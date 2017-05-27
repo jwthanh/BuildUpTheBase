@@ -81,10 +81,6 @@ bool Beatup::init()
     this->face_fight_node->setPositionY(get_center_pos().y/2);
     this->addChild(face_fight_node);
 
-    auto player = new Player("Jimothy");
-    player->coins = 100;
-    this->buildup->player = player; //this shouldn't set the other class right?
-
     this->buildup->city = Buildup::init_city(this->buildup);
     this->buildup->city->update_buildings(0);
 
