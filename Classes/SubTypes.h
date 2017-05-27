@@ -2,6 +2,8 @@
 #ifndef SUBTYPES_H
 #define SUBTYPES_H
 
+using res_count_t = long double;
+
 enum class IngredientSubType {
     None, Grain, PileOfGrain, Bread, Loaf, Seed, Tree, Iron, Copper,
     Wood, Fly, Sand, Flesh, Berry, Soul, Blood, Paper, Undead, Minecart,

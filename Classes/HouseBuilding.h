@@ -6,7 +6,7 @@
 #include <map>
 
 #include "Clock.h"
-#include "Ingredients.h"
+#include "SubTypes.h"
 
 #include "Buyable.h"
 
@@ -49,7 +49,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         City* city;
 
-        Ingredient::SubType punched_sub_type;
+        IngredientSubType punched_sub_type;
 
         vsWorker workers;
 
@@ -70,13 +70,13 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
 
         int building_level; //affects only resource limits for now
         res_count_t get_storage_space();
-        bool is_storage_full_of_ingredients(Ingredient::SubType);
-        bool can_fit_more_ingredients(Ingredient::SubType sub_type, res_count_t quantity = 1);
+        bool is_storage_full_of_ingredients(IngredientSubType);
+        bool can_fit_more_ingredients(IngredientSubType sub_type, res_count_t quantity = 1);
 
         unsigned int num_workers; //people who work here, help make things faster
 
         Building(City* city, std::string name, std::string id_key);
-        void create_ingredients(Ingredient::SubType sub_type, res_count_t quantity);
+        void create_ingredients(IngredientSubType sub_type, res_count_t quantity);
 
         void consume_recipe(Recipe* recipe);
 
