@@ -66,8 +66,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         ConsumerCache _consumer_cache;
         ScavengerCache _scavenger_cache;
 
-        Clock spawn_clock;
-
         int building_level; //affects only resource limits for now
         res_count_t get_storage_space();
         bool is_storage_full_of_ingredients(IngredientSubType);

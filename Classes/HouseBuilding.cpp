@@ -76,7 +76,6 @@ Building::Building(City* city, std::string name, std::string id_key) :
     building_level = 1;
 
     update_clock.set_threshold(1.0f);
-    spawn_clock = Clock(3);
 
     workers = vsWorker();
 

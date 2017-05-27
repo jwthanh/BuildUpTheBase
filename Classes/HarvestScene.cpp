@@ -174,6 +174,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_I)
     {
+
         GameDirector::switch_to_items_menu();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_P)
