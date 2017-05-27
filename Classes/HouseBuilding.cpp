@@ -68,43 +68,6 @@ spBuilding City::building_by_name(std::string name)
     return NULL;
 };
 
-template<typename from_V>
-void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int remove_count, VoidFunc callback )
-{
-    if (from_vs.size() > condition_size)
-    {
-
-        if (remove_count == 0) { remove_count = condition_size; };
-        printj1("removing " << remove_count);
-        from_vs.erase(from_vs.begin(), from_vs.begin()+remove_count);
-        callback();
-    };
-};
-
-void move_if_sized(Resource::ResourceType res_type,
-        unsigned int condition_size, unsigned int move_count,
-        spBuilding from_bldg, spBuilding to_bldg, VoidFunc callback )
-{
-    CCLOG("move if sized shouldnt be called");
-    //unsigned int from_size;
-    //if (res_type == Resource::Ingredient) from_size = from_bldg->ingredients.size();
-    //else if (res_type == Resource::Product) from_size = from_bldg->products.size();
-    //else if (res_type == Resource::Waste) from_size = from_bldg->wastes.size();
-
-    //if (from_size >= condition_size)
-    //{
-    //    if (move_count == 0) { move_count = condition_size; };
-    //    Animal animal = Animal("Horse");
-    //    animal.b2b_transfer(
-    //        from_bldg,
-    //        to_bldg,
-    //        res_type,
-    //        move_count
-    //        );
-    //    callback();
-    //};
-};
-
 Building::Building(City* city, std::string name, std::string id_key) :
              Nameable(name), Buyable(id_key), Updateable(), city(city)
 {

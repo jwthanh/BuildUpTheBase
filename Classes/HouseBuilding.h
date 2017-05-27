@@ -108,8 +108,4 @@ class City : public Nameable, public Updateable
         spBuilding building_by_name(std::string name);
 };
 
-template<typename from_V>
-void remove_if_sized(from_V& from_vs, unsigned int condition_size, unsigned int remove_count, VoidFunc callback );
-
-void move_if_sized(Resource::ResourceType res_type, unsigned int condition_size, unsigned int move_count, spBuilding from_bldg, spBuilding to_bldng, VoidFunc callback);
 #endif
