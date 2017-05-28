@@ -499,11 +499,26 @@ void BaseScene::create_building_choicelist()
             } else {
                 //open modal to prompt for buying
                 ActionTextBlobModal* text_modal = ActionTextBlobModal::create();
+
+                //title
                 std::string building_name = building->name;
                 auto ss = std::stringstream();
                 ss << "Unlock " << building_name;
                 text_modal->set_title(ss.str());
+
+                //body
                 text_modal->set_body("this is an alert to prompt you to buy this building");
+
+                //buy callback
+                text_modal->set_confirm_button_text("Unlock");
+                text_modal->set_confirm_callback([building, text_modal](){
+                        building->set_been_bought(true);
+                        text_modal->on_layout_touched();
+                });
+
+                //abort setup
+                text_modal->set_abort_button_text("Cancel");
+
                 this->addChild(text_modal);
                 text_modal->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 
