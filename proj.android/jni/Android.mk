@@ -76,15 +76,21 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/banking/Bank.cpp \
                    ../../Classes/BuildingDetailScene.cpp \
 \
-\
-\
                    ../../Classes/magic_particles/MagicEmitter.cpp \
                    ../../Classes/magic_particles/mp_cocos.cpp \
                    ../../Classes/magic_particles/platform_cocos.cpp \
                    ../../Classes/magic_particles/_core/mp.cpp \
                    ../../Classes/magic_particles/_core/platform_win_posix.cpp \
                    ../../Classes/magic_particles/opengl/mp_wrap.cpp \
-                   ../../Classes/magic_particles/opengl/image_loader.cpp
+                   ../../Classes/magic_particles/opengl/image_loader.cpp \
+\
+      ../../Classes/Gestures/GestureRecognizer.cpp \
+      ../../Classes/Gestures/GestureRecognizerUtils.cpp \
+      ../../Classes/Gestures/LongPressGestureRecognizer.cpp \
+      ../../Classes/Gestures/PanGestureRecognizer.cpp \
+      ../../Classes/Gestures/PinchGestureRecognizer.cpp \
+      ../../Classes/Gestures/SwipeGestureRecognizer.cpp \
+      ../../Classes/Gestures/TapGestureRecognizer.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes $(LOCAL_PATH)/../../../_core $(LOCAL_PATH)/../../../opengl $(LOCAL_PATH)/../../Classes/cricket_audio/inc
 
