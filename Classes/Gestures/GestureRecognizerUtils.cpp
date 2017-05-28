@@ -23,7 +23,10 @@ THE SOFTWARE.
 ****************************************************************************/
 
 #include "GestureRecognizerUtils.h"
+
 #include <iso646.h>
+#include <math/CCGeometry.h>
+#include <2d/CCNode.h>
 
 bool nodeContainsThePoint(cocos2d::Node* node, const cocos2d::Vec2& pt)
 {

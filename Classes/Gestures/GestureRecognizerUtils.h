@@ -24,7 +24,11 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "cocos2d.h"
+namespace cocos2d {
+    class Vec2;
+    class Node;
+}
+
 /**
  * 
  * @param map

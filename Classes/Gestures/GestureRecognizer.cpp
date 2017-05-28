@@ -25,7 +25,13 @@ THE SOFTWARE.
 #include "GestureRecognizer.h"
 #include "GestureRecognizerUtils.h"
 
-NS_CC_BEGIN
+#include <base/CCDirector.h>
+#include <base/CCEventDispatcher.h>
+#include <base/CCEventListener.h>
+#include <base/CCEventListenerTouch.h>
+#include <2d/CCDrawNode.h>
+
+namespace cocos2d {
 
 std::vector<Color4F> GestureRecognizer::touchColors = //10 colors
 {

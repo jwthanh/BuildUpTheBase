@@ -27,8 +27,15 @@ THE SOFTWARE.
 #include <algorithm>
 #include <vector>
 #include <unordered_map>
-#include "cocos2d.h"
 #include <iso646.h>
+#include <2d/CCNode.h>
+
+namespace cocos2d
+{
+    //class Point;
+    class EventListenerTouchOneByOne;
+    class DrawNode;
+}
 
 using TouchesMap = std::unordered_map<int, cocos2d::Point>;
 
