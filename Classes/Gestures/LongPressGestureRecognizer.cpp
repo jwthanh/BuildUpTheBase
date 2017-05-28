@@ -44,12 +44,12 @@ LongPressGestureRecognizer::LongPressGestureRecognizer(float timeout, uint finge
     timeoutSeconds = timeout;
 }
 
-LongPressGestureRecognizer::~LongPressGestureRecognizer() 
+LongPressGestureRecognizer::~LongPressGestureRecognizer()
 {
     //CCLOG("Destructor LongPressGestureRecognizer");
 }
 
-bool LongPressGestureRecognizer::onTouchBegan(Touch* touch, Event* ev) 
+bool LongPressGestureRecognizer::onTouchBegan(Touch* touch, Event* ev)
 {
     if (touches.empty()) // empty map, new recognition
     {
@@ -57,20 +57,20 @@ bool LongPressGestureRecognizer::onTouchBegan(Touch* touch, Event* ev)
         reset();
         scheduleTimeout(CC_CALLBACK_1(LongPressGestureRecognizer::timeout, this));
     }
-    
+
     if (touches.size() < fingerNumber)
         touches.insert({touch->getID(), {touch->getLocation()}}); // does nothing if certain id is alredy in the map
     else  { // too many touches!
         status = GestureStatus::FAILED;
-        if (onLongPress) 
+        if (onLongPress)
             onLongPress(this);
         return false;
     }
-    
+
     return true;
 }
 
-void LongPressGestureRecognizer::onTouchMoved(Touch* touch, Event* ev) 
+void LongPressGestureRecognizer::onTouchMoved(Touch* touch, Event* ev)
 {
     if (status == GestureStatus::POSSIBLE)
     {
@@ -82,20 +82,20 @@ void LongPressGestureRecognizer::onTouchMoved(Touch* touch, Event* ev)
     }
 }
 
-void LongPressGestureRecognizer::onTouchCancelled(Touch* touch, Event* ev) 
+void LongPressGestureRecognizer::onTouchCancelled(Touch* touch, Event* ev)
 {
     //CCLOG("LongPressGestureRecognizer::onTouchCancelled (touch id %d)", touch->getID());
     status = GestureStatus::FAILED;
     onTouchEnded(touch, ev);
 }
 
-void LongPressGestureRecognizer::onTouchEnded(Touch* touch, Event* ev) 
+void LongPressGestureRecognizer::onTouchEnded(Touch* touch, Event* ev)
 {
     touches.erase(touch->getID());
-    
+
     if (status == GestureStatus::RECOGNIZED and touches.empty()) // release after recognition
     {
-        status = GestureStatus::POSSIBLE; 
+        status = GestureStatus::POSSIBLE;
         if (onLongPress)
             onLongPress(this);
     }

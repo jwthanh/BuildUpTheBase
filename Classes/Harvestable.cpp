@@ -42,6 +42,9 @@
 #include "ui/UIImageView.h"
 #include "ui/UIListView.h"
 #include "ui/UIScale9Sprite.h"
+#include "Gestures/LongPressGestureRecognizer.h"
+#include "Gestures/GestureRecognizerUtils.h"
+#include "Modal.h"
 
 USING_NS_CC;
 
@@ -50,11 +53,33 @@ Size Harvestable::get_sprite_size()
     return this->sprite->getContentSize() * this->sprite->getScale();
 }
 
+static unsigned int COUNT = 0;
+
 void Harvestable::init_sprite()
 {
     this->sprite = cocos2d::Sprite::createWithSpriteFrameName(this->get_sprite_path());
     this->sprite->setScale(4);
     this->sprite->getTexture()->setAliasTexParameters();
+
+    auto build_increment_callback = [this](int increase_by, float wait_by) {
+        LongPressGestureRecognizer* gesture_recognizer = LongPressGestureRecognizer::create(wait_by);
+        gesture_recognizer->onLongPress = [this, increase_by](LongPressGestureRecognizer *recognizer)
+        {
+            auto stato = recognizer->getStatus();
+            auto location = recognizer->getGestureLocation();
+            if (stato == GestureStatus::RECOGNIZED)
+            {
+                if (nodeContainsThePoint(this->sprite, location))
+                {
+                    COUNT += increase_by;
+                    CCLOG("COUNT: %i", COUNT);
+                }
+            }
+        };
+        this->addChild(gesture_recognizer);
+    };
+
+    build_increment_callback(1, 0.5);
 
     this->setContentSize(this->get_sprite_size());
 
