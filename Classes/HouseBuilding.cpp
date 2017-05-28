@@ -88,14 +88,13 @@ Building::Building(City* city, std::string name, std::string id_key) :
     this->consumers = mistHarvester();
     this->_consumer_cache = std::make_shared<ConsumerCache>();
 
-    // this->scavengers = mistHarvester();
     this->scavengers = mistHarvester({
         { { WorkerSubType::One, IngredientSubType::Undead }, 1 }
     });
     this->_scavenger_cache = std::make_shared<ScavengerCache>();
 
     this->data = std::make_shared<BuildingData>(name);
-    this->_shop_cost = atoi(this->data->get_gold_cost().c_str());
+    this->_shop_cost = atoi(this->data->get_base_CI_cost().c_str());
     this->short_name = this->data->get_short_name();
 
     //TODO make these buyable again

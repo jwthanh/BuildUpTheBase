@@ -49,7 +49,7 @@ class BuildingData : public BaseStaticData
 
         GET_JSON_ATTR(task_name);
         GET_JSON_ATTR(description);
-        GET_JSON_ATTR(gold_cost);
+        GET_JSON_ATTR(base_CI_cost);
         GET_JSON_ATTR(img_large);
         GET_JSON_ATTR(short_name);
 

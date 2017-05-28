@@ -4,7 +4,7 @@
             "short_name": "FARM",
             "task_name":"10grain -> 1 pile, move 1/2 ING",
             "description": "Green farmland spreads to all corners of the horizons.",
-            "gold_cost": "0",
+            "base_CI_cost": "0",
             "img_large": "farm_icon.png",
             "recipes": {
                 "bread_recipe" : {
@@ -35,56 +35,56 @@
             "short_name": "WORK",
             "task_name":"Sword (2 iron), Shield (3 wood)",
             "description": "Smoke rises steadily, a hammer bangs on.",
-            "gold_cost": "10",
+            "base_CI_cost": "10",
             "img_large": "workshop_icon.png"
         },
         "The Dump" : {
             "short_name": "DUMP",
             "task_name":"5 waste > create flies",
             "description": "You can smell it from here, the waste rotting away.",
-            "gold_cost": "25",
+            "base_CI_cost": "25",
             "img_large": "dump_icon.png"
         },
         "The Marketplace" : {
             "short_name": "MRKT",
             "task_name":"Bustle (nothing)",
             "description": "Loud vendors sell their wares, trying to get the jump on the next customer walking by.",
-            "gold_cost": "10",
+            "base_CI_cost": "10",
             "img_large": "marketplace_icon.png"
         },
         "The Arena" : {
             "short_name": "ARNA",
             "task_name":"Squirrel, fighter, move corpse",
             "description": "Ruthless barbarians and their warriors fight to the death, for the pleasure of the crowd.",
-            "gold_cost": "100",
+            "base_CI_cost": "100",
             "img_large": "sword.png"
         },
         "The Graveyard" : {
             "short_name": "GRYD",
             "task_name":"Dead silence (nothing)",
             "description": "A dark shadow on the hill looms silently, as if watching and waiting. The dead lay here.",
-            "gold_cost": "100",
+            "base_CI_cost": "100",
             "img_large": "gravestone_icon.png"
         },
         "The Underscape" : {
             "short_name": "UNDR",
             "task_name":"Skeleton (7 flesh)",
             "description": "Ungodly noises are heard at all hours of the day. The townsfolk never get close enough to discover what really happens.",
-            "gold_cost": "100",
+            "base_CI_cost": "100",
             "img_large": "pink_monster_icon.png"
         },
         "The Forest" : {
             "short_name": "FRST",
             "task_name":"Bunny, mine berry, wood",
             "description": "Verdant lands surround the town.",
-            "gold_cost": "10",
+            "base_CI_cost": "10",
             "img_large": "forest_icon.png"
         },
         "The Mine" : {
             "short_name": "MINE",
             "task_name":"Mine copper, iron",
             "description": "A small dark shaft belies the size of the caverns underneath.",
-            "gold_cost": "10",
+            "base_CI_cost": "10",
             "img_large": "mine_icon.png"
         }
     }
