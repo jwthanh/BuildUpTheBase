@@ -98,7 +98,7 @@ Building::Building(City* city, std::string name, std::string id_key) :
     this->short_name = this->data->get_short_name();
 
     //TODO make buildings buyable again
-    this->set_been_bought(true);
+    // this->set_been_bought(true);
 
     this->techtree = std::make_shared<TechTree>();
 };

@@ -471,9 +471,9 @@ void BaseScene::create_building_choicelist()
         {
             auto target_building = BUILDUP->get_target_building();
 
-            const bool been_bought = building->get_been_bought();
-            panel->setVisible(been_bought);
-            if (!been_bought) { return; }
+            // const bool been_bought = building->get_been_bought();
+            // panel->setVisible(been_bought);
+            // if (!been_bought) { return; }
 
             try_set_enabled(panel, target_building != building);
 
@@ -492,8 +492,20 @@ void BaseScene::create_building_choicelist()
         building_node->schedule(update_func, AVERAGE_DELAY, "update_func");
         update_func(0);
 
-        auto set_target_building = [building]() {
-            BUILDUP->set_target_building(building);
+        auto set_target_building = [this, building]() {
+            const bool been_bought = building->get_been_bought();
+            if (been_bought) {
+                BUILDUP->set_target_building(building);
+            } else {
+                //open modal to prompt for buying
+                TextBlobModal* text_modal = TextBlobModal::create();
+                std::string building_name = building->name;
+                auto ss = std::stringstream();
+                ss << "Unlock " << building_name;
+                text_modal->set_title(ss.str());
+                text_modal->set_body("this is an alert to prompt you to buy this building");
+                this->addChild(text_modal);
+            };
         };
         bind_touch_ended(panel, set_target_building);
     };
