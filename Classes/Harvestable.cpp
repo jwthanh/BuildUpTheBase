@@ -335,14 +335,7 @@ void Harvestable::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 
 void Harvestable::animate_clip()
 {
-    auto size = 20.0f;
-    Vec2 origin = Vec2(
-            this->sprite->getContentSize().width*this->sprite->getScaleX()*CCRANDOM_0_1(),
-            this->sprite->getContentSize().height*this->sprite->getScaleY()*CCRANDOM_0_1()
-            );
-
-    Vec2 destination = origin +Vec2(size, size);
-    this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
+    return; //do nothing
 }
 
 float Harvestable::get_click_ratio() const
