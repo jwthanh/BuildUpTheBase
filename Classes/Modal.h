@@ -35,6 +35,8 @@ class BaseModal : public cocos2d::Node
 
         cocos2d::ui::Text* _title_lbl;
 
+        virtual cocos2d::Node* _build_root_node();
+
     public:
         CREATE_FUNC(BaseModal);
         bool init();
@@ -63,6 +65,7 @@ class ActionTextBlobModal : public TextBlobModal
     private:
         cocos2d::ui::Button* _confirm_btn;
         cocos2d::ui::Button* _abort_btn;
+        cocos2d::Node* _build_root_node() override;
 
     public:
         CREATE_FUNC(ActionTextBlobModal);

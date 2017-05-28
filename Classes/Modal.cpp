@@ -17,13 +17,18 @@
 
 USING_NS_CC;
 
+cocos2d::Node* BaseModal::_build_root_node()
+{
+    return get_prebuilt_node_from_csb("editor/details/message_detail.csb");
+};
+
 bool BaseModal::init()
 {
     //background color
     LayerColor* layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
     this->addChild(layer_color);
 
-    cocos2d::Node* root_message_node = get_prebuilt_node_from_csb("editor/details/message_detail.csb");
+    cocos2d::Node* root_message_node = this->_build_root_node();
     this->_node = root_message_node->getChildByName("message_panel");
     this->_node->removeFromParent();
     this->_node->setPosition(cocos2d::Vec2{960, 640}/ 2);
@@ -112,14 +117,23 @@ void TextBlobModal::set_body(const std::string& body)
     };
 };
 
+cocos2d::Node* ActionTextBlobModal::_build_root_node()
+{
+    return get_prebuilt_node_from_csb("editor/details/message_action_panel.csb");
+};
+
+
 bool ActionTextBlobModal::init()
 {
     TextBlobModal::init();
 
     this->_confirm_btn = dynamic_cast<cocos2d::ui::Button*>(this->_node->getChildByName("confirm_btn"));
-    load_default_button_textures(this->_confirm_btn);
+    prep_button(this->_confirm_btn);
+    bind_touch_ended(this->_confirm_btn, [this](){this->on_layout_touched(); });
+
     this->_abort_btn = dynamic_cast<cocos2d::ui::Button*>(this->_node->getChildByName("abort_btn"));
-    load_default_button_textures(this->_abort_btn);
+    prep_button(this->_abort_btn);
+    bind_touch_ended(this->_abort_btn, [this](){this->on_layout_touched(); });
 
     return true;
 };

@@ -498,7 +498,7 @@ void BaseScene::create_building_choicelist()
                 BUILDUP->set_target_building(building);
             } else {
                 //open modal to prompt for buying
-                TextBlobModal* text_modal = TextBlobModal::create();
+                ActionTextBlobModal* text_modal = ActionTextBlobModal::create();
                 std::string building_name = building->name;
                 auto ss = std::stringstream();
                 ss << "Unlock " << building_name;

@@ -77,7 +77,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="abort_btn" ActionTag="-1509452143" Tag="198" IconVisible="False" LeftMargin="425.0000" RightMargin="53.0000" TopMargin="418.0000" BottomMargin="16.0000" TouchEnable="True" FontSize="24" ButtonText="Abort" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="abort_btn" ActionTag="-1509452143" Tag="198" IconVisible="False" LeftMargin="425.0000" RightMargin="53.0000" TopMargin="418.0000" BottomMargin="16.0000" TouchEnable="True" FontSize="24" ButtonText="Cancel" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="290.0000" Y="78.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="570.0000" Y="55.0000" />
