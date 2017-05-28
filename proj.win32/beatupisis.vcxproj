@@ -174,6 +174,13 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\GameLayer.cpp" />
     <ClCompile Include="..\Classes\Beatup.cpp" />
     <ClCompile Include="..\Classes\GameLogic.cpp" />
+    <ClCompile Include="..\Classes\Gestures\GestureRecognizer.cpp" />
+    <ClCompile Include="..\Classes\Gestures\GestureRecognizerUtils.cpp" />
+    <ClCompile Include="..\Classes\Gestures\LongPressGestureRecognizer.cpp" />
+    <ClCompile Include="..\Classes\Gestures\PanGestureRecognizer.cpp" />
+    <ClCompile Include="..\Classes\Gestures\PinchGestureRecognizer.cpp" />
+    <ClCompile Include="..\Classes\Gestures\SwipeGestureRecognizer.cpp" />
+    <ClCompile Include="..\Classes\Gestures\TapGestureRecognizer.cpp" />
     <ClCompile Include="..\Classes\goals\Achievement.cpp" />
     <ClCompile Include="..\Classes\Harvestable.cpp" />
     <ClCompile Include="..\Classes\HarvestableManager.cpp" />
@@ -238,6 +245,13 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\GameLayer.h" />
     <ClInclude Include="..\Classes\Beatup.h" />
     <ClInclude Include="..\Classes\GameLogic.h" />
+    <ClInclude Include="..\Classes\Gestures\GestureRecognizer.h" />
+    <ClInclude Include="..\Classes\Gestures\GestureRecognizerUtils.h" />
+    <ClInclude Include="..\Classes\Gestures\LongPressGestureRecognizer.h" />
+    <ClInclude Include="..\Classes\Gestures\PanGestureRecognizer.h" />
+    <ClInclude Include="..\Classes\Gestures\PinchGestureRecognizer.h" />
+    <ClInclude Include="..\Classes\Gestures\SwipeGestureRecognizer.h" />
+    <ClInclude Include="..\Classes\Gestures\TapGestureRecognizer.h" />
     <ClInclude Include="..\Classes\goals\Achievement.h" />
     <ClInclude Include="..\Classes\Harvestable.h" />
     <ClInclude Include="..\Classes\HarvestableManager.h" />

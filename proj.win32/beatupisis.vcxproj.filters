@@ -31,6 +31,9 @@
     <Filter Include="banking">
       <UniqueIdentifier>{178913b6-5efb-4360-a2d1-9d7c6a04c3aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gestures">
+      <UniqueIdentifier>{a707ccfb-9827-4e76-bb49-9f0cf1480d85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -115,6 +118,27 @@
       <Filter>banking</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Buildup.cpp" />
+    <ClCompile Include="..\Classes\Gestures\GestureRecognizer.cpp">
+      <Filter>Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Gestures\GestureRecognizerUtils.cpp">
+      <Filter>Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Gestures\LongPressGestureRecognizer.cpp">
+      <Filter>Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Gestures\PanGestureRecognizer.cpp">
+      <Filter>Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Gestures\PinchGestureRecognizer.cpp">
+      <Filter>Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Gestures\SwipeGestureRecognizer.cpp">
+      <Filter>Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Gestures\TapGestureRecognizer.cpp">
+      <Filter>Gestures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -225,6 +249,27 @@
       <Filter>banking</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Buildup.h" />
+    <ClInclude Include="..\Classes\Gestures\GestureRecognizer.h">
+      <Filter>Gestures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Gestures\GestureRecognizerUtils.h">
+      <Filter>Gestures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Gestures\LongPressGestureRecognizer.h">
+      <Filter>Gestures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Gestures\PanGestureRecognizer.h">
+      <Filter>Gestures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Gestures\PinchGestureRecognizer.h">
+      <Filter>Gestures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Gestures\SwipeGestureRecognizer.h">
+      <Filter>Gestures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Gestures\TapGestureRecognizer.h">
+      <Filter>Gestures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
