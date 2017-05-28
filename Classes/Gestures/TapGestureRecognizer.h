@@ -45,22 +45,22 @@ struct TouchInfo
 class TapGestureRecognizer : public GestureRecognizer
 {
 public:
-    static TapGestureRecognizer* create(uint fingerCount = 1, uint tapNumber = 1, float maxTime = TAP_MAX_BEETWEEN_TOUCHES);    
+    static TapGestureRecognizer* create(uint fingerCount = 1, uint tapNumber = 1, float maxTime = TAP_MAX_BEETWEEN_TOUCHES);
     std::function<void(TapGestureRecognizer*)> onTap;
-    
+
 private:
     std::unordered_map<int, int> touchesCount; // for each id stores the tap count
     const uint tapNumber;
     uint tapCount {0};
-    
+
     TapGestureRecognizer(uint fingerCount, uint tapNumber, float maxTime);
     virtual ~TapGestureRecognizer();
-    
+
     // helper
     bool touchEndCheck(Touch* touch);
     bool existNeighbor(Point aPoint, int& touchIndex);
     void reset(float dt = 0); // reset recognizer status
-    
+
     bool onTouchBegan(Touch* touch, Event* ev) override;
     void onTouchMoved(Touch* touch, Event* ev) override;
     void onTouchCancelled(Touch* touch, Event* ev) override;

@@ -35,7 +35,7 @@ THE SOFTWARE.
 #define SWIPE_X_TOLLERANCE (visibleSize.width * 0.010f)
 #define SWIPE_Y_TOLLERANCE (visibleSize.width * 0.010f)
 
-#else // can be adjusted 
+#else // can be adjusted
 
 #define SWIPE_X_DELTA      (visibleSize.width * 0.04f)
 #define SWIPE_Y_DELTA      (visibleSize.width * 0.04f)
@@ -57,20 +57,20 @@ public:
         SWIPE_LEFT,
         SWIPE_RIGHT
     };
-    
-    static SwipeGestureRecognizer* create();    
+
+    static SwipeGestureRecognizer* create();
     std::function<void(SwipeGestureRecognizer*)> onSwipe {nullptr};
     SwipeStatus getSwipeDirection() {return swipeDirection;}
-    
+
 private:
     SwipeStatus swipeDirection {SwipeStatus::SWIPE_NOT_DETECTED};
-    
+
     SwipeGestureRecognizer();
     virtual ~SwipeGestureRecognizer();
-    
+
     void swipeCheck(Touch* touch);
     void timeout(float dt) override;
-    
+
     bool onTouchBegan(Touch* touch, Event* ev) override;
     void onTouchMoved(Touch* touch, Event* ev) override;
     void onTouchCancelled(Touch* touch, Event* ev) override;

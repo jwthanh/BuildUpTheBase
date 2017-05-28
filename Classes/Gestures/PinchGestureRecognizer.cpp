@@ -49,14 +49,14 @@ PinchGestureRecognizer::~PinchGestureRecognizer()
     //CCLOG("Destructor PinchGestureRecognizer");
 }
 
-bool PinchGestureRecognizer::onTouchBegan(Touch* touch, Event* ev) 
+bool PinchGestureRecognizer::onTouchBegan(Touch* touch, Event* ev)
 {
     if (touches.size() < 2)
     {
         status = GestureStatus::POSSIBLE;
         touches.insert({touch->getID(), touch->getLocation()});
 
-        if (touches.size() == 2) 
+        if (touches.size() == 2)
         {
             status = GestureStatus::BEGAN;
             gestureLocation = mean(touches);
@@ -69,27 +69,27 @@ bool PinchGestureRecognizer::onTouchBegan(Touch* touch, Event* ev)
         return false; // no others touch tracking
 }
 
-void PinchGestureRecognizer::onTouchMoved(Touch* touch, Event* ev) 
+void PinchGestureRecognizer::onTouchMoved(Touch* touch, Event* ev)
 {
     if (touches.size() == 2)
     {
         status = GestureStatus::CHANGED;
-        
+
         TouchesMap updatedTouches;
         updatedTouches.insert({touch->getID(), touch->getLocation()});
-        
+
         for (auto& pair : touches) // add tracked points that not moved
             updatedTouches.insert({pair.first, pair.second});
-        
+
         if (updatedTouches.size() == 2)
         {
             pinchFactor     = computePinchFactor(updatedTouches);
             pinchRotation   = computeAngle(updatedTouches);
-            
+
             auto newLocation = mean(updatedTouches); // gesture center
             pinchTraslation  = newLocation - gestureLocation; // move delta
             gestureLocation  = newLocation;
-            
+
             touches = updatedTouches; // touch map update
 
             if (onPinch)
@@ -98,7 +98,7 @@ void PinchGestureRecognizer::onTouchMoved(Touch* touch, Event* ev)
     }
 }
 
-void PinchGestureRecognizer::onTouchCancelled(Touch* touch, Event* ev) 
+void PinchGestureRecognizer::onTouchCancelled(Touch* touch, Event* ev)
 {
     //CCLOG("PinchGestureRecognizer::onTouchCancelled (touch id %d)", touch->getID());
     status = GestureStatus::FAILED;
@@ -107,10 +107,10 @@ void PinchGestureRecognizer::onTouchCancelled(Touch* touch, Event* ev)
     onTouchEnded(touch, ev);
 }
 
-void PinchGestureRecognizer::onTouchEnded(Touch* touch, Event* ev) 
+void PinchGestureRecognizer::onTouchEnded(Touch* touch, Event* ev)
 {
     touches.erase(touch->getID());
-    
+
     if (status == GestureStatus::CHANGED and touches.empty()) // all fingers lifted
     {
         status = GestureStatus::RECOGNIZED;
@@ -119,18 +119,18 @@ void PinchGestureRecognizer::onTouchEnded(Touch* touch, Event* ev)
     }
 }
 
-float PinchGestureRecognizer::computePinchFactor(const TouchesMap& newTouches) const 
+float PinchGestureRecognizer::computePinchFactor(const TouchesMap& newTouches) const
 {
     auto it = touches.begin();
     auto pair1 = *(it++);
     auto pair2 = *(it);
-    
+
     auto pointNew1 = newTouches.at(pair1.first);
     auto pointNew2 = newTouches.at(pair2.first);
-    
+
     auto oldDist     = pair1.second.distance(pair2.second);
     auto currDist    = pointNew1.distance(pointNew2);
-    
+
     return currDist / oldDist;
 }
 
@@ -139,13 +139,13 @@ float PinchGestureRecognizer::computeAngle(const TouchesMap &newTouches) const
     auto it = touches.begin();
     auto pair1 = *(it++);
     auto pair2 = *it;
-    
+
     auto pointNew1 = newTouches.at(pair1.first);
     auto pointNew2 = newTouches.at(pair2.first);
-    
+
     auto dir     = pair1.second - pair2.second;
     auto currDir = pointNew1 - pointNew2;
-    
+
     return computeSignedAngle(dir, currDir);
 }
 

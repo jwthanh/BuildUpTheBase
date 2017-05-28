@@ -33,22 +33,22 @@ class PinchGestureRecognizer : public GestureRecognizer
 public:
     static PinchGestureRecognizer* create();
     std::function<void(PinchGestureRecognizer* recognizer)> onPinch;
-    
+
     float getPinchFactor()     const {return pinchFactor;}
     float getPinchRotation()   const {return pinchRotation;}
     Vec2  getPinchTraslation() const {return pinchTraslation;}
-    
+
 private:
     float pinchFactor     {0};
     float pinchRotation   {0};
     Vec2  pinchTraslation {Vec2::ZERO};
-    
+
     PinchGestureRecognizer();
     virtual ~PinchGestureRecognizer();
-    
+
     float computePinchFactor(const TouchesMap& newTouches) const;
     float computeAngle(const TouchesMap& newTouches) const;
-    
+
     bool onTouchBegan(Touch* touch, Event* ev) override;
     void onTouchMoved(Touch* touch, Event* ev) override;
     void onTouchCancelled(Touch* touch, Event* ev) override;

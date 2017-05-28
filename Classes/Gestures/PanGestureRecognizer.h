@@ -34,13 +34,13 @@ public:
     static PanGestureRecognizer* create(uint fingers = 1);
     std::function<void(PanGestureRecognizer* recognizer)> onPan;  // callback
     Vec2 getTraslation() const {return traslation;} // incremental traslation
-    
+
 private:
     Vec2 traslation {Vec2::ZERO};
-    
+
     PanGestureRecognizer(uint fingers);
     virtual ~PanGestureRecognizer();
-    
+
     bool onTouchBegan(Touch* touch, Event* ev) override;
     void onTouchMoved(Touch* touch, Event* ev) override;
     void onTouchCancelled(Touch* touch, Event* ev) override;

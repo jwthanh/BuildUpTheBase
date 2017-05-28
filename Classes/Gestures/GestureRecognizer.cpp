@@ -74,18 +74,18 @@ void GestureRecognizer::addTouchListener()
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-bool GestureRecognizer::isTouchInNode(Touch* t) 
+bool GestureRecognizer::isTouchInNode(Touch* t)
 {
     // object contains point or touch started in the object and exited
     return nodeContainsThePoint(this, t->getLocation()) or mapHasKey(touches, t->getID());
 }
 
-void GestureRecognizer::setFillParentEnabled(bool enabled) 
+void GestureRecognizer::setFillParentEnabled(bool enabled)
 {
     isFillParentEnabled = enabled;
 }
 
-void GestureRecognizer::setContentSize(const Size& contentSize) 
+void GestureRecognizer::setContentSize(const Size& contentSize)
 {
     //CCLOG("GestureRecognizer::setContentSize");
     isFillParentEnabled = false;
@@ -115,12 +115,12 @@ void GestureRecognizer::setDebugMode(bool isDebugMode, uint mask)
     }
 }
 
-bool GestureRecognizer::isDebugModeEnabled() 
+bool GestureRecognizer::isDebugModeEnabled()
 {
     return debugNode != nullptr;
 }
 
-void GestureRecognizer::setSwallowTouches(bool swallow) 
+void GestureRecognizer::setSwallowTouches(bool swallow)
 {
     if (listener)
         listener->setSwallowTouches(swallow);
@@ -151,11 +151,11 @@ void GestureRecognizer::resetDebugNode()
 
 // Callbacks
 
-bool GestureRecognizer::_onTouchBegan(Touch* touch, Event* ev) 
+bool GestureRecognizer::_onTouchBegan(Touch* touch, Event* ev)
 {
     if (enabled and isTouchInNode(touch))
     {
-        if (debugNode and debugMask & GESTURE_DEBUG_POINTS) 
+        if (debugNode and debugMask & GESTURE_DEBUG_POINTS)
             debugNode->drawPoint(convertToNodeSpace(touch->getLocation()), 4.0f, touchColors[touch->getID()]);
 
         return onTouchBegan(touch, ev);
@@ -163,18 +163,18 @@ bool GestureRecognizer::_onTouchBegan(Touch* touch, Event* ev)
     return false;
 }
 
-void GestureRecognizer::_onTouchMoved(Touch* touch, Event* ev) 
+void GestureRecognizer::_onTouchMoved(Touch* touch, Event* ev)
 {
     if (enabled and isTouchInNode(touch))
     {
-        if (debugNode and debugMask & GESTURE_DEBUG_POINTS) 
+        if (debugNode and debugMask & GESTURE_DEBUG_POINTS)
             debugNode->drawPoint(convertToNodeSpace(touch->getLocation()), 4.0f, touchColors[touch->getID()]);
 
         onTouchMoved(touch, ev);
     }
 }
 
-void GestureRecognizer::_onTouchCancelled(Touch* touch, Event* ev) 
+void GestureRecognizer::_onTouchCancelled(Touch* touch, Event* ev)
 {
     if (enabled and isTouchInNode(touch))
     {
@@ -185,7 +185,7 @@ void GestureRecognizer::_onTouchCancelled(Touch* touch, Event* ev)
     }
 }
 
-void GestureRecognizer::_onTouchEnded(Touch* touch, Event* ev) 
+void GestureRecognizer::_onTouchEnded(Touch* touch, Event* ev)
 {
     if (enabled and isTouchInNode(touch))
     {
@@ -219,14 +219,14 @@ void GestureRecognizer::scheduleTimeout(std::function<void(float)> func)
 
 // Update
 
-void GestureRecognizer::update(float delta) 
+void GestureRecognizer::update(float delta)
 {
     // Gesture recognizer content size matches with parent content size
     Node::update(delta);
-    if (isFillParentEnabled) 
+    if (isFillParentEnabled)
     {
         auto parent = getParent();
-        if ( parent and not parent->getContentSize().equals(getContentSize()) ) 
+        if ( parent and not parent->getContentSize().equals(getContentSize()) )
         {
             Node::setContentSize(parent->getContentSize());
             resetDebugNode();

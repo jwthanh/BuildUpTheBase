@@ -50,7 +50,7 @@ SwipeGestureRecognizer::~SwipeGestureRecognizer()
     //CCLOG("Destructor di SwipeGestureRecognizer");
 }
 
-bool SwipeGestureRecognizer::onTouchBegan(Touch* touch, Event* ev) 
+bool SwipeGestureRecognizer::onTouchBegan(Touch* touch, Event* ev)
 {
     if (touches.empty()) { // empty map, new recognition
         status = GestureStatus::POSSIBLE;
@@ -61,26 +61,26 @@ bool SwipeGestureRecognizer::onTouchBegan(Touch* touch, Event* ev)
         status = GestureStatus::FAILED;
         if (onSwipe)
             onSwipe(this);
-        
+
         return false;
     }
     return true;
 }
 
-void SwipeGestureRecognizer::onTouchMoved(Touch* touch, Event* ev) 
+void SwipeGestureRecognizer::onTouchMoved(Touch* touch, Event* ev)
 {
     if (status == GestureStatus::POSSIBLE)
         swipeCheck(touch);
 }
 
-void SwipeGestureRecognizer::onTouchCancelled(Touch* touch, Event* ev) 
+void SwipeGestureRecognizer::onTouchCancelled(Touch* touch, Event* ev)
 {
     //CCLOG("SwipeGestureRecognizer::onTouchCancelled (touch id %d)", touch->getID());
     status = GestureStatus::FAILED;
     onTouchEnded(touch, ev);
 }
 
-void SwipeGestureRecognizer::onTouchEnded(Touch* touch, Event* ev) 
+void SwipeGestureRecognizer::onTouchEnded(Touch* touch, Event* ev)
 {
     touches.erase(touch->getID());
 }
@@ -95,7 +95,7 @@ void SwipeGestureRecognizer::timeout(float dt)
 void SwipeGestureRecognizer::swipeCheck(Touch* touch)
 {
     int id = touch->getID();
-    
+
     if (mapHasKey(touches, id)) // tracked touch
     {
         Point currPoint = touch->getLocation();
@@ -103,9 +103,9 @@ void SwipeGestureRecognizer::swipeCheck(Touch* touch)
         Point delta = currPoint - lastPoint;
         float xOffset = delta.x;
         float yOffset = delta.y;
-        
+
         //CCLOG("delta (x:%f, y:%f)", xOffset, yOffset);
-        
+
         if (xOffset > SWIPE_X_DELTA and fabs(yOffset) < SWIPE_Y_TOLLERANCE)
         {
             //CCLOG("swipe right");
@@ -130,10 +130,10 @@ void SwipeGestureRecognizer::swipeCheck(Touch* touch)
             status = GestureStatus::RECOGNIZED;
             swipeDirection = SwipeStatus::SWIPE_DOWN;
         }
-        
+
         if (status == GestureStatus::RECOGNIZED and onSwipe)
             onSwipe(this);
-        
+
         touches.at(id) = currPoint;
     }
 }

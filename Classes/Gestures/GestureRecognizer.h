@@ -55,7 +55,7 @@ enum class GestureStatus
 };
 
 #define GESTURE_DEBUG_AREA   (1<<0)
-#define GESTURE_DEBUG_POINTS (1<<1) 
+#define GESTURE_DEBUG_POINTS (1<<1)
 #define GESTURE_DEBUG_ALL    (0XFFFFFFFF)
 #define GESTURE_TIMEOUT_KEY "GestureRecognizerTimeoutKey"
 
@@ -63,44 +63,44 @@ using uint = unsigned int;
 
 NS_CC_BEGIN
 
-class GestureRecognizer : public Node 
+class GestureRecognizer : public Node
 {
 public:
     static std::vector<Color4F> touchColors;
-    
+
     GestureRecognizer(uint fingers = 1);
     virtual ~GestureRecognizer();
-    
+
     /**
-     * 
+     *
      * @param mode enable-disable debug mode
      * @param mask specify what informations will be drawn
      */
     void setDebugMode(bool mode, uint mask = GESTURE_DEBUG_ALL);
     bool isDebugModeEnabled();
-    
+
     // getters
     GestureStatus  getStatus()  const {return status;}
     Point getGestureLocation() const {return gestureLocation;}
-    
+
     // setters
     void setEnabled(bool _enabled) {enabled = _enabled;}
     void setSwallowTouches(bool swallow);
-    
+
     /**
-     * 
+     *
      * @param enabled If enabled the content size of the recognizer will match with it's parent one
      */
     void setFillParentEnabled(bool enabled);
-    
+
 
     /**
      * Automatically disable the fill parent feature
      * @param contentSize
      */
     virtual void setContentSize(const Size& contentSize);
-    
-protected:    
+
+protected:
     // Dati membro
     bool enabled {true}; // if false the recognizer does not receive the touches
     bool isFillParentEnabled {true};
@@ -111,28 +111,28 @@ protected:
     TouchesMap touches; // key touch id -> value location of the point
     GestureStatus status {GestureStatus::POSSIBLE};
     float timeoutSeconds {0}; // timeout for gesture recognition
-    
+
     // Debug stuff
     uint debugMask {0};
     DrawNode* debugNode {nullptr};
-    
+
     bool isTouchInNode(Touch* t);
     void scheduleTimeout(std::function<void(float)> func);
     virtual void timeout(float dt){};
     Point mean(const TouchesMap& map) const;
-    
+
     // Pure virtual function implemented by subclasses
     virtual bool onTouchBegan(Touch* touch, Event* ev)     = 0;
     virtual void onTouchMoved(Touch* touch, Event* ev)     = 0;
     virtual void onTouchCancelled(Touch* touch, Event* ev) = 0;
-    virtual void onTouchEnded(Touch* touch, Event* ev)     = 0; 
+    virtual void onTouchEnded(Touch* touch, Event* ev)     = 0;
     virtual void update(float delta);
-    
+
 private:
     void addTouchListener();
     void addDebugArea();
     void resetDebugNode();
-    
+
     /*
      * Functions linked to the EventListenerTouchOneByOne
      */

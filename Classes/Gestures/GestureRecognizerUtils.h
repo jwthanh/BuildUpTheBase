@@ -30,7 +30,7 @@ namespace cocos2d {
 }
 
 /**
- * 
+ *
  * @param map
  * @param key
  * @return true if the container 'map' has the element 'key'
@@ -42,7 +42,7 @@ inline bool mapHasKey(const Map& map, const Key& key)
 }
 
 /**
- * 
+ *
  * @param node
  * @param pt
  * @return true if 'node' contains the point 'pt'
@@ -50,7 +50,7 @@ inline bool mapHasKey(const Map& map, const Key& key)
 bool nodeContainsThePoint(cocos2d::Node* node, const cocos2d::Vec2& pt);
 
 /**
- * 
+ *
  * @param v1
  * @param v2
  * @return angle between v1 and v2. The angle is positive if v1 overlaps v2 clockwise, negative otherwise.

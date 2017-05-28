@@ -48,7 +48,7 @@ PanGestureRecognizer::~PanGestureRecognizer()
     //CCLOG("Destructor PanGestureRecognizer");
 }
 
-bool PanGestureRecognizer::onTouchBegan(Touch* touch, Event* ev) 
+bool PanGestureRecognizer::onTouchBegan(Touch* touch, Event* ev)
 {
     if (touches.size() < fingerNumber) // touches storing
     {
@@ -68,18 +68,18 @@ bool PanGestureRecognizer::onTouchBegan(Touch* touch, Event* ev)
         return false; // no others touch tracking
 }
 
-void PanGestureRecognizer::onTouchMoved(Touch* touch, Event* ev) 
+void PanGestureRecognizer::onTouchMoved(Touch* touch, Event* ev)
 {
     if (touches.size() == fingerNumber) // wanted number of touches
     {
         status = GestureStatus::CHANGED;
-        
+
         TouchesMap updatedTouches;
         updatedTouches.insert({touch->getID(), touch->getLocation()});
-        
+
         for (auto& pair : touches) // add tracked points that not moved
             updatedTouches.insert({pair.first, pair.second});
-        
+
         auto oldMedia = mean(touches);
         auto newMedia = mean(updatedTouches);
         gestureLocation = newMedia;
@@ -91,7 +91,7 @@ void PanGestureRecognizer::onTouchMoved(Touch* touch, Event* ev)
     }
 }
 
-void PanGestureRecognizer::onTouchCancelled(Touch* touch, Event* ev) 
+void PanGestureRecognizer::onTouchCancelled(Touch* touch, Event* ev)
 {
     //CCLOG("PanGestureRecognizer::onTouchCancelled (touch id %d)", touch->getID());
     status = GestureStatus::FAILED;
@@ -100,10 +100,10 @@ void PanGestureRecognizer::onTouchCancelled(Touch* touch, Event* ev)
     onTouchEnded(touch, ev);
 }
 
-void PanGestureRecognizer::onTouchEnded(Touch* touch, Event* ev) 
+void PanGestureRecognizer::onTouchEnded(Touch* touch, Event* ev)
 {
     touches.erase(touch->getID());
-    
+
     if (status == GestureStatus::CHANGED and touches.empty()) // all fingers were lift
     {
         status = GestureStatus::RECOGNIZED;

@@ -44,7 +44,7 @@ float computeSignedAngle(const cocos2d::Vec2& v1, const cocos2d::Vec2& v2)
         auto a = CC_RADIANS_TO_DEGREES(cocos2d::Vec2::angle(v1, v2));
         cocos2d::Vec3 normal;
         cocos2d::Vec3::cross({v1.x, v1.y, 0}, {v2.x, v2.y, 0}, &normal);
-        result = normal.z <= 0 ? a : -a; 
+        result = normal.z <= 0 ? a : -a;
     }
     return result;
 }
