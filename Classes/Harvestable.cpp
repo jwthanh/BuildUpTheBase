@@ -1384,7 +1384,6 @@ void UndeadHarvestable::animate_clip()
 
     float click_ratio = this->get_click_ratio();
     auto spark_parts = ParticleSystemQuad::create("particles/blood.plist");
-    spark_parts->setScale(1.0 / 2.0f);
     spark_parts->setPosition(origin);
     int total_particles = spark_parts->getTotalParticles();
     int particle_count = (int)(total_particles * click_ratio);
