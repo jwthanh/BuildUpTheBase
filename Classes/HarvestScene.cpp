@@ -471,6 +471,10 @@ void BaseScene::create_building_choicelist()
         {
             auto target_building = BUILDUP->get_target_building();
 
+            const bool been_bought = building->get_been_bought();
+            panel->setVisible(been_bought);
+            if (!been_bought) { return; }
+
             try_set_enabled(panel, target_building != building);
 
             if (building->is_storage_full_of_ingredients(building->punched_sub_type))
@@ -523,8 +527,6 @@ void BaseScene::create_building_choicelist()
 
     auto update_func = [panel, building_image, img_path](float dt)
     {
-        auto target_building = BUILDUP->get_target_building();
-
         std::string tex_name;
         ui::Widget::TextureResType res_type;
 
