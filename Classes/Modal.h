@@ -7,6 +7,8 @@
 
 #include "2d/CCNode.h"
 
+using VoidFuncNoArgs = std::function<void()>;
+
 namespace cocos2d
 {
     class ParticleSystemQuad;
@@ -18,6 +20,7 @@ namespace cocos2d
         class Text;
         class ScrollView;
         class ListView;
+        class Button;
     };
 };
 
@@ -50,9 +53,26 @@ class TextBlobModal : public BaseModal
 
     public:
         CREATE_FUNC(TextBlobModal);
-        virtual bool init();
+        bool init() override;
 
         void set_body(const std::string& body_txt);
+};
+
+class ActionTextBlobModal : public TextBlobModal
+{
+    private:
+        cocos2d::ui::Button* _confirm_btn;
+        cocos2d::ui::Button* _abort_btn;
+
+    public:
+        CREATE_FUNC(ActionTextBlobModal);
+        bool init() override;
+
+        void set_confirm_button_text(std::string confirm_text);
+        void set_confirm_callback(VoidFuncNoArgs confirm_callback);
+
+        void set_abort_button_text(std::string abort_text);
+        void set_abort_callback(VoidFuncNoArgs abort_callback);
 };
 
 #endif

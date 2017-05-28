@@ -13,6 +13,7 @@
           <Project Name="inventory_detail.csd" Type="Node" />
           <Project Name="message_detail.csd" Type="Node" />
           <Project Name="report_ing_detail.csd" Type="Node" />
+          <Project Name="message_action_panel.csd" Type="Node" />
         </Folder>
         <Folder Name="images">
           <Image Name="cat.png" />

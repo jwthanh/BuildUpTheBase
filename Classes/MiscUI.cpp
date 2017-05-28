@@ -119,6 +119,40 @@ void animate_flash_action(
 
 };
 
+void animate_modal_open(
+        cocos2d::Node* target,
+        float duration,
+        float end_scale,
+        cocos2d::Vec2 start_pos,
+        cocos2d::Vec2 end_pos
+    )
+{
+    //animate
+    target->setPosition(start_pos);
+
+    target->setScale(0);
+
+    auto scale_to_end_scale = EaseOut::create(
+        ScaleTo::create(duration, end_scale, end_scale),
+        1.5f
+    );
+
+    if (end_pos == Vec2{-1, -1})
+    {
+        end_pos = get_center_pos();
+    }
+
+    auto move_to_end_pos = MoveTo::create(duration, end_pos);
+
+    Sequence* seq = Sequence::create(
+        EaseBackOut::create(
+            Spawn::createWithTwoActions(move_to_end_pos, scale_to_end_scale)
+        ),
+        NULL
+    );
+    target->runAction(seq);
+};
+
 void try_set_text_color(cocos2d::ui::Text* text_node, const cocos2d::Color4B color)
 {
     if (text_node->getTextColor() != color)

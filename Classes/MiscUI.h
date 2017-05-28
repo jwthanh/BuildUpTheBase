@@ -50,6 +50,14 @@ void animate_flash_action(
     cocos2d::Color3B to_color = cocos2d::Color3B::RED, cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
 );
 
+void animate_modal_open(
+    cocos2d::Node* target,
+    float duration = 0.25f,
+    float end_scale = 1.0f,
+    cocos2d::Vec2 start_pos = cocos2d::Vec2(0, 0),
+    cocos2d::Vec2 end_pos = cocos2d::Vec2(0, 0)
+);
+
 void try_set_text_color(cocos2d::ui::Text* text_node, const cocos2d::Color4B color);
 void try_set_node_color(cocos2d::Node* node, const cocos2d::Color3B color);
 

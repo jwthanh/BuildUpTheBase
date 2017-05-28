@@ -11,6 +11,7 @@
 #include "ui/UIText.h"
 #include "ui/UILayout.h"
 #include "ui/UIListView.h"
+#include "ui/UIButton.h"
 #include "2d/CCLayer.h"
 
 
@@ -109,4 +110,36 @@ void TextBlobModal::set_body(const std::string& body)
 
         this->_body_scroll->addChild(line);
     };
+};
+
+bool ActionTextBlobModal::init()
+{
+    TextBlobModal::init();
+
+    this->_confirm_btn = dynamic_cast<cocos2d::ui::Button*>(this->_node->getChildByName("confirm_btn"));
+    load_default_button_textures(this->_confirm_btn);
+    this->_abort_btn = dynamic_cast<cocos2d::ui::Button*>(this->_node->getChildByName("abort_btn"));
+    load_default_button_textures(this->_abort_btn);
+
+    return true;
+};
+
+void ActionTextBlobModal::set_confirm_button_text(std::string confirm_text)
+{
+    this->_confirm_btn->setTitleText(confirm_text);
+};
+
+void ActionTextBlobModal::set_confirm_callback(VoidFuncNoArgs confirm_callback)
+{
+    bind_touch_ended(this->_confirm_btn, confirm_callback);
+};
+
+void ActionTextBlobModal::set_abort_button_text(std::string abort_text)
+{
+    this->_abort_btn->setTitleText(abort_text);
+};
+
+void ActionTextBlobModal::set_abort_callback(VoidFuncNoArgs abort_callback)
+{
+    bind_touch_ended(this->_confirm_btn, abort_callback);
 };

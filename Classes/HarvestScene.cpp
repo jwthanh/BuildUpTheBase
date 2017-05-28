@@ -492,7 +492,7 @@ void BaseScene::create_building_choicelist()
         building_node->schedule(update_func, AVERAGE_DELAY, "update_func");
         update_func(0);
 
-        auto set_target_building = [this, building]() {
+        auto set_target_building = [this, building, panel]() {
             const bool been_bought = building->get_been_bought();
             if (been_bought) {
                 BUILDUP->set_target_building(building);
@@ -505,6 +505,9 @@ void BaseScene::create_building_choicelist()
                 text_modal->set_title(ss.str());
                 text_modal->set_body("this is an alert to prompt you to buy this building");
                 this->addChild(text_modal);
+                text_modal->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+
+                animate_modal_open(text_modal, 0.25f, 1.0f, get_center_pos(), cocos2d::Vec2::ZERO);
             };
         };
         bind_touch_ended(panel, set_target_building);
