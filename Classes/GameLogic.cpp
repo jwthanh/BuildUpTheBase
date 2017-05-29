@@ -41,6 +41,8 @@
 #include "goals/Achievement.h"
 #include "BuildingDetailScene.h"
 #include "banking/Bank.h"
+#include "SoundEngine.h"
+#include "base/CCEventListenerTouch.h"
 
 
 USING_NS_CC;
@@ -1215,12 +1217,39 @@ void GameDirector::switch_to_bank_menu()
 
         //bank size to width of container
         nuitem->button->setContentSize({ bank_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
-
-        auto do_bank = [config](){
+        auto listener = cocos2d::EventListenerTouchOneByOne::create();
+        listener->onTouchBegan = [config, nuitem](Touch* touch, Event* event)
+        {
+                CCLOG("started");
                 do_vibrate(5);
                 config.bank_callback();
+                SoundLibrary::getInstance()->play_general_widget_touched();
+
+            //TODO create a callback to schedule that slowly speeds up increments based on time added to Clock from the delta time passed to it
+                return true;
         };
-        bind_touch_ended(nuitem->button, do_bank);
+        listener->onTouchEnded = [config, nuitem](Touch* touch, Event* event)
+        {
+                CCLOG("ended");
+        };
+        auto event_dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+        event_dispatcher->addEventListenerWithSceneGraphPriority(listener, nuitem->button);
+        //auto touch_handler = [config, nuitem](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType evt)
+        //{
+        //    if (evt == cocos2d::ui::Widget::TouchEventType::BEGAN)
+        //    {
+        //        CCLOG("started");
+        //    }
+        //    if (evt == cocos2d::ui::Widget::TouchEventType::ENDED)
+        //    {
+        //        CCLOG("ENDED");
+        //        do_vibrate(5);
+        //        config.bank_callback();
+        //        SoundLibrary::getInstance()->play_general_widget_touched();
+        //    }
+        //};
+        //nuitem->button->addTouchEventListener(touch_handler);
+        //nuitem->button->addeve
     }
 
     auto director = cocos2d::Director::getInstance();
