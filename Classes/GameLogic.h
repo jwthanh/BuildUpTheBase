@@ -25,7 +25,8 @@ class GameLogic
     protected:
         static GameLogic* _instance;
 
-       res_count_t  _city_investment;
+        res_count_t  _city_investment;
+        res_count_t  _total_kills;
 
         bool _can_vibrate;
 

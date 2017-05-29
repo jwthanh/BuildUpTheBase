@@ -250,6 +250,8 @@ bool GameLogic::init()
     instance->buildup = instance->beatup->buildup;
     instance->equipment = std::unique_ptr<Equipment>(new Equipment());
 
+    instance->_total_kills = 0.0; //set in serializer
+
     this->coin_save_clock = std::make_shared<Clock>(15.0f);
     this->coin_rate_per_sec_clock = std::make_shared<Clock>(1.0f);
     this->power_sell_all_cooldown = std::make_shared<Clock>(5.0f);
@@ -379,12 +381,12 @@ void GameLogic::add_total_kills(int value)
         achievement->increment_by_n((res_count_t)value);
     };
 
-    DataManager::incr_key("total_kills", value);
+    this->_total_kills += value;
 };
 
 int GameLogic::get_total_kills()
 {
-    return DataManager::get_int_from_data("total_kills");
+    return this->_total_kills;
 };
 
 void GameLogic::save_all()
@@ -417,6 +419,7 @@ void GameLogic::save_all()
     //save coins
     DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());
     DataManager::set_double_from_data("city_investment", GameLogic::getInstance()->get_city_investment());
+    DataManager::set_double_from_data("total_kills", GameLogic::getInstance()->get_total_kills());
 
     //save last targeted building and tab
     DataManager::set_string_from_data("target_building", BUILDUP->get_target_building()->name);
@@ -479,6 +482,7 @@ void GameLogic::load_all()
     }
     BEATUP->_total_coins = coins_from_data;
     GameLogic::getInstance()->_city_investment = DataManager::get_double_from_data("city_investment");
+    GameLogic::getInstance()->_total_kills = DataManager::get_double_from_data("total_kills");
 
     BUILDUP->city->name = DataManager::get_string_from_data("city_name", "");
 
