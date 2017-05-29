@@ -6,7 +6,7 @@
       <ObjectData Name="Scene" Tag="581" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="panel" ActionTag="-1524675579" Tag="632" IconVisible="False" TopMargin="0.0001" BottomMargin="-0.0001" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="panel" ActionTag="-1524675579" Tag="632" IconVisible="False" TopMargin="0.0001" BottomMargin="-0.0001" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="2" ColorAngle="270.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="960.0000" Y="640.0000" />
             <Children>
               <AbstractNodeData Name="city_name_panel" ActionTag="1593445582" Tag="633" IconVisible="False" LeftMargin="150.0000" RightMargin="150.0000" TopMargin="84.5322" BottomMargin="484.5322" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
@@ -263,8 +263,8 @@
             <PreSize X="1.0000" Y="1.0000" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
-            <EndColor A="255" R="255" G="255" B="255" />
-            <ColorVector ScaleY="1.0000" />
+            <EndColor A="255" R="167" G="194" B="220" />
+            <ColorVector ScaleX="0.0000" ScaleY="-1.0000" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

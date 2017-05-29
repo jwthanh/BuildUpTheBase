@@ -40,6 +40,7 @@
 #include "utilities/vibration.h"
 #include "goals/Achievement.h"
 #include "BuildingDetailScene.h"
+#include "banking/Bank.h"
 
 
 USING_NS_CC;
@@ -1160,6 +1161,30 @@ void GameDirector::switch_to_bank_menu()
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
     prep_back_button(back_btn);
+
+    {
+        cocos2d::ui::Layout* total_coins_panel = dynamic_cast<cocos2d::ui::Layout*>(panel->getChildByName("total_coins_panel"));
+        cocos2d::ui::Text* total_coins_count_lbl = dynamic_cast<cocos2d::ui::Text*>(total_coins_panel->getChildByName("total_coins_count_lbl"));
+
+        auto update_total_coins = [total_coins_count_lbl](float dt) {
+            std::string total_coins = beautify_double(BEATUP->get_total_coins());
+            total_coins_count_lbl->setString(total_coins);
+        };
+        update_total_coins(0);
+        total_coins_count_lbl->schedule(update_total_coins, SHORT_DELAY, "update_total_coins");
+    }
+
+    {
+        cocos2d::ui::Layout* banked_coins_panel = dynamic_cast<cocos2d::ui::Layout*>(panel->getChildByName("banked_coins_panel"));
+        cocos2d::ui::Text* banked_coins_count_lbl = dynamic_cast<cocos2d::ui::Text*>(banked_coins_panel->getChildByName("banked_coins_count_lbl"));
+
+        auto update_banked_coins = [banked_coins_count_lbl](float dt) {
+            std::string banked_coins = beautify_double(BANK->get_total_coins_banked());
+            banked_coins_count_lbl->setString(banked_coins);
+        };
+        update_banked_coins(0);
+        banked_coins_count_lbl->schedule(update_banked_coins, SHORT_DELAY, "update_banked_coins");
+    }
 
     cocos2d::ui::ListView* bank_pageview = dynamic_cast<cocos2d::ui::ListView*>(panel->getChildByName("bank_listview"));
 
