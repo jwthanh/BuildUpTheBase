@@ -29,25 +29,29 @@ const std::map<Ingredient::SubType, std::string> Ingredient::type_map = {
 };
 
 const std::map<Ingredient::SubType, res_count_t> Ingredient::type_to_value = {
-    {Ingredient::SubType::Grain,         3.0},
+    //mis types
     {Ingredient::SubType::PileOfGrain,  30.0},
     {Ingredient::SubType::Bread,        45.0},
     {Ingredient::SubType::Loaf,         30.0},
-    {Ingredient::SubType::Seed,          5.0},
-    {Ingredient::SubType::Tree,          15.0},
-    {Ingredient::SubType::Wood,         15.0},
     {Ingredient::SubType::Iron,         30.0},
-    {Ingredient::SubType::Copper,       13.0},
-    {Ingredient::SubType::Fly,           1.0},
-    {Ingredient::SubType::Sand,          1.0},
-    {Ingredient::SubType::Flesh,         3.0},
-    {Ingredient::SubType::Berry,         5.0},
     {Ingredient::SubType::Soul,        100.0},
+    {Ingredient::SubType::Undead,       35.0},
+    {Ingredient::SubType::Wood,         15.0},
+    {Ingredient::SubType::Minecart,    250.0},
+    {Ingredient::SubType::MineRails,    50.0},
+    {Ingredient::SubType::Tree,          15.0},
+
+
+    //auto harvested types
+    {Ingredient::SubType::Grain,         3.0},
+    {Ingredient::SubType::Sand,          1.0},
     {Ingredient::SubType::Blood,         2.5},
     {Ingredient::SubType::Paper,         4.0},
-    {Ingredient::SubType::Undead,       35.0},
-    {Ingredient::SubType::Minecart,    250.0},
-    {Ingredient::SubType::MineRails,    50.0}
+    {Ingredient::SubType::Fly,           1.0},
+    {Ingredient::SubType::Seed,          5.0},
+    {Ingredient::SubType::Copper,       13.0},
+    {Ingredient::SubType::Flesh,         3.0},
+    {Ingredient::SubType::Berry,         5.0}
 };
 
 const std::map<Ingredient::SubType, res_count_t> Ingredient::type_to_harvest_ratio = {
