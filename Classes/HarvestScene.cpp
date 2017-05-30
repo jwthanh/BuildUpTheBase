@@ -493,6 +493,11 @@ void BaseScene::create_building_choicelist()
         update_func(0);
 
         auto set_target_building = [this, building, panel]() {
+            BUILDUP->set_target_building(building);
+            return;
+            //TODO TODO
+            // figure out a nice way to unlock buildings
+            //TODO TODO
             const bool been_bought = building->get_been_bought();
             if (been_bought) {
                 BUILDUP->set_target_building(building);

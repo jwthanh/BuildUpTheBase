@@ -97,8 +97,10 @@ Building::Building(City* city, std::string name, std::string id_key) :
     this->_shop_cost = atoi(this->data->get_base_CI_cost().c_str());
     this->short_name = this->data->get_short_name();
 
-    //TODO make buildings buyable again
-    // this->set_been_bought(true);
+    //TODO TODO
+    // work out how to unlock buildings properly
+    //TODO TODO
+    this->set_been_bought(true);
 
     this->techtree = std::make_shared<TechTree>();
 };
