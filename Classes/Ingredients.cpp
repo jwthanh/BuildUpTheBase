@@ -43,14 +43,14 @@ const std::map<Ingredient::SubType, res_count_t> Ingredient::type_to_value = {
 
 
     //auto harvested types
-    {Ingredient::SubType::Grain,         3.0},
+    {Ingredient::SubType::Grain,         1.75},
     {Ingredient::SubType::Sand,          1.0},
     {Ingredient::SubType::Blood,         2.5},
     {Ingredient::SubType::Paper,         4.0},
     {Ingredient::SubType::Fly,           1.0},
-    {Ingredient::SubType::Seed,          5.0},
+    {Ingredient::SubType::Seed,          5.50},
     {Ingredient::SubType::Copper,       13.0},
-    {Ingredient::SubType::Flesh,         3.0},
+    {Ingredient::SubType::Flesh,         4.50},
     {Ingredient::SubType::Berry,         5.0}
 };
 
@@ -70,12 +70,12 @@ const std::map<Ingredient::SubType, res_count_t> Ingredient::type_to_harvest_rat
     {Ingredient::SubType::Grain,         2.0},
     {Ingredient::SubType::Sand,          0.6},
     {Ingredient::SubType::Blood,         0.5},
-    {Ingredient::SubType::Paper,         1.1},
-    {Ingredient::SubType::Fly,           1.0},
+    {Ingredient::SubType::Paper,         0.9},
+    {Ingredient::SubType::Fly,           3.0},
     {Ingredient::SubType::Seed,          0.7},
-    {Ingredient::SubType::Copper,        0.4},
-    {Ingredient::SubType::Flesh,         0.3},
-    {Ingredient::SubType::Berry,         1.0},
+    {Ingredient::SubType::Copper,        0.3},
+    {Ingredient::SubType::Flesh,         0.66},
+    {Ingredient::SubType::Berry,         0.75},
 };
 
 const std::vector<Ingredient::SubType> Ingredient::basic_ingredients = {
