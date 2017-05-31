@@ -162,6 +162,7 @@ class MiningHarvestable : public Harvestable
 
         virtual void animate_touch_start(cocos2d::Touch* touch);
         virtual void animate_clip() override;
+        cocos2d::Color4B get_create_output_color();
         virtual void animate_rotate() override;
 };
 

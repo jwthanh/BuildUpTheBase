@@ -712,6 +712,20 @@ void MiningHarvestable::animate_clip()
     this->stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
 }
 
+//default text floating color
+Color4B MiningHarvestable::get_create_output_color()
+{
+    if (this->get_output_ing_type() == Ingredient::SubType::Copper)
+    {
+        return Color4B::WHITE;
+    }
+    else
+    {
+        return Color4B::GREEN;
+    };
+};
+
+
 void MiningHarvestable::animate_rotate()
 {
     float intensity = 0.0f;
