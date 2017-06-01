@@ -86,6 +86,9 @@ std::string existing_player_load()
 
     if (is_cheating == false)
     {
+        //TODO maybe simulate it for up to an hour, and multiply that output by
+        //the hours remaining. Alternatively, rewrite it somehow so that it
+        //accurately estimates it from nothing.
         BUILDUP->city->update(seconds_count);
 
         auto refreshed_ingredients = BUILDUP->get_all_ingredients();
