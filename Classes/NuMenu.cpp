@@ -792,6 +792,8 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     auto custom_update_func = [this](float dt) {
         if (this->building->building_level == this->building_level) {
             this->building_level++;
+            long double shop_cost = scale_number(10.0L, ((res_count_t)this->building_level)-1.0L, 10.5L);
+            this->_shop_cost = shop_cost;
         };
 
         if (this->building_level > 15) {
