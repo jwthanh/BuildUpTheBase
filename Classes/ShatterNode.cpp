@@ -123,9 +123,10 @@ void ShatterSprite::createShatter(){
     const int fragCount = nRow*nCol;
     //----create fragBatchNode
     frag_batch_node = SpriteBatchNode::createWithTexture(this->getTexture(), fragCount);
-    //frag_batch_node->
+
     this->addChild(frag_batch_node);
     frag_batch_node->setVisible(false);
+
     //----create frags and add them to fragBatchNode and grid
     //make frag_grid
     frag_grid.resize(nRow);
@@ -137,8 +138,6 @@ void ShatterSprite::createShatter(){
         for (int j = 0; j < nCol; j++){
             ShatterFrag* frag = new ShatterFrag();
             frag->autorelease();
-            //auto sprite_frame = this->getSpriteFrame();
-            //frag->initWithSpriteFrameName("weapon_ice.png");
             frag->initWithTexture(this->getTexture());
 
             //set to grid
