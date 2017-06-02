@@ -122,8 +122,8 @@ static std::uniform_int_distribution<int> rand_distribution;
 void ShatterSprite::createShatter(){
     //----calculate grid size and fragCount
     Size contentSize = this->getContentSize();
-    const int nRow = (int)floorf(contentSize.height / grid_side_len);//grid row count
-    const int nCol = (int)floorf(contentSize.width / grid_side_len);//grid col count
+    const int nRow = static_cast<int>(floorf(contentSize.height / grid_side_len));//grid row count
+    const int nCol = static_cast<int>(floorf(contentSize.width / grid_side_len));//grid col count
     const int fragCount = nRow*nCol;
     //----create fragBatchNode
     frag_batch_node = SpriteBatchNode::createWithTexture(this->getTexture(), fragCount);
@@ -157,10 +157,10 @@ void ShatterSprite::createShatter(){
 void ShatterSprite::resetShatter(){
     Size contentSize = this->getContentSize();
 
-    int num_rows = (int)frag_grid.size();
-    int num_cols = (num_rows == 0 ? 0 : (int)frag_grid[0].size());
+    int num_rows = static_cast<int>(frag_grid.size());
+    int num_cols = (num_rows == 0 ? 0 : static_cast<int>(frag_grid[0].size()));
 
-    const float half_grid_len = (float)0.5*grid_side_len;
+    const float half_grid_len = static_cast<float>(0.5)*grid_side_len;
 
     float offset_x = this->getTextureRect().origin.x;
     float offset_y = this->getTextureRect().origin.y;
@@ -200,8 +200,8 @@ void ShatterSprite::updateShatterAction(float time, float dt, float growSpeedOfT
     //radius of surrounding circle
     float initalTargetR = Vec2(contentSize.width, contentSize.height).getLength() / 2;
 
-    int nRow = (int)frag_grid.size();
-    int nCol = nRow ? (int)frag_grid[0].size() : 0;
+    int nRow = static_cast<int>(frag_grid.size());
+    int nCol = nRow ? static_cast<int>(frag_grid[0].size()) : 0;
 
     for (int i = 0; i < nRow; i++){
         for (int j = 0; j < nCol; j++){
@@ -231,15 +231,15 @@ void ShatterSprite::updateShatterAction(float time, float dt, float growSpeedOfT
             }
 
             float edge_dist = targetR - disToCenter;
-            float edge_random_dist = edge_dist + frag->random_number % (int)initalTargetR - initalTargetR / 2;//add random to disToEdge
+            float edge_random_dist = edge_dist + frag->random_number % static_cast<int>(initalTargetR) - initalTargetR / 2;//add random to disToEdge
 
-            float move_length = (float)(edge_random_dist*0.0333f); //we only move some percent of disToEdgeWithRandom
+            float move_length = static_cast<float>(edge_random_dist * 0.0333f); //we only move some percent of disToEdgeWithRandom
 
             Vec2 moved_pos = direction * move_length;
             frag->setPosition(fragPos + moved_pos);
 
             //update opacity
-            GLubyte opacity = (GLubyte)MAX(0, 255 - 255 * disToCenter / initalTargetR);
+            GLubyte opacity = static_cast<GLubyte>(MAX(0, 255 - 255 * disToCenter / initalTargetR));
             frag->setOpacity(opacity);
 
             //update scale
@@ -281,15 +281,15 @@ bool ShatterAction::isDone(){
 void ShatterAction::stop(){
 
     //clean up and reset
-    ((ShatterSprite*)_target)->frag_batch_node->setVisible(true);
+    static_cast<ShatterSprite*>(_target)->frag_batch_node->setVisible(true);
     //call father stop
     ActionInterval::stop();
 }
 
 void ShatterAction::startWithTarget(Node *pTarget){
     //reset
-    ((ShatterSprite*)pTarget)->resetShatter();
-    ((ShatterSprite*)pTarget)->frag_batch_node->setVisible(true);
+    static_cast<ShatterSprite*>(pTarget)->resetShatter();
+    static_cast<ShatterSprite*>(pTarget)->frag_batch_node->setVisible(true);
     //call father startWithTarget
     ActionInterval::startWithTarget(pTarget);
 
@@ -304,6 +304,6 @@ void ShatterAction::update(float time){
     time_foe = cur_time;
     float progressPercentage = time;
     cur_time = progressPercentage*getDuration();
-    ((ShatterSprite*)_target)->updateShatterAction(cur_time, cur_time - time_foe, m_growSpeedOfTargetR);
+    static_cast<ShatterSprite*>(_target)->updateShatterAction(cur_time, cur_time - time_foe, m_growSpeedOfTargetR);
 
 }
