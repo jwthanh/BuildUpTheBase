@@ -44,34 +44,6 @@ void Worker::on_update(float dt)
 
 };
 
-bool ResourceCondition::is_satisfied(spBuilding building){
-    //if (this->type_choice == Resource::Ingredient) {
-    //    return (int)building->ingredients.size() >= this->quantity;
-    //}
-    //else if (this->type_choice == Resource::Product) {
-    //    return (int)building->products.size() >= this->quantity;
-    //}
-    //else if (this->type_choice == Resource::Ingredient) {
-    //    return (int)building->wastes.size() >= this->quantity;
-    //}
-    //else {
-    //    unsigned int size = building->ingredients.size() +
-    //        building->products.size() +
-    //        building->wastes.size();
-    //    return (int)size >= this->quantity;
-    //};
-    CCLOG("does this happen, resource condition check");
-    return false;
-};
-
-ResourceCondition* ResourceCondition::create_ingredient_condition(Ingredient::SubType ing_type, int quantity, std::string condition_name)
-{
-    auto ingredient_condition = new ResourceCondition(Resource::Ingredient, quantity, condition_name);
-    ingredient_condition->ing_type = ing_type;
-
-    return ingredient_condition;
-};
-
 Harvester::Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type)
     : Worker(building, name, sub_type), ing_type(ing_type)
 {

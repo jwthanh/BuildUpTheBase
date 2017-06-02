@@ -11,38 +11,6 @@
 
 #include "Ingredients.h"
 
-class ResourceCondition : public Nameable
-{
-    public:
-        Resource::ResourceType type_choice;
-
-        Ingredient::SubType ing_type;
-
-        int quantity;
-
-        ResourceCondition(Resource::ResourceType type_choice, int quantity, std::string name) : Nameable(name) {
-            this->type_choice = type_choice;
-            this->quantity = quantity;
-        };
-
-        static ResourceCondition* create_ingredient_condition(Ingredient::SubType ing_type, int quantity, std::string condition_name);
-
-        bool is_satisfied(spBuilding building);
-};
-
-
-//if this is satisfied, the action can happen
-class Condition : public Nameable
-{
-
-};
-
-//
-class Action : public Nameable
-{
-
-};
-
 //
 //attaches to a building and does something once certain conditions are hit
 //
