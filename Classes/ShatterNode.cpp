@@ -115,6 +115,10 @@ bool ShatterSprite::initWithSpriteFrame(SpriteFrame *spriteFrame)
 }
 
 
+static std::random_device rand_device;
+static std::mt19937_64 rand_generator(rand_device());
+static std::uniform_int_distribution<int> rand_distribution;
+
 void ShatterSprite::createShatter(){
     //----calculate grid size and fragCount
     Size contentSize = this->getContentSize();
@@ -145,7 +149,7 @@ void ShatterSprite::createShatter(){
             //add to batchNode
             frag_batch_node->addChild(frag);
             //random
-            frag->random_number = rand();
+            frag->random_number = rand_distribution(rand_generator);
         }
     }
 }
