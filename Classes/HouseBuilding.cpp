@@ -197,12 +197,62 @@ typename CacheT::element_type::mapped_type get_or_create_from_cache(spBuilding& 
     return temp_harvester;
 };
 
-void Building::update(float dt)
+void Building::_update_consumers(float dt)
 {
-    Updateable::update(dt);
-
     spBuilding shared_this = this->shared_from_this();
+    for (auto& mist : this->consumers) {
+        const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
+        const WorkerSubType& harv_type = sub_type.first;
+        const Ingredient::SubType& ing_type = sub_type.second;
+        res_count_t& count = mist.second;
 
+        std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
+        std::shared_ptr<ConsumerHarvester> consumer = get_or_create_from_cache(shared_this, this->_consumer_cache, key);
+        consumer->active_count = count;
+        consumer->update(dt);
+    };
+}
+
+void Building::_update_salesmen(float dt)
+{
+    spBuilding shared_this = this->shared_from_this();
+    for (auto& mist : this->salesmen) {
+        const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
+        const WorkerSubType& harv_type = sub_type.first;
+        const Ingredient::SubType& ing_type = sub_type.second;
+        const res_count_t& count = mist.second;
+
+        std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
+        std::shared_ptr<Salesman> salesman = get_or_create_from_cache(shared_this, this->_salesmen_cache, key);
+        salesman->active_count = count;
+        salesman->update(dt);
+    };
+}
+
+void Building::_update_scavengers(float dt)
+{
+    spBuilding shared_this = this->shared_from_this();
+    for (auto& mist : this->scavengers) {
+        if (this->name != "The Dump") { break; }; //TODO remove this after debug
+
+        const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
+        const WorkerSubType& harv_type = sub_type.first;
+        const Ingredient::SubType& ing_type = sub_type.second;
+        const res_count_t& count = mist.second;
+
+        //find cache worker, otherwise create and add it to cache
+        std::shared_ptr<ScavengerHarvester> scavenger;
+        std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
+        scavenger = get_or_create_from_cache(shared_this, this->_scavenger_cache, key);
+
+        scavenger->active_count = count;
+        scavenger->update(dt);
+    };
+}
+
+void Building::_update_harvesters(float dt)
+{
+    spBuilding shared_this = this->shared_from_this();
     for (auto& mist : this->harvesters) {
         const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
         const WorkerSubType& harv_type = sub_type.first;
@@ -217,53 +267,24 @@ void Building::update(float dt)
         harvester->active_count = count;
         harvester->update(dt);
     };
+}
+
+void Building::update(float dt)
+{
+    Updateable::update(dt);
+
+    spBuilding shared_this = this->shared_from_this();
+
+    this->_update_harvesters(dt);
 
     if (update_clock.passed_threshold())
     {
         update_clock.reset();
 
         //consumers update before salesmen so that they get first dibs on resources
-        for (auto& mist : this->consumers) {
-            const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
-            const WorkerSubType& harv_type = sub_type.first;
-            const Ingredient::SubType& ing_type = sub_type.second;
-            res_count_t& count = mist.second;
-
-            std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-            std::shared_ptr<ConsumerHarvester> consumer = get_or_create_from_cache(shared_this, this->_consumer_cache, key);
-            consumer->active_count = count;
-            consumer->update(dt);
-        };
-
-
-        for (auto& mist : this->salesmen) {
-            const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
-            const WorkerSubType& harv_type = sub_type.first;
-            const Ingredient::SubType& ing_type = sub_type.second;
-            const res_count_t& count = mist.second;
-
-            std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-            std::shared_ptr<Salesman> salesman = get_or_create_from_cache(shared_this, this->_salesmen_cache, key);
-            salesman->active_count = count;
-            salesman->update(dt);
-        };
-
-        for (auto& mist : this->scavengers) {
-            if (this->name != "The Dump") { break; }; //TODO remove this after debug
-
-            const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
-            const WorkerSubType& harv_type = sub_type.first;
-            const Ingredient::SubType& ing_type = sub_type.second;
-            const res_count_t& count = mist.second;
-
-            //find cache worker, otherwise create and add it to cache
-            std::shared_ptr<ScavengerHarvester> scavenger;
-            std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-            scavenger = get_or_create_from_cache(shared_this, this->_scavenger_cache, key);
-
-            scavenger->active_count = count;
-            scavenger->update(dt);
-        };
+        this->_update_consumers(dt);
+        this->_update_salesmen(dt);
+        this->_update_scavengers(dt);
 
     }
 };

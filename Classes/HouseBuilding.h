@@ -50,6 +50,12 @@ static const std::map<int, res_count_t> BUILDING_LEVEL_STORAGE_LIMIT = {
 
 class Building : public Nameable, public Updateable, public Buyable, public std::enable_shared_from_this<Building>
 {
+    private:
+        void _update_consumers(float dt);
+        void _update_salesmen(float dt);
+        void _update_scavengers(float dt);
+        void _update_harvesters(float dt);
+
     public:
 
         spBuildingData data;
