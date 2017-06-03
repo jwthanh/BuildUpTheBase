@@ -51,10 +51,14 @@ static const std::map<int, res_count_t> BUILDING_LEVEL_STORAGE_LIMIT = {
 class Building : public Nameable, public Updateable, public Buyable, public std::enable_shared_from_this<Building>
 {
     private:
-        void _update_consumers(float dt);
-        void _update_salesmen(float dt);
-        void _update_scavengers(float dt);
         void _update_harvesters(float dt);
+        spHarvesterCache _harvester_cache;
+        void _update_salesmen(float dt);
+        spSalesmenCache _salesmen_cache;
+        void _update_consumers(float dt);
+        spConsumerCache _consumer_cache;
+        void _update_scavengers(float dt);
+        spScavengerCache _scavenger_cache;
 
     public:
 
@@ -74,10 +78,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         mistHarvester salesmen;
         mistHarvester consumers;
         mistHarvester scavengers;
-        spHarvesterCache _harvester_cache;
-        spSalesmenCache _salesmen_cache;
-        spConsumerCache _consumer_cache;
-        spScavengerCache _scavenger_cache;
 
         int building_level; //affects only resource limits for now
         res_count_t get_storage_space();
