@@ -250,9 +250,9 @@ void GameLogic::load_game()
 bool GameLogic::init()
 {
     GameLogic* instance = GameLogic::getInstance();
-    instance->beatup = Beatup::create();
-    instance->beatup->setName("beatup");
-    instance->beatup->retain();
+    instance->beatup = new Beatup();
+    instance->beatup->init();
+
     instance->buildup = instance->beatup->buildup;
     instance->equipment = std::unique_ptr<Equipment>(new Equipment());
 

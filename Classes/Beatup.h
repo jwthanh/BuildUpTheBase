@@ -1,44 +1,19 @@
 #ifndef __HELLOWORLD_SCENE_H__
 #define __HELLOWORLD_SCENE_H__
-#include "GameLayer.h"
 #include "constants.h"
 
 #include <chrono>
 
-namespace cocos2d
-{
-    class MotionStreak;
-    class NodeGrid;
-    class Sprite;
 
-    namespace ui
-    {
-        class Text;
-        class Widget;
-    }
-}
-
-
-class Beatup : public GameLayer
+class Beatup
 {
 
     private:
         bool _visible_inventory = false;
 
     public:
-        CREATE_FUNC(Beatup);
-        static cocos2d::Scene* createScene();
-        static cocos2d::Scene* createScene(int level);
-
-        void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* pEvent);
-        void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *pEvent);
 
         virtual bool init();
-
-        std::map<cocos2d::EventKeyboard::KeyCode, bool> key_state;
-        cocos2d::Sprite* background;
-
-        static cocos2d::Scene* main_menu_scene;
 
         Buildup* buildup;
 
@@ -59,26 +34,13 @@ class Beatup : public GameLayer
         void update_buildup(float dt);
         void reset();
 
-        void shake_screen(int intensity, bool left_angle);
-        void shake_color(GLuint opacity);
 
 
-        cocos2d::LayerColor* color_layer;
-
-
-        ProgressBar* progress_bar;
-
-        bool should_shake();
-        Clock* shake_clock;
 
         Clock* spawn_coin_clock;
 
-        cocos2d::NodeGrid* node_grid;
-
         void set_target_building(spBuilding target);
         spBuilding get_target_building();
-
-        cocos2d::Node* face_fight_node;
 
         void cycle_next_building(bool reverse = false);
 
@@ -125,8 +87,6 @@ class Beatup : public GameLayer
         void back_to_menu();
 
         void onEnter();
-
-        cocos2d::MotionStreak* motion;
 
         bool tutorials_enabled();
         static std::string tutorial_id_key;

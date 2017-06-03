@@ -40,8 +40,8 @@ void Bank::pocket_or_bank_coins(res_count_t added_coins)
     if (to_bank > 0.0) {
         this->add_total_coins_banked(to_bank);
     } else if (to_bank < 0.0) {
-        CCASSERT(false, "likely negative to_bank");
-        CCLOG("Negative coins to bank, this is likely an error.");
+        //CCASSERT(false, "likely negative to_bank");
+        //CCLOG("Negative coins to bank, this is likely an error.");
     };
 };
 

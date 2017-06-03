@@ -101,7 +101,7 @@ ProgressBar::ProgressBar(
 
     this->setScale(sx(4));
 
-    GameLogic::getInstance()->beatup->addChild(this->base_node);
+    //GameLogic::getInstance()->beatup->addChild(this->base_node);
 };
 
 ProgressBar::~ProgressBar()
