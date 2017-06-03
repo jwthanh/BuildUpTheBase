@@ -1289,6 +1289,21 @@ void FightingHarvestable::shatter()
         }
     }
 
+
+    //spawn shatter
+    FighterNode* fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
+    Node* renderer = fighter_node->img_view->getVirtualRenderer();
+    Sprite* sprite = dynamic_cast<ui::Scale9Sprite*>(renderer)->getSprite();
+    auto shatter_sprite = ShatterSprite::createWithTexture(sprite->getTexture());
+    shatter_sprite->setScale(4.0f);
+    shatter_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    shatter_sprite->setPosition(get_center_pos());
+    this->getParent()->addChild(shatter_sprite);
+
+    auto shatter_action = ShatterAction::create(0.5f);
+    shatter_sprite->setOpacity(0);
+    shatter_sprite->runAction(Sequence::createWithTwoActions(shatter_action, cocos2d::RemoveSelf::create()));
+
     auto harvestable_manager = HarvestableManager::getInstance();
     harvestable_manager->reset_fighter();
     this->spawn_enemy();
