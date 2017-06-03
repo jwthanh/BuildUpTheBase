@@ -73,19 +73,12 @@ bool NuItem::init(cocos2d::Node* parent)
 {
     ui::Widget::init();
 
-    auto set_renderer = [](ui::Text* text_node){
-        Label* renderer = (Label*)text_node->getVirtualRenderer();
-        renderer->setTTFConfig(NuItem::ttf_config);
-        // renderer->setBMFontFilePath("fonts/pixelmix.fnt");
-    };
-
-
-    auto setup_text_node = [set_renderer](ui::Text* text_node)
+    auto setup_text_node = [](ui::Text* text_node)
     {
         Label* renderer = (Label*)text_node->getVirtualRenderer();
         set_aliasing(text_node, true);
         renderer->setOverflow(Label::Overflow::SHRINK);
-        set_renderer(text_node);
+        renderer->setTTFConfig(NuItem::ttf_config);
     };
 
     if (NuItem::orig_button == NULL)
