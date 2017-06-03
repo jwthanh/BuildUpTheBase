@@ -1152,6 +1152,32 @@ void GameDirector::switch_to_reset_menu()
     director->pushScene(scene);
 };
 
+float withdraw_ticks = 0.0f;
+void bank_withdraw_callback(float dt)
+{
+    //TODO actually withdraw from bank
+};
+
+float deposit_ticks = 0.0f;
+void bank_deposit_callback(float dt)
+{
+    //special case to immediately do something
+    if (deposit_ticks == 0.0f) {
+        BANK->add_total_coins_banked(10);
+    }
+
+    //TODO take from pocket and put into bank
+    deposit_ticks += dt;
+    if (deposit_ticks > 10.75f) {
+        BANK->add_total_coins_banked(deposit_ticks*10);
+    }
+    else if (deposit_ticks > 2.75f) {
+        BANK->add_total_coins_banked(deposit_ticks);
+    }
+    else if (deposit_ticks > 0.75f) {
+        BANK->add_total_coins_banked(deposit_ticks/10);
+    }
+};
 
 void GameDirector::switch_to_bank_menu()
 {
@@ -1196,63 +1222,59 @@ void GameDirector::switch_to_bank_menu()
     struct bank_config {
         std::string title;
         std::string description;
-        std::function<void()> bank_callback;
+        std::function<void(float)> bank_callback;
     };
 
     std::vector<bank_config> configs {
         {
             "Withdraw 10",
-            "Deposit 10 coins in the bank.",
-            [](){}
+            "Withdraw 10 coins in the bank.",
+            bank_withdraw_callback
         },
         {
             "Deposit 10",
-            "Withdraw 10 coins from the bank.",
-            [](){}
+            "Deposit 10 coins from the bank.",
+            bank_deposit_callback
         }
     };
 
+
     for (auto& config : configs)
     {
-        auto nuitem = NuItem::create(bank_pageview);
+        NuItem* nuitem = NuItem::create(bank_pageview);
         nuitem->set_title(config.title);
         nuitem->set_description(config.description);
 
         //bank size to width of container
         nuitem->button->setContentSize({ bank_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
-        auto listener = cocos2d::EventListenerTouchOneByOne::create();
-        listener->onTouchBegan = [config, nuitem](Touch* touch, Event* event)
-        {
-                CCLOG("started");
-                do_vibrate(5);
-                config.bank_callback();
-                SoundLibrary::getInstance()->play_general_widget_touched();
 
-            //TODO create a callback to schedule that slowly speeds up increments based on time added to Clock from the delta time passed to it
+        auto listener = cocos2d::EventListenerTouchOneByOne::create();
+        listener->setSwallowTouches(false);
+        listener->onTouchBegan = [config, nuitem, scene](Touch* touch, Event* event)
+        {
+            Rect bbox = nuitem->button->getBoundingBox();
+            auto converted_touch = nuitem->button->getParent()->convertTouchToNodeSpace(touch);
+            if (bbox.containsPoint(converted_touch))
+            {
+                CCLOG("started %s", config.title.c_str());
+                do_vibrate(5);
+                nuitem->button->schedule(config.bank_callback, SHORT_DELAY, "bank_callback");
+                SoundLibrary::getInstance()->play_general_widget_touched();
                 return true;
+
+            }
+            return false;
         };
         listener->onTouchEnded = [config, nuitem](Touch* touch, Event* event)
         {
-                CCLOG("ended");
+            withdraw_ticks = 0.0f;
+            deposit_ticks = 0.0f;
+
+            nuitem->button->unschedule("bank_callback");
         };
+
         auto event_dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
         event_dispatcher->addEventListenerWithSceneGraphPriority(listener, nuitem->button);
-        //auto touch_handler = [config, nuitem](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType evt)
-        //{
-        //    if (evt == cocos2d::ui::Widget::TouchEventType::BEGAN)
-        //    {
-        //        CCLOG("started");
-        //    }
-        //    if (evt == cocos2d::ui::Widget::TouchEventType::ENDED)
-        //    {
-        //        CCLOG("ENDED");
-        //        do_vibrate(5);
-        //        config.bank_callback();
-        //        SoundLibrary::getInstance()->play_general_widget_touched();
-        //    }
-        //};
-        //nuitem->button->addTouchEventListener(touch_handler);
-        //nuitem->button->addeve
     }
 
     auto director = cocos2d::Director::getInstance();

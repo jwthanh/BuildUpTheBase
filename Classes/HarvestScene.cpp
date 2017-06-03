@@ -185,19 +185,19 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         // SoundLibrary::getInstance()->play_general_harvest_touched();
-        // GameDirector::switch_to_building_detail_menu();
+        GameDirector::switch_to_building_detail_menu();
 
         //auto sprite = Sprite::createWithSpriteFrameName("pink_monster.png");
-        auto shatter_sprite = ShatterSprite::createWithSpriteFrameName("pink_monster.png");
-        shatter_sprite->setScale(4.0f);
-        shatter_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-        shatter_sprite->setPosition(get_center_pos());
-        this->addChild(shatter_sprite);
-        auto shatter_action = ShatterAction::create(0.5f);
-        //shatter_sprite->runAction(shatter_action);
-        shatter_sprite->setOpacity(0);
-        shatter_sprite->runAction(Sequence::createWithTwoActions(shatter_action, cocos2d::RemoveSelf::create()));
-
+        // auto shatter_sprite = ShatterSprite::createWithSpriteFrameName("pink_monster.png");
+        // shatter_sprite->setScale(4.0f);
+        // shatter_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+        // shatter_sprite->setPosition(get_center_pos());
+        // this->addChild(shatter_sprite);
+        // auto shatter_action = ShatterAction::create(0.5f);
+        // //shatter_sprite->runAction(shatter_action);
+        // shatter_sprite->setOpacity(0);
+        // shatter_sprite->runAction(Sequence::createWithTwoActions(shatter_action, cocos2d::RemoveSelf::create()));
+        //
 
 
 
