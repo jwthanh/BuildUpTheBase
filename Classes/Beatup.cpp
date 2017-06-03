@@ -413,9 +413,8 @@ void Beatup::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* evt)
     {
     }
 
-    else if(keyCode == EventKeyboard::KeyCode::KEY_2)
+    else if(keyCode == EventKeyboard::KeyCode::KEY_P)
     {
-        GameDirector::switch_to_building_menu();
     }
 
     else if(keyCode == EventKeyboard::KeyCode::KEY_3)

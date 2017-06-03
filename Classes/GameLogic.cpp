@@ -554,18 +554,6 @@ void set_default_key_handler(Scene* scene)
 
 };
 
-void GameDirector::switch_to_building_menu()
-{
-    auto scene = cocos2d::Scene::create();
-    BuildingNuMenu* building_menu = BuildingNuMenu::create(
-        BUILDUP->get_target_building()
-        );
-    scene->addChild(building_menu);
-
-    auto director = cocos2d::Director::getInstance();
-    director->pushScene(scene);
-};
-
 void GameDirector::switch_to_city_menu()
 {
     auto city_menu_scene_node = get_prebuilt_node_from_csb("editor/scenes/city_menu_scene.csb");

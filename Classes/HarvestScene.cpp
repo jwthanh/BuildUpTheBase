@@ -185,7 +185,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         // SoundLibrary::getInstance()->play_general_harvest_touched();
-        GameDirector::switch_to_building_detail_menu();
+        // GameDirector::switch_to_building_detail_menu();
 
         //auto sprite = Sprite::createWithSpriteFrameName("pink_monster.png");
         // auto shatter_sprite = ShatterSprite::createWithSpriteFrameName("pink_monster.png");

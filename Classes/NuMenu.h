@@ -228,32 +228,4 @@ class ConsumerShopNuItem : public HarvesterShopNuItem
         IngredientSubType consumed_type;
 };
 
-
-class NuMenu : public GameLayer
-{
-    public:
-        CREATE_FUNC(NuMenu);
-        virtual void onEnter() override;
-
-        cocos2d::ui::ScrollView* scrollable;
-
-        bool init();
-        void create_back_item(cocos2d::Node* parent);
-
-        virtual void init_items(){};
-
-
-};
-
-class BuildingNuMenu : public NuMenu
-{
-    public:
-        std::shared_ptr<Building> building;
-
-        static BuildingNuMenu* create(std::shared_ptr<Building> building);
-        void init_items();
-
-        void create_inventory_item(cocos2d::Node* parent);
-};
-
 #endif
