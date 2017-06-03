@@ -5,13 +5,8 @@
 #include <chrono>
 #include <ctime>
 
-
-#include "Clock.h"
-#include "SoundEngine.h"
 #include "constants.h"
 #include "DataManager.h"
-#include "ProgressBar.h"
-#include "ShatterNode.h" //is used on android
 
 #include "HouseBuilding.h"
 #include "Buildup.h"
@@ -24,15 +19,8 @@
 #include "Recipe.h"
 #include "GameLogic.h"
 
-#include "2d/CCScene.h"
 #include "base/CCDirector.h"
-#include "base/CCEventListenerTouch.h"
-#include "base/CCEventListenerKeyboard.h"
-#include "base/CCEventDispatcher.h"
-#include "2d/CCMenu.h"
 #include "cocostudio/ActionTimeline/CCActionTimelineCache.h"
-#include "ui/UIText.h"
-#include "ui/UIButton.h"
 #include "goals/Achievement.h"
 #include "Technology.h"
 
@@ -41,7 +29,6 @@ USING_NS_CC;
 
 std::string Beatup::tutorial_id_key = "tutorials_enabled";
 
-std::string Beatup::total_hit_key = "total_hit_key";
 std::string Beatup::total_coin_key = "total_coin_key";
 std::string Beatup::last_login_key = "last_login_key";
 
@@ -53,64 +40,13 @@ bool Beatup::init()
 
     this->buildup = new Buildup();
 
-
     this->buildup->city = Buildup::init_city(this->buildup);
     this->buildup->city->update_buildings(0);
-
-    this->setup_commands();
 
     this->has_been_initialized = true;
 
     return true;
 }
-
-void Beatup::update_buildup(float dt)
-{
-    this->buildup->update(dt);
-}
-
-void Beatup::setup_commands()
-{
-    auto console = Director::getInstance()->getConsole();
-
-    auto gl = Director::getInstance()->getOpenGLView();
-    auto frame_size = gl->getFrameSize();
-    auto design_size = gl->getDesignResolutionSize();
-
-    //CCLOG("frame %f %f", frame_size.width, frame_size.height);
-    //CCLOG("design %f %f", design_size.width, design_size.height);
-
-
-    Console::Command hd = {"hd", "1080p",
-        [this](int, std::string args)
-        {
-            auto glView = Director::getInstance()->getOpenGLView();
-            glView->setFrameSize(1920, 1080);
-            glView->setDesignResolutionSize(1920, 1080, ResolutionPolicy::SHOW_ALL);
-            Director::getInstance()->popToRootScene();
-        } };
-    console->addCommand(hd);
-
-    Console::Command sd = {"sd", "640p",
-        [this](int, std::string args)
-        {
-            auto glView = Director::getInstance()->getOpenGLView();
-            glView->setFrameSize(960, 640);
-            glView->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
-        } };
-    console->addCommand(sd);
-
-};
-
-void Beatup::add_total_hit(int x)
-{
-    DataManager::incr_key("total_hit_key", x);
-};
-
-int Beatup::get_total_hits()
-{
-    return DataManager::get_int_from_data(Beatup::total_hit_key);
-};
 
 void Beatup::add_total_coins(res_count_t x)
 {
@@ -189,74 +125,6 @@ std::chrono::duration<double, std::ratio<3600>> Beatup::hours_since_last_login()
 };
 
 
-void Beatup::deal_player_dmg(int dmg)
-{
-    this->player_hp-=dmg;
-    if (this->player_hp <= 0)
-    {
-        this->player_hp = 0;
-        this->level_been_lost = true;
-    };
-};
-
-void Beatup::set_target_building(spBuilding target)
-{
-    spBuilding old_target = this->get_target_building();
-    if (old_target != NULL)
-    {
-        // old_target->swap_center(target);
-    }
-    this->buildup->set_target_building(target);
-};
-
-spBuilding Beatup::get_target_building()
-{
-    if (this->buildup->get_target_building() == NULL ) { return NULL; };
-    return this->buildup->get_target_building();
-};
-
-
-void Beatup::cycle_next_building(bool reverse)
-{
-    vsBuilding buildings = this->buildup->city->buildings;
-    if (buildings.size() > 1)
-    {
-        if (reverse == false)
-        {
-            vsBuilding::iterator next_building_iter = std::find(buildings.begin(), buildings.end(), this->get_target_building());
-
-            if (next_building_iter + 1 != buildings.end())
-            {
-                this->set_target_building(*(next_building_iter + 1));
-            }
-            else
-            {
-                this->set_target_building(*buildings.begin());
-            }
-
-        }
-        else if (reverse == true)
-        {
-            vsBuilding::reverse_iterator next_building_riter = std::find(buildings.rbegin(), buildings.rend(), this->get_target_building());
-
-            if (next_building_riter + 1 != buildings.rend())
-            {
-                this->set_target_building(*(next_building_riter + 1));
-            }
-            else
-            {
-                this->set_target_building(*buildings.rbegin());
-            }
-
-        }
-    }
-    else
-    {
-        log("0 or 1 buildings to swap between, need two or more.");
-    };
-};
-
-
 void Beatup::apply_flash_shader()
 {
     Texture2D::TexParams p;
@@ -294,17 +162,4 @@ void Beatup::apply_flash_shader()
 bool Beatup::tutorials_enabled()
 {
     return DataManager::get_bool_from_data(Beatup::tutorial_id_key, true);
-};
-
-bool Beatup::get_level_over()
-{
-    return this->level_been_won || this->level_been_lost;
-};
-
-void Beatup::reload_resources()
-{
-#ifdef __ANDROID__
-#else
-    system("xcopy \"C:\\Users\\Primary\\workspace\\basebuilder\\proj.win32\\..\\Resources\" \"C:\\Users\\Primary\\workspace\\basebuilder\\proj.win32\\Debug.win32\\\" /E /I /F /Y  /D /K ");
-#endif
 };

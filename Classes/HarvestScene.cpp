@@ -139,7 +139,6 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_F5)
     {
-        BEATUP->reload_resources();
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_GRAVE)
     {

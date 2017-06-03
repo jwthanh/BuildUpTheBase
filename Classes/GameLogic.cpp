@@ -268,7 +268,7 @@ bool GameLogic::init()
 
 void GameLogic::update(float dt)
 {
-    this->beatup->update_buildup(dt);
+    this->buildup->update(dt);
 
     this->coin_save_clock->update(dt);
     if (this->coin_save_clock->passed_threshold())
