@@ -222,18 +222,7 @@ void Building::update(float dt)
     {
         update_clock.reset();
 
-        for (auto& mist : this->salesmen) {
-            const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
-            const WorkerSubType& harv_type = sub_type.first;
-            const Ingredient::SubType& ing_type = sub_type.second;
-            const res_count_t& count = mist.second;
-
-            std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-            std::shared_ptr<Salesman> salesman = get_or_create_from_cache(shared_this, this->_salesmen_cache, key);
-            salesman->active_count = count;
-            salesman->update(dt);
-        };
-
+        //consumers update before salesmen so that they get first dibs on resources
         for (auto& mist : this->consumers) {
             const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
             const WorkerSubType& harv_type = sub_type.first;
@@ -244,6 +233,19 @@ void Building::update(float dt)
             std::shared_ptr<ConsumerHarvester> consumer = get_or_create_from_cache(shared_this, this->_consumer_cache, key);
             consumer->active_count = count;
             consumer->update(dt);
+        };
+
+
+        for (auto& mist : this->salesmen) {
+            const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
+            const WorkerSubType& harv_type = sub_type.first;
+            const Ingredient::SubType& ing_type = sub_type.second;
+            const res_count_t& count = mist.second;
+
+            std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
+            std::shared_ptr<Salesman> salesman = get_or_create_from_cache(shared_this, this->_salesmen_cache, key);
+            salesman->active_count = count;
+            salesman->update(dt);
         };
 
         for (auto& mist : this->scavengers) {
