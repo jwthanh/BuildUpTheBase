@@ -791,7 +791,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
             this->_shop_cost = shop_cost;
         };
 
-        if (this->building_level > 15) {
+        if (this->building_level > MAX_BUILDING_LEVEL) {
             this->set_been_bought(true);
         };
     };
