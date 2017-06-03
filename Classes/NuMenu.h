@@ -228,20 +228,6 @@ class ConsumerShopNuItem : public HarvesterShopNuItem
         IngredientSubType consumed_type;
 };
 
-///UNUSED, not working probably
-class CombatShopNuItem : public BuildingShopNuItem
-{
-    public:
-        static CombatShopNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
-
-        //NOTE these dont override anything, HarvesterShopNuItem introduced these. TODO make them part of the base stuff
-        virtual void my_init_title();
-        virtual void my_init_sprite();
-        void my_init_touch_ended_callback();
-        void my_init_update_callback();
-
-        virtual bool custom_status_check(float dt) override;
-};
 
 class NuMenu : public GameLayer
 {
