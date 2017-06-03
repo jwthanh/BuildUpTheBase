@@ -93,6 +93,7 @@ bool NuItem::init(cocos2d::Node* parent)
         NuItem::orig_button = static_cast<cocos2d::ui::Button*>(get_prebuilt_node_from_csb("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
         load_default_button_textures(NuItem::orig_button);
         NuItem::orig_button->retain();
+        NuItem::orig_button->setSwallowTouches(false);
 
         ((ui::Text*)NuItem::orig_button->getChildByName("title_panel")->getChildByName("title_lbl"))->setString(std::string("", 200));
         ((ui::Text*)NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl"))->setString(std::string("", 200));
@@ -103,6 +104,7 @@ bool NuItem::init(cocos2d::Node* parent)
 
     //clone orig button, background is still messed though
     this->button = (ui::Button*)NuItem::orig_button->clone();
+    this->button->setSwallowTouches(false);
 
 
     this->button->setCascadeColorEnabled(true);
