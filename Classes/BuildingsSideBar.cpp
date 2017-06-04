@@ -67,6 +67,25 @@ TabManager::TabManager()
     this->active_tab = TabTypes::ShopTab;
 }
 
+bool TabManager::is_tab_unlocked(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const
+{
+    if (tab_type == TabTypes::ShopTab){
+        return false;
+
+    } else if (tab_type == TabTypes::DetailTab){
+        return true;
+
+    } else if (tab_type == TabTypes::BuildingTab){
+        return true;
+
+    } else if (tab_type == TabTypes::PowersTab){
+        return true;
+    } else {
+        CCLOG("should never be an unkown tab type");
+        return false;
+    }
+}
+
 bool TabManager::is_tab_active(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const
 {
     return this->active_tab == tab_type && this->active_building == building;
@@ -74,6 +93,8 @@ bool TabManager::is_tab_active(const TabTypes& tab_type, const std::shared_ptr<B
 
 void TabManager::set_tab_active(TabTypes tab_type, const spBuilding& building)
 {
+    if (this->is_tab_unlocked(tab_type, building) == false) { return; };
+
     this->active_tab = tab_type;
     spBuilding old_building = this->active_building;
     this->active_building = building;
@@ -176,11 +197,13 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 {
     if (evt == ui::Widget::TouchEventType::ENDED) {
 
+        //enable all tab buttons
         this->tab_shop_btn->setEnabled(true);
         this->tab_detail_btn->setEnabled(true);
         this->tab_building_btn->setEnabled(true);
         this->tab_powers_btn->setEnabled(true);
 
+        //disable the pressed one
         ui::Button* target_button = dynamic_cast<ui::Button*>(target);
         target_button->setEnabled(false);
 
@@ -190,6 +213,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
         {
             ui::ListView* listview = listviews->at(target_building->name);
             listview->requestDoLayout();
+
             this->tabs.set_tab_active(tab_type, target_building);
 
             std::map<std::string, std::string> name_map = {
@@ -256,28 +280,39 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 
 void SideListView::setup_tab_buttons()
 {
+    //returns a callback to determine whether to show or hide the tab button
+    auto build_enable_if_unlocked = [this](ui::Button* tab_btn, TabManager::TabTypes tab_type) {
+        std::function<void(float)> enable_if_unlocked = [this, tab_btn, tab_type](float dt) {
+            try_set_visible(tab_btn, this->tabs.is_tab_unlocked(tab_type, BUILDUP->get_target_building()));
+        };
+
+        return enable_if_unlocked;
+    };
+
     this->tab_shop_btn = this->_create_button("tab_1_btn");
     bind_touch_ended(this->tab_shop_btn, [this](){ this->toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED); });
+    this->tab_shop_btn->schedule(build_enable_if_unlocked(this->tab_shop_btn, TabManager::TabTypes::ShopTab), AVERAGE_DELAY, "enable_if_unlocked");
 
     this->tab_detail_btn = this->_create_button("tab_2_btn");
     bind_touch_ended(this->tab_detail_btn, [this](){ this->toggle_buttons(this->tab_detail_btn, ui::Widget::TouchEventType::ENDED); });
+    this->tab_detail_btn->schedule(build_enable_if_unlocked(this->tab_detail_btn, TabManager::TabTypes::DetailTab), AVERAGE_DELAY, "enable_if_unlocked");
 
     this->tab_building_btn = this->_create_button("tab_3_btn");
     bind_touch_ended(this->tab_building_btn, [this](){ this->toggle_buttons(this->tab_building_btn, ui::Widget::TouchEventType::ENDED); });
+    this->tab_building_btn->schedule(build_enable_if_unlocked(this->tab_building_btn, TabManager::TabTypes::BuildingTab), AVERAGE_DELAY, "enable_if_unlocked");
 
     this->tab_powers_btn = this->_create_button("tab_4_btn");
     bind_touch_ended(this->tab_powers_btn, [this](){ this->toggle_buttons(this->tab_powers_btn, ui::Widget::TouchEventType::ENDED); });
+    this->tab_powers_btn->schedule(build_enable_if_unlocked(this->tab_powers_btn, TabManager::TabTypes::PowersTab), AVERAGE_DELAY, "enable_if_unlocked");
 
 }
 
 void SideListView::setup_listviews()
 {
-	CCLOG("start creating listviews");
     this->shop_listviews = this->_create_listview("shop_listview");
     this->detail_listviews = this->_create_listview("detail_listview");
     this->building_listviews = this->_create_listview("building_listview");
     this->powers_listviews = this->_create_listview("powers_listview");
-	CCLOG("done creating listviews");
 
     auto clean_children_on_target_change = [this](float dt)
     {
@@ -300,7 +335,8 @@ void SideListView::setup_shop_listview_as_harvesters()
         ui::ListView* shop_listview = this->shop_listviews->at(building->name);
         auto update_harvester_listview = [this, shop_listview, building, tab_type](float dt)
         {
-            if (this->tabs.is_tab_active(tab_type, building) == false)
+            if (this->tabs.is_tab_active(tab_type, building) == false ||
+                    this->tabs.is_tab_unlocked(tab_type, building) == false)
             {
                 try_set_visible(shop_listview, false);
                 return;
@@ -453,7 +489,8 @@ void SideListView::setup_building_listview_as_upgrades()
 
         auto update_listview = [this, listview, building, tab_type](float dt)
         {
-            if (this->tabs.is_tab_active(tab_type, building) == false)
+            if (this->tabs.is_tab_active(tab_type, building) == false ||
+                    this->tabs.is_tab_unlocked(tab_type, building) == false)
             {
                 try_set_visible(listview, false);
                 return;
@@ -491,7 +528,8 @@ void SideListView::setup_detail_listview_as_recipes()
         ///DETAIL LISTVIEW
         auto update_listview = [this, listview, building, tab_type](float dt)
         {
-            if (this->tabs.is_tab_active(tab_type, building) == false)
+            if (this->tabs.is_tab_active(tab_type, building) == false ||
+                    this->tabs.is_tab_unlocked(tab_type, building) == false)
             {
                 try_set_visible(listview, false);
                 return;
@@ -1015,7 +1053,8 @@ void SideListView::setup_powers_listview_as_powers()
         ///send feedback
         auto send_feeback = [this, listview, building, tab_type](float dt)
         {
-            if (this->tabs.is_tab_active(tab_type, building) == false)
+            if (this->tabs.is_tab_active(tab_type, building) == false ||
+                    this->tabs.is_tab_unlocked(tab_type, building) == false)
             {
                 try_set_visible(listview, false);
                 return;

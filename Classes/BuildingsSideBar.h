@@ -51,6 +51,8 @@ class TabManager
 
         TabManager();
 
+        bool is_tab_unlocked(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const;
+
         bool is_tab_active(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const;
         void set_tab_active(TabTypes tab_type, const spBuilding& building);
 
