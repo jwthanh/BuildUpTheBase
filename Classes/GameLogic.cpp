@@ -1143,7 +1143,21 @@ void GameDirector::switch_to_reset_menu()
 float withdraw_ticks = 0.0f;
 void bank_withdraw_callback(float dt)
 {
-    //TODO actually withdraw from bank
+    //special case to immediately do something
+    if (withdraw_ticks == 0.0f) {
+        BANK->transfer_from_bank(10);
+    }
+
+    withdraw_ticks += dt;
+    if (withdraw_ticks > 10.75f) {
+        BANK->transfer_from_bank(withdraw_ticks*10);
+    }
+    else if (withdraw_ticks > 2.75f) {
+        BANK->transfer_from_bank(withdraw_ticks);
+    }
+    else if (withdraw_ticks > 0.75f) {
+        BANK->transfer_from_bank(withdraw_ticks/10);
+    }
 };
 
 float deposit_ticks = 0.0f;
@@ -1151,19 +1165,18 @@ void bank_deposit_callback(float dt)
 {
     //special case to immediately do something
     if (deposit_ticks == 0.0f) {
-        BANK->add_total_coins_banked(10);
+        BANK->transfer_to_bank(10);
     }
 
-    //TODO take from pocket and put into bank
     deposit_ticks += dt;
     if (deposit_ticks > 10.75f) {
-        BANK->add_total_coins_banked(deposit_ticks*10);
+        BANK->transfer_to_bank(deposit_ticks*10);
     }
     else if (deposit_ticks > 2.75f) {
-        BANK->add_total_coins_banked(deposit_ticks);
+        BANK->transfer_to_bank(deposit_ticks);
     }
     else if (deposit_ticks > 0.75f) {
-        BANK->add_total_coins_banked(deposit_ticks/10);
+        BANK->transfer_to_bank(deposit_ticks/10);
     }
 };
 

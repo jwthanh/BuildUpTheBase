@@ -53,7 +53,7 @@ res_count_t Bank::get_total_coins_banked() const
 
 void Bank::add_total_coins_banked(res_count_t added_value)
 {
-    this->_total_coins_banked += added_value;
+    this->_total_coins_banked = std::max(this->_total_coins_banked + added_value, 0.0L);
 };
 
 void Bank::set_total_coins_banked(res_count_t new_total)
@@ -68,10 +68,11 @@ void Bank::transfer_to_bank(res_count_t to_bank)
 
     res_count_t total_coins = BEATUP->get_total_coins();
 
+    //make sure there's enough in total coins
     res_count_t to_transfer = std::min(to_bank, total_coins);
+
     //remove from total
     BEATUP->add_total_coins(-to_transfer);
-
     this->add_total_coins_banked(to_transfer);
 };
 
@@ -85,7 +86,10 @@ void Bank::transfer_from_bank(res_count_t from_bank)
         from_bank = coin_storage_left;
 
     }
-    this->add_total_coins_banked(-from_bank);
-    BEATUP->add_total_coins(from_bank);
+
+    //make sure there's enough in coins banked
+    res_count_t to_transfer = std::min(from_bank, this->get_total_coins_banked());
+    this->add_total_coins_banked(-to_transfer);
+    BEATUP->add_total_coins(to_transfer);
 };
 
