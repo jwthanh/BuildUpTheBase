@@ -64,7 +64,7 @@ void Bank::set_total_coins_banked(res_count_t new_total)
 void Bank::transfer_to_bank(res_count_t to_bank)
 {
 
-    if (to_bank > 0) { return; };
+    if (to_bank < 0) { return; };
 
     res_count_t total_coins = BEATUP->get_total_coins();
 
@@ -77,7 +77,7 @@ void Bank::transfer_to_bank(res_count_t to_bank)
 
 void Bank::transfer_from_bank(res_count_t from_bank)
 {
-    if (from_bank > 0) { return; };
+    if (from_bank < 0) { return; };
 
     res_count_t coin_storage_left = BEATUP->get_coin_storage_left();
 
