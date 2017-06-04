@@ -100,7 +100,7 @@ Building::Building(City* city, std::string name, std::string id_key) :
     //TODO TODO
     // work out how to unlock buildings properly
     //TODO TODO
-    this->set_been_bought(true);
+    // this->set_been_bought(true);
 
     this->techtree = std::make_shared<TechTree>();
 };
@@ -456,10 +456,7 @@ void Buildup::post_update()
 
 City* Buildup::init_city(Buildup* buildup)
 {
-
-
     test_beautify_double();
-
 
     buildup->server_clock = Clock(30.0f); //update server every 30 seconds
 
@@ -504,6 +501,7 @@ City* Buildup::init_city(Buildup* buildup)
     };
 
     auto farm = city->building_by_name("The Farm");
+    farm->set_been_bought(true);
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer", WorkerSubType::ZERO));
     buildup->set_target_building(farm);
 
