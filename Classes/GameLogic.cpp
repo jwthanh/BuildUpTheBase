@@ -1149,14 +1149,8 @@ void bank_withdraw_callback(float dt)
     }
 
     withdraw_ticks += dt;
-    if (withdraw_ticks > 10.75f) {
-        BANK->transfer_from_bank(withdraw_ticks*10);
-    }
-    else if (withdraw_ticks > 2.75f) {
-        BANK->transfer_from_bank(withdraw_ticks);
-    }
-    else if (withdraw_ticks > 0.75f) {
-        BANK->transfer_from_bank(withdraw_ticks/10);
+    if (withdraw_ticks > 0.75f) {
+        BANK->transfer_from_bank(std::pow(withdraw_ticks, withdraw_ticks));
     }
 };
 
@@ -1169,14 +1163,8 @@ void bank_deposit_callback(float dt)
     }
 
     deposit_ticks += dt;
-    if (deposit_ticks > 10.75f) {
-        BANK->transfer_to_bank(deposit_ticks*10);
-    }
-    else if (deposit_ticks > 2.75f) {
-        BANK->transfer_to_bank(deposit_ticks);
-    }
-    else if (deposit_ticks > 0.75f) {
-        BANK->transfer_to_bank(deposit_ticks/10);
+    if (deposit_ticks > 0.75f) {
+        BANK->transfer_to_bank(std::pow(deposit_ticks,deposit_ticks));
     }
 };
 
