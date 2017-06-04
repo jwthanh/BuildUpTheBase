@@ -70,13 +70,13 @@ TabManager::TabManager()
 bool TabManager::is_tab_unlocked(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const
 {
     if (tab_type == TabTypes::ShopTab){
-        return false;
+        return building->name != "The Farm";
 
     } else if (tab_type == TabTypes::DetailTab){
         return true;
 
     } else if (tab_type == TabTypes::BuildingTab){
-        return true;
+        return building->name == "The Farm";
 
     } else if (tab_type == TabTypes::PowersTab){
         return true;
