@@ -1289,7 +1289,6 @@ void FightingHarvestable::shatter()
         }
     }
 
-
     //spawn shatter
     FighterNode* fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
     Node* renderer = fighter_node->img_view->getVirtualRenderer();
