@@ -1212,18 +1212,21 @@ void GameDirector::switch_to_bank_menu()
         std::string title;
         std::string description;
         std::function<void(float)> bank_callback;
+        std::function<void(NuItem*)> update_nuitem_callback;
     };
 
     std::vector<bank_config> configs {
         {
             "Withdraw 10",
-            "Withdraw 10 coins in the bank.",
-            bank_withdraw_callback
+            "Withdraw 10 coins from the bank.",
+            bank_withdraw_callback,
+            [](NuItem* nuitem) { try_set_enabled(nuitem->button, BANK->get_total_coins_banked() > 0.0); }
         },
         {
             "Deposit 10",
-            "Deposit 10 coins from the bank.",
-            bank_deposit_callback
+            "Deposit 10 coins to the bank.",
+            bank_deposit_callback,
+            [](NuItem* nuitem) { try_set_enabled(nuitem->button, BEATUP->get_total_coins() > 0.0); }
         }
     };
 
@@ -1233,6 +1236,7 @@ void GameDirector::switch_to_bank_menu()
         NuItem* nuitem = NuItem::create(bank_pageview);
         nuitem->set_title(config.title);
         nuitem->set_description(config.description);
+        nuitem->button->schedule([config, nuitem](float dt){ config.update_nuitem_callback(nuitem); }, SHORT_DELAY, "update_nuitem_callback");
 
         //bank size to width of container
         nuitem->button->setContentSize({ bank_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
@@ -1245,7 +1249,6 @@ void GameDirector::switch_to_bank_menu()
             auto converted_touch = nuitem->button->getParent()->convertTouchToNodeSpace(touch);
             if (bbox.containsPoint(converted_touch))
             {
-                CCLOG("started %s", config.title.c_str());
                 do_vibrate(5);
                 nuitem->button->schedule(config.bank_callback, SHORT_DELAY, "bank_callback");
                 SoundLibrary::getInstance()->play_general_widget_touched();
@@ -1256,6 +1259,7 @@ void GameDirector::switch_to_bank_menu()
         };
         listener->onTouchEnded = [config, nuitem](Touch* touch, Event* event)
         {
+            //reset all button-held counters
             withdraw_ticks = 0.0f;
             deposit_ticks = 0.0f;
 
