@@ -25,6 +25,11 @@ class Bank
         void add_total_coins_banked(res_count_t added_value);
         void set_total_coins_banked(res_count_t new_total);
 
+        //takes from total coins and puts it into bank, if it can.
+        // must be a positive number
+        void transfer_to_bank(res_count_t to_bank);
+        void transfer_from_bank(res_count_t from_bank);
+
         friend class BankSerializer;
 };
 #endif

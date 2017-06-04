@@ -60,3 +60,32 @@ void Bank::set_total_coins_banked(res_count_t new_total)
 {
     this->_total_coins_banked = new_total;
 };
+
+void Bank::transfer_to_bank(res_count_t to_bank)
+{
+
+    if (to_bank > 0) { return; };
+
+    res_count_t total_coins = BEATUP->get_total_coins();
+
+    res_count_t to_transfer = std::min(to_bank, total_coins);
+    //remove from total
+    BEATUP->add_total_coins(-to_transfer);
+
+    this->add_total_coins_banked(to_transfer);
+};
+
+void Bank::transfer_from_bank(res_count_t from_bank)
+{
+    if (from_bank > 0) { return; };
+
+    res_count_t coin_storage_left = BEATUP->get_coin_storage_left();
+
+    if (from_bank > coin_storage_left && coin_storage_left > 0) {
+        from_bank = coin_storage_left;
+
+    }
+    this->add_total_coins_banked(-from_bank);
+    BEATUP->add_total_coins(from_bank);
+};
+
