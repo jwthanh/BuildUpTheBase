@@ -492,9 +492,11 @@ void BaseScene::create_building_choicelist()
 
             if (building->is_storage_full_of_ingredients(building->punched_sub_type))
             {
-                Color3B reddish = { 243, 162, 173 };
-                try_set_node_color(panel, reddish);
-                building_name->setString("FULL!");
+                if (time(0) % 4 > 2) {
+                    building_name->setString(building->short_name);
+                } else {
+                    building_name->setString("FULL");
+                }
             }
             else
             {
@@ -672,12 +674,10 @@ void BaseScene::create_info_panel()
             if (time(0) % 9 > 3) {
                 res_count_t max_coin_storage = BEATUP->get_max_coin_storage();
                 arena_kill_lbl->setString("Coin Limit: " + beautify_double(max_coin_storage));
-            } else if (time(0) % 9 > 6 )
-            {
+            } else if (time(0) % 9 > 6 ) {
                 res_count_t city_investment = GameLogic::getInstance()->get_city_investment();
                 arena_kill_lbl->setString("Investments: " + beautify_double(city_investment));
-            } else
-            {
+            } else {
                 res_count_t coins_banked = BANK->get_total_coins_banked();
                 arena_kill_lbl->setString("Banked: " + beautify_double(coins_banked));
             }
