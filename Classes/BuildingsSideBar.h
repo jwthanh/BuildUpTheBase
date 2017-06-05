@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "constants.h"
-#include "ui/UIWidget.h"
+#include "ui/UIWidget.h" //for ui::Widget::TouchEventType
 
 namespace cocos2d
 {
@@ -18,6 +18,14 @@ namespace cocos2d
         class Button;
     }
 }
+
+enum class TabTypes
+{
+    ShopTab = 0,
+    DetailTab = 1,
+    BuildingTab = 2,
+    PowersTab = 3
+};
 
 class Building;
 
@@ -41,13 +49,8 @@ class TabManager
 
         //used for loading and saving last active tab, so dont change away from
         //0, 1, 2, 3
-        enum class TabTypes
-        {
-            ShopTab = 0,
-            DetailTab = 1,
-            BuildingTab = 2,
-            PowersTab = 3
-        } active_tab;
+        using TabTypes = TabTypes;
+        TabTypes active_tab;
 
         TabManager();
 
