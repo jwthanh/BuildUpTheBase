@@ -1,5 +1,7 @@
 #include "GameProgress.h"
 
+#include "HouseBuilding.h"
+
 GameProgress* GameProgress::_instance = nullptr;
 
 GameProgress* GameProgress::getInstance()
@@ -10,6 +12,11 @@ GameProgress* GameProgress::getInstance()
     }
 
     return GameProgress::_instance;
+}
+
+GameProgress::GameProgress()
+{
+    this->_building_tab_map = {};
 }
 
 
