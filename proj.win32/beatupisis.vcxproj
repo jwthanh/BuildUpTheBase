@@ -204,6 +204,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\PopupPanel.cpp" />
     <ClCompile Include="..\Classes\ProgressBar.cpp" />
     <ClCompile Include="..\Classes\Ingredients.cpp" />
+    <ClCompile Include="..\Classes\progress\GameProgress.cpp" />
     <ClCompile Include="..\Classes\Serializer.cpp" />
     <ClCompile Include="..\Classes\ShatterNode.cpp" />
     <ClCompile Include="..\Classes\SoundEngine.cpp" />
@@ -281,6 +282,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\NuMenu.h" />
     <ClInclude Include="..\Classes\PopupPanel.h" />
     <ClInclude Include="..\Classes\ProgressBar.h" />
+    <ClInclude Include="..\Classes\progress\GameProgress.h" />
     <ClInclude Include="..\Classes\RandomWeightMap.h" />
     <ClInclude Include="..\Classes\Ingredients.h" />
     <ClInclude Include="..\Classes\Serializer.h" />

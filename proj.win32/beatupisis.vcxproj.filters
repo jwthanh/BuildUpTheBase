@@ -139,6 +139,7 @@
     <ClCompile Include="..\Classes\Gestures\TapGestureRecognizer.cpp">
       <Filter>Gestures</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\progress\GameProgress.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -270,6 +271,7 @@
     <ClInclude Include="..\Classes\Gestures\TapGestureRecognizer.h">
       <Filter>Gestures</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\progress\GameProgress.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
