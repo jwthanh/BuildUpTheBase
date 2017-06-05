@@ -69,20 +69,23 @@ TabManager::TabManager()
 
 bool TabManager::is_tab_unlocked(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const
 {
+    const static bool is_global = true;
+
     if (tab_type == TabTypes::ShopTab){
-        return building->name != "The Farm";
+        return true;
 
     } else if (tab_type == TabTypes::DetailTab){
         return true;
 
     } else if (tab_type == TabTypes::BuildingTab){
-        return building->name == "The Farm";
+        return true;
 
     } else if (tab_type == TabTypes::PowersTab){
-        return true;
+        //powers is a global menu, so always active
+        return is_global;
     } else {
-        CCLOG("should never be an unkown tab type");
-        return false;
+        CCLOG("should never be an unknown tab type");
+        return true;
     }
 }
 
