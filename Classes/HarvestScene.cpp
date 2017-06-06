@@ -62,6 +62,7 @@
 #include "RandomWeightMap.h"
 #include "banking/Bank.h"
 #include "ShatterNode.h"
+#include "progress/GameProgress.h"
 
 USING_NS_CC;
 
@@ -484,7 +485,8 @@ void BaseScene::create_building_choicelist()
         {
             auto target_building = BUILDUP->get_target_building();
 
-            const bool been_bought = building->get_been_bought();
+            GameProgress* game_progress = GameProgress::getInstance();
+            const bool been_bought = map_get(game_progress->get_building_unlock_map(), building, false);
             panel->setVisible(been_bought);
             if (!been_bought) { return; }
 
@@ -514,7 +516,8 @@ void BaseScene::create_building_choicelist()
             //TODO TODO
             // figure out a nice way to unlock buildings
             //TODO TODO
-            const bool been_bought = building->get_been_bought();
+            GameProgress* game_progress = GameProgress::getInstance();
+            const bool been_bought = map_get(game_progress->get_building_unlock_map(), building, false);
             if (been_bought) {
                 BUILDUP->set_target_building(building);
             } else {

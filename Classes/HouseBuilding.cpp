@@ -36,6 +36,7 @@
 #include <json/writer.h>
 #include <ck/ck.h>
 #include "Buildup.h"
+#include "progress/GameProgress.h"
 
 USING_NS_CC;
 
@@ -387,6 +388,9 @@ void Buildup::update(float dt)
         this->post_update();
 
     };
+
+    GameProgress* game_progress = GameProgress::getInstance();
+    game_progress->update(dt, this->city);
 };
 
 void Buildup::post_update()

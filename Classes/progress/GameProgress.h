@@ -5,10 +5,12 @@
 #include <memory>
 
 class Building;
+class City;
 enum class TabTypes;
 
 using TabMap = std::map<TabTypes, bool>;
 using BuildingTabMap = std::map<std::shared_ptr<Building>, TabMap>;
+using BuildingUnlockMap = std::map<std::shared_ptr<Building>, bool>;
 
 
 //Tracks a players progress through the game.
@@ -19,14 +21,21 @@ class GameProgress
     private:
         static GameProgress* _instance;
 
-        std::shared_ptr<BuildingTabMap> _building_tab_map;
+        BuildingTabMap _building_tab_map;
+        BuildingUnlockMap _building_unlock_map;
 
     public:
         static GameProgress* getInstance();
 
+        //sets all buildings in the city to locked by default
+        // will need to set the progress elsewhere I think
+        void init(City* city);
+        void update(float dt, City* city);
+
         GameProgress();
 
-        std::shared_ptr<BuildingTabMap> get_building_tab_map;
+        const BuildingTabMap& get_building_tab_map() const;
+        const BuildingUnlockMap& get_building_unlock_map() const;
 
 };
 #endif

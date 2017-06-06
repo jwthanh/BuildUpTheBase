@@ -43,6 +43,7 @@
 #include "banking/Bank.h"
 #include "SoundEngine.h"
 #include "base/CCEventListenerTouch.h"
+#include "progress/GameProgress.h"
 
 
 USING_NS_CC;
@@ -513,6 +514,9 @@ void GameLogic::load_all()
         sidebar->toggle_buttons(sidebar->tab_powers_btn, ui::Widget::TouchEventType::ENDED);
 
     GameLogic::getInstance()->has_learned_wallet_size = DataManager::get_bool_from_data("has_learned_wallet_size", false);
+
+    GameProgress* game_progress = GameProgress::getInstance();
+    game_progress->init(BUILDUP->city);
 
 };
 
