@@ -2,7 +2,6 @@
 #ifndef NUMENU_H
 #define NUMENU_H
 
-#include "GameLayer.h"
 #include "Buyable.h"
 #include "SubTypes.h"
 #include "constants.h"
@@ -29,6 +28,8 @@ namespace cocos2d
     {
         class Text;
         class Widget;
+        class ImageView;
+        class Button;
     }
 }
 

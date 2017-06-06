@@ -2,8 +2,6 @@
 
 #include "Util.h"
 #include "constants.h"
-#include "GameLogic.h"
-#include "Beatup.h" //used in BEATUP macro
 #include "NuMenu.h"
 
 #include "2d/CCSprite.h"
@@ -11,6 +9,7 @@
 #include "2d/CCLabel.h"
 #include "2d/CCActionProgressTimer.h"
 #include "2d/CCActionInstant.h"
+#include <2d/CCLayer.h>
 
 USING_NS_CC;
 

@@ -64,6 +64,7 @@ class Tutorial;
 class TutorialStep;
 
 enum class IngredientSubType;
+enum class WorkerSubType;
 typedef long double res_count_t;
 
 
@@ -119,6 +120,10 @@ MAKE_SP_VS_MI(Tutorial);
 MAKE_SP_VS_MI(TutorialStep);
 
 using mistIngredient = std::map<IngredientSubType, res_count_t>;
+
+using work_ing_t = std::pair<WorkerSubType, IngredientSubType>;
+using mistHarvester = std::map<work_ing_t, res_count_t>;
+using mistWorkerSubType = std::map<WorkerSubType, res_count_t>;
 
 #undef MAKE_SP_VS
 #undef _MAKE_VS
