@@ -78,5 +78,3 @@ const BuildingUnlockMap& GameProgress::get_building_unlock_map() const
 {
     return this->_building_unlock_map;
 }
-
-

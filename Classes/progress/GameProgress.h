@@ -28,8 +28,8 @@ class GameProgress
         static GameProgress* getInstance();
 
         //sets all buildings in the city to locked by default
-        // will need to set the progress elsewhere I think
         void init(City* city);
+        // takes the buildings from city and updates the map based on their statuses
         void update(float dt, City* city);
 
         GameProgress();
