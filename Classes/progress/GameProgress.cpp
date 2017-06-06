@@ -21,12 +21,12 @@ void GameProgress::init(City* city)
     {
         this->_building_unlock_map[building] = false;
 
-        auto tab_map = this->_building_tab_map[building];
+        auto& tab_map = this->_building_tab_map[building];
 
-        tab_map[TabTypes::ShopTab] = false;
+        tab_map[TabTypes::ShopTab] = true;
         tab_map[TabTypes::DetailTab] = false;
         tab_map[TabTypes::BuildingTab] = false;
-        tab_map[TabTypes::PowersTab] = false;
+        tab_map[TabTypes::PowersTab] = true;
     }
 }
 

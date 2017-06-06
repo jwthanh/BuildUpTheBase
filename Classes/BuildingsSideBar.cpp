@@ -41,6 +41,7 @@
 #include "ui/CocosGUI.h"
 #include <2d/CCActionInterval.h>
 #include <2d/CCActionEase.h>
+#include "progress/GameProgress.h"
 
 
 USING_NS_CC;
@@ -69,24 +70,16 @@ TabManager::TabManager()
 
 bool TabManager::is_tab_unlocked(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const
 {
-    const static bool is_global = true;
+    GameProgress* game_progress = GameProgress::getInstance();
+    const BuildingTabMap& tab_map = game_progress->get_building_tab_map();
 
-    if (tab_type == TabTypes::ShopTab){
-        return true;
+    //if it cant find the building in the map, return false.
+    // this assumes the map is empty on start up, if it is end a few seconds into the app
+    // something is wrong somewhere
+    auto it = tab_map.find(building);
+    if (it == tab_map.end()){ return false; }
 
-    } else if (tab_type == TabTypes::DetailTab){
-        return true;
-
-    } else if (tab_type == TabTypes::BuildingTab){
-        return true;
-
-    } else if (tab_type == TabTypes::PowersTab){
-        //powers is a global menu, so always active
-        return is_global;
-    } else {
-        CCLOG("should never be an unknown tab type");
-        return true;
-    }
+    return tab_map.at(building).at(tab_type);
 }
 
 bool TabManager::is_tab_active(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const
