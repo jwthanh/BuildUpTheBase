@@ -164,11 +164,11 @@ SideListView::SideListView(Node* parent, spBuilding current_target)
     check_visible(0.0f);
 
 
-    this->tabs.button_map = std::map<ui::Button*, std::pair<TabManager::TabTypes, spListviewMap>>{
-        { this->tab_shop_btn, { TabManager::TabTypes::ShopTab, this->shop_listviews } },
-        { this->tab_detail_btn, { TabManager::TabTypes::DetailTab, this->detail_listviews } },
-        { this->tab_building_btn, { TabManager::TabTypes::BuildingTab, this->building_listviews } },
-        { this->tab_powers_btn, { TabManager::TabTypes::PowersTab, this->powers_listviews } }
+    this->tabs.button_map = std::map<ui::Button*, std::pair<TabTypes, spListviewMap>>{
+        { this->tab_shop_btn, { TabTypes::ShopTab, this->shop_listviews } },
+        { this->tab_detail_btn, { TabTypes::DetailTab, this->detail_listviews } },
+        { this->tab_building_btn, { TabTypes::BuildingTab, this->building_listviews } },
+        { this->tab_powers_btn, { TabTypes::PowersTab, this->powers_listviews } }
     };
 
     //prepress the shop button
@@ -212,7 +212,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 
         spBuilding target_building = BUILDUP->get_target_building();
 
-        auto activate_tab = [this, target_building](spListviewMap& listviews, TabManager::TabTypes tab_type)
+        auto activate_tab = [this, target_building](spListviewMap& listviews, TabTypes tab_type)
         {
             ui::ListView* listview = listviews->at(target_building->name);
             listview->requestDoLayout();
@@ -241,7 +241,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
             // FIXME because buttons aren't there the first time due to
             // update function building the items, this doesn't work the first
             // time it happens, it requires a built tab
-            if (tab_type == TabManager::TabTypes::BuildingTab)
+            if (tab_type == TabTypes::BuildingTab)
             {
                 int sentinel = 123456;
                 int index = sentinel;
@@ -284,7 +284,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 void SideListView::setup_tab_buttons()
 {
     //returns a callback to determine whether to show or hide the tab button
-    auto build_enable_if_unlocked = [this](ui::Button* tab_btn, TabManager::TabTypes tab_type) {
+    auto build_enable_if_unlocked = [this](ui::Button* tab_btn, TabTypes tab_type) {
         std::function<void(float)> enable_if_unlocked = [this, tab_btn, tab_type](float dt) {
             try_set_visible(tab_btn, this->tabs.is_tab_unlocked(tab_type, BUILDUP->get_target_building()));
         };
@@ -294,19 +294,19 @@ void SideListView::setup_tab_buttons()
 
     this->tab_shop_btn = this->_create_button("tab_1_btn");
     bind_touch_ended(this->tab_shop_btn, [this](){ this->toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED); });
-    this->tab_shop_btn->schedule(build_enable_if_unlocked(this->tab_shop_btn, TabManager::TabTypes::ShopTab), AVERAGE_DELAY, "enable_if_unlocked");
+    this->tab_shop_btn->schedule(build_enable_if_unlocked(this->tab_shop_btn, TabTypes::ShopTab), AVERAGE_DELAY, "enable_if_unlocked");
 
     this->tab_detail_btn = this->_create_button("tab_2_btn");
     bind_touch_ended(this->tab_detail_btn, [this](){ this->toggle_buttons(this->tab_detail_btn, ui::Widget::TouchEventType::ENDED); });
-    this->tab_detail_btn->schedule(build_enable_if_unlocked(this->tab_detail_btn, TabManager::TabTypes::DetailTab), AVERAGE_DELAY, "enable_if_unlocked");
+    this->tab_detail_btn->schedule(build_enable_if_unlocked(this->tab_detail_btn, TabTypes::DetailTab), AVERAGE_DELAY, "enable_if_unlocked");
 
     this->tab_building_btn = this->_create_button("tab_3_btn");
     bind_touch_ended(this->tab_building_btn, [this](){ this->toggle_buttons(this->tab_building_btn, ui::Widget::TouchEventType::ENDED); });
-    this->tab_building_btn->schedule(build_enable_if_unlocked(this->tab_building_btn, TabManager::TabTypes::BuildingTab), AVERAGE_DELAY, "enable_if_unlocked");
+    this->tab_building_btn->schedule(build_enable_if_unlocked(this->tab_building_btn, TabTypes::BuildingTab), AVERAGE_DELAY, "enable_if_unlocked");
 
     this->tab_powers_btn = this->_create_button("tab_4_btn");
     bind_touch_ended(this->tab_powers_btn, [this](){ this->toggle_buttons(this->tab_powers_btn, ui::Widget::TouchEventType::ENDED); });
-    this->tab_powers_btn->schedule(build_enable_if_unlocked(this->tab_powers_btn, TabManager::TabTypes::PowersTab), AVERAGE_DELAY, "enable_if_unlocked");
+    this->tab_powers_btn->schedule(build_enable_if_unlocked(this->tab_powers_btn, TabTypes::PowersTab), AVERAGE_DELAY, "enable_if_unlocked");
 
 }
 
@@ -332,7 +332,7 @@ void SideListView::setup_listviews()
 
 void SideListView::setup_shop_listview_as_harvesters()
 {
-    TabManager::TabTypes tab_type = TabManager::TabTypes::ShopTab;
+    TabTypes tab_type = TabTypes::ShopTab;
     for (spBuilding building : BUILDUP->city->buildings)
     {
         ui::ListView* shop_listview = this->shop_listviews->at(building->name);
@@ -484,7 +484,7 @@ bool SideListView::if_tag_exists_in_listview(int child_tag, ui::ListView* listvi
 
 void SideListView::setup_building_listview_as_upgrades()
 {
-    TabManager::TabTypes tab_type = TabManager::TabTypes::BuildingTab;
+    TabTypes tab_type = TabTypes::BuildingTab;
 
     for (spBuilding building : BUILDUP->city->buildings)
     {
@@ -521,7 +521,7 @@ void SideListView::setup_building_listview_as_upgrades()
 
 void SideListView::setup_detail_listview_as_recipes()
 {
-    TabManager::TabTypes tab_type = TabManager::TabTypes::DetailTab;
+    TabTypes tab_type = TabTypes::DetailTab;
 
 
     for (spBuilding building : BUILDUP->city->buildings)
@@ -1047,7 +1047,7 @@ void SideListView::setup_detail_listview_as_recipes()
 
 void SideListView::setup_powers_listview_as_powers()
 {
-    TabManager::TabTypes tab_type = TabManager::TabTypes::PowersTab;
+    TabTypes tab_type = TabTypes::PowersTab;
 
     for (spBuilding building : BUILDUP->city->buildings)
     {

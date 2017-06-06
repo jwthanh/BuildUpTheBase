@@ -49,7 +49,6 @@ class TabManager
 
         //used for loading and saving last active tab, so dont change away from
         //0, 1, 2, 3
-        using TabTypes = TabTypes;
         TabTypes active_tab;
 
         TabManager();
@@ -59,7 +58,7 @@ class TabManager
         bool is_tab_active(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const;
         void set_tab_active(TabTypes tab_type, const spBuilding& building);
 
-        std::map<cocos2d::ui::Button*, std::pair<TabManager::TabTypes, spListviewMap>> button_map;
+        std::map<cocos2d::ui::Button*, std::pair<TabTypes, spListviewMap>> button_map;
         cocos2d::ui::ListView* get_active_listview();
         cocos2d::ui::Button* get_active_button();
 };
