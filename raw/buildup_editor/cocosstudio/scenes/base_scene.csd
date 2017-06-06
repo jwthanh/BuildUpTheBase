@@ -276,7 +276,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="shop_listview" ActionTag="-890238903" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+              <AbstractNodeData Name="worker_listview" ActionTag="-890238903" Tag="30" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" StretchHeightEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
                 <Size X="800.0000" Y="810.0000" />
                 <AnchorPoint />
                 <Position X="0.0004" />
@@ -315,7 +315,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="powers_listview" ActionTag="1504007663" Tag="169" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+              <AbstractNodeData Name="menu_listview" ActionTag="1504007663" Tag="169" IconVisible="False" VerticalEdge="BottomEdge" LeftMargin="0.0004" RightMargin="-400.0004" TopMargin="-270.0000" TouchEnable="True" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
                 <Size X="800.0000" Y="810.0000" />
                 <AnchorPoint />
                 <Position X="0.0004" />

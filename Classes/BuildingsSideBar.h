@@ -65,15 +65,15 @@ class SideListView
 
         TabManager tabs;
 
-        spListviewMap shop_listviews;
+        spListviewMap worker_listviews;
         spListviewMap detail_listviews;
         spListviewMap building_listviews;
-        spListviewMap powers_listviews;
+        spListviewMap menu_listviews;
 
-        cocos2d::ui::Button* tab_shop_btn;
+        cocos2d::ui::Button* tab_worker_btn;
         cocos2d::ui::Button* tab_detail_btn;
         cocos2d::ui::Button* tab_building_btn;
-        cocos2d::ui::Button* tab_powers_btn;
+        cocos2d::ui::Button* tab_menu_btn;
 
 
         SideListView(cocos2d::Node* parent, std::shared_ptr<Building> current_target);
@@ -87,10 +87,10 @@ class SideListView
         void setup_listviews();
         bool if_tag_exists_in_listview(int child_tag, cocos2d::ui::ListView* listview);
 
-        void setup_shop_listview_as_harvesters();
-        void setup_detail_listview_as_recipes();
-        void setup_building_listview_as_upgrades();
-        void setup_powers_listview_as_powers();
+        void setup_worker_listview();
+        void setup_detail_listview();
+        void setup_building_listview();
+        void setup_menu_listview();
 };
 
 #endif

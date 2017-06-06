@@ -119,7 +119,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_A)
     {
         ActionPanel* action_panel = ActionPanel::create();
-        action_panel->set_target(this->sidebar->shop_listviews->at("The Graveyard"));
+        action_panel->set_target(this->sidebar->worker_listviews->at("The Graveyard"));
         this->addChild(action_panel);
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_F)
@@ -1115,10 +1115,10 @@ void BaseScene::create_shop_listview()
 
     this->sidebar = std::make_shared<SideListView>(this, BUILDUP->get_target_building());
 
-    this->sidebar->setup_shop_listview_as_harvesters();
-    this->sidebar->setup_detail_listview_as_recipes();
-    this->sidebar->setup_building_listview_as_upgrades();
-    this->sidebar->setup_powers_listview_as_powers();
+    this->sidebar->setup_worker_listview();
+    this->sidebar->setup_detail_listview();
+    this->sidebar->setup_building_listview();
+    this->sidebar->setup_menu_listview();
 };
 
 bool HarvestScene::init()

@@ -3,10 +3,10 @@
 
 enum class TabTypes
 {
-    ShopTab = 0,
+    WorkerTab = 0,
     DetailTab = 1,
     BuildingTab = 2,
-    PowersTab = 3
+    MenuTab = 3
 };
 
 #endif

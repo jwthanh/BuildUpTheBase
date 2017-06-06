@@ -66,7 +66,7 @@ std::map<Worker::SubType, Worker::SubType> req_map = {
 TabManager::TabManager()
 {
     this->active_building = BUILDUP->city->building_by_name("The Farm");
-    this->active_tab = TabTypes::ShopTab;
+    this->active_tab = TabTypes::WorkerTab;
 }
 
 bool TabManager::is_tab_unlocked(const TabTypes& tab_type, const std::shared_ptr<Building>& building) const
@@ -159,14 +159,14 @@ SideListView::SideListView(Node* parent, spBuilding current_target)
 
 
     this->tabs.button_map = std::map<ui::Button*, std::pair<TabTypes, spListviewMap>>{
-        { this->tab_shop_btn, { TabTypes::ShopTab, this->shop_listviews } },
+        { this->tab_worker_btn, { TabTypes::WorkerTab, this->worker_listviews } },
         { this->tab_detail_btn, { TabTypes::DetailTab, this->detail_listviews } },
         { this->tab_building_btn, { TabTypes::BuildingTab, this->building_listviews } },
-        { this->tab_powers_btn, { TabTypes::PowersTab, this->powers_listviews } }
+        { this->tab_menu_btn, { TabTypes::MenuTab, this->menu_listviews } }
     };
 
     //prepress the shop button
-    this->toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
+    this->toggle_buttons(this->tab_worker_btn, ui::Widget::TouchEventType::ENDED);
 };
 
 ui::Button* SideListView::_create_button(std::string node_name)
@@ -195,10 +195,10 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
     if (evt == ui::Widget::TouchEventType::ENDED) {
 
         //enable all tab buttons
-        this->tab_shop_btn->setEnabled(true);
+        this->tab_worker_btn->setEnabled(true);
         this->tab_detail_btn->setEnabled(true);
         this->tab_building_btn->setEnabled(true);
-        this->tab_powers_btn->setEnabled(true);
+        this->tab_menu_btn->setEnabled(true);
 
         //disable the pressed one
         ui::Button* target_button = dynamic_cast<ui::Button*>(target);
@@ -286,9 +286,9 @@ void SideListView::setup_tab_buttons()
         return enable_if_unlocked;
     };
 
-    this->tab_shop_btn = this->_create_button("tab_1_btn");
-    bind_touch_ended(this->tab_shop_btn, [this](){ this->toggle_buttons(this->tab_shop_btn, ui::Widget::TouchEventType::ENDED); });
-    this->tab_shop_btn->schedule(build_enable_if_unlocked(this->tab_shop_btn, TabTypes::ShopTab), AVERAGE_DELAY, "enable_if_unlocked");
+    this->tab_worker_btn = this->_create_button("tab_1_btn");
+    bind_touch_ended(this->tab_worker_btn, [this](){ this->toggle_buttons(this->tab_worker_btn, ui::Widget::TouchEventType::ENDED); });
+    this->tab_worker_btn->schedule(build_enable_if_unlocked(this->tab_worker_btn, TabTypes::WorkerTab), AVERAGE_DELAY, "enable_if_unlocked");
 
     this->tab_detail_btn = this->_create_button("tab_2_btn");
     bind_touch_ended(this->tab_detail_btn, [this](){ this->toggle_buttons(this->tab_detail_btn, ui::Widget::TouchEventType::ENDED); });
@@ -298,18 +298,18 @@ void SideListView::setup_tab_buttons()
     bind_touch_ended(this->tab_building_btn, [this](){ this->toggle_buttons(this->tab_building_btn, ui::Widget::TouchEventType::ENDED); });
     this->tab_building_btn->schedule(build_enable_if_unlocked(this->tab_building_btn, TabTypes::BuildingTab), AVERAGE_DELAY, "enable_if_unlocked");
 
-    this->tab_powers_btn = this->_create_button("tab_4_btn");
-    bind_touch_ended(this->tab_powers_btn, [this](){ this->toggle_buttons(this->tab_powers_btn, ui::Widget::TouchEventType::ENDED); });
-    this->tab_powers_btn->schedule(build_enable_if_unlocked(this->tab_powers_btn, TabTypes::PowersTab), AVERAGE_DELAY, "enable_if_unlocked");
+    this->tab_menu_btn = this->_create_button("tab_4_btn");
+    bind_touch_ended(this->tab_menu_btn, [this](){ this->toggle_buttons(this->tab_menu_btn, ui::Widget::TouchEventType::ENDED); });
+    this->tab_menu_btn->schedule(build_enable_if_unlocked(this->tab_menu_btn, TabTypes::MenuTab), AVERAGE_DELAY, "enable_if_unlocked");
 
 }
 
 void SideListView::setup_listviews()
 {
-    this->shop_listviews = this->_create_listview("shop_listview");
+    this->worker_listviews = this->_create_listview("worker_listview");
     this->detail_listviews = this->_create_listview("detail_listview");
     this->building_listviews = this->_create_listview("building_listview");
-    this->powers_listviews = this->_create_listview("powers_listview");
+    this->menu_listviews = this->_create_listview("menu_listview");
 
     auto clean_children_on_target_change = [this](float dt)
     {
@@ -324,12 +324,12 @@ void SideListView::setup_listviews()
     this->parent->schedule(clean_children_on_target_change, AVERAGE_DELAY, "clean_children");
 };
 
-void SideListView::setup_shop_listview_as_harvesters()
+void SideListView::setup_worker_listview()
 {
-    TabTypes tab_type = TabTypes::ShopTab;
+    TabTypes tab_type = TabTypes::WorkerTab;
     for (spBuilding building : BUILDUP->city->buildings)
     {
-        ui::ListView* shop_listview = this->shop_listviews->at(building->name);
+        ui::ListView* shop_listview = this->worker_listviews->at(building->name);
         auto update_harvester_listview = [this, shop_listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false ||
@@ -476,7 +476,7 @@ bool SideListView::if_tag_exists_in_listview(int child_tag, ui::ListView* listvi
     return existing_node != NULL;
 }
 
-void SideListView::setup_building_listview_as_upgrades()
+void SideListView::setup_building_listview()
 {
     TabTypes tab_type = TabTypes::BuildingTab;
 
@@ -513,7 +513,7 @@ void SideListView::setup_building_listview_as_upgrades()
     };
 };
 
-void SideListView::setup_detail_listview_as_recipes()
+void SideListView::setup_detail_listview()
 {
     TabTypes tab_type = TabTypes::DetailTab;
 
@@ -1039,13 +1039,13 @@ void SideListView::setup_detail_listview_as_recipes()
     };
 };
 
-void SideListView::setup_powers_listview_as_powers()
+void SideListView::setup_menu_listview()
 {
-    TabTypes tab_type = TabTypes::PowersTab;
+    TabTypes tab_type = TabTypes::MenuTab;
 
     for (spBuilding building : BUILDUP->city->buildings)
     {
-        ui::ListView* listview = this->powers_listviews->at(building->name);
+        ui::ListView* listview = this->menu_listviews->at(building->name);
 
         ///send feedback
         auto send_feeback = [this, listview, building, tab_type](float dt)

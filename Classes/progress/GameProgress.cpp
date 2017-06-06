@@ -23,10 +23,10 @@ void GameProgress::init(City* city)
 
         auto& tab_map = this->_building_tab_map[building];
 
-        tab_map[TabTypes::ShopTab] = true;
+        tab_map[TabTypes::WorkerTab] = true;
         tab_map[TabTypes::DetailTab] = false;
         tab_map[TabTypes::BuildingTab] = false;
-        tab_map[TabTypes::PowersTab] = true;
+        tab_map[TabTypes::MenuTab] = true;
     }
 }
 

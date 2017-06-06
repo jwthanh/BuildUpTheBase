@@ -502,17 +502,17 @@ void GameLogic::load_all()
     cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
     HarvestScene* harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
     auto sidebar = harvest_scene->sidebar;
-    TabTypes tab_type = (TabTypes)DataManager::get_int_from_data("active_tab", (int)TabTypes::ShopTab);
+    TabTypes tab_type = (TabTypes)DataManager::get_int_from_data("active_tab", (int)TabTypes::WorkerTab);
 
     //TODO make add a toggle_buttons based on TabType to avoid this set of if statments
-    if (tab_type == TabTypes::ShopTab)
-        sidebar->toggle_buttons(sidebar->tab_shop_btn, ui::Widget::TouchEventType::ENDED);
+    if (tab_type == TabTypes::WorkerTab)
+        sidebar->toggle_buttons(sidebar->tab_worker_btn, ui::Widget::TouchEventType::ENDED);
     else if (tab_type == TabTypes::BuildingTab)
         sidebar->toggle_buttons(sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
     else if (tab_type == TabTypes::DetailTab)
         sidebar->toggle_buttons(sidebar->tab_detail_btn, ui::Widget::TouchEventType::ENDED);
-    else if (tab_type == TabTypes::PowersTab)
-        sidebar->toggle_buttons(sidebar->tab_powers_btn, ui::Widget::TouchEventType::ENDED);
+    else if (tab_type == TabTypes::MenuTab)
+        sidebar->toggle_buttons(sidebar->tab_menu_btn, ui::Widget::TouchEventType::ENDED);
 
     GameLogic::getInstance()->has_learned_wallet_size = DataManager::get_bool_from_data("has_learned_wallet_size", false);
 
