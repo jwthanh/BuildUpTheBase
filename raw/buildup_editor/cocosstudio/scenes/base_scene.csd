@@ -6,7 +6,7 @@
       <ObjectData Name="Scene" Tag="239" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="tutorial_sidebar_panel" ActionTag="-2013916583" Tag="2052" IconVisible="True" RightMargin="960.0000" TopMargin="540.0000" BottomMargin="100.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+          <AbstractNodeData Name="tutorial_sidebar_panel" Visible="False" ActionTag="-2013916583" Tag="2052" IconVisible="True" RightMargin="960.0000" TopMargin="540.0000" BottomMargin="100.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
             <Position Y="100.0000" />
@@ -209,7 +209,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="sidebar_panel" Visible="False" ActionTag="-679798338" Tag="271" IconVisible="False" RightMargin="560.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="sidebar_panel" ActionTag="-679798338" Tag="271" IconVisible="False" RightMargin="560.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="400.0000" Y="540.0000" />
             <Children>
               <AbstractNodeData Name="tab_1_btn" ActionTag="2032519568" Tag="160" IconVisible="False" LeftMargin="0.0009" RightMargin="199.9991" TopMargin="69.9991" BottomMargin="400.0009" TouchEnable="True" FontSize="18" ButtonText="Workers" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
@@ -244,13 +244,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="tab_3_btn" ActionTag="-2035028012" Tag="78" IconVisible="False" LeftMargin="0.0009" RightMargin="199.9991" TopMargin="-0.0016" BottomMargin="470.0016" TouchEnable="True" FontSize="18" ButtonText="Building" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="tab_3_btn" ActionTag="-2035028012" Tag="78" IconVisible="False" LeftMargin="200.0000" TopMargin="-0.0016" BottomMargin="470.0016" TouchEnable="True" FontSize="18" ButtonText="Building" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="200.0000" Y="70.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0009" Y="505.0016" />
+                <Position X="300.0000" Y="505.0016" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2500" Y="0.9352" />
+                <PrePosition X="0.7500" Y="0.9352" />
                 <PreSize X="0.5000" Y="0.1296" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
@@ -260,13 +260,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="tab_4_btn" ActionTag="243979730" Tag="78" IconVisible="False" LeftMargin="200.0003" RightMargin="-0.0003" TopMargin="-0.0016" BottomMargin="470.0016" TouchEnable="True" FontSize="18" ButtonText="Menu" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="tab_4_btn" ActionTag="243979730" Tag="78" IconVisible="False" RightMargin="200.0000" TopMargin="-0.0016" BottomMargin="470.0016" TouchEnable="True" FontSize="18" ButtonText="Menu" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="200.0000" Y="70.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="300.0003" Y="505.0016" />
+                <Position X="100.0000" Y="505.0016" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.7500" Y="0.9352" />
+                <PrePosition X="0.2500" Y="0.9352" />
                 <PreSize X="0.5000" Y="0.1296" />
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />

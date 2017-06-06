@@ -13,7 +13,6 @@
 
 USING_NS_CC;
 
-
 ProgressBar::ProgressBar(
     std::string front_sprite_frame_path="",
     std::string back_sprite_frame_path=""
