@@ -25,7 +25,7 @@ void GameProgress::init(City* city)
 
         tab_map[TabTypes::WorkerTab] = true;
         tab_map[TabTypes::DetailTab] = false;
-        tab_map[TabTypes::BuildingTab] = false;
+        tab_map[TabTypes::BuildingTab] = true;
         tab_map[TabTypes::MenuTab] = true;
     }
 }
