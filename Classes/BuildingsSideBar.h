@@ -7,6 +7,8 @@
 #include "constants.h"
 #include "ui/UIWidget.h" //for ui::Widget::TouchEventType
 
+#include "enums/tab_types.h"
+
 namespace cocos2d
 {
     class Ref;
@@ -18,14 +20,6 @@ namespace cocos2d
         class Button;
     }
 }
-
-enum class TabTypes
-{
-    ShopTab = 0,
-    DetailTab = 1,
-    BuildingTab = 2,
-    PowersTab = 3
-};
 
 class Building;
 

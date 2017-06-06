@@ -34,6 +34,9 @@
     <Filter Include="Gestures">
       <UniqueIdentifier>{a707ccfb-9827-4e76-bb49-9f0cf1480d85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="enums">
+      <UniqueIdentifier>{10648e83-4c80-4ba7-83e8-5d90f366aff5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -272,6 +275,9 @@
       <Filter>Gestures</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\progress\GameProgress.h" />
+    <ClInclude Include="..\Classes\enums\tab_types.h">
+      <Filter>enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

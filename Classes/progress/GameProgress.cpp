@@ -1,6 +1,7 @@
 #include "GameProgress.h"
 
 #include "HouseBuilding.h"
+#include "enums/tab_types.h"
 
 GameProgress* GameProgress::_instance = nullptr;
 
@@ -19,6 +20,13 @@ void GameProgress::init(City* city)
     for (auto& building : city->buildings)
     {
         this->_building_unlock_map[building] = false;
+
+        auto tab_map = this->_building_tab_map[building];
+
+        tab_map[TabTypes::ShopTab] = false;
+        tab_map[TabTypes::DetailTab] = false;
+        tab_map[TabTypes::BuildingTab] = false;
+        tab_map[TabTypes::PowersTab] = false;
     }
 }
 
