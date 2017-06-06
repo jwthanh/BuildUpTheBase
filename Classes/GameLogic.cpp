@@ -44,6 +44,7 @@
 #include "SoundEngine.h"
 #include "base/CCEventListenerTouch.h"
 #include "progress/GameProgress.h"
+#include "Ingredients.h"
 
 
 USING_NS_CC;

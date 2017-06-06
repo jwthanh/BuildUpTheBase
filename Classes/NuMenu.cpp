@@ -17,14 +17,13 @@
 #include "Technology.h"
 #include "HarvestScene.h"
 #include "NodeBuilder.h"
+#include "Ingredients.h"
 
 #include "magic_particles/MagicEmitter.h"
 
 #include "2d/CCParticleSystemQuad.h"
 #include "base/CCDirector.h"
 #include "2d/CCRenderTexture.h"
-#include "base/CCEventListenerTouch.h"
-#include "base/CCEventListenerKeyboard.h"
 #include "base/CCEventDispatcher.h"
 #include "ui/UIText.h"
 #include "ui/UIButton.h"
@@ -33,7 +32,6 @@
 #include <cocostudio/CocosStudioExtension.h>
 #include "ui/UILayout.h"
 #include "ui/UIListView.h"
-#include "ui/UIScrollView.h"
 
 #include "utilities/vibration.h"
 #include "external/easylogging.h"
@@ -436,7 +434,7 @@ void RecipeNuItem::other_init(spRecipe recipe)
         CCLOG("no callback set, using default, recipe %s", this->recipe->name.c_str());
         recipe->_callback = [this]() {
             for (auto pair : this->recipe->outputs) {
-                Ingredient::SubType ing_type = pair.first;
+                IngredientSubType ing_type = pair.first;
                 res_count_t count = pair.second;
                 this->building->create_ingredients(ing_type, count);
             };
@@ -889,7 +887,7 @@ bool HarvesterShopNuItem::init(Node* parent, spBuilding building)
     return true;
 }
 
-void HarvesterShopNuItem::my_init(WorkerSubType harv_type, Ingredient::SubType ing_type)
+void HarvesterShopNuItem::my_init(WorkerSubType harv_type, IngredientSubType ing_type)
 {
     this->harv_type = harv_type;
     this->ing_type = ing_type;

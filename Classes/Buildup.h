@@ -3,7 +3,6 @@
 
 #include "Clock.h"
 #include "constants.h"
-#include "Ingredients.h"
 
 class City;
 class Player;
@@ -35,7 +34,7 @@ class Buildup
         mistIngredient _all_ingredients;
     public:
         mistIngredient& get_all_ingredients();
-        void remove_shared_ingredients_from_all(Ingredient::SubType ing_type, res_count_t count);
+        void remove_shared_ingredients_from_all(IngredientSubType ing_type, res_count_t count);
 
         Buildup();
         void update(float dt);

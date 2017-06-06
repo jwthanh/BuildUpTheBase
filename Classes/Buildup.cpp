@@ -19,6 +19,7 @@
 #include "FileOperation.h"
 #include "Network.h"
 #include "Util.h"
+#include "Ingredients.h"
 
 Buildup::Buildup()
 {

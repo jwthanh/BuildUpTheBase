@@ -28,7 +28,9 @@
 #include "HarvestableManager.h"
 #include "utilities/vibration.h"
 #include "HarvestScene.h"
+#include "Ingredients.h"
 #include "SoundEngine.h"
+#include "Modal.h"
 
 #include "2d/CCClippingNode.h"
 #include "2d/CCActionEase.h"
@@ -44,7 +46,6 @@
 #include "ui/UIScale9Sprite.h"
 #include "Gestures/LongPressGestureRecognizer.h"
 #include "Gestures/GestureRecognizerUtils.h"
-#include "Modal.h"
 
 USING_NS_CC;
 

@@ -18,6 +18,8 @@
 #include "Harvestable.h"
 #include "HarvestableManager.h"
 #include "banking/Bank.h"
+#include "Ingredients.h"
+
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
     : Nameable(name), Updateable(), sub_type(sub_type) {

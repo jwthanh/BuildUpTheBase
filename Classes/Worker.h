@@ -9,8 +9,6 @@
 
 #include "SubTypes.h"
 
-#include "Ingredients.h"
-
 //
 //attaches to a building and does something once certain conditions are hit
 //
@@ -36,9 +34,9 @@ class Worker : public Nameable, Updateable
 class Harvester : public Worker
 {
     public:
-        Ingredient::SubType ing_type;
+        IngredientSubType ing_type;
 
-        Harvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
+        Harvester(spBuilding building, std::string name, IngredientSubType ing_type, SubType sub_type);
 
         virtual void on_update(float dt) override;
 
@@ -49,7 +47,7 @@ class Harvester : public Worker
 class Salesman : public Harvester
 {
     public:
-        Salesman(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
+        Salesman(spBuilding building, std::string name, IngredientSubType ing_type, SubType sub_type);
 
         virtual void on_update(float dt) override;
         static res_count_t get_base_shop_cost(SubType sub_type);
@@ -59,7 +57,7 @@ class Salesman : public Harvester
 class ConsumerHarvester : public Harvester
 {
     public:
-        ConsumerHarvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
+        ConsumerHarvester(spBuilding building, std::string name, IngredientSubType ing_type, SubType sub_type);
         virtual void on_update(float dt) override;
 
 };
@@ -67,7 +65,7 @@ class ConsumerHarvester : public Harvester
 class ScavengerHarvester : public Harvester
 {
     public:
-        ScavengerHarvester(spBuilding building, std::string name, Ingredient::SubType ing_type, SubType sub_type);
+        ScavengerHarvester(spBuilding building, std::string name, IngredientSubType ing_type, SubType sub_type);
         virtual void on_update(float dt) override;
 
 };

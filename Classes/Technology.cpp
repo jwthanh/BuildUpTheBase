@@ -4,6 +4,7 @@
 #include "HouseBuilding.h"
 #include "Recipe.h"
 #include "Util.h"
+#include "Ingredients.h"
 
 //used for saving to file, and more
 const std::map<Technology::SubType, std::string> Technology::type_map = {

@@ -9,6 +9,7 @@
 
 #include "Recipe.h"
 #include "Item.h"
+#include "Ingredients.h"
 
 std::map<std::string, rjDocument> BaseStaticData::_file_content_cache = {};
 

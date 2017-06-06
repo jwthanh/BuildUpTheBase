@@ -19,6 +19,7 @@
 #include "Equipment.h"
 #include "goals/Achievement.h"
 #include "Worker.h"
+#include "Ingredients.h"
 
 #include "2d/CCTMXTiledMap.h"
 #include "2d/CCTMXLayer.h"

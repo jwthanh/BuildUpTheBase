@@ -15,6 +15,8 @@
 #include "Technology.h"
 #include "GameLogic.h"
 #include "Clock.h"
+#include "Ingredients.h"
+
 
 #include "Buildup.h"
 

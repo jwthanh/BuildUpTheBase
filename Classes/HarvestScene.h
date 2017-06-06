@@ -3,7 +3,6 @@
 #define HARVESTSCENE_H
 
 #include "GameLayer.h"
-#include "Ingredients.h"
 #include "magic_particles/_core/magic.h"
 
 class SideListView;
@@ -65,7 +64,7 @@ class BaseScene : public GameLayer
         void create_shop_listview();
         void create_popup_panel();
 
-        cocos2d::ui::Widget* create_ingredient_detail_alert(Ingredient::SubType ing_type);
+        cocos2d::ui::Widget* create_ingredient_detail_alert(IngredientSubType ing_type);
 
         void scroll_to_target_building();
         void generate_WIP_welcome_message(); //only exists to keep it somewhere for later
@@ -87,14 +86,14 @@ class HarvestScene : public BaseScene
         void add_harvestable();
 
         void toggle_ingredient_listviews(bool remove_children=true);
-        Node* show_ingredient_listview_for_ing_type(Ingredient::SubType ing_type);
+        Node* show_ingredient_listview_for_ing_type(IngredientSubType ing_type);
         ///return NULL if panel containing ing type is invisible
         Node* get_visible_ing_panel(
-            Ingredient::SubType ing_type
+            IngredientSubType ing_type
         );
 
         void spawn_floating_label_for_ing_type(
-            Ingredient::SubType ing_type,
+            IngredientSubType ing_type,
             std::string message
         );
 };

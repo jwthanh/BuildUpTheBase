@@ -96,7 +96,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
     auto check_grain = [first_step](float dt){
         //update progress bar
         res_count_t target_total_grain = BUILDING_LEVEL_STORAGE_LIMIT.at(1);
-        res_count_t grain_count = BUILDUP->count_ingredients(Ingredient::SubType::Grain);
+        res_count_t grain_count = BUILDUP->count_ingredients(IngredientSubType::Grain);
         res_count_t satisfied_percentage = grain_count/target_total_grain*100;
         first_step->tutorial_loadingbar->setPercent((float)satisfied_percentage);
 
@@ -168,7 +168,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
     auto target_building = BUILDUP->get_target_building();
 
 
-    //typedef std::pair<Worker::SubType, Ingredient::SubType> work_ing_t;
+    //typedef std::pair<Worker::SubType, IngredientSubType> work_ing_t;
 
     auto check_harvesters = [this, third_step, target_building](float dt){
         //update progress bar

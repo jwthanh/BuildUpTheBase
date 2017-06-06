@@ -63,6 +63,11 @@ class Item;
 class Tutorial;
 class TutorialStep;
 
+enum class IngredientSubType;
+typedef long double res_count_t;
+
+
+
 typedef std::function<void()> VoidFunc;
 
 #define _MAKE_SP(Cls)typedef std::shared_ptr<Cls> sp##Cls
@@ -113,6 +118,7 @@ MAKE_SP_VS_MI(Item);
 MAKE_SP_VS_MI(Tutorial);
 MAKE_SP_VS_MI(TutorialStep);
 
+using mistIngredient = std::map<IngredientSubType, res_count_t>;
 
 #undef MAKE_SP_VS
 #undef _MAKE_VS
@@ -133,8 +139,6 @@ typedef bool(*BoolFuncBuilding)(spBuilding);
 #define EQUIPMENT GameLogic::getInstance()->equipment
 #define BANK Bank::getInstance()
 #define INVENTORY GameLogic::getInstance()->equipment->inventory
-
-typedef long double res_count_t;
 
 #define rjDocument rapidjson::GenericDocument<rapidjson::UTF8<>,rapidjson::CrtAllocator>
 #define rjValue rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>

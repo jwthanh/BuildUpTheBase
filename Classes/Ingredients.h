@@ -8,6 +8,8 @@
 
 #include "SubTypes.h"
 
+
+
 class Resource
 {
     public:
@@ -55,9 +57,5 @@ class Ingredient : public Resource
         };
 
 };
-
-#define MAKE_MI_SUBTYPE(Cls)typedef std::map<Cls::SubType, res_count_t> mist##Cls
-MAKE_MI_SUBTYPE(Ingredient);
-#undef  MAKE_MI_SUBTYPE
 
 #endif

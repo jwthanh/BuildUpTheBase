@@ -2,6 +2,7 @@
 #include "GameLogic.h"
 #include "HouseBuilding.h"
 #include "Buildup.h"
+#include "Ingredients.h"
 
 
 void Recipe::callback()

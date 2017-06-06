@@ -31,6 +31,7 @@
 #include "Tutorial.h"
 #include "utilities/vibration.h"
 #include "goals/Achievement.h"
+#include "Ingredients.h"
 #include "banking/Bank.h"
 
 #include "base/CCDirector.h"
