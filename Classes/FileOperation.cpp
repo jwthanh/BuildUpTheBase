@@ -48,6 +48,9 @@ rjDocument FileIO::open_json(std::string& json_path, bool builtin_path)
         {
             CCLOG("This json file isn't an array or object '%s'", jsonBuffer);
         }
+        std::stringstream err_ss;
+        err_ss << "needs to be valid JSON: " << json_path;
+        CCLOG(err_ss.str().c_str());
         CC_ASSERT(is_valid && "needs to be a valid json");
     }
     else
