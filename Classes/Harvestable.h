@@ -74,7 +74,7 @@ class Harvestable : public cocos2d::ui::Widget
 		// rough outline of call order
 		/* onTouchBegan -> animate_touch_start
          * [animate_touch_start] -> get_per_touch_output
-         * [animate_touch_start] -> animate_flash_action
+         * [animate_touch_start] -> run_flash_action
          [animate_touch_start] -> spawn_label_on_touch
 
          * onTouchEnded -> [animate_touch_end]

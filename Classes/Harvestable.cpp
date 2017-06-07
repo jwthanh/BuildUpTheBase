@@ -271,7 +271,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         Node* raw_ingredient_count = building_info_panel->getChildByName("ingredient_count");
 
         ui::Text* ingredient_count = dynamic_cast<ui::Text*>(raw_ingredient_count);
-        animate_flash_action(ingredient_count, 0.2f, 1.15f);
+        run_flash_action(ingredient_count, 0.2f, 1.15f);
         building_info_panel->runAction(FShake::actionWithDuration(0.1f, 1.5f, 1.5f));
 
         ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(harvest_scene->getChildByName("inventory_basic_listview"));
@@ -291,7 +291,7 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
 
         if (ing_panel)
         {
-            animate_flash_action(ing_panel, 0.1f, 1.15f);
+            run_flash_action(ing_panel, 0.1f, 1.15f);
         }
 
         floating_color = Color4B::RED;
@@ -868,7 +868,7 @@ void CraftingHarvestable::animate_touch_start(cocos2d::Touch* touch)
 
             auto detail_listview = harvest_scene->sidebar->tabs.get_active_listview();
             for (auto& child : detail_listview->getChildren()){
-                animate_flash_action(child, 0.1f, 1.05f);
+                run_flash_action(child, 0.1f, 1.05f);
             };
         };
     }
@@ -1147,7 +1147,7 @@ void FightingHarvestable::animate_harvest()
         auto player_info_panel = harvest_scene->getChildByName("player_info_panel");
         auto player_hp_gold = player_info_panel->getChildByName("player_hp_lbl");
         float duration = 0.075f;
-        animate_flash_action(player_hp_gold, duration, 1.5f);
+        run_flash_action(player_hp_gold, duration, 1.5f);
         player_info_panel->runAction(FShake::actionWithDuration(duration, 10));
 
         this->spawn_label_on_touch(NULL, this->initial_scale, 0, "Cast Bloodoath\nto regenerate!\n(The Underscape)", Color4B::RED);

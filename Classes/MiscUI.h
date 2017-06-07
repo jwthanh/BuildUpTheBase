@@ -15,6 +15,7 @@ namespace cocos2d {
 
 namespace cocos2d
 {
+    class Sequence;
     namespace ui
     {
         class Scale9Sprite;
@@ -44,10 +45,19 @@ public:
 
 void load_default_button_textures(cocos2d::ui::Button* button);
 
-void animate_flash_action(
+//builds a sequence that scales a node up and then back down, highlighting it to_color and returning to end_color
+cocos2d::Sequence* build_flash_action(
+    float duration,
+    float scale, float original_scale,
+    cocos2d::Color3B to_color = cocos2d::Color3B::RED,
+    cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
+);
+//runs the flash sequence
+void run_flash_action(
     cocos2d::Node* target, float duration = 0.1f,
     float scale = 1.2f, float original_scale = 1.0f,
-    cocos2d::Color3B to_color = cocos2d::Color3B::RED, cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
+    cocos2d::Color3B to_color = cocos2d::Color3B::RED,
+    cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
 );
 
 void animate_modal_open(

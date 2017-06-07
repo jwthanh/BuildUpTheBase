@@ -93,16 +93,13 @@ void load_default_button_textures(cocos2d::ui::Button* button)
     );
 };
 
-int FLASH_ACTION_TAG = 10; //arbitrarily 10
-void animate_flash_action(
-    cocos2d::Node* target, float duration, float scale,
-    float original_scale, cocos2d::Color3B to_color /* RED */
-    , cocos2d::Color3B end_color /* WHITE */
-)
+int FLASH_ACTION_TAG = 112233442; //arbitrary number chosen
+cocos2d::Sequence* build_flash_action(
+    float duration,
+    float scale, float original_scale,
+    cocos2d::Color3B to_color, cocos2d::Color3B end_color
+    )
 {
-    //clear previous flash animation
-    target->stopActionByTag(FLASH_ACTION_TAG);
-
     auto tint = TintTo::create(duration, to_color);
     auto tint_rev = TintTo::create(duration, end_color);
 
@@ -115,7 +112,18 @@ void animate_flash_action(
         NULL
         );
     flash_sequence->setTag(FLASH_ACTION_TAG);
-    target->runAction(flash_sequence);
+    return flash_sequence;
+}
+
+void run_flash_action(
+    cocos2d::Node* target, float duration, float scale,
+    float original_scale, cocos2d::Color3B to_color /* RED */
+    , cocos2d::Color3B end_color /* WHITE */
+)
+{
+    //clear previous flash animation
+    target->stopActionByTag(FLASH_ACTION_TAG);
+    target->runAction(build_flash_action(duration, scale, original_scale, to_color, end_color));
 
 };
 

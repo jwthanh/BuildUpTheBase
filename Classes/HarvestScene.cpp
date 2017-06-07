@@ -944,7 +944,7 @@ void BaseScene::create_player_info_panel()
                     {
                         start_color = Color3B::GREEN;
                     };
-                    animate_flash_action(player_hp_lbl, 0.15f, 1.2f, 1.0f, start_color, Color3B::WHITE);
+                    run_flash_action(player_hp_lbl, 0.15f, 1.2f, 1.0f, start_color, Color3B::WHITE);
                 }
 
             hp_cache->last_cur_hp = hp->current_val;
@@ -1418,7 +1418,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 sell_btn->getParent()->addChild(floating_label);
 
                 auto player_gold_lbl = this->getChildByName("player_info_panel")->getChildByName("player_gold_lbl");
-                animate_flash_action(player_gold_lbl, 0.1f, 1.2f, 1.0f, text_color);
+                run_flash_action(player_gold_lbl, 0.1f, 1.2f, 1.0f, text_color);
 
                 do_vibrate(10);
             }
