@@ -37,6 +37,9 @@
     <Filter Include="enums">
       <UniqueIdentifier>{10648e83-4c80-4ba7-83e8-5d90f366aff5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="main_loop">
+      <UniqueIdentifier>{56aecfdc-1a13-4fd3-98c3-0dcef1146b4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -143,6 +146,9 @@
       <Filter>Gestures</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\progress\GameProgress.cpp" />
+    <ClCompile Include="..\Classes\main_loop\MainLoop.cpp">
+      <Filter>main_loop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -277,6 +283,9 @@
     <ClInclude Include="..\Classes\progress\GameProgress.h" />
     <ClInclude Include="..\Classes\enums\tab_types.h">
       <Filter>enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\main_loop\MainLoop.h">
+      <Filter>main_loop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

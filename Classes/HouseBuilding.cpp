@@ -1,9 +1,7 @@
 #include <memory>
 #include <vector>
-#include <ctime>
 #include <assert.h>
 
-#include <tinyxml2/tinyxml2.h>
 #include <json/stringbuffer.h>
 
 #include "HouseBuilding.h"

@@ -1,17 +1,20 @@
 #include "AppDelegate.h"
-#include "HarvestScene.h"
-#include "FileOperation.h"
 
 #include "magic_particles/mp_cocos.h"
 #include "magic_particles/platform_cocos.h"
+
+#include "ck/ck.h"
+#include "ck/config.h"
 
 #include "cocos2d.h"
 
 #include "Util.h"
 #include "SoundEngine.h"
+#include "main_loop/MainLoop.h"
+#include "HarvestScene.h"
+#include "FileOperation.h"
 
-#include "ck/ck.h"
-#include "ck/config.h"
+
 USING_NS_CC;
 
 /* easy logging stuff*/
@@ -20,7 +23,6 @@ USING_NS_CC;
 
 INITIALIZE_EASYLOGGINGPP
 /* end init of easy logging stuff*/
-
 
 AppDelegate::AppDelegate() {
     this->device = NULL;
@@ -167,6 +169,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
             harvest_scene->setName("HarvestScene");
 
             scene->addChild(harvest_scene);
+
+            //this schedules a mainloop to run every frame
+            MainLoop::getInstance()->schedule();
 
             auto director = Director::getInstance();
             director->replaceScene(scene);
