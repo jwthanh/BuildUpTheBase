@@ -75,7 +75,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/goals/Achievement.cpp \
                    ../../Classes/banking/Bank.cpp \
                    ../../Classes/BuildingDetailScene.cpp \
-                   ../../Classes/GameProgress.cpp \
+                   ../../Classes/progress/GameProgress.cpp \
 \
                    ../../Classes/magic_particles/MagicEmitter.cpp \
                    ../../Classes/magic_particles/mp_cocos.cpp \
