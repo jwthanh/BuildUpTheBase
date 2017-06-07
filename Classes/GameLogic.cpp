@@ -195,11 +195,6 @@ void GameLogic::load_game()
         return;
     };
 
-    //TODO save/load whether its been completed or not
-    // Tutorial* tutorial = Tutorial::getInstance();
-    // auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-    // tutorial->first_start(scene);
-
     //cheat to reset data to blank on load
     auto username = DataManager::get_string_from_data("username");
     if (username == "__resetdata")
@@ -288,7 +283,7 @@ void GameLogic::update(float dt)
         {
 
             ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(scene->getChildByName("player_info_panel"));
-            auto player_gold_per_sec_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
+            ui::Text* player_gold_per_sec_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
             set_aliasing(player_gold_per_sec_lbl); //TODO move this somewhere where it's not called all the time
 
             const auto& total_coins = BEATUP->get_total_coins();

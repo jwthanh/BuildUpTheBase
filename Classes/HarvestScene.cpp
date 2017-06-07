@@ -804,9 +804,12 @@ void BaseScene::create_info_panel()
 
 void BaseScene::create_username_input()
 {
-    auto building_panel = this->getChildByName("player_info_panel");
+    auto player_info_panel = this->getChildByName("player_info_panel");
 
-    ui::TextField* username_input = dynamic_cast<ui::TextField*>(building_panel->getChildByName("username_input"));
+    ui::Text* player_gold_per_sec_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
+    set_aliasing(player_gold_per_sec_lbl);
+
+    ui::TextField* username_input = dynamic_cast<ui::TextField*>(player_info_panel->getChildByName("username_input"));
 
     username_input->setTextHorizontalAlignment(TextHAlignment::CENTER);
     ui::UICCTextField* renderer = dynamic_cast<ui::UICCTextField*>(username_input->getVirtualRenderer());
