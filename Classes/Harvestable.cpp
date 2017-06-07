@@ -46,6 +46,7 @@
 #include "ui/UIScale9Sprite.h"
 #include "Gestures/LongPressGestureRecognizer.h"
 #include "Gestures/GestureRecognizerUtils.h"
+#include "Tutorial.h"
 
 USING_NS_CC;
 
@@ -248,9 +249,16 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
     {
         do_vibrate(5);
 
-        std::vector<std::string> choices = {
-            "Upgrade building",
-            "Sell some ingredients"
+        std::vector<std::string> choices;
+        if (Tutorial::getInstance()->is_tutorial_active()) {
+            choices = {
+                "Sell your grain"
+            };
+        } else {
+            choices = {
+                "Upgrade building",
+                "Make space: sell resources"
+            };
         };
         floating_msg = pick_one(choices);
 

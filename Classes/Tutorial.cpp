@@ -31,6 +31,8 @@ Tutorial::Tutorial()
     this->_show_building_info = true;
     this->_show_progress_panel = true;
 
+    this->_is_tutorial_active = false;
+
     this->current_step = NULL;
     this->next_step = NULL;
 
@@ -48,6 +50,8 @@ Tutorial* Tutorial::getInstance()
 
 void Tutorial::load_step(int step_index)
 {
+    this->set_tutorial_active(true);
+
     std::function<bool(std::shared_ptr<TutorialStep>)> matches_step_index = [this, step_index](std::shared_ptr<TutorialStep> step)-> bool
     {
         return step->step_index == step_index;
@@ -65,10 +69,21 @@ void Tutorial::load_step(int step_index)
         //assume the tutorial is over
         std::string tutorial_key = "tutorial_v1_complete";
         DataManager::set_bool_from_data(tutorial_key, true);
+        this->set_tutorial_active(false);
 
         CCLOG("couldn't find matching step for %i", step_index);
         this->show_game_ui();
     }
+};
+
+void Tutorial::set_tutorial_active(bool is_active)
+{
+    this->_is_tutorial_active = is_active;
+};
+
+bool Tutorial::is_tutorial_active()
+{
+    return this->_is_tutorial_active;
 };
 
 void Tutorial::first_start(cocos2d::Node* parent)

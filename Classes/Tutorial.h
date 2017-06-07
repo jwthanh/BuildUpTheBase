@@ -31,12 +31,15 @@ class Tutorial
 {
     private:
         static Tutorial* _instance;
+
         bool _show_sidebar;
         bool _show_building_buttons;
         bool _show_player_info;
         bool _show_player_hp_lbl;
         bool _show_progress_panel;
         bool _show_building_info;
+
+        bool _is_tutorial_active;
 
     public:
         Tutorial();
@@ -48,6 +51,9 @@ class Tutorial
         std::vector<std::shared_ptr<TutorialStep>> steps;
 
         void load_step(int step_index);
+
+        void set_tutorial_active(bool is_active);
+        bool is_tutorial_active();
 
         //preps the game's ui for the first time
         void first_start(cocos2d::Node* parent);
