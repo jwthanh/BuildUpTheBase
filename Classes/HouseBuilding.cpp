@@ -54,8 +54,6 @@ spBuilding City::building_by_name(std::string name)
 Building::Building(City* city, std::string name, std::string id_key) :
              Nameable(name), Buyable(id_key), Updateable(), city(city)
 {
-    num_workers = 1;
-
     building_level = 1;
 
     update_clock.set_threshold(1.0f);

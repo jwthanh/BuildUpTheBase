@@ -83,8 +83,6 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         bool is_storage_full_of_ingredients(IngredientSubType);
         bool can_fit_more_ingredients(IngredientSubType sub_type, res_count_t quantity = 1);
 
-        unsigned int num_workers; //people who work here, help make things faster
-
         Building(City* city, std::string name, std::string id_key);
         void create_ingredients(IngredientSubType sub_type, res_count_t quantity);
 
