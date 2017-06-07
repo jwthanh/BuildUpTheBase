@@ -1391,13 +1391,10 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 Color3B text_color;
                 std::stringstream ss;
 
-                if (coins_gained != 0)
-                {
+                if (coins_gained != 0) {
                     text_color = Color3B::GREEN;
                     ss << "+$" << beautify_double(coins_gained);
-                }
-                else
-                {
+                } else {
                     text_color = Color3B::RED;
                     ss << "Max coins stored\nIncrease coin storage\n (The Marketplace)";
                 }
@@ -1407,11 +1404,11 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 auto floating_label = FloatingLabel::createWithTTF(message, DEFAULT_FONT, 30);
                 floating_label->setTextColor(Color4B(text_color));
 
-                pos.x += cocos2d::rand_minus1_1()*20.0f;
-                pos.y += cocos2d::rand_minus1_1()*20.0f;
+                floating_start_pos.x += cocos2d::rand_minus1_1()*30.0f;
+                floating_start_pos.y += cocos2d::rand_0_1()*50.0f;
 
 #ifdef __ANDROID__
-                pos.y += 75.0f; //dont get hidden by finger
+                floating_start_pos.y += 75.0f; //dont get hidden by finger
 #endif
 
                 floating_label->setPosition(floating_start_pos);

@@ -207,8 +207,8 @@ void Harvestable::spawn_label_on_touch(cocos2d::Touch* touch, float end_scale, f
         pos = this->getPosition();
     }
 
-    pos.x += cocos2d::rand_minus1_1()*20.0f;
-    pos.y += cocos2d::rand_minus1_1()*20.0f;
+    pos.x += cocos2d::rand_minus1_1()*30.0f;
+    pos.y += cocos2d::rand_0_1()*50.0f;
 
 #ifdef __ANDROID__
     pos.y += 75.0f; //dont get hidden by finger
@@ -1112,8 +1112,8 @@ void FightingHarvestable::animate_clip()
 
     auto fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
     auto pos = fighter_node->convertToWorldSpace(this->getTouchEndPosition());
-    pos.x += cocos2d::rand_minus1_1()*20.0f;
-    pos.y += cocos2d::rand_minus1_1()*20.0f;
+    pos.x += cocos2d::rand_minus1_1()*30.0f;
+    pos.y += cocos2d::rand_0_1()*50.0f;
 
 #ifdef __ANDROID__
     pos.y += 75.0f; //dont get hidden by finger
