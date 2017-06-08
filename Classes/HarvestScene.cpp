@@ -309,7 +309,7 @@ void BaseScene::create_goal_loadingbar()
         Tutorial* tutorial = Tutorial::getInstance();
         try_set_visible(progress_panel, tutorial->get_show_progress_panel());
     };
-    progress_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
+    progress_panel->schedule(check_visible, FPS_60, "check_visible");
     check_visible(0.0f);
 
     ui::LoadingBar* loading_bar = dynamic_cast<ui::LoadingBar*>(progress_panel->getChildByName("goal_loadingbar"));
@@ -353,7 +353,7 @@ void BaseScene::create_goal_loadingbar()
             };
 
         };
-    loading_bar->schedule(update_loading_bar, AVERAGE_DELAY, "loadingbar_update");
+    loading_bar->schedule(update_loading_bar, FPS_10, "loadingbar_update");
     update_loading_bar(0);
 
 
@@ -396,7 +396,7 @@ void BaseScene::create_goal_loadingbar()
             }
         };
     };
-    harvester_progress_panel->schedule(update_harvester_loading_panel, SHORT_DELAY, "visibility_cb");
+    harvester_progress_panel->schedule(update_harvester_loading_panel, FPS_60, "visibility_cb");
     update_harvester_loading_panel(0);
 }
 
@@ -507,7 +507,7 @@ void BaseScene::create_building_choicelist()
                 building_name->setString(building->short_name);
             }
         };
-        building_node->schedule(update_func, AVERAGE_DELAY, "update_func");
+        building_node->schedule(update_func, FPS_10, "update_func");
         update_func(0);
 
         auto set_target_building = [this, building, panel]() {
@@ -563,7 +563,7 @@ void BaseScene::create_building_choicelist()
     auto check_visible = [building_buttons, tutorial](float dt){
         try_set_visible(building_buttons, tutorial->get_show_building_buttons());
     };
-    building_buttons->schedule(check_visible, SHORT_DELAY, "check_visible");
+    building_buttons->schedule(check_visible, FPS_60, "check_visible");
     check_visible(0.0f);
 
 
@@ -596,7 +596,7 @@ void BaseScene::create_building_choicelist()
 
         try_set_node_color(panel, Color3B::WHITE);
     };
-    city_node->schedule(update_func, AVERAGE_DELAY, "update_func");
+    city_node->schedule(update_func, FPS_10, "update_func");
     update_func(0);
 
     auto touch_handler = [](){ GameDirector::switch_to_city_menu(); };
@@ -690,7 +690,7 @@ void BaseScene::create_info_panel()
             try_set_visible(arena_kill_panel, false);
         }
     };
-    arena_kill_panel->schedule(update_info_display, AVERAGE_DELAY, "update_info_display");
+    arena_kill_panel->schedule(update_info_display, FPS_10, "update_info_display");
     update_info_display(0);
 
 
@@ -700,7 +700,7 @@ void BaseScene::create_info_panel()
     auto check_visible = [building_info_panel, tutorial](float dt){
         try_set_visible(building_info_panel, tutorial->get_show_building_info());
     };
-    building_info_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
+    building_info_panel->schedule(check_visible, FPS_60, "check_visible");
     check_visible(0.0f);
 
     auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
@@ -708,7 +708,7 @@ void BaseScene::create_info_panel()
     auto update_building_name = [building_name](float dt){
         building_name->setString(BUILDUP->get_target_building()->name);
     };
-    this->schedule(update_building_name, AVERAGE_DELAY, "building_name_update");
+    this->schedule(update_building_name, FPS_10, "building_name_update");
     update_building_name(0);
 
     auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
@@ -747,7 +747,7 @@ void BaseScene::create_info_panel()
 
         ing_count->setUserData(cached);
     };
-    this->schedule(update_ing_count, AVERAGE_DELAY, "update_ing_count");
+    this->schedule(update_ing_count, FPS_10, "update_ing_count");
     update_ing_count(0);
 
     auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
@@ -773,7 +773,7 @@ void BaseScene::create_info_panel()
             try_set_visible(harvester_count, false);
         }
     };
-    this->schedule(update_harvester_count, AVERAGE_DELAY, "harvester_count_update");
+    this->schedule(update_harvester_count, FPS_10, "harvester_count_update");
     update_harvester_count(0);
 
     auto salesmen_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("salesmen_count"));
@@ -798,7 +798,7 @@ void BaseScene::create_info_panel()
             try_set_visible(salesmen_count, false);
         }
     };
-    this->schedule(update_salesmen_count, AVERAGE_DELAY, "salesmen_count_update");
+    this->schedule(update_salesmen_count, FPS_10, "salesmen_count_update");
     update_salesmen_count(0);
 };
 
@@ -870,7 +870,7 @@ void BaseScene::create_player_info_panel()
         try_set_visible(player_info_panel, tutorial->get_show_player_info());
     };
 
-    player_info_panel->schedule(check_visible, SHORT_DELAY, "check_visible");
+    player_info_panel->schedule(check_visible, FPS_60, "check_visible");
     check_visible(0.0f);
 
     ui::Text* player_info_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_info_lbl"));
@@ -917,7 +917,7 @@ void BaseScene::create_player_info_panel()
     auto check_hp_visible = [player_hp_lbl, tutorial](float dt){
         try_set_visible(player_hp_lbl, tutorial->get_show_player_hp_lbl());
     };
-    player_hp_lbl->schedule(check_hp_visible, SHORT_DELAY, "check_hp_visible");
+    player_hp_lbl->schedule(check_hp_visible, FPS_60, "check_hp_visible");
     check_visible(0.0f);
 
     auto update_player_info_lbls = [player_gold_lbl, player_hp_lbl, hp_cache](float dt){
@@ -954,7 +954,7 @@ void BaseScene::create_player_info_panel()
         };
 
     };
-    this->schedule(update_player_info_lbls, AVERAGE_DELAY, "update_player_info_lbls");
+    this->schedule(update_player_info_lbls, FPS_10, "update_player_info_lbls");
     update_player_info_lbls(0);
 
 };
@@ -1091,7 +1091,7 @@ void BaseScene::create_inventory_listview()
             };
 
             update_lbl_cb(0); //fire once immediately
-            new_item_panel->schedule(update_lbl_cb, MID_DELAY, "item_name_lbl_update");
+            new_item_panel->schedule(update_lbl_cb, FPS_4, "item_name_lbl_update");
 
             auto&& advanced_ingredients = Ingredient::advanced_ingredients;
             bool in_advanced = std::find(advanced_ingredients.begin(), advanced_ingredients.end(), ing_type) != advanced_ingredients.end();
@@ -1110,7 +1110,7 @@ void BaseScene::create_inventory_listview()
     };
 
     update_listview(0.0f); //why doesnt this do anything
-    inventory_basic_listview->schedule(update_listview, AVERAGE_DELAY, "update_listview");
+    inventory_basic_listview->schedule(update_listview, FPS_10, "update_listview");
 };
 
 void BaseScene::create_shop_listview()
@@ -1180,7 +1180,7 @@ bool HarvestScene::init()
 
 
     };
-    this->schedule(update_layer_color, AVERAGE_DELAY, "update_layer_color");
+    this->schedule(update_layer_color, FPS_10, "update_layer_color");
     update_layer_color(0.0f);
 
     this->setOnEnterCallback([this]()
@@ -1353,7 +1353,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         res_count_t _def = 0.0;
         res_count_t count = map_get(all_ing, it, _def);
         count_lbl->setString(beautify_double(count));
-    }, AVERAGE_DELAY, "alert_count_update");
+    }, FPS_10, "alert_count_update");
 
     res_count_t coins_gained_per = Ingredient::type_to_value.at(ing_type);
     auto create_sell_button = [this, alert_panel, ing_type, coins_gained_per](std::string name, res_count_t amount_sold, float percent_sold)
@@ -1441,7 +1441,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
             {
                 try_set_enabled(sell_btn, true);
             }
-        }, AVERAGE_DELAY, "sell_btn_state_cb");
+        }, FPS_10, "sell_btn_state_cb");
     };
 
     create_sell_button("sell_1_btn", 1, 0.0f);
@@ -1456,7 +1456,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
         value_ss << "for " << beautify_double(cg) << "$ each";
         value_lbl->setString(value_ss.str().c_str());
     };
-    value_lbl->schedule(update_value_lbl, AVERAGE_DELAY, "update_value_lbl");
+    value_lbl->schedule(update_value_lbl, FPS_10, "update_value_lbl");
     update_value_lbl(0);
 
     alert_panel->setPosition(get_center_pos());

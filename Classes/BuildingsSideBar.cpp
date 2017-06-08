@@ -154,7 +154,7 @@ SideListView::SideListView(Node* parent, spBuilding current_target)
         try_set_visible(sidebar_panel, tutorial->get_show_sidebar());
     };
 
-    parent->schedule(check_visible, SHORT_DELAY, "check_visible");
+    parent->schedule(check_visible, FPS_60, "check_visible");
     check_visible(0.0f);
 
 
@@ -288,19 +288,19 @@ void SideListView::setup_tab_buttons()
 
     this->tab_worker_btn = this->_create_button("tab_1_btn");
     bind_touch_ended(this->tab_worker_btn, [this](){ this->toggle_buttons(this->tab_worker_btn, ui::Widget::TouchEventType::ENDED); });
-    this->tab_worker_btn->schedule(build_enable_if_unlocked(this->tab_worker_btn, TabTypes::WorkerTab), AVERAGE_DELAY, "enable_if_unlocked");
+    this->tab_worker_btn->schedule(build_enable_if_unlocked(this->tab_worker_btn, TabTypes::WorkerTab), FPS_10, "enable_if_unlocked");
 
     this->tab_detail_btn = this->_create_button("tab_2_btn");
     bind_touch_ended(this->tab_detail_btn, [this](){ this->toggle_buttons(this->tab_detail_btn, ui::Widget::TouchEventType::ENDED); });
-    this->tab_detail_btn->schedule(build_enable_if_unlocked(this->tab_detail_btn, TabTypes::DetailTab), AVERAGE_DELAY, "enable_if_unlocked");
+    this->tab_detail_btn->schedule(build_enable_if_unlocked(this->tab_detail_btn, TabTypes::DetailTab), FPS_10, "enable_if_unlocked");
 
     this->tab_building_btn = this->_create_button("tab_3_btn");
     bind_touch_ended(this->tab_building_btn, [this](){ this->toggle_buttons(this->tab_building_btn, ui::Widget::TouchEventType::ENDED); });
-    this->tab_building_btn->schedule(build_enable_if_unlocked(this->tab_building_btn, TabTypes::BuildingTab), AVERAGE_DELAY, "enable_if_unlocked");
+    this->tab_building_btn->schedule(build_enable_if_unlocked(this->tab_building_btn, TabTypes::BuildingTab), FPS_10, "enable_if_unlocked");
 
     this->tab_menu_btn = this->_create_button("tab_4_btn");
     bind_touch_ended(this->tab_menu_btn, [this](){ this->toggle_buttons(this->tab_menu_btn, ui::Widget::TouchEventType::ENDED); });
-    this->tab_menu_btn->schedule(build_enable_if_unlocked(this->tab_menu_btn, TabTypes::MenuTab), AVERAGE_DELAY, "enable_if_unlocked");
+    this->tab_menu_btn->schedule(build_enable_if_unlocked(this->tab_menu_btn, TabTypes::MenuTab), FPS_10, "enable_if_unlocked");
 
 }
 
@@ -321,7 +321,7 @@ void SideListView::setup_listviews()
 
         }
     };
-    this->parent->schedule(clean_children_on_target_change, AVERAGE_DELAY, "clean_children");
+    this->parent->schedule(clean_children_on_target_change, FPS_10, "clean_children");
 };
 
 void SideListView::setup_worker_listview()
@@ -455,14 +455,14 @@ void SideListView::setup_worker_listview()
                     };
                 };
 
-                menu_item->schedule(update_target_and_prereq, AVERAGE_DELAY, "update_ing_type");
+                menu_item->schedule(update_target_and_prereq, FPS_10, "update_ing_type");
                 update_target_and_prereq(0);
 
             };
 
         };
 
-        shop_listview->schedule(update_harvester_listview, AVERAGE_DELAY, "update_listview");
+        shop_listview->schedule(update_harvester_listview, FPS_10, "update_listview");
         update_harvester_listview(0);
     };
 };
@@ -508,7 +508,7 @@ void SideListView::setup_building_listview()
 
         };
 
-        listview->schedule(update_listview, AVERAGE_DELAY, "update_listview");
+        listview->schedule(update_listview, FPS_10, "update_listview");
         update_listview(0);
     };
 };
@@ -1034,7 +1034,7 @@ void SideListView::setup_detail_listview()
             };
         };
 
-        listview->schedule(update_listview, AVERAGE_DELAY, "update_listview");
+        listview->schedule(update_listview, FPS_10, "update_listview");
         update_listview(0);
     };
 };
@@ -1094,7 +1094,7 @@ void SideListView::setup_menu_listview()
 
         };
 
-        listview->schedule(send_feeback, AVERAGE_DELAY, "send_feeback");
+        listview->schedule(send_feeback, FPS_10, "send_feeback");
         send_feeback(0);
 
 
@@ -1135,7 +1135,7 @@ void SideListView::setup_menu_listview()
 
         };
 
-        listview->schedule(open_leaderboard, AVERAGE_DELAY, "open_leaderboard");
+        listview->schedule(open_leaderboard, FPS_10, "open_leaderboard");
         open_leaderboard(0);
 
         ///sell all power
@@ -1197,7 +1197,7 @@ void SideListView::setup_menu_listview()
 
         };
 
-        listview->schedule(update_sellall, AVERAGE_DELAY, "update_sellall");
+        listview->schedule(update_sellall, FPS_10, "update_sellall");
         update_sellall(0);
 
         ///sell all advanced
@@ -1259,7 +1259,7 @@ void SideListView::setup_menu_listview()
 
         };
 
-        listview->schedule(update_sellall_advanced, AVERAGE_DELAY, "update_sellall_advanced");
+        listview->schedule(update_sellall_advanced, FPS_10, "update_sellall_advanced");
         update_sellall_advanced(0);
 
 
@@ -1299,7 +1299,7 @@ void SideListView::setup_menu_listview()
 
         };
 
-        listview->schedule(update_save, AVERAGE_DELAY, "update_save");
+        listview->schedule(update_save, FPS_10, "update_save");
         update_save(0);
 
 
@@ -1354,7 +1354,7 @@ void SideListView::setup_menu_listview()
 
         };
 
-        listview->schedule(toggle_vibration, AVERAGE_DELAY, "toggle_vibration");
+        listview->schedule(toggle_vibration, FPS_10, "toggle_vibration");
         toggle_vibration(0);
 
         ///Open log alert
@@ -1418,7 +1418,7 @@ void SideListView::setup_menu_listview()
 
         };
 
-        listview->schedule(open_log, AVERAGE_DELAY, "open_log");
+        listview->schedule(open_log, FPS_10, "open_log");
         open_log(0);
 
     }

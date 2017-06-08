@@ -234,7 +234,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
         };
         harvester_nuitem->button->setVisible(is_third_step && has_celebrated == false);
     };
-    harvester_nuitem->button->schedule(check_third_step, AVERAGE_DELAY, "check_third_step");
+    harvester_nuitem->button->schedule(check_third_step, FPS_10, "check_third_step");
     check_third_step(0);
 
     harvester_nuitem->my_init(Worker::SubType::One, target_building->punched_sub_type);
@@ -300,7 +300,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
         };
         salesmen_nuitem->button->setVisible(is_fourth_step && has_celebrated == false);
     };
-    salesmen_nuitem->schedule(check_fourth_step, AVERAGE_DELAY, "check_fourth_step");
+    salesmen_nuitem->schedule(check_fourth_step, FPS_10, "check_fourth_step");
     check_fourth_step(0);
 
     salesmen_nuitem->my_init(Worker::SubType::One, target_building->punched_sub_type);
@@ -367,7 +367,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
         };
         upgrade_building_nuitem->button->setVisible(is_fifth_step && has_celebrated == false);
     };
-    upgrade_building_nuitem->schedule(check_fifth_step, AVERAGE_DELAY, "check_fifth_step");
+    upgrade_building_nuitem->schedule(check_fifth_step, FPS_10, "check_fifth_step");
     check_fifth_step(0);
 
     upgrade_building_nuitem->my_init(2);
@@ -567,7 +567,7 @@ void TutorialStep::run_scheduled_func()
         return;
     };
 
-    this->parent->schedule(this->_scheduled_func, SHORT_DELAY, "scheduled_func");
+    this->parent->schedule(this->_scheduled_func, FPS_60, "scheduled_func");
     this->_scheduled_func(0);
 };
 

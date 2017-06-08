@@ -107,6 +107,6 @@ void BuildingDetailScene::init_callbacks()
         res_count_t leveled = this->building->building_level;
         leveled_lbl->setString(beautify_double(leveled));
     };
-    leveled_lbl->schedule(update_leveled, AVERAGE_DELAY, "update_leveled");
+    leveled_lbl->schedule(update_leveled, FPS_10, "update_leveled");
     update_leveled(0);
 };

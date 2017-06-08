@@ -628,7 +628,7 @@ void GameDirector::switch_to_city_menu()
         res_count_t invested = GameLogic::getInstance()->get_city_investment();
         invested_lbl->setString("CI "+beautify_double(invested));
     };
-    invested_lbl->schedule(update_invested, AVERAGE_DELAY, "update_invested");
+    invested_lbl->schedule(update_invested, FPS_10, "update_invested");
     update_invested(0);
 
     //appeasement panel
@@ -661,7 +661,7 @@ void GameDirector::switch_to_city_menu()
             try_set_enabled(appeasement_button, true);
         }
     };
-    appeasement_button->schedule(appeasement_btn_update, SHORT_DELAY, "update_btn");
+    appeasement_button->schedule(appeasement_btn_update, FPS_60, "update_btn");
 
     load_default_button_textures(appeasement_button);
     Label* appeasement_renderer = appeasement_button->getTitleRenderer();
@@ -672,7 +672,7 @@ void GameDirector::switch_to_city_menu()
         res_count_t appeasemented = (res_count_t)GameLogic::getInstance()->get_appeasements();
         appeased_lbl->setString("Souls "+beautify_double(appeasemented));
     };
-    appeased_lbl->schedule(update_appeasemented, AVERAGE_DELAY, "update_appeasemented");
+    appeased_lbl->schedule(update_appeasemented, FPS_10, "update_appeasemented");
     update_appeasemented(0);
 
 
@@ -787,7 +787,7 @@ void GameDirector::switch_to_miner_menu()
                     };
                 }
             };
-            nav_button->schedule(update_nav_button, AVERAGE_DELAY, "update_nav_button");
+            nav_button->schedule(update_nav_button, FPS_10, "update_nav_button");
 
         } else {
             CCLOG("No nav button");
@@ -801,7 +801,7 @@ void GameDirector::switch_to_miner_menu()
         rails_count_lbl->setString(pretty_count);
     };
     update_rails_count_cb(0);
-    rails_count_lbl->schedule(update_rails_count_cb, AVERAGE_DELAY, "update_rails_count_cb");
+    rails_count_lbl->schedule(update_rails_count_cb, FPS_10, "update_rails_count_cb");
 
     auto update_cart_count_cb = [cart_count_lbl](float dt)
     {
@@ -810,7 +810,7 @@ void GameDirector::switch_to_miner_menu()
         cart_count_lbl->setString(pretty_count);
     };
     update_cart_count_cb(0);
-    cart_count_lbl->schedule(update_cart_count_cb, AVERAGE_DELAY, "update_cart_count_cb");
+    cart_count_lbl->schedule(update_cart_count_cb, FPS_10, "update_cart_count_cb");
 
     auto update_depth_display_cb = [miner, depth_display](float dt)
     {
@@ -819,7 +819,7 @@ void GameDirector::switch_to_miner_menu()
         depth_display->setString(pretty_count);
     };
     update_depth_display_cb(0);
-    depth_display->schedule(update_depth_display_cb, AVERAGE_DELAY, "update_depth_display_cb");
+    depth_display->schedule(update_depth_display_cb, FPS_10, "update_depth_display_cb");
 
     auto scene = cocos2d::Scene::create();
     scene->setName("city_wrapper_scene");
@@ -873,7 +873,7 @@ void GameDirector::switch_to_miner_menu()
 		}
 	};
     check_altar_touching_cb(0);
-    explode_btn->schedule(check_altar_touching_cb, AVERAGE_DELAY, "check_altar_touching_cb");
+    explode_btn->schedule(check_altar_touching_cb, FPS_10, "check_altar_touching_cb");
 
     //chance button
     auto chance_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("chance_btn"));
@@ -908,7 +908,7 @@ void GameDirector::switch_to_miner_menu()
 		}
 	};
     check_chance_touching_cb(0);
-    chance_btn->schedule(check_chance_touching_cb, AVERAGE_DELAY, "check_chance_touching_cb");
+    chance_btn->schedule(check_chance_touching_cb, FPS_10, "check_chance_touching_cb");
 
     //dig button
     auto dig_btn = dynamic_cast<ui::Button*>(miner_scene->getChildByName("dig_btn"));
@@ -939,7 +939,7 @@ void GameDirector::switch_to_miner_menu()
         dig_btn->setBright(num_carts > 0); //setBright because we want to trigger the label animation
     };
     check_carts_cb(0);
-    dig_btn->schedule(check_carts_cb, AVERAGE_DELAY, "check_carts_cb");
+    dig_btn->schedule(check_carts_cb, FPS_10, "check_carts_cb");
 
 
     auto director = cocos2d::Director::getInstance();
@@ -1044,7 +1044,7 @@ void GameDirector::switch_to_equipment_menu()
             }
         };
         update_equipped_item(0);
-        panel->schedule(update_equipped_item, SHORT_DELAY, "update_equipped_item");
+        panel->schedule(update_equipped_item, FPS_60, "update_equipped_item");
         return update_equipped_item;
     };
 
@@ -1191,7 +1191,7 @@ void GameDirector::switch_to_bank_menu()
             total_coins_count_lbl->setString(total_coins);
         };
         update_total_coins(0);
-        total_coins_count_lbl->schedule(update_total_coins, SHORT_DELAY, "update_total_coins");
+        total_coins_count_lbl->schedule(update_total_coins, FPS_60, "update_total_coins");
     }
 
     {
@@ -1203,7 +1203,7 @@ void GameDirector::switch_to_bank_menu()
             banked_coins_count_lbl->setString(banked_coins);
         };
         update_banked_coins(0);
-        banked_coins_count_lbl->schedule(update_banked_coins, SHORT_DELAY, "update_banked_coins");
+        banked_coins_count_lbl->schedule(update_banked_coins, FPS_60, "update_banked_coins");
     }
 
     cocos2d::ui::ListView* bank_pageview = dynamic_cast<cocos2d::ui::ListView*>(panel->getChildByName("bank_listview"));
@@ -1236,7 +1236,7 @@ void GameDirector::switch_to_bank_menu()
         NuItem* nuitem = NuItem::create(bank_pageview);
         nuitem->set_title(config.title);
         nuitem->set_description(config.description);
-        nuitem->button->schedule([config, nuitem](float dt){ config.update_nuitem_callback(nuitem); }, SHORT_DELAY, "update_nuitem_callback");
+        nuitem->button->schedule([config, nuitem](float dt){ config.update_nuitem_callback(nuitem); }, FPS_60, "update_nuitem_callback");
 
         //bank size to width of container
         nuitem->button->setContentSize({ bank_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
@@ -1250,7 +1250,7 @@ void GameDirector::switch_to_bank_menu()
             if (bbox.containsPoint(converted_touch))
             {
                 do_vibrate(5);
-                nuitem->button->schedule(config.bank_callback, SHORT_DELAY, "bank_callback");
+                nuitem->button->schedule(config.bank_callback, FPS_60, "bank_callback");
                 SoundLibrary::getInstance()->play_general_widget_touched();
                 return true;
 

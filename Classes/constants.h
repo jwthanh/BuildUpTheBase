@@ -155,13 +155,13 @@ typedef std::function<void()> VoidFuncNoArgs;
 typedef std::function<void(Beatup*)> VoidFuncBeatupNoArgs;
 
 
-const float SECOND_DELAY   = 1.0f /   1.0f;
-const float LONG_DELAY     = 1.0f /   2.0f;
-const float MID_DELAY      = 1.0f /   4.0f;
-const float AVERAGE_DELAY  = 1.0f /  10.0f;
-const float HALF_DELAY     = 1.0f /  15.0f;
-const float QUARTER_DELAY  = 1.0f /  30.0f;
-const float SHORT_DELAY    = 1.0f /  60.0f;
-const float REALTIME_DELAY = 1.0f / 120.0f;
+const float FPS_1   = 1.0f /   1.0f;
+const float FPS_2   = 1.0f /   2.0f;
+const float FPS_4   = 1.0f /   4.0f;
+const float FPS_10  = 1.0f /  10.0f;
+const float FPS_15  = 1.0f /  15.0f;
+const float FPS_30  = 1.0f /  30.0f;
+const float FPS_60  = 1.0f /  60.0f;
+const float FPS_120 = 1.0f / 120.0f;
 
 #endif

@@ -790,7 +790,7 @@ void ScrapItemScene::init_callbacks()
         this->item_misc_info_body_lbl->setString(beautify_double(city_investment));
     };
     update_city_investment_lbl(0);
-    this->item_misc_info_panel->schedule(update_city_investment_lbl, AVERAGE_DELAY, "update_city_investment_lbl");
+    this->item_misc_info_panel->schedule(update_city_investment_lbl, FPS_10, "update_city_investment_lbl");
 };
 
 bool ScrapItemScene::init()
