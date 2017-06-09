@@ -20,6 +20,7 @@
 #include "Network.h"
 #include "Util.h"
 #include "Ingredients.h"
+#include "main_loop/MainLoop.h"
 
 Buildup::Buildup()
 {
@@ -96,9 +97,30 @@ void Buildup::post_update()
         coins_string = coins_string.substr(0, coins_string.find('.'));
     }
 
+    //build up string of coins
+    res_count_t seconds_played = MainLoop::getInstance()->seconds_played;
+    std::stringstream seconds_ss;
+    seconds_ss << seconds_played;
+    std::string seconds_string = seconds_ss.str();
+    if (seconds_string.find("e") == std::string::npos)
+    {
+        seconds_string = seconds_string.substr(0, seconds_string.find('.'));
+    }
+
     //create a json doc, set the { 'coins' : coins } json obj, along with the buildings json
     std::string savefile_path = "test_building.json";
     rjDocument doc = FileIO::open_json(savefile_path, false);
+    {
+        //build the rjValues that become the key and values in the dict
+        rjValue key = rjValue(rapidjson::kStringType);
+        key.SetString("seconds_played");
+        rjValue value = rjValue();
+        const char* raw_coin_cs = seconds_string.c_str();
+        value.SetString(raw_coin_cs, seconds_string.size());
+
+        auto& allocator = doc.GetAllocator();
+        doc.AddMember(key, value, allocator);
+    }
 
     //build the rjValues that become the key and values in the dict
     rjValue key = rjValue(rapidjson::kStringType);
