@@ -2,6 +2,9 @@
 #include <base/CCDirector.h>
 #include <base/CCScheduler.h>
 
+MainLoop::MainLoop() {
+    this->seconds_played = 0.0f; //set in GameLogic::load_all
+};
 
 void MainLoop::schedule() {
     cocos2d::Director::getInstance()->getScheduler()->schedule(
@@ -14,5 +17,5 @@ void MainLoop::unschedule() {
 
 void MainLoop::update(float dt)
 {
-    CCLOG("this is being called every frame, no matter the replaced scene");
+    this->seconds_played += dt;
 }

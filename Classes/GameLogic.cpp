@@ -45,6 +45,7 @@
 #include "base/CCEventListenerTouch.h"
 #include "progress/GameProgress.h"
 #include "Ingredients.h"
+#include "main_loop/MainLoop.h"
 
 
 USING_NS_CC;
@@ -438,6 +439,8 @@ void GameLogic::save_all()
     //been taught about wallet size
     DataManager::set_bool_from_data("has_learned_wallet_size", GameLogic::getInstance()->has_learned_wallet_size);
 
+    DataManager::set_double_from_data("seconds_played", MainLoop::getInstance()->seconds_played);
+
     //set the last login time, set here and on load
     LOG(INFO) << "Marking last login";
     BEATUP->set_last_login();
@@ -510,6 +513,7 @@ void GameLogic::load_all()
         sidebar->toggle_buttons(sidebar->tab_menu_btn, ui::Widget::TouchEventType::ENDED);
 
     GameLogic::getInstance()->has_learned_wallet_size = DataManager::get_bool_from_data("has_learned_wallet_size", false);
+    MainLoop::getInstance()->seconds_played = DataManager::get_double_from_data("seconds_played", 0.0f);
 
     GameProgress* game_progress = GameProgress::getInstance();
     game_progress->init(BUILDUP->city);
