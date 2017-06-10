@@ -20,17 +20,8 @@ class Resource
             Waste = 2
         };
 
-        // convert type to string
-        static std::string type_str(ResourceType type);
-
         static const ResourceType resource_type;
 };
-
-#define TYPE_MAP_CONVERSION(Rtype, Rlowertype) \
-    static const std::map<SubType, std::string> type_map; \
-SubType sub_type; \
-static std::string type_to_string(Rtype::SubType type); \
-static Rtype::SubType string_to_type(std::string string_type);
 
 class Ingredient : public Resource
 {
@@ -45,8 +36,10 @@ class Ingredient : public Resource
         static const std::vector<SubType> basic_ingredients;
         static const std::vector<SubType> advanced_ingredients;
 
-
-        TYPE_MAP_CONVERSION(Ingredient, ingredient);
+        static const std::map<SubType, std::string> type_map;
+        SubType sub_type;
+        static std::string type_to_string(Ingredient::SubType type);
+        static Ingredient::SubType string_to_type(std::string string_type);
 
         Ingredient(Ingredient::SubType sub_type) : Resource() {
             this->sub_type = sub_type;

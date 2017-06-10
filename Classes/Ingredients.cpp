@@ -115,11 +115,3 @@ Ingredient::SubType Ingredient::string_to_type(std::string string_type)
 
     assert(false && "unknown type"); return result;
 };
-
-std::string Resource::type_str(ResourceType type)
-{
-    auto mapping = std::map<ResourceType, std::string>();
-    mapping[Ingredient] = "Ingredient";
-
-    return mapping[type];
-}
