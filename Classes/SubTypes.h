@@ -10,22 +10,6 @@ enum class IngredientSubType {
     MineRails
 };
 
-enum class ProductSubType {
-    None,
-    Veggies,
-    Meat,
-    Dairy,
-    Cereals,
-    Sword,
-    Shield
-};
-
-enum class WasteSubType {
-    None,
-    Corpse,
-    Wasted_Iron
-};
-
 enum class TechSubType
 {
     None = -1,

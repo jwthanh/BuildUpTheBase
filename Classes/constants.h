@@ -41,10 +41,7 @@ class ScavengerHarvester;
 class ResourceCondition;
 class Harvestable;
 
-class Resource;
-class Ingredient;
-class Product;
-class Waste;
+struct Ingredient;
 
 class Attribute;
 class AttributeContainer;
@@ -96,10 +93,7 @@ MAKE_SP_VS_MI(ResourceCondition);
 MAKE_SP_VS_MI(Recipe);
 MAKE_SP_VS_MI(Harvestable);
 
-MAKE_SP_VS_MI(Resource);
-MAKE_SP_VS_MI(Product);
 MAKE_SP_VS_MI(Ingredient);
-MAKE_SP_VS_MI(Waste);
 
 MAKE_SP_VS_MI(Attribute);
 MAKE_SP_VS_MI(AttributeContainer);

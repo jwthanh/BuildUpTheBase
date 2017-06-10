@@ -2,52 +2,24 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
 #include <map>
-#include <unordered_map>
 
 #include "constants.h"
 
 #include "SubTypes.h"
 
-
-
-class Resource
+struct Ingredient
 {
-    public:
-        enum ResourceType {
-            ALL = -1,
-            Ingredient = 0,
-            Product = 1,
-            Waste = 2
-        };
+    using SubType = IngredientSubType;
 
-        static const ResourceType resource_type;
-};
+    static const std::map<SubType, res_count_t> type_to_value;
+    static const std::map<Ingredient::SubType, res_count_t> type_to_harvest_ratio;
 
-class Ingredient : public Resource
-{
-    public:
-        static const ResourceType resource_type = Resource::ResourceType::Ingredient;
+    static const std::vector<SubType> basic_ingredients;
+    static const std::vector<SubType> advanced_ingredients;
 
-        using SubType = IngredientSubType;
-
-        static const std::map<SubType, res_count_t> type_to_value;
-        static const std::map<Ingredient::SubType, res_count_t> type_to_harvest_ratio;
-
-        static const std::vector<SubType> basic_ingredients;
-        static const std::vector<SubType> advanced_ingredients;
-
-        static const std::map<SubType, std::string> type_map;
-        SubType sub_type;
-        static std::string type_to_string(Ingredient::SubType type);
-        static Ingredient::SubType string_to_type(std::string string_type);
-
-        Ingredient(Ingredient::SubType sub_type) : Resource() {
-            this->sub_type = sub_type;
-        };
-
-        Ingredient(const Ingredient& other) : Resource(other) {
-            this->sub_type = other.sub_type;
-        };
+    static const std::map<SubType, std::string> type_map;
+    static std::string type_to_string(Ingredient::SubType type);
+    static Ingredient::SubType string_to_type(std::string string_type);
 
 };
 
