@@ -979,19 +979,18 @@ void BaseScene::create_inventory_listview()
 
         std::vector<type_count_pair> ingredient_counts;
         mistIngredient& city_ingredients = BUILDUP->get_all_ingredients();
+        ingredient_counts.reserve(city_ingredients.size());
 
         res_count_t _def = -1;
-        for (auto&& ts : Ingredient::basic_ingredients)
+        for (auto&& ing_type : Ingredient::basic_ingredients)
         {
-            Ingredient::SubType ing_type = ts;
-            auto count = map_get(city_ingredients, ing_type, _def);
-            ingredient_counts.push_back({ ts, count });
+            res_count_t count = map_get(city_ingredients, ing_type, _def);
+            ingredient_counts.push_back({ ing_type, count });
         }
-        for (auto&& ts : Ingredient::advanced_ingredients)
+        for (auto&& ing_type : Ingredient::advanced_ingredients)
         {
-            Ingredient::SubType ing_type = ts;
             auto count = map_get(city_ingredients, ing_type, _def);
-            ingredient_counts.push_back({ ts, count });
+            ingredient_counts.push_back({ ing_type, count });
         }
 
         std::sort(
