@@ -77,6 +77,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/BuildingDetailScene.cpp \
                    ../../Classes/progress/GameProgress.cpp \
                    ../../Classes/main_loop/MainLoop.cpp \
+                   ../../Classes/main_loop/SimulateMainLoop.cpp \
 \
                    ../../Classes/magic_particles/MagicEmitter.cpp \
                    ../../Classes/magic_particles/mp_cocos.cpp \
