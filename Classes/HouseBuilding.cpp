@@ -31,7 +31,7 @@ void City::update(float dt)
 
 void City::update_buildings(float dt)
 {
-    for (std::shared_ptr<Building>& building : this->buildings)
+    for (const std::shared_ptr<Building>& building : this->buildings)
     {
         building->update(dt);
     };
@@ -40,13 +40,14 @@ void City::update_buildings(float dt)
 
 spBuilding City::building_by_name(const std::string& name)
 {
-    for (auto& bldg : this->buildings)
+    //creating a lambda for std::find is too slow, this loop seems to be the fastest
+    for (auto& building : this->buildings)
     {
-        if (bldg->name == name)
-            return bldg;
+        if (building->name == name)
+            return building;
     };
 
-    return NULL;
+    return nullptr;
 };
 
 Building::Building(City* city, std::string name, std::string id_key) :
@@ -88,7 +89,7 @@ res_count_t Building::get_total_harvester_output()
 {
     res_count_t total = 0;
 
-    for (auto h_mist : this->harvesters)
+    for (const auto& h_mist : this->harvesters)
     {
         WorkerSubType harv_type = h_mist.first.first;
         Ingredient::SubType ing_type = h_mist.first.second;

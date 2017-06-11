@@ -55,7 +55,7 @@ void GameProgress::update(float dt, City* city)
             is_unlocked = true;
         } else {
             spBuilding matched_building = city->building_by_name(upgrade_prerequisites.at(building->name));
-            const int MIN_LEVEL_REQUIRED = 5;
+            const int MIN_LEVEL_REQUIRED = 4;
             is_unlocked = matched_building->building_level >= MIN_LEVEL_REQUIRED;
         };
 
