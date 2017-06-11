@@ -1445,7 +1445,6 @@ spListviewMap SideListView::_create_listview(std::string node_name)
 
         listview->setScrollBarColor({ 48, 96, 130 });
 
-        listview->setMagneticType(ui::ListView::MagneticType::TOP); //scrolls to TOP of current item, if needed; not sure why but this helps the jumping around as you add new items
         listview->setMagneticAllowedOutOfBoundary(false); //true is default, doesnt allow overscrolling sort of. if you go out of bounds, it'll scroll it back
 
 
