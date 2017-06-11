@@ -38,9 +38,9 @@ void City::update_buildings(float dt)
 
 };
 
-spBuilding City::building_by_name(std::string name)
+spBuilding City::building_by_name(const std::string& name)
 {
-    for (auto bldg : this->buildings)
+    for (auto& bldg : this->buildings)
     {
         if (bldg->name == name)
             return bldg;
@@ -161,7 +161,8 @@ template<typename CacheT>
 typename CacheT::element_type::mapped_type get_or_create_from_cache(spBuilding& building, CacheT& cache, std::pair<WorkerSubType, Ingredient::SubType> key)
 {
     typename CacheT::element_type::mapped_type temp_harvester;
-    if (cache->find(key) != cache->end())
+    auto it = cache->find(key);
+    if (it != cache->end())
     {
         //pull it out of cache
         temp_harvester = (*cache)[key];

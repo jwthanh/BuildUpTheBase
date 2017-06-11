@@ -30,13 +30,6 @@ TechTree::TechTree()
 TechMap TechTree::get_tech_map()
 {
     return this->tech_map;
-    // TechMap tech_map;
-
-    // for (auto tech : this->technologies) {
-    //     tech_map[tech->sub_type] = tech->get_been_unlocked();
-    // };
-
-    // return tech_map;
 };
 
 Technology::Technology(Technology::SubType sub_type)

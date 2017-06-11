@@ -19,6 +19,7 @@
 #include "HarvestableManager.h"
 #include "banking/Bank.h"
 #include "Ingredients.h"
+#include "main_loop/SimulateMainLoop.h"
 
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)
@@ -116,23 +117,20 @@ res_count_t Salesman::get_base_shop_cost(SubType sub_type)
     return map_get(base_salesman_cost_map, sub_type, default_shop_cost);
 }
 
-mistWorkerSubType base_salesman_to_sell_count = {
+const mistWorkerSubType base_salesman_to_sell_count = {
     {Salesman::SubType::One, 1}
 };
 
 res_count_t Salesman::get_to_sell_count(SubType sub_type)
 {
-    res_count_t default_to_sell_count = 9999.0;
-
     //base count for salesmen
-    res_count_t base_count = map_get(base_salesman_to_sell_count, sub_type, default_to_sell_count);
+    res_count_t&& base_count = map_get(base_salesman_to_sell_count, sub_type, 9999.0);
 
     //adjust based on how many upgrades were crafted at the Workshop
+    auto&& workshop = BUILDUP->city->building_by_name("The Workshop");
+    TechMap&& tech_map = workshop->techtree->get_tech_map();
 
-    auto workshop = BUILDUP->city->building_by_name("The Workshop");
-    auto tech_map = workshop->techtree->get_tech_map();
-
-    auto tech_type = Technology::SubType::SalesmenBaseBoost;
+    TechSubType&& tech_type = Technology::SubType::SalesmenBaseBoost;
     res_count_t _def = 0L;
     res_count_t times_increased = map_get(tech_map, tech_type, _def);
 
@@ -169,14 +167,14 @@ void Salesman::on_update(float dt)
             //create floating label for the amount sold over the correct ing panel
             cocos2d::Scene* root_scene = cocos2d::Director::getInstance()->getRunningScene();
             auto harvest_scene = dynamic_cast<HarvestScene*>(root_scene->getChildByName("HarvestScene"));
-            if (harvest_scene)
+            if (harvest_scene && !SimulateMainLoop::is_simulating)
             {
                 std::string message = "+$" + beautify_double(actual_value);
                 harvest_scene->spawn_floating_label_for_ing_type(ing_type, message);
             }
-            else
+            else if (!SimulateMainLoop::is_simulating)
             {
-                CCLOG("warn no harvest scene found, probably due to this being on startup, so we're not going to make any floating labels");
+                // CCLOG("warn no harvest scene found, probably due to this being on startup, so we're not going to make any floating labels");
             }
         }
     }
@@ -243,6 +241,6 @@ void ScavengerHarvester::on_update(float dt)
     }
     else
     {
-        CCLOG("INFO: ScavengerHarvester cant do anything if no dumpster harvestable");
+        // CCLOG("INFO: ScavengerHarvester cant do anything if no dumpster harvestable");
     }
 }

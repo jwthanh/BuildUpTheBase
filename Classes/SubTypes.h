@@ -5,7 +5,7 @@
 using res_count_t = long double;
 
 enum class IngredientSubType {
-    None, Grain, PileOfGrain, Bread, Loaf, Seed, Tree, Iron, Copper,
+    None = 0, Grain, PileOfGrain, Bread, Loaf, Seed, Tree, Iron, Copper,
     Wood, Fly, Sand, Flesh, Berry, Soul, Blood, Paper, Undead, Minecart,
     MineRails
 };

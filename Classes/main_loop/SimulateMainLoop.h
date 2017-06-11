@@ -8,6 +8,7 @@ class SimulateMainLoop
 {
     public:
         //effectively calls BUILDUP->city->update(dt)
+        static bool is_simulating;
         static void simulate(float dt);
 };
 #endif

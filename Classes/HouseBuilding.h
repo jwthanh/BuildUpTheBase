@@ -113,7 +113,7 @@ class City : public Nameable, public Updateable
         void update(float dt);
         void update_buildings(float dt);
 
-        spBuilding building_by_name(std::string name);
+        spBuilding building_by_name(const std::string& name);
 };
 
 #endif

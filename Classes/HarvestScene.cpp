@@ -64,6 +64,7 @@
 #include "banking/Bank.h"
 #include "ShatterNode.h"
 #include "progress/GameProgress.h"
+#include "main_loop/SimulateMainLoop.h"
 
 USING_NS_CC;
 
@@ -185,22 +186,16 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
-        // SoundLibrary::getInstance()->play_general_harvest_touched();
-        // GameDirector::switch_to_building_detail_menu();
 
-        //auto sprite = Sprite::createWithSpriteFrameName("pink_monster.png");
-        // auto shatter_sprite = ShatterSprite::createWithSpriteFrameName("pink_monster.png");
-        // shatter_sprite->setScale(4.0f);
-        // shatter_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-        // shatter_sprite->setPosition(get_center_pos());
-        // this->addChild(shatter_sprite);
-        // auto shatter_action = ShatterAction::create(0.5f);
-        // //shatter_sprite->runAction(shatter_action);
-        // shatter_sprite->setOpacity(0);
-        // shatter_sprite->runAction(Sequence::createWithTwoActions(shatter_action, cocos2d::RemoveSelf::create()));
-        //
-
-
+        res_count_t seconds_to_sim = 60 * 60 * 24;
+        time_t start = time(0);
+        CCLOG("starting sim for %f", seconds_to_sim);
+        for (float i = 0; i < seconds_to_sim; i += 1) {
+            // BUILDUP->city->update(1.0f);
+            SimulateMainLoop::simulate(seconds_to_sim);
+        };
+        time_t end = time(0);
+        CCLOG("done sim for %f, taking %i", seconds_to_sim, end-start);
 
     }
 }
