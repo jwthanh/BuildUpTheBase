@@ -149,6 +149,9 @@
     <ClCompile Include="..\Classes\main_loop\MainLoop.cpp">
       <Filter>main_loop</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\main_loop\SimulateMainLoop.cpp">
+      <Filter>main_loop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -285,6 +288,9 @@
       <Filter>enums</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\main_loop\MainLoop.h">
+      <Filter>main_loop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\main_loop\SimulateMainLoop.h">
       <Filter>main_loop</Filter>
     </ClInclude>
   </ItemGroup>

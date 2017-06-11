@@ -46,6 +46,7 @@
 #include "progress/GameProgress.h"
 #include "Ingredients.h"
 #include "main_loop/MainLoop.h"
+#include "main_loop/SimulateMainLoop.h"
 
 
 USING_NS_CC;
@@ -89,10 +90,7 @@ std::string existing_player_load()
 
     if (is_cheating == false)
     {
-        //TODO maybe simulate it for up to an hour, and multiply that output by
-        //the hours remaining. Alternatively, rewrite it somehow so that it
-        //accurately estimates it from nothing.
-        BUILDUP->city->update(seconds_count);
+        SimulateMainLoop::simulate(seconds_count);
 
         auto refreshed_ingredients = BUILDUP->get_all_ingredients();
         for (auto mist_ing : refreshed_ingredients)
