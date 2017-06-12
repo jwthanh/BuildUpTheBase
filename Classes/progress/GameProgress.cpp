@@ -38,10 +38,10 @@ const std::map<BuildingTypes, BuildingTypes> upgrade_prerequisites = {
     { BuildingTypes::TheForest, BuildingTypes::TheGraveyard },
     { BuildingTypes::TheGraveyard, BuildingTypes::TheMarketplace },
     { BuildingTypes::TheMarketplace, BuildingTypes::TheMine },
-    { BuildingTypes::TheMine, BuildingTypes::TheUnderscape },
-    { BuildingTypes::TheUnderscape, BuildingTypes::TheWorkshop },
-    { BuildingTypes::TheWorkshop, BuildingTypes::TheArena },
-    { BuildingTypes::TheArena, BuildingTypes::TheDump },
+    { BuildingTypes::TheMine, BuildingTypes::TheArena },
+    { BuildingTypes::TheArena, BuildingTypes::TheWorkshop },
+    { BuildingTypes::TheWorkshop, BuildingTypes::TheUnderscape },
+    { BuildingTypes::TheUnderscape, BuildingTypes::TheDump },
     { BuildingTypes::TheDump, BuildingTypes::TheFarm },
 };
 
