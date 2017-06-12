@@ -886,6 +886,12 @@ void BaseScene::create_player_info_panel()
 
     //check visibilty for tutorials
     auto check_hp_visible = [player_hp_lbl, tutorial](float dt){
+        //hide hp lbl if arena is locked
+        spBuilding arena = BUILDUP->city->building_by_type(BuildingTypes::TheArena);
+        const BuildingUnlockMap& unlock_map = GameProgress::getInstance()->get_building_unlock_map();
+        bool is_arena_unlocked = unlock_map.size() && unlock_map.at(arena) ;
+        if (is_arena_unlocked == false) { player_hp_lbl->setVisible(false); return; }
+
         try_set_visible(player_hp_lbl, tutorial->get_show_player_hp_lbl());
     };
     player_hp_lbl->schedule(check_hp_visible, FPS_60, "check_hp_visible");
@@ -899,6 +905,12 @@ void BaseScene::create_player_info_panel()
         coin_ss << "$" << beautify_double(gold);
         std::string coin_msg = coin_ss.str();
         player_gold_lbl->setString(coin_msg);
+
+        //hide hp lbl if arena is locked
+        spBuilding arena = BUILDUP->city->building_by_type(BuildingTypes::TheArena);
+        const BuildingUnlockMap& unlock_map = GameProgress::getInstance()->get_building_unlock_map();
+        bool is_arena_unlocked = unlock_map.size() && unlock_map.at(arena) ;
+        if (is_arena_unlocked == false) { player_hp_lbl->setVisible(false); return; }
 
         //set hp
         std::stringstream hp_ss;
