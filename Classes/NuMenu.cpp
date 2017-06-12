@@ -36,6 +36,7 @@
 #include "utilities/vibration.h"
 #include "external/easylogging.h"
 #include "banking/Bank.h"
+#include "progress/GameProgress.h"
 
 
 USING_NS_CC;
@@ -330,7 +331,6 @@ void ShopNuItem::update_func(float dt)
     {
         try_set_enable(false);
 
-        // this->set_cost_lbl(beautify_double(rounded_cost));
         if (rounded_cost != this->_last_shop_cost) {
             this->set_cost_lbl(beautify_double(rounded_cost));
             this->_last_shop_cost = rounded_cost;
@@ -344,7 +344,6 @@ void ShopNuItem::update_func(float dt)
     {
         try_set_enable(true);
 
-        // this->set_cost_lbl(beautify_double(rounded_cost));
         if (rounded_cost != this->_last_shop_cost) {
             this->set_cost_lbl(beautify_double(rounded_cost));
             this->_last_shop_cost = rounded_cost;
@@ -352,9 +351,6 @@ void ShopNuItem::update_func(float dt)
 
         try_set_node_color(this->button, Color3B::WHITE);
     };
-
-
-
 }
 
 BuildingShopNuItem* BuildingShopNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
@@ -1184,20 +1180,13 @@ void ConsumerShopNuItem::my_init_update_callback()
 
 bool ConsumerShopNuItem::custom_status_check(float dt)
 {
-    spBuilding target_building = BUILDUP->get_target_building();
+    // check if arena is unlocked
+    // TODO TODO make normal or disabled instead of hidden
+    spBuilding arena = BUILDUP->city->building_by_type(BuildingTypes::TheArena);
+    const BuildingUnlockMap& unlock_map = GameProgress::getInstance()->get_building_unlock_map();
+    bool is_arena_unlocked = unlock_map.size() && unlock_map.at(arena) ;
 
-    // check if high enough building level to fit more
-    bool is_enabled = false;
-    work_ing_t pair = { this->harv_type, target_building->punched_sub_type };
-    res_count_t def = 0.0;
-    res_count_t harvesters_owned = map_get( target_building->consumers, pair, def);
-
-    if (harvesters_owned < target_building->get_storage_space())
-    {
-        is_enabled = true;
-    };
-
-    return is_enabled;
+    return is_arena_unlocked;
 };
 
 ConsumerShopNuItem* ConsumerShopNuItem::create(cocos2d::ui::Widget* parent, spBuilding building, IngredientSubType consumed_type)
