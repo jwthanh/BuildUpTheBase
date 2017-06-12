@@ -50,8 +50,8 @@ spBuilding City::building_by_name(const std::string& name)
     return nullptr;
 };
 
-Building::Building(City* city, std::string name, std::string id_key) :
-             Nameable(name), Buyable(id_key), Updateable(), city(city)
+Building::Building(City* city, BuildingTypes type, std::string id_key) :
+     Nameable(BuildingTypes_to_name.at(type)), Updateable(), Buyable(id_key), type(type), city(city)
 {
     building_level = 1;
 

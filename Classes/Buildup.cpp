@@ -168,35 +168,35 @@ City* Buildup::init_city(Buildup* buildup)
     auto city = new City(buildup, "Burlington");
 
     struct BuildingConfig {
-        std::string name;
+        BuildingTypes type;
         std::string id;
         Ingredient::SubType ing_type;
     };
 
     std::vector<BuildingConfig> configs = {
         {
-            "The Farm", "the_farm", Ingredient::SubType::Grain
+            BuildingTypes::TheFarm, "the_farm", Ingredient::SubType::Grain
         }, {
-            "The Arena", "the_arena", Ingredient::SubType::Sand
+            BuildingTypes::TheArena, "the_arena", Ingredient::SubType::Sand
         }, {
-            "The Underscape", "the_underscape", Ingredient::SubType::Blood
+            BuildingTypes::TheUnderscape, "the_underscape", Ingredient::SubType::Blood
         }, {
-            "The Marketplace", "the_marketplace", Ingredient::SubType::Paper
+            BuildingTypes::TheMarketplace, "the_marketplace", Ingredient::SubType::Paper
         }, {
-            "The Dump", "the_dump", Ingredient::SubType::Fly
+            BuildingTypes::TheDump, "the_dump", Ingredient::SubType::Fly
         }, {
-            "The Workshop", "the_workshop", Ingredient::SubType::Seed
+            BuildingTypes::TheWorkshop, "the_workshop", Ingredient::SubType::Seed
         }, {
-            "The Mine", "the_mine", Ingredient::SubType::Copper
+            BuildingTypes::TheMine, "the_mine", Ingredient::SubType::Copper
         }, {
-            "The Graveyard", "the_graveyard", Ingredient::SubType::Flesh
+            BuildingTypes::TheGraveyard, "the_graveyard", Ingredient::SubType::Flesh
         }, {
-            "The Forest", "the_forest", Ingredient::SubType::Berry
+            BuildingTypes::TheForest, "the_forest", Ingredient::SubType::Berry
         }
     };
 
     auto create_building = [city](BuildingConfig config) {
-        auto building = std::make_shared<Building>(city, config.name, config.id);
+        auto building = std::make_shared<Building>(city, config.type, config.id);
         building->punched_sub_type = config.ing_type;
         city->buildings.push_back(building);
     };

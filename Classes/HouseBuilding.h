@@ -14,6 +14,31 @@
 
 #include "Updateable.h"
 
+enum class BuildingTypes
+{
+    TheFarm = 0,
+    TheArena,
+    TheUnderscape,
+    TheMarketplace,
+    TheDump,
+    TheWorkshop,
+    TheMine,
+    TheGraveyard,
+    TheForest
+};
+
+const std::map<BuildingTypes, std::string> BuildingTypes_to_name = {
+    { BuildingTypes::TheFarm, "The Farm" },
+    { BuildingTypes::TheArena, "The Arena" },
+    { BuildingTypes::TheUnderscape, "The Underscape" },
+    { BuildingTypes::TheMarketplace, "The Marketplace" },
+    { BuildingTypes::TheDump, "The Dump" },
+    { BuildingTypes::TheWorkshop, "The Workshop" },
+    { BuildingTypes::TheMine, "The Mine" },
+    { BuildingTypes::TheGraveyard, "The Graveyard" },
+    { BuildingTypes::TheForest, "The Forest" }
+};
+
 
 using HarvesterCache = std::map<work_ing_t, std::shared_ptr<Harvester>>;
 using spHarvesterCache = std::shared_ptr<HarvesterCache>;
@@ -60,6 +85,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         spScavengerCache _scavenger_cache;
 
     public:
+        BuildingTypes type;
 
         spBuildingData data;
 
@@ -83,7 +109,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         bool is_storage_full_of_ingredients(IngredientSubType);
         bool can_fit_more_ingredients(IngredientSubType sub_type, res_count_t quantity = 1);
 
-        Building(City* city, std::string name, std::string id_key);
+        Building(City* city, BuildingTypes type, std::string id_key);
         void create_ingredients(IngredientSubType sub_type, res_count_t quantity);
 
         void consume_recipe(Recipe* recipe);
