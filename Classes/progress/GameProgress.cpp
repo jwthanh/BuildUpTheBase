@@ -61,6 +61,16 @@ void GameProgress::update(float dt, City* city)
         };
 
         this->_building_unlock_map[building] = is_unlocked;
+
+        if (building->type == BuildingTypes::TheWorkshop) {
+            if (building->building_level >= 1) {
+                this->_building_tab_map[building][TabTypes::DetailTab] = true;
+            };
+        } else if (building->type == BuildingTypes::TheFarm) {
+            if (this->_building_unlock_map[city->building_by_type(BuildingTypes::TheWorkshop)] == true) {
+                this->_building_tab_map[building][TabTypes::DetailTab] = true;
+            }
+        };
     }
 }
 
