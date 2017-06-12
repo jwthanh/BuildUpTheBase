@@ -19,8 +19,8 @@ class Recipe : public Nameable
         ComponentMap components;
         OutputMap outputs;
 
-        VoidFunc _callback;
-        void callback();
+        VoidFunc _on_recipe_complete;
+        void on_recipe_complete();
 
         std::string description;
 

@@ -1016,21 +1016,21 @@ void CraftingHarvestable::shatter()
 
         //FIXME reduce hardcoding maybe?
         if (result == Output::Single) {
-            this->recipe->callback();
+            this->recipe->on_recipe_complete();
             achievement->increment();
             do_vibrate(10); //vibrate normally
 
         } else if (result == Output::Double) {
-            this->recipe->callback();
-            this->recipe->callback();
+            this->recipe->on_recipe_complete();
+            this->recipe->on_recipe_complete();
             achievement->increment();
             achievement->increment();
             do_vibrate(20); //vibrate stronger
 
         } else if (result == Output::Triple) {
-            this->recipe->callback();
-            this->recipe->callback();
-            this->recipe->callback();
+            this->recipe->on_recipe_complete();
+            this->recipe->on_recipe_complete();
+            this->recipe->on_recipe_complete();
             achievement->increment();
             achievement->increment();
             achievement->increment();

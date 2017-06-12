@@ -425,10 +425,10 @@ void RecipeNuItem::other_init(spRecipe recipe)
         ((cocos2d::ui::Scale9Sprite*)(this->item_icon->getVirtualRenderer()))->getSprite()->getTexture()->setAliasTexParameters();
     };
 
-    if (recipe->_callback == NULL)
+    if (recipe->_on_recipe_complete == NULL)
     {
         CCLOG("no callback set, using default, recipe %s", this->recipe->name.c_str());
-        recipe->_callback = [this]() {
+        recipe->_on_recipe_complete = [this]() {
             for (auto pair : this->recipe->outputs) {
                 IngredientSubType ing_type = pair.first;
                 res_count_t count = pair.second;

@@ -5,11 +5,11 @@
 #include "Ingredients.h"
 
 
-void Recipe::callback()
+void Recipe::on_recipe_complete()
 {
-    if (_callback != NULL)
+    if (_on_recipe_complete != NULL)
     {
-        this->_callback();
+        this->_on_recipe_complete();
     }
 }
 
@@ -21,7 +21,7 @@ Recipe::Recipe(std::string name, std::string description) : Nameable(name), desc
     this->components = ComponentMap();
     this->outputs = OutputMap();
 
-    // this->_callback = [this](Beatup* bu) {
+    // this->_on_recipe_complete = [this](Beatup* bu) {
     //     this-> //TODO figure out how to add this output to building
     // };
 
@@ -80,7 +80,7 @@ void Recipe::consume()
             BUILDUP->remove_shared_ingredients_from_all(component_pair.first, component_pair.second);
         }
 
-        this->callback();
+        this->on_recipe_complete();
     }
     else
     {

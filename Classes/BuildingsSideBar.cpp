@@ -580,7 +580,7 @@ void SideListView::setup_detail_listview()
                 blood_oath->components = mistIngredient({
                     { Ingredient::SubType::Blood, 10 }
                 });
-                blood_oath->_callback = [building]()
+                blood_oath->_on_recipe_complete = [building]()
                 {
                     auto health = BUILDUP->fighter->attrs->health;
                     if (health->is_full() == false)
@@ -614,7 +614,7 @@ void SideListView::setup_detail_listview()
                     { Ingredient::SubType::Flesh, 6 },
                     { Ingredient::SubType::Blood, 9 }
                 });
-                blood_oath->_callback = [building](){
+                blood_oath->_on_recipe_complete = [building](){
                     bool can_fit_more_dead = true;
                     if (can_fit_more_dead)
                     {
@@ -686,7 +686,7 @@ void SideListView::setup_detail_listview()
                 send_scavenger->components = mistIngredient({
                     { Ingredient::SubType::Undead, 3 }
                 });
-                send_scavenger->_callback = [building]()
+                send_scavenger->_on_recipe_complete = [building]()
                 {
                     bool can_fit_more_items = true; //TODO
                     if (can_fit_more_items)
@@ -732,7 +732,7 @@ void SideListView::setup_detail_listview()
                 queue_scavenger->components = mistIngredient({
                     { Ingredient::SubType::Undead, 1 }
                 });
-                queue_scavenger->_callback = [building]()
+                queue_scavenger->_on_recipe_complete = [building]()
                 {
                     HarvestableManager* harvestable_manager = HarvestableManager::getInstance();
                     harvestable_manager->queued_scavengers += 1.0;
@@ -758,7 +758,7 @@ void SideListView::setup_detail_listview()
                 transmute_copper->components = mistIngredient({
                     { Ingredient::SubType::Copper, 10 }
                 });
-                transmute_copper->_callback = [building]()
+                transmute_copper->_on_recipe_complete = [building]()
                 {
                     bool can_fit_more_iron = true; //TODO
                     if (can_fit_more_iron)
@@ -794,7 +794,7 @@ void SideListView::setup_detail_listview()
                     { Ingredient::SubType::Iron, 8 },
                     { Ingredient::SubType::Copper, 25 }
                 });
-                build_minecart->_callback = [building]()
+                build_minecart->_on_recipe_complete = [building]()
                 {
                     bool can_fit_more_carts = true; //TODO
                     if (can_fit_more_carts)
@@ -831,7 +831,7 @@ void SideListView::setup_detail_listview()
                     { Ingredient::SubType::Wood, 5 },
                     { Ingredient::SubType::Copper, 15 }
                 });
-                build_minerails->_callback = [building]()
+                build_minerails->_on_recipe_complete = [building]()
                 {
                     bool can_fit_more_carts = true; //TODO
                     if (can_fit_more_carts)
@@ -931,7 +931,7 @@ void SideListView::setup_detail_listview()
                 salesmen_boost->components = mistIngredient{
                     { Ingredient::SubType::Bread, 3.0 }
                 };
-                salesmen_boost->_callback = [](){
+                salesmen_boost->_on_recipe_complete = [](){
                     auto workshop = BUILDUP->city->building_by_type(BuildingTypes::TheWorkshop);
 
                     Technology technology = Technology(TechSubType::SalesmenBaseBoost);
@@ -959,7 +959,7 @@ void SideListView::setup_detail_listview()
                     { Ingredient::SubType::Flesh, 3.0 }, // because we've got 3
                     { Ingredient::SubType::Loaf, 3.0 }   // hardcoded
                 };
-                weaken_flesh->_callback = [](){
+                weaken_flesh->_on_recipe_complete = [](){
                     auto workshop = BUILDUP->city->building_by_type(BuildingTypes::TheWorkshop);
 
                     Technology technology = Technology(TechSubType::CombatWeakenEnemy);
