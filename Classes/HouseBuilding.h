@@ -51,6 +51,19 @@ const std::map<std::string, BuildingTypes> BuildingTypes_to_string = {
     { "The Forest", BuildingTypes::TheForest }
 };
 
+const std::map<BuildingTypes, res_count_t> BuildingTypes_to_base_upgrade_cost = {
+    { BuildingTypes::TheFarm       , 10.0L },
+    { BuildingTypes::TheDump       , 100.0L },
+    { BuildingTypes::TheArena      , 1000.0L },
+    { BuildingTypes::TheUnderscape , 10000.0L },
+    { BuildingTypes::TheMarketplace, 100000.0L },
+    { BuildingTypes::TheWorkshop   , 1000000.0L },
+    { BuildingTypes::TheMine       , 10000000.0L },
+    { BuildingTypes::TheGraveyard  , 100000000.0L },
+    { BuildingTypes::TheForest     , 1000000000.0L }
+};
+
+
 
 using HarvesterCache = std::map<work_ing_t, std::shared_ptr<Harvester>>;
 using spHarvesterCache = std::shared_ptr<HarvesterCache>;

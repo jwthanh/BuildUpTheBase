@@ -779,7 +779,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     update_title_and_desc(0.0f);
     this->schedule(update_title_and_desc, FPS_60, "update_title_and_desc");
 
-    res_count_t base_shop_cost = 10.0L;
+    res_count_t base_shop_cost = BuildingTypes_to_base_upgrade_cost.at(this->building->type);
     res_count_t shop_cost = scale_number(base_shop_cost, static_cast<res_count_t>(this->building_level)-1.0L, 10.5L);
     this->_shop_cost = shop_cost;
 
