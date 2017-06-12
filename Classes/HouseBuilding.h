@@ -54,8 +54,8 @@ const std::map<std::string, BuildingTypes> BuildingTypes_to_string = {
 const std::map<BuildingTypes, res_count_t> BuildingTypes_to_base_upgrade_cost = {
     { BuildingTypes::TheFarm       , 10.0L },
     { BuildingTypes::TheDump       , 100.0L },
-    { BuildingTypes::TheArena      , 1000.0L },
-    { BuildingTypes::TheUnderscape , 10000.0L },
+    { BuildingTypes::TheUnderscape , 1000.0L },
+    { BuildingTypes::TheArena      , 10000.0L },
     { BuildingTypes::TheMarketplace, 100000.0L },
     { BuildingTypes::TheWorkshop   , 1000000.0L },
     { BuildingTypes::TheMine       , 10000000.0L },
