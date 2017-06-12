@@ -198,7 +198,7 @@ City* Buildup::init_city(Buildup* buildup)
     auto create_building = [city](BuildingConfig config) {
         auto building = std::make_shared<Building>(city, config.type, config.id);
         building->punched_sub_type = config.ing_type;
-        city->buildings.push_back(building);
+        city->buildings[config.type] = building;
     };
 
     for (auto config : configs) {

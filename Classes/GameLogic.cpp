@@ -395,8 +395,9 @@ void GameLogic::save_all()
 {
     LOG(INFO) << "Starting save";
     auto bldg_serializer = BuildingSerializer("test_building.json");
-    for (spBuilding building : BUILDUP->city->buildings)
+    for (const auto& pair : BUILDUP->city->buildings)
     {
+        spBuilding building = pair.second;
         bldg_serializer.serialize(building);
     };
 
@@ -455,8 +456,9 @@ void GameLogic::load_all()
     GameLogic::getInstance()->set_can_vibrate(DataManager::get_bool_from_data(vibrate_key, true));
 
     auto bldg_serializer = BuildingSerializer("test_building.json");
-    for (spBuilding building : BUILDUP->city->buildings)
+    for (const auto& pair : BUILDUP->city->buildings)
     {
+        spBuilding building = pair.second;
         bldg_serializer.load(building);
     };
 
@@ -521,8 +523,9 @@ void GameLogic::load_all()
 void GameLogic::load_all_as_cheater()
 {
     auto bldg_serializer = BuildingSerializer("cheat_building.json");
-    for (spBuilding building : BUILDUP->city->buildings)
+    for (const auto& pair : BUILDUP->city->buildings)
     {
+        spBuilding building = pair.second;
         bldg_serializer.load(building);
     };
 

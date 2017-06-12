@@ -128,12 +128,11 @@ class City : public Nameable, public Updateable
 
         Buildup* buildup;
 
-        vsBuilding buildings;
+        std::map<BuildingTypes, spBuilding> buildings;
 
         City(Buildup* buildup, std::string name)
             : Nameable(name), Updateable(), buildup(buildup)
         {
-            buildings = {};
         };
 
         void update(float dt);

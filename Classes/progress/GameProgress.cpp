@@ -17,8 +17,9 @@ GameProgress* GameProgress::getInstance()
 
 void GameProgress::init(City* city)
 {
-    for (auto& building : city->buildings)
+    for (auto& pair : city->buildings)
     {
+        spBuilding building = pair.second;
         this->_building_unlock_map[building] = false;
 
         auto& tab_map = this->_building_tab_map[building];
@@ -48,8 +49,9 @@ const std::map<std::string, std::string> upgrade_prerequisites = {
 void GameProgress::update(float dt, City* city)
 {
     //check all the buildings against their requirements for unlocking
-    for (auto& building : city->buildings)
+    for (auto& pair : city->buildings)
     {
+        spBuilding building = pair.second;
         bool is_unlocked = false;
         if (building->name == "The Farm") {
             is_unlocked = true;

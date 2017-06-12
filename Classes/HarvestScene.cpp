@@ -255,34 +255,9 @@ void BaseScene::generate_WIP_welcome_message()
     }
 }
 
-void BaseScene::scroll_to_target_building()
-{
-    auto building_pageview = dynamic_cast<ui::PageView*>(this->getChildByName("building_pageview"));
-    if (building_pageview)
-    {
-        vsBuilding buildings = BUILDUP->city->buildings;
-        auto find_cb = [](spBuilding building) {
-            return building == BUILDUP->get_target_building();
-        };
-        int index = std::find_if(buildings.begin(),
-                                 buildings.end(),
-                                 find_cb) - buildings.begin();
-
-        if (index > (int)buildings.size())
-        {
-            CCLOG("no building found, not moving building pageview");
-        } else
-        {
-
-            building_pageview->ListView::scrollToItem(index, { 0, 0 }, { 0, 0 }, 0.5f);
-        }
-    }
-}
-
 void BaseScene::onEnter()
 {
     GameLayer::onEnter();
-    scroll_to_target_building();
 };
 
 void BaseScene::onSwipeLeft(float dt)

@@ -327,8 +327,9 @@ void SideListView::setup_listviews()
 void SideListView::setup_worker_listview()
 {
     TabTypes tab_type = TabTypes::WorkerTab;
-    for (spBuilding building : BUILDUP->city->buildings)
+    for (auto pair : BUILDUP->city->buildings)
     {
+        spBuilding building = pair.second;
         ui::ListView* shop_listview = this->worker_listviews->at(building->name);
         auto update_harvester_listview = [this, shop_listview, building, tab_type](float dt)
         {
@@ -480,8 +481,9 @@ void SideListView::setup_building_listview()
 {
     TabTypes tab_type = TabTypes::BuildingTab;
 
-    for (spBuilding building : BUILDUP->city->buildings)
+    for (auto pair : BUILDUP->city->buildings)
     {
+        spBuilding building = pair.second;
         ui::ListView* listview = this->building_listviews->at(building->name);
 
         auto update_listview = [this, listview, building, tab_type](float dt)
@@ -518,8 +520,9 @@ void SideListView::setup_detail_listview()
     TabTypes tab_type = TabTypes::DetailTab;
 
 
-    for (spBuilding building : BUILDUP->city->buildings)
+    for (const auto& pair : BUILDUP->city->buildings)
     {
+        spBuilding building = pair.second;
         ui::ListView* listview = this->detail_listviews->at(building->name);
 
         ///DETAIL LISTVIEW
@@ -1043,8 +1046,9 @@ void SideListView::setup_menu_listview()
 {
     TabTypes tab_type = TabTypes::MenuTab;
 
-    for (spBuilding building : BUILDUP->city->buildings)
+    for (const auto& pair : BUILDUP->city->buildings)
     {
+        spBuilding building = pair.second;
         ui::ListView* listview = this->menu_listviews->at(building->name);
 
         ///send feedback
@@ -1431,8 +1435,9 @@ spListviewMap SideListView::_create_listview(std::string node_name)
 	auto orig_listview = static_cast<ui::ListView*>(sidebar_panel->getChildByName(node_name));
 
     spListviewMap result = std::make_shared<listviewMap>();
-    for (spBuilding building : BUILDUP->city->buildings)
+    for (const auto& pair : BUILDUP->city->buildings)
     {
+        spBuilding building = pair.second;
         auto listview = dynamic_cast<ui::ListView*>(orig_listview->clone());
         sidebar_panel->addChild(listview);
 

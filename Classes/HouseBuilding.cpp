@@ -31,8 +31,9 @@ void City::update(float dt)
 
 void City::update_buildings(float dt)
 {
-    for (const std::shared_ptr<Building>& building : this->buildings)
+    for (auto pair : this->buildings)
     {
+        spBuilding building = pair.second;
         building->update(dt);
     };
 
@@ -41,8 +42,9 @@ void City::update_buildings(float dt)
 spBuilding City::building_by_name(const std::string& name)
 {
     //creating a lambda for std::find is too slow, this loop seems to be the fastest
-    for (auto& building : this->buildings)
+    for (auto pair : this->buildings)
     {
+        spBuilding building = pair.second;
         if (building->name == name)
             return building;
     };
