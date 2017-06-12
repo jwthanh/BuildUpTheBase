@@ -129,3 +129,10 @@ you start off as garbage out of a spaceships ejection chute and then grow into y
  it'd give you sections to work through. different planets would have
   different types to it. you could switch between planets to focus on different
   strategies and weaknesses or something. I'll write the idea down
+
+
+
+# TODO
+* Grey out Nuitems when they're visible but not yet usable
+* use ??? for resources you can't use but recipes are visible
+* notifications when things are unlocked
