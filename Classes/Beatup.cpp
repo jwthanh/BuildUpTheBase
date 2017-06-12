@@ -75,7 +75,8 @@ res_count_t Beatup::get_max_coin_storage()
     spBuilding&& marketplace = BUILDUP->city->building_by_type(BuildingTypes::TheMarketplace);
     res_count_t num_researched = map_get(marketplace->techtree->tech_map, TechSubType::RaiseWalletCap, 0.0);
 
-    return scale_number_flat_pow(100000.0L, num_researched, 11.3L);
+    static const res_count_t base_coin_storage = 10000000.0L;
+    return scale_number_flat_pow(base_coin_storage, num_researched, 11.3L);
 
 };
 
