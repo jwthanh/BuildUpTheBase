@@ -485,15 +485,15 @@ void ChanceItemScene::convert_item_resource(std::stringstream& body_ss, const sp
     res_count_t quantity = item->level * ITEM_RARITY_MODIFIER.at(item->rarity);
 
     if (slot_type == ItemSlotType::Combat) {
-        building = BUILDUP->city->building_by_name("The Arena");
+        building = BUILDUP->city->building_by_type(BuildingTypes::TheArena);
         ing_type = Ingredient::SubType::Soul;
     }
     else if (slot_type == ItemSlotType::Mining) {
-        building = BUILDUP->city->building_by_name("The Mine");
+        building = BUILDUP->city->building_by_type(BuildingTypes::TheMine);
         ing_type = Ingredient::SubType::Copper;
     }
     else if (slot_type == ItemSlotType::Recipe) {
-        building = BUILDUP->city->building_by_name("The Workshop");
+        building = BUILDUP->city->building_by_type(BuildingTypes::TheWorkshop);
         ing_type = Ingredient::SubType::Bread;
     } else {
         assert(false && "what slot type");

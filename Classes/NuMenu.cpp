@@ -660,7 +660,7 @@ void UpgradeWalletNuItem::other_init()
         this->add_available_coins(-this->_shop_cost);
 
         Technology technology = Technology(TechSubType::RaiseWalletCap);
-        auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
+        auto marketplace = BUILDUP->city->building_by_type(BuildingTypes::TheMarketplace);
         res_count_t def = 0.0;
         res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);
         marketplace->techtree->tech_map[technology.sub_type] = num_researched + 1;
@@ -677,7 +677,7 @@ void UpgradeWalletNuItem::other_init()
         std::stringstream ss;
 
         Technology technology = Technology(TechSubType::RaiseWalletCap);
-        auto marketplace = BUILDUP->city->building_by_name("The Marketplace");
+        auto marketplace = BUILDUP->city->building_by_type(BuildingTypes::TheMarketplace);
 
         res_count_t def = 0.0;
         res_count_t num_researched = map_get(marketplace->techtree->tech_map, technology.sub_type, def);

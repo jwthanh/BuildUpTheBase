@@ -34,16 +34,15 @@ void GameProgress::init(City* city)
 //building name to its name of building that it requires to unlock
 // ie The Farm needs to be level 3 before the Arena unlocks:
 // {"The Farm" : "The Arena"}
-const std::map<std::string, std::string> upgrade_prerequisites = {
-    { "The Forest", "The Graveyard" },
-    { "The Graveyard", "The Marketplace" },
-    { "The Marketplace", "The Mine" },
-    { "The Mine", "The Underscape" },
-    { "The Underscape", "The Workshop" },
-    { "The Workshop", "The Arena" },
-    { "The Arena", "The Dump" },
-    { "The Dump", "The Farm" },
-    { "The Farm", "" }
+const std::map<BuildingTypes, BuildingTypes> upgrade_prerequisites = {
+    { BuildingTypes::TheForest, BuildingTypes::TheGraveyard },
+    { BuildingTypes::TheGraveyard, BuildingTypes::TheMarketplace },
+    { BuildingTypes::TheMarketplace, BuildingTypes::TheMine },
+    { BuildingTypes::TheMine, BuildingTypes::TheUnderscape },
+    { BuildingTypes::TheUnderscape, BuildingTypes::TheWorkshop },
+    { BuildingTypes::TheWorkshop, BuildingTypes::TheArena },
+    { BuildingTypes::TheArena, BuildingTypes::TheDump },
+    { BuildingTypes::TheDump, BuildingTypes::TheFarm },
 };
 
 void GameProgress::update(float dt, City* city)
@@ -56,7 +55,7 @@ void GameProgress::update(float dt, City* city)
         if (building->name == "The Farm") {
             is_unlocked = true;
         } else {
-            spBuilding matched_building = city->building_by_name(upgrade_prerequisites.at(building->name));
+            spBuilding matched_building = city->building_by_type(upgrade_prerequisites.at(building->type));
             const int MIN_LEVEL_REQUIRED = 4;
             is_unlocked = matched_building->building_level >= MIN_LEVEL_REQUIRED;
         };

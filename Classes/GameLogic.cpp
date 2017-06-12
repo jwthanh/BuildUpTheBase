@@ -494,7 +494,7 @@ void GameLogic::load_all()
 
     //load last targeted building and tab
     std::string target_building_name = DataManager::get_string_from_data("target_building", "The Farm");
-    spBuilding building = BUILDUP->city->building_by_name(target_building_name);
+    spBuilding building = BUILDUP->city->building_by_type(BuildingTypes_to_string.at(target_building_name));
     BUILDUP->set_target_building(building);
 
     cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();

@@ -91,7 +91,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
     this->hide_game_ui();
 
     //default to The Farm, just in case
-    BUILDUP->set_target_building(BUILDUP->city->building_by_name("The Farm"));
+    BUILDUP->set_target_building(BUILDUP->city->building_by_type(BuildingTypes::TheFarm));
 
     auto tutorial_sidebar_panel = parent->getChildByName("tutorial_sidebar_panel")->getChildByName("tutorial_sidebar_panel"); //FIXME i wish there was a way to name these better to reduce repetition
 

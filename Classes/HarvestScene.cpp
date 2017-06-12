@@ -373,28 +373,28 @@ void BaseScene::create_goal_loadingbar()
 void BaseScene::create_building_choicelist()
 {
     struct ChoiceConfig {
-        std::string building_name;
+        BuildingTypes building_type;
         std::string node_name;
     };
     std::vector<ChoiceConfig> configs = {
         {
-            "The Farm", "farm_node"
+            BuildingTypes::TheFarm, "farm_node"
         }, {
-            "The Arena", "arena_node"
+            BuildingTypes::TheArena, "arena_node"
         }, {
-            "The Underscape", "underscape_node"
+            BuildingTypes::TheUnderscape, "underscape_node"
         }, {
-            "The Marketplace", "marketplace_node"
+            BuildingTypes::TheMarketplace, "marketplace_node"
         }, {
-            "The Dump", "dump_node"
+            BuildingTypes::TheDump, "dump_node"
         }, {
-            "The Workshop", "workshop_node"
+            BuildingTypes::TheWorkshop, "workshop_node"
         }, {
-            "The Mine", "mine_node"
+            BuildingTypes::TheMine, "mine_node"
         }, {
-            "The Graveyard", "graveyard_node"
+            BuildingTypes::TheGraveyard, "graveyard_node"
         }, {
-            "The Forest", "forest_node"
+            BuildingTypes::TheForest, "forest_node"
         }
     };
 
@@ -403,7 +403,7 @@ void BaseScene::create_building_choicelist()
 
     for (auto conf : configs)
     {
-        spBuilding building = BUILDUP->city->building_by_name(conf.building_name);
+        spBuilding building = BUILDUP->city->building_by_type(conf.building_type);
 
         //get initial node from the prebuilt scene
         Node* building_node = building_buttons->getChildByName(conf.node_name);

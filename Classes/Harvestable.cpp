@@ -1183,7 +1183,7 @@ void FightingHarvestable::spawn_enemy()
     res_count_t base_hp = 20.0;
     res_count_t base_slow_rate = 3.0;
 
-    spBuilding workshop = BUILDUP->city->building_by_name("The Workshop");
+    spBuilding workshop = BUILDUP->city->building_by_type(BuildingTypes::TheWorkshop);
     TechMap tech_map = workshop->techtree->get_tech_map();
 
     auto tech_type = Technology::SubType::CombatWeakenEnemy;

@@ -65,7 +65,7 @@ std::map<Worker::SubType, Worker::SubType> req_map = {
 
 TabManager::TabManager()
 {
-    this->active_building = BUILDUP->city->building_by_name("The Farm");
+    this->active_building = BUILDUP->city->building_by_type(BuildingTypes::TheFarm);
     this->active_tab = TabTypes::WorkerTab;
 }
 
@@ -931,7 +931,7 @@ void SideListView::setup_detail_listview()
                     { Ingredient::SubType::Bread, 3.0 }
                 };
                 salesmen_boost->_callback = [](){
-                    auto workshop = BUILDUP->city->building_by_name("The Workshop");
+                    auto workshop = BUILDUP->city->building_by_type(BuildingTypes::TheWorkshop);
 
                     Technology technology = Technology(TechSubType::SalesmenBaseBoost);
 
@@ -959,7 +959,7 @@ void SideListView::setup_detail_listview()
                     { Ingredient::SubType::Loaf, 3.0 }   // hardcoded
                 };
                 weaken_flesh->_callback = [](){
-                    auto workshop = BUILDUP->city->building_by_name("The Workshop");
+                    auto workshop = BUILDUP->city->building_by_type(BuildingTypes::TheWorkshop);
 
                     Technology technology = Technology(TechSubType::CombatWeakenEnemy);
 

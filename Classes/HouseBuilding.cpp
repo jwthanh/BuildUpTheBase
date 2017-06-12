@@ -39,15 +39,16 @@ void City::update_buildings(float dt)
 
 };
 
-spBuilding City::building_by_name(const std::string& name)
+spBuilding City::building_by_type(BuildingTypes type)
 {
+    return this->buildings.at(type);
     //creating a lambda for std::find is too slow, this loop seems to be the fastest
-    for (auto pair : this->buildings)
-    {
-        spBuilding building = pair.second;
-        if (building->name == name)
-            return building;
-    };
+    //for (auto pair : this->buildings)
+    //{
+    //    spBuilding building = pair.second;
+    //    if (building->name == type)
+    //        return building;
+    //};
 
     return nullptr;
 };

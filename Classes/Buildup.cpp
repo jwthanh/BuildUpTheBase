@@ -205,7 +205,7 @@ City* Buildup::init_city(Buildup* buildup)
         create_building(config);
     };
 
-    auto farm = city->building_by_name("The Farm");
+    auto farm = city->building_by_type(BuildingTypes::TheFarm);
     farm->set_been_bought(true);
     farm->workers.push_back(std::make_shared<Worker>(farm, "Farmer", WorkerSubType::ZERO));
     buildup->set_target_building(farm);

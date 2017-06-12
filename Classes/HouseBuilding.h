@@ -39,6 +39,18 @@ const std::map<BuildingTypes, std::string> BuildingTypes_to_name = {
     { BuildingTypes::TheForest, "The Forest" }
 };
 
+const std::map<std::string, BuildingTypes> BuildingTypes_to_string = {
+    { "The Farm", BuildingTypes::TheFarm },
+    { "The Arena", BuildingTypes::TheArena },
+    { "The Underscape", BuildingTypes::TheUnderscape },
+    { "The Marketplace", BuildingTypes::TheMarketplace },
+    { "The Dump", BuildingTypes::TheDump },
+    { "The Workshop", BuildingTypes::TheWorkshop },
+    { "The Mine", BuildingTypes::TheMine },
+    { "The Graveyard", BuildingTypes::TheGraveyard },
+    { "The Forest", BuildingTypes::TheForest }
+};
+
 
 using HarvesterCache = std::map<work_ing_t, std::shared_ptr<Harvester>>;
 using spHarvesterCache = std::shared_ptr<HarvesterCache>;
@@ -138,7 +150,7 @@ class City : public Nameable, public Updateable
         void update(float dt);
         void update_buildings(float dt);
 
-        spBuilding building_by_name(const std::string& name);
+        spBuilding building_by_type(BuildingTypes type);
 };
 
 #endif
