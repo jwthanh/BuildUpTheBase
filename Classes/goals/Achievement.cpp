@@ -2,8 +2,9 @@
 
 #include "base/CCConsole.h"
 #include "base/CCDirector.h"
-#include "GameLogic.h"
 #include "2d/CCParticleExamples.h"
+
+#include "GameLogic.h"
 #include "PopupPanel.h"
 #include "utilities/vibration.h"
 
@@ -220,7 +221,6 @@ void BaseAchievement::celebrate()
     }
 
     do_vibrate(16); //long vibrate
-    CCLOG("YAY COMPLETED ACHIEVEMENT!");
 };
 
 std::string BaseAchievement::get_icon_path()
@@ -231,7 +231,6 @@ std::string BaseAchievement::get_icon_path()
 CountAchievement::CountAchievement(AchievementType achievement_type, res_count_t current, res_count_t target)
     : BaseAchievement(achievement_type)
 {
-    //TODO load from file
     this->_current_count = current;
     this->_target_count = target;
 };
