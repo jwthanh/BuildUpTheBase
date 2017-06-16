@@ -73,7 +73,11 @@ seems to work as well as it can.
 * items have passives #DONE
 * limited slots for total item inventory
 
+# Welcome back modal
 * new welcome-back prompt so it "doesn't look like a programmers console"
+* potential to convert the gained resources to a valuable resource?
+* make it tap to 'earn' the harvested resources while you were away
+
 
 * limit the amount of levels you can upgrade technologies by. its too high and salesmen are out of control
 
