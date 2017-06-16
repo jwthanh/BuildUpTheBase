@@ -16,15 +16,39 @@
 
 bool SimulateMainLoop::is_simulating = false;
 
-void SimulateMainLoop::simulate(float dt)
+mistIngredient SimulateMainLoop::simulate(float dt)
 {
-    SimulateMainLoop::is_simulating = true;
-    //TODO maybe simulate it for up to an hour, and multiply that output by
+    //TODO(idea) maybe simulate it for up to an hour, and multiply that output by
     //the hours remaining. Alternatively, rewrite it somehow so that it
     //accurately estimates it from nothing.
+
+    //grab a copy of the ingredients before simulation
+    auto original_ingredients = BUILDUP->get_all_ingredients();
+
+    SimulateMainLoop::is_simulating = true;
     BUILDUP->city->update(dt);
 
+    mistIngredient updated_ingredients = BUILDUP->get_all_ingredients();
+
+    //ingredients that were added based on the difference between original_ and updated_ingredients
+    mistIngredient diff_ingredients;
+    for (auto mist_ing : updated_ingredients)
+    {
+        Ingredient::SubType ing_type = mist_ing.first;
+        res_count_t updated_count = mist_ing.second;
+
+        res_count_t original_count = map_get(original_ingredients, ing_type, 0.0L);
+
+        if (updated_count - original_count > 0.0)
+        {
+            res_count_t gained = updated_count - original_count;
+            diff_ingredients[ing_type] = gained;
+        }
+    }
+
     SimulateMainLoop::is_simulating = false;
+
+    return diff_ingredients;
 };
 
 void SimulateMainLoop::generate_WIP_welcome_message()

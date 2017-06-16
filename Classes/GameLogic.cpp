@@ -78,11 +78,8 @@ std::string existing_player_load()
     std::stringstream gains_ss, at_capacity_ss;
     std::chrono::duration<double, std::ratio<3600>> hours_since_last_login = BEATUP->hours_since_last_login();
 
-    auto original_ingredients = BUILDUP->get_all_ingredients();
-
     auto seconds = std::chrono::duration_cast<std::chrono::seconds>(hours_since_last_login);
     long long seconds_count = seconds.count();
-
 
     //if the time is over a day in the passed, assume that they're cheating
     // anything less than 24 hours could be a timezone thing
@@ -90,25 +87,20 @@ std::string existing_player_load()
 
     if (is_cheating == false)
     {
-        SimulateMainLoop::simulate(seconds_count);
+        mistIngredient diff_ingredients = SimulateMainLoop::simulate(seconds_count);
 
-        auto refreshed_ingredients = BUILDUP->get_all_ingredients();
-        for (auto mist_ing : refreshed_ingredients)
+        for (auto mist_ing : diff_ingredients)
         {
             Ingredient::SubType ing_type = mist_ing.first;
-            res_count_t new_count = mist_ing.second;
+            res_count_t gained = mist_ing.second;
 
-            res_count_t _def = 0;
-            res_count_t old_count = map_get(original_ingredients, ing_type, _def);
-
-            if (new_count - old_count > 0.0)
+            if (gained > 0.0)
             {
-                res_count_t gained = new_count - old_count;
                 gains_ss << "+Gained " << beautify_double(gained) << " " << Ingredient::type_to_string(ing_type);
 
-                //TODO reimplement a per-building storage full message (since its all shared now)
-
                 gains_ss << std::endl;
+
+                //TODO reimplement a per-building storage full message (since its all shared now)
             }
         }
     }
