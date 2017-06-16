@@ -40,6 +40,12 @@ bool BaseModal::init()
     this->set_title("Unnamed Modal");
     set_aliasing(this->_title_lbl, true);
 
+    //scrollable body
+    this->_body_scroll = dynamic_cast<ui::ListView*>(this->_node->getChildByName("body_scroll"));
+    this->_body_scroll->setScrollBarEnabled(true);
+    this->_body_scroll->scrollToTop(0.0f, false);
+    this->_body_scroll->setUnifySizeEnabled(true);
+
     //invisible layout to tap to close
     this->_exit_layout = ui::Layout::create();
     this->_exit_layout->setAnchorPoint(Vec2::ZERO);
@@ -79,12 +85,6 @@ void BaseModal::set_title(const std::string& title)
 bool TextBlobModal::init()
 {
     BaseModal::init();
-
-    //scrollable body
-    this->_body_scroll = dynamic_cast<ui::ListView*>(this->_node->getChildByName("body_scroll"));
-    this->_body_scroll->setScrollBarEnabled(true);
-    this->_body_scroll->scrollToTop(0.0f, false);
-    this->_body_scroll->setUnifySizeEnabled(true);
 
     //fill message up
     this->set_body("No body yet");

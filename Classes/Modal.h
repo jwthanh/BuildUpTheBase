@@ -34,6 +34,9 @@ class BaseModal : public cocos2d::Node
         cocos2d::ui::Layout* _close_panel;
 
         cocos2d::ui::Text* _title_lbl;
+        //TODO figure how to resize dynamically
+        cocos2d::ui::ListView* _body_scroll;
+
 
         virtual cocos2d::Node* _build_root_node();
 
@@ -44,15 +47,14 @@ class BaseModal : public cocos2d::Node
         std::function<void()> on_layout_touched;
 
         void set_title(const std::string& title);
+
+        cocos2d::ui::ListView* get_body_scroll() { return this->_body_scroll; };
+
 };
 
 //modal with scrollable text in its body
 class TextBlobModal : public BaseModal
 {
-    private:
-        //TODO figure how to resize dynamically
-        cocos2d::ui::ListView* _body_scroll;
-
     public:
         CREATE_FUNC(TextBlobModal);
         bool init() override;
