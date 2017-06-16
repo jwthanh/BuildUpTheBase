@@ -10,5 +10,7 @@ class SimulateMainLoop
         //effectively calls BUILDUP->city->update(dt)
         static bool is_simulating;
         static void simulate(float dt);
+
+        static void generate_WIP_welcome_message();
 };
 #endif
