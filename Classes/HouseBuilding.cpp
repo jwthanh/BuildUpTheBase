@@ -31,7 +31,7 @@ void City::update(float dt)
 
 void City::update_buildings(float dt)
 {
-    for (auto pair : this->buildings)
+    for (const auto& pair : this->buildings)
     {
         spBuilding building = pair.second;
         building->update(dt);
@@ -42,15 +42,6 @@ void City::update_buildings(float dt)
 spBuilding City::building_by_type(BuildingTypes type)
 {
     return this->buildings.at(type);
-    //creating a lambda for std::find is too slow, this loop seems to be the fastest
-    //for (auto pair : this->buildings)
-    //{
-    //    spBuilding building = pair.second;
-    //    if (building->name == type)
-    //        return building;
-    //};
-
-    return nullptr;
 };
 
 Building::Building(City* city, BuildingTypes type, std::string id_key) :
@@ -219,7 +210,7 @@ void Building::_update_scavengers(float dt)
 {
     spBuilding shared_this = this->shared_from_this();
     for (auto& mist : this->scavengers) {
-        if (this->name != "The Dump") { break; }; //TODO remove this after debug
+        if (this->type != BuildingTypes::TheDump) { break; }; //TODO remove this after debug
 
         const std::pair<WorkerSubType, Ingredient::SubType>& sub_type = mist.first;
         const WorkerSubType& harv_type = sub_type.first;
@@ -244,7 +235,7 @@ void Building::_update_harvesters(float dt)
         const res_count_t& count = mist.second;
 
         std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-        std::shared_ptr<Harvester> harvester = get_or_create_from_cache(shared_this, this->_harvester_cache, key);
+        spHarvester harvester = get_or_create_from_cache(shared_this, this->_harvester_cache, key);
 
         harvester->active_count = count;
         harvester->update(dt);
@@ -254,8 +245,6 @@ void Building::_update_harvesters(float dt)
 void Building::update(float dt)
 {
     Updateable::update(dt);
-
-    spBuilding shared_this = this->shared_from_this();
 
     this->_update_harvesters(dt);
 
