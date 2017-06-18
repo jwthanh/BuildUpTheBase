@@ -13,6 +13,7 @@
 #include "Nameable.h"
 
 #include "Updateable.h"
+#include "Ingredients.h"
 
 enum class BuildingTypes
 {
@@ -135,7 +136,7 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         bool can_fit_more_ingredients(IngredientSubType sub_type, res_count_t quantity = 1);
 
         Building(City* city, BuildingTypes type, std::string id_key);
-        void create_ingredients(IngredientSubType sub_type, res_count_t quantity);
+        void create_ingredients(const Ingredient::SubType& sub_type, res_count_t quantity);
 
         void consume_recipe(Recipe* recipe);
 

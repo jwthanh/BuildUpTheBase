@@ -127,12 +127,11 @@ std::shared_ptr<T> create_one(typename T::SubType sub_type)
 template<typename mistT>
 void create(mistT& mist, res_count_t quantity, typename mistT::key_type sub_type)
 {
-    res_count_t def = 0;
-    auto exisiting_count = map_get(mist, sub_type, def);
+    const res_count_t exisiting_count = map_get(mist, sub_type, 0.0L);
     mist[sub_type] = exisiting_count + quantity;
 };
 
-void Building::create_ingredients(Ingredient::SubType sub_type, res_count_t to_create)
+void Building::create_ingredients(const Ingredient::SubType& sub_type, res_count_t to_create)
 {
     //NOTE this compares this buildings limit against all the ingredients in the city. this might get weird
     auto counted_ingredients = BUILDUP->count_ingredients(sub_type);
