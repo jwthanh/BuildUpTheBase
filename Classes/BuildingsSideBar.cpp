@@ -121,7 +121,7 @@ cocos2d::ui::ListView* TabManager::get_active_listview()
         spListviewMap listview_map = pair.second.second;
         if (tab_type == this->active_tab)
         {
-            return listview_map->at(this->active_building->name);
+            return listview_map->at(this->active_building->type);
         }
     }
     return NULL;
@@ -209,26 +209,26 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 
         auto activate_tab = [this, target_building](spListviewMap& listviews, TabTypes tab_type)
         {
-            ui::ListView* listview = listviews->at(target_building->name);
+            ui::ListView* listview = listviews->at(target_building->type);
             listview->requestDoLayout();
 
             this->tabs.set_tab_active(tab_type, target_building);
 
-            std::map<std::string, std::string> name_map = {
-                {"The Farm", "Cook"},
-                {"The Arena", "Upgrade"},
-                {"The Underscape", "Blood Magic"},
-                {"The Marketplace", "Barter"},
+            std::map<BuildingTypes, std::string> name_map = {
+                {BuildingTypes::TheFarm, "Cook"},
+                {BuildingTypes::TheArena, "Upgrade"},
+                {BuildingTypes::TheUnderscape, "Blood Magic"},
+                {BuildingTypes::TheMarketplace, "Barter"},
 
-                {"The Dump", "Scavenge"},
-                {"The Workshop", "Craft"},
-                {"The Mine", "Tools"},
-                {"The Graveyard", "Necromancy"},
-                {"The Forest", "Explore"}
+                {BuildingTypes::TheDump, "Scavenge"},
+                {BuildingTypes::TheWorkshop, "Craft"},
+                {BuildingTypes::TheMine, "Tools"},
+                {BuildingTypes::TheGraveyard, "Necromancy"},
+                {BuildingTypes::TheForest, "Explore"}
             };
 
             std::string default_str = "Detail";
-            std::string detail_str = map_get(name_map, target_building->name, default_str);
+            std::string detail_str = map_get(name_map, target_building->type, default_str);
             this->tab_detail_btn->setTitleText(detail_str);
 
 
@@ -241,7 +241,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
                 int sentinel = 123456;
                 int index = sentinel;
 
-                auto building_upgrade_sidebar = this->building_listviews->at(target_building->name);
+                auto building_upgrade_sidebar = this->building_listviews->at(target_building->type);
                 for (Node* item : building_upgrade_sidebar->getChildren())
                 {
                     auto nuitem = dynamic_cast<ui::Button*>(item);
@@ -315,7 +315,7 @@ void SideListView::setup_listviews()
     auto clean_children_on_target_change = [this](float dt)
     {
         spBuilding target_building = BUILDUP->get_target_building();
-        if (target_building->name != this->current_target->name)
+        if (target_building->type != this->current_target->type)
         {
             this->current_target = target_building;
             toggle_buttons(this->tabs.get_active_button(), ui::Widget::TouchEventType::ENDED);
@@ -331,7 +331,7 @@ void SideListView::setup_worker_listview()
     for (auto pair : BUILDUP->city->buildings)
     {
         spBuilding building = pair.second;
-        ui::ListView* shop_listview = this->worker_listviews->at(building->name);
+        ui::ListView* shop_listview = this->worker_listviews->at(building->type);
         auto update_harvester_listview = [this, shop_listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false ||
@@ -485,7 +485,7 @@ void SideListView::setup_building_listview()
     for (auto pair : BUILDUP->city->buildings)
     {
         spBuilding building = pair.second;
-        ui::ListView* listview = this->building_listviews->at(building->name);
+        ui::ListView* listview = this->building_listviews->at(building->type);
 
         auto update_listview = [this, listview, building, tab_type](float dt)
         {
@@ -524,7 +524,7 @@ void SideListView::setup_detail_listview()
     for (const auto& pair : BUILDUP->city->buildings)
     {
         spBuilding building = pair.second;
-        ui::ListView* listview = this->detail_listviews->at(building->name);
+        ui::ListView* listview = this->detail_listviews->at(building->type);
 
         ///DETAIL LISTVIEW
         auto update_listview = [this, listview, building, tab_type](float dt)
@@ -1050,7 +1050,7 @@ void SideListView::setup_menu_listview()
     for (const auto& pair : BUILDUP->city->buildings)
     {
         spBuilding building = pair.second;
-        ui::ListView* listview = this->menu_listviews->at(building->name);
+        ui::ListView* listview = this->menu_listviews->at(building->type);
 
         ///send feedback
         auto send_feeback = [this, listview, building, tab_type](float dt)
@@ -1454,7 +1454,7 @@ spListviewMap SideListView::_create_listview(std::string node_name)
         listview->setMagneticAllowedOutOfBoundary(false); //true is default, doesnt allow overscrolling sort of. if you go out of bounds, it'll scroll it back
 
 
-        (*result)[building->name] = listview;
+        (*result)[building->type] = listview;
 
     }
 

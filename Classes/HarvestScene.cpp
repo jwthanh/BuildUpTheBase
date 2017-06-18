@@ -118,7 +118,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_A)
     {
         ActionPanel* action_panel = ActionPanel::create();
-        action_panel->set_target(this->sidebar->worker_listviews->at("The Graveyard"));
+        action_panel->set_target(this->sidebar->worker_listviews->at(BuildingTypes::TheGraveyard));
         this->addChild(action_panel);
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_F)

@@ -1,7 +1,7 @@
 #pragma once
 #ifndef BUILDINGSSIDEBAR_H
 #define BUILDINGSSIDEBAR_H
-#include <string>
+
 #include <memory>
 
 #include "constants.h"
@@ -22,13 +22,14 @@ namespace cocos2d
 }
 
 class Building;
+enum class BuildingTypes;
 
 ///Base ListView for sidebar
 ///
 ///It creates a ui::ListView specific to each building
 
-using str_listview_t = std::pair<std::string, cocos2d::ui::ListView*>;
-using listviewMap = std::map<std::string, cocos2d::ui::ListView*>;
+using str_listview_t = std::pair<BuildingTypes, cocos2d::ui::ListView*>;
+using listviewMap = std::map<BuildingTypes, cocos2d::ui::ListView*>;
 using spListviewMap = std::shared_ptr<listviewMap>;
 
 ///for managing which tab and building is active
