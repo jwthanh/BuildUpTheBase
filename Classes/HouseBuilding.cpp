@@ -261,8 +261,7 @@ void Building::update(float dt)
 
 res_count_t Building::get_storage_space() const
 {
-    res_count_t _def = 9999999;
-    return map_get(BUILDING_LEVEL_STORAGE_LIMIT, this->building_level, _def)*BuildingTypes_to_base_upgrade_cost.at(this->type);
+    return BUILDING_LEVEL_STORAGE_LIMIT.at(this->building_level)*BuildingTypes_to_base_upgrade_cost.at(this->type);
 }
 
 bool Building::is_storage_full_of_ingredients(Ingredient::SubType sub_type)
