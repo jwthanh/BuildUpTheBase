@@ -98,10 +98,9 @@ res_count_t Building::get_total_salesmen_output()
 {
     res_count_t total = 0;
 
-    for (auto h_mist : this->salesmen)
+    for (auto& h_mist : this->salesmen)
     {
         WorkerSubType harv_type = h_mist.first.first;
-        Ingredient::SubType ing_type = h_mist.first.second;
         res_count_t active_count = h_mist.second;
         total += Salesman::get_to_sell_count(harv_type)*active_count*this->building_level;
     };
@@ -183,7 +182,7 @@ void Building::_update_consumers(float dt)
         res_count_t& count = mist.second;
 
         std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-        std::shared_ptr<ConsumerHarvester> consumer = get_or_create_from_cache(shared_this, this->_consumer_cache, key);
+        std::shared_ptr<ConsumerHarvester>&& consumer = get_or_create_from_cache(shared_this, this->_consumer_cache, key);
         consumer->active_count = count;
         consumer->update(dt);
     };
@@ -199,7 +198,7 @@ void Building::_update_salesmen(float dt)
         const res_count_t& count = mist.second;
 
         std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-        std::shared_ptr<Salesman> salesman = get_or_create_from_cache(shared_this, this->_salesmen_cache, key);
+        std::shared_ptr<Salesman>&& salesman = get_or_create_from_cache(shared_this, this->_salesmen_cache, key);
 
         salesman->active_count = count;
         salesman->update(dt);
@@ -235,7 +234,7 @@ void Building::_update_harvesters(float dt)
         const res_count_t& count = mist.second;
 
         std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-        spHarvester harvester = get_or_create_from_cache(shared_this, this->_harvester_cache, key);
+        spHarvester&& harvester = get_or_create_from_cache(shared_this, this->_harvester_cache, key);
 
         harvester->active_count = count;
         harvester->update(dt);
