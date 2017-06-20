@@ -152,24 +152,17 @@ void Building::consume_recipe(Recipe* recipe)
 
 
 template<typename spCacheT>
-typename spCacheT::element_type::mapped_type get_or_create_from_cache(spBuilding& building, spCacheT& cache, std::pair<WorkerSubType, Ingredient::SubType>& key)
+typename spCacheT::element_type::mapped_type& get_or_create_from_cache(spBuilding& building, spCacheT& cache, std::pair<WorkerSubType, Ingredient::SubType>& key)
 {
-    typename spCacheT::element_type::iterator it = cache->find(key);
-    if (it != cache->end())
-    {
-        //pull it out of cache
-        return (*cache)[key];
-    }
+    typename spCacheT::element_type::iterator& it = cache->find(key);
+    if (it == cache->end()) {
+        //create a cache for the key type on the building
+        (*cache)[key] = std::make_shared<typename spCacheT::element_type::mapped_type::element_type>(
+            building, "cached worker", key.second, key.first
+        );
+    } 
 
-    //create a cache for the key type on the building
-    typename spCacheT::element_type::mapped_type temp_harvester = std::make_shared<typename spCacheT::element_type::mapped_type::element_type>(
-        building, "test worker", key.second, key.first
-    );
-
-    //assign the created worker into the cache
-    (*cache)[key] = temp_harvester;
-
-    return temp_harvester;
+    return (*cache)[key];
 };
 
 void Building::_update_consumers(float dt)
@@ -182,7 +175,7 @@ void Building::_update_consumers(float dt)
         res_count_t& count = mist.second;
 
         std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-        std::shared_ptr<ConsumerHarvester>&& consumer = get_or_create_from_cache(shared_this, this->_consumer_cache, key);
+        std::shared_ptr<ConsumerHarvester>& consumer = get_or_create_from_cache(shared_this, this->_consumer_cache, key);
         consumer->active_count = count;
         consumer->update(dt);
     };
@@ -198,7 +191,7 @@ void Building::_update_salesmen(float dt)
         const res_count_t& count = mist.second;
 
         std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-        std::shared_ptr<Salesman>&& salesman = get_or_create_from_cache(shared_this, this->_salesmen_cache, key);
+        std::shared_ptr<Salesman>& salesman = get_or_create_from_cache(shared_this, this->_salesmen_cache, key);
 
         salesman->active_count = count;
         salesman->update(dt);
@@ -234,7 +227,7 @@ void Building::_update_harvesters(float dt)
         const res_count_t& count = mist.second;
 
         std::pair<WorkerSubType, IngredientSubType> key = std::make_pair(harv_type, ing_type);
-        spHarvester&& harvester = get_or_create_from_cache(shared_this, this->_harvester_cache, key);
+        spHarvester& harvester = get_or_create_from_cache(shared_this, this->_harvester_cache, key);
 
         harvester->active_count = count;
         harvester->update(dt);
