@@ -128,7 +128,7 @@ res_count_t Salesman::get_to_sell_count(SubType sub_type)
 
     //adjust based on how many upgrades were crafted at the Workshop
     auto&& workshop = BUILDUP->city->building_by_type(BuildingTypes::TheWorkshop);
-    TechMap&& tech_map = workshop->techtree->get_tech_map();
+    TechMap& tech_map = workshop->techtree->get_tech_map();
 
     TechSubType&& tech_type = Technology::SubType::SalesmenBaseBoost;
     res_count_t _def = 0L;

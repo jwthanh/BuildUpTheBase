@@ -27,7 +27,7 @@ TechTree::TechTree()
 
 };
 
-TechMap TechTree::get_tech_map()
+TechMap& TechTree::get_tech_map()
 {
     return this->tech_map;
 };

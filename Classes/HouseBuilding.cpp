@@ -124,8 +124,8 @@ void create(mistT& mist, res_count_t quantity, typename mistT::key_type sub_type
 void Building::create_ingredients(const Ingredient::SubType& sub_type, res_count_t to_create)
 {
     //NOTE this compares this buildings limit against all the ingredients in the city. this might get weird
-    auto counted_ingredients = BUILDUP->count_ingredients(sub_type);
-    auto storage_space = this->get_storage_space();
+    res_count_t&& counted_ingredients = BUILDUP->count_ingredients(sub_type);
+    res_count_t&& storage_space = this->get_storage_space();
 
     //if its more than storage can fit, only create what can fit
     if ((counted_ingredients + to_create) > storage_space)
@@ -259,7 +259,7 @@ void Building::update(float dt)
     }
 };
 
-res_count_t Building::get_storage_space()
+res_count_t Building::get_storage_space() const
 {
     res_count_t _def = 9999999;
     return map_get(BUILDING_LEVEL_STORAGE_LIMIT, this->building_level, _def)*BuildingTypes_to_base_upgrade_cost.at(this->type);
