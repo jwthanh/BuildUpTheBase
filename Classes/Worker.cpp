@@ -141,7 +141,7 @@ res_count_t Salesman::get_to_sell_count(SubType sub_type)
 ///NOTE this only gets called once per building->update_clock, not once a frame
 void Salesman::on_update(float dt)
 {
-    res_count_t base_sell_count = Salesman::get_to_sell_count(this->sub_type) * building->building_level;
+    res_count_t base_sell_count = Salesman::get_to_sell_count(this->sub_type) * building->get_building_level();
     res_count_t active_sell_count = base_sell_count*this->active_count;
 
     mistIngredient& all_ingredients = BUILDUP->get_all_ingredients();

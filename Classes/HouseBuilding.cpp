@@ -47,7 +47,7 @@ spBuilding City::building_by_type(BuildingTypes type)
 Building::Building(City* city, BuildingTypes type, std::string id_key) :
      Nameable(BuildingTypes_to_name.at(type)), Updateable(), Buyable(id_key), type(type), city(city)
 {
-    building_level = 1;
+    this->set_building_level(1);
 
     update_clock.set_threshold(1.0f);
 
@@ -102,7 +102,7 @@ res_count_t Building::get_total_salesmen_output()
     {
         WorkerSubType harv_type = h_mist.first.first;
         res_count_t active_count = h_mist.second;
-        total += Salesman::get_to_sell_count(harv_type)*active_count*this->building_level;
+        total += Salesman::get_to_sell_count(harv_type)*active_count*this->_building_level;
     };
 
     return total;
@@ -125,7 +125,7 @@ void Building::create_ingredients(const Ingredient::SubType& sub_type, res_count
 {
     //NOTE this compares this buildings limit against all the ingredients in the city. this might get weird
     res_count_t&& counted_ingredients = BUILDUP->count_ingredients(sub_type);
-    res_count_t&& storage_space = this->get_storage_space();
+    const res_count_t& storage_space = this->get_storage_space();
 
     //if its more than storage can fit, only create what can fit
     if ((counted_ingredients + to_create) > storage_space)
@@ -259,9 +259,14 @@ void Building::update(float dt)
     }
 };
 
-res_count_t Building::get_storage_space() const
+void Building::update_storage_space()
 {
-    return BUILDING_LEVEL_STORAGE_LIMIT.at(this->building_level)*BuildingTypes_to_base_upgrade_cost.at(this->type);
+    this->_storage_space = BUILDING_LEVEL_STORAGE_LIMIT.at(this->_building_level)*BuildingTypes_to_base_upgrade_cost.at(this->type);
+}
+
+const res_count_t& Building::get_storage_space() const
+{
+    return this->_storage_space;
 }
 
 bool Building::is_storage_full_of_ingredients(Ingredient::SubType sub_type)
@@ -275,3 +280,13 @@ bool Building::can_fit_more_ingredients(Ingredient::SubType sub_type, res_count_
     return BUILDUP->count_ingredients(sub_type) + quantity <= this->get_storage_space();
 };
 
+void Building::set_building_level(int new_level)
+{
+    this->_building_level = new_level;
+    this->update_storage_space();
+}
+
+const int& Building::get_building_level() const
+{
+    return this->_building_level;
+}

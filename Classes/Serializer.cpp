@@ -183,7 +183,7 @@ void BuildingSerializer::load(spBuilding building)
 
 void BuildingSerializer::serialize_building_level(rjDocument& doc)
 {
-    this->set_int(doc, "building_level", this->building->building_level);
+    this->set_int(doc, "building_level", this->building->get_building_level());
 }
 
 void BuildingSerializer::load_building_level(rjDocument& doc)
@@ -195,7 +195,7 @@ void BuildingSerializer::load_building_level(rjDocument& doc)
     if (new_level != -1)
     {
         //only used saved building level
-        this->building->building_level = new_level;
+        this->building->set_building_level(new_level);
     }
 }
 

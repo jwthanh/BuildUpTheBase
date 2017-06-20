@@ -239,7 +239,7 @@ void BaseScene::create_goal_loadingbar()
 
     auto progress_callback = [this]() {
             spBuilding target_building = BUILDUP->get_target_building();
-            res_count_t coin_goal = scale_number(BuildingTypes_to_base_upgrade_cost.at(target_building->type), (res_count_t)target_building->building_level, 10.5L);
+            res_count_t coin_goal = scale_number(BuildingTypes_to_base_upgrade_cost.at(target_building->type), (res_count_t)target_building->get_building_level(), 10.5L);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             if (percentage >= 100.0f) {
                 this->sidebar->toggle_buttons(this->sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
@@ -251,14 +251,14 @@ void BaseScene::create_goal_loadingbar()
     auto update_loading_bar = [this, loading_bar](float dt)
         {
             spBuilding target_building = BUILDUP->get_target_building();
-			if (target_building->building_level == 15)
+			if (target_building->get_building_level() == 15)
 			{
 				this->upgrade_lbl->setString("Max level!");
 				try_set_visible(loading_bar, false);
 				return;
 			}
 
-            res_count_t coin_goal = scale_number(BuildingTypes_to_base_upgrade_cost.at(target_building->type), (res_count_t)target_building->building_level, 10.5L);
+            res_count_t coin_goal = scale_number(BuildingTypes_to_base_upgrade_cost.at(target_building->type), (res_count_t)target_building->get_building_level(), 10.5L);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             loading_bar->setPercent(percentage);
 			try_set_visible(loading_bar, true);
@@ -1075,12 +1075,12 @@ bool HarvestScene::init()
     std::function<void(float)> update_layer_color = [this, layer_color](float dt)
     {
         spBuilding target_building = BUILDUP->get_target_building();
-        if (target_building->building_level == this->_layer_building_level)
+        if (target_building->get_building_level() == this->_layer_building_level)
         {
             return;
         }
 
-        this->_layer_building_level = target_building->building_level;
+        this->_layer_building_level = target_building->get_building_level();
 
         std::map<int, Color3B> color_map ={
             {1,  {0,   0,   0}},

@@ -57,13 +57,13 @@ void GameProgress::update(float dt, City* city)
         } else {
             spBuilding matched_building = city->building_by_type(upgrade_prerequisites.at(building->type));
             const int MIN_LEVEL_REQUIRED = 4;
-            is_unlocked = matched_building->building_level >= MIN_LEVEL_REQUIRED;
+            is_unlocked = matched_building->get_building_level() >= MIN_LEVEL_REQUIRED;
         };
 
         this->_building_unlock_map[building] = is_unlocked;
 
         if (building->type == BuildingTypes::TheWorkshop) {
-            if (building->building_level >= 1) {
+            if (building->get_building_level() >= 1) {
                 this->_building_tab_map[building][TabTypes::DetailTab] = true;
             };
         } else if (building->type == BuildingTypes::TheFarm) {

@@ -505,7 +505,7 @@ void SideListView::setup_building_listview()
             if (node_exists) { return; };
 
             UpgradeBuildingShopNuItem* menu_item = UpgradeBuildingShopNuItem::create(listview, building);
-            menu_item->my_init(building->building_level+1);
+            menu_item->my_init(building->get_building_level()+1);
 
             menu_item->setTag(child_tag);
 

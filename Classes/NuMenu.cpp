@@ -767,7 +767,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
             this->set_title(ss.str());
             this->set_description("Upgrade building\nincreasing its storage");
         } else {
-            ss << "Max level (lv " << this->building->building_level << ")";
+            ss << "Max level (lv " << this->building->get_building_level() << ")";
             this->set_title(ss.str());
             this->set_description("Upgraded to the max!");
         };
@@ -780,7 +780,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     this->_shop_cost = shop_cost;
 
     auto custom_update_func = [this, base_shop_cost](float dt) {
-        if (this->building->building_level == this->building_level) {
+        if (this->building->get_building_level() == this->building_level) {
             this->building_level++;
 
             //update shop cost with new level
@@ -805,7 +805,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
             this->add_available_coins(-cost);
 
             auto building = BUILDUP->get_target_building();
-            building->building_level = this->building_level;
+            building->set_building_level(this->building_level);
 
             Scene* scene = Director::getInstance()->getRunningScene();
             Node* harvest_scene = scene->getChildByName("HarvestScene");
@@ -837,7 +837,7 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
 bool UpgradeBuildingShopNuItem::custom_status_check(float dt)
 {
     //only activate menuitem if the building is one level below item's building level
-    return this->building->building_level == this->building_level - 1;
+    return this->building->get_building_level() == this->building_level - 1;
 };
 
 HarvesterShopNuItem* HarvesterShopNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
@@ -1034,7 +1034,7 @@ void SalesmanShopNuItem::my_init_update_callback()
         this->_shop_cost = scale_number(Salesman::get_base_shop_cost(this->harv_type), harvesters_owned, 1.15L);
 
         std::stringstream ss;
-        auto sold_count = Salesman::get_to_sell_count(this->harv_type) * building->building_level;
+        auto sold_count = Salesman::get_to_sell_count(this->harv_type) * building->get_building_level();
         ss << "Sells " << sold_count << " " << Ingredient::type_to_string(building->punched_sub_type) << "\nper sec";
         this->set_description(ss.str());
     };

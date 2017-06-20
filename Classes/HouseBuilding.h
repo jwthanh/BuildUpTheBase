@@ -110,6 +110,9 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         void _update_scavengers(float dt);
         spScavengerCache _scavenger_cache;
 
+        res_count_t _storage_space;
+        int _building_level;
+
     public:
         BuildingTypes type;
 
@@ -130,8 +133,11 @@ class Building : public Nameable, public Updateable, public Buyable, public std:
         mistHarvester consumers;
         mistHarvester scavengers;
 
-        int building_level; //affects only resource limits for now
-        res_count_t get_storage_space() const;
+        void set_building_level(int new_level);
+        const int& get_building_level() const;
+
+        void update_storage_space();
+        const res_count_t& get_storage_space() const;
         bool is_storage_full_of_ingredients(IngredientSubType);
         bool can_fit_more_ingredients(IngredientSubType sub_type, res_count_t quantity = 1);
 
