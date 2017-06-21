@@ -953,7 +953,7 @@ void SideListView::setup_detail_listview()
                     }});
 
                 //weaken flesh
-                spRecipe weaken_flesh = std::make_shared<Recipe>("Dead meat", "Weaken your enemies\n-- 3 flies, 3 flesh");
+                spRecipe weaken_flesh = std::make_shared<Recipe>("Dead meat", "Weaken your enemies\n-- 3 flies, 3 flesh, 3 loaf");
                 weaken_flesh->components = mistIngredient{
                     { Ingredient::SubType::Fly, 3.0 },   //TODO not use only three
                     { Ingredient::SubType::Flesh, 3.0 }, // because we've got 3
