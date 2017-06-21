@@ -1153,6 +1153,7 @@ void FightingHarvestable::spawn_enemy()
     res_count_t final_slow_rate = std::max(0.01L, base_slow_rate + (0.005*decrease_count));
 
     res_count_t enemy_hp = scale_number_slow(base_hp, (res_count_t)game_logic->get_total_kills(), 1.05L, final_slow_rate);
+
     res_count_t max_possible_hp = 9999999999999999999.0;
     enemy_hp = std::min(std::max(base_hp, enemy_hp), max_possible_hp); //make sure the enemy has at least 20 hp, but never more than max_possible_hp
     enemy_hp = std::floor(enemy_hp);

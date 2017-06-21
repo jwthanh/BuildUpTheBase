@@ -53,7 +53,7 @@ void log_vector(cocos2d::Vec2 vector, std::string message="");
 template<typename T>
 typename T::mapped_type map_get(const T& input_map, const typename T::key_type& key, const typename T::mapped_type& default_result)
 {
-    auto& it = input_map.find(key);
+    auto&& it = input_map.find(key);
     if (it != input_map.end())
     {
         return it->second;

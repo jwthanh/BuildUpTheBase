@@ -951,7 +951,7 @@ void BaseScene::create_inventory_listview()
                 }
             }
             //dont build the ingredient button if for no ingredients
-            else if (existing_node == NULL && zero_ingredients)
+            else if (existing_node == false && zero_ingredients)
             {
                 continue;
             }

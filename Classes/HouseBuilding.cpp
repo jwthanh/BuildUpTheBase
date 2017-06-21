@@ -154,7 +154,7 @@ void Building::consume_recipe(Recipe* recipe)
 template<typename spCacheT>
 typename spCacheT::element_type::mapped_type& get_or_create_from_cache(spBuilding& building, spCacheT& cache, std::pair<WorkerSubType, Ingredient::SubType>& key)
 {
-    typename spCacheT::element_type::iterator& it = cache->find(key);
+    typename spCacheT::element_type::iterator&& it = cache->find(key);
     if (it == cache->end()) {
         //create a cache for the key type on the building
         (*cache)[key] = std::make_shared<typename spCacheT::element_type::mapped_type::element_type>(
