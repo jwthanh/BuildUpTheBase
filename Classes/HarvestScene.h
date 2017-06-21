@@ -19,6 +19,7 @@ namespace cocos2d
     namespace ui
     {
         class Text;
+        class TextBMFont;
         class Widget;
     }
 }
@@ -52,7 +53,7 @@ class BaseScene : public GameLayer
         std::shared_ptr<SideListView> sidebar;
         std::shared_ptr<PopupPanel> popup_panel;
 
-        cocos2d::ui::Text* upgrade_lbl;
+        cocos2d::ui::TextBMFont* upgrade_lbl;
         spRecipe target_recipe;
 
         void create_goal_loadingbar();

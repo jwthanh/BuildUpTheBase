@@ -13,6 +13,7 @@ namespace cocos2d
     {
         class Layout;
         class Text;
+        class TextBMFont;
         class ScrollView;
         class ListView;
     };

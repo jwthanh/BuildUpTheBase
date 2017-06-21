@@ -19,7 +19,17 @@
                 <PreSize X="0.7181" Y="0.4528" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="building_name" ActionTag="2011617631" Tag="153" IconVisible="False" LeftMargin="11.9679" RightMargin="15.3965" TopMargin="119.6817" BottomMargin="11.9562" IsCustomSize="True" FontSize="48" LabelText="NAME" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="5" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="building_name" ActionTag="-1961393170" Tag="820" IconVisible="False" LeftMargin="27.4688" RightMargin="29.5313" TopMargin="131.4087" BottomMargin="20.5913" LabelText="NAME" ctype="TextBMFontObjectData">
+                <Size X="143.0000" Y="48.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="98.9688" Y="44.5913" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4948" Y="0.2230" />
+                <PreSize X="0.7150" Y="0.2400" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_48x5.fnt" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="building_name_ttf" ActionTag="2011617631" VisibleForFrame="False" Tag="153" IconVisible="False" LeftMargin="11.9679" RightMargin="15.3965" TopMargin="119.6817" BottomMargin="11.9562" IsCustomSize="True" FontSize="48" LabelText="NAME" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="5" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="172.6356" Y="68.3621" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="98.2857" Y="46.1372" />

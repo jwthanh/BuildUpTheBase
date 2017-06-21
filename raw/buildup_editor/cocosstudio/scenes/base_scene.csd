@@ -19,7 +19,8 @@
           <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" LeftMargin="759.9955" RightMargin="0.0045" TopMargin="0.0004" BottomMargin="439.9996" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" TopMargin="66.9059" BottomMargin="112.2260" IsCustomSize="True" FontSize="16" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" TopMargin="66.9059" BottomMargin="112.2260" IsCustomSize="True" FontSize="16" LabelText="ING: XX" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="200.0000" Y="20.8681" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="100.0000" Y="122.6600" />
@@ -31,7 +32,8 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="-0.2571" RightMargin="-3.7429" TopMargin="99.8857" BottomMargin="46.3260" IsCustomSize="True" FontSize="16" LabelText="Harvesters: 30,000&#xA;at 99,999/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="harvester_count" ActionTag="-1638508918" Tag="157" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="-0.2571" RightMargin="-3.7429" TopMargin="99.8857" BottomMargin="46.3260" IsCustomSize="True" FontSize="16" LabelText="Harvesters: 30,000&#xA;at 99,999/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="204.0000" Y="53.7883" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="101.7429" Y="73.2202" />
@@ -43,7 +45,7 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="building_name" ActionTag="595339504" Tag="50" IconVisible="False" LeftMargin="1.7434" RightMargin="-1.7432" TopMargin="1.7804" BottomMargin="148.2196" IsCustomSize="True" FontSize="20" LabelText="The Marketplace" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="building_name" ActionTag="595339504" Tag="50" IconVisible="False" LeftMargin="1.7434" RightMargin="-1.7432" TopMargin="1.7804" BottomMargin="148.2196" IsCustomSize="True" FontSize="20" LabelText="The Marketplace" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
                 <Size X="199.9998" Y="50.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="101.7433" Y="173.2196" />
@@ -54,8 +56,10 @@
                 <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="salesmen_count" ActionTag="564918455" Tag="77" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="-0.2568" RightMargin="-3.7432" TopMargin="145.1059" BottomMargin="1.1059" IsCustomSize="True" FontSize="16" LabelText="Salesmen: 30,000&#xA;at 99,999/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="salesmen_count" ActionTag="564918455" Tag="77" IconVisible="False" HorizontalEdge="LeftEdge" LeftMargin="-0.2568" RightMargin="-3.7432" TopMargin="145.1059" BottomMargin="1.1059" IsCustomSize="True" FontSize="16" LabelText="Salesmen: 30,000&#xA;at 99,999/sec" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="204.0000" Y="53.7883" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="101.7432" Y="28.0000" />
@@ -123,7 +127,8 @@
           <AbstractNodeData Name="player_info_panel" ActionTag="1380082613" Tag="115" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="760.0001" RightMargin="-0.0001" TopMargin="275.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="265.0000" />
             <Children>
-              <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="4.2148" RightMargin="5.7852" TopMargin="13.7148" BottomMargin="225.1450" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_info_lbl" ActionTag="872050223" Tag="123" IconVisible="False" LeftMargin="4.2148" RightMargin="5.7852" TopMargin="13.7148" BottomMargin="225.1450" IsCustomSize="True" FontSize="20" LabelText="Player Info" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="190.0000" Y="26.1403" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="99.2148" Y="238.2151" />
@@ -135,7 +140,8 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="6.6380" RightMargin="3.3620" TopMargin="55.2263" BottomMargin="186.2263" IsCustomSize="True" FontSize="20" LabelText="$100,200Qad" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="6.6380" RightMargin="3.3620" TopMargin="55.2263" BottomMargin="186.2263" IsCustomSize="True" FontSize="20" LabelText="$100,200Qad" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="190.0000" Y="23.5473" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="101.6380" Y="198.0000" />
@@ -147,7 +153,8 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="5.0001" RightMargin="4.9999" TopMargin="133.4999" BottomMargin="108.5001" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_hp_lbl" ActionTag="-1981462917" Tag="212" IconVisible="False" LeftMargin="5.0001" RightMargin="4.9999" TopMargin="133.4999" BottomMargin="108.5001" IsCustomSize="True" FontSize="16" LabelText="HP 100/100" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="190.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="100.0001" Y="120.0001" />
@@ -159,7 +166,8 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_per_sec_lbl" ActionTag="-768634115" Tag="172" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="6.6380" RightMargin="3.3620" TopMargin="84.2265" BottomMargin="157.2262" IsCustomSize="True" FontSize="14" LabelText="+100/s" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="player_gold_per_sec_lbl" ActionTag="-768634115" Tag="172" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="6.6380" RightMargin="3.3620" TopMargin="84.2265" BottomMargin="157.2262" IsCustomSize="True" FontSize="14" LabelText="+100/s" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="190.0000" Y="23.5473" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="101.6380" Y="168.9999" />
@@ -362,7 +370,8 @@
                 <PreSize X="0.8400" Y="0.2400" />
                 <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="upgrade_lbl" ActionTag="-61553329" Tag="28" IconVisible="False" LeftMargin="-0.0412" RightMargin="0.0412" TopMargin="2.3925" BottomMargin="49.6075" IsCustomSize="True" FontSize="16" LabelText="Upgrade Progress:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="upgrade_lbl" ActionTag="-61553329" Tag="28" IconVisible="False" LeftMargin="-0.0412" RightMargin="0.0412" TopMargin="2.3925" BottomMargin="49.6075" IsCustomSize="True" FontSize="16" LabelText="Upgrade Progress:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="200.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="99.9588" Y="61.1075" />
@@ -504,7 +513,8 @@
           <AbstractNodeData Name="arena_kill_panel" ActionTag="-1152670340" Tag="71" IconVisible="False" LeftMargin="539.5058" RightMargin="200.0012" TopMargin="510.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="220.4930" Y="30.0000" />
             <Children>
-              <AbstractNodeData Name="arena_kill_lbl" ActionTag="421305276" Tag="108" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="3.3846" RightMargin="-0.5087" TopMargin="2.7843" BottomMargin="1.4583" IsCustomSize="True" FontSize="16" LabelText="Kills: 123,123Qad" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="arena_kill_lbl" ActionTag="421305276" Tag="108" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="3.3846" RightMargin="-0.5087" TopMargin="2.7843" BottomMargin="1.4583" IsCustomSize="True" FontSize="16" LabelText="Kills: 123,123Qad" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="217.6171" Y="25.7575" />
                 <AnchorPoint ScaleX="0.5022" ScaleY="0.5000" />
                 <Position X="112.6719" Y="14.3370" />
@@ -541,7 +551,8 @@
                 <PreSize X="0.6000" Y="0.4500" />
                 <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="harvester_progress_lbl" ActionTag="1421967100" Tag="82" IconVisible="False" LeftMargin="1.9588" RightMargin="208.0412" TopMargin="7.3925" BottomMargin="9.6075" IsCustomSize="True" FontSize="16" LabelText="Item find:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="harvester_progress_lbl" ActionTag="1421967100" Tag="82" IconVisible="False" LeftMargin="1.9588" RightMargin="208.0412" TopMargin="7.3925" BottomMargin="9.6075" IsCustomSize="True" FontSize="16" LabelText="Item find:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="150.0000" Y="23.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="1.9588" Y="21.1075" />
@@ -571,7 +582,8 @@
               <AbstractNodeData Name="popup_panel_inner" ActionTag="-1343836221" Tag="121" IconVisible="False" LeftMargin="25.8600" RightMargin="34.1400" TopMargin="12.5000" BottomMargin="12.5000" ClipAble="False" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="900.0000" Y="75.0000" />
                 <Children>
-                  <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="87.4620" RightMargin="11.7079" TopMargin="3.2630" BottomMargin="3.1496" IsCustomSize="True" FontSize="20" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="87.4620" RightMargin="11.7079" TopMargin="3.2630" BottomMargin="3.1496" IsCustomSize="True" FontSize="20" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                     <Size X="800.8301" Y="68.5874" />
                     <AnchorPoint />
                     <Position X="87.4620" Y="3.1496" />

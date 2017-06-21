@@ -19,29 +19,25 @@
                 <PreSize X="0.1600" Y="0.0800" />
                 <FileData Type="Normal" Path="images/cat.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="item_name_lbl" ActionTag="1258482361" Tag="160" IconVisible="False" LeftMargin="4.5009" RightMargin="6.4991" TopMargin="8.9999" BottomMargin="155.0001" FontSize="28" LabelText="berry" HorizontalAlignmentType="HT_Center" OutlineSize="4" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="109.0000" Y="36.0000" />
+              <AbstractNodeData Name="item_name_lbl" ActionTag="1258482361" Tag="160" IconVisible="False" LeftMargin="14.5009" RightMargin="16.4991" TopMargin="14.9999" BottomMargin="161.0001" LabelText="berry" ctype="TextBMFontObjectData">
+                <Size X="89.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="59.0009" Y="173.0001" />
-                <Scale ScaleX="0.9000" ScaleY="0.9000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4917" Y="0.8650" />
-                <PreSize X="0.9083" Y="0.1800" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="0" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
+                <PreSize X="0.7417" Y="0.1200" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="item_count_lbl" ActionTag="-1420577332" Tag="775" IconVisible="False" LeftMargin="3.3944" RightMargin="5.3927" TopMargin="42.6090" BottomMargin="106.6091" IsCustomSize="True" FontSize="36" LabelText="berry&#xA;" HorizontalAlignmentType="HT_Center" OutlineSize="4" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="111.2129" Y="50.7818" />
+              <AbstractNodeData Name="item_count_lbl" ActionTag="-1420577332" Tag="775" IconVisible="False" LeftMargin="-0.4991" RightMargin="1.4991" TopMargin="35.9999" BottomMargin="100.0001" LabelText="berry&#xA;" ctype="TextBMFontObjectData">
+                <Size X="119.0000" Y="64.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="59.0009" Y="132.0001" />
-                <Scale ScaleX="0.9000" ScaleY="0.9000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4917" Y="0.6600" />
-                <PreSize X="0.9268" Y="0.2539" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="0" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
+                <PreSize X="0.9917" Y="0.3200" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_32x3.fnt" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

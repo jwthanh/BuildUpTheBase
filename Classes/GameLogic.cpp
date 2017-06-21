@@ -7,6 +7,7 @@
 
 #include "ui/UILayout.h"
 #include "ui/UIText.h"
+#include "ui/UITextBMFont.h"
 #include "ui/UIButton.h"
 #include "ui/UIPageView.h"
 #include "ui/UITextField.h"
@@ -274,8 +275,7 @@ void GameLogic::update(float dt)
         {
 
             ui::Layout* player_info_panel = dynamic_cast<ui::Layout*>(scene->getChildByName("player_info_panel"));
-            ui::Text* player_gold_per_sec_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
-            set_aliasing(player_gold_per_sec_lbl); //TODO move this somewhere where it's not called all the time
+            ui::TextBMFont* player_gold_per_sec_lbl = dynamic_cast<ui::TextBMFont*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
 
             const auto& total_coins = BEATUP->get_total_coins();
             res_count_t coin_diff = total_coins - BEATUP->_last_total_coins;

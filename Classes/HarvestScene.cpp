@@ -233,9 +233,9 @@ void BaseScene::create_goal_loadingbar()
     ui::LoadingBar* loading_bar = dynamic_cast<ui::LoadingBar*>(progress_panel->getChildByName("goal_loadingbar"));
     loading_bar->setPercent(0.0f);
 
-    this->upgrade_lbl = dynamic_cast<ui::Text*>(progress_panel->getChildByName("upgrade_lbl"));
+    this->upgrade_lbl = dynamic_cast<ui::TextBMFont*>(progress_panel->getChildByName("upgrade_lbl"));
     this->upgrade_lbl->setString("");
-    set_aliasing(this->upgrade_lbl, true);
+    // // set_aliasing(this->upgrade_lbl, true);
 
     auto progress_callback = [this]() {
             spBuilding target_building = BUILDUP->get_target_building();
@@ -360,9 +360,9 @@ void BaseScene::create_building_choicelist()
 
 
         //set building name
-        ui::Text* building_name = (ui::Text*)panel->getChildByName("building_name");
+        ui::TextBMFont* building_name = (ui::TextBMFont*)panel->getChildByName("building_name");
         building_name->setString(building->short_name);
-        set_aliasing(building_name, true);
+        // // set_aliasing(building_name, true);
 
         //add building image
         ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
@@ -488,9 +488,9 @@ void BaseScene::create_building_choicelist()
 
 
     //set building name
-    ui::Text* building_name = (ui::Text*)panel->getChildByName("building_name");
+    ui::TextBMFont* building_name = (ui::TextBMFont*)panel->getChildByName("building_name");
     building_name->setString("MGMT");
-    set_aliasing(building_name, true);
+    // // set_aliasing(building_name, true);
 
     //add building image
     ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
@@ -575,8 +575,8 @@ void BaseScene::create_info_panel()
     auto building = BUILDUP->get_target_building();
 
     ui::Layout* arena_kill_panel = dynamic_cast<ui::Layout*>(this->getChildByName("arena_kill_panel"));
-    ui::Text* arena_kill_lbl = dynamic_cast<ui::Text*>(arena_kill_panel->getChildByName("arena_kill_lbl"));
-    set_aliasing(arena_kill_lbl);
+    ui::TextBMFont* arena_kill_lbl = dynamic_cast<ui::TextBMFont*>(arena_kill_panel->getChildByName("arena_kill_lbl"));
+    // set_aliasing(arena_kill_lbl);
 
     auto update_info_display = [this, arena_kill_panel, arena_kill_lbl](float dt){
         auto target_building = BUILDUP->get_target_building();
@@ -622,16 +622,16 @@ void BaseScene::create_info_panel()
     building_info_panel->schedule(check_visible, FPS_60, "check_visible");
     check_visible(0.0f);
 
-    auto building_name = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("building_name"));
-    set_aliasing(building_name);
+    auto building_name = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("building_name"));
+    // // set_aliasing(building_name);
     auto update_building_name = [building_name](float dt){
         building_name->setString(BUILDUP->get_target_building()->name);
     };
     this->schedule(update_building_name, FPS_10, "building_name_update");
     update_building_name(0);
 
-    auto ing_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("ingredient_count"));
-    set_aliasing(ing_count);
+    auto ing_count = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("ingredient_count"));
+    // // set_aliasing(ing_count);
     cached_building_info_t* cached_building_info = new cached_building_info_t();
     ing_count->setUserData(static_cast<void*>(cached_building_info));
 
@@ -669,8 +669,8 @@ void BaseScene::create_info_panel()
     this->schedule(update_ing_count, FPS_10, "update_ing_count");
     update_ing_count(0);
 
-    auto harvester_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("harvester_count"));
-    set_aliasing(harvester_count);
+    auto harvester_count = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("harvester_count"));
+    // // set_aliasing(harvester_count);
     auto update_harvester_count = [harvester_count](float dt)
     {
         spBuilding building = BUILDUP->get_target_building();
@@ -695,8 +695,8 @@ void BaseScene::create_info_panel()
     this->schedule(update_harvester_count, FPS_10, "harvester_count_update");
     update_harvester_count(0);
 
-    auto salesmen_count = dynamic_cast<ui::Text*>(building_info_panel->getChildByName("salesmen_count"));
-    set_aliasing(salesmen_count);
+    auto salesmen_count = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("salesmen_count"));
+    // // set_aliasing(salesmen_count);
     auto update_salesmen_count = [salesmen_count](float dt)
     {
         spBuilding building = BUILDUP->get_target_building();
@@ -725,15 +725,15 @@ void BaseScene::create_username_input()
 {
     auto player_info_panel = this->getChildByName("player_info_panel");
 
-    ui::Text* player_gold_per_sec_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
-    set_aliasing(player_gold_per_sec_lbl);
+    ui::TextBMFont* player_gold_per_sec_lbl = dynamic_cast<ui::TextBMFont*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
+    // // set_aliasing(player_gold_per_sec_lbl);
 
     ui::TextField* username_input = dynamic_cast<ui::TextField*>(player_info_panel->getChildByName("username_input"));
 
     username_input->setTextHorizontalAlignment(TextHAlignment::CENTER);
     ui::UICCTextField* renderer = dynamic_cast<ui::UICCTextField*>(username_input->getVirtualRenderer());
     cocos2d::Label* label = dynamic_cast<Label*>(renderer);
-    set_aliasing(label);
+    // // set_aliasing(label);
     label->setTTFConfig(NuItem::ttf_config);
 
     username_input->setPlaceHolderColor(Color4B::GREEN);
@@ -792,8 +792,8 @@ void BaseScene::create_player_info_panel()
     player_info_panel->schedule(check_visible, FPS_60, "check_visible");
     check_visible(0.0f);
 
-    ui::Text* player_info_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_info_lbl"));
-    set_aliasing(player_info_lbl, true);
+    ui::TextBMFont* player_info_lbl = dynamic_cast<ui::TextBMFont*>(player_info_panel->getChildByName("player_info_lbl"));
+    // // set_aliasing(player_info_lbl, true);
 
     auto manual_heal = [player_info_panel, this]()
     {
@@ -810,16 +810,16 @@ void BaseScene::create_player_info_panel()
         }
         else
         {
-            auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
+            auto player_gold_lbl = dynamic_cast<ui::TextBMFont*>(player_info_panel->getChildByName("player_gold_lbl"));
             player_gold_lbl->runAction(FShake::actionWithDuration(0.05f, 10));
         }
     };
     bind_touch_ended(player_info_panel, manual_heal);
 
-    auto player_gold_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_gold_lbl"));
-    set_aliasing(player_gold_lbl, true);
-    auto player_hp_lbl = dynamic_cast<ui::Text*>(player_info_panel->getChildByName("player_hp_lbl"));
-    set_aliasing(player_hp_lbl, true);
+    auto player_gold_lbl = dynamic_cast<ui::TextBMFont*>(player_info_panel->getChildByName("player_gold_lbl"));
+    // // set_aliasing(player_gold_lbl, true);
+    auto player_hp_lbl = dynamic_cast<ui::TextBMFont*>(player_info_panel->getChildByName("player_hp_lbl"));
+    // // set_aliasing(player_hp_lbl, true);
 
     ui::Button* achievement_btn = dynamic_cast<ui::Button*>(player_info_panel->getChildByName("achievement_btn"));
     prep_button(achievement_btn);
@@ -972,16 +972,16 @@ void BaseScene::create_inventory_listview()
             new_item_panel->runAction(EaseBackOut::create(scale_to));
 
             //set aliasing on font
-            auto item_name_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_name_lbl"));
-            set_aliasing(item_name_lbl, true);
-            auto item_count_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_count_lbl"));
-            set_aliasing(item_count_lbl, true);
+            auto item_name_lbl = dynamic_cast<ui::TextBMFont*>(new_item_panel->getChildByName("item_name_lbl"));
+            // // set_aliasing(item_name_lbl, true);
+            auto item_count_lbl = dynamic_cast<ui::TextBMFont*>(new_item_panel->getChildByName("item_count_lbl"));
+            // // set_aliasing(item_count_lbl, true);
 
             //add ingredient image
             ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
             IngredientData res_data(str_type);
             item_img->loadTexture(res_data.get_img_large());
-            set_aliasing(item_img, true);
+            // // set_aliasing(item_img, true);
 
             auto on_touch_cb = [ing_type, this, new_item_panel]() {
                 auto alert = this->create_ingredient_detail_alert(ing_type);
@@ -1015,7 +1015,7 @@ void BaseScene::create_inventory_listview()
                 Ingredient::SubType ing_t = ing_type;
                 res_count_t count = map_get(city_ingredients, ing_t, _def);
 
-                ui::Text* item_count_lbl = dynamic_cast<ui::Text*>(new_item_panel->getChildByName("item_count_lbl"));
+                ui::TextBMFont* item_count_lbl = dynamic_cast<ui::TextBMFont*>(new_item_panel->getChildByName("item_count_lbl"));
                 item_count_lbl->setString(beautify_double(count));
 
             };
@@ -1263,7 +1263,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     close_panel->addTouchEventListener(cb);
     exit_layout->addTouchEventListener(cb);
 
-    auto resource_name = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_name"));
+    auto resource_name = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("resource_name"));
     std::string res_name = Ingredient::type_to_string(ing_type);
     resource_name->setString(res_name);
 
@@ -1271,11 +1271,11 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     auto resource_icon = dynamic_cast<ui::ImageView*>(alert_panel->getChildByName("resource_icon"));
     resource_icon->loadTexture(ing_data.get_img_large());
 
-    auto resource_description = dynamic_cast<ui::Text*>(alert_panel->getChildByName("resource_description"));
+    auto resource_description = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("resource_description"));
     resource_description->setString(res_data.get_description());
 
-    auto count_desc = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_desc"));
-    auto count_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("count_lbl"));
+    auto count_desc = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("count_desc"));
+    auto count_lbl = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("count_lbl"));
 
     alert_panel->schedule([count_lbl, ing_type](float) {
         auto it = ing_type;
@@ -1379,7 +1379,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     create_sell_button("sell_100_btn", -1, 0.25f);
     create_sell_button("sell_1000_btn", -1, 0.50f);
 
-    auto value_lbl = dynamic_cast<ui::Text*>(alert_panel->getChildByName("value_lbl"));
+    auto value_lbl = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("value_lbl"));
     auto update_value_lbl = [coins_gained_per, alert_panel, value_lbl](float dt){
         auto cg = coins_gained_per;
         std::stringstream value_ss;

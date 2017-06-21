@@ -8,6 +8,7 @@
 #include "2d/CCActionInterval.h"
 #include "2d/CCActionInstant.h"
 #include "ui/UIText.h"
+#include "ui/UITextBMFont.h"
 #include "ui/UILayout.h"
 #include "ui/UIImageView.h"
 #include "2d/CCLayer.h"
@@ -22,7 +23,7 @@ PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
     this->initial_x = panel->getPositionX();
     this->initial_y = panel->getPositionY();
 
-    auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
+    auto label = dynamic_cast<cocos2d::ui::TextBMFont*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
     set_aliasing(label);
 
     //default touch handler

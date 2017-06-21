@@ -49,6 +49,7 @@
         <Fnt Name="pixelmix_16x2.fnt" />
         <Fnt Name="pixelmix_24x2.fnt" />
         <Fnt Name="pixelmix_32x3.fnt" />
+        <Fnt Name="pixelmix_48x5.fnt" />
         <TmxFile Name="test_map.tmx" />
       </RootFolder>
     </Group>
