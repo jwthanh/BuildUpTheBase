@@ -169,7 +169,17 @@
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="count_lbl" ActionTag="-1594456649" Tag="125" IconVisible="False" LeftMargin="-73.0000" RightMargin="3.0000" TopMargin="43.5000" BottomMargin="-36.5000" IsCustomSize="True" FontSize="19" LabelText="x00&#xA;" HorizontalAlignmentType="HT_Right" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="count_lbl" ActionTag="941991515" Tag="24" IconVisible="False" LeftMargin="5.7068" RightMargin="8.2932" TopMargin="47.8403" BottomMargin="-33.8403" LabelText="x00" ctype="TextBMFontObjectData">
+                    <Size X="36.0000" Y="16.0000" />
+                    <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+                    <Position X="41.7068" Y="-25.8403" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.8341" Y="-0.8613" />
+                    <PreSize X="0.7200" Y="0.5333" />
+                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_16x2.fnt" Plist="" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="count_lbl_ttf" ActionTag="-1594456649" VisibleForFrame="False" Tag="125" IconVisible="False" LeftMargin="-73.0000" RightMargin="3.0000" TopMargin="43.5000" BottomMargin="-36.5000" IsCustomSize="True" FontSize="19" LabelText="x00&#xA;" HorizontalAlignmentType="HT_Right" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="120.0000" Y="23.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="-13.0000" Y="-25.0000" />

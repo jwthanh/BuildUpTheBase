@@ -91,7 +91,7 @@ bool NuItem::init(cocos2d::Node* parent)
         ((ui::TextBMFont*)NuItem::orig_button->getChildByName("title_panel")->getChildByName("title_lbl"))->setString(std::string("", 200));
         ((ui::TextBMFont*)NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl"))->setString(std::string("", 200));
         ((ui::TextBMFont*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"))->setString(std::string("", 200));
-        ((ui::Text*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"))->setString(std::string("", 200));
+        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"))->setString(std::string("", 200));
 
     };
 
@@ -131,8 +131,8 @@ bool NuItem::init(cocos2d::Node* parent)
     //setup_text_node(this->desc_lbl);
     this->cost_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
     // setup_text_node(this->cost_lbl);
-    this->count_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
-    setup_text_node(this->count_lbl);
+    this->count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
+    // setup_text_node(this->count_lbl);
 
     //progress stuff for achievement buttons
     this->current_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("progress_panel")->getChildByName("current_lbl"));

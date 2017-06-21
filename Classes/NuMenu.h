@@ -53,7 +53,7 @@ class NuItem : public cocos2d::ui::Widget
         cocos2d::ui::TextBMFont* title_lbl;
         cocos2d::ui::TextBMFont* desc_lbl;
         cocos2d::ui::TextBMFont* cost_lbl;
-        cocos2d::ui::Text* count_lbl;
+        cocos2d::ui::TextBMFont* count_lbl;
 
         //progress panel for achievements
         cocos2d::ui::Text* current_lbl;
