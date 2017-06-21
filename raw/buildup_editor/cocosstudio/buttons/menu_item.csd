@@ -73,7 +73,17 @@
               <AbstractNodeData Name="title_panel" ActionTag="1455973353" Tag="15" IconVisible="False" LeftMargin="185.1844" RightMargin="364.8156" TopMargin="51.0865" BottomMargin="118.9135" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="250.0000" Y="30.0000" />
                 <Children>
-                  <AbstractNodeData Name="title_lbl" ActionTag="2133409854" Tag="16" IconVisible="False" LeftMargin="-22.6599" RightMargin="86.3376" TopMargin="1.5001" BottomMargin="5.4999" IsCustomSize="True" FontSize="19" LabelText="Example Item Title" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="title_lbl" ActionTag="-144678569" Tag="21" IconVisible="False" LeftMargin="-22.6120" RightMargin="33.6120" TopMargin="-0.5167" BottomMargin="6.5167" LabelText="Fnt Text Label" ctype="TextBMFontObjectData">
+                    <Size X="239.0000" Y="24.0000" />
+                    <AnchorPoint ScaleY="1.0000" />
+                    <Position X="-22.6120" Y="30.5167" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="-0.0904" Y="1.0172" />
+                    <PreSize X="0.9560" Y="0.8000" />
+                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="title_lbl_ttf" ActionTag="2133409854" VisibleForFrame="False" Tag="16" IconVisible="False" LeftMargin="-22.6599" RightMargin="86.3376" TopMargin="1.5001" BottomMargin="5.4999" IsCustomSize="True" FontSize="19" LabelText="Example Item Title" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="186.3223" Y="23.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="70.5013" Y="16.9999" />
@@ -100,7 +110,17 @@
               <AbstractNodeData Name="description_panel" ActionTag="-65130128" Tag="17" IconVisible="False" LeftMargin="185.1844" RightMargin="314.8156" TopMargin="129.4048" BottomMargin="25.5952" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="300.0000" Y="45.0000" />
                 <Children>
-                  <AbstractNodeData Name="description_lbl" ActionTag="2007594687" UserData="300" Tag="20" IconVisible="False" LeftMargin="-21.9864" RightMargin="100.9564" TopMargin="0.1568" BottomMargin="0.8432" IsCustomSize="True" FontSize="16" LabelText="multline desc" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="description_lbl" ActionTag="-2076290452" Tag="22" IconVisible="False" LeftMargin="-20.1440" RightMargin="160.1440" TopMargin="3.8435" BottomMargin="25.1565" LabelText="Fnt Text Label" ctype="TextBMFontObjectData">
+                    <Size X="160.0000" Y="16.0000" />
+                    <AnchorPoint ScaleY="1.0000" />
+                    <Position X="-20.1440" Y="41.1565" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="-0.0671" Y="0.9146" />
+                    <PreSize X="0.5333" Y="0.3556" />
+                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_16x2.fnt" Plist="" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="description_lbl_ttf" ActionTag="2007594687" VisibleForFrame="False" UserData="300" Tag="20" IconVisible="False" LeftMargin="-21.9864" RightMargin="100.9564" TopMargin="0.1568" BottomMargin="0.8432" IsCustomSize="True" FontSize="16" LabelText="multline desc" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="221.0300" Y="44.0000" />
                     <AnchorPoint />
                     <Position X="-21.9864" Y="0.8432" />
@@ -127,7 +147,17 @@
               <AbstractNodeData Name="cost_panel" ActionTag="-1877787221" Tag="18" IconVisible="False" LeftMargin="683.6465" RightMargin="66.3535" TopMargin="51.0865" BottomMargin="118.9135" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="50.0000" Y="30.0000" />
                 <Children>
-                  <AbstractNodeData Name="cost_lbl" ActionTag="183630071" Tag="19" IconVisible="False" LeftMargin="-73.0000" RightMargin="3.0000" TopMargin="1.5000" BottomMargin="5.5000" IsCustomSize="True" FontSize="19" LabelText="123,456QuX&#xA;" HorizontalAlignmentType="HT_Right" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="cost_lbl" ActionTag="1978576715" Tag="23" IconVisible="False" LeftMargin="-79.5692" RightMargin="19.5692" TopMargin="2.6184" BottomMargin="11.3816" LabelText="123,456QuX" ctype="TextBMFontObjectData">
+                    <Size X="110.0000" Y="16.0000" />
+                    <AnchorPoint ScaleY="1.0000" />
+                    <Position X="-79.5692" Y="27.3816" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="-1.5914" Y="0.9127" />
+                    <PreSize X="2.2000" Y="0.5333" />
+                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_16x2.fnt" Plist="" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="cost_lbl_ttf" ActionTag="183630071" VisibleForFrame="False" Tag="19" IconVisible="False" LeftMargin="-73.0000" RightMargin="3.0000" TopMargin="1.5000" BottomMargin="5.5000" IsCustomSize="True" FontSize="19" LabelText="123,456QuX&#xA;" HorizontalAlignmentType="HT_Right" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="120.0000" Y="23.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="-13.0000" Y="17.0000" />

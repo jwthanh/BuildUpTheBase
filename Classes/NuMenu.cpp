@@ -37,6 +37,7 @@
 #include "external/easylogging.h"
 #include "banking/Bank.h"
 #include "progress/GameProgress.h"
+#include "ui/UITextBMFont.h"
 
 
 USING_NS_CC;
@@ -87,9 +88,9 @@ bool NuItem::init(cocos2d::Node* parent)
         NuItem::orig_button->retain();
         NuItem::orig_button->setSwallowTouches(false);
 
-        ((ui::Text*)NuItem::orig_button->getChildByName("title_panel")->getChildByName("title_lbl"))->setString(std::string("", 200));
-        ((ui::Text*)NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl"))->setString(std::string("", 200));
-        ((ui::Text*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"))->setString(std::string("", 200));
+        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("title_panel")->getChildByName("title_lbl"))->setString(std::string("", 200));
+        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl"))->setString(std::string("", 200));
+        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"))->setString(std::string("", 200));
         ((ui::Text*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"))->setString(std::string("", 200));
 
     };
@@ -124,12 +125,12 @@ bool NuItem::init(cocos2d::Node* parent)
     this->_original_image_path = "";
 
     this->item_icon = dynamic_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
-    this->title_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
-    setup_text_node(this->title_lbl);
-    this->desc_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
-    setup_text_node(this->desc_lbl);
-    this->cost_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
-    setup_text_node(this->cost_lbl);
+    this->title_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
+    //setup_text_node(this->title_lbl);
+    this->desc_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
+    //setup_text_node(this->desc_lbl);
+    this->cost_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
+    // setup_text_node(this->cost_lbl);
     this->count_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
     setup_text_node(this->count_lbl);
 
@@ -317,14 +318,14 @@ void ShopNuItem::update_func(float dt)
     res_count_t cost = this->get_cost();
     res_count_t total_coins = this->get_available_coins();
 
-    this->cost_lbl->setTextColor(Color4B::WHITE);
+    //this->cost_lbl->setTextColor(Color4B::WHITE);
     res_count_t rounded_cost = std::round(this->get_cost());
 
     if (this->get_been_bought())
     {
         this->set_cost_lbl("---");
         try_set_enable(false);
-        try_set_text_color(this->cost_lbl, Color4B::GRAY);
+        //try_set_text_color(this->cost_lbl, Color4B::GRAY);
         try_set_node_color(this->button, Color3B::WHITE);
     }
     else if (total_coins < cost || !this->custom_status_check(dt))
@@ -337,7 +338,7 @@ void ShopNuItem::update_func(float dt)
         };
 
         Color3B color = { 243, 162, 173 };
-        try_set_text_color(this->cost_lbl, Color4B::RED);
+        //try_set_text_color(this->cost_lbl, Color4B::RED);
         try_set_node_color(this->button, color);
     }
     else

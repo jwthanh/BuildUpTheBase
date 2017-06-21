@@ -46,6 +46,9 @@
         </Folder>
         <Image Name="main_UI_export_10.png" />
         <TTF Name="pixelmix.ttf" />
+        <Fnt Name="pixelmix_16x2.fnt" />
+        <Fnt Name="pixelmix_24x2.fnt" />
+        <Fnt Name="pixelmix_32x3.fnt" />
         <TmxFile Name="test_map.tmx" />
       </RootFolder>
     </Group>

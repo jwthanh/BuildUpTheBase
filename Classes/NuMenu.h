@@ -26,6 +26,7 @@ namespace cocos2d
 
     namespace ui
     {
+        class TextBMFont;
         class Text;
         class Widget;
         class ImageView;
@@ -49,9 +50,9 @@ class NuItem : public cocos2d::ui::Widget
 
         cocos2d::ui::Button* button;
         cocos2d::ui::ImageView* item_icon;
-        cocos2d::ui::Text* title_lbl;
-        cocos2d::ui::Text* desc_lbl;
-        cocos2d::ui::Text* cost_lbl;
+        cocos2d::ui::TextBMFont* title_lbl;
+        cocos2d::ui::TextBMFont* desc_lbl;
+        cocos2d::ui::TextBMFont* cost_lbl;
         cocos2d::ui::Text* count_lbl;
 
         //progress panel for achievements
