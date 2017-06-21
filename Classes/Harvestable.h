@@ -110,7 +110,6 @@ class FarmingHarvestable : public Harvestable
 {
     public:
         CREATE_FUNC(FarmingHarvestable);
-        bool init();
         std::string get_sprite_path();
 };
 
@@ -118,7 +117,6 @@ class GraveyardHarvestable : public Harvestable
 {
     public:
         CREATE_FUNC(GraveyardHarvestable);
-        bool init();
         std::string get_sprite_path();
 };
 
@@ -126,7 +124,6 @@ class TreeHarvestable : public Harvestable
 {
     public:
         CREATE_FUNC(TreeHarvestable);
-        bool init();
         std::string get_sprite_path();
         void animate_touch_start(cocos2d::Touch* touch);
 
@@ -157,7 +154,6 @@ class MiningHarvestable : public Harvestable
 {
     public:
         CREATE_FUNC(MiningHarvestable);
-        virtual bool init();
         virtual std::string get_sprite_path();
 
         virtual void animate_touch_start(cocos2d::Touch* touch);
@@ -239,6 +235,5 @@ class MarketHarvestable : public Harvestable
     public:
         CREATE_FUNC(MarketHarvestable);
         virtual std::string get_sprite_path() override;
-        bool init() override;
 };
 #endif

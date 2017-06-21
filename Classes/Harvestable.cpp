@@ -471,45 +471,15 @@ void Harvestable::shatter()
 
 };
 
-bool FarmingHarvestable::init()
-{
-    bool val = Harvestable::init();
-
-    this->initial_scale = 0.9f;
-    this->setScale(this->initial_scale);
-
-    return val;
-};
-
 std::string FarmingHarvestable::get_sprite_path()
 {
     return "farm.png";
-};
-
-bool GraveyardHarvestable::init()
-{
-    bool val = Harvestable::init();
-
-    this->initial_scale = 0.9f;
-    this->setScale(this->initial_scale);
-
-    return val;
 };
 
 std::string GraveyardHarvestable::get_sprite_path()
 {
     return "gravestone.png";
 };
-
-bool TreeHarvestable::init()
-{
-    bool val = Harvestable::init();
-
-    this->initial_scale = 0.9f;
-    this->setScale(this->initial_scale);
-
-    return val;
-}
 
 std::string TreeHarvestable::get_sprite_path()
 {
@@ -662,15 +632,6 @@ void DumpsterHarvestable::generate_item()
     std::uniform_real_distribution<res_count_t> distribution(1, max_level);
     res_count_t item_level = std::floor(distribution(gen));
     this->scavenge_item->level = item_level;
-};
-
-bool MiningHarvestable::init()
-{
-    Harvestable::init();
-
-    this->initial_scale = 0.9f;
-    this->setScale(this->initial_scale);
-    return true;
 };
 
 std::string MiningHarvestable::get_sprite_path()
@@ -1475,14 +1436,4 @@ void UndeadHarvestable::animate_rotate()
 std::string MarketHarvestable::get_sprite_path()
 {
     return "marketplace.png";
-};
-
-bool MarketHarvestable::init()
-{
-    bool val = Harvestable::init();
-
-    this->initial_scale = 0.9f;
-    this->setScale(this->initial_scale);
-
-    return val;
 };
