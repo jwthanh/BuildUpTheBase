@@ -2,9 +2,8 @@
 #ifndef MISCUI_H
 #define MISCUI_H
 
-#include "2d/CCLabel.h"
-
 namespace cocos2d {
+    class Vec2;
     class Sprite;
     class Texture2D;
     class Label;
@@ -16,6 +15,7 @@ namespace cocos2d {
 namespace cocos2d
 {
     class Sequence;
+    struct Color3B;
     namespace ui
     {
         class TextBMFont;
@@ -27,46 +27,30 @@ namespace cocos2d
     }
 }
 
-class FloatingLabel : public cocos2d::Label
-{
-public:
-
-    FloatingLabel(cocos2d::TextHAlignment hAlignment = cocos2d::TextHAlignment::LEFT,
-                  cocos2d::TextVAlignment vAlignment = cocos2d::TextVAlignment::TOP);
-
-    static FloatingLabel* createWithTTF(const std::string& text, const std::string& fontFilePath, float fontSize,
-        const cocos2d::Size& dimensions = cocos2d::Size::ZERO, cocos2d::TextHAlignment hAlignment = cocos2d::TextHAlignment::LEFT,
-        cocos2d::TextVAlignment vAlignment = cocos2d::TextVAlignment::TOP);
-
-    static FloatingLabel* createWithTTF(const cocos2d::TTFConfig& ttfConfig, const std::string& text,
-        cocos2d::TextHAlignment hAlignment = cocos2d::TextHAlignment::LEFT, int maxLineWidth = 0);
-
-    void do_float(float x=100.0f, float x_variation=1.0f, float y=100.0f, float y_variation=10.0f, float duration=1.5f);
-};
-
+cocos2d::Label* do_float(float x = 100.0f, float x_variation = 1.0f, float y = 100.0f, float y_variation = 10.0f, float duration = 1.5f);
 void load_default_button_textures(cocos2d::ui::Button* button);
 
 //builds a sequence that scales a node up and then back down, highlighting it to_color and returning to end_color
 cocos2d::Sequence* build_flash_action(
     float duration,
     float scale, float original_scale,
-    cocos2d::Color3B to_color = cocos2d::Color3B::RED,
-    cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
+    cocos2d::Color3B to_color,
+    cocos2d::Color3B end_color
 );
 //runs the flash sequence
 void run_flash_action(
-    cocos2d::Node* target, float duration = 0.1f,
-    float scale = 1.2f, float original_scale = 1.0f,
-    cocos2d::Color3B to_color = cocos2d::Color3B::RED,
-    cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
+    cocos2d::Node* target, float duration,
+    float scale, float original_scale,
+    cocos2d::Color3B to_color,
+    cocos2d::Color3B end_color
 );
 
 void animate_modal_open(
     cocos2d::Node* target,
-    float duration = 0.25f,
-    float end_scale = 1.0f,
-    cocos2d::Vec2 start_pos = cocos2d::Vec2(0, 0),
-    cocos2d::Vec2 end_pos = cocos2d::Vec2(0, 0)
+    float duration,
+    float end_scale,
+    cocos2d::Vec2 start_pos,
+    cocos2d::Vec2 end_pos
 );
 
 void try_set_text_color(cocos2d::ui::Text* text_node, const cocos2d::Color4B color);

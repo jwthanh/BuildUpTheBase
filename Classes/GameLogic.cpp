@@ -764,7 +764,7 @@ void GameDirector::switch_to_miner_menu()
                 }
                 else
                 {
-                    run_flash_action(rails_count_lbl, 0.1f, 1.5f);
+                    run_flash_action(rails_count_lbl, 0.1f, 1.5f, 1.0f, Color3B::RED, Color3B::WHITE);
                     auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
                     info_panel->runAction(shake);
                 }
@@ -924,7 +924,7 @@ void GameDirector::switch_to_miner_menu()
             }
             else
             {
-                run_flash_action(cart_count_lbl, 0.1f, 1.5f);
+                run_flash_action(cart_count_lbl, 0.1f, 1.5f, 1.0f, Color3B::RED, Color3B::WHITE);
                 auto shake = FShake::actionWithDuration(0.1f, 2.5f, 2.5f);
                 info_panel->runAction(shake);
             }

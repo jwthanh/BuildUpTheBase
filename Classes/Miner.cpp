@@ -443,7 +443,7 @@ void Miner::move_active_tile(cocos2d::Vec2 offset)
 
             //animate specific tile
             cocos2d::Sprite* blocked_sprite = this->active_layer->getTileAt(pos);
-            run_flash_action(blocked_sprite, 0.2f, 1.1f);
+            run_flash_action(blocked_sprite, 0.2f, 1.1f, 1.0f, cocos2d::Color3B::RED, cocos2d::Color3B::WHITE);
         }
         else
         {

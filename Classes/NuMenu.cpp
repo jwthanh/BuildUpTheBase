@@ -38,6 +38,7 @@
 #include "banking/Bank.h"
 #include "progress/GameProgress.h"
 #include "ui/UITextBMFont.h"
+#include "2d/CCLabel.h"
 
 
 USING_NS_CC;

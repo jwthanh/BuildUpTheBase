@@ -1,10 +1,5 @@
 #include "PopupPanel.h"
 
-#include "MiscUI.h"
-#include "Util.h"
-#include "external/easylogging.h"
-#include "utilities/vibration.h"
-
 #include "2d/CCActionInterval.h"
 #include "2d/CCActionInstant.h"
 #include "ui/UIText.h"
@@ -15,6 +10,12 @@
 #include "2d/CCActionEase.h"
 #include "2d/CCParticleSystemQuad.h"
 
+
+#include "external/easylogging.h"
+#include "utilities/vibration.h"
+
+#include "MiscUI.h"
+#include "Util.h"
 
 
 PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :

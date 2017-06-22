@@ -11,45 +11,10 @@
 
 USING_NS_CC;
 
-FloatingLabel::FloatingLabel(TextHAlignment hAlignment, TextVAlignment vAlignment)
-    : Label(hAlignment, vAlignment)
+Label* do_float(float x, float x_variation, float y, float y_variation, float duration)
 {
-
-};
-
-FloatingLabel* FloatingLabel::createWithTTF(const std::string& text, const std::string& fontFile, float fontSize, const Size& dimensions /* = Size::ZERO */, TextHAlignment hAlignment /* = TextHAlignment::LEFT */, TextVAlignment vAlignment /* = TextVAlignment::TOP */)
-{
-    auto ret = new (std::nothrow) FloatingLabel(hAlignment,vAlignment);
-
-    if (ret && ret->initWithTTF(text, fontFile, fontSize, dimensions, hAlignment, vAlignment))
-    {
-        ret->autorelease();
-        return ret;
-    }
-
-    CC_SAFE_DELETE(ret);
-    return nullptr;
-}
-
-FloatingLabel* FloatingLabel::createWithTTF(const TTFConfig& ttfConfig, const std::string& text, TextHAlignment hAlignment /* = TextHAlignment::CENTER */, int maxLineWidth /* = 0 */)
-{
-    auto ret = new (std::nothrow) FloatingLabel(hAlignment);
-
-    if (ret && ret->initWithTTF(ttfConfig, text, hAlignment, maxLineWidth))
-    {
-        ret->autorelease();
-        return ret;
-    }
-
-    CC_SAFE_DELETE(ret);
-    return nullptr;
-}
-
-
-void FloatingLabel::do_float(float x, float x_variation, float y, float y_variation, float duration)
-{
-    set_aliasing((Label*)this);
-    this->enableOutline(Color4B::BLACK, 2);
+    auto label = Label::createWithBMFont("pixelmix_24x2.fnt", "");
+    //label->enableOutline(Color4B::BLACK, 2);
 
     float x_scale = sx(x + (x_variation * CCRANDOM_MINUS1_1()));
     float y_scale = sy(y + (y_variation * CCRANDOM_MINUS1_1()));
@@ -60,27 +25,27 @@ void FloatingLabel::do_float(float x, float x_variation, float y, float y_variat
         Vec2(y_scale-x_scale, y_scale)
     };
 
-    duration += (CCRANDOM_MINUS1_1()*0.30f*duration);
 
+    duration += (CCRANDOM_MINUS1_1()*0.30f*duration);
     auto move_action = EaseIn::create(BezierBy::create(duration, config), 2.3f);
 
-    this->runAction(TintTo::create(duration*6, Color3B::RED));
+    label->runAction(TintTo::create(duration*6, Color3B::RED));
 
-    this->setScale(0.10f);
-    this->runAction(Sequence::createWithTwoActions(
+    label->setScale(0.10f);
+    label->runAction(Sequence::createWithTwoActions(
         ScaleTo::create(0.1f, 1.0f),
         ScaleBy::create(duration*6, 0.35f)
     ));
 
-    this->runAction(FadeOut::create(duration));
+    label->runAction(FadeOut::create(duration));
 
-    this->runAction(
+    label->runAction(
         Sequence::createWithTwoActions(
             move_action,
             RemoveSelf::create()
         )
     );
-
+    return label;
 };
 
 void load_default_button_textures(cocos2d::ui::Button* button)
@@ -97,7 +62,7 @@ int FLASH_ACTION_TAG = 112233442; //arbitrary number chosen
 cocos2d::Sequence* build_flash_action(
     float duration,
     float scale, float original_scale,
-    cocos2d::Color3B to_color, cocos2d::Color3B end_color
+    cocos2d::Color3B to_color = Color3B::RED, cocos2d::Color3B end_color = Color3B::WHITE
     )
 {
     auto tint = TintTo::create(duration, to_color);
@@ -116,9 +81,9 @@ cocos2d::Sequence* build_flash_action(
 }
 
 void run_flash_action(
-    cocos2d::Node* target, float duration, float scale,
-    float original_scale, cocos2d::Color3B to_color /* RED */
-    , cocos2d::Color3B end_color /* WHITE */
+    cocos2d::Node* target, float duration = 0.1f, float scale = 1.2f,
+    float original_scale = 1.0f, cocos2d::Color3B to_color = Color3B::RED
+    , cocos2d::Color3B end_color = Color3B::WHITE
 )
 {
     //clear previous flash animation

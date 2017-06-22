@@ -25,6 +25,7 @@
 #include "goals/Achievement.h"
 #include "RandomWeightMap.h"
 #include "Ingredients.h"
+#include "2d/CCLabel.h"
 
 using namespace cocos2d;
 

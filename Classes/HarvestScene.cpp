@@ -1334,7 +1334,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
                 std::string message = ss.str();
 
-                auto floating_label = FloatingLabel::createWithTTF(message, DEFAULT_FONT, 30);
+                auto floating_label = do_float();
                 floating_label->setTextColor(Color4B(text_color));
 
                 floating_start_pos.x += cocos2d::rand_minus1_1()*30.0f;
@@ -1346,12 +1346,11 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
                 floating_label->setPosition(floating_start_pos);
                 floating_label->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
-                floating_label->do_float();
 
                 sell_btn->getParent()->addChild(floating_label);
 
                 auto player_gold_lbl = this->getChildByName("player_info_panel")->getChildByName("player_gold_lbl");
-                run_flash_action(player_gold_lbl, 0.1f, 1.2f, 1.0f, text_color);
+                run_flash_action(player_gold_lbl, 0.1f, 1.2f, 1.0f, text_color, Color3B::WHITE);
 
                 do_vibrate(10);
             }
@@ -1514,10 +1513,8 @@ void HarvestScene::spawn_floating_label_for_ing_type(
     auto ing_panel = this->get_visible_ing_panel(ing_type);
     if (ing_panel)
     {
-        auto floating_label = FloatingLabel::createWithTTF(message, "pixelmix.ttf", 25);
-        floating_label->enableOutline(cocos2d::Color4B::BLACK, 2);
+        auto floating_label = do_float(50, 1, 50, 10, 1);
         this->addChild(floating_label);
-        floating_label->do_float(50, 1, 50, 10, 1);
 
         cocos2d::Vec2 pos = {
             ing_panel->getContentSize().width / 2,

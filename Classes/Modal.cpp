@@ -6,6 +6,7 @@
 #include "utilities/vibration.h"
 
 #include "NodeBuilder.h"
+#include "2d/CCLabel.h"
 #include "2d/CCActionInterval.h"
 #include "2d/CCActionInstant.h"
 #include "ui/UIText.h"
