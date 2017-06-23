@@ -1514,6 +1514,7 @@ void HarvestScene::spawn_floating_label_for_ing_type(
     if (ing_panel)
     {
         auto floating_label = do_float(50, 1, 50, 10, 1);
+        floating_label->setString(message);
         this->addChild(floating_label);
 
         cocos2d::Vec2 pos = {
