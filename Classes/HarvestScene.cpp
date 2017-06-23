@@ -1274,14 +1274,12 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     auto resource_description = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("resource_description"));
     resource_description->setString(res_data.get_description());
 
-    auto count_desc = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("count_desc"));
     auto count_lbl = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("count_lbl"));
 
     alert_panel->schedule([count_lbl, ing_type](float) {
-        auto it = ing_type;
         auto& all_ing = BUILDUP->get_all_ingredients();
         res_count_t _def = 0.0;
-        res_count_t count = map_get(all_ing, it, _def);
+        res_count_t count = map_get(all_ing, ing_type, _def);
         count_lbl->setString(beautify_double(count));
     }, FPS_10, "alert_count_update");
 
