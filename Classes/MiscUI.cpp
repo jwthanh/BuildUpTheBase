@@ -142,9 +142,9 @@ void try_set_node_color(cocos2d::Node* node, const cocos2d::Color3B color)
     }
 };
 
-void set_aliasing(cocos2d::ui::TextBMFont* label, bool set_aliasing)
+void set_aliasing(cocos2d::ui::TextBMFont* label, bool is_alias)
 {
-    CCLOG("WARN: trying to alias a BMFont, fix this");
+    set_aliasing(dynamic_cast<cocos2d::Label*>(label->getVirtualRenderer()), is_alias);
 }
 
 void set_aliasing(cocos2d::Label* label, bool set_aliasing)

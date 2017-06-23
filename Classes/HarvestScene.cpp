@@ -242,7 +242,6 @@ void BaseScene::create_goal_loadingbar()
 
     this->upgrade_lbl = dynamic_cast<ui::TextBMFont*>(progress_panel->getChildByName("upgrade_lbl"));
     this->upgrade_lbl->setString("");
-    // // set_aliasing(this->upgrade_lbl, true);
 
     auto progress_callback = [this]() {
             spBuilding target_building = BUILDUP->get_target_building();
@@ -369,7 +368,6 @@ void BaseScene::create_building_choicelist()
         //set building name
         ui::TextBMFont* building_name = (ui::TextBMFont*)panel->getChildByName("building_name");
         building_name->setString(building->short_name);
-        // // set_aliasing(building_name, true);
 
         //add building image
         ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
@@ -497,7 +495,6 @@ void BaseScene::create_building_choicelist()
     //set building name
     ui::TextBMFont* building_name = (ui::TextBMFont*)panel->getChildByName("building_name");
     building_name->setString("MGMT");
-    // // set_aliasing(building_name, true);
 
     //add building image
     ui::ImageView* building_image = (ui::ImageView*)panel->getChildByName("building_image");
@@ -630,7 +627,6 @@ void BaseScene::create_info_panel()
     check_visible(0.0f);
 
     auto building_name = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("building_name"));
-    // // set_aliasing(building_name);
     auto update_building_name = [building_name](float dt){
         building_name->setString(BUILDUP->get_target_building()->name);
     };
@@ -638,7 +634,6 @@ void BaseScene::create_info_panel()
     update_building_name(0);
 
     auto ing_count = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("ingredient_count"));
-    // // set_aliasing(ing_count);
     cached_building_info_t* cached_building_info = new cached_building_info_t();
     ing_count->setUserData(static_cast<void*>(cached_building_info));
 
@@ -677,7 +672,7 @@ void BaseScene::create_info_panel()
     update_ing_count(0);
 
     auto harvester_count = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("harvester_count"));
-    // // set_aliasing(harvester_count);
+    set_aliasing(harvester_count);
     auto update_harvester_count = [harvester_count](float dt)
     {
         spBuilding building = BUILDUP->get_target_building();
@@ -703,7 +698,6 @@ void BaseScene::create_info_panel()
     update_harvester_count(0);
 
     auto salesmen_count = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("salesmen_count"));
-    // // set_aliasing(salesmen_count);
     auto update_salesmen_count = [salesmen_count](float dt)
     {
         spBuilding building = BUILDUP->get_target_building();
@@ -733,14 +727,12 @@ void BaseScene::create_username_input()
     auto player_info_panel = this->getChildByName("player_info_panel");
 
     ui::TextBMFont* player_gold_per_sec_lbl = dynamic_cast<ui::TextBMFont*>(player_info_panel->getChildByName("player_gold_per_sec_lbl"));
-    // // set_aliasing(player_gold_per_sec_lbl);
 
     ui::TextField* username_input = dynamic_cast<ui::TextField*>(player_info_panel->getChildByName("username_input"));
 
     username_input->setTextHorizontalAlignment(TextHAlignment::CENTER);
     ui::UICCTextField* renderer = dynamic_cast<ui::UICCTextField*>(username_input->getVirtualRenderer());
     cocos2d::Label* label = dynamic_cast<Label*>(renderer);
-    // // set_aliasing(label);
     label->setTTFConfig(NuItem::ttf_config);
 
     username_input->setPlaceHolderColor(Color4B::GREEN);
@@ -800,7 +792,6 @@ void BaseScene::create_player_info_panel()
     check_visible(0.0f);
 
     ui::TextBMFont* player_info_lbl = dynamic_cast<ui::TextBMFont*>(player_info_panel->getChildByName("player_info_lbl"));
-    // // set_aliasing(player_info_lbl, true);
 
     auto manual_heal = [player_info_panel, this]()
     {
@@ -824,9 +815,7 @@ void BaseScene::create_player_info_panel()
     bind_touch_ended(player_info_panel, manual_heal);
 
     auto player_gold_lbl = dynamic_cast<ui::TextBMFont*>(player_info_panel->getChildByName("player_gold_lbl"));
-    // // set_aliasing(player_gold_lbl, true);
     auto player_hp_lbl = dynamic_cast<ui::TextBMFont*>(player_info_panel->getChildByName("player_hp_lbl"));
-    // // set_aliasing(player_hp_lbl, true);
 
     ui::Button* achievement_btn = dynamic_cast<ui::Button*>(player_info_panel->getChildByName("achievement_btn"));
     prep_button(achievement_btn);
@@ -980,15 +969,13 @@ void BaseScene::create_inventory_listview()
 
             //set aliasing on font
             auto item_name_lbl = dynamic_cast<ui::TextBMFont*>(new_item_panel->getChildByName("item_name_lbl"));
-            // // set_aliasing(item_name_lbl, true);
             auto item_count_lbl = dynamic_cast<ui::TextBMFont*>(new_item_panel->getChildByName("item_count_lbl"));
-            // // set_aliasing(item_count_lbl, true);
 
             //add ingredient image
             ui::ImageView* item_img = (ui::ImageView*)new_item_panel->getChildByName("item_img");
             IngredientData res_data(str_type);
             item_img->loadTexture(res_data.get_img_large());
-            // // set_aliasing(item_img, true);
+            set_aliasing(item_img, true);
 
             auto on_touch_cb = [ing_type, this, new_item_panel]() {
                 auto alert = this->create_ingredient_detail_alert(ing_type);
