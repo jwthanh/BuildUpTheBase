@@ -184,16 +184,23 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     }
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
+        //Label* wrapped_bmfont_lbl = Label::createWithTTF("this is a really long line that I hope to wrap.", "pixelmix.ttf", 25);
+        Label* wrapped_bmfont_lbl = Label::createWithBMFont("pixelmix_24x2.fnt", "this is a really long line that I hope to wrap.");
+        this->addChild(wrapped_bmfont_lbl);
+        //wrapped_bmfont_lbl->setContentSize({ 0, 100 });
+        wrapped_bmfont_lbl->setDimensions(100, 0);
+        wrapped_bmfont_lbl->enableWrap(true);
+        wrapped_bmfont_lbl->setPosition(get_center_pos());
 
-        res_count_t seconds_to_sim = 60 * 60 * 24;
-        time_t start = time(0);
-        CCLOG("starting sim for %f", seconds_to_sim);
-        for (float i = 0; i < seconds_to_sim; i += 1) {
-            // BUILDUP->city->update(1.0f);
-            SimulateMainLoop::simulate(seconds_to_sim);
-        };
-        time_t end = time(0);
-        CCLOG("done sim for %f, taking %i", seconds_to_sim, end-start);
+        //res_count_t seconds_to_sim = 60 * 60 * 24;
+        //time_t start = time(0);
+        //CCLOG("starting sim for %f", seconds_to_sim);
+        //for (float i = 0; i < seconds_to_sim; i += 1) {
+        //    // BUILDUP->city->update(1.0f);
+        //    SimulateMainLoop::simulate(seconds_to_sim);
+        //};
+        //time_t end = time(0);
+        //CCLOG("done sim for %f, taking %i", seconds_to_sim, end-start);
 
     }
 }
@@ -1271,7 +1278,8 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
     auto resource_icon = dynamic_cast<ui::ImageView*>(alert_panel->getChildByName("resource_icon"));
     resource_icon->loadTexture(ing_data.get_img_large());
 
-    auto resource_description = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("resource_description"));
+    ui::TextBMFont* resource_description = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("resource_description"));
+    static_cast<Label*>(resource_description->getVirtualRenderer())->setDimensions(375, 0);
     resource_description->setString(res_data.get_description());
 
     auto count_lbl = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("count_lbl"));
