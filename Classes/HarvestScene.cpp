@@ -627,6 +627,9 @@ void BaseScene::create_info_panel()
     check_visible(0.0f);
 
     auto building_name = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("building_name"));
+    static_cast<Label*>(building_name->getVirtualRenderer())->setDimensions(175, 0);
+    static_cast<Label*>(building_name->getVirtualRenderer())->setHorizontalAlignment(TextHAlignment::CENTER);
+    //building_name->setFntFile("pixelmix_16x2.fnt");
     auto update_building_name = [building_name](float dt){
         building_name->setString(BUILDUP->get_target_building()->name);
     };

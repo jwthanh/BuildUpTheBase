@@ -45,13 +45,13 @@
                 <PreSize X="0.5610" Y="0.0471" />
                 <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="resource_description" ActionTag="-468974190" Tag="28" IconVisible="False" LeftMargin="-220.3085" RightMargin="-208.6915" TopMargin="214.0743" BottomMargin="271.9257" LabelText="This is some sample description and its really wide" ctype="TextBMFontObjectData">
+              <AbstractNodeData Name="resource_description" ActionTag="-468974190" Tag="28" IconVisible="False" LeftMargin="-219.5000" RightMargin="-209.5000" TopMargin="214.0743" BottomMargin="271.9257" LabelText="This is some sample description and its really wide" ctype="TextBMFontObjectData">
                 <Size X="839.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="199.1915" Y="283.9257" />
+                <Position X="200.0000" Y="283.9257" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4858" Y="0.5567" />
+                <PrePosition X="0.4878" Y="0.5567" />
                 <PreSize X="2.0463" Y="0.0471" />
                 <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
               </AbstractNodeData>
