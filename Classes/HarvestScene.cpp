@@ -1267,6 +1267,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
     ui::TextBMFont* resource_description = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("resource_description"));
     static_cast<Label*>(resource_description->getVirtualRenderer())->setDimensions(375, 0);
+    static_cast<Label*>(resource_description->getVirtualRenderer())->setHorizontalAlignment(TextHAlignment::CENTER);
     resource_description->setString(res_data.get_description());
 
     auto count_lbl = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("count_lbl"));
