@@ -837,9 +837,13 @@ void BaseScene::create_player_info_panel()
         spBuilding arena = BUILDUP->city->building_by_type(BuildingTypes::TheArena);
         const BuildingUnlockMap& unlock_map = GameProgress::getInstance()->get_building_unlock_map();
         bool is_arena_unlocked = unlock_map.size() && unlock_map.at(arena) ;
-        if (is_arena_unlocked == false) { player_hp_lbl->setVisible(false); return; }
+        if (is_arena_unlocked == false) {
+            player_hp_lbl->setVisible(false);
+            return;
+        }
 
-        try_set_visible(player_hp_lbl, tutorial->get_show_player_hp_lbl());
+        bool tutorial_show_hp = tutorial->get_show_player_hp_lbl();
+        try_set_visible(player_hp_lbl, tutorial_show_hp);
     };
     player_hp_lbl->schedule(check_hp_visible, FPS_60, "check_hp_visible");
     check_visible(0.0f);

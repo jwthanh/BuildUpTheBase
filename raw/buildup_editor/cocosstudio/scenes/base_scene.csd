@@ -125,7 +125,7 @@
                 <PreSize X="0.9100" Y="0.0906" />
                 <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="14.6380" RightMargin="3.3620" TopMargin="55.0000" BottomMargin="186.0000" LabelText="$100,200Qad" ctype="TextBMFontObjectData">
+              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="14.6380" RightMargin="3.3620" TopMargin="55.0000" BottomMargin="186.0000" LabelText="$100,200Qad" ctype="TextBMFontObjectData">
                 <Size X="182.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="105.6380" Y="198.0000" />
@@ -145,15 +145,15 @@
                 <PreSize X="0.7900" Y="0.0906" />
                 <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_per_sec_lbl" ActionTag="-768634115" Tag="172" IconVisible="False" HorizontalEdge="RightEdge" LeftMargin="101.6380" RightMargin="3.3620" TopMargin="84.0001" BottomMargin="156.9999" LabelText="+100/s" ctype="TextBMFontObjectData">
-                <Size X="95.0000" Y="24.0000" />
+              <AbstractNodeData Name="player_gold_per_sec_lbl" ActionTag="-768634115" Tag="172" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="68.0000" RightMargin="68.0000" TopMargin="88.0000" BottomMargin="161.0000" LabelText="+100/s" ctype="TextBMFontObjectData">
+                <Size X="64.0000" Y="16.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="149.1380" Y="168.9999" />
+                <Position X="100.0000" Y="169.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.7457" Y="0.6377" />
-                <PreSize X="0.4750" Y="0.0906" />
-                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
+                <PrePosition X="0.5000" Y="0.6377" />
+                <PreSize X="0.3200" Y="0.0604" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_16x2.fnt" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="username_input" ActionTag="314951060" Tag="95" IconVisible="False" LeftMargin="5.5233" RightMargin="7.3183" TopMargin="179.1065" BottomMargin="67.0835" TouchEnable="True" FontSize="16" IsCustomSize="True" LabelText="" PlaceHolderText="Enter Username" MaxLengthEnable="True" MaxLengthText="15" ctype="TextFieldObjectData">
                 <Size X="187.1584" Y="18.8100" />
