@@ -231,9 +231,33 @@ void AppDelegate::preload_sprites()
     };
 
     auto texture_cache = Director::getInstance()->getTextureCache();
+    auto cache_and_alias = [texture_cache](std::string path)
+    {
+        Texture2D* new_tex = texture_cache->addImage(path);
+        new_tex->setAliasTexParameters();
+    };
     texture_cache->addImage("items/dagger.png");
     texture_cache->addImage("items/ashen_mirror.png");
     texture_cache->addImage("items/homunculus.png");
+
+
+    auto font_paths = {
+        "fonts/pixelmix_32x3_0.png",
+        "fonts/pixelmix_48x5_0.png",
+        "fonts/pixelmix_16x2_0.png",
+        "fonts/pixelmix_24x2_0.png",
+
+        "editor/pixelmix_24x2_0.png",
+        "editor/pixelmix_32x3_0.png",
+        "editor/pixelmix_32x4_0.png",
+        "editor/pixelmix_48x5_0.png",
+        "editor/pixelmix_16x2_0.png",
+        "editor/pixelmix_20x2_0.png"
+    };
+    for (auto& path : font_paths) {
+        cache_and_alias(path);
+    };
+
     CCLOG("done loading sprites");
 
 };
