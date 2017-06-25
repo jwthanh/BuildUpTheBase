@@ -60,13 +60,13 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="item_icon" ActionTag="647280568" Tag="14" IconVisible="False" LeftMargin="46.9999" RightMargin="689.0001" TopMargin="68.0000" BottomMargin="68.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="item_icon" ActionTag="647280568" Tag="14" IconVisible="False" LeftMargin="52.9999" RightMargin="683.0001" TopMargin="68.0000" BottomMargin="68.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
                 <Size X="64.0000" Y="64.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="78.9999" Y="100.0000" />
+                <Position X="84.9999" Y="100.0000" />
                 <Scale ScaleX="1.7500" ScaleY="1.7500" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0987" Y="0.5000" />
+                <PrePosition X="0.1062" Y="0.5000" />
                 <PreSize X="0.0800" Y="0.3200" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
