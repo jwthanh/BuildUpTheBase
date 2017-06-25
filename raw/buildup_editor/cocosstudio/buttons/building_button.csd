@@ -29,18 +29,6 @@
                 <PreSize X="0.7150" Y="0.2400" />
                 <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_48x5.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="building_name_ttf" ActionTag="2011617631" VisibleForFrame="False" Tag="153" IconVisible="False" LeftMargin="11.9679" RightMargin="15.3965" TopMargin="119.6817" BottomMargin="11.9562" IsCustomSize="True" FontSize="48" LabelText="NAME" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="5" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="172.6356" Y="68.3621" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="98.2857" Y="46.1372" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4914" Y="0.2307" />
-                <PreSize X="0.8632" Y="0.3418" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="0" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />

@@ -375,7 +375,7 @@
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="40.8483" Y="36.1731" />
-                <Scale ScaleX="0.3500" ScaleY="0.3500" />
+                <Scale ScaleX="0.3300" ScaleY="0.3300" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.1135" Y="0.2495" />
                 <PreSize X="0.0000" Y="0.0000" />
@@ -385,7 +385,7 @@
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="40.8483" Y="106.1736" />
-                <Scale ScaleX="0.3500" ScaleY="0.3500" />
+                <Scale ScaleX="0.3300" ScaleY="0.3300" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.1135" Y="0.7322" />
                 <PreSize X="0.0000" Y="0.0000" />
@@ -395,7 +395,7 @@
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="110.8475" Y="36.1731" />
-                <Scale ScaleX="0.3500" ScaleY="0.3500" />
+                <Scale ScaleX="0.3300" ScaleY="0.3300" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.3079" Y="0.2495" />
                 <PreSize X="0.0000" Y="0.0000" />
@@ -405,7 +405,7 @@
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="110.8475" Y="106.1736" />
-                <Scale ScaleX="0.3500" ScaleY="0.3500" />
+                <Scale ScaleX="0.3300" ScaleY="0.3300" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.3079" Y="0.7322" />
                 <PreSize X="0.0000" Y="0.0000" />
@@ -415,7 +415,7 @@
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="180.8492" Y="36.1731" />
-                <Scale ScaleX="0.3500" ScaleY="0.3500" />
+                <Scale ScaleX="0.3300" ScaleY="0.3300" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5024" Y="0.2495" />
                 <PreSize X="0.0000" Y="0.0000" />
@@ -425,7 +425,7 @@
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="180.8492" Y="106.1736" />
-                <Scale ScaleX="0.3500" ScaleY="0.3500" />
+                <Scale ScaleX="0.3300" ScaleY="0.3300" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5024" Y="0.7322" />
                 <PreSize X="0.0000" Y="0.0000" />
@@ -435,7 +435,7 @@
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="250.8497" Y="36.1731" />
-                <Scale ScaleX="0.3500" ScaleY="0.3500" />
+                <Scale ScaleX="0.3300" ScaleY="0.3300" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.6968" Y="0.2495" />
                 <PreSize X="0.0000" Y="0.0000" />
@@ -445,7 +445,7 @@
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="250.8497" Y="106.1736" />
-                <Scale ScaleX="0.3500" ScaleY="0.3500" />
+                <Scale ScaleX="0.3300" ScaleY="0.3300" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.6968" Y="0.7322" />
                 <PreSize X="0.0000" Y="0.0000" />
@@ -455,7 +455,7 @@
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="320.8494" Y="36.1731" />
-                <Scale ScaleX="0.3500" ScaleY="0.3500" />
+                <Scale ScaleX="0.3300" ScaleY="0.3300" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.8912" Y="0.2495" />
                 <PreSize X="0.0000" Y="0.0000" />
@@ -465,7 +465,7 @@
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position X="320.8486" Y="106.1736" />
-                <Scale ScaleX="0.3500" ScaleY="0.3500" />
+                <Scale ScaleX="0.3300" ScaleY="0.3300" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.8912" Y="0.7322" />
                 <PreSize X="0.0000" Y="0.0000" />
