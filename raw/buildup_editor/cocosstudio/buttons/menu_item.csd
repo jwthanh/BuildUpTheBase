@@ -70,25 +70,25 @@
                 <PreSize X="0.0800" Y="0.3200" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="title_panel" ActionTag="1455973353" Tag="15" IconVisible="False" LeftMargin="181.9228" RightMargin="374.6028" TopMargin="24.9872" BottomMargin="138.4872" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="title_panel" ActionTag="1455973353" Tag="15" IconVisible="False" LeftMargin="181.9228" RightMargin="374.6028" TopMargin="29.9872" BottomMargin="133.4872" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="243.4744" Y="36.5256" />
                 <Children>
-                  <AbstractNodeData Name="title_lbl" ActionTag="-144678569" Tag="21" IconVisible="False" LeftMargin="-28.2774" RightMargin="-48.2482" TopMargin="-3.4006" BottomMargin="7.9261" LabelText="Fnt Text Label" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="title_lbl" ActionTag="-144678569" Tag="21" IconVisible="False" LeftMargin="-27.3308" RightMargin="-49.1948" TopMargin="2.5256" BottomMargin="2.0000" LabelText="Fnt Text Label" ctype="TextBMFontObjectData">
                     <Size X="320.0000" Y="32.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="-28.2774" Y="23.9261" />
+                    <Position X="-27.3308" Y="18.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-0.1161" Y="0.6551" />
+                    <PrePosition X="-0.1123" Y="0.4928" />
                     <PreSize X="1.3143" Y="0.8761" />
                     <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_32x4.fnt" Plist="" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="303.6600" Y="156.7500" />
+                <Position X="303.6600" Y="151.7500" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.3796" Y="0.7837" />
+                <PrePosition X="0.3796" Y="0.7588" />
                 <PreSize X="0.3043" Y="0.1826" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />
