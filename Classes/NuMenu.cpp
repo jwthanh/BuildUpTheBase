@@ -136,9 +136,9 @@ bool NuItem::init(cocos2d::Node* parent)
     // setup_text_node(this->count_lbl);
 
     //progress stuff for achievement buttons
-    this->current_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("progress_panel")->getChildByName("current_lbl"));
-    this->middle_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("progress_panel")->getChildByName("middle_lbl"));
-    this->total_lbl = dynamic_cast<cocos2d::ui::Text*>(button->getChildByName("progress_panel")->getChildByName("total_lbl"));
+    this->current_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("progress_panel")->getChildByName("current_lbl"));
+    this->middle_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("progress_panel")->getChildByName("middle_lbl"));
+    this->total_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("progress_panel")->getChildByName("total_lbl"));
     this->set_progress_panel_visible(false);
 
     this->schedule(CC_SCHEDULE_SELECTOR(NuItem::update_func));

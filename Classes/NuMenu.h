@@ -56,9 +56,9 @@ class NuItem : public cocos2d::ui::Widget
         cocos2d::ui::TextBMFont* count_lbl;
 
         //progress panel for achievements
-        cocos2d::ui::Text* current_lbl;
-        cocos2d::ui::Text* middle_lbl;
-        cocos2d::ui::Text* total_lbl;
+        cocos2d::ui::TextBMFont* current_lbl;
+        cocos2d::ui::TextBMFont* middle_lbl;
+        cocos2d::ui::TextBMFont* total_lbl;
 
         std::string _original_image_path;
 
