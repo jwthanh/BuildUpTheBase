@@ -70,37 +70,25 @@
                 <PreSize X="0.0800" Y="0.3200" />
                 <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="title_panel" ActionTag="1455973353" Tag="15" IconVisible="False" LeftMargin="185.1844" RightMargin="364.8156" TopMargin="51.0865" BottomMargin="118.9135" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="title_panel" ActionTag="1455973353" Tag="15" IconVisible="False" LeftMargin="178.6576" RightMargin="371.3424" TopMargin="28.2475" BottomMargin="141.7525" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="250.0000" Y="30.0000" />
                 <Children>
-                  <AbstractNodeData Name="title_lbl" ActionTag="-144678569" Tag="21" IconVisible="False" LeftMargin="-22.6120" RightMargin="33.6120" TopMargin="-0.5167" BottomMargin="6.5167" LabelText="Fnt Text Label" ctype="TextBMFontObjectData">
-                    <Size X="239.0000" Y="24.0000" />
-                    <AnchorPoint ScaleY="1.0000" />
-                    <Position X="-22.6120" Y="30.5167" />
+                  <AbstractNodeData Name="title_lbl" ActionTag="-144678569" Tag="21" IconVisible="False" LeftMargin="-21.5245" RightMargin="-48.4755" TopMargin="-12.1298" BottomMargin="10.1298" LabelText="Fnt Text Label" ctype="TextBMFontObjectData">
+                    <Size X="320.0000" Y="32.0000" />
+                    <AnchorPoint ScaleY="0.5000" />
+                    <Position X="-21.5245" Y="26.1298" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-0.0904" Y="1.0172" />
-                    <PreSize X="0.9560" Y="0.8000" />
-                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="title_lbl_ttf" ActionTag="2133409854" VisibleForFrame="False" Tag="16" IconVisible="False" LeftMargin="-22.6599" RightMargin="86.3376" TopMargin="1.5001" BottomMargin="5.4999" IsCustomSize="True" FontSize="19" LabelText="Example Item Title" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="186.3223" Y="23.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="70.5013" Y="16.9999" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.2820" Y="0.5667" />
-                    <PreSize X="0.7453" Y="0.7667" />
-                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                    <OutlineColor A="255" R="0" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
+                    <PrePosition X="-0.0861" Y="0.8710" />
+                    <PreSize X="1.2800" Y="1.0667" />
+                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_32x4.fnt" Plist="" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
-                <Position X="185.1844" Y="118.9135" />
-                <Scale ScaleX="2.0000" ScaleY="2.0000" />
+                <Position X="178.6576" Y="141.7525" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2315" Y="0.5946" />
+                <PrePosition X="0.2233" Y="0.7088" />
                 <PreSize X="0.3125" Y="0.1500" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />
@@ -110,32 +98,20 @@
               <AbstractNodeData Name="description_panel" ActionTag="-65130128" Tag="17" IconVisible="False" LeftMargin="185.1844" RightMargin="314.8156" TopMargin="129.4048" BottomMargin="25.5952" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="300.0000" Y="45.0000" />
                 <Children>
-                  <AbstractNodeData Name="description_lbl" ActionTag="-2076290452" Tag="22" IconVisible="False" LeftMargin="-20.1440" RightMargin="160.1440" TopMargin="3.8435" BottomMargin="25.1565" LabelText="Fnt Text Label" ctype="TextBMFontObjectData">
-                    <Size X="160.0000" Y="16.0000" />
+                  <AbstractNodeData Name="description_lbl" ActionTag="-2076290452" Tag="22" IconVisible="False" LeftMargin="-31.0209" RightMargin="11.0209" TopMargin="-42.9237" BottomMargin="55.9237" LabelText="Fnt Text Label" ctype="TextBMFontObjectData">
+                    <Size X="320.0000" Y="32.0000" />
                     <AnchorPoint ScaleY="1.0000" />
-                    <Position X="-20.1440" Y="41.1565" />
+                    <Position X="-31.0209" Y="87.9237" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-0.0671" Y="0.9146" />
-                    <PreSize X="0.5333" Y="0.3556" />
-                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_16x2.fnt" Plist="" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="description_lbl_ttf" ActionTag="2007594687" VisibleForFrame="False" UserData="300" Tag="20" IconVisible="False" LeftMargin="-21.9864" RightMargin="100.9564" TopMargin="0.1568" BottomMargin="0.8432" IsCustomSize="True" FontSize="16" LabelText="multline desc" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="221.0300" Y="44.0000" />
-                    <AnchorPoint />
-                    <Position X="-21.9864" Y="0.8432" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-0.0733" Y="0.0187" />
-                    <PreSize X="0.7368" Y="0.9778" />
-                    <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                    <OutlineColor A="255" R="0" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
+                    <PrePosition X="-0.1034" Y="1.9539" />
+                    <PreSize X="1.0667" Y="0.7111" />
+                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_32x4.fnt" Plist="" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
                 <Position X="185.1844" Y="25.5952" />
-                <Scale ScaleX="2.0000" ScaleY="2.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2315" Y="0.1280" />
                 <PreSize X="0.3750" Y="0.2250" />
@@ -147,15 +123,15 @@
               <AbstractNodeData Name="cost_panel" ActionTag="-1877787221" Tag="18" IconVisible="False" LeftMargin="683.6465" RightMargin="66.3535" TopMargin="51.0865" BottomMargin="118.9135" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="50.0000" Y="30.0000" />
                 <Children>
-                  <AbstractNodeData Name="cost_lbl" ActionTag="1978576715" Tag="23" IconVisible="False" LeftMargin="-79.5692" RightMargin="19.5692" TopMargin="2.6184" BottomMargin="11.3816" LabelText="123,456QuX" ctype="TextBMFontObjectData">
-                    <Size X="110.0000" Y="16.0000" />
-                    <AnchorPoint ScaleY="1.0000" />
-                    <Position X="-79.5692" Y="27.3816" />
+                  <AbstractNodeData Name="cost_lbl" ActionTag="1978576715" Tag="23" IconVisible="False" LeftMargin="-130.6945" RightMargin="-38.3055" TopMargin="-26.1838" BottomMargin="24.1838" LabelText="123,456QuX" ctype="TextBMFontObjectData">
+                    <Size X="219.0000" Y="32.0000" />
+                    <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+                    <Position X="88.3055" Y="40.1838" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="-1.5914" Y="0.9127" />
-                    <PreSize X="2.2000" Y="0.5333" />
-                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_16x2.fnt" Plist="" />
+                    <PrePosition X="1.7661" Y="1.3395" />
+                    <PreSize X="4.3800" Y="1.0667" />
+                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_32x3.fnt" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="cost_lbl_ttf" ActionTag="183630071" VisibleForFrame="False" Tag="19" IconVisible="False" LeftMargin="-73.0000" RightMargin="3.0000" TopMargin="1.5000" BottomMargin="5.5000" IsCustomSize="True" FontSize="19" LabelText="123,456QuX&#xA;" HorizontalAlignmentType="HT_Right" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="120.0000" Y="23.0000" />
@@ -169,15 +145,15 @@
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="count_lbl" ActionTag="941991515" Tag="24" IconVisible="False" LeftMargin="5.7068" RightMargin="8.2932" TopMargin="47.8403" BottomMargin="-33.8403" LabelText="x00" ctype="TextBMFontObjectData">
-                    <Size X="36.0000" Y="16.0000" />
+                  <AbstractNodeData Name="count_lbl" ActionTag="941991515" Tag="24" IconVisible="False" LeftMargin="-150.3964" RightMargin="-42.6036" TopMargin="80.9598" BottomMargin="-82.9598" LabelText="x123,456QuX" ctype="TextBMFontObjectData">
+                    <Size X="243.0000" Y="32.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="41.7068" Y="-25.8403" />
+                    <Position X="92.6036" Y="-66.9598" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.8341" Y="-0.8613" />
-                    <PreSize X="0.7200" Y="0.5333" />
-                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_16x2.fnt" Plist="" />
+                    <PrePosition X="1.8521" Y="-2.2320" />
+                    <PreSize X="4.8600" Y="1.0667" />
+                    <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_32x3.fnt" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="count_lbl_ttf" ActionTag="-1594456649" VisibleForFrame="False" Tag="125" IconVisible="False" LeftMargin="-73.0000" RightMargin="3.0000" TopMargin="43.5000" BottomMargin="-36.5000" IsCustomSize="True" FontSize="19" LabelText="x00&#xA;" HorizontalAlignmentType="HT_Right" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="120.0000" Y="23.0000" />
@@ -194,7 +170,7 @@
                 </Children>
                 <AnchorPoint />
                 <Position X="683.6465" Y="118.9135" />
-                <Scale ScaleX="1.9981" ScaleY="1.8664" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.8546" Y="0.5946" />
                 <PreSize X="0.0625" Y="0.1500" />
