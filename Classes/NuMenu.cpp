@@ -158,13 +158,13 @@ bool NuItem::init(cocos2d::Node* parent)
         //if theres no cost, move count up, widen description
         if (this->cost_lbl->getStringLength() == 0) {
             this->count_lbl->setPosition(this->cost_lbl->getPosition());
-            this->desc_lbl->setContentSize({ 300.0f, 44.0f });
+            dynamic_cast<cocos2d::Label*>(this->desc_lbl->getVirtualRenderer())->setDimensions(450, 0);
         };
 
         //if theres no count in place, widen description
         if (this->count_lbl->getStringLength() == 0)
         {
-            this->desc_lbl->setContentSize({ 300.0f, 44.0f });
+            dynamic_cast<cocos2d::Label*>(this->desc_lbl->getVirtualRenderer())->setDimensions(450, 0);
         }
     };
     this->schedule(reposition_labels, FPS_4, "reposition_labels");
