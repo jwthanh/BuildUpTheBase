@@ -72,15 +72,22 @@ NuItem* NuItem::create(cocos2d::ui::Widget* parent)
 
 void NuItem::init_orig_item()
 {
+
     NuItem::orig_button = static_cast<cocos2d::ui::Button*>(get_prebuilt_node_from_csb("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
     load_default_button_textures(NuItem::orig_button);
     NuItem::orig_button->retain();
     NuItem::orig_button->setSwallowTouches(false);
 
-    static_cast<ui::TextBMFont*>(NuItem::orig_button->getChildByName("title_lbl"))->setString(std::string("", 200));
-    static_cast<ui::TextBMFont*>(NuItem::orig_button->getChildByName("description_lbl"))->setString(std::string("", 200));
-    static_cast<ui::TextBMFont*>(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"))->setString(std::string("", 200));
-    static_cast<ui::TextBMFont*>(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"))->setString(std::string("", 200));
+    //sets a long blank string to save on allocations later
+    auto set_blank_chars = [](cocos2d::Node* textbmfont_node)
+    {
+        dynamic_cast<ui::TextBMFont*>(textbmfont_node)->setString(std::string("", 200));
+    };
+
+    set_blank_chars(NuItem::orig_button->getChildByName("title_lbl"));
+    set_blank_chars(NuItem::orig_button->getChildByName("description_lbl"));
+    set_blank_chars(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
+    set_blank_chars(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"));
 }
 
 bool NuItem::init(cocos2d::Node* parent)
