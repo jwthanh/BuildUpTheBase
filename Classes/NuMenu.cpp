@@ -70,30 +70,26 @@ NuItem* NuItem::create(cocos2d::ui::Widget* parent)
     }
 }
 
+void NuItem::init_orig_item()
+{
+    NuItem::orig_button = static_cast<cocos2d::ui::Button*>(get_prebuilt_node_from_csb("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
+    load_default_button_textures(NuItem::orig_button);
+    NuItem::orig_button->retain();
+    NuItem::orig_button->setSwallowTouches(false);
+
+    static_cast<ui::TextBMFont*>(NuItem::orig_button->getChildByName("title_lbl"))->setString(std::string("", 200));
+    static_cast<ui::TextBMFont*>(NuItem::orig_button->getChildByName("description_lbl"))->setString(std::string("", 200));
+    static_cast<ui::TextBMFont*>(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"))->setString(std::string("", 200));
+    static_cast<ui::TextBMFont*>(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"))->setString(std::string("", 200));
+}
+
 bool NuItem::init(cocos2d::Node* parent)
 {
     ui::Widget::init();
 
-    auto setup_text_node = [](ui::Text* text_node)
-    {
-        Label* renderer = (Label*)text_node->getVirtualRenderer();
-        set_aliasing(text_node, true);
-        renderer->setOverflow(Label::Overflow::SHRINK);
-        renderer->setTTFConfig(NuItem::ttf_config);
-    };
-
     if (NuItem::orig_button == NULL)
     {
-        NuItem::orig_button = static_cast<cocos2d::ui::Button*>(get_prebuilt_node_from_csb("editor/buttons/menu_item.csb")->getChildByName("menu_item_btn"));
-        load_default_button_textures(NuItem::orig_button);
-        NuItem::orig_button->retain();
-        NuItem::orig_button->setSwallowTouches(false);
-
-        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("title_lbl"))->setString(std::string("", 200));
-        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("description_lbl"))->setString(std::string("", 200));
-        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"))->setString(std::string("", 200));
-        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"))->setString(std::string("", 200));
-
+        NuItem::init_orig_item();
     };
 
     //clone orig button, background is still messed though
@@ -127,13 +123,9 @@ bool NuItem::init(cocos2d::Node* parent)
 
     this->item_icon = dynamic_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
     this->title_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("title_lbl"));
-    //setup_text_node(this->title_lbl);
     this->desc_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("description_lbl"));
-    //setup_text_node(this->desc_lbl);
     this->cost_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
-    // setup_text_node(this->cost_lbl);
     this->count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
-    // setup_text_node(this->count_lbl);
 
     //progress stuff for achievement buttons
     this->current_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("progress_panel")->getChildByName("current_lbl"));

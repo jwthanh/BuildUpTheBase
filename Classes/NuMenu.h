@@ -41,6 +41,7 @@ class NuItem : public cocos2d::ui::Widget
         static NuItem* create(cocos2d::ui::Widget* parent);
 
         NuItem(){};
+        static void init_orig_item();
         virtual bool init(cocos2d::Node* parent);
 
         static cocos2d::ui::Button* orig_button;
