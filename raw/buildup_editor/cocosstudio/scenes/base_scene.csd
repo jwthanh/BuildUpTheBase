@@ -483,26 +483,26 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="arena_kill_panel" ActionTag="-1152670340" Tag="71" IconVisible="False" LeftMargin="539.5058" RightMargin="200.0012" TopMargin="510.0000" BottomMargin="100.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-            <Size X="220.4930" Y="30.0000" />
+          <AbstractNodeData Name="arena_kill_panel" ActionTag="-1152670340" Tag="71" IconVisible="False" LeftMargin="473.2609" RightMargin="200.0024" TopMargin="510.0001" BottomMargin="99.9999" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+            <Size X="286.7367" Y="30.0000" />
             <Children>
-              <AbstractNodeData Name="arena_kill_lbl" ActionTag="421305276" Tag="108" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="-13.3803" RightMargin="-17.1267" TopMargin="3.6630" BottomMargin="2.3370" LabelText="Kills: 123,123Qad" ctype="TextBMFontObjectData">
+              <AbstractNodeData Name="arena_kill_lbl" ActionTag="421305276" Tag="108" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="19.7502" RightMargin="15.9865" TopMargin="3.6630" BottomMargin="2.3370" LabelText="Kills: 123,123Qad" ctype="TextBMFontObjectData">
                 <Size X="251.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5022" ScaleY="0.5000" />
-                <Position X="112.6719" Y="14.3370" />
+                <Position X="145.8024" Y="14.3370" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5110" Y="0.4779" />
-                <PreSize X="1.1384" Y="0.8000" />
+                <PrePosition X="0.5085" Y="0.4779" />
+                <PreSize X="0.8754" Y="0.8000" />
                 <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
               </AbstractNodeData>
             </Children>
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="649.7523" Y="115.0000" />
+            <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+            <Position X="759.9976" Y="114.9999" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6768" Y="0.1797" />
-            <PreSize X="0.2297" Y="0.0469" />
+            <PrePosition X="0.7917" Y="0.1797" />
+            <PreSize X="0.2987" Y="0.0469" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />

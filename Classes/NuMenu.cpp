@@ -89,8 +89,8 @@ bool NuItem::init(cocos2d::Node* parent)
         NuItem::orig_button->retain();
         NuItem::orig_button->setSwallowTouches(false);
 
-        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("title_panel")->getChildByName("title_lbl"))->setString(std::string("", 200));
-        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl"))->setString(std::string("", 200));
+        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("title_lbl"))->setString(std::string("", 200));
+        ((ui::TextBMFont*)NuItem::orig_button->getChildByName("description_lbl"))->setString(std::string("", 200));
         ((ui::TextBMFont*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl"))->setString(std::string("", 200));
         ((ui::TextBMFont*)NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl"))->setString(std::string("", 200));
 
@@ -126,9 +126,9 @@ bool NuItem::init(cocos2d::Node* parent)
     this->_original_image_path = "";
 
     this->item_icon = dynamic_cast<cocos2d::ui::ImageView*>(button->getChildByName("item_icon"));
-    this->title_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("title_panel")->getChildByName("title_lbl"));
+    this->title_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("title_lbl"));
     //setup_text_node(this->title_lbl);
-    this->desc_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("description_panel")->getChildByName("description_lbl"));
+    this->desc_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("description_lbl"));
     //setup_text_node(this->desc_lbl);
     this->cost_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
     // setup_text_node(this->cost_lbl);
@@ -151,9 +151,9 @@ bool NuItem::init(cocos2d::Node* parent)
         this->cost_lbl->setPosition(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("cost_lbl")->getPosition());
         this->count_lbl->setPosition(NuItem::orig_button->getChildByName("cost_panel")->getChildByName("count_lbl")->getPosition());
 
-        auto orig_desc_pos = NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl")->getPosition();
+        auto orig_desc_pos = NuItem::orig_button->getChildByName("description_lbl")->getPosition();
         this->desc_lbl->setPosition(orig_desc_pos);
-        auto orig_desc_size = NuItem::orig_button->getChildByName("description_panel")->getChildByName("description_lbl")->getContentSize();
+        auto orig_desc_size = NuItem::orig_button->getChildByName("description_lbl")->getContentSize();
         this->desc_lbl->setContentSize(orig_desc_size);
 
         //if theres no cost, move count up, widen description
