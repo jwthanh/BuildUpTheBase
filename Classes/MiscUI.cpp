@@ -219,6 +219,22 @@ void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val)
     set_aliasing(sprite, val);
 };
 
+
+void set_dimensions(cocos2d::Label* label, float width, float height)
+{
+    label->setDimensions(width, height);
+};
+
+void set_dimensions(cocos2d::ui::Text* text, float width, float height)
+{
+    set_dimensions(dynamic_cast<cocos2d::Label*>(text->getVirtualRenderer()), width, height);
+};
+
+void set_dimensions(cocos2d::ui::TextBMFont* text, float width, float height)
+{
+    set_dimensions(dynamic_cast<cocos2d::Label*>(text->getVirtualRenderer()), width, height);
+};
+
 void image_view_scale9_hack(cocos2d::ui::ImageView* img_view)
 {
     img_view->setScale9Enabled(!img_view->isScale9Enabled());

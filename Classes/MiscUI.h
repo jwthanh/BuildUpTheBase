@@ -66,6 +66,10 @@ void set_aliasing(cocos2d::ui::ImageView* img_view, bool val=true);
 void set_aliasing(cocos2d::ui::Button* button, bool val=true);
 void set_aliasing(cocos2d::ui::Scale9Sprite* scale9, bool val=true);
 
+void set_dimensions(cocos2d::Label* label, float width, float height);
+void set_dimensions(cocos2d::ui::Text* text, float width, float height);
+void set_dimensions(cocos2d::ui::TextBMFont* text, float width, float height);
+
 //FIXME (by upgrading cocos probably) this resets ImageView somehow so loadTexture doesn't crash
 // so we toggle it once to change it, then toggle it again to reset to default
 void image_view_scale9_hack(cocos2d::ui::ImageView* img_view);

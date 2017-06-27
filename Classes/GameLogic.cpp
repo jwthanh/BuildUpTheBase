@@ -629,11 +629,10 @@ void GameDirector::switch_to_city_menu()
     update_invested(0);
 
     auto invested_desc_lbl = dynamic_cast<ui::TextBMFont*>(invest_panel->getChildByName("invested_desc_lbl"));
-    dynamic_cast<cocos2d::Label*>(invested_desc_lbl->getVirtualRenderer())->setDimensions(550,0);
+    set_dimensions(invested_desc_lbl, 550, 0);
 
     //appeasement panel
     auto appeasement_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("appeasement_panel"));
-    dynamic_cast<cocos2d::Label*>(invested_desc_lbl->getVirtualRenderer())->setDimensions(550,0);
     auto appeasement_button = dynamic_cast<ui::Button*>(appeasement_panel->getChildByName("appeasement_button"));
     auto add_appeasements_cb = []()
     {
@@ -677,7 +676,7 @@ void GameDirector::switch_to_city_menu()
     update_appeasemented(0);
 
     auto appeasement_desc_lbl = dynamic_cast<ui::TextBMFont*>(appeasement_panel->getChildByName("appeasement_desc_lbl"));
-    dynamic_cast<cocos2d::Label*>(appeasement_desc_lbl->getVirtualRenderer())->setDimensions(550,0);
+    set_dimensions(appeasement_desc_lbl, 550, 0);
 
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
