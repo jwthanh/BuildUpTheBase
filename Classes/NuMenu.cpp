@@ -153,12 +153,10 @@ bool NuItem::init(cocos2d::Node* parent)
         auto orig_desc_pos = NuItem::orig_button->getChildByName("description_lbl")->getPosition();
         this->desc_lbl->setPosition(orig_desc_pos);
         auto orig_desc_size = NuItem::orig_button->getChildByName("description_lbl")->getContentSize();
-        this->desc_lbl->setContentSize(orig_desc_size);
 
         //if theres no cost, move count up, widen description
         if (this->cost_lbl->getStringLength() == 0) {
-            this->count_lbl->setPosition(this->cost_lbl->getPosition());
-            set_dimensions(this->count_lbl, 450, 0);
+            set_dimensions(this->desc_lbl, 450, 0);
         };
 
         //if theres no count in place, widen description
