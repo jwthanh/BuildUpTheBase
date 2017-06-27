@@ -558,7 +558,7 @@ void GameDirector::switch_to_city_menu()
     city_menu_scene_node->removeFromParent();
     auto panel = city_menu_scene_node->getChildByName("panel");
 
-    auto header = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
+    auto header = dynamic_cast<ui::TextBMFont*>(panel->getChildByName("title_lbl"));
     header->setTouchEnabled(true);
     auto toggle_display_stats = [](){
             auto director = Director::getInstance();
@@ -573,7 +573,7 @@ void GameDirector::switch_to_city_menu()
     set_default_key_handler(scene);
 
     //title
-    auto title_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("title_lbl"));
+    auto title_lbl = dynamic_cast<ui::TextBMFont*>(panel->getChildByName("title_lbl"));
     set_aliasing(title_lbl);
 
     //city name
@@ -620,7 +620,7 @@ void GameDirector::switch_to_city_menu()
     Label* invest_renderer = invest_button->getTitleRenderer();
     invest_renderer->setTTFConfig(ttf_config);
 
-    auto invested_lbl = dynamic_cast<ui::Text*>(invest_panel->getChildByName("invested_lbl"));
+    auto invested_lbl = dynamic_cast<ui::TextBMFont*>(invest_panel->getChildByName("invested_lbl"));
     auto update_invested = [invested_lbl](float dt) {
         res_count_t invested = GameLogic::getInstance()->get_city_investment();
         invested_lbl->setString("CI "+beautify_double(invested));
@@ -628,8 +628,12 @@ void GameDirector::switch_to_city_menu()
     invested_lbl->schedule(update_invested, FPS_10, "update_invested");
     update_invested(0);
 
+    auto invested_desc_lbl = dynamic_cast<ui::TextBMFont*>(invest_panel->getChildByName("invested_desc_lbl"));
+    dynamic_cast<cocos2d::Label*>(invested_desc_lbl->getVirtualRenderer())->setDimensions(550,0);
+
     //appeasement panel
     auto appeasement_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("appeasement_panel"));
+    dynamic_cast<cocos2d::Label*>(invested_desc_lbl->getVirtualRenderer())->setDimensions(550,0);
     auto appeasement_button = dynamic_cast<ui::Button*>(appeasement_panel->getChildByName("appeasement_button"));
     auto add_appeasements_cb = []()
     {
@@ -664,13 +668,16 @@ void GameDirector::switch_to_city_menu()
     Label* appeasement_renderer = appeasement_button->getTitleRenderer();
     appeasement_renderer->setTTFConfig(ttf_config);
 
-    auto appeased_lbl = dynamic_cast<ui::Text*>(appeasement_panel->getChildByName("appeased_lbl"));
+    auto appeased_lbl = dynamic_cast<ui::TextBMFont*>(appeasement_panel->getChildByName("appeased_lbl"));
     auto update_appeasemented = [appeased_lbl](float dt) {
         res_count_t appeasemented = (res_count_t)GameLogic::getInstance()->get_appeasements();
         appeased_lbl->setString("Souls "+beautify_double(appeasemented));
     };
     appeased_lbl->schedule(update_appeasemented, FPS_10, "update_appeasemented");
     update_appeasemented(0);
+
+    auto appeasement_desc_lbl = dynamic_cast<ui::TextBMFont*>(appeasement_panel->getChildByName("appeasement_desc_lbl"));
+    dynamic_cast<cocos2d::Label*>(appeasement_desc_lbl->getVirtualRenderer())->setDimensions(550,0);
 
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
@@ -700,9 +707,9 @@ void GameDirector::switch_to_miner_menu()
     std::shared_ptr<Miner> miner = std::make_shared<Miner>(miner_scene);
 
     auto info_panel = dynamic_cast<ui::Layout*>(miner_scene->getChildByName("info_panel"));
-    auto rails_count_lbl = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_rails_count"));
-    auto cart_count_lbl = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_cart_count"));
-    auto depth_display = dynamic_cast<ui::Text*>(info_panel->getChildByName("mine_depth_count"));
+    auto rails_count_lbl = dynamic_cast<ui::TextBMFont*>(info_panel->getChildByName("mine_rails_count"));
+    auto cart_count_lbl = dynamic_cast<ui::TextBMFont*>(info_panel->getChildByName("mine_cart_count"));
+    auto depth_display = dynamic_cast<ui::TextBMFont*>(info_panel->getChildByName("mine_depth_count"));
 
     auto tilemap_nav = miner_scene->getChildByName("tilemap_nav");
     for (cocos2d::Node* child : tilemap_nav->getChildren())
@@ -1024,7 +1031,7 @@ void GameDirector::switch_to_equipment_menu()
             EquipmentSlot* slot, std::string default_message
         ){
 
-        ui::Text* name_lbl = dynamic_cast<ui::Text*>(panel->getChildByName("name_lbl"));
+        ui::TextBMFont* name_lbl = dynamic_cast<ui::TextBMFont*>(panel->getChildByName("name_lbl"));
         ui::ImageView* item_img = dynamic_cast<ui::ImageView*>(panel->getChildByName("item_img"));
         image_view_scale9_hack(item_img);
 
@@ -1181,7 +1188,7 @@ void GameDirector::switch_to_bank_menu()
 
     {
         cocos2d::ui::Layout* total_coins_panel = dynamic_cast<cocos2d::ui::Layout*>(panel->getChildByName("total_coins_panel"));
-        cocos2d::ui::Text* total_coins_count_lbl = dynamic_cast<cocos2d::ui::Text*>(total_coins_panel->getChildByName("total_coins_count_lbl"));
+        cocos2d::ui::TextBMFont* total_coins_count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(total_coins_panel->getChildByName("total_coins_count_lbl"));
 
         auto update_total_coins = [total_coins_count_lbl](float dt) {
             std::string total_coins = beautify_double(BEATUP->get_total_coins());
@@ -1193,7 +1200,7 @@ void GameDirector::switch_to_bank_menu()
 
     {
         cocos2d::ui::Layout* banked_coins_panel = dynamic_cast<cocos2d::ui::Layout*>(panel->getChildByName("banked_coins_panel"));
-        cocos2d::ui::Text* banked_coins_count_lbl = dynamic_cast<cocos2d::ui::Text*>(banked_coins_panel->getChildByName("banked_coins_count_lbl"));
+        cocos2d::ui::TextBMFont* banked_coins_count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(banked_coins_panel->getChildByName("banked_coins_count_lbl"));
 
         auto update_banked_coins = [banked_coins_count_lbl](float dt) {
             std::string banked_coins = beautify_double(BANK->get_total_coins_banked());
@@ -1299,13 +1306,13 @@ void GameDirector::switch_to_achievement_menu()
     int completed = std::count_if(achievements.begin(), achievements.end(), is_completed);
     std::stringstream completed_ss;
     completed_ss << "Completed:\n" << completed;
-    ((ui::Text*)panel->getChildByName("unlocked_lbl"))->setString(completed_ss.str());
+    ((ui::TextBMFont*)panel->getChildByName("unlocked_lbl"))->setString(completed_ss.str());
 
     auto is_not_completed = [](const std::shared_ptr<BaseAchievement>& achievement) { return !achievement->get_completed(); };
     int remaining = std::count_if(achievements.begin(), achievements.end(), is_not_completed);
     std::stringstream not_completed_ss;
     not_completed_ss << "Remaining:\n" << remaining;
-    ((ui::Text*)panel->getChildByName("remaining_lbl"))->setString(not_completed_ss.str());
+    ((ui::TextBMFont*)panel->getChildByName("remaining_lbl"))->setString(not_completed_ss.str());
 
     for (std::shared_ptr<BaseAchievement>& achievement : achievements)
     {
