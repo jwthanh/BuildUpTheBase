@@ -582,11 +582,6 @@ void GameDirector::switch_to_city_menu()
     set_aliasing(city_name_input);
     city_name_input->setString(DataManager::get_string_from_data("city_name", ""));
 
-    //use outline from NuItems ttf_config
-    ui::UICCTextField* renderer = dynamic_cast<ui::UICCTextField*>(city_name_input->getVirtualRenderer());
-    cocos2d::Label* label = dynamic_cast<Label*>(renderer);
-    label->setTTFConfig(NuItem::ttf_config);
-
     auto is_bad_character = [](char character){
         return !(std::isalnum(character) || character == '_');
     };
@@ -629,7 +624,7 @@ void GameDirector::switch_to_city_menu()
     update_invested(0);
 
     auto invested_desc_lbl = dynamic_cast<ui::TextBMFont*>(invest_panel->getChildByName("invested_desc_lbl"));
-    set_dimensions(invested_desc_lbl, 550, 0);
+    set_dimensions(invested_desc_lbl, 600, 0);
 
     //appeasement panel
     auto appeasement_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("appeasement_panel"));
@@ -676,7 +671,7 @@ void GameDirector::switch_to_city_menu()
     update_appeasemented(0);
 
     auto appeasement_desc_lbl = dynamic_cast<ui::TextBMFont*>(appeasement_panel->getChildByName("appeasement_desc_lbl"));
-    set_dimensions(appeasement_desc_lbl, 550, 0);
+    set_dimensions(appeasement_desc_lbl, 600, 0);
 
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));

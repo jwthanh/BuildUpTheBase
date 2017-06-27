@@ -12,23 +12,23 @@
               <AbstractNodeData Name="city_name_panel" ActionTag="1593445582" Tag="633" IconVisible="False" LeftMargin="150.0000" RightMargin="150.0000" TopMargin="84.5322" BottomMargin="484.5322" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="660.0000" Y="70.9357" />
                 <Children>
-                  <AbstractNodeData Name="city_name_lbl" ActionTag="-1770781464" Tag="634" IconVisible="False" LeftMargin="11.7858" RightMargin="379.2142" TopMargin="22.5509" BottomMargin="24.3848" LabelText="Your city's name:" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="city_name_lbl" ActionTag="-1770781464" Tag="634" IconVisible="False" LeftMargin="11.7858" RightMargin="379.2142" TopMargin="22.9357" BottomMargin="24.0000" LabelText="Your city's name:" ctype="TextBMFontObjectData">
                     <Size X="269.0000" Y="24.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="11.7858" Y="36.3848" />
+                    <Position X="11.7858" Y="36.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0179" Y="0.5129" />
+                    <PrePosition X="0.0179" Y="0.5075" />
                     <PreSize X="0.4076" Y="0.3383" />
                     <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="city_name_textfield" ActionTag="-1399427436" Tag="635" IconVisible="False" LeftMargin="292.3124" RightMargin="8.6386" TopMargin="24.7782" BottomMargin="23.1575" TouchEnable="True" FontSize="20" IsCustomSize="True" LabelText="" PlaceHolderText="Name your base" MaxLengthEnable="True" MaxLengthText="50" ctype="TextFieldObjectData">
+                  <AbstractNodeData Name="city_name_textfield" ActionTag="-1399427436" Tag="635" IconVisible="False" LeftMargin="292.3123" RightMargin="8.6387" TopMargin="27.4357" BottomMargin="20.5000" TouchEnable="True" FontSize="20" IsCustomSize="True" LabelText="" PlaceHolderText="Nameless Base" MaxLengthEnable="True" MaxLengthText="50" ctype="TextFieldObjectData">
                     <Size X="359.0490" Y="23.0000" />
-                    <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="651.3614" Y="34.6575" />
+                    <AnchorPoint ScaleY="0.5000" />
+                    <Position X="292.3123" Y="32.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.9869" Y="0.4886" />
+                    <PrePosition X="0.4429" Y="0.4511" />
                     <PreSize X="0.5440" Y="0.3242" />
                     <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
                   </AbstractNodeData>
@@ -84,11 +84,11 @@
                   </AbstractNodeData>
                   <AbstractNodeData Name="invested_desc_lbl" ActionTag="884468073" Tag="39" IconVisible="False" LeftMargin="-432.1359" RightMargin="-453.8641" TopMargin="105.9894" BottomMargin="28.0106" LabelText="Money invested into the city can be spent on increasing the coin storage capacity. Scrap items to increase the value invested in the city." ctype="TextBMFontObjectData">
                     <Size X="1546.0000" Y="16.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="340.8641" Y="36.0106" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
+                    <Position X="340.8641" Y="44.0106" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5165" Y="0.2401" />
+                    <PrePosition X="0.5165" Y="0.2934" />
                     <PreSize X="2.3424" Y="0.1067" />
                     <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_16x2.fnt" Plist="" />
                   </AbstractNodeData>
@@ -104,27 +104,27 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="appeasement_panel" ActionTag="-1686059654" Tag="23" IconVisible="False" LeftMargin="150.0000" RightMargin="150.0000" TopMargin="335.0000" BottomMargin="155.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
-                <Size X="660.0000" Y="150.0000" />
+              <AbstractNodeData Name="appeasement_panel" ActionTag="-1686059654" Tag="23" IconVisible="False" LeftMargin="150.0000" RightMargin="150.0000" TopMargin="335.0000" BottomMargin="146.8547" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="660.0000" Y="158.1453" />
                 <Children>
-                  <AbstractNodeData Name="appeasement_lbl" ActionTag="-713331910" Tag="24" IconVisible="False" LeftMargin="34.0000" RightMargin="414.0000" TopMargin="8.0000" BottomMargin="118.0000" LabelText="Appease gods" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="appeasement_lbl" ActionTag="-713331910" Tag="24" IconVisible="False" LeftMargin="33.9999" RightMargin="414.0001" TopMargin="9.1452" BottomMargin="125.0001" LabelText="Appease gods" ctype="TextBMFontObjectData">
                     <Size X="212.0000" Y="24.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="140.0000" Y="130.0000" />
+                    <Position X="139.9999" Y="137.0001" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.2121" Y="0.8667" />
-                    <PreSize X="0.3212" Y="0.1600" />
+                    <PrePosition X="0.2121" Y="0.8663" />
+                    <PreSize X="0.3212" Y="0.1518" />
                     <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="appeasement_button" ActionTag="246070718" Tag="25" IconVisible="False" LeftMargin="287.1991" RightMargin="6.0701" TopMargin="8.8849" BottomMargin="80.7115" TouchEnable="True" FontSize="14" ButtonText="1 Soul" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="appeasement_button" ActionTag="246070718" Tag="25" IconVisible="False" LeftMargin="287.1990" RightMargin="6.0701" TopMargin="10.9434" BottomMargin="86.7983" TouchEnable="True" FontSize="14" ButtonText="1 Soul" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="366.7309" Y="60.4035" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="470.5645" Y="110.9133" />
+                    <Position X="470.5645" Y="117.0001" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.7130" Y="0.7394" />
-                    <PreSize X="0.5557" Y="0.4027" />
+                    <PrePosition X="0.7130" Y="0.7398" />
+                    <PreSize X="0.5557" Y="0.3819" />
                     <TextColor A="255" R="255" G="255" B="255" />
                     <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
                     <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
@@ -132,33 +132,33 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="appeased_lbl" ActionTag="-83459881" Tag="26" IconVisible="False" LeftMargin="50.5450" RightMargin="445.4550" TopMargin="42.8443" BottomMargin="83.1557" LabelText="123,456QaD" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="appeased_lbl" ActionTag="-83459881" Tag="26" IconVisible="False" LeftMargin="50.5450" RightMargin="445.4550" TopMargin="45.1453" BottomMargin="89.0000" LabelText="123,456QaD" ctype="TextBMFontObjectData">
                     <Size X="164.0000" Y="24.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="132.5450" Y="95.1557" />
+                    <Position X="132.5450" Y="101.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.2008" Y="0.6344" />
-                    <PreSize X="0.2485" Y="0.1600" />
+                    <PrePosition X="0.2008" Y="0.6387" />
+                    <PreSize X="0.2485" Y="0.1518" />
                     <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="appeasement_desc_lbl" ActionTag="37638646" Tag="210" IconVisible="False" LeftMargin="-525.1359" RightMargin="-526.8641" TopMargin="95.9895" BottomMargin="38.0105" LabelText="With every ten souls gathered from The Arena comes increased favour from those watching. Items scavenged from The Dump will increase in level and value." ctype="TextBMFontObjectData">
-                    <Size X="1712.0000" Y="16.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="330.8641" Y="46.0105" />
+                  <AbstractNodeData Name="appeasement_desc_lbl" ActionTag="37638646" Tag="210" IconVisible="False" LeftMargin="-488.1361" RightMargin="-509.8639" TopMargin="103.1453" BottomMargin="39.0000" LabelText="Every ten souls gathered from The Arena comes increased favour from those watching. Items scavenged from The Dump will increase in level and value." ctype="TextBMFontObjectData">
+                    <Size X="1658.0000" Y="16.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
+                    <Position X="340.8639" Y="55.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5013" Y="0.3067" />
-                    <PreSize X="2.5939" Y="0.1067" />
+                    <PrePosition X="0.5165" Y="0.3478" />
+                    <PreSize X="2.5121" Y="0.1012" />
                     <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_16x2.fnt" Plist="" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="480.0000" Y="230.0000" />
+                <Position X="480.0000" Y="225.9274" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.3594" />
-                <PreSize X="0.6875" Y="0.2344" />
+                <PrePosition X="0.5000" Y="0.3530" />
+                <PreSize X="0.6875" Y="0.2471" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />
                 <EndColor A="255" R="255" G="255" B="255" />
