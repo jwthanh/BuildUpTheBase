@@ -521,15 +521,15 @@
                 <PreSize X="0.6000" Y="0.4500" />
                 <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="harvester_progress_lbl" ActionTag="1421967100" Tag="82" IconVisible="False" LeftMargin="1.9588" RightMargin="206.0412" TopMargin="6.8925" BottomMargin="9.1075" LabelText="Item find:" ctype="TextBMFontObjectData">
-                <Size X="152.0000" Y="24.0000" />
+              <AbstractNodeData Name="harvester_progress_lbl" ActionTag="1421967100" Tag="82" IconVisible="False" LeftMargin="1.9588" RightMargin="230.0412" TopMargin="8.8925" BottomMargin="11.1075" LabelText="Item find:" ctype="TextBMFontObjectData">
+                <Size X="128.0000" Y="20.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="1.9588" Y="21.1075" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.0054" Y="0.5277" />
-                <PreSize X="0.4222" Y="0.6000" />
-                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
+                <PreSize X="0.3556" Y="0.5000" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_20x2.fnt" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint />
@@ -549,13 +549,13 @@
               <AbstractNodeData Name="popup_panel_inner" ActionTag="-1343836221" Tag="121" IconVisible="False" LeftMargin="25.8600" RightMargin="34.1400" TopMargin="12.5000" BottomMargin="12.5000" ClipAble="False" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="900.0000" Y="75.0000" />
                 <Children>
-                  <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="87.4620" RightMargin="-1523.4619" TopMargin="47.8504" BottomMargin="3.1496" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="popup_lbl" ActionTag="1598524311" Tag="122" IconVisible="False" LeftMargin="92.4621" RightMargin="-1528.4622" TopMargin="26.8504" BottomMargin="24.1496" LabelText="HAHA Your hero died you piece of happiness, maybe you'd like to break up into to lines, but you wouldn't know shit about doing that would you" ctype="TextBMFontObjectData">
                     <Size X="2336.0000" Y="24.0000" />
-                    <AnchorPoint />
-                    <Position X="87.4620" Y="3.1496" />
+                    <AnchorPoint ScaleY="0.5000" />
+                    <Position X="92.4621" Y="36.1496" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0972" Y="0.0420" />
+                    <PrePosition X="0.1027" Y="0.4820" />
                     <PreSize X="2.5956" Y="0.3200" />
                     <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                   </AbstractNodeData>

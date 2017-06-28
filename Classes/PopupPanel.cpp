@@ -25,6 +25,7 @@ PopupPanel::PopupPanel(cocos2d::ui::Layout* panel) :
     this->initial_y = panel->getPositionY();
 
     auto label = dynamic_cast<cocos2d::ui::TextBMFont*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
+    set_dimensions(label, 800, 0);
     set_aliasing(label);
 
     //default touch handler
@@ -120,13 +121,13 @@ void PopupPanel::animate_close()
 
 std::string PopupPanel::get_string()
 {
-    auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
+    auto label = dynamic_cast<cocos2d::ui::TextBMFont*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
     return label->getString();
 }
 
 void PopupPanel::set_string(std::string message)
 {
-    auto label = dynamic_cast<cocos2d::ui::Text*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
+    auto label = dynamic_cast<cocos2d::ui::TextBMFont*>(this->_layout->getChildByName("popup_panel_inner")->getChildByName("popup_lbl"));
     label->setString(message);
 }
 
