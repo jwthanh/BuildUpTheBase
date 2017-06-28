@@ -62,6 +62,7 @@ void GameProgress::update(float dt, City* city)
 
         this->_building_unlock_map[building] = is_unlocked;
 
+        //add the unlocking conditions for specific buildings and their tabs
         if (building->type == BuildingTypes::TheWorkshop) {
             if (building->get_building_level() >= 1) {
                 this->_building_tab_map[building][TabTypes::DetailTab] = true;
@@ -70,6 +71,12 @@ void GameProgress::update(float dt, City* city)
             if (this->_building_unlock_map[city->building_by_type(BuildingTypes::TheWorkshop)] == true) {
                 this->_building_tab_map[building][TabTypes::DetailTab] = true;
             }
+        } else if (building->type == BuildingTypes::TheUnderscape) {
+            if (this->_building_unlock_map[city->building_by_type(BuildingTypes::TheArena)] == true) {
+                this->_building_tab_map[building][TabTypes::DetailTab] = true;
+            }
+        } else if (building->type == BuildingTypes::TheArena) {
+            this->_building_tab_map[building][TabTypes::DetailTab] = true;
         };
     }
 }

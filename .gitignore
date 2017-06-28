@@ -36,6 +36,8 @@ proj.win32/Debug.win32/beatupisis.log
 
 */bin/*
 */obj/*
+*.obj
+*.o.d$
 
 *tags*
 
