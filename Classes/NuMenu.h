@@ -7,6 +7,7 @@
 #include "constants.h"
 
 #include "ui/UIWidget.h"
+#include "HouseBuilding.h"
 
 class PlainShopItem;
 class Fist;
@@ -120,6 +121,10 @@ class TargetRecipeNuItem : public BuildingNuItem
         static TargetRecipeNuItem* create(cocos2d::ui::Widget* parent, spBuilding building);
 
         spRecipe recipe;
+
+        /// used to check if the requirements have been met, ie unlocked the Arena for weaken enemies crafting recipe
+        BuildingTypes required_building_type;
+        bool get_is_locked() const;
 
         virtual void other_init(spRecipe recipe);
         virtual void update_func(float dt) override;

@@ -557,6 +557,8 @@ void SideListView::setup_detail_listview()
                 std::shared_ptr<void> object;
                 DetailType type;
                 MenuItemConfig config;
+                BuildingTypes required_building_unlock;
+
             };
 
             std::vector<DetailConfig> nuitems_config;
@@ -978,7 +980,9 @@ void SideListView::setup_detail_listview()
                         weaken_flesh->name,
                         weaken_flesh->description,
                         ""
-                    }});
+                    },
+                    BuildingTypes::TheArena
+                });
             };
 
             int i = 0;
@@ -1000,6 +1004,7 @@ void SideListView::setup_detail_listview()
                 }
                 else if (config.type == DetailType::ChangeTargetRecipe) {
                     menu_item = TargetRecipeNuItem::create(listview, building);
+                    dynamic_cast<TargetRecipeNuItem*>(menu_item)->required_building_type = config.required_building_unlock;
                 }
                 else if (config.type == DetailType::UpgradeWalletCapTech) {
                     menu_item = UpgradeWalletNuItem::create(listview, building);

@@ -615,7 +615,16 @@ void TargetRecipeNuItem::update_func(float dt)
 
     spRecipe recipe = this->recipe;
     this->set_description(recipe->description);
+
+    //hide or show based on whether its locked
+    //TODO make it show as locked instead
+    this->button->setVisible(this->get_is_locked());
 }
+
+bool TargetRecipeNuItem::get_is_locked() const
+{
+    return GameProgress::getInstance()->get_building_unlock_map().at(BUILDUP->city->building_by_type(this->required_building_type));
+};
 
 UpgradeWalletNuItem* UpgradeWalletNuItem::create(cocos2d::ui::Widget* parent, spBuilding building)
 {
