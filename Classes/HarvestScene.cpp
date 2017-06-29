@@ -1336,7 +1336,8 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 std::string message = ss.str();
 
                 auto floating_label = do_float();
-                floating_label->setTextColor(Color4B(text_color));
+                floating_label->setString(message);
+                floating_label->setColor(text_color);
 
                 floating_start_pos.x += cocos2d::rand_minus1_1()*30.0f;
                 floating_start_pos.y += cocos2d::rand_0_1()*50.0f;
