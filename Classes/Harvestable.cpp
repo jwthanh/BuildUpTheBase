@@ -1074,6 +1074,7 @@ void FightingHarvestable::animate_clip()
 
     std::string floating_msg = ss.str();
     auto floating_label = do_float();
+    floating_label->setString(floating_msg);
 
     if (this->is_critical_hit)
     {
