@@ -373,7 +373,10 @@ void SideListView::setup_worker_listview()
             };
 
             if (building->name == "The Underscape"){
-                nuitems_config.insert(nuitems_config.begin() + 1, { WorkerType::Consumer, "consumer_item_one", Worker::SubType::One });
+                //if the arena is unlocked, add the consumer
+                if (GameProgress::getInstance()->get_building_unlock_map().at(BUILDUP->city->building_by_type(BuildingTypes::TheArena))) {
+                    nuitems_config.insert(nuitems_config.begin() + 1, { WorkerType::Consumer, "consumer_item_one", Worker::SubType::One });
+                };
             };
 
             int i = 0;
