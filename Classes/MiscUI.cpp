@@ -29,7 +29,8 @@ Label* do_float(float x, float x_variation, float y, float y_variation, float du
     duration += (CCRANDOM_MINUS1_1()*0.30f*duration);
     auto move_action = EaseIn::create(BezierBy::create(duration, config), 2.3f);
 
-    label->runAction(TintTo::create(duration*6, Color3B::RED));
+    //idk why this was a thing anyway, pretty sure I didn't like it much
+    // label->runAction(TintTo::create(duration*6, Color3B::RED));
 
     label->setScale(0.10f);
     label->runAction(Sequence::createWithTwoActions(

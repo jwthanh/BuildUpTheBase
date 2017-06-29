@@ -1078,7 +1078,7 @@ void FightingHarvestable::animate_clip()
 
     if (this->is_critical_hit)
     {
-        floating_label->setTextColor(Color4B::ORANGE);
+        floating_label->setColor(Color3B::ORANGE);
     }
 
     auto fighter_node = dynamic_cast<FighterNode*>(this->getChildByName("fighter_node"));
