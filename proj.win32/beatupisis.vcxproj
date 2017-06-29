@@ -202,7 +202,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Modal.cpp" />
     <ClCompile Include="..\Classes\Network.cpp" />
     <ClCompile Include="..\Classes\NodeBuilder.cpp" />
-    <ClCompile Include="..\Classes\NuMenu.cpp" />
+    <ClCompile Include="..\Classes\NuItem.cpp" />
     <ClCompile Include="..\Classes\PopupPanel.cpp" />
     <ClCompile Include="..\Classes\ProgressBar.cpp" />
     <ClCompile Include="..\Classes\Ingredients.cpp" />
@@ -284,7 +284,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Nameable.h" />
     <ClInclude Include="..\Classes\Network.h" />
     <ClInclude Include="..\Classes\NodeBuilder.h" />
-    <ClInclude Include="..\Classes\NuMenu.h" />
+    <ClInclude Include="..\Classes\NuItem.h" />
     <ClInclude Include="..\Classes\PopupPanel.h" />
     <ClInclude Include="..\Classes\ProgressBar.h" />
     <ClInclude Include="..\Classes\progress\GameProgress.h" />

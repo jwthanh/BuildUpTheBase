@@ -27,7 +27,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    hellocpp/CricketAndroidJni.cpp\
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/Beatup.cpp \
-                   ../../Classes/NuMenu.cpp \
+                   ../../Classes/NuItem.cpp \
                    ../../Classes/HarvestScene.cpp \
                    ../../Classes/BuildingsSideBar.cpp \
                    ../../Classes/Harvestable.cpp \

@@ -11,7 +11,7 @@
 #include "HarvestableManager.h"
 
 #include "GameLogic.h"
-#include "NuMenu.h"
+#include "NuItem.h"
 #include "Beatup.h"
 #include "Util.h"
 #include "StaticData.h"

@@ -2,7 +2,7 @@
 
 #include "Util.h"
 #include "constants.h"
-#include "NuMenu.h"
+#include "NuItem.h"
 
 #include "2d/CCSprite.h"
 #include "2d/CCProgressTimer.h"

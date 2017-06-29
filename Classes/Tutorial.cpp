@@ -16,7 +16,7 @@
 #include "Buildup.h"
 #include "Util.h"
 #include "MiscUI.h"
-#include "NuMenu.h"
+#include "NuItem.h"
 #include "DataManager.h"
 #include "Worker.h"
 
