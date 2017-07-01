@@ -40,6 +40,9 @@
     <Filter Include="main_loop">
       <UniqueIdentifier>{56aecfdc-1a13-4fd3-98c3-0dcef1146b4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="progress">
+      <UniqueIdentifier>{1e0998ad-c761-4c71-a0c8-a2283d0a0671}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -144,7 +147,6 @@
     <ClCompile Include="..\Classes\Gestures\TapGestureRecognizer.cpp">
       <Filter>Gestures</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\progress\GameProgress.cpp" />
     <ClCompile Include="..\Classes\main_loop\MainLoop.cpp">
       <Filter>main_loop</Filter>
     </ClCompile>
@@ -152,6 +154,12 @@
       <Filter>main_loop</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\NuItem.cpp" />
+    <ClCompile Include="..\Classes\progress\NumberScaling.cpp">
+      <Filter>progress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\progress\GameProgress.cpp">
+      <Filter>progress</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -282,7 +290,6 @@
     <ClInclude Include="..\Classes\Gestures\TapGestureRecognizer.h">
       <Filter>Gestures</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\progress\GameProgress.h" />
     <ClInclude Include="..\Classes\enums\tab_types.h">
       <Filter>enums</Filter>
     </ClInclude>
@@ -293,6 +300,12 @@
       <Filter>main_loop</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\NuItem.h" />
+    <ClInclude Include="..\Classes\progress\NumberScaling.h">
+      <Filter>progress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\progress\GameProgress.h">
+      <Filter>progress</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

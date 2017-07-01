@@ -76,6 +76,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/banking/Bank.cpp \
                    ../../Classes/BuildingDetailScene.cpp \
                    ../../Classes/progress/GameProgress.cpp \
+                   ../../Classes/progress/NumberScaling.cpp \
                    ../../Classes/main_loop/MainLoop.cpp \
                    ../../Classes/main_loop/SimulateMainLoop.cpp \
 \

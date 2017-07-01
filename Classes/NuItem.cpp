@@ -39,6 +39,7 @@
 #include "progress/GameProgress.h"
 #include "ui/UITextBMFont.h"
 #include "2d/CCLabel.h"
+#include "progress/NumberScaling.h"
 
 
 USING_NS_CC;
@@ -783,16 +784,15 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
     update_title_and_desc(0.0f);
     this->schedule(update_title_and_desc, FPS_60, "update_title_and_desc");
 
-    res_count_t base_shop_cost = BuildingTypes_to_base_upgrade_cost.at(this->building->type);
-    res_count_t shop_cost = scale_number(base_shop_cost, static_cast<res_count_t>(this->building_level)-1.0L, 3.5L);
+    res_count_t shop_cost = get_building_upgrade_cost(this->building->type, static_cast<res_count_t>(this->building_level));
     this->_shop_cost = shop_cost;
 
-    auto custom_update_func = [this, base_shop_cost](float dt) {
+    auto custom_update_func = [this](float dt) {
         if (this->building->get_building_level() == this->building_level) {
             this->building_level++;
 
             //update shop cost with new level
-            res_count_t shop_cost = scale_number(base_shop_cost, static_cast<res_count_t>(this->building_level)-1.0L, 3.5L);
+            res_count_t shop_cost = get_building_upgrade_cost(this->building->type, static_cast<res_count_t>(this->building_level));
             this->_shop_cost = shop_cost;
         };
 
