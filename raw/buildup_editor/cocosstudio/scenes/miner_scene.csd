@@ -35,77 +35,65 @@
           <AbstractNodeData Name="info_panel" ActionTag="-621482901" Tag="20" IconVisible="False" LeftMargin="760.0000" BottomMargin="440.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="mine_rails_lbl" ActionTag="-1424291244" Tag="113" IconVisible="False" LeftMargin="-1.0597" RightMargin="1.0597" TopMargin="12.7188" BottomMargin="163.2812" IsCustomSize="True" FontSize="20" LabelText="Mine Rails" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="200.0000" Y="24.0000" />
+              <AbstractNodeData Name="mine_rails_lbl" ActionTag="-1424291244" Tag="113" IconVisible="False" LeftMargin="32.4403" RightMargin="34.5597" TopMargin="14.7188" BottomMargin="165.2812" LabelText="Mine Rails" ctype="TextBMFontObjectData">
+                <Size X="133.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="98.9403" Y="175.2812" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4947" Y="0.8764" />
-                <PreSize X="1.0000" Y="0.1200" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="26" G="26" B="26" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
+                <PreSize X="0.6650" Y="0.1000" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_20x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="mine_rails_count" ActionTag="1431279639" Tag="114" IconVisible="False" LeftMargin="-0.0600" RightMargin="0.0600" TopMargin="41.7194" BottomMargin="134.2806" IsCustomSize="True" FontSize="20" LabelText="XXX,XXXQaD" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="200.0000" Y="24.0000" />
+              <AbstractNodeData Name="mine_rails_count" ActionTag="1431279639" Tag="114" IconVisible="False" LeftMargin="28.4400" RightMargin="28.5600" TopMargin="43.7194" BottomMargin="136.2806" LabelText="XXX,XXXQaD" ctype="TextBMFontObjectData">
+                <Size X="143.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="99.9400" Y="146.2806" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4997" Y="0.7314" />
-                <PreSize X="1.0000" Y="0.1200" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="26" G="26" B="26" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
+                <PreSize X="0.7150" Y="0.1000" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_20x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="mine_depth_lbl" ActionTag="5292265" Tag="141" IconVisible="False" LeftMargin="-1.0597" RightMargin="1.0597" TopMargin="128.7186" BottomMargin="47.2814" IsCustomSize="True" FontSize="20" LabelText="Depth" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="200.0000" Y="24.0000" />
+              <AbstractNodeData Name="mine_depth_lbl" ActionTag="5292265" Tag="141" IconVisible="False" LeftMargin="61.4403" RightMargin="63.5597" TopMargin="130.7186" BottomMargin="49.2814" LabelText="Depth" ctype="TextBMFontObjectData">
+                <Size X="75.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="98.9403" Y="59.2814" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4947" Y="0.2964" />
-                <PreSize X="1.0000" Y="0.1200" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="26" G="26" B="26" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
+                <PreSize X="0.3750" Y="0.1000" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_20x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="mine_depth_count" ActionTag="1956838979" Tag="142" IconVisible="False" LeftMargin="-0.0598" RightMargin="0.0598" TopMargin="157.7192" BottomMargin="18.2808" IsCustomSize="True" FontSize="20" LabelText="XXX,XXXQaD" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="200.0000" Y="24.0000" />
+              <AbstractNodeData Name="mine_depth_count" ActionTag="1956838979" Tag="142" IconVisible="False" LeftMargin="28.4402" RightMargin="28.5598" TopMargin="159.7192" BottomMargin="20.2808" LabelText="XXX,XXXQaD" ctype="TextBMFontObjectData">
+                <Size X="143.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="99.9402" Y="30.2808" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4997" Y="0.1514" />
-                <PreSize X="1.0000" Y="0.1200" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="26" G="26" B="26" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
+                <PreSize X="0.7150" Y="0.1000" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_20x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="mine_cart_lbl" ActionTag="876096813" Tag="112" IconVisible="False" LeftMargin="-1.0596" RightMargin="1.0596" TopMargin="70.7187" BottomMargin="105.2813" IsCustomSize="True" FontSize="20" LabelText="Minecarts&#xA;" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="200.0000" Y="24.0000" />
+              <AbstractNodeData Name="mine_cart_lbl" ActionTag="876096813" Tag="112" IconVisible="False" LeftMargin="33.9404" RightMargin="36.0596" TopMargin="72.7187" BottomMargin="87.2813" LabelText="Minecarts&#xA;" ctype="TextBMFontObjectData">
+                <Size X="130.0000" Y="40.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="98.9404" Y="117.2813" />
+                <Position X="98.9404" Y="107.2813" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4947" Y="0.5864" />
-                <PreSize X="1.0000" Y="0.1200" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="26" G="26" B="26" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
+                <PrePosition X="0.4947" Y="0.5364" />
+                <PreSize X="0.6500" Y="0.2000" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_20x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="mine_cart_count" ActionTag="208944224" Tag="113" IconVisible="False" LeftMargin="-0.0597" RightMargin="0.0597" TopMargin="99.7193" BottomMargin="76.2807" IsCustomSize="True" FontSize="20" LabelText="XXX,XXXQaD" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="200.0000" Y="24.0000" />
+              <AbstractNodeData Name="mine_cart_count" ActionTag="208944224" Tag="113" IconVisible="False" LeftMargin="28.4403" RightMargin="28.5597" TopMargin="101.7193" BottomMargin="78.2807" LabelText="XXX,XXXQaD" ctype="TextBMFontObjectData">
+                <Size X="143.0000" Y="20.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="99.9403" Y="88.2807" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4997" Y="0.4414" />
-                <PreSize X="1.0000" Y="0.1200" />
-                <FontResource Type="Normal" Path="pixelmix.ttf" Plist="" />
-                <OutlineColor A="255" R="26" G="26" B="26" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
+                <PreSize X="0.7150" Y="0.1000" />
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_20x2.fnt" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint />
