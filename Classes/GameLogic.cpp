@@ -1308,10 +1308,14 @@ void GameDirector::switch_to_bank_menu()
             auto converted_touch = nuitem->button->getParent()->convertTouchToNodeSpace(touch);
             if (bbox.containsPoint(converted_touch))
             {
-                do_vibrate(5);
-                nuitem->button->schedule(config.bank_callback, FPS_60, "bank_callback");
-                SoundLibrary::getInstance()->play_general_widget_touched();
-                return true;
+                if ( nuitem->button->isEnabled()) {
+                    do_vibrate(5);
+                    nuitem->button->schedule(config.bank_callback, FPS_60, "bank_callback");
+                    SoundLibrary::getInstance()->play_general_widget_touched();
+                    return true;
+                } else {
+                    do_vibrate(1);
+                }
 
             }
             return false;
