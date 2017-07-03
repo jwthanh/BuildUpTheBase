@@ -59,7 +59,7 @@ const std::map<BuildingTypes, res_count_t> BuildingTypes_to_base_upgrade_cost = 
     { BuildingTypes::TheArena      , 10000.0L },
     { BuildingTypes::TheWorkshop   , 100000.0L },
     { BuildingTypes::TheMarketplace, 1000000.0L },
-    { BuildingTypes::TheMine       , 10000000.0L },
+    { BuildingTypes::TheMine       , 5000000.0L },
     { BuildingTypes::TheGraveyard  , 100000000.0L },
     { BuildingTypes::TheForest     , 1000000000.0L }
 };
