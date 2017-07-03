@@ -1139,17 +1139,49 @@ void GameDirector::switch_to_reset_menu()
 };
 
 float withdraw_ticks = 0.0f;
+res_count_t withdraw_current_count = 0.0f;
 void bank_withdraw_callback(float dt)
 {
+    res_count_t current_withdraw_value;
+
     //special case to immediately do something
     if (withdraw_ticks == 0.0f) {
-        BANK->transfer_from_bank(10);
+        current_withdraw_value = 10;
+        BANK->transfer_from_bank(current_withdraw_value);
+        //hardcode to this instead of adding so it resets from whatever it used to be
+        withdraw_current_count = current_withdraw_value;
     }
 
     withdraw_ticks += dt;
     if (withdraw_ticks > 0.75f) {
-        BANK->transfer_from_bank(std::pow(withdraw_ticks, withdraw_ticks));
+        current_withdraw_value = std::pow(withdraw_ticks, withdraw_ticks);
+        BANK->transfer_from_bank(current_withdraw_value);
+
+        //cheat by only adding the visible number if there was enough space for it. really this should be checking the difference before and after adding the coins but whatever
+        if (BEATUP->get_coin_storage_left() > 0.0 && BANK->get_total_coins_banked() > 0.0)
+        {
+            withdraw_current_count += current_withdraw_value;
+        }
     }
+
+    auto banking_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("panel");
+    if (banking_scene)
+    {
+        //update string
+        cocos2d::ui::TextBMFont* coins_added_txt = dynamic_cast<cocos2d::ui::TextBMFont*>(banking_scene->getChildByName("total_coins_panel")->getChildByName("total_coins_added"));
+        coins_added_txt->setString(beautify_double(withdraw_current_count));
+
+        //reset animations
+        coins_added_txt->stopAllActions();
+        coins_added_txt->setVisible(true);
+        coins_added_txt->setOpacity(255);
+        coins_added_txt->runAction(FadeOut::create(2.0));
+
+    } else
+    {
+        CCLOG("NOT banking scene");
+    }
+
 };
 
 float deposit_ticks = 0.0f;
