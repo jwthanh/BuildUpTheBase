@@ -1234,7 +1234,7 @@ void GameDirector::switch_to_bank_menu()
         NuItem* nuitem = NuItem::create(bank_pageview);
         nuitem->set_title(config.title);
         nuitem->set_description(config.description);
-        nuitem->button->schedule([config, nuitem](float dt){ config.update_nuitem_callback(nuitem); }, FPS_60, "update_nuitem_callback");
+        nuitem->button->schedule([config, nuitem](float dt){ config.update_nuitem_callback(nuitem); }, FPS_120, "update_nuitem_callback");
 
         //bank size to width of container
         nuitem->button->setContentSize({ bank_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
