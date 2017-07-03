@@ -1165,8 +1165,7 @@ void bank_withdraw_callback(float dt)
     }
 
     auto banking_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("panel");
-    if (banking_scene)
-    {
+    if (banking_scene) {
         //update string
         cocos2d::ui::TextBMFont* coins_added_txt = dynamic_cast<cocos2d::ui::TextBMFont*>(banking_scene->getChildByName("total_coins_panel")->getChildByName("total_coins_added"));
         coins_added_txt->setString(beautify_double(withdraw_current_count));
@@ -1177,25 +1176,55 @@ void bank_withdraw_callback(float dt)
         coins_added_txt->setOpacity(255);
         coins_added_txt->runAction(FadeOut::create(2.0));
 
-    } else
-    {
+    } else {
         CCLOG("NOT banking scene");
     }
 
 };
 
 float deposit_ticks = 0.0f;
+res_count_t deposit_current_count = 0.0f;
 void bank_deposit_callback(float dt)
 {
+    res_count_t current_deposit_value;
+
     //special case to immediately do something
     if (deposit_ticks == 0.0f) {
-        BANK->transfer_to_bank(10);
+        current_deposit_value = 10;
+        BANK->transfer_to_bank(current_deposit_value);
+        //hardcode to this instead of adding so it resets from whatever it used to be
+        deposit_current_count = current_deposit_value;
     }
 
     deposit_ticks += dt;
     if (deposit_ticks > 0.75f) {
-        BANK->transfer_to_bank(std::pow(deposit_ticks,deposit_ticks));
+        current_deposit_value = std::pow(deposit_ticks, deposit_ticks);
+        BANK->transfer_to_bank(current_deposit_value);
+
+        //cheat by only adding the visible number if there was enough space for it. really this should be checking the difference before and after adding the coins but whatever
+        if (BEATUP->get_total_coins() > 0.0)
+        {
+            deposit_current_count += current_deposit_value;
+        }
     }
+
+    auto banking_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("panel");
+    if (banking_scene) {
+        //update string
+        cocos2d::ui::TextBMFont* coins_added_txt = dynamic_cast<cocos2d::ui::TextBMFont*>(banking_scene->getChildByName("banked_coins_panel")->getChildByName("banked_coins_added"));
+        coins_added_txt->setString(beautify_double(deposit_current_count));
+
+        //reset animations
+        coins_added_txt->stopAllActions();
+        coins_added_txt->setVisible(true);
+        coins_added_txt->setOpacity(255);
+        coins_added_txt->runAction(FadeOut::create(2.0));
+
+    } else {
+        CCLOG("NOT banking scene");
+    }
+
+
 };
 
 void GameDirector::switch_to_bank_menu()
