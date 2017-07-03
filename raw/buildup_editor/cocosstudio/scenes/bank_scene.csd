@@ -25,7 +25,8 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="title_lbl" ActionTag="127619952" Tag="41" IconVisible="False" LeftMargin="52.3923" RightMargin="52.3925" TopMargin="3.2147" BottomMargin="550.6392" IsCustomSize="True" FontSize="36" LabelText="The Bank" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="title_lbl" ActionTag="127619952" Tag="41" IconVisible="False" LeftMargin="52.3923" RightMargin="52.3925" TopMargin="3.2147" BottomMargin="550.6392" IsCustomSize="True" FontSize="36" LabelText="The Bank" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="855.2153" Y="86.1461" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="479.9999" Y="593.7123" />
@@ -37,7 +38,8 @@
                 <OutlineColor A="255" R="26" G="26" B="26" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="desc_lbl" ActionTag="-1682992427" Tag="42" IconVisible="False" LeftMargin="52.3923" RightMargin="52.3925" TopMargin="81.7877" BottomMargin="523.2123" IsCustomSize="True" FontSize="20" LabelText="Stores excess coins for later. Upgrade at the Marketplace" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="desc_lbl" ActionTag="-1682992427" Tag="42" IconVisible="False" LeftMargin="52.3923" RightMargin="52.3925" TopMargin="81.7877" BottomMargin="523.2123" IsCustomSize="True" FontSize="20" LabelText="Stores excess coins for later. Upgrade at the Marketplace" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                 <Size X="855.2153" Y="35.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="479.9999" Y="540.7123" />
@@ -65,7 +67,8 @@
               <AbstractNodeData Name="total_coins_panel" ActionTag="-176246686" Tag="199" IconVisible="False" LeftMargin="14.0000" RightMargin="786.0000" TopMargin="174.0000" BottomMargin="380.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="39" ComboBoxIndex="2" ColorAngle="270.0000" ctype="PanelObjectData">
                 <Size X="160.0000" Y="86.0000" />
                 <Children>
-                  <AbstractNodeData Name="total_coins_header" ActionTag="-1245448573" Tag="201" IconVisible="False" LeftMargin="40.5000" RightMargin="40.5000" TopMargin="7.0000" BottomMargin="53.0000" FontSize="20" LabelText="Coins:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="total_coins_header" ActionTag="-1245448573" Tag="201" IconVisible="False" LeftMargin="40.5000" RightMargin="40.5000" TopMargin="7.0000" BottomMargin="53.0000" FontSize="20" LabelText="Coins:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                     <Size X="79.0000" Y="26.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="80.0000" Y="66.0000" />
@@ -77,7 +80,8 @@
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="total_coins_count_lbl" ActionTag="1234377149" Tag="202" IconVisible="False" LeftMargin="2.5000" RightMargin="0.5000" TopMargin="50.0000" BottomMargin="10.0000" FontSize="20" LabelText="123,456Quax" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="total_coins_count_lbl" ActionTag="1234377149" Tag="202" IconVisible="False" LeftMargin="2.5000" RightMargin="0.5000" TopMargin="50.0000" BottomMargin="10.0000" FontSize="20" LabelText="123,456Quax" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                     <Size X="157.0000" Y="26.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="81.0000" Y="23.0000" />
@@ -104,7 +108,8 @@
               <AbstractNodeData Name="banked_coins_panel" ActionTag="-2096377961" Tag="203" IconVisible="False" LeftMargin="14.0000" RightMargin="786.0000" TopMargin="334.0000" BottomMargin="220.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="39" ComboBoxIndex="2" ColorAngle="270.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="160.0000" Y="86.0000" />
                 <Children>
-                  <AbstractNodeData Name="banked_coins_header" ActionTag="736078382" Tag="204" IconVisible="False" LeftMargin="31.5000" RightMargin="31.5000" TopMargin="7.0000" BottomMargin="53.0000" FontSize="20" LabelText="Banked:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="banked_coins_header" ActionTag="736078382" Tag="204" IconVisible="False" LeftMargin="31.5000" RightMargin="31.5000" TopMargin="7.0000" BottomMargin="53.0000" FontSize="20" LabelText="Banked:" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                     <Size X="97.0000" Y="26.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="80.0000" Y="66.0000" />
@@ -116,7 +121,8 @@
                     <OutlineColor A="255" R="26" G="26" B="26" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="banked_coins_count_lbl" ActionTag="-2052060896" Tag="205" IconVisible="False" LeftMargin="2.5000" RightMargin="0.5000" TopMargin="50.0000" BottomMargin="10.0000" FontSize="20" LabelText="123,456Quax" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="banked_coins_count_lbl" ActionTag="-2052060896" Tag="205" IconVisible="False" LeftMargin="2.5000" RightMargin="0.5000" TopMargin="50.0000" BottomMargin="10.0000" FontSize="20" LabelText="123,456Quax" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextBMFontObjectData">
+                <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
                     <Size X="157.0000" Y="26.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="81.0000" Y="23.0000" />
