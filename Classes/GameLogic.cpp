@@ -685,6 +685,8 @@ void GameDirector::switch_to_city_menu()
     auto miner_scene_btn = dynamic_cast<ui::Button*>(panel->getChildByName("miner_scene_btn"));
     prep_button(miner_scene_btn);
     bind_touch_ended(miner_scene_btn, [](){GameDirector::switch_to_miner_menu();});
+    //hide miner scene button if the forest is locked
+    miner_scene_btn->setVisible(GameProgress::getInstance()->get_building_unlock_map().at(CITY->building_by_type(BuildingTypes::TheForest)));
 
     auto item_equip_scene_btn = dynamic_cast<ui::Button*>(panel->getChildByName("item_equip_scene_btn"));
     prep_button(item_equip_scene_btn);
