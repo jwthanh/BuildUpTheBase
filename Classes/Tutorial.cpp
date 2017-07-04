@@ -31,6 +31,7 @@ Tutorial::Tutorial()
     this->_show_player_info = true;
     this->_show_building_info = true;
     this->_show_progress_panel = true;
+    this->_show_player_hp_lbl = true;
 
     this->_is_tutorial_active = false;
 
