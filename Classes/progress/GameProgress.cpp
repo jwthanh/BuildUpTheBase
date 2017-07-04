@@ -80,6 +80,8 @@ void GameProgress::update(float dt, City* city)
             if (this->_building_unlock_map[city->building_by_type(BuildingTypes::TheForest)] == true) {
                 this->_building_tab_map[building][TabTypes::DetailTab] = true;
             }
+        } else if (building->type == BuildingTypes::TheForest) {
+            this->_building_tab_map[building][TabTypes::DetailTab] = true;
         } else if (building->type == BuildingTypes::TheGraveyard) {
             this->_building_tab_map[building][TabTypes::DetailTab] = true;
         } else if (building->type == BuildingTypes::TheMarketplace) {
