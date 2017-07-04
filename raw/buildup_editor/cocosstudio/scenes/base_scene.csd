@@ -19,10 +19,10 @@
           <AbstractNodeData Name="building_info_panel" ActionTag="520425261" Tag="141" IconVisible="False" LeftMargin="759.9955" RightMargin="0.0045" TopMargin="0.0004" BottomMargin="439.9996" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="200.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="65.0000" RightMargin="65.0000" TopMargin="69.3401" BottomMargin="114.6599" LabelText="ING: XX" ctype="TextBMFontObjectData">
+              <AbstractNodeData Name="ingredient_count" ActionTag="-435758994" Tag="156" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="65.0000" RightMargin="65.0000" TopMargin="69.3400" BottomMargin="114.6600" LabelText="ING: XX" ctype="TextBMFontObjectData">
                 <Size X="70.0000" Y="16.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="100.0000" Y="122.6599" />
+                <Position X="100.0000" Y="122.6600" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.6133" />
@@ -125,10 +125,10 @@
                 <PreSize X="0.9100" Y="0.0906" />
                 <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="14.6380" RightMargin="3.3620" TopMargin="55.0000" BottomMargin="186.0000" LabelText="$100,200Qad" ctype="TextBMFontObjectData">
+              <AbstractNodeData Name="player_gold_lbl" ActionTag="732100340" Tag="124" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="14.6400" RightMargin="3.3600" TopMargin="54.9920" BottomMargin="186.0080" LabelText="$100,200Qad" ctype="TextBMFontObjectData">
                 <Size X="182.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="105.6380" Y="198.0000" />
+                <Position X="105.6400" Y="198.0080" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5282" Y="0.7472" />
@@ -486,13 +486,13 @@
           <AbstractNodeData Name="arena_kill_panel" ActionTag="-1152670340" Tag="71" IconVisible="False" LeftMargin="473.2609" RightMargin="200.0024" TopMargin="510.0001" BottomMargin="99.9999" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="286.7367" Y="30.0000" />
             <Children>
-              <AbstractNodeData Name="arena_kill_lbl" ActionTag="421305276" Tag="108" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="19.7502" RightMargin="15.9865" TopMargin="3.6630" BottomMargin="2.3370" LabelText="Kills: 123,123Qad" ctype="TextBMFontObjectData">
+              <AbstractNodeData Name="arena_kill_lbl" ActionTag="421305276" Tag="108" IconVisible="False" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" LeftMargin="19.7534" RightMargin="15.9833" TopMargin="2.0000" BottomMargin="4.0000" LabelText="Kills: 123,123Qad" ctype="TextBMFontObjectData">
                 <Size X="251.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5022" ScaleY="0.5000" />
-                <Position X="145.8024" Y="14.3370" />
+                <Position X="145.8056" Y="16.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5085" Y="0.4779" />
+                <PrePosition X="0.5085" Y="0.5333" />
                 <PreSize X="0.8754" Y="0.8000" />
                 <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
               </AbstractNodeData>
