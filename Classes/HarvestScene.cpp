@@ -246,7 +246,8 @@ void BaseScene::create_goal_loadingbar()
 
     auto progress_callback = [this]() {
             spBuilding target_building = BUILDUP->get_target_building();
-            res_count_t coin_goal = get_building_upgrade_cost(target_building->type, static_cast<res_count_t>(target_building->get_building_level()));
+            res_count_t target_level = target_building->get_building_level() + 1.0;
+            res_count_t coin_goal = get_building_upgrade_cost(target_building->type, target_level);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             if (percentage >= 100.0f) {
                 this->sidebar->toggle_buttons(this->sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
@@ -265,7 +266,8 @@ void BaseScene::create_goal_loadingbar()
 				return;
 			}
 
-            res_count_t coin_goal = get_building_upgrade_cost(target_building->type, static_cast<res_count_t>(target_building->get_building_level()));
+            res_count_t target_level = target_building->get_building_level() + 1.0;
+            res_count_t coin_goal = get_building_upgrade_cost(target_building->type, target_level);
             float percentage = BEATUP->get_total_coins() / coin_goal * 100;
             loading_bar->setPercent(percentage);
 			try_set_visible(loading_bar, true);
