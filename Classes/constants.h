@@ -135,6 +135,7 @@ typedef bool(*BoolFuncBuilding)(spBuilding);
 
 #define BEATUP GameLogic::getInstance()->beatup
 #define BUILDUP GameLogic::getInstance()->buildup
+#define CITY BUILDUP->city
 #define EQUIPMENT GameLogic::getInstance()->equipment
 #define BANK Bank::getInstance()
 #define INVENTORY GameLogic::getInstance()->equipment->inventory
