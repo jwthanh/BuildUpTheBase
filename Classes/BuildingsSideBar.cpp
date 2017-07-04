@@ -613,13 +613,13 @@ void SideListView::setup_detail_listview()
             };
             if (building->name == "The Graveyard")
             {
-                spRecipe blood_oath = std::make_shared<Recipe>("Raise Dead", "Scavenges at The Dump\n-- 1 soul, 6 flesh, 9 blood");
-                blood_oath->components = mistIngredient({
+                spRecipe raise_dead = std::make_shared<Recipe>("Raise Dead", "Works at The Dump\n-- 1 soul, 6 flesh, 9 blood");
+                raise_dead->components = mistIngredient({
                     { Ingredient::SubType::Soul, 1 },
                     { Ingredient::SubType::Flesh, 6 },
                     { Ingredient::SubType::Blood, 9 }
                 });
-                blood_oath->_on_recipe_complete = [building](){
+                raise_dead->_on_recipe_complete = [building](){
                     bool can_fit_more_dead = true;
                     if (can_fit_more_dead)
                     {
@@ -643,11 +643,11 @@ void SideListView::setup_detail_listview()
                     };
                 };
                 nuitems_config.push_back({
-                    blood_oath,
+                    raise_dead,
                     DetailType::Recipe,
                     {
-                        blood_oath->name,
-                        blood_oath->description,
+                        raise_dead->name,
+                        raise_dead->description,
                         "ingredients/undead.png"
                     }});
             };
