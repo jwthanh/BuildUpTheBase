@@ -608,6 +608,8 @@ void GameDirector::switch_to_city_menu()
 
     //invest panel
     auto invest_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("invest_panel"));
+    //hide invest panel if the marketplace is locked
+    invest_panel->setVisible(GameProgress::getInstance()->get_building_unlock_map().at(CITY->building_by_type(BuildingTypes::TheMarketplace)));
     auto invest_button = dynamic_cast<ui::Button*>(invest_panel->getChildByName("invest_button"));
     bind_touch_ended(invest_button, [](){ GameDirector::switch_to_scrap_item_menu(); });
     load_default_button_textures(invest_button);
@@ -629,6 +631,8 @@ void GameDirector::switch_to_city_menu()
 
     //appeasement panel
     auto appeasement_panel = dynamic_cast<ui::Layout*>(panel->getChildByName("appeasement_panel"));
+    //hide appeasement panel if the arena is locked
+    appeasement_panel->setVisible(GameProgress::getInstance()->get_building_unlock_map().at(CITY->building_by_type(BuildingTypes::TheArena)));
     auto appeasement_button = dynamic_cast<ui::Button*>(appeasement_panel->getChildByName("appeasement_button"));
     auto add_appeasements_cb = []()
     {
@@ -681,6 +685,8 @@ void GameDirector::switch_to_city_menu()
     auto items_scene_btn = dynamic_cast<ui::Button*>(panel->getChildByName("items_scene_btn"));
     prep_button(items_scene_btn);
     bind_touch_ended(items_scene_btn, [](){GameDirector::switch_to_items_menu();});
+    //hide items scene button if the dump is locked
+    items_scene_btn->setVisible(GameProgress::getInstance()->get_building_unlock_map().at(CITY->building_by_type(BuildingTypes::TheDump)));
 
     auto miner_scene_btn = dynamic_cast<ui::Button*>(panel->getChildByName("miner_scene_btn"));
     prep_button(miner_scene_btn);
@@ -691,6 +697,8 @@ void GameDirector::switch_to_city_menu()
     auto item_equip_scene_btn = dynamic_cast<ui::Button*>(panel->getChildByName("item_equip_scene_btn"));
     prep_button(item_equip_scene_btn);
     bind_touch_ended(item_equip_scene_btn, [](){GameDirector::switch_to_equipment_menu();});
+    //hide equip scene button if the dump is locked
+    item_equip_scene_btn->setVisible(GameProgress::getInstance()->get_building_unlock_map().at(CITY->building_by_type(BuildingTypes::TheDump)));
 
     auto director = cocos2d::Director::getInstance();
     director->pushScene(scene);
