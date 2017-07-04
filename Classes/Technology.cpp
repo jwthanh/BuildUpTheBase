@@ -91,7 +91,7 @@ spRecipe Technology::get_ingredient_requirements(spBuilding building)
         res_count_t paper_cost = std::floor(scale_number(2.0L, map_get(tech_map, this->sub_type, _def), 4.45L));
         recipe->components = mistIngredient({{ Ingredient::SubType::Paper, paper_cost }});
 
-        ss << "Doubles tap output here\n-- costs " << beautify_double(paper_cost) << " paper";
+        ss << "Doubles tap output\n-- costs " << beautify_double(paper_cost) << " paper";
     }
     else if (this->sub_type == Technology::SubType::SalesmenBaseBoost)
     {

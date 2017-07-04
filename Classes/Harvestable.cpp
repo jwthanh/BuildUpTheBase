@@ -166,8 +166,9 @@ res_count_t Harvestable::get_per_touch_output()
 {
     res_count_t base = 1.0L;
 
-    auto tech_map = this->building->techtree->get_tech_map();
+    auto tech_map = CITY->building_by_type(BuildingTypes::TheMarketplace)->techtree->get_tech_map();
     TechSubType tech_type = Technology::SubType::ClickDoublePower;
+
     res_count_t _def = 0L;
     res_count_t times_doubled = map_get(tech_map, tech_type, _def);
     if (times_doubled > 0){
