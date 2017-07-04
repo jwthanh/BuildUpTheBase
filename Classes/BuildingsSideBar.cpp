@@ -832,7 +832,7 @@ void SideListView::setup_detail_listview()
                     }});
 
                 //build minerails
-                spRecipe build_minerails = std::make_shared<Recipe>("Build Rails", "Place & travel to altars\n-- costs 5 Wood, 15 Copper");
+                spRecipe build_minerails = std::make_shared<Recipe>("Build Rails", "Place & travel to altars.\n-- 5 Wood, 15 Copper");
                 build_minerails->components = mistIngredient({
                     { Ingredient::SubType::Wood, 5 },
                     { Ingredient::SubType::Copper, 15 }
