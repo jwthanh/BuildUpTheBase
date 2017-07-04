@@ -2,6 +2,7 @@
 
 #include "HouseBuilding.h"
 #include "enums/tab_types.h"
+#include "house_building/BuildingTypes.h"
 
 GameProgress* GameProgress::_instance = nullptr;
 

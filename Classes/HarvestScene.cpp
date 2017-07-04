@@ -30,6 +30,7 @@
 #include "Modal.h"
 #include "PopupPanel.h"
 #include "Ingredients.h"
+#include "house_building/BuildingTypes.h"
 
 #include "magic_particles/_core/mp.h"
 #include "magic_particles/mp_cocos.h"

@@ -9,6 +9,7 @@
 #include "DataManager.h"
 
 #include "HouseBuilding.h"
+#include "house_building/BuildingTypes.h"
 #include "Buildup.h"
 
 //#pragma warning(default:4267)

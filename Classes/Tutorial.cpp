@@ -19,6 +19,7 @@
 #include "NuItem.h"
 #include "DataManager.h"
 #include "Worker.h"
+#include "house_building/BuildingTypes.h"
 
 Tutorial* Tutorial::_instance = nullptr;
 

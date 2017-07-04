@@ -261,6 +261,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Harvestable.h" />
     <ClInclude Include="..\Classes\HarvestableManager.h" />
     <ClInclude Include="..\Classes\HarvestScene.h" />
+    <ClInclude Include="..\Classes\house_building\BuildingTypes.h" />
     <ClInclude Include="..\Classes\Item.h" />
     <ClInclude Include="..\Classes\ItemScene.h" />
     <ClInclude Include="..\Classes\Logging.h" />

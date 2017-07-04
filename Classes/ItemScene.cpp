@@ -26,6 +26,7 @@
 #include "RandomWeightMap.h"
 #include "Ingredients.h"
 #include "2d/CCLabel.h"
+#include "house_building/BuildingTypes.h"
 
 using namespace cocos2d;
 

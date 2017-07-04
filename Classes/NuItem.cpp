@@ -18,6 +18,7 @@
 #include "HarvestScene.h"
 #include "NodeBuilder.h"
 #include "Ingredients.h"
+#include "house_building/BuildingTypes.h"
 
 #include "magic_particles/MagicEmitter.h"
 

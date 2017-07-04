@@ -43,6 +43,9 @@
     <Filter Include="progress">
       <UniqueIdentifier>{1e0998ad-c761-4c71-a0c8-a2283d0a0671}</UniqueIdentifier>
     </Filter>
+    <Filter Include="house_building">
+      <UniqueIdentifier>{de0c601c-af7f-4bf9-82a6-e1e16b661d34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -305,6 +308,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\progress\GameProgress.h">
       <Filter>progress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\house_building\BuildingTypes.h">
+      <Filter>house_building</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

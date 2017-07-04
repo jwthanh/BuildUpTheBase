@@ -2,6 +2,8 @@
 #include "HouseBuilding.h"
 #include "Util.h"
 
+#include "house_building/BuildingTypes.h"
+
 res_count_t get_building_upgrade_cost(BuildingTypes building_type, res_count_t building_level)
 {
     res_count_t base_shop_cost = BuildingTypes_to_base_upgrade_cost.at(building_type);

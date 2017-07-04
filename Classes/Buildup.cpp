@@ -21,6 +21,7 @@
 #include "Util.h"
 #include "Ingredients.h"
 #include "main_loop/MainLoop.h"
+#include "house_building/BuildingTypes.h"
 
 Buildup::Buildup()
 {

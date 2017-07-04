@@ -33,6 +33,7 @@
 #include "goals/Achievement.h"
 #include "Ingredients.h"
 #include "banking/Bank.h"
+#include "house_building/BuildingTypes.h"
 
 #include "base/CCDirector.h"
 #include "CCApplication.h"

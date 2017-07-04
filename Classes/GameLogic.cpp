@@ -48,6 +48,7 @@
 #include "Ingredients.h"
 #include "main_loop/MainLoop.h"
 #include "main_loop/SimulateMainLoop.h"
+#include "house_building/BuildingTypes.h"
 
 
 USING_NS_CC;

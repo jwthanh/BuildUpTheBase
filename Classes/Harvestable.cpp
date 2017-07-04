@@ -31,6 +31,7 @@
 #include "Ingredients.h"
 #include "SoundEngine.h"
 #include "Modal.h"
+#include "house_building/BuildingTypes.h"
 
 #include "2d/CCClippingNode.h"
 #include "2d/CCActionEase.h"

@@ -20,6 +20,7 @@
 #include "banking/Bank.h"
 #include "Ingredients.h"
 #include "main_loop/SimulateMainLoop.h"
+#include "house_building/BuildingTypes.h"
 
 
 Worker::Worker(spBuilding building, std::string name, SubType sub_type)

@@ -17,6 +17,7 @@
 
 
 #include "Buildup.h"
+#include "house_building/BuildingTypes.h"
 
 USING_NS_CC;
 
