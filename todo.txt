@@ -136,8 +136,9 @@ you start off as garbage out of a spaceships ejection chute and then grow into y
 
 
 
-# TODO
+# Actual TODO
 * Grey out Nuitems when they're visible but not yet usable
 * use ??? for resources you can't use but recipes are visible
 * notifications when things are unlocked
 * in the bank (possible others?) don't always just beautify_double everything, when you've got a lot of money, you need to hold the button for a while before you see any change
+* click and hold on buttons
