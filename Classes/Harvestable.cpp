@@ -41,6 +41,7 @@
 #include "2d/CCSpriteFrameCache.h"
 #include "2d/CCParticleSystemQuad.h"
 #include "ui/UIText.h"
+#include "ui/UITextBMFont.h"
 #include "ui/UIButton.h" //button is used somewhere
 #include "ui/UIImageView.h"
 #include "ui/UIListView.h"
@@ -273,8 +274,14 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
         Node* building_info_panel = harvest_scene->getChildByName("building_info_panel");
         Node* raw_ingredient_count = building_info_panel->getChildByName("ingredient_count");
 
-        ui::Text* ingredient_count = dynamic_cast<ui::Text*>(raw_ingredient_count);
-        run_flash_action(ingredient_count, 0.2f, 1.15f, 1.0f, Color3B::RED, Color3B::WHITE);
+        ui::TextBMFont* ingredient_count = dynamic_cast<ui::TextBMFont*>(raw_ingredient_count);
+        if (ingredient_count == NULL)
+        {
+            CCLOG("ERROR ingredient count is NULL");
+        } else
+        {
+            run_flash_action(raw_ingredient_count, 0.2f, 1.15f, 1.0f, Color3B::RED, Color3B::WHITE);
+        }
         building_info_panel->runAction(FShake::actionWithDuration(0.1f, 1.5f, 1.5f));
 
         ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(harvest_scene->getChildByName("inventory_basic_listview"));
