@@ -14,9 +14,6 @@
 #include "Util.h"
 
 
-USING_NS_CC;
-
-
 bool SoundEngine::_sound_enabled = true;
 float SoundEngine::_sound_vol = 1.0f;
 float SoundEngine::_music_vol = 1.0f;
@@ -30,14 +27,14 @@ bool SoundEngine::is_sound_enabled()
 {
     return false; //TODO reenable sound at some point
 
-    UserDefault* ud = UserDefault::getInstance();
+    cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
     return ud->getBoolForKey(SoundEngine::id_string.c_str(), true);
 };
 
 void SoundEngine::set_sound_enabled(bool enabled)
 {
     // SoundEngine::_sound_enabled = enabled;
-    UserDefault* ud = UserDefault::getInstance();
+    cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
     return ud->setBoolForKey(SoundEngine::id_string.c_str(), enabled);
 };
 
@@ -45,7 +42,7 @@ bool SoundEngine::is_music_enabled()
 {
     return false; //TODO reenable sound at some point
 
-    UserDefault* ud = UserDefault::getInstance();
+    cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
     return ud->getBoolForKey(SoundEngine::music_id_string.c_str(), true);
 };
 
@@ -55,7 +52,7 @@ void SoundEngine::set_music_enabled(bool enabled)
         SoundEngine::stop_all_sound_and_music();
     };
 
-    UserDefault* ud = UserDefault::getInstance();
+    cocos2d::UserDefault* ud = cocos2d::UserDefault::getInstance();
     return ud->setBoolForKey(SoundEngine::music_id_string.c_str(), enabled);
 };
 
@@ -75,7 +72,7 @@ int SoundEngine::play_sound(std::string sound_path)
     {
         sound_path = clean_path(sound_path);
 #ifdef _WIN32
-        return experimental::AudioEngine::play2d(sound_path.c_str());
+        return cocos2d::experimental::AudioEngine::play2d(sound_path.c_str());
 #else
 		auto eng = CocosDenshion::SimpleAudioEngine::getInstance();
 		eng->playEffect(sound_path.c_str());
@@ -93,9 +90,9 @@ void SoundEngine::play_music(std::string music_path)
 #ifdef _WIN32
         if (SoundEngine::bg_music_id != -1)
         {
-            experimental::AudioEngine::stop(SoundEngine::bg_music_id);
+            cocos2d::experimental::AudioEngine::stop(SoundEngine::bg_music_id);
         }
-        SoundEngine::bg_music_id =  experimental::AudioEngine::play2d(music_path.c_str(), true);
+        SoundEngine::bg_music_id = cocos2d::experimental::AudioEngine::play2d(music_path.c_str(), true);
 #else
 		auto eng = CocosDenshion::SimpleAudioEngine::getInstance();
 		eng->playBackgroundMusic(music_path.c_str());
@@ -109,8 +106,8 @@ bool SoundEngine::get_playing_music()
 #ifdef _WIN32
     if (SoundEngine::bg_music_id != -1)
     {
-        float duration = experimental::AudioEngine::getDuration(SoundEngine::bg_music_id);
-        if (experimental::AudioEngine::getCurrentTime(SoundEngine::bg_music_id) >= duration)
+        float duration = cocos2d::experimental::AudioEngine::getDuration(SoundEngine::bg_music_id);
+        if (cocos2d::experimental::AudioEngine::getCurrentTime(SoundEngine::bg_music_id) >= duration)
         {
             return false;
         }
@@ -130,7 +127,7 @@ bool SoundEngine::get_playing_music()
 void SoundEngine::stop_all_sound_and_music()
 {
 #ifdef _WIN32
-    experimental::AudioEngine::stopAll();
+    cocos2d::experimental::AudioEngine::stopAll();
     SoundEngine::bg_music_id = -1;
 
 #else

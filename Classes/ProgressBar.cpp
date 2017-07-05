@@ -11,8 +11,6 @@
 #include "2d/CCActionInstant.h"
 #include <2d/CCLayer.h>
 
-USING_NS_CC;
-
 ProgressBar::ProgressBar(
     std::string front_sprite_frame_path="",
     std::string back_sprite_frame_path=""
@@ -20,41 +18,41 @@ ProgressBar::ProgressBar(
 {
     this->target_percentage = 100.0f;
 
-    this->base_node = Node::create();
+    this->base_node = cocos2d::Node::create();
 
     auto get_sprite = [](std::string sprite_path, std::string frame_path)
     {
-        Sprite* result;
+        cocos2d::Sprite* result;
         if (sprite_path == "") {
             if (frame_path != "")
-                result = Sprite::createWithSpriteFrameName(frame_path);
+                result = cocos2d::Sprite::createWithSpriteFrameName(frame_path);
             else
-                result = Sprite::create();
+                result = cocos2d::Sprite::create();
         }
         else {
-            result = Sprite::create(sprite_path);
+            result = cocos2d::Sprite::create(sprite_path);
         };
 
         return result;
     };
 
-    Sprite* front_sprite = get_sprite("", front_sprite_frame_path);
+    cocos2d::Sprite* front_sprite = get_sprite("", front_sprite_frame_path);
     this->front_timer = cocos2d::ProgressTimer::create(front_sprite);
-    Sprite* slider_sprite = get_sprite("whitebar.png", "");
+    cocos2d::Sprite* slider_sprite = get_sprite("whitebar.png", "");
     this->back_timer = cocos2d::ProgressTimer::create(slider_sprite);
 
-    Sprite* back_sprite = get_sprite("", back_sprite_frame_path);
+    cocos2d::Sprite* back_sprite = get_sprite("", back_sprite_frame_path);
     this->background = back_sprite;
     this->base_node->addChild(this->background);
 
-    this->lbl = Label::createWithTTF("", DEFAULT_FONT, 40);
+    this->lbl = cocos2d::Label::createWithTTF("", DEFAULT_FONT, 40);
     this->lbl->setTTFConfig(NuItem::ttf_config);
     this->lbl->setScale(0.5f);
-    this->lbl->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    this->lbl->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
     this->lbl->getFontAtlas()->setAliasTexParameters();
 
     auto front_size = this->front_timer->getContentSize();
-    this->lbl->setPosition(Vec2(
+    this->lbl->setPosition(cocos2d::Vec2(
         front_size.width/2.0f,
         front_size.height/2.0f
     ));
@@ -68,18 +66,18 @@ ProgressBar::ProgressBar(
     this->base_node->addChild(this->back_timer);
     this->base_node->addChild(this->front_timer);
 
-    this->color_layer = LayerColor::create(Color4B(255, 255, 255, 25));
+    this->color_layer = cocos2d::LayerColor::create(cocos2d::Color4B(255, 255, 255, 25));
     this->front_timer->addChild(this->color_layer);
     this->color_layer->setContentSize(this->front_timer->getContentSize());
 
     this->wait_to_clear = true;
 
 
-    for (ProgressTimer* timer : {this->front_timer, this->back_timer})
+    for (cocos2d::ProgressTimer* timer : {this->front_timer, this->back_timer})
     {
-        timer->setType(ProgressTimer::Type::BAR);
-        timer->setBarChangeRate(Vec2(1, 0));
-        timer->setAnchorPoint(Vec2(0.5, 0.5));
+        timer->setType(cocos2d::ProgressTimer::Type::BAR);
+        timer->setBarChangeRate(cocos2d::Vec2(1, 0));
+        timer->setAnchorPoint(cocos2d::Vec2(0.5, 0.5));
         timer->setPosition(0, 0);
         timer->setVisible(true);
         timer->setPercentage(100);
@@ -91,9 +89,9 @@ ProgressBar::ProgressBar(
             t_tex->setAliasTexParameters();
         };
 
-        timer->setMidpoint(Vec2(0, 0));
+        timer->setMidpoint(cocos2d::Vec2(0, 0));
     };
-    this->background->setAnchorPoint(Vec2(0.5,0.5));
+    this->background->setAnchorPoint(cocos2d::Vec2(0.5,0.5));
 
     this->do_finish_bump = false;
 
@@ -124,19 +122,19 @@ void ProgressBar::update_string(std::string msg)
     {
         font_size -= 2;
     };
-    auto label = Label::createWithTTF(msg, DEFAULT_FONT, font_size);
+    auto label = cocos2d::Label::createWithTTF(msg, DEFAULT_FONT, font_size);
     this->lbl = label;
 
 
     this->lbl->setScale(0.25f);
-    this->lbl->setAnchorPoint(Vec2(0.5f, 0.5f));
+    this->lbl->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     auto front_size = this->front_timer->getContentSize();
-    this->lbl->setPosition(Vec2(
+    this->lbl->setPosition(cocos2d::Vec2(
         front_size.width/2.0f,
         front_size.height/2.0f
     ));
 
-    this->lbl->setTextColor(Color4B::BLACK);
+    this->lbl->setTextColor(cocos2d::Color4B::BLACK);
     this->front_timer->addChild(this->lbl);
 };
 
@@ -166,7 +164,7 @@ void ProgressBar::setScale(float scale)
     this->fit_back_to_front();
 };
 
-Vec2 ProgressBar::get_back_scale()
+cocos2d::Vec2 ProgressBar::get_back_scale()
 {
     auto front_size = this->front_timer->getContentSize();
     auto back_size = this->back_timer->getContentSize();
@@ -174,7 +172,7 @@ Vec2 ProgressBar::get_back_scale()
     auto scale_x = this->front_timer->getScaleX();
     auto scale_y = this->front_timer->getScaleY();
 
-    return Vec2(
+    return cocos2d::Vec2(
             front_size.width*scale_x/back_size.width,
             front_size.height*scale_y/back_size.height
             );
@@ -183,7 +181,7 @@ Vec2 ProgressBar::get_back_scale()
 void ProgressBar::fit_back_to_front()
 {
 
-    Vec2 scale = this->get_back_scale();
+    cocos2d::Vec2 scale = this->get_back_scale();
 
     this->back_timer->setScale(scale.x, scale.y);
 };
@@ -206,8 +204,8 @@ void ProgressBar::scroll_to_percentage(float percentage)
     //bool is_emptying = this->target_percentage*100 < this->front_timer->getPercentage();
     bool is_emptying = true;
 
-    ProgressTimer* fore_timer;
-    ProgressTimer* rear_timer;
+    cocos2d::ProgressTimer* fore_timer;
+    cocos2d::ProgressTimer* rear_timer;
 
     if ( is_emptying )
     {
@@ -225,20 +223,20 @@ void ProgressBar::scroll_to_percentage(float percentage)
         rear_timer->stopAllActions();
     };
 
-    ProgressTo* front_prog_to = ProgressTo::create(0.01f, percentage * 100);
+    cocos2d::ProgressTo* front_prog_to = cocos2d::ProgressTo::create(0.01f, percentage * 100);
 
-    Sequence* front_sequence = NULL;
+    cocos2d::Sequence* front_sequence = NULL;
     if (this->do_finish_bump && percentage >= 1.0f)
     {
         if (this->front_timer == fore_timer)
         {
-            front_sequence = Sequence::create(
+            front_sequence = cocos2d::Sequence::create(
                 this->get_bump_seq(0.125f, 1.25f), NULL
                 );
         }
         else
         {
-            front_sequence = Sequence::create(
+            front_sequence = cocos2d::Sequence::create(
                 this->get_back_bump_seq(0.125f, 1.25f), NULL
                 );
 
@@ -246,15 +244,15 @@ void ProgressBar::scroll_to_percentage(float percentage)
     }
     else
     {
-        front_sequence = Sequence::create(front_prog_to, NULL);
+        front_sequence = cocos2d::Sequence::create(front_prog_to, NULL);
     };
 
     fore_timer->runAction(front_sequence);
 
     //TODO renable this once you figure out the white background fighter thing
-    DelayTime* delay = DelayTime::create(1);
-    ProgressTo* back_prog_to = ProgressTo::create(0.25f, percentage * 100);
-    Sequence* back_sequence = Sequence::create(delay, back_prog_to, NULL);
+    cocos2d::DelayTime* delay = cocos2d::DelayTime::create(1);
+    cocos2d::ProgressTo* back_prog_to = cocos2d::ProgressTo::create(0.25f, percentage * 100);
+    cocos2d::Sequence* back_sequence = cocos2d::Sequence::create(delay, back_prog_to, NULL);
     rear_timer->runAction(back_sequence);
 };
 
@@ -279,21 +277,21 @@ void ProgressBar::bump(float duration, float new_scale, ProgressBar::Layer layer
     };
 };
 
-Sequence* ProgressBar::get_bump_seq(float duration, float new_scale)
+cocos2d::Sequence* ProgressBar::get_bump_seq(float duration, float new_scale)
 {
-    ScaleTo* sb = ScaleTo::create(duration, this->scale*new_scale);
-    ScaleTo* bs = ScaleTo::create(duration, this->scale);
-    Sequence* seq = Sequence::create(sb, bs, NULL);
+    cocos2d::ScaleTo* sb = cocos2d::ScaleTo::create(duration, this->scale*new_scale);
+    cocos2d::ScaleTo* bs = cocos2d::ScaleTo::create(duration, this->scale);
+    cocos2d::Sequence* seq = cocos2d::Sequence::create(sb, bs, NULL);
 
     return seq;
 };
 
-Sequence* ProgressBar::get_back_bump_seq(float duration, float new_scale)
+cocos2d::Sequence* ProgressBar::get_back_bump_seq(float duration, float new_scale)
 {
-    ScaleTo* sb = ScaleTo::create(duration, this->get_back_scale().x*new_scale);
-    ScaleTo* bs = ScaleTo::create(duration, this->get_back_scale().x);
-    CallFunc* cf = CallFunc::create(std::function<void()>([this](){ this->fit_back_to_front(); })); //TODO figure out a way that this isn't necessary to fix the background sticking out too far
-    Sequence* seq = Sequence::create(sb, bs, cf, NULL);
+    cocos2d::ScaleTo* sb = cocos2d::ScaleTo::create(duration, this->get_back_scale().x*new_scale);
+    cocos2d::ScaleTo* bs = cocos2d::ScaleTo::create(duration, this->get_back_scale().x);
+    cocos2d::CallFunc* cf = cocos2d::CallFunc::create(std::function<void()>([this](){ this->fit_back_to_front(); })); //TODO figure out a way that this isn't necessary to fix the background sticking out too far
+    cocos2d::Sequence* seq = cocos2d::Sequence::create(sb, bs, cf, NULL);
 
     return seq;
 };

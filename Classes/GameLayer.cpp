@@ -8,7 +8,6 @@
 #include "base/CCDirector.h"
 #include "ui/UIScrollView.h"
 #include "ui/CocosGUI.h"
-USING_NS_CC;
 
 #include "GameLogic.h"
 
@@ -21,7 +20,7 @@ bool GameLayer::touch_in_node(Node* target, cocos2d::Touch* touch, float scale)
     auto bbox = target->getBoundingBox();
     if (scale != 1)
     {
-        Rect new_rect(bbox);
+        cocos2d::Rect new_rect(bbox);
 
         new_rect.size.width = bbox.size.width*scale;
         new_rect.size.height = bbox.size.height*scale;
@@ -53,7 +52,7 @@ bool GameLayer::vec2_in_node(Node* target, cocos2d::Vec2 pos)
     return false;
 };
 
-bool GameLayer::vec2_in_rect(Rect* rect, cocos2d::Vec2 pos)
+bool GameLayer::vec2_in_rect(cocos2d::Rect* rect, cocos2d::Vec2 pos)
 {
     if (rect->containsPoint(pos))
     {
@@ -81,7 +80,7 @@ bool GameLayer::init()
 
 void GameLayer::update(float dt)
 {
-    Size visibleSize = Director::getInstance()->getVisibleSize();
+    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
     if (true == isTouchDown)
     {
         if (initialTouchPos[0] - currentTouchPos[0] > visibleSize.width * 0.05)
@@ -111,7 +110,7 @@ void GameLayer::update(float dt)
     }
 };
 
-bool GameLayer::onTouchBegan(Touch *touch, Event *event)
+bool GameLayer::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     initialTouchPos[0] = touch->getLocation().x;
     initialTouchPos[1] = touch->getLocation().y;
@@ -123,18 +122,18 @@ bool GameLayer::onTouchBegan(Touch *touch, Event *event)
     return true;
 }
 
-void GameLayer::onTouchMoved(Touch *touch, Event *event)
+void GameLayer::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     currentTouchPos[0] = touch->getLocation().x;
     currentTouchPos[1] = touch->getLocation().y;
 }
 
-void GameLayer::onTouchEnded(Touch *touch, Event *event)
+void GameLayer::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     isTouchDown = false;
 }
 
-void GameLayer::onTouchCancelled(Touch *touch, Event *event)
+void GameLayer::onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     onTouchEnded(touch, event);
 }
@@ -161,7 +160,7 @@ void GameLayer::onSwipeDown(float dt)
 
 void GameLayer::pop_scene(Ref* pSender)
 {
-    Director::getInstance()->popToRootScene(); //sloppy way to delete scene, idk a better way yet
+    cocos2d::Director::getInstance()->popToRootScene(); //sloppy way to delete scene, idk a better way yet
 };
 
 void GameLayer::quit(Ref* pSender)
@@ -174,7 +173,7 @@ void GameLayer::quit(Ref* pSender)
     GameLogic::save_all();
 
     CCLOG("QUITTING");
-    Director::getInstance()->end();
+    cocos2d::Director::getInstance()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
@@ -182,28 +181,28 @@ void GameLayer::quit(Ref* pSender)
 };
 
 
-ui::ScrollView* GameLayer::create_center_scrollview()
+cocos2d::ui::ScrollView* GameLayer::create_center_scrollview()
 {
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+    cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
 
-    auto scroll = ui::ScrollView::create();
+    auto scroll = cocos2d::ui::ScrollView::create();
     //scroll->setBackGroundColorType(ui::Layout::BackGroundColorType::SOLID);
     float scroll_w = sx(800);
     float scroll_h = sy(400);
-    Size scroll_size = Size(scroll_w, scroll_h);
+    cocos2d::Size scroll_size = cocos2d::Size(scroll_w, scroll_h);
     scroll->setContentSize(scroll_size);
 
-    scroll->setAnchorPoint(Vec2(0.5, 0.5));
+    scroll->setAnchorPoint(cocos2d::Vec2(0.5, 0.5));
     scroll->setPosition( get_center_pos(0, -sy(50) ));
-    scroll->setDirection(ui::ScrollView::Direction::VERTICAL);
+    scroll->setDirection(cocos2d::ui::ScrollView::Direction::VERTICAL);
 
     this->addChild(scroll);
     //scroll->setBackGroundColor(Color3B::GREEN);
 
     //auto container_size = Size(scroll_w, scroll_h*3);
     // scroll->setInnerContainerSize(container_size);
-    scroll->setLayoutType(ui::Layout::Type::VERTICAL);
+    scroll->setLayoutType(cocos2d::ui::Layout::Type::VERTICAL);
 
     // scroll->setBounceEnabled(true); //this sucks, needs to be smoother
     scroll->setScrollBarAutoHideEnabled(false);
@@ -213,30 +212,30 @@ ui::ScrollView* GameLayer::create_center_scrollview()
 
 cocos2d::ui::Button* GameLayer::create_button(std::string text, BoolFuncNoArgs cb, bool start_disabled, ButtonState* btn_state)
 {
-    auto param = ui::LinearLayoutParameter::create();
-    param->setGravity(ui::LinearLayoutParameter::LinearGravity::CENTER_HORIZONTAL);
+    auto param = cocos2d::ui::LinearLayoutParameter::create();
+    param->setGravity(cocos2d::ui::LinearLayoutParameter::LinearGravity::CENTER_HORIZONTAL);
 
-    auto disable_button = [](ui::Button* button)
+    auto disable_button = [](cocos2d::ui::Button* button)
     {
-        button->setTitleColor(Color3B::GRAY);
+        button->setTitleColor(cocos2d::Color3B::GRAY);
         button->setTouchEnabled(false);
         button->setPressedActionEnabled(false);
     };
 
-    auto btn = ui::Button::create("main_UI_export_10_x4.png", "", "", ui::Widget::TextureResType::PLIST);
+    auto btn = cocos2d::ui::Button::create("main_UI_export_10_x4.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
 
     btn->setTitleFontName(menu_font);
     btn->setTitleFontSize(menu_fontsize);
-    btn->setTitleColor(Color3B::BLACK);
+    btn->setTitleColor(cocos2d::Color3B::BLACK);
     btn->getTitleRenderer()->getFontAtlas()->setAliasTexParameters();
 
-    btn->setColor(Color3B(114, 160, 72));
+    btn->setColor(cocos2d::Color3B(114, 160, 72));
 
     btn->getVirtualRenderer()->setScale(sx(1.0f));
     btn->setScaleX(sx(1.0f));
     btn->setScaleY(sy(1.0f));
 
-    param->setMargin(ui::Margin(0, sy(15.0f)*btn->getScaleY(), 0, sy(15.0f)*btn->getScaleY()));
+    param->setMargin(cocos2d::ui::Margin(0, sy(15.0f)*btn->getScaleY(), 0, sy(15.0f)*btn->getScaleY()));
 
     btn->setLayoutParameter(param);
     btn->setTouchEnabled(true);
@@ -255,9 +254,9 @@ cocos2d::ui::Button* GameLayer::create_button(std::string text, BoolFuncNoArgs c
     };
 
     btn->addTouchEventListener(
-        [btn_state, cb, btn, disable_button](Ref* ref, ui::Widget::TouchEventType event)
+        [btn_state, cb, btn, disable_button](Ref* ref, cocos2d::ui::Widget::TouchEventType event)
             {
-                if (event == ui::Widget::TouchEventType::ENDED)
+                if (event == cocos2d::ui::Widget::TouchEventType::ENDED)
                 {
                     if (!cb())
                     {
@@ -289,12 +288,12 @@ void GameLayer::onEnter()
     }
 };
 
-void GameLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
+void GameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    if(keyCode == EventKeyboard::KeyCode::KEY_BACK || keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
+    if(keyCode == cocos2d::EventKeyboard::KeyCode::KEY_BACK || keyCode == cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE)
     {
         CCLOG("GameLayer::onKeyReleased: popScene");
-        Director::getInstance()->popScene();
+        cocos2d::Director::getInstance()->popScene();
         event->stopPropagation();
     }
 };

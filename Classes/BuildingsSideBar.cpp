@@ -46,8 +46,6 @@
 #include "progress/GameProgress.h"
 
 
-USING_NS_CC;
-
 std::map<Worker::SubType, Worker::SubType> req_map = {
     { Worker::SubType::ZERO, Worker::SubType::ZERO },
     { Worker::SubType::One, Worker::SubType::ZERO },
@@ -132,7 +130,7 @@ cocos2d::ui::Button* TabManager::get_active_button()
 {
     for (auto pair : this->button_map)
     {
-        ui::Button* button = pair.first;
+        cocos2d::ui::Button* button = pair.first;
         TabTypes tab_type = pair.second.first;
         if (tab_type == this->active_tab)
         {
@@ -142,7 +140,7 @@ cocos2d::ui::Button* TabManager::get_active_button()
     return NULL;
 }
 
-SideListView::SideListView(Node* parent, spBuilding current_target)
+SideListView::SideListView(cocos2d::Node* parent, spBuilding current_target)
     : current_target(current_target), parent(parent)
 {
     this->tabs = TabManager();
@@ -151,7 +149,7 @@ SideListView::SideListView(Node* parent, spBuilding current_target)
     this->setup_tab_buttons();
 
     Tutorial* tutorial = Tutorial::getInstance();
-    Node* sidebar_panel = parent->getChildByName("sidebar_panel");
+    cocos2d::Node* sidebar_panel = parent->getChildByName("sidebar_panel");
     auto check_visible = [sidebar_panel, tutorial](float dt){
         try_set_visible(sidebar_panel, tutorial->get_show_sidebar());
     };
@@ -160,7 +158,7 @@ SideListView::SideListView(Node* parent, spBuilding current_target)
     check_visible(0.0f);
 
 
-    this->tabs.button_map = std::map<ui::Button*, std::pair<TabTypes, spListviewMap>>{
+    this->tabs.button_map = std::map<cocos2d::ui::Button*, std::pair<TabTypes, spListviewMap>>{
         { this->tab_worker_btn, { TabTypes::WorkerTab, this->worker_listviews } },
         { this->tab_detail_btn, { TabTypes::DetailTab, this->detail_listviews } },
         { this->tab_building_btn, { TabTypes::BuildingTab, this->building_listviews } },
@@ -168,14 +166,14 @@ SideListView::SideListView(Node* parent, spBuilding current_target)
     };
 
     //prepress the shop button
-    this->toggle_buttons(this->tab_worker_btn, ui::Widget::TouchEventType::ENDED);
+    this->toggle_buttons(this->tab_worker_btn, cocos2d::ui::Widget::TouchEventType::ENDED);
 };
 
-ui::Button* SideListView::_create_button(std::string node_name)
+cocos2d::ui::Button* SideListView::_create_button(std::string node_name)
 {
-    Node* sidebar_panel = this->parent->getChildByName("sidebar_panel");
+    cocos2d::Node* sidebar_panel = this->parent->getChildByName("sidebar_panel");
 
-    ui::Button* button = dynamic_cast<ui::Button*>(
+    cocos2d::ui::Button* button = dynamic_cast<cocos2d::ui::Button*>(
         sidebar_panel->getChildByName(node_name)
     );
     set_aliasing(button);
@@ -183,18 +181,18 @@ ui::Button* SideListView::_create_button(std::string node_name)
 
     button->setLocalZOrder(5); //needs to be above listviews for dropping animation
 
-    Label* button_lbl = (Label*)button->getTitleRenderer();
-    button_lbl->setTextColor(Color4B::WHITE);
-    button_lbl->enableOutline(Color4B::BLACK, 2);
+    cocos2d::Label* button_lbl = (cocos2d::Label*)button->getTitleRenderer();
+    button_lbl->setTextColor(cocos2d::Color4B::WHITE);
+    button_lbl->enableOutline(cocos2d::Color4B::BLACK, 2);
     button_lbl->getFontAtlas()->setAliasTexParameters();
 
 
     return button;
 };
 
-void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
+void SideListView::toggle_buttons(cocos2d::Ref* target, cocos2d::ui::Widget::TouchEventType evt)
 {
-    if (evt == ui::Widget::TouchEventType::ENDED) {
+    if (evt == cocos2d::ui::Widget::TouchEventType::ENDED) {
 
         //enable all tab buttons
         this->tab_worker_btn->setEnabled(true);
@@ -203,14 +201,14 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
         this->tab_menu_btn->setEnabled(true);
 
         //disable the pressed one
-        ui::Button* target_button = dynamic_cast<ui::Button*>(target);
+        cocos2d::ui::Button* target_button = dynamic_cast<cocos2d::ui::Button*>(target);
         target_button->setEnabled(false);
 
         spBuilding target_building = BUILDUP->get_target_building();
 
         auto activate_tab = [this, target_building](spListviewMap& listviews, TabTypes tab_type)
         {
-            ui::ListView* listview = listviews->at(target_building->type);
+            cocos2d::ui::ListView* listview = listviews->at(target_building->type);
             listview->requestDoLayout();
 
             this->tabs.set_tab_active(tab_type, target_building);
@@ -243,9 +241,9 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
                 int index = sentinel;
 
                 auto building_upgrade_sidebar = this->building_listviews->at(target_building->type);
-                for (Node* item : building_upgrade_sidebar->getChildren())
+                for (cocos2d::Node* item : building_upgrade_sidebar->getChildren())
                 {
-                    auto nuitem = dynamic_cast<ui::Button*>(item);
+                    auto nuitem = dynamic_cast<cocos2d::ui::Button*>(item);
                     if (nuitem)
                     {
                         //assume enabled means buyable
@@ -261,7 +259,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
                     bool orig_bounce = building_upgrade_sidebar->isBounceEnabled();
                     building_upgrade_sidebar->setBounceEnabled(false);
 
-                    building_upgrade_sidebar->jumpToItem(index, Vec2::ONE, Vec2::ONE);
+                    building_upgrade_sidebar->jumpToItem(index, cocos2d::Vec2::ONE, cocos2d::Vec2::ONE);
 
                     building_upgrade_sidebar->setBounceEnabled(orig_bounce);
                 }
@@ -280,7 +278,7 @@ void SideListView::toggle_buttons(Ref* target, ui::Widget::TouchEventType evt)
 void SideListView::setup_tab_buttons()
 {
     //returns a callback to determine whether to show or hide the tab button
-    auto build_enable_if_unlocked = [this](ui::Button* tab_btn, TabTypes tab_type) {
+    auto build_enable_if_unlocked = [this](cocos2d::ui::Button* tab_btn, TabTypes tab_type) {
         std::function<void(float)> enable_if_unlocked = [this, tab_btn, tab_type](float dt) {
             try_set_visible(tab_btn, this->tabs.is_tab_unlocked(tab_type, BUILDUP->get_target_building()));
         };
@@ -289,19 +287,19 @@ void SideListView::setup_tab_buttons()
     };
 
     this->tab_worker_btn = this->_create_button("tab_1_btn");
-    bind_touch_ended(this->tab_worker_btn, [this](){ this->toggle_buttons(this->tab_worker_btn, ui::Widget::TouchEventType::ENDED); });
+    bind_touch_ended(this->tab_worker_btn, [this](){ this->toggle_buttons(this->tab_worker_btn, cocos2d::ui::Widget::TouchEventType::ENDED); });
     this->tab_worker_btn->schedule(build_enable_if_unlocked(this->tab_worker_btn, TabTypes::WorkerTab), FPS_10, "enable_if_unlocked");
 
     this->tab_detail_btn = this->_create_button("tab_2_btn");
-    bind_touch_ended(this->tab_detail_btn, [this](){ this->toggle_buttons(this->tab_detail_btn, ui::Widget::TouchEventType::ENDED); });
+    bind_touch_ended(this->tab_detail_btn, [this](){ this->toggle_buttons(this->tab_detail_btn, cocos2d::ui::Widget::TouchEventType::ENDED); });
     this->tab_detail_btn->schedule(build_enable_if_unlocked(this->tab_detail_btn, TabTypes::DetailTab), FPS_10, "enable_if_unlocked");
 
     this->tab_building_btn = this->_create_button("tab_3_btn");
-    bind_touch_ended(this->tab_building_btn, [this](){ this->toggle_buttons(this->tab_building_btn, ui::Widget::TouchEventType::ENDED); });
+    bind_touch_ended(this->tab_building_btn, [this](){ this->toggle_buttons(this->tab_building_btn, cocos2d::ui::Widget::TouchEventType::ENDED); });
     this->tab_building_btn->schedule(build_enable_if_unlocked(this->tab_building_btn, TabTypes::BuildingTab), FPS_10, "enable_if_unlocked");
 
     this->tab_menu_btn = this->_create_button("tab_4_btn");
-    bind_touch_ended(this->tab_menu_btn, [this](){ this->toggle_buttons(this->tab_menu_btn, ui::Widget::TouchEventType::ENDED); });
+    bind_touch_ended(this->tab_menu_btn, [this](){ this->toggle_buttons(this->tab_menu_btn, cocos2d::ui::Widget::TouchEventType::ENDED); });
     this->tab_menu_btn->schedule(build_enable_if_unlocked(this->tab_menu_btn, TabTypes::MenuTab), FPS_10, "enable_if_unlocked");
 
 }
@@ -319,7 +317,7 @@ void SideListView::setup_listviews()
         if (target_building->type != this->current_target->type)
         {
             this->current_target = target_building;
-            toggle_buttons(this->tabs.get_active_button(), ui::Widget::TouchEventType::ENDED);
+            toggle_buttons(this->tabs.get_active_button(), cocos2d::ui::Widget::TouchEventType::ENDED);
 
         }
     };
@@ -332,7 +330,7 @@ void SideListView::setup_worker_listview()
     for (auto pair : BUILDUP->city->buildings)
     {
         spBuilding building = pair.second;
-        ui::ListView* shop_listview = this->worker_listviews->at(building->type);
+        cocos2d::ui::ListView* shop_listview = this->worker_listviews->at(building->type);
         auto update_harvester_listview = [this, shop_listview, building, tab_type](float dt)
         {
             if (this->tabs.is_tab_active(tab_type, building) == false ||
@@ -475,7 +473,7 @@ void SideListView::setup_worker_listview()
 
 ///tries to push the node at child_tag to the back of the listview. if it didn't exist,
 /// it returns false
-bool SideListView::if_tag_exists_in_listview(int child_tag, ui::ListView* listview)
+bool SideListView::if_tag_exists_in_listview(int child_tag, cocos2d::ui::ListView* listview)
 {
     auto existing_node = listview->getChildByTag(child_tag);
 
@@ -489,7 +487,7 @@ void SideListView::setup_building_listview()
     for (auto pair : BUILDUP->city->buildings)
     {
         spBuilding building = pair.second;
-        ui::ListView* listview = this->building_listviews->at(building->type);
+        cocos2d::ui::ListView* listview = this->building_listviews->at(building->type);
 
         auto update_listview = [this, listview, building, tab_type](float dt)
         {
@@ -528,7 +526,7 @@ void SideListView::setup_detail_listview()
     for (const auto& pair : BUILDUP->city->buildings)
     {
         spBuilding building = pair.second;
-        ui::ListView* listview = this->detail_listviews->at(building->type);
+        cocos2d::ui::ListView* listview = this->detail_listviews->at(building->type);
 
         ///DETAIL LISTVIEW
         auto update_listview = [this, listview, building, tab_type](float dt)
@@ -1059,7 +1057,7 @@ void SideListView::setup_menu_listview()
     for (const auto& pair : BUILDUP->city->buildings)
     {
         spBuilding building = pair.second;
-        ui::ListView* listview = this->menu_listviews->at(building->type);
+        cocos2d::ui::ListView* listview = this->menu_listviews->at(building->type);
 
         ///send feedback
         auto send_feeback = [this, listview, building, tab_type](float dt)
@@ -1097,13 +1095,13 @@ void SideListView::setup_menu_listview()
                 std::stringstream url_ss;
                 url_ss << "mailto:tankorsmash@tankorsmash.com?";
                 url_ss << "subject=";
-                url_ss << "[" << Application::getInstance()->getVersion() << "] ";
+                url_ss << "[" << cocos2d::Application::getInstance()->getVersion() << "] ";
                 url_ss << "Build Up The Base Feedback&";
                 url_ss << "body=Hey there, I've got a feature, bug, quality of life, or enhancement I'd love to see, check it out:";
                 std::string url = url_ss.str();
 
                 CCLOG("prepping email: %s", url.c_str());
-                Application::getInstance()->openURL(url);
+                cocos2d::Application::getInstance()->openURL(url);
             });
 
         };
@@ -1144,7 +1142,7 @@ void SideListView::setup_menu_listview()
 
                 //TODO use actual url
                 auto username = DataManager::get_string_from_data("username", "");
-                Application::getInstance()->openURL("http://tankorsmash.webfactional.com/leaderboard?username="+username);
+                cocos2d::Application::getInstance()->openURL("http://tankorsmash.webfactional.com/leaderboard?username="+username);
             });
 
         };
@@ -1403,7 +1401,7 @@ void SideListView::setup_menu_listview()
 
                 auto scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
                 auto modal = TextBlobModal::create();
-                std::string version_string = Application::getInstance()->getVersion();
+                std::string version_string = cocos2d::Application::getInstance()->getVersion();
                 if (version_string.empty())
                 {
                     version_string = "0.0.0";
@@ -1440,19 +1438,19 @@ void SideListView::setup_menu_listview()
 
 spListviewMap SideListView::_create_listview(std::string node_name)
 {
-    Node* sidebar_panel = this->parent->getChildByName("sidebar_panel");
+    cocos2d::Node* sidebar_panel = this->parent->getChildByName("sidebar_panel");
 
-	auto orig_listview = static_cast<ui::ListView*>(sidebar_panel->getChildByName(node_name));
+	auto orig_listview = static_cast<cocos2d::ui::ListView*>(sidebar_panel->getChildByName(node_name));
 
     spListviewMap result = std::make_shared<listviewMap>();
     for (const auto& pair : BUILDUP->city->buildings)
     {
         spBuilding building = pair.second;
-        auto listview = dynamic_cast<ui::ListView*>(orig_listview->clone());
+        auto listview = dynamic_cast<cocos2d::ui::ListView*>(orig_listview->clone());
         sidebar_panel->addChild(listview);
 
         listview->setScrollBarAutoHideEnabled(false);
-        listview->setScrollBarPositionFromCorner(Vec2(10, 20));
+        listview->setScrollBarPositionFromCorner(cocos2d::Vec2(10, 20));
         listview->setScrollBarWidth(20.0f);
 
         listview->setScrollBarOpacity(255);

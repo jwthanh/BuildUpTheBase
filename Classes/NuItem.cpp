@@ -43,13 +43,11 @@
 #include "progress/NumberScaling.h"
 
 
-USING_NS_CC;
-
 cocos2d::ui::Button* NuItem::orig_button = NULL;
-cocos2d::TTFConfig NuItem::ttf_config = TTFConfig(
+cocos2d::TTFConfig NuItem::ttf_config = cocos2d::TTFConfig(
     "pixelmix.ttf",
     16,
-    GlyphCollection::CUSTOM,
+    cocos2d::GlyphCollection::CUSTOM,
     "\"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüış \n",
     false,
     2
@@ -83,7 +81,7 @@ void NuItem::init_orig_item()
     //sets a long blank string to save on allocations later
     auto set_blank_chars = [](cocos2d::Node* textbmfont_node)
     {
-        dynamic_cast<ui::TextBMFont*>(textbmfont_node)->setString(std::string("", 200));
+        dynamic_cast<cocos2d::ui::TextBMFont*>(textbmfont_node)->setString(std::string("", 200));
     };
 
     set_blank_chars(NuItem::orig_button->getChildByName("title_lbl"));
@@ -94,7 +92,7 @@ void NuItem::init_orig_item()
 
 bool NuItem::init(cocos2d::Node* parent)
 {
-    ui::Widget::init();
+    cocos2d::ui::Widget::init();
 
     if (NuItem::orig_button == NULL)
     {
@@ -102,7 +100,7 @@ bool NuItem::init(cocos2d::Node* parent)
     };
 
     //clone orig button, background is still messed though
-    this->button = (ui::Button*)NuItem::orig_button->clone();
+    this->button = (cocos2d::ui::Button*)NuItem::orig_button->clone();
     this->button->setSwallowTouches(false);
 
 
@@ -117,7 +115,7 @@ bool NuItem::init(cocos2d::Node* parent)
     this->button->removeFromParent();
 
     parent->addChild(this); //FIXME hack to get the selector to run. ideally the button would be a child of this but then button doesnt go on the right spot
-    ui::ListView* scrollview_parent = dynamic_cast<ui::ListView*>(parent);
+    cocos2d::ui::ListView* scrollview_parent = dynamic_cast<cocos2d::ui::ListView*>(parent);
     if (scrollview_parent)
     {
         scrollview_parent->pushBackCustomItem(button);
@@ -207,7 +205,7 @@ void NuItem::set_original_image(std::string path)
     this->_original_image_path = path;
 };
 
-void NuItem::set_image(std::string path, ui::Widget::TextureResType texture_type)
+void NuItem::set_image(std::string path, cocos2d::ui::Widget::TextureResType texture_type)
 {
     //same loaded image, do nothing
     if (this->item_icon->getRenderFile().file == path)
@@ -218,7 +216,7 @@ void NuItem::set_image(std::string path, ui::Widget::TextureResType texture_type
     image_view_scale9_hack(this->item_icon);
     this->item_icon->loadTexture(path, texture_type);
 
-    ui::Scale9Sprite* sprite = dynamic_cast<ui::Scale9Sprite*>(this->item_icon->getVirtualRenderer());
+    cocos2d::ui::Scale9Sprite* sprite = dynamic_cast<cocos2d::ui::Scale9Sprite*>(this->item_icon->getVirtualRenderer());
     if (sprite)
     {
         sprite->getSprite()->getTexture()->setAliasTexParameters();
@@ -307,7 +305,7 @@ void ShopNuItem::update_func(float dt)
     if (this->get_been_bought())
     {
         //Check if image has been updated
-        ResourceData data = this->item_icon->getRenderFile();
+        cocos2d::ResourceData data = this->item_icon->getRenderFile();
         std::string checkbox_path = "grey_boxCheckmark.png";
         if (data.file != checkbox_path)
         {
@@ -326,7 +324,7 @@ void ShopNuItem::update_func(float dt)
         this->set_cost_lbl("---");
         try_set_enable(false);
         //try_set_text_color(this->cost_lbl, Color4B::GRAY);
-        try_set_node_color(this->button, Color3B::WHITE);
+        try_set_node_color(this->button, cocos2d::Color3B::WHITE);
     }
     else if (total_coins < cost || !this->custom_status_check(dt))
     {
@@ -337,7 +335,7 @@ void ShopNuItem::update_func(float dt)
             this->_last_shop_cost = rounded_cost;
         };
 
-        Color3B color = { 243, 162, 173 };
+        cocos2d::Color3B color = { 243, 162, 173 };
         //try_set_text_color(this->cost_lbl, Color4B::RED);
         try_set_node_color(this->button, color);
     }
@@ -350,7 +348,7 @@ void ShopNuItem::update_func(float dt)
             this->_last_shop_cost = rounded_cost;
         };
 
-        try_set_node_color(this->button, Color3B::WHITE);
+        try_set_node_color(this->button, cocos2d::Color3B::WHITE);
     };
 }
 
@@ -569,7 +567,7 @@ void TargetRecipeNuItem::other_init(spRecipe recipe)
             harvest_scene->target_recipe = this->recipe;
             harvest_scene->removeChildByName("harvestable");
 
-            auto arena_kill_panel = dynamic_cast<ui::Layout*>(harvest_scene->getChildByName("arena_kill_panel"));
+            auto arena_kill_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("arena_kill_panel"));
             auto particle = MagicEmitter::create("TargetRecipeChanged");
 
             auto pos = arena_kill_panel->getPosition();
@@ -603,7 +601,7 @@ void TargetRecipeNuItem::update_func(float dt)
         this->set_image("anvil.png");
 
         this->try_set_enable(false);
-        Color3B selected_color = {82, 148, 126}; //green
+        cocos2d::Color3B selected_color = {82, 148, 126}; //green
         try_set_node_color(this->button, selected_color);
 
     }
@@ -611,7 +609,7 @@ void TargetRecipeNuItem::update_func(float dt)
         this->set_image("grey_boxCheckmark.png");
 
         this->try_set_enable(true);
-        Color3B unselected_color = Color3B::WHITE;
+        cocos2d::Color3B unselected_color = cocos2d::Color3B::WHITE;
         try_set_node_color(this->button, unselected_color);
     }
 
@@ -816,11 +814,11 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
             auto building = BUILDUP->get_target_building();
             building->set_building_level(this->building_level);
 
-            Scene* scene = Director::getInstance()->getRunningScene();
+            cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
             Node* harvest_scene = scene->getChildByName("HarvestScene");
             if (harvest_scene)
             {
-                auto explosion_parts = ParticleSystemQuad::create("particles/upgrade.plist");
+                auto explosion_parts = cocos2d::ParticleSystemQuad::create("particles/upgrade.plist");
                 explosion_parts->setPosition({570, 300});
                 explosion_parts->setAutoRemoveOnFinish(true);
 
@@ -950,19 +948,19 @@ void HarvesterShopNuItem::my_init_sprite()
     };
     for (auto path : sprites)
     {
-        base_node->addChild(Sprite::createWithSpriteFrameName(path));
+        base_node->addChild(cocos2d::Sprite::createWithSpriteFrameName(path));
     }
 
     base_node->setPosition(8,8);
     base_node->setScaleY(-1.0f);
 
-    RenderTexture* rt = RenderTexture::create(16, 16);
+    cocos2d::RenderTexture* rt = cocos2d::RenderTexture::create(16, 16);
     rt->retain();
     rt->begin();
     base_node->visit();
     rt->end();
 
-    ui::Scale9Sprite* vr = dynamic_cast<ui::Scale9Sprite*>(this->item_icon->getVirtualRenderer());
+    cocos2d::ui::Scale9Sprite* vr = dynamic_cast<cocos2d::ui::Scale9Sprite*>(this->item_icon->getVirtualRenderer());
     vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
 };
 
@@ -1128,19 +1126,19 @@ void SalesmanShopNuItem::my_init_sprite()
     };
     for (auto path : sprites)
     {
-        base_node->addChild(Sprite::createWithSpriteFrameName(path));
+        base_node->addChild(cocos2d::Sprite::createWithSpriteFrameName(path));
     }
 
     base_node->setPosition(8,8);
     base_node->setScaleY(-1.0f);
 
-    auto rt = RenderTexture::create(16, 16);
+    auto rt = cocos2d::RenderTexture::create(16, 16);
     rt->retain();
     rt->begin();
     base_node->visit();
     rt->end();
 
-    ui::Scale9Sprite* vr = (ui::Scale9Sprite*)this->item_icon->getVirtualRenderer();
+    cocos2d::ui::Scale9Sprite* vr = (cocos2d::ui::Scale9Sprite*)this->item_icon->getVirtualRenderer();
     vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
 };
 
@@ -1255,18 +1253,18 @@ void ConsumerShopNuItem::my_init_sprite()
     };
     for (auto path : sprites)
     {
-        base_node->addChild(Sprite::createWithSpriteFrameName(path));
+        base_node->addChild(cocos2d::Sprite::createWithSpriteFrameName(path));
     }
 
     base_node->setPosition(8,8);
     base_node->setScaleY(-1.0f);
 
-    auto rt = RenderTexture::create(16, 16);
+    auto rt = cocos2d::RenderTexture::create(16, 16);
     rt->retain();
     rt->begin();
     base_node->visit();
     rt->end();
 
-    ui::Scale9Sprite* vr = (ui::Scale9Sprite*)this->item_icon->getVirtualRenderer();
+    cocos2d::ui::Scale9Sprite* vr = (cocos2d::ui::Scale9Sprite*)this->item_icon->getVirtualRenderer();
     vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
 };

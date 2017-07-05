@@ -15,7 +15,6 @@
 #include "FileOperation.h"
 
 
-USING_NS_CC;
 
 /* easy logging stuff*/
 #define ELPP_DISABLE_DEFAULT_CRASH_HANDLING
@@ -49,7 +48,7 @@ void AppDelegate::initGLContextAttrs()
     //red,green,blue,alpha,depth,stencil
     GLContextAttrs glContextAttrs = { 8, 8, 8, 8, 24, 8 };
 
-    GLView::setGLContextAttrs(glContextAttrs);
+    cocos2d::GLView::setGLContextAttrs(glContextAttrs);
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
@@ -71,14 +70,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     el::Loggers::reconfigureLogger("default", conf);
 
     // initialize director
-    auto director = Director::getInstance();
+    auto director = cocos2d::Director::getInstance();
     auto glview = director->getOpenGLView();
     if (!glview) {
-        glview = GLViewImpl::create("Build up a base!");
+        glview = cocos2d::GLViewImpl::create("Build up a base!");
         director->setOpenGLView(glview);
     }
 
-    Size base_size = Size(960, 640);
+    cocos2d::Size base_size = cocos2d::Size(960, 640);
 
     auto set_resolution = [glview, director, base_size](float x, float y) {
         glview->setFrameSize(x, y);
@@ -118,7 +117,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 #endif
 
     //add the cocos studio paths. it ignores its own export path so you need to tell it where else to look
-    FileUtils::getInstance()->addSearchPath("editor");
+    cocos2d::FileUtils::getInstance()->addSearchPath("editor");
 
     //seed rng
     std::srand((int)time(NULL));
@@ -126,19 +125,19 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // auto console = director->getConsole();
     // console->listenOnTCP(1234);
 
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    Vec2 center_pos = Vec2(
+    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+    cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+    cocos2d::Vec2 center_pos = cocos2d::Vec2(
         origin.x + visibleSize.width / 2.0f,
         origin.y + visibleSize.height / 2.0f
     );
 
-    Scene* loading_scene = Scene::create();
-    Sprite* loading_bg = Sprite::create("loading/loading.png");
+    cocos2d::Scene* loading_scene = cocos2d::Scene::create();
+    cocos2d::Sprite* loading_bg = cocos2d::Sprite::create("loading/loading.png");
     loading_scene->addChild(loading_bg);
 
     loading_bg->setPosition(center_pos);
-    loading_bg->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    loading_bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
     loading_bg->getTexture()->setAliasTexParameters();
     loading_bg->setScale(16.0f);
 
@@ -152,17 +151,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
             this->preload_all();
             CCLOG("...done preloading");
 
-            Scene* scene = Scene::create();
+            cocos2d::Scene* scene = cocos2d::Scene::create();
             scene->setName("root_scene");
 
-            Sprite* loading_bg = Sprite::create("loading/loading.png");
+            cocos2d::Sprite* loading_bg = cocos2d::Sprite::create("loading/loading.png");
             loading_bg->setName("loading_bg");
             scene->addChild(loading_bg);
 
             HarvestScene* harvest_scene = HarvestScene::create();
 
             loading_bg->setPosition(get_center_pos());
-            loading_bg->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+            loading_bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
             loading_bg->getTexture()->setAliasTexParameters();
             loading_bg->setScale(16.0f);
 
@@ -173,7 +172,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
             //this schedules a mainloop to run every frame
             MainLoop::getInstance()->schedule();
 
-            auto director = Director::getInstance();
+            auto director = cocos2d::Director::getInstance();
             director->replaceScene(scene);
         };
         loading_scene->scheduleOnce(load_func, 0.00f, "whateverloading");
@@ -189,7 +188,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
-    Director::getInstance()->stopAnimation();
+    cocos2d::Director::getInstance()->stopAnimation();
 
     // GameLogic::save_all(); //causes crash on android when saving from city or items scene. Dont know why
 
@@ -199,7 +198,7 @@ void AppDelegate::applicationDidEnterBackground() {
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
-    Director::getInstance()->startAnimation();
+    cocos2d::Director::getInstance()->startAnimation();
 
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
@@ -214,7 +213,7 @@ void AppDelegate::preload_all()
 
 void AppDelegate::preload_sprites()
 {
-    auto cache = SpriteFrameCache::getInstance();
+    auto cache = cocos2d::SpriteFrameCache::getInstance();
 
     CCLOG("start loading sprites");
 
@@ -230,10 +229,10 @@ void AppDelegate::preload_sprites()
         cache->addSpriteFramesWithFile(path);
     };
 
-    auto texture_cache = Director::getInstance()->getTextureCache();
+    auto texture_cache = cocos2d::Director::getInstance()->getTextureCache();
     auto cache_and_alias = [texture_cache](std::string path)
     {
-        Texture2D* new_tex = texture_cache->addImage(path);
+        cocos2d::Texture2D* new_tex = texture_cache->addImage(path);
         new_tex->setAliasTexParameters();
     };
     texture_cache->addImage("items/dagger.png");
@@ -282,7 +281,7 @@ void AppDelegate::preload_particles()
 
 void AppDelegate::init_magic_particles()
 {
-    cocos2d::Size winSize = Director::getInstance()->getWinSizeInPixels();
+    cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSizeInPixels();
 
     int client_wi=winSize.width;
     int client_he=winSize.height;

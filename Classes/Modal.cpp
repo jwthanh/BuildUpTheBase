@@ -16,8 +16,6 @@
 #include "2d/CCLayer.h"
 
 
-USING_NS_CC;
-
 cocos2d::Node* BaseModal::_build_root_node()
 {
     return get_prebuilt_node_from_csb("editor/details/message_detail.csb");
@@ -26,7 +24,7 @@ cocos2d::Node* BaseModal::_build_root_node()
 bool BaseModal::init()
 {
     //background color
-    LayerColor* layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
+    cocos2d::LayerColor* layer_color = cocos2d::LayerColor::create({30, 144, 255, 85});
     this->addChild(layer_color);
 
     cocos2d::Node* root_message_node = this->_build_root_node();
@@ -34,7 +32,7 @@ bool BaseModal::init()
     this->_node->removeFromParent();
     this->_node->setPosition(cocos2d::Vec2{960, 640}/ 2);
     this->addChild(this->_node);
-    this->_close_panel = dynamic_cast<ui::Layout*>(this->_node->getChildByName("close_panel"));
+    this->_close_panel = dynamic_cast<cocos2d::ui::Layout*>(this->_node->getChildByName("close_panel"));
 
     //title
     this->_title_lbl = dynamic_cast<cocos2d::ui::Text*>(this->_node->getChildByName("title_lbl"));
@@ -42,14 +40,14 @@ bool BaseModal::init()
     set_aliasing(this->_title_lbl, true);
 
     //scrollable body
-    this->_body_scroll = dynamic_cast<ui::ListView*>(this->_node->getChildByName("body_scroll"));
+    this->_body_scroll = dynamic_cast<cocos2d::ui::ListView*>(this->_node->getChildByName("body_scroll"));
     this->_body_scroll->setScrollBarEnabled(true);
     this->_body_scroll->scrollToTop(0.0f, false);
     this->_body_scroll->setUnifySizeEnabled(true);
 
     //invisible layout to tap to close
-    this->_exit_layout = ui::Layout::create();
-    this->_exit_layout->setAnchorPoint(Vec2::ZERO);
+    this->_exit_layout = cocos2d::ui::Layout::create();
+    this->_exit_layout->setAnchorPoint(cocos2d::Vec2::ZERO);
     this->_exit_layout->setContentSize({ 1000, 1000 });
     this->_exit_layout->setTouchEnabled(true);
     this->addChild(this->_exit_layout, -1); //add it behind everything else in this.
@@ -96,7 +94,7 @@ bool TextBlobModal::init()
 void TextBlobModal::set_body(const std::string& body)
 {
     std::string raw_log_string = body;
-    cocos2d::TTFConfig ttf_config = TTFConfig("pixelmix.ttf", 24, GlyphCollection::ASCII, NULL, false, 2);
+    cocos2d::TTFConfig ttf_config = cocos2d::TTFConfig("pixelmix.ttf", 24, cocos2d::GlyphCollection::ASCII, NULL, false, 2);
 
     this->_body_scroll->removeAllChildren();
 
@@ -107,10 +105,10 @@ void TextBlobModal::set_body(const std::string& body)
 
     for (auto s : split_messages)
     {
-        auto line = ui::Text::create(s, "", 24.0f);
+        auto line = cocos2d::ui::Text::create(s, "", 24.0f);
         line->setTextAreaSize({700.0, 0});
 
-        Label* renderer = (Label*)line->getVirtualRenderer();
+        cocos2d::Label* renderer = (cocos2d::Label*)line->getVirtualRenderer();
         renderer->setTTFConfig(ttf_config);
         set_aliasing(renderer);
 

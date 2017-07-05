@@ -9,41 +9,39 @@
 #include "2d/CCSprite.h"
 #include "base/CCDirector.h"
 
-USING_NS_CC;
-
-Label* do_float(float x, float x_variation, float y, float y_variation, float duration)
+cocos2d::Label* do_float(float x, float x_variation, float y, float y_variation, float duration)
 {
-    auto label = Label::createWithBMFont("pixelmix_24x2.fnt", "");
+    auto label = cocos2d::Label::createWithBMFont("pixelmix_24x2.fnt", "");
     //label->enableOutline(Color4B::BLACK, 2);
 
     float x_scale = sx(x + (x_variation * CCRANDOM_MINUS1_1()));
     float y_scale = sy(y + (y_variation * CCRANDOM_MINUS1_1()));
 
-    ccBezierConfig config = {
-        Vec2(x_scale, y_scale),
-        Vec2(x_scale, x_scale-y_scale),
-        Vec2(y_scale-x_scale, y_scale)
+    cocos2d::ccBezierConfig config = {
+        cocos2d::Vec2(x_scale, y_scale),
+        cocos2d::Vec2(x_scale, x_scale-y_scale),
+        cocos2d::Vec2(y_scale-x_scale, y_scale)
     };
 
 
     duration += (CCRANDOM_MINUS1_1()*0.30f*duration);
-    auto move_action = EaseIn::create(BezierBy::create(duration, config), 2.3f);
+    auto move_action = cocos2d::EaseIn::create(cocos2d::BezierBy::create(duration, config), 2.3f);
 
     //idk why this was a thing anyway, pretty sure I didn't like it much
     // label->runAction(TintTo::create(duration*6, Color3B::RED));
 
     label->setScale(0.10f);
-    label->runAction(Sequence::createWithTwoActions(
-        ScaleTo::create(0.1f, 1.0f),
-        ScaleBy::create(duration*6, 0.35f)
+    label->runAction(cocos2d::Sequence::createWithTwoActions(
+        cocos2d::ScaleTo::create(0.1f, 1.0f),
+        cocos2d::ScaleBy::create(duration*6, 0.35f)
     ));
 
-    label->runAction(FadeOut::create(duration));
+    label->runAction(cocos2d::FadeOut::create(duration));
 
     label->runAction(
-        Sequence::createWithTwoActions(
+        cocos2d::Sequence::createWithTwoActions(
             move_action,
-            RemoveSelf::create()
+            cocos2d::RemoveSelf::create()
         )
     );
     return label;
@@ -63,18 +61,18 @@ int FLASH_ACTION_TAG = 112233442; //arbitrary number chosen
 cocos2d::Sequence* build_flash_action(
     float duration,
     float scale, float original_scale,
-    cocos2d::Color3B to_color = Color3B::RED, cocos2d::Color3B end_color = Color3B::WHITE
+    cocos2d::Color3B to_color = cocos2d::Color3B::RED, cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
     )
 {
-    auto tint = TintTo::create(duration, to_color);
-    auto tint_rev = TintTo::create(duration, end_color);
+    auto tint = cocos2d::TintTo::create(duration, to_color);
+    auto tint_rev = cocos2d::TintTo::create(duration, end_color);
 
-    auto scale_to = ScaleTo::create(duration, scale);
-    auto scale_rev = ScaleTo::create(duration, original_scale);
-    auto flash_sequence = Sequence::create(
-        Spawn::createWithTwoActions(tint, EaseBackOut::create(scale_to)),
-        DelayTime::create(duration * 2),
-        Spawn::createWithTwoActions(tint_rev, scale_rev),
+    auto scale_to = cocos2d::ScaleTo::create(duration, scale);
+    auto scale_rev = cocos2d::ScaleTo::create(duration, original_scale);
+    auto flash_sequence = cocos2d::Sequence::create(
+        cocos2d::Spawn::createWithTwoActions(tint, cocos2d::EaseBackOut::create(scale_to)),
+        cocos2d::DelayTime::create(duration * 2),
+        cocos2d::Spawn::createWithTwoActions(tint_rev, scale_rev),
         NULL
         );
     flash_sequence->setTag(FLASH_ACTION_TAG);
@@ -83,8 +81,8 @@ cocos2d::Sequence* build_flash_action(
 
 void run_flash_action(
     cocos2d::Node* target, float duration = 0.1f, float scale = 1.2f,
-    float original_scale = 1.0f, cocos2d::Color3B to_color = Color3B::RED
-    , cocos2d::Color3B end_color = Color3B::WHITE
+    float original_scale = 1.0f, cocos2d::Color3B to_color = cocos2d::Color3B::RED
+    , cocos2d::Color3B end_color = cocos2d::Color3B::WHITE
 )
 {
     //clear previous flash animation
@@ -106,21 +104,21 @@ void animate_modal_open(
 
     target->setScale(0);
 
-    auto scale_to_end_scale = EaseOut::create(
-        ScaleTo::create(duration, end_scale, end_scale),
+    auto scale_to_end_scale = cocos2d::EaseOut::create(
+        cocos2d::ScaleTo::create(duration, end_scale, end_scale),
         1.5f
     );
 
-    if (end_pos == Vec2{-1, -1})
+    if (end_pos == cocos2d::Vec2{-1, -1})
     {
         end_pos = get_center_pos();
     }
 
-    auto move_to_end_pos = MoveTo::create(duration, end_pos);
+    auto move_to_end_pos = cocos2d::MoveTo::create(duration, end_pos);
 
-    Sequence* seq = Sequence::create(
-        EaseBackOut::create(
-            Spawn::createWithTwoActions(move_to_end_pos, scale_to_end_scale)
+    cocos2d::Sequence* seq = cocos2d::Sequence::create(
+        cocos2d::EaseBackOut::create(
+            cocos2d::Spawn::createWithTwoActions(move_to_end_pos, scale_to_end_scale)
         ),
         NULL
     );
@@ -181,13 +179,13 @@ void set_aliasing(cocos2d::Sprite* sprite, bool val)
 
 void set_aliasing(cocos2d::ui::Text* text, bool val)
 {
-    Label* renderer = (Label*)text->getVirtualRenderer();
+    cocos2d::Label* renderer = (cocos2d::Label*)text->getVirtualRenderer();
     set_aliasing(renderer, val);
 };
 
 void set_aliasing(cocos2d::ui::TextField* text, bool val)
 {
-    Label* renderer = dynamic_cast<Label*>(text->getVirtualRenderer());
+    cocos2d::Label* renderer = dynamic_cast<cocos2d::Label*>(text->getVirtualRenderer());
     set_aliasing(renderer, val);
 };
 
@@ -242,17 +240,18 @@ void image_view_scale9_hack(cocos2d::ui::ImageView* img_view)
     img_view->setScale9Enabled(!img_view->isScale9Enabled());
 };
 
-void prep_button(ui::Button* button)
+void prep_button(cocos2d::ui::Button* button)
 {
     load_default_button_textures(button);
     button->setTitleFontName("fonts/pixelmix.ttf"); //required
-    button->getTitleRenderer()->setTextColor(Color4B::WHITE);
-    button->getTitleRenderer()->enableOutline(Color4B::BLACK, 2);
+    button->getTitleRenderer()->setTextColor(cocos2d::Color4B::WHITE);
+    button->getTitleRenderer()->enableOutline(cocos2d::Color4B::BLACK, 2);
     set_aliasing(button);
 }
 
-void prep_back_button(ui::Button* back_button)
+void prep_back_button(cocos2d::ui::Button* back_button)
 {
     prep_button(back_button);
-    bind_touch_ended(back_button, [](){ Director::getInstance()->popScene();});
+    bind_touch_ended(back_button, [](){
+                     cocos2d::Director::getInstance()->popScene();});
 }

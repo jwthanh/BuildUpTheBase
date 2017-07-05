@@ -51,8 +51,6 @@
 #include "Tutorial.h"
 #include "2d/CCLabel.h"
 
-USING_NS_CC;
-
 Size Harvestable::get_sprite_size()
 {
     return this->sprite->getContentSize() * this->sprite->getScale();
@@ -283,8 +281,6 @@ void Harvestable::animate_touch_start(cocos2d::Touch* touch)
             run_flash_action(raw_ingredient_count, 0.2f, 1.15f, 1.0f, Color3B::RED, Color3B::WHITE);
         }
         building_info_panel->runAction(FShake::actionWithDuration(0.1f, 1.5f, 1.5f));
-
-        ui::ListView* inventory_basic_listview = dynamic_cast<ui::ListView*>(harvest_scene->getChildByName("inventory_basic_listview"));
 
         Node* ing_panel = harvest_scene->get_visible_ing_panel(ing_type);
         if (ing_panel == NULL)
