@@ -154,16 +154,12 @@ bool NuItem::init(cocos2d::Node* parent)
         this->desc_lbl->setPosition(orig_desc_pos);
         auto orig_desc_size = NuItem::orig_button->getChildByName("description_lbl")->getContentSize();
 
-        //if theres no cost, move count up, widen description
-        if (this->cost_lbl->getStringLength() == 0) {
-            set_dimensions(this->desc_lbl, 450, 0);
-        };
-
-        //if theres no count in place, widen description
-        if (this->count_lbl->getStringLength() == 0)
-        {
-            set_dimensions(this->desc_lbl, 450, 0);
+        //if there's no cost or count to show, widen the description
+        if (this->cost_lbl->getStringLength() == 0 && this->count_lbl->getStringLength() == 0) {
+            set_dimensions(this->desc_lbl, 650, 0);
         }
+
+        //TODO potentially bring back repositioning the labels if one or the other is missing
     };
     this->schedule(reposition_labels, FPS_4, "reposition_labels");
     reposition_labels(0);
