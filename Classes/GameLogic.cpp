@@ -1381,14 +1381,18 @@ void GameDirector::switch_to_achievement_menu()
     int completed = std::count_if(achievements.begin(), achievements.end(), is_completed);
     std::stringstream completed_ss;
     completed_ss << "Completed:\n" << completed;
-    dynamic_cast<ui::TextBMFont*>(panel->getChildByName("unlocked_lbl"))->setString(completed_ss.str());
+    auto unlocked_lbl = dynamic_cast<ui::TextBMFont*>(panel->getChildByName("unlocked_lbl"));
+    unlocked_lbl->setString(completed_ss.str());
+    static_cast<Label*>(unlocked_lbl->getVirtualRenderer())->setHorizontalAlignment(TextHAlignment::CENTER);
 
     //remaining achievements
     auto is_not_completed = [](const std::shared_ptr<BaseAchievement>& achievement) { return !achievement->get_completed(); };
     int remaining = std::count_if(achievements.begin(), achievements.end(), is_not_completed);
     std::stringstream not_completed_ss;
     not_completed_ss << "Remaining:\n" << remaining;
-    dynamic_cast<ui::TextBMFont*>(panel->getChildByName("remaining_lbl"))->setString(not_completed_ss.str());
+    auto remaining_lbl = dynamic_cast<ui::TextBMFont*>(panel->getChildByName("remaining_lbl"));
+    remaining_lbl->setString(not_completed_ss.str());
+    static_cast<Label*>(remaining_lbl->getVirtualRenderer())->setHorizontalAlignment(TextHAlignment::CENTER);
 
     for (std::shared_ptr<BaseAchievement>& achievement : achievements)
     {
