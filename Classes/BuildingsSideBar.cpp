@@ -1298,8 +1298,8 @@ void SideListView::setup_menu_listview()
             BuildingNuItem* menu_item;
             menu_item = BuildingNuItem::create(listview, building);
             menu_item->setName(child_name);
-            menu_item->set_title("Save Game");
-            menu_item->set_description("Autosaves every 30s, but you never know.");
+            menu_item->set_title("Force Save Game");
+            menu_item->set_description("Saves every 30s, but you're feeling large and in charge.");
             menu_item->set_image("lineDark29.png");
 
             menu_item->set_touch_ended_callback([]()
