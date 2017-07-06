@@ -1249,6 +1249,10 @@ void GameDirector::switch_to_bank_menu()
     panel->removeFromParent();
     scene->addChild(panel);
 
+    cocos2d::ui::TextBMFont* desc_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(panel->getChildByName("desc_lbl"));
+    set_dimensions(desc_lbl, 920, 0);
+    static_cast<Label*>(desc_lbl->getVirtualRenderer())->setHorizontalAlignment(TextHAlignment::CENTER);
+
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
     prep_back_button(back_btn);
 
