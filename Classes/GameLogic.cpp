@@ -1376,17 +1376,19 @@ void GameDirector::switch_to_achievement_menu()
     };
     std::sort(achievements.begin(), achievements.end(), order_by_completed);
 
+    //completed achievements
     auto is_completed = [](const std::shared_ptr<BaseAchievement>& achievement) { return achievement->get_completed(); };
     int completed = std::count_if(achievements.begin(), achievements.end(), is_completed);
     std::stringstream completed_ss;
     completed_ss << "Completed:\n" << completed;
-    ((ui::TextBMFont*)panel->getChildByName("unlocked_lbl"))->setString(completed_ss.str());
+    dynamic_cast<ui::TextBMFont*>(panel->getChildByName("unlocked_lbl"))->setString(completed_ss.str());
 
+    //remaining achievements
     auto is_not_completed = [](const std::shared_ptr<BaseAchievement>& achievement) { return !achievement->get_completed(); };
     int remaining = std::count_if(achievements.begin(), achievements.end(), is_not_completed);
     std::stringstream not_completed_ss;
     not_completed_ss << "Remaining:\n" << remaining;
-    ((ui::TextBMFont*)panel->getChildByName("remaining_lbl"))->setString(not_completed_ss.str());
+    dynamic_cast<ui::TextBMFont*>(panel->getChildByName("remaining_lbl"))->setString(not_completed_ss.str());
 
     for (std::shared_ptr<BaseAchievement>& achievement : achievements)
     {
@@ -1397,6 +1399,11 @@ void GameDirector::switch_to_achievement_menu()
         //reset size to width of container
         nuitem->button->setContentSize({ achievement_pageview->getInnerContainerSize().width, nuitem->button->getContentSize().height });
         nuitem->set_progress_panel_visible(true);
+
+        //set the desc label wider
+        nuitem->unschedule("reposition_labels");
+        set_dimensions(nuitem->desc_lbl, 1000, 0);
+
         auto counted_achievement = dynamic_cast<CountAchievement*>(achievement.get());
         if (counted_achievement != NULL) {
             auto current = counted_achievement->get_current_count();
