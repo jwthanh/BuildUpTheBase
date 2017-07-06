@@ -70,6 +70,10 @@ void set_dimensions(cocos2d::Label* label, float width, float height);
 void set_dimensions(cocos2d::ui::Text* text, float width, float height);
 void set_dimensions(cocos2d::ui::TextBMFont* text, float width, float height);
 
+void set_horizontal_center_align(cocos2d::Label* label);
+void set_horizontal_center_align(cocos2d::ui::Text* text);
+void set_horizontal_center_align(cocos2d::ui::TextBMFont* text);
+
 //FIXME (by upgrading cocos probably) this resets ImageView somehow so loadTexture doesn't crash
 // so we toggle it once to change it, then toggle it again to reset to default
 void image_view_scale9_hack(cocos2d::ui::ImageView* img_view);

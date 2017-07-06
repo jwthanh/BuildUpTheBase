@@ -632,7 +632,7 @@ void BaseScene::create_info_panel()
 
     auto building_name = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("building_name"));
     set_dimensions(building_name, 175, 0);
-    static_cast<Label*>(building_name->getVirtualRenderer())->setHorizontalAlignment(TextHAlignment::CENTER);
+    set_horizontal_center_align(building_name);
     //building_name->setFntFile("pixelmix_16x2.fnt");
     auto update_building_name = [building_name](float dt){
         building_name->setString(BUILDUP->get_target_building()->name);
@@ -1278,7 +1278,7 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
 
     ui::TextBMFont* resource_description = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("resource_description"));
     set_dimensions(resource_description, 375, 0);
-    static_cast<Label*>(resource_description->getVirtualRenderer())->setHorizontalAlignment(TextHAlignment::CENTER);
+    set_horizontal_center_align(resource_description);
     resource_description->setString(res_data.get_description());
 
     auto count_lbl = dynamic_cast<ui::TextBMFont*>(alert_panel->getChildByName("count_lbl"));

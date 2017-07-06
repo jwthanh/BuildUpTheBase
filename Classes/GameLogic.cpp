@@ -1251,7 +1251,7 @@ void GameDirector::switch_to_bank_menu()
 
     cocos2d::ui::TextBMFont* desc_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(panel->getChildByName("desc_lbl"));
     set_dimensions(desc_lbl, 920, 0);
-    static_cast<Label*>(desc_lbl->getVirtualRenderer())->setHorizontalAlignment(TextHAlignment::CENTER);
+    set_horizontal_center_align(desc_lbl);
 
     auto back_btn = dynamic_cast<ui::Button*>(panel->getChildByName("back_btn"));
     prep_back_button(back_btn);
@@ -1383,7 +1383,7 @@ void GameDirector::switch_to_achievement_menu()
     completed_ss << "Completed:\n" << completed;
     auto unlocked_lbl = dynamic_cast<ui::TextBMFont*>(panel->getChildByName("unlocked_lbl"));
     unlocked_lbl->setString(completed_ss.str());
-    static_cast<Label*>(unlocked_lbl->getVirtualRenderer())->setHorizontalAlignment(TextHAlignment::CENTER);
+    set_horizontal_center_align(unlocked_lbl);
 
     //remaining achievements
     auto is_not_completed = [](const std::shared_ptr<BaseAchievement>& achievement) { return !achievement->get_completed(); };
@@ -1392,7 +1392,7 @@ void GameDirector::switch_to_achievement_menu()
     not_completed_ss << "Remaining:\n" << remaining;
     auto remaining_lbl = dynamic_cast<ui::TextBMFont*>(panel->getChildByName("remaining_lbl"));
     remaining_lbl->setString(not_completed_ss.str());
-    static_cast<Label*>(remaining_lbl->getVirtualRenderer())->setHorizontalAlignment(TextHAlignment::CENTER);
+    set_horizontal_center_align(remaining_lbl);
 
     for (std::shared_ptr<BaseAchievement>& achievement : achievements)
     {

@@ -234,6 +234,21 @@ void set_dimensions(cocos2d::ui::TextBMFont* text, float width, float height)
     set_dimensions(dynamic_cast<cocos2d::Label*>(text->getVirtualRenderer()), width, height);
 };
 
+void set_horizontal_center_align(cocos2d::Label* label)
+{
+    label->setHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
+};
+
+void set_horizontal_center_align(cocos2d::ui::Text* text)
+{
+    set_horizontal_center_align(dynamic_cast<cocos2d::Label*>(text->getVirtualRenderer()));
+};
+
+void set_horizontal_center_align(cocos2d::ui::TextBMFont* text)
+{
+    set_horizontal_center_align(dynamic_cast<cocos2d::Label*>(text->getVirtualRenderer()));
+};
+
 void image_view_scale9_hack(cocos2d::ui::ImageView* img_view)
 {
     img_view->setScale9Enabled(!img_view->isScale9Enabled());
