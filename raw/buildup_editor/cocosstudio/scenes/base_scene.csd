@@ -497,11 +497,11 @@
                 <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_24x2.fnt" Plist="" />
               </AbstractNodeData>
             </Children>
-            <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-            <Position X="759.9976" Y="114.9999" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="616.6293" Y="114.9999" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7917" Y="0.1797" />
+            <PrePosition X="0.6423" Y="0.1797" />
             <PreSize X="0.2987" Y="0.0469" />
             <SingleColor A="255" R="150" G="200" B="255" />
             <FirstColor A="255" R="150" G="200" B="255" />

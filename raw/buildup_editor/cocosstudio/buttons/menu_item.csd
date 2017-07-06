@@ -9,7 +9,7 @@
           <AbstractNodeData Name="menu_item_btn" ActionTag="-490875392" Tag="21" IconVisible="False" LeftMargin="-400.0000" RightMargin="-400.0000" TopMargin="-100.0000" BottomMargin="-100.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="800.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="progress_panel" ActionTag="-1327047022" Tag="258" IconVisible="False" RightMargin="-600.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="progress_panel" ActionTag="-1327047022" Tag="258" IconVisible="False" LeftMargin="0.0001" RightMargin="-600.0000" TopMargin="1.3186" BottomMargin="-1.3186" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="1400.0000" Y="200.0000" />
                 <Children>
                   <AbstractNodeData Name="current_lbl" ActionTag="-714968081" Tag="279" IconVisible="False" LeftMargin="1078.9414" RightMargin="102.0586" TopMargin="34.0000" BottomMargin="134.0000" LabelText="123,456QuX" ctype="TextBMFontObjectData">
@@ -44,10 +44,10 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
-                <Position />
+                <Position X="0.0001" Y="-1.3186" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
+                <PrePosition X="0.0000" Y="-0.0066" />
                 <PreSize X="1.7500" Y="1.0000" />
                 <SingleColor A="255" R="150" G="200" B="255" />
                 <FirstColor A="255" R="150" G="200" B="255" />
