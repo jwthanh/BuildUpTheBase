@@ -156,7 +156,7 @@ bool NuItem::init(cocos2d::Node* parent)
 
         //if there's no cost or count to show, widen the description
         if (this->cost_lbl->getStringLength() == 0 && this->count_lbl->getStringLength() == 0) {
-            set_dimensions(this->desc_lbl, 650, 0);
+            set_dimensions(this->desc_lbl, 600, 0);
         }
 
         //TODO potentially bring back repositioning the labels if one or the other is missing
