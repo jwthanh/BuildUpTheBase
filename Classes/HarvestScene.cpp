@@ -680,6 +680,7 @@ void BaseScene::create_info_panel()
 
     auto harvester_count = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("harvester_count"));
     set_aliasing(harvester_count);
+    set_horizontal_center_align(harvester_count);
     auto update_harvester_count = [harvester_count](float dt)
     {
         spBuilding building = BUILDUP->get_target_building();
@@ -705,6 +706,7 @@ void BaseScene::create_info_panel()
     update_harvester_count(0);
 
     auto salesmen_count = dynamic_cast<ui::TextBMFont*>(building_info_panel->getChildByName("salesmen_count"));
+    set_horizontal_center_align(salesmen_count);
     auto update_salesmen_count = [salesmen_count](float dt)
     {
         spBuilding building = BUILDUP->get_target_building();
