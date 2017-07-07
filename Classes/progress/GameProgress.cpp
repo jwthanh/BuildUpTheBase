@@ -76,6 +76,10 @@ void GameProgress::update(float dt, City* city)
             if (this->_building_unlock_map[city->building_by_type(BuildingTypes::TheArena)] == true) {
                 this->_building_tab_map[building][TabTypes::DetailTab] = true;
             }
+        } else if (building->type == BuildingTypes::TheDump) {
+            if (this->_building_unlock_map[city->building_by_type(BuildingTypes::TheGraveyard)] == true) {
+                this->_building_tab_map[building][TabTypes::DetailTab] = true;
+            }
         } else if (building->type == BuildingTypes::TheMine) {
             if (this->_building_unlock_map[city->building_by_type(BuildingTypes::TheForest)] == true) {
                 this->_building_tab_map[building][TabTypes::DetailTab] = true;
