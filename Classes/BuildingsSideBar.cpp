@@ -758,7 +758,7 @@ void SideListView::setup_detail_listview()
             if (building->name == "The Mine")
             {
                 //transmute copper
-                spRecipe transmute_copper = std::make_shared<Recipe>("Transmute: Iron", "Gain 10 Copper\n -- costs 2 Iron");
+                spRecipe transmute_copper = std::make_shared<Recipe>("Transmute: Iron", "Gain 2 Iron\n -- costs 10 Copper");
                 transmute_copper->components = mistIngredient({
                     { Ingredient::SubType::Copper, 10 }
                 });
