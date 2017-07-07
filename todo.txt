@@ -142,3 +142,5 @@ you start off as garbage out of a spaceships ejection chute and then grow into y
 * notifications when things are unlocked
 * in the bank (possible others?) don't always just beautify_double everything, when you've got a lot of money, you need to hold the button for a while before you see any change
 * click and hold on buttons
+* Save item scavenging progress
+* allow Scavenge AFK
