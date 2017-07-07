@@ -976,6 +976,29 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
             work_ing_t map = { harv_type, ing_type };
             auto harvester_count = map_get(building->harvesters, map, def);
             harvester_count++;
+
+            auto harvest_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+            if (harvest_scene) {
+
+                auto floating_label = do_float();
+                floating_label->setString("+1");
+                floating_label->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
+
+                cocos2d::ui::Layout* building_info_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("building_info_panel"));
+                auto harvester_count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(building_info_panel->getChildByName("harvester_count"));
+
+                cocos2d::Vec2 pos = {
+                    cocos2d::rand_minus1_1()*30.0f, cocos2d::rand_0_1()*50.0f
+                };
+
+                //position floating label in the middle of the harvester count
+                pos.x += harvester_count_lbl->getContentSize().width/2;
+                floating_label->setPosition(pos);
+
+                harvester_count_lbl->addChild(floating_label);
+
+            }
+
             building->harvesters[{ harv_type, ing_type }] = harvester_count;
             this->update_func(0);
         }
@@ -1019,6 +1042,29 @@ void SalesmanShopNuItem::my_init_touch_ended_callback()
             work_ing_t pair = { harv_type, ing_type };
             auto harvester_count = map_get(building->salesmen, pair, def);
             harvester_count++;
+
+            auto harvest_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+            if (harvest_scene) {
+
+                auto floating_label = do_float();
+                floating_label->setString("+1");
+                floating_label->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
+
+                cocos2d::ui::Layout* building_info_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("building_info_panel"));
+                auto salesmen_count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(building_info_panel->getChildByName("salesmen_count"));
+
+                cocos2d::Vec2 pos = {
+                    cocos2d::rand_minus1_1()*30.0f, cocos2d::rand_0_1()*50.0f
+                };
+
+                //position floating label in the middle of the harvester count
+                pos.x += salesmen_count_lbl->getContentSize().width/2;
+                floating_label->setPosition(pos);
+
+                salesmen_count_lbl->addChild(floating_label);
+
+            }
+
             building->salesmen[{ harv_type, ing_type }] = harvester_count;
             this->update_func(0);
         }
