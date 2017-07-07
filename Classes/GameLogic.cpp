@@ -49,6 +49,9 @@
 #include "main_loop/MainLoop.h"
 #include "main_loop/SimulateMainLoop.h"
 #include "house_building/BuildingTypes.h"
+#include "Fighter.h"
+#include "attribute_container.h"
+#include "attribute.h"
 
 
 USING_NS_CC;
@@ -433,6 +436,9 @@ void GameLogic::save_all()
 
     DataManager::set_double_from_data("seconds_played", MainLoop::getInstance()->seconds_played);
 
+    DataManager::set_double_from_data("current_player_hp", BUILDUP->fighter->attrs->health->current_val);
+    DataManager::set_double_from_data("max_player_hp", BUILDUP->fighter->attrs->health->max_val);
+
     //set the last login time, set here and on load
     LOG(INFO) << "Marking last login";
     BEATUP->set_last_login();
@@ -506,7 +512,11 @@ void GameLogic::load_all()
         sidebar->toggle_buttons(sidebar->tab_menu_btn, ui::Widget::TouchEventType::ENDED);
 
     GameLogic::getInstance()->has_learned_wallet_size = DataManager::get_bool_from_data("has_learned_wallet_size", false);
+
     MainLoop::getInstance()->seconds_played = DataManager::get_double_from_data("seconds_played", 0.0f);
+
+    BUILDUP->fighter->attrs->health->current_val = DataManager::get_double_from_data("current_player_hp", 100.0);
+    BUILDUP->fighter->attrs->health->max_val = DataManager::get_double_from_data("max_player_hp", 100.0);
 
     GameProgress* game_progress = GameProgress::getInstance();
     game_progress->init(BUILDUP->city);
