@@ -357,7 +357,6 @@ void GameLogic::add_city_investment(res_count_t value)
 
 res_count_t GameLogic::get_city_investment()
 {
-    //NOTE returns actual double though
     return this->_city_investment;
 };
 
