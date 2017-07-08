@@ -931,7 +931,7 @@ void SideListView::setup_detail_listview()
             if (building->name == "The Workshop")
             {
                 //salesmen boost
-                spRecipe salesmen_boost = std::make_shared<Recipe>("Raise prices", "More value per salesmen.\n-- 3 bread");
+                spRecipe salesmen_boost = std::make_shared<Recipe>("Feed Salesmen", "More money gained per salesmen.\n-- 3 bread");
                 salesmen_boost->components = mistIngredient{
                     { Ingredient::SubType::Bread, 3.0 }
                 };
