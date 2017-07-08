@@ -320,7 +320,7 @@ void Tutorial::first_start(cocos2d::Node* parent)
     auto fifth_step = std::make_shared<TutorialStep>(
         tutorial_sidebar_panel,
         "Upgradin' the building",
-        "Frustrated with the 25 resource limit?\n\nUpgrade The Farm so you can fit more grain in its storage \n\nBuy 5 grain harvesters to harvest a little bit of grain while you wait.",
+        "Frustrated with the 25 resource limit?\n\nUpgrade The Farm so you can fit more grain in its storage.",
         "   You're building an empire now."
     );
     fifth_step->step_index = 4;
