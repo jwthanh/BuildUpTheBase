@@ -1098,6 +1098,7 @@ void SideListView::setup_menu_listview()
                 url_ss << "[" << cocos2d::Application::getInstance()->getVersion() << "] ";
                 url_ss << "Build Up The Base Feedback&";
                 url_ss << "body=Hey there, I've got a feature, bug, quality of life, or enhancement I'd love to see, check it out:";
+                url_ss << std::endl << std::endl;
                 std::string url = url_ss.str();
 
                 CCLOG("prepping email: %s", url.c_str());
