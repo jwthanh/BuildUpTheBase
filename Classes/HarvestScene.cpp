@@ -1078,6 +1078,7 @@ bool HarvestScene::init()
 
     this->_layer_building_level = -99; //using some bogus number
 
+    //TODO remove this since we don't use it at all.
     //update layer color when the building's level has changed
     std::function<void(float)> update_layer_color = [this, layer_color](float dt)
     {
@@ -1311,12 +1312,10 @@ ui::Widget* BaseScene::create_ingredient_detail_alert(Ingredient::SubType ing_ty
                 res_count_t USE_ABSOLUTE = -1;
 
                 res_count_t num_to_sell;
-                if (amount_sold != USE_ABSOLUTE) //if amount sold is not -1, use absolute values instead
-                {
+
+                if (amount_sold != USE_ABSOLUTE) {
                     num_to_sell = std::min(num_sellable, amount_sold);
-                }
-                else
-                {
+                } else {
                     num_to_sell = std::min(num_sellable, num_sellable*percent_sold);
                 }
 
