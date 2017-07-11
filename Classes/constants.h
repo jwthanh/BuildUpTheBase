@@ -157,9 +157,9 @@ typedef bool(*BoolFuncBuilding)(spBuilding);
 
 #define TOUCH_CALLBACK_PARAMS cocos2d::Ref* target, TouchEventType evt
 
-typedef std::function<bool()> BoolFuncNoArgs;
-typedef std::function<void()> VoidFuncNoArgs;
-typedef std::function<void(Beatup*)> VoidFuncBeatupNoArgs;
+using BoolFuncNoArgs = std::function<bool()>;
+using VoidFuncNoArgs = std::function<void()>;
+using VoidFuncBeatupNoArgs = std::function<void(Beatup*)>;
 
 using TimePoint = std::chrono::system_clock::time_point;
 using Duration = std::chrono::system_clock::duration;

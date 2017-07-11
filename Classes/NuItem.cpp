@@ -41,6 +41,7 @@
 #include "ui/UITextBMFont.h"
 #include "2d/CCLabel.h"
 #include "progress/NumberScaling.h"
+#include "progress/Constructable.h"
 
 
 cocos2d::ui::Button* NuItem::orig_button = NULL;
@@ -969,37 +970,48 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
 
         if (cost <= total_coins)
         {
+            //start Constructable with the following complete logic:
             this->add_available_coins(-cost);
+
             auto building = BUILDUP->get_target_building();
+            auto celebration_func = [building, this]() {
+                CCLOG("celebrating");
 
-            res_count_t def = 0.0;
-            work_ing_t map = { harv_type, ing_type };
-            auto harvester_count = map_get(building->harvesters, map, def);
-            harvester_count++;
+                res_count_t def = 0.0;
+                work_ing_t map = { this->harv_type, this->ing_type };
+                auto harvester_count = map_get(building->harvesters, map, def);
+                harvester_count++;
 
-            auto harvest_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-            if (harvest_scene) {
+                auto harvest_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+                if (harvest_scene) {
 
-                auto floating_label = do_float();
-                floating_label->setString("+1");
-                floating_label->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
+                    auto floating_label = do_float();
+                    floating_label->setString("+1");
+                    floating_label->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
 
-                cocos2d::ui::Layout* building_info_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("building_info_panel"));
-                auto harvester_count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(building_info_panel->getChildByName("harvester_count"));
+                    cocos2d::ui::Layout* building_info_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("building_info_panel"));
+                    auto harvester_count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(building_info_panel->getChildByName("harvester_count"));
 
-                cocos2d::Vec2 pos = {
-                    cocos2d::rand_minus1_1()*30.0f, cocos2d::rand_0_1()*50.0f
-                };
+                    cocos2d::Vec2 pos = {
+                        cocos2d::rand_minus1_1()*30.0f, cocos2d::rand_0_1()*50.0f
+                    };
 
-                //position floating label in the middle of the harvester count
-                pos.x += harvester_count_lbl->getContentSize().width/2;
-                floating_label->setPosition(pos);
+                    //position floating label in the middle of the harvester count
+                    pos.x += harvester_count_lbl->getContentSize().width / 2;
+                    floating_label->setPosition(pos);
 
-                harvester_count_lbl->addChild(floating_label);
+                    harvester_count_lbl->addChild(floating_label);
 
-            }
+                }
 
-            building->harvesters[{ harv_type, ing_type }] = harvester_count;
+                building->harvesters[{ harv_type, ing_type }] = harvester_count;
+                this->update_func(0);
+            };
+
+            auto delta = std::chrono::seconds(3);
+            auto end_time = SysClock::now() += delta;
+            CON_MAN->constructables["test_const"] = std::make_shared<Constructable>(celebration_func, end_time, end_time);
+            CCLOG("added to conman");
             this->update_func(0);
         }
     });

@@ -1,6 +1,9 @@
 #include "MainLoop.h"
+
 #include <base/CCDirector.h>
 #include <base/CCScheduler.h>
+
+#include "progress/Constructable.h"
 
 MainLoop::MainLoop() {
     this->seconds_played = 0.0f; //set in GameLogic::load_all
@@ -18,4 +21,6 @@ void MainLoop::unschedule() {
 void MainLoop::update(float dt)
 {
     this->seconds_played += dt;
+
+    CON_MAN->update(dt);
 }
