@@ -163,6 +163,9 @@
     <ClCompile Include="..\Classes\progress\GameProgress.cpp">
       <Filter>progress</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\progress\Constructable.cpp">
+      <Filter>progress</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -311,6 +314,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\house_building\BuildingTypes.h">
       <Filter>house_building</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\progress\Constructable.h">
+      <Filter>progress</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

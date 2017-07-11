@@ -141,6 +141,7 @@ you start off as garbage out of a spaceships ejection chute and then grow into y
   * maybe can queue up further upgrades?
     * maybe queue is upgradeable and you start with no queue?
 * every frame the progress increments against the target end time
+* serializing to save and load them
 
 
 
