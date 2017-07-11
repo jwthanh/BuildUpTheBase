@@ -3,6 +3,7 @@
 #define CONSTANTS_H
 
 #include <algorithm>
+#include <chrono>
 #include <functional>
 #include <vector>
 #include <memory>
@@ -60,6 +61,10 @@ class Item;
 class Tutorial;
 class TutorialStep;
 
+class GameProgress;
+class Constructable;
+class ConstructableManager;
+
 enum class IngredientSubType;
 enum class WorkerSubType;
 typedef long double res_count_t;
@@ -113,6 +118,9 @@ MAKE_SP_VS_MI(Item);
 MAKE_SP_VS_MI(Tutorial);
 MAKE_SP_VS_MI(TutorialStep);
 
+MAKE_SP_VS_MI(Constructable);
+MAKE_SP_VS_MI(ConstructableManager);
+
 using mistIngredient = std::map<IngredientSubType, res_count_t>;
 
 using work_ing_t = std::pair<WorkerSubType, IngredientSubType>;
@@ -133,12 +141,16 @@ using mistWorkerSubType = std::map<WorkerSubType, res_count_t>;
 typedef void(*TaskFunc)(spBuilding, float);
 typedef bool(*BoolFuncBuilding)(spBuilding);
 
-#define BEATUP GameLogic::getInstance()->beatup
-#define BUILDUP GameLogic::getInstance()->buildup
+#define GAME_LOGIC GameLogic::getInstance()
+#define BEATUP GAME_LOGIC->beatup
+#define BUILDUP GAME_LOGIC->buildup
 #define CITY BUILDUP->city
-#define EQUIPMENT GameLogic::getInstance()->equipment
+#define EQUIPMENT GAME_LOGIC->equipment
+#define INVENTORY GAME_LOGIC->equipment->inventory
+
 #define BANK Bank::getInstance()
-#define INVENTORY GameLogic::getInstance()->equipment->inventory
+#define GAME_PROGRESS GameProgress::getInstance()
+#define CON_MAN ConstructableManager::getInstance()
 
 #define rjDocument rapidjson::GenericDocument<rapidjson::UTF8<>,rapidjson::CrtAllocator>
 #define rjValue rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>
@@ -148,6 +160,10 @@ typedef bool(*BoolFuncBuilding)(spBuilding);
 typedef std::function<bool()> BoolFuncNoArgs;
 typedef std::function<void()> VoidFuncNoArgs;
 typedef std::function<void(Beatup*)> VoidFuncBeatupNoArgs;
+
+using TimePoint = std::chrono::system_clock::time_point;
+using Duration = std::chrono::system_clock::duration;
+using SysClock = std::chrono::system_clock;
 
 
 const float FPS_1   = 1.0f /   1.0f;
