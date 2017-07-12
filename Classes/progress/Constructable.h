@@ -2,9 +2,11 @@
 #define CONSTRUCTABLE_H
 
 #include <chrono>
+#include <unordered_map>
 
 #include "constants.h"
-#include <unordered_map>
+
+class HarvesterShopNuItem;
 
 ///represents a progress towards building an unlock, ie a new harvestable level 1
 class Constructable
@@ -62,7 +64,6 @@ class Blueprint
         virtual std::string build_map_id() = 0;
 };
 
-class HarvesterShopNuItem;
 class HarvesterShopNuItemBlueprint : public Blueprint
 {
     private:
