@@ -1,8 +1,21 @@
 #include "Constructable.h"
 #include <sstream>
 #include "NuItem.h"
+#include <iomanip>
 
 ConstructableManager* ConstructableManager::_instance = nullptr;
+
+Constructable::Constructable(VoidFunc celebrate_func, spBlueprint blueprint)
+    : total_in_queue(0),
+    _has_celebrated(false),
+    _celebrate_func(celebrate_func),
+    blueprint(blueprint)
+{
+    //TODO dont make it always have 'now' as a starting time
+    TimePoint end_time = SysClock::now() + blueprint->base_duration;
+    this->base_end_time = end_time;
+    this->current_end_time = this->base_end_time;
+};
 
 void Constructable::update(float dt)
 {
@@ -47,6 +60,24 @@ void ConstructableManager::update(float dt) const
         constructable.second->update(dt);
     }
 }
+
+void ConstructableManager::add_blueprint_to_queue(spBlueprint blueprint, VoidFunc celebration_func)
+{
+    //find the blueprint id, if its not in the map add it, otherwise increment the
+    // total_in_queue
+
+    auto matched_map_id = this->constructables.find(blueprint->build_map_id());
+
+    spConstructable constructable;
+    if (matched_map_id != this->constructables.end()) {
+        constructable = matched_map_id->second;
+    } else {
+        constructable = std::make_shared<Constructable>(celebration_func, blueprint);
+        this->constructables[blueprint->build_map_id()] = constructable;
+    };
+
+    constructable->total_in_queue += 1;
+};
 
 std::string HarvesterShopNuItemBlueprint::build_map_id()
 {

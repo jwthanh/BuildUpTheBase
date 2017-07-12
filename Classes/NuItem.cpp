@@ -1008,14 +1008,10 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
                 this->update_func(0);
             };
 
-            auto delta = std::chrono::seconds(3);
-            auto end_time = SysClock::now() += delta;
-
             //generate map_id for the city, building, nuitem type (worker type, sublevel)
-            std::string constructable_map_id = HarvesterShopNuItemBlueprint(this).build_map_id();
-
-            CON_MAN->constructables[constructable_map_id] = std::make_shared<Constructable>(celebration_func, end_time, end_time);
-            CCLOG("added to conman as '%s'", constructable_map_id.c_str());
+            spBlueprint blueprint = std::make_shared<HarvesterShopNuItemBlueprint>(this);
+            blueprint->base_duration = std::chrono::seconds(3);
+            CON_MAN->add_blueprint_to_queue(blueprint, celebration_func);
             this->update_func(0);
         }
     });

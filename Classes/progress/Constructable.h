@@ -12,23 +12,22 @@ class HarvesterShopNuItem;
 class Constructable
 {
     private:
+
         bool _has_celebrated;
         VoidFunc _celebrate_func;
 
     public:
+        res_count_t total_in_queue;
         //when constructable is completed
         TimePoint base_end_time;
         //base_end_time after being modified by abilities or manual
         TimePoint current_end_time;
 
-        Constructable(
-                VoidFunc celebrate_func,
-                TimePoint base_end_time,
-                TimePoint current_end_time)
-            : _has_celebrated(false),
-            _celebrate_func(celebrate_func),
-            base_end_time(base_end_time),
-            current_end_time(current_end_time) {}
+        spBlueprint blueprint;
+
+    Constructable(
+        VoidFunc celebrate_func,
+        spBlueprint blueprint);
 
         void update(float dt);
 
@@ -49,8 +48,12 @@ class ConstructableManager
         static ConstructableManager* _instance;
     public:
         static ConstructableManager* getInstance();
-        void update(float dt) const;
+
         std::unordered_map<std::string, spConstructable> constructables;
+
+        void update(float dt) const;
+
+        void add_blueprint_to_queue(spBlueprint blueprint, VoidFunc celebration_func);
 };
 
 ///Blueprint is a class that builds a map key id for the given object to be used with the ConstructableManager

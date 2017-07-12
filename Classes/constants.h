@@ -64,6 +64,7 @@ class TutorialStep;
 class GameProgress;
 class Constructable;
 class ConstructableManager;
+class Blueprint;
 
 enum class IngredientSubType;
 enum class WorkerSubType;
@@ -120,6 +121,7 @@ MAKE_SP_VS_MI(TutorialStep);
 
 MAKE_SP_VS_MI(Constructable);
 MAKE_SP_VS_MI(ConstructableManager);
+MAKE_SP_VS_MI(Blueprint);
 
 using mistIngredient = std::map<IngredientSubType, res_count_t>;
 
