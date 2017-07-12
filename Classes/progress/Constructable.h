@@ -37,6 +37,7 @@ class Constructable
 
         //whether the constructable has been announced completed
         bool get_has_celebrated() const { return this->_has_celebrated; };
+        void set_has_celebrated(bool has_celebrated) { this->_has_celebrated = has_celebrated; };
         //tries to call this->celebrate_func if this->get_has_celebrated() is false;
         void try_to_celebrate();
 };

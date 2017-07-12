@@ -34,7 +34,9 @@ void Constructable::update(float dt)
                 //update current_end_time based off the blueprint
                 this->_has_celebrated = false;
                 this->init_end_time();
+            } else {
             };
+        } else {
         }
     }
 }
@@ -91,6 +93,12 @@ void ConstructableManager::add_blueprint_to_queue(spBlueprint blueprint, VoidFun
     };
 
     constructable->total_in_queue += 1;
+    //force active in case it already celebrated and is skipping loop
+    if (constructable->get_has_celebrated())
+    {
+        constructable->set_has_celebrated(false);
+        constructable->init_end_time();
+    }
 };
 
 std::string HarvesterShopNuItemBlueprint::build_map_id()
