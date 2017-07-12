@@ -97,12 +97,12 @@ std::string HarvesterShopNuItemBlueprint::build_map_id()
 {
     //generate map_id for the city, building, nuitem type (worker type, sublevel)
     std::stringstream constructable_map_id_ss;
-    const std::string divider;
+    const std::string divider = "__";
     constructable_map_id_ss << "city" << divider;
     constructable_map_id_ss << this->nuitem->building->name << divider;
     constructable_map_id_ss << "HarvesterShopNuItem" << divider;
     constructable_map_id_ss << "harv_type_" << (int)this->nuitem->harv_type << divider;
-    constructable_map_id_ss << "ing_type" << (int)this->nuitem->ing_type;
+    constructable_map_id_ss << "ing_type_" << (int)this->nuitem->ing_type;
     std::string constructable_map_id = constructable_map_id_ss.str();
     return constructable_map_id;
 };
