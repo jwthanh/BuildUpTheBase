@@ -50,4 +50,32 @@ class ConstructableManager
         void update(float dt) const;
         std::unordered_map<std::string, spConstructable> constructables;
 };
+
+///Blueprint is a class that builds a map key id for the given object to be used with the ConstructableManager
+// to track the constructables in progress. This'll reduce the risk of errors on generating unique keys
+class Blueprint
+{
+    public:
+        Duration base_duration;
+        Blueprint(): base_duration(0) {};
+
+        virtual std::string build_map_id() = 0;
+};
+
+class HarvesterShopNuItem;
+class HarvesterShopNuItemBlueprint : public Blueprint
+{
+    private:
+        HarvesterShopNuItem* nuitem;
+
+    public:
+        HarvesterShopNuItemBlueprint(HarvesterShopNuItem* nuitem)
+        {
+            this->base_duration = Duration(1);
+            this->nuitem = nuitem;
+        };
+
+        std::string build_map_id() override ;
+};
+
 #endif
