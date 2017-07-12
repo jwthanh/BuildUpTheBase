@@ -11,17 +11,31 @@ Constructable::Constructable(VoidFunc celebrate_func, spBlueprint blueprint)
     _celebrate_func(celebrate_func),
     blueprint(blueprint)
 {
+    this->init_end_time();
+};
+
+void Constructable::init_end_time()
+{
     //TODO dont make it always have 'now' as a starting time
-    TimePoint end_time = SysClock::now() + blueprint->base_duration;
+    TimePoint end_time = SysClock::now() + this->blueprint->base_duration;
     this->base_end_time = end_time;
     this->current_end_time = this->base_end_time;
 };
 
 void Constructable::update(float dt)
 {
-    if (this->_has_celebrated == false && this->passed_threshold())
+    if (this->passed_threshold())
     {
-        this->try_to_celebrate();
+        if (this->_has_celebrated == false) {
+            this->try_to_celebrate();
+            this->total_in_queue -= 1;
+
+            if (this->total_in_queue >= 1) {
+                //update current_end_time based off the blueprint
+                this->_has_celebrated = false;
+                this->init_end_time();
+            };
+        }
     }
 }
 

@@ -29,6 +29,7 @@ class Constructable
         VoidFunc celebrate_func,
         spBlueprint blueprint);
 
+        void init_end_time();
         void update(float dt);
 
         //whether now is currently passed this->current_end_time
