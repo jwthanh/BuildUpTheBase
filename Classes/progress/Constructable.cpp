@@ -5,6 +5,8 @@
 
 ConstructableManager* ConstructableManager::_instance = nullptr;
 
+const bool CTRUCT_LOGGING = false;
+
 Constructable::Constructable(VoidFunc celebrate_func, spBlueprint blueprint)
     : total_in_queue(0),
     _has_celebrated(false),
@@ -27,16 +29,20 @@ void Constructable::update(float dt)
     if (this->passed_threshold())
     {
         if (this->_has_celebrated == false) {
+            if (CTRUCT_LOGGING) CCLOG("trying to celebrate because its false");
             this->try_to_celebrate();
             this->total_in_queue -= 1;
 
             if (this->total_in_queue >= 1) {
+                if (CTRUCT_LOGGING) CCLOG("gte 1 total in queue");
                 //update current_end_time based off the blueprint
                 this->_has_celebrated = false;
                 this->init_end_time();
             } else {
+                if (CTRUCT_LOGGING) CCLOG("less than 1 in queue, skipping");
             };
         } else {
+            if (CTRUCT_LOGGING) CCLOG("Already celebrated, skipping");
         }
     }
 }
@@ -87,9 +93,11 @@ void ConstructableManager::add_blueprint_to_queue(spBlueprint blueprint, VoidFun
     spConstructable constructable;
     if (matched_map_id != this->constructables.end()) {
         constructable = matched_map_id->second;
+        if (CTRUCT_LOGGING) CCLOG("adding BP to queue, found existing...");
     } else {
         constructable = std::make_shared<Constructable>(celebration_func, blueprint);
         this->constructables[blueprint->build_map_id()] = constructable;
+        if (CTRUCT_LOGGING) CCLOG("adding BP to queue, creating new...");
     };
 
     constructable->total_in_queue += 1;
@@ -99,6 +107,7 @@ void ConstructableManager::add_blueprint_to_queue(spBlueprint blueprint, VoidFun
         constructable->set_has_celebrated(false);
         constructable->init_end_time();
     }
+    if (CTRUCT_LOGGING) CCLOG("...total in queue: %f", constructable->total_in_queue);
 };
 
 std::string HarvesterShopNuItemBlueprint::build_map_id()
