@@ -277,6 +277,21 @@ void NuItem::set_progress_panel_visible(bool visible)
     try_set_visible(this->total_lbl, visible);
 };
 
+void NuItem::connect_to_constructable(spConstructable constructable)
+{
+    //track ctruct
+    auto update_progress_bar = [this, constructable](float dt) {
+        if (constructable->total_in_queue > 0) {
+            this->progress_bar->setVisible(true);
+            float progress_percent = constructable->get_current_percent();
+            this->progress_bar->setPercent(progress_percent);
+        } else {
+            this->progress_bar->setVisible(false);
+        };
+    };
+    this->schedule(update_progress_bar, FPS_60, "update_constructable_progress_bar");
+};
+
 void ShopNuItem::add_available_coins(res_count_t new_coins)
 {
     BANK->pocket_or_bank_coins(new_coins);
@@ -1019,7 +1034,8 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
             //generate map_id for the city, building, nuitem type (worker type, sublevel)
             spBlueprint blueprint = std::make_shared<HarvesterShopNuItemBlueprint>(this);
             blueprint->base_duration = std::chrono::seconds(1);
-            CON_MAN->add_blueprint_to_queue(blueprint, celebration_func);
+            spConstructable constructable = CON_MAN->add_blueprint_to_queue(blueprint, celebration_func);
+            this->connect_to_constructable(constructable);
             this->update_func(0);
         }
     });

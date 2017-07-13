@@ -56,6 +56,26 @@ bool Constructable::passed_threshold() const
     return diff > Duration(0);
 }
 
+float Constructable::get_current_percent() const
+{
+    //get duration
+    Duration total_duration = this->blueprint->base_duration;
+    //get current time and get end time
+    TimePoint now_time_point = SysClock::now();
+    Duration time_until_passed = this->current_end_time  - now_time_point;
+
+    Duration time_progressed = total_duration - time_until_passed;
+    float progress_count = static_cast<float>(time_progressed.count());
+    float duration_count = static_cast<float>(total_duration.count());
+    float progress = (progress_count / duration_count) * 100.0f;
+    //float progress = static_cast<float>(raw_progress);
+    CCLOG("progress %f", progress);
+    /// if we're 5 seconds away a 20 second duration, we know we're
+    /// 75% of the way through
+
+    return progress;
+};
+
 void Constructable::try_to_celebrate()
 {
     if (this->_has_celebrated == false) {
@@ -83,11 +103,27 @@ void ConstructableManager::update(float dt) const
     }
 }
 
-void ConstructableManager::add_blueprint_to_queue(spBlueprint blueprint, VoidFunc celebration_func)
+spConstructable ConstructableManager::add_blueprint_to_queue(spBlueprint blueprint, VoidFunc celebration_func)
 {
     //find the blueprint id, if its not in the map add it, otherwise increment the
     // total_in_queue
 
+    spConstructable constructable = this->get_constructable_from_blueprint(blueprint, celebration_func);
+
+    constructable->total_in_queue += 1;
+    //force active in case it already celebrated and is skipping loop
+    if (constructable->get_has_celebrated())
+    {
+        constructable->set_has_celebrated(false);
+        constructable->init_end_time();
+    }
+    if (CTRUCT_LOGGING) CCLOG("...total in queue: %f", constructable->total_in_queue);
+
+    return constructable;
+};
+
+spConstructable ConstructableManager::get_constructable_from_blueprint(spBlueprint blueprint, VoidFunc celebration_func)
+{
     auto matched_map_id = this->constructables.find(blueprint->build_map_id());
 
     spConstructable constructable;
@@ -100,14 +136,7 @@ void ConstructableManager::add_blueprint_to_queue(spBlueprint blueprint, VoidFun
         if (CTRUCT_LOGGING) CCLOG("adding BP to queue, creating new...");
     };
 
-    constructable->total_in_queue += 1;
-    //force active in case it already celebrated and is skipping loop
-    if (constructable->get_has_celebrated())
-    {
-        constructable->set_has_celebrated(false);
-        constructable->init_end_time();
-    }
-    if (CTRUCT_LOGGING) CCLOG("...total in queue: %f", constructable->total_in_queue);
+    return constructable;
 };
 
 std::string HarvesterShopNuItemBlueprint::build_map_id()

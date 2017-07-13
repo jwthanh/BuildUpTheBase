@@ -34,6 +34,8 @@ class Constructable
 
         //whether now is currently passed this->current_end_time
         bool passed_threshold() const;
+        //from 1-100%, get how far along the current time is to the end time
+        float get_current_percent() const;
 
         //whether the constructable has been announced completed
         bool get_has_celebrated() const { return this->_has_celebrated; };
@@ -55,7 +57,9 @@ class ConstructableManager
 
         void update(float dt) const;
 
-        void add_blueprint_to_queue(spBlueprint blueprint, VoidFunc celebration_func);
+        ///returns the matching constructable, new or existing
+        spConstructable add_blueprint_to_queue(spBlueprint blueprint, VoidFunc celebration_func);
+        spConstructable get_constructable_from_blueprint(spBlueprint blueprint, VoidFunc celebration_func);
 };
 
 ///Blueprint is a class that builds a map key id for the given object to be used with the ConstructableManager

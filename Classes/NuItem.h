@@ -83,6 +83,9 @@ class NuItem : public cocos2d::ui::Widget
 
         //only the children not actually the panel
         void set_progress_panel_visible(bool visible);
+
+        //tracks the constructable to show the progressbar
+        void connect_to_constructable(spConstructable constructable);
 };
 
 class BuildingNuItem : public NuItem
