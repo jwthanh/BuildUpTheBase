@@ -1035,7 +1035,7 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
 
             //generate map_id for the city, building, nuitem type (worker type, sublevel)
             spBlueprint blueprint = std::make_shared<HarvesterShopNuItemBlueprint>(this);
-            blueprint->base_duration = std::chrono::seconds(1);
+            blueprint->base_duration = std::chrono::seconds(1) * (int)this->harv_type;
             spConstructable constructable = CON_MAN->add_blueprint_to_queue(blueprint, celebration_func);
             this->connect_to_constructable(constructable);
             this->update_func(0);
