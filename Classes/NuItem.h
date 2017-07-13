@@ -32,6 +32,7 @@ namespace cocos2d
         class Widget;
         class ImageView;
         class Button;
+        class LoadingBar;
     }
 }
 
@@ -56,6 +57,7 @@ class NuItem : public cocos2d::ui::Widget
         cocos2d::ui::TextBMFont* desc_lbl;
         cocos2d::ui::TextBMFont* cost_lbl;
         cocos2d::ui::TextBMFont* count_lbl;
+        cocos2d::ui::LoadingBar* progress_bar;
 
         //progress panel for achievements
         cocos2d::ui::TextBMFont* current_lbl;

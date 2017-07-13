@@ -9,7 +9,7 @@
           <AbstractNodeData Name="menu_item_btn" ActionTag="-490875392" Tag="21" IconVisible="False" LeftMargin="-400.0000" RightMargin="-400.0000" TopMargin="-100.0000" BottomMargin="-100.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="800.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="progress_panel" ActionTag="-1327047022" Tag="258" IconVisible="False" LeftMargin="0.0001" RightMargin="-600.0000" TopMargin="1.3186" BottomMargin="-1.3186" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="progress_panel" ActionTag="-1327047022" Tag="258" IconVisible="False" LeftMargin="0.0001" RightMargin="-600.0001" TopMargin="1.3186" BottomMargin="-1.3186" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="1400.0000" Y="200.0000" />
                 <Children>
                   <AbstractNodeData Name="current_lbl" ActionTag="-714968081" Tag="279" IconVisible="False" LeftMargin="1078.9414" RightMargin="102.0586" TopMargin="34.0000" BottomMargin="134.0000" LabelText="123,456QuX" ctype="TextBMFontObjectData">
@@ -54,6 +54,16 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
+              <AbstractNodeData Name="progress_bar" ActionTag="98430432" Tag="112" IconVisible="False" LeftMargin="29.9999" RightMargin="22.0002" TopMargin="161.6814" BottomMargin="14.3186" ctype="LoadingBarObjectData">
+                <Size X="747.9999" Y="24.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="29.9999" Y="26.3186" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.0375" Y="0.1316" />
+                <PreSize X="0.9350" Y="0.1200" />
+                <ImageFileData Type="Normal" Path="main_UI_export_10.png" Plist="" />
+              </AbstractNodeData>
               <AbstractNodeData Name="item_icon" ActionTag="647280568" Tag="14" IconVisible="False" LeftMargin="52.9999" RightMargin="683.0001" TopMargin="68.0000" BottomMargin="68.0000" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
                 <Size X="64.0000" Y="64.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -97,13 +107,13 @@
                     <PreSize X="4.3800" Y="1.0667" />
                     <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_32x3.fnt" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="count_lbl" ActionTag="941991515" Tag="24" IconVisible="False" LeftMargin="-150.3964" RightMargin="-42.6036" TopMargin="80.9598" BottomMargin="-82.9598" LabelText="x123,456QuX" ctype="TextBMFontObjectData">
+                  <AbstractNodeData Name="count_lbl" ActionTag="941991515" Tag="24" IconVisible="False" LeftMargin="-150.3964" RightMargin="-42.6036" TopMargin="74.0000" BottomMargin="-76.0000" LabelText="x123,456QuX" ctype="TextBMFontObjectData">
                     <Size X="243.0000" Y="32.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="92.6036" Y="-66.9598" />
+                    <Position X="92.6036" Y="-60.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="1.8521" Y="-2.2320" />
+                    <PrePosition X="1.8521" Y="-2.0000" />
                     <PreSize X="4.8600" Y="1.0667" />
                     <LabelBMFontFile_CNB Type="Normal" Path="pixelmix_32x3.fnt" Plist="" />
                   </AbstractNodeData>

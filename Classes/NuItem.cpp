@@ -33,6 +33,7 @@
 #include <cocostudio/CocosStudioExtension.h>
 #include "ui/UILayout.h"
 #include "ui/UIListView.h"
+#include "ui/UILoadingBar.h"
 
 #include "utilities/vibration.h"
 #include "external/easylogging.h"
@@ -134,6 +135,13 @@ bool NuItem::init(cocos2d::Node* parent)
     this->desc_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("description_lbl"));
     this->cost_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("cost_panel")->getChildByName("cost_lbl"));
     this->count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("cost_panel")->getChildByName("count_lbl"));
+
+    //progress bar for constructables
+    this->progress_bar = dynamic_cast<cocos2d::ui::LoadingBar*>(button->getChildByName("progress_bar"));
+    set_aliasing(dynamic_cast<cocos2d::ui::Scale9Sprite*>(this->progress_bar->getVirtualRenderer()));
+    this->progress_bar->setPercent(100.0);
+    this->progress_bar->setVisible(false);
+
 
     //progress stuff for achievement buttons
     this->current_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(button->getChildByName("progress_panel")->getChildByName("current_lbl"));
