@@ -1,7 +1,7 @@
 #include "Constructable.h"
 #include <sstream>
-#include "NuItem.h"
 #include <iomanip>
+#include "NuItem.h"
 
 ConstructableManager* ConstructableManager::_instance = nullptr;
 

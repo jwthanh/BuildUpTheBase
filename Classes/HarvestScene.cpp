@@ -187,7 +187,7 @@ void BaseScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
     else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
     {
         //Label* wrapped_bmfont_lbl = Label::createWithTTF("this is a really long line that I hope to wrap.", "pixelmix.ttf", 25);
-        Label* wrapped_bmfont_lbl = Label::createWithBMFont("pixelmix_24x2.fnt", "this is a really long line that I hope to wrap.");
+        Label* wrapped_bmfont_lbl = Label::createWithBMFont("fonts/experimental/pixelmix_24x2.fnt", "this is a really long line that I hope to wrap.");
         this->addChild(wrapped_bmfont_lbl);
         //wrapped_bmfont_lbl->setContentSize({ 0, 100 });
         wrapped_bmfont_lbl->setDimensions(100, 0);
