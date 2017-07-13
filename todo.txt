@@ -155,3 +155,5 @@ you start off as garbage out of a spaceships ejection chute and then grow into y
 * click and hold on buttons
 * Save item scavenging progress
 * allow Scavenge AFK
+* update Salesman::to_sell_count to include building level so that I don't need to do it manually everywhere
+* fix the last sidebar tab not being saved
