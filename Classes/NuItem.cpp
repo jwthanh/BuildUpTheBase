@@ -1008,8 +1008,10 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
                 auto harvest_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
                 if (harvest_scene) {
 
+                    std::string message = "+"+beautify_double(Harvester::get_to_harvest_count(this->harv_type, this->ing_type));
+
                     auto floating_label = do_float();
-                    floating_label->setString("+1");
+                    floating_label->setString(message);
                     floating_label->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
 
                     cocos2d::ui::Layout* building_info_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("building_info_panel"));
