@@ -984,6 +984,29 @@ void HarvesterShopNuItem::my_init_sprite()
     vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
 };
 
+void do_float_over_panel(std::string node_name, std::string float_message)
+{
+    auto harvest_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
+    if (harvest_scene) {
+
+        cocos2d::ui::Layout* building_info_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("building_info_panel"));
+        auto harvester_count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(building_info_panel->getChildByName(node_name));
+
+        auto floating_label = do_float();
+        floating_label->setString(float_message);
+        floating_label->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
+
+        //position floating label in the middle of the harvester count
+        cocos2d::Vec2 pos = {
+            cocos2d::rand_minus1_1()*30.0f, cocos2d::rand_0_1()*50.0f
+        };
+        pos.x += harvester_count_lbl->getContentSize().width / 2;
+        floating_label->setPosition(pos);
+
+        harvester_count_lbl->addChild(floating_label);
+    }
+};
+
 void HarvesterShopNuItem::my_init_touch_ended_callback()
 {
     this->set_touch_ended_callback([this]()
@@ -1005,29 +1028,8 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
                 auto harvester_count = map_get(building->harvesters, map, def);
                 harvester_count++;
 
-                auto harvest_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-                if (harvest_scene) {
-
-                    std::string message = "+"+beautify_double(Harvester::get_to_harvest_count(this->harv_type, this->ing_type));
-
-                    auto floating_label = do_float();
-                    floating_label->setString(message);
-                    floating_label->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
-
-                    cocos2d::ui::Layout* building_info_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("building_info_panel"));
-                    auto harvester_count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(building_info_panel->getChildByName("harvester_count"));
-
-                    cocos2d::Vec2 pos = {
-                        cocos2d::rand_minus1_1()*30.0f, cocos2d::rand_0_1()*50.0f
-                    };
-
-                    //position floating label in the middle of the harvester count
-                    pos.x += harvester_count_lbl->getContentSize().width / 2;
-                    floating_label->setPosition(pos);
-
-                    harvester_count_lbl->addChild(floating_label);
-
-                }
+                std::string message = "+"+beautify_double(Harvester::get_to_harvest_count(this->harv_type, this->ing_type));
+                do_float_over_panel("harvester_count", message);
 
                 building->harvesters[{ harv_type, ing_type }] = harvester_count;
                 this->update_func(0);
@@ -1081,27 +1083,8 @@ void SalesmanShopNuItem::my_init_touch_ended_callback()
             auto harvester_count = map_get(building->salesmen, pair, def);
             harvester_count++;
 
-            auto harvest_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-            if (harvest_scene) {
-
-                auto floating_label = do_float();
-                floating_label->setString("+1");
-                floating_label->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
-
-                cocos2d::ui::Layout* building_info_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("building_info_panel"));
-                auto salesmen_count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(building_info_panel->getChildByName("salesmen_count"));
-
-                cocos2d::Vec2 pos = {
-                    cocos2d::rand_minus1_1()*30.0f, cocos2d::rand_0_1()*50.0f
-                };
-
-                //position floating label in the middle of the harvester count
-                pos.x += salesmen_count_lbl->getContentSize().width/2;
-                floating_label->setPosition(pos);
-
-                salesmen_count_lbl->addChild(floating_label);
-
-            }
+            std::string message = "+"+beautify_double(Salesman::get_to_sell_count(harv_type)* building->get_building_level());
+            do_float_over_panel("salesmen_count", message);
 
             building->salesmen[{ harv_type, ing_type }] = harvester_count;
             this->update_func(0);
