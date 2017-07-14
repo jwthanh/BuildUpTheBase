@@ -231,6 +231,12 @@ std::string SalesmanShopNuItemBlueprint::build_map_id()
 
 void SalesmanShopNuItemBlueprint::serialize(rjDocument& document, rjAllocator& allocator)
 {
+    std::string map_id = this->build_map_id();
+    Blueprint::serialize(document, allocator);
+
+    rjValue& value = document[map_id.c_str()];
+    value.AddMember("worker_subtype",(int)this->worker_subtype, allocator);
+    value.AddMember("ing_type",(int)this->ing_type, allocator);
 }
 
 void SalesmanShopNuItemBlueprint::load(rjDocument& document, rjAllocator& allocator)
@@ -256,7 +262,7 @@ std::string UpgradeBuildingShopNuItemBlueprint::build_map_id()
     const std::string divider = "__";
     constructable_map_id_ss << "city" << divider;
     constructable_map_id_ss << this->building_name << divider;
-    constructable_map_id_ss << "SalesmanShopNuItem" << divider;
+    constructable_map_id_ss << "UpgradeBuildingShopNuItem" << divider;
     constructable_map_id_ss << "building_level_" << (int)this->building_level;
     std::string constructable_map_id = constructable_map_id_ss.str();
     return constructable_map_id;
@@ -264,6 +270,11 @@ std::string UpgradeBuildingShopNuItemBlueprint::build_map_id()
 
 void UpgradeBuildingShopNuItemBlueprint::serialize(rjDocument& document, rjAllocator& allocator)
 {
+    std::string map_id = this->build_map_id();
+    Blueprint::serialize(document, allocator);
+
+    rjValue& value = document[map_id.c_str()];
+    value.AddMember("building_level",(int)this->building_level, allocator);
 }
 
 void UpgradeBuildingShopNuItemBlueprint::load(rjDocument& document, rjAllocator& allocator)
