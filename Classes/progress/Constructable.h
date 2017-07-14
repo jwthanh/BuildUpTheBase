@@ -7,6 +7,7 @@
 #include "constants.h"
 
 class HarvesterShopNuItem;
+class SalesmanShopNuItem;
 
 ///represents a progress towards building an unlock, ie a new harvestable level 1
 class Constructable
@@ -85,7 +86,22 @@ class HarvesterShopNuItemBlueprint : public Blueprint
             this->nuitem = nuitem;
         };
 
-        std::string build_map_id() override ;
+        std::string build_map_id() override;
+};
+
+class SalesmanShopNuItemBlueprint : public Blueprint
+{
+    private:
+        SalesmanShopNuItem* nuitem;
+
+    public:
+        SalesmanShopNuItemBlueprint(SalesmanShopNuItem* nuitem)
+        {
+            this->base_duration = Duration(1);
+            this->nuitem = nuitem;
+        };
+
+        std::string build_map_id() override;
 };
 
 #endif

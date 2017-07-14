@@ -1040,6 +1040,7 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
             blueprint->base_duration = std::chrono::seconds(1) * (int)this->harv_type;
             spConstructable constructable = CON_MAN->add_blueprint_to_queue(blueprint, celebration_func);
             this->connect_to_constructable(constructable);
+
             this->update_func(0);
         }
     });
@@ -1076,17 +1077,26 @@ void SalesmanShopNuItem::my_init_touch_ended_callback()
         if (cost <= total_coins)
         {
             this->add_available_coins(-cost);
+
             auto building = BUILDUP->get_target_building();
+            auto celebration_func = [building, this]() {
+                res_count_t def = 0.0;
+                work_ing_t pair = { harv_type, ing_type };
+                auto harvester_count = map_get(building->salesmen, pair, def);
+                harvester_count++;
 
-            res_count_t def = 0.0;
-            work_ing_t pair = { harv_type, ing_type };
-            auto harvester_count = map_get(building->salesmen, pair, def);
-            harvester_count++;
+                std::string message = "+"+beautify_double(Salesman::get_to_sell_count(harv_type)* building->get_building_level());
+                do_float_over_panel("salesmen_count", message);
 
-            std::string message = "+"+beautify_double(Salesman::get_to_sell_count(harv_type)* building->get_building_level());
-            do_float_over_panel("salesmen_count", message);
+                building->salesmen[{ harv_type, ing_type }] = harvester_count;
+            };
 
-            building->salesmen[{ harv_type, ing_type }] = harvester_count;
+            //generate map_id for the city, building, nuitem type (worker type, sublevel)
+            spBlueprint blueprint = std::make_shared<SalesmanShopNuItemBlueprint>(this);
+            blueprint->base_duration = std::chrono::seconds(2) * (int)this->harv_type;
+            spConstructable constructable = CON_MAN->add_blueprint_to_queue(blueprint, celebration_func);
+            this->connect_to_constructable(constructable);
+
             this->update_func(0);
         }
     });
