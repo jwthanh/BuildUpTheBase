@@ -168,4 +168,13 @@ class BankSerializer : public BaseSerializer
         void load() override;
 };
 
+class ConstructableSerializer : public BaseSerializer
+{
+    public:
+        ConstructableSerializer(std::string filename) : BaseSerializer(filename){};
+
+        void serialize() override;
+        void load() override;
+};
+
 #endif

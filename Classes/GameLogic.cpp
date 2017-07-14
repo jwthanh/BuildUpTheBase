@@ -408,11 +408,14 @@ void GameLogic::save_all()
     auto achievement_serializer = AchievementSerializer("alpha_achievements.json");
     achievement_serializer.serialize();
 
-    auto harvestable_manager_serializer = HarvestableManagerSerializer("alpha_harvestable_manager.json");
+    HarvestableManagerSerializer harvestable_manager_serializer = HarvestableManagerSerializer("alpha_harvestable_manager.json");
     harvestable_manager_serializer.serialize();
 
     auto bank_serializer = BankSerializer("alpha_bank.json");
     bank_serializer.serialize();
+
+    auto constructable_serializer = ConstructableSerializer("alpha_constructable.json");
+    constructable_serializer.serialize();
 
     //save coins
     DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());

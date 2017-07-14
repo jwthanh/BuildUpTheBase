@@ -1,5 +1,6 @@
 #include "Serializer.h"
 #include <string>
+#include <chrono>
 #include <sstream>
 
 #include <json/document.h>
@@ -21,10 +22,12 @@
 #include "Worker.h"
 #include "Ingredients.h"
 
-#include "2d/CCTMXTiledMap.h"
-#include "2d/CCTMXLayer.h"
 #include "HarvestableManager.h"
 #include "banking/Bank.h"
+#include "progress/Constructable.h"
+
+#include "2d/CCTMXTiledMap.h"
+#include "2d/CCTMXLayer.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -866,3 +869,44 @@ void BankSerializer::load()
     bank->_total_coins_banked = this->get_double(doc, "total_coins_banked", 0);
 
 }
+
+void ConstructableSerializer::serialize()
+{
+    rjDocument doc = rjDocument();
+    doc.SetObject();
+
+    rjDocument::AllocatorType& allocator = doc.GetAllocator();
+
+    //go through all active constructables and save the duration, and active total
+    for (auto& constructable : CON_MAN->constructables) {
+        std::string map_id = constructable.second->blueprint->build_map_id();
+        rjValue key(map_id.c_str(), map_id.length(), allocator);
+
+        rjValue value(rj::kObjectType);
+        Duration raw_duration = constructable.second->blueprint->base_duration;
+        auto duration = std::chrono::duration_cast<std::chrono::duration<float>>(raw_duration);
+        value.AddMember("duration", rjValue(duration.count()), allocator);
+        value.AddMember("total_in_queue", rjValue((double)constructable.second->total_in_queue), allocator);
+
+        doc.AddMember(key, value, allocator);
+    };
+    // Constructable* bank = Constructable::getInstance();
+    // this->set_double(doc, "total_coins_banked", bank->_total_coins_banked);
+
+    this->save_document(doc);
+}
+
+void ConstructableSerializer::load()
+{
+    rjDocument doc = this->get_document();
+    //dont do work if there's nothing to do
+    if (doc.IsObject() == false)
+    {
+        CCLOG("NOT OBJECT");
+        return;
+    }
+
+    //Constructable* bank = Constructable::getInstance();
+    //bank->_total_coins_banked = this->get_double(doc, "total_coins_banked", 0);
+
+};
