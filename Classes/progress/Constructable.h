@@ -98,7 +98,7 @@ class SalesmanShopNuItemBlueprint : public Blueprint
         IngredientSubType ing_type;
 
     public:
-        SalesmanShopNuItemBlueprint(SalesmanShopNuItem* nuitem);
+        explicit SalesmanShopNuItemBlueprint(SalesmanShopNuItem* nuitem);
         SalesmanShopNuItemBlueprint(std::string building_name, WorkerSubType worker_subtype, IngredientSubType ing_type);
 
         std::string build_map_id() override;
@@ -107,14 +107,12 @@ class SalesmanShopNuItemBlueprint : public Blueprint
 class UpgradeBuildingShopNuItemBlueprint : public Blueprint
 {
     private:
-        UpgradeBuildingShopNuItem* nuitem;
+        std::string building_name;
+        res_count_t building_level;
 
     public:
-        UpgradeBuildingShopNuItemBlueprint(UpgradeBuildingShopNuItem* nuitem)
-        {
-            this->base_duration = Duration(1);
-            this->nuitem = nuitem;
-        };
+        explicit UpgradeBuildingShopNuItemBlueprint(UpgradeBuildingShopNuItem* nuitem);
+        UpgradeBuildingShopNuItemBlueprint(std::string building_name, res_count_t building_level);
 
         std::string build_map_id() override;
 };
