@@ -154,8 +154,14 @@ typedef bool(*BoolFuncBuilding)(spBuilding);
 #define GAME_PROGRESS GameProgress::getInstance()
 #define CON_MAN ConstructableManager::getInstance()
 
+//macros because we don't want to include rapidjson everywhere and I couldn't figure out
+// how to forward declare templates
 #define rjDocument rapidjson::GenericDocument<rapidjson::UTF8<>,rapidjson::CrtAllocator>
+#define rjAllocator rjDocument::AllocatorType
 #define rjValue rapidjson::GenericValue<rapidjson::UTF8<>, rapidjson::CrtAllocator>
+//helper to make rjValues from std::strings
+#define RJ_STRING(string) rjValue(string.c_str(), string.length(), allocator)
+
 
 #define TOUCH_CALLBACK_PARAMS cocos2d::Ref* target, TouchEventType evt
 

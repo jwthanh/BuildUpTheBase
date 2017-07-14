@@ -139,6 +139,32 @@ spConstructable ConstructableManager::get_constructable_from_blueprint(spBluepri
     return constructable;
 };
 
+void Blueprint::serialize(rjDocument& document, rjAllocator& allocator)
+{
+    std::string map_id = this->build_map_id();
+    rjValue key = RJ_STRING(map_id);
+
+    rjValue value(rapidjson::kObjectType);
+    //adds the type of the blueprint
+    value.AddMember("type_id", RJ_STRING(this->get_serialized_type_id()), allocator);
+
+    //adds the base duration of the blueprint
+    Duration raw_duration = this->base_duration;
+    auto duration = std::chrono::duration_cast<std::chrono::duration<float>>(raw_duration);
+    value.AddMember("duration", rjValue(duration.count()), allocator);
+
+    //adds the values to the document
+    document.AddMember(key, value, allocator);
+};
+
+void Blueprint::load(rjDocument& document, rjAllocator& allocator)
+{
+    std::string map_id = this->build_map_id();
+    if (document.HasMember(map_id.c_str()) == false) { return; }
+
+    rjValue& value = document[map_id.c_str()];
+};
+
 HarvesterShopNuItemBlueprint::HarvesterShopNuItemBlueprint(HarvesterShopNuItem* nuitem)
     : HarvesterShopNuItemBlueprint(nuitem->building->name, nuitem->harv_type, nuitem->ing_type)
 {
@@ -162,6 +188,20 @@ std::string HarvesterShopNuItemBlueprint::build_map_id()
     constructable_map_id_ss << "ing_type_" << (int)this->ing_type;
     std::string constructable_map_id = constructable_map_id_ss.str();
     return constructable_map_id;
+}
+
+void HarvesterShopNuItemBlueprint::serialize(rjDocument& document, rjAllocator& allocator)
+{
+    std::string map_id = this->build_map_id();
+    Blueprint::serialize(document, allocator);
+
+    rjValue& value = document[map_id.c_str()];
+    value.AddMember("worker_subtype",(int)this->worker_subtype, allocator);
+    value.AddMember("ing_type",(int)this->ing_type, allocator);
+}
+
+void HarvesterShopNuItemBlueprint::load(rjDocument& document, rjAllocator& allocator)
+{
 };
 
 SalesmanShopNuItemBlueprint::SalesmanShopNuItemBlueprint(SalesmanShopNuItem* nuitem)
@@ -187,6 +227,14 @@ std::string SalesmanShopNuItemBlueprint::build_map_id()
     constructable_map_id_ss << "ing_type_" << (int)this->ing_type;
     std::string constructable_map_id = constructable_map_id_ss.str();
     return constructable_map_id;
+}
+
+void SalesmanShopNuItemBlueprint::serialize(rjDocument& document, rjAllocator& allocator)
+{
+}
+
+void SalesmanShopNuItemBlueprint::load(rjDocument& document, rjAllocator& allocator)
+{
 };
 
 UpgradeBuildingShopNuItemBlueprint::UpgradeBuildingShopNuItemBlueprint(UpgradeBuildingShopNuItem* nuitem)
@@ -212,4 +260,12 @@ std::string UpgradeBuildingShopNuItemBlueprint::build_map_id()
     constructable_map_id_ss << "building_level_" << (int)this->building_level;
     std::string constructable_map_id = constructable_map_id_ss.str();
     return constructable_map_id;
+}
+
+void UpgradeBuildingShopNuItemBlueprint::serialize(rjDocument& document, rjAllocator& allocator)
+{
+}
+
+void UpgradeBuildingShopNuItemBlueprint::load(rjDocument& document, rjAllocator& allocator)
+{
 };

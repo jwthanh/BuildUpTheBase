@@ -29,8 +29,6 @@
 #include "2d/CCTMXTiledMap.h"
 #include "2d/CCTMXLayer.h"
 
-#define RJ_STRING(string) rjValue(string.c_str(), string.length(), allocator)
-
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
 {
@@ -864,17 +862,16 @@ void ConstructableSerializer::serialize()
 
     //go through all active constructables and save the duration, and active total
     for (auto& constructable : CON_MAN->constructables) {
-        std::string map_id = constructable.second->blueprint->build_map_id();
-        rjValue key = RJ_STRING(map_id);
+        //serialize the specific blueprint members
+        spBlueprint blueprint = constructable.second->blueprint;
+        blueprint->serialize(doc, allocator);
 
-        rjValue value(rj::kObjectType);
-        Duration raw_duration = constructable.second->blueprint->base_duration;
-        auto duration = std::chrono::duration_cast<std::chrono::duration<float>>(raw_duration);
-        value.AddMember("type_id", RJ_STRING(constructable.second->blueprint->get_serialized_type_id()), allocator);
-        value.AddMember("duration", rjValue(duration.count()), allocator);
+        //set the constructables total
+        // FIXME blueprint->serialize writes the member to the doc but then we immediately fetch it
+        // from the doc, maybe there's a better way to do this
+        std::string map_id = blueprint->build_map_id();
+        rjValue& value = doc[map_id.c_str()];
         value.AddMember("total_in_queue", rjValue((double)constructable.second->total_in_queue), allocator);
-
-        doc.AddMember(key, value, allocator);
     };
     // Constructable* bank = Constructable::getInstance();
     // this->set_double(doc, "total_coins_banked", bank->_total_coins_banked);
@@ -894,7 +891,17 @@ void ConstructableSerializer::load()
 
     for (rjDocument::MemberIterator it = doc.MemberBegin(); it != doc.MemberEnd(); ++it)
     {
+        continue;
         auto key = std::string(it->name.GetString());
+        std::string type_id = it->value["type_id"].GetString();
+        spBlueprint blueprint;
+        if (type_id == "harvester_shop") {
+            std::string building_name = it->value["building_name"].GetString();
+            WorkerSubType worker_subtype = (WorkerSubType)it->value["worker_subtype"].GetInt();
+            IngredientSubType ing_type = (IngredientSubType)it->value["ing_type"].GetInt();
+            blueprint = std::make_shared<HarvesterShopNuItemBlueprint>(building_name, worker_subtype, ing_type);
+        };
+
         double float_duration = it->value["duration"].GetDouble();
         double total_in_queue = it->value["total_in_queue"].GetDouble();
         CCLOG("reading member %s: duration is %f, total is %f", key, float_duration, total_in_queue);
