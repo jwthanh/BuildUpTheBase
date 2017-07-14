@@ -78,14 +78,14 @@ class Blueprint
 class HarvesterShopNuItemBlueprint : public Blueprint
 {
     private:
-        HarvesterShopNuItem* nuitem;
+        //HarvesterShopNuItem* nuitem;
+        std::string building_name;
+        WorkerSubType worker_subtype;
+        IngredientSubType ing_type;
 
     public:
-        HarvesterShopNuItemBlueprint(HarvesterShopNuItem* nuitem)
-        {
-            this->base_duration = Duration(1);
-            this->nuitem = nuitem;
-        };
+        explicit HarvesterShopNuItemBlueprint(HarvesterShopNuItem* nuitem);
+        HarvesterShopNuItemBlueprint(std::string building_name, WorkerSubType worker_subtype, IngredientSubType ing_type);
 
         std::string build_map_id() override;
 };
@@ -93,14 +93,13 @@ class HarvesterShopNuItemBlueprint : public Blueprint
 class SalesmanShopNuItemBlueprint : public Blueprint
 {
     private:
-        SalesmanShopNuItem* nuitem;
+        std::string building_name;
+        WorkerSubType worker_subtype;
+        IngredientSubType ing_type;
 
     public:
-        SalesmanShopNuItemBlueprint(SalesmanShopNuItem* nuitem)
-        {
-            this->base_duration = Duration(1);
-            this->nuitem = nuitem;
-        };
+        SalesmanShopNuItemBlueprint(SalesmanShopNuItem* nuitem);
+        SalesmanShopNuItemBlueprint(std::string building_name, WorkerSubType worker_subtype, IngredientSubType ing_type);
 
         std::string build_map_id() override;
 };

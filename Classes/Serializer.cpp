@@ -913,7 +913,5 @@ void ConstructableSerializer::load()
         double total_in_queue = it->value["total_in_queue"].GetDouble();
         CCLOG("reading member %s: duration is %f, total is %f", key, float_duration, total_in_queue);
     }
-    //Constructable* bank = Constructable::getInstance();
-    //bank->_total_coins_banked = this->get_double(doc, "total_coins_banked", 0);
 
 };
