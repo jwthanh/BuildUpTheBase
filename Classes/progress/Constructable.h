@@ -73,6 +73,8 @@ class Blueprint
         Blueprint(): base_duration(0) {};
 
         virtual std::string build_map_id() = 0;
+
+        virtual std::string get_serialized_type_id() { return "basic"; };
 };
 
 class HarvesterShopNuItemBlueprint : public Blueprint
@@ -88,6 +90,7 @@ class HarvesterShopNuItemBlueprint : public Blueprint
         HarvesterShopNuItemBlueprint(std::string building_name, WorkerSubType worker_subtype, IngredientSubType ing_type);
 
         std::string build_map_id() override;
+        std::string get_serialized_type_id() override { return "harvester_shop"; };
 };
 
 class SalesmanShopNuItemBlueprint : public Blueprint
@@ -102,6 +105,7 @@ class SalesmanShopNuItemBlueprint : public Blueprint
         SalesmanShopNuItemBlueprint(std::string building_name, WorkerSubType worker_subtype, IngredientSubType ing_type);
 
         std::string build_map_id() override;
+        std::string get_serialized_type_id() override { return "salesman_shop"; };
 };
 
 class UpgradeBuildingShopNuItemBlueprint : public Blueprint
@@ -115,6 +119,7 @@ class UpgradeBuildingShopNuItemBlueprint : public Blueprint
         UpgradeBuildingShopNuItemBlueprint(std::string building_name, res_count_t building_level);
 
         std::string build_map_id() override;
+        std::string get_serialized_type_id() override { return "upgrade_building"; };
 };
 
 #endif

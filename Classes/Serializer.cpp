@@ -29,6 +29,8 @@
 #include "2d/CCTMXTiledMap.h"
 #include "2d/CCTMXLayer.h"
 
+#define RJ_STRING(string) rjValue(string.c_str(), string.length(), allocator)
+
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
 {
@@ -880,11 +882,12 @@ void ConstructableSerializer::serialize()
     //go through all active constructables and save the duration, and active total
     for (auto& constructable : CON_MAN->constructables) {
         std::string map_id = constructable.second->blueprint->build_map_id();
-        rjValue key(map_id.c_str(), map_id.length(), allocator);
+        rjValue key = RJ_STRING(map_id);
 
         rjValue value(rj::kObjectType);
         Duration raw_duration = constructable.second->blueprint->base_duration;
         auto duration = std::chrono::duration_cast<std::chrono::duration<float>>(raw_duration);
+        value.AddMember("type_id", RJ_STRING(constructable.second->blueprint->get_serialized_type_id()), allocator);
         value.AddMember("duration", rjValue(duration.count()), allocator);
         value.AddMember("total_in_queue", rjValue((double)constructable.second->total_in_queue), allocator);
 
