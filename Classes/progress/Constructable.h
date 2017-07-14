@@ -8,6 +8,7 @@
 
 class HarvesterShopNuItem;
 class SalesmanShopNuItem;
+class UpgradeBuildingShopNuItem;
 
 ///represents a progress towards building an unlock, ie a new harvestable level 1
 class Constructable
@@ -96,6 +97,21 @@ class SalesmanShopNuItemBlueprint : public Blueprint
 
     public:
         SalesmanShopNuItemBlueprint(SalesmanShopNuItem* nuitem)
+        {
+            this->base_duration = Duration(1);
+            this->nuitem = nuitem;
+        };
+
+        std::string build_map_id() override;
+};
+
+class UpgradeBuildingShopNuItemBlueprint : public Blueprint
+{
+    private:
+        UpgradeBuildingShopNuItem* nuitem;
+
+    public:
+        UpgradeBuildingShopNuItemBlueprint(UpgradeBuildingShopNuItem* nuitem)
         {
             this->base_duration = Duration(1);
             this->nuitem = nuitem;

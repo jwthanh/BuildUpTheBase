@@ -832,26 +832,37 @@ bool UpgradeBuildingShopNuItem::my_init(int building_level)
             this->add_available_coins(-cost);
 
             auto building = BUILDUP->get_target_building();
-            building->set_building_level(this->building_level);
+            auto celebration_func = [building, this]() {
+                building->set_building_level(this->building_level);
 
-            cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
-            Node* harvest_scene = scene->getChildByName("HarvestScene");
-            if (harvest_scene)
-            {
-                auto explosion_parts = cocos2d::ParticleSystemQuad::create("particles/upgrade.plist");
-                explosion_parts->setPosition({570, 300});
-                explosion_parts->setAutoRemoveOnFinish(true);
+                //TODO make this require confirmation so the effect doesn't play on any random scene
+                // maybe just add a notification instead
+                cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+                Node* harvest_scene = scene->getChildByName("HarvestScene");
+                if (harvest_scene)
+                {
+                    auto explosion_parts = cocos2d::ParticleSystemQuad::create("particles/upgrade.plist");
+                    explosion_parts->setPosition({570, 300});
+                    explosion_parts->setAutoRemoveOnFinish(true);
 
-                harvest_scene->addChild(explosion_parts);
+                    harvest_scene->addChild(explosion_parts);
 
-                harvest_scene->runAction(FShake::actionWithDuration(0.25f, 2.5f));
+                    harvest_scene->runAction(FShake::actionWithDuration(0.25f, 2.5f));
 
-                do_vibrate(175);
-            }
-            else
-            {
-                LOG(WARNING) << "no proper scene, potential crash?";
-            }
+                    do_vibrate(175);
+                }
+                else
+                {
+                    LOG(WARNING) << "no proper scene, potential crash?";
+                }
+            };
+
+            //generate map_id for the city, building, nuitem type (worker type, sublevel)
+            spBlueprint blueprint = std::make_shared<UpgradeBuildingShopNuItemBlueprint>(this);
+            blueprint->base_duration = std::chrono::seconds(60) * (int)this->building_level;
+            spConstructable constructable = CON_MAN->add_blueprint_to_queue(blueprint, celebration_func);
+            this->connect_to_constructable(constructable);
+
             this->update_func(0);
         }
     };

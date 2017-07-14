@@ -166,3 +166,16 @@ std::string SalesmanShopNuItemBlueprint::build_map_id()
     std::string constructable_map_id = constructable_map_id_ss.str();
     return constructable_map_id;
 };
+
+std::string UpgradeBuildingShopNuItemBlueprint::build_map_id()
+{
+    //generate map_id for the city, building, nuitem type (worker type, sublevel)
+    std::stringstream constructable_map_id_ss;
+    const std::string divider = "__";
+    constructable_map_id_ss << "city" << divider;
+    constructable_map_id_ss << this->nuitem->building->name << divider;
+    constructable_map_id_ss << "SalesmanShopNuItem" << divider;
+    constructable_map_id_ss << "building_level_" << (int)this->nuitem->building_level;
+    std::string constructable_map_id = constructable_map_id_ss.str();
+    return constructable_map_id;
+};
