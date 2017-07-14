@@ -54,12 +54,8 @@ void BaseSerializer::save_document(rjDocument& doc, std::string filename) const
 void BaseSerializer::add_member(rjDocument& doc, std::string key, rjValue& value)
 {
     //build the Values that become the key and values
-    auto& allocator = doc.GetAllocator();
-    rjValue doc_key = rjValue();
-
-    //NOTE need to use allocator here, AND move the key later it seems like,
-    //otherwise the value gets cleaned up
-    doc_key.SetString(key.c_str(), key.size(), allocator);
+    rjDocument::AllocatorType& allocator = doc.GetAllocator();
+    rjValue doc_key = RJ_STRING(key);
 
     //all the member to the document
     this->_add_member(doc, doc_key, value, allocator);
@@ -69,14 +65,13 @@ rjValue& BaseSerializer::get_member(rjDocument& doc, std::string key)
 {
     //build the Values that become the key and values
     rjDocument::AllocatorType& allocator = doc.GetAllocator();
-    rjValue doc_key = rjValue();
 
-    doc_key.SetString(key.c_str(), key.size());
+    rjValue doc_key = RJ_STRING(key);
 
     return this->_get_member(doc, doc_key, allocator);
 };
 
-void BaseSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rapidjson::CrtAllocator& allocator)
+void BaseSerializer::_add_member(rjDocument& doc, rjValue& key, rjValue& value, rjDocument::AllocatorType& allocator)
 {
     doc.AddMember(key.Move(), value.Move(), allocator);
 };
@@ -94,8 +89,7 @@ rjValue& BaseSerializer::_get_member(rjDocument& doc, rjValue& key, rjDocument::
 void BaseSerializer::set_string(rjDocument & doc, std::string key, std::string value)
 {
     rjDocument::AllocatorType& allocator = doc.GetAllocator();
-    rjValue doc_value = rjValue();
-    doc_value.SetString(value.c_str(), value.size(), allocator);
+    rjValue doc_value = RJ_STRING(value);
 
     this->add_member(doc, key, doc_value);
 
@@ -370,25 +364,14 @@ void ItemSerializer::serialize()
     doc.SetArray();
     auto build_str_member = [&allocator](rjValue& row, std::string key, std::string value){
 
-        rjValue rj_key = rjValue();
-        auto key_str = key.c_str();
-        auto key_len = key.length();
-        rj_key.SetString(key_str, key_len, allocator);
-
-        rjValue rj_value = rjValue();
-        auto value_str = value.c_str();
-        auto value_len = value.length();
-        rj_value.SetString(value_str, value_len, allocator);
-
+        rjValue rj_key = RJ_STRING(key);
+        rjValue rj_value = RJ_STRING(value);
 
         row.AddMember(rj_key.Move(), rj_value.Move(), allocator);
     };
     auto build_dbl_member = [&allocator](rjValue& row, std::string key, res_count_t value){
 
-        rjValue rj_key = rjValue();
-        auto key_str = key.c_str();
-        auto key_len = key.length();
-        rj_key.SetString(key_str, key_len, allocator);
+        rjValue rj_key = RJ_STRING(key);
 
         rjValue rj_value = rjValue();
         rj_value.SetDouble(value);
