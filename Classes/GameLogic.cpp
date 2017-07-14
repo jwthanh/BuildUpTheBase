@@ -481,6 +481,9 @@ void GameLogic::load_all()
     auto bank_serializer = BankSerializer("alpha_bank.json");
     bank_serializer.load();
 
+    auto constructable_serializer = ConstructableSerializer("alpha_constructable.json");
+    constructable_serializer.load();
+
     auto coins_from_data = DataManager::get_double_from_data(Beatup::total_coin_key);
     if (coins_from_data < 0.0)
     {
