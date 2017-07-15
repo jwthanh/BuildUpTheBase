@@ -166,6 +166,9 @@
     <ClCompile Include="..\Classes\progress\Constructable.cpp">
       <Filter>progress</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\progress\Celebration.cpp">
+      <Filter>progress</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -316,6 +319,9 @@
       <Filter>house_building</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\progress\Constructable.h">
+      <Filter>progress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\progress\Celebration.h">
       <Filter>progress</Filter>
     </ClInclude>
   </ItemGroup>

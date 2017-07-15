@@ -28,6 +28,8 @@
 
 #include "2d/CCTMXTiledMap.h"
 #include "2d/CCTMXLayer.h"
+#include "progress/Celebration.h"
+#include "house_building/BuildingTypes.h"
 
 BaseSerializer::BaseSerializer(std::string filename)
     : filename(filename)
@@ -893,17 +895,33 @@ void ConstructableSerializer::load()
     for (rjDocument::MemberIterator it = doc.MemberBegin(); it != doc.MemberEnd(); ++it)
     {
         std::string type_id = it->value["type_id"].GetString();
+        std::string building_name = it->value["building_name"].GetString();
+        spBuilding building = CITY->building_by_type(BuildingTypes_to_string.at(building_name));
+
         spBlueprint blueprint;
+        VoidFuncNoArgs celebration_func;
         if (type_id == "harvester_shop") {
             blueprint = HarvesterShopNuItemBlueprint::load(it->value, allocator);
+            HarvesterShopNuItemBlueprint* bp = (HarvesterShopNuItemBlueprint*)blueprint.get();
+            celebration_func = std::bind(buy_harvester_and_celebrate, building, bp->worker_subtype, bp->ing_type);
         } else if (type_id == "salesman_shop") {
             blueprint = SalesmanShopNuItemBlueprint::load(it->value, allocator);
+            SalesmanShopNuItemBlueprint* bp = (SalesmanShopNuItemBlueprint*)blueprint.get();
+            celebration_func = std::bind(buy_salesman_and_celebrate, building, bp->worker_subtype, bp->ing_type);
         } else if (type_id == "upgrade_building") {
             blueprint = UpgradeBuildingShopNuItemBlueprint::load(it->value, allocator);
+            UpgradeBuildingShopNuItemBlueprint* bp = (UpgradeBuildingShopNuItemBlueprint*)blueprint.get();
+            celebration_func = std::bind(upgrade_building_and_celebrate, building, bp->building_level);
+            //celebration_func = upgrade_building_and_celebrate;
         };
 
         //TODO add blueprint to CON_MAN
+        spConstructable constructable = CON_MAN->add_blueprint_to_queue(
+            blueprint,
+            celebration_func
+        );
 
+        CCLOG("ASDADS");
         //auto key = std::string(it->name.GetString());
         //double float_duration = it->value["duration"].GetDouble();
         //double total_in_queue = it->value["total_in_queue"].GetDouble();

@@ -101,6 +101,8 @@ class HarvesterShopNuItemBlueprint : public Blueprint
         std::string get_serialized_type_id() override { return "harvester_shop"; };
         void serialize(rjDocument& document, rjAllocator& allocator) override;
         static spBlueprint load(rjValue& document, rjAllocator& allocator);
+
+        friend class ConstructableSerializer;
 };
 
 class SalesmanShopNuItemBlueprint : public Blueprint
@@ -119,6 +121,8 @@ class SalesmanShopNuItemBlueprint : public Blueprint
         std::string get_serialized_type_id() override { return "salesman_shop"; };
         void serialize(rjDocument& document, rjAllocator& allocator) override;
         static spBlueprint load(rjValue& document, rjAllocator& allocator);
+
+        friend class ConstructableSerializer;
 };
 
 class UpgradeBuildingShopNuItemBlueprint : public Blueprint
@@ -136,6 +140,8 @@ class UpgradeBuildingShopNuItemBlueprint : public Blueprint
         std::string get_serialized_type_id() override { return "upgrade_building"; };
         void serialize(rjDocument& document, rjAllocator& allocator) override;
         static spBlueprint load(rjValue& document, rjAllocator& allocator);
+
+        friend class ConstructableSerializer;
 };
 
 #endif

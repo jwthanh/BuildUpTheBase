@@ -39,6 +39,7 @@
 #include "external/easylogging.h"
 #include "banking/Bank.h"
 #include "progress/GameProgress.h"
+#include "progress/Celebration.h"
 #include "ui/UITextBMFont.h"
 #include "2d/CCLabel.h"
 #include "progress/NumberScaling.h"
@@ -783,33 +784,6 @@ UpgradeBuildingShopNuItem* UpgradeBuildingShopNuItem::create(cocos2d::ui::Widget
 
 const int MAX_BUILDING_LEVEL = 15;
 
-void upgrade_building_and_celebrate(spBuilding building, res_count_t new_building_level)
-{
-    building->set_building_level(new_building_level);
-
-    //TODO make this require confirmation so the effect doesn't play on any random scene
-    // maybe just add a notification instead
-    cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
-    cocos2d::Node* harvest_scene = scene->getChildByName("HarvestScene");
-    if (harvest_scene)
-    {
-        auto explosion_parts = cocos2d::ParticleSystemQuad::create("particles/upgrade.plist");
-        explosion_parts->setPosition({570, 300});
-        explosion_parts->setAutoRemoveOnFinish(true);
-
-        harvest_scene->addChild(explosion_parts);
-
-        harvest_scene->runAction(FShake::actionWithDuration(0.25f, 2.5f));
-
-        do_vibrate(175);
-    }
-    else
-    {
-        LOG(WARNING) << "no proper scene, potential crash?";
-    }
-
-};
-
 bool UpgradeBuildingShopNuItem::my_init(int building_level)
 {
     this->building_level = building_level;
@@ -999,47 +973,6 @@ void HarvesterShopNuItem::my_init_sprite()
     vr->setSpriteFrame(rt->getSprite()->getSpriteFrame());
 };
 
-void do_float_over_panel(std::string node_name, std::string float_message)
-{
-    auto harvest_scene = cocos2d::Director::getInstance()->getRunningScene()->getChildByName("HarvestScene");
-    if (harvest_scene) {
-
-        cocos2d::ui::Layout* building_info_panel = dynamic_cast<cocos2d::ui::Layout*>(harvest_scene->getChildByName("building_info_panel"));
-        auto harvester_count_lbl = dynamic_cast<cocos2d::ui::TextBMFont*>(building_info_panel->getChildByName(node_name));
-
-        auto floating_label = do_float();
-        floating_label->setString(float_message);
-        floating_label->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE_BOTTOM);
-
-        //position floating label in the middle of the harvester count
-        cocos2d::Vec2 pos = {
-            cocos2d::rand_minus1_1()*30.0f, cocos2d::rand_0_1()*50.0f
-        };
-        pos.x += harvester_count_lbl->getContentSize().width / 2;
-        floating_label->setPosition(pos);
-
-        harvester_count_lbl->addChild(floating_label);
-    }
-};
-
-void buy_harvester_and_celebrate(spBuilding building, WorkerSubType worker_subtype, IngredientSubType ing_type)
-{
-    //TODO ideally this would immediately trigger the associated NuItem's update_func
-
-
-    CCLOG("celebrating");
-
-    res_count_t def = 0.0;
-    work_ing_t map = { worker_subtype, ing_type };
-    auto harvester_count = map_get(building->harvesters, map, def);
-    harvester_count++;
-
-    std::string message = "+"+beautify_double(Harvester::get_to_harvest_count(worker_subtype, ing_type));
-    do_float_over_panel("harvester_count", message);
-
-    building->harvesters[{ worker_subtype, ing_type }] = harvester_count;
-};
-
 void HarvesterShopNuItem::my_init_touch_ended_callback()
 {
     this->set_touch_ended_callback([this]()
@@ -1087,19 +1020,6 @@ void HarvesterShopNuItem::my_init_update_callback()
 
 };
 
-void buy_salesman_and_celebrate(spBuilding building, WorkerSubType worker_subtype, IngredientSubType ing_type)
-{
-    res_count_t def = 0.0;
-    work_ing_t pair = { worker_subtype, ing_type };
-    auto harvester_count = map_get(building->salesmen, pair, def);
-    harvester_count++;
-
-    std::string message = "+"+beautify_double(Salesman::get_to_sell_count(worker_subtype)* building->get_building_level());
-    do_float_over_panel("salesmen_count", message);
-
-    building->salesmen[{ worker_subtype, ing_type }] = harvester_count;
-}
-
 void SalesmanShopNuItem::my_init_touch_ended_callback()
 {
     this->set_touch_ended_callback([this]()
@@ -1117,7 +1037,10 @@ void SalesmanShopNuItem::my_init_touch_ended_callback()
             //generate map_id for the city, building, nuitem type (worker type, sublevel)
             spBlueprint blueprint = std::make_shared<SalesmanShopNuItemBlueprint>(this);
             blueprint->base_duration = std::chrono::seconds(2) * (int)this->harv_type;
-            spConstructable constructable = CON_MAN->add_blueprint_to_queue(blueprint, celebration_func);
+            spConstructable constructable = CON_MAN->add_blueprint_to_queue(
+                blueprint,
+                celebration_func
+            );
             this->connect_to_constructable(constructable);
 
             this->update_func(0);
