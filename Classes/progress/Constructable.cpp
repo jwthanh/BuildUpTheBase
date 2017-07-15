@@ -188,6 +188,7 @@ void HarvesterShopNuItemBlueprint::serialize(rjDocument& document, rjAllocator& 
     Blueprint::serialize(document, allocator);
 
     rjValue& value = document[map_id.c_str()];
+    value.AddMember("building_name", RJ_STRING(this->building_name), allocator);
     value.AddMember("worker_subtype",(int)this->worker_subtype, allocator);
     value.AddMember("ing_type",(int)this->ing_type, allocator);
 }
@@ -233,6 +234,7 @@ void SalesmanShopNuItemBlueprint::serialize(rjDocument& document, rjAllocator& a
     Blueprint::serialize(document, allocator);
 
     rjValue& value = document[map_id.c_str()];
+    value.AddMember("building_name", RJ_STRING(this->building_name), allocator);
     value.AddMember("worker_subtype",(int)this->worker_subtype, allocator);
     value.AddMember("ing_type",(int)this->ing_type, allocator);
 }
@@ -278,6 +280,7 @@ void UpgradeBuildingShopNuItemBlueprint::serialize(rjDocument& document, rjAlloc
     Blueprint::serialize(document, allocator);
 
     rjValue& value = document[map_id.c_str()];
+    value.AddMember("building_name", RJ_STRING(this->building_name), allocator);
     value.AddMember("building_level",(int)this->building_level, allocator);
 }
 

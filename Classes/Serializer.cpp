@@ -882,6 +882,7 @@ void ConstructableSerializer::serialize()
 void ConstructableSerializer::load()
 {
     rjDocument doc = this->get_document();
+    rjAllocator allocator = doc.GetAllocator();
     //dont do work if there's nothing to do
     if (doc.IsObject() == false)
     {
@@ -891,20 +892,20 @@ void ConstructableSerializer::load()
 
     for (rjDocument::MemberIterator it = doc.MemberBegin(); it != doc.MemberEnd(); ++it)
     {
-        continue;
-        auto key = std::string(it->name.GetString());
         std::string type_id = it->value["type_id"].GetString();
         spBlueprint blueprint;
         if (type_id == "harvester_shop") {
-            std::string building_name = it->value["building_name"].GetString();
-            WorkerSubType worker_subtype = (WorkerSubType)it->value["worker_subtype"].GetInt();
-            IngredientSubType ing_type = (IngredientSubType)it->value["ing_type"].GetInt();
-            blueprint = std::make_shared<HarvesterShopNuItemBlueprint>(building_name, worker_subtype, ing_type);
+            blueprint = HarvesterShopNuItemBlueprint::load(it->value, allocator);
+        } else if (type_id == "salesman_shop") {
+            blueprint = SalesmanShopNuItemBlueprint::load(it->value, allocator);
+        } else if (type_id == "upgrade_building") {
+            blueprint = UpgradeBuildingShopNuItemBlueprint::load(it->value, allocator);
         };
 
-        double float_duration = it->value["duration"].GetDouble();
-        double total_in_queue = it->value["total_in_queue"].GetDouble();
-        CCLOG("reading member %s: duration is %f, total is %f", key, float_duration, total_in_queue);
+        //auto key = std::string(it->name.GetString());
+        //double float_duration = it->value["duration"].GetDouble();
+        //double total_in_queue = it->value["total_in_queue"].GetDouble();
+        //CCLOG("reading member %s: duration is %f, total is %f", key, float_duration, total_in_queue);
     }
 
 };
