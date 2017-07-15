@@ -157,14 +157,6 @@ void Blueprint::serialize(rjDocument& document, rjAllocator& allocator)
     document.AddMember(key, value, allocator);
 };
 
-void Blueprint::load(rjDocument& document, rjAllocator& allocator)
-{
-    std::string map_id = this->build_map_id();
-    if (document.HasMember(map_id.c_str()) == false) { return; }
-
-    rjValue& value = document[map_id.c_str()];
-};
-
 HarvesterShopNuItemBlueprint::HarvesterShopNuItemBlueprint(HarvesterShopNuItem* nuitem)
     : HarvesterShopNuItemBlueprint(nuitem->building->name, nuitem->harv_type, nuitem->ing_type)
 {
@@ -200,8 +192,14 @@ void HarvesterShopNuItemBlueprint::serialize(rjDocument& document, rjAllocator& 
     value.AddMember("ing_type",(int)this->ing_type, allocator);
 }
 
-void HarvesterShopNuItemBlueprint::load(rjDocument& document, rjAllocator& allocator)
+spBlueprint HarvesterShopNuItemBlueprint::load(rjValue& container, rjAllocator& allocator)
 {
+    std::string building_name = container["building_name"].GetString();
+    WorkerSubType worker_subtype = (WorkerSubType)container["worker_subtype"].GetInt();
+    IngredientSubType ing_type = (IngredientSubType)container["ing_type"].GetInt();
+    spBlueprint created_blueprint = std::make_shared<HarvesterShopNuItemBlueprint>(building_name, worker_subtype, ing_type);
+
+    return created_blueprint;
 };
 
 SalesmanShopNuItemBlueprint::SalesmanShopNuItemBlueprint(SalesmanShopNuItem* nuitem)
@@ -239,8 +237,14 @@ void SalesmanShopNuItemBlueprint::serialize(rjDocument& document, rjAllocator& a
     value.AddMember("ing_type",(int)this->ing_type, allocator);
 }
 
-void SalesmanShopNuItemBlueprint::load(rjDocument& document, rjAllocator& allocator)
+spBlueprint SalesmanShopNuItemBlueprint::load(rjValue& container, rjAllocator& allocator)
 {
+    std::string building_name = container["building_name"].GetString();
+    WorkerSubType worker_subtype = (WorkerSubType)container["worker_subtype"].GetInt();
+    IngredientSubType ing_type = (IngredientSubType)container["ing_type"].GetInt();
+    spBlueprint created_blueprint = std::make_shared<SalesmanShopNuItemBlueprint>(building_name, worker_subtype, ing_type);
+
+    return created_blueprint;
 };
 
 UpgradeBuildingShopNuItemBlueprint::UpgradeBuildingShopNuItemBlueprint(UpgradeBuildingShopNuItem* nuitem)
@@ -277,6 +281,11 @@ void UpgradeBuildingShopNuItemBlueprint::serialize(rjDocument& document, rjAlloc
     value.AddMember("building_level",(int)this->building_level, allocator);
 }
 
-void UpgradeBuildingShopNuItemBlueprint::load(rjDocument& document, rjAllocator& allocator)
+spBlueprint UpgradeBuildingShopNuItemBlueprint::load(rjValue& container, rjAllocator& allocator)
 {
+    std::string building_name = container["building_name"].GetString();
+    int building_level = container["building_level"].GetInt();
+    spBlueprint created_blueprint = std::make_shared<UpgradeBuildingShopNuItemBlueprint>(building_name, building_level);
+
+    return created_blueprint;
 };

@@ -79,7 +79,9 @@ class Blueprint
 
         virtual std::string get_serialized_type_id() = 0;
         virtual void serialize(rjDocument& document, rjAllocator& allocator);
-        virtual void load(rjDocument& document, rjAllocator& allocator);
+
+        //implement the load in the children, similar to Node::create
+        //static spBlueprint load(rjValue& document, rjAllocator& allocator);
 };
 
 class HarvesterShopNuItemBlueprint : public Blueprint
@@ -98,7 +100,7 @@ class HarvesterShopNuItemBlueprint : public Blueprint
 
         std::string get_serialized_type_id() override { return "harvester_shop"; };
         void serialize(rjDocument& document, rjAllocator& allocator) override;
-        void load(rjDocument& document, rjAllocator& allocator) override;
+        static spBlueprint load(rjValue& document, rjAllocator& allocator);
 };
 
 class SalesmanShopNuItemBlueprint : public Blueprint
@@ -116,7 +118,7 @@ class SalesmanShopNuItemBlueprint : public Blueprint
 
         std::string get_serialized_type_id() override { return "salesman_shop"; };
         void serialize(rjDocument& document, rjAllocator& allocator) override;
-        void load(rjDocument& document, rjAllocator& allocator) override;
+        static spBlueprint load(rjValue& document, rjAllocator& allocator);
 };
 
 class UpgradeBuildingShopNuItemBlueprint : public Blueprint
@@ -133,7 +135,7 @@ class UpgradeBuildingShopNuItemBlueprint : public Blueprint
 
         std::string get_serialized_type_id() override { return "upgrade_building"; };
         void serialize(rjDocument& document, rjAllocator& allocator) override;
-        void load(rjDocument& document, rjAllocator& allocator) override;
+        static spBlueprint load(rjValue& document, rjAllocator& allocator);
 };
 
 #endif
