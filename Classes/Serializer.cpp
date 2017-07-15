@@ -902,6 +902,8 @@ void ConstructableSerializer::load()
             blueprint = UpgradeBuildingShopNuItemBlueprint::load(it->value, allocator);
         };
 
+        //TODO add blueprint to CON_MAN
+
         //auto key = std::string(it->name.GetString());
         //double float_duration = it->value["duration"].GetDouble();
         //double total_in_queue = it->value["total_in_queue"].GetDouble();

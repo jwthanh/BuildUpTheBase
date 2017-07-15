@@ -150,7 +150,7 @@ void Blueprint::serialize(rjDocument& document, rjAllocator& allocator)
 
     //adds the base duration of the blueprint
     Duration raw_duration = this->base_duration;
-    auto duration = std::chrono::duration_cast<std::chrono::duration<float>>(raw_duration);
+    auto duration = std::chrono::duration_cast<std::chrono::duration<int>>(raw_duration);
     value.AddMember("duration", rjValue(duration.count()), allocator);
 
     //adds the values to the document
@@ -200,6 +200,10 @@ spBlueprint HarvesterShopNuItemBlueprint::load(rjValue& container, rjAllocator& 
     IngredientSubType ing_type = (IngredientSubType)container["ing_type"].GetInt();
     spBlueprint created_blueprint = std::make_shared<HarvesterShopNuItemBlueprint>(building_name, worker_subtype, ing_type);
 
+    int raw_duration = container["duration"].GetInt();
+    Duration proper_duration = std::chrono::seconds(raw_duration);
+    created_blueprint->base_duration = proper_duration;
+
     return created_blueprint;
 };
 
@@ -246,6 +250,10 @@ spBlueprint SalesmanShopNuItemBlueprint::load(rjValue& container, rjAllocator& a
     IngredientSubType ing_type = (IngredientSubType)container["ing_type"].GetInt();
     spBlueprint created_blueprint = std::make_shared<SalesmanShopNuItemBlueprint>(building_name, worker_subtype, ing_type);
 
+    int raw_duration = container["duration"].GetInt();
+    Duration proper_duration = std::chrono::seconds(raw_duration);
+    created_blueprint->base_duration = proper_duration;
+
     return created_blueprint;
 };
 
@@ -289,6 +297,10 @@ spBlueprint UpgradeBuildingShopNuItemBlueprint::load(rjValue& container, rjAlloc
     std::string building_name = container["building_name"].GetString();
     int building_level = container["building_level"].GetInt();
     spBlueprint created_blueprint = std::make_shared<UpgradeBuildingShopNuItemBlueprint>(building_name, building_level);
+
+    int raw_duration = container["duration"].GetInt();
+    Duration proper_duration = std::chrono::seconds(raw_duration);
+    created_blueprint->base_duration = proper_duration;
 
     return created_blueprint;
 };
