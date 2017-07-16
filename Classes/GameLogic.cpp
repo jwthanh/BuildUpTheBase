@@ -501,20 +501,6 @@ void GameLogic::load_all()
     spBuilding building = BUILDUP->city->building_by_type(BuildingTypes_to_string.at(target_building_name));
     BUILDUP->set_target_building(building);
 
-    cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
-    HarvestScene* harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
-    auto sidebar = harvest_scene->sidebar;
-    TabTypes tab_type = (TabTypes)DataManager::get_int_from_data("active_tab", (int)TabTypes::WorkerTab);
-
-    //TODO make add a toggle_buttons based on TabType to avoid this set of if statments
-    if (tab_type == TabTypes::WorkerTab)
-        sidebar->toggle_buttons(sidebar->tab_worker_btn, ui::Widget::TouchEventType::ENDED);
-    else if (tab_type == TabTypes::BuildingTab)
-        sidebar->toggle_buttons(sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
-    else if (tab_type == TabTypes::DetailTab)
-        sidebar->toggle_buttons(sidebar->tab_detail_btn, ui::Widget::TouchEventType::ENDED);
-    else if (tab_type == TabTypes::MenuTab)
-        sidebar->toggle_buttons(sidebar->tab_menu_btn, ui::Widget::TouchEventType::ENDED);
 
     GameLogic::getInstance()->has_learned_wallet_size = DataManager::get_bool_from_data("has_learned_wallet_size", false);
 
@@ -525,6 +511,21 @@ void GameLogic::load_all()
 
     GameProgress* game_progress = GameProgress::getInstance();
     game_progress->init(BUILDUP->city);
+
+    cocos2d::Scene* scene = cocos2d::Director::getInstance()->getRunningScene();
+    HarvestScene* harvest_scene = dynamic_cast<HarvestScene*>(scene->getChildByName("HarvestScene"));
+    auto sidebar = harvest_scene->sidebar;
+    TabTypes tab_type = (TabTypes)DataManager::get_int_from_data("active_tab", (int)TabTypes::WorkerTab);
+
+    //TODO make add a toggle_buttons based on TabType to avoid this set of if statments
+     if (tab_type == TabTypes::WorkerTab)
+         sidebar->toggle_buttons(sidebar->tab_worker_btn, ui::Widget::TouchEventType::ENDED);
+     else if (tab_type == TabTypes::BuildingTab)
+         sidebar->toggle_buttons(sidebar->tab_building_btn, ui::Widget::TouchEventType::ENDED);
+     else if (tab_type == TabTypes::DetailTab)
+         sidebar->toggle_buttons(sidebar->tab_detail_btn, ui::Widget::TouchEventType::ENDED);
+     else if (tab_type == TabTypes::MenuTab)
+         sidebar->toggle_buttons(sidebar->tab_menu_btn, ui::Widget::TouchEventType::ENDED);
 
 };
 

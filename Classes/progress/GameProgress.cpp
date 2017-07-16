@@ -30,6 +30,13 @@ void GameProgress::init(City* city)
         tab_map[TabTypes::BuildingTab] = true;
         tab_map[TabTypes::MenuTab] = true;
     }
+
+    //FIXME rewrite ::update so that you don't need to run it over and over again to make sure the values
+    //      are up to date. IE the first time you run it it checks the Dump for another building, and the
+    //      other building is still false by default, until the loop has been run a few times
+    for (int i = 0; i < 25; i++) {
+        this->update(0.0f, city);
+    }
 }
 
 //building name to its name of building that it requires to unlock

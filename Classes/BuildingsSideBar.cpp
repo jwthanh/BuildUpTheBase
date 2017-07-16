@@ -90,7 +90,11 @@ bool TabManager::is_tab_active(const TabTypes& tab_type, const std::shared_ptr<B
 void TabManager::set_tab_active(TabTypes tab_type, const spBuilding& building)
 {
     //default to BuildingTab if you don't have the given tabtype for the building
-    if (this->is_tab_unlocked(tab_type, building) == false) { tab_type = TabTypes::BuildingTab; };
+    if (this->is_tab_unlocked(tab_type, building) == false)
+    {
+        CCLOG("tab is not unlocked, defaulting to BuildingTab");
+        tab_type = TabTypes::BuildingTab;
+    };
 
     this->active_tab = tab_type;
     spBuilding old_building = this->active_building;
