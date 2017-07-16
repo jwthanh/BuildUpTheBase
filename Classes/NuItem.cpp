@@ -985,8 +985,7 @@ void HarvesterShopNuItem::my_init_touch_ended_callback()
             //start Constructable with the following complete logic:
             this->add_available_coins(-cost);
 
-            auto building = BUILDUP->get_target_building();
-            VoidFuncNoArgs celebration_func = std::bind(buy_harvester_and_celebrate, building, this->harv_type, this->ing_type);
+            VoidFuncNoArgs celebration_func = std::bind(buy_harvester_and_celebrate, this->building, this->harv_type, this->ing_type);
 
             //generate map_id for the city, building, nuitem type (worker type, sublevel)
             spBlueprint blueprint = std::make_shared<HarvesterShopNuItemBlueprint>(this);
@@ -1031,8 +1030,7 @@ void SalesmanShopNuItem::my_init_touch_ended_callback()
         {
             this->add_available_coins(-cost);
 
-            auto building = BUILDUP->get_target_building();
-            VoidFuncNoArgs celebration_func = std::bind(buy_salesman_and_celebrate, building, this->harv_type, this->ing_type);
+            VoidFuncNoArgs celebration_func = std::bind(buy_salesman_and_celebrate, this->building, this->harv_type, this->ing_type);
 
             //generate map_id for the city, building, nuitem type (worker type, sublevel)
             spBlueprint blueprint = std::make_shared<SalesmanShopNuItemBlueprint>(this);
