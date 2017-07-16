@@ -920,6 +920,8 @@ void ConstructableSerializer::load()
             blueprint,
             celebration_func
         );
+        double total_in_queue = it->value["total_in_queue"].GetDouble();
+        constructable->total_in_queue = total_in_queue;
 
         CCLOG("ASDADS");
         //auto key = std::string(it->name.GetString());
