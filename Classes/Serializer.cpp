@@ -897,6 +897,10 @@ void ConstructableSerializer::load()
         std::string type_id = it->value["type_id"].GetString();
         std::string building_name = it->value["building_name"].GetString();
         spBuilding building = CITY->building_by_type(BuildingTypes_to_string.at(building_name));
+        double total_in_queue = it->value["total_in_queue"].GetDouble();
+        if (total_in_queue <= 0) {
+            continue;
+        };
 
         spBlueprint blueprint;
         VoidFuncNoArgs celebration_func;
@@ -920,7 +924,6 @@ void ConstructableSerializer::load()
             blueprint,
             celebration_func
         );
-        double total_in_queue = it->value["total_in_queue"].GetDouble();
         constructable->total_in_queue = total_in_queue;
 
         CCLOG("ASDADS");
