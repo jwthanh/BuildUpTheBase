@@ -916,7 +916,6 @@ void ConstructableSerializer::load()
             blueprint = UpgradeBuildingShopNuItemBlueprint::load(it->value, allocator);
             UpgradeBuildingShopNuItemBlueprint* bp = (UpgradeBuildingShopNuItemBlueprint*)blueprint.get();
             celebration_func = std::bind(upgrade_building_and_celebrate, building, bp->building_level);
-            //celebration_func = upgrade_building_and_celebrate;
         };
 
         //TODO add blueprint to CON_MAN
@@ -926,11 +925,6 @@ void ConstructableSerializer::load()
         );
         constructable->total_in_queue = total_in_queue;
 
-        CCLOG("ASDADS");
-        //auto key = std::string(it->name.GetString());
-        //double float_duration = it->value["duration"].GetDouble();
-        //double total_in_queue = it->value["total_in_queue"].GetDouble();
-        //CCLOG("reading member %s: duration is %f, total is %f", key, float_duration, total_in_queue);
     }
 
 };
