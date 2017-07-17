@@ -873,10 +873,25 @@ void ConstructableSerializer::serialize()
         // from the doc, maybe there's a better way to do this
         std::string map_id = blueprint->build_map_id();
         rjValue& value = doc[map_id.c_str()];
-        value.AddMember("total_in_queue", rjValue((double)constructable.second->total_in_queue), allocator);
+        value.AddMember(
+            "total_in_queue",
+            rjValue(static_cast<double>(constructable.second->total_in_queue)),
+            allocator
+        );
+
+        long long current_end_time = std::chrono::duration_cast<std::chrono::seconds>(constructable.second->current_end_time.time_since_epoch()).count();
+        value.AddMember(
+            "current_end_time",
+            rjValue(current_end_time),
+            allocator
+        );
+        long long base_end_time = std::chrono::duration_cast<std::chrono::seconds>(constructable.second->base_end_time.time_since_epoch()).count();
+        value.AddMember(
+            "base_end_time",
+            rjValue(base_end_time),
+            allocator
+        );
     };
-    // Constructable* bank = Constructable::getInstance();
-    // this->set_double(doc, "total_coins_banked", bank->_total_coins_banked);
 
     this->save_document(doc);
 }
@@ -906,15 +921,15 @@ void ConstructableSerializer::load()
         VoidFuncNoArgs celebration_func;
         if (type_id == "harvester_shop") {
             blueprint = HarvesterShopNuItemBlueprint::load(it->value, allocator);
-            HarvesterShopNuItemBlueprint* bp = (HarvesterShopNuItemBlueprint*)blueprint.get();
+            HarvesterShopNuItemBlueprint* bp = static_cast<HarvesterShopNuItemBlueprint*>(blueprint.get());
             celebration_func = std::bind(buy_harvester_and_celebrate, building, bp->worker_subtype, bp->ing_type);
         } else if (type_id == "salesman_shop") {
             blueprint = SalesmanShopNuItemBlueprint::load(it->value, allocator);
-            SalesmanShopNuItemBlueprint* bp = (SalesmanShopNuItemBlueprint*)blueprint.get();
+            SalesmanShopNuItemBlueprint* bp = static_cast<SalesmanShopNuItemBlueprint*>(blueprint.get());
             celebration_func = std::bind(buy_salesman_and_celebrate, building, bp->worker_subtype, bp->ing_type);
         } else if (type_id == "upgrade_building") {
             blueprint = UpgradeBuildingShopNuItemBlueprint::load(it->value, allocator);
-            UpgradeBuildingShopNuItemBlueprint* bp = (UpgradeBuildingShopNuItemBlueprint*)blueprint.get();
+            UpgradeBuildingShopNuItemBlueprint* bp = static_cast<UpgradeBuildingShopNuItemBlueprint*>(blueprint.get());
             celebration_func = std::bind(upgrade_building_and_celebrate, building, bp->building_level);
         };
 
@@ -924,6 +939,15 @@ void ConstructableSerializer::load()
             celebration_func
         );
         constructable->total_in_queue = total_in_queue;
+
+        auto epoch = std::chrono::system_clock::time_point();
+        long long base_end_time_count = it->value["base_end_time"].GetInt64();
+        TimePoint base_end_time = epoch + std::chrono::seconds(base_end_time_count);
+        constructable->base_end_time = base_end_time;
+
+        long long current_end_time_count = it->value["current_end_time"].GetInt64();
+        TimePoint current_end_time = epoch + std::chrono::seconds(current_end_time_count);
+        constructable->current_end_time = current_end_time;
 
     }
 

@@ -52,6 +52,7 @@
 #include "Fighter.h"
 #include "attribute_container.h"
 #include "attribute.h"
+#include "progress/Constructable.h"
 
 
 USING_NS_CC;
@@ -416,6 +417,14 @@ void GameLogic::save_all()
 
     auto constructable_serializer = ConstructableSerializer("alpha_constructable.json");
     constructable_serializer.serialize();
+
+    //TODO
+    //iterate through all the saved constructables and make sure they've
+    //all been completed if they're in the past. aka go through them all
+    //and make sure their end time is in the future
+    for (auto& constructable : CON_MAN->constructables) {
+
+    };
 
     //save coins
     DataManager::set_double_from_data(Beatup::total_coin_key, BEATUP->get_total_coins());
